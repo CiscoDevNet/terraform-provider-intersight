@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateConfigExporterRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateConfigExporterRequest) Execute() (ConfigExporter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateConfigExporterRequest) Execute() (ConfigExporter, *_nethttp.Response, error) {
 	return r.ApiService.CreateConfigExporterExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *ConfigApiService) CreateConfigExporter(ctx _context.Context) ApiCreateC
  * Execute executes the request
  * @return ConfigExporter
  */
-func (a *ConfigApiService) CreateConfigExporterExecute(r ApiCreateConfigExporterRequest) (ConfigExporter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) CreateConfigExporterExecute(r ApiCreateConfigExporterRequest) (ConfigExporter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigExporter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.CreateConfigExporter")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Exporters"
@@ -92,8 +90,7 @@ func (a *ConfigApiService) CreateConfigExporterExecute(r ApiCreateConfigExporter
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.configExporter == nil {
-		executionError.error = "configExporter is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("configExporter is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *ConfigApiService) CreateConfigExporterExecute(r ApiCreateConfigExporter
 	localVarPostBody = r.configExporter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *ConfigApiService) CreateConfigExporterExecute(r ApiCreateConfigExporter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateConfigImporterRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateConfigImporterRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateConfigImporterRequest) Execute() (ConfigImporter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateConfigImporterRequest) Execute() (ConfigImporter, *_nethttp.Response, error) {
 	return r.ApiService.CreateConfigImporterExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *ConfigApiService) CreateConfigImporter(ctx _context.Context) ApiCreateC
  * Execute executes the request
  * @return ConfigImporter
  */
-func (a *ConfigApiService) CreateConfigImporterExecute(r ApiCreateConfigImporterRequest) (ConfigImporter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) CreateConfigImporterExecute(r ApiCreateConfigImporterRequest) (ConfigImporter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigImporter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.CreateConfigImporter")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Importers"
@@ -272,8 +264,7 @@ func (a *ConfigApiService) CreateConfigImporterExecute(r ApiCreateConfigImporter
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.configImporter == nil {
-		executionError.error = "configImporter is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("configImporter is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *ConfigApiService) CreateConfigImporterExecute(r ApiCreateConfigImporter
 	localVarPostBody = r.configImporter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *ConfigApiService) CreateConfigImporterExecute(r ApiCreateConfigImporter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteConfigExporterRequest struct {
@@ -394,7 +382,7 @@ type ApiDeleteConfigExporterRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteConfigExporterRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteConfigExporterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteConfigExporterExecute(r)
 }
 
@@ -415,20 +403,18 @@ func (a *ConfigApiService) DeleteConfigExporter(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *ConfigApiService) DeleteConfigExporterExecute(r ApiDeleteConfigExporterRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) DeleteConfigExporterExecute(r ApiDeleteConfigExporterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.DeleteConfigExporter")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Exporters/{Moid}"
@@ -457,22 +443,19 @@ func (a *ConfigApiService) DeleteConfigExporterExecute(r ApiDeleteConfigExporter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -530,7 +513,7 @@ func (a *ConfigApiService) DeleteConfigExporterExecute(r ApiDeleteConfigExporter
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteConfigImporterRequest struct {
@@ -539,7 +522,7 @@ type ApiDeleteConfigImporterRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteConfigImporterRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteConfigImporterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteConfigImporterExecute(r)
 }
 
@@ -560,20 +543,18 @@ func (a *ConfigApiService) DeleteConfigImporter(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *ConfigApiService) DeleteConfigImporterExecute(r ApiDeleteConfigImporterRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) DeleteConfigImporterExecute(r ApiDeleteConfigImporterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.DeleteConfigImporter")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Importers/{Moid}"
@@ -602,22 +583,19 @@ func (a *ConfigApiService) DeleteConfigImporterExecute(r ApiDeleteConfigImporter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -675,7 +653,7 @@ func (a *ConfigApiService) DeleteConfigImporterExecute(r ApiDeleteConfigImporter
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetConfigExportedItemByMoidRequest struct {
@@ -684,7 +662,7 @@ type ApiGetConfigExportedItemByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetConfigExportedItemByMoidRequest) Execute() (ConfigExportedItem, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigExportedItemByMoidRequest) Execute() (ConfigExportedItem, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigExportedItemByMoidExecute(r)
 }
 
@@ -706,21 +684,19 @@ func (a *ConfigApiService) GetConfigExportedItemByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return ConfigExportedItem
  */
-func (a *ConfigApiService) GetConfigExportedItemByMoidExecute(r ApiGetConfigExportedItemByMoidRequest) (ConfigExportedItem, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigExportedItemByMoidExecute(r ApiGetConfigExportedItemByMoidRequest) (ConfigExportedItem, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigExportedItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigExportedItemByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/ExportedItems/{Moid}"
@@ -749,22 +725,19 @@ func (a *ConfigApiService) GetConfigExportedItemByMoidExecute(r ApiGetConfigExpo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -831,7 +804,7 @@ func (a *ConfigApiService) GetConfigExportedItemByMoidExecute(r ApiGetConfigExpo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigExportedItemListRequest struct {
@@ -895,7 +868,7 @@ func (r ApiGetConfigExportedItemListRequest) Tags(tags string) ApiGetConfigExpor
 	return r
 }
 
-func (r ApiGetConfigExportedItemListRequest) Execute() (ConfigExportedItemResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigExportedItemListRequest) Execute() (ConfigExportedItemResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigExportedItemListExecute(r)
 }
 
@@ -915,21 +888,19 @@ func (a *ConfigApiService) GetConfigExportedItemList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return ConfigExportedItemResponse
  */
-func (a *ConfigApiService) GetConfigExportedItemListExecute(r ApiGetConfigExportedItemListRequest) (ConfigExportedItemResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigExportedItemListExecute(r ApiGetConfigExportedItemListRequest) (ConfigExportedItemResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigExportedItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigExportedItemList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/ExportedItems"
@@ -990,22 +961,19 @@ func (a *ConfigApiService) GetConfigExportedItemListExecute(r ApiGetConfigExport
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1072,7 +1040,7 @@ func (a *ConfigApiService) GetConfigExportedItemListExecute(r ApiGetConfigExport
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigExporterByMoidRequest struct {
@@ -1081,7 +1049,7 @@ type ApiGetConfigExporterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetConfigExporterByMoidRequest) Execute() (ConfigExporter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigExporterByMoidRequest) Execute() (ConfigExporter, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigExporterByMoidExecute(r)
 }
 
@@ -1103,21 +1071,19 @@ func (a *ConfigApiService) GetConfigExporterByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return ConfigExporter
  */
-func (a *ConfigApiService) GetConfigExporterByMoidExecute(r ApiGetConfigExporterByMoidRequest) (ConfigExporter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigExporterByMoidExecute(r ApiGetConfigExporterByMoidRequest) (ConfigExporter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigExporter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigExporterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Exporters/{Moid}"
@@ -1146,22 +1112,19 @@ func (a *ConfigApiService) GetConfigExporterByMoidExecute(r ApiGetConfigExporter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1228,7 +1191,7 @@ func (a *ConfigApiService) GetConfigExporterByMoidExecute(r ApiGetConfigExporter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigExporterListRequest struct {
@@ -1292,7 +1255,7 @@ func (r ApiGetConfigExporterListRequest) Tags(tags string) ApiGetConfigExporterL
 	return r
 }
 
-func (r ApiGetConfigExporterListRequest) Execute() (ConfigExporterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigExporterListRequest) Execute() (ConfigExporterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigExporterListExecute(r)
 }
 
@@ -1312,21 +1275,19 @@ func (a *ConfigApiService) GetConfigExporterList(ctx _context.Context) ApiGetCon
  * Execute executes the request
  * @return ConfigExporterResponse
  */
-func (a *ConfigApiService) GetConfigExporterListExecute(r ApiGetConfigExporterListRequest) (ConfigExporterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigExporterListExecute(r ApiGetConfigExporterListRequest) (ConfigExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigExporterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigExporterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Exporters"
@@ -1387,22 +1348,19 @@ func (a *ConfigApiService) GetConfigExporterListExecute(r ApiGetConfigExporterLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1469,7 +1427,7 @@ func (a *ConfigApiService) GetConfigExporterListExecute(r ApiGetConfigExporterLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigImportedItemByMoidRequest struct {
@@ -1478,7 +1436,7 @@ type ApiGetConfigImportedItemByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetConfigImportedItemByMoidRequest) Execute() (ConfigImportedItem, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigImportedItemByMoidRequest) Execute() (ConfigImportedItem, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigImportedItemByMoidExecute(r)
 }
 
@@ -1500,21 +1458,19 @@ func (a *ConfigApiService) GetConfigImportedItemByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return ConfigImportedItem
  */
-func (a *ConfigApiService) GetConfigImportedItemByMoidExecute(r ApiGetConfigImportedItemByMoidRequest) (ConfigImportedItem, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigImportedItemByMoidExecute(r ApiGetConfigImportedItemByMoidRequest) (ConfigImportedItem, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigImportedItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigImportedItemByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/ImportedItems/{Moid}"
@@ -1543,22 +1499,19 @@ func (a *ConfigApiService) GetConfigImportedItemByMoidExecute(r ApiGetConfigImpo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1625,7 +1578,7 @@ func (a *ConfigApiService) GetConfigImportedItemByMoidExecute(r ApiGetConfigImpo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigImportedItemListRequest struct {
@@ -1689,7 +1642,7 @@ func (r ApiGetConfigImportedItemListRequest) Tags(tags string) ApiGetConfigImpor
 	return r
 }
 
-func (r ApiGetConfigImportedItemListRequest) Execute() (ConfigImportedItemResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigImportedItemListRequest) Execute() (ConfigImportedItemResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigImportedItemListExecute(r)
 }
 
@@ -1709,21 +1662,19 @@ func (a *ConfigApiService) GetConfigImportedItemList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return ConfigImportedItemResponse
  */
-func (a *ConfigApiService) GetConfigImportedItemListExecute(r ApiGetConfigImportedItemListRequest) (ConfigImportedItemResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigImportedItemListExecute(r ApiGetConfigImportedItemListRequest) (ConfigImportedItemResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigImportedItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigImportedItemList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/ImportedItems"
@@ -1784,22 +1735,19 @@ func (a *ConfigApiService) GetConfigImportedItemListExecute(r ApiGetConfigImport
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1866,7 +1814,7 @@ func (a *ConfigApiService) GetConfigImportedItemListExecute(r ApiGetConfigImport
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigImporterByMoidRequest struct {
@@ -1875,7 +1823,7 @@ type ApiGetConfigImporterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetConfigImporterByMoidRequest) Execute() (ConfigImporter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigImporterByMoidRequest) Execute() (ConfigImporter, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigImporterByMoidExecute(r)
 }
 
@@ -1897,21 +1845,19 @@ func (a *ConfigApiService) GetConfigImporterByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return ConfigImporter
  */
-func (a *ConfigApiService) GetConfigImporterByMoidExecute(r ApiGetConfigImporterByMoidRequest) (ConfigImporter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigImporterByMoidExecute(r ApiGetConfigImporterByMoidRequest) (ConfigImporter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigImporter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigImporterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Importers/{Moid}"
@@ -1940,22 +1886,19 @@ func (a *ConfigApiService) GetConfigImporterByMoidExecute(r ApiGetConfigImporter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2022,7 +1965,7 @@ func (a *ConfigApiService) GetConfigImporterByMoidExecute(r ApiGetConfigImporter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetConfigImporterListRequest struct {
@@ -2086,7 +2029,7 @@ func (r ApiGetConfigImporterListRequest) Tags(tags string) ApiGetConfigImporterL
 	return r
 }
 
-func (r ApiGetConfigImporterListRequest) Execute() (ConfigImporterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetConfigImporterListRequest) Execute() (ConfigImporterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigImporterListExecute(r)
 }
 
@@ -2106,21 +2049,19 @@ func (a *ConfigApiService) GetConfigImporterList(ctx _context.Context) ApiGetCon
  * Execute executes the request
  * @return ConfigImporterResponse
  */
-func (a *ConfigApiService) GetConfigImporterListExecute(r ApiGetConfigImporterListRequest) (ConfigImporterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ConfigApiService) GetConfigImporterListExecute(r ApiGetConfigImporterListRequest) (ConfigImporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ConfigImporterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigApiService.GetConfigImporterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/config/Importers"
@@ -2181,22 +2122,19 @@ func (a *ConfigApiService) GetConfigImporterListExecute(r ApiGetConfigImporterLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2263,5 +2201,5 @@ func (a *ConfigApiService) GetConfigImporterListExecute(r ApiGetConfigImporterLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

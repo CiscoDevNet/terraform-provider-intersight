@@ -344,7 +344,8 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 		return diag.Errorf("json marshal of HyperflexHealthCheckExecutionSnapshot object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching HyperflexHealthCheckExecutionSnapshot: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

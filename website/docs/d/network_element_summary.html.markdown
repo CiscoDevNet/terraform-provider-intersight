@@ -54,6 +54,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `source_object_type`:(string) The source object type of this view MO. 
 * `switch_id`:(string) The Switch Id of the network Element. 
+* `thermal`:(string) The Thermal status of the fabric interconnect.* `unknown` - The default state of the sensor (in case no data is received).* `ok` - State of the sensor indicating the sensor's temperature range is okay.* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.* `upper-critical` - State of the sensor indicating that the temperature is above normal range.* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.* `lower-critical` - State of the sensor indicating that the temperature is below normal range.* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range. 
 * `total_memory`:(int) Total available memory on this switch platform. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Version holds the firmware version related information. 

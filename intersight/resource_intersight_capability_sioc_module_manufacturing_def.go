@@ -30,7 +30,7 @@ func resourceCapabilitySiocModuleManufacturingDef() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -200,7 +200,8 @@ func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *sc
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilitySiocModuleManufacturingDef(conn.ctx).CapabilitySiocModuleManufacturingDef(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilitySiocModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -215,7 +216,8 @@ func resourceCapabilitySiocModuleManufacturingDefRead(c context.Context, d *sche
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleManufacturingDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilitySiocModuleManufacturingDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -382,7 +384,8 @@ func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *sc
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilitySiocModuleManufacturingDef(conn.ctx, d.Id()).CapabilitySiocModuleManufacturingDef(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilitySiocModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -397,7 +400,8 @@ func resourceCapabilitySiocModuleManufacturingDefDelete(c context.Context, d *sc
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySiocModuleManufacturingDef(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilitySiocModuleManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

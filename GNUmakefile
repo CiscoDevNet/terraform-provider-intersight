@@ -1,5 +1,5 @@
 PKG_NAME=intersight
-VERSION=0.1.5
+VERSION=0.1.6
 TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
 WEBSITE_REPO=github.com/hashicorp/terraform-website
@@ -21,7 +21,7 @@ build: fmtcheck
 	go install
 	GOOS=linux GOARCH=amd64 $(GO_BUILD) -o .build/linux_amd64/terraform-provider-intersight_v$(VERSION)
 	GOOS=windows GOARCH=amd64 $(GO_BUILD) -o .build/windows/terraform-provider-intersight_v$(VERSION).exe
-	GOOS=darwin GOARCH=amd64 $(GO_BUILD) -o .build/darwin/terraform-provider-intersight_v$(VERSION)
+	GOOS=darwin GOARCH=amd64 $(GO_BUILD) -o .build/darwin_amd64/terraform-provider-intersight_v$(VERSION)
 
 fmt:
 	@echo "==> Fixing source code with gofmt..."

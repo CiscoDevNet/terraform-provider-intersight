@@ -25,7 +25,7 @@ func resourceHyperflexAppCatalog() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -722,7 +722,8 @@ func resourceHyperflexAppCatalogCreate(c context.Context, d *schema.ResourceData
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexAppCatalog(conn.ctx).HyperflexAppCatalog(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexAppCatalog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -737,7 +738,8 @@ func resourceHyperflexAppCatalogRead(c context.Context, d *schema.ResourceData, 
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexAppCatalogByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexAppCatalog object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -1177,7 +1179,8 @@ func resourceHyperflexAppCatalogUpdate(c context.Context, d *schema.ResourceData
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexAppCatalog(conn.ctx, d.Id()).HyperflexAppCatalog(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexAppCatalog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -1192,7 +1195,8 @@ func resourceHyperflexAppCatalogDelete(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexAppCatalog(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexAppCatalog object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

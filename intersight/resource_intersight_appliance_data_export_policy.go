@@ -401,7 +401,8 @@ func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.ApplianceApi.CreateApplianceDataExportPolicy(conn.ctx).ApplianceDataExportPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating ApplianceDataExportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -416,7 +417,8 @@ func resourceApplianceDataExportPolicyRead(c context.Context, d *schema.Resource
 	var de diag.Diagnostics
 	r := conn.ApiClient.ApplianceApi.GetApplianceDataExportPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "ApplianceDataExportPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -676,7 +678,8 @@ func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.ApplianceApi.UpdateApplianceDataExportPolicy(conn.ctx, d.Id()).ApplianceDataExportPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating ApplianceDataExportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())

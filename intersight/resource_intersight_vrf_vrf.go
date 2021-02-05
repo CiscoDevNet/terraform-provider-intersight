@@ -66,7 +66,7 @@ func resourceVrfVrf() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -234,7 +234,8 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 
 	r := conn.ApiClient.VrfApi.CreateVrfVrf(conn.ctx).VrfVrf(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VrfVrf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -249,7 +250,8 @@ func resourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interfac
 	var de diag.Diagnostics
 	r := conn.ApiClient.VrfApi.GetVrfVrfByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VrfVrf object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -414,7 +416,8 @@ func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interf
 
 	r := conn.ApiClient.VrfApi.UpdateVrfVrf(conn.ctx, d.Id()).VrfVrf(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VrfVrf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -429,7 +432,8 @@ func resourceVrfVrfDelete(c context.Context, d *schema.ResourceData, meta interf
 	conn := meta.(*Config)
 	p := conn.ApiClient.VrfApi.DeleteVrfVrf(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VrfVrf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

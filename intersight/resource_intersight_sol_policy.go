@@ -66,7 +66,7 @@ func resourceSolPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -361,7 +361,8 @@ func resourceSolPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.SolApi.CreateSolPolicy(conn.ctx).SolPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating SolPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -380,7 +381,8 @@ func detachSolPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 	r := conn.ApiClient.SolApi.UpdateSolPolicy(conn.ctx, d.Id()).SolPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -393,7 +395,8 @@ func resourceSolPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 	var de diag.Diagnostics
 	r := conn.ApiClient.SolApi.GetSolPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "SolPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -645,7 +648,8 @@ func resourceSolPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.SolApi.UpdateSolPolicy(conn.ctx, d.Id()).SolPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating SolPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -668,7 +672,8 @@ func resourceSolPolicyDelete(c context.Context, d *schema.ResourceData, meta int
 	}
 	p := conn.ApiClient.SolApi.DeleteSolPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting SolPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

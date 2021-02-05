@@ -311,7 +311,8 @@ func dataSourceBootIscsiDeviceRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("json marshal of BootIscsiDevice object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.BootApi.GetBootIscsiDeviceList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching BootIscsiDevice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

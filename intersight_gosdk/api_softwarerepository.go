@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateSoftwarerepositoryAuthorizationRequest) IfNoneMatch(ifNoneMatch
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryAuthorizationExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorization(ctx
  * Execute executes the request
  * @return SoftwarerepositoryAuthorization
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExecute(r ApiCreateSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExecute(r ApiCreateSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryAuthorization")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Authorizations"
@@ -92,8 +90,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryAuthorization == nil {
-		executionError.error = "softwarerepositoryAuthorization is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryAuthorization is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExec
 	localVarPostBody = r.softwarerepositoryAuthorization
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryAuthorizationExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateSoftwarerepositoryCategoryMapperRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateSoftwarerepositoryCategoryMapperRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryCategoryMapperExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapper(ct
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapper
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExecute(r ApiCreateSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExecute(r ApiCreateSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryCategoryMapper")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers"
@@ -272,8 +264,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapper == nil {
-		executionError.error = "softwarerepositoryCategoryMapper is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapper is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExe
 	localVarPostBody = r.softwarerepositoryCategoryMapper
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateSoftwarerepositoryCategoryMapperModelRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) IfNoneMatch(ifNon
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryCategoryMapperModelExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperMod
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperModel
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperModelExecute(r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperModelExecute(r ApiCreateSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryCategoryMapperModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels"
@@ -452,8 +438,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperMod
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapperModel == nil {
-		executionError.error = "softwarerepositoryCategoryMapperModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapperModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperMod
 	localVarPostBody = r.softwarerepositoryCategoryMapperModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategoryMapperMod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateSoftwarerepositoryCategorySupportConstraintRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) IfNoneMatch
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryCategorySupportConstraintExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportCo
  * Execute executes the request
  * @return SoftwarerepositoryCategorySupportConstraint
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportConstraintExecute(r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportConstraintExecute(r ApiCreateSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategorySupportConstraint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryCategorySupportConstraint")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints"
@@ -632,8 +612,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportCo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategorySupportConstraint == nil {
-		executionError.error = "softwarerepositoryCategorySupportConstraint is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategorySupportConstraint is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportCo
 	localVarPostBody = r.softwarerepositoryCategorySupportConstraint
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryCategorySupportCo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateSoftwarerepositoryOperatingSystemFileRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) IfNoneMatch(ifNon
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryOperatingSystemFileExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFi
  * Execute executes the request
  * @return SoftwarerepositoryOperatingSystemFile
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFileExecute(r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFileExecute(r ApiCreateSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryOperatingSystemFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryOperatingSystemFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles"
@@ -812,8 +786,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryOperatingSystemFile == nil {
-		executionError.error = "softwarerepositoryOperatingSystemFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryOperatingSystemFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFi
 	localVarPostBody = r.softwarerepositoryOperatingSystemFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryOperatingSystemFi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateSoftwarerepositoryReleaseRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateSoftwarerepositoryReleaseRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	return r.ApiService.CreateSoftwarerepositoryReleaseExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryRelease(ctx _cont
  * Execute executes the request
  * @return SoftwarerepositoryRelease
  */
-func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r ApiCreateSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r ApiCreateSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.CreateSoftwarerepositoryRelease")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases"
@@ -992,8 +960,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryRelease == nil {
-		executionError.error = "softwarerepositoryRelease is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryRelease is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r 
 	localVarPostBody = r.softwarerepositoryRelease
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *SoftwarerepositoryApiService) CreateSoftwarerepositoryReleaseExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteSoftwarerepositoryCategoryMapperRequest struct {
@@ -1114,7 +1078,7 @@ type ApiDeleteSoftwarerepositoryCategoryMapperRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSoftwarerepositoryCategoryMapperRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSoftwarerepositoryCategoryMapperRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSoftwarerepositoryCategoryMapperExecute(r)
 }
 
@@ -1135,20 +1099,18 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapper(ct
 /*
  * Execute executes the request
  */
-func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperExecute(r ApiDeleteSoftwarerepositoryCategoryMapperRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperExecute(r ApiDeleteSoftwarerepositoryCategoryMapperRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.DeleteSoftwarerepositoryCategoryMapper")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers/{Moid}"
@@ -1177,22 +1139,19 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1250,7 +1209,7 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperExe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteSoftwarerepositoryCategoryMapperModelRequest struct {
@@ -1259,7 +1218,7 @@ type ApiDeleteSoftwarerepositoryCategoryMapperModelRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSoftwarerepositoryCategoryMapperModelRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSoftwarerepositoryCategoryMapperModelRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSoftwarerepositoryCategoryMapperModelExecute(r)
 }
 
@@ -1280,20 +1239,18 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperMod
 /*
  * Execute executes the request
  */
-func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperModelExecute(r ApiDeleteSoftwarerepositoryCategoryMapperModelRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperModelExecute(r ApiDeleteSoftwarerepositoryCategoryMapperModelRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.DeleteSoftwarerepositoryCategoryMapperModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels/{Moid}"
@@ -1322,22 +1279,19 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperMod
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1395,7 +1349,7 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategoryMapperMod
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest struct {
@@ -1404,7 +1358,7 @@ type ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSoftwarerepositoryCategorySupportConstraintExecute(r)
 }
 
@@ -1425,20 +1379,18 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportCo
 /*
  * Execute executes the request
  */
-func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportConstraintExecute(r ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportConstraintExecute(r ApiDeleteSoftwarerepositoryCategorySupportConstraintRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.DeleteSoftwarerepositoryCategorySupportConstraint")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints/{Moid}"
@@ -1467,22 +1419,19 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportCo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1540,7 +1489,7 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryCategorySupportCo
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteSoftwarerepositoryOperatingSystemFileRequest struct {
@@ -1549,7 +1498,7 @@ type ApiDeleteSoftwarerepositoryOperatingSystemFileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSoftwarerepositoryOperatingSystemFileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSoftwarerepositoryOperatingSystemFileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSoftwarerepositoryOperatingSystemFileExecute(r)
 }
 
@@ -1570,20 +1519,18 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFi
 /*
  * Execute executes the request
  */
-func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFileExecute(r ApiDeleteSoftwarerepositoryOperatingSystemFileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFileExecute(r ApiDeleteSoftwarerepositoryOperatingSystemFileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.DeleteSoftwarerepositoryOperatingSystemFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles/{Moid}"
@@ -1612,22 +1559,19 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1685,7 +1629,7 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryOperatingSystemFi
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteSoftwarerepositoryReleaseRequest struct {
@@ -1694,7 +1638,7 @@ type ApiDeleteSoftwarerepositoryReleaseRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSoftwarerepositoryReleaseRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSoftwarerepositoryReleaseRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSoftwarerepositoryReleaseExecute(r)
 }
 
@@ -1715,20 +1659,18 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryRelease(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryReleaseExecute(r ApiDeleteSoftwarerepositoryReleaseRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryReleaseExecute(r ApiDeleteSoftwarerepositoryReleaseRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.DeleteSoftwarerepositoryRelease")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases/{Moid}"
@@ -1757,22 +1699,19 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryReleaseExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1830,7 +1769,7 @@ func (a *SoftwarerepositoryApiService) DeleteSoftwarerepositoryReleaseExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryAuthorizationByMoidRequest struct {
@@ -1839,7 +1778,7 @@ type ApiGetSoftwarerepositoryAuthorizationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryAuthorizationByMoidExecute(r)
 }
 
@@ -1861,21 +1800,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoid(
  * Execute executes the request
  * @return SoftwarerepositoryAuthorization
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoidExecute(r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoidExecute(r ApiGetSoftwarerepositoryAuthorizationByMoidRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryAuthorizationByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Authorizations/{Moid}"
@@ -1904,22 +1841,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoidE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1986,7 +1920,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationByMoidE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryAuthorizationListRequest struct {
@@ -2050,7 +1984,7 @@ func (r ApiGetSoftwarerepositoryAuthorizationListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryAuthorizationListRequest) Execute() (SoftwarerepositoryAuthorizationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryAuthorizationListRequest) Execute() (SoftwarerepositoryAuthorizationResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryAuthorizationListExecute(r)
 }
 
@@ -2070,21 +2004,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationList(ct
  * Execute executes the request
  * @return SoftwarerepositoryAuthorizationResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationListExecute(r ApiGetSoftwarerepositoryAuthorizationListRequest) (SoftwarerepositoryAuthorizationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationListExecute(r ApiGetSoftwarerepositoryAuthorizationListRequest) (SoftwarerepositoryAuthorizationResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryAuthorizationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryAuthorizationList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Authorizations"
@@ -2145,22 +2077,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationListExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2227,7 +2156,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryAuthorizationListExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCachedImageByMoidRequest struct {
@@ -2236,7 +2165,7 @@ type ApiGetSoftwarerepositoryCachedImageByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryCachedImageByMoidRequest) Execute() (SoftwarerepositoryCachedImage, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCachedImageByMoidRequest) Execute() (SoftwarerepositoryCachedImage, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCachedImageByMoidExecute(r)
 }
 
@@ -2258,21 +2187,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoid(ct
  * Execute executes the request
  * @return SoftwarerepositoryCachedImage
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoidExecute(r ApiGetSoftwarerepositoryCachedImageByMoidRequest) (SoftwarerepositoryCachedImage, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoidExecute(r ApiGetSoftwarerepositoryCachedImageByMoidRequest) (SoftwarerepositoryCachedImage, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCachedImage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCachedImageByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CachedImages/{Moid}"
@@ -2301,22 +2228,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoidExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2383,7 +2307,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCachedImageListRequest struct {
@@ -2447,7 +2371,7 @@ func (r ApiGetSoftwarerepositoryCachedImageListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryCachedImageListRequest) Execute() (SoftwarerepositoryCachedImageResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCachedImageListRequest) Execute() (SoftwarerepositoryCachedImageResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCachedImageListExecute(r)
 }
 
@@ -2467,21 +2391,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageList(ctx 
  * Execute executes the request
  * @return SoftwarerepositoryCachedImageResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageListExecute(r ApiGetSoftwarerepositoryCachedImageListRequest) (SoftwarerepositoryCachedImageResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageListExecute(r ApiGetSoftwarerepositoryCachedImageListRequest) (SoftwarerepositoryCachedImageResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCachedImageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCachedImageList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CachedImages"
@@ -2542,22 +2464,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageListExecu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2624,7 +2543,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCachedImageListExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCatalogByMoidRequest struct {
@@ -2633,7 +2552,7 @@ type ApiGetSoftwarerepositoryCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryCatalogByMoidRequest) Execute() (SoftwarerepositoryCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCatalogByMoidRequest) Execute() (SoftwarerepositoryCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCatalogByMoidExecute(r)
 }
 
@@ -2655,21 +2574,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoid(ctx _c
  * Execute executes the request
  * @return SoftwarerepositoryCatalog
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoidExecute(r ApiGetSoftwarerepositoryCatalogByMoidRequest) (SoftwarerepositoryCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoidExecute(r ApiGetSoftwarerepositoryCatalogByMoidRequest) (SoftwarerepositoryCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Catalogs/{Moid}"
@@ -2698,22 +2615,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2780,7 +2694,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCatalogListRequest struct {
@@ -2844,7 +2758,7 @@ func (r ApiGetSoftwarerepositoryCatalogListRequest) Tags(tags string) ApiGetSoft
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryCatalogListRequest) Execute() (SoftwarerepositoryCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCatalogListRequest) Execute() (SoftwarerepositoryCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCatalogListExecute(r)
 }
 
@@ -2864,21 +2778,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogList(ctx _con
  * Execute executes the request
  * @return SoftwarerepositoryCatalogResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogListExecute(r ApiGetSoftwarerepositoryCatalogListRequest) (SoftwarerepositoryCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogListExecute(r ApiGetSoftwarerepositoryCatalogListRequest) (SoftwarerepositoryCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Catalogs"
@@ -2939,22 +2851,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3021,7 +2930,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCatalogListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategoryMapperByMoidRequest struct {
@@ -3030,7 +2939,7 @@ type ApiGetSoftwarerepositoryCategoryMapperByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategoryMapperByMoidExecute(r)
 }
 
@@ -3052,21 +2961,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoid
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapper
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperByMoidRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategoryMapperByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers/{Moid}"
@@ -3095,22 +3002,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoid
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3177,7 +3081,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperByMoid
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategoryMapperListRequest struct {
@@ -3241,7 +3145,7 @@ func (r ApiGetSoftwarerepositoryCategoryMapperListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryCategoryMapperListRequest) Execute() (SoftwarerepositoryCategoryMapperResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategoryMapperListRequest) Execute() (SoftwarerepositoryCategoryMapperResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategoryMapperListExecute(r)
 }
 
@@ -3261,21 +3165,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperList(c
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperListExecute(r ApiGetSoftwarerepositoryCategoryMapperListRequest) (SoftwarerepositoryCategoryMapperResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperListExecute(r ApiGetSoftwarerepositoryCategoryMapperListRequest) (SoftwarerepositoryCategoryMapperResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategoryMapperList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers"
@@ -3336,22 +3238,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperListEx
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3418,7 +3317,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperListEx
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest struct {
@@ -3427,7 +3326,7 @@ type ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategoryMapperModelByMoidExecute(r)
 }
 
@@ -3449,21 +3348,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelB
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperModel
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelByMoidExecute(r ApiGetSoftwarerepositoryCategoryMapperModelByMoidRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategoryMapperModelByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels/{Moid}"
@@ -3492,22 +3389,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3574,7 +3468,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategoryMapperModelListRequest struct {
@@ -3638,7 +3532,7 @@ func (r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) Tags(tags string
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) Execute() (SoftwarerepositoryCategoryMapperModelResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) Execute() (SoftwarerepositoryCategoryMapperModelResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategoryMapperModelListExecute(r)
 }
 
@@ -3658,21 +3552,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelL
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperModelResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelListExecute(r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) (SoftwarerepositoryCategoryMapperModelResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelListExecute(r ApiGetSoftwarerepositoryCategoryMapperModelListRequest) (SoftwarerepositoryCategoryMapperModelResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperModelResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategoryMapperModelList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels"
@@ -3733,22 +3625,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3815,7 +3704,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategoryMapperModelL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest struct {
@@ -3824,7 +3713,7 @@ type ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategorySupportConstraintByMoidExecute(r)
 }
 
@@ -3846,21 +3735,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
  * Execute executes the request
  * @return SoftwarerepositoryCategorySupportConstraint
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintByMoidExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintByMoidExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintByMoidRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategorySupportConstraint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategorySupportConstraintByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints/{Moid}"
@@ -3889,22 +3776,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3971,7 +3855,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryCategorySupportConstraintListRequest struct {
@@ -4035,7 +3919,7 @@ func (r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) Tags(tags 
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) Execute() (SoftwarerepositoryCategorySupportConstraintResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) Execute() (SoftwarerepositoryCategorySupportConstraintResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryCategorySupportConstraintListExecute(r)
 }
 
@@ -4055,21 +3939,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
  * Execute executes the request
  * @return SoftwarerepositoryCategorySupportConstraintResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintListExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) (SoftwarerepositoryCategorySupportConstraintResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConstraintListExecute(r ApiGetSoftwarerepositoryCategorySupportConstraintListRequest) (SoftwarerepositoryCategorySupportConstraintResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategorySupportConstraintResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryCategorySupportConstraintList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints"
@@ -4130,22 +4012,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4212,7 +4091,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryCategorySupportConst
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryDownloadSpecByMoidRequest struct {
@@ -4221,7 +4100,7 @@ type ApiGetSoftwarerepositoryDownloadSpecByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) Execute() (SoftwarerepositoryDownloadSpec, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) Execute() (SoftwarerepositoryDownloadSpec, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryDownloadSpecByMoidExecute(r)
 }
 
@@ -4243,21 +4122,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoid(c
  * Execute executes the request
  * @return SoftwarerepositoryDownloadSpec
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoidExecute(r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) (SoftwarerepositoryDownloadSpec, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoidExecute(r ApiGetSoftwarerepositoryDownloadSpecByMoidRequest) (SoftwarerepositoryDownloadSpec, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryDownloadSpec
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryDownloadSpecByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/DownloadSpecs/{Moid}"
@@ -4286,22 +4163,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoidEx
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4368,7 +4242,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryDownloadSpecListRequest struct {
@@ -4432,7 +4306,7 @@ func (r ApiGetSoftwarerepositoryDownloadSpecListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryDownloadSpecListRequest) Execute() (SoftwarerepositoryDownloadSpecResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryDownloadSpecListRequest) Execute() (SoftwarerepositoryDownloadSpecResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryDownloadSpecListExecute(r)
 }
 
@@ -4452,21 +4326,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecList(ctx
  * Execute executes the request
  * @return SoftwarerepositoryDownloadSpecResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecListExecute(r ApiGetSoftwarerepositoryDownloadSpecListRequest) (SoftwarerepositoryDownloadSpecResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecListExecute(r ApiGetSoftwarerepositoryDownloadSpecListRequest) (SoftwarerepositoryDownloadSpecResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryDownloadSpecResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryDownloadSpecList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/DownloadSpecs"
@@ -4527,22 +4399,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecListExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4609,7 +4478,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryDownloadSpecListExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest struct {
@@ -4618,7 +4487,7 @@ type ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryOperatingSystemFileByMoidExecute(r)
 }
 
@@ -4640,21 +4509,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileB
  * Execute executes the request
  * @return SoftwarerepositoryOperatingSystemFile
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileByMoidExecute(r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileByMoidExecute(r ApiGetSoftwarerepositoryOperatingSystemFileByMoidRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryOperatingSystemFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryOperatingSystemFileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles/{Moid}"
@@ -4683,22 +4550,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4765,7 +4629,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryOperatingSystemFileListRequest struct {
@@ -4829,7 +4693,7 @@ func (r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) Tags(tags string
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) Execute() (SoftwarerepositoryOperatingSystemFileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) Execute() (SoftwarerepositoryOperatingSystemFileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryOperatingSystemFileListExecute(r)
 }
 
@@ -4849,21 +4713,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileL
  * Execute executes the request
  * @return SoftwarerepositoryOperatingSystemFileResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileListExecute(r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) (SoftwarerepositoryOperatingSystemFileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileListExecute(r ApiGetSoftwarerepositoryOperatingSystemFileListRequest) (SoftwarerepositoryOperatingSystemFileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryOperatingSystemFileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryOperatingSystemFileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles"
@@ -4924,22 +4786,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5006,7 +4865,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryOperatingSystemFileL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryReleaseByMoidRequest struct {
@@ -5015,7 +4874,7 @@ type ApiGetSoftwarerepositoryReleaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSoftwarerepositoryReleaseByMoidRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryReleaseByMoidRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryReleaseByMoidExecute(r)
 }
 
@@ -5037,21 +4896,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoid(ctx _c
  * Execute executes the request
  * @return SoftwarerepositoryRelease
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoidExecute(r ApiGetSoftwarerepositoryReleaseByMoidRequest) (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoidExecute(r ApiGetSoftwarerepositoryReleaseByMoidRequest) (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryReleaseByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases/{Moid}"
@@ -5080,22 +4937,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5162,7 +5016,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSoftwarerepositoryReleaseListRequest struct {
@@ -5226,7 +5080,7 @@ func (r ApiGetSoftwarerepositoryReleaseListRequest) Tags(tags string) ApiGetSoft
 	return r
 }
 
-func (r ApiGetSoftwarerepositoryReleaseListRequest) Execute() (SoftwarerepositoryReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSoftwarerepositoryReleaseListRequest) Execute() (SoftwarerepositoryReleaseResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSoftwarerepositoryReleaseListExecute(r)
 }
 
@@ -5246,21 +5100,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseList(ctx _con
  * Execute executes the request
  * @return SoftwarerepositoryReleaseResponse
  */
-func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseListExecute(r ApiGetSoftwarerepositoryReleaseListRequest) (SoftwarerepositoryReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseListExecute(r ApiGetSoftwarerepositoryReleaseListRequest) (SoftwarerepositoryReleaseResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryReleaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.GetSoftwarerepositoryReleaseList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases"
@@ -5321,22 +5173,19 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5403,7 +5252,7 @@ func (a *SoftwarerepositoryApiService) GetSoftwarerepositoryReleaseListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryAuthorizationRequest struct {
@@ -5423,7 +5272,7 @@ func (r ApiPatchSoftwarerepositoryAuthorizationRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryAuthorizationExecute(r)
 }
 
@@ -5445,21 +5294,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorization(ctx 
  * Execute executes the request
  * @return SoftwarerepositoryAuthorization
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecute(r ApiPatchSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecute(r ApiPatchSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryAuthorization")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Authorizations/{Moid}"
@@ -5469,8 +5316,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecu
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryAuthorization == nil {
-		executionError.error = "softwarerepositoryAuthorization is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryAuthorization is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5497,22 +5343,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecu
 	localVarPostBody = r.softwarerepositoryAuthorization
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5579,7 +5422,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryAuthorizationExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryCategoryMapperRequest struct {
@@ -5599,7 +5442,7 @@ func (r ApiPatchSoftwarerepositoryCategoryMapperRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryCategoryMapperExecute(r)
 }
 
@@ -5621,21 +5464,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapper(ctx
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapper
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExecute(r ApiPatchSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExecute(r ApiPatchSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryCategoryMapper")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers/{Moid}"
@@ -5645,8 +5486,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapper == nil {
-		executionError.error = "softwarerepositoryCategoryMapper is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapper is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5673,22 +5513,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExec
 	localVarPostBody = r.softwarerepositoryCategoryMapper
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5755,7 +5592,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryCategoryMapperModelRequest struct {
@@ -5775,7 +5612,7 @@ func (r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) IfMatch(ifMatch st
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryCategoryMapperModelExecute(r)
 }
 
@@ -5797,21 +5634,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperMode
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperModel
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperModelExecute(r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperModelExecute(r ApiPatchSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryCategoryMapperModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels/{Moid}"
@@ -5821,8 +5656,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperMode
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapperModel == nil {
-		executionError.error = "softwarerepositoryCategoryMapperModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapperModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5849,22 +5683,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperMode
 	localVarPostBody = r.softwarerepositoryCategoryMapperModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5931,7 +5762,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategoryMapperMode
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryCategorySupportConstraintRequest struct {
@@ -5951,7 +5782,7 @@ func (r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) IfMatch(ifMa
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryCategorySupportConstraintExecute(r)
 }
 
@@ -5973,21 +5804,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportCon
  * Execute executes the request
  * @return SoftwarerepositoryCategorySupportConstraint
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportConstraintExecute(r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportConstraintExecute(r ApiPatchSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategorySupportConstraint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryCategorySupportConstraint")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints/{Moid}"
@@ -5997,8 +5826,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportCon
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategorySupportConstraint == nil {
-		executionError.error = "softwarerepositoryCategorySupportConstraint is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategorySupportConstraint is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6025,22 +5853,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportCon
 	localVarPostBody = r.softwarerepositoryCategorySupportConstraint
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6107,7 +5932,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryCategorySupportCon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryOperatingSystemFileRequest struct {
@@ -6127,7 +5952,7 @@ func (r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) IfMatch(ifMatch st
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryOperatingSystemFileExecute(r)
 }
 
@@ -6149,21 +5974,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFil
  * Execute executes the request
  * @return SoftwarerepositoryOperatingSystemFile
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFileExecute(r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFileExecute(r ApiPatchSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryOperatingSystemFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryOperatingSystemFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles/{Moid}"
@@ -6173,8 +5996,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFil
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryOperatingSystemFile == nil {
-		executionError.error = "softwarerepositoryOperatingSystemFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryOperatingSystemFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6201,22 +6023,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFil
 	localVarPostBody = r.softwarerepositoryOperatingSystemFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6283,7 +6102,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryOperatingSystemFil
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSoftwarerepositoryReleaseRequest struct {
@@ -6303,7 +6122,7 @@ func (r ApiPatchSoftwarerepositoryReleaseRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	return r.ApiService.PatchSoftwarerepositoryReleaseExecute(r)
 }
 
@@ -6325,21 +6144,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryRelease(ctx _conte
  * Execute executes the request
  * @return SoftwarerepositoryRelease
  */
-func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r ApiPatchSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r ApiPatchSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.PatchSoftwarerepositoryRelease")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases/{Moid}"
@@ -6349,8 +6166,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryRelease == nil {
-		executionError.error = "softwarerepositoryRelease is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryRelease is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6377,22 +6193,19 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r A
 	localVarPostBody = r.softwarerepositoryRelease
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6459,7 +6272,7 @@ func (a *SoftwarerepositoryApiService) PatchSoftwarerepositoryReleaseExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryAuthorizationRequest struct {
@@ -6479,7 +6292,7 @@ func (r ApiUpdateSoftwarerepositoryAuthorizationRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryAuthorizationRequest) Execute() (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryAuthorizationExecute(r)
 }
 
@@ -6501,21 +6314,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorization(ctx
  * Execute executes the request
  * @return SoftwarerepositoryAuthorization
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExecute(r ApiUpdateSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExecute(r ApiUpdateSoftwarerepositoryAuthorizationRequest) (SoftwarerepositoryAuthorization, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryAuthorization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryAuthorization")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Authorizations/{Moid}"
@@ -6525,8 +6336,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryAuthorization == nil {
-		executionError.error = "softwarerepositoryAuthorization is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryAuthorization is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6553,22 +6363,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExec
 	localVarPostBody = r.softwarerepositoryAuthorization
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6635,7 +6442,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryAuthorizationExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryCategoryMapperRequest struct {
@@ -6655,7 +6462,7 @@ func (r ApiUpdateSoftwarerepositoryCategoryMapperRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryCategoryMapperRequest) Execute() (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryCategoryMapperExecute(r)
 }
 
@@ -6677,21 +6484,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapper(ct
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapper
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExecute(r ApiUpdateSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExecute(r ApiUpdateSoftwarerepositoryCategoryMapperRequest) (SoftwarerepositoryCategoryMapper, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapper
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryCategoryMapper")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMappers/{Moid}"
@@ -6701,8 +6506,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapper == nil {
-		executionError.error = "softwarerepositoryCategoryMapper is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapper is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6729,22 +6533,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExe
 	localVarPostBody = r.softwarerepositoryCategoryMapper
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6811,7 +6612,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryCategoryMapperModelRequest struct {
@@ -6831,7 +6632,7 @@ func (r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) IfMatch(ifMatch s
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) Execute() (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryCategoryMapperModelExecute(r)
 }
 
@@ -6853,21 +6654,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperMod
  * Execute executes the request
  * @return SoftwarerepositoryCategoryMapperModel
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperModelExecute(r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperModelExecute(r ApiUpdateSoftwarerepositoryCategoryMapperModelRequest) (SoftwarerepositoryCategoryMapperModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategoryMapperModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryCategoryMapperModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategoryMapperModels/{Moid}"
@@ -6877,8 +6676,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperMod
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategoryMapperModel == nil {
-		executionError.error = "softwarerepositoryCategoryMapperModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategoryMapperModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6905,22 +6703,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperMod
 	localVarPostBody = r.softwarerepositoryCategoryMapperModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6987,7 +6782,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategoryMapperMod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest struct {
@@ -7007,7 +6802,7 @@ func (r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) IfMatch(ifM
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) Execute() (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryCategorySupportConstraintExecute(r)
 }
 
@@ -7029,21 +6824,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportCo
  * Execute executes the request
  * @return SoftwarerepositoryCategorySupportConstraint
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportConstraintExecute(r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportConstraintExecute(r ApiUpdateSoftwarerepositoryCategorySupportConstraintRequest) (SoftwarerepositoryCategorySupportConstraint, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryCategorySupportConstraint
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryCategorySupportConstraint")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/CategorySupportConstraints/{Moid}"
@@ -7053,8 +6846,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportCo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryCategorySupportConstraint == nil {
-		executionError.error = "softwarerepositoryCategorySupportConstraint is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryCategorySupportConstraint is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7081,22 +6873,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportCo
 	localVarPostBody = r.softwarerepositoryCategorySupportConstraint
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7163,7 +6952,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryCategorySupportCo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryOperatingSystemFileRequest struct {
@@ -7183,7 +6972,7 @@ func (r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) IfMatch(ifMatch s
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) Execute() (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryOperatingSystemFileExecute(r)
 }
 
@@ -7205,21 +6994,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFi
  * Execute executes the request
  * @return SoftwarerepositoryOperatingSystemFile
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFileExecute(r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFileExecute(r ApiUpdateSoftwarerepositoryOperatingSystemFileRequest) (SoftwarerepositoryOperatingSystemFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryOperatingSystemFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryOperatingSystemFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/OperatingSystemFiles/{Moid}"
@@ -7229,8 +7016,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryOperatingSystemFile == nil {
-		executionError.error = "softwarerepositoryOperatingSystemFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryOperatingSystemFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7257,22 +7043,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFi
 	localVarPostBody = r.softwarerepositoryOperatingSystemFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7339,7 +7122,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryOperatingSystemFi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSoftwarerepositoryReleaseRequest struct {
@@ -7359,7 +7142,7 @@ func (r ApiUpdateSoftwarerepositoryReleaseRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSoftwarerepositoryReleaseRequest) Execute() (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSoftwarerepositoryReleaseExecute(r)
 }
 
@@ -7381,21 +7164,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryRelease(ctx _cont
  * Execute executes the request
  * @return SoftwarerepositoryRelease
  */
-func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r ApiUpdateSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r ApiUpdateSoftwarerepositoryReleaseRequest) (SoftwarerepositoryRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SoftwarerepositoryRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SoftwarerepositoryApiService.UpdateSoftwarerepositoryRelease")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/softwarerepository/Releases/{Moid}"
@@ -7405,8 +7186,7 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.softwarerepositoryRelease == nil {
-		executionError.error = "softwarerepositoryRelease is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("softwarerepositoryRelease is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7433,22 +7213,19 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r 
 	localVarPostBody = r.softwarerepositoryRelease
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7515,5 +7292,5 @@ func (a *SoftwarerepositoryApiService) UpdateSoftwarerepositoryReleaseExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

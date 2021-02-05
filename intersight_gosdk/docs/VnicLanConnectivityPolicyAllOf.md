@@ -6,9 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.LanConnectivityPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.LanConnectivityPolicy"]
+**IqnAllocationType** | Pointer to **string** | Allocation Type of iSCSI Qualified Name - Static/Dynamic/None. * &#x60;None&#x60; - Type defines that property is not applicable for an interface. * &#x60;Auto&#x60; - The system selects an interface automatically - DHCP. * &#x60;Static&#x60; - Type represents that static information or properties are associated to an interface. * &#x60;Pool&#x60; - Type defines that property value will be fetched from an associated pool. | [optional] [default to "None"]
 **PlacementMode** | Pointer to **string** | The mode used for placement of vNICs on network adapters. It can either be Auto or Custom. * &#x60;custom&#x60; - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user. * &#x60;auto&#x60; - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system. | [optional] [default to "custom"]
+**StaticIqnName** | Pointer to **string** | User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain. | [optional] 
 **TargetPlatform** | Pointer to **string** | The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
 **EthIfs** | Pointer to [**[]VnicEthIfRelationship**](VnicEthIfRelationship.md) | An array of relationships to vnicEthIf resources. | [optional] 
+**IqnPool** | Pointer to [**IqnpoolPoolRelationship**](iqnpool.Pool.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
@@ -71,6 +74,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetIqnAllocationType
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetIqnAllocationType() string`
+
+GetIqnAllocationType returns the IqnAllocationType field if non-nil, zero value otherwise.
+
+### GetIqnAllocationTypeOk
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetIqnAllocationTypeOk() (*string, bool)`
+
+GetIqnAllocationTypeOk returns a tuple with the IqnAllocationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqnAllocationType
+
+`func (o *VnicLanConnectivityPolicyAllOf) SetIqnAllocationType(v string)`
+
+SetIqnAllocationType sets IqnAllocationType field to given value.
+
+### HasIqnAllocationType
+
+`func (o *VnicLanConnectivityPolicyAllOf) HasIqnAllocationType() bool`
+
+HasIqnAllocationType returns a boolean if a field has been set.
+
 ### GetPlacementMode
 
 `func (o *VnicLanConnectivityPolicyAllOf) GetPlacementMode() string`
@@ -95,6 +123,31 @@ SetPlacementMode sets PlacementMode field to given value.
 `func (o *VnicLanConnectivityPolicyAllOf) HasPlacementMode() bool`
 
 HasPlacementMode returns a boolean if a field has been set.
+
+### GetStaticIqnName
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetStaticIqnName() string`
+
+GetStaticIqnName returns the StaticIqnName field if non-nil, zero value otherwise.
+
+### GetStaticIqnNameOk
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetStaticIqnNameOk() (*string, bool)`
+
+GetStaticIqnNameOk returns a tuple with the StaticIqnName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticIqnName
+
+`func (o *VnicLanConnectivityPolicyAllOf) SetStaticIqnName(v string)`
+
+SetStaticIqnName sets StaticIqnName field to given value.
+
+### HasStaticIqnName
+
+`func (o *VnicLanConnectivityPolicyAllOf) HasStaticIqnName() bool`
+
+HasStaticIqnName returns a boolean if a field has been set.
 
 ### GetTargetPlatform
 
@@ -156,6 +209,31 @@ HasEthIfs returns a boolean if a field has been set.
 `func (o *VnicLanConnectivityPolicyAllOf) UnsetEthIfs()`
 
 UnsetEthIfs ensures that no value is present for EthIfs, not even an explicit nil
+### GetIqnPool
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetIqnPool() IqnpoolPoolRelationship`
+
+GetIqnPool returns the IqnPool field if non-nil, zero value otherwise.
+
+### GetIqnPoolOk
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetIqnPoolOk() (*IqnpoolPoolRelationship, bool)`
+
+GetIqnPoolOk returns a tuple with the IqnPool field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIqnPool
+
+`func (o *VnicLanConnectivityPolicyAllOf) SetIqnPool(v IqnpoolPoolRelationship)`
+
+SetIqnPool sets IqnPool field to given value.
+
+### HasIqnPool
+
+`func (o *VnicLanConnectivityPolicyAllOf) HasIqnPool() bool`
+
+HasIqnPool returns a boolean if a field has been set.
+
 ### GetOrganization
 
 `func (o *VnicLanConnectivityPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship`

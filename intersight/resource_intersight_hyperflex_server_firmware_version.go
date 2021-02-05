@@ -296,7 +296,8 @@ func resourceHyperflexServerFirmwareVersionCreate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexServerFirmwareVersion(conn.ctx).HyperflexServerFirmwareVersion(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexServerFirmwareVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -311,7 +312,8 @@ func resourceHyperflexServerFirmwareVersionRead(c context.Context, d *schema.Res
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexServerFirmwareVersionByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexServerFirmwareVersion object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -503,7 +505,8 @@ func resourceHyperflexServerFirmwareVersionUpdate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexServerFirmwareVersion(conn.ctx, d.Id()).HyperflexServerFirmwareVersion(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexServerFirmwareVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -518,7 +521,8 @@ func resourceHyperflexServerFirmwareVersionDelete(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexServerFirmwareVersion(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexServerFirmwareVersion object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

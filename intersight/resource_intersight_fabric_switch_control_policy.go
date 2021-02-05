@@ -35,6 +35,46 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"mac_aging_settings": {
+				Description: "This specifies the MAC aging option and time settings.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"mac_aging_option": {
+							Description: "This specifies one of the option to configure the MAC address aging time.\n* `Default` - This option sets the default MAC address aging time to 14500 seconds for End Host mode.\n* `Custom` - This option allows the the user to configure the MAC address aging time on the switch. For Switch Model UCS-FI-6454 or higher, the valid range is 120 to 918000 seconds and the switch will set the lower multiple of 5 of the given time.\n* `Never` - This option disables the MAC address aging process and never allows the MAC address entries to get removed from the table.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "Default",
+						},
+						"mac_aging_time": {
+							Description: "Define the MAC address aging time in seconds. This field is valid when the \"Custom\" MAC address aging option is selected.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -48,7 +88,7 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -187,6 +227,49 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("mac_aging_settings"); ok {
+		p := make([]models.FabricMacAgingSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewFabricMacAgingSettingsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.MacAgingSettings")
+			if v, ok := l["mac_aging_option"]; ok {
+				{
+					x := (v.(string))
+					o.SetMacAgingOption(x)
+				}
+			}
+			if v, ok := l["mac_aging_time"]; ok {
+				{
+					x := int32(v.(int))
+					o.SetMacAgingTime(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacAgingSettings(x)
+		}
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -328,7 +411,8 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.FabricApi.CreateFabricSwitchControlPolicy(conn.ctx).FabricSwitchControlPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FabricSwitchControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -343,7 +427,8 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricSwitchControlPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FabricSwitchControlPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -362,6 +447,10 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("mac_aging_settings", flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property MacAgingSettings in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
@@ -418,6 +507,50 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("mac_aging_settings") {
+		v := d.Get("mac_aging_settings")
+		p := make([]models.FabricMacAgingSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.FabricMacAgingSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("fabric.MacAgingSettings")
+			if v, ok := l["mac_aging_option"]; ok {
+				{
+					x := (v.(string))
+					o.SetMacAgingOption(x)
+				}
+			}
+			if v, ok := l["mac_aging_time"]; ok {
+				{
+					x := int32(v.(int))
+					o.SetMacAgingTime(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetMacAgingSettings(x)
+		}
 	}
 
 	if d.HasChange("moid") {
@@ -565,7 +698,8 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSwitchControlPolicy(conn.ctx, d.Id()).FabricSwitchControlPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FabricSwitchControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -580,7 +714,8 @@ func resourceFabricSwitchControlPolicyDelete(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSwitchControlPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FabricSwitchControlPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -554,7 +554,8 @@ func resourceVmediaPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.VmediaApi.CreateVmediaPolicy(conn.ctx).VmediaPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VmediaPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -573,7 +574,8 @@ func detachVmediaPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 
 	r := conn.ApiClient.VmediaApi.UpdateVmediaPolicy(conn.ctx, d.Id()).VmediaPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -586,7 +588,8 @@ func resourceVmediaPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	var de diag.Diagnostics
 	r := conn.ApiClient.VmediaApi.GetVmediaPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VmediaPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -941,7 +944,8 @@ func resourceVmediaPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.VmediaApi.UpdateVmediaPolicy(conn.ctx, d.Id()).VmediaPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VmediaPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -964,7 +968,8 @@ func resourceVmediaPolicyDelete(c context.Context, d *schema.ResourceData, meta 
 	}
 	p := conn.ApiClient.VmediaApi.DeleteVmediaPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VmediaPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

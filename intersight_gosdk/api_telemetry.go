@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -38,7 +38,7 @@ func (r ApiQueryTelemetryDatasourceMetadataRequest) TelemetryDruidDataSourceMeta
 	return r
 }
 
-func (r ApiQueryTelemetryDatasourceMetadataRequest) Execute() ([]TelemetryDruidDataSourceMetadataResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryDatasourceMetadataRequest) Execute() ([]TelemetryDruidDataSourceMetadataResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryDatasourceMetadataExecute(r)
 }
 
@@ -59,21 +59,19 @@ func (a *TelemetryApiService) QueryTelemetryDatasourceMetadata(ctx _context.Cont
  * Execute executes the request
  * @return []TelemetryDruidDataSourceMetadataResult
  */
-func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQueryTelemetryDatasourceMetadataRequest) ([]TelemetryDruidDataSourceMetadataResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQueryTelemetryDatasourceMetadataRequest) ([]TelemetryDruidDataSourceMetadataResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidDataSourceMetadataResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryDatasourceMetadata")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/DataSourceMetadata"
@@ -82,8 +80,7 @@ func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQuery
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidDataSourceMetadataRequest == nil {
-		executionError.error = "telemetryDruidDataSourceMetadataRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidDataSourceMetadataRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -107,22 +104,19 @@ func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQuery
 	localVarPostBody = r.telemetryDruidDataSourceMetadataRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -149,7 +143,7 @@ func (a *TelemetryApiService) QueryTelemetryDatasourceMetadataExecute(r ApiQuery
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetryGroupByRequest struct {
@@ -163,7 +157,7 @@ func (r ApiQueryTelemetryGroupByRequest) TelemetryDruidGroupByRequest(telemetryD
 	return r
 }
 
-func (r ApiQueryTelemetryGroupByRequest) Execute() ([]TelemetryDruidGroupByResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryGroupByRequest) Execute() ([]TelemetryDruidGroupByResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryGroupByExecute(r)
 }
 
@@ -184,21 +178,19 @@ func (a *TelemetryApiService) QueryTelemetryGroupBy(ctx _context.Context) ApiQue
  * Execute executes the request
  * @return []TelemetryDruidGroupByResult
  */
-func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGroupByRequest) ([]TelemetryDruidGroupByResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGroupByRequest) ([]TelemetryDruidGroupByResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidGroupByResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryGroupBy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/GroupBys"
@@ -207,8 +199,7 @@ func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidGroupByRequest == nil {
-		executionError.error = "telemetryDruidGroupByRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidGroupByRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -232,22 +223,19 @@ func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGr
 	localVarPostBody = r.telemetryDruidGroupByRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -274,7 +262,7 @@ func (a *TelemetryApiService) QueryTelemetryGroupByExecute(r ApiQueryTelemetryGr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetryScanRequest struct {
@@ -288,7 +276,7 @@ func (r ApiQueryTelemetryScanRequest) TelemetryDruidScanRequest(telemetryDruidSc
 	return r
 }
 
-func (r ApiQueryTelemetryScanRequest) Execute() ([]TelemetryDruidScanResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryScanRequest) Execute() ([]TelemetryDruidScanResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryScanExecute(r)
 }
 
@@ -309,21 +297,19 @@ func (a *TelemetryApiService) QueryTelemetryScan(ctx _context.Context) ApiQueryT
  * Execute executes the request
  * @return []TelemetryDruidScanResult
  */
-func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanRequest) ([]TelemetryDruidScanResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanRequest) ([]TelemetryDruidScanResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidScanResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryScan")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/Scans"
@@ -332,8 +318,7 @@ func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidScanRequest == nil {
-		executionError.error = "telemetryDruidScanRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidScanRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -357,22 +342,19 @@ func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanR
 	localVarPostBody = r.telemetryDruidScanRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -399,7 +381,7 @@ func (a *TelemetryApiService) QueryTelemetryScanExecute(r ApiQueryTelemetryScanR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetrySearchRequest struct {
@@ -413,7 +395,7 @@ func (r ApiQueryTelemetrySearchRequest) TelemetryDruidSearchRequest(telemetryDru
 	return r
 }
 
-func (r ApiQueryTelemetrySearchRequest) Execute() ([]TelemetryDruidSearchResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetrySearchRequest) Execute() ([]TelemetryDruidSearchResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetrySearchExecute(r)
 }
 
@@ -434,21 +416,19 @@ func (a *TelemetryApiService) QueryTelemetrySearch(ctx _context.Context) ApiQuer
  * Execute executes the request
  * @return []TelemetryDruidSearchResult
  */
-func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySearchRequest) ([]TelemetryDruidSearchResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySearchRequest) ([]TelemetryDruidSearchResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidSearchResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetrySearch")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/Searches"
@@ -457,8 +437,7 @@ func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidSearchRequest == nil {
-		executionError.error = "telemetryDruidSearchRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidSearchRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -482,22 +461,19 @@ func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySea
 	localVarPostBody = r.telemetryDruidSearchRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -524,7 +500,7 @@ func (a *TelemetryApiService) QueryTelemetrySearchExecute(r ApiQueryTelemetrySea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetrySegmentMetadataRequest struct {
@@ -538,7 +514,7 @@ func (r ApiQueryTelemetrySegmentMetadataRequest) TelemetryDruidSegmentMetadataRe
 	return r
 }
 
-func (r ApiQueryTelemetrySegmentMetadataRequest) Execute() ([]TelemetryDruidSegmentMetadataResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetrySegmentMetadataRequest) Execute() ([]TelemetryDruidSegmentMetadataResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetrySegmentMetadataExecute(r)
 }
 
@@ -559,21 +535,19 @@ func (a *TelemetryApiService) QueryTelemetrySegmentMetadata(ctx _context.Context
  * Execute executes the request
  * @return []TelemetryDruidSegmentMetadataResult
  */
-func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTelemetrySegmentMetadataRequest) ([]TelemetryDruidSegmentMetadataResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTelemetrySegmentMetadataRequest) ([]TelemetryDruidSegmentMetadataResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidSegmentMetadataResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetrySegmentMetadata")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/SegmentMetadata"
@@ -582,8 +556,7 @@ func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTel
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidSegmentMetadataRequest == nil {
-		executionError.error = "telemetryDruidSegmentMetadataRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidSegmentMetadataRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -607,22 +580,19 @@ func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTel
 	localVarPostBody = r.telemetryDruidSegmentMetadataRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -649,7 +619,7 @@ func (a *TelemetryApiService) QueryTelemetrySegmentMetadataExecute(r ApiQueryTel
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetryTimeBoundaryRequest struct {
@@ -663,7 +633,7 @@ func (r ApiQueryTelemetryTimeBoundaryRequest) TelemetryDruidTimeBoundaryRequest(
 	return r
 }
 
-func (r ApiQueryTelemetryTimeBoundaryRequest) Execute() ([]TelemetryDruidTimeBoundaryResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryTimeBoundaryRequest) Execute() ([]TelemetryDruidTimeBoundaryResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryTimeBoundaryExecute(r)
 }
 
@@ -684,21 +654,19 @@ func (a *TelemetryApiService) QueryTelemetryTimeBoundary(ctx _context.Context) A
  * Execute executes the request
  * @return []TelemetryDruidTimeBoundaryResult
  */
-func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTelemetryTimeBoundaryRequest) ([]TelemetryDruidTimeBoundaryResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTelemetryTimeBoundaryRequest) ([]TelemetryDruidTimeBoundaryResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidTimeBoundaryResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryTimeBoundary")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/TimeBoundaries"
@@ -707,8 +675,7 @@ func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTeleme
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidTimeBoundaryRequest == nil {
-		executionError.error = "telemetryDruidTimeBoundaryRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidTimeBoundaryRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -732,22 +699,19 @@ func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTeleme
 	localVarPostBody = r.telemetryDruidTimeBoundaryRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -774,7 +738,7 @@ func (a *TelemetryApiService) QueryTelemetryTimeBoundaryExecute(r ApiQueryTeleme
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetryTimeSeriesRequest struct {
@@ -788,7 +752,7 @@ func (r ApiQueryTelemetryTimeSeriesRequest) TelemetryDruidTimeSeriesRequest(tele
 	return r
 }
 
-func (r ApiQueryTelemetryTimeSeriesRequest) Execute() ([]TelemetryDruidIntervalResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryTimeSeriesRequest) Execute() ([]TelemetryDruidIntervalResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryTimeSeriesExecute(r)
 }
 
@@ -809,21 +773,19 @@ func (a *TelemetryApiService) QueryTelemetryTimeSeries(ctx _context.Context) Api
  * Execute executes the request
  * @return []TelemetryDruidIntervalResult
  */
-func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetryTimeSeriesRequest) ([]TelemetryDruidIntervalResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetryTimeSeriesRequest) ([]TelemetryDruidIntervalResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidIntervalResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryTimeSeries")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/TimeSeries"
@@ -832,8 +794,7 @@ func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidTimeSeriesRequest == nil {
-		executionError.error = "telemetryDruidTimeSeriesRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidTimeSeriesRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -857,22 +818,19 @@ func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetr
 	localVarPostBody = r.telemetryDruidTimeSeriesRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -899,7 +857,7 @@ func (a *TelemetryApiService) QueryTelemetryTimeSeriesExecute(r ApiQueryTelemetr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiQueryTelemetryTopNRequest struct {
@@ -913,7 +871,7 @@ func (r ApiQueryTelemetryTopNRequest) TelemetryDruidTopNRequest(telemetryDruidTo
 	return r
 }
 
-func (r ApiQueryTelemetryTopNRequest) Execute() ([]TelemetryDruidTopNResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiQueryTelemetryTopNRequest) Execute() ([]TelemetryDruidTopNResult, *_nethttp.Response, error) {
 	return r.ApiService.QueryTelemetryTopNExecute(r)
 }
 
@@ -934,21 +892,19 @@ func (a *TelemetryApiService) QueryTelemetryTopN(ctx _context.Context) ApiQueryT
  * Execute executes the request
  * @return []TelemetryDruidTopNResult
  */
-func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNRequest) ([]TelemetryDruidTopNResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNRequest) ([]TelemetryDruidTopNResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  []TelemetryDruidTopNResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryApiService.QueryTelemetryTopN")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/telemetry/Topns"
@@ -957,8 +913,7 @@ func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.telemetryDruidTopNRequest == nil {
-		executionError.error = "telemetryDruidTopNRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("telemetryDruidTopNRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -982,22 +937,19 @@ func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNR
 	localVarPostBody = r.telemetryDruidTopNRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1024,5 +976,5 @@ func (a *TelemetryApiService) QueryTelemetryTopNExecute(r ApiQueryTelemetryTopNR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

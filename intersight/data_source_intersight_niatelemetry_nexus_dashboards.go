@@ -21,7 +21,7 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -61,13 +61,28 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"number_of_schemas_in_mso": {
+				Description: "Number of total schemas in Multi-Site Orchestrator.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"number_of_sites_in_mso": {
+				Description: "Number of sites in Multi-Site Orchestrator.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"number_of_sites_serviced": {
 				Description: "Number of sites serviced by ND.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"number_of_tenants_in_mso": {
+				Description: "Number of total tenants in Multi-Site Orchestrator.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -134,6 +149,11 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 					},
 				},
 			},
+			"type_of_site_in_mso": {
+				Description: "Type of site added to Multi-Site Orchestrator.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 		},
 	}
 }
@@ -176,13 +196,29 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetNumberOfApps(x)
 	}
+	if v, ok := d.GetOk("number_of_schemas_in_mso"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfSchemasInMso(x)
+	}
+	if v, ok := d.GetOk("number_of_sites_in_mso"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfSitesInMso(x)
+	}
 	if v, ok := d.GetOk("number_of_sites_serviced"); ok {
 		x := int64(v.(int))
 		o.SetNumberOfSitesServiced(x)
 	}
+	if v, ok := d.GetOk("number_of_tenants_in_mso"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfTenantsInMso(x)
+	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+	if v, ok := d.GetOk("type_of_site_in_mso"); ok {
+		x := (v.(string))
+		o.SetTypeOfSiteInMso(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -190,7 +226,8 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		return diag.Errorf("json marshal of NiatelemetryNexusDashboards object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNexusDashboardsList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching NiatelemetryNexusDashboards: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -247,8 +284,17 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 			if err := d.Set("number_of_apps", (s.GetNumberOfApps())); err != nil {
 				return diag.Errorf("error occurred while setting property NumberOfApps: %s", err.Error())
 			}
+			if err := d.Set("number_of_schemas_in_mso", (s.GetNumberOfSchemasInMso())); err != nil {
+				return diag.Errorf("error occurred while setting property NumberOfSchemasInMso: %s", err.Error())
+			}
+			if err := d.Set("number_of_sites_in_mso", (s.GetNumberOfSitesInMso())); err != nil {
+				return diag.Errorf("error occurred while setting property NumberOfSitesInMso: %s", err.Error())
+			}
 			if err := d.Set("number_of_sites_serviced", (s.GetNumberOfSitesServiced())); err != nil {
 				return diag.Errorf("error occurred while setting property NumberOfSitesServiced: %s", err.Error())
+			}
+			if err := d.Set("number_of_tenants_in_mso", (s.GetNumberOfTenantsInMso())); err != nil {
+				return diag.Errorf("error occurred while setting property NumberOfTenantsInMso: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
@@ -260,6 +306,9 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
+			}
+			if err := d.Set("type_of_site_in_mso", (s.GetTypeOfSiteInMso())); err != nil {
+				return diag.Errorf("error occurred while setting property TypeOfSiteInMso: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}

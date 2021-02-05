@@ -66,7 +66,7 @@ func resourceOrganizationOrganization() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -316,7 +316,8 @@ func resourceOrganizationOrganizationCreate(c context.Context, d *schema.Resourc
 
 	r := conn.ApiClient.OrganizationApi.CreateOrganizationOrganization(conn.ctx).OrganizationOrganization(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating OrganizationOrganization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -331,7 +332,8 @@ func resourceOrganizationOrganizationRead(c context.Context, d *schema.ResourceD
 	var de diag.Diagnostics
 	r := conn.ApiClient.OrganizationApi.GetOrganizationOrganizationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "OrganizationOrganization object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -543,7 +545,8 @@ func resourceOrganizationOrganizationUpdate(c context.Context, d *schema.Resourc
 
 	r := conn.ApiClient.OrganizationApi.UpdateOrganizationOrganization(conn.ctx, d.Id()).OrganizationOrganization(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating OrganizationOrganization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -558,7 +561,8 @@ func resourceOrganizationOrganizationDelete(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	p := conn.ApiClient.OrganizationApi.DeleteOrganizationOrganization(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting OrganizationOrganization object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

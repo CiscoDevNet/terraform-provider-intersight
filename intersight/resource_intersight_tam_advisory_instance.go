@@ -352,7 +352,8 @@ func resourceTamAdvisoryInstanceCreate(c context.Context, d *schema.ResourceData
 
 	r := conn.ApiClient.TamApi.CreateTamAdvisoryInstance(conn.ctx).TamAdvisoryInstance(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating TamAdvisoryInstance: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -367,7 +368,8 @@ func resourceTamAdvisoryInstanceRead(c context.Context, d *schema.ResourceData, 
 	var de diag.Diagnostics
 	r := conn.ApiClient.TamApi.GetTamAdvisoryInstanceByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "TamAdvisoryInstance object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -610,7 +612,8 @@ func resourceTamAdvisoryInstanceUpdate(c context.Context, d *schema.ResourceData
 
 	r := conn.ApiClient.TamApi.UpdateTamAdvisoryInstance(conn.ctx, d.Id()).TamAdvisoryInstance(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating TamAdvisoryInstance: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -625,7 +628,8 @@ func resourceTamAdvisoryInstanceDelete(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	p := conn.ApiClient.TamApi.DeleteTamAdvisoryInstance(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting TamAdvisoryInstance object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

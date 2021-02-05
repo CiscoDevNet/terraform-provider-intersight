@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.IoCardDescriptor"]
 **NumHifPorts** | Pointer to **int64** | Number of hif ports per blade for the iocard module. | [optional] 
 **Revision** | Pointer to **string** | Revision for the iocard module. | [optional] 
+**UifConnectivity** | Pointer to **string** | Connectivity information between UIF Uplink ports and IOM ports. * &#x60;inline&#x60; - UIF uplink ports and IOM ports are connected inline. * &#x60;cross-connected&#x60; - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. | [optional] [default to "inline"]
 
 ## Methods
 
@@ -117,6 +118,31 @@ SetRevision sets Revision field to given value.
 `func (o *CapabilityIoCardDescriptor) HasRevision() bool`
 
 HasRevision returns a boolean if a field has been set.
+
+### GetUifConnectivity
+
+`func (o *CapabilityIoCardDescriptor) GetUifConnectivity() string`
+
+GetUifConnectivity returns the UifConnectivity field if non-nil, zero value otherwise.
+
+### GetUifConnectivityOk
+
+`func (o *CapabilityIoCardDescriptor) GetUifConnectivityOk() (*string, bool)`
+
+GetUifConnectivityOk returns a tuple with the UifConnectivity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUifConnectivity
+
+`func (o *CapabilityIoCardDescriptor) SetUifConnectivity(v string)`
+
+SetUifConnectivity sets UifConnectivity field to given value.
+
+### HasUifConnectivity
+
+`func (o *CapabilityIoCardDescriptor) HasUifConnectivity() bool`
+
+HasUifConnectivity returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -21,7 +21,7 @@ func dataSourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -37,7 +37,7 @@ func dataSourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 			},
 			"disk_size": {
 				Description: "Ephemeral disk capacity to be provided with units example - 10Gi.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"memory": {
@@ -57,7 +57,7 @@ func dataSourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -185,7 +185,7 @@ func dataSourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sc
 		o.SetDescription(x)
 	}
 	if v, ok := d.GetOk("disk_size"); ok {
-		x := (v.(string))
+		x := int64(v.(int))
 		o.SetDiskSize(x)
 	}
 	if v, ok := d.GetOk("memory"); ok {
@@ -210,7 +210,8 @@ func dataSourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sc
 		return diag.Errorf("json marshal of KubernetesVirtualMachineInstanceType object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInstanceTypeList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInstanceType: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

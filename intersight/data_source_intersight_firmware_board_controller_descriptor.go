@@ -189,7 +189,8 @@ func dataSourceFirmwareBoardControllerDescriptorRead(c context.Context, d *schem
 		return diag.Errorf("json marshal of FirmwareBoardControllerDescriptor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareBoardControllerDescriptorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FirmwareBoardControllerDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

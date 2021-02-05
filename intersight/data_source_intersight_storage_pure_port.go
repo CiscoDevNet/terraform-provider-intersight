@@ -305,7 +305,8 @@ func dataSourceStoragePurePortRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("json marshal of StoragePurePort object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStoragePurePortList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching StoragePurePort: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

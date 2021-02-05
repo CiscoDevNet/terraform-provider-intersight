@@ -105,7 +105,7 @@ func resourceRecoveryBackupConfigPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -401,7 +401,8 @@ func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.Resou
 
 	r := conn.ApiClient.RecoveryApi.CreateRecoveryBackupConfigPolicy(conn.ctx).RecoveryBackupConfigPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating RecoveryBackupConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -416,7 +417,8 @@ func resourceRecoveryBackupConfigPolicyRead(c context.Context, d *schema.Resourc
 	var de diag.Diagnostics
 	r := conn.ApiClient.RecoveryApi.GetRecoveryBackupConfigPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "RecoveryBackupConfigPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -704,7 +706,8 @@ func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.Resou
 
 	r := conn.ApiClient.RecoveryApi.UpdateRecoveryBackupConfigPolicy(conn.ctx, d.Id()).RecoveryBackupConfigPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating RecoveryBackupConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -719,7 +722,8 @@ func resourceRecoveryBackupConfigPolicyDelete(c context.Context, d *schema.Resou
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryBackupConfigPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting RecoveryBackupConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

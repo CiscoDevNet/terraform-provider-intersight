@@ -200,7 +200,8 @@ func resourceCapabilityIoCardManufacturingDefCreate(c context.Context, d *schema
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityIoCardManufacturingDef(conn.ctx).CapabilityIoCardManufacturingDef(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityIoCardManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -215,7 +216,8 @@ func resourceCapabilityIoCardManufacturingDefRead(c context.Context, d *schema.R
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityIoCardManufacturingDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityIoCardManufacturingDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -382,7 +384,8 @@ func resourceCapabilityIoCardManufacturingDefUpdate(c context.Context, d *schema
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityIoCardManufacturingDef(conn.ctx, d.Id()).CapabilityIoCardManufacturingDef(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityIoCardManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -397,7 +400,8 @@ func resourceCapabilityIoCardManufacturingDefDelete(c context.Context, d *schema
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityIoCardManufacturingDef(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityIoCardManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

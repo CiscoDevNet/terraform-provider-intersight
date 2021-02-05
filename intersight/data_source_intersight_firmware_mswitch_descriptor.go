@@ -189,7 +189,8 @@ func dataSourceFirmwareMswitchDescriptorRead(c context.Context, d *schema.Resour
 		return diag.Errorf("json marshal of FirmwareMswitchDescriptor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareMswitchDescriptorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FirmwareMswitchDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

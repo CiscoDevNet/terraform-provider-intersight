@@ -328,7 +328,8 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.DeviceconnectorApi.CreateDeviceconnectorPolicy(conn.ctx).DeviceconnectorPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating DeviceconnectorPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -347,7 +348,8 @@ func detachDeviceconnectorPolicyProfiles(d *schema.ResourceData, meta interface{
 
 	r := conn.ApiClient.DeviceconnectorApi.UpdateDeviceconnectorPolicy(conn.ctx, d.Id()).DeviceconnectorPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -360,7 +362,8 @@ func resourceDeviceconnectorPolicyRead(c context.Context, d *schema.ResourceData
 	var de diag.Diagnostics
 	r := conn.ApiClient.DeviceconnectorApi.GetDeviceconnectorPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "DeviceconnectorPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -582,7 +585,8 @@ func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.DeviceconnectorApi.UpdateDeviceconnectorPolicy(conn.ctx, d.Id()).DeviceconnectorPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating DeviceconnectorPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -605,7 +609,8 @@ func resourceDeviceconnectorPolicyDelete(c context.Context, d *schema.ResourceDa
 	}
 	p := conn.ApiClient.DeviceconnectorApi.DeleteDeviceconnectorPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting DeviceconnectorPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

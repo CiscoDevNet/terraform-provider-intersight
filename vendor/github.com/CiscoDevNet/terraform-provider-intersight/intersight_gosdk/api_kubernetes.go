@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateKubernetesAciCniApicRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAciCniApicExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApic(ctx _context.Context) 
  * Execute executes the request
  * @return KubernetesAciCniApic
  */
-func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniApic
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAciCniApic")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics"
@@ -92,8 +90,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKube
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniApic == nil {
-		executionError.error = "kubernetesAciCniApic is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniApic is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKube
 	localVarPostBody = r.kubernetesAciCniApic
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniApicExecute(r ApiCreateKube
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAciCniProfileRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateKubernetesAciCniProfileRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAciCniProfileExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfile(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesAciCniProfile
  */
-func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAciCniProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles"
@@ -272,8 +264,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniProfile == nil {
-		executionError.error = "kubernetesAciCniProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateK
 	localVarPostBody = r.kubernetesAciCniProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniProfileExecute(r ApiCreateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAciCniTenantClusterAllocationRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) IfNoneMatch(ifN
 	return r
 }
 
-func (r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAciCniTenantClusterAllocationExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocation(ctx
  * Execute executes the request
  * @return KubernetesAciCniTenantClusterAllocation
  */
-func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExecute(r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExecute(r ApiCreateKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniTenantClusterAllocation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAciCniTenantClusterAllocation")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations"
@@ -452,8 +438,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniTenantClusterAllocation == nil {
-		executionError.error = "kubernetesAciCniTenantClusterAllocation is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniTenantClusterAllocation is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExec
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *KubernetesApiService) CreateKubernetesAciCniTenantClusterAllocationExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAddonRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateKubernetesAddonRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAddonExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *KubernetesApiService) CreateKubernetesAddon(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return KubernetesAddon
  */
-func (a *KubernetesApiService) CreateKubernetesAddonExecute(r ApiCreateKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAddonExecute(r ApiCreateKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddon
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAddon")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons"
@@ -632,8 +612,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonExecute(r ApiCreateKubernete
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddon == nil {
-		executionError.error = "kubernetesAddon is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddon is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonExecute(r ApiCreateKubernete
 	localVarPostBody = r.kubernetesAddon
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonExecute(r ApiCreateKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAddonDefinitionRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateKubernetesAddonDefinitionRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAddonDefinitionExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinition(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesAddonDefinition
  */
-func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreateKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreateKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAddonDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions"
@@ -812,8 +786,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonDefinition == nil {
-		executionError.error = "kubernetesAddonDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreat
 	localVarPostBody = r.kubernetesAddonDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonDefinitionExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAddonPolicyRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateKubernetesAddonPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAddonPolicyExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicy(ctx _context.Context)
  * Execute executes the request
  * @return KubernetesAddonPolicy
  */
-func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAddonPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies"
@@ -992,8 +960,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKub
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonPolicy == nil {
-		executionError.error = "kubernetesAddonPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKub
 	localVarPostBody = r.kubernetesAddonPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonPolicyExecute(r ApiCreateKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesAddonRepositoryRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateKubernetesAddonRepositoryRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesAddonRepositoryExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepository(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesAddonRepository
  */
-func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreateKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreateKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonRepository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesAddonRepository")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories"
@@ -1172,8 +1134,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonRepository == nil {
-		executionError.error = "kubernetesAddonRepository is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonRepository is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreat
 	localVarPostBody = r.kubernetesAddonRepository
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *KubernetesApiService) CreateKubernetesAddonRepositoryExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesClusterRequest struct {
@@ -1309,7 +1267,7 @@ func (r ApiCreateKubernetesClusterRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesClusterExecute(r)
 }
 
@@ -1329,21 +1287,19 @@ func (a *KubernetesApiService) CreateKubernetesCluster(ctx _context.Context) Api
  * Execute executes the request
  * @return KubernetesCluster
  */
-func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters"
@@ -1352,8 +1308,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKuberne
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesCluster == nil {
-		executionError.error = "kubernetesCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1383,22 +1338,19 @@ func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKuberne
 	localVarPostBody = r.kubernetesCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1465,7 +1417,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterExecute(r ApiCreateKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesClusterProfileRequest struct {
@@ -1489,7 +1441,7 @@ func (r ApiCreateKubernetesClusterProfileRequest) IfNoneMatch(ifNoneMatch string
 	return r
 }
 
-func (r ApiCreateKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesClusterProfileExecute(r)
 }
 
@@ -1509,21 +1461,19 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfile(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesClusterProfile
  */
-func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreateKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreateKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles"
@@ -1532,8 +1482,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesClusterProfile == nil {
-		executionError.error = "kubernetesClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1563,22 +1512,19 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreate
 	localVarPostBody = r.kubernetesClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1645,7 +1591,7 @@ func (a *KubernetesApiService) CreateKubernetesClusterProfileExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesContainerRuntimePolicyRequest struct {
@@ -1669,7 +1615,7 @@ func (r ApiCreateKubernetesContainerRuntimePolicyRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesContainerRuntimePolicyExecute(r)
 }
 
@@ -1689,21 +1635,19 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicy(ctx _conte
  * Execute executes the request
  * @return KubernetesContainerRuntimePolicy
  */
-func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r ApiCreateKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r ApiCreateKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesContainerRuntimePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesContainerRuntimePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies"
@@ -1712,8 +1656,7 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesContainerRuntimePolicy == nil {
-		executionError.error = "kubernetesContainerRuntimePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesContainerRuntimePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1743,22 +1686,19 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r A
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1825,7 +1765,7 @@ func (a *KubernetesApiService) CreateKubernetesContainerRuntimePolicyExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesNetworkPolicyRequest struct {
@@ -1849,7 +1789,7 @@ func (r ApiCreateKubernetesNetworkPolicyRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesNetworkPolicyExecute(r)
 }
 
@@ -1869,21 +1809,19 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicy(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesNetworkPolicy
  */
-func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies"
@@ -1892,8 +1830,7 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNetworkPolicy == nil {
-		executionError.error = "kubernetesNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1923,22 +1860,19 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateK
 	localVarPostBody = r.kubernetesNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2005,7 +1939,7 @@ func (a *KubernetesApiService) CreateKubernetesNetworkPolicyExecute(r ApiCreateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesNodeGroupProfileRequest struct {
@@ -2029,7 +1963,7 @@ func (r ApiCreateKubernetesNodeGroupProfileRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesNodeGroupProfileExecute(r)
 }
 
@@ -2049,21 +1983,19 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfile(ctx _context.Con
  * Execute executes the request
  * @return KubernetesNodeGroupProfile
  */
-func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCreateKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCreateKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeGroupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesNodeGroupProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles"
@@ -2072,8 +2004,7 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNodeGroupProfile == nil {
-		executionError.error = "kubernetesNodeGroupProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNodeGroupProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2103,22 +2034,19 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCrea
 	localVarPostBody = r.kubernetesNodeGroupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2185,7 +2113,7 @@ func (a *KubernetesApiService) CreateKubernetesNodeGroupProfileExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesSysConfigPolicyRequest struct {
@@ -2209,7 +2137,7 @@ func (r ApiCreateKubernetesSysConfigPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesSysConfigPolicyExecute(r)
 }
 
@@ -2229,21 +2157,19 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicy(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesSysConfigPolicy
  */
-func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreateKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreateKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies"
@@ -2252,8 +2178,7 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesSysConfigPolicy == nil {
-		executionError.error = "kubernetesSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2283,22 +2208,19 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreat
 	localVarPostBody = r.kubernetesSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2365,7 +2287,7 @@ func (a *KubernetesApiService) CreateKubernetesSysConfigPolicyExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesTrustedRegistriesPolicyRequest struct {
@@ -2389,7 +2311,7 @@ func (r ApiCreateKubernetesTrustedRegistriesPolicyRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesTrustedRegistriesPolicyExecute(r)
 }
 
@@ -2409,21 +2331,19 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicy(ctx _cont
  * Execute executes the request
  * @return KubernetesTrustedRegistriesPolicy
  */
-func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r ApiCreateKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r ApiCreateKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesTrustedRegistriesPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesTrustedRegistriesPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies"
@@ -2432,8 +2352,7 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesTrustedRegistriesPolicy == nil {
-		executionError.error = "kubernetesTrustedRegistriesPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesTrustedRegistriesPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2463,22 +2382,19 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r 
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2545,7 +2461,7 @@ func (a *KubernetesApiService) CreateKubernetesTrustedRegistriesPolicyExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesVersionRequest struct {
@@ -2569,7 +2485,7 @@ func (r ApiCreateKubernetesVersionRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesVersionExecute(r)
 }
 
@@ -2589,21 +2505,19 @@ func (a *KubernetesApiService) CreateKubernetesVersion(ctx _context.Context) Api
  * Execute executes the request
  * @return KubernetesVersion
  */
-func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions"
@@ -2612,8 +2526,7 @@ func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKuberne
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersion == nil {
-		executionError.error = "kubernetesVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2643,22 +2556,19 @@ func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKuberne
 	localVarPostBody = r.kubernetesVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2725,7 +2635,7 @@ func (a *KubernetesApiService) CreateKubernetesVersionExecute(r ApiCreateKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesVersionPolicyRequest struct {
@@ -2749,7 +2659,7 @@ func (r ApiCreateKubernetesVersionPolicyRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesVersionPolicyExecute(r)
 }
 
@@ -2769,21 +2679,19 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicy(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesVersionPolicy
  */
-func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies"
@@ -2792,8 +2700,7 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersionPolicy == nil {
-		executionError.error = "kubernetesVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2823,22 +2730,19 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateK
 	localVarPostBody = r.kubernetesVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2905,7 +2809,7 @@ func (a *KubernetesApiService) CreateKubernetesVersionPolicyExecute(r ApiCreateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest struct {
@@ -2929,7 +2833,7 @@ func (r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) IfNoneMa
 	return r
 }
 
-func (r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesVirtualMachineInfrastructureProviderExecute(r)
 }
 
@@ -2949,21 +2853,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
  * Execute executes the request
  * @return KubernetesVirtualMachineInfrastructureProvider
  */
-func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiCreateKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInfrastructureProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesVirtualMachineInfrastructureProvider")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders"
@@ -2972,8 +2874,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInfrastructureProvider == nil {
-		executionError.error = "kubernetesVirtualMachineInfrastructureProvider is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInfrastructureProvider is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3003,22 +2904,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3085,7 +2983,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInfrastructureProvi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesVirtualMachineInstanceTypeRequest struct {
@@ -3109,7 +3007,7 @@ func (r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) IfNoneMatch(ifNone
 	return r
 }
 
-func (r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesVirtualMachineInstanceTypeExecute(r)
 }
 
@@ -3129,21 +3027,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceType(ctx _c
  * Execute executes the request
  * @return KubernetesVirtualMachineInstanceType
  */
-func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute(r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute(r ApiCreateKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInstanceType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesVirtualMachineInstanceType")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes"
@@ -3152,8 +3048,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInstanceType == nil {
-		executionError.error = "kubernetesVirtualMachineInstanceType is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInstanceType is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3183,22 +3078,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3265,7 +3157,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineInstanceTypeExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateKubernetesVirtualMachineNodeProfileRequest struct {
@@ -3289,7 +3181,7 @@ func (r ApiCreateKubernetesVirtualMachineNodeProfileRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateKubernetesVirtualMachineNodeProfileExecute(r)
 }
 
@@ -3309,21 +3201,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfile(ctx _co
  * Execute executes the request
  * @return KubernetesVirtualMachineNodeProfile
  */
-func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(r ApiCreateKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(r ApiCreateKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.CreateKubernetesVirtualMachineNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles"
@@ -3332,8 +3222,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineNodeProfile == nil {
-		executionError.error = "kubernetesVirtualMachineNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3363,22 +3252,19 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3445,7 +3331,7 @@ func (a *KubernetesApiService) CreateKubernetesVirtualMachineNodeProfileExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAciCniApicRequest struct {
@@ -3454,7 +3340,7 @@ type ApiDeleteKubernetesAciCniApicRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAciCniApicRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAciCniApicRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAciCniApicExecute(r)
 }
 
@@ -3475,20 +3361,18 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniApic(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAciCniApicExecute(r ApiDeleteKubernetesAciCniApicRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAciCniApicExecute(r ApiDeleteKubernetesAciCniApicRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAciCniApic")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics/{Moid}"
@@ -3517,22 +3401,19 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniApicExecute(r ApiDeleteKube
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3590,7 +3471,7 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniApicExecute(r ApiDeleteKube
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAciCniProfileRequest struct {
@@ -3599,7 +3480,7 @@ type ApiDeleteKubernetesAciCniProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAciCniProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAciCniProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAciCniProfileExecute(r)
 }
 
@@ -3620,20 +3501,18 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniProfile(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAciCniProfileExecute(r ApiDeleteKubernetesAciCniProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAciCniProfileExecute(r ApiDeleteKubernetesAciCniProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAciCniProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles/{Moid}"
@@ -3662,22 +3541,19 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniProfileExecute(r ApiDeleteK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3735,7 +3611,7 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniProfileExecute(r ApiDeleteK
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAciCniTenantClusterAllocationRequest struct {
@@ -3744,7 +3620,7 @@ type ApiDeleteKubernetesAciCniTenantClusterAllocationRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAciCniTenantClusterAllocationRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAciCniTenantClusterAllocationRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAciCniTenantClusterAllocationExecute(r)
 }
 
@@ -3765,20 +3641,18 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniTenantClusterAllocation(ctx
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAciCniTenantClusterAllocationExecute(r ApiDeleteKubernetesAciCniTenantClusterAllocationRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAciCniTenantClusterAllocationExecute(r ApiDeleteKubernetesAciCniTenantClusterAllocationRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAciCniTenantClusterAllocation")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid}"
@@ -3807,22 +3681,19 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniTenantClusterAllocationExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3880,7 +3751,7 @@ func (a *KubernetesApiService) DeleteKubernetesAciCniTenantClusterAllocationExec
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAddonRequest struct {
@@ -3889,7 +3760,7 @@ type ApiDeleteKubernetesAddonRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAddonRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAddonRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAddonExecute(r)
 }
 
@@ -3910,20 +3781,18 @@ func (a *KubernetesApiService) DeleteKubernetesAddon(ctx _context.Context, moid 
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAddonExecute(r ApiDeleteKubernetesAddonRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAddonExecute(r ApiDeleteKubernetesAddonRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAddon")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons/{Moid}"
@@ -3952,22 +3821,19 @@ func (a *KubernetesApiService) DeleteKubernetesAddonExecute(r ApiDeleteKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4025,7 +3891,7 @@ func (a *KubernetesApiService) DeleteKubernetesAddonExecute(r ApiDeleteKubernete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAddonDefinitionRequest struct {
@@ -4034,7 +3900,7 @@ type ApiDeleteKubernetesAddonDefinitionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAddonDefinitionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAddonDefinitionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAddonDefinitionExecute(r)
 }
 
@@ -4055,20 +3921,18 @@ func (a *KubernetesApiService) DeleteKubernetesAddonDefinition(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAddonDefinitionExecute(r ApiDeleteKubernetesAddonDefinitionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAddonDefinitionExecute(r ApiDeleteKubernetesAddonDefinitionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAddonDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions/{Moid}"
@@ -4097,22 +3961,19 @@ func (a *KubernetesApiService) DeleteKubernetesAddonDefinitionExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4170,7 +4031,7 @@ func (a *KubernetesApiService) DeleteKubernetesAddonDefinitionExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAddonPolicyRequest struct {
@@ -4179,7 +4040,7 @@ type ApiDeleteKubernetesAddonPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAddonPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAddonPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAddonPolicyExecute(r)
 }
 
@@ -4200,20 +4061,18 @@ func (a *KubernetesApiService) DeleteKubernetesAddonPolicy(ctx _context.Context,
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAddonPolicyExecute(r ApiDeleteKubernetesAddonPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAddonPolicyExecute(r ApiDeleteKubernetesAddonPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAddonPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies/{Moid}"
@@ -4242,22 +4101,19 @@ func (a *KubernetesApiService) DeleteKubernetesAddonPolicyExecute(r ApiDeleteKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4315,7 +4171,7 @@ func (a *KubernetesApiService) DeleteKubernetesAddonPolicyExecute(r ApiDeleteKub
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesAddonRepositoryRequest struct {
@@ -4324,7 +4180,7 @@ type ApiDeleteKubernetesAddonRepositoryRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesAddonRepositoryRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesAddonRepositoryRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesAddonRepositoryExecute(r)
 }
 
@@ -4345,20 +4201,18 @@ func (a *KubernetesApiService) DeleteKubernetesAddonRepository(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesAddonRepositoryExecute(r ApiDeleteKubernetesAddonRepositoryRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesAddonRepositoryExecute(r ApiDeleteKubernetesAddonRepositoryRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesAddonRepository")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories/{Moid}"
@@ -4387,22 +4241,19 @@ func (a *KubernetesApiService) DeleteKubernetesAddonRepositoryExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4460,7 +4311,7 @@ func (a *KubernetesApiService) DeleteKubernetesAddonRepositoryExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesClusterRequest struct {
@@ -4469,7 +4320,7 @@ type ApiDeleteKubernetesClusterRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesClusterRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesClusterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesClusterExecute(r)
 }
 
@@ -4490,20 +4341,18 @@ func (a *KubernetesApiService) DeleteKubernetesCluster(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesClusterExecute(r ApiDeleteKubernetesClusterRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesClusterExecute(r ApiDeleteKubernetesClusterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters/{Moid}"
@@ -4532,22 +4381,19 @@ func (a *KubernetesApiService) DeleteKubernetesClusterExecute(r ApiDeleteKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4605,7 +4451,7 @@ func (a *KubernetesApiService) DeleteKubernetesClusterExecute(r ApiDeleteKuberne
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesClusterProfileRequest struct {
@@ -4614,7 +4460,7 @@ type ApiDeleteKubernetesClusterProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesClusterProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesClusterProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesClusterProfileExecute(r)
 }
 
@@ -4635,20 +4481,18 @@ func (a *KubernetesApiService) DeleteKubernetesClusterProfile(ctx _context.Conte
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesClusterProfileExecute(r ApiDeleteKubernetesClusterProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesClusterProfileExecute(r ApiDeleteKubernetesClusterProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles/{Moid}"
@@ -4677,22 +4521,19 @@ func (a *KubernetesApiService) DeleteKubernetesClusterProfileExecute(r ApiDelete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4750,7 +4591,7 @@ func (a *KubernetesApiService) DeleteKubernetesClusterProfileExecute(r ApiDelete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesContainerRuntimePolicyRequest struct {
@@ -4759,7 +4600,7 @@ type ApiDeleteKubernetesContainerRuntimePolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesContainerRuntimePolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesContainerRuntimePolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesContainerRuntimePolicyExecute(r)
 }
 
@@ -4780,20 +4621,18 @@ func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicy(ctx _conte
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicyExecute(r ApiDeleteKubernetesContainerRuntimePolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicyExecute(r ApiDeleteKubernetesContainerRuntimePolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesContainerRuntimePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies/{Moid}"
@@ -4822,22 +4661,19 @@ func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicyExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4895,7 +4731,7 @@ func (a *KubernetesApiService) DeleteKubernetesContainerRuntimePolicyExecute(r A
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesDaemonSetRequest struct {
@@ -4904,7 +4740,7 @@ type ApiDeleteKubernetesDaemonSetRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesDaemonSetRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesDaemonSetRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesDaemonSetExecute(r)
 }
 
@@ -4925,20 +4761,18 @@ func (a *KubernetesApiService) DeleteKubernetesDaemonSet(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesDaemonSetExecute(r ApiDeleteKubernetesDaemonSetRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesDaemonSetExecute(r ApiDeleteKubernetesDaemonSetRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesDaemonSet")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/DaemonSets/{Moid}"
@@ -4967,22 +4801,19 @@ func (a *KubernetesApiService) DeleteKubernetesDaemonSetExecute(r ApiDeleteKuber
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5040,7 +4871,7 @@ func (a *KubernetesApiService) DeleteKubernetesDaemonSetExecute(r ApiDeleteKuber
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesDeploymentRequest struct {
@@ -5049,7 +4880,7 @@ type ApiDeleteKubernetesDeploymentRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesDeploymentRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesDeploymentRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesDeploymentExecute(r)
 }
 
@@ -5070,20 +4901,18 @@ func (a *KubernetesApiService) DeleteKubernetesDeployment(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesDeploymentExecute(r ApiDeleteKubernetesDeploymentRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesDeploymentExecute(r ApiDeleteKubernetesDeploymentRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Deployments/{Moid}"
@@ -5112,22 +4941,19 @@ func (a *KubernetesApiService) DeleteKubernetesDeploymentExecute(r ApiDeleteKube
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5185,7 +5011,7 @@ func (a *KubernetesApiService) DeleteKubernetesDeploymentExecute(r ApiDeleteKube
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesIngressRequest struct {
@@ -5194,7 +5020,7 @@ type ApiDeleteKubernetesIngressRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesIngressRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesIngressRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesIngressExecute(r)
 }
 
@@ -5215,20 +5041,18 @@ func (a *KubernetesApiService) DeleteKubernetesIngress(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesIngressExecute(r ApiDeleteKubernetesIngressRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesIngressExecute(r ApiDeleteKubernetesIngressRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesIngress")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Ingresses/{Moid}"
@@ -5257,22 +5081,19 @@ func (a *KubernetesApiService) DeleteKubernetesIngressExecute(r ApiDeleteKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5330,7 +5151,7 @@ func (a *KubernetesApiService) DeleteKubernetesIngressExecute(r ApiDeleteKuberne
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesNetworkPolicyRequest struct {
@@ -5339,7 +5160,7 @@ type ApiDeleteKubernetesNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesNetworkPolicyExecute(r)
 }
 
@@ -5360,20 +5181,18 @@ func (a *KubernetesApiService) DeleteKubernetesNetworkPolicy(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesNetworkPolicyExecute(r ApiDeleteKubernetesNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesNetworkPolicyExecute(r ApiDeleteKubernetesNetworkPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies/{Moid}"
@@ -5402,22 +5221,19 @@ func (a *KubernetesApiService) DeleteKubernetesNetworkPolicyExecute(r ApiDeleteK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5475,7 +5291,7 @@ func (a *KubernetesApiService) DeleteKubernetesNetworkPolicyExecute(r ApiDeleteK
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesNodeRequest struct {
@@ -5484,7 +5300,7 @@ type ApiDeleteKubernetesNodeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesNodeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesNodeRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesNodeExecute(r)
 }
 
@@ -5505,20 +5321,18 @@ func (a *KubernetesApiService) DeleteKubernetesNode(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesNodeExecute(r ApiDeleteKubernetesNodeRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesNodeExecute(r ApiDeleteKubernetesNodeRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesNode")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Nodes/{Moid}"
@@ -5547,22 +5361,19 @@ func (a *KubernetesApiService) DeleteKubernetesNodeExecute(r ApiDeleteKubernetes
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5620,7 +5431,7 @@ func (a *KubernetesApiService) DeleteKubernetesNodeExecute(r ApiDeleteKubernetes
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesNodeGroupProfileRequest struct {
@@ -5629,7 +5440,7 @@ type ApiDeleteKubernetesNodeGroupProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesNodeGroupProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesNodeGroupProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesNodeGroupProfileExecute(r)
 }
 
@@ -5650,20 +5461,18 @@ func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfile(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfileExecute(r ApiDeleteKubernetesNodeGroupProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfileExecute(r ApiDeleteKubernetesNodeGroupProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesNodeGroupProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles/{Moid}"
@@ -5692,22 +5501,19 @@ func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfileExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5765,7 +5571,7 @@ func (a *KubernetesApiService) DeleteKubernetesNodeGroupProfileExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesPodRequest struct {
@@ -5774,7 +5580,7 @@ type ApiDeleteKubernetesPodRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesPodRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesPodRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesPodExecute(r)
 }
 
@@ -5795,20 +5601,18 @@ func (a *KubernetesApiService) DeleteKubernetesPod(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesPodExecute(r ApiDeleteKubernetesPodRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesPodExecute(r ApiDeleteKubernetesPodRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesPod")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Pods/{Moid}"
@@ -5837,22 +5641,19 @@ func (a *KubernetesApiService) DeleteKubernetesPodExecute(r ApiDeleteKubernetesP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5910,7 +5711,7 @@ func (a *KubernetesApiService) DeleteKubernetesPodExecute(r ApiDeleteKubernetesP
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesServiceRequest struct {
@@ -5919,7 +5720,7 @@ type ApiDeleteKubernetesServiceRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesServiceRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesServiceRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesServiceExecute(r)
 }
 
@@ -5940,20 +5741,18 @@ func (a *KubernetesApiService) DeleteKubernetesService(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesServiceExecute(r ApiDeleteKubernetesServiceRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesServiceExecute(r ApiDeleteKubernetesServiceRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesService")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Services/{Moid}"
@@ -5982,22 +5781,19 @@ func (a *KubernetesApiService) DeleteKubernetesServiceExecute(r ApiDeleteKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6055,7 +5851,7 @@ func (a *KubernetesApiService) DeleteKubernetesServiceExecute(r ApiDeleteKuberne
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesStatefulSetRequest struct {
@@ -6064,7 +5860,7 @@ type ApiDeleteKubernetesStatefulSetRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesStatefulSetRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesStatefulSetRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesStatefulSetExecute(r)
 }
 
@@ -6085,20 +5881,18 @@ func (a *KubernetesApiService) DeleteKubernetesStatefulSet(ctx _context.Context,
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesStatefulSetExecute(r ApiDeleteKubernetesStatefulSetRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesStatefulSetExecute(r ApiDeleteKubernetesStatefulSetRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesStatefulSet")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/StatefulSets/{Moid}"
@@ -6127,22 +5921,19 @@ func (a *KubernetesApiService) DeleteKubernetesStatefulSetExecute(r ApiDeleteKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6200,7 +5991,7 @@ func (a *KubernetesApiService) DeleteKubernetesStatefulSetExecute(r ApiDeleteKub
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesSysConfigPolicyRequest struct {
@@ -6209,7 +6000,7 @@ type ApiDeleteKubernetesSysConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesSysConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesSysConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesSysConfigPolicyExecute(r)
 }
 
@@ -6230,20 +6021,18 @@ func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicy(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicyExecute(r ApiDeleteKubernetesSysConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicyExecute(r ApiDeleteKubernetesSysConfigPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies/{Moid}"
@@ -6272,22 +6061,19 @@ func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicyExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6345,7 +6131,7 @@ func (a *KubernetesApiService) DeleteKubernetesSysConfigPolicyExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesTrustedRegistriesPolicyRequest struct {
@@ -6354,7 +6140,7 @@ type ApiDeleteKubernetesTrustedRegistriesPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesTrustedRegistriesPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesTrustedRegistriesPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesTrustedRegistriesPolicyExecute(r)
 }
 
@@ -6375,20 +6161,18 @@ func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicy(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicyExecute(r ApiDeleteKubernetesTrustedRegistriesPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicyExecute(r ApiDeleteKubernetesTrustedRegistriesPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesTrustedRegistriesPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies/{Moid}"
@@ -6417,22 +6201,19 @@ func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicyExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6490,7 +6271,7 @@ func (a *KubernetesApiService) DeleteKubernetesTrustedRegistriesPolicyExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesVersionRequest struct {
@@ -6499,7 +6280,7 @@ type ApiDeleteKubernetesVersionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesVersionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesVersionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesVersionExecute(r)
 }
 
@@ -6520,20 +6301,18 @@ func (a *KubernetesApiService) DeleteKubernetesVersion(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesVersionExecute(r ApiDeleteKubernetesVersionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesVersionExecute(r ApiDeleteKubernetesVersionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions/{Moid}"
@@ -6562,22 +6341,19 @@ func (a *KubernetesApiService) DeleteKubernetesVersionExecute(r ApiDeleteKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6635,7 +6411,7 @@ func (a *KubernetesApiService) DeleteKubernetesVersionExecute(r ApiDeleteKuberne
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesVersionPolicyRequest struct {
@@ -6644,7 +6420,7 @@ type ApiDeleteKubernetesVersionPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesVersionPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesVersionPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesVersionPolicyExecute(r)
 }
 
@@ -6665,20 +6441,18 @@ func (a *KubernetesApiService) DeleteKubernetesVersionPolicy(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesVersionPolicyExecute(r ApiDeleteKubernetesVersionPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesVersionPolicyExecute(r ApiDeleteKubernetesVersionPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies/{Moid}"
@@ -6707,22 +6481,19 @@ func (a *KubernetesApiService) DeleteKubernetesVersionPolicyExecute(r ApiDeleteK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6780,7 +6551,7 @@ func (a *KubernetesApiService) DeleteKubernetesVersionPolicyExecute(r ApiDeleteK
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest struct {
@@ -6789,7 +6560,7 @@ type ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesVirtualMachineInfrastructureProviderExecute(r)
 }
 
@@ -6810,20 +6581,18 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfrastructureProvi
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfrastructureProviderExecute(r ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfrastructureProviderExecute(r ApiDeleteKubernetesVirtualMachineInfrastructureProviderRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesVirtualMachineInfrastructureProvider")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid}"
@@ -6852,22 +6621,19 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfrastructureProvi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6925,7 +6691,7 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInfrastructureProvi
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesVirtualMachineInstanceTypeRequest struct {
@@ -6934,7 +6700,7 @@ type ApiDeleteKubernetesVirtualMachineInstanceTypeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesVirtualMachineInstanceTypeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesVirtualMachineInstanceTypeRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesVirtualMachineInstanceTypeExecute(r)
 }
 
@@ -6955,20 +6721,18 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceType(ctx _c
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceTypeExecute(r ApiDeleteKubernetesVirtualMachineInstanceTypeRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceTypeExecute(r ApiDeleteKubernetesVirtualMachineInstanceTypeRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesVirtualMachineInstanceType")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid}"
@@ -6997,22 +6761,19 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceTypeExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7070,7 +6831,7 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineInstanceTypeExecute
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteKubernetesVirtualMachineNodeProfileRequest struct {
@@ -7079,7 +6840,7 @@ type ApiDeleteKubernetesVirtualMachineNodeProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKubernetesVirtualMachineNodeProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteKubernetesVirtualMachineNodeProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteKubernetesVirtualMachineNodeProfileExecute(r)
 }
 
@@ -7100,20 +6861,18 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfile(ctx _co
 /*
  * Execute executes the request
  */
-func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfileExecute(r ApiDeleteKubernetesVirtualMachineNodeProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfileExecute(r ApiDeleteKubernetesVirtualMachineNodeProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.DeleteKubernetesVirtualMachineNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid}"
@@ -7142,22 +6901,19 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfileExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7215,7 +6971,7 @@ func (a *KubernetesApiService) DeleteKubernetesVirtualMachineNodeProfileExecute(
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniApicByMoidRequest struct {
@@ -7224,7 +6980,7 @@ type ApiGetKubernetesAciCniApicByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAciCniApicByMoidRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniApicByMoidRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniApicByMoidExecute(r)
 }
 
@@ -7246,21 +7002,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicByMoid(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesAciCniApic
  */
-func (a *KubernetesApiService) GetKubernetesAciCniApicByMoidExecute(r ApiGetKubernetesAciCniApicByMoidRequest) (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniApicByMoidExecute(r ApiGetKubernetesAciCniApicByMoidRequest) (KubernetesAciCniApic, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniApic
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniApicByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics/{Moid}"
@@ -7289,22 +7043,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicByMoidExecute(r ApiGetKube
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7371,7 +7122,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicByMoidExecute(r ApiGetKube
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniApicListRequest struct {
@@ -7435,7 +7186,7 @@ func (r ApiGetKubernetesAciCniApicListRequest) Tags(tags string) ApiGetKubernete
 	return r
 }
 
-func (r ApiGetKubernetesAciCniApicListRequest) Execute() (KubernetesAciCniApicResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniApicListRequest) Execute() (KubernetesAciCniApicResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniApicListExecute(r)
 }
 
@@ -7455,21 +7206,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicList(ctx _context.Context)
  * Execute executes the request
  * @return KubernetesAciCniApicResponse
  */
-func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubernetesAciCniApicListRequest) (KubernetesAciCniApicResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubernetesAciCniApicListRequest) (KubernetesAciCniApicResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniApicResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniApicList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics"
@@ -7530,22 +7279,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubern
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7612,7 +7358,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniApicListExecute(r ApiGetKubern
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniProfileByMoidRequest struct {
@@ -7621,7 +7367,7 @@ type ApiGetKubernetesAciCniProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAciCniProfileByMoidRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniProfileByMoidRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniProfileByMoidExecute(r)
 }
 
@@ -7643,21 +7389,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoid(ctx _context.Con
  * Execute executes the request
  * @return KubernetesAciCniProfile
  */
-func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoidExecute(r ApiGetKubernetesAciCniProfileByMoidRequest) (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoidExecute(r ApiGetKubernetesAciCniProfileByMoidRequest) (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles/{Moid}"
@@ -7686,22 +7430,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoidExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7768,7 +7509,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileByMoidExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniProfileListRequest struct {
@@ -7832,7 +7573,7 @@ func (r ApiGetKubernetesAciCniProfileListRequest) Tags(tags string) ApiGetKubern
 	return r
 }
 
-func (r ApiGetKubernetesAciCniProfileListRequest) Execute() (KubernetesAciCniProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniProfileListRequest) Execute() (KubernetesAciCniProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniProfileListExecute(r)
 }
 
@@ -7852,21 +7593,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileList(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesAciCniProfileResponse
  */
-func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKubernetesAciCniProfileListRequest) (KubernetesAciCniProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKubernetesAciCniProfileListRequest) (KubernetesAciCniProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles"
@@ -7927,22 +7666,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8009,7 +7745,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniProfileListExecute(r ApiGetKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest struct {
@@ -8018,7 +7754,7 @@ type ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniTenantClusterAllocationByMoidExecute(r)
 }
 
@@ -8040,21 +7776,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoid(
  * Execute executes the request
  * @return KubernetesAciCniTenantClusterAllocation
  */
-func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoidExecute(r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoidExecute(r ApiGetKubernetesAciCniTenantClusterAllocationByMoidRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniTenantClusterAllocation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniTenantClusterAllocationByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid}"
@@ -8083,22 +7817,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoidE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8165,7 +7896,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationByMoidE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAciCniTenantClusterAllocationListRequest struct {
@@ -8229,7 +7960,7 @@ func (r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) Tags(tags stri
 	return r
 }
 
-func (r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) Execute() (KubernetesAciCniTenantClusterAllocationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) Execute() (KubernetesAciCniTenantClusterAllocationResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAciCniTenantClusterAllocationListExecute(r)
 }
 
@@ -8249,21 +7980,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationList(ct
  * Execute executes the request
  * @return KubernetesAciCniTenantClusterAllocationResponse
  */
-func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExecute(r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) (KubernetesAciCniTenantClusterAllocationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExecute(r ApiGetKubernetesAciCniTenantClusterAllocationListRequest) (KubernetesAciCniTenantClusterAllocationResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniTenantClusterAllocationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAciCniTenantClusterAllocationList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations"
@@ -8324,22 +8053,19 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8406,7 +8132,7 @@ func (a *KubernetesApiService) GetKubernetesAciCniTenantClusterAllocationListExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonByMoidRequest struct {
@@ -8415,7 +8141,7 @@ type ApiGetKubernetesAddonByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAddonByMoidRequest) Execute() (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonByMoidRequest) Execute() (KubernetesAddon, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonByMoidExecute(r)
 }
 
@@ -8437,21 +8163,19 @@ func (a *KubernetesApiService) GetKubernetesAddonByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return KubernetesAddon
  */
-func (a *KubernetesApiService) GetKubernetesAddonByMoidExecute(r ApiGetKubernetesAddonByMoidRequest) (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonByMoidExecute(r ApiGetKubernetesAddonByMoidRequest) (KubernetesAddon, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddon
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons/{Moid}"
@@ -8480,22 +8204,19 @@ func (a *KubernetesApiService) GetKubernetesAddonByMoidExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8562,7 +8283,7 @@ func (a *KubernetesApiService) GetKubernetesAddonByMoidExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonDefinitionByMoidRequest struct {
@@ -8571,7 +8292,7 @@ type ApiGetKubernetesAddonDefinitionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAddonDefinitionByMoidRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonDefinitionByMoidRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonDefinitionByMoidExecute(r)
 }
 
@@ -8593,21 +8314,19 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoid(ctx _context.C
  * Execute executes the request
  * @return KubernetesAddonDefinition
  */
-func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoidExecute(r ApiGetKubernetesAddonDefinitionByMoidRequest) (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoidExecute(r ApiGetKubernetesAddonDefinitionByMoidRequest) (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonDefinitionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions/{Moid}"
@@ -8636,22 +8355,19 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8718,7 +8434,7 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonDefinitionListRequest struct {
@@ -8782,7 +8498,7 @@ func (r ApiGetKubernetesAddonDefinitionListRequest) Tags(tags string) ApiGetKube
 	return r
 }
 
-func (r ApiGetKubernetesAddonDefinitionListRequest) Execute() (KubernetesAddonDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonDefinitionListRequest) Execute() (KubernetesAddonDefinitionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonDefinitionListExecute(r)
 }
 
@@ -8802,21 +8518,19 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionList(ctx _context.Con
  * Execute executes the request
  * @return KubernetesAddonDefinitionResponse
  */
-func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetKubernetesAddonDefinitionListRequest) (KubernetesAddonDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetKubernetesAddonDefinitionListRequest) (KubernetesAddonDefinitionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonDefinitionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions"
@@ -8877,22 +8591,19 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8959,7 +8670,7 @@ func (a *KubernetesApiService) GetKubernetesAddonDefinitionListExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonListRequest struct {
@@ -9023,7 +8734,7 @@ func (r ApiGetKubernetesAddonListRequest) Tags(tags string) ApiGetKubernetesAddo
 	return r
 }
 
-func (r ApiGetKubernetesAddonListRequest) Execute() (KubernetesAddonResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonListRequest) Execute() (KubernetesAddonResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonListExecute(r)
 }
 
@@ -9043,21 +8754,19 @@ func (a *KubernetesApiService) GetKubernetesAddonList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return KubernetesAddonResponse
  */
-func (a *KubernetesApiService) GetKubernetesAddonListExecute(r ApiGetKubernetesAddonListRequest) (KubernetesAddonResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonListExecute(r ApiGetKubernetesAddonListRequest) (KubernetesAddonResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons"
@@ -9118,22 +8827,19 @@ func (a *KubernetesApiService) GetKubernetesAddonListExecute(r ApiGetKubernetesA
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9200,7 +8906,7 @@ func (a *KubernetesApiService) GetKubernetesAddonListExecute(r ApiGetKubernetesA
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonPolicyByMoidRequest struct {
@@ -9209,7 +8915,7 @@ type ApiGetKubernetesAddonPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAddonPolicyByMoidRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonPolicyByMoidRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonPolicyByMoidExecute(r)
 }
 
@@ -9231,21 +8937,19 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoid(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesAddonPolicy
  */
-func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoidExecute(r ApiGetKubernetesAddonPolicyByMoidRequest) (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoidExecute(r ApiGetKubernetesAddonPolicyByMoidRequest) (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies/{Moid}"
@@ -9274,22 +8978,19 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoidExecute(r ApiGetKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9356,7 +9057,7 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyByMoidExecute(r ApiGetKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonPolicyListRequest struct {
@@ -9420,7 +9121,7 @@ func (r ApiGetKubernetesAddonPolicyListRequest) Tags(tags string) ApiGetKubernet
 	return r
 }
 
-func (r ApiGetKubernetesAddonPolicyListRequest) Execute() (KubernetesAddonPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonPolicyListRequest) Execute() (KubernetesAddonPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonPolicyListExecute(r)
 }
 
@@ -9440,21 +9141,19 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyList(ctx _context.Context
  * Execute executes the request
  * @return KubernetesAddonPolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKubernetesAddonPolicyListRequest) (KubernetesAddonPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKubernetesAddonPolicyListRequest) (KubernetesAddonPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies"
@@ -9515,22 +9214,19 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKuber
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9597,7 +9293,7 @@ func (a *KubernetesApiService) GetKubernetesAddonPolicyListExecute(r ApiGetKuber
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonRepositoryByMoidRequest struct {
@@ -9606,7 +9302,7 @@ type ApiGetKubernetesAddonRepositoryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesAddonRepositoryByMoidRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonRepositoryByMoidRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonRepositoryByMoidExecute(r)
 }
 
@@ -9628,21 +9324,19 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoid(ctx _context.C
  * Execute executes the request
  * @return KubernetesAddonRepository
  */
-func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoidExecute(r ApiGetKubernetesAddonRepositoryByMoidRequest) (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoidExecute(r ApiGetKubernetesAddonRepositoryByMoidRequest) (KubernetesAddonRepository, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonRepository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonRepositoryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories/{Moid}"
@@ -9671,22 +9365,19 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9753,7 +9444,7 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesAddonRepositoryListRequest struct {
@@ -9817,7 +9508,7 @@ func (r ApiGetKubernetesAddonRepositoryListRequest) Tags(tags string) ApiGetKube
 	return r
 }
 
-func (r ApiGetKubernetesAddonRepositoryListRequest) Execute() (KubernetesAddonRepositoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesAddonRepositoryListRequest) Execute() (KubernetesAddonRepositoryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesAddonRepositoryListExecute(r)
 }
 
@@ -9837,21 +9528,19 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryList(ctx _context.Con
  * Execute executes the request
  * @return KubernetesAddonRepositoryResponse
  */
-func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetKubernetesAddonRepositoryListRequest) (KubernetesAddonRepositoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetKubernetesAddonRepositoryListRequest) (KubernetesAddonRepositoryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonRepositoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesAddonRepositoryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories"
@@ -9912,22 +9601,19 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9994,7 +9680,7 @@ func (a *KubernetesApiService) GetKubernetesAddonRepositoryListExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesCatalogByMoidRequest struct {
@@ -10003,7 +9689,7 @@ type ApiGetKubernetesCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesCatalogByMoidRequest) Execute() (KubernetesCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesCatalogByMoidRequest) Execute() (KubernetesCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesCatalogByMoidExecute(r)
 }
 
@@ -10025,21 +9711,19 @@ func (a *KubernetesApiService) GetKubernetesCatalogByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesCatalog
  */
-func (a *KubernetesApiService) GetKubernetesCatalogByMoidExecute(r ApiGetKubernetesCatalogByMoidRequest) (KubernetesCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesCatalogByMoidExecute(r ApiGetKubernetesCatalogByMoidRequest) (KubernetesCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Catalogs/{Moid}"
@@ -10068,22 +9752,19 @@ func (a *KubernetesApiService) GetKubernetesCatalogByMoidExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10150,7 +9831,7 @@ func (a *KubernetesApiService) GetKubernetesCatalogByMoidExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesCatalogListRequest struct {
@@ -10214,7 +9895,7 @@ func (r ApiGetKubernetesCatalogListRequest) Tags(tags string) ApiGetKubernetesCa
 	return r
 }
 
-func (r ApiGetKubernetesCatalogListRequest) Execute() (KubernetesCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesCatalogListRequest) Execute() (KubernetesCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesCatalogListExecute(r)
 }
 
@@ -10234,21 +9915,19 @@ func (a *KubernetesApiService) GetKubernetesCatalogList(ctx _context.Context) Ap
  * Execute executes the request
  * @return KubernetesCatalogResponse
  */
-func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernetesCatalogListRequest) (KubernetesCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernetesCatalogListRequest) (KubernetesCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Catalogs"
@@ -10309,22 +9988,19 @@ func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10391,7 +10067,7 @@ func (a *KubernetesApiService) GetKubernetesCatalogListExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesClusterByMoidRequest struct {
@@ -10400,7 +10076,7 @@ type ApiGetKubernetesClusterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesClusterByMoidRequest) Execute() (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesClusterByMoidRequest) Execute() (KubernetesCluster, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesClusterByMoidExecute(r)
 }
 
@@ -10422,21 +10098,19 @@ func (a *KubernetesApiService) GetKubernetesClusterByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesCluster
  */
-func (a *KubernetesApiService) GetKubernetesClusterByMoidExecute(r ApiGetKubernetesClusterByMoidRequest) (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesClusterByMoidExecute(r ApiGetKubernetesClusterByMoidRequest) (KubernetesCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesClusterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters/{Moid}"
@@ -10465,22 +10139,19 @@ func (a *KubernetesApiService) GetKubernetesClusterByMoidExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10547,7 +10218,7 @@ func (a *KubernetesApiService) GetKubernetesClusterByMoidExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesClusterListRequest struct {
@@ -10611,7 +10282,7 @@ func (r ApiGetKubernetesClusterListRequest) Tags(tags string) ApiGetKubernetesCl
 	return r
 }
 
-func (r ApiGetKubernetesClusterListRequest) Execute() (KubernetesClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesClusterListRequest) Execute() (KubernetesClusterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesClusterListExecute(r)
 }
 
@@ -10631,21 +10302,19 @@ func (a *KubernetesApiService) GetKubernetesClusterList(ctx _context.Context) Ap
  * Execute executes the request
  * @return KubernetesClusterResponse
  */
-func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernetesClusterListRequest) (KubernetesClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernetesClusterListRequest) (KubernetesClusterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesClusterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters"
@@ -10706,22 +10375,19 @@ func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10788,7 +10454,7 @@ func (a *KubernetesApiService) GetKubernetesClusterListExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesClusterProfileByMoidRequest struct {
@@ -10797,7 +10463,7 @@ type ApiGetKubernetesClusterProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesClusterProfileByMoidRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesClusterProfileByMoidRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesClusterProfileByMoidExecute(r)
 }
 
@@ -10819,21 +10485,19 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileByMoid(ctx _context.Co
  * Execute executes the request
  * @return KubernetesClusterProfile
  */
-func (a *KubernetesApiService) GetKubernetesClusterProfileByMoidExecute(r ApiGetKubernetesClusterProfileByMoidRequest) (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesClusterProfileByMoidExecute(r ApiGetKubernetesClusterProfileByMoidRequest) (KubernetesClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesClusterProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles/{Moid}"
@@ -10862,22 +10526,19 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10944,7 +10605,7 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesClusterProfileListRequest struct {
@@ -11008,7 +10669,7 @@ func (r ApiGetKubernetesClusterProfileListRequest) Tags(tags string) ApiGetKuber
 	return r
 }
 
-func (r ApiGetKubernetesClusterProfileListRequest) Execute() (KubernetesClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesClusterProfileListRequest) Execute() (KubernetesClusterProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesClusterProfileListExecute(r)
 }
 
@@ -11028,21 +10689,19 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileList(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesClusterProfileResponse
  */
-func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKubernetesClusterProfileListRequest) (KubernetesClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKubernetesClusterProfileListRequest) (KubernetesClusterProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesClusterProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles"
@@ -11103,22 +10762,19 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11185,7 +10841,7 @@ func (a *KubernetesApiService) GetKubernetesClusterProfileListExecute(r ApiGetKu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesContainerRuntimePolicyByMoidRequest struct {
@@ -11194,7 +10850,7 @@ type ApiGetKubernetesContainerRuntimePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesContainerRuntimePolicyByMoidExecute(r)
 }
 
@@ -11216,21 +10872,19 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoid(ctx _co
  * Execute executes the request
  * @return KubernetesContainerRuntimePolicy
  */
-func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoidExecute(r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoidExecute(r ApiGetKubernetesContainerRuntimePolicyByMoidRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesContainerRuntimePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesContainerRuntimePolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies/{Moid}"
@@ -11259,22 +10913,19 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoidExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11341,7 +10992,7 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesContainerRuntimePolicyListRequest struct {
@@ -11405,7 +11056,7 @@ func (r ApiGetKubernetesContainerRuntimePolicyListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetKubernetesContainerRuntimePolicyListRequest) Execute() (KubernetesContainerRuntimePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesContainerRuntimePolicyListRequest) Execute() (KubernetesContainerRuntimePolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesContainerRuntimePolicyListExecute(r)
 }
 
@@ -11425,21 +11076,19 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyList(ctx _cont
  * Execute executes the request
  * @return KubernetesContainerRuntimePolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r ApiGetKubernetesContainerRuntimePolicyListRequest) (KubernetesContainerRuntimePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r ApiGetKubernetesContainerRuntimePolicyListRequest) (KubernetesContainerRuntimePolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesContainerRuntimePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesContainerRuntimePolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies"
@@ -11500,22 +11149,19 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11582,7 +11228,7 @@ func (a *KubernetesApiService) GetKubernetesContainerRuntimePolicyListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesDaemonSetByMoidRequest struct {
@@ -11591,7 +11237,7 @@ type ApiGetKubernetesDaemonSetByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesDaemonSetByMoidRequest) Execute() (KubernetesDaemonSet, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesDaemonSetByMoidRequest) Execute() (KubernetesDaemonSet, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesDaemonSetByMoidExecute(r)
 }
 
@@ -11613,21 +11259,19 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetByMoid(ctx _context.Context
  * Execute executes the request
  * @return KubernetesDaemonSet
  */
-func (a *KubernetesApiService) GetKubernetesDaemonSetByMoidExecute(r ApiGetKubernetesDaemonSetByMoidRequest) (KubernetesDaemonSet, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesDaemonSetByMoidExecute(r ApiGetKubernetesDaemonSetByMoidRequest) (KubernetesDaemonSet, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesDaemonSet
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesDaemonSetByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/DaemonSets/{Moid}"
@@ -11656,22 +11300,19 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetByMoidExecute(r ApiGetKuber
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11738,7 +11379,7 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetByMoidExecute(r ApiGetKuber
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesDaemonSetListRequest struct {
@@ -11802,7 +11443,7 @@ func (r ApiGetKubernetesDaemonSetListRequest) Tags(tags string) ApiGetKubernetes
 	return r
 }
 
-func (r ApiGetKubernetesDaemonSetListRequest) Execute() (KubernetesDaemonSetResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesDaemonSetListRequest) Execute() (KubernetesDaemonSetResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesDaemonSetListExecute(r)
 }
 
@@ -11822,21 +11463,19 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetList(ctx _context.Context) 
  * Execute executes the request
  * @return KubernetesDaemonSetResponse
  */
-func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKubernetesDaemonSetListRequest) (KubernetesDaemonSetResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKubernetesDaemonSetListRequest) (KubernetesDaemonSetResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesDaemonSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesDaemonSetList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/DaemonSets"
@@ -11897,22 +11536,19 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11979,7 +11615,7 @@ func (a *KubernetesApiService) GetKubernetesDaemonSetListExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesDeploymentByMoidRequest struct {
@@ -11988,7 +11624,7 @@ type ApiGetKubernetesDeploymentByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesDeploymentByMoidRequest) Execute() (KubernetesDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesDeploymentByMoidRequest) Execute() (KubernetesDeployment, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesDeploymentByMoidExecute(r)
 }
 
@@ -12010,21 +11646,19 @@ func (a *KubernetesApiService) GetKubernetesDeploymentByMoid(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesDeployment
  */
-func (a *KubernetesApiService) GetKubernetesDeploymentByMoidExecute(r ApiGetKubernetesDeploymentByMoidRequest) (KubernetesDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesDeploymentByMoidExecute(r ApiGetKubernetesDeploymentByMoidRequest) (KubernetesDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesDeploymentByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Deployments/{Moid}"
@@ -12053,22 +11687,19 @@ func (a *KubernetesApiService) GetKubernetesDeploymentByMoidExecute(r ApiGetKube
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12135,7 +11766,7 @@ func (a *KubernetesApiService) GetKubernetesDeploymentByMoidExecute(r ApiGetKube
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesDeploymentListRequest struct {
@@ -12199,7 +11830,7 @@ func (r ApiGetKubernetesDeploymentListRequest) Tags(tags string) ApiGetKubernete
 	return r
 }
 
-func (r ApiGetKubernetesDeploymentListRequest) Execute() (KubernetesDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesDeploymentListRequest) Execute() (KubernetesDeploymentResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesDeploymentListExecute(r)
 }
 
@@ -12219,21 +11850,19 @@ func (a *KubernetesApiService) GetKubernetesDeploymentList(ctx _context.Context)
  * Execute executes the request
  * @return KubernetesDeploymentResponse
  */
-func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubernetesDeploymentListRequest) (KubernetesDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubernetesDeploymentListRequest) (KubernetesDeploymentResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesDeploymentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesDeploymentList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Deployments"
@@ -12294,22 +11923,19 @@ func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubern
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12376,7 +12002,7 @@ func (a *KubernetesApiService) GetKubernetesDeploymentListExecute(r ApiGetKubern
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesIngressByMoidRequest struct {
@@ -12385,7 +12011,7 @@ type ApiGetKubernetesIngressByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesIngressByMoidRequest) Execute() (KubernetesIngress, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesIngressByMoidRequest) Execute() (KubernetesIngress, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesIngressByMoidExecute(r)
 }
 
@@ -12407,21 +12033,19 @@ func (a *KubernetesApiService) GetKubernetesIngressByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesIngress
  */
-func (a *KubernetesApiService) GetKubernetesIngressByMoidExecute(r ApiGetKubernetesIngressByMoidRequest) (KubernetesIngress, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesIngressByMoidExecute(r ApiGetKubernetesIngressByMoidRequest) (KubernetesIngress, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesIngress
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesIngressByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Ingresses/{Moid}"
@@ -12450,22 +12074,19 @@ func (a *KubernetesApiService) GetKubernetesIngressByMoidExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12532,7 +12153,7 @@ func (a *KubernetesApiService) GetKubernetesIngressByMoidExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesIngressListRequest struct {
@@ -12596,7 +12217,7 @@ func (r ApiGetKubernetesIngressListRequest) Tags(tags string) ApiGetKubernetesIn
 	return r
 }
 
-func (r ApiGetKubernetesIngressListRequest) Execute() (KubernetesIngressResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesIngressListRequest) Execute() (KubernetesIngressResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesIngressListExecute(r)
 }
 
@@ -12616,21 +12237,19 @@ func (a *KubernetesApiService) GetKubernetesIngressList(ctx _context.Context) Ap
  * Execute executes the request
  * @return KubernetesIngressResponse
  */
-func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernetesIngressListRequest) (KubernetesIngressResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernetesIngressListRequest) (KubernetesIngressResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesIngressResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesIngressList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Ingresses"
@@ -12691,22 +12310,19 @@ func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12773,7 +12389,7 @@ func (a *KubernetesApiService) GetKubernetesIngressListExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNetworkPolicyByMoidRequest struct {
@@ -12782,7 +12398,7 @@ type ApiGetKubernetesNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesNetworkPolicyByMoidRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNetworkPolicyByMoidRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNetworkPolicyByMoidExecute(r)
 }
 
@@ -12804,21 +12420,19 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoid(ctx _context.Con
  * Execute executes the request
  * @return KubernetesNetworkPolicy
  */
-func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoidExecute(r ApiGetKubernetesNetworkPolicyByMoidRequest) (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoidExecute(r ApiGetKubernetesNetworkPolicyByMoidRequest) (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNetworkPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies/{Moid}"
@@ -12847,22 +12461,19 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoidExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12929,7 +12540,7 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyByMoidExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNetworkPolicyListRequest struct {
@@ -12993,7 +12604,7 @@ func (r ApiGetKubernetesNetworkPolicyListRequest) Tags(tags string) ApiGetKubern
 	return r
 }
 
-func (r ApiGetKubernetesNetworkPolicyListRequest) Execute() (KubernetesNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNetworkPolicyListRequest) Execute() (KubernetesNetworkPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNetworkPolicyListExecute(r)
 }
 
@@ -13013,21 +12624,19 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyList(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesNetworkPolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKubernetesNetworkPolicyListRequest) (KubernetesNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKubernetesNetworkPolicyListRequest) (KubernetesNetworkPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNetworkPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies"
@@ -13088,22 +12697,19 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13170,7 +12776,7 @@ func (a *KubernetesApiService) GetKubernetesNetworkPolicyListExecute(r ApiGetKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNodeByMoidRequest struct {
@@ -13179,7 +12785,7 @@ type ApiGetKubernetesNodeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesNodeByMoidRequest) Execute() (KubernetesNode, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNodeByMoidRequest) Execute() (KubernetesNode, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNodeByMoidExecute(r)
 }
 
@@ -13201,21 +12807,19 @@ func (a *KubernetesApiService) GetKubernetesNodeByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return KubernetesNode
  */
-func (a *KubernetesApiService) GetKubernetesNodeByMoidExecute(r ApiGetKubernetesNodeByMoidRequest) (KubernetesNode, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNodeByMoidExecute(r ApiGetKubernetesNodeByMoidRequest) (KubernetesNode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNodeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Nodes/{Moid}"
@@ -13244,22 +12848,19 @@ func (a *KubernetesApiService) GetKubernetesNodeByMoidExecute(r ApiGetKubernetes
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13326,7 +12927,7 @@ func (a *KubernetesApiService) GetKubernetesNodeByMoidExecute(r ApiGetKubernetes
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNodeGroupProfileByMoidRequest struct {
@@ -13335,7 +12936,7 @@ type ApiGetKubernetesNodeGroupProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesNodeGroupProfileByMoidRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNodeGroupProfileByMoidRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNodeGroupProfileByMoidExecute(r)
 }
 
@@ -13357,21 +12958,19 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoid(ctx _context.
  * Execute executes the request
  * @return KubernetesNodeGroupProfile
  */
-func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoidExecute(r ApiGetKubernetesNodeGroupProfileByMoidRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoidExecute(r ApiGetKubernetesNodeGroupProfileByMoidRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeGroupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNodeGroupProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles/{Moid}"
@@ -13400,22 +12999,19 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13482,7 +13078,7 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNodeGroupProfileListRequest struct {
@@ -13546,7 +13142,7 @@ func (r ApiGetKubernetesNodeGroupProfileListRequest) Tags(tags string) ApiGetKub
 	return r
 }
 
-func (r ApiGetKubernetesNodeGroupProfileListRequest) Execute() (KubernetesNodeGroupProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNodeGroupProfileListRequest) Execute() (KubernetesNodeGroupProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNodeGroupProfileListExecute(r)
 }
 
@@ -13566,21 +13162,19 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileList(ctx _context.Co
  * Execute executes the request
  * @return KubernetesNodeGroupProfileResponse
  */
-func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGetKubernetesNodeGroupProfileListRequest) (KubernetesNodeGroupProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGetKubernetesNodeGroupProfileListRequest) (KubernetesNodeGroupProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeGroupProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNodeGroupProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles"
@@ -13641,22 +13235,19 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13723,7 +13314,7 @@ func (a *KubernetesApiService) GetKubernetesNodeGroupProfileListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesNodeListRequest struct {
@@ -13787,7 +13378,7 @@ func (r ApiGetKubernetesNodeListRequest) Tags(tags string) ApiGetKubernetesNodeL
 	return r
 }
 
-func (r ApiGetKubernetesNodeListRequest) Execute() (KubernetesNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesNodeListRequest) Execute() (KubernetesNodeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesNodeListExecute(r)
 }
 
@@ -13807,21 +13398,19 @@ func (a *KubernetesApiService) GetKubernetesNodeList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return KubernetesNodeResponse
  */
-func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNodeListRequest) (KubernetesNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNodeListRequest) (KubernetesNodeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesNodeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Nodes"
@@ -13882,22 +13471,19 @@ func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13964,7 +13550,7 @@ func (a *KubernetesApiService) GetKubernetesNodeListExecute(r ApiGetKubernetesNo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesPodByMoidRequest struct {
@@ -13973,7 +13559,7 @@ type ApiGetKubernetesPodByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesPodByMoidRequest) Execute() (KubernetesPod, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesPodByMoidRequest) Execute() (KubernetesPod, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesPodByMoidExecute(r)
 }
 
@@ -13995,21 +13581,19 @@ func (a *KubernetesApiService) GetKubernetesPodByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return KubernetesPod
  */
-func (a *KubernetesApiService) GetKubernetesPodByMoidExecute(r ApiGetKubernetesPodByMoidRequest) (KubernetesPod, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesPodByMoidExecute(r ApiGetKubernetesPodByMoidRequest) (KubernetesPod, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesPod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesPodByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Pods/{Moid}"
@@ -14038,22 +13622,19 @@ func (a *KubernetesApiService) GetKubernetesPodByMoidExecute(r ApiGetKubernetesP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14120,7 +13701,7 @@ func (a *KubernetesApiService) GetKubernetesPodByMoidExecute(r ApiGetKubernetesP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesPodListRequest struct {
@@ -14184,7 +13765,7 @@ func (r ApiGetKubernetesPodListRequest) Tags(tags string) ApiGetKubernetesPodLis
 	return r
 }
 
-func (r ApiGetKubernetesPodListRequest) Execute() (KubernetesPodResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesPodListRequest) Execute() (KubernetesPodResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesPodListExecute(r)
 }
 
@@ -14204,21 +13785,19 @@ func (a *KubernetesApiService) GetKubernetesPodList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return KubernetesPodResponse
  */
-func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPodListRequest) (KubernetesPodResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPodListRequest) (KubernetesPodResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesPodResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesPodList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Pods"
@@ -14279,22 +13858,19 @@ func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPod
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14361,7 +13937,7 @@ func (a *KubernetesApiService) GetKubernetesPodListExecute(r ApiGetKubernetesPod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesServiceByMoidRequest struct {
@@ -14370,7 +13946,7 @@ type ApiGetKubernetesServiceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesServiceByMoidRequest) Execute() (KubernetesService, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesServiceByMoidRequest) Execute() (KubernetesService, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesServiceByMoidExecute(r)
 }
 
@@ -14392,21 +13968,19 @@ func (a *KubernetesApiService) GetKubernetesServiceByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesService
  */
-func (a *KubernetesApiService) GetKubernetesServiceByMoidExecute(r ApiGetKubernetesServiceByMoidRequest) (KubernetesService, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesServiceByMoidExecute(r ApiGetKubernetesServiceByMoidRequest) (KubernetesService, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesService
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesServiceByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Services/{Moid}"
@@ -14435,22 +14009,19 @@ func (a *KubernetesApiService) GetKubernetesServiceByMoidExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14517,7 +14088,7 @@ func (a *KubernetesApiService) GetKubernetesServiceByMoidExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesServiceListRequest struct {
@@ -14581,7 +14152,7 @@ func (r ApiGetKubernetesServiceListRequest) Tags(tags string) ApiGetKubernetesSe
 	return r
 }
 
-func (r ApiGetKubernetesServiceListRequest) Execute() (KubernetesServiceResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesServiceListRequest) Execute() (KubernetesServiceResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesServiceListExecute(r)
 }
 
@@ -14601,21 +14172,19 @@ func (a *KubernetesApiService) GetKubernetesServiceList(ctx _context.Context) Ap
  * Execute executes the request
  * @return KubernetesServiceResponse
  */
-func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernetesServiceListRequest) (KubernetesServiceResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernetesServiceListRequest) (KubernetesServiceResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesServiceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesServiceList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Services"
@@ -14676,22 +14245,19 @@ func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14758,7 +14324,7 @@ func (a *KubernetesApiService) GetKubernetesServiceListExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesStatefulSetByMoidRequest struct {
@@ -14767,7 +14333,7 @@ type ApiGetKubernetesStatefulSetByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesStatefulSetByMoidRequest) Execute() (KubernetesStatefulSet, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesStatefulSetByMoidRequest) Execute() (KubernetesStatefulSet, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesStatefulSetByMoidExecute(r)
 }
 
@@ -14789,21 +14355,19 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetByMoid(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesStatefulSet
  */
-func (a *KubernetesApiService) GetKubernetesStatefulSetByMoidExecute(r ApiGetKubernetesStatefulSetByMoidRequest) (KubernetesStatefulSet, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesStatefulSetByMoidExecute(r ApiGetKubernetesStatefulSetByMoidRequest) (KubernetesStatefulSet, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesStatefulSet
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesStatefulSetByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/StatefulSets/{Moid}"
@@ -14832,22 +14396,19 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetByMoidExecute(r ApiGetKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14914,7 +14475,7 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetByMoidExecute(r ApiGetKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesStatefulSetListRequest struct {
@@ -14978,7 +14539,7 @@ func (r ApiGetKubernetesStatefulSetListRequest) Tags(tags string) ApiGetKubernet
 	return r
 }
 
-func (r ApiGetKubernetesStatefulSetListRequest) Execute() (KubernetesStatefulSetResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesStatefulSetListRequest) Execute() (KubernetesStatefulSetResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesStatefulSetListExecute(r)
 }
 
@@ -14998,21 +14559,19 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetList(ctx _context.Context
  * Execute executes the request
  * @return KubernetesStatefulSetResponse
  */
-func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKubernetesStatefulSetListRequest) (KubernetesStatefulSetResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKubernetesStatefulSetListRequest) (KubernetesStatefulSetResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesStatefulSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesStatefulSetList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/StatefulSets"
@@ -15073,22 +14632,19 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKuber
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15155,7 +14711,7 @@ func (a *KubernetesApiService) GetKubernetesStatefulSetListExecute(r ApiGetKuber
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesSysConfigPolicyByMoidRequest struct {
@@ -15164,7 +14720,7 @@ type ApiGetKubernetesSysConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesSysConfigPolicyByMoidRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesSysConfigPolicyByMoidRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesSysConfigPolicyByMoidExecute(r)
 }
 
@@ -15186,21 +14742,19 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoid(ctx _context.C
  * Execute executes the request
  * @return KubernetesSysConfigPolicy
  */
-func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoidExecute(r ApiGetKubernetesSysConfigPolicyByMoidRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoidExecute(r ApiGetKubernetesSysConfigPolicyByMoidRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesSysConfigPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies/{Moid}"
@@ -15229,22 +14783,19 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15311,7 +14862,7 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesSysConfigPolicyListRequest struct {
@@ -15375,7 +14926,7 @@ func (r ApiGetKubernetesSysConfigPolicyListRequest) Tags(tags string) ApiGetKube
 	return r
 }
 
-func (r ApiGetKubernetesSysConfigPolicyListRequest) Execute() (KubernetesSysConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesSysConfigPolicyListRequest) Execute() (KubernetesSysConfigPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesSysConfigPolicyListExecute(r)
 }
 
@@ -15395,21 +14946,19 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyList(ctx _context.Con
  * Execute executes the request
  * @return KubernetesSysConfigPolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetKubernetesSysConfigPolicyListRequest) (KubernetesSysConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetKubernetesSysConfigPolicyListRequest) (KubernetesSysConfigPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesSysConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesSysConfigPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies"
@@ -15470,22 +15019,19 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15552,7 +15098,7 @@ func (a *KubernetesApiService) GetKubernetesSysConfigPolicyListExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest struct {
@@ -15561,7 +15107,7 @@ type ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesTrustedRegistriesPolicyByMoidExecute(r)
 }
 
@@ -15583,21 +15129,19 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoid(ctx _c
  * Execute executes the request
  * @return KubernetesTrustedRegistriesPolicy
  */
-func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoidExecute(r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoidExecute(r ApiGetKubernetesTrustedRegistriesPolicyByMoidRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesTrustedRegistriesPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesTrustedRegistriesPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies/{Moid}"
@@ -15626,22 +15170,19 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15708,7 +15249,7 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesTrustedRegistriesPolicyListRequest struct {
@@ -15772,7 +15313,7 @@ func (r ApiGetKubernetesTrustedRegistriesPolicyListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetKubernetesTrustedRegistriesPolicyListRequest) Execute() (KubernetesTrustedRegistriesPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesTrustedRegistriesPolicyListRequest) Execute() (KubernetesTrustedRegistriesPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesTrustedRegistriesPolicyListExecute(r)
 }
 
@@ -15792,21 +15333,19 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyList(ctx _con
  * Execute executes the request
  * @return KubernetesTrustedRegistriesPolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r ApiGetKubernetesTrustedRegistriesPolicyListRequest) (KubernetesTrustedRegistriesPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r ApiGetKubernetesTrustedRegistriesPolicyListRequest) (KubernetesTrustedRegistriesPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesTrustedRegistriesPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesTrustedRegistriesPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies"
@@ -15867,22 +15406,19 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15949,7 +15485,7 @@ func (a *KubernetesApiService) GetKubernetesTrustedRegistriesPolicyListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVersionByMoidRequest struct {
@@ -15958,7 +15494,7 @@ type ApiGetKubernetesVersionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesVersionByMoidRequest) Execute() (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVersionByMoidRequest) Execute() (KubernetesVersion, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVersionByMoidExecute(r)
 }
 
@@ -15980,21 +15516,19 @@ func (a *KubernetesApiService) GetKubernetesVersionByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesVersion
  */
-func (a *KubernetesApiService) GetKubernetesVersionByMoidExecute(r ApiGetKubernetesVersionByMoidRequest) (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVersionByMoidExecute(r ApiGetKubernetesVersionByMoidRequest) (KubernetesVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVersionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions/{Moid}"
@@ -16023,22 +15557,19 @@ func (a *KubernetesApiService) GetKubernetesVersionByMoidExecute(r ApiGetKuberne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16105,7 +15636,7 @@ func (a *KubernetesApiService) GetKubernetesVersionByMoidExecute(r ApiGetKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVersionListRequest struct {
@@ -16169,7 +15700,7 @@ func (r ApiGetKubernetesVersionListRequest) Tags(tags string) ApiGetKubernetesVe
 	return r
 }
 
-func (r ApiGetKubernetesVersionListRequest) Execute() (KubernetesVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVersionListRequest) Execute() (KubernetesVersionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVersionListExecute(r)
 }
 
@@ -16189,21 +15720,19 @@ func (a *KubernetesApiService) GetKubernetesVersionList(ctx _context.Context) Ap
  * Execute executes the request
  * @return KubernetesVersionResponse
  */
-func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernetesVersionListRequest) (KubernetesVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernetesVersionListRequest) (KubernetesVersionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVersionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions"
@@ -16264,22 +15793,19 @@ func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16346,7 +15872,7 @@ func (a *KubernetesApiService) GetKubernetesVersionListExecute(r ApiGetKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVersionPolicyByMoidRequest struct {
@@ -16355,7 +15881,7 @@ type ApiGetKubernetesVersionPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesVersionPolicyByMoidRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVersionPolicyByMoidRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVersionPolicyByMoidExecute(r)
 }
 
@@ -16377,21 +15903,19 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoid(ctx _context.Con
  * Execute executes the request
  * @return KubernetesVersionPolicy
  */
-func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoidExecute(r ApiGetKubernetesVersionPolicyByMoidRequest) (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoidExecute(r ApiGetKubernetesVersionPolicyByMoidRequest) (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVersionPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies/{Moid}"
@@ -16420,22 +15944,19 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoidExecute(r ApiGetK
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16502,7 +16023,7 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyByMoidExecute(r ApiGetK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVersionPolicyListRequest struct {
@@ -16566,7 +16087,7 @@ func (r ApiGetKubernetesVersionPolicyListRequest) Tags(tags string) ApiGetKubern
 	return r
 }
 
-func (r ApiGetKubernetesVersionPolicyListRequest) Execute() (KubernetesVersionPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVersionPolicyListRequest) Execute() (KubernetesVersionPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVersionPolicyListExecute(r)
 }
 
@@ -16586,21 +16107,19 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyList(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesVersionPolicyResponse
  */
-func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKubernetesVersionPolicyListRequest) (KubernetesVersionPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKubernetesVersionPolicyListRequest) (KubernetesVersionPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVersionPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies"
@@ -16661,22 +16180,19 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKub
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16743,7 +16259,7 @@ func (a *KubernetesApiService) GetKubernetesVersionPolicyListExecute(r ApiGetKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest struct {
@@ -16752,7 +16268,7 @@ type ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineInfrastructureProviderByMoidExecute(r)
 }
 
@@ -16774,21 +16290,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
  * Execute executes the request
  * @return KubernetesVirtualMachineInfrastructureProvider
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderByMoidExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderByMoidExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderByMoidRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInfrastructureProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineInfrastructureProviderByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid}"
@@ -16817,22 +16331,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16899,7 +16410,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest struct {
@@ -16963,7 +16474,7 @@ func (r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) Tags(ta
 	return r
 }
 
-func (r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) Execute() (KubernetesVirtualMachineInfrastructureProviderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) Execute() (KubernetesVirtualMachineInfrastructureProviderResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineInfrastructureProviderListExecute(r)
 }
 
@@ -16983,21 +16494,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
  * Execute executes the request
  * @return KubernetesVirtualMachineInfrastructureProviderResponse
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderListExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) (KubernetesVirtualMachineInfrastructureProviderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProviderListExecute(r ApiGetKubernetesVirtualMachineInfrastructureProviderListRequest) (KubernetesVirtualMachineInfrastructureProviderResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInfrastructureProviderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineInfrastructureProviderList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders"
@@ -17058,22 +16567,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17140,7 +16646,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInfrastructureProvider
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest struct {
@@ -17149,7 +16655,7 @@ type ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineInstanceTypeByMoidExecute(r)
 }
 
@@ -17171,21 +16677,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoid(ctx
  * Execute executes the request
  * @return KubernetesVirtualMachineInstanceType
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoidExecute(r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoidExecute(r ApiGetKubernetesVirtualMachineInstanceTypeByMoidRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInstanceType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineInstanceTypeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid}"
@@ -17214,22 +16718,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoidExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17296,7 +16797,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineInstanceTypeListRequest struct {
@@ -17360,7 +16861,7 @@ func (r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) Execute() (KubernetesVirtualMachineInstanceTypeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) Execute() (KubernetesVirtualMachineInstanceTypeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineInstanceTypeListExecute(r)
 }
 
@@ -17380,21 +16881,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeList(ctx _
  * Execute executes the request
  * @return KubernetesVirtualMachineInstanceTypeResponse
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecute(r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) (KubernetesVirtualMachineInstanceTypeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecute(r ApiGetKubernetesVirtualMachineInstanceTypeListRequest) (KubernetesVirtualMachineInstanceTypeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInstanceTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineInstanceTypeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes"
@@ -17455,22 +16954,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17537,7 +17033,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineInstanceTypeListExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest struct {
@@ -17546,7 +17042,7 @@ type ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineNodeProfileByMoidExecute(r)
 }
 
@@ -17568,21 +17064,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoid(ctx 
  * Execute executes the request
  * @return KubernetesVirtualMachineNodeProfile
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoidExecute(r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoidExecute(r ApiGetKubernetesVirtualMachineNodeProfileByMoidRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineNodeProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid}"
@@ -17611,22 +17105,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoidExecu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17693,7 +17184,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetKubernetesVirtualMachineNodeProfileListRequest struct {
@@ -17757,7 +17248,7 @@ func (r ApiGetKubernetesVirtualMachineNodeProfileListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetKubernetesVirtualMachineNodeProfileListRequest) Execute() (KubernetesVirtualMachineNodeProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetKubernetesVirtualMachineNodeProfileListRequest) Execute() (KubernetesVirtualMachineNodeProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetKubernetesVirtualMachineNodeProfileListExecute(r)
 }
 
@@ -17777,21 +17268,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileList(ctx _c
  * Execute executes the request
  * @return KubernetesVirtualMachineNodeProfileResponse
  */
-func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute(r ApiGetKubernetesVirtualMachineNodeProfileListRequest) (KubernetesVirtualMachineNodeProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute(r ApiGetKubernetesVirtualMachineNodeProfileListRequest) (KubernetesVirtualMachineNodeProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineNodeProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.GetKubernetesVirtualMachineNodeProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles"
@@ -17852,22 +17341,19 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17934,7 +17420,7 @@ func (a *KubernetesApiService) GetKubernetesVirtualMachineNodeProfileListExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAciCniApicRequest struct {
@@ -17954,7 +17440,7 @@ func (r ApiPatchKubernetesAciCniApicRequest) IfMatch(ifMatch string) ApiPatchKub
 	return r
 }
 
-func (r ApiPatchKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAciCniApicExecute(r)
 }
 
@@ -17976,21 +17462,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApic(ctx _context.Context, m
  * Execute executes the request
  * @return KubernetesAciCniApic
  */
-func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniApic
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAciCniApic")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics/{Moid}"
@@ -18000,8 +17484,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubern
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniApic == nil {
-		executionError.error = "kubernetesAciCniApic is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniApic is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18028,22 +17511,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubern
 	localVarPostBody = r.kubernetesAciCniApic
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18110,7 +17590,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniApicExecute(r ApiPatchKubern
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAciCniProfileRequest struct {
@@ -18130,7 +17610,7 @@ func (r ApiPatchKubernetesAciCniProfileRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAciCniProfileExecute(r)
 }
 
@@ -18152,21 +17632,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfile(ctx _context.Context
  * Execute executes the request
  * @return KubernetesAciCniProfile
  */
-func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAciCniProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles/{Moid}"
@@ -18176,8 +17654,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKub
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniProfile == nil {
-		executionError.error = "kubernetesAciCniProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18204,22 +17681,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKub
 	localVarPostBody = r.kubernetesAciCniProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18286,7 +17760,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniProfileExecute(r ApiPatchKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAciCniTenantClusterAllocationRequest struct {
@@ -18306,7 +17780,7 @@ func (r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) IfMatch(ifMatch 
 	return r
 }
 
-func (r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAciCniTenantClusterAllocationExecute(r)
 }
 
@@ -18328,21 +17802,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocation(ctx 
  * Execute executes the request
  * @return KubernetesAciCniTenantClusterAllocation
  */
-func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecute(r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecute(r ApiPatchKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniTenantClusterAllocation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAciCniTenantClusterAllocation")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid}"
@@ -18352,8 +17824,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecu
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniTenantClusterAllocation == nil {
-		executionError.error = "kubernetesAciCniTenantClusterAllocation is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniTenantClusterAllocation is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18380,22 +17851,19 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecu
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18462,7 +17930,7 @@ func (a *KubernetesApiService) PatchKubernetesAciCniTenantClusterAllocationExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAddonRequest struct {
@@ -18482,7 +17950,7 @@ func (r ApiPatchKubernetesAddonRequest) IfMatch(ifMatch string) ApiPatchKubernet
 	return r
 }
 
-func (r ApiPatchKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAddonExecute(r)
 }
 
@@ -18504,21 +17972,19 @@ func (a *KubernetesApiService) PatchKubernetesAddon(ctx _context.Context, moid s
  * Execute executes the request
  * @return KubernetesAddon
  */
-func (a *KubernetesApiService) PatchKubernetesAddonExecute(r ApiPatchKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAddonExecute(r ApiPatchKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddon
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAddon")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons/{Moid}"
@@ -18528,8 +17994,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonExecute(r ApiPatchKubernetesA
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddon == nil {
-		executionError.error = "kubernetesAddon is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddon is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18556,22 +18021,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonExecute(r ApiPatchKubernetesA
 	localVarPostBody = r.kubernetesAddon
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18638,7 +18100,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonExecute(r ApiPatchKubernetesA
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAddonDefinitionRequest struct {
@@ -18658,7 +18120,7 @@ func (r ApiPatchKubernetesAddonDefinitionRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAddonDefinitionExecute(r)
 }
 
@@ -18680,21 +18142,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinition(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesAddonDefinition
  */
-func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAddonDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions/{Moid}"
@@ -18704,8 +18164,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonDefinition == nil {
-		executionError.error = "kubernetesAddonDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18732,22 +18191,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchK
 	localVarPostBody = r.kubernetesAddonDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18814,7 +18270,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonDefinitionExecute(r ApiPatchK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAddonPolicyRequest struct {
@@ -18834,7 +18290,7 @@ func (r ApiPatchKubernetesAddonPolicyRequest) IfMatch(ifMatch string) ApiPatchKu
 	return r
 }
 
-func (r ApiPatchKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAddonPolicyExecute(r)
 }
 
@@ -18856,21 +18312,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicy(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesAddonPolicy
  */
-func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAddonPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies/{Moid}"
@@ -18880,8 +18334,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKuber
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonPolicy == nil {
-		executionError.error = "kubernetesAddonPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18908,22 +18361,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKuber
 	localVarPostBody = r.kubernetesAddonPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18990,7 +18440,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonPolicyExecute(r ApiPatchKuber
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesAddonRepositoryRequest struct {
@@ -19010,7 +18460,7 @@ func (r ApiPatchKubernetesAddonRepositoryRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesAddonRepositoryExecute(r)
 }
 
@@ -19032,21 +18482,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepository(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesAddonRepository
  */
-func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonRepository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesAddonRepository")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories/{Moid}"
@@ -19056,8 +18504,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonRepository == nil {
-		executionError.error = "kubernetesAddonRepository is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonRepository is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19084,22 +18531,19 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchK
 	localVarPostBody = r.kubernetesAddonRepository
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19166,7 +18610,7 @@ func (a *KubernetesApiService) PatchKubernetesAddonRepositoryExecute(r ApiPatchK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesClusterRequest struct {
@@ -19186,7 +18630,7 @@ func (r ApiPatchKubernetesClusterRequest) IfMatch(ifMatch string) ApiPatchKubern
 	return r
 }
 
-func (r ApiPatchKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesClusterExecute(r)
 }
 
@@ -19208,21 +18652,19 @@ func (a *KubernetesApiService) PatchKubernetesCluster(ctx _context.Context, moid
  * Execute executes the request
  * @return KubernetesCluster
  */
-func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters/{Moid}"
@@ -19232,8 +18674,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernete
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesCluster == nil {
-		executionError.error = "kubernetesCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19260,22 +18701,19 @@ func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernete
 	localVarPostBody = r.kubernetesCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19342,7 +18780,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterExecute(r ApiPatchKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesClusterProfileRequest struct {
@@ -19362,7 +18800,7 @@ func (r ApiPatchKubernetesClusterProfileRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesClusterProfileExecute(r)
 }
 
@@ -19384,21 +18822,19 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfile(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesClusterProfile
  */
-func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles/{Moid}"
@@ -19408,8 +18844,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKu
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesClusterProfile == nil {
-		executionError.error = "kubernetesClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19436,22 +18871,19 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKu
 	localVarPostBody = r.kubernetesClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19518,7 +18950,7 @@ func (a *KubernetesApiService) PatchKubernetesClusterProfileExecute(r ApiPatchKu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesContainerRuntimePolicyRequest struct {
@@ -19538,7 +18970,7 @@ func (r ApiPatchKubernetesContainerRuntimePolicyRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesContainerRuntimePolicyExecute(r)
 }
 
@@ -19560,21 +18992,19 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicy(ctx _contex
  * Execute executes the request
  * @return KubernetesContainerRuntimePolicy
  */
-func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r ApiPatchKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r ApiPatchKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesContainerRuntimePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesContainerRuntimePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies/{Moid}"
@@ -19584,8 +19014,7 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesContainerRuntimePolicy == nil {
-		executionError.error = "kubernetesContainerRuntimePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesContainerRuntimePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19612,22 +19041,19 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r Ap
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19694,7 +19120,7 @@ func (a *KubernetesApiService) PatchKubernetesContainerRuntimePolicyExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesNetworkPolicyRequest struct {
@@ -19714,7 +19140,7 @@ func (r ApiPatchKubernetesNetworkPolicyRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesNetworkPolicyExecute(r)
 }
 
@@ -19736,21 +19162,19 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicy(ctx _context.Context
  * Execute executes the request
  * @return KubernetesNetworkPolicy
  */
-func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies/{Moid}"
@@ -19760,8 +19184,7 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKub
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNetworkPolicy == nil {
-		executionError.error = "kubernetesNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19788,22 +19211,19 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKub
 	localVarPostBody = r.kubernetesNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19870,7 +19290,7 @@ func (a *KubernetesApiService) PatchKubernetesNetworkPolicyExecute(r ApiPatchKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesNodeGroupProfileRequest struct {
@@ -19890,7 +19310,7 @@ func (r ApiPatchKubernetesNodeGroupProfileRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesNodeGroupProfileExecute(r)
 }
 
@@ -19912,21 +19332,19 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfile(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesNodeGroupProfile
  */
-func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatchKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatchKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeGroupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesNodeGroupProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles/{Moid}"
@@ -19936,8 +19354,7 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNodeGroupProfile == nil {
-		executionError.error = "kubernetesNodeGroupProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNodeGroupProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19964,22 +19381,19 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatch
 	localVarPostBody = r.kubernetesNodeGroupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20046,7 +19460,7 @@ func (a *KubernetesApiService) PatchKubernetesNodeGroupProfileExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesSysConfigPolicyRequest struct {
@@ -20066,7 +19480,7 @@ func (r ApiPatchKubernetesSysConfigPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesSysConfigPolicyExecute(r)
 }
 
@@ -20088,21 +19502,19 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesSysConfigPolicy
  */
-func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies/{Moid}"
@@ -20112,8 +19524,7 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesSysConfigPolicy == nil {
-		executionError.error = "kubernetesSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20140,22 +19551,19 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchK
 	localVarPostBody = r.kubernetesSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20222,7 +19630,7 @@ func (a *KubernetesApiService) PatchKubernetesSysConfigPolicyExecute(r ApiPatchK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesTrustedRegistriesPolicyRequest struct {
@@ -20242,7 +19650,7 @@ func (r ApiPatchKubernetesTrustedRegistriesPolicyRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesTrustedRegistriesPolicyExecute(r)
 }
 
@@ -20264,21 +19672,19 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicy(ctx _conte
  * Execute executes the request
  * @return KubernetesTrustedRegistriesPolicy
  */
-func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r ApiPatchKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r ApiPatchKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesTrustedRegistriesPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesTrustedRegistriesPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies/{Moid}"
@@ -20288,8 +19694,7 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesTrustedRegistriesPolicy == nil {
-		executionError.error = "kubernetesTrustedRegistriesPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesTrustedRegistriesPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20316,22 +19721,19 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r A
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20398,7 +19800,7 @@ func (a *KubernetesApiService) PatchKubernetesTrustedRegistriesPolicyExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesVersionRequest struct {
@@ -20418,7 +19820,7 @@ func (r ApiPatchKubernetesVersionRequest) IfMatch(ifMatch string) ApiPatchKubern
 	return r
 }
 
-func (r ApiPatchKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesVersionExecute(r)
 }
 
@@ -20440,21 +19842,19 @@ func (a *KubernetesApiService) PatchKubernetesVersion(ctx _context.Context, moid
  * Execute executes the request
  * @return KubernetesVersion
  */
-func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions/{Moid}"
@@ -20464,8 +19864,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernete
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersion == nil {
-		executionError.error = "kubernetesVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20492,22 +19891,19 @@ func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernete
 	localVarPostBody = r.kubernetesVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20574,7 +19970,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionExecute(r ApiPatchKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesVersionPolicyRequest struct {
@@ -20594,7 +19990,7 @@ func (r ApiPatchKubernetesVersionPolicyRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesVersionPolicyExecute(r)
 }
 
@@ -20616,21 +20012,19 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicy(ctx _context.Context
  * Execute executes the request
  * @return KubernetesVersionPolicy
  */
-func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies/{Moid}"
@@ -20640,8 +20034,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKub
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersionPolicy == nil {
-		executionError.error = "kubernetesVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20668,22 +20061,19 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKub
 	localVarPostBody = r.kubernetesVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20750,7 +20140,7 @@ func (a *KubernetesApiService) PatchKubernetesVersionPolicyExecute(r ApiPatchKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest struct {
@@ -20770,7 +20160,7 @@ func (r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) IfMatch(i
 	return r
 }
 
-func (r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesVirtualMachineInfrastructureProviderExecute(r)
 }
 
@@ -20792,21 +20182,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
  * Execute executes the request
  * @return KubernetesVirtualMachineInfrastructureProvider
  */
-func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProviderExecute(r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProviderExecute(r ApiPatchKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInfrastructureProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesVirtualMachineInfrastructureProvider")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid}"
@@ -20816,8 +20204,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInfrastructureProvider == nil {
-		executionError.error = "kubernetesVirtualMachineInfrastructureProvider is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInfrastructureProvider is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20844,22 +20231,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20926,7 +20310,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInfrastructureProvid
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesVirtualMachineInstanceTypeRequest struct {
@@ -20946,7 +20330,7 @@ func (r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesVirtualMachineInstanceTypeExecute(r)
 }
 
@@ -20968,21 +20352,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceType(ctx _co
  * Execute executes the request
  * @return KubernetesVirtualMachineInstanceType
  */
-func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(r ApiPatchKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInstanceType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesVirtualMachineInstanceType")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid}"
@@ -20992,8 +20374,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInstanceType == nil {
-		executionError.error = "kubernetesVirtualMachineInstanceType is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInstanceType is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21020,22 +20401,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21102,7 +20480,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineInstanceTypeExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchKubernetesVirtualMachineNodeProfileRequest struct {
@@ -21122,7 +20500,7 @@ func (r ApiPatchKubernetesVirtualMachineNodeProfileRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchKubernetesVirtualMachineNodeProfileExecute(r)
 }
 
@@ -21144,21 +20522,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfile(ctx _con
  * Execute executes the request
  * @return KubernetesVirtualMachineNodeProfile
  */
-func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r ApiPatchKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r ApiPatchKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.PatchKubernetesVirtualMachineNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid}"
@@ -21168,8 +20544,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineNodeProfile == nil {
-		executionError.error = "kubernetesVirtualMachineNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21196,22 +20571,19 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21278,7 +20650,7 @@ func (a *KubernetesApiService) PatchKubernetesVirtualMachineNodeProfileExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAciCniApicRequest struct {
@@ -21298,7 +20670,7 @@ func (r ApiUpdateKubernetesAciCniApicRequest) IfMatch(ifMatch string) ApiUpdateK
 	return r
 }
 
-func (r ApiUpdateKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAciCniApicRequest) Execute() (KubernetesAciCniApic, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAciCniApicExecute(r)
 }
 
@@ -21320,21 +20692,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApic(ctx _context.Context, 
  * Execute executes the request
  * @return KubernetesAciCniApic
  */
-func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKubernetesAciCniApicRequest) (KubernetesAciCniApic, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniApic
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAciCniApic")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniApics/{Moid}"
@@ -21344,8 +20714,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKube
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniApic == nil {
-		executionError.error = "kubernetesAciCniApic is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniApic is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21372,22 +20741,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKube
 	localVarPostBody = r.kubernetesAciCniApic
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21454,7 +20820,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniApicExecute(r ApiUpdateKube
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAciCniProfileRequest struct {
@@ -21474,7 +20840,7 @@ func (r ApiUpdateKubernetesAciCniProfileRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAciCniProfileRequest) Execute() (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAciCniProfileExecute(r)
 }
 
@@ -21496,21 +20862,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfile(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesAciCniProfile
  */
-func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateKubernetesAciCniProfileRequest) (KubernetesAciCniProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAciCniProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniProfiles/{Moid}"
@@ -21520,8 +20884,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniProfile == nil {
-		executionError.error = "kubernetesAciCniProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21548,22 +20911,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateK
 	localVarPostBody = r.kubernetesAciCniProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21630,7 +20990,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniProfileExecute(r ApiUpdateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAciCniTenantClusterAllocationRequest struct {
@@ -21650,7 +21010,7 @@ func (r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) IfMatch(ifMatch
 	return r
 }
 
-func (r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) Execute() (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAciCniTenantClusterAllocationExecute(r)
 }
 
@@ -21672,21 +21032,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocation(ctx
  * Execute executes the request
  * @return KubernetesAciCniTenantClusterAllocation
  */
-func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExecute(r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExecute(r ApiUpdateKubernetesAciCniTenantClusterAllocationRequest) (KubernetesAciCniTenantClusterAllocation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAciCniTenantClusterAllocation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAciCniTenantClusterAllocation")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid}"
@@ -21696,8 +21054,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAciCniTenantClusterAllocation == nil {
-		executionError.error = "kubernetesAciCniTenantClusterAllocation is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAciCniTenantClusterAllocation is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21724,22 +21081,19 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExec
 	localVarPostBody = r.kubernetesAciCniTenantClusterAllocation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21806,7 +21160,7 @@ func (a *KubernetesApiService) UpdateKubernetesAciCniTenantClusterAllocationExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAddonRequest struct {
@@ -21826,7 +21180,7 @@ func (r ApiUpdateKubernetesAddonRequest) IfMatch(ifMatch string) ApiUpdateKubern
 	return r
 }
 
-func (r ApiUpdateKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAddonRequest) Execute() (KubernetesAddon, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAddonExecute(r)
 }
 
@@ -21848,21 +21202,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddon(ctx _context.Context, moid 
  * Execute executes the request
  * @return KubernetesAddon
  */
-func (a *KubernetesApiService) UpdateKubernetesAddonExecute(r ApiUpdateKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAddonExecute(r ApiUpdateKubernetesAddonRequest) (KubernetesAddon, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddon
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAddon")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Addons/{Moid}"
@@ -21872,8 +21224,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonExecute(r ApiUpdateKubernete
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddon == nil {
-		executionError.error = "kubernetesAddon is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddon is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21900,22 +21251,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonExecute(r ApiUpdateKubernete
 	localVarPostBody = r.kubernetesAddon
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21982,7 +21330,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonExecute(r ApiUpdateKubernete
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAddonDefinitionRequest struct {
@@ -22002,7 +21350,7 @@ func (r ApiUpdateKubernetesAddonDefinitionRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAddonDefinitionRequest) Execute() (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAddonDefinitionExecute(r)
 }
 
@@ -22024,21 +21372,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinition(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesAddonDefinition
  */
-func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdateKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdateKubernetesAddonDefinitionRequest) (KubernetesAddonDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAddonDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonDefinitions/{Moid}"
@@ -22048,8 +21394,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonDefinition == nil {
-		executionError.error = "kubernetesAddonDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22076,22 +21421,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdat
 	localVarPostBody = r.kubernetesAddonDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22158,7 +21500,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonDefinitionExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAddonPolicyRequest struct {
@@ -22178,7 +21520,7 @@ func (r ApiUpdateKubernetesAddonPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAddonPolicyRequest) Execute() (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAddonPolicyExecute(r)
 }
 
@@ -22200,21 +21542,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicy(ctx _context.Context,
  * Execute executes the request
  * @return KubernetesAddonPolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKubernetesAddonPolicyRequest) (KubernetesAddonPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAddonPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonPolicies/{Moid}"
@@ -22224,8 +21564,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKub
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonPolicy == nil {
-		executionError.error = "kubernetesAddonPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22252,22 +21591,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKub
 	localVarPostBody = r.kubernetesAddonPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22334,7 +21670,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonPolicyExecute(r ApiUpdateKub
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesAddonRepositoryRequest struct {
@@ -22354,7 +21690,7 @@ func (r ApiUpdateKubernetesAddonRepositoryRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesAddonRepositoryRequest) Execute() (KubernetesAddonRepository, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesAddonRepositoryExecute(r)
 }
 
@@ -22376,21 +21712,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepository(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesAddonRepository
  */
-func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdateKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdateKubernetesAddonRepositoryRequest) (KubernetesAddonRepository, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesAddonRepository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesAddonRepository")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/AddonRepositories/{Moid}"
@@ -22400,8 +21734,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesAddonRepository == nil {
-		executionError.error = "kubernetesAddonRepository is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesAddonRepository is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22428,22 +21761,19 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdat
 	localVarPostBody = r.kubernetesAddonRepository
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22510,7 +21840,7 @@ func (a *KubernetesApiService) UpdateKubernetesAddonRepositoryExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesClusterRequest struct {
@@ -22530,7 +21860,7 @@ func (r ApiUpdateKubernetesClusterRequest) IfMatch(ifMatch string) ApiUpdateKube
 	return r
 }
 
-func (r ApiUpdateKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesClusterRequest) Execute() (KubernetesCluster, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesClusterExecute(r)
 }
 
@@ -22552,21 +21882,19 @@ func (a *KubernetesApiService) UpdateKubernetesCluster(ctx _context.Context, moi
  * Execute executes the request
  * @return KubernetesCluster
  */
-func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKubernetesClusterRequest) (KubernetesCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Clusters/{Moid}"
@@ -22576,8 +21904,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKuberne
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesCluster == nil {
-		executionError.error = "kubernetesCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22604,22 +21931,19 @@ func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKuberne
 	localVarPostBody = r.kubernetesCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22686,7 +22010,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterExecute(r ApiUpdateKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesClusterProfileRequest struct {
@@ -22706,7 +22030,7 @@ func (r ApiUpdateKubernetesClusterProfileRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesClusterProfileRequest) Execute() (KubernetesClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesClusterProfileExecute(r)
 }
 
@@ -22728,21 +22052,19 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfile(ctx _context.Conte
  * Execute executes the request
  * @return KubernetesClusterProfile
  */
-func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdateKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdateKubernetesClusterProfileRequest) (KubernetesClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ClusterProfiles/{Moid}"
@@ -22752,8 +22074,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesClusterProfile == nil {
-		executionError.error = "kubernetesClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22780,22 +22101,19 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdate
 	localVarPostBody = r.kubernetesClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22862,7 +22180,7 @@ func (a *KubernetesApiService) UpdateKubernetesClusterProfileExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesContainerRuntimePolicyRequest struct {
@@ -22882,7 +22200,7 @@ func (r ApiUpdateKubernetesContainerRuntimePolicyRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesContainerRuntimePolicyRequest) Execute() (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesContainerRuntimePolicyExecute(r)
 }
 
@@ -22904,21 +22222,19 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicy(ctx _conte
  * Execute executes the request
  * @return KubernetesContainerRuntimePolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r ApiUpdateKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r ApiUpdateKubernetesContainerRuntimePolicyRequest) (KubernetesContainerRuntimePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesContainerRuntimePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesContainerRuntimePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/ContainerRuntimePolicies/{Moid}"
@@ -22928,8 +22244,7 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesContainerRuntimePolicy == nil {
-		executionError.error = "kubernetesContainerRuntimePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesContainerRuntimePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22956,22 +22271,19 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r A
 	localVarPostBody = r.kubernetesContainerRuntimePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23038,7 +22350,7 @@ func (a *KubernetesApiService) UpdateKubernetesContainerRuntimePolicyExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesNetworkPolicyRequest struct {
@@ -23058,7 +22370,7 @@ func (r ApiUpdateKubernetesNetworkPolicyRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesNetworkPolicyRequest) Execute() (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesNetworkPolicyExecute(r)
 }
 
@@ -23080,21 +22392,19 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicy(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesNetworkPolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateKubernetesNetworkPolicyRequest) (KubernetesNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NetworkPolicies/{Moid}"
@@ -23104,8 +22414,7 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNetworkPolicy == nil {
-		executionError.error = "kubernetesNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23132,22 +22441,19 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateK
 	localVarPostBody = r.kubernetesNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23214,7 +22520,7 @@ func (a *KubernetesApiService) UpdateKubernetesNetworkPolicyExecute(r ApiUpdateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesNodeGroupProfileRequest struct {
@@ -23234,7 +22540,7 @@ func (r ApiUpdateKubernetesNodeGroupProfileRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesNodeGroupProfileRequest) Execute() (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesNodeGroupProfileExecute(r)
 }
 
@@ -23256,21 +22562,19 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfile(ctx _context.Con
  * Execute executes the request
  * @return KubernetesNodeGroupProfile
  */
-func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpdateKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpdateKubernetesNodeGroupProfileRequest) (KubernetesNodeGroupProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesNodeGroupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesNodeGroupProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/NodeGroupProfiles/{Moid}"
@@ -23280,8 +22584,7 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesNodeGroupProfile == nil {
-		executionError.error = "kubernetesNodeGroupProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesNodeGroupProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23308,22 +22611,19 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpda
 	localVarPostBody = r.kubernetesNodeGroupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23390,7 +22690,7 @@ func (a *KubernetesApiService) UpdateKubernetesNodeGroupProfileExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesSysConfigPolicyRequest struct {
@@ -23410,7 +22710,7 @@ func (r ApiUpdateKubernetesSysConfigPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesSysConfigPolicyRequest) Execute() (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesSysConfigPolicyExecute(r)
 }
 
@@ -23432,21 +22732,19 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicy(ctx _context.Cont
  * Execute executes the request
  * @return KubernetesSysConfigPolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdateKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdateKubernetesSysConfigPolicyRequest) (KubernetesSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/SysConfigPolicies/{Moid}"
@@ -23456,8 +22754,7 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesSysConfigPolicy == nil {
-		executionError.error = "kubernetesSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23484,22 +22781,19 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdat
 	localVarPostBody = r.kubernetesSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23566,7 +22860,7 @@ func (a *KubernetesApiService) UpdateKubernetesSysConfigPolicyExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesTrustedRegistriesPolicyRequest struct {
@@ -23586,7 +22880,7 @@ func (r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) Execute() (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesTrustedRegistriesPolicyExecute(r)
 }
 
@@ -23608,21 +22902,19 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicy(ctx _cont
  * Execute executes the request
  * @return KubernetesTrustedRegistriesPolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r ApiUpdateKubernetesTrustedRegistriesPolicyRequest) (KubernetesTrustedRegistriesPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesTrustedRegistriesPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesTrustedRegistriesPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/TrustedRegistriesPolicies/{Moid}"
@@ -23632,8 +22924,7 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesTrustedRegistriesPolicy == nil {
-		executionError.error = "kubernetesTrustedRegistriesPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesTrustedRegistriesPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23660,22 +22951,19 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r 
 	localVarPostBody = r.kubernetesTrustedRegistriesPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23742,7 +23030,7 @@ func (a *KubernetesApiService) UpdateKubernetesTrustedRegistriesPolicyExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesVersionRequest struct {
@@ -23762,7 +23050,7 @@ func (r ApiUpdateKubernetesVersionRequest) IfMatch(ifMatch string) ApiUpdateKube
 	return r
 }
 
-func (r ApiUpdateKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesVersionRequest) Execute() (KubernetesVersion, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesVersionExecute(r)
 }
 
@@ -23784,21 +23072,19 @@ func (a *KubernetesApiService) UpdateKubernetesVersion(ctx _context.Context, moi
  * Execute executes the request
  * @return KubernetesVersion
  */
-func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKubernetesVersionRequest) (KubernetesVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/Versions/{Moid}"
@@ -23808,8 +23094,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKuberne
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersion == nil {
-		executionError.error = "kubernetesVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23836,22 +23121,19 @@ func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKuberne
 	localVarPostBody = r.kubernetesVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23918,7 +23200,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionExecute(r ApiUpdateKuberne
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesVersionPolicyRequest struct {
@@ -23938,7 +23220,7 @@ func (r ApiUpdateKubernetesVersionPolicyRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesVersionPolicyRequest) Execute() (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesVersionPolicyExecute(r)
 }
 
@@ -23960,21 +23242,19 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicy(ctx _context.Contex
  * Execute executes the request
  * @return KubernetesVersionPolicy
  */
-func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateKubernetesVersionPolicyRequest) (KubernetesVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VersionPolicies/{Moid}"
@@ -23984,8 +23264,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateK
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVersionPolicy == nil {
-		executionError.error = "kubernetesVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -24012,22 +23291,19 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateK
 	localVarPostBody = r.kubernetesVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24094,7 +23370,7 @@ func (a *KubernetesApiService) UpdateKubernetesVersionPolicyExecute(r ApiUpdateK
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest struct {
@@ -24114,7 +23390,7 @@ func (r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) IfMatch(
 	return r
 }
 
-func (r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) Execute() (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesVirtualMachineInfrastructureProviderExecute(r)
 }
 
@@ -24136,21 +23412,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
  * Execute executes the request
  * @return KubernetesVirtualMachineInfrastructureProvider
  */
-func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProviderExecute(r ApiUpdateKubernetesVirtualMachineInfrastructureProviderRequest) (KubernetesVirtualMachineInfrastructureProvider, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInfrastructureProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesVirtualMachineInfrastructureProvider")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid}"
@@ -24160,8 +23434,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInfrastructureProvider == nil {
-		executionError.error = "kubernetesVirtualMachineInfrastructureProvider is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInfrastructureProvider is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -24188,22 +23461,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
 	localVarPostBody = r.kubernetesVirtualMachineInfrastructureProvider
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24270,7 +23540,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInfrastructureProvi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesVirtualMachineInstanceTypeRequest struct {
@@ -24290,7 +23560,7 @@ func (r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) IfMatch(ifMatch st
 	return r
 }
 
-func (r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) Execute() (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesVirtualMachineInstanceTypeExecute(r)
 }
 
@@ -24312,21 +23582,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceType(ctx _c
  * Execute executes the request
  * @return KubernetesVirtualMachineInstanceType
  */
-func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute(r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute(r ApiUpdateKubernetesVirtualMachineInstanceTypeRequest) (KubernetesVirtualMachineInstanceType, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineInstanceType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesVirtualMachineInstanceType")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid}"
@@ -24336,8 +23604,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineInstanceType == nil {
-		executionError.error = "kubernetesVirtualMachineInstanceType is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineInstanceType is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -24364,22 +23631,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute
 	localVarPostBody = r.kubernetesVirtualMachineInstanceType
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24446,7 +23710,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineInstanceTypeExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateKubernetesVirtualMachineNodeProfileRequest struct {
@@ -24466,7 +23730,7 @@ func (r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) Execute() (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateKubernetesVirtualMachineNodeProfileExecute(r)
 }
 
@@ -24488,21 +23752,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfile(ctx _co
  * Execute executes the request
  * @return KubernetesVirtualMachineNodeProfile
  */
-func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(r ApiUpdateKubernetesVirtualMachineNodeProfileRequest) (KubernetesVirtualMachineNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  KubernetesVirtualMachineNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesApiService.UpdateKubernetesVirtualMachineNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid}"
@@ -24512,8 +23774,7 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kubernetesVirtualMachineNodeProfile == nil {
-		executionError.error = "kubernetesVirtualMachineNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("kubernetesVirtualMachineNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -24540,22 +23801,19 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(
 	localVarPostBody = r.kubernetesVirtualMachineNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24622,5 +23880,5 @@ func (a *KubernetesApiService) UpdateKubernetesVirtualMachineNodeProfileExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

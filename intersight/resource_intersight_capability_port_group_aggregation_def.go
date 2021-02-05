@@ -170,7 +170,8 @@ func resourceCapabilityPortGroupAggregationDefCreate(c context.Context, d *schem
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityPortGroupAggregationDef(conn.ctx).CapabilityPortGroupAggregationDef(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -185,7 +186,8 @@ func resourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schema.
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityPortGroupAggregationDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityPortGroupAggregationDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -322,7 +324,8 @@ func resourceCapabilityPortGroupAggregationDefUpdate(c context.Context, d *schem
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityPortGroupAggregationDef(conn.ctx, d.Id()).CapabilityPortGroupAggregationDef(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -337,7 +340,8 @@ func resourceCapabilityPortGroupAggregationDefDelete(c context.Context, d *schem
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityPortGroupAggregationDef(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityPortGroupAggregationDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -6,16 +6,21 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NiaInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NiaInventory"]
-**BgpPeerCount** | Pointer to **int64** | Number of BGP peers on a node. | [optional] 
 **Cpu** | Pointer to **float32** | CPU usage of device being inventoried. This determines the percentage of CPU resources used. | [optional] 
 **CrashResetLogs** | Pointer to **string** | Last crash reset reason of device being inventoried. This determines the last reason for a device&#39;s restart due to crash of the system. | [optional] 
+**CustomerDeviceConnector** | Pointer to **string** | Returns the value of the customerDeviceConnector field. | [optional] 
+**DeviceDiscovery** | Pointer to **string** | Returns the value of the deviceDiscovery field. | [optional] 
+**DeviceHealth** | Pointer to **int64** | Returns the device health. | [optional] 
+**DeviceId** | Pointer to **string** | Returns the value of the deviceId field. | [optional] 
 **DeviceName** | Pointer to **string** | Name of device being inventoried. The name the user assigns to the device is inventoried here. | [optional] 
 **DeviceType** | Pointer to **string** | Type of device being inventoried. This determines whether the device is a controller, leaf or spine. | [optional] 
+**DeviceUpTime** | Pointer to **int64** | Returns the device up time. | [optional] 
 **Disk** | Pointer to [**NullableNiatelemetryDiskinfo**](niatelemetry.Diskinfo.md) |  | [optional] 
 **Dn** | Pointer to **string** | Dn for the inventories present. | [optional] 
 **FexCount** | Pointer to **int64** | Number of fabric extendors utilized. | [optional] 
 **InfraWiNodeCount** | Pointer to **int64** | Number of appliances as physical device that are wired into the cluster. | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the device being inventoried. | [optional] 
+**IsVirtualNode** | Pointer to **string** | Flag to specify if the node is virtual. | [optional] 
 **LogInTime** | Pointer to **string** | Last log in time device being inventoried. This determines the last login time on the device. | [optional] 
 **LogOutTime** | Pointer to **string** | Last log out time of device being inventoried. This determines the last logout time on the device. | [optional] 
 **MacSecCount** | Pointer to **int64** | Number of Macsec configured interfaces on a TOR. | [optional] 
@@ -23,6 +28,9 @@ Name | Type | Description | Notes
 **MacsecTotalCount** | Pointer to **int64** | Number of total Macsec configured interfaces for all nodes. | [optional] 
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
+**NxosEvpnMacRoutes** | Pointer to **int64** | Returns the total number of evpn mac routes. | [optional] 
+**NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](niatelemetry.Interface.md) |  | [optional] 
+**NxosTelnet** | Pointer to **string** | Returns the value of the nxosTelnet field. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RoutePrefixCount** | Pointer to **int64** | Total nuumber of v4 and v6 routes per node. | [optional] 
@@ -94,31 +102,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetBgpPeerCount
-
-`func (o *NiatelemetryNiaInventory) GetBgpPeerCount() int64`
-
-GetBgpPeerCount returns the BgpPeerCount field if non-nil, zero value otherwise.
-
-### GetBgpPeerCountOk
-
-`func (o *NiatelemetryNiaInventory) GetBgpPeerCountOk() (*int64, bool)`
-
-GetBgpPeerCountOk returns a tuple with the BgpPeerCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBgpPeerCount
-
-`func (o *NiatelemetryNiaInventory) SetBgpPeerCount(v int64)`
-
-SetBgpPeerCount sets BgpPeerCount field to given value.
-
-### HasBgpPeerCount
-
-`func (o *NiatelemetryNiaInventory) HasBgpPeerCount() bool`
-
-HasBgpPeerCount returns a boolean if a field has been set.
-
 ### GetCpu
 
 `func (o *NiatelemetryNiaInventory) GetCpu() float32`
@@ -169,6 +152,106 @@ SetCrashResetLogs sets CrashResetLogs field to given value.
 
 HasCrashResetLogs returns a boolean if a field has been set.
 
+### GetCustomerDeviceConnector
+
+`func (o *NiatelemetryNiaInventory) GetCustomerDeviceConnector() string`
+
+GetCustomerDeviceConnector returns the CustomerDeviceConnector field if non-nil, zero value otherwise.
+
+### GetCustomerDeviceConnectorOk
+
+`func (o *NiatelemetryNiaInventory) GetCustomerDeviceConnectorOk() (*string, bool)`
+
+GetCustomerDeviceConnectorOk returns a tuple with the CustomerDeviceConnector field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerDeviceConnector
+
+`func (o *NiatelemetryNiaInventory) SetCustomerDeviceConnector(v string)`
+
+SetCustomerDeviceConnector sets CustomerDeviceConnector field to given value.
+
+### HasCustomerDeviceConnector
+
+`func (o *NiatelemetryNiaInventory) HasCustomerDeviceConnector() bool`
+
+HasCustomerDeviceConnector returns a boolean if a field has been set.
+
+### GetDeviceDiscovery
+
+`func (o *NiatelemetryNiaInventory) GetDeviceDiscovery() string`
+
+GetDeviceDiscovery returns the DeviceDiscovery field if non-nil, zero value otherwise.
+
+### GetDeviceDiscoveryOk
+
+`func (o *NiatelemetryNiaInventory) GetDeviceDiscoveryOk() (*string, bool)`
+
+GetDeviceDiscoveryOk returns a tuple with the DeviceDiscovery field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceDiscovery
+
+`func (o *NiatelemetryNiaInventory) SetDeviceDiscovery(v string)`
+
+SetDeviceDiscovery sets DeviceDiscovery field to given value.
+
+### HasDeviceDiscovery
+
+`func (o *NiatelemetryNiaInventory) HasDeviceDiscovery() bool`
+
+HasDeviceDiscovery returns a boolean if a field has been set.
+
+### GetDeviceHealth
+
+`func (o *NiatelemetryNiaInventory) GetDeviceHealth() int64`
+
+GetDeviceHealth returns the DeviceHealth field if non-nil, zero value otherwise.
+
+### GetDeviceHealthOk
+
+`func (o *NiatelemetryNiaInventory) GetDeviceHealthOk() (*int64, bool)`
+
+GetDeviceHealthOk returns a tuple with the DeviceHealth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceHealth
+
+`func (o *NiatelemetryNiaInventory) SetDeviceHealth(v int64)`
+
+SetDeviceHealth sets DeviceHealth field to given value.
+
+### HasDeviceHealth
+
+`func (o *NiatelemetryNiaInventory) HasDeviceHealth() bool`
+
+HasDeviceHealth returns a boolean if a field has been set.
+
+### GetDeviceId
+
+`func (o *NiatelemetryNiaInventory) GetDeviceId() string`
+
+GetDeviceId returns the DeviceId field if non-nil, zero value otherwise.
+
+### GetDeviceIdOk
+
+`func (o *NiatelemetryNiaInventory) GetDeviceIdOk() (*string, bool)`
+
+GetDeviceIdOk returns a tuple with the DeviceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceId
+
+`func (o *NiatelemetryNiaInventory) SetDeviceId(v string)`
+
+SetDeviceId sets DeviceId field to given value.
+
+### HasDeviceId
+
+`func (o *NiatelemetryNiaInventory) HasDeviceId() bool`
+
+HasDeviceId returns a boolean if a field has been set.
+
 ### GetDeviceName
 
 `func (o *NiatelemetryNiaInventory) GetDeviceName() string`
@@ -218,6 +301,31 @@ SetDeviceType sets DeviceType field to given value.
 `func (o *NiatelemetryNiaInventory) HasDeviceType() bool`
 
 HasDeviceType returns a boolean if a field has been set.
+
+### GetDeviceUpTime
+
+`func (o *NiatelemetryNiaInventory) GetDeviceUpTime() int64`
+
+GetDeviceUpTime returns the DeviceUpTime field if non-nil, zero value otherwise.
+
+### GetDeviceUpTimeOk
+
+`func (o *NiatelemetryNiaInventory) GetDeviceUpTimeOk() (*int64, bool)`
+
+GetDeviceUpTimeOk returns a tuple with the DeviceUpTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceUpTime
+
+`func (o *NiatelemetryNiaInventory) SetDeviceUpTime(v int64)`
+
+SetDeviceUpTime sets DeviceUpTime field to given value.
+
+### HasDeviceUpTime
+
+`func (o *NiatelemetryNiaInventory) HasDeviceUpTime() bool`
+
+HasDeviceUpTime returns a boolean if a field has been set.
 
 ### GetDisk
 
@@ -353,6 +461,31 @@ SetIpAddress sets IpAddress field to given value.
 `func (o *NiatelemetryNiaInventory) HasIpAddress() bool`
 
 HasIpAddress returns a boolean if a field has been set.
+
+### GetIsVirtualNode
+
+`func (o *NiatelemetryNiaInventory) GetIsVirtualNode() string`
+
+GetIsVirtualNode returns the IsVirtualNode field if non-nil, zero value otherwise.
+
+### GetIsVirtualNodeOk
+
+`func (o *NiatelemetryNiaInventory) GetIsVirtualNodeOk() (*string, bool)`
+
+GetIsVirtualNodeOk returns a tuple with the IsVirtualNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsVirtualNode
+
+`func (o *NiatelemetryNiaInventory) SetIsVirtualNode(v string)`
+
+SetIsVirtualNode sets IsVirtualNode field to given value.
+
+### HasIsVirtualNode
+
+`func (o *NiatelemetryNiaInventory) HasIsVirtualNode() bool`
+
+HasIsVirtualNode returns a boolean if a field has been set.
 
 ### GetLogInTime
 
@@ -528,6 +661,91 @@ SetNodeId sets NodeId field to given value.
 `func (o *NiatelemetryNiaInventory) HasNodeId() bool`
 
 HasNodeId returns a boolean if a field has been set.
+
+### GetNxosEvpnMacRoutes
+
+`func (o *NiatelemetryNiaInventory) GetNxosEvpnMacRoutes() int64`
+
+GetNxosEvpnMacRoutes returns the NxosEvpnMacRoutes field if non-nil, zero value otherwise.
+
+### GetNxosEvpnMacRoutesOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosEvpnMacRoutesOk() (*int64, bool)`
+
+GetNxosEvpnMacRoutesOk returns a tuple with the NxosEvpnMacRoutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosEvpnMacRoutes
+
+`func (o *NiatelemetryNiaInventory) SetNxosEvpnMacRoutes(v int64)`
+
+SetNxosEvpnMacRoutes sets NxosEvpnMacRoutes field to given value.
+
+### HasNxosEvpnMacRoutes
+
+`func (o *NiatelemetryNiaInventory) HasNxosEvpnMacRoutes() bool`
+
+HasNxosEvpnMacRoutes returns a boolean if a field has been set.
+
+### GetNxosInterfaceBrief
+
+`func (o *NiatelemetryNiaInventory) GetNxosInterfaceBrief() NiatelemetryInterface`
+
+GetNxosInterfaceBrief returns the NxosInterfaceBrief field if non-nil, zero value otherwise.
+
+### GetNxosInterfaceBriefOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosInterfaceBriefOk() (*NiatelemetryInterface, bool)`
+
+GetNxosInterfaceBriefOk returns a tuple with the NxosInterfaceBrief field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosInterfaceBrief
+
+`func (o *NiatelemetryNiaInventory) SetNxosInterfaceBrief(v NiatelemetryInterface)`
+
+SetNxosInterfaceBrief sets NxosInterfaceBrief field to given value.
+
+### HasNxosInterfaceBrief
+
+`func (o *NiatelemetryNiaInventory) HasNxosInterfaceBrief() bool`
+
+HasNxosInterfaceBrief returns a boolean if a field has been set.
+
+### SetNxosInterfaceBriefNil
+
+`func (o *NiatelemetryNiaInventory) SetNxosInterfaceBriefNil(b bool)`
+
+ SetNxosInterfaceBriefNil sets the value for NxosInterfaceBrief to be an explicit nil
+
+### UnsetNxosInterfaceBrief
+`func (o *NiatelemetryNiaInventory) UnsetNxosInterfaceBrief()`
+
+UnsetNxosInterfaceBrief ensures that no value is present for NxosInterfaceBrief, not even an explicit nil
+### GetNxosTelnet
+
+`func (o *NiatelemetryNiaInventory) GetNxosTelnet() string`
+
+GetNxosTelnet returns the NxosTelnet field if non-nil, zero value otherwise.
+
+### GetNxosTelnetOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosTelnetOk() (*string, bool)`
+
+GetNxosTelnetOk returns a tuple with the NxosTelnet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosTelnet
+
+`func (o *NiatelemetryNiaInventory) SetNxosTelnet(v string)`
+
+SetNxosTelnet sets NxosTelnet field to given value.
+
+### HasNxosTelnet
+
+`func (o *NiatelemetryNiaInventory) HasNxosTelnet() bool`
+
+HasNxosTelnet returns a boolean if a field has been set.
 
 ### GetRecordType
 

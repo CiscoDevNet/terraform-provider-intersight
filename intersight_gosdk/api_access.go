@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateAccessPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateA
 	return r
 }
 
-func (r ApiCreateAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateAccessPolicyExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *AccessApiService) CreateAccessPolicy(ctx _context.Context) ApiCreateAcc
  * Execute executes the request
  * @return AccessPolicy
  */
-func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  AccessPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.CreateAccessPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies"
@@ -92,8 +90,7 @@ func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.accessPolicy == nil {
-		executionError.error = "accessPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("accessPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequ
 	localVarPostBody = r.accessPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *AccessApiService) CreateAccessPolicyExecute(r ApiCreateAccessPolicyRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteAccessPolicyRequest struct {
@@ -214,7 +208,7 @@ type ApiDeleteAccessPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteAccessPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteAccessPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteAccessPolicyExecute(r)
 }
 
@@ -235,20 +229,18 @@ func (a *AccessApiService) DeleteAccessPolicy(ctx _context.Context, moid string)
 /*
  * Execute executes the request
  */
-func (a *AccessApiService) DeleteAccessPolicyExecute(r ApiDeleteAccessPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) DeleteAccessPolicyExecute(r ApiDeleteAccessPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.DeleteAccessPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies/{Moid}"
@@ -277,22 +269,19 @@ func (a *AccessApiService) DeleteAccessPolicyExecute(r ApiDeleteAccessPolicyRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -350,7 +339,7 @@ func (a *AccessApiService) DeleteAccessPolicyExecute(r ApiDeleteAccessPolicyRequ
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetAccessPolicyByMoidRequest struct {
@@ -359,7 +348,7 @@ type ApiGetAccessPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAccessPolicyByMoidRequest) Execute() (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetAccessPolicyByMoidRequest) Execute() (AccessPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetAccessPolicyByMoidExecute(r)
 }
 
@@ -381,21 +370,19 @@ func (a *AccessApiService) GetAccessPolicyByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return AccessPolicy
  */
-func (a *AccessApiService) GetAccessPolicyByMoidExecute(r ApiGetAccessPolicyByMoidRequest) (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) GetAccessPolicyByMoidExecute(r ApiGetAccessPolicyByMoidRequest) (AccessPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  AccessPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.GetAccessPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies/{Moid}"
@@ -424,22 +411,19 @@ func (a *AccessApiService) GetAccessPolicyByMoidExecute(r ApiGetAccessPolicyByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -506,7 +490,7 @@ func (a *AccessApiService) GetAccessPolicyByMoidExecute(r ApiGetAccessPolicyByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetAccessPolicyListRequest struct {
@@ -570,7 +554,7 @@ func (r ApiGetAccessPolicyListRequest) Tags(tags string) ApiGetAccessPolicyListR
 	return r
 }
 
-func (r ApiGetAccessPolicyListRequest) Execute() (AccessPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetAccessPolicyListRequest) Execute() (AccessPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetAccessPolicyListExecute(r)
 }
 
@@ -590,21 +574,19 @@ func (a *AccessApiService) GetAccessPolicyList(ctx _context.Context) ApiGetAcces
  * Execute executes the request
  * @return AccessPolicyResponse
  */
-func (a *AccessApiService) GetAccessPolicyListExecute(r ApiGetAccessPolicyListRequest) (AccessPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) GetAccessPolicyListExecute(r ApiGetAccessPolicyListRequest) (AccessPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  AccessPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.GetAccessPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies"
@@ -665,22 +647,19 @@ func (a *AccessApiService) GetAccessPolicyListExecute(r ApiGetAccessPolicyListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -747,7 +726,7 @@ func (a *AccessApiService) GetAccessPolicyListExecute(r ApiGetAccessPolicyListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchAccessPolicyRequest struct {
@@ -767,7 +746,7 @@ func (r ApiPatchAccessPolicyRequest) IfMatch(ifMatch string) ApiPatchAccessPolic
 	return r
 }
 
-func (r ApiPatchAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchAccessPolicyExecute(r)
 }
 
@@ -789,21 +768,19 @@ func (a *AccessApiService) PatchAccessPolicy(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return AccessPolicy
  */
-func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  AccessPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.PatchAccessPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies/{Moid}"
@@ -813,8 +790,7 @@ func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.accessPolicy == nil {
-		executionError.error = "accessPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("accessPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -841,22 +817,19 @@ func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyReques
 	localVarPostBody = r.accessPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -923,7 +896,7 @@ func (a *AccessApiService) PatchAccessPolicyExecute(r ApiPatchAccessPolicyReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateAccessPolicyRequest struct {
@@ -943,7 +916,7 @@ func (r ApiUpdateAccessPolicyRequest) IfMatch(ifMatch string) ApiUpdateAccessPol
 	return r
 }
 
-func (r ApiUpdateAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateAccessPolicyRequest) Execute() (AccessPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateAccessPolicyExecute(r)
 }
 
@@ -965,21 +938,19 @@ func (a *AccessApiService) UpdateAccessPolicy(ctx _context.Context, moid string)
  * Execute executes the request
  * @return AccessPolicy
  */
-func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequest) (AccessPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  AccessPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessApiService.UpdateAccessPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/access/Policies/{Moid}"
@@ -989,8 +960,7 @@ func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.accessPolicy == nil {
-		executionError.error = "accessPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("accessPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1017,22 +987,19 @@ func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequ
 	localVarPostBody = r.accessPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1099,5 +1066,5 @@ func (a *AccessApiService) UpdateAccessPolicyExecute(r ApiUpdateAccessPolicyRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

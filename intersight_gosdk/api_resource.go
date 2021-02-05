@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateResourceGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
 	return r.ApiService.CreateResourceGroupExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *ResourceApiService) CreateResourceGroup(ctx _context.Context) ApiCreate
  * Execute executes the request
  * @return ResourceGroup
  */
-func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.CreateResourceGroup")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups"
@@ -92,8 +90,7 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.resourceGroup == nil {
-		executionError.error = "resourceGroup is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 	localVarPostBody = r.resourceGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *ResourceApiService) CreateResourceGroupExecute(r ApiCreateResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteResourceGroupRequest struct {
@@ -214,7 +208,7 @@ type ApiDeleteResourceGroupRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteResourceGroupRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteResourceGroupRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteResourceGroupExecute(r)
 }
 
@@ -235,20 +229,18 @@ func (a *ResourceApiService) DeleteResourceGroup(ctx _context.Context, moid stri
 /*
  * Execute executes the request
  */
-func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroupRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroupRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.DeleteResourceGroup")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
@@ -277,22 +269,19 @@ func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroup
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -350,7 +339,7 @@ func (a *ResourceApiService) DeleteResourceGroupExecute(r ApiDeleteResourceGroup
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetResourceGroupByMoidRequest struct {
@@ -359,7 +348,7 @@ type ApiGetResourceGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetResourceGroupByMoidRequest) Execute() (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceGroupByMoidRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceGroupByMoidExecute(r)
 }
 
@@ -381,21 +370,19 @@ func (a *ResourceApiService) GetResourceGroupByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return ResourceGroup
  */
-func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroupByMoidRequest) (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroupByMoidRequest) (ResourceGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
@@ -424,22 +411,19 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -506,7 +490,7 @@ func (a *ResourceApiService) GetResourceGroupByMoidExecute(r ApiGetResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceGroupListRequest struct {
@@ -570,7 +554,7 @@ func (r ApiGetResourceGroupListRequest) Tags(tags string) ApiGetResourceGroupLis
 	return r
 }
 
-func (r ApiGetResourceGroupListRequest) Execute() (ResourceGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceGroupListRequest) Execute() (ResourceGroupResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceGroupListExecute(r)
 }
 
@@ -590,21 +574,19 @@ func (a *ResourceApiService) GetResourceGroupList(ctx _context.Context) ApiGetRe
  * Execute executes the request
  * @return ResourceGroupResponse
  */
-func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupListRequest) (ResourceGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupListRequest) (ResourceGroupResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups"
@@ -665,22 +647,19 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -747,7 +726,7 @@ func (a *ResourceApiService) GetResourceGroupListExecute(r ApiGetResourceGroupLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceGroupMemberByMoidRequest struct {
@@ -756,7 +735,7 @@ type ApiGetResourceGroupMemberByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetResourceGroupMemberByMoidRequest) Execute() (ResourceGroupMember, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceGroupMemberByMoidRequest) Execute() (ResourceGroupMember, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceGroupMemberByMoidExecute(r)
 }
 
@@ -778,21 +757,19 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return ResourceGroupMember
  */
-func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourceGroupMemberByMoidRequest) (ResourceGroupMember, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourceGroupMemberByMoidRequest) (ResourceGroupMember, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroupMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupMemberByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/GroupMembers/{Moid}"
@@ -821,22 +798,19 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -903,7 +877,7 @@ func (a *ResourceApiService) GetResourceGroupMemberByMoidExecute(r ApiGetResourc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceGroupMemberListRequest struct {
@@ -967,7 +941,7 @@ func (r ApiGetResourceGroupMemberListRequest) Tags(tags string) ApiGetResourceGr
 	return r
 }
 
-func (r ApiGetResourceGroupMemberListRequest) Execute() (ResourceGroupMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceGroupMemberListRequest) Execute() (ResourceGroupMemberResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceGroupMemberListExecute(r)
 }
 
@@ -987,21 +961,19 @@ func (a *ResourceApiService) GetResourceGroupMemberList(ctx _context.Context) Ap
  * Execute executes the request
  * @return ResourceGroupMemberResponse
  */
-func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceGroupMemberListRequest) (ResourceGroupMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceGroupMemberListRequest) (ResourceGroupMemberResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroupMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceGroupMemberList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/GroupMembers"
@@ -1062,22 +1034,19 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1144,7 +1113,7 @@ func (a *ResourceApiService) GetResourceGroupMemberListExecute(r ApiGetResourceG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceLicenseResourceCountByMoidRequest struct {
@@ -1153,7 +1122,7 @@ type ApiGetResourceLicenseResourceCountByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetResourceLicenseResourceCountByMoidRequest) Execute() (ResourceLicenseResourceCount, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceLicenseResourceCountByMoidRequest) Execute() (ResourceLicenseResourceCount, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceLicenseResourceCountByMoidExecute(r)
 }
 
@@ -1175,21 +1144,19 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoid(ctx _context.
  * Execute executes the request
  * @return ResourceLicenseResourceCount
  */
-func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiGetResourceLicenseResourceCountByMoidRequest) (ResourceLicenseResourceCount, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiGetResourceLicenseResourceCountByMoidRequest) (ResourceLicenseResourceCount, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceLicenseResourceCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceLicenseResourceCountByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/LicenseResourceCounts/{Moid}"
@@ -1218,22 +1185,19 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1300,7 +1264,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceLicenseResourceCountListRequest struct {
@@ -1364,7 +1328,7 @@ func (r ApiGetResourceLicenseResourceCountListRequest) Tags(tags string) ApiGetR
 	return r
 }
 
-func (r ApiGetResourceLicenseResourceCountListRequest) Execute() (ResourceLicenseResourceCountResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceLicenseResourceCountListRequest) Execute() (ResourceLicenseResourceCountResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceLicenseResourceCountListExecute(r)
 }
 
@@ -1384,21 +1348,19 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountList(ctx _context.Co
  * Execute executes the request
  * @return ResourceLicenseResourceCountResponse
  */
-func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGetResourceLicenseResourceCountListRequest) (ResourceLicenseResourceCountResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGetResourceLicenseResourceCountListRequest) (ResourceLicenseResourceCountResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceLicenseResourceCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceLicenseResourceCountList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/LicenseResourceCounts"
@@ -1459,22 +1421,19 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1541,7 +1500,7 @@ func (a *ResourceApiService) GetResourceLicenseResourceCountListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceMembershipByMoidRequest struct {
@@ -1550,7 +1509,7 @@ type ApiGetResourceMembershipByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetResourceMembershipByMoidRequest) Execute() (ResourceMembership, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceMembershipByMoidRequest) Execute() (ResourceMembership, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceMembershipByMoidExecute(r)
 }
 
@@ -1572,21 +1531,19 @@ func (a *ResourceApiService) GetResourceMembershipByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return ResourceMembership
  */
-func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResourceMembershipByMoidRequest) (ResourceMembership, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResourceMembershipByMoidRequest) (ResourceMembership, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceMembership
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Memberships/{Moid}"
@@ -1615,22 +1572,19 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1697,7 +1651,7 @@ func (a *ResourceApiService) GetResourceMembershipByMoidExecute(r ApiGetResource
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceMembershipHolderByMoidRequest struct {
@@ -1706,7 +1660,7 @@ type ApiGetResourceMembershipHolderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetResourceMembershipHolderByMoidRequest) Execute() (ResourceMembershipHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceMembershipHolderByMoidRequest) Execute() (ResourceMembershipHolder, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceMembershipHolderByMoidExecute(r)
 }
 
@@ -1728,21 +1682,19 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoid(ctx _context.Cont
  * Execute executes the request
  * @return ResourceMembershipHolder
  */
-func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetResourceMembershipHolderByMoidRequest) (ResourceMembershipHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetResourceMembershipHolderByMoidRequest) (ResourceMembershipHolder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceMembershipHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipHolderByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/MembershipHolders/{Moid}"
@@ -1771,22 +1723,19 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1853,7 +1802,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderByMoidExecute(r ApiGetRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceMembershipHolderListRequest struct {
@@ -1917,7 +1866,7 @@ func (r ApiGetResourceMembershipHolderListRequest) Tags(tags string) ApiGetResou
 	return r
 }
 
-func (r ApiGetResourceMembershipHolderListRequest) Execute() (ResourceMembershipHolderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceMembershipHolderListRequest) Execute() (ResourceMembershipHolderResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceMembershipHolderListExecute(r)
 }
 
@@ -1937,21 +1886,19 @@ func (a *ResourceApiService) GetResourceMembershipHolderList(ctx _context.Contex
  * Execute executes the request
  * @return ResourceMembershipHolderResponse
  */
-func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetResourceMembershipHolderListRequest) (ResourceMembershipHolderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetResourceMembershipHolderListRequest) (ResourceMembershipHolderResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceMembershipHolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipHolderList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/MembershipHolders"
@@ -2012,22 +1959,19 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2094,7 +2038,7 @@ func (a *ResourceApiService) GetResourceMembershipHolderListExecute(r ApiGetReso
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetResourceMembershipListRequest struct {
@@ -2158,7 +2102,7 @@ func (r ApiGetResourceMembershipListRequest) Tags(tags string) ApiGetResourceMem
 	return r
 }
 
-func (r ApiGetResourceMembershipListRequest) Execute() (ResourceMembershipResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetResourceMembershipListRequest) Execute() (ResourceMembershipResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetResourceMembershipListExecute(r)
 }
 
@@ -2178,21 +2122,19 @@ func (a *ResourceApiService) GetResourceMembershipList(ctx _context.Context) Api
  * Execute executes the request
  * @return ResourceMembershipResponse
  */
-func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMembershipListRequest) (ResourceMembershipResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMembershipListRequest) (ResourceMembershipResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceMembershipResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.GetResourceMembershipList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Memberships"
@@ -2253,22 +2195,19 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2335,7 +2274,7 @@ func (a *ResourceApiService) GetResourceMembershipListExecute(r ApiGetResourceMe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchResourceGroupRequest struct {
@@ -2355,7 +2294,7 @@ func (r ApiPatchResourceGroupRequest) IfMatch(ifMatch string) ApiPatchResourceGr
 	return r
 }
 
-func (r ApiPatchResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
 	return r.ApiService.PatchResourceGroupExecute(r)
 }
 
@@ -2377,21 +2316,19 @@ func (a *ResourceApiService) PatchResourceGroup(ctx _context.Context, moid strin
  * Execute executes the request
  * @return ResourceGroup
  */
-func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRequest) (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.PatchResourceGroup")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
@@ -2401,8 +2338,7 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.resourceGroup == nil {
-		executionError.error = "resourceGroup is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2429,22 +2365,19 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 	localVarPostBody = r.resourceGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2511,7 +2444,7 @@ func (a *ResourceApiService) PatchResourceGroupExecute(r ApiPatchResourceGroupRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateResourceGroupRequest struct {
@@ -2531,7 +2464,7 @@ func (r ApiUpdateResourceGroupRequest) IfMatch(ifMatch string) ApiUpdateResource
 	return r
 }
 
-func (r ApiUpdateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateResourceGroupRequest) Execute() (ResourceGroup, *_nethttp.Response, error) {
 	return r.ApiService.UpdateResourceGroupExecute(r)
 }
 
@@ -2553,21 +2486,19 @@ func (a *ResourceApiService) UpdateResourceGroup(ctx _context.Context, moid stri
  * Execute executes the request
  * @return ResourceGroup
  */
-func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, GenericOpenAPIError) {
+func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroupRequest) (ResourceGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  ResourceGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourceApiService.UpdateResourceGroup")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/resource/Groups/{Moid}"
@@ -2577,8 +2508,7 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.resourceGroup == nil {
-		executionError.error = "resourceGroup is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("resourceGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2605,22 +2535,19 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 	localVarPostBody = r.resourceGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2687,5 +2614,5 @@ func (a *ResourceApiService) UpdateResourceGroupExecute(r ApiUpdateResourceGroup
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

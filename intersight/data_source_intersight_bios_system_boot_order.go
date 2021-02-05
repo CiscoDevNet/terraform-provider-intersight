@@ -104,7 +104,7 @@ func dataSourceBiosSystemBootOrder() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -121,7 +121,7 @@ func dataSourceBiosSystemBootOrder() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -166,7 +166,7 @@ func dataSourceBiosSystemBootOrder() *schema.Resource {
 				},
 			},
 			"secure_boot": {
-				Description: "Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM).\n* `Disabled` - Set the state of Secure Boot to Disabled.\n* `Enabled` - Set the state of Secure Boot to Enabled.",
+				Description: "Secure boot if set to enabled, enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM).\n* `NotAvailable` - Set the state of Secure Boot to Not Available.\n* `Disabled` - Set the state of Secure Boot to Disabled.\n* `Enabled` - Set the state of Secure Boot to Enabled.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -234,7 +234,8 @@ func dataSourceBiosSystemBootOrderRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("json marshal of BiosSystemBootOrder object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.BiosApi.GetBiosSystemBootOrderList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching BiosSystemBootOrder: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

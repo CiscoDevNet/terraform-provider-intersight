@@ -17,7 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `engine_id`:(string) User-defined unique identification of the static engine. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `snmp_port`:(int) Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. 
+* `snmp_port`:(int) Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). 
 * `sys_contact`:(string) Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. 
 * `sys_location`:(string) Location of host on which the SNMP agent (server) runs. 
 * `trap_community`:(string) SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. 

@@ -150,6 +150,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_tech_support_collected": {
+				Description: "Status of techsupport collection.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"isis_count": {
 				Description: "Isis feature usage. This determines the total number of ISIS sessions across the fabric.",
 				Type:        schema.TypeInt,
@@ -314,6 +319,58 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			"smart_call_home": {
 				Description: "Smart callhome feature usage. This determines if this feature is being enabled or disabled.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"smart_license": {
+				Description: "Details of smart license.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"active_mode": {
+							Description: "Indicate the mode smart license is curerntly running.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"auth_status": {
+							Description: "Authorization status of the smart license.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"license_udi": {
+							Description: "License Udi of the smart license.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"smart_account": {
+							Description: "Smart licensing account name in CSSM and is retrieved from CSSM after regsitration.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"snapshot_count": {
+				Description: "Returns count of snapshots.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"snmp": {
@@ -553,6 +610,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetIpEpgCount(x)
 	}
+	if v, ok := d.GetOk("is_tech_support_collected"); ok {
+		x := (v.(string))
+		o.SetIsTechSupportCollected(x)
+	}
 	if v, ok := d.GetOk("isis_count"); ok {
 		x := int64(v.(int))
 		o.SetIsisCount(x)
@@ -653,6 +714,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetSmartCallHome(x)
 	}
+	if v, ok := d.GetOk("snapshot_count"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotCount(x)
+	}
 	if v, ok := d.GetOk("snmp"); ok {
 		x := (v.(string))
 		o.SetSnmp(x)
@@ -739,7 +804,8 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		return diag.Errorf("json marshal of NiatelemetryNiaFeatureUsage object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaFeatureUsageList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching NiatelemetryNiaFeatureUsage: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -850,6 +916,9 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 			if err := d.Set("ip_epg_count", (s.GetIpEpgCount())); err != nil {
 				return diag.Errorf("error occurred while setting property IpEpgCount: %s", err.Error())
 			}
+			if err := d.Set("is_tech_support_collected", (s.GetIsTechSupportCollected())); err != nil {
+				return diag.Errorf("error occurred while setting property IsTechSupportCollected: %s", err.Error())
+			}
 			if err := d.Set("isis_count", (s.GetIsisCount())); err != nil {
 				return diag.Errorf("error occurred while setting property IsisCount: %s", err.Error())
 			}
@@ -928,6 +997,13 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 			}
 			if err := d.Set("smart_call_home", (s.GetSmartCallHome())); err != nil {
 				return diag.Errorf("error occurred while setting property SmartCallHome: %s", err.Error())
+			}
+
+			if err := d.Set("smart_license", flattenMapNiatelemetrySmartLicense(s.GetSmartLicense(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property SmartLicense: %s", err.Error())
+			}
+			if err := d.Set("snapshot_count", (s.GetSnapshotCount())); err != nil {
+				return diag.Errorf("error occurred while setting property SnapshotCount: %s", err.Error())
 			}
 			if err := d.Set("snmp", (s.GetSnmp())); err != nil {
 				return diag.Errorf("error occurred while setting property Snmp: %s", err.Error())

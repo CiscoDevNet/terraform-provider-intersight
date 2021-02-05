@@ -364,7 +364,8 @@ func dataSourceStorageVirtualDriveExtensionRead(c context.Context, d *schema.Res
 		return diag.Errorf("json marshal of StorageVirtualDriveExtension object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageVirtualDriveExtensionList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching StorageVirtualDriveExtension: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

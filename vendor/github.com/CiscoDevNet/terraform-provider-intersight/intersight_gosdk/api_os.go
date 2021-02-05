@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateOsConfigurationFileRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, error) {
 	return r.ApiService.CreateOsConfigurationFileExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *OsApiService) CreateOsConfigurationFile(ctx _context.Context) ApiCreate
  * Execute executes the request
  * @return OsConfigurationFile
  */
-func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsConfigurationFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.CreateOsConfigurationFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles"
@@ -92,8 +90,7 @@ func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurati
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osConfigurationFile == nil {
-		executionError.error = "osConfigurationFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osConfigurationFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurati
 	localVarPostBody = r.osConfigurationFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *OsApiService) CreateOsConfigurationFileExecute(r ApiCreateOsConfigurati
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateOsInstallRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateOsInstallRequest) IfNoneMatch(ifNoneMatch string) ApiCreateOsIn
 	return r
 }
 
-func (r ApiCreateOsInstallRequest) Execute() (OsInstall, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateOsInstallRequest) Execute() (OsInstall, *_nethttp.Response, error) {
 	return r.ApiService.CreateOsInstallExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *OsApiService) CreateOsInstall(ctx _context.Context) ApiCreateOsInstallR
  * Execute executes the request
  * @return OsInstall
  */
-func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (OsInstall, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (OsInstall, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsInstall
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.CreateOsInstall")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Installs"
@@ -272,8 +264,7 @@ func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (OsIn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osInstall == nil {
-		executionError.error = "osInstall is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osInstall is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (OsIn
 	localVarPostBody = r.osInstall
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *OsApiService) CreateOsInstallExecute(r ApiCreateOsInstallRequest) (OsIn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateOsOsSupportRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateOsOsSupportRequest) IfNoneMatch(ifNoneMatch string) ApiCreateOs
 	return r
 }
 
-func (r ApiCreateOsOsSupportRequest) Execute() (OsOsSupport, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateOsOsSupportRequest) Execute() (OsOsSupport, *_nethttp.Response, error) {
 	return r.ApiService.CreateOsOsSupportExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *OsApiService) CreateOsOsSupport(ctx _context.Context) ApiCreateOsOsSupp
  * Execute executes the request
  * @return OsOsSupport
  */
-func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (OsOsSupport, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (OsOsSupport, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsOsSupport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.CreateOsOsSupport")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/OsSupports"
@@ -452,8 +438,7 @@ func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osOsSupport == nil {
-		executionError.error = "osOsSupport is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osOsSupport is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (
 	localVarPostBody = r.osOsSupport
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *OsApiService) CreateOsOsSupportExecute(r ApiCreateOsOsSupportRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateOsTemplateFileRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateOsTemplateFileRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateOsTemplateFileRequest) Execute() (OsTemplateFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateOsTemplateFileRequest) Execute() (OsTemplateFile, *_nethttp.Response, error) {
 	return r.ApiService.CreateOsTemplateFileExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *OsApiService) CreateOsTemplateFile(ctx _context.Context) ApiCreateOsTem
  * Execute executes the request
  * @return OsTemplateFile
  */
-func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequest) (OsTemplateFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequest) (OsTemplateFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsTemplateFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.CreateOsTemplateFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/TemplateFiles"
@@ -632,8 +612,7 @@ func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osTemplateFile == nil {
-		executionError.error = "osTemplateFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osTemplateFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequ
 	localVarPostBody = r.osTemplateFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *OsApiService) CreateOsTemplateFileExecute(r ApiCreateOsTemplateFileRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateOsValidInstallTargetRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateOsValidInstallTargetRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateOsValidInstallTargetRequest) Execute() (OsValidInstallTarget, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateOsValidInstallTargetRequest) Execute() (OsValidInstallTarget, *_nethttp.Response, error) {
 	return r.ApiService.CreateOsValidInstallTargetExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *OsApiService) CreateOsValidInstallTarget(ctx _context.Context) ApiCreat
  * Execute executes the request
  * @return OsValidInstallTarget
  */
-func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInstallTargetRequest) (OsValidInstallTarget, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInstallTargetRequest) (OsValidInstallTarget, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsValidInstallTarget
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.CreateOsValidInstallTarget")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ValidInstallTargets"
@@ -812,8 +786,7 @@ func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInsta
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osValidInstallTarget == nil {
-		executionError.error = "osValidInstallTarget is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osValidInstallTarget is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInsta
 	localVarPostBody = r.osValidInstallTarget
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *OsApiService) CreateOsValidInstallTargetExecute(r ApiCreateOsValidInsta
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteOsConfigurationFileRequest struct {
@@ -934,7 +904,7 @@ type ApiDeleteOsConfigurationFileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteOsConfigurationFileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteOsConfigurationFileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteOsConfigurationFileExecute(r)
 }
 
@@ -955,20 +925,18 @@ func (a *OsApiService) DeleteOsConfigurationFile(ctx _context.Context, moid stri
 /*
  * Execute executes the request
  */
-func (a *OsApiService) DeleteOsConfigurationFileExecute(r ApiDeleteOsConfigurationFileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) DeleteOsConfigurationFileExecute(r ApiDeleteOsConfigurationFileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.DeleteOsConfigurationFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles/{Moid}"
@@ -997,22 +965,19 @@ func (a *OsApiService) DeleteOsConfigurationFileExecute(r ApiDeleteOsConfigurati
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1070,7 +1035,7 @@ func (a *OsApiService) DeleteOsConfigurationFileExecute(r ApiDeleteOsConfigurati
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetOsCatalogByMoidRequest struct {
@@ -1079,7 +1044,7 @@ type ApiGetOsCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetOsCatalogByMoidRequest) Execute() (OsCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsCatalogByMoidRequest) Execute() (OsCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetOsCatalogByMoidExecute(r)
 }
 
@@ -1101,21 +1066,19 @@ func (a *OsApiService) GetOsCatalogByMoid(ctx _context.Context, moid string) Api
  * Execute executes the request
  * @return OsCatalog
  */
-func (a *OsApiService) GetOsCatalogByMoidExecute(r ApiGetOsCatalogByMoidRequest) (OsCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsCatalogByMoidExecute(r ApiGetOsCatalogByMoidRequest) (OsCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Catalogs/{Moid}"
@@ -1144,22 +1107,19 @@ func (a *OsApiService) GetOsCatalogByMoidExecute(r ApiGetOsCatalogByMoidRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1226,7 +1186,7 @@ func (a *OsApiService) GetOsCatalogByMoidExecute(r ApiGetOsCatalogByMoidRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsCatalogListRequest struct {
@@ -1290,7 +1250,7 @@ func (r ApiGetOsCatalogListRequest) Tags(tags string) ApiGetOsCatalogListRequest
 	return r
 }
 
-func (r ApiGetOsCatalogListRequest) Execute() (OsCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsCatalogListRequest) Execute() (OsCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetOsCatalogListExecute(r)
 }
 
@@ -1310,21 +1270,19 @@ func (a *OsApiService) GetOsCatalogList(ctx _context.Context) ApiGetOsCatalogLis
  * Execute executes the request
  * @return OsCatalogResponse
  */
-func (a *OsApiService) GetOsCatalogListExecute(r ApiGetOsCatalogListRequest) (OsCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsCatalogListExecute(r ApiGetOsCatalogListRequest) (OsCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Catalogs"
@@ -1385,22 +1343,19 @@ func (a *OsApiService) GetOsCatalogListExecute(r ApiGetOsCatalogListRequest) (Os
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1467,7 +1422,7 @@ func (a *OsApiService) GetOsCatalogListExecute(r ApiGetOsCatalogListRequest) (Os
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsConfigurationFileByMoidRequest struct {
@@ -1476,7 +1431,7 @@ type ApiGetOsConfigurationFileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetOsConfigurationFileByMoidRequest) Execute() (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsConfigurationFileByMoidRequest) Execute() (OsConfigurationFile, *_nethttp.Response, error) {
 	return r.ApiService.GetOsConfigurationFileByMoidExecute(r)
 }
 
@@ -1498,21 +1453,19 @@ func (a *OsApiService) GetOsConfigurationFileByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return OsConfigurationFile
  */
-func (a *OsApiService) GetOsConfigurationFileByMoidExecute(r ApiGetOsConfigurationFileByMoidRequest) (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsConfigurationFileByMoidExecute(r ApiGetOsConfigurationFileByMoidRequest) (OsConfigurationFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsConfigurationFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsConfigurationFileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles/{Moid}"
@@ -1541,22 +1494,19 @@ func (a *OsApiService) GetOsConfigurationFileByMoidExecute(r ApiGetOsConfigurati
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1623,7 +1573,7 @@ func (a *OsApiService) GetOsConfigurationFileByMoidExecute(r ApiGetOsConfigurati
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsConfigurationFileListRequest struct {
@@ -1687,7 +1637,7 @@ func (r ApiGetOsConfigurationFileListRequest) Tags(tags string) ApiGetOsConfigur
 	return r
 }
 
-func (r ApiGetOsConfigurationFileListRequest) Execute() (OsConfigurationFileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsConfigurationFileListRequest) Execute() (OsConfigurationFileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetOsConfigurationFileListExecute(r)
 }
 
@@ -1707,21 +1657,19 @@ func (a *OsApiService) GetOsConfigurationFileList(ctx _context.Context) ApiGetOs
  * Execute executes the request
  * @return OsConfigurationFileResponse
  */
-func (a *OsApiService) GetOsConfigurationFileListExecute(r ApiGetOsConfigurationFileListRequest) (OsConfigurationFileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsConfigurationFileListExecute(r ApiGetOsConfigurationFileListRequest) (OsConfigurationFileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsConfigurationFileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsConfigurationFileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles"
@@ -1782,22 +1730,19 @@ func (a *OsApiService) GetOsConfigurationFileListExecute(r ApiGetOsConfiguration
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1864,7 +1809,7 @@ func (a *OsApiService) GetOsConfigurationFileListExecute(r ApiGetOsConfiguration
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsDistributionByMoidRequest struct {
@@ -1873,7 +1818,7 @@ type ApiGetOsDistributionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetOsDistributionByMoidRequest) Execute() (OsDistribution, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsDistributionByMoidRequest) Execute() (OsDistribution, *_nethttp.Response, error) {
 	return r.ApiService.GetOsDistributionByMoidExecute(r)
 }
 
@@ -1895,21 +1840,19 @@ func (a *OsApiService) GetOsDistributionByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return OsDistribution
  */
-func (a *OsApiService) GetOsDistributionByMoidExecute(r ApiGetOsDistributionByMoidRequest) (OsDistribution, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsDistributionByMoidExecute(r ApiGetOsDistributionByMoidRequest) (OsDistribution, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsDistribution
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsDistributionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Distributions/{Moid}"
@@ -1938,22 +1881,19 @@ func (a *OsApiService) GetOsDistributionByMoidExecute(r ApiGetOsDistributionByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2020,7 +1960,7 @@ func (a *OsApiService) GetOsDistributionByMoidExecute(r ApiGetOsDistributionByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsDistributionListRequest struct {
@@ -2084,7 +2024,7 @@ func (r ApiGetOsDistributionListRequest) Tags(tags string) ApiGetOsDistributionL
 	return r
 }
 
-func (r ApiGetOsDistributionListRequest) Execute() (OsDistributionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsDistributionListRequest) Execute() (OsDistributionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetOsDistributionListExecute(r)
 }
 
@@ -2104,21 +2044,19 @@ func (a *OsApiService) GetOsDistributionList(ctx _context.Context) ApiGetOsDistr
  * Execute executes the request
  * @return OsDistributionResponse
  */
-func (a *OsApiService) GetOsDistributionListExecute(r ApiGetOsDistributionListRequest) (OsDistributionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsDistributionListExecute(r ApiGetOsDistributionListRequest) (OsDistributionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsDistributionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsDistributionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Distributions"
@@ -2179,22 +2117,19 @@ func (a *OsApiService) GetOsDistributionListExecute(r ApiGetOsDistributionListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2261,7 +2196,7 @@ func (a *OsApiService) GetOsDistributionListExecute(r ApiGetOsDistributionListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsInstallByMoidRequest struct {
@@ -2270,7 +2205,7 @@ type ApiGetOsInstallByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetOsInstallByMoidRequest) Execute() (OsInstall, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsInstallByMoidRequest) Execute() (OsInstall, *_nethttp.Response, error) {
 	return r.ApiService.GetOsInstallByMoidExecute(r)
 }
 
@@ -2292,21 +2227,19 @@ func (a *OsApiService) GetOsInstallByMoid(ctx _context.Context, moid string) Api
  * Execute executes the request
  * @return OsInstall
  */
-func (a *OsApiService) GetOsInstallByMoidExecute(r ApiGetOsInstallByMoidRequest) (OsInstall, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsInstallByMoidExecute(r ApiGetOsInstallByMoidRequest) (OsInstall, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsInstall
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsInstallByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Installs/{Moid}"
@@ -2335,22 +2268,19 @@ func (a *OsApiService) GetOsInstallByMoidExecute(r ApiGetOsInstallByMoidRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2417,7 +2347,7 @@ func (a *OsApiService) GetOsInstallByMoidExecute(r ApiGetOsInstallByMoidRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsInstallListRequest struct {
@@ -2481,7 +2411,7 @@ func (r ApiGetOsInstallListRequest) Tags(tags string) ApiGetOsInstallListRequest
 	return r
 }
 
-func (r ApiGetOsInstallListRequest) Execute() (OsInstallResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsInstallListRequest) Execute() (OsInstallResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetOsInstallListExecute(r)
 }
 
@@ -2501,21 +2431,19 @@ func (a *OsApiService) GetOsInstallList(ctx _context.Context) ApiGetOsInstallLis
  * Execute executes the request
  * @return OsInstallResponse
  */
-func (a *OsApiService) GetOsInstallListExecute(r ApiGetOsInstallListRequest) (OsInstallResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsInstallListExecute(r ApiGetOsInstallListRequest) (OsInstallResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsInstallResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsInstallList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/Installs"
@@ -2576,22 +2504,19 @@ func (a *OsApiService) GetOsInstallListExecute(r ApiGetOsInstallListRequest) (Os
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2658,7 +2583,7 @@ func (a *OsApiService) GetOsInstallListExecute(r ApiGetOsInstallListRequest) (Os
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsSupportedVersionByMoidRequest struct {
@@ -2667,7 +2592,7 @@ type ApiGetOsSupportedVersionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetOsSupportedVersionByMoidRequest) Execute() (OsSupportedVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsSupportedVersionByMoidRequest) Execute() (OsSupportedVersion, *_nethttp.Response, error) {
 	return r.ApiService.GetOsSupportedVersionByMoidExecute(r)
 }
 
@@ -2689,21 +2614,19 @@ func (a *OsApiService) GetOsSupportedVersionByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return OsSupportedVersion
  */
-func (a *OsApiService) GetOsSupportedVersionByMoidExecute(r ApiGetOsSupportedVersionByMoidRequest) (OsSupportedVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsSupportedVersionByMoidExecute(r ApiGetOsSupportedVersionByMoidRequest) (OsSupportedVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsSupportedVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsSupportedVersionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/SupportedVersions/{Moid}"
@@ -2732,22 +2655,19 @@ func (a *OsApiService) GetOsSupportedVersionByMoidExecute(r ApiGetOsSupportedVer
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2814,7 +2734,7 @@ func (a *OsApiService) GetOsSupportedVersionByMoidExecute(r ApiGetOsSupportedVer
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetOsSupportedVersionListRequest struct {
@@ -2878,7 +2798,7 @@ func (r ApiGetOsSupportedVersionListRequest) Tags(tags string) ApiGetOsSupported
 	return r
 }
 
-func (r ApiGetOsSupportedVersionListRequest) Execute() (OsSupportedVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetOsSupportedVersionListRequest) Execute() (OsSupportedVersionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetOsSupportedVersionListExecute(r)
 }
 
@@ -2898,21 +2818,19 @@ func (a *OsApiService) GetOsSupportedVersionList(ctx _context.Context) ApiGetOsS
  * Execute executes the request
  * @return OsSupportedVersionResponse
  */
-func (a *OsApiService) GetOsSupportedVersionListExecute(r ApiGetOsSupportedVersionListRequest) (OsSupportedVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) GetOsSupportedVersionListExecute(r ApiGetOsSupportedVersionListRequest) (OsSupportedVersionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsSupportedVersionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.GetOsSupportedVersionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/SupportedVersions"
@@ -2973,22 +2891,19 @@ func (a *OsApiService) GetOsSupportedVersionListExecute(r ApiGetOsSupportedVersi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3055,7 +2970,7 @@ func (a *OsApiService) GetOsSupportedVersionListExecute(r ApiGetOsSupportedVersi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchOsConfigurationFileRequest struct {
@@ -3075,7 +2990,7 @@ func (r ApiPatchOsConfigurationFileRequest) IfMatch(ifMatch string) ApiPatchOsCo
 	return r
 }
 
-func (r ApiPatchOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, error) {
 	return r.ApiService.PatchOsConfigurationFileExecute(r)
 }
 
@@ -3097,21 +3012,19 @@ func (a *OsApiService) PatchOsConfigurationFile(ctx _context.Context, moid strin
  * Execute executes the request
  * @return OsConfigurationFile
  */
-func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsConfigurationFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.PatchOsConfigurationFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles/{Moid}"
@@ -3121,8 +3034,7 @@ func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfiguration
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osConfigurationFile == nil {
-		executionError.error = "osConfigurationFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osConfigurationFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3149,22 +3061,19 @@ func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfiguration
 	localVarPostBody = r.osConfigurationFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3231,7 +3140,7 @@ func (a *OsApiService) PatchOsConfigurationFileExecute(r ApiPatchOsConfiguration
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateOsConfigurationFileRequest struct {
@@ -3251,7 +3160,7 @@ func (r ApiUpdateOsConfigurationFileRequest) IfMatch(ifMatch string) ApiUpdateOs
 	return r
 }
 
-func (r ApiUpdateOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateOsConfigurationFileRequest) Execute() (OsConfigurationFile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateOsConfigurationFileExecute(r)
 }
 
@@ -3273,21 +3182,19 @@ func (a *OsApiService) UpdateOsConfigurationFile(ctx _context.Context, moid stri
  * Execute executes the request
  * @return OsConfigurationFile
  */
-func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurationFileRequest) (OsConfigurationFile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  OsConfigurationFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OsApiService.UpdateOsConfigurationFile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/os/ConfigurationFiles/{Moid}"
@@ -3297,8 +3204,7 @@ func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurati
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.osConfigurationFile == nil {
-		executionError.error = "osConfigurationFile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("osConfigurationFile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3325,22 +3231,19 @@ func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurati
 	localVarPostBody = r.osConfigurationFile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3407,5 +3310,5 @@ func (a *OsApiService) UpdateOsConfigurationFileExecute(r ApiUpdateOsConfigurati
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

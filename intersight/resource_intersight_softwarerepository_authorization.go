@@ -91,7 +91,7 @@ func resourceSoftwarerepositoryAuthorization() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -267,7 +267,8 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 
 	r := conn.ApiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryAuthorization(conn.ctx).SoftwarerepositoryAuthorization(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating SoftwarerepositoryAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -282,7 +283,8 @@ func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.Re
 	var de diag.Diagnostics
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryAuthorizationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "SoftwarerepositoryAuthorization object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -469,7 +471,8 @@ func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.
 
 	r := conn.ApiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryAuthorization(conn.ctx, d.Id()).SoftwarerepositoryAuthorization(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating SoftwarerepositoryAuthorization: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())

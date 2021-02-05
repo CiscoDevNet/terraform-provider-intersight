@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ClusterName** | Pointer to **string** | Name of the cluster. It is specified only for HyperFlex based devices. | [optional] [readonly] 
 **Connected** | Pointer to **int64** | The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **MembershipRatio** | Pointer to **float32** | Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices. | [optional] [readonly] 
+**VmHost** | Pointer to [**NullableAssetVmHost**](asset.VmHost.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +145,41 @@ SetMembershipRatio sets MembershipRatio field to given value.
 
 HasMembershipRatio returns a boolean if a field has been set.
 
+### GetVmHost
+
+`func (o *AssetDeviceStatistics) GetVmHost() AssetVmHost`
+
+GetVmHost returns the VmHost field if non-nil, zero value otherwise.
+
+### GetVmHostOk
+
+`func (o *AssetDeviceStatistics) GetVmHostOk() (*AssetVmHost, bool)`
+
+GetVmHostOk returns a tuple with the VmHost field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmHost
+
+`func (o *AssetDeviceStatistics) SetVmHost(v AssetVmHost)`
+
+SetVmHost sets VmHost field to given value.
+
+### HasVmHost
+
+`func (o *AssetDeviceStatistics) HasVmHost() bool`
+
+HasVmHost returns a boolean if a field has been set.
+
+### SetVmHostNil
+
+`func (o *AssetDeviceStatistics) SetVmHostNil(b bool)`
+
+ SetVmHostNil sets the value for VmHost to be an explicit nil
+
+### UnsetVmHost
+`func (o *AssetDeviceStatistics) UnsetVmHost()`
+
+UnsetVmHost ensures that no value is present for VmHost, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

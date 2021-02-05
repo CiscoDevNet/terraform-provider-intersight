@@ -374,7 +374,8 @@ func dataSourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interf
 		return diag.Errorf("json marshal of IamIdp object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.IamApi.GetIamIdpList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

@@ -330,7 +330,8 @@ func resourceHyperflexCiscoHypervisorManagerCreate(c context.Context, d *schema.
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexCiscoHypervisorManager(conn.ctx).HyperflexCiscoHypervisorManager(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexCiscoHypervisorManager: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -345,7 +346,8 @@ func resourceHyperflexCiscoHypervisorManagerRead(c context.Context, d *schema.Re
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexCiscoHypervisorManagerByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexCiscoHypervisorManager object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -568,7 +570,8 @@ func resourceHyperflexCiscoHypervisorManagerUpdate(c context.Context, d *schema.
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexCiscoHypervisorManager(conn.ctx, d.Id()).HyperflexCiscoHypervisorManager(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexCiscoHypervisorManager: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())

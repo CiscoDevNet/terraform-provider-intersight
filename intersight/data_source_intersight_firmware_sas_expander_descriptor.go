@@ -189,7 +189,8 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 		return diag.Errorf("json marshal of FirmwareSasExpanderDescriptor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FirmwareSasExpanderDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -32,7 +32,9 @@ type ApplianceUpgradePolicy struct {
 	// End date of the black out period.
 	BlackoutEndDate *time.Time `json:"BlackoutEndDate,omitempty"`
 	// Start date of the black out period. The appliance will not be upgraded during this period.
-	BlackoutStartDate    *time.Time              `json:"BlackoutStartDate,omitempty"`
+	BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
+	// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
+	EnableMetaDataSync   *bool                   `json:"EnableMetaDataSync,omitempty"`
 	Schedule             NullableOnpremSchedule  `json:"Schedule,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -48,6 +50,8 @@ func NewApplianceUpgradePolicy(classId string, objectType string) *ApplianceUpgr
 	this := ApplianceUpgradePolicy{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enableMetaDataSync bool = true
+	this.EnableMetaDataSync = &enableMetaDataSync
 	return &this
 }
 
@@ -60,6 +64,8 @@ func NewApplianceUpgradePolicyWithDefaults() *ApplianceUpgradePolicy {
 	this.ClassId = classId
 	var objectType string = "appliance.UpgradePolicy"
 	this.ObjectType = objectType
+	var enableMetaDataSync bool = true
+	this.EnableMetaDataSync = &enableMetaDataSync
 	return &this
 }
 
@@ -239,6 +245,38 @@ func (o *ApplianceUpgradePolicy) SetBlackoutStartDate(v time.Time) {
 	o.BlackoutStartDate = &v
 }
 
+// GetEnableMetaDataSync returns the EnableMetaDataSync field value if set, zero value otherwise.
+func (o *ApplianceUpgradePolicy) GetEnableMetaDataSync() bool {
+	if o == nil || o.EnableMetaDataSync == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableMetaDataSync
+}
+
+// GetEnableMetaDataSyncOk returns a tuple with the EnableMetaDataSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceUpgradePolicy) GetEnableMetaDataSyncOk() (*bool, bool) {
+	if o == nil || o.EnableMetaDataSync == nil {
+		return nil, false
+	}
+	return o.EnableMetaDataSync, true
+}
+
+// HasEnableMetaDataSync returns a boolean if a field has been set.
+func (o *ApplianceUpgradePolicy) HasEnableMetaDataSync() bool {
+	if o != nil && o.EnableMetaDataSync != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableMetaDataSync gets a reference to the given bool and assigns it to the EnableMetaDataSync field.
+func (o *ApplianceUpgradePolicy) SetEnableMetaDataSync(v bool) {
+	o.EnableMetaDataSync = &v
+}
+
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceUpgradePolicy) GetSchedule() OnpremSchedule {
 	if o == nil || o.Schedule.Get() == nil {
@@ -342,6 +380,9 @@ func (o ApplianceUpgradePolicy) MarshalJSON() ([]byte, error) {
 	if o.BlackoutStartDate != nil {
 		toSerialize["BlackoutStartDate"] = o.BlackoutStartDate
 	}
+	if o.EnableMetaDataSync != nil {
+		toSerialize["EnableMetaDataSync"] = o.EnableMetaDataSync
+	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
 	}
@@ -369,9 +410,11 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// End date of the black out period.
 		BlackoutEndDate *time.Time `json:"BlackoutEndDate,omitempty"`
 		// Start date of the black out period. The appliance will not be upgraded during this period.
-		BlackoutStartDate *time.Time              `json:"BlackoutStartDate,omitempty"`
-		Schedule          NullableOnpremSchedule  `json:"Schedule,omitempty"`
-		Account           *IamAccountRelationship `json:"Account,omitempty"`
+		BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
+		// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
+		EnableMetaDataSync *bool                   `json:"EnableMetaDataSync,omitempty"`
+		Schedule           NullableOnpremSchedule  `json:"Schedule,omitempty"`
+		Account            *IamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceUpgradePolicyWithoutEmbeddedStruct := ApplianceUpgradePolicyWithoutEmbeddedStruct{}
@@ -385,6 +428,7 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varApplianceUpgradePolicy.BlackoutDatesEnabled = varApplianceUpgradePolicyWithoutEmbeddedStruct.BlackoutDatesEnabled
 		varApplianceUpgradePolicy.BlackoutEndDate = varApplianceUpgradePolicyWithoutEmbeddedStruct.BlackoutEndDate
 		varApplianceUpgradePolicy.BlackoutStartDate = varApplianceUpgradePolicyWithoutEmbeddedStruct.BlackoutStartDate
+		varApplianceUpgradePolicy.EnableMetaDataSync = varApplianceUpgradePolicyWithoutEmbeddedStruct.EnableMetaDataSync
 		varApplianceUpgradePolicy.Schedule = varApplianceUpgradePolicyWithoutEmbeddedStruct.Schedule
 		varApplianceUpgradePolicy.Account = varApplianceUpgradePolicyWithoutEmbeddedStruct.Account
 		*o = ApplianceUpgradePolicy(varApplianceUpgradePolicy)
@@ -410,6 +454,7 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BlackoutDatesEnabled")
 		delete(additionalProperties, "BlackoutEndDate")
 		delete(additionalProperties, "BlackoutStartDate")
+		delete(additionalProperties, "EnableMetaDataSync")
 		delete(additionalProperties, "Schedule")
 		delete(additionalProperties, "Account")
 

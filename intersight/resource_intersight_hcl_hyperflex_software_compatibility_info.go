@@ -98,7 +98,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -132,7 +132,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -334,7 +334,8 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 
 	r := conn.ApiClient.HclApi.CreateHclHyperflexSoftwareCompatibilityInfo(conn.ctx).HclHyperflexSoftwareCompatibilityInfo(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HclHyperflexSoftwareCompatibilityInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -349,7 +350,8 @@ func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *sch
 	var de diag.Diagnostics
 	r := conn.ApiClient.HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HclHyperflexSoftwareCompatibilityInfo object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -581,7 +583,8 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 
 	r := conn.ApiClient.HclApi.UpdateHclHyperflexSoftwareCompatibilityInfo(conn.ctx, d.Id()).HclHyperflexSoftwareCompatibilityInfo(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HclHyperflexSoftwareCompatibilityInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -596,7 +599,8 @@ func resourceHclHyperflexSoftwareCompatibilityInfoDelete(c context.Context, d *s
 	conn := meta.(*Config)
 	p := conn.ApiClient.HclApi.DeleteHclHyperflexSoftwareCompatibilityInfo(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HclHyperflexSoftwareCompatibilityInfo object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

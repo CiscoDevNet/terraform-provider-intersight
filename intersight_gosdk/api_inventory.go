@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateInventoryRequestRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateInventoryRequestRequest) Execute() (InventoryRequest, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateInventoryRequestRequest) Execute() (InventoryRequest, *_nethttp.Response, error) {
 	return r.ApiService.CreateInventoryRequestExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *InventoryApiService) CreateInventoryRequest(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return InventoryRequest
  */
-func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventoryRequestRequest) (InventoryRequest, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventoryRequestRequest) (InventoryRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.CreateInventoryRequest")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/Requests"
@@ -92,8 +90,7 @@ func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventory
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.inventoryRequest == nil {
-		executionError.error = "inventoryRequest is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("inventoryRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventory
 	localVarPostBody = r.inventoryRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *InventoryApiService) CreateInventoryRequestExecute(r ApiCreateInventory
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryDeviceInfoByMoidRequest struct {
@@ -214,7 +208,7 @@ type ApiGetInventoryDeviceInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetInventoryDeviceInfoByMoidRequest) Execute() (InventoryDeviceInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryDeviceInfoByMoidRequest) Execute() (InventoryDeviceInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryDeviceInfoByMoidExecute(r)
 }
 
@@ -236,21 +230,19 @@ func (a *InventoryApiService) GetInventoryDeviceInfoByMoid(ctx _context.Context,
  * Execute executes the request
  * @return InventoryDeviceInfo
  */
-func (a *InventoryApiService) GetInventoryDeviceInfoByMoidExecute(r ApiGetInventoryDeviceInfoByMoidRequest) (InventoryDeviceInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryDeviceInfoByMoidExecute(r ApiGetInventoryDeviceInfoByMoidRequest) (InventoryDeviceInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryDeviceInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryDeviceInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/DeviceInfos/{Moid}"
@@ -279,22 +271,19 @@ func (a *InventoryApiService) GetInventoryDeviceInfoByMoidExecute(r ApiGetInvent
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -361,7 +350,7 @@ func (a *InventoryApiService) GetInventoryDeviceInfoByMoidExecute(r ApiGetInvent
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryDeviceInfoListRequest struct {
@@ -425,7 +414,7 @@ func (r ApiGetInventoryDeviceInfoListRequest) Tags(tags string) ApiGetInventoryD
 	return r
 }
 
-func (r ApiGetInventoryDeviceInfoListRequest) Execute() (InventoryDeviceInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryDeviceInfoListRequest) Execute() (InventoryDeviceInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryDeviceInfoListExecute(r)
 }
 
@@ -445,21 +434,19 @@ func (a *InventoryApiService) GetInventoryDeviceInfoList(ctx _context.Context) A
  * Execute executes the request
  * @return InventoryDeviceInfoResponse
  */
-func (a *InventoryApiService) GetInventoryDeviceInfoListExecute(r ApiGetInventoryDeviceInfoListRequest) (InventoryDeviceInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryDeviceInfoListExecute(r ApiGetInventoryDeviceInfoListRequest) (InventoryDeviceInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryDeviceInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryDeviceInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/DeviceInfos"
@@ -520,22 +507,19 @@ func (a *InventoryApiService) GetInventoryDeviceInfoListExecute(r ApiGetInventor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -602,7 +586,7 @@ func (a *InventoryApiService) GetInventoryDeviceInfoListExecute(r ApiGetInventor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryDnMoBindingByMoidRequest struct {
@@ -611,7 +595,7 @@ type ApiGetInventoryDnMoBindingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetInventoryDnMoBindingByMoidRequest) Execute() (InventoryDnMoBinding, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryDnMoBindingByMoidRequest) Execute() (InventoryDnMoBinding, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryDnMoBindingByMoidExecute(r)
 }
 
@@ -633,21 +617,19 @@ func (a *InventoryApiService) GetInventoryDnMoBindingByMoid(ctx _context.Context
  * Execute executes the request
  * @return InventoryDnMoBinding
  */
-func (a *InventoryApiService) GetInventoryDnMoBindingByMoidExecute(r ApiGetInventoryDnMoBindingByMoidRequest) (InventoryDnMoBinding, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryDnMoBindingByMoidExecute(r ApiGetInventoryDnMoBindingByMoidRequest) (InventoryDnMoBinding, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryDnMoBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryDnMoBindingByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/DnMoBindings/{Moid}"
@@ -676,22 +658,19 @@ func (a *InventoryApiService) GetInventoryDnMoBindingByMoidExecute(r ApiGetInven
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -758,7 +737,7 @@ func (a *InventoryApiService) GetInventoryDnMoBindingByMoidExecute(r ApiGetInven
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryDnMoBindingListRequest struct {
@@ -822,7 +801,7 @@ func (r ApiGetInventoryDnMoBindingListRequest) Tags(tags string) ApiGetInventory
 	return r
 }
 
-func (r ApiGetInventoryDnMoBindingListRequest) Execute() (InventoryDnMoBindingResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryDnMoBindingListRequest) Execute() (InventoryDnMoBindingResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryDnMoBindingListExecute(r)
 }
 
@@ -842,21 +821,19 @@ func (a *InventoryApiService) GetInventoryDnMoBindingList(ctx _context.Context) 
  * Execute executes the request
  * @return InventoryDnMoBindingResponse
  */
-func (a *InventoryApiService) GetInventoryDnMoBindingListExecute(r ApiGetInventoryDnMoBindingListRequest) (InventoryDnMoBindingResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryDnMoBindingListExecute(r ApiGetInventoryDnMoBindingListRequest) (InventoryDnMoBindingResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryDnMoBindingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryDnMoBindingList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/DnMoBindings"
@@ -917,22 +894,19 @@ func (a *InventoryApiService) GetInventoryDnMoBindingListExecute(r ApiGetInvento
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -999,7 +973,7 @@ func (a *InventoryApiService) GetInventoryDnMoBindingListExecute(r ApiGetInvento
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryGenericInventoryByMoidRequest struct {
@@ -1008,7 +982,7 @@ type ApiGetInventoryGenericInventoryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetInventoryGenericInventoryByMoidRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryGenericInventoryByMoidRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryGenericInventoryByMoidExecute(r)
 }
 
@@ -1030,21 +1004,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryByMoid(ctx _context.Co
  * Execute executes the request
  * @return InventoryGenericInventory
  */
-func (a *InventoryApiService) GetInventoryGenericInventoryByMoidExecute(r ApiGetInventoryGenericInventoryByMoidRequest) (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryGenericInventoryByMoidExecute(r ApiGetInventoryGenericInventoryByMoidRequest) (InventoryGenericInventory, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryGenericInventoryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventories/{Moid}"
@@ -1073,22 +1045,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1155,7 +1124,7 @@ func (a *InventoryApiService) GetInventoryGenericInventoryByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryGenericInventoryHolderByMoidRequest struct {
@@ -1164,7 +1133,7 @@ type ApiGetInventoryGenericInventoryHolderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetInventoryGenericInventoryHolderByMoidRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryGenericInventoryHolderByMoidRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryGenericInventoryHolderByMoidExecute(r)
 }
 
@@ -1186,21 +1155,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoid(ctx _cont
  * Execute executes the request
  * @return InventoryGenericInventoryHolder
  */
-func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoidExecute(r ApiGetInventoryGenericInventoryHolderByMoidRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoidExecute(r ApiGetInventoryGenericInventoryHolderByMoidRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventoryHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryGenericInventoryHolderByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventoryHolders/{Moid}"
@@ -1229,22 +1196,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoidExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1311,7 +1275,7 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryGenericInventoryHolderListRequest struct {
@@ -1375,7 +1339,7 @@ func (r ApiGetInventoryGenericInventoryHolderListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetInventoryGenericInventoryHolderListRequest) Execute() (InventoryGenericInventoryHolderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryGenericInventoryHolderListRequest) Execute() (InventoryGenericInventoryHolderResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryGenericInventoryHolderListExecute(r)
 }
 
@@ -1395,21 +1359,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderList(ctx _contex
  * Execute executes the request
  * @return InventoryGenericInventoryHolderResponse
  */
-func (a *InventoryApiService) GetInventoryGenericInventoryHolderListExecute(r ApiGetInventoryGenericInventoryHolderListRequest) (InventoryGenericInventoryHolderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryGenericInventoryHolderListExecute(r ApiGetInventoryGenericInventoryHolderListRequest) (InventoryGenericInventoryHolderResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventoryHolderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryGenericInventoryHolderList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventoryHolders"
@@ -1470,22 +1432,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderListExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1552,7 +1511,7 @@ func (a *InventoryApiService) GetInventoryGenericInventoryHolderListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetInventoryGenericInventoryListRequest struct {
@@ -1616,7 +1575,7 @@ func (r ApiGetInventoryGenericInventoryListRequest) Tags(tags string) ApiGetInve
 	return r
 }
 
-func (r ApiGetInventoryGenericInventoryListRequest) Execute() (InventoryGenericInventoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetInventoryGenericInventoryListRequest) Execute() (InventoryGenericInventoryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetInventoryGenericInventoryListExecute(r)
 }
 
@@ -1636,21 +1595,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryList(ctx _context.Cont
  * Execute executes the request
  * @return InventoryGenericInventoryResponse
  */
-func (a *InventoryApiService) GetInventoryGenericInventoryListExecute(r ApiGetInventoryGenericInventoryListRequest) (InventoryGenericInventoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) GetInventoryGenericInventoryListExecute(r ApiGetInventoryGenericInventoryListRequest) (InventoryGenericInventoryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.GetInventoryGenericInventoryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventories"
@@ -1711,22 +1668,19 @@ func (a *InventoryApiService) GetInventoryGenericInventoryListExecute(r ApiGetIn
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1793,7 +1747,7 @@ func (a *InventoryApiService) GetInventoryGenericInventoryListExecute(r ApiGetIn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchInventoryGenericInventoryRequest struct {
@@ -1813,7 +1767,7 @@ func (r ApiPatchInventoryGenericInventoryRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchInventoryGenericInventoryRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchInventoryGenericInventoryRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, error) {
 	return r.ApiService.PatchInventoryGenericInventoryExecute(r)
 }
 
@@ -1835,21 +1789,19 @@ func (a *InventoryApiService) PatchInventoryGenericInventory(ctx _context.Contex
  * Execute executes the request
  * @return InventoryGenericInventory
  */
-func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchInventoryGenericInventoryRequest) (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchInventoryGenericInventoryRequest) (InventoryGenericInventory, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.PatchInventoryGenericInventory")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventories/{Moid}"
@@ -1859,8 +1811,7 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchIn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.inventoryGenericInventory == nil {
-		executionError.error = "inventoryGenericInventory is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("inventoryGenericInventory is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1887,22 +1838,19 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchIn
 	localVarPostBody = r.inventoryGenericInventory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1969,7 +1917,7 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryExecute(r ApiPatchIn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchInventoryGenericInventoryHolderRequest struct {
@@ -1989,7 +1937,7 @@ func (r ApiPatchInventoryGenericInventoryHolderRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchInventoryGenericInventoryHolderRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchInventoryGenericInventoryHolderRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	return r.ApiService.PatchInventoryGenericInventoryHolderExecute(r)
 }
 
@@ -2011,21 +1959,19 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryHolder(ctx _context.
  * Execute executes the request
  * @return InventoryGenericInventoryHolder
  */
-func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiPatchInventoryGenericInventoryHolderRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiPatchInventoryGenericInventoryHolderRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventoryHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.PatchInventoryGenericInventoryHolder")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventoryHolders/{Moid}"
@@ -2035,8 +1981,7 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.inventoryGenericInventoryHolder == nil {
-		executionError.error = "inventoryGenericInventoryHolder is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("inventoryGenericInventoryHolder is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2063,22 +2008,19 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiP
 	localVarPostBody = r.inventoryGenericInventoryHolder
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2145,7 +2087,7 @@ func (a *InventoryApiService) PatchInventoryGenericInventoryHolderExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateInventoryGenericInventoryRequest struct {
@@ -2165,7 +2107,7 @@ func (r ApiUpdateInventoryGenericInventoryRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateInventoryGenericInventoryRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateInventoryGenericInventoryRequest) Execute() (InventoryGenericInventory, *_nethttp.Response, error) {
 	return r.ApiService.UpdateInventoryGenericInventoryExecute(r)
 }
 
@@ -2187,21 +2129,19 @@ func (a *InventoryApiService) UpdateInventoryGenericInventory(ctx _context.Conte
  * Execute executes the request
  * @return InventoryGenericInventory
  */
-func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdateInventoryGenericInventoryRequest) (InventoryGenericInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdateInventoryGenericInventoryRequest) (InventoryGenericInventory, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.UpdateInventoryGenericInventory")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventories/{Moid}"
@@ -2211,8 +2151,7 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.inventoryGenericInventory == nil {
-		executionError.error = "inventoryGenericInventory is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("inventoryGenericInventory is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2239,22 +2178,19 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdate
 	localVarPostBody = r.inventoryGenericInventory
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2321,7 +2257,7 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateInventoryGenericInventoryHolderRequest struct {
@@ -2341,7 +2277,7 @@ func (r ApiUpdateInventoryGenericInventoryHolderRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateInventoryGenericInventoryHolderRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateInventoryGenericInventoryHolderRequest) Execute() (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	return r.ApiService.UpdateInventoryGenericInventoryHolderExecute(r)
 }
 
@@ -2363,21 +2299,19 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryHolder(ctx _context
  * Execute executes the request
  * @return InventoryGenericInventoryHolder
  */
-func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r ApiUpdateInventoryGenericInventoryHolderRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, GenericOpenAPIError) {
+func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r ApiUpdateInventoryGenericInventoryHolderRequest) (InventoryGenericInventoryHolder, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  InventoryGenericInventoryHolder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InventoryApiService.UpdateInventoryGenericInventoryHolder")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/inventory/GenericInventoryHolders/{Moid}"
@@ -2387,8 +2321,7 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.inventoryGenericInventoryHolder == nil {
-		executionError.error = "inventoryGenericInventoryHolder is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("inventoryGenericInventoryHolder is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2415,22 +2348,19 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r Api
 	localVarPostBody = r.inventoryGenericInventoryHolder
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2497,5 +2427,5 @@ func (a *InventoryApiService) UpdateInventoryGenericInventoryHolderExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

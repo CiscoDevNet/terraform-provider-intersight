@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **CommunityAccess** | Pointer to **string** | Controls access to the information in the inventory tables. Applicable only for SNMPv1 and SNMPv2c users. * &#x60;Disabled&#x60; - Blocks access to the information in the inventory tables. * &#x60;Limited&#x60; - Partial access to read the information in the inventory tables. * &#x60;Full&#x60; - Full access to read the information in the inventory tables. | [optional] [default to "Disabled"]
 **Enabled** | Pointer to **bool** | State of the SNMP Policy on the endpoint. If enabled, the endpoint sends SNMP traps to the designated host. | [optional] [default to true]
 **EngineId** | Pointer to **string** | User-defined unique identification of the static engine. | [optional] 
-**SnmpPort** | Pointer to **int64** | Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. | [optional] [default to 161]
+**SnmpPort** | Pointer to **int64** | Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). | [optional] [default to 161]
 **SnmpTraps** | Pointer to [**[]SnmpTrap**](SnmpTrap.md) |  | [optional] 
 **SnmpUsers** | Pointer to [**[]SnmpUser**](SnmpUser.md) |  | [optional] 
 **SysContact** | Pointer to **string** | Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. | [optional] 

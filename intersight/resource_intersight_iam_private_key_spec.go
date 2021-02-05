@@ -288,7 +288,8 @@ func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, 
 
 	r := conn.ApiClient.IamApi.CreateIamPrivateKeySpec(conn.ctx).IamPrivateKeySpec(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -303,7 +304,8 @@ func resourceIamPrivateKeySpecRead(c context.Context, d *schema.ResourceData, me
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamPrivateKeySpecByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamPrivateKeySpec object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -490,7 +492,8 @@ func resourceIamPrivateKeySpecUpdate(c context.Context, d *schema.ResourceData, 
 
 	r := conn.ApiClient.IamApi.UpdateIamPrivateKeySpec(conn.ctx, d.Id()).IamPrivateKeySpec(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -505,7 +508,8 @@ func resourceIamPrivateKeySpecDelete(c context.Context, d *schema.ResourceData, 
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamPrivateKeySpec(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamPrivateKeySpec object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

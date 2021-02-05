@@ -90,7 +90,7 @@ func resourceFirmwareServerConfigurationUtilityDistributable() *schema.Resource 
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -133,7 +133,7 @@ func resourceFirmwareServerConfigurationUtilityDistributable() *schema.Resource 
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -266,7 +266,7 @@ func resourceFirmwareServerConfigurationUtilityDistributable() *schema.Resource 
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -854,7 +854,8 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareServerConfigurationUtilityDistributable(conn.ctx).FirmwareServerConfigurationUtilityDistributable(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -869,7 +870,8 @@ func resourceFirmwareServerConfigurationUtilityDistributableRead(c context.Conte
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareServerConfigurationUtilityDistributable object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -1468,7 +1470,8 @@ func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Con
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareServerConfigurationUtilityDistributable(conn.ctx, d.Id()).FirmwareServerConfigurationUtilityDistributable(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -1483,7 +1486,8 @@ func resourceFirmwareServerConfigurationUtilityDistributableDelete(c context.Con
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareServerConfigurationUtilityDistributable(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FirmwareServerConfigurationUtilityDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

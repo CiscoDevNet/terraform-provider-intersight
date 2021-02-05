@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -47,6 +47,8 @@ type BiosPolicyAllOf struct {
 	AcsControlSlot14state *string `json:"AcsControlSlot14state,omitempty"`
 	// BIOS Token for setting Adjacent Cache Line Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	AdjacentCacheLinePrefetch *string `json:"AdjacentCacheLinePrefetch,omitempty"`
+	// BIOS Token for setting Advanced Memory Test configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	AdvancedMemTest *string `json:"AdvancedMemTest,omitempty"`
 	// BIOS Token for setting All USB Devices configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	AllUsbDevices *string `json:"AllUsbDevices,omitempty"`
 	// BIOS Token for setting Altitude configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1500-m` - Value - 1500-m for configuring Altitude token. * `300-m` - Value - 300-m for configuring Altitude token. * `3000-m` - Value - 3000-m for configuring Altitude token. * `900-m` - Value - 900-m for configuring Altitude token. * `auto` - Value - auto for configuring Altitude token.
@@ -61,7 +63,7 @@ type BiosPolicyAllOf struct {
 	AutoCcState *string `json:"AutoCcState,omitempty"`
 	// BIOS Token for setting CPU Autonomous Cstate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	AutonumousCstateEnable *string `json:"AutonumousCstateEnable,omitempty"`
-	// BIOS Token for setting Baud rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `115200` - Value - 115200 for configuring BaudRate token. * `19200` - Value - 19200 for configuring BaudRate token. * `38400` - Value - 38400 for configuring BaudRate token. * `57600` - Value - 57600 for configuring BaudRate token. * `9600` - Value - 9600 for configuring BaudRate token.
+	// BIOS Token for setting Baud Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `115200` - Value - 115200 for configuring BaudRate token. * `19200` - Value - 19200 for configuring BaudRate token. * `38400` - Value - 38400 for configuring BaudRate token. * `57600` - Value - 57600 for configuring BaudRate token. * `9600` - Value - 9600 for configuring BaudRate token.
 	BaudRate *string `json:"BaudRate,omitempty"`
 	// BIOS Token for setting BME DMA Mitigation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	BmeDmaMitigation *string `json:"BmeDmaMitigation,omitempty"`
@@ -89,13 +91,13 @@ type BiosPolicyAllOf struct {
 	CbsCmnGnbNbIommu *string `json:"CbsCmnGnbNbIommu,omitempty"`
 	// BIOS Token for setting Bank Group Swap configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token. * `enabled` - Value - enabled for configuring CbsCmnMemCtrlBankGroupSwapDdr4 token.
 	CbsCmnMemCtrlBankGroupSwapDdr4 *string `json:"CbsCmnMemCtrlBankGroupSwapDdr4,omitempty"`
-	// BIOS Token for setting Chipselect Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
+	// BIOS Token for setting Chipset Interleave configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token. * `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.
 	CbsCmnMemMapBankInterleaveDdr4 *string `json:"CbsCmnMemMapBankInterleaveDdr4,omitempty"`
 	// BIOS Token for setting cTDP Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmncTdpCtl token. * `Manual` - Value - Manual for configuring CbsCmncTdpCtl token.
 	CbsCmncTdpCtl *string `json:"CbsCmncTdpCtl,omitempty"`
-	// BIOS Token for setting Memory interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token. * `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token. * `Channel NPS2` - Value - Channel NPS2 for configuring CbsDfCmnMemIntlv token. * `Channel NPS4` - Value - Channel NPS4 for configuring CbsDfCmnMemIntlv token. * `Die` - Value - Die for configuring CbsDfCmnMemIntlv token. * `Die NPS1` - Value - Die NPS1 for configuring CbsDfCmnMemIntlv token. * `None` - Value - None for configuring CbsDfCmnMemIntlv token. * `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token. * `Socket NPS0` - Value - Socket NPS0 for configuring CbsDfCmnMemIntlv token.
+	// BIOS Token for setting AMD Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token. * `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token. * `Die` - Value - Die for configuring CbsDfCmnMemIntlv token. * `None` - Value - None for configuring CbsDfCmnMemIntlv token. * `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.
 	CbsDfCmnMemIntlv *string `json:"CbsDfCmnMemIntlv,omitempty"`
-	// BIOS Token for setting Memory Interleaving Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token. * `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token. * `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token. * `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.
+	// BIOS Token for setting AMD Memory Interleaving Size configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token. * `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token. * `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token. * `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token. * `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.
 	CbsDfCmnMemIntlvSize *string `json:"CbsDfCmnMemIntlvSize,omitempty"`
 	// BIOS Token for setting Consistent Device Naming configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	CdnEnable *string `json:"CdnEnable,omitempty"`
@@ -119,7 +121,7 @@ type BiosPolicyAllOf struct {
 	ConfigTdp *string `json:"ConfigTdp,omitempty"`
 	// BIOS Token for setting Configurable TDP Level configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Level 1` - Value - Level 1 for configuring ConfigTdpLevel token. * `Level 2` - Value - Level 2 for configuring ConfigTdpLevel token. * `Normal` - Value - Normal for configuring ConfigTdpLevel token.
 	ConfigTdpLevel *string `json:"ConfigTdpLevel,omitempty"`
-	// BIOS Token for setting Console redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `com-0` - Value - com-0 for configuring ConsoleRedirection token. * `com-1` - Value - com-1 for configuring ConsoleRedirection token. * `disabled` - Value - disabled for configuring ConsoleRedirection token. * `enabled` - Value - enabled for configuring ConsoleRedirection token. * `serial-port-a` - Value - serial-port-a for configuring ConsoleRedirection token.
+	// BIOS Token for setting Console Redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `com-0` - Value - com-0 for configuring ConsoleRedirection token. * `com-1` - Value - com-1 for configuring ConsoleRedirection token. * `disabled` - Value - disabled for configuring ConsoleRedirection token. * `enabled` - Value - enabled for configuring ConsoleRedirection token. * `serial-port-a` - Value - serial-port-a for configuring ConsoleRedirection token.
 	ConsoleRedirection *string `json:"ConsoleRedirection,omitempty"`
 	// BIOS Token for setting Core MultiProcessing configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1` - Value - 1 for configuring CoreMultiProcessing token. * `10` - Value - 10 for configuring CoreMultiProcessing token. * `11` - Value - 11 for configuring CoreMultiProcessing token. * `12` - Value - 12 for configuring CoreMultiProcessing token. * `13` - Value - 13 for configuring CoreMultiProcessing token. * `14` - Value - 14 for configuring CoreMultiProcessing token. * `15` - Value - 15 for configuring CoreMultiProcessing token. * `16` - Value - 16 for configuring CoreMultiProcessing token. * `17` - Value - 17 for configuring CoreMultiProcessing token. * `18` - Value - 18 for configuring CoreMultiProcessing token. * `19` - Value - 19 for configuring CoreMultiProcessing token. * `2` - Value - 2 for configuring CoreMultiProcessing token. * `20` - Value - 20 for configuring CoreMultiProcessing token. * `21` - Value - 21 for configuring CoreMultiProcessing token. * `22` - Value - 22 for configuring CoreMultiProcessing token. * `23` - Value - 23 for configuring CoreMultiProcessing token. * `24` - Value - 24 for configuring CoreMultiProcessing token. * `25` - Value - 25 for configuring CoreMultiProcessing token. * `26` - Value - 26 for configuring CoreMultiProcessing token. * `27` - Value - 27 for configuring CoreMultiProcessing token. * `28` - Value - 28 for configuring CoreMultiProcessing token. * `3` - Value - 3 for configuring CoreMultiProcessing token. * `4` - Value - 4 for configuring CoreMultiProcessing token. * `5` - Value - 5 for configuring CoreMultiProcessing token. * `6` - Value - 6 for configuring CoreMultiProcessing token. * `7` - Value - 7 for configuring CoreMultiProcessing token. * `8` - Value - 8 for configuring CoreMultiProcessing token. * `9` - Value - 9 for configuring CoreMultiProcessing token. * `all` - Value - all for configuring CoreMultiProcessing token.
 	CoreMultiProcessing *string `json:"CoreMultiProcessing,omitempty"`
@@ -145,6 +147,8 @@ type BiosPolicyAllOf struct {
 	DramClockThrottling *string `json:"DramClockThrottling,omitempty"`
 	// BIOS Token for setting DRAM Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1x` - Value - 1x for configuring DramRefreshRate token. * `2x` - Value - 2x for configuring DramRefreshRate token. * `3x` - Value - 3x for configuring DramRefreshRate token. * `4x` - Value - 4x for configuring DramRefreshRate token. * `Auto` - Value - Auto for configuring DramRefreshRate token.
 	DramRefreshRate *string `json:"DramRefreshRate,omitempty"`
+	// BIOS Token for setting DRAM SW Thermal Throttling configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring DramSwThermalThrottling token. * `enabled` - Value - enabled for configuring DramSwThermalThrottling token.
+	DramSwThermalThrottling *string `json:"DramSwThermalThrottling,omitempty"`
 	// BIOS Token for setting External SSC Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EnableClockSpreadSpec *string `json:"EnableClockSpreadSpec,omitempty"`
 	// BIOS Token for setting Energy Efficient Turbo configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -153,6 +157,8 @@ type BiosPolicyAllOf struct {
 	EngPerfTuning *string `json:"EngPerfTuning,omitempty"`
 	// BIOS Token for setting Enhanced Intel Speedstep (R) Technology configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	EnhancedIntelSpeedStepTech *string `json:"EnhancedIntelSpeedStepTech,omitempty"`
+	// BIOS Token for setting Processor EPP Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	EppEnable *string `json:"EppEnable,omitempty"`
 	// BIOS Token for setting EPP Profile configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced Performance` - Value - Balanced Performance for configuring EppProfile token. * `Balanced Power` - Value - Balanced Power for configuring EppProfile token. * `Performance` - Value - Performance for configuring EppProfile token. * `Power` - Value - Power for configuring EppProfile token.
 	EppProfile *string `json:"EppProfile,omitempty"`
 	// BIOS Token for setting Execute Disable Bit configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -183,9 +189,9 @@ type BiosPolicyAllOf struct {
 	IntelVtdCoherencySupport *string `json:"IntelVtdCoherencySupport,omitempty"`
 	// BIOS Token for setting Intel (R) VT-d Interrupt Remapping configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelVtdInterruptRemapping *string `json:"IntelVtdInterruptRemapping,omitempty"`
-	// BIOS Token for setting Intel (R) VT-d PassThrough DMA support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting Intel (R) VT-d PassThrough DMA Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelVtdPassThroughDmaSupport *string `json:"IntelVtdPassThroughDmaSupport,omitempty"`
-	// BIOS Token for setting Intel VTD ATS support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting Intel VTD ATS Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IntelVtdatsSupport *string `json:"IntelVtdatsSupport,omitempty"`
 	// BIOS Token for setting IIO Error Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring IohErrorEnable token. * `Yes` - Value - Yes for configuring IohErrorEnable token.
 	IohErrorEnable *string `json:"IohErrorEnable,omitempty"`
@@ -193,13 +199,17 @@ type BiosPolicyAllOf struct {
 	IohResource *string `json:"IohResource,omitempty"`
 	// BIOS Token for setting DCU IP Prefetcher configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	IpPrefetch *string `json:"IpPrefetch,omitempty"`
+	// BIOS Token for setting IPV4 HTTP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	Ipv4http *string `json:"Ipv4http,omitempty"`
 	// BIOS Token for setting IPv4 PXE Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	Ipv4pxe *string `json:"Ipv4pxe,omitempty"`
+	// BIOS Token for setting IPV6 HTTP Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	Ipv6http *string `json:"Ipv6http,omitempty"`
 	// BIOS Token for setting IPV6 PXE Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	Ipv6pxe *string `json:"Ipv6pxe,omitempty"`
 	// BIOS Token for setting KTI Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	KtiPrefetch *string `json:"KtiPrefetch,omitempty"`
-	// BIOS Token for setting Legacy OS redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting Legacy OS Redirection configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	LegacyOsRedirection *string `json:"LegacyOsRedirection,omitempty"`
 	// BIOS Token for setting Legacy USB Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring LegacyUsbSupport token. * `disabled` - Value - disabled for configuring LegacyUsbSupport token. * `enabled` - Value - enabled for configuring LegacyUsbSupport token.
 	LegacyUsbSupport *string `json:"LegacyUsbSupport,omitempty"`
@@ -219,19 +229,23 @@ type BiosPolicyAllOf struct {
 	LvDdrMode *string `json:"LvDdrMode,omitempty"`
 	// BIOS Token for setting Make Device Non Bootable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	MakeDeviceNonBootable *string `json:"MakeDeviceNonBootable,omitempty"`
-	// BIOS Token for setting Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 Way Node Interleave` - Value - 1 Way Node Interleave for configuring MemoryInterLeave token. * `2 Way Node Interleave` - Value - 2 Way Node Interleave for configuring MemoryInterLeave token. * `4 Way Node Interleave` - Value - 4 Way Node Interleave for configuring MemoryInterLeave token. * `8 Way Node Interleave` - Value - 8 Way Node Interleave for configuring MemoryInterLeave token. * `disabled` - Value - disabled for configuring MemoryInterLeave token. * `enabled` - Value - enabled for configuring MemoryInterLeave token.
+	// BIOS Token for setting Intel Memory Interleaving configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 Way Node Interleave` - Value - 1 Way Node Interleave for configuring MemoryInterLeave token. * `2 Way Node Interleave` - Value - 2 Way Node Interleave for configuring MemoryInterLeave token. * `4 Way Node Interleave` - Value - 4 Way Node Interleave for configuring MemoryInterLeave token. * `8 Way Node Interleave` - Value - 8 Way Node Interleave for configuring MemoryInterLeave token. * `disabled` - Value - disabled for configuring MemoryInterLeave token. * `enabled` - Value - enabled for configuring MemoryInterLeave token.
 	MemoryInterLeave *string `json:"MemoryInterLeave,omitempty"`
 	// BIOS Token for setting Memory Mapped IO above 4GiB configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	MemoryMappedIoAbove4gb *string `json:"MemoryMappedIoAbove4gb,omitempty"`
+	// BIOS Token for setting Memory Refresh Rate configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1x Refresh` - Value - 1x Refresh for configuring MemoryRefreshRate token. * `2x Refresh` - Value - 2x Refresh for configuring MemoryRefreshRate token.
+	MemoryRefreshRate *string `json:"MemoryRefreshRate,omitempty"`
 	// BIOS Token for setting Memory Size Limit in GiB configuration (0-65535).
 	MemorySizeLimit *string `json:"MemorySizeLimit,omitempty"`
+	// BIOS Token for setting Memory Thermal Throttling Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `CLTT with PECI` - Value - CLTT with PECI for configuring MemoryThermalThrottling token. * `Disabled` - Value - Disabled for configuring MemoryThermalThrottling token.
+	MemoryThermalThrottling *string `json:"MemoryThermalThrottling,omitempty"`
 	// BIOS Token for setting Mirroring Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `inter-socket` - Value - inter-socket for configuring MirroringMode token. * `intra-socket` - Value - intra-socket for configuring MirroringMode token.
 	MirroringMode *string `json:"MirroringMode,omitempty"`
 	// BIOS Token for setting MMCFG BASE configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1 GB` - Value - 1 GiB for configuring MmcfgBase token. * `2 GB` - Value - 2 GiB for configuring MmcfgBase token. * `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token. * `3 GB` - Value - 3 GiB for configuring MmcfgBase token. * `Auto` - Value - Auto for configuring MmcfgBase token.
 	MmcfgBase *string `json:"MmcfgBase,omitempty"`
 	// BIOS Token for setting Network Stack configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	NetworkStack *string `json:"NetworkStack,omitempty"`
-	// BIOS Token for setting NUMA optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	// BIOS Token for setting NUMA Optimized configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	NumaOptimized *string `json:"NumaOptimized,omitempty"`
 	// BIOS Token for setting NVM Performance Setting configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `BW Optimized` - Value - BW Optimized for configuring NvmdimmPerformConfig token. * `Balanced Profile` - Value - Balanced Profile for configuring NvmdimmPerformConfig token. * `Latency Optimized` - Value - Latency Optimized for configuring NvmdimmPerformConfig token.
 	NvmdimmPerformConfig *string `json:"NvmdimmPerformConfig,omitempty"`
@@ -253,9 +267,11 @@ type BiosPolicyAllOf struct {
 	OutOfBandMgmtPort *string `json:"OutOfBandMgmtPort,omitempty"`
 	// BIOS Token for setting Package C State Limit configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring PackageCstateLimit token. * `C0 C1 State` - Value - C0 C1 State for configuring PackageCstateLimit token. * `C0/C1` - Value - C0/C1 for configuring PackageCstateLimit token. * `C2` - Value - C2 for configuring PackageCstateLimit token. * `C6 Non Retention` - Value - C6 Non Retention for configuring PackageCstateLimit token. * `C6 Retention` - Value - C6 Retention for configuring PackageCstateLimit token. * `No Limit` - Value - No Limit for configuring PackageCstateLimit token.
 	PackageCstateLimit *string `json:"PackageCstateLimit,omitempty"`
+	// BIOS Token for setting Panic and High Watermark configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `High` - Value - High for configuring PanicHighWatermark token. * `Low` - Value - Low for configuring PanicHighWatermark token.
+	PanicHighWatermark *string `json:"PanicHighWatermark,omitempty"`
 	// BIOS Token for setting Partial Memory Mirror Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring PartialMirrorModeConfig token. * `Percentage` - Value - Percentage for configuring PartialMirrorModeConfig token. * `Value in GB` - Value - Value in GiB for configuring PartialMirrorModeConfig token.
 	PartialMirrorModeConfig *string `json:"PartialMirrorModeConfig,omitempty"`
-	// BIOS Token for setting Partial Mirror percentage configuration (0.00-50.00).
+	// BIOS Token for setting Partial Mirror Percentage configuration (0.00-50.00).
 	PartialMirrorPercent *string `json:"PartialMirrorPercent,omitempty"`
 	// BIOS Token for setting Partial Mirror1 Size in GiB configuration (0-65535).
 	PartialMirrorValue1 *string `json:"PartialMirrorValue1,omitempty"`
@@ -321,7 +337,7 @@ type BiosPolicyAllOf struct {
 	ProcessorC6report *string `json:"ProcessorC6report,omitempty"`
 	// BIOS Token for setting CPU C State configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	ProcessorCstate *string `json:"ProcessorCstate,omitempty"`
-	// BIOS Token for setting P-SATA mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring Psata token. * `Disabled` - Value - Disabled for configuring Psata token. * `LSI SW RAID` - Value - LSI SW RAID for configuring Psata token.
+	// BIOS Token for setting P-SATA Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring Psata token. * `Disabled` - Value - Disabled for configuring Psata token. * `LSI SW RAID` - Value - LSI SW RAID for configuring Psata token.
 	Psata *string `json:"Psata,omitempty"`
 	// BIOS Token for setting P-STATE Coordination configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `HW ALL` - Value - HW ALL for configuring PstateCoordType token. * `SW ALL` - Value - SW ALL for configuring PstateCoordType token. * `SW ANY` - Value - SW ANY for configuring PstateCoordType token.
 	PstateCoordType *string `json:"PstateCoordType,omitempty"`
@@ -339,14 +355,16 @@ type BiosPolicyAllOf struct {
 	RankInterLeave *string `json:"RankInterLeave,omitempty"`
 	// BIOS Token for setting Redirection After BIOS POST configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Always Enable` - Value - Always Enable for configuring RedirectionAfterPost token. * `Bootloader` - Value - Bootloader for configuring RedirectionAfterPost token.
 	RedirectionAfterPost *string `json:"RedirectionAfterPost,omitempty"`
-	// BIOS Token for setting SATA mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring SataModeSelect token. * `Disabled` - Value - Disabled for configuring SataModeSelect token. * `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.
+	// BIOS Token for setting SATA Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `AHCI` - Value - AHCI for configuring SataModeSelect token. * `Disabled` - Value - Disabled for configuring SataModeSelect token. * `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.
 	SataModeSelect *string `json:"SataModeSelect,omitempty"`
-	// BIOS Token for setting SelectMemory RAS configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token. * `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token. * `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token. * `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token. * `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.
+	// BIOS Token for setting Memory RAS Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token. * `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token. * `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token. * `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token. * `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token. * `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.
 	SelectMemoryRasConfiguration *string `json:"SelectMemoryRasConfiguration,omitempty"`
-	// BIOS Token for setting Select PPR Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring SelectPprType token. * `Hard PPR` - Value - Hard PPR for configuring SelectPprType token.
+	// BIOS Token for setting PPR Type configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring SelectPprType token. * `Hard PPR` - Value - Hard PPR for configuring SelectPprType token.
 	SelectPprType *string `json:"SelectPprType,omitempty"`
 	// BIOS Token for setting Serial A Enable configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SerialPortAenable *string `json:"SerialPortAenable,omitempty"`
+	// BIOS Token for setting Secured Encrypted Virtualization configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `253 ASIDs` - Value - 253 ASIDs for configuring Sev token. * `509 ASIDs` - Value - 509 ASIDs for configuring Sev token. * `Auto` - Value - Auto for configuring Sev token.
+	Sev *string `json:"Sev,omitempty"`
 	// BIOS Token for setting Single PCTL configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring SinglePctlEnable token. * `Yes` - Value - Yes for configuring SinglePctlEnable token.
 	SinglePctlEnable *string `json:"SinglePctlEnable,omitempty"`
 	// BIOS Token for setting PCIe Slot:10 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Slot10linkSpeed token. * `Disabled` - Value - Disabled for configuring Slot10linkSpeed token. * `GEN1` - Value - GEN1 for configuring Slot10linkSpeed token. * `GEN2` - Value - GEN2 for configuring Slot10linkSpeed token. * `GEN3` - Value - GEN3 for configuring Slot10linkSpeed token.
@@ -563,6 +581,8 @@ type BiosPolicyAllOf struct {
 	TpmControl *string `json:"TpmControl,omitempty"`
 	// BIOS Token for setting TPM Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	TpmSupport *string `json:"TpmSupport,omitempty"`
+	// BIOS Token for setting Transparent Secure Memory Encryption configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Tsme token. * `disabled` - Value - disabled for configuring Tsme token. * `enabled` - Value - enabled for configuring Tsme token.
+	Tsme *string `json:"Tsme,omitempty"`
 	// BIOS Token for setting Intel Trusted Execution Technology Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	TxtSupport *string `json:"TxtSupport,omitempty"`
 	// BIOS Token for setting Boot Order Rules configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Loose` - Value - Loose for configuring UcsmBootOrderRule token. * `Strict` - Value - Strict for configuring UcsmBootOrderRule token.
@@ -635,6 +655,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.AcsControlSlot14state = &acsControlSlot14state
 	var adjacentCacheLinePrefetch string = "platform-default"
 	this.AdjacentCacheLinePrefetch = &adjacentCacheLinePrefetch
+	var advancedMemTest string = "platform-default"
+	this.AdvancedMemTest = &advancedMemTest
 	var allUsbDevices string = "platform-default"
 	this.AllUsbDevices = &allUsbDevices
 	var altitude string = "platform-default"
@@ -733,6 +755,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.DramClockThrottling = &dramClockThrottling
 	var dramRefreshRate string = "platform-default"
 	this.DramRefreshRate = &dramRefreshRate
+	var dramSwThermalThrottling string = "platform-default"
+	this.DramSwThermalThrottling = &dramSwThermalThrottling
 	var enableClockSpreadSpec string = "platform-default"
 	this.EnableClockSpreadSpec = &enableClockSpreadSpec
 	var energyEfficientTurbo string = "platform-default"
@@ -741,6 +765,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.EngPerfTuning = &engPerfTuning
 	var enhancedIntelSpeedStepTech string = "platform-default"
 	this.EnhancedIntelSpeedStepTech = &enhancedIntelSpeedStepTech
+	var eppEnable string = "platform-default"
+	this.EppEnable = &eppEnable
 	var eppProfile string = "platform-default"
 	this.EppProfile = &eppProfile
 	var executeDisableBit string = "platform-default"
@@ -781,8 +807,12 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.IohResource = &iohResource
 	var ipPrefetch string = "platform-default"
 	this.IpPrefetch = &ipPrefetch
+	var ipv4http string = "platform-default"
+	this.Ipv4http = &ipv4http
 	var ipv4pxe string = "platform-default"
 	this.Ipv4pxe = &ipv4pxe
+	var ipv6http string = "platform-default"
+	this.Ipv6http = &ipv6http
 	var ipv6pxe string = "platform-default"
 	this.Ipv6pxe = &ipv6pxe
 	var ktiPrefetch string = "platform-default"
@@ -811,8 +841,12 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.MemoryInterLeave = &memoryInterLeave
 	var memoryMappedIoAbove4gb string = "platform-default"
 	this.MemoryMappedIoAbove4gb = &memoryMappedIoAbove4gb
+	var memoryRefreshRate string = "platform-default"
+	this.MemoryRefreshRate = &memoryRefreshRate
 	var memorySizeLimit string = "platform-default"
 	this.MemorySizeLimit = &memorySizeLimit
+	var memoryThermalThrottling string = "platform-default"
+	this.MemoryThermalThrottling = &memoryThermalThrottling
 	var mirroringMode string = "platform-default"
 	this.MirroringMode = &mirroringMode
 	var mmcfgBase string = "platform-default"
@@ -841,6 +875,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.OutOfBandMgmtPort = &outOfBandMgmtPort
 	var packageCstateLimit string = "platform-default"
 	this.PackageCstateLimit = &packageCstateLimit
+	var panicHighWatermark string = "platform-default"
+	this.PanicHighWatermark = &panicHighWatermark
 	var partialMirrorModeConfig string = "platform-default"
 	this.PartialMirrorModeConfig = &partialMirrorModeConfig
 	var partialMirrorPercent string = "platform-default"
@@ -935,6 +971,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.SelectPprType = &selectPprType
 	var serialPortAenable string = "platform-default"
 	this.SerialPortAenable = &serialPortAenable
+	var sev string = "platform-default"
+	this.Sev = &sev
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -1151,6 +1189,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.TpmControl = &tpmControl
 	var tpmSupport string = "platform-default"
 	this.TpmSupport = &tpmSupport
+	var tsme string = "platform-default"
+	this.Tsme = &tsme
 	var txtSupport string = "platform-default"
 	this.TxtSupport = &txtSupport
 	var ucsmBootOrderRule string = "platform-default"
@@ -1219,6 +1259,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.AcsControlSlot14state = &acsControlSlot14state
 	var adjacentCacheLinePrefetch string = "platform-default"
 	this.AdjacentCacheLinePrefetch = &adjacentCacheLinePrefetch
+	var advancedMemTest string = "platform-default"
+	this.AdvancedMemTest = &advancedMemTest
 	var allUsbDevices string = "platform-default"
 	this.AllUsbDevices = &allUsbDevices
 	var altitude string = "platform-default"
@@ -1317,6 +1359,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.DramClockThrottling = &dramClockThrottling
 	var dramRefreshRate string = "platform-default"
 	this.DramRefreshRate = &dramRefreshRate
+	var dramSwThermalThrottling string = "platform-default"
+	this.DramSwThermalThrottling = &dramSwThermalThrottling
 	var enableClockSpreadSpec string = "platform-default"
 	this.EnableClockSpreadSpec = &enableClockSpreadSpec
 	var energyEfficientTurbo string = "platform-default"
@@ -1325,6 +1369,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.EngPerfTuning = &engPerfTuning
 	var enhancedIntelSpeedStepTech string = "platform-default"
 	this.EnhancedIntelSpeedStepTech = &enhancedIntelSpeedStepTech
+	var eppEnable string = "platform-default"
+	this.EppEnable = &eppEnable
 	var eppProfile string = "platform-default"
 	this.EppProfile = &eppProfile
 	var executeDisableBit string = "platform-default"
@@ -1365,8 +1411,12 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.IohResource = &iohResource
 	var ipPrefetch string = "platform-default"
 	this.IpPrefetch = &ipPrefetch
+	var ipv4http string = "platform-default"
+	this.Ipv4http = &ipv4http
 	var ipv4pxe string = "platform-default"
 	this.Ipv4pxe = &ipv4pxe
+	var ipv6http string = "platform-default"
+	this.Ipv6http = &ipv6http
 	var ipv6pxe string = "platform-default"
 	this.Ipv6pxe = &ipv6pxe
 	var ktiPrefetch string = "platform-default"
@@ -1395,8 +1445,12 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.MemoryInterLeave = &memoryInterLeave
 	var memoryMappedIoAbove4gb string = "platform-default"
 	this.MemoryMappedIoAbove4gb = &memoryMappedIoAbove4gb
+	var memoryRefreshRate string = "platform-default"
+	this.MemoryRefreshRate = &memoryRefreshRate
 	var memorySizeLimit string = "platform-default"
 	this.MemorySizeLimit = &memorySizeLimit
+	var memoryThermalThrottling string = "platform-default"
+	this.MemoryThermalThrottling = &memoryThermalThrottling
 	var mirroringMode string = "platform-default"
 	this.MirroringMode = &mirroringMode
 	var mmcfgBase string = "platform-default"
@@ -1425,6 +1479,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.OutOfBandMgmtPort = &outOfBandMgmtPort
 	var packageCstateLimit string = "platform-default"
 	this.PackageCstateLimit = &packageCstateLimit
+	var panicHighWatermark string = "platform-default"
+	this.PanicHighWatermark = &panicHighWatermark
 	var partialMirrorModeConfig string = "platform-default"
 	this.PartialMirrorModeConfig = &partialMirrorModeConfig
 	var partialMirrorPercent string = "platform-default"
@@ -1519,6 +1575,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.SelectPprType = &selectPprType
 	var serialPortAenable string = "platform-default"
 	this.SerialPortAenable = &serialPortAenable
+	var sev string = "platform-default"
+	this.Sev = &sev
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -1735,6 +1793,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.TpmControl = &tpmControl
 	var tpmSupport string = "platform-default"
 	this.TpmSupport = &tpmSupport
+	var tsme string = "platform-default"
+	this.Tsme = &tsme
 	var txtSupport string = "platform-default"
 	this.TxtSupport = &txtSupport
 	var ucsmBootOrderRule string = "platform-default"
@@ -2230,6 +2290,38 @@ func (o *BiosPolicyAllOf) HasAdjacentCacheLinePrefetch() bool {
 // SetAdjacentCacheLinePrefetch gets a reference to the given string and assigns it to the AdjacentCacheLinePrefetch field.
 func (o *BiosPolicyAllOf) SetAdjacentCacheLinePrefetch(v string) {
 	o.AdjacentCacheLinePrefetch = &v
+}
+
+// GetAdvancedMemTest returns the AdvancedMemTest field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetAdvancedMemTest() string {
+	if o == nil || o.AdvancedMemTest == nil {
+		var ret string
+		return ret
+	}
+	return *o.AdvancedMemTest
+}
+
+// GetAdvancedMemTestOk returns a tuple with the AdvancedMemTest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetAdvancedMemTestOk() (*string, bool) {
+	if o == nil || o.AdvancedMemTest == nil {
+		return nil, false
+	}
+	return o.AdvancedMemTest, true
+}
+
+// HasAdvancedMemTest returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasAdvancedMemTest() bool {
+	if o != nil && o.AdvancedMemTest != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdvancedMemTest gets a reference to the given string and assigns it to the AdvancedMemTest field.
+func (o *BiosPolicyAllOf) SetAdvancedMemTest(v string) {
+	o.AdvancedMemTest = &v
 }
 
 // GetAllUsbDevices returns the AllUsbDevices field value if set, zero value otherwise.
@@ -3800,6 +3892,38 @@ func (o *BiosPolicyAllOf) SetDramRefreshRate(v string) {
 	o.DramRefreshRate = &v
 }
 
+// GetDramSwThermalThrottling returns the DramSwThermalThrottling field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetDramSwThermalThrottling() string {
+	if o == nil || o.DramSwThermalThrottling == nil {
+		var ret string
+		return ret
+	}
+	return *o.DramSwThermalThrottling
+}
+
+// GetDramSwThermalThrottlingOk returns a tuple with the DramSwThermalThrottling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetDramSwThermalThrottlingOk() (*string, bool) {
+	if o == nil || o.DramSwThermalThrottling == nil {
+		return nil, false
+	}
+	return o.DramSwThermalThrottling, true
+}
+
+// HasDramSwThermalThrottling returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasDramSwThermalThrottling() bool {
+	if o != nil && o.DramSwThermalThrottling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDramSwThermalThrottling gets a reference to the given string and assigns it to the DramSwThermalThrottling field.
+func (o *BiosPolicyAllOf) SetDramSwThermalThrottling(v string) {
+	o.DramSwThermalThrottling = &v
+}
+
 // GetEnableClockSpreadSpec returns the EnableClockSpreadSpec field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetEnableClockSpreadSpec() string {
 	if o == nil || o.EnableClockSpreadSpec == nil {
@@ -3926,6 +4050,38 @@ func (o *BiosPolicyAllOf) HasEnhancedIntelSpeedStepTech() bool {
 // SetEnhancedIntelSpeedStepTech gets a reference to the given string and assigns it to the EnhancedIntelSpeedStepTech field.
 func (o *BiosPolicyAllOf) SetEnhancedIntelSpeedStepTech(v string) {
 	o.EnhancedIntelSpeedStepTech = &v
+}
+
+// GetEppEnable returns the EppEnable field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetEppEnable() string {
+	if o == nil || o.EppEnable == nil {
+		var ret string
+		return ret
+	}
+	return *o.EppEnable
+}
+
+// GetEppEnableOk returns a tuple with the EppEnable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetEppEnableOk() (*string, bool) {
+	if o == nil || o.EppEnable == nil {
+		return nil, false
+	}
+	return o.EppEnable, true
+}
+
+// HasEppEnable returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasEppEnable() bool {
+	if o != nil && o.EppEnable != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEppEnable gets a reference to the given string and assigns it to the EppEnable field.
+func (o *BiosPolicyAllOf) SetEppEnable(v string) {
+	o.EppEnable = &v
 }
 
 // GetEppProfile returns the EppProfile field value if set, zero value otherwise.
@@ -4568,6 +4724,38 @@ func (o *BiosPolicyAllOf) SetIpPrefetch(v string) {
 	o.IpPrefetch = &v
 }
 
+// GetIpv4http returns the Ipv4http field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetIpv4http() string {
+	if o == nil || o.Ipv4http == nil {
+		var ret string
+		return ret
+	}
+	return *o.Ipv4http
+}
+
+// GetIpv4httpOk returns a tuple with the Ipv4http field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetIpv4httpOk() (*string, bool) {
+	if o == nil || o.Ipv4http == nil {
+		return nil, false
+	}
+	return o.Ipv4http, true
+}
+
+// HasIpv4http returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasIpv4http() bool {
+	if o != nil && o.Ipv4http != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpv4http gets a reference to the given string and assigns it to the Ipv4http field.
+func (o *BiosPolicyAllOf) SetIpv4http(v string) {
+	o.Ipv4http = &v
+}
+
 // GetIpv4pxe returns the Ipv4pxe field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetIpv4pxe() string {
 	if o == nil || o.Ipv4pxe == nil {
@@ -4598,6 +4786,38 @@ func (o *BiosPolicyAllOf) HasIpv4pxe() bool {
 // SetIpv4pxe gets a reference to the given string and assigns it to the Ipv4pxe field.
 func (o *BiosPolicyAllOf) SetIpv4pxe(v string) {
 	o.Ipv4pxe = &v
+}
+
+// GetIpv6http returns the Ipv6http field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetIpv6http() string {
+	if o == nil || o.Ipv6http == nil {
+		var ret string
+		return ret
+	}
+	return *o.Ipv6http
+}
+
+// GetIpv6httpOk returns a tuple with the Ipv6http field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetIpv6httpOk() (*string, bool) {
+	if o == nil || o.Ipv6http == nil {
+		return nil, false
+	}
+	return o.Ipv6http, true
+}
+
+// HasIpv6http returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasIpv6http() bool {
+	if o != nil && o.Ipv6http != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpv6http gets a reference to the given string and assigns it to the Ipv6http field.
+func (o *BiosPolicyAllOf) SetIpv6http(v string) {
+	o.Ipv6http = &v
 }
 
 // GetIpv6pxe returns the Ipv6pxe field value if set, zero value otherwise.
@@ -5048,6 +5268,38 @@ func (o *BiosPolicyAllOf) SetMemoryMappedIoAbove4gb(v string) {
 	o.MemoryMappedIoAbove4gb = &v
 }
 
+// GetMemoryRefreshRate returns the MemoryRefreshRate field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetMemoryRefreshRate() string {
+	if o == nil || o.MemoryRefreshRate == nil {
+		var ret string
+		return ret
+	}
+	return *o.MemoryRefreshRate
+}
+
+// GetMemoryRefreshRateOk returns a tuple with the MemoryRefreshRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetMemoryRefreshRateOk() (*string, bool) {
+	if o == nil || o.MemoryRefreshRate == nil {
+		return nil, false
+	}
+	return o.MemoryRefreshRate, true
+}
+
+// HasMemoryRefreshRate returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasMemoryRefreshRate() bool {
+	if o != nil && o.MemoryRefreshRate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryRefreshRate gets a reference to the given string and assigns it to the MemoryRefreshRate field.
+func (o *BiosPolicyAllOf) SetMemoryRefreshRate(v string) {
+	o.MemoryRefreshRate = &v
+}
+
 // GetMemorySizeLimit returns the MemorySizeLimit field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetMemorySizeLimit() string {
 	if o == nil || o.MemorySizeLimit == nil {
@@ -5078,6 +5330,38 @@ func (o *BiosPolicyAllOf) HasMemorySizeLimit() bool {
 // SetMemorySizeLimit gets a reference to the given string and assigns it to the MemorySizeLimit field.
 func (o *BiosPolicyAllOf) SetMemorySizeLimit(v string) {
 	o.MemorySizeLimit = &v
+}
+
+// GetMemoryThermalThrottling returns the MemoryThermalThrottling field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetMemoryThermalThrottling() string {
+	if o == nil || o.MemoryThermalThrottling == nil {
+		var ret string
+		return ret
+	}
+	return *o.MemoryThermalThrottling
+}
+
+// GetMemoryThermalThrottlingOk returns a tuple with the MemoryThermalThrottling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetMemoryThermalThrottlingOk() (*string, bool) {
+	if o == nil || o.MemoryThermalThrottling == nil {
+		return nil, false
+	}
+	return o.MemoryThermalThrottling, true
+}
+
+// HasMemoryThermalThrottling returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasMemoryThermalThrottling() bool {
+	if o != nil && o.MemoryThermalThrottling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryThermalThrottling gets a reference to the given string and assigns it to the MemoryThermalThrottling field.
+func (o *BiosPolicyAllOf) SetMemoryThermalThrottling(v string) {
+	o.MemoryThermalThrottling = &v
 }
 
 // GetMirroringMode returns the MirroringMode field value if set, zero value otherwise.
@@ -5526,6 +5810,38 @@ func (o *BiosPolicyAllOf) HasPackageCstateLimit() bool {
 // SetPackageCstateLimit gets a reference to the given string and assigns it to the PackageCstateLimit field.
 func (o *BiosPolicyAllOf) SetPackageCstateLimit(v string) {
 	o.PackageCstateLimit = &v
+}
+
+// GetPanicHighWatermark returns the PanicHighWatermark field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetPanicHighWatermark() string {
+	if o == nil || o.PanicHighWatermark == nil {
+		var ret string
+		return ret
+	}
+	return *o.PanicHighWatermark
+}
+
+// GetPanicHighWatermarkOk returns a tuple with the PanicHighWatermark field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetPanicHighWatermarkOk() (*string, bool) {
+	if o == nil || o.PanicHighWatermark == nil {
+		return nil, false
+	}
+	return o.PanicHighWatermark, true
+}
+
+// HasPanicHighWatermark returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasPanicHighWatermark() bool {
+	if o != nil && o.PanicHighWatermark != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPanicHighWatermark gets a reference to the given string and assigns it to the PanicHighWatermark field.
+func (o *BiosPolicyAllOf) SetPanicHighWatermark(v string) {
+	o.PanicHighWatermark = &v
 }
 
 // GetPartialMirrorModeConfig returns the PartialMirrorModeConfig field value if set, zero value otherwise.
@@ -7030,6 +7346,38 @@ func (o *BiosPolicyAllOf) HasSerialPortAenable() bool {
 // SetSerialPortAenable gets a reference to the given string and assigns it to the SerialPortAenable field.
 func (o *BiosPolicyAllOf) SetSerialPortAenable(v string) {
 	o.SerialPortAenable = &v
+}
+
+// GetSev returns the Sev field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetSev() string {
+	if o == nil || o.Sev == nil {
+		var ret string
+		return ret
+	}
+	return *o.Sev
+}
+
+// GetSevOk returns a tuple with the Sev field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetSevOk() (*string, bool) {
+	if o == nil || o.Sev == nil {
+		return nil, false
+	}
+	return o.Sev, true
+}
+
+// HasSev returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasSev() bool {
+	if o != nil && o.Sev != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSev gets a reference to the given string and assigns it to the Sev field.
+func (o *BiosPolicyAllOf) SetSev(v string) {
+	o.Sev = &v
 }
 
 // GetSinglePctlEnable returns the SinglePctlEnable field value if set, zero value otherwise.
@@ -10488,6 +10836,38 @@ func (o *BiosPolicyAllOf) SetTpmSupport(v string) {
 	o.TpmSupport = &v
 }
 
+// GetTsme returns the Tsme field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetTsme() string {
+	if o == nil || o.Tsme == nil {
+		var ret string
+		return ret
+	}
+	return *o.Tsme
+}
+
+// GetTsmeOk returns a tuple with the Tsme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetTsmeOk() (*string, bool) {
+	if o == nil || o.Tsme == nil {
+		return nil, false
+	}
+	return o.Tsme, true
+}
+
+// HasTsme returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasTsme() bool {
+	if o != nil && o.Tsme != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTsme gets a reference to the given string and assigns it to the Tsme field.
+func (o *BiosPolicyAllOf) SetTsme(v string) {
+	o.Tsme = &v
+}
+
 // GetTxtSupport returns the TxtSupport field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetTxtSupport() string {
 	if o == nil || o.TxtSupport == nil {
@@ -11080,6 +11460,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.AdjacentCacheLinePrefetch != nil {
 		toSerialize["AdjacentCacheLinePrefetch"] = o.AdjacentCacheLinePrefetch
 	}
+	if o.AdvancedMemTest != nil {
+		toSerialize["AdvancedMemTest"] = o.AdvancedMemTest
+	}
 	if o.AllUsbDevices != nil {
 		toSerialize["AllUsbDevices"] = o.AllUsbDevices
 	}
@@ -11227,6 +11610,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.DramRefreshRate != nil {
 		toSerialize["DramRefreshRate"] = o.DramRefreshRate
 	}
+	if o.DramSwThermalThrottling != nil {
+		toSerialize["DramSwThermalThrottling"] = o.DramSwThermalThrottling
+	}
 	if o.EnableClockSpreadSpec != nil {
 		toSerialize["EnableClockSpreadSpec"] = o.EnableClockSpreadSpec
 	}
@@ -11238,6 +11624,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.EnhancedIntelSpeedStepTech != nil {
 		toSerialize["EnhancedIntelSpeedStepTech"] = o.EnhancedIntelSpeedStepTech
+	}
+	if o.EppEnable != nil {
+		toSerialize["EppEnable"] = o.EppEnable
 	}
 	if o.EppProfile != nil {
 		toSerialize["EppProfile"] = o.EppProfile
@@ -11299,8 +11688,14 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.IpPrefetch != nil {
 		toSerialize["IpPrefetch"] = o.IpPrefetch
 	}
+	if o.Ipv4http != nil {
+		toSerialize["Ipv4http"] = o.Ipv4http
+	}
 	if o.Ipv4pxe != nil {
 		toSerialize["Ipv4pxe"] = o.Ipv4pxe
+	}
+	if o.Ipv6http != nil {
+		toSerialize["Ipv6http"] = o.Ipv6http
 	}
 	if o.Ipv6pxe != nil {
 		toSerialize["Ipv6pxe"] = o.Ipv6pxe
@@ -11344,8 +11739,14 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.MemoryMappedIoAbove4gb != nil {
 		toSerialize["MemoryMappedIoAbove4gb"] = o.MemoryMappedIoAbove4gb
 	}
+	if o.MemoryRefreshRate != nil {
+		toSerialize["MemoryRefreshRate"] = o.MemoryRefreshRate
+	}
 	if o.MemorySizeLimit != nil {
 		toSerialize["MemorySizeLimit"] = o.MemorySizeLimit
+	}
+	if o.MemoryThermalThrottling != nil {
+		toSerialize["MemoryThermalThrottling"] = o.MemoryThermalThrottling
 	}
 	if o.MirroringMode != nil {
 		toSerialize["MirroringMode"] = o.MirroringMode
@@ -11388,6 +11789,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.PackageCstateLimit != nil {
 		toSerialize["PackageCstateLimit"] = o.PackageCstateLimit
+	}
+	if o.PanicHighWatermark != nil {
+		toSerialize["PanicHighWatermark"] = o.PanicHighWatermark
 	}
 	if o.PartialMirrorModeConfig != nil {
 		toSerialize["PartialMirrorModeConfig"] = o.PartialMirrorModeConfig
@@ -11529,6 +11933,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.SerialPortAenable != nil {
 		toSerialize["SerialPortAenable"] = o.SerialPortAenable
+	}
+	if o.Sev != nil {
+		toSerialize["Sev"] = o.Sev
 	}
 	if o.SinglePctlEnable != nil {
 		toSerialize["SinglePctlEnable"] = o.SinglePctlEnable
@@ -11854,6 +12261,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.TpmSupport != nil {
 		toSerialize["TpmSupport"] = o.TpmSupport
 	}
+	if o.Tsme != nil {
+		toSerialize["Tsme"] = o.Tsme
+	}
 	if o.TxtSupport != nil {
 		toSerialize["TxtSupport"] = o.TxtSupport
 	}
@@ -11938,6 +12348,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AcsControlSlot13state")
 		delete(additionalProperties, "AcsControlSlot14state")
 		delete(additionalProperties, "AdjacentCacheLinePrefetch")
+		delete(additionalProperties, "AdvancedMemTest")
 		delete(additionalProperties, "AllUsbDevices")
 		delete(additionalProperties, "Altitude")
 		delete(additionalProperties, "AspmSupport")
@@ -11987,10 +12398,12 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DirectCacheAccess")
 		delete(additionalProperties, "DramClockThrottling")
 		delete(additionalProperties, "DramRefreshRate")
+		delete(additionalProperties, "DramSwThermalThrottling")
 		delete(additionalProperties, "EnableClockSpreadSpec")
 		delete(additionalProperties, "EnergyEfficientTurbo")
 		delete(additionalProperties, "EngPerfTuning")
 		delete(additionalProperties, "EnhancedIntelSpeedStepTech")
+		delete(additionalProperties, "EppEnable")
 		delete(additionalProperties, "EppProfile")
 		delete(additionalProperties, "ExecuteDisableBit")
 		delete(additionalProperties, "ExtendedApic")
@@ -12011,7 +12424,9 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IohErrorEnable")
 		delete(additionalProperties, "IohResource")
 		delete(additionalProperties, "IpPrefetch")
+		delete(additionalProperties, "Ipv4http")
 		delete(additionalProperties, "Ipv4pxe")
+		delete(additionalProperties, "Ipv6http")
 		delete(additionalProperties, "Ipv6pxe")
 		delete(additionalProperties, "KtiPrefetch")
 		delete(additionalProperties, "LegacyOsRedirection")
@@ -12026,7 +12441,9 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MakeDeviceNonBootable")
 		delete(additionalProperties, "MemoryInterLeave")
 		delete(additionalProperties, "MemoryMappedIoAbove4gb")
+		delete(additionalProperties, "MemoryRefreshRate")
 		delete(additionalProperties, "MemorySizeLimit")
+		delete(additionalProperties, "MemoryThermalThrottling")
 		delete(additionalProperties, "MirroringMode")
 		delete(additionalProperties, "MmcfgBase")
 		delete(additionalProperties, "NetworkStack")
@@ -12041,6 +12458,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OsBootWatchdogTimerTimeout")
 		delete(additionalProperties, "OutOfBandMgmtPort")
 		delete(additionalProperties, "PackageCstateLimit")
+		delete(additionalProperties, "PanicHighWatermark")
 		delete(additionalProperties, "PartialMirrorModeConfig")
 		delete(additionalProperties, "PartialMirrorPercent")
 		delete(additionalProperties, "PartialMirrorValue1")
@@ -12088,6 +12506,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SelectMemoryRasConfiguration")
 		delete(additionalProperties, "SelectPprType")
 		delete(additionalProperties, "SerialPortAenable")
+		delete(additionalProperties, "Sev")
 		delete(additionalProperties, "SinglePctlEnable")
 		delete(additionalProperties, "Slot10linkSpeed")
 		delete(additionalProperties, "Slot10state")
@@ -12196,6 +12615,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "TerminalType")
 		delete(additionalProperties, "TpmControl")
 		delete(additionalProperties, "TpmSupport")
+		delete(additionalProperties, "Tsme")
 		delete(additionalProperties, "TxtSupport")
 		delete(additionalProperties, "UcsmBootOrderRule")
 		delete(additionalProperties, "UfsDisable")

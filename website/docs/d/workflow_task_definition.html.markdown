@@ -11,7 +11,7 @@ Used to define a task which can be included within a workflow. Task definition c
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `default_version`:(bool) When true this will be the task version that is used when a specific task definition version is not specified. The very first task definition created with a name will be set as the default version, after that user can explicitly set any version of the task definition as the default version. 
-* `description`:(string) The task definition description to describe what this task will do when executed. 
+* `description`:(string) A user friendly description about task on what operations are done as part of the task execution and any other specific information about task input and output. 
 * `label`:(string) A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_). 
 * `license_entitlement`:(string) License entitlement required to run this task. It is determined by license requirement of features.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

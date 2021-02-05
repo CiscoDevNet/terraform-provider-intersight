@@ -11,6 +11,8 @@ Virtual Ethernet Interface.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `failover_enabled`:(bool) Setting this to true esnures that the traffic failsover from one uplink to another auotmatically in case of an uplink failure. It is applicable for Cisco VIC adapters only which are connected to Fabric Interconnect cluster. The uplink if specified determines the primary uplink in case of a failover. 
+* `iscsi_ip_v4_address_allocation_type`:(string) Static/Dynamic Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.* `None` - Type defines that property is not applicable for an interface.* `Auto` - The system selects an interface automatically - DHCP.* `Static` - Type represents that static information or properties are associated to an interface.* `Pool` - Type defines that property value will be fetched from an associated pool. 
+* `iscsi_ipv4_address`:(string) IP address associated to the vNIC. 
 * `mac_address`:(string) The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. 
 * `mac_address_type`:(string) Type of allocation selected to assign a MAC address for the vnic.* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

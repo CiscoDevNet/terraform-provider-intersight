@@ -66,7 +66,7 @@ func resourceHyperflexHxdpVersion() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -224,7 +224,8 @@ func resourceHyperflexHxdpVersionCreate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexHxdpVersion(conn.ctx).HyperflexHxdpVersion(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -239,7 +240,8 @@ func resourceHyperflexHxdpVersionRead(c context.Context, d *schema.ResourceData,
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHxdpVersionByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexHxdpVersion object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -394,7 +396,8 @@ func resourceHyperflexHxdpVersionUpdate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexHxdpVersion(conn.ctx, d.Id()).HyperflexHxdpVersion(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -409,7 +412,8 @@ func resourceHyperflexHxdpVersionDelete(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHxdpVersion(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexHxdpVersion object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

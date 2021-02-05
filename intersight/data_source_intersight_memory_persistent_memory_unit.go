@@ -51,7 +51,7 @@ func dataSourceMemoryPersistentMemoryUnit() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -235,6 +235,11 @@ func dataSourceMemoryPersistentMemoryUnit() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"oper_reason": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"oper_state": {
 				Description: "This represents the operational state of the memory unit on a server.",
 				Type:        schema.TypeString,
@@ -605,7 +610,8 @@ func dataSourceMemoryPersistentMemoryUnitRead(c context.Context, d *schema.Resou
 		return diag.Errorf("json marshal of MemoryPersistentMemoryUnit object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryUnitList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching MemoryPersistentMemoryUnit: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -714,6 +720,9 @@ func dataSourceMemoryPersistentMemoryUnitRead(c context.Context, d *schema.Resou
 			}
 			if err := d.Set("oper_power_state", (s.GetOperPowerState())); err != nil {
 				return diag.Errorf("error occurred while setting property OperPowerState: %s", err.Error())
+			}
+			if err := d.Set("oper_reason", (s.GetOperReason())); err != nil {
+				return diag.Errorf("error occurred while setting property OperReason: %s", err.Error())
 			}
 			if err := d.Set("oper_state", (s.GetOperState())); err != nil {
 				return diag.Errorf("error occurred while setting property OperState: %s", err.Error())

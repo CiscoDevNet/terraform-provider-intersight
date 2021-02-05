@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateFcpoolPoolRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFcp
 	return r
 }
 
-func (r ApiCreateFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, error) {
 	return r.ApiService.CreateFcpoolPoolExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *FcpoolApiService) CreateFcpoolPool(ctx _context.Context) ApiCreateFcpoo
  * Execute executes the request
  * @return FcpoolPool
  */
-func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.CreateFcpoolPool")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools"
@@ -92,8 +90,7 @@ func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fcpoolPool == nil {
-		executionError.error = "fcpoolPool is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("fcpoolPool is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest)
 	localVarPostBody = r.fcpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *FcpoolApiService) CreateFcpoolPoolExecute(r ApiCreateFcpoolPoolRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteFcpoolPoolRequest struct {
@@ -214,7 +208,7 @@ type ApiDeleteFcpoolPoolRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFcpoolPoolRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFcpoolPoolRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFcpoolPoolExecute(r)
 }
 
@@ -235,20 +229,18 @@ func (a *FcpoolApiService) DeleteFcpoolPool(ctx _context.Context, moid string) A
 /*
  * Execute executes the request
  */
-func (a *FcpoolApiService) DeleteFcpoolPoolExecute(r ApiDeleteFcpoolPoolRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) DeleteFcpoolPoolExecute(r ApiDeleteFcpoolPoolRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.DeleteFcpoolPool")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools/{Moid}"
@@ -277,22 +269,19 @@ func (a *FcpoolApiService) DeleteFcpoolPoolExecute(r ApiDeleteFcpoolPoolRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -350,7 +339,7 @@ func (a *FcpoolApiService) DeleteFcpoolPoolExecute(r ApiDeleteFcpoolPoolRequest)
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolFcBlockByMoidRequest struct {
@@ -359,7 +348,7 @@ type ApiGetFcpoolFcBlockByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFcpoolFcBlockByMoidRequest) Execute() (FcpoolFcBlock, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolFcBlockByMoidRequest) Execute() (FcpoolFcBlock, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolFcBlockByMoidExecute(r)
 }
 
@@ -381,21 +370,19 @@ func (a *FcpoolApiService) GetFcpoolFcBlockByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return FcpoolFcBlock
  */
-func (a *FcpoolApiService) GetFcpoolFcBlockByMoidExecute(r ApiGetFcpoolFcBlockByMoidRequest) (FcpoolFcBlock, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolFcBlockByMoidExecute(r ApiGetFcpoolFcBlockByMoidRequest) (FcpoolFcBlock, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolFcBlock
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolFcBlockByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/FcBlocks/{Moid}"
@@ -424,22 +411,19 @@ func (a *FcpoolApiService) GetFcpoolFcBlockByMoidExecute(r ApiGetFcpoolFcBlockBy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -506,7 +490,7 @@ func (a *FcpoolApiService) GetFcpoolFcBlockByMoidExecute(r ApiGetFcpoolFcBlockBy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolFcBlockListRequest struct {
@@ -570,7 +554,7 @@ func (r ApiGetFcpoolFcBlockListRequest) Tags(tags string) ApiGetFcpoolFcBlockLis
 	return r
 }
 
-func (r ApiGetFcpoolFcBlockListRequest) Execute() (FcpoolFcBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolFcBlockListRequest) Execute() (FcpoolFcBlockResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolFcBlockListExecute(r)
 }
 
@@ -590,21 +574,19 @@ func (a *FcpoolApiService) GetFcpoolFcBlockList(ctx _context.Context) ApiGetFcpo
  * Execute executes the request
  * @return FcpoolFcBlockResponse
  */
-func (a *FcpoolApiService) GetFcpoolFcBlockListExecute(r ApiGetFcpoolFcBlockListRequest) (FcpoolFcBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolFcBlockListExecute(r ApiGetFcpoolFcBlockListRequest) (FcpoolFcBlockResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolFcBlockResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolFcBlockList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/FcBlocks"
@@ -665,22 +647,19 @@ func (a *FcpoolApiService) GetFcpoolFcBlockListExecute(r ApiGetFcpoolFcBlockList
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -747,7 +726,7 @@ func (a *FcpoolApiService) GetFcpoolFcBlockListExecute(r ApiGetFcpoolFcBlockList
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolLeaseByMoidRequest struct {
@@ -756,7 +735,7 @@ type ApiGetFcpoolLeaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFcpoolLeaseByMoidRequest) Execute() (FcpoolLease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolLeaseByMoidRequest) Execute() (FcpoolLease, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolLeaseByMoidExecute(r)
 }
 
@@ -778,21 +757,19 @@ func (a *FcpoolApiService) GetFcpoolLeaseByMoid(ctx _context.Context, moid strin
  * Execute executes the request
  * @return FcpoolLease
  */
-func (a *FcpoolApiService) GetFcpoolLeaseByMoidExecute(r ApiGetFcpoolLeaseByMoidRequest) (FcpoolLease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolLeaseByMoidExecute(r ApiGetFcpoolLeaseByMoidRequest) (FcpoolLease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolLeaseByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Leases/{Moid}"
@@ -821,22 +798,19 @@ func (a *FcpoolApiService) GetFcpoolLeaseByMoidExecute(r ApiGetFcpoolLeaseByMoid
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -903,7 +877,7 @@ func (a *FcpoolApiService) GetFcpoolLeaseByMoidExecute(r ApiGetFcpoolLeaseByMoid
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolLeaseListRequest struct {
@@ -967,7 +941,7 @@ func (r ApiGetFcpoolLeaseListRequest) Tags(tags string) ApiGetFcpoolLeaseListReq
 	return r
 }
 
-func (r ApiGetFcpoolLeaseListRequest) Execute() (FcpoolLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolLeaseListRequest) Execute() (FcpoolLeaseResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolLeaseListExecute(r)
 }
 
@@ -987,21 +961,19 @@ func (a *FcpoolApiService) GetFcpoolLeaseList(ctx _context.Context) ApiGetFcpool
  * Execute executes the request
  * @return FcpoolLeaseResponse
  */
-func (a *FcpoolApiService) GetFcpoolLeaseListExecute(r ApiGetFcpoolLeaseListRequest) (FcpoolLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolLeaseListExecute(r ApiGetFcpoolLeaseListRequest) (FcpoolLeaseResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolLeaseList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Leases"
@@ -1062,22 +1034,19 @@ func (a *FcpoolApiService) GetFcpoolLeaseListExecute(r ApiGetFcpoolLeaseListRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1144,7 +1113,7 @@ func (a *FcpoolApiService) GetFcpoolLeaseListExecute(r ApiGetFcpoolLeaseListRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolPoolByMoidRequest struct {
@@ -1153,7 +1122,7 @@ type ApiGetFcpoolPoolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFcpoolPoolByMoidRequest) Execute() (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolPoolByMoidRequest) Execute() (FcpoolPool, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolPoolByMoidExecute(r)
 }
 
@@ -1175,21 +1144,19 @@ func (a *FcpoolApiService) GetFcpoolPoolByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return FcpoolPool
  */
-func (a *FcpoolApiService) GetFcpoolPoolByMoidExecute(r ApiGetFcpoolPoolByMoidRequest) (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolPoolByMoidExecute(r ApiGetFcpoolPoolByMoidRequest) (FcpoolPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolPoolByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools/{Moid}"
@@ -1218,22 +1185,19 @@ func (a *FcpoolApiService) GetFcpoolPoolByMoidExecute(r ApiGetFcpoolPoolByMoidRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1300,7 +1264,7 @@ func (a *FcpoolApiService) GetFcpoolPoolByMoidExecute(r ApiGetFcpoolPoolByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolPoolListRequest struct {
@@ -1364,7 +1328,7 @@ func (r ApiGetFcpoolPoolListRequest) Tags(tags string) ApiGetFcpoolPoolListReque
 	return r
 }
 
-func (r ApiGetFcpoolPoolListRequest) Execute() (FcpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolPoolListRequest) Execute() (FcpoolPoolResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolPoolListExecute(r)
 }
 
@@ -1384,21 +1348,19 @@ func (a *FcpoolApiService) GetFcpoolPoolList(ctx _context.Context) ApiGetFcpoolP
  * Execute executes the request
  * @return FcpoolPoolResponse
  */
-func (a *FcpoolApiService) GetFcpoolPoolListExecute(r ApiGetFcpoolPoolListRequest) (FcpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolPoolListExecute(r ApiGetFcpoolPoolListRequest) (FcpoolPoolResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolPoolList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools"
@@ -1459,22 +1421,19 @@ func (a *FcpoolApiService) GetFcpoolPoolListExecute(r ApiGetFcpoolPoolListReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1541,7 +1500,7 @@ func (a *FcpoolApiService) GetFcpoolPoolListExecute(r ApiGetFcpoolPoolListReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolPoolMemberByMoidRequest struct {
@@ -1550,7 +1509,7 @@ type ApiGetFcpoolPoolMemberByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFcpoolPoolMemberByMoidRequest) Execute() (FcpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolPoolMemberByMoidRequest) Execute() (FcpoolPoolMember, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolPoolMemberByMoidExecute(r)
 }
 
@@ -1572,21 +1531,19 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return FcpoolPoolMember
  */
-func (a *FcpoolApiService) GetFcpoolPoolMemberByMoidExecute(r ApiGetFcpoolPoolMemberByMoidRequest) (FcpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolPoolMemberByMoidExecute(r ApiGetFcpoolPoolMemberByMoidRequest) (FcpoolPoolMember, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPoolMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolPoolMemberByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/PoolMembers/{Moid}"
@@ -1615,22 +1572,19 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberByMoidExecute(r ApiGetFcpoolPoolMe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1697,7 +1651,7 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberByMoidExecute(r ApiGetFcpoolPoolMe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolPoolMemberListRequest struct {
@@ -1761,7 +1715,7 @@ func (r ApiGetFcpoolPoolMemberListRequest) Tags(tags string) ApiGetFcpoolPoolMem
 	return r
 }
 
-func (r ApiGetFcpoolPoolMemberListRequest) Execute() (FcpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolPoolMemberListRequest) Execute() (FcpoolPoolMemberResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolPoolMemberListExecute(r)
 }
 
@@ -1781,21 +1735,19 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberList(ctx _context.Context) ApiGetF
  * Execute executes the request
  * @return FcpoolPoolMemberResponse
  */
-func (a *FcpoolApiService) GetFcpoolPoolMemberListExecute(r ApiGetFcpoolPoolMemberListRequest) (FcpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolPoolMemberListExecute(r ApiGetFcpoolPoolMemberListRequest) (FcpoolPoolMemberResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPoolMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolPoolMemberList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/PoolMembers"
@@ -1856,22 +1808,19 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberListExecute(r ApiGetFcpoolPoolMemb
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1938,7 +1887,7 @@ func (a *FcpoolApiService) GetFcpoolPoolMemberListExecute(r ApiGetFcpoolPoolMemb
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolUniverseByMoidRequest struct {
@@ -1947,7 +1896,7 @@ type ApiGetFcpoolUniverseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFcpoolUniverseByMoidRequest) Execute() (FcpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolUniverseByMoidRequest) Execute() (FcpoolUniverse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolUniverseByMoidExecute(r)
 }
 
@@ -1969,21 +1918,19 @@ func (a *FcpoolApiService) GetFcpoolUniverseByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return FcpoolUniverse
  */
-func (a *FcpoolApiService) GetFcpoolUniverseByMoidExecute(r ApiGetFcpoolUniverseByMoidRequest) (FcpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolUniverseByMoidExecute(r ApiGetFcpoolUniverseByMoidRequest) (FcpoolUniverse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolUniverse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolUniverseByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Universes/{Moid}"
@@ -2012,22 +1959,19 @@ func (a *FcpoolApiService) GetFcpoolUniverseByMoidExecute(r ApiGetFcpoolUniverse
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2094,7 +2038,7 @@ func (a *FcpoolApiService) GetFcpoolUniverseByMoidExecute(r ApiGetFcpoolUniverse
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFcpoolUniverseListRequest struct {
@@ -2158,7 +2102,7 @@ func (r ApiGetFcpoolUniverseListRequest) Tags(tags string) ApiGetFcpoolUniverseL
 	return r
 }
 
-func (r ApiGetFcpoolUniverseListRequest) Execute() (FcpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFcpoolUniverseListRequest) Execute() (FcpoolUniverseResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFcpoolUniverseListExecute(r)
 }
 
@@ -2178,21 +2122,19 @@ func (a *FcpoolApiService) GetFcpoolUniverseList(ctx _context.Context) ApiGetFcp
  * Execute executes the request
  * @return FcpoolUniverseResponse
  */
-func (a *FcpoolApiService) GetFcpoolUniverseListExecute(r ApiGetFcpoolUniverseListRequest) (FcpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) GetFcpoolUniverseListExecute(r ApiGetFcpoolUniverseListRequest) (FcpoolUniverseResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolUniverseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.GetFcpoolUniverseList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Universes"
@@ -2253,22 +2195,19 @@ func (a *FcpoolApiService) GetFcpoolUniverseListExecute(r ApiGetFcpoolUniverseLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2335,7 +2274,7 @@ func (a *FcpoolApiService) GetFcpoolUniverseListExecute(r ApiGetFcpoolUniverseLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFcpoolPoolRequest struct {
@@ -2355,7 +2294,7 @@ func (r ApiPatchFcpoolPoolRequest) IfMatch(ifMatch string) ApiPatchFcpoolPoolReq
 	return r
 }
 
-func (r ApiPatchFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, error) {
 	return r.ApiService.PatchFcpoolPoolExecute(r)
 }
 
@@ -2377,21 +2316,19 @@ func (a *FcpoolApiService) PatchFcpoolPool(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return FcpoolPool
  */
-func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.PatchFcpoolPool")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools/{Moid}"
@@ -2401,8 +2338,7 @@ func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fcpoolPool == nil {
-		executionError.error = "fcpoolPool is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("fcpoolPool is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2429,22 +2365,19 @@ func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (
 	localVarPostBody = r.fcpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2511,7 +2444,7 @@ func (a *FcpoolApiService) PatchFcpoolPoolExecute(r ApiPatchFcpoolPoolRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFcpoolPoolRequest struct {
@@ -2531,7 +2464,7 @@ func (r ApiUpdateFcpoolPoolRequest) IfMatch(ifMatch string) ApiUpdateFcpoolPoolR
 	return r
 }
 
-func (r ApiUpdateFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFcpoolPoolRequest) Execute() (FcpoolPool, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFcpoolPoolExecute(r)
 }
 
@@ -2553,21 +2486,19 @@ func (a *FcpoolApiService) UpdateFcpoolPool(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return FcpoolPool
  */
-func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest) (FcpoolPool, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FcpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcpoolApiService.UpdateFcpoolPool")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fcpool/Pools/{Moid}"
@@ -2577,8 +2508,7 @@ func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fcpoolPool == nil {
-		executionError.error = "fcpoolPool is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("fcpoolPool is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2605,22 +2535,19 @@ func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest)
 	localVarPostBody = r.fcpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2687,5 +2614,5 @@ func (a *FcpoolApiService) UpdateFcpoolPoolExecute(r ApiUpdateFcpoolPoolRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

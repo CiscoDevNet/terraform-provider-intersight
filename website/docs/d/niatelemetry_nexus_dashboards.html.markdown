@@ -17,4 +17,8 @@ The following arguments can be used to get data of already created objects in In
 * `nd_type`:(string) Node type in Nexus Dashboard cluster. 
 * `nd_version`:(string) Version running on Nexus Dashboard. 
 * `number_of_apps`:(int) Number of applications installed in the Nexus Dashboard. 
+* `number_of_schemas_in_mso`:(int) Number of total schemas in Multi-Site Orchestrator. 
+* `number_of_sites_in_mso`:(int) Number of sites in Multi-Site Orchestrator. 
 * `number_of_sites_serviced`:(int) Number of sites serviced by ND. 
+* `number_of_tenants_in_mso`:(int) Number of total tenants in Multi-Site Orchestrator. 
+* `type_of_site_in_mso`:(string) Type of site added to Multi-Site Orchestrator. 

@@ -25,7 +25,7 @@ func resourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -68,7 +68,7 @@ func resourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -241,7 +241,8 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityEquipmentPhysicalDef(conn.ctx).CapabilityEquipmentPhysicalDef(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -256,7 +257,8 @@ func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.Res
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentPhysicalDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityEquipmentPhysicalDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -463,7 +465,8 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityEquipmentPhysicalDef(conn.ctx, d.Id()).CapabilityEquipmentPhysicalDef(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -478,7 +481,8 @@ func resourceCapabilityEquipmentPhysicalDefDelete(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityEquipmentPhysicalDef(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityEquipmentPhysicalDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

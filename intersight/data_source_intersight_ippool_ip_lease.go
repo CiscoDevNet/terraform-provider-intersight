@@ -20,6 +20,11 @@ func dataSourceIppoolIpLease() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"allocation_type": {
+				Description: "Type of the lease allocation either static or dynamic (i.e via pool).\n* `dynamic` - Identifiers to be allocated by system.\n* `static` - Identifiers are assigned by the user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"assigned_to_entity": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -59,8 +64,47 @@ func dataSourceIppoolIpLease() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"block_lease": {
+				Description: "A reference to a ippoolBlockLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -73,14 +117,12 @@ func dataSourceIppoolIpLease() *schema.Resource {
 				Description: "IPv4 Address given as a lease to an external entity like server profiles.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"ip_v4_config": {
 				Description: "Netmask, Gateway and DNS settings for IPv4 addresses.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -89,7 +131,7 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -97,16 +139,14 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							Description: "IP address of the default IPv4 gateway.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"netmask": {
 							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -115,29 +155,26 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							Description: "IP Address of the primary Domain Name System (DNS) server.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"secondary_dns": {
 							Description: "IP Address of the secondary Domain Name System (DNS) server.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
+				Computed: true,
 			},
 			"ip_v6_address": {
 				Description: "IPv6 Address given as a lease to an external entity like server profiles.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"ip_v6_config": {
 				Description: "Netmask, Gateway and DNS settings for IPv6 addresses.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -146,7 +183,7 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -154,10 +191,9 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							Description: "IP address of the default IPv6 gateway.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -166,22 +202,20 @@ func dataSourceIppoolIpLease() *schema.Resource {
 							Description: "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"primary_dns": {
 							Description: "IP Address of the primary Domain Name System (DNS) server.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"secondary_dns": {
 							Description: "IP Address of the secondary Domain Name System (DNS) server.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
+				Computed: true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -384,6 +418,10 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IppoolIpLease{}
+	if v, ok := d.GetOk("allocation_type"); ok {
+		x := (v.(string))
+		o.SetAllocationType(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -414,7 +452,8 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("json marshal of IppoolIpLease object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.IppoolApi.GetIppoolIpLeaseList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching IppoolIpLease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -447,9 +486,16 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
+			if err := d.Set("allocation_type", (s.GetAllocationType())); err != nil {
+				return diag.Errorf("error occurred while setting property AllocationType: %s", err.Error())
+			}
 
 			if err := d.Set("assigned_to_entity", flattenMapMoBaseMoRelationship(s.GetAssignedToEntity(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property AssignedToEntity: %s", err.Error())
+			}
+
+			if err := d.Set("block_lease", flattenMapIppoolBlockLeaseRelationship(s.GetBlockLease(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property BlockLease: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())

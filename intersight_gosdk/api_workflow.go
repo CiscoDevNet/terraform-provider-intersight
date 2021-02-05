@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateWorkflowBatchApiExecutorRequest) IfNoneMatch(ifNoneMatch string
 	return r
 }
 
-func (r ApiCreateWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowBatchApiExecutorExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *WorkflowApiService) CreateWorkflowBatchApiExecutor(ctx _context.Context
  * Execute executes the request
  * @return WorkflowBatchApiExecutor
  */
-func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBatchApiExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowBatchApiExecutor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors"
@@ -92,8 +90,7 @@ func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowBatchApiExecutor == nil {
-		executionError.error = "workflowBatchApiExecutor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowBatchApiExecutor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWo
 	localVarPostBody = r.workflowBatchApiExecutor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *WorkflowApiService) CreateWorkflowBatchApiExecutorExecute(r ApiCreateWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowCustomDataTypeDefinitionRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateWorkflowCustomDataTypeDefinitionRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowCustomDataTypeDefinitionExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinition(ctx _context
  * Execute executes the request
  * @return WorkflowCustomDataTypeDefinition
  */
-func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r ApiCreateWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r ApiCreateWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCustomDataTypeDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowCustomDataTypeDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions"
@@ -272,8 +264,7 @@ func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowCustomDataTypeDefinition == nil {
-		executionError.error = "workflowCustomDataTypeDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowCustomDataTypeDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r Api
 	localVarPostBody = r.workflowCustomDataTypeDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *WorkflowApiService) CreateWorkflowCustomDataTypeDefinitionExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowErrorResponseHandlerRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateWorkflowErrorResponseHandlerRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowErrorResponseHandlerExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *WorkflowApiService) CreateWorkflowErrorResponseHandler(ctx _context.Con
  * Execute executes the request
  * @return WorkflowErrorResponseHandler
  */
-func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCreateWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCreateWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowErrorResponseHandler
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowErrorResponseHandler")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers"
@@ -452,8 +438,7 @@ func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowErrorResponseHandler == nil {
-		executionError.error = "workflowErrorResponseHandler is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowErrorResponseHandler is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCrea
 	localVarPostBody = r.workflowErrorResponseHandler
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *WorkflowApiService) CreateWorkflowErrorResponseHandlerExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowRollbackWorkflowRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateWorkflowRollbackWorkflowRequest) IfNoneMatch(ifNoneMatch string
 	return r
 }
 
-func (r ApiCreateWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowRollbackWorkflowExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *WorkflowApiService) CreateWorkflowRollbackWorkflow(ctx _context.Context
  * Execute executes the request
  * @return WorkflowRollbackWorkflow
  */
-func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowRollbackWorkflow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowRollbackWorkflow")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows"
@@ -632,8 +612,7 @@ func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowRollbackWorkflow == nil {
-		executionError.error = "workflowRollbackWorkflow is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowRollbackWorkflow is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWo
 	localVarPostBody = r.workflowRollbackWorkflow
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *WorkflowApiService) CreateWorkflowRollbackWorkflowExecute(r ApiCreateWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowTaskDefinitionRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateWorkflowTaskDefinitionRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowTaskDefinitionExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *WorkflowApiService) CreateWorkflowTaskDefinition(ctx _context.Context) 
  * Execute executes the request
  * @return WorkflowTaskDefinition
  */
-func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowTaskDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions"
@@ -812,8 +786,7 @@ func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWork
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowTaskDefinition == nil {
-		executionError.error = "workflowTaskDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowTaskDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWork
 	localVarPostBody = r.workflowTaskDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *WorkflowApiService) CreateWorkflowTaskDefinitionExecute(r ApiCreateWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowWorkflowDefinitionRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateWorkflowWorkflowDefinitionRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowWorkflowDefinitionExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowDefinition(ctx _context.Conte
  * Execute executes the request
  * @return WorkflowWorkflowDefinition
  */
-func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreateWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreateWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowWorkflowDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions"
@@ -992,8 +960,7 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowDefinition == nil {
-		executionError.error = "workflowWorkflowDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreate
 	localVarPostBody = r.workflowWorkflowDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowDefinitionExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateWorkflowWorkflowInfoRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateWorkflowWorkflowInfoRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	return r.ApiService.CreateWorkflowWorkflowInfoExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowInfo(ctx _context.Context) Ap
  * Execute executes the request
  * @return WorkflowWorkflowInfo
  */
-func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.CreateWorkflowWorkflowInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos"
@@ -1172,8 +1134,7 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowInfo == nil {
-		executionError.error = "workflowWorkflowInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkfl
 	localVarPostBody = r.workflowWorkflowInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *WorkflowApiService) CreateWorkflowWorkflowInfoExecute(r ApiCreateWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowBatchApiExecutorRequest struct {
@@ -1294,7 +1252,7 @@ type ApiDeleteWorkflowBatchApiExecutorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowBatchApiExecutorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowBatchApiExecutorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowBatchApiExecutorExecute(r)
 }
 
@@ -1315,20 +1273,18 @@ func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutor(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutorExecute(r ApiDeleteWorkflowBatchApiExecutorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutorExecute(r ApiDeleteWorkflowBatchApiExecutorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowBatchApiExecutor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors/{Moid}"
@@ -1357,22 +1313,19 @@ func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutorExecute(r ApiDeleteWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1430,7 +1383,7 @@ func (a *WorkflowApiService) DeleteWorkflowBatchApiExecutorExecute(r ApiDeleteWo
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowCustomDataTypeDefinitionRequest struct {
@@ -1439,7 +1392,7 @@ type ApiDeleteWorkflowCustomDataTypeDefinitionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowCustomDataTypeDefinitionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowCustomDataTypeDefinitionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowCustomDataTypeDefinitionExecute(r)
 }
 
@@ -1460,20 +1413,18 @@ func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinition(ctx _context
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinitionExecute(r ApiDeleteWorkflowCustomDataTypeDefinitionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinitionExecute(r ApiDeleteWorkflowCustomDataTypeDefinitionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowCustomDataTypeDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions/{Moid}"
@@ -1502,22 +1453,19 @@ func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinitionExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1575,7 +1523,7 @@ func (a *WorkflowApiService) DeleteWorkflowCustomDataTypeDefinitionExecute(r Api
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowErrorResponseHandlerRequest struct {
@@ -1584,7 +1532,7 @@ type ApiDeleteWorkflowErrorResponseHandlerRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowErrorResponseHandlerRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowErrorResponseHandlerRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowErrorResponseHandlerExecute(r)
 }
 
@@ -1605,20 +1553,18 @@ func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandler(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandlerExecute(r ApiDeleteWorkflowErrorResponseHandlerRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandlerExecute(r ApiDeleteWorkflowErrorResponseHandlerRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowErrorResponseHandler")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers/{Moid}"
@@ -1647,22 +1593,19 @@ func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandlerExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1720,7 +1663,7 @@ func (a *WorkflowApiService) DeleteWorkflowErrorResponseHandlerExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowRollbackWorkflowRequest struct {
@@ -1729,7 +1672,7 @@ type ApiDeleteWorkflowRollbackWorkflowRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowRollbackWorkflowRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowRollbackWorkflowRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowRollbackWorkflowExecute(r)
 }
 
@@ -1750,20 +1693,18 @@ func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflow(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflowExecute(r ApiDeleteWorkflowRollbackWorkflowRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflowExecute(r ApiDeleteWorkflowRollbackWorkflowRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowRollbackWorkflow")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows/{Moid}"
@@ -1792,22 +1733,19 @@ func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflowExecute(r ApiDeleteWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1865,7 +1803,7 @@ func (a *WorkflowApiService) DeleteWorkflowRollbackWorkflowExecute(r ApiDeleteWo
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowTaskDefinitionRequest struct {
@@ -1874,7 +1812,7 @@ type ApiDeleteWorkflowTaskDefinitionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowTaskDefinitionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowTaskDefinitionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowTaskDefinitionExecute(r)
 }
 
@@ -1895,20 +1833,18 @@ func (a *WorkflowApiService) DeleteWorkflowTaskDefinition(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowTaskDefinitionExecute(r ApiDeleteWorkflowTaskDefinitionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowTaskDefinitionExecute(r ApiDeleteWorkflowTaskDefinitionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowTaskDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions/{Moid}"
@@ -1937,22 +1873,19 @@ func (a *WorkflowApiService) DeleteWorkflowTaskDefinitionExecute(r ApiDeleteWork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2010,7 +1943,7 @@ func (a *WorkflowApiService) DeleteWorkflowTaskDefinitionExecute(r ApiDeleteWork
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowWorkflowDefinitionRequest struct {
@@ -2019,7 +1952,7 @@ type ApiDeleteWorkflowWorkflowDefinitionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowWorkflowDefinitionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowWorkflowDefinitionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowWorkflowDefinitionExecute(r)
 }
 
@@ -2040,20 +1973,18 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinition(ctx _context.Conte
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinitionExecute(r ApiDeleteWorkflowWorkflowDefinitionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinitionExecute(r ApiDeleteWorkflowWorkflowDefinitionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowWorkflowDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions/{Moid}"
@@ -2082,22 +2013,19 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinitionExecute(r ApiDelete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2155,7 +2083,7 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowDefinitionExecute(r ApiDelete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteWorkflowWorkflowInfoRequest struct {
@@ -2164,7 +2092,7 @@ type ApiDeleteWorkflowWorkflowInfoRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteWorkflowWorkflowInfoRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteWorkflowWorkflowInfoRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteWorkflowWorkflowInfoExecute(r)
 }
 
@@ -2185,20 +2113,18 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowInfo(ctx _context.Context, mo
 /*
  * Execute executes the request
  */
-func (a *WorkflowApiService) DeleteWorkflowWorkflowInfoExecute(r ApiDeleteWorkflowWorkflowInfoRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) DeleteWorkflowWorkflowInfoExecute(r ApiDeleteWorkflowWorkflowInfoRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.DeleteWorkflowWorkflowInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos/{Moid}"
@@ -2227,22 +2153,19 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowInfoExecute(r ApiDeleteWorkfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2300,7 +2223,7 @@ func (a *WorkflowApiService) DeleteWorkflowWorkflowInfoExecute(r ApiDeleteWorkfl
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBatchApiExecutorByMoidRequest struct {
@@ -2309,7 +2232,7 @@ type ApiGetWorkflowBatchApiExecutorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBatchApiExecutorByMoidRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBatchApiExecutorByMoidExecute(r)
 }
 
@@ -2331,21 +2254,19 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoid(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowBatchApiExecutor
  */
-func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWorkflowBatchApiExecutorByMoidRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWorkflowBatchApiExecutorByMoidRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBatchApiExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBatchApiExecutorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors/{Moid}"
@@ -2374,22 +2295,19 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2456,7 +2374,7 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorByMoidExecute(r ApiGetWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBatchApiExecutorListRequest struct {
@@ -2520,7 +2438,7 @@ func (r ApiGetWorkflowBatchApiExecutorListRequest) Tags(tags string) ApiGetWorkf
 	return r
 }
 
-func (r ApiGetWorkflowBatchApiExecutorListRequest) Execute() (WorkflowBatchApiExecutorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBatchApiExecutorListRequest) Execute() (WorkflowBatchApiExecutorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBatchApiExecutorListExecute(r)
 }
 
@@ -2540,21 +2458,19 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorList(ctx _context.Contex
  * Execute executes the request
  * @return WorkflowBatchApiExecutorResponse
  */
-func (a *WorkflowApiService) GetWorkflowBatchApiExecutorListExecute(r ApiGetWorkflowBatchApiExecutorListRequest) (WorkflowBatchApiExecutorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBatchApiExecutorListExecute(r ApiGetWorkflowBatchApiExecutorListRequest) (WorkflowBatchApiExecutorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBatchApiExecutorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBatchApiExecutorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors"
@@ -2615,22 +2531,19 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorListExecute(r ApiGetWork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2697,7 +2610,7 @@ func (a *WorkflowApiService) GetWorkflowBatchApiExecutorListExecute(r ApiGetWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBuildTaskMetaByMoidRequest struct {
@@ -2706,7 +2619,7 @@ type ApiGetWorkflowBuildTaskMetaByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowBuildTaskMetaByMoidRequest) Execute() (WorkflowBuildTaskMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBuildTaskMetaByMoidRequest) Execute() (WorkflowBuildTaskMeta, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBuildTaskMetaByMoidExecute(r)
 }
 
@@ -2728,21 +2641,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoid(ctx _context.Context
  * Execute executes the request
  * @return WorkflowBuildTaskMeta
  */
-func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoidExecute(r ApiGetWorkflowBuildTaskMetaByMoidRequest) (WorkflowBuildTaskMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoidExecute(r ApiGetWorkflowBuildTaskMetaByMoidRequest) (WorkflowBuildTaskMeta, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBuildTaskMeta
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBuildTaskMetaByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BuildTaskMeta/{Moid}"
@@ -2771,22 +2682,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoidExecute(r ApiGetWorkf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2853,7 +2761,7 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaByMoidExecute(r ApiGetWorkf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBuildTaskMetaListRequest struct {
@@ -2917,7 +2825,7 @@ func (r ApiGetWorkflowBuildTaskMetaListRequest) Tags(tags string) ApiGetWorkflow
 	return r
 }
 
-func (r ApiGetWorkflowBuildTaskMetaListRequest) Execute() (WorkflowBuildTaskMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBuildTaskMetaListRequest) Execute() (WorkflowBuildTaskMetaResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBuildTaskMetaListExecute(r)
 }
 
@@ -2937,21 +2845,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaList(ctx _context.Context) 
  * Execute executes the request
  * @return WorkflowBuildTaskMetaResponse
  */
-func (a *WorkflowApiService) GetWorkflowBuildTaskMetaListExecute(r ApiGetWorkflowBuildTaskMetaListRequest) (WorkflowBuildTaskMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBuildTaskMetaListExecute(r ApiGetWorkflowBuildTaskMetaListRequest) (WorkflowBuildTaskMetaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBuildTaskMetaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBuildTaskMetaList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BuildTaskMeta"
@@ -3012,22 +2918,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaListExecute(r ApiGetWorkflo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3094,7 +2997,7 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaListExecute(r ApiGetWorkflo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest struct {
@@ -3103,7 +3006,7 @@ type ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) Execute() (WorkflowBuildTaskMetaOwner, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) Execute() (WorkflowBuildTaskMetaOwner, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBuildTaskMetaOwnerByMoidExecute(r)
 }
 
@@ -3125,21 +3028,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoid(ctx _context.Co
  * Execute executes the request
  * @return WorkflowBuildTaskMetaOwner
  */
-func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoidExecute(r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) (WorkflowBuildTaskMetaOwner, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoidExecute(r ApiGetWorkflowBuildTaskMetaOwnerByMoidRequest) (WorkflowBuildTaskMetaOwner, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBuildTaskMetaOwner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBuildTaskMetaOwnerByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BuildTaskMetaOwners/{Moid}"
@@ -3168,22 +3069,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3250,7 +3148,7 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowBuildTaskMetaOwnerListRequest struct {
@@ -3314,7 +3212,7 @@ func (r ApiGetWorkflowBuildTaskMetaOwnerListRequest) Tags(tags string) ApiGetWor
 	return r
 }
 
-func (r ApiGetWorkflowBuildTaskMetaOwnerListRequest) Execute() (WorkflowBuildTaskMetaOwnerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowBuildTaskMetaOwnerListRequest) Execute() (WorkflowBuildTaskMetaOwnerResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowBuildTaskMetaOwnerListExecute(r)
 }
 
@@ -3334,21 +3232,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerList(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowBuildTaskMetaOwnerResponse
  */
-func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerListExecute(r ApiGetWorkflowBuildTaskMetaOwnerListRequest) (WorkflowBuildTaskMetaOwnerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerListExecute(r ApiGetWorkflowBuildTaskMetaOwnerListRequest) (WorkflowBuildTaskMetaOwnerResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBuildTaskMetaOwnerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowBuildTaskMetaOwnerList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BuildTaskMetaOwners"
@@ -3409,22 +3305,19 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerListExecute(r ApiGetWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3491,7 +3384,7 @@ func (a *WorkflowApiService) GetWorkflowBuildTaskMetaOwnerListExecute(r ApiGetWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowCatalogByMoidRequest struct {
@@ -3500,7 +3393,7 @@ type ApiGetWorkflowCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowCatalogByMoidRequest) Execute() (WorkflowCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowCatalogByMoidRequest) Execute() (WorkflowCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowCatalogByMoidExecute(r)
 }
 
@@ -3522,21 +3415,19 @@ func (a *WorkflowApiService) GetWorkflowCatalogByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return WorkflowCatalog
  */
-func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCatalogByMoidRequest) (WorkflowCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCatalogByMoidRequest) (WorkflowCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/Catalogs/{Moid}"
@@ -3565,22 +3456,19 @@ func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCat
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3647,7 +3535,7 @@ func (a *WorkflowApiService) GetWorkflowCatalogByMoidExecute(r ApiGetWorkflowCat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowCatalogListRequest struct {
@@ -3711,7 +3599,7 @@ func (r ApiGetWorkflowCatalogListRequest) Tags(tags string) ApiGetWorkflowCatalo
 	return r
 }
 
-func (r ApiGetWorkflowCatalogListRequest) Execute() (WorkflowCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowCatalogListRequest) Execute() (WorkflowCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowCatalogListExecute(r)
 }
 
@@ -3731,21 +3619,19 @@ func (a *WorkflowApiService) GetWorkflowCatalogList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return WorkflowCatalogResponse
  */
-func (a *WorkflowApiService) GetWorkflowCatalogListExecute(r ApiGetWorkflowCatalogListRequest) (WorkflowCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowCatalogListExecute(r ApiGetWorkflowCatalogListRequest) (WorkflowCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/Catalogs"
@@ -3806,22 +3692,19 @@ func (a *WorkflowApiService) GetWorkflowCatalogListExecute(r ApiGetWorkflowCatal
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3888,7 +3771,7 @@ func (a *WorkflowApiService) GetWorkflowCatalogListExecute(r ApiGetWorkflowCatal
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest struct {
@@ -3897,7 +3780,7 @@ type ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowCustomDataTypeDefinitionByMoidExecute(r)
 }
 
@@ -3919,21 +3802,19 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoid(ctx _cont
  * Execute executes the request
  * @return WorkflowCustomDataTypeDefinition
  */
-func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r ApiGetWorkflowCustomDataTypeDefinitionByMoidRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCustomDataTypeDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowCustomDataTypeDefinitionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions/{Moid}"
@@ -3962,22 +3843,19 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4044,7 +3922,7 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowCustomDataTypeDefinitionListRequest struct {
@@ -4108,7 +3986,7 @@ func (r ApiGetWorkflowCustomDataTypeDefinitionListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetWorkflowCustomDataTypeDefinitionListRequest) Execute() (WorkflowCustomDataTypeDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowCustomDataTypeDefinitionListRequest) Execute() (WorkflowCustomDataTypeDefinitionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowCustomDataTypeDefinitionListExecute(r)
 }
 
@@ -4128,21 +4006,19 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionList(ctx _contex
  * Execute executes the request
  * @return WorkflowCustomDataTypeDefinitionResponse
  */
-func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionListExecute(r ApiGetWorkflowCustomDataTypeDefinitionListRequest) (WorkflowCustomDataTypeDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionListExecute(r ApiGetWorkflowCustomDataTypeDefinitionListRequest) (WorkflowCustomDataTypeDefinitionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCustomDataTypeDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowCustomDataTypeDefinitionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions"
@@ -4203,22 +4079,19 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionListExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4285,7 +4158,7 @@ func (a *WorkflowApiService) GetWorkflowCustomDataTypeDefinitionListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowErrorResponseHandlerByMoidRequest struct {
@@ -4294,7 +4167,7 @@ type ApiGetWorkflowErrorResponseHandlerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowErrorResponseHandlerByMoidRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowErrorResponseHandlerByMoidExecute(r)
 }
 
@@ -4316,21 +4189,19 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoid(ctx _context.
  * Execute executes the request
  * @return WorkflowErrorResponseHandler
  */
-func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiGetWorkflowErrorResponseHandlerByMoidRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiGetWorkflowErrorResponseHandlerByMoidRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowErrorResponseHandler
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowErrorResponseHandlerByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers/{Moid}"
@@ -4359,22 +4230,19 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4441,7 +4309,7 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowErrorResponseHandlerListRequest struct {
@@ -4505,7 +4373,7 @@ func (r ApiGetWorkflowErrorResponseHandlerListRequest) Tags(tags string) ApiGetW
 	return r
 }
 
-func (r ApiGetWorkflowErrorResponseHandlerListRequest) Execute() (WorkflowErrorResponseHandlerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowErrorResponseHandlerListRequest) Execute() (WorkflowErrorResponseHandlerResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowErrorResponseHandlerListExecute(r)
 }
 
@@ -4525,21 +4393,19 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerList(ctx _context.Co
  * Execute executes the request
  * @return WorkflowErrorResponseHandlerResponse
  */
-func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerListExecute(r ApiGetWorkflowErrorResponseHandlerListRequest) (WorkflowErrorResponseHandlerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerListExecute(r ApiGetWorkflowErrorResponseHandlerListRequest) (WorkflowErrorResponseHandlerResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowErrorResponseHandlerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowErrorResponseHandlerList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers"
@@ -4600,22 +4466,19 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4682,7 +4545,7 @@ func (a *WorkflowApiService) GetWorkflowErrorResponseHandlerListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest struct {
@@ -4691,7 +4554,7 @@ type ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) Execute() (WorkflowPendingDynamicWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) Execute() (WorkflowPendingDynamicWorkflowInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(r)
 }
 
@@ -4713,21 +4576,19 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoid(ctx _co
  * Execute executes the request
  * @return WorkflowPendingDynamicWorkflowInfo
  */
-func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) (WorkflowPendingDynamicWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoByMoidRequest) (WorkflowPendingDynamicWorkflowInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowPendingDynamicWorkflowInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowPendingDynamicWorkflowInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/PendingDynamicWorkflowInfos/{Moid}"
@@ -4756,22 +4617,19 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4838,7 +4696,7 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowPendingDynamicWorkflowInfoListRequest struct {
@@ -4902,7 +4760,7 @@ func (r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) Execute() (WorkflowPendingDynamicWorkflowInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) Execute() (WorkflowPendingDynamicWorkflowInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowPendingDynamicWorkflowInfoListExecute(r)
 }
 
@@ -4922,21 +4780,19 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoList(ctx _cont
  * Execute executes the request
  * @return WorkflowPendingDynamicWorkflowInfoResponse
  */
-func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoListExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) (WorkflowPendingDynamicWorkflowInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoListExecute(r ApiGetWorkflowPendingDynamicWorkflowInfoListRequest) (WorkflowPendingDynamicWorkflowInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowPendingDynamicWorkflowInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowPendingDynamicWorkflowInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/PendingDynamicWorkflowInfos"
@@ -4997,22 +4853,19 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoListExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5079,7 +4932,7 @@ func (a *WorkflowApiService) GetWorkflowPendingDynamicWorkflowInfoListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowRollbackWorkflowByMoidRequest struct {
@@ -5088,7 +4941,7 @@ type ApiGetWorkflowRollbackWorkflowByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowRollbackWorkflowByMoidRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowRollbackWorkflowByMoidExecute(r)
 }
 
@@ -5110,21 +4963,19 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoid(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowRollbackWorkflow
  */
-func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWorkflowRollbackWorkflowByMoidRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWorkflowRollbackWorkflowByMoidRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowRollbackWorkflow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowRollbackWorkflowByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows/{Moid}"
@@ -5153,22 +5004,19 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5235,7 +5083,7 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowByMoidExecute(r ApiGetWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowRollbackWorkflowListRequest struct {
@@ -5299,7 +5147,7 @@ func (r ApiGetWorkflowRollbackWorkflowListRequest) Tags(tags string) ApiGetWorkf
 	return r
 }
 
-func (r ApiGetWorkflowRollbackWorkflowListRequest) Execute() (WorkflowRollbackWorkflowResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowRollbackWorkflowListRequest) Execute() (WorkflowRollbackWorkflowResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowRollbackWorkflowListExecute(r)
 }
 
@@ -5319,21 +5167,19 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowList(ctx _context.Contex
  * Execute executes the request
  * @return WorkflowRollbackWorkflowResponse
  */
-func (a *WorkflowApiService) GetWorkflowRollbackWorkflowListExecute(r ApiGetWorkflowRollbackWorkflowListRequest) (WorkflowRollbackWorkflowResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowRollbackWorkflowListExecute(r ApiGetWorkflowRollbackWorkflowListRequest) (WorkflowRollbackWorkflowResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowRollbackWorkflowResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowRollbackWorkflowList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows"
@@ -5394,22 +5240,19 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowListExecute(r ApiGetWork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5476,7 +5319,7 @@ func (a *WorkflowApiService) GetWorkflowRollbackWorkflowListExecute(r ApiGetWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskDefinitionByMoidRequest struct {
@@ -5485,7 +5328,7 @@ type ApiGetWorkflowTaskDefinitionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskDefinitionByMoidRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskDefinitionByMoidExecute(r)
 }
 
@@ -5507,21 +5350,19 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoid(ctx _context.Contex
  * Execute executes the request
  * @return WorkflowTaskDefinition
  */
-func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWorkflowTaskDefinitionByMoidRequest) (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWorkflowTaskDefinitionByMoidRequest) (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskDefinitionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions/{Moid}"
@@ -5550,22 +5391,19 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5632,7 +5470,7 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionByMoidExecute(r ApiGetWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskDefinitionListRequest struct {
@@ -5696,7 +5534,7 @@ func (r ApiGetWorkflowTaskDefinitionListRequest) Tags(tags string) ApiGetWorkflo
 	return r
 }
 
-func (r ApiGetWorkflowTaskDefinitionListRequest) Execute() (WorkflowTaskDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskDefinitionListRequest) Execute() (WorkflowTaskDefinitionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskDefinitionListExecute(r)
 }
 
@@ -5716,21 +5554,19 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionList(ctx _context.Context)
  * Execute executes the request
  * @return WorkflowTaskDefinitionResponse
  */
-func (a *WorkflowApiService) GetWorkflowTaskDefinitionListExecute(r ApiGetWorkflowTaskDefinitionListRequest) (WorkflowTaskDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskDefinitionListExecute(r ApiGetWorkflowTaskDefinitionListRequest) (WorkflowTaskDefinitionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskDefinitionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions"
@@ -5791,22 +5627,19 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionListExecute(r ApiGetWorkfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5873,7 +5706,7 @@ func (a *WorkflowApiService) GetWorkflowTaskDefinitionListExecute(r ApiGetWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskInfoByMoidRequest struct {
@@ -5882,7 +5715,7 @@ type ApiGetWorkflowTaskInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowTaskInfoByMoidRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskInfoByMoidRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskInfoByMoidExecute(r)
 }
 
@@ -5904,21 +5737,19 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return WorkflowTaskInfo
  */
-func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTaskInfoByMoidRequest) (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTaskInfoByMoidRequest) (WorkflowTaskInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskInfos/{Moid}"
@@ -5947,22 +5778,19 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6029,7 +5857,7 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoByMoidExecute(r ApiGetWorkflowTa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskInfoListRequest struct {
@@ -6093,7 +5921,7 @@ func (r ApiGetWorkflowTaskInfoListRequest) Tags(tags string) ApiGetWorkflowTaskI
 	return r
 }
 
-func (r ApiGetWorkflowTaskInfoListRequest) Execute() (WorkflowTaskInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskInfoListRequest) Execute() (WorkflowTaskInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskInfoListExecute(r)
 }
 
@@ -6113,21 +5941,19 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return WorkflowTaskInfoResponse
  */
-func (a *WorkflowApiService) GetWorkflowTaskInfoListExecute(r ApiGetWorkflowTaskInfoListRequest) (WorkflowTaskInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskInfoListExecute(r ApiGetWorkflowTaskInfoListRequest) (WorkflowTaskInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskInfos"
@@ -6188,22 +6014,19 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoListExecute(r ApiGetWorkflowTask
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6270,7 +6093,7 @@ func (a *WorkflowApiService) GetWorkflowTaskInfoListExecute(r ApiGetWorkflowTask
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskMetadataByMoidRequest struct {
@@ -6279,7 +6102,7 @@ type ApiGetWorkflowTaskMetadataByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowTaskMetadataByMoidRequest) Execute() (WorkflowTaskMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskMetadataByMoidRequest) Execute() (WorkflowTaskMetadata, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskMetadataByMoidExecute(r)
 }
 
@@ -6301,21 +6124,19 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoid(ctx _context.Context,
  * Execute executes the request
  * @return WorkflowTaskMetadata
  */
-func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkflowTaskMetadataByMoidRequest) (WorkflowTaskMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkflowTaskMetadataByMoidRequest) (WorkflowTaskMetadata, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskMetadataByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskMetadata/{Moid}"
@@ -6344,22 +6165,19 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6426,7 +6244,7 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataByMoidExecute(r ApiGetWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowTaskMetadataListRequest struct {
@@ -6490,7 +6308,7 @@ func (r ApiGetWorkflowTaskMetadataListRequest) Tags(tags string) ApiGetWorkflowT
 	return r
 }
 
-func (r ApiGetWorkflowTaskMetadataListRequest) Execute() (WorkflowTaskMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowTaskMetadataListRequest) Execute() (WorkflowTaskMetadataResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowTaskMetadataListExecute(r)
 }
 
@@ -6510,21 +6328,19 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataList(ctx _context.Context) A
  * Execute executes the request
  * @return WorkflowTaskMetadataResponse
  */
-func (a *WorkflowApiService) GetWorkflowTaskMetadataListExecute(r ApiGetWorkflowTaskMetadataListRequest) (WorkflowTaskMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowTaskMetadataListExecute(r ApiGetWorkflowTaskMetadataListRequest) (WorkflowTaskMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowTaskMetadataList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskMetadata"
@@ -6585,22 +6401,19 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataListExecute(r ApiGetWorkflow
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6667,7 +6480,7 @@ func (a *WorkflowApiService) GetWorkflowTaskMetadataListExecute(r ApiGetWorkflow
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowDefinitionByMoidRequest struct {
@@ -6676,7 +6489,7 @@ type ApiGetWorkflowWorkflowDefinitionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowDefinitionByMoidRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowDefinitionByMoidExecute(r)
 }
 
@@ -6698,21 +6511,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoid(ctx _context.Co
  * Execute executes the request
  * @return WorkflowWorkflowDefinition
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGetWorkflowWorkflowDefinitionByMoidRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGetWorkflowWorkflowDefinitionByMoidRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowDefinitionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions/{Moid}"
@@ -6741,22 +6552,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6823,7 +6631,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowDefinitionListRequest struct {
@@ -6887,7 +6695,7 @@ func (r ApiGetWorkflowWorkflowDefinitionListRequest) Tags(tags string) ApiGetWor
 	return r
 }
 
-func (r ApiGetWorkflowWorkflowDefinitionListRequest) Execute() (WorkflowWorkflowDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowDefinitionListRequest) Execute() (WorkflowWorkflowDefinitionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowDefinitionListExecute(r)
 }
 
@@ -6907,21 +6715,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionList(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowWorkflowDefinitionResponse
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionListExecute(r ApiGetWorkflowWorkflowDefinitionListRequest) (WorkflowWorkflowDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionListExecute(r ApiGetWorkflowWorkflowDefinitionListRequest) (WorkflowWorkflowDefinitionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowDefinitionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions"
@@ -6982,22 +6788,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionListExecute(r ApiGetWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7064,7 +6867,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowDefinitionListExecute(r ApiGetWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowInfoByMoidRequest struct {
@@ -7073,7 +6876,7 @@ type ApiGetWorkflowWorkflowInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowInfoByMoidRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowInfoByMoidExecute(r)
 }
 
@@ -7095,21 +6898,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoid(ctx _context.Context,
  * Execute executes the request
  * @return WorkflowWorkflowInfo
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkflowWorkflowInfoByMoidRequest) (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkflowWorkflowInfoByMoidRequest) (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos/{Moid}"
@@ -7138,22 +6939,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7220,7 +7018,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoByMoidExecute(r ApiGetWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowInfoListRequest struct {
@@ -7284,7 +7082,7 @@ func (r ApiGetWorkflowWorkflowInfoListRequest) Tags(tags string) ApiGetWorkflowW
 	return r
 }
 
-func (r ApiGetWorkflowWorkflowInfoListRequest) Execute() (WorkflowWorkflowInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowInfoListRequest) Execute() (WorkflowWorkflowInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowInfoListExecute(r)
 }
 
@@ -7304,21 +7102,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoList(ctx _context.Context) A
  * Execute executes the request
  * @return WorkflowWorkflowInfoResponse
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowInfoListExecute(r ApiGetWorkflowWorkflowInfoListRequest) (WorkflowWorkflowInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowInfoListExecute(r ApiGetWorkflowWorkflowInfoListRequest) (WorkflowWorkflowInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos"
@@ -7379,22 +7175,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoListExecute(r ApiGetWorkflow
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7461,7 +7254,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowInfoListExecute(r ApiGetWorkflow
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowMetaByMoidRequest struct {
@@ -7470,7 +7263,7 @@ type ApiGetWorkflowWorkflowMetaByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowWorkflowMetaByMoidRequest) Execute() (WorkflowWorkflowMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowMetaByMoidRequest) Execute() (WorkflowWorkflowMeta, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowMetaByMoidExecute(r)
 }
 
@@ -7492,21 +7285,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoid(ctx _context.Context,
  * Execute executes the request
  * @return WorkflowWorkflowMeta
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoidExecute(r ApiGetWorkflowWorkflowMetaByMoidRequest) (WorkflowWorkflowMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoidExecute(r ApiGetWorkflowWorkflowMetaByMoidRequest) (WorkflowWorkflowMeta, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowMeta
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowMetaByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowMeta/{Moid}"
@@ -7535,22 +7326,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoidExecute(r ApiGetWorkfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7617,7 +7405,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaByMoidExecute(r ApiGetWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowMetaListRequest struct {
@@ -7681,7 +7469,7 @@ func (r ApiGetWorkflowWorkflowMetaListRequest) Tags(tags string) ApiGetWorkflowW
 	return r
 }
 
-func (r ApiGetWorkflowWorkflowMetaListRequest) Execute() (WorkflowWorkflowMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowMetaListRequest) Execute() (WorkflowWorkflowMetaResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowMetaListExecute(r)
 }
 
@@ -7701,21 +7489,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaList(ctx _context.Context) A
  * Execute executes the request
  * @return WorkflowWorkflowMetaResponse
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowMetaListExecute(r ApiGetWorkflowWorkflowMetaListRequest) (WorkflowWorkflowMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowMetaListExecute(r ApiGetWorkflowWorkflowMetaListRequest) (WorkflowWorkflowMetaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowMetaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowMetaList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowMeta"
@@ -7776,22 +7562,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaListExecute(r ApiGetWorkflow
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7858,7 +7641,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetaListExecute(r ApiGetWorkflow
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowMetadataByMoidRequest struct {
@@ -7867,7 +7650,7 @@ type ApiGetWorkflowWorkflowMetadataByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Execute() (WorkflowWorkflowMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowMetadataByMoidRequest) Execute() (WorkflowWorkflowMetadata, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowMetadataByMoidExecute(r)
 }
 
@@ -7889,21 +7672,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoid(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowWorkflowMetadata
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWorkflowWorkflowMetadataByMoidRequest) (WorkflowWorkflowMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWorkflowWorkflowMetadataByMoidRequest) (WorkflowWorkflowMetadata, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowMetadataByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowMetadata/{Moid}"
@@ -7932,22 +7713,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8014,7 +7792,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataByMoidExecute(r ApiGetWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetWorkflowWorkflowMetadataListRequest struct {
@@ -8078,7 +7856,7 @@ func (r ApiGetWorkflowWorkflowMetadataListRequest) Tags(tags string) ApiGetWorkf
 	return r
 }
 
-func (r ApiGetWorkflowWorkflowMetadataListRequest) Execute() (WorkflowWorkflowMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetWorkflowWorkflowMetadataListRequest) Execute() (WorkflowWorkflowMetadataResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetWorkflowWorkflowMetadataListExecute(r)
 }
 
@@ -8098,21 +7876,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataList(ctx _context.Contex
  * Execute executes the request
  * @return WorkflowWorkflowMetadataResponse
  */
-func (a *WorkflowApiService) GetWorkflowWorkflowMetadataListExecute(r ApiGetWorkflowWorkflowMetadataListRequest) (WorkflowWorkflowMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) GetWorkflowWorkflowMetadataListExecute(r ApiGetWorkflowWorkflowMetadataListRequest) (WorkflowWorkflowMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.GetWorkflowWorkflowMetadataList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowMetadata"
@@ -8173,22 +7949,19 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataListExecute(r ApiGetWork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8255,7 +8028,7 @@ func (a *WorkflowApiService) GetWorkflowWorkflowMetadataListExecute(r ApiGetWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowBatchApiExecutorRequest struct {
@@ -8275,7 +8048,7 @@ func (r ApiPatchWorkflowBatchApiExecutorRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowBatchApiExecutorExecute(r)
 }
 
@@ -8297,21 +8070,19 @@ func (a *WorkflowApiService) PatchWorkflowBatchApiExecutor(ctx _context.Context,
  * Execute executes the request
  * @return WorkflowBatchApiExecutor
  */
-func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBatchApiExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowBatchApiExecutor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors/{Moid}"
@@ -8321,8 +8092,7 @@ func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWork
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowBatchApiExecutor == nil {
-		executionError.error = "workflowBatchApiExecutor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowBatchApiExecutor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8349,22 +8119,19 @@ func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWork
 	localVarPostBody = r.workflowBatchApiExecutor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8431,7 +8198,7 @@ func (a *WorkflowApiService) PatchWorkflowBatchApiExecutorExecute(r ApiPatchWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowCustomDataTypeDefinitionRequest struct {
@@ -8451,7 +8218,7 @@ func (r ApiPatchWorkflowCustomDataTypeDefinitionRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowCustomDataTypeDefinitionExecute(r)
 }
 
@@ -8473,21 +8240,19 @@ func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinition(ctx _context.
  * Execute executes the request
  * @return WorkflowCustomDataTypeDefinition
  */
-func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiPatchWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiPatchWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCustomDataTypeDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowCustomDataTypeDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions/{Moid}"
@@ -8497,8 +8262,7 @@ func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowCustomDataTypeDefinition == nil {
-		executionError.error = "workflowCustomDataTypeDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowCustomDataTypeDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8525,22 +8289,19 @@ func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiP
 	localVarPostBody = r.workflowCustomDataTypeDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8607,7 +8368,7 @@ func (a *WorkflowApiService) PatchWorkflowCustomDataTypeDefinitionExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowErrorResponseHandlerRequest struct {
@@ -8627,7 +8388,7 @@ func (r ApiPatchWorkflowErrorResponseHandlerRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowErrorResponseHandlerExecute(r)
 }
 
@@ -8649,21 +8410,19 @@ func (a *WorkflowApiService) PatchWorkflowErrorResponseHandler(ctx _context.Cont
  * Execute executes the request
  * @return WorkflowErrorResponseHandler
  */
-func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatchWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatchWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowErrorResponseHandler
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowErrorResponseHandler")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers/{Moid}"
@@ -8673,8 +8432,7 @@ func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowErrorResponseHandler == nil {
-		executionError.error = "workflowErrorResponseHandler is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowErrorResponseHandler is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8701,22 +8459,19 @@ func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatch
 	localVarPostBody = r.workflowErrorResponseHandler
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8783,7 +8538,7 @@ func (a *WorkflowApiService) PatchWorkflowErrorResponseHandlerExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowRollbackWorkflowRequest struct {
@@ -8803,7 +8558,7 @@ func (r ApiPatchWorkflowRollbackWorkflowRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowRollbackWorkflowExecute(r)
 }
 
@@ -8825,21 +8580,19 @@ func (a *WorkflowApiService) PatchWorkflowRollbackWorkflow(ctx _context.Context,
  * Execute executes the request
  * @return WorkflowRollbackWorkflow
  */
-func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowRollbackWorkflow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowRollbackWorkflow")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows/{Moid}"
@@ -8849,8 +8602,7 @@ func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWork
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowRollbackWorkflow == nil {
-		executionError.error = "workflowRollbackWorkflow is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowRollbackWorkflow is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8877,22 +8629,19 @@ func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWork
 	localVarPostBody = r.workflowRollbackWorkflow
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8959,7 +8708,7 @@ func (a *WorkflowApiService) PatchWorkflowRollbackWorkflowExecute(r ApiPatchWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowTaskDefinitionRequest struct {
@@ -8979,7 +8728,7 @@ func (r ApiPatchWorkflowTaskDefinitionRequest) IfMatch(ifMatch string) ApiPatchW
 	return r
 }
 
-func (r ApiPatchWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowTaskDefinitionExecute(r)
 }
 
@@ -9001,21 +8750,19 @@ func (a *WorkflowApiService) PatchWorkflowTaskDefinition(ctx _context.Context, m
  * Execute executes the request
  * @return WorkflowTaskDefinition
  */
-func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowTaskDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions/{Moid}"
@@ -9025,8 +8772,7 @@ func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowTaskDefinition == nil {
-		executionError.error = "workflowTaskDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowTaskDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9053,22 +8799,19 @@ func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkfl
 	localVarPostBody = r.workflowTaskDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9135,7 +8878,7 @@ func (a *WorkflowApiService) PatchWorkflowTaskDefinitionExecute(r ApiPatchWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowTaskInfoRequest struct {
@@ -9155,7 +8898,7 @@ func (r ApiPatchWorkflowTaskInfoRequest) IfMatch(ifMatch string) ApiPatchWorkflo
 	return r
 }
 
-func (r ApiPatchWorkflowTaskInfoRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowTaskInfoRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowTaskInfoExecute(r)
 }
 
@@ -9177,21 +8920,19 @@ func (a *WorkflowApiService) PatchWorkflowTaskInfo(ctx _context.Context, moid st
  * Execute executes the request
  * @return WorkflowTaskInfo
  */
-func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTaskInfoRequest) (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTaskInfoRequest) (WorkflowTaskInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowTaskInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskInfos/{Moid}"
@@ -9201,8 +8942,7 @@ func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTask
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowTaskInfo == nil {
-		executionError.error = "workflowTaskInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowTaskInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9229,22 +8969,19 @@ func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTask
 	localVarPostBody = r.workflowTaskInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9311,7 +9048,7 @@ func (a *WorkflowApiService) PatchWorkflowTaskInfoExecute(r ApiPatchWorkflowTask
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowWorkflowDefinitionRequest struct {
@@ -9331,7 +9068,7 @@ func (r ApiPatchWorkflowWorkflowDefinitionRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowWorkflowDefinitionExecute(r)
 }
 
@@ -9353,21 +9090,19 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowDefinition(ctx _context.Contex
  * Execute executes the request
  * @return WorkflowWorkflowDefinition
  */
-func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowWorkflowDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions/{Moid}"
@@ -9377,8 +9112,7 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowDefinition == nil {
-		executionError.error = "workflowWorkflowDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9405,22 +9139,19 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWo
 	localVarPostBody = r.workflowWorkflowDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9487,7 +9218,7 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowDefinitionExecute(r ApiPatchWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchWorkflowWorkflowInfoRequest struct {
@@ -9507,7 +9238,7 @@ func (r ApiPatchWorkflowWorkflowInfoRequest) IfMatch(ifMatch string) ApiPatchWor
 	return r
 }
 
-func (r ApiPatchWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	return r.ApiService.PatchWorkflowWorkflowInfoExecute(r)
 }
 
@@ -9529,21 +9260,19 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowInfo(ctx _context.Context, moi
  * Execute executes the request
  * @return WorkflowWorkflowInfo
  */
-func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.PatchWorkflowWorkflowInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos/{Moid}"
@@ -9553,8 +9282,7 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflow
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowInfo == nil {
-		executionError.error = "workflowWorkflowInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9581,22 +9309,19 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflow
 	localVarPostBody = r.workflowWorkflowInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9663,7 +9388,7 @@ func (a *WorkflowApiService) PatchWorkflowWorkflowInfoExecute(r ApiPatchWorkflow
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowBatchApiExecutorRequest struct {
@@ -9683,7 +9408,7 @@ func (r ApiUpdateWorkflowBatchApiExecutorRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowBatchApiExecutorRequest) Execute() (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowBatchApiExecutorExecute(r)
 }
 
@@ -9705,21 +9430,19 @@ func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutor(ctx _context.Context
  * Execute executes the request
  * @return WorkflowBatchApiExecutor
  */
-func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWorkflowBatchApiExecutorRequest) (WorkflowBatchApiExecutor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowBatchApiExecutor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowBatchApiExecutor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/BatchApiExecutors/{Moid}"
@@ -9729,8 +9452,7 @@ func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowBatchApiExecutor == nil {
-		executionError.error = "workflowBatchApiExecutor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowBatchApiExecutor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9757,22 +9479,19 @@ func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWo
 	localVarPostBody = r.workflowBatchApiExecutor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9839,7 +9558,7 @@ func (a *WorkflowApiService) UpdateWorkflowBatchApiExecutorExecute(r ApiUpdateWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowCustomDataTypeDefinitionRequest struct {
@@ -9859,7 +9578,7 @@ func (r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) Execute() (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowCustomDataTypeDefinitionExecute(r)
 }
 
@@ -9881,21 +9600,19 @@ func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinition(ctx _context
  * Execute executes the request
  * @return WorkflowCustomDataTypeDefinition
  */
-func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r ApiUpdateWorkflowCustomDataTypeDefinitionRequest) (WorkflowCustomDataTypeDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowCustomDataTypeDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowCustomDataTypeDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/CustomDataTypeDefinitions/{Moid}"
@@ -9905,8 +9622,7 @@ func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowCustomDataTypeDefinition == nil {
-		executionError.error = "workflowCustomDataTypeDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowCustomDataTypeDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9933,22 +9649,19 @@ func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r Api
 	localVarPostBody = r.workflowCustomDataTypeDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10015,7 +9728,7 @@ func (a *WorkflowApiService) UpdateWorkflowCustomDataTypeDefinitionExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowErrorResponseHandlerRequest struct {
@@ -10035,7 +9748,7 @@ func (r ApiUpdateWorkflowErrorResponseHandlerRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowErrorResponseHandlerRequest) Execute() (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowErrorResponseHandlerExecute(r)
 }
 
@@ -10057,21 +9770,19 @@ func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandler(ctx _context.Con
  * Execute executes the request
  * @return WorkflowErrorResponseHandler
  */
-func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpdateWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpdateWorkflowErrorResponseHandlerRequest) (WorkflowErrorResponseHandler, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowErrorResponseHandler
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowErrorResponseHandler")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/ErrorResponseHandlers/{Moid}"
@@ -10081,8 +9792,7 @@ func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowErrorResponseHandler == nil {
-		executionError.error = "workflowErrorResponseHandler is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowErrorResponseHandler is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10109,22 +9819,19 @@ func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpda
 	localVarPostBody = r.workflowErrorResponseHandler
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10191,7 +9898,7 @@ func (a *WorkflowApiService) UpdateWorkflowErrorResponseHandlerExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowRollbackWorkflowRequest struct {
@@ -10211,7 +9918,7 @@ func (r ApiUpdateWorkflowRollbackWorkflowRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowRollbackWorkflowRequest) Execute() (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowRollbackWorkflowExecute(r)
 }
 
@@ -10233,21 +9940,19 @@ func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflow(ctx _context.Context
  * Execute executes the request
  * @return WorkflowRollbackWorkflow
  */
-func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWorkflowRollbackWorkflowRequest) (WorkflowRollbackWorkflow, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowRollbackWorkflow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowRollbackWorkflow")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/RollbackWorkflows/{Moid}"
@@ -10257,8 +9962,7 @@ func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowRollbackWorkflow == nil {
-		executionError.error = "workflowRollbackWorkflow is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowRollbackWorkflow is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10285,22 +9989,19 @@ func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWo
 	localVarPostBody = r.workflowRollbackWorkflow
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10367,7 +10068,7 @@ func (a *WorkflowApiService) UpdateWorkflowRollbackWorkflowExecute(r ApiUpdateWo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowTaskDefinitionRequest struct {
@@ -10387,7 +10088,7 @@ func (r ApiUpdateWorkflowTaskDefinitionRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowTaskDefinitionRequest) Execute() (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowTaskDefinitionExecute(r)
 }
 
@@ -10409,21 +10110,19 @@ func (a *WorkflowApiService) UpdateWorkflowTaskDefinition(ctx _context.Context, 
  * Execute executes the request
  * @return WorkflowTaskDefinition
  */
-func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWorkflowTaskDefinitionRequest) (WorkflowTaskDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowTaskDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskDefinitions/{Moid}"
@@ -10433,8 +10132,7 @@ func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWork
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowTaskDefinition == nil {
-		executionError.error = "workflowTaskDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowTaskDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10461,22 +10159,19 @@ func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWork
 	localVarPostBody = r.workflowTaskDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10543,7 +10238,7 @@ func (a *WorkflowApiService) UpdateWorkflowTaskDefinitionExecute(r ApiUpdateWork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowTaskInfoRequest struct {
@@ -10563,7 +10258,7 @@ func (r ApiUpdateWorkflowTaskInfoRequest) IfMatch(ifMatch string) ApiUpdateWorkf
 	return r
 }
 
-func (r ApiUpdateWorkflowTaskInfoRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowTaskInfoRequest) Execute() (WorkflowTaskInfo, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowTaskInfoExecute(r)
 }
 
@@ -10585,21 +10280,19 @@ func (a *WorkflowApiService) UpdateWorkflowTaskInfo(ctx _context.Context, moid s
  * Execute executes the request
  * @return WorkflowTaskInfo
  */
-func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTaskInfoRequest) (WorkflowTaskInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTaskInfoRequest) (WorkflowTaskInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowTaskInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowTaskInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/TaskInfos/{Moid}"
@@ -10609,8 +10302,7 @@ func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowTaskInfo == nil {
-		executionError.error = "workflowTaskInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowTaskInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10637,22 +10329,19 @@ func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTa
 	localVarPostBody = r.workflowTaskInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10719,7 +10408,7 @@ func (a *WorkflowApiService) UpdateWorkflowTaskInfoExecute(r ApiUpdateWorkflowTa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowWorkflowDefinitionRequest struct {
@@ -10739,7 +10428,7 @@ func (r ApiUpdateWorkflowWorkflowDefinitionRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowWorkflowDefinitionRequest) Execute() (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowWorkflowDefinitionExecute(r)
 }
 
@@ -10761,21 +10450,19 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinition(ctx _context.Conte
  * Execute executes the request
  * @return WorkflowWorkflowDefinition
  */
-func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdateWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdateWorkflowWorkflowDefinitionRequest) (WorkflowWorkflowDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowWorkflowDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowDefinitions/{Moid}"
@@ -10785,8 +10472,7 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowDefinition == nil {
-		executionError.error = "workflowWorkflowDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10813,22 +10499,19 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdate
 	localVarPostBody = r.workflowWorkflowDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10895,7 +10578,7 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowDefinitionExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateWorkflowWorkflowInfoRequest struct {
@@ -10915,7 +10598,7 @@ func (r ApiUpdateWorkflowWorkflowInfoRequest) IfMatch(ifMatch string) ApiUpdateW
 	return r
 }
 
-func (r ApiUpdateWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateWorkflowWorkflowInfoRequest) Execute() (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	return r.ApiService.UpdateWorkflowWorkflowInfoExecute(r)
 }
 
@@ -10937,21 +10620,19 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowInfo(ctx _context.Context, mo
  * Execute executes the request
  * @return WorkflowWorkflowInfo
  */
-func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkflowWorkflowInfoRequest) (WorkflowWorkflowInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  WorkflowWorkflowInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowApiService.UpdateWorkflowWorkflowInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/workflow/WorkflowInfos/{Moid}"
@@ -10961,8 +10642,7 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.workflowWorkflowInfo == nil {
-		executionError.error = "workflowWorkflowInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("workflowWorkflowInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10989,22 +10669,19 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkfl
 	localVarPostBody = r.workflowWorkflowInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11071,5 +10748,5 @@ func (a *WorkflowApiService) UpdateWorkflowWorkflowInfoExecute(r ApiUpdateWorkfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

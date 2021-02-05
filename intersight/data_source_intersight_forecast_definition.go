@@ -187,7 +187,8 @@ func dataSourceForecastDefinitionRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("json marshal of ForecastDefinition object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.ForecastApi.GetForecastDefinitionList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ForecastDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

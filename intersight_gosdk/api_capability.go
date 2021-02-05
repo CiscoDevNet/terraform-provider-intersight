@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateCapabilityAdapterUnitDescriptorRequest) IfNoneMatch(ifNoneMatch
 	return r
 }
 
-func (r ApiCreateCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityAdapterUnitDescriptorExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptor(ctx _contex
  * Execute executes the request
  * @return CapabilityAdapterUnitDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r ApiCreateCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r ApiCreateCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityAdapterUnitDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityAdapterUnitDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors"
@@ -92,8 +90,7 @@ func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityAdapterUnitDescriptor == nil {
-		executionError.error = "capabilityAdapterUnitDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityAdapterUnitDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r Ap
 	localVarPostBody = r.capabilityAdapterUnitDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *CapabilityApiService) CreateCapabilityAdapterUnitDescriptorExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityChassisDescriptorRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateCapabilityChassisDescriptorRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityChassisDescriptorExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *CapabilityApiService) CreateCapabilityChassisDescriptor(ctx _context.Co
  * Execute executes the request
  * @return CapabilityChassisDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCreateCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCreateCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityChassisDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors"
@@ -272,8 +264,7 @@ func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCre
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisDescriptor == nil {
-		executionError.error = "capabilityChassisDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCre
 	localVarPostBody = r.capabilityChassisDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *CapabilityApiService) CreateCapabilityChassisDescriptorExecute(r ApiCre
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityChassisManufacturingDefRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateCapabilityChassisManufacturingDefRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityChassisManufacturingDefExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDef(ctx _cont
  * Execute executes the request
  * @return CapabilityChassisManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r ApiCreateCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r ApiCreateCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityChassisManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs"
@@ -452,8 +438,7 @@ func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisManufacturingDef == nil {
-		executionError.error = "capabilityChassisManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r 
 	localVarPostBody = r.capabilityChassisManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *CapabilityApiService) CreateCapabilityChassisManufacturingDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityCimcFirmwareDescriptorRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateCapabilityCimcFirmwareDescriptorRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityCimcFirmwareDescriptorExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptor(ctx _conte
  * Execute executes the request
  * @return CapabilityCimcFirmwareDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r ApiCreateCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r ApiCreateCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCimcFirmwareDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityCimcFirmwareDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors"
@@ -632,8 +612,7 @@ func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityCimcFirmwareDescriptor == nil {
-		executionError.error = "capabilityCimcFirmwareDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityCimcFirmwareDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r A
 	localVarPostBody = r.capabilityCimcFirmwareDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *CapabilityApiService) CreateCapabilityCimcFirmwareDescriptorExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityEquipmentPhysicalDefRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateCapabilityEquipmentPhysicalDefRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityEquipmentPhysicalDefExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDef(ctx _context
  * Execute executes the request
  * @return CapabilityEquipmentPhysicalDef
  */
-func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r ApiCreateCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r ApiCreateCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentPhysicalDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityEquipmentPhysicalDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs"
@@ -812,8 +786,7 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentPhysicalDef == nil {
-		executionError.error = "capabilityEquipmentPhysicalDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentPhysicalDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r Api
 	localVarPostBody = r.capabilityEquipmentPhysicalDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentPhysicalDefExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityEquipmentSlotArrayRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateCapabilityEquipmentSlotArrayRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityEquipmentSlotArrayExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArray(ctx _context.C
  * Execute executes the request
  * @return CapabilityEquipmentSlotArray
  */
-func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCreateCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCreateCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentSlotArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityEquipmentSlotArray")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays"
@@ -992,8 +960,7 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentSlotArray == nil {
-		executionError.error = "capabilityEquipmentSlotArray is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentSlotArray is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCr
 	localVarPostBody = r.capabilityEquipmentSlotArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *CapabilityApiService) CreateCapabilityEquipmentSlotArrayExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityFanModuleDescriptorRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateCapabilityFanModuleDescriptorRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityFanModuleDescriptorExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptor(ctx _context.
  * Execute executes the request
  * @return CapabilityFanModuleDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiCreateCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiCreateCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityFanModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors"
@@ -1172,8 +1134,7 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleDescriptor == nil {
-		executionError.error = "capabilityFanModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiC
 	localVarPostBody = r.capabilityFanModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleDescriptorExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityFanModuleManufacturingDefRequest struct {
@@ -1309,7 +1267,7 @@ func (r ApiCreateCapabilityFanModuleManufacturingDefRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityFanModuleManufacturingDefExecute(r)
 }
 
@@ -1329,21 +1287,19 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDef(ctx _co
  * Execute executes the request
  * @return CapabilityFanModuleManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(r ApiCreateCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(r ApiCreateCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityFanModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs"
@@ -1352,8 +1308,7 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleManufacturingDef == nil {
-		executionError.error = "capabilityFanModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1383,22 +1338,19 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(
 	localVarPostBody = r.capabilityFanModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1465,7 +1417,7 @@ func (a *CapabilityApiService) CreateCapabilityFanModuleManufacturingDefExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityIoCardCapabilityDefRequest struct {
@@ -1489,7 +1441,7 @@ func (r ApiCreateCapabilityIoCardCapabilityDefRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityIoCardCapabilityDefExecute(r)
 }
 
@@ -1509,21 +1461,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDef(ctx _context.
  * Execute executes the request
  * @return CapabilityIoCardCapabilityDef
  */
-func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiCreateCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiCreateCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityIoCardCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs"
@@ -1532,8 +1482,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardCapabilityDef == nil {
-		executionError.error = "capabilityIoCardCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1563,22 +1512,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiC
 	localVarPostBody = r.capabilityIoCardCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1645,7 +1591,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardCapabilityDefExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityIoCardDescriptorRequest struct {
@@ -1669,7 +1615,7 @@ func (r ApiCreateCapabilityIoCardDescriptorRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityIoCardDescriptorExecute(r)
 }
 
@@ -1689,21 +1635,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardDescriptor(ctx _context.Con
  * Execute executes the request
  * @return CapabilityIoCardDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCreateCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCreateCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityIoCardDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors"
@@ -1712,8 +1656,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardDescriptor == nil {
-		executionError.error = "capabilityIoCardDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1743,22 +1686,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCrea
 	localVarPostBody = r.capabilityIoCardDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1825,7 +1765,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardDescriptorExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityIoCardManufacturingDefRequest struct {
@@ -1849,7 +1789,7 @@ func (r ApiCreateCapabilityIoCardManufacturingDefRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityIoCardManufacturingDefExecute(r)
 }
 
@@ -1869,21 +1809,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDef(ctx _conte
  * Execute executes the request
  * @return CapabilityIoCardManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r ApiCreateCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r ApiCreateCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityIoCardManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs"
@@ -1892,8 +1830,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardManufacturingDef == nil {
-		executionError.error = "capabilityIoCardManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1923,22 +1860,19 @@ func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r A
 	localVarPostBody = r.capabilityIoCardManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2005,7 +1939,7 @@ func (a *CapabilityApiService) CreateCapabilityIoCardManufacturingDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityPortGroupAggregationDefRequest struct {
@@ -2029,7 +1963,7 @@ func (r ApiCreateCapabilityPortGroupAggregationDefRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityPortGroupAggregationDefExecute(r)
 }
 
@@ -2049,21 +1983,19 @@ func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDef(ctx _cont
  * Execute executes the request
  * @return CapabilityPortGroupAggregationDef
  */
-func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r ApiCreateCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r ApiCreateCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPortGroupAggregationDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityPortGroupAggregationDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs"
@@ -2072,8 +2004,7 @@ func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPortGroupAggregationDef == nil {
-		executionError.error = "capabilityPortGroupAggregationDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPortGroupAggregationDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2103,22 +2034,19 @@ func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r 
 	localVarPostBody = r.capabilityPortGroupAggregationDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2185,7 +2113,7 @@ func (a *CapabilityApiService) CreateCapabilityPortGroupAggregationDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityPsuDescriptorRequest struct {
@@ -2209,7 +2137,7 @@ func (r ApiCreateCapabilityPsuDescriptorRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityPsuDescriptorExecute(r)
 }
 
@@ -2229,21 +2157,19 @@ func (a *CapabilityApiService) CreateCapabilityPsuDescriptor(ctx _context.Contex
  * Execute executes the request
  * @return CapabilityPsuDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityPsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors"
@@ -2252,8 +2178,7 @@ func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuDescriptor == nil {
-		executionError.error = "capabilityPsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2283,22 +2208,19 @@ func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateC
 	localVarPostBody = r.capabilityPsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2365,7 +2287,7 @@ func (a *CapabilityApiService) CreateCapabilityPsuDescriptorExecute(r ApiCreateC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilityPsuManufacturingDefRequest struct {
@@ -2389,7 +2311,7 @@ func (r ApiCreateCapabilityPsuManufacturingDefRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilityPsuManufacturingDefExecute(r)
 }
 
@@ -2409,21 +2331,19 @@ func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDef(ctx _context.
  * Execute executes the request
  * @return CapabilityPsuManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiCreateCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiCreateCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilityPsuManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs"
@@ -2432,8 +2352,7 @@ func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuManufacturingDef == nil {
-		executionError.error = "capabilityPsuManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2463,22 +2382,19 @@ func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiC
 	localVarPostBody = r.capabilityPsuManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2545,7 +2461,7 @@ func (a *CapabilityApiService) CreateCapabilityPsuManufacturingDefExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySiocModuleCapabilityDefRequest struct {
@@ -2569,7 +2485,7 @@ func (r ApiCreateCapabilitySiocModuleCapabilityDefRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySiocModuleCapabilityDefExecute(r)
 }
 
@@ -2589,21 +2505,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDef(ctx _cont
  * Execute executes the request
  * @return CapabilitySiocModuleCapabilityDef
  */
-func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r ApiCreateCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r ApiCreateCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySiocModuleCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs"
@@ -2612,8 +2526,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleCapabilityDef == nil {
-		executionError.error = "capabilitySiocModuleCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2643,22 +2556,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r 
 	localVarPostBody = r.capabilitySiocModuleCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2725,7 +2635,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleCapabilityDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySiocModuleDescriptorRequest struct {
@@ -2749,7 +2659,7 @@ func (r ApiCreateCapabilitySiocModuleDescriptorRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySiocModuleDescriptorExecute(r)
 }
 
@@ -2769,21 +2679,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptor(ctx _context
  * Execute executes the request
  * @return CapabilitySiocModuleDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r ApiCreateCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r ApiCreateCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySiocModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors"
@@ -2792,8 +2700,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleDescriptor == nil {
-		executionError.error = "capabilitySiocModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2823,22 +2730,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r Api
 	localVarPostBody = r.capabilitySiocModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2905,7 +2809,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleDescriptorExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySiocModuleManufacturingDefRequest struct {
@@ -2929,7 +2833,7 @@ func (r ApiCreateCapabilitySiocModuleManufacturingDefRequest) IfNoneMatch(ifNone
 	return r
 }
 
-func (r ApiCreateCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySiocModuleManufacturingDefExecute(r)
 }
 
@@ -2949,21 +2853,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDef(ctx _c
  * Execute executes the request
  * @return CapabilitySiocModuleManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute(r ApiCreateCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute(r ApiCreateCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySiocModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs"
@@ -2972,8 +2874,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleManufacturingDef == nil {
-		executionError.error = "capabilitySiocModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3003,22 +2904,19 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute
 	localVarPostBody = r.capabilitySiocModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3085,7 +2983,7 @@ func (a *CapabilityApiService) CreateCapabilitySiocModuleManufacturingDefExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySwitchCapabilityRequest struct {
@@ -3109,7 +3007,7 @@ func (r ApiCreateCapabilitySwitchCapabilityRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySwitchCapabilityExecute(r)
 }
 
@@ -3129,21 +3027,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchCapability(ctx _context.Con
  * Execute executes the request
  * @return CapabilitySwitchCapability
  */
-func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCreateCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCreateCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchCapability
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySwitchCapability")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities"
@@ -3152,8 +3048,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchCapability == nil {
-		executionError.error = "capabilitySwitchCapability is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchCapability is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3183,22 +3078,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCrea
 	localVarPostBody = r.capabilitySwitchCapability
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3265,7 +3157,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchCapabilityExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySwitchDescriptorRequest struct {
@@ -3289,7 +3181,7 @@ func (r ApiCreateCapabilitySwitchDescriptorRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySwitchDescriptorExecute(r)
 }
 
@@ -3309,21 +3201,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchDescriptor(ctx _context.Con
  * Execute executes the request
  * @return CapabilitySwitchDescriptor
  */
-func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCreateCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCreateCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySwitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors"
@@ -3332,8 +3222,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchDescriptor == nil {
-		executionError.error = "capabilitySwitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3363,22 +3252,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCrea
 	localVarPostBody = r.capabilitySwitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3445,7 +3331,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchDescriptorExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateCapabilitySwitchManufacturingDefRequest struct {
@@ -3469,7 +3355,7 @@ func (r ApiCreateCapabilitySwitchManufacturingDefRequest) IfNoneMatch(ifNoneMatc
 	return r
 }
 
-func (r ApiCreateCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.CreateCapabilitySwitchManufacturingDefExecute(r)
 }
 
@@ -3489,21 +3375,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDef(ctx _conte
  * Execute executes the request
  * @return CapabilitySwitchManufacturingDef
  */
-func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r ApiCreateCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r ApiCreateCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.CreateCapabilitySwitchManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs"
@@ -3512,8 +3396,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchManufacturingDef == nil {
-		executionError.error = "capabilitySwitchManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3543,22 +3426,19 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r A
 	localVarPostBody = r.capabilitySwitchManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3625,7 +3505,7 @@ func (a *CapabilityApiService) CreateCapabilitySwitchManufacturingDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityAdapterUnitDescriptorRequest struct {
@@ -3634,7 +3514,7 @@ type ApiDeleteCapabilityAdapterUnitDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityAdapterUnitDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityAdapterUnitDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityAdapterUnitDescriptorExecute(r)
 }
 
@@ -3655,20 +3535,18 @@ func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptor(ctx _contex
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptorExecute(r ApiDeleteCapabilityAdapterUnitDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptorExecute(r ApiDeleteCapabilityAdapterUnitDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityAdapterUnitDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors/{Moid}"
@@ -3697,22 +3575,19 @@ func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptorExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3770,7 +3645,7 @@ func (a *CapabilityApiService) DeleteCapabilityAdapterUnitDescriptorExecute(r Ap
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityChassisDescriptorRequest struct {
@@ -3779,7 +3654,7 @@ type ApiDeleteCapabilityChassisDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityChassisDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityChassisDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityChassisDescriptorExecute(r)
 }
 
@@ -3800,20 +3675,18 @@ func (a *CapabilityApiService) DeleteCapabilityChassisDescriptor(ctx _context.Co
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityChassisDescriptorExecute(r ApiDeleteCapabilityChassisDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityChassisDescriptorExecute(r ApiDeleteCapabilityChassisDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityChassisDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors/{Moid}"
@@ -3842,22 +3715,19 @@ func (a *CapabilityApiService) DeleteCapabilityChassisDescriptorExecute(r ApiDel
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3915,7 +3785,7 @@ func (a *CapabilityApiService) DeleteCapabilityChassisDescriptorExecute(r ApiDel
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityChassisManufacturingDefRequest struct {
@@ -3924,7 +3794,7 @@ type ApiDeleteCapabilityChassisManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityChassisManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityChassisManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityChassisManufacturingDefExecute(r)
 }
 
@@ -3945,20 +3815,18 @@ func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDef(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDefExecute(r ApiDeleteCapabilityChassisManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDefExecute(r ApiDeleteCapabilityChassisManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityChassisManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs/{Moid}"
@@ -3987,22 +3855,19 @@ func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDefExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4060,7 +3925,7 @@ func (a *CapabilityApiService) DeleteCapabilityChassisManufacturingDefExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityCimcFirmwareDescriptorRequest struct {
@@ -4069,7 +3934,7 @@ type ApiDeleteCapabilityCimcFirmwareDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityCimcFirmwareDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityCimcFirmwareDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityCimcFirmwareDescriptorExecute(r)
 }
 
@@ -4090,20 +3955,18 @@ func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptor(ctx _conte
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptorExecute(r ApiDeleteCapabilityCimcFirmwareDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptorExecute(r ApiDeleteCapabilityCimcFirmwareDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityCimcFirmwareDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors/{Moid}"
@@ -4132,22 +3995,19 @@ func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptorExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4205,7 +4065,7 @@ func (a *CapabilityApiService) DeleteCapabilityCimcFirmwareDescriptorExecute(r A
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityEquipmentPhysicalDefRequest struct {
@@ -4214,7 +4074,7 @@ type ApiDeleteCapabilityEquipmentPhysicalDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityEquipmentPhysicalDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityEquipmentPhysicalDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityEquipmentPhysicalDefExecute(r)
 }
 
@@ -4235,20 +4095,18 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDef(ctx _context
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDefExecute(r ApiDeleteCapabilityEquipmentPhysicalDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDefExecute(r ApiDeleteCapabilityEquipmentPhysicalDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityEquipmentPhysicalDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs/{Moid}"
@@ -4277,22 +4135,19 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDefExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4350,7 +4205,7 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentPhysicalDefExecute(r Api
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityEquipmentSlotArrayRequest struct {
@@ -4359,7 +4214,7 @@ type ApiDeleteCapabilityEquipmentSlotArrayRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityEquipmentSlotArrayRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityEquipmentSlotArrayRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityEquipmentSlotArrayExecute(r)
 }
 
@@ -4380,20 +4235,18 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArray(ctx _context.C
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArrayExecute(r ApiDeleteCapabilityEquipmentSlotArrayRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArrayExecute(r ApiDeleteCapabilityEquipmentSlotArrayRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityEquipmentSlotArray")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays/{Moid}"
@@ -4422,22 +4275,19 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArrayExecute(r ApiDe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4495,7 +4345,7 @@ func (a *CapabilityApiService) DeleteCapabilityEquipmentSlotArrayExecute(r ApiDe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityFanModuleDescriptorRequest struct {
@@ -4504,7 +4354,7 @@ type ApiDeleteCapabilityFanModuleDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityFanModuleDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityFanModuleDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityFanModuleDescriptorExecute(r)
 }
 
@@ -4525,20 +4375,18 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptor(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptorExecute(r ApiDeleteCapabilityFanModuleDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptorExecute(r ApiDeleteCapabilityFanModuleDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityFanModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors/{Moid}"
@@ -4567,22 +4415,19 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptorExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4640,7 +4485,7 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleDescriptorExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityFanModuleManufacturingDefRequest struct {
@@ -4649,7 +4494,7 @@ type ApiDeleteCapabilityFanModuleManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityFanModuleManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityFanModuleManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityFanModuleManufacturingDefExecute(r)
 }
 
@@ -4670,20 +4515,18 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDef(ctx _co
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDefExecute(r ApiDeleteCapabilityFanModuleManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDefExecute(r ApiDeleteCapabilityFanModuleManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityFanModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs/{Moid}"
@@ -4712,22 +4555,19 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDefExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4785,7 +4625,7 @@ func (a *CapabilityApiService) DeleteCapabilityFanModuleManufacturingDefExecute(
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityIoCardCapabilityDefRequest struct {
@@ -4794,7 +4634,7 @@ type ApiDeleteCapabilityIoCardCapabilityDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityIoCardCapabilityDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityIoCardCapabilityDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityIoCardCapabilityDefExecute(r)
 }
 
@@ -4815,20 +4655,18 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDef(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDefExecute(r ApiDeleteCapabilityIoCardCapabilityDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDefExecute(r ApiDeleteCapabilityIoCardCapabilityDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityIoCardCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs/{Moid}"
@@ -4857,22 +4695,19 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDefExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4930,7 +4765,7 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardCapabilityDefExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityIoCardDescriptorRequest struct {
@@ -4939,7 +4774,7 @@ type ApiDeleteCapabilityIoCardDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityIoCardDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityIoCardDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityIoCardDescriptorExecute(r)
 }
 
@@ -4960,20 +4795,18 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptor(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptorExecute(r ApiDeleteCapabilityIoCardDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptorExecute(r ApiDeleteCapabilityIoCardDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityIoCardDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors/{Moid}"
@@ -5002,22 +4835,19 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptorExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5075,7 +4905,7 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardDescriptorExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityIoCardManufacturingDefRequest struct {
@@ -5084,7 +4914,7 @@ type ApiDeleteCapabilityIoCardManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityIoCardManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityIoCardManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityIoCardManufacturingDefExecute(r)
 }
 
@@ -5105,20 +4935,18 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDef(ctx _conte
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDefExecute(r ApiDeleteCapabilityIoCardManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDefExecute(r ApiDeleteCapabilityIoCardManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityIoCardManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs/{Moid}"
@@ -5147,22 +4975,19 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDefExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5220,7 +5045,7 @@ func (a *CapabilityApiService) DeleteCapabilityIoCardManufacturingDefExecute(r A
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityPortGroupAggregationDefRequest struct {
@@ -5229,7 +5054,7 @@ type ApiDeleteCapabilityPortGroupAggregationDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityPortGroupAggregationDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityPortGroupAggregationDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityPortGroupAggregationDefExecute(r)
 }
 
@@ -5250,20 +5075,18 @@ func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDef(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDefExecute(r ApiDeleteCapabilityPortGroupAggregationDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDefExecute(r ApiDeleteCapabilityPortGroupAggregationDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityPortGroupAggregationDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs/{Moid}"
@@ -5292,22 +5115,19 @@ func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDefExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5365,7 +5185,7 @@ func (a *CapabilityApiService) DeleteCapabilityPortGroupAggregationDefExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityPsuDescriptorRequest struct {
@@ -5374,7 +5194,7 @@ type ApiDeleteCapabilityPsuDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityPsuDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityPsuDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityPsuDescriptorExecute(r)
 }
 
@@ -5395,20 +5215,18 @@ func (a *CapabilityApiService) DeleteCapabilityPsuDescriptor(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityPsuDescriptorExecute(r ApiDeleteCapabilityPsuDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityPsuDescriptorExecute(r ApiDeleteCapabilityPsuDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityPsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors/{Moid}"
@@ -5437,22 +5255,19 @@ func (a *CapabilityApiService) DeleteCapabilityPsuDescriptorExecute(r ApiDeleteC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5510,7 +5325,7 @@ func (a *CapabilityApiService) DeleteCapabilityPsuDescriptorExecute(r ApiDeleteC
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilityPsuManufacturingDefRequest struct {
@@ -5519,7 +5334,7 @@ type ApiDeleteCapabilityPsuManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilityPsuManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilityPsuManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilityPsuManufacturingDefExecute(r)
 }
 
@@ -5540,20 +5355,18 @@ func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDef(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDefExecute(r ApiDeleteCapabilityPsuManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDefExecute(r ApiDeleteCapabilityPsuManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilityPsuManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs/{Moid}"
@@ -5582,22 +5395,19 @@ func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDefExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5655,7 +5465,7 @@ func (a *CapabilityApiService) DeleteCapabilityPsuManufacturingDefExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySiocModuleCapabilityDefRequest struct {
@@ -5664,7 +5474,7 @@ type ApiDeleteCapabilitySiocModuleCapabilityDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySiocModuleCapabilityDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySiocModuleCapabilityDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySiocModuleCapabilityDefExecute(r)
 }
 
@@ -5685,20 +5495,18 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDef(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDefExecute(r ApiDeleteCapabilitySiocModuleCapabilityDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDefExecute(r ApiDeleteCapabilitySiocModuleCapabilityDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySiocModuleCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs/{Moid}"
@@ -5727,22 +5535,19 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDefExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5800,7 +5605,7 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleCapabilityDefExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySiocModuleDescriptorRequest struct {
@@ -5809,7 +5614,7 @@ type ApiDeleteCapabilitySiocModuleDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySiocModuleDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySiocModuleDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySiocModuleDescriptorExecute(r)
 }
 
@@ -5830,20 +5635,18 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptor(ctx _context
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptorExecute(r ApiDeleteCapabilitySiocModuleDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptorExecute(r ApiDeleteCapabilitySiocModuleDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySiocModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors/{Moid}"
@@ -5872,22 +5675,19 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptorExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5945,7 +5745,7 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleDescriptorExecute(r Api
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySiocModuleManufacturingDefRequest struct {
@@ -5954,7 +5754,7 @@ type ApiDeleteCapabilitySiocModuleManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySiocModuleManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySiocModuleManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySiocModuleManufacturingDefExecute(r)
 }
 
@@ -5975,20 +5775,18 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDef(ctx _c
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDefExecute(r ApiDeleteCapabilitySiocModuleManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDefExecute(r ApiDeleteCapabilitySiocModuleManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySiocModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs/{Moid}"
@@ -6017,22 +5815,19 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDefExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6090,7 +5885,7 @@ func (a *CapabilityApiService) DeleteCapabilitySiocModuleManufacturingDefExecute
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySwitchCapabilityRequest struct {
@@ -6099,7 +5894,7 @@ type ApiDeleteCapabilitySwitchCapabilityRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySwitchCapabilityRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySwitchCapabilityRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySwitchCapabilityExecute(r)
 }
 
@@ -6120,20 +5915,18 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchCapability(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySwitchCapabilityExecute(r ApiDeleteCapabilitySwitchCapabilityRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySwitchCapabilityExecute(r ApiDeleteCapabilitySwitchCapabilityRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySwitchCapability")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities/{Moid}"
@@ -6162,22 +5955,19 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchCapabilityExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6235,7 +6025,7 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchCapabilityExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySwitchDescriptorRequest struct {
@@ -6244,7 +6034,7 @@ type ApiDeleteCapabilitySwitchDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySwitchDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySwitchDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySwitchDescriptorExecute(r)
 }
 
@@ -6265,20 +6055,18 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptor(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptorExecute(r ApiDeleteCapabilitySwitchDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptorExecute(r ApiDeleteCapabilitySwitchDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySwitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors/{Moid}"
@@ -6307,22 +6095,19 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptorExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6380,7 +6165,7 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchDescriptorExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteCapabilitySwitchManufacturingDefRequest struct {
@@ -6389,7 +6174,7 @@ type ApiDeleteCapabilitySwitchManufacturingDefRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCapabilitySwitchManufacturingDefRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCapabilitySwitchManufacturingDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCapabilitySwitchManufacturingDefExecute(r)
 }
 
@@ -6410,20 +6195,18 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDef(ctx _conte
 /*
  * Execute executes the request
  */
-func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDefExecute(r ApiDeleteCapabilitySwitchManufacturingDefRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDefExecute(r ApiDeleteCapabilitySwitchManufacturingDefRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.DeleteCapabilitySwitchManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs/{Moid}"
@@ -6452,22 +6235,19 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDefExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6525,7 +6305,7 @@ func (a *CapabilityApiService) DeleteCapabilitySwitchManufacturingDefExecute(r A
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityAdapterUnitDescriptorByMoidRequest struct {
@@ -6534,7 +6314,7 @@ type ApiGetCapabilityAdapterUnitDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityAdapterUnitDescriptorByMoidExecute(r)
 }
 
@@ -6556,21 +6336,19 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoid(ctx _con
  * Execute executes the request
  * @return CapabilityAdapterUnitDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoidExecute(r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoidExecute(r ApiGetCapabilityAdapterUnitDescriptorByMoidRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityAdapterUnitDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityAdapterUnitDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors/{Moid}"
@@ -6599,22 +6377,19 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoidExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6681,7 +6456,7 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityAdapterUnitDescriptorListRequest struct {
@@ -6745,7 +6520,7 @@ func (r ApiGetCapabilityAdapterUnitDescriptorListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetCapabilityAdapterUnitDescriptorListRequest) Execute() (CapabilityAdapterUnitDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityAdapterUnitDescriptorListRequest) Execute() (CapabilityAdapterUnitDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityAdapterUnitDescriptorListExecute(r)
 }
 
@@ -6765,21 +6540,19 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorList(ctx _conte
  * Execute executes the request
  * @return CapabilityAdapterUnitDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorListExecute(r ApiGetCapabilityAdapterUnitDescriptorListRequest) (CapabilityAdapterUnitDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorListExecute(r ApiGetCapabilityAdapterUnitDescriptorListRequest) (CapabilityAdapterUnitDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityAdapterUnitDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityAdapterUnitDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors"
@@ -6840,22 +6613,19 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorListExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6922,7 +6692,7 @@ func (a *CapabilityApiService) GetCapabilityAdapterUnitDescriptorListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityCatalogByMoidRequest struct {
@@ -6931,7 +6701,7 @@ type ApiGetCapabilityCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityCatalogByMoidRequest) Execute() (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityCatalogByMoidRequest) Execute() (CapabilityCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityCatalogByMoidExecute(r)
 }
 
@@ -6953,21 +6723,19 @@ func (a *CapabilityApiService) GetCapabilityCatalogByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return CapabilityCatalog
  */
-func (a *CapabilityApiService) GetCapabilityCatalogByMoidExecute(r ApiGetCapabilityCatalogByMoidRequest) (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityCatalogByMoidExecute(r ApiGetCapabilityCatalogByMoidRequest) (CapabilityCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/Catalogs/{Moid}"
@@ -6996,22 +6764,19 @@ func (a *CapabilityApiService) GetCapabilityCatalogByMoidExecute(r ApiGetCapabil
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7078,7 +6843,7 @@ func (a *CapabilityApiService) GetCapabilityCatalogByMoidExecute(r ApiGetCapabil
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityCatalogListRequest struct {
@@ -7142,7 +6907,7 @@ func (r ApiGetCapabilityCatalogListRequest) Tags(tags string) ApiGetCapabilityCa
 	return r
 }
 
-func (r ApiGetCapabilityCatalogListRequest) Execute() (CapabilityCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityCatalogListRequest) Execute() (CapabilityCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityCatalogListExecute(r)
 }
 
@@ -7162,21 +6927,19 @@ func (a *CapabilityApiService) GetCapabilityCatalogList(ctx _context.Context) Ap
  * Execute executes the request
  * @return CapabilityCatalogResponse
  */
-func (a *CapabilityApiService) GetCapabilityCatalogListExecute(r ApiGetCapabilityCatalogListRequest) (CapabilityCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityCatalogListExecute(r ApiGetCapabilityCatalogListRequest) (CapabilityCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/Catalogs"
@@ -7237,22 +7000,19 @@ func (a *CapabilityApiService) GetCapabilityCatalogListExecute(r ApiGetCapabilit
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7319,7 +7079,7 @@ func (a *CapabilityApiService) GetCapabilityCatalogListExecute(r ApiGetCapabilit
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityChassisDescriptorByMoidRequest struct {
@@ -7328,7 +7088,7 @@ type ApiGetCapabilityChassisDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityChassisDescriptorByMoidRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityChassisDescriptorByMoidRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityChassisDescriptorByMoidExecute(r)
 }
 
@@ -7350,21 +7110,19 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoid(ctx _context
  * Execute executes the request
  * @return CapabilityChassisDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoidExecute(r ApiGetCapabilityChassisDescriptorByMoidRequest) (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoidExecute(r ApiGetCapabilityChassisDescriptorByMoidRequest) (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityChassisDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors/{Moid}"
@@ -7393,22 +7151,19 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoidExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7475,7 +7230,7 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityChassisDescriptorListRequest struct {
@@ -7539,7 +7294,7 @@ func (r ApiGetCapabilityChassisDescriptorListRequest) Tags(tags string) ApiGetCa
 	return r
 }
 
-func (r ApiGetCapabilityChassisDescriptorListRequest) Execute() (CapabilityChassisDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityChassisDescriptorListRequest) Execute() (CapabilityChassisDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityChassisDescriptorListExecute(r)
 }
 
@@ -7559,21 +7314,19 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorList(ctx _context.C
  * Execute executes the request
  * @return CapabilityChassisDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityChassisDescriptorListExecute(r ApiGetCapabilityChassisDescriptorListRequest) (CapabilityChassisDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityChassisDescriptorListExecute(r ApiGetCapabilityChassisDescriptorListRequest) (CapabilityChassisDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityChassisDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors"
@@ -7634,22 +7387,19 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorListExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7716,7 +7466,7 @@ func (a *CapabilityApiService) GetCapabilityChassisDescriptorListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityChassisManufacturingDefByMoidRequest struct {
@@ -7725,7 +7475,7 @@ type ApiGetCapabilityChassisManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityChassisManufacturingDefByMoidRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityChassisManufacturingDefByMoidRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityChassisManufacturingDefByMoidExecute(r)
 }
 
@@ -7747,21 +7497,19 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoid(ctx _c
  * Execute executes the request
  * @return CapabilityChassisManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoidExecute(r ApiGetCapabilityChassisManufacturingDefByMoidRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoidExecute(r ApiGetCapabilityChassisManufacturingDefByMoidRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityChassisManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs/{Moid}"
@@ -7790,22 +7538,19 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7872,7 +7617,7 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityChassisManufacturingDefListRequest struct {
@@ -7936,7 +7681,7 @@ func (r ApiGetCapabilityChassisManufacturingDefListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetCapabilityChassisManufacturingDefListRequest) Execute() (CapabilityChassisManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityChassisManufacturingDefListRequest) Execute() (CapabilityChassisManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityChassisManufacturingDefListExecute(r)
 }
 
@@ -7956,21 +7701,19 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefList(ctx _con
  * Execute executes the request
  * @return CapabilityChassisManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefListExecute(r ApiGetCapabilityChassisManufacturingDefListRequest) (CapabilityChassisManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefListExecute(r ApiGetCapabilityChassisManufacturingDefListRequest) (CapabilityChassisManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityChassisManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs"
@@ -8031,22 +7774,19 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8113,7 +7853,7 @@ func (a *CapabilityApiService) GetCapabilityChassisManufacturingDefListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest struct {
@@ -8122,7 +7862,7 @@ type ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityCimcFirmwareDescriptorByMoidExecute(r)
 }
 
@@ -8144,21 +7884,19 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoid(ctx _co
  * Execute executes the request
  * @return CapabilityCimcFirmwareDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoidExecute(r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoidExecute(r ApiGetCapabilityCimcFirmwareDescriptorByMoidRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCimcFirmwareDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityCimcFirmwareDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors/{Moid}"
@@ -8187,22 +7925,19 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoidExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8269,7 +8004,7 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityCimcFirmwareDescriptorListRequest struct {
@@ -8333,7 +8068,7 @@ func (r ApiGetCapabilityCimcFirmwareDescriptorListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetCapabilityCimcFirmwareDescriptorListRequest) Execute() (CapabilityCimcFirmwareDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityCimcFirmwareDescriptorListRequest) Execute() (CapabilityCimcFirmwareDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityCimcFirmwareDescriptorListExecute(r)
 }
 
@@ -8353,21 +8088,19 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorList(ctx _cont
  * Execute executes the request
  * @return CapabilityCimcFirmwareDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorListExecute(r ApiGetCapabilityCimcFirmwareDescriptorListRequest) (CapabilityCimcFirmwareDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorListExecute(r ApiGetCapabilityCimcFirmwareDescriptorListRequest) (CapabilityCimcFirmwareDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCimcFirmwareDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityCimcFirmwareDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors"
@@ -8428,22 +8161,19 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorListExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8510,7 +8240,7 @@ func (a *CapabilityApiService) GetCapabilityCimcFirmwareDescriptorListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityEquipmentPhysicalDefByMoidRequest struct {
@@ -8519,7 +8249,7 @@ type ApiGetCapabilityEquipmentPhysicalDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityEquipmentPhysicalDefByMoidExecute(r)
 }
 
@@ -8541,21 +8271,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoid(ctx _cont
  * Execute executes the request
  * @return CapabilityEquipmentPhysicalDef
  */
-func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoidExecute(r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoidExecute(r ApiGetCapabilityEquipmentPhysicalDefByMoidRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentPhysicalDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityEquipmentPhysicalDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs/{Moid}"
@@ -8584,22 +8312,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoidExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8666,7 +8391,7 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityEquipmentPhysicalDefListRequest struct {
@@ -8730,7 +8455,7 @@ func (r ApiGetCapabilityEquipmentPhysicalDefListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetCapabilityEquipmentPhysicalDefListRequest) Execute() (CapabilityEquipmentPhysicalDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityEquipmentPhysicalDefListRequest) Execute() (CapabilityEquipmentPhysicalDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityEquipmentPhysicalDefListExecute(r)
 }
 
@@ -8750,21 +8475,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefList(ctx _contex
  * Execute executes the request
  * @return CapabilityEquipmentPhysicalDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefListExecute(r ApiGetCapabilityEquipmentPhysicalDefListRequest) (CapabilityEquipmentPhysicalDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefListExecute(r ApiGetCapabilityEquipmentPhysicalDefListRequest) (CapabilityEquipmentPhysicalDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentPhysicalDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityEquipmentPhysicalDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs"
@@ -8825,22 +8548,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefListExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8907,7 +8627,7 @@ func (a *CapabilityApiService) GetCapabilityEquipmentPhysicalDefListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityEquipmentSlotArrayByMoidRequest struct {
@@ -8916,7 +8636,7 @@ type ApiGetCapabilityEquipmentSlotArrayByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityEquipmentSlotArrayByMoidExecute(r)
 }
 
@@ -8938,21 +8658,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoid(ctx _contex
  * Execute executes the request
  * @return CapabilityEquipmentSlotArray
  */
-func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoidExecute(r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoidExecute(r ApiGetCapabilityEquipmentSlotArrayByMoidRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentSlotArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityEquipmentSlotArrayByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays/{Moid}"
@@ -8981,22 +8699,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9063,7 +8778,7 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityEquipmentSlotArrayListRequest struct {
@@ -9127,7 +8842,7 @@ func (r ApiGetCapabilityEquipmentSlotArrayListRequest) Tags(tags string) ApiGetC
 	return r
 }
 
-func (r ApiGetCapabilityEquipmentSlotArrayListRequest) Execute() (CapabilityEquipmentSlotArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityEquipmentSlotArrayListRequest) Execute() (CapabilityEquipmentSlotArrayResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityEquipmentSlotArrayListExecute(r)
 }
 
@@ -9147,21 +8862,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayList(ctx _context.
  * Execute executes the request
  * @return CapabilityEquipmentSlotArrayResponse
  */
-func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayListExecute(r ApiGetCapabilityEquipmentSlotArrayListRequest) (CapabilityEquipmentSlotArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayListExecute(r ApiGetCapabilityEquipmentSlotArrayListRequest) (CapabilityEquipmentSlotArrayResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentSlotArrayResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityEquipmentSlotArrayList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays"
@@ -9222,22 +8935,19 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9304,7 +9014,7 @@ func (a *CapabilityApiService) GetCapabilityEquipmentSlotArrayListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityFanModuleDescriptorByMoidRequest struct {
@@ -9313,7 +9023,7 @@ type ApiGetCapabilityFanModuleDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityFanModuleDescriptorByMoidRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityFanModuleDescriptorByMoidRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityFanModuleDescriptorByMoidExecute(r)
 }
 
@@ -9335,21 +9045,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoid(ctx _conte
  * Execute executes the request
  * @return CapabilityFanModuleDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoidExecute(r ApiGetCapabilityFanModuleDescriptorByMoidRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoidExecute(r ApiGetCapabilityFanModuleDescriptorByMoidRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFanModuleDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors/{Moid}"
@@ -9378,22 +9086,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9460,7 +9165,7 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityFanModuleDescriptorListRequest struct {
@@ -9524,7 +9229,7 @@ func (r ApiGetCapabilityFanModuleDescriptorListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetCapabilityFanModuleDescriptorListRequest) Execute() (CapabilityFanModuleDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityFanModuleDescriptorListRequest) Execute() (CapabilityFanModuleDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityFanModuleDescriptorListExecute(r)
 }
 
@@ -9544,21 +9249,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorList(ctx _context
  * Execute executes the request
  * @return CapabilityFanModuleDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorListExecute(r ApiGetCapabilityFanModuleDescriptorListRequest) (CapabilityFanModuleDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorListExecute(r ApiGetCapabilityFanModuleDescriptorListRequest) (CapabilityFanModuleDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFanModuleDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors"
@@ -9619,22 +9322,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9701,7 +9401,7 @@ func (a *CapabilityApiService) GetCapabilityFanModuleDescriptorListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityFanModuleManufacturingDefByMoidRequest struct {
@@ -9710,7 +9410,7 @@ type ApiGetCapabilityFanModuleManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityFanModuleManufacturingDefByMoidExecute(r)
 }
 
@@ -9732,21 +9432,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoid(ctx 
  * Execute executes the request
  * @return CapabilityFanModuleManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoidExecute(r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoidExecute(r ApiGetCapabilityFanModuleManufacturingDefByMoidRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFanModuleManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs/{Moid}"
@@ -9775,22 +9473,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoidExecu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9857,7 +9552,7 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityFanModuleManufacturingDefListRequest struct {
@@ -9921,7 +9616,7 @@ func (r ApiGetCapabilityFanModuleManufacturingDefListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetCapabilityFanModuleManufacturingDefListRequest) Execute() (CapabilityFanModuleManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityFanModuleManufacturingDefListRequest) Execute() (CapabilityFanModuleManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityFanModuleManufacturingDefListExecute(r)
 }
 
@@ -9941,21 +9636,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefList(ctx _c
  * Execute executes the request
  * @return CapabilityFanModuleManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute(r ApiGetCapabilityFanModuleManufacturingDefListRequest) (CapabilityFanModuleManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute(r ApiGetCapabilityFanModuleManufacturingDefListRequest) (CapabilityFanModuleManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityFanModuleManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs"
@@ -10016,22 +9709,19 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10098,7 +9788,7 @@ func (a *CapabilityApiService) GetCapabilityFanModuleManufacturingDefListExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardCapabilityDefByMoidRequest struct {
@@ -10107,7 +9797,7 @@ type ApiGetCapabilityIoCardCapabilityDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardCapabilityDefByMoidExecute(r)
 }
 
@@ -10129,21 +9819,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoid(ctx _conte
  * Execute executes the request
  * @return CapabilityIoCardCapabilityDef
  */
-func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoidExecute(r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoidExecute(r ApiGetCapabilityIoCardCapabilityDefByMoidRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardCapabilityDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs/{Moid}"
@@ -10172,22 +9860,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10254,7 +9939,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardCapabilityDefListRequest struct {
@@ -10318,7 +10003,7 @@ func (r ApiGetCapabilityIoCardCapabilityDefListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetCapabilityIoCardCapabilityDefListRequest) Execute() (CapabilityIoCardCapabilityDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardCapabilityDefListRequest) Execute() (CapabilityIoCardCapabilityDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardCapabilityDefListExecute(r)
 }
 
@@ -10338,21 +10023,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefList(ctx _context
  * Execute executes the request
  * @return CapabilityIoCardCapabilityDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefListExecute(r ApiGetCapabilityIoCardCapabilityDefListRequest) (CapabilityIoCardCapabilityDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefListExecute(r ApiGetCapabilityIoCardCapabilityDefListRequest) (CapabilityIoCardCapabilityDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardCapabilityDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardCapabilityDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs"
@@ -10413,22 +10096,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10495,7 +10175,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardCapabilityDefListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardDescriptorByMoidRequest struct {
@@ -10504,7 +10184,7 @@ type ApiGetCapabilityIoCardDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityIoCardDescriptorByMoidRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardDescriptorByMoidRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardDescriptorByMoidExecute(r)
 }
 
@@ -10526,21 +10206,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoid(ctx _context.
  * Execute executes the request
  * @return CapabilityIoCardDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoidExecute(r ApiGetCapabilityIoCardDescriptorByMoidRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoidExecute(r ApiGetCapabilityIoCardDescriptorByMoidRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors/{Moid}"
@@ -10569,22 +10247,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10651,7 +10326,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardDescriptorListRequest struct {
@@ -10715,7 +10390,7 @@ func (r ApiGetCapabilityIoCardDescriptorListRequest) Tags(tags string) ApiGetCap
 	return r
 }
 
-func (r ApiGetCapabilityIoCardDescriptorListRequest) Execute() (CapabilityIoCardDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardDescriptorListRequest) Execute() (CapabilityIoCardDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardDescriptorListExecute(r)
 }
 
@@ -10735,21 +10410,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorList(ctx _context.Co
  * Execute executes the request
  * @return CapabilityIoCardDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityIoCardDescriptorListExecute(r ApiGetCapabilityIoCardDescriptorListRequest) (CapabilityIoCardDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardDescriptorListExecute(r ApiGetCapabilityIoCardDescriptorListRequest) (CapabilityIoCardDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors"
@@ -10810,22 +10483,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10892,7 +10562,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardDescriptorListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardManufacturingDefByMoidRequest struct {
@@ -10901,7 +10571,7 @@ type ApiGetCapabilityIoCardManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardManufacturingDefByMoidExecute(r)
 }
 
@@ -10923,21 +10593,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoid(ctx _co
  * Execute executes the request
  * @return CapabilityIoCardManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoidExecute(r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoidExecute(r ApiGetCapabilityIoCardManufacturingDefByMoidRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs/{Moid}"
@@ -10966,22 +10634,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoidExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11048,7 +10713,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityIoCardManufacturingDefListRequest struct {
@@ -11112,7 +10777,7 @@ func (r ApiGetCapabilityIoCardManufacturingDefListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetCapabilityIoCardManufacturingDefListRequest) Execute() (CapabilityIoCardManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityIoCardManufacturingDefListRequest) Execute() (CapabilityIoCardManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityIoCardManufacturingDefListExecute(r)
 }
 
@@ -11132,21 +10797,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefList(ctx _cont
  * Execute executes the request
  * @return CapabilityIoCardManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefListExecute(r ApiGetCapabilityIoCardManufacturingDefListRequest) (CapabilityIoCardManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefListExecute(r ApiGetCapabilityIoCardManufacturingDefListRequest) (CapabilityIoCardManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityIoCardManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs"
@@ -11207,22 +10870,19 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefListExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11289,7 +10949,7 @@ func (a *CapabilityApiService) GetCapabilityIoCardManufacturingDefListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPortGroupAggregationDefByMoidRequest struct {
@@ -11298,7 +10958,7 @@ type ApiGetCapabilityPortGroupAggregationDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPortGroupAggregationDefByMoidExecute(r)
 }
 
@@ -11320,21 +10980,19 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoid(ctx _c
  * Execute executes the request
  * @return CapabilityPortGroupAggregationDef
  */
-func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoidExecute(r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoidExecute(r ApiGetCapabilityPortGroupAggregationDefByMoidRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPortGroupAggregationDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPortGroupAggregationDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs/{Moid}"
@@ -11363,22 +11021,19 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11445,7 +11100,7 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPortGroupAggregationDefListRequest struct {
@@ -11509,7 +11164,7 @@ func (r ApiGetCapabilityPortGroupAggregationDefListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetCapabilityPortGroupAggregationDefListRequest) Execute() (CapabilityPortGroupAggregationDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPortGroupAggregationDefListRequest) Execute() (CapabilityPortGroupAggregationDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPortGroupAggregationDefListExecute(r)
 }
 
@@ -11529,21 +11184,19 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefList(ctx _con
  * Execute executes the request
  * @return CapabilityPortGroupAggregationDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefListExecute(r ApiGetCapabilityPortGroupAggregationDefListRequest) (CapabilityPortGroupAggregationDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefListExecute(r ApiGetCapabilityPortGroupAggregationDefListRequest) (CapabilityPortGroupAggregationDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPortGroupAggregationDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPortGroupAggregationDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs"
@@ -11604,22 +11257,19 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11686,7 +11336,7 @@ func (a *CapabilityApiService) GetCapabilityPortGroupAggregationDefListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPsuDescriptorByMoidRequest struct {
@@ -11695,7 +11345,7 @@ type ApiGetCapabilityPsuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityPsuDescriptorByMoidRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPsuDescriptorByMoidRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPsuDescriptorByMoidExecute(r)
 }
 
@@ -11717,21 +11367,19 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoid(ctx _context.Con
  * Execute executes the request
  * @return CapabilityPsuDescriptor
  */
-func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoidExecute(r ApiGetCapabilityPsuDescriptorByMoidRequest) (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoidExecute(r ApiGetCapabilityPsuDescriptorByMoidRequest) (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPsuDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors/{Moid}"
@@ -11760,22 +11408,19 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoidExecute(r ApiGetC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11842,7 +11487,7 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorByMoidExecute(r ApiGetC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPsuDescriptorListRequest struct {
@@ -11906,7 +11551,7 @@ func (r ApiGetCapabilityPsuDescriptorListRequest) Tags(tags string) ApiGetCapabi
 	return r
 }
 
-func (r ApiGetCapabilityPsuDescriptorListRequest) Execute() (CapabilityPsuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPsuDescriptorListRequest) Execute() (CapabilityPsuDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPsuDescriptorListExecute(r)
 }
 
@@ -11926,21 +11571,19 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorList(ctx _context.Conte
  * Execute executes the request
  * @return CapabilityPsuDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilityPsuDescriptorListExecute(r ApiGetCapabilityPsuDescriptorListRequest) (CapabilityPsuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPsuDescriptorListExecute(r ApiGetCapabilityPsuDescriptorListRequest) (CapabilityPsuDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPsuDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors"
@@ -12001,22 +11644,19 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorListExecute(r ApiGetCap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12083,7 +11723,7 @@ func (a *CapabilityApiService) GetCapabilityPsuDescriptorListExecute(r ApiGetCap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPsuManufacturingDefByMoidRequest struct {
@@ -12092,7 +11732,7 @@ type ApiGetCapabilityPsuManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilityPsuManufacturingDefByMoidRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPsuManufacturingDefByMoidRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPsuManufacturingDefByMoidExecute(r)
 }
 
@@ -12114,21 +11754,19 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoid(ctx _conte
  * Execute executes the request
  * @return CapabilityPsuManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoidExecute(r ApiGetCapabilityPsuManufacturingDefByMoidRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoidExecute(r ApiGetCapabilityPsuManufacturingDefByMoidRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPsuManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs/{Moid}"
@@ -12157,22 +11795,19 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12239,7 +11874,7 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilityPsuManufacturingDefListRequest struct {
@@ -12303,7 +11938,7 @@ func (r ApiGetCapabilityPsuManufacturingDefListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetCapabilityPsuManufacturingDefListRequest) Execute() (CapabilityPsuManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilityPsuManufacturingDefListRequest) Execute() (CapabilityPsuManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilityPsuManufacturingDefListExecute(r)
 }
 
@@ -12323,21 +11958,19 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefList(ctx _context
  * Execute executes the request
  * @return CapabilityPsuManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefListExecute(r ApiGetCapabilityPsuManufacturingDefListRequest) (CapabilityPsuManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefListExecute(r ApiGetCapabilityPsuManufacturingDefListRequest) (CapabilityPsuManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilityPsuManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs"
@@ -12398,22 +12031,19 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12480,7 +12110,7 @@ func (a *CapabilityApiService) GetCapabilityPsuManufacturingDefListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest struct {
@@ -12489,7 +12119,7 @@ type ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleCapabilityDefByMoidExecute(r)
 }
 
@@ -12511,21 +12141,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoid(ctx _c
  * Execute executes the request
  * @return CapabilitySiocModuleCapabilityDef
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoidExecute(r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoidExecute(r ApiGetCapabilitySiocModuleCapabilityDefByMoidRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleCapabilityDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs/{Moid}"
@@ -12554,22 +12182,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12636,7 +12261,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleCapabilityDefListRequest struct {
@@ -12700,7 +12325,7 @@ func (r ApiGetCapabilitySiocModuleCapabilityDefListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetCapabilitySiocModuleCapabilityDefListRequest) Execute() (CapabilitySiocModuleCapabilityDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleCapabilityDefListRequest) Execute() (CapabilitySiocModuleCapabilityDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleCapabilityDefListExecute(r)
 }
 
@@ -12720,21 +12345,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefList(ctx _con
  * Execute executes the request
  * @return CapabilitySiocModuleCapabilityDefResponse
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefListExecute(r ApiGetCapabilitySiocModuleCapabilityDefListRequest) (CapabilitySiocModuleCapabilityDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefListExecute(r ApiGetCapabilitySiocModuleCapabilityDefListRequest) (CapabilitySiocModuleCapabilityDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleCapabilityDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleCapabilityDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs"
@@ -12795,22 +12418,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12877,7 +12497,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleCapabilityDefListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleDescriptorByMoidRequest struct {
@@ -12886,7 +12506,7 @@ type ApiGetCapabilitySiocModuleDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleDescriptorByMoidExecute(r)
 }
 
@@ -12908,21 +12528,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoid(ctx _cont
  * Execute executes the request
  * @return CapabilitySiocModuleDescriptor
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoidExecute(r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoidExecute(r ApiGetCapabilitySiocModuleDescriptorByMoidRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors/{Moid}"
@@ -12951,22 +12569,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoidExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13033,7 +12648,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleDescriptorListRequest struct {
@@ -13097,7 +12712,7 @@ func (r ApiGetCapabilitySiocModuleDescriptorListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetCapabilitySiocModuleDescriptorListRequest) Execute() (CapabilitySiocModuleDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleDescriptorListRequest) Execute() (CapabilitySiocModuleDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleDescriptorListExecute(r)
 }
 
@@ -13117,21 +12732,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorList(ctx _contex
  * Execute executes the request
  * @return CapabilitySiocModuleDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorListExecute(r ApiGetCapabilitySiocModuleDescriptorListRequest) (CapabilitySiocModuleDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorListExecute(r ApiGetCapabilitySiocModuleDescriptorListRequest) (CapabilitySiocModuleDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors"
@@ -13192,22 +12805,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorListExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13274,7 +12884,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleDescriptorListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest struct {
@@ -13283,7 +12893,7 @@ type ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleManufacturingDefByMoidExecute(r)
 }
 
@@ -13305,21 +12915,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoid(ctx
  * Execute executes the request
  * @return CapabilitySiocModuleManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoidExecute(r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoidExecute(r ApiGetCapabilitySiocModuleManufacturingDefByMoidRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs/{Moid}"
@@ -13348,22 +12956,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoidExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13430,7 +13035,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySiocModuleManufacturingDefListRequest struct {
@@ -13494,7 +13099,7 @@ func (r ApiGetCapabilitySiocModuleManufacturingDefListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetCapabilitySiocModuleManufacturingDefListRequest) Execute() (CapabilitySiocModuleManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySiocModuleManufacturingDefListRequest) Execute() (CapabilitySiocModuleManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySiocModuleManufacturingDefListExecute(r)
 }
 
@@ -13514,21 +13119,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefList(ctx _
  * Execute executes the request
  * @return CapabilitySiocModuleManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefListExecute(r ApiGetCapabilitySiocModuleManufacturingDefListRequest) (CapabilitySiocModuleManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefListExecute(r ApiGetCapabilitySiocModuleManufacturingDefListRequest) (CapabilitySiocModuleManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySiocModuleManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs"
@@ -13589,22 +13192,19 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefListExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13671,7 +13271,7 @@ func (a *CapabilityApiService) GetCapabilitySiocModuleManufacturingDefListExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchCapabilityByMoidRequest struct {
@@ -13680,7 +13280,7 @@ type ApiGetCapabilitySwitchCapabilityByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySwitchCapabilityByMoidRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchCapabilityByMoidRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchCapabilityByMoidExecute(r)
 }
 
@@ -13702,21 +13302,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoid(ctx _context.
  * Execute executes the request
  * @return CapabilitySwitchCapability
  */
-func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoidExecute(r ApiGetCapabilitySwitchCapabilityByMoidRequest) (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoidExecute(r ApiGetCapabilitySwitchCapabilityByMoidRequest) (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchCapability
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchCapabilityByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities/{Moid}"
@@ -13745,22 +13343,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13827,7 +13422,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchCapabilityListRequest struct {
@@ -13891,7 +13486,7 @@ func (r ApiGetCapabilitySwitchCapabilityListRequest) Tags(tags string) ApiGetCap
 	return r
 }
 
-func (r ApiGetCapabilitySwitchCapabilityListRequest) Execute() (CapabilitySwitchCapabilityResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchCapabilityListRequest) Execute() (CapabilitySwitchCapabilityResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchCapabilityListExecute(r)
 }
 
@@ -13911,21 +13506,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityList(ctx _context.Co
  * Execute executes the request
  * @return CapabilitySwitchCapabilityResponse
  */
-func (a *CapabilityApiService) GetCapabilitySwitchCapabilityListExecute(r ApiGetCapabilitySwitchCapabilityListRequest) (CapabilitySwitchCapabilityResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchCapabilityListExecute(r ApiGetCapabilitySwitchCapabilityListRequest) (CapabilitySwitchCapabilityResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchCapabilityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchCapabilityList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities"
@@ -13986,22 +13579,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14068,7 +13658,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchCapabilityListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchDescriptorByMoidRequest struct {
@@ -14077,7 +13667,7 @@ type ApiGetCapabilitySwitchDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySwitchDescriptorByMoidRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchDescriptorByMoidRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchDescriptorByMoidExecute(r)
 }
 
@@ -14099,21 +13689,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoid(ctx _context.
  * Execute executes the request
  * @return CapabilitySwitchDescriptor
  */
-func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoidExecute(r ApiGetCapabilitySwitchDescriptorByMoidRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoidExecute(r ApiGetCapabilitySwitchDescriptorByMoidRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors/{Moid}"
@@ -14142,22 +13730,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14224,7 +13809,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchDescriptorListRequest struct {
@@ -14288,7 +13873,7 @@ func (r ApiGetCapabilitySwitchDescriptorListRequest) Tags(tags string) ApiGetCap
 	return r
 }
 
-func (r ApiGetCapabilitySwitchDescriptorListRequest) Execute() (CapabilitySwitchDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchDescriptorListRequest) Execute() (CapabilitySwitchDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchDescriptorListExecute(r)
 }
 
@@ -14308,21 +13893,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorList(ctx _context.Co
  * Execute executes the request
  * @return CapabilitySwitchDescriptorResponse
  */
-func (a *CapabilityApiService) GetCapabilitySwitchDescriptorListExecute(r ApiGetCapabilitySwitchDescriptorListRequest) (CapabilitySwitchDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchDescriptorListExecute(r ApiGetCapabilitySwitchDescriptorListRequest) (CapabilitySwitchDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors"
@@ -14383,22 +13966,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14465,7 +14045,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchDescriptorListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchManufacturingDefByMoidRequest struct {
@@ -14474,7 +14054,7 @@ type ApiGetCapabilitySwitchManufacturingDefByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchManufacturingDefByMoidExecute(r)
 }
 
@@ -14496,21 +14076,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoid(ctx _co
  * Execute executes the request
  * @return CapabilitySwitchManufacturingDef
  */
-func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoidExecute(r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoidExecute(r ApiGetCapabilitySwitchManufacturingDefByMoidRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchManufacturingDefByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs/{Moid}"
@@ -14539,22 +14117,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoidExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14621,7 +14196,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCapabilitySwitchManufacturingDefListRequest struct {
@@ -14685,7 +14260,7 @@ func (r ApiGetCapabilitySwitchManufacturingDefListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetCapabilitySwitchManufacturingDefListRequest) Execute() (CapabilitySwitchManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCapabilitySwitchManufacturingDefListRequest) Execute() (CapabilitySwitchManufacturingDefResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCapabilitySwitchManufacturingDefListExecute(r)
 }
 
@@ -14705,21 +14280,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefList(ctx _cont
  * Execute executes the request
  * @return CapabilitySwitchManufacturingDefResponse
  */
-func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r ApiGetCapabilitySwitchManufacturingDefListRequest) (CapabilitySwitchManufacturingDefResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r ApiGetCapabilitySwitchManufacturingDefListRequest) (CapabilitySwitchManufacturingDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchManufacturingDefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.GetCapabilitySwitchManufacturingDefList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs"
@@ -14780,22 +14353,19 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14862,7 +14432,7 @@ func (a *CapabilityApiService) GetCapabilitySwitchManufacturingDefListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityAdapterUnitDescriptorRequest struct {
@@ -14882,7 +14452,7 @@ func (r ApiPatchCapabilityAdapterUnitDescriptorRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityAdapterUnitDescriptorExecute(r)
 }
 
@@ -14904,21 +14474,19 @@ func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptor(ctx _context
  * Execute executes the request
  * @return CapabilityAdapterUnitDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r ApiPatchCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r ApiPatchCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityAdapterUnitDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityAdapterUnitDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors/{Moid}"
@@ -14928,8 +14496,7 @@ func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityAdapterUnitDescriptor == nil {
-		executionError.error = "capabilityAdapterUnitDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityAdapterUnitDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -14956,22 +14523,19 @@ func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r Api
 	localVarPostBody = r.capabilityAdapterUnitDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15038,7 +14602,7 @@ func (a *CapabilityApiService) PatchCapabilityAdapterUnitDescriptorExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityCatalogRequest struct {
@@ -15058,7 +14622,7 @@ func (r ApiPatchCapabilityCatalogRequest) IfMatch(ifMatch string) ApiPatchCapabi
 	return r
 }
 
-func (r ApiPatchCapabilityCatalogRequest) Execute() (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityCatalogRequest) Execute() (CapabilityCatalog, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityCatalogExecute(r)
 }
 
@@ -15080,21 +14644,19 @@ func (a *CapabilityApiService) PatchCapabilityCatalog(ctx _context.Context, moid
  * Execute executes the request
  * @return CapabilityCatalog
  */
-func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilityCatalogRequest) (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilityCatalogRequest) (CapabilityCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/Catalogs/{Moid}"
@@ -15104,8 +14666,7 @@ func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilit
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityCatalog == nil {
-		executionError.error = "capabilityCatalog is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityCatalog is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15132,22 +14693,19 @@ func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilit
 	localVarPostBody = r.capabilityCatalog
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15214,7 +14772,7 @@ func (a *CapabilityApiService) PatchCapabilityCatalogExecute(r ApiPatchCapabilit
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityChassisDescriptorRequest struct {
@@ -15234,7 +14792,7 @@ func (r ApiPatchCapabilityChassisDescriptorRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityChassisDescriptorExecute(r)
 }
 
@@ -15256,21 +14814,19 @@ func (a *CapabilityApiService) PatchCapabilityChassisDescriptor(ctx _context.Con
  * Execute executes the request
  * @return CapabilityChassisDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatchCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatchCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityChassisDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors/{Moid}"
@@ -15280,8 +14836,7 @@ func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisDescriptor == nil {
-		executionError.error = "capabilityChassisDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15308,22 +14863,19 @@ func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatc
 	localVarPostBody = r.capabilityChassisDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15390,7 +14942,7 @@ func (a *CapabilityApiService) PatchCapabilityChassisDescriptorExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityChassisManufacturingDefRequest struct {
@@ -15410,7 +14962,7 @@ func (r ApiPatchCapabilityChassisManufacturingDefRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityChassisManufacturingDefExecute(r)
 }
 
@@ -15432,21 +14984,19 @@ func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDef(ctx _conte
  * Execute executes the request
  * @return CapabilityChassisManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r ApiPatchCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r ApiPatchCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityChassisManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs/{Moid}"
@@ -15456,8 +15006,7 @@ func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisManufacturingDef == nil {
-		executionError.error = "capabilityChassisManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15484,22 +15033,19 @@ func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r A
 	localVarPostBody = r.capabilityChassisManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15566,7 +15112,7 @@ func (a *CapabilityApiService) PatchCapabilityChassisManufacturingDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityCimcFirmwareDescriptorRequest struct {
@@ -15586,7 +15132,7 @@ func (r ApiPatchCapabilityCimcFirmwareDescriptorRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityCimcFirmwareDescriptorExecute(r)
 }
 
@@ -15608,21 +15154,19 @@ func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptor(ctx _contex
  * Execute executes the request
  * @return CapabilityCimcFirmwareDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r ApiPatchCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r ApiPatchCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCimcFirmwareDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityCimcFirmwareDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors/{Moid}"
@@ -15632,8 +15176,7 @@ func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityCimcFirmwareDescriptor == nil {
-		executionError.error = "capabilityCimcFirmwareDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityCimcFirmwareDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15660,22 +15203,19 @@ func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r Ap
 	localVarPostBody = r.capabilityCimcFirmwareDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15742,7 +15282,7 @@ func (a *CapabilityApiService) PatchCapabilityCimcFirmwareDescriptorExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityEquipmentPhysicalDefRequest struct {
@@ -15762,7 +15302,7 @@ func (r ApiPatchCapabilityEquipmentPhysicalDefRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityEquipmentPhysicalDefExecute(r)
 }
 
@@ -15784,21 +15324,19 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDef(ctx _context.
  * Execute executes the request
  * @return CapabilityEquipmentPhysicalDef
  */
-func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiPatchCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiPatchCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentPhysicalDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityEquipmentPhysicalDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs/{Moid}"
@@ -15808,8 +15346,7 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentPhysicalDef == nil {
-		executionError.error = "capabilityEquipmentPhysicalDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentPhysicalDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15836,22 +15373,19 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiP
 	localVarPostBody = r.capabilityEquipmentPhysicalDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15918,7 +15452,7 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentPhysicalDefExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityEquipmentSlotArrayRequest struct {
@@ -15938,7 +15472,7 @@ func (r ApiPatchCapabilityEquipmentSlotArrayRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityEquipmentSlotArrayExecute(r)
 }
 
@@ -15960,21 +15494,19 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArray(ctx _context.Co
  * Execute executes the request
  * @return CapabilityEquipmentSlotArray
  */
-func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPatchCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPatchCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentSlotArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityEquipmentSlotArray")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays/{Moid}"
@@ -15984,8 +15516,7 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentSlotArray == nil {
-		executionError.error = "capabilityEquipmentSlotArray is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentSlotArray is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16012,22 +15543,19 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPat
 	localVarPostBody = r.capabilityEquipmentSlotArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16094,7 +15622,7 @@ func (a *CapabilityApiService) PatchCapabilityEquipmentSlotArrayExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityFanModuleDescriptorRequest struct {
@@ -16114,7 +15642,7 @@ func (r ApiPatchCapabilityFanModuleDescriptorRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityFanModuleDescriptorExecute(r)
 }
 
@@ -16136,21 +15664,19 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptor(ctx _context.C
  * Execute executes the request
  * @return CapabilityFanModuleDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPatchCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPatchCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityFanModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors/{Moid}"
@@ -16160,8 +15686,7 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleDescriptor == nil {
-		executionError.error = "capabilityFanModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16188,22 +15713,19 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPa
 	localVarPostBody = r.capabilityFanModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16270,7 +15792,7 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleDescriptorExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityFanModuleManufacturingDefRequest struct {
@@ -16290,7 +15812,7 @@ func (r ApiPatchCapabilityFanModuleManufacturingDefRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityFanModuleManufacturingDefExecute(r)
 }
 
@@ -16312,21 +15834,19 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDef(ctx _con
  * Execute executes the request
  * @return CapabilityFanModuleManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r ApiPatchCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r ApiPatchCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityFanModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs/{Moid}"
@@ -16336,8 +15856,7 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleManufacturingDef == nil {
-		executionError.error = "capabilityFanModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16364,22 +15883,19 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r
 	localVarPostBody = r.capabilityFanModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16446,7 +15962,7 @@ func (a *CapabilityApiService) PatchCapabilityFanModuleManufacturingDefExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityIoCardCapabilityDefRequest struct {
@@ -16466,7 +15982,7 @@ func (r ApiPatchCapabilityIoCardCapabilityDefRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityIoCardCapabilityDefExecute(r)
 }
 
@@ -16488,21 +16004,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDef(ctx _context.C
  * Execute executes the request
  * @return CapabilityIoCardCapabilityDef
  */
-func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPatchCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPatchCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityIoCardCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs/{Moid}"
@@ -16512,8 +16026,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardCapabilityDef == nil {
-		executionError.error = "capabilityIoCardCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16540,22 +16053,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPa
 	localVarPostBody = r.capabilityIoCardCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16622,7 +16132,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardCapabilityDefExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityIoCardDescriptorRequest struct {
@@ -16642,7 +16152,7 @@ func (r ApiPatchCapabilityIoCardDescriptorRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityIoCardDescriptorExecute(r)
 }
 
@@ -16664,21 +16174,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardDescriptor(ctx _context.Cont
  * Execute executes the request
  * @return CapabilityIoCardDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatchCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatchCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityIoCardDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors/{Moid}"
@@ -16688,8 +16196,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardDescriptor == nil {
-		executionError.error = "capabilityIoCardDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16716,22 +16223,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatch
 	localVarPostBody = r.capabilityIoCardDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16798,7 +16302,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardDescriptorExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityIoCardManufacturingDefRequest struct {
@@ -16818,7 +16322,7 @@ func (r ApiPatchCapabilityIoCardManufacturingDefRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityIoCardManufacturingDefExecute(r)
 }
 
@@ -16840,21 +16344,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDef(ctx _contex
  * Execute executes the request
  * @return CapabilityIoCardManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r ApiPatchCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r ApiPatchCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityIoCardManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs/{Moid}"
@@ -16864,8 +16366,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardManufacturingDef == nil {
-		executionError.error = "capabilityIoCardManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -16892,22 +16393,19 @@ func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r Ap
 	localVarPostBody = r.capabilityIoCardManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16974,7 +16472,7 @@ func (a *CapabilityApiService) PatchCapabilityIoCardManufacturingDefExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityPortGroupAggregationDefRequest struct {
@@ -16994,7 +16492,7 @@ func (r ApiPatchCapabilityPortGroupAggregationDefRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityPortGroupAggregationDefExecute(r)
 }
 
@@ -17016,21 +16514,19 @@ func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDef(ctx _conte
  * Execute executes the request
  * @return CapabilityPortGroupAggregationDef
  */
-func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r ApiPatchCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r ApiPatchCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPortGroupAggregationDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityPortGroupAggregationDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs/{Moid}"
@@ -17040,8 +16536,7 @@ func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPortGroupAggregationDef == nil {
-		executionError.error = "capabilityPortGroupAggregationDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPortGroupAggregationDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17068,22 +16563,19 @@ func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r A
 	localVarPostBody = r.capabilityPortGroupAggregationDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17150,7 +16642,7 @@ func (a *CapabilityApiService) PatchCapabilityPortGroupAggregationDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityPsuDescriptorRequest struct {
@@ -17170,7 +16662,7 @@ func (r ApiPatchCapabilityPsuDescriptorRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityPsuDescriptorExecute(r)
 }
 
@@ -17192,21 +16684,19 @@ func (a *CapabilityApiService) PatchCapabilityPsuDescriptor(ctx _context.Context
  * Execute executes the request
  * @return CapabilityPsuDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityPsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors/{Moid}"
@@ -17216,8 +16706,7 @@ func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuDescriptor == nil {
-		executionError.error = "capabilityPsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17244,22 +16733,19 @@ func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCap
 	localVarPostBody = r.capabilityPsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17326,7 +16812,7 @@ func (a *CapabilityApiService) PatchCapabilityPsuDescriptorExecute(r ApiPatchCap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilityPsuManufacturingDefRequest struct {
@@ -17346,7 +16832,7 @@ func (r ApiPatchCapabilityPsuManufacturingDefRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilityPsuManufacturingDefExecute(r)
 }
 
@@ -17368,21 +16854,19 @@ func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDef(ctx _context.C
  * Execute executes the request
  * @return CapabilityPsuManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPatchCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPatchCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilityPsuManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs/{Moid}"
@@ -17392,8 +16876,7 @@ func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuManufacturingDef == nil {
-		executionError.error = "capabilityPsuManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17420,22 +16903,19 @@ func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPa
 	localVarPostBody = r.capabilityPsuManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17502,7 +16982,7 @@ func (a *CapabilityApiService) PatchCapabilityPsuManufacturingDefExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySiocModuleCapabilityDefRequest struct {
@@ -17522,7 +17002,7 @@ func (r ApiPatchCapabilitySiocModuleCapabilityDefRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySiocModuleCapabilityDefExecute(r)
 }
 
@@ -17544,21 +17024,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDef(ctx _conte
  * Execute executes the request
  * @return CapabilitySiocModuleCapabilityDef
  */
-func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r ApiPatchCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r ApiPatchCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySiocModuleCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs/{Moid}"
@@ -17568,8 +17046,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleCapabilityDef == nil {
-		executionError.error = "capabilitySiocModuleCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17596,22 +17073,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r A
 	localVarPostBody = r.capabilitySiocModuleCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17678,7 +17152,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleCapabilityDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySiocModuleDescriptorRequest struct {
@@ -17698,7 +17172,7 @@ func (r ApiPatchCapabilitySiocModuleDescriptorRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySiocModuleDescriptorExecute(r)
 }
 
@@ -17720,21 +17194,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptor(ctx _context.
  * Execute executes the request
  * @return CapabilitySiocModuleDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiPatchCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiPatchCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySiocModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors/{Moid}"
@@ -17744,8 +17216,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleDescriptor == nil {
-		executionError.error = "capabilitySiocModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17772,22 +17243,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiP
 	localVarPostBody = r.capabilitySiocModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17854,7 +17322,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleDescriptorExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySiocModuleManufacturingDefRequest struct {
@@ -17874,7 +17342,7 @@ func (r ApiPatchCapabilitySiocModuleManufacturingDefRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiPatchCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySiocModuleManufacturingDefExecute(r)
 }
 
@@ -17896,21 +17364,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDef(ctx _co
  * Execute executes the request
  * @return CapabilitySiocModuleManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(r ApiPatchCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(r ApiPatchCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySiocModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs/{Moid}"
@@ -17920,8 +17386,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleManufacturingDef == nil {
-		executionError.error = "capabilitySiocModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17948,22 +17413,19 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(
 	localVarPostBody = r.capabilitySiocModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18030,7 +17492,7 @@ func (a *CapabilityApiService) PatchCapabilitySiocModuleManufacturingDefExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySwitchCapabilityRequest struct {
@@ -18050,7 +17512,7 @@ func (r ApiPatchCapabilitySwitchCapabilityRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySwitchCapabilityExecute(r)
 }
 
@@ -18072,21 +17534,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchCapability(ctx _context.Cont
  * Execute executes the request
  * @return CapabilitySwitchCapability
  */
-func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatchCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatchCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchCapability
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySwitchCapability")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities/{Moid}"
@@ -18096,8 +17556,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchCapability == nil {
-		executionError.error = "capabilitySwitchCapability is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchCapability is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18124,22 +17583,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatch
 	localVarPostBody = r.capabilitySwitchCapability
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18206,7 +17662,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchCapabilityExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySwitchDescriptorRequest struct {
@@ -18226,7 +17682,7 @@ func (r ApiPatchCapabilitySwitchDescriptorRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySwitchDescriptorExecute(r)
 }
 
@@ -18248,21 +17704,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchDescriptor(ctx _context.Cont
  * Execute executes the request
  * @return CapabilitySwitchDescriptor
  */
-func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatchCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatchCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySwitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors/{Moid}"
@@ -18272,8 +17726,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchDescriptor == nil {
-		executionError.error = "capabilitySwitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18300,22 +17753,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatch
 	localVarPostBody = r.capabilitySwitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18382,7 +17832,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchDescriptorExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCapabilitySwitchManufacturingDefRequest struct {
@@ -18402,7 +17852,7 @@ func (r ApiPatchCapabilitySwitchManufacturingDefRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiPatchCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.PatchCapabilitySwitchManufacturingDefExecute(r)
 }
 
@@ -18424,21 +17874,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDef(ctx _contex
  * Execute executes the request
  * @return CapabilitySwitchManufacturingDef
  */
-func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r ApiPatchCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r ApiPatchCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.PatchCapabilitySwitchManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs/{Moid}"
@@ -18448,8 +17896,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchManufacturingDef == nil {
-		executionError.error = "capabilitySwitchManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18476,22 +17923,19 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r Ap
 	localVarPostBody = r.capabilitySwitchManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18558,7 +18002,7 @@ func (a *CapabilityApiService) PatchCapabilitySwitchManufacturingDefExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityAdapterUnitDescriptorRequest struct {
@@ -18578,7 +18022,7 @@ func (r ApiUpdateCapabilityAdapterUnitDescriptorRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityAdapterUnitDescriptorRequest) Execute() (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityAdapterUnitDescriptorExecute(r)
 }
 
@@ -18600,21 +18044,19 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptor(ctx _contex
  * Execute executes the request
  * @return CapabilityAdapterUnitDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r ApiUpdateCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r ApiUpdateCapabilityAdapterUnitDescriptorRequest) (CapabilityAdapterUnitDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityAdapterUnitDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityAdapterUnitDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/AdapterUnitDescriptors/{Moid}"
@@ -18624,8 +18066,7 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityAdapterUnitDescriptor == nil {
-		executionError.error = "capabilityAdapterUnitDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityAdapterUnitDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18652,22 +18093,19 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r Ap
 	localVarPostBody = r.capabilityAdapterUnitDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18734,7 +18172,7 @@ func (a *CapabilityApiService) UpdateCapabilityAdapterUnitDescriptorExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityCatalogRequest struct {
@@ -18754,7 +18192,7 @@ func (r ApiUpdateCapabilityCatalogRequest) IfMatch(ifMatch string) ApiUpdateCapa
 	return r
 }
 
-func (r ApiUpdateCapabilityCatalogRequest) Execute() (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityCatalogRequest) Execute() (CapabilityCatalog, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityCatalogExecute(r)
 }
 
@@ -18776,21 +18214,19 @@ func (a *CapabilityApiService) UpdateCapabilityCatalog(ctx _context.Context, moi
  * Execute executes the request
  * @return CapabilityCatalog
  */
-func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabilityCatalogRequest) (CapabilityCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabilityCatalogRequest) (CapabilityCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/Catalogs/{Moid}"
@@ -18800,8 +18236,7 @@ func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabil
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityCatalog == nil {
-		executionError.error = "capabilityCatalog is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityCatalog is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18828,22 +18263,19 @@ func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabil
 	localVarPostBody = r.capabilityCatalog
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18910,7 +18342,7 @@ func (a *CapabilityApiService) UpdateCapabilityCatalogExecute(r ApiUpdateCapabil
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityChassisDescriptorRequest struct {
@@ -18930,7 +18362,7 @@ func (r ApiUpdateCapabilityChassisDescriptorRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityChassisDescriptorRequest) Execute() (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityChassisDescriptorExecute(r)
 }
 
@@ -18952,21 +18384,19 @@ func (a *CapabilityApiService) UpdateCapabilityChassisDescriptor(ctx _context.Co
  * Execute executes the request
  * @return CapabilityChassisDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpdateCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpdateCapabilityChassisDescriptorRequest) (CapabilityChassisDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityChassisDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisDescriptors/{Moid}"
@@ -18976,8 +18406,7 @@ func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpd
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisDescriptor == nil {
-		executionError.error = "capabilityChassisDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19004,22 +18433,19 @@ func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpd
 	localVarPostBody = r.capabilityChassisDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19086,7 +18512,7 @@ func (a *CapabilityApiService) UpdateCapabilityChassisDescriptorExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityChassisManufacturingDefRequest struct {
@@ -19106,7 +18532,7 @@ func (r ApiUpdateCapabilityChassisManufacturingDefRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityChassisManufacturingDefRequest) Execute() (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityChassisManufacturingDefExecute(r)
 }
 
@@ -19128,21 +18554,19 @@ func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDef(ctx _cont
  * Execute executes the request
  * @return CapabilityChassisManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r ApiUpdateCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r ApiUpdateCapabilityChassisManufacturingDefRequest) (CapabilityChassisManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityChassisManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityChassisManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/ChassisManufacturingDefs/{Moid}"
@@ -19152,8 +18576,7 @@ func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityChassisManufacturingDef == nil {
-		executionError.error = "capabilityChassisManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityChassisManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19180,22 +18603,19 @@ func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r 
 	localVarPostBody = r.capabilityChassisManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19262,7 +18682,7 @@ func (a *CapabilityApiService) UpdateCapabilityChassisManufacturingDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityCimcFirmwareDescriptorRequest struct {
@@ -19282,7 +18702,7 @@ func (r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) Execute() (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityCimcFirmwareDescriptorExecute(r)
 }
 
@@ -19304,21 +18724,19 @@ func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptor(ctx _conte
  * Execute executes the request
  * @return CapabilityCimcFirmwareDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r ApiUpdateCapabilityCimcFirmwareDescriptorRequest) (CapabilityCimcFirmwareDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityCimcFirmwareDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityCimcFirmwareDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/CimcFirmwareDescriptors/{Moid}"
@@ -19328,8 +18746,7 @@ func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityCimcFirmwareDescriptor == nil {
-		executionError.error = "capabilityCimcFirmwareDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityCimcFirmwareDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19356,22 +18773,19 @@ func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r A
 	localVarPostBody = r.capabilityCimcFirmwareDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19438,7 +18852,7 @@ func (a *CapabilityApiService) UpdateCapabilityCimcFirmwareDescriptorExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityEquipmentPhysicalDefRequest struct {
@@ -19458,7 +18872,7 @@ func (r ApiUpdateCapabilityEquipmentPhysicalDefRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityEquipmentPhysicalDefRequest) Execute() (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityEquipmentPhysicalDefExecute(r)
 }
 
@@ -19480,21 +18894,19 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDef(ctx _context
  * Execute executes the request
  * @return CapabilityEquipmentPhysicalDef
  */
-func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r ApiUpdateCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r ApiUpdateCapabilityEquipmentPhysicalDefRequest) (CapabilityEquipmentPhysicalDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentPhysicalDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityEquipmentPhysicalDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentPhysicalDefs/{Moid}"
@@ -19504,8 +18916,7 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentPhysicalDef == nil {
-		executionError.error = "capabilityEquipmentPhysicalDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentPhysicalDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19532,22 +18943,19 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r Api
 	localVarPostBody = r.capabilityEquipmentPhysicalDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19614,7 +19022,7 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentPhysicalDefExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityEquipmentSlotArrayRequest struct {
@@ -19634,7 +19042,7 @@ func (r ApiUpdateCapabilityEquipmentSlotArrayRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityEquipmentSlotArrayRequest) Execute() (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityEquipmentSlotArrayExecute(r)
 }
 
@@ -19656,21 +19064,19 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArray(ctx _context.C
  * Execute executes the request
  * @return CapabilityEquipmentSlotArray
  */
-func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUpdateCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUpdateCapabilityEquipmentSlotArrayRequest) (CapabilityEquipmentSlotArray, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityEquipmentSlotArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityEquipmentSlotArray")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/EquipmentSlotArrays/{Moid}"
@@ -19680,8 +19086,7 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityEquipmentSlotArray == nil {
-		executionError.error = "capabilityEquipmentSlotArray is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityEquipmentSlotArray is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19708,22 +19113,19 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUp
 	localVarPostBody = r.capabilityEquipmentSlotArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19790,7 +19192,7 @@ func (a *CapabilityApiService) UpdateCapabilityEquipmentSlotArrayExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityFanModuleDescriptorRequest struct {
@@ -19810,7 +19212,7 @@ func (r ApiUpdateCapabilityFanModuleDescriptorRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityFanModuleDescriptorRequest) Execute() (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityFanModuleDescriptorExecute(r)
 }
 
@@ -19832,21 +19234,19 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptor(ctx _context.
  * Execute executes the request
  * @return CapabilityFanModuleDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiUpdateCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiUpdateCapabilityFanModuleDescriptorRequest) (CapabilityFanModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityFanModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleDescriptors/{Moid}"
@@ -19856,8 +19256,7 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleDescriptor == nil {
-		executionError.error = "capabilityFanModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19884,22 +19283,19 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiU
 	localVarPostBody = r.capabilityFanModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19966,7 +19362,7 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleDescriptorExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityFanModuleManufacturingDefRequest struct {
@@ -19986,7 +19382,7 @@ func (r ApiUpdateCapabilityFanModuleManufacturingDefRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityFanModuleManufacturingDefRequest) Execute() (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityFanModuleManufacturingDefExecute(r)
 }
 
@@ -20008,21 +19404,19 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDef(ctx _co
  * Execute executes the request
  * @return CapabilityFanModuleManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(r ApiUpdateCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(r ApiUpdateCapabilityFanModuleManufacturingDefRequest) (CapabilityFanModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityFanModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityFanModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/FanModuleManufacturingDefs/{Moid}"
@@ -20032,8 +19426,7 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityFanModuleManufacturingDef == nil {
-		executionError.error = "capabilityFanModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityFanModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20060,22 +19453,19 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(
 	localVarPostBody = r.capabilityFanModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20142,7 +19532,7 @@ func (a *CapabilityApiService) UpdateCapabilityFanModuleManufacturingDefExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityIoCardCapabilityDefRequest struct {
@@ -20162,7 +19552,7 @@ func (r ApiUpdateCapabilityIoCardCapabilityDefRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityIoCardCapabilityDefRequest) Execute() (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityIoCardCapabilityDefExecute(r)
 }
 
@@ -20184,21 +19574,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDef(ctx _context.
  * Execute executes the request
  * @return CapabilityIoCardCapabilityDef
  */
-func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiUpdateCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiUpdateCapabilityIoCardCapabilityDefRequest) (CapabilityIoCardCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityIoCardCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardCapabilityDefs/{Moid}"
@@ -20208,8 +19596,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardCapabilityDef == nil {
-		executionError.error = "capabilityIoCardCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20236,22 +19623,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiU
 	localVarPostBody = r.capabilityIoCardCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20318,7 +19702,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardCapabilityDefExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityIoCardDescriptorRequest struct {
@@ -20338,7 +19722,7 @@ func (r ApiUpdateCapabilityIoCardDescriptorRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityIoCardDescriptorRequest) Execute() (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityIoCardDescriptorExecute(r)
 }
 
@@ -20360,21 +19744,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptor(ctx _context.Con
  * Execute executes the request
  * @return CapabilityIoCardDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpdateCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpdateCapabilityIoCardDescriptorRequest) (CapabilityIoCardDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityIoCardDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardDescriptors/{Moid}"
@@ -20384,8 +19766,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardDescriptor == nil {
-		executionError.error = "capabilityIoCardDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20412,22 +19793,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpda
 	localVarPostBody = r.capabilityIoCardDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20494,7 +19872,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardDescriptorExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityIoCardManufacturingDefRequest struct {
@@ -20514,7 +19892,7 @@ func (r ApiUpdateCapabilityIoCardManufacturingDefRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityIoCardManufacturingDefRequest) Execute() (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityIoCardManufacturingDefExecute(r)
 }
 
@@ -20536,21 +19914,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDef(ctx _conte
  * Execute executes the request
  * @return CapabilityIoCardManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r ApiUpdateCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r ApiUpdateCapabilityIoCardManufacturingDefRequest) (CapabilityIoCardManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityIoCardManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityIoCardManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/IoCardManufacturingDefs/{Moid}"
@@ -20560,8 +19936,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityIoCardManufacturingDef == nil {
-		executionError.error = "capabilityIoCardManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityIoCardManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20588,22 +19963,19 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r A
 	localVarPostBody = r.capabilityIoCardManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20670,7 +20042,7 @@ func (a *CapabilityApiService) UpdateCapabilityIoCardManufacturingDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityPortGroupAggregationDefRequest struct {
@@ -20690,7 +20062,7 @@ func (r ApiUpdateCapabilityPortGroupAggregationDefRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityPortGroupAggregationDefRequest) Execute() (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityPortGroupAggregationDefExecute(r)
 }
 
@@ -20712,21 +20084,19 @@ func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDef(ctx _cont
  * Execute executes the request
  * @return CapabilityPortGroupAggregationDef
  */
-func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r ApiUpdateCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r ApiUpdateCapabilityPortGroupAggregationDefRequest) (CapabilityPortGroupAggregationDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPortGroupAggregationDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityPortGroupAggregationDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PortGroupAggregationDefs/{Moid}"
@@ -20736,8 +20106,7 @@ func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPortGroupAggregationDef == nil {
-		executionError.error = "capabilityPortGroupAggregationDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPortGroupAggregationDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20764,22 +20133,19 @@ func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r 
 	localVarPostBody = r.capabilityPortGroupAggregationDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20846,7 +20212,7 @@ func (a *CapabilityApiService) UpdateCapabilityPortGroupAggregationDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityPsuDescriptorRequest struct {
@@ -20866,7 +20232,7 @@ func (r ApiUpdateCapabilityPsuDescriptorRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityPsuDescriptorRequest) Execute() (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityPsuDescriptorExecute(r)
 }
 
@@ -20888,21 +20254,19 @@ func (a *CapabilityApiService) UpdateCapabilityPsuDescriptor(ctx _context.Contex
  * Execute executes the request
  * @return CapabilityPsuDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateCapabilityPsuDescriptorRequest) (CapabilityPsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityPsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuDescriptors/{Moid}"
@@ -20912,8 +20276,7 @@ func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuDescriptor == nil {
-		executionError.error = "capabilityPsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20940,22 +20303,19 @@ func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateC
 	localVarPostBody = r.capabilityPsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21022,7 +20382,7 @@ func (a *CapabilityApiService) UpdateCapabilityPsuDescriptorExecute(r ApiUpdateC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilityPsuManufacturingDefRequest struct {
@@ -21042,7 +20402,7 @@ func (r ApiUpdateCapabilityPsuManufacturingDefRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilityPsuManufacturingDefRequest) Execute() (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilityPsuManufacturingDefExecute(r)
 }
 
@@ -21064,21 +20424,19 @@ func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDef(ctx _context.
  * Execute executes the request
  * @return CapabilityPsuManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiUpdateCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiUpdateCapabilityPsuManufacturingDefRequest) (CapabilityPsuManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilityPsuManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilityPsuManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/PsuManufacturingDefs/{Moid}"
@@ -21088,8 +20446,7 @@ func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilityPsuManufacturingDef == nil {
-		executionError.error = "capabilityPsuManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilityPsuManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21116,22 +20473,19 @@ func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiU
 	localVarPostBody = r.capabilityPsuManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21198,7 +20552,7 @@ func (a *CapabilityApiService) UpdateCapabilityPsuManufacturingDefExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySiocModuleCapabilityDefRequest struct {
@@ -21218,7 +20572,7 @@ func (r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) Execute() (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySiocModuleCapabilityDefExecute(r)
 }
 
@@ -21240,21 +20594,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDef(ctx _cont
  * Execute executes the request
  * @return CapabilitySiocModuleCapabilityDef
  */
-func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r ApiUpdateCapabilitySiocModuleCapabilityDefRequest) (CapabilitySiocModuleCapabilityDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleCapabilityDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySiocModuleCapabilityDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleCapabilityDefs/{Moid}"
@@ -21264,8 +20616,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleCapabilityDef == nil {
-		executionError.error = "capabilitySiocModuleCapabilityDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleCapabilityDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21292,22 +20643,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r 
 	localVarPostBody = r.capabilitySiocModuleCapabilityDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21374,7 +20722,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleCapabilityDefExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySiocModuleDescriptorRequest struct {
@@ -21394,7 +20742,7 @@ func (r ApiUpdateCapabilitySiocModuleDescriptorRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySiocModuleDescriptorRequest) Execute() (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySiocModuleDescriptorExecute(r)
 }
 
@@ -21416,21 +20764,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptor(ctx _context
  * Execute executes the request
  * @return CapabilitySiocModuleDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r ApiUpdateCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r ApiUpdateCapabilitySiocModuleDescriptorRequest) (CapabilitySiocModuleDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySiocModuleDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleDescriptors/{Moid}"
@@ -21440,8 +20786,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleDescriptor == nil {
-		executionError.error = "capabilitySiocModuleDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21468,22 +20813,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r Api
 	localVarPostBody = r.capabilitySiocModuleDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21550,7 +20892,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleDescriptorExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySiocModuleManufacturingDefRequest struct {
@@ -21570,7 +20912,7 @@ func (r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) IfMatch(ifMatch st
 	return r
 }
 
-func (r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) Execute() (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySiocModuleManufacturingDefExecute(r)
 }
 
@@ -21592,21 +20934,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDef(ctx _c
  * Execute executes the request
  * @return CapabilitySiocModuleManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute(r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute(r ApiUpdateCapabilitySiocModuleManufacturingDefRequest) (CapabilitySiocModuleManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySiocModuleManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySiocModuleManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SiocModuleManufacturingDefs/{Moid}"
@@ -21616,8 +20956,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySiocModuleManufacturingDef == nil {
-		executionError.error = "capabilitySiocModuleManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySiocModuleManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21644,22 +20983,19 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute
 	localVarPostBody = r.capabilitySiocModuleManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21726,7 +21062,7 @@ func (a *CapabilityApiService) UpdateCapabilitySiocModuleManufacturingDefExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySwitchCapabilityRequest struct {
@@ -21746,7 +21082,7 @@ func (r ApiUpdateCapabilitySwitchCapabilityRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySwitchCapabilityRequest) Execute() (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySwitchCapabilityExecute(r)
 }
 
@@ -21768,21 +21104,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchCapability(ctx _context.Con
  * Execute executes the request
  * @return CapabilitySwitchCapability
  */
-func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpdateCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpdateCapabilitySwitchCapabilityRequest) (CapabilitySwitchCapability, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchCapability
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySwitchCapability")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchCapabilities/{Moid}"
@@ -21792,8 +21126,7 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchCapability == nil {
-		executionError.error = "capabilitySwitchCapability is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchCapability is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21820,22 +21153,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpda
 	localVarPostBody = r.capabilitySwitchCapability
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21902,7 +21232,7 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchCapabilityExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySwitchDescriptorRequest struct {
@@ -21922,7 +21252,7 @@ func (r ApiUpdateCapabilitySwitchDescriptorRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySwitchDescriptorRequest) Execute() (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySwitchDescriptorExecute(r)
 }
 
@@ -21944,21 +21274,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptor(ctx _context.Con
  * Execute executes the request
  * @return CapabilitySwitchDescriptor
  */
-func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpdateCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpdateCapabilitySwitchDescriptorRequest) (CapabilitySwitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySwitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchDescriptors/{Moid}"
@@ -21968,8 +21296,7 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchDescriptor == nil {
-		executionError.error = "capabilitySwitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21996,22 +21323,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpda
 	localVarPostBody = r.capabilitySwitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22078,7 +21402,7 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchDescriptorExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCapabilitySwitchManufacturingDefRequest struct {
@@ -22098,7 +21422,7 @@ func (r ApiUpdateCapabilitySwitchManufacturingDefRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiUpdateCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCapabilitySwitchManufacturingDefRequest) Execute() (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCapabilitySwitchManufacturingDefExecute(r)
 }
 
@@ -22120,21 +21444,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDef(ctx _conte
  * Execute executes the request
  * @return CapabilitySwitchManufacturingDef
  */
-func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r ApiUpdateCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r ApiUpdateCapabilitySwitchManufacturingDefRequest) (CapabilitySwitchManufacturingDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CapabilitySwitchManufacturingDef
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CapabilityApiService.UpdateCapabilitySwitchManufacturingDef")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/capability/SwitchManufacturingDefs/{Moid}"
@@ -22144,8 +21466,7 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.capabilitySwitchManufacturingDef == nil {
-		executionError.error = "capabilitySwitchManufacturingDef is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("capabilitySwitchManufacturingDef is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22172,22 +21493,19 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r A
 	localVarPostBody = r.capabilitySwitchManufacturingDef
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22254,5 +21572,5 @@ func (a *CapabilityApiService) UpdateCapabilitySwitchManufacturingDefExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

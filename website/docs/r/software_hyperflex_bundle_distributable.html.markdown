@@ -10,23 +10,14 @@ description: |-
 A HyperFlex image bundle distributed by Cisco for Private Appliance.
 ## Argument Reference
 The following arguments are supported:
-* `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `bundle_type`:(string)(Computed) The bundle type of the image, as published on cisco.com. 
-* `catalog`:(Array with Maximum of one item) - A reference to a softwarerepositoryCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `catalog`:(HashMap) - A reference to a softwarerepositoryCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `component_meta`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `component_label`:(string) The name of the component in the compressed HSU bundle. 
   + `component_type`:(string) The type of component image within the distributable.* `ALL` - This represents all the components.* `ALL,HDD` - This represents all the components plus the HDDs.* `None` - This represents none of the components.* `NXOS` - This represents NXOS components.* `IOM` - This represents IOM components.* `PSU` - This represents PSU components.* `CIMC` - This represents CIMC components.* `BIOS` - This represents BIOS components.* `PCIE` - This represents PCIE components.* `Drive` - This represents Storage components.* `DIMM` - This represents DIMM components.* `BoardController` - This represents Board Controller components.* `StorageController` - This represents Storage Controller components.* `HBA` - This represents HBA components.* `GPU` - This represents GPU components.* `SasExpander` - This represents SasExpander components.* `MSwitch` - This represents mSwitch components.* `CMC` - This represents CMC components. 
   + `description`:(string) This shows the description of component image within the distributable. 
@@ -34,7 +25,7 @@ This complex property has following sub-properties:
   + `image_path`:(string) This shows the path of component image within the distributable. 
   + `is_oob_supported`:(bool) If set, the component can be updated through out-of-band management, else, is updated through host service utility boot. 
   + `model`:(string) The model of the component image in the distributable. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `oob_manageability`:
                 (Array of schema.TypeString) -
   + `packed_version`:(string) The image version of components packaged in the distributable. 
@@ -43,9 +34,6 @@ This complex property has following sub-properties:
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `distributable_metas`:(Array) An array of relationships to firmwareDistributableMeta resources. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -53,9 +41,6 @@ This complex property has following sub-properties:
 * `guid`:(string)(Computed) The unique identifier for an image in a Cisco repository. 
 * `images`:(Array)(Computed) An array of relationships to softwareHyperflexDistributable resources. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -67,14 +52,10 @@ This complex property has following sub-properties:
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `platform_type`:(string)(Computed) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
-* `release`:(Array with Maximum of one item) - A reference to a softwarerepositoryRelease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `release`:(HashMap) - A reference to a softwarerepositoryRelease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -83,18 +64,13 @@ This complex property has following sub-properties:
 * `size`:(int) The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. 
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `software_type_id`:(string)(Computed) The software type id provided by cisco.com. 
-* `nr_source`:(Array with Maximum of one item) - Location of the file in an external repository. 
+* `nr_source`:(HashMap) - Location of the file in an external repository. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `supported_models`:
                 (Array of schema.TypeString) -
 * `tags`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vendor`:(string) The vendor or publisher of this file. 
@@ -105,4 +81,4 @@ This complex property has following sub-properties:
 `intersight_software_hyperflex_bundle_distributable` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_software_hyperflex_bundle_distributable.example 1234567890987654321abcde
-```
+``` 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -34,7 +34,7 @@ type ApiGetNetworkElementByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNetworkElementByMoidRequest) Execute() (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkElementByMoidRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkElementByMoidExecute(r)
 }
 
@@ -56,21 +56,19 @@ func (a *NetworkApiService) GetNetworkElementByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return NetworkElement
  */
-func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElementByMoidRequest) (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElementByMoidRequest) (NetworkElement, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
@@ -99,22 +97,19 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -181,7 +176,7 @@ func (a *NetworkApiService) GetNetworkElementByMoidExecute(r ApiGetNetworkElemen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkElementListRequest struct {
@@ -245,7 +240,7 @@ func (r ApiGetNetworkElementListRequest) Tags(tags string) ApiGetNetworkElementL
 	return r
 }
 
-func (r ApiGetNetworkElementListRequest) Execute() (NetworkElementResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkElementListRequest) Execute() (NetworkElementResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkElementListExecute(r)
 }
 
@@ -265,21 +260,19 @@ func (a *NetworkApiService) GetNetworkElementList(ctx _context.Context) ApiGetNe
  * Execute executes the request
  * @return NetworkElementResponse
  */
-func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementListRequest) (NetworkElementResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementListRequest) (NetworkElementResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElementResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements"
@@ -340,22 +333,19 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -422,7 +412,7 @@ func (a *NetworkApiService) GetNetworkElementListExecute(r ApiGetNetworkElementL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkElementSummaryByMoidRequest struct {
@@ -431,7 +421,7 @@ type ApiGetNetworkElementSummaryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (NetworkElementSummary, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkElementSummaryByMoidRequest) Execute() (NetworkElementSummary, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkElementSummaryByMoidExecute(r)
 }
 
@@ -453,21 +443,19 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoid(ctx _context.Context,
  * Execute executes the request
  * @return NetworkElementSummary
  */
-func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetworkElementSummaryByMoidRequest) (NetworkElementSummary, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetworkElementSummaryByMoidRequest) (NetworkElementSummary, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElementSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementSummaryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/ElementSummaries/{Moid}"
@@ -496,22 +484,19 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -578,7 +563,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryByMoidExecute(r ApiGetNetwor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkElementSummaryListRequest struct {
@@ -642,7 +627,7 @@ func (r ApiGetNetworkElementSummaryListRequest) Tags(tags string) ApiGetNetworkE
 	return r
 }
 
-func (r ApiGetNetworkElementSummaryListRequest) Execute() (NetworkElementSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkElementSummaryListRequest) Execute() (NetworkElementSummaryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkElementSummaryListExecute(r)
 }
 
@@ -662,21 +647,19 @@ func (a *NetworkApiService) GetNetworkElementSummaryList(ctx _context.Context) A
  * Execute executes the request
  * @return NetworkElementSummaryResponse
  */
-func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkElementSummaryListRequest) (NetworkElementSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkElementSummaryListRequest) (NetworkElementSummaryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElementSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkElementSummaryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/ElementSummaries"
@@ -737,22 +720,19 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -819,7 +799,7 @@ func (a *NetworkApiService) GetNetworkElementSummaryListExecute(r ApiGetNetworkE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkFcZoneInfoByMoidRequest struct {
@@ -828,7 +808,7 @@ type ApiGetNetworkFcZoneInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkFcZoneInfoByMoidRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkFcZoneInfoByMoidExecute(r)
 }
 
@@ -850,21 +830,19 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return NetworkFcZoneInfo
  */
-func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZoneInfoByMoidRequest) (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZoneInfoByMoidRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFcZoneInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
@@ -893,22 +871,19 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -975,7 +950,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoByMoidExecute(r ApiGetNetworkFcZ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkFcZoneInfoListRequest struct {
@@ -1039,7 +1014,7 @@ func (r ApiGetNetworkFcZoneInfoListRequest) Tags(tags string) ApiGetNetworkFcZon
 	return r
 }
 
-func (r ApiGetNetworkFcZoneInfoListRequest) Execute() (NetworkFcZoneInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkFcZoneInfoListRequest) Execute() (NetworkFcZoneInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkFcZoneInfoListExecute(r)
 }
 
@@ -1059,21 +1034,19 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return NetworkFcZoneInfoResponse
  */
-func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZoneInfoListRequest) (NetworkFcZoneInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZoneInfoListRequest) (NetworkFcZoneInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkFcZoneInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkFcZoneInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos"
@@ -1134,22 +1107,19 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1216,7 +1186,7 @@ func (a *NetworkApiService) GetNetworkFcZoneInfoListExecute(r ApiGetNetworkFcZon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkVlanPortInfoByMoidRequest struct {
@@ -1225,7 +1195,7 @@ type ApiGetNetworkVlanPortInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkVlanPortInfoByMoidRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkVlanPortInfoByMoidExecute(r)
 }
 
@@ -1247,21 +1217,19 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return NetworkVlanPortInfo
  */
-func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkVlanPortInfoByMoidRequest) (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkVlanPortInfoByMoidRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVlanPortInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
@@ -1290,22 +1258,19 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1372,7 +1337,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoByMoidExecute(r ApiGetNetworkV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNetworkVlanPortInfoListRequest struct {
@@ -1436,7 +1401,7 @@ func (r ApiGetNetworkVlanPortInfoListRequest) Tags(tags string) ApiGetNetworkVla
 	return r
 }
 
-func (r ApiGetNetworkVlanPortInfoListRequest) Execute() (NetworkVlanPortInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNetworkVlanPortInfoListRequest) Execute() (NetworkVlanPortInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNetworkVlanPortInfoListExecute(r)
 }
 
@@ -1456,21 +1421,19 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoList(ctx _context.Context) Api
  * Execute executes the request
  * @return NetworkVlanPortInfoResponse
  */
-func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVlanPortInfoListRequest) (NetworkVlanPortInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVlanPortInfoListRequest) (NetworkVlanPortInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkVlanPortInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.GetNetworkVlanPortInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos"
@@ -1531,22 +1494,19 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1613,7 +1573,7 @@ func (a *NetworkApiService) GetNetworkVlanPortInfoListExecute(r ApiGetNetworkVla
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchNetworkElementRequest struct {
@@ -1633,7 +1593,7 @@ func (r ApiPatchNetworkElementRequest) IfMatch(ifMatch string) ApiPatchNetworkEl
 	return r
 }
 
-func (r ApiPatchNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
 	return r.ApiService.PatchNetworkElementExecute(r)
 }
 
@@ -1655,21 +1615,19 @@ func (a *NetworkApiService) PatchNetworkElement(ctx _context.Context, moid strin
  * Execute executes the request
  * @return NetworkElement
  */
-func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementRequest) (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementRequest) (NetworkElement, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkElement")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
@@ -1679,8 +1637,7 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkElement == nil {
-		executionError.error = "networkElement is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkElement is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1707,22 +1664,19 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 	localVarPostBody = r.networkElement
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1789,7 +1743,7 @@ func (a *NetworkApiService) PatchNetworkElementExecute(r ApiPatchNetworkElementR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchNetworkFcZoneInfoRequest struct {
@@ -1809,7 +1763,7 @@ func (r ApiPatchNetworkFcZoneInfoRequest) IfMatch(ifMatch string) ApiPatchNetwor
 	return r
 }
 
-func (r ApiPatchNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	return r.ApiService.PatchNetworkFcZoneInfoExecute(r)
 }
 
@@ -1831,21 +1785,19 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfo(ctx _context.Context, moid st
  * Execute executes the request
  * @return NetworkFcZoneInfo
  */
-func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkFcZoneInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
@@ -1855,8 +1807,7 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkFcZoneInfo == nil {
-		executionError.error = "networkFcZoneInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkFcZoneInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1883,22 +1834,19 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 	localVarPostBody = r.networkFcZoneInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1965,7 +1913,7 @@ func (a *NetworkApiService) PatchNetworkFcZoneInfoExecute(r ApiPatchNetworkFcZon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchNetworkVlanPortInfoRequest struct {
@@ -1985,7 +1933,7 @@ func (r ApiPatchNetworkVlanPortInfoRequest) IfMatch(ifMatch string) ApiPatchNetw
 	return r
 }
 
-func (r ApiPatchNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	return r.ApiService.PatchNetworkVlanPortInfoExecute(r)
 }
 
@@ -2007,21 +1955,19 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfo(ctx _context.Context, moid 
  * Execute executes the request
  * @return NetworkVlanPortInfo
  */
-func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.PatchNetworkVlanPortInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
@@ -2031,8 +1977,7 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkVlanPortInfo == nil {
-		executionError.error = "networkVlanPortInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkVlanPortInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2059,22 +2004,19 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 	localVarPostBody = r.networkVlanPortInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2141,7 +2083,7 @@ func (a *NetworkApiService) PatchNetworkVlanPortInfoExecute(r ApiPatchNetworkVla
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateNetworkElementRequest struct {
@@ -2161,7 +2103,7 @@ func (r ApiUpdateNetworkElementRequest) IfMatch(ifMatch string) ApiUpdateNetwork
 	return r
 }
 
-func (r ApiUpdateNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateNetworkElementRequest) Execute() (NetworkElement, *_nethttp.Response, error) {
 	return r.ApiService.UpdateNetworkElementExecute(r)
 }
 
@@ -2183,21 +2125,19 @@ func (a *NetworkApiService) UpdateNetworkElement(ctx _context.Context, moid stri
  * Execute executes the request
  * @return NetworkElement
  */
-func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElementRequest) (NetworkElement, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElementRequest) (NetworkElement, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkElement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkElement")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/Elements/{Moid}"
@@ -2207,8 +2147,7 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkElement == nil {
-		executionError.error = "networkElement is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkElement is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2235,22 +2174,19 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 	localVarPostBody = r.networkElement
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2317,7 +2253,7 @@ func (a *NetworkApiService) UpdateNetworkElementExecute(r ApiUpdateNetworkElemen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateNetworkFcZoneInfoRequest struct {
@@ -2337,7 +2273,7 @@ func (r ApiUpdateNetworkFcZoneInfoRequest) IfMatch(ifMatch string) ApiUpdateNetw
 	return r
 }
 
-func (r ApiUpdateNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateNetworkFcZoneInfoRequest) Execute() (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	return r.ApiService.UpdateNetworkFcZoneInfoExecute(r)
 }
 
@@ -2359,21 +2295,19 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfo(ctx _context.Context, moid s
  * Execute executes the request
  * @return NetworkFcZoneInfo
  */
-func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZoneInfoRequest) (NetworkFcZoneInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkFcZoneInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkFcZoneInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/FcZoneInfos/{Moid}"
@@ -2383,8 +2317,7 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkFcZoneInfo == nil {
-		executionError.error = "networkFcZoneInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkFcZoneInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2411,22 +2344,19 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 	localVarPostBody = r.networkFcZoneInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2493,7 +2423,7 @@ func (a *NetworkApiService) UpdateNetworkFcZoneInfoExecute(r ApiUpdateNetworkFcZ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateNetworkVlanPortInfoRequest struct {
@@ -2513,7 +2443,7 @@ func (r ApiUpdateNetworkVlanPortInfoRequest) IfMatch(ifMatch string) ApiUpdateNe
 	return r
 }
 
-func (r ApiUpdateNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateNetworkVlanPortInfoRequest) Execute() (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	return r.ApiService.UpdateNetworkVlanPortInfoExecute(r)
 }
 
@@ -2535,21 +2465,19 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfo(ctx _context.Context, moid
  * Execute executes the request
  * @return NetworkVlanPortInfo
  */
-func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkVlanPortInfoRequest) (NetworkVlanPortInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NetworkVlanPortInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkApiService.UpdateNetworkVlanPortInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/network/VlanPortInfos/{Moid}"
@@ -2559,8 +2487,7 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.networkVlanPortInfo == nil {
-		executionError.error = "networkVlanPortInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("networkVlanPortInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2587,22 +2514,19 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 	localVarPostBody = r.networkVlanPortInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2669,5 +2593,5 @@ func (a *NetworkApiService) UpdateNetworkVlanPortInfoExecute(r ApiUpdateNetworkV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

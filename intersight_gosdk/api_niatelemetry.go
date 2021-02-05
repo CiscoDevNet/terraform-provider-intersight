@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -28,24 +28,24 @@ var (
 // NiatelemetryApiService NiatelemetryApi service
 type NiatelemetryApiService service
 
-type ApiGetNiatelemetryAppDetailsByMoidRequest struct {
+type ApiGetNiatelemetryApicFanDetailsByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (NiatelemetryAppDetails, *_nethttp.Response, GenericOpenAPIError) {
-	return r.ApiService.GetNiatelemetryAppDetailsByMoidExecute(r)
+func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Execute() (NiatelemetryApicFanDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicFanDetailsByMoidExecute(r)
 }
 
 /*
- * GetNiatelemetryAppDetailsByMoid Read a 'niatelemetry.AppDetails' resource.
+ * GetNiatelemetryApicFanDetailsByMoid Read a 'niatelemetry.ApicFanDetails' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiGetNiatelemetryAppDetailsByMoidRequest
+ * @return ApiGetNiatelemetryApicFanDetailsByMoidRequest
  */
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAppDetailsByMoidRequest {
-	return ApiGetNiatelemetryAppDetailsByMoidRequest{
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
+	return ApiGetNiatelemetryApicFanDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -54,26 +54,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx _context.Co
 
 /*
  * Execute executes the request
- * @return NiatelemetryAppDetails
+ * @return NiatelemetryApicFanDetails
  */
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGetNiatelemetryAppDetailsByMoidRequest) (NiatelemetryAppDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r ApiGetNiatelemetryApicFanDetailsByMoidRequest) (NiatelemetryApicFanDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
-		localVarReturnValue  NiatelemetryAppDetails
+		localVarReturnValue  NiatelemetryApicFanDetails
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAppDetailsByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFanDetailsByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/niatelemetry/AppDetails/{Moid}"
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFanDetails/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -99,22 +97,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -181,7 +176,1555 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicFanDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Filter(filter string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Top(top int32) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Expand(expand string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Apply(apply string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Count(count bool) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) At(at string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Tags(tags string) ApiGetNiatelemetryApicFanDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Execute() (NiatelemetryApicFanDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicFanDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicFanDetailsList Read a 'niatelemetry.ApicFanDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryApicFanDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx _context.Context) ApiGetNiatelemetryApicFanDetailsListRequest {
+	return ApiGetNiatelemetryApicFanDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicFanDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiGetNiatelemetryApicFanDetailsListRequest) (NiatelemetryApicFanDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicFanDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFanDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFanDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicFexDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Execute() (NiatelemetryApicFexDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicFexDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicFexDetailsByMoid Read a 'niatelemetry.ApicFexDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryApicFexDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
+	return ApiGetNiatelemetryApicFexDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicFexDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r ApiGetNiatelemetryApicFexDetailsByMoidRequest) (NiatelemetryApicFexDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicFexDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFexDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFexDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicFexDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Filter(filter string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Top(top int32) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Expand(expand string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Apply(apply string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Count(count bool) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) At(at string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Tags(tags string) ApiGetNiatelemetryApicFexDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Execute() (NiatelemetryApicFexDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicFexDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicFexDetailsList Read a 'niatelemetry.ApicFexDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryApicFexDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx _context.Context) ApiGetNiatelemetryApicFexDetailsListRequest {
+	return ApiGetNiatelemetryApicFexDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicFexDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiGetNiatelemetryApicFexDetailsListRequest) (NiatelemetryApicFexDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicFexDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFexDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFexDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicPsuDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Execute() (NiatelemetryApicPsuDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicPsuDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicPsuDetailsByMoid Read a 'niatelemetry.ApicPsuDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryApicPsuDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
+	return ApiGetNiatelemetryApicPsuDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicPsuDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) (NiatelemetryApicPsuDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicPsuDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicPsuDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicPsuDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicPsuDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Filter(filter string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Top(top int32) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Expand(expand string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Apply(apply string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Count(count bool) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) At(at string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Tags(tags string) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Execute() (NiatelemetryApicPsuDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicPsuDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicPsuDetailsList Read a 'niatelemetry.ApicPsuDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryApicPsuDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx _context.Context) ApiGetNiatelemetryApicPsuDetailsListRequest {
+	return ApiGetNiatelemetryApicPsuDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicPsuDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiGetNiatelemetryApicPsuDetailsListRequest) (NiatelemetryApicPsuDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicPsuDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicPsuDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicPsuDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicUiPageCountsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Execute() (NiatelemetryApicUiPageCounts, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicUiPageCountsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicUiPageCountsByMoid Read a 'niatelemetry.ApicUiPageCounts' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryApicUiPageCountsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
+	return ApiGetNiatelemetryApicUiPageCountsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicUiPageCounts
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) (NiatelemetryApicUiPageCounts, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicUiPageCounts
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicUiPageCountsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicUiPageCounts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryApicUiPageCountsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Filter(filter string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Orderby(orderby string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Top(top int32) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Skip(skip int32) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Select_(select_ string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Expand(expand string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Apply(apply string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Count(count bool) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) At(at string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Tags(tags string) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Execute() (NiatelemetryApicUiPageCountsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryApicUiPageCountsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryApicUiPageCountsList Read a 'niatelemetry.ApicUiPageCounts' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryApicUiPageCountsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx _context.Context) ApiGetNiatelemetryApicUiPageCountsListRequest {
+	return ApiGetNiatelemetryApicUiPageCountsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryApicUiPageCountsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r ApiGetNiatelemetryApicUiPageCountsListRequest) (NiatelemetryApicUiPageCountsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryApicUiPageCountsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicUiPageCountsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicUiPageCounts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryAppDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (NiatelemetryAppDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryAppDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryAppDetailsByMoid Read a 'niatelemetry.AppDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryAppDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAppDetailsByMoidRequest {
+	return ApiGetNiatelemetryAppDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryAppDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGetNiatelemetryAppDetailsByMoidRequest) (NiatelemetryAppDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryAppDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAppDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/AppDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryAppDetailsListRequest struct {
@@ -245,7 +1788,7 @@ func (r ApiGetNiatelemetryAppDetailsListRequest) Tags(tags string) ApiGetNiatele
 	return r
 }
 
-func (r ApiGetNiatelemetryAppDetailsListRequest) Execute() (NiatelemetryAppDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryAppDetailsListRequest) Execute() (NiatelemetryAppDetailsResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryAppDetailsListExecute(r)
 }
 
@@ -265,21 +1808,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx _context.Cont
  * Execute executes the request
  * @return NiatelemetryAppDetailsResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNiatelemetryAppDetailsListRequest) (NiatelemetryAppDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNiatelemetryAppDetailsListRequest) (NiatelemetryAppDetailsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryAppDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAppDetailsList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AppDetails"
@@ -340,22 +1881,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -422,7 +1960,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryEpgByMoidRequest struct {
@@ -431,7 +1969,7 @@ type ApiGetNiatelemetryEpgByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (NiatelemetryEpg, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (NiatelemetryEpg, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryEpgByMoidExecute(r)
 }
 
@@ -453,21 +1991,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return NiatelemetryEpg
  */
-func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatelemetryEpgByMoidRequest) (NiatelemetryEpg, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatelemetryEpgByMoidRequest) (NiatelemetryEpg, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryEpg
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryEpgByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Epgs/{Moid}"
@@ -496,22 +2032,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -578,7 +2111,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryEpgListRequest struct {
@@ -642,7 +2175,7 @@ func (r ApiGetNiatelemetryEpgListRequest) Tags(tags string) ApiGetNiatelemetryEp
 	return r
 }
 
-func (r ApiGetNiatelemetryEpgListRequest) Execute() (NiatelemetryEpgResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryEpgListRequest) Execute() (NiatelemetryEpgResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryEpgListExecute(r)
 }
 
@@ -662,21 +2195,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx _context.Context) Ap
  * Execute executes the request
  * @return NiatelemetryEpgResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiatelemetryEpgListRequest) (NiatelemetryEpgResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiatelemetryEpgListRequest) (NiatelemetryEpgResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryEpgResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryEpgList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Epgs"
@@ -737,22 +2268,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -819,7 +2347,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryFaultByMoidRequest struct {
@@ -828,7 +2356,7 @@ type ApiGetNiatelemetryFaultByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (NiatelemetryFault, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (NiatelemetryFault, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryFaultByMoidExecute(r)
 }
 
@@ -850,21 +2378,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx _context.Context
  * Execute executes the request
  * @return NiatelemetryFault
  */
-func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiatelemetryFaultByMoidRequest) (NiatelemetryFault, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiatelemetryFaultByMoidRequest) (NiatelemetryFault, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryFault
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFaultByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Faults/{Moid}"
@@ -893,22 +2419,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -975,7 +2498,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryFaultListRequest struct {
@@ -1039,7 +2562,7 @@ func (r ApiGetNiatelemetryFaultListRequest) Tags(tags string) ApiGetNiatelemetry
 	return r
 }
 
-func (r ApiGetNiatelemetryFaultListRequest) Execute() (NiatelemetryFaultResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryFaultListRequest) Execute() (NiatelemetryFaultResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryFaultListExecute(r)
 }
 
@@ -1059,21 +2582,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx _context.Context) 
  * Execute executes the request
  * @return NiatelemetryFaultResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatelemetryFaultListRequest) (NiatelemetryFaultResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatelemetryFaultListRequest) (NiatelemetryFaultResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryFaultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFaultList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Faults"
@@ -1134,22 +2655,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1216,7 +2734,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryLcByMoidRequest struct {
@@ -1225,7 +2743,7 @@ type ApiGetNiatelemetryLcByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (NiatelemetryLc, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (NiatelemetryLc, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryLcByMoidExecute(r)
 }
 
@@ -1247,21 +2765,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return NiatelemetryLc
  */
-func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelemetryLcByMoidRequest) (NiatelemetryLc, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelemetryLcByMoidRequest) (NiatelemetryLc, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryLc
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLcByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Lcs/{Moid}"
@@ -1290,22 +2806,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1372,7 +2885,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryLcListRequest struct {
@@ -1436,7 +2949,7 @@ func (r ApiGetNiatelemetryLcListRequest) Tags(tags string) ApiGetNiatelemetryLcL
 	return r
 }
 
-func (r ApiGetNiatelemetryLcListRequest) Execute() (NiatelemetryLcResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryLcListRequest) Execute() (NiatelemetryLcResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryLcListExecute(r)
 }
 
@@ -1456,21 +2969,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx _context.Context) Api
  * Execute executes the request
  * @return NiatelemetryLcResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemetryLcListRequest) (NiatelemetryLcResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemetryLcListRequest) (NiatelemetryLcResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryLcResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLcList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Lcs"
@@ -1531,22 +3042,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1613,7 +3121,1168 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Execute() (NiatelemetryMsoSchemaDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoSchemaDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoSchemaDetailsByMoid Read a 'niatelemetry.MsoSchemaDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
+	return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoSchemaDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) (NiatelemetryMsoSchemaDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoSchemaDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSchemaDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSchemaDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoSchemaDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Filter(filter string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Top(top int32) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Expand(expand string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Apply(apply string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Count(count bool) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) At(at string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Tags(tags string) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Execute() (NiatelemetryMsoSchemaDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoSchemaDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoSchemaDetailsList Read a 'niatelemetry.MsoSchemaDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryMsoSchemaDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+	return ApiGetNiatelemetryMsoSchemaDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoSchemaDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r ApiGetNiatelemetryMsoSchemaDetailsListRequest) (NiatelemetryMsoSchemaDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoSchemaDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSchemaDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSchemaDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoSiteDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Execute() (NiatelemetryMsoSiteDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoSiteDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoSiteDetailsByMoid Read a 'niatelemetry.MsoSiteDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
+	return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoSiteDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) (NiatelemetryMsoSiteDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoSiteDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSiteDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSiteDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoSiteDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Filter(filter string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Top(top int32) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Expand(expand string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Apply(apply string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Count(count bool) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) At(at string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Tags(tags string) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Execute() (NiatelemetryMsoSiteDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoSiteDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoSiteDetailsList Read a 'niatelemetry.MsoSiteDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryMsoSiteDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+	return ApiGetNiatelemetryMsoSiteDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoSiteDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiGetNiatelemetryMsoSiteDetailsListRequest) (NiatelemetryMsoSiteDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoSiteDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSiteDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSiteDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoTenantDetailsByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Execute() (NiatelemetryMsoTenantDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoTenantDetailsByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoTenantDetailsByMoid Read a 'niatelemetry.MsoTenantDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
+	return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoTenantDetails
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) (NiatelemetryMsoTenantDetails, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoTenantDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoTenantDetailsByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoTenantDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryMsoTenantDetailsListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Filter(filter string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Orderby(orderby string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Top(top int32) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Skip(skip int32) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Select_(select_ string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Expand(expand string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Apply(apply string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Count(count bool) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) At(at string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Tags(tags string) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Execute() (NiatelemetryMsoTenantDetailsResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryMsoTenantDetailsListExecute(r)
+}
+
+/*
+ * GetNiatelemetryMsoTenantDetailsList Read a 'niatelemetry.MsoTenantDetails' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryMsoTenantDetailsListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+	return ApiGetNiatelemetryMsoTenantDetailsListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryMsoTenantDetailsResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r ApiGetNiatelemetryMsoTenantDetailsListRequest) (NiatelemetryMsoTenantDetailsResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryMsoTenantDetailsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoTenantDetailsList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoTenantDetails"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest struct {
@@ -1622,7 +4291,7 @@ type ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r)
 }
 
@@ -1644,21 +4313,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
  * Execute executes the request
  * @return NiatelemetryNexusDashboardControllerDetails
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardControllerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardControllerDetailsByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardControllerDetails/{Moid}"
@@ -1687,22 +4354,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1769,7 +4433,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest struct {
@@ -1833,7 +4497,7 @@ func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Tags(tags 
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Execute() (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Execute() (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardControllerDetailsListExecute(r)
 }
 
@@ -1853,21 +4517,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
  * Execute executes the request
  * @return NiatelemetryNexusDashboardControllerDetailsResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsListExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsListExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardControllerDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardControllerDetailsList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardControllerDetails"
@@ -1928,22 +4590,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2010,7 +4669,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest struct {
@@ -2019,7 +4678,7 @@ type ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardDetails, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardDetailsByMoidExecute(r)
 }
 
@@ -2041,21 +4700,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx 
  * Execute executes the request
  * @return NiatelemetryNexusDashboardDetails
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) (NiatelemetryNexusDashboardDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) (NiatelemetryNexusDashboardDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardDetailsByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardDetails/{Moid}"
@@ -2084,22 +4741,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2166,7 +4820,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardDetailsListRequest struct {
@@ -2230,7 +4884,7 @@ func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Execute() (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Execute() (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardDetailsListExecute(r)
 }
 
@@ -2250,21 +4904,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx _c
  * Execute executes the request
  * @return NiatelemetryNexusDashboardDetailsResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute(r ApiGetNiatelemetryNexusDashboardDetailsListRequest) (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute(r ApiGetNiatelemetryNexusDashboardDetailsListRequest) (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardDetailsList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardDetails"
@@ -2325,22 +4977,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2407,7 +5056,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest struct {
@@ -2416,7 +5065,7 @@ type ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r)
 }
 
@@ -2438,21 +5087,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
  * Execute executes the request
  * @return NiatelemetryNexusDashboardMemoryDetails
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardMemoryDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardMemoryDetailsByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardMemoryDetails/{Moid}"
@@ -2481,22 +5128,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2563,7 +5207,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest struct {
@@ -2627,7 +5271,7 @@ func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Tags(tags stri
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Execute() (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Execute() (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r)
 }
 
@@ -2647,21 +5291,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(
  * Execute executes the request
  * @return NiatelemetryNexusDashboardMemoryDetailsResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardMemoryDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardMemoryDetailsList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardMemoryDetails"
@@ -2722,22 +5364,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2804,7 +5443,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardsByMoidRequest struct {
@@ -2813,7 +5452,7 @@ type ApiGetNiatelemetryNexusDashboardsByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (NiatelemetryNexusDashboards, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (NiatelemetryNexusDashboards, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardsByMoidExecute(r)
 }
 
@@ -2835,21 +5474,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx _conte
  * Execute executes the request
  * @return NiatelemetryNexusDashboards
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r ApiGetNiatelemetryNexusDashboardsByMoidRequest) (NiatelemetryNexusDashboards, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r ApiGetNiatelemetryNexusDashboardsByMoidRequest) (NiatelemetryNexusDashboards, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboards
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardsByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboards/{Moid}"
@@ -2878,22 +5515,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2960,7 +5594,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNexusDashboardsListRequest struct {
@@ -3024,7 +5658,7 @@ func (r ApiGetNiatelemetryNexusDashboardsListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardsListRequest) Execute() (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNexusDashboardsListRequest) Execute() (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardsListExecute(r)
 }
 
@@ -3044,21 +5678,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx _context
  * Execute executes the request
  * @return NiatelemetryNexusDashboardsResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r ApiGetNiatelemetryNexusDashboardsListRequest) (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r ApiGetNiatelemetryNexusDashboardsListRequest) (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNexusDashboardsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardsList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboards"
@@ -3119,22 +5751,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3201,7 +5830,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaFeatureUsageByMoidRequest struct {
@@ -3210,7 +5839,7 @@ type ApiGetNiatelemetryNiaFeatureUsageByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (NiatelemetryNiaFeatureUsage, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (NiatelemetryNiaFeatureUsage, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaFeatureUsageByMoidExecute(r)
 }
 
@@ -3232,21 +5861,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx _conte
  * Execute executes the request
  * @return NiatelemetryNiaFeatureUsage
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) (NiatelemetryNiaFeatureUsage, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) (NiatelemetryNiaFeatureUsage, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaFeatureUsage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaFeatureUsageByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaFeatureUsages/{Moid}"
@@ -3275,22 +5902,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3357,7 +5981,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaFeatureUsageListRequest struct {
@@ -3421,7 +6045,7 @@ func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Execute() (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Execute() (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaFeatureUsageListExecute(r)
 }
 
@@ -3441,21 +6065,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx _context
  * Execute executes the request
  * @return NiatelemetryNiaFeatureUsageResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r ApiGetNiatelemetryNiaFeatureUsageListRequest) (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r ApiGetNiatelemetryNiaFeatureUsageListRequest) (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaFeatureUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaFeatureUsageList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaFeatureUsages"
@@ -3516,22 +6138,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3598,7 +6217,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaInventoryByMoidRequest struct {
@@ -3607,7 +6226,7 @@ type ApiGetNiatelemetryNiaInventoryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (NiatelemetryNiaInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (NiatelemetryNiaInventory, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryByMoidExecute(r)
 }
 
@@ -3629,21 +6248,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx _context.
  * Execute executes the request
  * @return NiatelemetryNiaInventory
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiGetNiatelemetryNiaInventoryByMoidRequest) (NiatelemetryNiaInventory, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiGetNiatelemetryNiaInventoryByMoidRequest) (NiatelemetryNiaInventory, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
@@ -3672,22 +6289,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3754,7 +6368,781 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Execute() (NiatelemetryNiaInventoryDcnm, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryNiaInventoryDcnmByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryNiaInventoryDcnmByMoid Read a 'niatelemetry.NiaInventoryDcnm' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
+	return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryNiaInventoryDcnm
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) (NiatelemetryNiaInventoryDcnm, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryNiaInventoryDcnm
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryDcnmByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryDcnms/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNiaInventoryDcnmListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Filter(filter string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Orderby(orderby string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Top(top int32) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Skip(skip int32) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Select_(select_ string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Expand(expand string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Apply(apply string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Count(count bool) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) At(at string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Tags(tags string) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Execute() (NiatelemetryNiaInventoryDcnmResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryNiaInventoryDcnmListExecute(r)
+}
+
+/*
+ * GetNiatelemetryNiaInventoryDcnmList Read a 'niatelemetry.NiaInventoryDcnm' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryNiaInventoryDcnmListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx _context.Context) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+	return ApiGetNiatelemetryNiaInventoryDcnmListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryNiaInventoryDcnmResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r ApiGetNiatelemetryNiaInventoryDcnmListRequest) (NiatelemetryNiaInventoryDcnmResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryNiaInventoryDcnmResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryDcnmList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryDcnms"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNiaInventoryFabricByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *NiatelemetryApiService
+	moid       string
+}
+
+func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Execute() (NiatelemetryNiaInventoryFabric, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryNiaInventoryFabricByMoidExecute(r)
+}
+
+/*
+ * GetNiatelemetryNiaInventoryFabricByMoid Read a 'niatelemetry.NiaInventoryFabric' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
+	return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryNiaInventoryFabric
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) (NiatelemetryNiaInventoryFabric, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryNiaInventoryFabric
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryFabricByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryFabrics/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetNiatelemetryNiaInventoryFabricListRequest struct {
+	ctx         _context.Context
+	ApiService  *NiatelemetryApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Filter(filter string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Orderby(orderby string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Top(top int32) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Skip(skip int32) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Select_(select_ string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Expand(expand string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Apply(apply string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Count(count bool) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Inlinecount(inlinecount string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) At(at string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Tags(tags string) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Execute() (NiatelemetryNiaInventoryFabricResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetNiatelemetryNiaInventoryFabricListExecute(r)
+}
+
+/*
+ * GetNiatelemetryNiaInventoryFabricList Read a 'niatelemetry.NiaInventoryFabric' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetNiatelemetryNiaInventoryFabricListRequest
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx _context.Context) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+	return ApiGetNiatelemetryNiaInventoryFabricListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NiatelemetryNiaInventoryFabricResponse
+ */
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r ApiGetNiatelemetryNiaInventoryFabricListRequest) (NiatelemetryNiaInventoryFabricResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NiatelemetryNiaInventoryFabricResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryFabricList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryFabrics"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaInventoryListRequest struct {
@@ -3818,7 +7206,7 @@ func (r ApiGetNiatelemetryNiaInventoryListRequest) Tags(tags string) ApiGetNiate
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaInventoryListRequest) Execute() (NiatelemetryNiaInventoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaInventoryListRequest) Execute() (NiatelemetryNiaInventoryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryListExecute(r)
 }
 
@@ -3838,21 +7226,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx _context.Co
  * Execute executes the request
  * @return NiatelemetryNiaInventoryResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGetNiatelemetryNiaInventoryListRequest) (NiatelemetryNiaInventoryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGetNiatelemetryNiaInventoryListRequest) (NiatelemetryNiaInventoryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaInventoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories"
@@ -3913,22 +7299,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3995,7 +7378,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaLicenseStateByMoidRequest struct {
@@ -4004,7 +7387,7 @@ type ApiGetNiatelemetryNiaLicenseStateByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (NiatelemetryNiaLicenseState, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (NiatelemetryNiaLicenseState, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaLicenseStateByMoidExecute(r)
 }
 
@@ -4026,21 +7409,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx _conte
  * Execute executes the request
  * @return NiatelemetryNiaLicenseState
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) (NiatelemetryNiaLicenseState, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) (NiatelemetryNiaLicenseState, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaLicenseState
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaLicenseStateByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaLicenseStates/{Moid}"
@@ -4069,22 +7450,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4151,7 +7529,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryNiaLicenseStateListRequest struct {
@@ -4215,7 +7593,7 @@ func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Execute() (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Execute() (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaLicenseStateListExecute(r)
 }
 
@@ -4235,21 +7613,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx _context
  * Execute executes the request
  * @return NiatelemetryNiaLicenseStateResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r ApiGetNiatelemetryNiaLicenseStateListRequest) (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r ApiGetNiatelemetryNiaLicenseStateListRequest) (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryNiaLicenseStateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaLicenseStateList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaLicenseStates"
@@ -4310,22 +7686,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4392,7 +7765,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryTenantByMoidRequest struct {
@@ -4401,7 +7774,7 @@ type ApiGetNiatelemetryTenantByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (NiatelemetryTenant, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (NiatelemetryTenant, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryTenantByMoidExecute(r)
 }
 
@@ -4423,21 +7796,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx _context.Contex
  * Execute executes the request
  * @return NiatelemetryTenant
  */
-func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiatelemetryTenantByMoidRequest) (NiatelemetryTenant, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiatelemetryTenantByMoidRequest) (NiatelemetryTenant, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryTenant
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryTenantByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Tenants/{Moid}"
@@ -4466,22 +7837,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4548,7 +7916,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiatelemetryTenantListRequest struct {
@@ -4612,7 +7980,7 @@ func (r ApiGetNiatelemetryTenantListRequest) Tags(tags string) ApiGetNiatelemetr
 	return r
 }
 
-func (r ApiGetNiatelemetryTenantListRequest) Execute() (NiatelemetryTenantResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiatelemetryTenantListRequest) Execute() (NiatelemetryTenantResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiatelemetryTenantListExecute(r)
 }
 
@@ -4632,21 +8000,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx _context.Context)
  * Execute executes the request
  * @return NiatelemetryTenantResponse
  */
-func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatelemetryTenantListRequest) (NiatelemetryTenantResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatelemetryTenantListRequest) (NiatelemetryTenantResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiatelemetryTenantResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryTenantList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Tenants"
@@ -4707,22 +8073,19 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4789,5 +8152,5 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

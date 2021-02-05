@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -74,6 +74,8 @@ type NiatelemetryNiaFeatureUsage struct {
 	IgmpSnoop *string `json:"IgmpSnoop,omitempty"`
 	// Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.
 	IpEpgCount *int64 `json:"IpEpgCount,omitempty"`
+	// Status of techsupport collection.
+	IsTechSupportCollected *string `json:"IsTechSupportCollected,omitempty"`
 	// Isis feature usage. This determines the total number of ISIS sessions across the fabric.
 	IsisCount *int64 `json:"IsisCount,omitempty"`
 	// L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.
@@ -119,7 +121,10 @@ type NiatelemetryNiaFeatureUsage struct {
 	// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Smart callhome feature usage. This determines if this feature is being enabled or disabled.
-	SmartCallHome *string `json:"SmartCallHome,omitempty"`
+	SmartCallHome *string                          `json:"SmartCallHome,omitempty"`
+	SmartLicense  NullableNiatelemetrySmartLicense `json:"SmartLicense,omitempty"`
+	// Returns count of snapshots.
+	SnapshotCount *int64 `json:"SnapshotCount,omitempty"`
 	// SNMP feature usage. This determines if this feature is enabled or disabled.
 	Snmp *string `json:"Snmp,omitempty"`
 	// Number of SNMP monitoring policies on the fabric.
@@ -1037,6 +1042,38 @@ func (o *NiatelemetryNiaFeatureUsage) SetIpEpgCount(v int64) {
 	o.IpEpgCount = &v
 }
 
+// GetIsTechSupportCollected returns the IsTechSupportCollected field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsage) GetIsTechSupportCollected() string {
+	if o == nil || o.IsTechSupportCollected == nil {
+		var ret string
+		return ret
+	}
+	return *o.IsTechSupportCollected
+}
+
+// GetIsTechSupportCollectedOk returns a tuple with the IsTechSupportCollected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsage) GetIsTechSupportCollectedOk() (*string, bool) {
+	if o == nil || o.IsTechSupportCollected == nil {
+		return nil, false
+	}
+	return o.IsTechSupportCollected, true
+}
+
+// HasIsTechSupportCollected returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsage) HasIsTechSupportCollected() bool {
+	if o != nil && o.IsTechSupportCollected != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsTechSupportCollected gets a reference to the given string and assigns it to the IsTechSupportCollected field.
+func (o *NiatelemetryNiaFeatureUsage) SetIsTechSupportCollected(v string) {
+	o.IsTechSupportCollected = &v
+}
+
 // GetIsisCount returns the IsisCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaFeatureUsage) GetIsisCount() int64 {
 	if o == nil || o.IsisCount == nil {
@@ -1771,6 +1808,81 @@ func (o *NiatelemetryNiaFeatureUsage) HasSmartCallHome() bool {
 // SetSmartCallHome gets a reference to the given string and assigns it to the SmartCallHome field.
 func (o *NiatelemetryNiaFeatureUsage) SetSmartCallHome(v string) {
 	o.SmartCallHome = &v
+}
+
+// GetSmartLicense returns the SmartLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaFeatureUsage) GetSmartLicense() NiatelemetrySmartLicense {
+	if o == nil || o.SmartLicense.Get() == nil {
+		var ret NiatelemetrySmartLicense
+		return ret
+	}
+	return *o.SmartLicense.Get()
+}
+
+// GetSmartLicenseOk returns a tuple with the SmartLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaFeatureUsage) GetSmartLicenseOk() (*NiatelemetrySmartLicense, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SmartLicense.Get(), o.SmartLicense.IsSet()
+}
+
+// HasSmartLicense returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsage) HasSmartLicense() bool {
+	if o != nil && o.SmartLicense.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSmartLicense gets a reference to the given NullableNiatelemetrySmartLicense and assigns it to the SmartLicense field.
+func (o *NiatelemetryNiaFeatureUsage) SetSmartLicense(v NiatelemetrySmartLicense) {
+	o.SmartLicense.Set(&v)
+}
+
+// SetSmartLicenseNil sets the value for SmartLicense to be an explicit nil
+func (o *NiatelemetryNiaFeatureUsage) SetSmartLicenseNil() {
+	o.SmartLicense.Set(nil)
+}
+
+// UnsetSmartLicense ensures that no value is present for SmartLicense, not even an explicit nil
+func (o *NiatelemetryNiaFeatureUsage) UnsetSmartLicense() {
+	o.SmartLicense.Unset()
+}
+
+// GetSnapshotCount returns the SnapshotCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsage) GetSnapshotCount() int64 {
+	if o == nil || o.SnapshotCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SnapshotCount
+}
+
+// GetSnapshotCountOk returns a tuple with the SnapshotCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsage) GetSnapshotCountOk() (*int64, bool) {
+	if o == nil || o.SnapshotCount == nil {
+		return nil, false
+	}
+	return o.SnapshotCount, true
+}
+
+// HasSnapshotCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsage) HasSnapshotCount() bool {
+	if o != nil && o.SnapshotCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotCount gets a reference to the given int64 and assigns it to the SnapshotCount field.
+func (o *NiatelemetryNiaFeatureUsage) SetSnapshotCount(v int64) {
+	o.SnapshotCount = &v
 }
 
 // GetSnmp returns the Snmp field value if set, zero value otherwise.
@@ -2536,6 +2648,9 @@ func (o NiatelemetryNiaFeatureUsage) MarshalJSON() ([]byte, error) {
 	if o.IpEpgCount != nil {
 		toSerialize["IpEpgCount"] = o.IpEpgCount
 	}
+	if o.IsTechSupportCollected != nil {
+		toSerialize["IsTechSupportCollected"] = o.IsTechSupportCollected
+	}
 	if o.IsisCount != nil {
 		toSerialize["IsisCount"] = o.IsisCount
 	}
@@ -2604,6 +2719,12 @@ func (o NiatelemetryNiaFeatureUsage) MarshalJSON() ([]byte, error) {
 	}
 	if o.SmartCallHome != nil {
 		toSerialize["SmartCallHome"] = o.SmartCallHome
+	}
+	if o.SmartLicense.IsSet() {
+		toSerialize["SmartLicense"] = o.SmartLicense.Get()
+	}
+	if o.SnapshotCount != nil {
+		toSerialize["SnapshotCount"] = o.SnapshotCount
 	}
 	if o.Snmp != nil {
 		toSerialize["Snmp"] = o.Snmp
@@ -2732,6 +2853,8 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		IgmpSnoop *string `json:"IgmpSnoop,omitempty"`
 		// Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.
 		IpEpgCount *int64 `json:"IpEpgCount,omitempty"`
+		// Status of techsupport collection.
+		IsTechSupportCollected *string `json:"IsTechSupportCollected,omitempty"`
 		// Isis feature usage. This determines the total number of ISIS sessions across the fabric.
 		IsisCount *int64 `json:"IsisCount,omitempty"`
 		// L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.
@@ -2777,7 +2900,10 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		// The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Smart callhome feature usage. This determines if this feature is being enabled or disabled.
-		SmartCallHome *string `json:"SmartCallHome,omitempty"`
+		SmartCallHome *string                          `json:"SmartCallHome,omitempty"`
+		SmartLicense  NullableNiatelemetrySmartLicense `json:"SmartLicense,omitempty"`
+		// Returns count of snapshots.
+		SnapshotCount *int64 `json:"SnapshotCount,omitempty"`
 		// SNMP feature usage. This determines if this feature is enabled or disabled.
 		Snmp *string `json:"Snmp,omitempty"`
 		// Number of SNMP monitoring policies on the fabric.
@@ -2853,6 +2979,7 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaFeatureUsage.IgmpAccessListCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IgmpAccessListCount
 		varNiatelemetryNiaFeatureUsage.IgmpSnoop = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IgmpSnoop
 		varNiatelemetryNiaFeatureUsage.IpEpgCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IpEpgCount
+		varNiatelemetryNiaFeatureUsage.IsTechSupportCollected = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IsTechSupportCollected
 		varNiatelemetryNiaFeatureUsage.IsisCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IsisCount
 		varNiatelemetryNiaFeatureUsage.L2Multicast = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.L2Multicast
 		varNiatelemetryNiaFeatureUsage.LeafCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.LeafCount
@@ -2876,6 +3003,8 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaFeatureUsage.SharedL3OutCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SharedL3OutCount
 		varNiatelemetryNiaFeatureUsage.SiteName = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SiteName
 		varNiatelemetryNiaFeatureUsage.SmartCallHome = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SmartCallHome
+		varNiatelemetryNiaFeatureUsage.SmartLicense = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SmartLicense
+		varNiatelemetryNiaFeatureUsage.SnapshotCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SnapshotCount
 		varNiatelemetryNiaFeatureUsage.Snmp = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.Snmp
 		varNiatelemetryNiaFeatureUsage.SnmpGroupCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SnmpGroupCount
 		varNiatelemetryNiaFeatureUsage.SpanCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.SpanCount
@@ -2941,6 +3070,7 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IgmpAccessListCount")
 		delete(additionalProperties, "IgmpSnoop")
 		delete(additionalProperties, "IpEpgCount")
+		delete(additionalProperties, "IsTechSupportCollected")
 		delete(additionalProperties, "IsisCount")
 		delete(additionalProperties, "L2Multicast")
 		delete(additionalProperties, "LeafCount")
@@ -2964,6 +3094,8 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SharedL3OutCount")
 		delete(additionalProperties, "SiteName")
 		delete(additionalProperties, "SmartCallHome")
+		delete(additionalProperties, "SmartLicense")
+		delete(additionalProperties, "SnapshotCount")
 		delete(additionalProperties, "Snmp")
 		delete(additionalProperties, "SnmpGroupCount")
 		delete(additionalProperties, "SpanCount")

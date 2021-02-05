@@ -49,7 +49,7 @@ func resourceHyperflexHealthCheckPackageChecksum() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -181,7 +181,8 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexHealthCheckPackageChecksum(conn.ctx).HyperflexHealthCheckPackageChecksum(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexHealthCheckPackageChecksum: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -196,7 +197,8 @@ func resourceHyperflexHealthCheckPackageChecksumRead(c context.Context, d *schem
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckPackageChecksumByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexHealthCheckPackageChecksum object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -343,7 +345,8 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexHealthCheckPackageChecksum(conn.ctx, d.Id()).HyperflexHealthCheckPackageChecksum(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexHealthCheckPackageChecksum: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -358,7 +361,8 @@ func resourceHyperflexHealthCheckPackageChecksumDelete(c context.Context, d *sch
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHealthCheckPackageChecksum(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexHealthCheckPackageChecksum object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

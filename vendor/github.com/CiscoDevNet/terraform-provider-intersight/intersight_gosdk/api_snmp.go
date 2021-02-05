@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateSnmpPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateSnm
 	return r
 }
 
-func (r ApiCreateSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateSnmpPolicyExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *SnmpApiService) CreateSnmpPolicy(ctx _context.Context) ApiCreateSnmpPol
  * Execute executes the request
  * @return SnmpPolicy
  */
-func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SnmpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.CreateSnmpPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies"
@@ -92,8 +90,7 @@ func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.snmpPolicy == nil {
-		executionError.error = "snmpPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("snmpPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (
 	localVarPostBody = r.snmpPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *SnmpApiService) CreateSnmpPolicyExecute(r ApiCreateSnmpPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteSnmpPolicyRequest struct {
@@ -214,7 +208,7 @@ type ApiDeleteSnmpPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSnmpPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteSnmpPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteSnmpPolicyExecute(r)
 }
 
@@ -235,20 +229,18 @@ func (a *SnmpApiService) DeleteSnmpPolicy(ctx _context.Context, moid string) Api
 /*
  * Execute executes the request
  */
-func (a *SnmpApiService) DeleteSnmpPolicyExecute(r ApiDeleteSnmpPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) DeleteSnmpPolicyExecute(r ApiDeleteSnmpPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.DeleteSnmpPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies/{Moid}"
@@ -277,22 +269,19 @@ func (a *SnmpApiService) DeleteSnmpPolicyExecute(r ApiDeleteSnmpPolicyRequest) (
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -350,7 +339,7 @@ func (a *SnmpApiService) DeleteSnmpPolicyExecute(r ApiDeleteSnmpPolicyRequest) (
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetSnmpPolicyByMoidRequest struct {
@@ -359,7 +348,7 @@ type ApiGetSnmpPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSnmpPolicyByMoidRequest) Execute() (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSnmpPolicyByMoidRequest) Execute() (SnmpPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetSnmpPolicyByMoidExecute(r)
 }
 
@@ -381,21 +370,19 @@ func (a *SnmpApiService) GetSnmpPolicyByMoid(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return SnmpPolicy
  */
-func (a *SnmpApiService) GetSnmpPolicyByMoidExecute(r ApiGetSnmpPolicyByMoidRequest) (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) GetSnmpPolicyByMoidExecute(r ApiGetSnmpPolicyByMoidRequest) (SnmpPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SnmpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.GetSnmpPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies/{Moid}"
@@ -424,22 +411,19 @@ func (a *SnmpApiService) GetSnmpPolicyByMoidExecute(r ApiGetSnmpPolicyByMoidRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -506,7 +490,7 @@ func (a *SnmpApiService) GetSnmpPolicyByMoidExecute(r ApiGetSnmpPolicyByMoidRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetSnmpPolicyListRequest struct {
@@ -570,7 +554,7 @@ func (r ApiGetSnmpPolicyListRequest) Tags(tags string) ApiGetSnmpPolicyListReque
 	return r
 }
 
-func (r ApiGetSnmpPolicyListRequest) Execute() (SnmpPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetSnmpPolicyListRequest) Execute() (SnmpPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetSnmpPolicyListExecute(r)
 }
 
@@ -590,21 +574,19 @@ func (a *SnmpApiService) GetSnmpPolicyList(ctx _context.Context) ApiGetSnmpPolic
  * Execute executes the request
  * @return SnmpPolicyResponse
  */
-func (a *SnmpApiService) GetSnmpPolicyListExecute(r ApiGetSnmpPolicyListRequest) (SnmpPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) GetSnmpPolicyListExecute(r ApiGetSnmpPolicyListRequest) (SnmpPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SnmpPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.GetSnmpPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies"
@@ -665,22 +647,19 @@ func (a *SnmpApiService) GetSnmpPolicyListExecute(r ApiGetSnmpPolicyListRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -747,7 +726,7 @@ func (a *SnmpApiService) GetSnmpPolicyListExecute(r ApiGetSnmpPolicyListRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchSnmpPolicyRequest struct {
@@ -767,7 +746,7 @@ func (r ApiPatchSnmpPolicyRequest) IfMatch(ifMatch string) ApiPatchSnmpPolicyReq
 	return r
 }
 
-func (r ApiPatchSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchSnmpPolicyExecute(r)
 }
 
@@ -789,21 +768,19 @@ func (a *SnmpApiService) PatchSnmpPolicy(ctx _context.Context, moid string) ApiP
  * Execute executes the request
  * @return SnmpPolicy
  */
-func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SnmpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.PatchSnmpPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies/{Moid}"
@@ -813,8 +790,7 @@ func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (Sn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.snmpPolicy == nil {
-		executionError.error = "snmpPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("snmpPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -841,22 +817,19 @@ func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (Sn
 	localVarPostBody = r.snmpPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -923,7 +896,7 @@ func (a *SnmpApiService) PatchSnmpPolicyExecute(r ApiPatchSnmpPolicyRequest) (Sn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateSnmpPolicyRequest struct {
@@ -943,7 +916,7 @@ func (r ApiUpdateSnmpPolicyRequest) IfMatch(ifMatch string) ApiUpdateSnmpPolicyR
 	return r
 }
 
-func (r ApiUpdateSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateSnmpPolicyRequest) Execute() (SnmpPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateSnmpPolicyExecute(r)
 }
 
@@ -965,21 +938,19 @@ func (a *SnmpApiService) UpdateSnmpPolicy(ctx _context.Context, moid string) Api
  * Execute executes the request
  * @return SnmpPolicy
  */
-func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (SnmpPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  SnmpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SnmpApiService.UpdateSnmpPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/snmp/Policies/{Moid}"
@@ -989,8 +960,7 @@ func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.snmpPolicy == nil {
-		executionError.error = "snmpPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("snmpPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1017,22 +987,19 @@ func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (
 	localVarPostBody = r.snmpPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1099,5 +1066,5 @@ func (a *SnmpApiService) UpdateSnmpPolicyExecute(r ApiUpdateSnmpPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

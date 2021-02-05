@@ -222,7 +222,8 @@ func dataSourceKubernetesAciCniApicRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("json marshal of KubernetesAciCniApic object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesAciCniApicList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching KubernetesAciCniApic: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

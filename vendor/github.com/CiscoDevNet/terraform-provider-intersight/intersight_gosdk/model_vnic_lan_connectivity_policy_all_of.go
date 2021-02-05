@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -21,12 +21,17 @@ type VnicLanConnectivityPolicyAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Allocation Type of iSCSI Qualified Name - Static/Dynamic/None. * `None` - Type defines that property is not applicable for an interface. * `Auto` - The system selects an interface automatically - DHCP. * `Static` - Type represents that static information or properties are associated to an interface. * `Pool` - Type defines that property value will be fetched from an associated pool.
+	IqnAllocationType *string `json:"IqnAllocationType,omitempty"`
 	// The mode used for placement of vNICs on network adapters. It can either be Auto or Custom. * `custom` - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user. * `auto` - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system.
 	PlacementMode *string `json:"PlacementMode,omitempty"`
+	// User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain.
+	StaticIqnName *string `json:"StaticIqnName,omitempty"`
 	// The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.
 	TargetPlatform *string `json:"TargetPlatform,omitempty"`
 	// An array of relationships to vnicEthIf resources.
 	EthIfs       []VnicEthIfRelationship               `json:"EthIfs,omitempty"`
+	IqnPool      *IqnpoolPoolRelationship              `json:"IqnPool,omitempty"`
 	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
@@ -43,6 +48,8 @@ func NewVnicLanConnectivityPolicyAllOf(classId string, objectType string) *VnicL
 	this := VnicLanConnectivityPolicyAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var iqnAllocationType string = "None"
+	this.IqnAllocationType = &iqnAllocationType
 	var placementMode string = "custom"
 	this.PlacementMode = &placementMode
 	var targetPlatform string = "Standalone"
@@ -59,6 +66,8 @@ func NewVnicLanConnectivityPolicyAllOfWithDefaults() *VnicLanConnectivityPolicyA
 	this.ClassId = classId
 	var objectType string = "vnic.LanConnectivityPolicy"
 	this.ObjectType = objectType
+	var iqnAllocationType string = "None"
+	this.IqnAllocationType = &iqnAllocationType
 	var placementMode string = "custom"
 	this.PlacementMode = &placementMode
 	var targetPlatform string = "Standalone"
@@ -114,6 +123,38 @@ func (o *VnicLanConnectivityPolicyAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetIqnAllocationType returns the IqnAllocationType field value if set, zero value otherwise.
+func (o *VnicLanConnectivityPolicyAllOf) GetIqnAllocationType() string {
+	if o == nil || o.IqnAllocationType == nil {
+		var ret string
+		return ret
+	}
+	return *o.IqnAllocationType
+}
+
+// GetIqnAllocationTypeOk returns a tuple with the IqnAllocationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicLanConnectivityPolicyAllOf) GetIqnAllocationTypeOk() (*string, bool) {
+	if o == nil || o.IqnAllocationType == nil {
+		return nil, false
+	}
+	return o.IqnAllocationType, true
+}
+
+// HasIqnAllocationType returns a boolean if a field has been set.
+func (o *VnicLanConnectivityPolicyAllOf) HasIqnAllocationType() bool {
+	if o != nil && o.IqnAllocationType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIqnAllocationType gets a reference to the given string and assigns it to the IqnAllocationType field.
+func (o *VnicLanConnectivityPolicyAllOf) SetIqnAllocationType(v string) {
+	o.IqnAllocationType = &v
+}
+
 // GetPlacementMode returns the PlacementMode field value if set, zero value otherwise.
 func (o *VnicLanConnectivityPolicyAllOf) GetPlacementMode() string {
 	if o == nil || o.PlacementMode == nil {
@@ -144,6 +185,38 @@ func (o *VnicLanConnectivityPolicyAllOf) HasPlacementMode() bool {
 // SetPlacementMode gets a reference to the given string and assigns it to the PlacementMode field.
 func (o *VnicLanConnectivityPolicyAllOf) SetPlacementMode(v string) {
 	o.PlacementMode = &v
+}
+
+// GetStaticIqnName returns the StaticIqnName field value if set, zero value otherwise.
+func (o *VnicLanConnectivityPolicyAllOf) GetStaticIqnName() string {
+	if o == nil || o.StaticIqnName == nil {
+		var ret string
+		return ret
+	}
+	return *o.StaticIqnName
+}
+
+// GetStaticIqnNameOk returns a tuple with the StaticIqnName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicLanConnectivityPolicyAllOf) GetStaticIqnNameOk() (*string, bool) {
+	if o == nil || o.StaticIqnName == nil {
+		return nil, false
+	}
+	return o.StaticIqnName, true
+}
+
+// HasStaticIqnName returns a boolean if a field has been set.
+func (o *VnicLanConnectivityPolicyAllOf) HasStaticIqnName() bool {
+	if o != nil && o.StaticIqnName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticIqnName gets a reference to the given string and assigns it to the StaticIqnName field.
+func (o *VnicLanConnectivityPolicyAllOf) SetStaticIqnName(v string) {
+	o.StaticIqnName = &v
 }
 
 // GetTargetPlatform returns the TargetPlatform field value if set, zero value otherwise.
@@ -209,6 +282,38 @@ func (o *VnicLanConnectivityPolicyAllOf) HasEthIfs() bool {
 // SetEthIfs gets a reference to the given []VnicEthIfRelationship and assigns it to the EthIfs field.
 func (o *VnicLanConnectivityPolicyAllOf) SetEthIfs(v []VnicEthIfRelationship) {
 	o.EthIfs = v
+}
+
+// GetIqnPool returns the IqnPool field value if set, zero value otherwise.
+func (o *VnicLanConnectivityPolicyAllOf) GetIqnPool() IqnpoolPoolRelationship {
+	if o == nil || o.IqnPool == nil {
+		var ret IqnpoolPoolRelationship
+		return ret
+	}
+	return *o.IqnPool
+}
+
+// GetIqnPoolOk returns a tuple with the IqnPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicLanConnectivityPolicyAllOf) GetIqnPoolOk() (*IqnpoolPoolRelationship, bool) {
+	if o == nil || o.IqnPool == nil {
+		return nil, false
+	}
+	return o.IqnPool, true
+}
+
+// HasIqnPool returns a boolean if a field has been set.
+func (o *VnicLanConnectivityPolicyAllOf) HasIqnPool() bool {
+	if o != nil && o.IqnPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIqnPool gets a reference to the given IqnpoolPoolRelationship and assigns it to the IqnPool field.
+func (o *VnicLanConnectivityPolicyAllOf) SetIqnPool(v IqnpoolPoolRelationship) {
+	o.IqnPool = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -284,14 +389,23 @@ func (o VnicLanConnectivityPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.IqnAllocationType != nil {
+		toSerialize["IqnAllocationType"] = o.IqnAllocationType
+	}
 	if o.PlacementMode != nil {
 		toSerialize["PlacementMode"] = o.PlacementMode
+	}
+	if o.StaticIqnName != nil {
+		toSerialize["StaticIqnName"] = o.StaticIqnName
 	}
 	if o.TargetPlatform != nil {
 		toSerialize["TargetPlatform"] = o.TargetPlatform
 	}
 	if o.EthIfs != nil {
 		toSerialize["EthIfs"] = o.EthIfs
+	}
+	if o.IqnPool != nil {
+		toSerialize["IqnPool"] = o.IqnPool
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -319,9 +433,12 @@ func (o *VnicLanConnectivityPolicyAllOf) UnmarshalJSON(bytes []byte) (err error)
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "IqnAllocationType")
 		delete(additionalProperties, "PlacementMode")
+		delete(additionalProperties, "StaticIqnName")
 		delete(additionalProperties, "TargetPlatform")
 		delete(additionalProperties, "EthIfs")
+		delete(additionalProperties, "IqnPool")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 		o.AdditionalProperties = additionalProperties

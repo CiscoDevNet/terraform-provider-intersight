@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdminLocatorLedState** | Pointer to **string** | User configured state of the locator LED for the server. * &#x60;None&#x60; - No operation property for locator led. * &#x60;On&#x60; - The Locator Led is turned on. * &#x60;Off&#x60; - The Locator Led is turned off. | [optional] [default to "None"]
 **AdminPowerState** | Pointer to **string** | User configured power state of the server. * &#x60;Policy&#x60; - Power state is set to the default value in the policy. * &#x60;PowerOn&#x60; - Power state of the server is set to On. * &#x60;PowerOff&#x60; - Power state is the server set to Off. * &#x60;PowerCycle&#x60; - Power state the server is reset. * &#x60;HardReset&#x60; - Power state the server is hard reset. * &#x60;Shutdown&#x60; - Operating system on the server is shut down. * &#x60;Reboot&#x60; - Power state of IMC is rebooted. | [optional] [default to "Policy"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
+**Name** | Pointer to **string** | The property used to identify the name of the server it is associated with. | [optional] [readonly] 
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](compute.PersistentMemoryOperation.md) |  | [optional] 
 **ServerConfig** | Pointer to [**NullableComputeServerConfig**](compute.ServerConfig.md) |  | [optional] 
@@ -150,6 +151,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *ComputeServerSetting) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *ComputeServerSetting) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *ComputeServerSetting) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *ComputeServerSetting) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *ComputeServerSetting) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOneTimeBootDevice
 

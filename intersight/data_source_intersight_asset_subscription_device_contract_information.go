@@ -90,7 +90,7 @@ func dataSourceAssetSubscriptionDeviceContractInformation() *schema.Resource {
 							Computed:    true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -212,7 +212,7 @@ func dataSourceAssetSubscriptionDeviceContractInformation() *schema.Resource {
 													Computed:    true,
 												},
 												"class_id": {
-													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
 												},
@@ -268,7 +268,7 @@ func dataSourceAssetSubscriptionDeviceContractInformation() *schema.Resource {
 										},
 									},
 									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
 									},
@@ -353,8 +353,20 @@ func dataSourceAssetSubscriptionDeviceContractInformation() *schema.Resource {
 							Optional:    true,
 							Computed:    true,
 						},
+						"product_family": {
+							Description: "Product Family is the field used to identify the hypervisor type. example \"ESXi\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
 						"product_type": {
 							Description: "Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"unit_of_measure": {
+							Description: "Unit of Measure is flag used to identify the type of metric being pushed. example - \"STORAGE\" for hardware metrics , \"VM\" - for hypervisor metrics.\n* `None` - A default value to catch cases where unit of measure is not correctly detected.\n* `STORAGE` - The metric type of the device is a storage metric.\n* `NODE` - The metric type of the device is a hardware metric.\n* `VM` - The metric type of the device is a hypervisor metric.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -375,7 +387,7 @@ func dataSourceAssetSubscriptionDeviceContractInformation() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -488,7 +500,8 @@ func dataSourceAssetSubscriptionDeviceContractInformationRead(c context.Context,
 		return diag.Errorf("json marshal of AssetSubscriptionDeviceContractInformation object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.AssetApi.GetAssetSubscriptionDeviceContractInformationList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching AssetSubscriptionDeviceContractInformation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

@@ -121,7 +121,7 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -383,7 +383,8 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 
 	r := conn.ApiClient.ApplianceApi.CreateApplianceBackup(conn.ctx).ApplianceBackup(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating ApplianceBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -398,7 +399,8 @@ func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta
 	var de diag.Diagnostics
 	r := conn.ApiClient.ApplianceApi.GetApplianceBackupByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "ApplianceBackup object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -491,7 +493,8 @@ func resourceApplianceBackupDelete(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	p := conn.ApiClient.ApplianceApi.DeleteApplianceBackup(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting ApplianceBackup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -345,7 +345,8 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 
 	r := conn.ApiClient.LicenseApi.CreateLicenseLicenseInfo(conn.ctx).LicenseLicenseInfo(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -360,7 +361,8 @@ func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, m
 	var de diag.Diagnostics
 	r := conn.ApiClient.LicenseApi.GetLicenseLicenseInfoByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "LicenseLicenseInfo object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -625,7 +627,8 @@ func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData,
 
 	r := conn.ApiClient.LicenseApi.UpdateLicenseLicenseInfo(conn.ctx, d.Id()).LicenseLicenseInfo(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())

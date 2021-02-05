@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.VirtualMachineInstanceType"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.VirtualMachineInstanceType"]
 **Cpu** | Pointer to **int64** | Number of CPUs allocated to virtual machine. | [optional] [default to 4]
-**DiskSize** | Pointer to **string** | Ephemeral disk capacity to be provided with units example - 10Gi. | [optional] 
+**DiskSize** | Pointer to **int64** | Ephemeral disk capacity to be provided with units example - 10Gi. | [optional] 
 **Memory** | Pointer to **int64** | Virtual machine memory defined in mebibytes (MiB). | [optional] [default to 16384]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]KubernetesVirtualMachineInfrastructureProviderRelationship**](KubernetesVirtualMachineInfrastructureProviderRelationship.md) | An array of relationships to kubernetesVirtualMachineInfrastructureProvider resources. | [optional] 
@@ -98,20 +98,20 @@ HasCpu returns a boolean if a field has been set.
 
 ### GetDiskSize
 
-`func (o *KubernetesVirtualMachineInstanceType) GetDiskSize() string`
+`func (o *KubernetesVirtualMachineInstanceType) GetDiskSize() int64`
 
 GetDiskSize returns the DiskSize field if non-nil, zero value otherwise.
 
 ### GetDiskSizeOk
 
-`func (o *KubernetesVirtualMachineInstanceType) GetDiskSizeOk() (*string, bool)`
+`func (o *KubernetesVirtualMachineInstanceType) GetDiskSizeOk() (*int64, bool)`
 
 GetDiskSizeOk returns a tuple with the DiskSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDiskSize
 
-`func (o *KubernetesVirtualMachineInstanceType) SetDiskSize(v string)`
+`func (o *KubernetesVirtualMachineInstanceType) SetDiskSize(v int64)`
 
 SetDiskSize sets DiskSize field to given value.
 

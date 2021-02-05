@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateFirmwareBiosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareBiosDescriptorExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptor(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareBiosDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBiosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors"
@@ -92,8 +90,7 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBiosDescriptor == nil {
-		executionError.error = "firmwareBiosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwareBiosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *FirmwareApiService) CreateFirmwareBiosDescriptorExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareBoardControllerDescriptorRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateFirmwareBoardControllerDescriptorRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptor(ctx _contex
  * Execute executes the request
  * @return FirmwareBoardControllerDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r ApiCreateFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareBoardControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors"
@@ -272,8 +264,7 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBoardControllerDescriptor == nil {
-		executionError.error = "firmwareBoardControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r Ap
 	localVarPostBody = r.firmwareBoardControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *FirmwareApiService) CreateFirmwareBoardControllerDescriptorExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareChassisUpgradeRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateFirmwareChassisUpgradeRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareChassisUpgradeRequest) Execute() (FirmwareChassisUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareChassisUpgradeRequest) Execute() (FirmwareChassisUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareChassisUpgradeExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgrade(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareChassisUpgrade
  */
-func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirmwareChassisUpgradeRequest) (FirmwareChassisUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirmwareChassisUpgradeRequest) (FirmwareChassisUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareChassisUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareChassisUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ChassisUpgrades"
@@ -452,8 +438,7 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareChassisUpgrade == nil {
-		executionError.error = "firmwareChassisUpgrade is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareChassisUpgrade is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwareChassisUpgrade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *FirmwareApiService) CreateFirmwareChassisUpgradeExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareCimcDescriptorRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateFirmwareCimcDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareCimcDescriptorExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptor(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareCimcDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareCimcDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors"
@@ -632,8 +612,7 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareCimcDescriptor == nil {
-		executionError.error = "firmwareCimcDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwareCimcDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *FirmwareApiService) CreateFirmwareCimcDescriptorExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareDimmDescriptorRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateFirmwareDimmDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareDimmDescriptorExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptor(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareDimmDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDimmDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors"
@@ -812,8 +786,7 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDimmDescriptor == nil {
-		executionError.error = "firmwareDimmDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwareDimmDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *FirmwareApiService) CreateFirmwareDimmDescriptorExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareDistributableRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateFirmwareDistributableRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareDistributableExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *FirmwareApiService) CreateFirmwareDistributable(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareDistributable
  */
-func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables"
@@ -992,8 +960,7 @@ func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDistributable == nil {
-		executionError.error = "firmwareDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *FirmwareApiService) CreateFirmwareDistributableExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareDriveDescriptorRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateFirmwareDriveDescriptorRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareDriveDescriptorExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptor(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareDriveDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDriveDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors"
@@ -1172,8 +1134,7 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFir
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriveDescriptor == nil {
-		executionError.error = "firmwareDriveDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFir
 	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *FirmwareApiService) CreateFirmwareDriveDescriptorExecute(r ApiCreateFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareDriverDistributableRequest struct {
@@ -1309,7 +1267,7 @@ func (r ApiCreateFirmwareDriverDistributableRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareDriverDistributableExecute(r)
 }
 
@@ -1329,21 +1287,19 @@ func (a *FirmwareApiService) CreateFirmwareDriverDistributable(ctx _context.Cont
  * Execute executes the request
  * @return FirmwareDriverDistributable
  */
-func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreateFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreateFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriverDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareDriverDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables"
@@ -1352,8 +1308,7 @@ func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriverDistributable == nil {
-		executionError.error = "firmwareDriverDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriverDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1383,22 +1338,19 @@ func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreat
 	localVarPostBody = r.firmwareDriverDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1465,7 +1417,7 @@ func (a *FirmwareApiService) CreateFirmwareDriverDistributableExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareEulaRequest struct {
@@ -1489,7 +1441,7 @@ func (r ApiCreateFirmwareEulaRequest) IfNoneMatch(ifNoneMatch string) ApiCreateF
 	return r
 }
 
-func (r ApiCreateFirmwareEulaRequest) Execute() (FirmwareEula, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareEulaRequest) Execute() (FirmwareEula, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareEulaExecute(r)
 }
 
@@ -1509,21 +1461,19 @@ func (a *FirmwareApiService) CreateFirmwareEula(ctx _context.Context) ApiCreateF
  * Execute executes the request
  * @return FirmwareEula
  */
-func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRequest) (FirmwareEula, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRequest) (FirmwareEula, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareEula
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareEula")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Eulas"
@@ -1532,8 +1482,7 @@ func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareEula == nil {
-		executionError.error = "firmwareEula is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareEula is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1563,22 +1512,19 @@ func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRe
 	localVarPostBody = r.firmwareEula
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1645,7 +1591,7 @@ func (a *FirmwareApiService) CreateFirmwareEulaExecute(r ApiCreateFirmwareEulaRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareGpuDescriptorRequest struct {
@@ -1669,7 +1615,7 @@ func (r ApiCreateFirmwareGpuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareGpuDescriptorExecute(r)
 }
 
@@ -1689,21 +1635,19 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptor(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareGpuDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareGpuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors"
@@ -1712,8 +1656,7 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareGpuDescriptor == nil {
-		executionError.error = "firmwareGpuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1743,22 +1686,19 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareGpuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1825,7 +1765,7 @@ func (a *FirmwareApiService) CreateFirmwareGpuDescriptorExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareHbaDescriptorRequest struct {
@@ -1849,7 +1789,7 @@ func (r ApiCreateFirmwareHbaDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareHbaDescriptorExecute(r)
 }
 
@@ -1869,21 +1809,19 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptor(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareHbaDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareHbaDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors"
@@ -1892,8 +1830,7 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareHbaDescriptor == nil {
-		executionError.error = "firmwareHbaDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1923,22 +1860,19 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareHbaDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2005,7 +1939,7 @@ func (a *FirmwareApiService) CreateFirmwareHbaDescriptorExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareIomDescriptorRequest struct {
@@ -2029,7 +1963,7 @@ func (r ApiCreateFirmwareIomDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareIomDescriptorExecute(r)
 }
 
@@ -2049,21 +1983,19 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptor(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareIomDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareIomDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors"
@@ -2072,8 +2004,7 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareIomDescriptor == nil {
-		executionError.error = "firmwareIomDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2103,22 +2034,19 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareIomDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2185,7 +2113,7 @@ func (a *FirmwareApiService) CreateFirmwareIomDescriptorExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareMswitchDescriptorRequest struct {
@@ -2209,7 +2137,7 @@ func (r ApiCreateFirmwareMswitchDescriptorRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -2229,21 +2157,19 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptor(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareMswitchDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareMswitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors"
@@ -2252,8 +2178,7 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareMswitchDescriptor == nil {
-		executionError.error = "firmwareMswitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2283,22 +2208,19 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateF
 	localVarPostBody = r.firmwareMswitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2365,7 +2287,7 @@ func (a *FirmwareApiService) CreateFirmwareMswitchDescriptorExecute(r ApiCreateF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareNxosDescriptorRequest struct {
@@ -2389,7 +2311,7 @@ func (r ApiCreateFirmwareNxosDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareNxosDescriptorExecute(r)
 }
 
@@ -2409,21 +2331,19 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptor(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareNxosDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareNxosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors"
@@ -2432,8 +2352,7 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareNxosDescriptor == nil {
-		executionError.error = "firmwareNxosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2463,22 +2382,19 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwareNxosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2545,7 +2461,7 @@ func (a *FirmwareApiService) CreateFirmwareNxosDescriptorExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwarePcieDescriptorRequest struct {
@@ -2569,7 +2485,7 @@ func (r ApiCreateFirmwarePcieDescriptorRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwarePcieDescriptorExecute(r)
 }
 
@@ -2589,21 +2505,19 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptor(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwarePcieDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePcieDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors"
@@ -2612,8 +2526,7 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePcieDescriptor == nil {
-		executionError.error = "firmwarePcieDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2643,22 +2556,19 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirm
 	localVarPostBody = r.firmwarePcieDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2725,7 +2635,7 @@ func (a *FirmwareApiService) CreateFirmwarePcieDescriptorExecute(r ApiCreateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwarePsuDescriptorRequest struct {
@@ -2749,7 +2659,7 @@ func (r ApiCreateFirmwarePsuDescriptorRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwarePsuDescriptorExecute(r)
 }
 
@@ -2769,21 +2679,19 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptor(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwarePsuDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwarePsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors"
@@ -2792,8 +2700,7 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePsuDescriptor == nil {
-		executionError.error = "firmwarePsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2823,22 +2730,19 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwarePsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2905,7 +2809,7 @@ func (a *FirmwareApiService) CreateFirmwarePsuDescriptorExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareSasExpanderDescriptorRequest struct {
@@ -2929,7 +2833,7 @@ func (r ApiCreateFirmwareSasExpanderDescriptorRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -2949,21 +2853,19 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptor(ctx _context.Co
  * Execute executes the request
  * @return FirmwareSasExpanderDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCreateFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareSasExpanderDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors"
@@ -2972,8 +2874,7 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCre
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareSasExpanderDescriptor == nil {
-		executionError.error = "firmwareSasExpanderDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3003,22 +2904,19 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCre
 	localVarPostBody = r.firmwareSasExpanderDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3085,7 +2983,7 @@ func (a *FirmwareApiService) CreateFirmwareSasExpanderDescriptorExecute(r ApiCre
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareServerConfigurationUtilityDistributableRequest struct {
@@ -3109,7 +3007,7 @@ func (r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) IfNoneM
 	return r
 }
 
-func (r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareServerConfigurationUtilityDistributableExecute(r)
 }
 
@@ -3129,21 +3027,19 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
  * Execute executes the request
  * @return FirmwareServerConfigurationUtilityDistributable
  */
-func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributableExecute(r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributableExecute(r ApiCreateFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareServerConfigurationUtilityDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareServerConfigurationUtilityDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables"
@@ -3152,8 +3048,7 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareServerConfigurationUtilityDistributable == nil {
-		executionError.error = "firmwareServerConfigurationUtilityDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareServerConfigurationUtilityDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3183,22 +3078,19 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3265,7 +3157,7 @@ func (a *FirmwareApiService) CreateFirmwareServerConfigurationUtilityDistributab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareStorageControllerDescriptorRequest struct {
@@ -3289,7 +3181,7 @@ func (r ApiCreateFirmwareStorageControllerDescriptorRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -3309,21 +3201,19 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptor(ctx _cont
  * Execute executes the request
  * @return FirmwareStorageControllerDescriptor
  */
-func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r ApiCreateFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareStorageControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors"
@@ -3332,8 +3222,7 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareStorageControllerDescriptor == nil {
-		executionError.error = "firmwareStorageControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3363,22 +3252,19 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r 
 	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3445,7 +3331,7 @@ func (a *FirmwareApiService) CreateFirmwareStorageControllerDescriptorExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareSwitchUpgradeRequest struct {
@@ -3469,7 +3355,7 @@ func (r ApiCreateFirmwareSwitchUpgradeRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareSwitchUpgradeRequest) Execute() (FirmwareSwitchUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareSwitchUpgradeRequest) Execute() (FirmwareSwitchUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareSwitchUpgradeExecute(r)
 }
 
@@ -3489,21 +3375,19 @@ func (a *FirmwareApiService) CreateFirmwareSwitchUpgrade(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareSwitchUpgrade
  */
-func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmwareSwitchUpgradeRequest) (FirmwareSwitchUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmwareSwitchUpgradeRequest) (FirmwareSwitchUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSwitchUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareSwitchUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SwitchUpgrades"
@@ -3512,8 +3396,7 @@ func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareSwitchUpgrade == nil {
-		executionError.error = "firmwareSwitchUpgrade is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareSwitchUpgrade is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3543,22 +3426,19 @@ func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareSwitchUpgrade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3625,7 +3505,181 @@ func (a *FirmwareApiService) CreateFirmwareSwitchUpgradeExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateFirmwareUnsupportedVersionUpgradeRequest struct {
+	ctx                               _context.Context
+	ApiService                        *FirmwareApiService
+	firmwareUnsupportedVersionUpgrade *FirmwareUnsupportedVersionUpgrade
+	ifMatch                           *string
+	ifNoneMatch                       *string
+}
+
+func (r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) FirmwareUnsupportedVersionUpgrade(firmwareUnsupportedVersionUpgrade FirmwareUnsupportedVersionUpgrade) ApiCreateFirmwareUnsupportedVersionUpgradeRequest {
+	r.firmwareUnsupportedVersionUpgrade = &firmwareUnsupportedVersionUpgrade
+	return r
+}
+func (r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) IfMatch(ifMatch string) ApiCreateFirmwareUnsupportedVersionUpgradeRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFirmwareUnsupportedVersionUpgradeRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) Execute() (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	return r.ApiService.CreateFirmwareUnsupportedVersionUpgradeExecute(r)
+}
+
+/*
+ * CreateFirmwareUnsupportedVersionUpgrade Create a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateFirmwareUnsupportedVersionUpgradeRequest
+ */
+func (a *FirmwareApiService) CreateFirmwareUnsupportedVersionUpgrade(ctx _context.Context) ApiCreateFirmwareUnsupportedVersionUpgradeRequest {
+	return ApiCreateFirmwareUnsupportedVersionUpgradeRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FirmwareUnsupportedVersionUpgrade
+ */
+func (a *FirmwareApiService) CreateFirmwareUnsupportedVersionUpgradeExecute(r ApiCreateFirmwareUnsupportedVersionUpgradeRequest) (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FirmwareUnsupportedVersionUpgrade
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareUnsupportedVersionUpgrade")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.firmwareUnsupportedVersionUpgrade == nil {
+		return localVarReturnValue, nil, reportError("firmwareUnsupportedVersionUpgrade is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.firmwareUnsupportedVersionUpgrade
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareUpgradeRequest struct {
@@ -3649,7 +3703,7 @@ func (r ApiCreateFirmwareUpgradeRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateFirmwareUpgradeRequest) Execute() (FirmwareUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareUpgradeRequest) Execute() (FirmwareUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareUpgradeExecute(r)
 }
 
@@ -3669,21 +3723,19 @@ func (a *FirmwareApiService) CreateFirmwareUpgrade(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return FirmwareUpgrade
  */
-func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpgradeRequest) (FirmwareUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpgradeRequest) (FirmwareUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Upgrades"
@@ -3692,8 +3744,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpg
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareUpgrade == nil {
-		executionError.error = "firmwareUpgrade is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareUpgrade is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3723,22 +3774,19 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpg
 	localVarPostBody = r.firmwareUpgrade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3805,7 +3853,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeExecute(r ApiCreateFirmwareUpg
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateFirmwareUpgradeImpactRequest struct {
@@ -3829,7 +3877,7 @@ func (r ApiCreateFirmwareUpgradeImpactRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFirmwareUpgradeImpactRequest) Execute() (FirmwareUpgradeImpact, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateFirmwareUpgradeImpactRequest) Execute() (FirmwareUpgradeImpact, *_nethttp.Response, error) {
 	return r.ApiService.CreateFirmwareUpgradeImpactExecute(r)
 }
 
@@ -3849,21 +3897,19 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeImpact(ctx _context.Context) A
  * Execute executes the request
  * @return FirmwareUpgradeImpact
  */
-func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmwareUpgradeImpactRequest) (FirmwareUpgradeImpact, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmwareUpgradeImpactRequest) (FirmwareUpgradeImpact, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeImpact
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.CreateFirmwareUpgradeImpact")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/UpgradeImpacts"
@@ -3872,8 +3918,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareUpgradeImpact == nil {
-		executionError.error = "firmwareUpgradeImpact is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareUpgradeImpact is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3903,22 +3948,19 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmw
 	localVarPostBody = r.firmwareUpgradeImpact
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3985,7 +4027,7 @@ func (a *FirmwareApiService) CreateFirmwareUpgradeImpactExecute(r ApiCreateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareBiosDescriptorRequest struct {
@@ -3994,7 +4036,7 @@ type ApiDeleteFirmwareBiosDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareBiosDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareBiosDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareBiosDescriptorExecute(r)
 }
 
@@ -4015,20 +4057,18 @@ func (a *FirmwareApiService) DeleteFirmwareBiosDescriptor(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareBiosDescriptorExecute(r ApiDeleteFirmwareBiosDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareBiosDescriptorExecute(r ApiDeleteFirmwareBiosDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareBiosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
@@ -4057,22 +4097,19 @@ func (a *FirmwareApiService) DeleteFirmwareBiosDescriptorExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4130,7 +4167,7 @@ func (a *FirmwareApiService) DeleteFirmwareBiosDescriptorExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareBoardControllerDescriptorRequest struct {
@@ -4139,7 +4176,7 @@ type ApiDeleteFirmwareBoardControllerDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareBoardControllerDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareBoardControllerDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -4160,20 +4197,18 @@ func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptor(ctx _contex
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptorExecute(r ApiDeleteFirmwareBoardControllerDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptorExecute(r ApiDeleteFirmwareBoardControllerDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareBoardControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
@@ -4202,22 +4237,19 @@ func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptorExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4275,7 +4307,7 @@ func (a *FirmwareApiService) DeleteFirmwareBoardControllerDescriptorExecute(r Ap
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareChassisUpgradeRequest struct {
@@ -4284,7 +4316,7 @@ type ApiDeleteFirmwareChassisUpgradeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareChassisUpgradeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareChassisUpgradeRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareChassisUpgradeExecute(r)
 }
 
@@ -4305,20 +4337,18 @@ func (a *FirmwareApiService) DeleteFirmwareChassisUpgrade(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareChassisUpgradeExecute(r ApiDeleteFirmwareChassisUpgradeRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareChassisUpgradeExecute(r ApiDeleteFirmwareChassisUpgradeRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareChassisUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ChassisUpgrades/{Moid}"
@@ -4347,22 +4377,19 @@ func (a *FirmwareApiService) DeleteFirmwareChassisUpgradeExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4420,7 +4447,7 @@ func (a *FirmwareApiService) DeleteFirmwareChassisUpgradeExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareCimcDescriptorRequest struct {
@@ -4429,7 +4456,7 @@ type ApiDeleteFirmwareCimcDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareCimcDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareCimcDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareCimcDescriptorExecute(r)
 }
 
@@ -4450,20 +4477,18 @@ func (a *FirmwareApiService) DeleteFirmwareCimcDescriptor(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareCimcDescriptorExecute(r ApiDeleteFirmwareCimcDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareCimcDescriptorExecute(r ApiDeleteFirmwareCimcDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareCimcDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
@@ -4492,22 +4517,19 @@ func (a *FirmwareApiService) DeleteFirmwareCimcDescriptorExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4565,7 +4587,7 @@ func (a *FirmwareApiService) DeleteFirmwareCimcDescriptorExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareDimmDescriptorRequest struct {
@@ -4574,7 +4596,7 @@ type ApiDeleteFirmwareDimmDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareDimmDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareDimmDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareDimmDescriptorExecute(r)
 }
 
@@ -4595,20 +4617,18 @@ func (a *FirmwareApiService) DeleteFirmwareDimmDescriptor(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareDimmDescriptorExecute(r ApiDeleteFirmwareDimmDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareDimmDescriptorExecute(r ApiDeleteFirmwareDimmDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDimmDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
@@ -4637,22 +4657,19 @@ func (a *FirmwareApiService) DeleteFirmwareDimmDescriptorExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4710,7 +4727,7 @@ func (a *FirmwareApiService) DeleteFirmwareDimmDescriptorExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareDistributableRequest struct {
@@ -4719,7 +4736,7 @@ type ApiDeleteFirmwareDistributableRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareDistributableRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareDistributableRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareDistributableExecute(r)
 }
 
@@ -4740,20 +4757,18 @@ func (a *FirmwareApiService) DeleteFirmwareDistributable(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareDistributableExecute(r ApiDeleteFirmwareDistributableRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareDistributableExecute(r ApiDeleteFirmwareDistributableRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables/{Moid}"
@@ -4782,22 +4797,19 @@ func (a *FirmwareApiService) DeleteFirmwareDistributableExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4855,7 +4867,7 @@ func (a *FirmwareApiService) DeleteFirmwareDistributableExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareDriveDescriptorRequest struct {
@@ -4864,7 +4876,7 @@ type ApiDeleteFirmwareDriveDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareDriveDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareDriveDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareDriveDescriptorExecute(r)
 }
 
@@ -4885,20 +4897,18 @@ func (a *FirmwareApiService) DeleteFirmwareDriveDescriptor(ctx _context.Context,
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareDriveDescriptorExecute(r ApiDeleteFirmwareDriveDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareDriveDescriptorExecute(r ApiDeleteFirmwareDriveDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDriveDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
@@ -4927,22 +4937,19 @@ func (a *FirmwareApiService) DeleteFirmwareDriveDescriptorExecute(r ApiDeleteFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5000,7 +5007,7 @@ func (a *FirmwareApiService) DeleteFirmwareDriveDescriptorExecute(r ApiDeleteFir
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareDriverDistributableRequest struct {
@@ -5009,7 +5016,7 @@ type ApiDeleteFirmwareDriverDistributableRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareDriverDistributableRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareDriverDistributableRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareDriverDistributableExecute(r)
 }
 
@@ -5030,20 +5037,18 @@ func (a *FirmwareApiService) DeleteFirmwareDriverDistributable(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareDriverDistributableExecute(r ApiDeleteFirmwareDriverDistributableRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareDriverDistributableExecute(r ApiDeleteFirmwareDriverDistributableRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareDriverDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables/{Moid}"
@@ -5072,22 +5077,19 @@ func (a *FirmwareApiService) DeleteFirmwareDriverDistributableExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5145,7 +5147,7 @@ func (a *FirmwareApiService) DeleteFirmwareDriverDistributableExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareGpuDescriptorRequest struct {
@@ -5154,7 +5156,7 @@ type ApiDeleteFirmwareGpuDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareGpuDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareGpuDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareGpuDescriptorExecute(r)
 }
 
@@ -5175,20 +5177,18 @@ func (a *FirmwareApiService) DeleteFirmwareGpuDescriptor(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareGpuDescriptorExecute(r ApiDeleteFirmwareGpuDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareGpuDescriptorExecute(r ApiDeleteFirmwareGpuDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareGpuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
@@ -5217,22 +5217,19 @@ func (a *FirmwareApiService) DeleteFirmwareGpuDescriptorExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5290,7 +5287,7 @@ func (a *FirmwareApiService) DeleteFirmwareGpuDescriptorExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareHbaDescriptorRequest struct {
@@ -5299,7 +5296,7 @@ type ApiDeleteFirmwareHbaDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareHbaDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareHbaDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareHbaDescriptorExecute(r)
 }
 
@@ -5320,20 +5317,18 @@ func (a *FirmwareApiService) DeleteFirmwareHbaDescriptor(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareHbaDescriptorExecute(r ApiDeleteFirmwareHbaDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareHbaDescriptorExecute(r ApiDeleteFirmwareHbaDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareHbaDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
@@ -5362,22 +5357,19 @@ func (a *FirmwareApiService) DeleteFirmwareHbaDescriptorExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5435,7 +5427,7 @@ func (a *FirmwareApiService) DeleteFirmwareHbaDescriptorExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareIomDescriptorRequest struct {
@@ -5444,7 +5436,7 @@ type ApiDeleteFirmwareIomDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareIomDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareIomDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareIomDescriptorExecute(r)
 }
 
@@ -5465,20 +5457,18 @@ func (a *FirmwareApiService) DeleteFirmwareIomDescriptor(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareIomDescriptorExecute(r ApiDeleteFirmwareIomDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareIomDescriptorExecute(r ApiDeleteFirmwareIomDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareIomDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
@@ -5507,22 +5497,19 @@ func (a *FirmwareApiService) DeleteFirmwareIomDescriptorExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5580,7 +5567,7 @@ func (a *FirmwareApiService) DeleteFirmwareIomDescriptorExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareMswitchDescriptorRequest struct {
@@ -5589,7 +5576,7 @@ type ApiDeleteFirmwareMswitchDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareMswitchDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareMswitchDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -5610,20 +5597,18 @@ func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptor(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptorExecute(r ApiDeleteFirmwareMswitchDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptorExecute(r ApiDeleteFirmwareMswitchDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareMswitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
@@ -5652,22 +5637,19 @@ func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptorExecute(r ApiDeleteF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5725,7 +5707,7 @@ func (a *FirmwareApiService) DeleteFirmwareMswitchDescriptorExecute(r ApiDeleteF
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareNxosDescriptorRequest struct {
@@ -5734,7 +5716,7 @@ type ApiDeleteFirmwareNxosDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareNxosDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareNxosDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareNxosDescriptorExecute(r)
 }
 
@@ -5755,20 +5737,18 @@ func (a *FirmwareApiService) DeleteFirmwareNxosDescriptor(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareNxosDescriptorExecute(r ApiDeleteFirmwareNxosDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareNxosDescriptorExecute(r ApiDeleteFirmwareNxosDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareNxosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
@@ -5797,22 +5777,19 @@ func (a *FirmwareApiService) DeleteFirmwareNxosDescriptorExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5870,7 +5847,7 @@ func (a *FirmwareApiService) DeleteFirmwareNxosDescriptorExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwarePcieDescriptorRequest struct {
@@ -5879,7 +5856,7 @@ type ApiDeleteFirmwarePcieDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwarePcieDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwarePcieDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwarePcieDescriptorExecute(r)
 }
 
@@ -5900,20 +5877,18 @@ func (a *FirmwareApiService) DeleteFirmwarePcieDescriptor(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwarePcieDescriptorExecute(r ApiDeleteFirmwarePcieDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwarePcieDescriptorExecute(r ApiDeleteFirmwarePcieDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwarePcieDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
@@ -5942,22 +5917,19 @@ func (a *FirmwareApiService) DeleteFirmwarePcieDescriptorExecute(r ApiDeleteFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6015,7 +5987,7 @@ func (a *FirmwareApiService) DeleteFirmwarePcieDescriptorExecute(r ApiDeleteFirm
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwarePsuDescriptorRequest struct {
@@ -6024,7 +5996,7 @@ type ApiDeleteFirmwarePsuDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwarePsuDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwarePsuDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwarePsuDescriptorExecute(r)
 }
 
@@ -6045,20 +6017,18 @@ func (a *FirmwareApiService) DeleteFirmwarePsuDescriptor(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwarePsuDescriptorExecute(r ApiDeleteFirmwarePsuDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwarePsuDescriptorExecute(r ApiDeleteFirmwarePsuDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwarePsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
@@ -6087,22 +6057,19 @@ func (a *FirmwareApiService) DeleteFirmwarePsuDescriptorExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6160,7 +6127,7 @@ func (a *FirmwareApiService) DeleteFirmwarePsuDescriptorExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareSasExpanderDescriptorRequest struct {
@@ -6169,7 +6136,7 @@ type ApiDeleteFirmwareSasExpanderDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareSasExpanderDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareSasExpanderDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -6190,20 +6157,18 @@ func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptor(ctx _context.Co
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptorExecute(r ApiDeleteFirmwareSasExpanderDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptorExecute(r ApiDeleteFirmwareSasExpanderDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareSasExpanderDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
@@ -6232,22 +6197,19 @@ func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptorExecute(r ApiDel
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6305,7 +6267,7 @@ func (a *FirmwareApiService) DeleteFirmwareSasExpanderDescriptorExecute(r ApiDel
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest struct {
@@ -6314,7 +6276,7 @@ type ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareServerConfigurationUtilityDistributableExecute(r)
 }
 
@@ -6335,20 +6297,18 @@ func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributab
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributableExecute(r ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributableExecute(r ApiDeleteFirmwareServerConfigurationUtilityDistributableRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareServerConfigurationUtilityDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid}"
@@ -6377,22 +6337,19 @@ func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributab
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6450,7 +6407,7 @@ func (a *FirmwareApiService) DeleteFirmwareServerConfigurationUtilityDistributab
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareStorageControllerDescriptorRequest struct {
@@ -6459,7 +6416,7 @@ type ApiDeleteFirmwareStorageControllerDescriptorRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareStorageControllerDescriptorRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareStorageControllerDescriptorRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -6480,20 +6437,18 @@ func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptor(ctx _cont
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptorExecute(r ApiDeleteFirmwareStorageControllerDescriptorRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptorExecute(r ApiDeleteFirmwareStorageControllerDescriptorRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareStorageControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
@@ -6522,22 +6477,19 @@ func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptorExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6595,7 +6547,7 @@ func (a *FirmwareApiService) DeleteFirmwareStorageControllerDescriptorExecute(r 
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareSwitchUpgradeRequest struct {
@@ -6604,7 +6556,7 @@ type ApiDeleteFirmwareSwitchUpgradeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareSwitchUpgradeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareSwitchUpgradeRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareSwitchUpgradeExecute(r)
 }
 
@@ -6625,20 +6577,18 @@ func (a *FirmwareApiService) DeleteFirmwareSwitchUpgrade(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareSwitchUpgradeExecute(r ApiDeleteFirmwareSwitchUpgradeRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareSwitchUpgradeExecute(r ApiDeleteFirmwareSwitchUpgradeRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareSwitchUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SwitchUpgrades/{Moid}"
@@ -6667,22 +6617,19 @@ func (a *FirmwareApiService) DeleteFirmwareSwitchUpgradeExecute(r ApiDeleteFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6740,7 +6687,147 @@ func (a *FirmwareApiService) DeleteFirmwareSwitchUpgradeExecute(r ApiDeleteFirmw
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteFirmwareUnsupportedVersionUpgradeRequest struct {
+	ctx        _context.Context
+	ApiService *FirmwareApiService
+	moid       string
+}
+
+func (r ApiDeleteFirmwareUnsupportedVersionUpgradeRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteFirmwareUnsupportedVersionUpgradeExecute(r)
+}
+
+/*
+ * DeleteFirmwareUnsupportedVersionUpgrade Delete a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteFirmwareUnsupportedVersionUpgradeRequest
+ */
+func (a *FirmwareApiService) DeleteFirmwareUnsupportedVersionUpgrade(ctx _context.Context, moid string) ApiDeleteFirmwareUnsupportedVersionUpgradeRequest {
+	return ApiDeleteFirmwareUnsupportedVersionUpgradeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *FirmwareApiService) DeleteFirmwareUnsupportedVersionUpgradeExecute(r ApiDeleteFirmwareUnsupportedVersionUpgradeRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareUnsupportedVersionUpgrade")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteFirmwareUpgradeRequest struct {
@@ -6749,7 +6836,7 @@ type ApiDeleteFirmwareUpgradeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFirmwareUpgradeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteFirmwareUpgradeRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteFirmwareUpgradeExecute(r)
 }
 
@@ -6770,20 +6857,18 @@ func (a *FirmwareApiService) DeleteFirmwareUpgrade(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *FirmwareApiService) DeleteFirmwareUpgradeExecute(r ApiDeleteFirmwareUpgradeRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) DeleteFirmwareUpgradeExecute(r ApiDeleteFirmwareUpgradeRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.DeleteFirmwareUpgrade")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Upgrades/{Moid}"
@@ -6812,22 +6897,19 @@ func (a *FirmwareApiService) DeleteFirmwareUpgradeExecute(r ApiDeleteFirmwareUpg
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6885,7 +6967,7 @@ func (a *FirmwareApiService) DeleteFirmwareUpgradeExecute(r ApiDeleteFirmwareUpg
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareBiosDescriptorByMoidRequest struct {
@@ -6894,7 +6976,7 @@ type ApiGetFirmwareBiosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareBiosDescriptorByMoidRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareBiosDescriptorByMoidExecute(r)
 }
 
@@ -6916,21 +6998,19 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareBiosDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirmwareBiosDescriptorByMoidRequest) (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBiosDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
@@ -6959,22 +7039,19 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7041,7 +7118,7 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareBiosDescriptorListRequest struct {
@@ -7105,7 +7182,7 @@ func (r ApiGetFirmwareBiosDescriptorListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwareBiosDescriptorListRequest) Execute() (FirmwareBiosDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareBiosDescriptorListRequest) Execute() (FirmwareBiosDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareBiosDescriptorListExecute(r)
 }
 
@@ -7125,21 +7202,19 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareBiosDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareBiosDescriptorListExecute(r ApiGetFirmwareBiosDescriptorListRequest) (FirmwareBiosDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareBiosDescriptorListExecute(r ApiGetFirmwareBiosDescriptorListRequest) (FirmwareBiosDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBiosDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBiosDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors"
@@ -7200,22 +7275,19 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7282,7 +7354,7 @@ func (a *FirmwareApiService) GetFirmwareBiosDescriptorListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareBoardControllerDescriptorByMoidRequest struct {
@@ -7291,7 +7363,7 @@ type ApiGetFirmwareBoardControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareBoardControllerDescriptorByMoidExecute(r)
 }
 
@@ -7313,21 +7385,19 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoid(ctx _con
  * Execute executes the request
  * @return FirmwareBoardControllerDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r ApiGetFirmwareBoardControllerDescriptorByMoidRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBoardControllerDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
@@ -7356,22 +7426,19 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7438,7 +7505,7 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareBoardControllerDescriptorListRequest struct {
@@ -7502,7 +7569,7 @@ func (r ApiGetFirmwareBoardControllerDescriptorListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetFirmwareBoardControllerDescriptorListRequest) Execute() (FirmwareBoardControllerDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareBoardControllerDescriptorListRequest) Execute() (FirmwareBoardControllerDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareBoardControllerDescriptorListExecute(r)
 }
 
@@ -7522,21 +7589,19 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorList(ctx _conte
  * Execute executes the request
  * @return FirmwareBoardControllerDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorListExecute(r ApiGetFirmwareBoardControllerDescriptorListRequest) (FirmwareBoardControllerDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorListExecute(r ApiGetFirmwareBoardControllerDescriptorListRequest) (FirmwareBoardControllerDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBoardControllerDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareBoardControllerDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors"
@@ -7597,22 +7662,19 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorListExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7679,7 +7741,7 @@ func (a *FirmwareApiService) GetFirmwareBoardControllerDescriptorListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareChassisUpgradeByMoidRequest struct {
@@ -7688,7 +7750,7 @@ type ApiGetFirmwareChassisUpgradeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Execute() (FirmwareChassisUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareChassisUpgradeByMoidRequest) Execute() (FirmwareChassisUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareChassisUpgradeByMoidExecute(r)
 }
 
@@ -7710,21 +7772,19 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareChassisUpgrade
  */
-func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirmwareChassisUpgradeByMoidRequest) (FirmwareChassisUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirmwareChassisUpgradeByMoidRequest) (FirmwareChassisUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareChassisUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareChassisUpgradeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ChassisUpgrades/{Moid}"
@@ -7753,22 +7813,19 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7835,7 +7892,7 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareChassisUpgradeListRequest struct {
@@ -7899,7 +7956,7 @@ func (r ApiGetFirmwareChassisUpgradeListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwareChassisUpgradeListRequest) Execute() (FirmwareChassisUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareChassisUpgradeListRequest) Execute() (FirmwareChassisUpgradeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareChassisUpgradeListExecute(r)
 }
 
@@ -7919,21 +7976,19 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareChassisUpgradeResponse
  */
-func (a *FirmwareApiService) GetFirmwareChassisUpgradeListExecute(r ApiGetFirmwareChassisUpgradeListRequest) (FirmwareChassisUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareChassisUpgradeListExecute(r ApiGetFirmwareChassisUpgradeListRequest) (FirmwareChassisUpgradeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareChassisUpgradeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareChassisUpgradeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ChassisUpgrades"
@@ -7994,22 +8049,19 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8076,7 +8128,7 @@ func (a *FirmwareApiService) GetFirmwareChassisUpgradeListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareCimcDescriptorByMoidRequest struct {
@@ -8085,7 +8137,7 @@ type ApiGetFirmwareCimcDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareCimcDescriptorByMoidRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareCimcDescriptorByMoidExecute(r)
 }
 
@@ -8107,21 +8159,19 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareCimcDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirmwareCimcDescriptorByMoidRequest) (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareCimcDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
@@ -8150,22 +8200,19 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8232,7 +8279,7 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareCimcDescriptorListRequest struct {
@@ -8296,7 +8343,7 @@ func (r ApiGetFirmwareCimcDescriptorListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwareCimcDescriptorListRequest) Execute() (FirmwareCimcDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareCimcDescriptorListRequest) Execute() (FirmwareCimcDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareCimcDescriptorListExecute(r)
 }
 
@@ -8316,21 +8363,19 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareCimcDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareCimcDescriptorListExecute(r ApiGetFirmwareCimcDescriptorListRequest) (FirmwareCimcDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareCimcDescriptorListExecute(r ApiGetFirmwareCimcDescriptorListRequest) (FirmwareCimcDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareCimcDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareCimcDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors"
@@ -8391,22 +8436,19 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8473,7 +8515,7 @@ func (a *FirmwareApiService) GetFirmwareCimcDescriptorListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDimmDescriptorByMoidRequest struct {
@@ -8482,7 +8524,7 @@ type ApiGetFirmwareDimmDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDimmDescriptorByMoidRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDimmDescriptorByMoidExecute(r)
 }
 
@@ -8504,21 +8546,19 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareDimmDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirmwareDimmDescriptorByMoidRequest) (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDimmDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
@@ -8547,22 +8587,19 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8629,7 +8666,7 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDimmDescriptorListRequest struct {
@@ -8693,7 +8730,7 @@ func (r ApiGetFirmwareDimmDescriptorListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwareDimmDescriptorListRequest) Execute() (FirmwareDimmDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDimmDescriptorListRequest) Execute() (FirmwareDimmDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDimmDescriptorListExecute(r)
 }
 
@@ -8713,21 +8750,19 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareDimmDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareDimmDescriptorListExecute(r ApiGetFirmwareDimmDescriptorListRequest) (FirmwareDimmDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDimmDescriptorListExecute(r ApiGetFirmwareDimmDescriptorListRequest) (FirmwareDimmDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDimmDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDimmDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors"
@@ -8788,22 +8823,19 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8870,7 +8902,7 @@ func (a *FirmwareApiService) GetFirmwareDimmDescriptorListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDistributableByMoidRequest struct {
@@ -8879,7 +8911,7 @@ type ApiGetFirmwareDistributableByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDistributableByMoidRequest) Execute() (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDistributableByMoidRequest) Execute() (FirmwareDistributable, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDistributableByMoidExecute(r)
 }
 
@@ -8901,21 +8933,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareDistributable
  */
-func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmwareDistributableByMoidRequest) (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmwareDistributableByMoidRequest) (FirmwareDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDistributableByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables/{Moid}"
@@ -8944,22 +8974,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9026,7 +9053,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDistributableListRequest struct {
@@ -9090,7 +9117,7 @@ func (r ApiGetFirmwareDistributableListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareDistributableListRequest) Execute() (FirmwareDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDistributableListRequest) Execute() (FirmwareDistributableResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDistributableListExecute(r)
 }
 
@@ -9110,21 +9137,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareDistributableResponse
  */
-func (a *FirmwareApiService) GetFirmwareDistributableListExecute(r ApiGetFirmwareDistributableListRequest) (FirmwareDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDistributableListExecute(r ApiGetFirmwareDistributableListRequest) (FirmwareDistributableResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributableResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDistributableList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables"
@@ -9185,22 +9210,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9267,7 +9289,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDistributableMetaByMoidRequest struct {
@@ -9276,7 +9298,7 @@ type ApiGetFirmwareDistributableMetaByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDistributableMetaByMoidRequest) Execute() (FirmwareDistributableMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDistributableMetaByMoidRequest) Execute() (FirmwareDistributableMeta, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDistributableMetaByMoidExecute(r)
 }
 
@@ -9298,21 +9320,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoid(ctx _context.Con
  * Execute executes the request
  * @return FirmwareDistributableMeta
  */
-func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetFirmwareDistributableMetaByMoidRequest) (FirmwareDistributableMeta, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetFirmwareDistributableMetaByMoidRequest) (FirmwareDistributableMeta, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributableMeta
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDistributableMetaByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DistributableMeta/{Moid}"
@@ -9341,22 +9361,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9423,7 +9440,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaByMoidExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDistributableMetaListRequest struct {
@@ -9487,7 +9504,7 @@ func (r ApiGetFirmwareDistributableMetaListRequest) Tags(tags string) ApiGetFirm
 	return r
 }
 
-func (r ApiGetFirmwareDistributableMetaListRequest) Execute() (FirmwareDistributableMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDistributableMetaListRequest) Execute() (FirmwareDistributableMetaResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDistributableMetaListExecute(r)
 }
 
@@ -9507,21 +9524,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaList(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareDistributableMetaResponse
  */
-func (a *FirmwareApiService) GetFirmwareDistributableMetaListExecute(r ApiGetFirmwareDistributableMetaListRequest) (FirmwareDistributableMetaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDistributableMetaListExecute(r ApiGetFirmwareDistributableMetaListRequest) (FirmwareDistributableMetaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributableMetaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDistributableMetaList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DistributableMeta"
@@ -9582,22 +9597,19 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaListExecute(r ApiGetFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9664,7 +9676,7 @@ func (a *FirmwareApiService) GetFirmwareDistributableMetaListExecute(r ApiGetFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDriveDescriptorByMoidRequest struct {
@@ -9673,7 +9685,7 @@ type ApiGetFirmwareDriveDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDriveDescriptorByMoidRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDriveDescriptorByMoidExecute(r)
 }
 
@@ -9695,21 +9707,19 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoid(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareDriveDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFirmwareDriveDescriptorByMoidRequest) (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriveDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
@@ -9738,22 +9748,19 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9820,7 +9827,7 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorByMoidExecute(r ApiGetFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDriveDescriptorListRequest struct {
@@ -9884,7 +9891,7 @@ func (r ApiGetFirmwareDriveDescriptorListRequest) Tags(tags string) ApiGetFirmwa
 	return r
 }
 
-func (r ApiGetFirmwareDriveDescriptorListRequest) Execute() (FirmwareDriveDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDriveDescriptorListRequest) Execute() (FirmwareDriveDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDriveDescriptorListExecute(r)
 }
 
@@ -9904,21 +9911,19 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorList(ctx _context.Context
  * Execute executes the request
  * @return FirmwareDriveDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareDriveDescriptorListExecute(r ApiGetFirmwareDriveDescriptorListRequest) (FirmwareDriveDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDriveDescriptorListExecute(r ApiGetFirmwareDriveDescriptorListRequest) (FirmwareDriveDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriveDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriveDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors"
@@ -9979,22 +9984,19 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorListExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10061,7 +10063,7 @@ func (a *FirmwareApiService) GetFirmwareDriveDescriptorListExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDriverDistributableByMoidRequest struct {
@@ -10070,7 +10072,7 @@ type ApiGetFirmwareDriverDistributableByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareDriverDistributableByMoidRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDriverDistributableByMoidRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDriverDistributableByMoidExecute(r)
 }
 
@@ -10092,21 +10094,19 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoid(ctx _context.C
  * Execute executes the request
  * @return FirmwareDriverDistributable
  */
-func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGetFirmwareDriverDistributableByMoidRequest) (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGetFirmwareDriverDistributableByMoidRequest) (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriverDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriverDistributableByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables/{Moid}"
@@ -10135,22 +10135,19 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10217,7 +10214,7 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareDriverDistributableListRequest struct {
@@ -10281,7 +10278,7 @@ func (r ApiGetFirmwareDriverDistributableListRequest) Tags(tags string) ApiGetFi
 	return r
 }
 
-func (r ApiGetFirmwareDriverDistributableListRequest) Execute() (FirmwareDriverDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareDriverDistributableListRequest) Execute() (FirmwareDriverDistributableResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareDriverDistributableListExecute(r)
 }
 
@@ -10301,21 +10298,19 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableList(ctx _context.Con
  * Execute executes the request
  * @return FirmwareDriverDistributableResponse
  */
-func (a *FirmwareApiService) GetFirmwareDriverDistributableListExecute(r ApiGetFirmwareDriverDistributableListRequest) (FirmwareDriverDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareDriverDistributableListExecute(r ApiGetFirmwareDriverDistributableListRequest) (FirmwareDriverDistributableResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriverDistributableResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareDriverDistributableList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables"
@@ -10376,22 +10371,19 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableListExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10458,7 +10450,7 @@ func (a *FirmwareApiService) GetFirmwareDriverDistributableListExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareEulaByMoidRequest struct {
@@ -10467,7 +10459,7 @@ type ApiGetFirmwareEulaByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareEulaByMoidRequest) Execute() (FirmwareEula, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareEulaByMoidRequest) Execute() (FirmwareEula, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareEulaByMoidExecute(r)
 }
 
@@ -10489,21 +10481,19 @@ func (a *FirmwareApiService) GetFirmwareEulaByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return FirmwareEula
  */
-func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaByMoidRequest) (FirmwareEula, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaByMoidRequest) (FirmwareEula, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareEula
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareEulaByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Eulas/{Moid}"
@@ -10532,22 +10522,19 @@ func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaBy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10614,7 +10601,7 @@ func (a *FirmwareApiService) GetFirmwareEulaByMoidExecute(r ApiGetFirmwareEulaBy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareEulaListRequest struct {
@@ -10678,7 +10665,7 @@ func (r ApiGetFirmwareEulaListRequest) Tags(tags string) ApiGetFirmwareEulaListR
 	return r
 }
 
-func (r ApiGetFirmwareEulaListRequest) Execute() (FirmwareEulaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareEulaListRequest) Execute() (FirmwareEulaResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareEulaListExecute(r)
 }
 
@@ -10698,21 +10685,19 @@ func (a *FirmwareApiService) GetFirmwareEulaList(ctx _context.Context) ApiGetFir
  * Execute executes the request
  * @return FirmwareEulaResponse
  */
-func (a *FirmwareApiService) GetFirmwareEulaListExecute(r ApiGetFirmwareEulaListRequest) (FirmwareEulaResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareEulaListExecute(r ApiGetFirmwareEulaListRequest) (FirmwareEulaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareEulaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareEulaList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Eulas"
@@ -10773,22 +10758,19 @@ func (a *FirmwareApiService) GetFirmwareEulaListExecute(r ApiGetFirmwareEulaList
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10855,7 +10837,7 @@ func (a *FirmwareApiService) GetFirmwareEulaListExecute(r ApiGetFirmwareEulaList
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareFirmwareSummaryByMoidRequest struct {
@@ -10864,7 +10846,7 @@ type ApiGetFirmwareFirmwareSummaryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Execute() (FirmwareFirmwareSummary, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareFirmwareSummaryByMoidRequest) Execute() (FirmwareFirmwareSummary, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareFirmwareSummaryByMoidExecute(r)
 }
 
@@ -10886,21 +10868,19 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoid(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareFirmwareSummary
  */
-func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFirmwareFirmwareSummaryByMoidRequest) (FirmwareFirmwareSummary, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFirmwareFirmwareSummaryByMoidRequest) (FirmwareFirmwareSummary, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareFirmwareSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareFirmwareSummaryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/FirmwareSummaries/{Moid}"
@@ -10929,22 +10909,19 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11011,7 +10988,7 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryByMoidExecute(r ApiGetFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareFirmwareSummaryListRequest struct {
@@ -11075,7 +11052,7 @@ func (r ApiGetFirmwareFirmwareSummaryListRequest) Tags(tags string) ApiGetFirmwa
 	return r
 }
 
-func (r ApiGetFirmwareFirmwareSummaryListRequest) Execute() (FirmwareFirmwareSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareFirmwareSummaryListRequest) Execute() (FirmwareFirmwareSummaryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareFirmwareSummaryListExecute(r)
 }
 
@@ -11095,21 +11072,19 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryList(ctx _context.Context
  * Execute executes the request
  * @return FirmwareFirmwareSummaryResponse
  */
-func (a *FirmwareApiService) GetFirmwareFirmwareSummaryListExecute(r ApiGetFirmwareFirmwareSummaryListRequest) (FirmwareFirmwareSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareFirmwareSummaryListExecute(r ApiGetFirmwareFirmwareSummaryListRequest) (FirmwareFirmwareSummaryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareFirmwareSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareFirmwareSummaryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/FirmwareSummaries"
@@ -11170,22 +11145,19 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryListExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11252,7 +11224,7 @@ func (a *FirmwareApiService) GetFirmwareFirmwareSummaryListExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareGpuDescriptorByMoidRequest struct {
@@ -11261,7 +11233,7 @@ type ApiGetFirmwareGpuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareGpuDescriptorByMoidRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareGpuDescriptorByMoidExecute(r)
 }
 
@@ -11283,21 +11255,19 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareGpuDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmwareGpuDescriptorByMoidRequest) (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareGpuDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
@@ -11326,22 +11296,19 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11408,7 +11375,7 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareGpuDescriptorListRequest struct {
@@ -11472,7 +11439,7 @@ func (r ApiGetFirmwareGpuDescriptorListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareGpuDescriptorListRequest) Execute() (FirmwareGpuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareGpuDescriptorListRequest) Execute() (FirmwareGpuDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareGpuDescriptorListExecute(r)
 }
 
@@ -11492,21 +11459,19 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareGpuDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareGpuDescriptorListExecute(r ApiGetFirmwareGpuDescriptorListRequest) (FirmwareGpuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareGpuDescriptorListExecute(r ApiGetFirmwareGpuDescriptorListRequest) (FirmwareGpuDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareGpuDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareGpuDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors"
@@ -11567,22 +11532,19 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11649,7 +11611,7 @@ func (a *FirmwareApiService) GetFirmwareGpuDescriptorListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareHbaDescriptorByMoidRequest struct {
@@ -11658,7 +11620,7 @@ type ApiGetFirmwareHbaDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareHbaDescriptorByMoidRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareHbaDescriptorByMoidExecute(r)
 }
 
@@ -11680,21 +11642,19 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareHbaDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmwareHbaDescriptorByMoidRequest) (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareHbaDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
@@ -11723,22 +11683,19 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11805,7 +11762,7 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareHbaDescriptorListRequest struct {
@@ -11869,7 +11826,7 @@ func (r ApiGetFirmwareHbaDescriptorListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareHbaDescriptorListRequest) Execute() (FirmwareHbaDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareHbaDescriptorListRequest) Execute() (FirmwareHbaDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareHbaDescriptorListExecute(r)
 }
 
@@ -11889,21 +11846,19 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareHbaDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareHbaDescriptorListExecute(r ApiGetFirmwareHbaDescriptorListRequest) (FirmwareHbaDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareHbaDescriptorListExecute(r ApiGetFirmwareHbaDescriptorListRequest) (FirmwareHbaDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareHbaDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareHbaDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors"
@@ -11964,22 +11919,19 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12046,7 +11998,7 @@ func (a *FirmwareApiService) GetFirmwareHbaDescriptorListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareIomDescriptorByMoidRequest struct {
@@ -12055,7 +12007,7 @@ type ApiGetFirmwareIomDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareIomDescriptorByMoidRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareIomDescriptorByMoidExecute(r)
 }
 
@@ -12077,21 +12029,19 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareIomDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmwareIomDescriptorByMoidRequest) (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareIomDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
@@ -12120,22 +12070,19 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12202,7 +12149,7 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareIomDescriptorListRequest struct {
@@ -12266,7 +12213,7 @@ func (r ApiGetFirmwareIomDescriptorListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareIomDescriptorListRequest) Execute() (FirmwareIomDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareIomDescriptorListRequest) Execute() (FirmwareIomDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareIomDescriptorListExecute(r)
 }
 
@@ -12286,21 +12233,19 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareIomDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareIomDescriptorListExecute(r ApiGetFirmwareIomDescriptorListRequest) (FirmwareIomDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareIomDescriptorListExecute(r ApiGetFirmwareIomDescriptorListRequest) (FirmwareIomDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareIomDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareIomDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors"
@@ -12361,22 +12306,19 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12443,7 +12385,7 @@ func (a *FirmwareApiService) GetFirmwareIomDescriptorListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareMswitchDescriptorByMoidRequest struct {
@@ -12452,7 +12394,7 @@ type ApiGetFirmwareMswitchDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareMswitchDescriptorByMoidRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareMswitchDescriptorByMoidExecute(r)
 }
 
@@ -12474,21 +12416,19 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoid(ctx _context.Con
  * Execute executes the request
  * @return FirmwareMswitchDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetFirmwareMswitchDescriptorByMoidRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareMswitchDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
@@ -12517,22 +12457,19 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12599,7 +12536,7 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorByMoidExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareMswitchDescriptorListRequest struct {
@@ -12663,7 +12600,7 @@ func (r ApiGetFirmwareMswitchDescriptorListRequest) Tags(tags string) ApiGetFirm
 	return r
 }
 
-func (r ApiGetFirmwareMswitchDescriptorListRequest) Execute() (FirmwareMswitchDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareMswitchDescriptorListRequest) Execute() (FirmwareMswitchDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareMswitchDescriptorListExecute(r)
 }
 
@@ -12683,21 +12620,19 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorList(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareMswitchDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareMswitchDescriptorListExecute(r ApiGetFirmwareMswitchDescriptorListRequest) (FirmwareMswitchDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareMswitchDescriptorListExecute(r ApiGetFirmwareMswitchDescriptorListRequest) (FirmwareMswitchDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareMswitchDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareMswitchDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors"
@@ -12758,22 +12693,19 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorListExecute(r ApiGetFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12840,7 +12772,7 @@ func (a *FirmwareApiService) GetFirmwareMswitchDescriptorListExecute(r ApiGetFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareNxosDescriptorByMoidRequest struct {
@@ -12849,7 +12781,7 @@ type ApiGetFirmwareNxosDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareNxosDescriptorByMoidRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareNxosDescriptorByMoidExecute(r)
 }
 
@@ -12871,21 +12803,19 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareNxosDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirmwareNxosDescriptorByMoidRequest) (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareNxosDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
@@ -12914,22 +12844,19 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12996,7 +12923,7 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareNxosDescriptorListRequest struct {
@@ -13060,7 +12987,7 @@ func (r ApiGetFirmwareNxosDescriptorListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwareNxosDescriptorListRequest) Execute() (FirmwareNxosDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareNxosDescriptorListRequest) Execute() (FirmwareNxosDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareNxosDescriptorListExecute(r)
 }
 
@@ -13080,21 +13007,19 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwareNxosDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareNxosDescriptorListExecute(r ApiGetFirmwareNxosDescriptorListRequest) (FirmwareNxosDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareNxosDescriptorListExecute(r ApiGetFirmwareNxosDescriptorListRequest) (FirmwareNxosDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareNxosDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareNxosDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors"
@@ -13155,22 +13080,19 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13237,7 +13159,7 @@ func (a *FirmwareApiService) GetFirmwareNxosDescriptorListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwarePcieDescriptorByMoidRequest struct {
@@ -13246,7 +13168,7 @@ type ApiGetFirmwarePcieDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwarePcieDescriptorByMoidRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwarePcieDescriptorByMoidExecute(r)
 }
 
@@ -13268,21 +13190,19 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoid(ctx _context.Contex
  * Execute executes the request
  * @return FirmwarePcieDescriptor
  */
-func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirmwarePcieDescriptorByMoidRequest) (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePcieDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
@@ -13311,22 +13231,19 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirm
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13393,7 +13310,7 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorByMoidExecute(r ApiGetFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwarePcieDescriptorListRequest struct {
@@ -13457,7 +13374,7 @@ func (r ApiGetFirmwarePcieDescriptorListRequest) Tags(tags string) ApiGetFirmwar
 	return r
 }
 
-func (r ApiGetFirmwarePcieDescriptorListRequest) Execute() (FirmwarePcieDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwarePcieDescriptorListRequest) Execute() (FirmwarePcieDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwarePcieDescriptorListExecute(r)
 }
 
@@ -13477,21 +13394,19 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorList(ctx _context.Context)
  * Execute executes the request
  * @return FirmwarePcieDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwarePcieDescriptorListExecute(r ApiGetFirmwarePcieDescriptorListRequest) (FirmwarePcieDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwarePcieDescriptorListExecute(r ApiGetFirmwarePcieDescriptorListRequest) (FirmwarePcieDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePcieDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePcieDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors"
@@ -13552,22 +13467,19 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorListExecute(r ApiGetFirmwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13634,7 +13546,7 @@ func (a *FirmwareApiService) GetFirmwarePcieDescriptorListExecute(r ApiGetFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwarePsuDescriptorByMoidRequest struct {
@@ -13643,7 +13555,7 @@ type ApiGetFirmwarePsuDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwarePsuDescriptorByMoidRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwarePsuDescriptorByMoidExecute(r)
 }
 
@@ -13665,21 +13577,19 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwarePsuDescriptor
  */
-func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmwarePsuDescriptorByMoidRequest) (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePsuDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
@@ -13708,22 +13618,19 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13790,7 +13697,7 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwarePsuDescriptorListRequest struct {
@@ -13854,7 +13761,7 @@ func (r ApiGetFirmwarePsuDescriptorListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwarePsuDescriptorListRequest) Execute() (FirmwarePsuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwarePsuDescriptorListRequest) Execute() (FirmwarePsuDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwarePsuDescriptorListExecute(r)
 }
 
@@ -13874,21 +13781,19 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwarePsuDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwarePsuDescriptorListExecute(r ApiGetFirmwarePsuDescriptorListRequest) (FirmwarePsuDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwarePsuDescriptorListExecute(r ApiGetFirmwarePsuDescriptorListRequest) (FirmwarePsuDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePsuDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwarePsuDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors"
@@ -13949,22 +13854,19 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14031,7 +13933,7 @@ func (a *FirmwareApiService) GetFirmwarePsuDescriptorListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareRunningFirmwareByMoidRequest struct {
@@ -14040,7 +13942,7 @@ type ApiGetFirmwareRunningFirmwareByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareRunningFirmwareByMoidRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareRunningFirmwareByMoidExecute(r)
 }
 
@@ -14062,21 +13964,19 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoid(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareRunningFirmware
  */
-func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFirmwareRunningFirmwareByMoidRequest) (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFirmwareRunningFirmwareByMoidRequest) (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareRunningFirmware
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareRunningFirmwareByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/RunningFirmwares/{Moid}"
@@ -14105,22 +14005,19 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14187,7 +14084,7 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareByMoidExecute(r ApiGetFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareRunningFirmwareListRequest struct {
@@ -14251,7 +14148,7 @@ func (r ApiGetFirmwareRunningFirmwareListRequest) Tags(tags string) ApiGetFirmwa
 	return r
 }
 
-func (r ApiGetFirmwareRunningFirmwareListRequest) Execute() (FirmwareRunningFirmwareResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareRunningFirmwareListRequest) Execute() (FirmwareRunningFirmwareResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareRunningFirmwareListExecute(r)
 }
 
@@ -14271,21 +14168,19 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareList(ctx _context.Context
  * Execute executes the request
  * @return FirmwareRunningFirmwareResponse
  */
-func (a *FirmwareApiService) GetFirmwareRunningFirmwareListExecute(r ApiGetFirmwareRunningFirmwareListRequest) (FirmwareRunningFirmwareResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareRunningFirmwareListExecute(r ApiGetFirmwareRunningFirmwareListRequest) (FirmwareRunningFirmwareResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareRunningFirmwareResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareRunningFirmwareList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/RunningFirmwares"
@@ -14346,22 +14241,19 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareListExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14428,7 +14320,7 @@ func (a *FirmwareApiService) GetFirmwareRunningFirmwareListExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareSasExpanderDescriptorByMoidRequest struct {
@@ -14437,7 +14329,7 @@ type ApiGetFirmwareSasExpanderDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareSasExpanderDescriptorByMoidExecute(r)
 }
 
@@ -14459,21 +14351,19 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoid(ctx _context
  * Execute executes the request
  * @return FirmwareSasExpanderDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r ApiGetFirmwareSasExpanderDescriptorByMoidRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSasExpanderDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
@@ -14502,22 +14392,19 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14584,7 +14471,7 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareSasExpanderDescriptorListRequest struct {
@@ -14648,7 +14535,7 @@ func (r ApiGetFirmwareSasExpanderDescriptorListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetFirmwareSasExpanderDescriptorListRequest) Execute() (FirmwareSasExpanderDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareSasExpanderDescriptorListRequest) Execute() (FirmwareSasExpanderDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareSasExpanderDescriptorListExecute(r)
 }
 
@@ -14668,21 +14555,19 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorList(ctx _context.C
  * Execute executes the request
  * @return FirmwareSasExpanderDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorListExecute(r ApiGetFirmwareSasExpanderDescriptorListRequest) (FirmwareSasExpanderDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorListExecute(r ApiGetFirmwareSasExpanderDescriptorListRequest) (FirmwareSasExpanderDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSasExpanderDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSasExpanderDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors"
@@ -14743,22 +14628,19 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorListExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14825,7 +14707,7 @@ func (a *FirmwareApiService) GetFirmwareSasExpanderDescriptorListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest struct {
@@ -14834,7 +14716,7 @@ type ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareServerConfigurationUtilityDistributableByMoidExecute(r)
 }
 
@@ -14856,21 +14738,19 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableB
  * Execute executes the request
  * @return FirmwareServerConfigurationUtilityDistributable
  */
-func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableByMoidExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableByMoidExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableByMoidRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareServerConfigurationUtilityDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareServerConfigurationUtilityDistributableByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid}"
@@ -14899,22 +14779,19 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14981,7 +14858,7 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareServerConfigurationUtilityDistributableListRequest struct {
@@ -15045,7 +14922,7 @@ func (r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) Tags(t
 	return r
 }
 
-func (r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) Execute() (FirmwareServerConfigurationUtilityDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) Execute() (FirmwareServerConfigurationUtilityDistributableResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareServerConfigurationUtilityDistributableListExecute(r)
 }
 
@@ -15065,21 +14942,19 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableL
  * Execute executes the request
  * @return FirmwareServerConfigurationUtilityDistributableResponse
  */
-func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableListExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) (FirmwareServerConfigurationUtilityDistributableResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableListExecute(r ApiGetFirmwareServerConfigurationUtilityDistributableListRequest) (FirmwareServerConfigurationUtilityDistributableResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareServerConfigurationUtilityDistributableResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareServerConfigurationUtilityDistributableList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables"
@@ -15140,22 +15015,19 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15222,7 +15094,7 @@ func (a *FirmwareApiService) GetFirmwareServerConfigurationUtilityDistributableL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareStorageControllerDescriptorByMoidRequest struct {
@@ -15231,7 +15103,7 @@ type ApiGetFirmwareStorageControllerDescriptorByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareStorageControllerDescriptorByMoidExecute(r)
 }
 
@@ -15253,21 +15125,19 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoid(ctx _c
  * Execute executes the request
  * @return FirmwareStorageControllerDescriptor
  */
-func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute(r ApiGetFirmwareStorageControllerDescriptorByMoidRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareStorageControllerDescriptorByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
@@ -15296,22 +15166,19 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15378,7 +15245,7 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareStorageControllerDescriptorListRequest struct {
@@ -15442,7 +15309,7 @@ func (r ApiGetFirmwareStorageControllerDescriptorListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetFirmwareStorageControllerDescriptorListRequest) Execute() (FirmwareStorageControllerDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareStorageControllerDescriptorListRequest) Execute() (FirmwareStorageControllerDescriptorResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareStorageControllerDescriptorListExecute(r)
 }
 
@@ -15462,21 +15329,19 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorList(ctx _con
  * Execute executes the request
  * @return FirmwareStorageControllerDescriptorResponse
  */
-func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorListExecute(r ApiGetFirmwareStorageControllerDescriptorListRequest) (FirmwareStorageControllerDescriptorResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorListExecute(r ApiGetFirmwareStorageControllerDescriptorListRequest) (FirmwareStorageControllerDescriptorResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareStorageControllerDescriptorResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareStorageControllerDescriptorList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors"
@@ -15537,22 +15402,19 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorListExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15619,7 +15481,7 @@ func (a *FirmwareApiService) GetFirmwareStorageControllerDescriptorListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareSwitchUpgradeByMoidRequest struct {
@@ -15628,7 +15490,7 @@ type ApiGetFirmwareSwitchUpgradeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Execute() (FirmwareSwitchUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareSwitchUpgradeByMoidRequest) Execute() (FirmwareSwitchUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareSwitchUpgradeByMoidExecute(r)
 }
 
@@ -15650,21 +15512,19 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareSwitchUpgrade
  */
-func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmwareSwitchUpgradeByMoidRequest) (FirmwareSwitchUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmwareSwitchUpgradeByMoidRequest) (FirmwareSwitchUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSwitchUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSwitchUpgradeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SwitchUpgrades/{Moid}"
@@ -15693,22 +15553,19 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15775,7 +15632,7 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareSwitchUpgradeListRequest struct {
@@ -15839,7 +15696,7 @@ func (r ApiGetFirmwareSwitchUpgradeListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareSwitchUpgradeListRequest) Execute() (FirmwareSwitchUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareSwitchUpgradeListRequest) Execute() (FirmwareSwitchUpgradeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareSwitchUpgradeListExecute(r)
 }
 
@@ -15859,21 +15716,19 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareSwitchUpgradeResponse
  */
-func (a *FirmwareApiService) GetFirmwareSwitchUpgradeListExecute(r ApiGetFirmwareSwitchUpgradeListRequest) (FirmwareSwitchUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareSwitchUpgradeListExecute(r ApiGetFirmwareSwitchUpgradeListRequest) (FirmwareSwitchUpgradeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSwitchUpgradeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareSwitchUpgradeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SwitchUpgrades"
@@ -15934,22 +15789,19 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16016,7 +15868,394 @@ func (a *FirmwareApiService) GetFirmwareSwitchUpgradeListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FirmwareApiService
+	moid       string
+}
+
+func (r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) Execute() (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	return r.ApiService.GetFirmwareUnsupportedVersionUpgradeByMoidExecute(r)
+}
+
+/*
+ * GetFirmwareUnsupportedVersionUpgradeByMoid Read a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest
+ */
+func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoid(ctx _context.Context, moid string) ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest {
+	return ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FirmwareUnsupportedVersionUpgrade
+ */
+func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeByMoidExecute(r ApiGetFirmwareUnsupportedVersionUpgradeByMoidRequest) (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FirmwareUnsupportedVersionUpgrade
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUnsupportedVersionUpgradeByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFirmwareUnsupportedVersionUpgradeListRequest struct {
+	ctx         _context.Context
+	ApiService  *FirmwareApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Filter(filter string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Orderby(orderby string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Top(top int32) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Skip(skip int32) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Select_(select_ string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Expand(expand string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Apply(apply string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Count(count bool) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Inlinecount(inlinecount string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) At(at string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Tags(tags string) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) Execute() (FirmwareUnsupportedVersionUpgradeResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetFirmwareUnsupportedVersionUpgradeListExecute(r)
+}
+
+/*
+ * GetFirmwareUnsupportedVersionUpgradeList Read a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetFirmwareUnsupportedVersionUpgradeListRequest
+ */
+func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeList(ctx _context.Context) ApiGetFirmwareUnsupportedVersionUpgradeListRequest {
+	return ApiGetFirmwareUnsupportedVersionUpgradeListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FirmwareUnsupportedVersionUpgradeResponse
+ */
+func (a *FirmwareApiService) GetFirmwareUnsupportedVersionUpgradeListExecute(r ApiGetFirmwareUnsupportedVersionUpgradeListRequest) (FirmwareUnsupportedVersionUpgradeResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FirmwareUnsupportedVersionUpgradeResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUnsupportedVersionUpgradeList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeByMoidRequest struct {
@@ -16025,7 +16264,7 @@ type ApiGetFirmwareUpgradeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareUpgradeByMoidRequest) Execute() (FirmwareUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeByMoidRequest) Execute() (FirmwareUpgrade, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeByMoidExecute(r)
 }
 
@@ -16047,21 +16286,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return FirmwareUpgrade
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpgradeByMoidRequest) (FirmwareUpgrade, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpgradeByMoidRequest) (FirmwareUpgrade, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Upgrades/{Moid}"
@@ -16090,22 +16327,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpg
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16172,7 +16406,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeByMoidExecute(r ApiGetFirmwareUpg
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeImpactStatusByMoidRequest struct {
@@ -16181,7 +16415,7 @@ type ApiGetFirmwareUpgradeImpactStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Execute() (FirmwareUpgradeImpactStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) Execute() (FirmwareUpgradeImpactStatus, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeImpactStatusByMoidExecute(r)
 }
 
@@ -16203,21 +16437,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoid(ctx _context.C
  * Execute executes the request
  * @return FirmwareUpgradeImpactStatus
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) (FirmwareUpgradeImpactStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGetFirmwareUpgradeImpactStatusByMoidRequest) (FirmwareUpgradeImpactStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeImpactStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeImpactStatusByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/UpgradeImpactStatuses/{Moid}"
@@ -16246,22 +16478,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16328,7 +16557,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeImpactStatusListRequest struct {
@@ -16392,7 +16621,7 @@ func (r ApiGetFirmwareUpgradeImpactStatusListRequest) Tags(tags string) ApiGetFi
 	return r
 }
 
-func (r ApiGetFirmwareUpgradeImpactStatusListRequest) Execute() (FirmwareUpgradeImpactStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeImpactStatusListRequest) Execute() (FirmwareUpgradeImpactStatusResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeImpactStatusListExecute(r)
 }
 
@@ -16412,21 +16641,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusList(ctx _context.Con
  * Execute executes the request
  * @return FirmwareUpgradeImpactStatusResponse
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusListExecute(r ApiGetFirmwareUpgradeImpactStatusListRequest) (FirmwareUpgradeImpactStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusListExecute(r ApiGetFirmwareUpgradeImpactStatusListRequest) (FirmwareUpgradeImpactStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeImpactStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeImpactStatusList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/UpgradeImpactStatuses"
@@ -16487,22 +16714,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusListExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16569,7 +16793,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeImpactStatusListExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeListRequest struct {
@@ -16633,7 +16857,7 @@ func (r ApiGetFirmwareUpgradeListRequest) Tags(tags string) ApiGetFirmwareUpgrad
 	return r
 }
 
-func (r ApiGetFirmwareUpgradeListRequest) Execute() (FirmwareUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeListRequest) Execute() (FirmwareUpgradeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeListExecute(r)
 }
 
@@ -16653,21 +16877,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return FirmwareUpgradeResponse
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeListExecute(r ApiGetFirmwareUpgradeListRequest) (FirmwareUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeListExecute(r ApiGetFirmwareUpgradeListRequest) (FirmwareUpgradeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Upgrades"
@@ -16728,22 +16950,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeListExecute(r ApiGetFirmwareUpgra
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16810,7 +17029,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeListExecute(r ApiGetFirmwareUpgra
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeStatusByMoidRequest struct {
@@ -16819,7 +17038,7 @@ type ApiGetFirmwareUpgradeStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Execute() (FirmwareUpgradeStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeStatusByMoidRequest) Execute() (FirmwareUpgradeStatus, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeStatusByMoidExecute(r)
 }
 
@@ -16841,21 +17060,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoid(ctx _context.Context
  * Execute executes the request
  * @return FirmwareUpgradeStatus
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmwareUpgradeStatusByMoidRequest) (FirmwareUpgradeStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmwareUpgradeStatusByMoidRequest) (FirmwareUpgradeStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeStatusByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/UpgradeStatuses/{Moid}"
@@ -16884,22 +17101,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16966,7 +17180,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusByMoidExecute(r ApiGetFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetFirmwareUpgradeStatusListRequest struct {
@@ -17030,7 +17244,7 @@ func (r ApiGetFirmwareUpgradeStatusListRequest) Tags(tags string) ApiGetFirmware
 	return r
 }
 
-func (r ApiGetFirmwareUpgradeStatusListRequest) Execute() (FirmwareUpgradeStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetFirmwareUpgradeStatusListRequest) Execute() (FirmwareUpgradeStatusResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetFirmwareUpgradeStatusListExecute(r)
 }
 
@@ -17050,21 +17264,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusList(ctx _context.Context) 
  * Execute executes the request
  * @return FirmwareUpgradeStatusResponse
  */
-func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwareUpgradeStatusListRequest) (FirmwareUpgradeStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwareUpgradeStatusListRequest) (FirmwareUpgradeStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareUpgradeStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.GetFirmwareUpgradeStatusList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/UpgradeStatuses"
@@ -17125,22 +17337,19 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17207,7 +17416,7 @@ func (a *FirmwareApiService) GetFirmwareUpgradeStatusListExecute(r ApiGetFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareBiosDescriptorRequest struct {
@@ -17227,7 +17436,7 @@ func (r ApiPatchFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareBiosDescriptorExecute(r)
 }
 
@@ -17249,21 +17458,19 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareBiosDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBiosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
@@ -17273,8 +17480,7 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBiosDescriptor == nil {
-		executionError.error = "firmwareBiosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17301,22 +17507,19 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwa
 	localVarPostBody = r.firmwareBiosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17383,7 +17586,7 @@ func (a *FirmwareApiService) PatchFirmwareBiosDescriptorExecute(r ApiPatchFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareBoardControllerDescriptorRequest struct {
@@ -17403,7 +17606,7 @@ func (r ApiPatchFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch string
 	return r
 }
 
-func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -17425,21 +17628,19 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptor(ctx _context
  * Execute executes the request
  * @return FirmwareBoardControllerDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r ApiPatchFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareBoardControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
@@ -17449,8 +17650,7 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBoardControllerDescriptor == nil {
-		executionError.error = "firmwareBoardControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17477,22 +17677,19 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r Api
 	localVarPostBody = r.firmwareBoardControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17559,7 +17756,7 @@ func (a *FirmwareApiService) PatchFirmwareBoardControllerDescriptorExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareCimcDescriptorRequest struct {
@@ -17579,7 +17776,7 @@ func (r ApiPatchFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareCimcDescriptorExecute(r)
 }
 
@@ -17601,21 +17798,19 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareCimcDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareCimcDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
@@ -17625,8 +17820,7 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareCimcDescriptor == nil {
-		executionError.error = "firmwareCimcDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17653,22 +17847,19 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwa
 	localVarPostBody = r.firmwareCimcDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17735,7 +17926,7 @@ func (a *FirmwareApiService) PatchFirmwareCimcDescriptorExecute(r ApiPatchFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareDimmDescriptorRequest struct {
@@ -17755,7 +17946,7 @@ func (r ApiPatchFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareDimmDescriptorExecute(r)
 }
 
@@ -17777,21 +17968,19 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareDimmDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDimmDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
@@ -17801,8 +17990,7 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDimmDescriptor == nil {
-		executionError.error = "firmwareDimmDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -17829,22 +18017,19 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwa
 	localVarPostBody = r.firmwareDimmDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17911,7 +18096,7 @@ func (a *FirmwareApiService) PatchFirmwareDimmDescriptorExecute(r ApiPatchFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareDistributableRequest struct {
@@ -17931,7 +18116,7 @@ func (r ApiPatchFirmwareDistributableRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareDistributableExecute(r)
 }
 
@@ -17953,21 +18138,19 @@ func (a *FirmwareApiService) PatchFirmwareDistributable(ctx _context.Context, mo
  * Execute executes the request
  * @return FirmwareDistributable
  */
-func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables/{Moid}"
@@ -17977,8 +18160,7 @@ func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwar
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDistributable == nil {
-		executionError.error = "firmwareDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18005,22 +18187,19 @@ func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwar
 	localVarPostBody = r.firmwareDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18087,7 +18266,7 @@ func (a *FirmwareApiService) PatchFirmwareDistributableExecute(r ApiPatchFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareDriveDescriptorRequest struct {
@@ -18107,7 +18286,7 @@ func (r ApiPatchFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareDriveDescriptorExecute(r)
 }
 
@@ -18129,21 +18308,19 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareDriveDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDriveDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
@@ -18153,8 +18330,7 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriveDescriptor == nil {
-		executionError.error = "firmwareDriveDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18181,22 +18357,19 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmw
 	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18263,7 +18436,7 @@ func (a *FirmwareApiService) PatchFirmwareDriveDescriptorExecute(r ApiPatchFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareDriverDistributableRequest struct {
@@ -18283,7 +18456,7 @@ func (r ApiPatchFirmwareDriverDistributableRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareDriverDistributableExecute(r)
 }
 
@@ -18305,21 +18478,19 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributable(ctx _context.Conte
  * Execute executes the request
  * @return FirmwareDriverDistributable
  */
-func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriverDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareDriverDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables/{Moid}"
@@ -18329,8 +18500,7 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriverDistributable == nil {
-		executionError.error = "firmwareDriverDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriverDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18357,22 +18527,19 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchF
 	localVarPostBody = r.firmwareDriverDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18439,7 +18606,7 @@ func (a *FirmwareApiService) PatchFirmwareDriverDistributableExecute(r ApiPatchF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareGpuDescriptorRequest struct {
@@ -18459,7 +18626,7 @@ func (r ApiPatchFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareGpuDescriptorExecute(r)
 }
 
@@ -18481,21 +18648,19 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptor(ctx _context.Context, mo
  * Execute executes the request
  * @return FirmwareGpuDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareGpuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
@@ -18505,8 +18670,7 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwar
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareGpuDescriptor == nil {
-		executionError.error = "firmwareGpuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18533,22 +18697,19 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwar
 	localVarPostBody = r.firmwareGpuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18615,7 +18776,7 @@ func (a *FirmwareApiService) PatchFirmwareGpuDescriptorExecute(r ApiPatchFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareHbaDescriptorRequest struct {
@@ -18635,7 +18796,7 @@ func (r ApiPatchFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareHbaDescriptorExecute(r)
 }
 
@@ -18657,21 +18818,19 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptor(ctx _context.Context, mo
  * Execute executes the request
  * @return FirmwareHbaDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareHbaDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
@@ -18681,8 +18840,7 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwar
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareHbaDescriptor == nil {
-		executionError.error = "firmwareHbaDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18709,22 +18867,19 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwar
 	localVarPostBody = r.firmwareHbaDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18791,7 +18946,7 @@ func (a *FirmwareApiService) PatchFirmwareHbaDescriptorExecute(r ApiPatchFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareIomDescriptorRequest struct {
@@ -18811,7 +18966,7 @@ func (r ApiPatchFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareIomDescriptorExecute(r)
 }
 
@@ -18833,21 +18988,19 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptor(ctx _context.Context, mo
  * Execute executes the request
  * @return FirmwareIomDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareIomDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
@@ -18857,8 +19010,7 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwar
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareIomDescriptor == nil {
-		executionError.error = "firmwareIomDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -18885,22 +19037,19 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwar
 	localVarPostBody = r.firmwareIomDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18967,7 +19116,7 @@ func (a *FirmwareApiService) PatchFirmwareIomDescriptorExecute(r ApiPatchFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareMswitchDescriptorRequest struct {
@@ -18987,7 +19136,7 @@ func (r ApiPatchFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -19009,21 +19158,19 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptor(ctx _context.Context
  * Execute executes the request
  * @return FirmwareMswitchDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareMswitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
@@ -19033,8 +19180,7 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFir
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareMswitchDescriptor == nil {
-		executionError.error = "firmwareMswitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19061,22 +19207,19 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFir
 	localVarPostBody = r.firmwareMswitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19143,7 +19286,7 @@ func (a *FirmwareApiService) PatchFirmwareMswitchDescriptorExecute(r ApiPatchFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareNxosDescriptorRequest struct {
@@ -19163,7 +19306,7 @@ func (r ApiPatchFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareNxosDescriptorExecute(r)
 }
 
@@ -19185,21 +19328,19 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareNxosDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareNxosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
@@ -19209,8 +19350,7 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareNxosDescriptor == nil {
-		executionError.error = "firmwareNxosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19237,22 +19377,19 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwa
 	localVarPostBody = r.firmwareNxosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19319,7 +19456,7 @@ func (a *FirmwareApiService) PatchFirmwareNxosDescriptorExecute(r ApiPatchFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwarePcieDescriptorRequest struct {
@@ -19339,7 +19476,7 @@ func (r ApiPatchFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwarePcieDescriptorExecute(r)
 }
 
@@ -19361,21 +19498,19 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwarePcieDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePcieDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
@@ -19385,8 +19520,7 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePcieDescriptor == nil {
-		executionError.error = "firmwarePcieDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19413,22 +19547,19 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwa
 	localVarPostBody = r.firmwarePcieDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19495,7 +19626,7 @@ func (a *FirmwareApiService) PatchFirmwarePcieDescriptorExecute(r ApiPatchFirmwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwarePsuDescriptorRequest struct {
@@ -19515,7 +19646,7 @@ func (r ApiPatchFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiPatchFi
 	return r
 }
 
-func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwarePsuDescriptorExecute(r)
 }
 
@@ -19537,21 +19668,19 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptor(ctx _context.Context, mo
  * Execute executes the request
  * @return FirmwarePsuDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwarePsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
@@ -19561,8 +19690,7 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwar
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePsuDescriptor == nil {
-		executionError.error = "firmwarePsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19589,22 +19717,19 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwar
 	localVarPostBody = r.firmwarePsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19671,7 +19796,7 @@ func (a *FirmwareApiService) PatchFirmwarePsuDescriptorExecute(r ApiPatchFirmwar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareRunningFirmwareRequest struct {
@@ -19691,7 +19816,7 @@ func (r ApiPatchFirmwareRunningFirmwareRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchFirmwareRunningFirmwareRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareRunningFirmwareRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareRunningFirmwareExecute(r)
 }
 
@@ -19713,21 +19838,19 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmware(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareRunningFirmware
  */
-func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmwareRunningFirmwareRequest) (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmwareRunningFirmwareRequest) (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareRunningFirmware
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareRunningFirmware")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/RunningFirmwares/{Moid}"
@@ -19737,8 +19860,7 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareRunningFirmware == nil {
-		executionError.error = "firmwareRunningFirmware is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareRunningFirmware is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19765,22 +19887,19 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmw
 	localVarPostBody = r.firmwareRunningFirmware
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19847,7 +19966,7 @@ func (a *FirmwareApiService) PatchFirmwareRunningFirmwareExecute(r ApiPatchFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareSasExpanderDescriptorRequest struct {
@@ -19867,7 +19986,7 @@ func (r ApiPatchFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -19889,21 +20008,19 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptor(ctx _context.Con
  * Execute executes the request
  * @return FirmwareSasExpanderDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatchFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareSasExpanderDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
@@ -19913,8 +20030,7 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareSasExpanderDescriptor == nil {
-		executionError.error = "firmwareSasExpanderDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -19941,22 +20057,19 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatc
 	localVarPostBody = r.firmwareSasExpanderDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20023,7 +20136,7 @@ func (a *FirmwareApiService) PatchFirmwareSasExpanderDescriptorExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareServerConfigurationUtilityDistributableRequest struct {
@@ -20043,7 +20156,7 @@ func (r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) IfMatch(
 	return r
 }
 
-func (r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareServerConfigurationUtilityDistributableExecute(r)
 }
 
@@ -20065,21 +20178,19 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
  * Execute executes the request
  * @return FirmwareServerConfigurationUtilityDistributable
  */
-func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributableExecute(r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributableExecute(r ApiPatchFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareServerConfigurationUtilityDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareServerConfigurationUtilityDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid}"
@@ -20089,8 +20200,7 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareServerConfigurationUtilityDistributable == nil {
-		executionError.error = "firmwareServerConfigurationUtilityDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareServerConfigurationUtilityDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20117,22 +20227,19 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20199,7 +20306,7 @@ func (a *FirmwareApiService) PatchFirmwareServerConfigurationUtilityDistributabl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchFirmwareStorageControllerDescriptorRequest struct {
@@ -20219,7 +20326,7 @@ func (r ApiPatchFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.PatchFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -20241,21 +20348,19 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptor(ctx _conte
  * Execute executes the request
  * @return FirmwareStorageControllerDescriptor
  */
-func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r ApiPatchFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareStorageControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
@@ -20265,8 +20370,7 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r A
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareStorageControllerDescriptor == nil {
-		executionError.error = "firmwareStorageControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20293,22 +20397,19 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r A
 	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20375,7 +20476,177 @@ func (a *FirmwareApiService) PatchFirmwareStorageControllerDescriptorExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchFirmwareUnsupportedVersionUpgradeRequest struct {
+	ctx                               _context.Context
+	ApiService                        *FirmwareApiService
+	moid                              string
+	firmwareUnsupportedVersionUpgrade *FirmwareUnsupportedVersionUpgrade
+	ifMatch                           *string
+}
+
+func (r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) FirmwareUnsupportedVersionUpgrade(firmwareUnsupportedVersionUpgrade FirmwareUnsupportedVersionUpgrade) ApiPatchFirmwareUnsupportedVersionUpgradeRequest {
+	r.firmwareUnsupportedVersionUpgrade = &firmwareUnsupportedVersionUpgrade
+	return r
+}
+func (r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) IfMatch(ifMatch string) ApiPatchFirmwareUnsupportedVersionUpgradeRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) Execute() (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	return r.ApiService.PatchFirmwareUnsupportedVersionUpgradeExecute(r)
+}
+
+/*
+ * PatchFirmwareUnsupportedVersionUpgrade Update a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchFirmwareUnsupportedVersionUpgradeRequest
+ */
+func (a *FirmwareApiService) PatchFirmwareUnsupportedVersionUpgrade(ctx _context.Context, moid string) ApiPatchFirmwareUnsupportedVersionUpgradeRequest {
+	return ApiPatchFirmwareUnsupportedVersionUpgradeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FirmwareUnsupportedVersionUpgrade
+ */
+func (a *FirmwareApiService) PatchFirmwareUnsupportedVersionUpgradeExecute(r ApiPatchFirmwareUnsupportedVersionUpgradeRequest) (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FirmwareUnsupportedVersionUpgrade
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.PatchFirmwareUnsupportedVersionUpgrade")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.firmwareUnsupportedVersionUpgrade == nil {
+		return localVarReturnValue, nil, reportError("firmwareUnsupportedVersionUpgrade is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.firmwareUnsupportedVersionUpgrade
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareBiosDescriptorRequest struct {
@@ -20395,7 +20666,7 @@ func (r ApiUpdateFirmwareBiosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareBiosDescriptorRequest) Execute() (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareBiosDescriptorExecute(r)
 }
 
@@ -20417,21 +20688,19 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareBiosDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirmwareBiosDescriptorRequest) (FirmwareBiosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBiosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBiosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BiosDescriptors/{Moid}"
@@ -20441,8 +20710,7 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBiosDescriptor == nil {
-		executionError.error = "firmwareBiosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBiosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20469,22 +20737,19 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirm
 	localVarPostBody = r.firmwareBiosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20551,7 +20816,7 @@ func (a *FirmwareApiService) UpdateFirmwareBiosDescriptorExecute(r ApiUpdateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareBoardControllerDescriptorRequest struct {
@@ -20571,7 +20836,7 @@ func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareBoardControllerDescriptorRequest) Execute() (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareBoardControllerDescriptorExecute(r)
 }
 
@@ -20593,21 +20858,19 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptor(ctx _contex
  * Execute executes the request
  * @return FirmwareBoardControllerDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r ApiUpdateFirmwareBoardControllerDescriptorRequest) (FirmwareBoardControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareBoardControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareBoardControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/BoardControllerDescriptors/{Moid}"
@@ -20617,8 +20880,7 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r Ap
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareBoardControllerDescriptor == nil {
-		executionError.error = "firmwareBoardControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareBoardControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20645,22 +20907,19 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r Ap
 	localVarPostBody = r.firmwareBoardControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20727,7 +20986,7 @@ func (a *FirmwareApiService) UpdateFirmwareBoardControllerDescriptorExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareCimcDescriptorRequest struct {
@@ -20747,7 +21006,7 @@ func (r ApiUpdateFirmwareCimcDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareCimcDescriptorRequest) Execute() (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareCimcDescriptorExecute(r)
 }
 
@@ -20769,21 +21028,19 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareCimcDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirmwareCimcDescriptorRequest) (FirmwareCimcDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareCimcDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareCimcDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/CimcDescriptors/{Moid}"
@@ -20793,8 +21050,7 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareCimcDescriptor == nil {
-		executionError.error = "firmwareCimcDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareCimcDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20821,22 +21077,19 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirm
 	localVarPostBody = r.firmwareCimcDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20903,7 +21156,7 @@ func (a *FirmwareApiService) UpdateFirmwareCimcDescriptorExecute(r ApiUpdateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareDimmDescriptorRequest struct {
@@ -20923,7 +21176,7 @@ func (r ApiUpdateFirmwareDimmDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareDimmDescriptorRequest) Execute() (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareDimmDescriptorExecute(r)
 }
 
@@ -20945,21 +21198,19 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareDimmDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirmwareDimmDescriptorRequest) (FirmwareDimmDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDimmDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDimmDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DimmDescriptors/{Moid}"
@@ -20969,8 +21220,7 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDimmDescriptor == nil {
-		executionError.error = "firmwareDimmDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDimmDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -20997,22 +21247,19 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirm
 	localVarPostBody = r.firmwareDimmDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21079,7 +21326,7 @@ func (a *FirmwareApiService) UpdateFirmwareDimmDescriptorExecute(r ApiUpdateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareDistributableRequest struct {
@@ -21099,7 +21346,7 @@ func (r ApiUpdateFirmwareDistributableRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareDistributableRequest) Execute() (FirmwareDistributable, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareDistributableExecute(r)
 }
 
@@ -21121,21 +21368,19 @@ func (a *FirmwareApiService) UpdateFirmwareDistributable(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareDistributable
  */
-func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmwareDistributableRequest) (FirmwareDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/Distributables/{Moid}"
@@ -21145,8 +21390,7 @@ func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDistributable == nil {
-		executionError.error = "firmwareDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21173,22 +21417,19 @@ func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmw
 	localVarPostBody = r.firmwareDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21255,7 +21496,7 @@ func (a *FirmwareApiService) UpdateFirmwareDistributableExecute(r ApiUpdateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareDriveDescriptorRequest struct {
@@ -21275,7 +21516,7 @@ func (r ApiUpdateFirmwareDriveDescriptorRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareDriveDescriptorRequest) Execute() (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareDriveDescriptorExecute(r)
 }
 
@@ -21297,21 +21538,19 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptor(ctx _context.Context,
  * Execute executes the request
  * @return FirmwareDriveDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFirmwareDriveDescriptorRequest) (FirmwareDriveDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriveDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDriveDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriveDescriptors/{Moid}"
@@ -21321,8 +21560,7 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFir
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriveDescriptor == nil {
-		executionError.error = "firmwareDriveDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriveDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21349,22 +21587,19 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFir
 	localVarPostBody = r.firmwareDriveDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21431,7 +21666,7 @@ func (a *FirmwareApiService) UpdateFirmwareDriveDescriptorExecute(r ApiUpdateFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareDriverDistributableRequest struct {
@@ -21451,7 +21686,7 @@ func (r ApiUpdateFirmwareDriverDistributableRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareDriverDistributableRequest) Execute() (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareDriverDistributableExecute(r)
 }
 
@@ -21473,21 +21708,19 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributable(ctx _context.Cont
  * Execute executes the request
  * @return FirmwareDriverDistributable
  */
-func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdateFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdateFirmwareDriverDistributableRequest) (FirmwareDriverDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareDriverDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareDriverDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/DriverDistributables/{Moid}"
@@ -21497,8 +21730,7 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareDriverDistributable == nil {
-		executionError.error = "firmwareDriverDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareDriverDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21525,22 +21757,19 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdat
 	localVarPostBody = r.firmwareDriverDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21607,7 +21836,7 @@ func (a *FirmwareApiService) UpdateFirmwareDriverDistributableExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareGpuDescriptorRequest struct {
@@ -21627,7 +21856,7 @@ func (r ApiUpdateFirmwareGpuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareGpuDescriptorRequest) Execute() (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareGpuDescriptorExecute(r)
 }
 
@@ -21649,21 +21878,19 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareGpuDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmwareGpuDescriptorRequest) (FirmwareGpuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareGpuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareGpuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/GpuDescriptors/{Moid}"
@@ -21673,8 +21900,7 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareGpuDescriptor == nil {
-		executionError.error = "firmwareGpuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareGpuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21701,22 +21927,19 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmw
 	localVarPostBody = r.firmwareGpuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21783,7 +22006,7 @@ func (a *FirmwareApiService) UpdateFirmwareGpuDescriptorExecute(r ApiUpdateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareHbaDescriptorRequest struct {
@@ -21803,7 +22026,7 @@ func (r ApiUpdateFirmwareHbaDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareHbaDescriptorRequest) Execute() (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareHbaDescriptorExecute(r)
 }
 
@@ -21825,21 +22048,19 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareHbaDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmwareHbaDescriptorRequest) (FirmwareHbaDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareHbaDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareHbaDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/HbaDescriptors/{Moid}"
@@ -21849,8 +22070,7 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareHbaDescriptor == nil {
-		executionError.error = "firmwareHbaDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareHbaDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -21877,22 +22097,19 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmw
 	localVarPostBody = r.firmwareHbaDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21959,7 +22176,7 @@ func (a *FirmwareApiService) UpdateFirmwareHbaDescriptorExecute(r ApiUpdateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareIomDescriptorRequest struct {
@@ -21979,7 +22196,7 @@ func (r ApiUpdateFirmwareIomDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareIomDescriptorRequest) Execute() (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareIomDescriptorExecute(r)
 }
 
@@ -22001,21 +22218,19 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwareIomDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmwareIomDescriptorRequest) (FirmwareIomDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareIomDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareIomDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/IomDescriptors/{Moid}"
@@ -22025,8 +22240,7 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareIomDescriptor == nil {
-		executionError.error = "firmwareIomDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareIomDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22053,22 +22267,19 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmw
 	localVarPostBody = r.firmwareIomDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22135,7 +22346,7 @@ func (a *FirmwareApiService) UpdateFirmwareIomDescriptorExecute(r ApiUpdateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareMswitchDescriptorRequest struct {
@@ -22155,7 +22366,7 @@ func (r ApiUpdateFirmwareMswitchDescriptorRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareMswitchDescriptorRequest) Execute() (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareMswitchDescriptorExecute(r)
 }
 
@@ -22177,21 +22388,19 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptor(ctx _context.Contex
  * Execute executes the request
  * @return FirmwareMswitchDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateFirmwareMswitchDescriptorRequest) (FirmwareMswitchDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareMswitchDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareMswitchDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/MswitchDescriptors/{Moid}"
@@ -22201,8 +22410,7 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareMswitchDescriptor == nil {
-		executionError.error = "firmwareMswitchDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareMswitchDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22229,22 +22437,19 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateF
 	localVarPostBody = r.firmwareMswitchDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22311,7 +22516,7 @@ func (a *FirmwareApiService) UpdateFirmwareMswitchDescriptorExecute(r ApiUpdateF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareNxosDescriptorRequest struct {
@@ -22331,7 +22536,7 @@ func (r ApiUpdateFirmwareNxosDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareNxosDescriptorRequest) Execute() (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareNxosDescriptorExecute(r)
 }
 
@@ -22353,21 +22558,19 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwareNxosDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirmwareNxosDescriptorRequest) (FirmwareNxosDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareNxosDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareNxosDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/NxosDescriptors/{Moid}"
@@ -22377,8 +22580,7 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareNxosDescriptor == nil {
-		executionError.error = "firmwareNxosDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareNxosDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22405,22 +22607,19 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirm
 	localVarPostBody = r.firmwareNxosDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22487,7 +22686,7 @@ func (a *FirmwareApiService) UpdateFirmwareNxosDescriptorExecute(r ApiUpdateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwarePcieDescriptorRequest struct {
@@ -22507,7 +22706,7 @@ func (r ApiUpdateFirmwarePcieDescriptorRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwarePcieDescriptorRequest) Execute() (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwarePcieDescriptorExecute(r)
 }
 
@@ -22529,21 +22728,19 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptor(ctx _context.Context, 
  * Execute executes the request
  * @return FirmwarePcieDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirmwarePcieDescriptorRequest) (FirmwarePcieDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePcieDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePcieDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PcieDescriptors/{Moid}"
@@ -22553,8 +22750,7 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePcieDescriptor == nil {
-		executionError.error = "firmwarePcieDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePcieDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22581,22 +22777,19 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirm
 	localVarPostBody = r.firmwarePcieDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22663,7 +22856,7 @@ func (a *FirmwareApiService) UpdateFirmwarePcieDescriptorExecute(r ApiUpdateFirm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwarePsuDescriptorRequest struct {
@@ -22683,7 +22876,7 @@ func (r ApiUpdateFirmwarePsuDescriptorRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwarePsuDescriptorRequest) Execute() (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwarePsuDescriptorExecute(r)
 }
 
@@ -22705,21 +22898,19 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptor(ctx _context.Context, m
  * Execute executes the request
  * @return FirmwarePsuDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmwarePsuDescriptorRequest) (FirmwarePsuDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwarePsuDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwarePsuDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/PsuDescriptors/{Moid}"
@@ -22729,8 +22920,7 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwarePsuDescriptor == nil {
-		executionError.error = "firmwarePsuDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwarePsuDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22757,22 +22947,19 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmw
 	localVarPostBody = r.firmwarePsuDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22839,7 +23026,7 @@ func (a *FirmwareApiService) UpdateFirmwarePsuDescriptorExecute(r ApiUpdateFirmw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareRunningFirmwareRequest struct {
@@ -22859,7 +23046,7 @@ func (r ApiUpdateFirmwareRunningFirmwareRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateFirmwareRunningFirmwareRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareRunningFirmwareRequest) Execute() (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareRunningFirmwareExecute(r)
 }
 
@@ -22881,21 +23068,19 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmware(ctx _context.Context,
  * Execute executes the request
  * @return FirmwareRunningFirmware
  */
-func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFirmwareRunningFirmwareRequest) (FirmwareRunningFirmware, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFirmwareRunningFirmwareRequest) (FirmwareRunningFirmware, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareRunningFirmware
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareRunningFirmware")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/RunningFirmwares/{Moid}"
@@ -22905,8 +23090,7 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFir
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareRunningFirmware == nil {
-		executionError.error = "firmwareRunningFirmware is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareRunningFirmware is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -22933,22 +23117,19 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFir
 	localVarPostBody = r.firmwareRunningFirmware
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23015,7 +23196,7 @@ func (a *FirmwareApiService) UpdateFirmwareRunningFirmwareExecute(r ApiUpdateFir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareSasExpanderDescriptorRequest struct {
@@ -23035,7 +23216,7 @@ func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareSasExpanderDescriptorRequest) Execute() (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareSasExpanderDescriptorExecute(r)
 }
 
@@ -23057,21 +23238,19 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptor(ctx _context.Co
  * Execute executes the request
  * @return FirmwareSasExpanderDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpdateFirmwareSasExpanderDescriptorRequest) (FirmwareSasExpanderDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareSasExpanderDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareSasExpanderDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/SasExpanderDescriptors/{Moid}"
@@ -23081,8 +23260,7 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpd
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareSasExpanderDescriptor == nil {
-		executionError.error = "firmwareSasExpanderDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareSasExpanderDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23109,22 +23287,19 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpd
 	localVarPostBody = r.firmwareSasExpanderDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23191,7 +23366,7 @@ func (a *FirmwareApiService) UpdateFirmwareSasExpanderDescriptorExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest struct {
@@ -23211,7 +23386,7 @@ func (r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) IfMatch
 	return r
 }
 
-func (r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) Execute() (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareServerConfigurationUtilityDistributableExecute(r)
 }
 
@@ -23233,21 +23408,19 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
  * Execute executes the request
  * @return FirmwareServerConfigurationUtilityDistributable
  */
-func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributableExecute(r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributableExecute(r ApiUpdateFirmwareServerConfigurationUtilityDistributableRequest) (FirmwareServerConfigurationUtilityDistributable, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareServerConfigurationUtilityDistributable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareServerConfigurationUtilityDistributable")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/ServerConfigurationUtilityDistributables/{Moid}"
@@ -23257,8 +23430,7 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareServerConfigurationUtilityDistributable == nil {
-		executionError.error = "firmwareServerConfigurationUtilityDistributable is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareServerConfigurationUtilityDistributable is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23285,22 +23457,19 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
 	localVarPostBody = r.firmwareServerConfigurationUtilityDistributable
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23367,7 +23536,7 @@ func (a *FirmwareApiService) UpdateFirmwareServerConfigurationUtilityDistributab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateFirmwareStorageControllerDescriptorRequest struct {
@@ -23387,7 +23556,7 @@ func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateFirmwareStorageControllerDescriptorRequest) Execute() (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	return r.ApiService.UpdateFirmwareStorageControllerDescriptorExecute(r)
 }
 
@@ -23409,21 +23578,19 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptor(ctx _cont
  * Execute executes the request
  * @return FirmwareStorageControllerDescriptor
  */
-func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, GenericOpenAPIError) {
+func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r ApiUpdateFirmwareStorageControllerDescriptorRequest) (FirmwareStorageControllerDescriptor, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  FirmwareStorageControllerDescriptor
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareStorageControllerDescriptor")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/firmware/StorageControllerDescriptors/{Moid}"
@@ -23433,8 +23600,7 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.firmwareStorageControllerDescriptor == nil {
-		executionError.error = "firmwareStorageControllerDescriptor is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("firmwareStorageControllerDescriptor is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -23461,22 +23627,19 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r 
 	localVarPostBody = r.firmwareStorageControllerDescriptor
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23543,5 +23706,175 @@ func (a *FirmwareApiService) UpdateFirmwareStorageControllerDescriptorExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateFirmwareUnsupportedVersionUpgradeRequest struct {
+	ctx                               _context.Context
+	ApiService                        *FirmwareApiService
+	moid                              string
+	firmwareUnsupportedVersionUpgrade *FirmwareUnsupportedVersionUpgrade
+	ifMatch                           *string
+}
+
+func (r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) FirmwareUnsupportedVersionUpgrade(firmwareUnsupportedVersionUpgrade FirmwareUnsupportedVersionUpgrade) ApiUpdateFirmwareUnsupportedVersionUpgradeRequest {
+	r.firmwareUnsupportedVersionUpgrade = &firmwareUnsupportedVersionUpgrade
+	return r
+}
+func (r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) IfMatch(ifMatch string) ApiUpdateFirmwareUnsupportedVersionUpgradeRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) Execute() (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	return r.ApiService.UpdateFirmwareUnsupportedVersionUpgradeExecute(r)
+}
+
+/*
+ * UpdateFirmwareUnsupportedVersionUpgrade Update a 'firmware.UnsupportedVersionUpgrade' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateFirmwareUnsupportedVersionUpgradeRequest
+ */
+func (a *FirmwareApiService) UpdateFirmwareUnsupportedVersionUpgrade(ctx _context.Context, moid string) ApiUpdateFirmwareUnsupportedVersionUpgradeRequest {
+	return ApiUpdateFirmwareUnsupportedVersionUpgradeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FirmwareUnsupportedVersionUpgrade
+ */
+func (a *FirmwareApiService) UpdateFirmwareUnsupportedVersionUpgradeExecute(r ApiUpdateFirmwareUnsupportedVersionUpgradeRequest) (FirmwareUnsupportedVersionUpgrade, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FirmwareUnsupportedVersionUpgrade
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FirmwareApiService.UpdateFirmwareUnsupportedVersionUpgrade")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/firmware/UnsupportedVersionUpgrades/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.firmwareUnsupportedVersionUpgrade == nil {
+		return localVarReturnValue, nil, reportError("firmwareUnsupportedVersionUpgrade is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.firmwareUnsupportedVersionUpgrade
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

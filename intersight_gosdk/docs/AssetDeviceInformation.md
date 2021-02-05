@@ -18,7 +18,9 @@ Name | Type | Description | Notes
 **OldDeviceStatusDescription** | Pointer to **string** | Description of status of old Cisco device, which got replaced by the new device. | [optional] [readonly] 
 **OldDeviceStatusId** | Pointer to **int32** | Status ID of old Cisco device, which got replaced by the new device. * &#x60;0&#x60; - A default value to catch cases where device status is not correctly detected. * &#x60;10000&#x60; - Device is installed successfully. * &#x60;1010041&#x60; - Device is currently in Return Material Authorization process. * &#x60;10005&#x60; - Device is replaced successfully with another device. * &#x60;10007&#x60; - Device is returned succcessfuly. * &#x60;10009&#x60; - Device is terminated at customer&#39;s end. | [optional] [readonly] [default to 0]
 **OldInstanceId** | Pointer to **string** | Instance number of the old device, which got replaced by the new device. | [optional] [readonly] 
+**ProductFamily** | Pointer to **string** | Product Family is the field used to identify the hypervisor type. example \&quot;ESXi\&quot;. | [optional] [readonly] 
 **ProductType** | Pointer to **string** | Product type helps to determine if device has to be billed using consumption metering. example \&quot;SERVER\&quot;. | [optional] [readonly] 
+**UnitOfMeasure** | Pointer to **string** | Unit of Measure is flag used to identify the type of metric being pushed. example - \&quot;STORAGE\&quot; for hardware metrics , \&quot;VM\&quot; - for hypervisor metrics. * &#x60;None&#x60; - A default value to catch cases where unit of measure is not correctly detected. * &#x60;STORAGE&#x60; - The metric type of the device is a storage metric. * &#x60;NODE&#x60; - The metric type of the device is a hardware metric. * &#x60;VM&#x60; - The metric type of the device is a hypervisor metric. | [optional] [readonly] [default to "None"]
 
 ## Methods
 
@@ -399,6 +401,31 @@ SetOldInstanceId sets OldInstanceId field to given value.
 
 HasOldInstanceId returns a boolean if a field has been set.
 
+### GetProductFamily
+
+`func (o *AssetDeviceInformation) GetProductFamily() string`
+
+GetProductFamily returns the ProductFamily field if non-nil, zero value otherwise.
+
+### GetProductFamilyOk
+
+`func (o *AssetDeviceInformation) GetProductFamilyOk() (*string, bool)`
+
+GetProductFamilyOk returns a tuple with the ProductFamily field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProductFamily
+
+`func (o *AssetDeviceInformation) SetProductFamily(v string)`
+
+SetProductFamily sets ProductFamily field to given value.
+
+### HasProductFamily
+
+`func (o *AssetDeviceInformation) HasProductFamily() bool`
+
+HasProductFamily returns a boolean if a field has been set.
+
 ### GetProductType
 
 `func (o *AssetDeviceInformation) GetProductType() string`
@@ -423,6 +450,31 @@ SetProductType sets ProductType field to given value.
 `func (o *AssetDeviceInformation) HasProductType() bool`
 
 HasProductType returns a boolean if a field has been set.
+
+### GetUnitOfMeasure
+
+`func (o *AssetDeviceInformation) GetUnitOfMeasure() string`
+
+GetUnitOfMeasure returns the UnitOfMeasure field if non-nil, zero value otherwise.
+
+### GetUnitOfMeasureOk
+
+`func (o *AssetDeviceInformation) GetUnitOfMeasureOk() (*string, bool)`
+
+GetUnitOfMeasureOk returns a tuple with the UnitOfMeasure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnitOfMeasure
+
+`func (o *AssetDeviceInformation) SetUnitOfMeasure(v string)`
+
+SetUnitOfMeasure sets UnitOfMeasure field to given value.
+
+### HasUnitOfMeasure
+
+`func (o *AssetDeviceInformation) HasUnitOfMeasure() bool`
+
+HasUnitOfMeasure returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

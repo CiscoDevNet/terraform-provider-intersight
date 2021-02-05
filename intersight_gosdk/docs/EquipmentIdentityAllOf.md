@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AdminAction** | Pointer to **string** | Updated by UI/API to trigger specific chassis action type. * &#x60;None&#x60; - No operation value for maintenance actions on an equipment. * &#x60;Decommission&#x60; - Decommission the equipment and temporarily remove it from being managed by Intersight. * &#x60;Recommission&#x60; - Recommission the equipment. * &#x60;Reack&#x60; - Reacknowledge the equipment and discover it again. * &#x60;Remove&#x60; - Remove the equipment permanently from Intersight management. | [optional] [default to "None"]
-**AdminActionState** | Pointer to **string** | The state of Maintenance Action performed. This will have three states. Applying - Action is in progress. Applied - Action is completed and applied. Failed - Action has failed. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [default to "None"]
-**Identifier** | Pointer to **int64** | Numeric Identifier assigned by the management system to the equipment. | [optional] 
-**Lifecycle** | Pointer to **string** | The equipment&#39;s lifecycle status. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DecommissionInProgress&#x60; - Decommission Inprogress Lifecycle state. * &#x60;RecommissionInProgress&#x60; - Recommission Inprogress Lifecycle state. * &#x60;OperationFailed&#x60; - Failed Operation Lifecycle state. * &#x60;ReackInProgress&#x60; - ReackInProgress Lifecycle state. * &#x60;RemoveInProgress&#x60; - RemoveInProgress Lifecycle state. * &#x60;Discovered&#x60; - Discovered Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. | [optional] [default to "None"]
-**Model** | Pointer to **string** | The vendor provided model name for the equipment. | [optional] 
-**Serial** | Pointer to **string** | The serial number of the equipment. | [optional] 
-**Vendor** | Pointer to **string** | The manufacturer of the equipment. | [optional] 
-**DeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**AdminActionState** | Pointer to **string** | The state of Maintenance Action performed. This will have three states. Applying - Action is in progress. Applied - Action is completed and applied. Failed - Action has failed. * &#x60;None&#x60; - Nil value when no action has been triggered by the user. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "None"]
+**Identifier** | Pointer to **int64** | Numeric Identifier assigned by the management system to the equipment. | [optional] [readonly] 
+**Lifecycle** | Pointer to **string** | The equipment&#39;s lifecycle status. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DecommissionInProgress&#x60; - Decommission Inprogress Lifecycle state. * &#x60;RecommissionInProgress&#x60; - Recommission Inprogress Lifecycle state. * &#x60;OperationFailed&#x60; - Failed Operation Lifecycle state. * &#x60;ReackInProgress&#x60; - ReackInProgress Lifecycle state. * &#x60;RemoveInProgress&#x60; - RemoveInProgress Lifecycle state. * &#x60;Discovered&#x60; - Discovered Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. | [optional] [readonly] [default to "None"]
+**Model** | Pointer to **string** | The vendor provided model name for the equipment. | [optional] [readonly] 
+**Serial** | Pointer to **string** | The serial number of the equipment. | [optional] [readonly] 
+**Vendor** | Pointer to **string** | The manufacturer of the equipment. | [optional] [readonly] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -249,30 +249,30 @@ SetVendor sets Vendor field to given value.
 
 HasVendor returns a boolean if a field has been set.
 
-### GetDeviceRegistration
+### GetRegisteredDevice
 
-`func (o *EquipmentIdentityAllOf) GetDeviceRegistration() AssetDeviceRegistrationRelationship`
+`func (o *EquipmentIdentityAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
 
-GetDeviceRegistration returns the DeviceRegistration field if non-nil, zero value otherwise.
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
 
-### GetDeviceRegistrationOk
+### GetRegisteredDeviceOk
 
-`func (o *EquipmentIdentityAllOf) GetDeviceRegistrationOk() (*AssetDeviceRegistrationRelationship, bool)`
+`func (o *EquipmentIdentityAllOf) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
 
-GetDeviceRegistrationOk returns a tuple with the DeviceRegistration field if it's non-nil, zero value otherwise
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDeviceRegistration
+### SetRegisteredDevice
 
-`func (o *EquipmentIdentityAllOf) SetDeviceRegistration(v AssetDeviceRegistrationRelationship)`
+`func (o *EquipmentIdentityAllOf) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
 
-SetDeviceRegistration sets DeviceRegistration field to given value.
+SetRegisteredDevice sets RegisteredDevice field to given value.
 
-### HasDeviceRegistration
+### HasRegisteredDevice
 
-`func (o *EquipmentIdentityAllOf) HasDeviceRegistration() bool`
+`func (o *EquipmentIdentityAllOf) HasRegisteredDevice() bool`
 
-HasDeviceRegistration returns a boolean if a field has been set.
+HasRegisteredDevice returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

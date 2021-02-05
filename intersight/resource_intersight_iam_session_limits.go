@@ -342,7 +342,8 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.IamApi.CreateIamSessionLimits(conn.ctx).IamSessionLimits(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -357,7 +358,8 @@ func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, met
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamSessionLimitsByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamSessionLimits object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -590,7 +592,8 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.IamApi.UpdateIamSessionLimits(conn.ctx, d.Id()).IamSessionLimits(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -605,7 +608,8 @@ func resourceIamSessionLimitsDelete(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamSessionLimits(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamSessionLimits object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

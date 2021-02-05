@@ -16,7 +16,6 @@ The following arguments can be used to get data of already created objects in In
 * `nr_lifecycle`:(string) The equipment's lifecycle status.* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.* `Active` - Default Lifecycle State for a physical entity.* `Decommissioned` - Decommission Lifecycle state.* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.* `OperationFailed` - Failed Operation Lifecycle state.* `ReackInProgress` - ReackInProgress Lifecycle state.* `RemoveInProgress` - RemoveInProgress Lifecycle state.* `Discovered` - Discovered Lifecycle state.* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. 
 * `model`:(string) The vendor provided model name for the equipment. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `pending_discovery`:(string) Value to indicate if discovery needs to be triggered after some event (ex. device connector reconnect). 
 * `serial`:(string) The serial number of the equipment. 
 * `switch_id`:(int) Switch ID to which Fabric Extender is connected, ID can be either 1 or 2, equalent to A or B. 
 * `vendor`:(string) The manufacturer of the equipment. 

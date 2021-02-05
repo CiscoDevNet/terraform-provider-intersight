@@ -29,7 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_blocks`:(string) The number of blocks present on the physical disk. 
 * `oper_power_state`:(string) Operational power of the physical disk. 
-* `oper_qualifier_reason`:(string) This reason for the operational status of the disk. 
+* `oper_qualifier_reason`:(string) For certain states, indicates the reason why the operState is in that state. 
 * `operability`:(string) This field identifies the disk operability of the disk. 
 * `physical_block_size`:(string) The block size of the installed physical disk. 
 * `pid`:(string) This field identifies the Product ID for physicalDisk. 

@@ -61,13 +61,13 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 				},
 			},
 			"autosize_mode": {
-				Description: "The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink\n* `off` - The volume will not grow or shrink in size in response to the amount of used space.\n* `grow` - The volume will automatically grow when used space in the volume is above the grow threshold.\n* `grow_shrink` - The volume will grow or shrink in size in response to the amount of used space.",
+				Description: "The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink.\n* `off` - The volume will not grow or shrink in size in response to the amount of used space.\n* `grow` - The volume will automatically grow when used space in the volume is above the grow threshold.\n* `grow_shrink` - The volume will grow or shrink in size in response to the amount of used space.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -283,7 +283,7 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - Load Sharing",
+				Description: "NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - Load Sharing.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -362,7 +362,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("json marshal of StorageNetAppVolume object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageNetAppVolumeList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching StorageNetAppVolume: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

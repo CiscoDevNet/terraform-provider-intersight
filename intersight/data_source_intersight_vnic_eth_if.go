@@ -38,7 +38,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -261,6 +261,143 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"ip_lease": {
+				Description: "A reference to a ippoolIpLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"iscsi_boot_policy": {
+				Description: "A reference to a vnicIscsiBootPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"iscsi_ip_v4_address_allocation_type": {
+				Description: "Static/Dynamic Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"iscsi_ip_v4_config": {
+				Description: "IPV4 configurations such as Netmask, Gateway and DNS for iSCSI vNIC.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"gateway": {
+							Description: "IP address of the default IPv4 gateway.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"netmask": {
+							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"primary_dns": {
+							Description: "IP Address of the primary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"secondary_dns": {
+							Description: "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"iscsi_ipv4_address": {
+				Description: "IP address associated to the vNIC.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"lan_connectivity_policy": {
 				Description: "A reference to a vnicLanConnectivityPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -305,6 +442,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -337,7 +475,6 @@ func dataSourceVnicEthIf() *schema.Resource {
 						},
 					},
 				},
-				Computed: true,
 			},
 			"mac_address": {
 				Description: "The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy.",
@@ -463,7 +600,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -473,7 +610,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -540,6 +677,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Description: "An array of relationships to vnicEthIf resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -572,7 +710,6 @@ func dataSourceVnicEthIf() *schema.Resource {
 						},
 					},
 				},
-				Computed: true,
 			},
 			"standby_vif_id": {
 				Description: "The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.",
@@ -621,7 +758,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -669,7 +806,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -699,7 +836,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -730,6 +867,14 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("failover_enabled"); ok {
 		x := (v.(bool))
 		o.SetFailoverEnabled(x)
+	}
+	if v, ok := d.GetOk("iscsi_ip_v4_address_allocation_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpV4AddressAllocationType(x)
+	}
+	if v, ok := d.GetOk("iscsi_ipv4_address"); ok {
+		x := (v.(string))
+		o.SetIscsiIpv4Address(x)
 	}
 	if v, ok := d.GetOk("mac_address"); ok {
 		x := (v.(string))
@@ -773,7 +918,8 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("json marshal of VnicEthIf object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthIfList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -835,6 +981,24 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 			}
 			if err := d.Set("failover_enabled", (s.GetFailoverEnabled())); err != nil {
 				return diag.Errorf("error occurred while setting property FailoverEnabled: %s", err.Error())
+			}
+
+			if err := d.Set("ip_lease", flattenMapIppoolIpLeaseRelationship(s.GetIpLease(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property IpLease: %s", err.Error())
+			}
+
+			if err := d.Set("iscsi_boot_policy", flattenMapVnicIscsiBootPolicyRelationship(s.GetIscsiBootPolicy(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property IscsiBootPolicy: %s", err.Error())
+			}
+			if err := d.Set("iscsi_ip_v4_address_allocation_type", (s.GetIscsiIpV4AddressAllocationType())); err != nil {
+				return diag.Errorf("error occurred while setting property IscsiIpV4AddressAllocationType: %s", err.Error())
+			}
+
+			if err := d.Set("iscsi_ip_v4_config", flattenMapIppoolIpV4Config(s.GetIscsiIpV4Config(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property IscsiIpV4Config: %s", err.Error())
+			}
+			if err := d.Set("iscsi_ipv4_address", (s.GetIscsiIpv4Address())); err != nil {
+				return diag.Errorf("error occurred while setting property IscsiIpv4Address: %s", err.Error())
 			}
 
 			if err := d.Set("lan_connectivity_policy", flattenMapVnicLanConnectivityPolicyRelationship(s.GetLanConnectivityPolicy(), d)); err != nil {

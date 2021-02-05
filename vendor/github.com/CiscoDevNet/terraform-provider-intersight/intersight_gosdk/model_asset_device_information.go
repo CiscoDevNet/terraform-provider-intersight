@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -46,8 +46,12 @@ type AssetDeviceInformation struct {
 	OldDeviceStatusId *int32 `json:"OldDeviceStatusId,omitempty"`
 	// Instance number of the old device, which got replaced by the new device.
 	OldInstanceId *string `json:"OldInstanceId,omitempty"`
+	// Product Family is the field used to identify the hypervisor type. example \"ESXi\".
+	ProductFamily *string `json:"ProductFamily,omitempty"`
 	// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
-	ProductType          *string `json:"ProductType,omitempty"`
+	ProductType *string `json:"ProductType,omitempty"`
+	// Unit of Measure is flag used to identify the type of metric being pushed. example - \"STORAGE\" for hardware metrics , \"VM\" - for hypervisor metrics. * `None` - A default value to catch cases where unit of measure is not correctly detected. * `STORAGE` - The metric type of the device is a storage metric. * `NODE` - The metric type of the device is a hardware metric. * `VM` - The metric type of the device is a hypervisor metric.
+	UnitOfMeasure        *string `json:"UnitOfMeasure,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -63,6 +67,8 @@ func NewAssetDeviceInformation(classId string, objectType string) *AssetDeviceIn
 	this.ObjectType = objectType
 	var oldDeviceStatusId int32 = 0
 	this.OldDeviceStatusId = &oldDeviceStatusId
+	var unitOfMeasure string = "None"
+	this.UnitOfMeasure = &unitOfMeasure
 	return &this
 }
 
@@ -77,6 +83,8 @@ func NewAssetDeviceInformationWithDefaults() *AssetDeviceInformation {
 	this.ObjectType = objectType
 	var oldDeviceStatusId int32 = 0
 	this.OldDeviceStatusId = &oldDeviceStatusId
+	var unitOfMeasure string = "None"
+	this.UnitOfMeasure = &unitOfMeasure
 	return &this
 }
 
@@ -524,6 +532,38 @@ func (o *AssetDeviceInformation) SetOldInstanceId(v string) {
 	o.OldInstanceId = &v
 }
 
+// GetProductFamily returns the ProductFamily field value if set, zero value otherwise.
+func (o *AssetDeviceInformation) GetProductFamily() string {
+	if o == nil || o.ProductFamily == nil {
+		var ret string
+		return ret
+	}
+	return *o.ProductFamily
+}
+
+// GetProductFamilyOk returns a tuple with the ProductFamily field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceInformation) GetProductFamilyOk() (*string, bool) {
+	if o == nil || o.ProductFamily == nil {
+		return nil, false
+	}
+	return o.ProductFamily, true
+}
+
+// HasProductFamily returns a boolean if a field has been set.
+func (o *AssetDeviceInformation) HasProductFamily() bool {
+	if o != nil && o.ProductFamily != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProductFamily gets a reference to the given string and assigns it to the ProductFamily field.
+func (o *AssetDeviceInformation) SetProductFamily(v string) {
+	o.ProductFamily = &v
+}
+
 // GetProductType returns the ProductType field value if set, zero value otherwise.
 func (o *AssetDeviceInformation) GetProductType() string {
 	if o == nil || o.ProductType == nil {
@@ -554,6 +594,38 @@ func (o *AssetDeviceInformation) HasProductType() bool {
 // SetProductType gets a reference to the given string and assigns it to the ProductType field.
 func (o *AssetDeviceInformation) SetProductType(v string) {
 	o.ProductType = &v
+}
+
+// GetUnitOfMeasure returns the UnitOfMeasure field value if set, zero value otherwise.
+func (o *AssetDeviceInformation) GetUnitOfMeasure() string {
+	if o == nil || o.UnitOfMeasure == nil {
+		var ret string
+		return ret
+	}
+	return *o.UnitOfMeasure
+}
+
+// GetUnitOfMeasureOk returns a tuple with the UnitOfMeasure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceInformation) GetUnitOfMeasureOk() (*string, bool) {
+	if o == nil || o.UnitOfMeasure == nil {
+		return nil, false
+	}
+	return o.UnitOfMeasure, true
+}
+
+// HasUnitOfMeasure returns a boolean if a field has been set.
+func (o *AssetDeviceInformation) HasUnitOfMeasure() bool {
+	if o != nil && o.UnitOfMeasure != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUnitOfMeasure gets a reference to the given string and assigns it to the UnitOfMeasure field.
+func (o *AssetDeviceInformation) SetUnitOfMeasure(v string) {
+	o.UnitOfMeasure = &v
 }
 
 func (o AssetDeviceInformation) MarshalJSON() ([]byte, error) {
@@ -608,8 +680,14 @@ func (o AssetDeviceInformation) MarshalJSON() ([]byte, error) {
 	if o.OldInstanceId != nil {
 		toSerialize["OldInstanceId"] = o.OldInstanceId
 	}
+	if o.ProductFamily != nil {
+		toSerialize["ProductFamily"] = o.ProductFamily
+	}
 	if o.ProductType != nil {
 		toSerialize["ProductType"] = o.ProductType
+	}
+	if o.UnitOfMeasure != nil {
+		toSerialize["UnitOfMeasure"] = o.UnitOfMeasure
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -647,8 +725,12 @@ func (o *AssetDeviceInformation) UnmarshalJSON(bytes []byte) (err error) {
 		OldDeviceStatusId *int32 `json:"OldDeviceStatusId,omitempty"`
 		// Instance number of the old device, which got replaced by the new device.
 		OldInstanceId *string `json:"OldInstanceId,omitempty"`
+		// Product Family is the field used to identify the hypervisor type. example \"ESXi\".
+		ProductFamily *string `json:"ProductFamily,omitempty"`
 		// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
 		ProductType *string `json:"ProductType,omitempty"`
+		// Unit of Measure is flag used to identify the type of metric being pushed. example - \"STORAGE\" for hardware metrics , \"VM\" - for hypervisor metrics. * `None` - A default value to catch cases where unit of measure is not correctly detected. * `STORAGE` - The metric type of the device is a storage metric. * `NODE` - The metric type of the device is a hardware metric. * `VM` - The metric type of the device is a hypervisor metric.
+		UnitOfMeasure *string `json:"UnitOfMeasure,omitempty"`
 	}
 
 	varAssetDeviceInformationWithoutEmbeddedStruct := AssetDeviceInformationWithoutEmbeddedStruct{}
@@ -670,7 +752,9 @@ func (o *AssetDeviceInformation) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeviceInformation.OldDeviceStatusDescription = varAssetDeviceInformationWithoutEmbeddedStruct.OldDeviceStatusDescription
 		varAssetDeviceInformation.OldDeviceStatusId = varAssetDeviceInformationWithoutEmbeddedStruct.OldDeviceStatusId
 		varAssetDeviceInformation.OldInstanceId = varAssetDeviceInformationWithoutEmbeddedStruct.OldInstanceId
+		varAssetDeviceInformation.ProductFamily = varAssetDeviceInformationWithoutEmbeddedStruct.ProductFamily
 		varAssetDeviceInformation.ProductType = varAssetDeviceInformationWithoutEmbeddedStruct.ProductType
+		varAssetDeviceInformation.UnitOfMeasure = varAssetDeviceInformationWithoutEmbeddedStruct.UnitOfMeasure
 		*o = AssetDeviceInformation(varAssetDeviceInformation)
 	} else {
 		return err
@@ -702,7 +786,9 @@ func (o *AssetDeviceInformation) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OldDeviceStatusDescription")
 		delete(additionalProperties, "OldDeviceStatusId")
 		delete(additionalProperties, "OldInstanceId")
+		delete(additionalProperties, "ProductFamily")
 		delete(additionalProperties, "ProductType")
+		delete(additionalProperties, "UnitOfMeasure")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

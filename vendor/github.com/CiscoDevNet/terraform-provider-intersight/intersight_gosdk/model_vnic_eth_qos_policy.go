@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -24,6 +24,8 @@ type VnicEthQosPolicy struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The burst traffic, in bytes, allowed on the vNIC.
+	Burst *int64 `json:"Burst,omitempty"`
 	// Class of Service to be associated to the traffic on the virtual interface.
 	Cos *int64 `json:"Cos,omitempty"`
 	// The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.
@@ -48,6 +50,8 @@ func NewVnicEthQosPolicy(classId string, objectType string) *VnicEthQosPolicy {
 	this := VnicEthQosPolicy{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var burst int64 = 1024
+	this.Burst = &burst
 	var cos int64 = 0
 	this.Cos = &cos
 	var mtu int64 = 1500
@@ -70,6 +74,8 @@ func NewVnicEthQosPolicyWithDefaults() *VnicEthQosPolicy {
 	this.ClassId = classId
 	var objectType string = "vnic.EthQosPolicy"
 	this.ObjectType = objectType
+	var burst int64 = 1024
+	this.Burst = &burst
 	var cos int64 = 0
 	this.Cos = &cos
 	var mtu int64 = 1500
@@ -129,6 +135,38 @@ func (o *VnicEthQosPolicy) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *VnicEthQosPolicy) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetBurst returns the Burst field value if set, zero value otherwise.
+func (o *VnicEthQosPolicy) GetBurst() int64 {
+	if o == nil || o.Burst == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Burst
+}
+
+// GetBurstOk returns a tuple with the Burst field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthQosPolicy) GetBurstOk() (*int64, bool) {
+	if o == nil || o.Burst == nil {
+		return nil, false
+	}
+	return o.Burst, true
+}
+
+// HasBurst returns a boolean if a field has been set.
+func (o *VnicEthQosPolicy) HasBurst() bool {
+	if o != nil && o.Burst != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBurst gets a reference to the given int64 and assigns it to the Burst field.
+func (o *VnicEthQosPolicy) SetBurst(v int64) {
+	o.Burst = &v
 }
 
 // GetCos returns the Cos field value if set, zero value otherwise.
@@ -339,6 +377,9 @@ func (o VnicEthQosPolicy) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Burst != nil {
+		toSerialize["Burst"] = o.Burst
+	}
 	if o.Cos != nil {
 		toSerialize["Cos"] = o.Cos
 	}
@@ -371,6 +412,8 @@ func (o *VnicEthQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The burst traffic, in bytes, allowed on the vNIC.
+		Burst *int64 `json:"Burst,omitempty"`
 		// Class of Service to be associated to the traffic on the virtual interface.
 		Cos *int64 `json:"Cos,omitempty"`
 		// The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts.
@@ -391,6 +434,7 @@ func (o *VnicEthQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicEthQosPolicy := _VnicEthQosPolicy{}
 		varVnicEthQosPolicy.ClassId = varVnicEthQosPolicyWithoutEmbeddedStruct.ClassId
 		varVnicEthQosPolicy.ObjectType = varVnicEthQosPolicyWithoutEmbeddedStruct.ObjectType
+		varVnicEthQosPolicy.Burst = varVnicEthQosPolicyWithoutEmbeddedStruct.Burst
 		varVnicEthQosPolicy.Cos = varVnicEthQosPolicyWithoutEmbeddedStruct.Cos
 		varVnicEthQosPolicy.Mtu = varVnicEthQosPolicyWithoutEmbeddedStruct.Mtu
 		varVnicEthQosPolicy.Priority = varVnicEthQosPolicyWithoutEmbeddedStruct.Priority
@@ -416,6 +460,7 @@ func (o *VnicEthQosPolicy) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Burst")
 		delete(additionalProperties, "Cos")
 		delete(additionalProperties, "Mtu")
 		delete(additionalProperties, "Priority")

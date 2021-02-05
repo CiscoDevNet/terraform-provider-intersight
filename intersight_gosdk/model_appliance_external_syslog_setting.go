@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -26,6 +26,8 @@ type ApplianceExternalSyslogSetting struct {
 	ObjectType string `json:"ObjectType"`
 	// Enable or disable External Syslog Server.
 	Enabled *bool `json:"Enabled,omitempty"`
+	// Enable or disable exporting of Web Server access logs.
+	ExportNginx *bool `json:"ExportNginx,omitempty"`
 	// External Syslog Server Port for connection establishment.
 	Port *int64 `json:"Port,omitempty"`
 	// External Syslog Server Address, can be IP address or hostname.
@@ -46,6 +48,8 @@ func NewApplianceExternalSyslogSetting(classId string, objectType string) *Appli
 	this.ObjectType = objectType
 	var enabled bool = false
 	this.Enabled = &enabled
+	var exportNginx bool = false
+	this.ExportNginx = &exportNginx
 	var port int64 = 10514
 	this.Port = &port
 	return &this
@@ -62,6 +66,8 @@ func NewApplianceExternalSyslogSettingWithDefaults() *ApplianceExternalSyslogSet
 	this.ObjectType = objectType
 	var enabled bool = false
 	this.Enabled = &enabled
+	var exportNginx bool = false
+	this.ExportNginx = &exportNginx
 	var port int64 = 10514
 	this.Port = &port
 	return &this
@@ -145,6 +151,38 @@ func (o *ApplianceExternalSyslogSetting) HasEnabled() bool {
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *ApplianceExternalSyslogSetting) SetEnabled(v bool) {
 	o.Enabled = &v
+}
+
+// GetExportNginx returns the ExportNginx field value if set, zero value otherwise.
+func (o *ApplianceExternalSyslogSetting) GetExportNginx() bool {
+	if o == nil || o.ExportNginx == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ExportNginx
+}
+
+// GetExportNginxOk returns a tuple with the ExportNginx field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceExternalSyslogSetting) GetExportNginxOk() (*bool, bool) {
+	if o == nil || o.ExportNginx == nil {
+		return nil, false
+	}
+	return o.ExportNginx, true
+}
+
+// HasExportNginx returns a boolean if a field has been set.
+func (o *ApplianceExternalSyslogSetting) HasExportNginx() bool {
+	if o != nil && o.ExportNginx != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExportNginx gets a reference to the given bool and assigns it to the ExportNginx field.
+func (o *ApplianceExternalSyslogSetting) SetExportNginx(v bool) {
+	o.ExportNginx = &v
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
@@ -262,6 +300,9 @@ func (o ApplianceExternalSyslogSetting) MarshalJSON() ([]byte, error) {
 	if o.Enabled != nil {
 		toSerialize["Enabled"] = o.Enabled
 	}
+	if o.ExportNginx != nil {
+		toSerialize["ExportNginx"] = o.ExportNginx
+	}
 	if o.Port != nil {
 		toSerialize["Port"] = o.Port
 	}
@@ -287,6 +328,8 @@ func (o *ApplianceExternalSyslogSetting) UnmarshalJSON(bytes []byte) (err error)
 		ObjectType string `json:"ObjectType"`
 		// Enable or disable External Syslog Server.
 		Enabled *bool `json:"Enabled,omitempty"`
+		// Enable or disable exporting of Web Server access logs.
+		ExportNginx *bool `json:"ExportNginx,omitempty"`
 		// External Syslog Server Port for connection establishment.
 		Port *int64 `json:"Port,omitempty"`
 		// External Syslog Server Address, can be IP address or hostname.
@@ -302,6 +345,7 @@ func (o *ApplianceExternalSyslogSetting) UnmarshalJSON(bytes []byte) (err error)
 		varApplianceExternalSyslogSetting.ClassId = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.ClassId
 		varApplianceExternalSyslogSetting.ObjectType = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.ObjectType
 		varApplianceExternalSyslogSetting.Enabled = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.Enabled
+		varApplianceExternalSyslogSetting.ExportNginx = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.ExportNginx
 		varApplianceExternalSyslogSetting.Port = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.Port
 		varApplianceExternalSyslogSetting.Server = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.Server
 		varApplianceExternalSyslogSetting.Account = varApplianceExternalSyslogSettingWithoutEmbeddedStruct.Account
@@ -325,6 +369,7 @@ func (o *ApplianceExternalSyslogSetting) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Enabled")
+		delete(additionalProperties, "ExportNginx")
 		delete(additionalProperties, "Port")
 		delete(additionalProperties, "Server")
 		delete(additionalProperties, "Account")

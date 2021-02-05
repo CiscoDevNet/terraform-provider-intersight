@@ -401,7 +401,8 @@ func resourceKubernetesAciCniApicCreate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesAciCniApic(conn.ctx).KubernetesAciCniApic(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KubernetesAciCniApic: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -416,7 +417,8 @@ func resourceKubernetesAciCniApicRead(c context.Context, d *schema.ResourceData,
 	var de diag.Diagnostics
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAciCniApicByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KubernetesAciCniApic object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -676,7 +678,8 @@ func resourceKubernetesAciCniApicUpdate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesAciCniApic(conn.ctx, d.Id()).KubernetesAciCniApic(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KubernetesAciCniApic: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -691,7 +694,8 @@ func resourceKubernetesAciCniApicDelete(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAciCniApic(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KubernetesAciCniApic object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

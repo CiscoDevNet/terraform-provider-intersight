@@ -12,7 +12,11 @@ Name | Type | Description | Notes
 **NdType** | Pointer to **string** | Node type in Nexus Dashboard cluster. | [optional] 
 **NdVersion** | Pointer to **string** | Version running on Nexus Dashboard. | [optional] 
 **NumberOfApps** | Pointer to **int64** | Number of applications installed in the Nexus Dashboard. | [optional] 
+**NumberOfSchemasInMso** | Pointer to **int64** | Number of total schemas in Multi-Site Orchestrator. | [optional] 
+**NumberOfSitesInMso** | Pointer to **int64** | Number of sites in Multi-Site Orchestrator. | [optional] 
 **NumberOfSitesServiced** | Pointer to **int64** | Number of sites serviced by ND. | [optional] 
+**NumberOfTenantsInMso** | Pointer to **int64** | Number of total tenants in Multi-Site Orchestrator. | [optional] 
+**TypeOfSiteInMso** | Pointer to **string** | Type of site added to Multi-Site Orchestrator. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -224,6 +228,56 @@ SetNumberOfApps sets NumberOfApps field to given value.
 
 HasNumberOfApps returns a boolean if a field has been set.
 
+### GetNumberOfSchemasInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfSchemasInMso() int64`
+
+GetNumberOfSchemasInMso returns the NumberOfSchemasInMso field if non-nil, zero value otherwise.
+
+### GetNumberOfSchemasInMsoOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfSchemasInMsoOk() (*int64, bool)`
+
+GetNumberOfSchemasInMsoOk returns a tuple with the NumberOfSchemasInMso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfSchemasInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfSchemasInMso(v int64)`
+
+SetNumberOfSchemasInMso sets NumberOfSchemasInMso field to given value.
+
+### HasNumberOfSchemasInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfSchemasInMso() bool`
+
+HasNumberOfSchemasInMso returns a boolean if a field has been set.
+
+### GetNumberOfSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfSitesInMso() int64`
+
+GetNumberOfSitesInMso returns the NumberOfSitesInMso field if non-nil, zero value otherwise.
+
+### GetNumberOfSitesInMsoOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfSitesInMsoOk() (*int64, bool)`
+
+GetNumberOfSitesInMsoOk returns a tuple with the NumberOfSitesInMso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfSitesInMso(v int64)`
+
+SetNumberOfSitesInMso sets NumberOfSitesInMso field to given value.
+
+### HasNumberOfSitesInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfSitesInMso() bool`
+
+HasNumberOfSitesInMso returns a boolean if a field has been set.
+
 ### GetNumberOfSitesServiced
 
 `func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfSitesServiced() int64`
@@ -248,6 +302,56 @@ SetNumberOfSitesServiced sets NumberOfSitesServiced field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfSitesServiced() bool`
 
 HasNumberOfSitesServiced returns a boolean if a field has been set.
+
+### GetNumberOfTenantsInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfTenantsInMso() int64`
+
+GetNumberOfTenantsInMso returns the NumberOfTenantsInMso field if non-nil, zero value otherwise.
+
+### GetNumberOfTenantsInMsoOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfTenantsInMsoOk() (*int64, bool)`
+
+GetNumberOfTenantsInMsoOk returns a tuple with the NumberOfTenantsInMso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfTenantsInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfTenantsInMso(v int64)`
+
+SetNumberOfTenantsInMso sets NumberOfTenantsInMso field to given value.
+
+### HasNumberOfTenantsInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfTenantsInMso() bool`
+
+HasNumberOfTenantsInMso returns a boolean if a field has been set.
+
+### GetTypeOfSiteInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetTypeOfSiteInMso() string`
+
+GetTypeOfSiteInMso returns the TypeOfSiteInMso field if non-nil, zero value otherwise.
+
+### GetTypeOfSiteInMsoOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetTypeOfSiteInMsoOk() (*string, bool)`
+
+GetTypeOfSiteInMsoOk returns a tuple with the TypeOfSiteInMso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTypeOfSiteInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetTypeOfSiteInMso(v string)`
+
+SetTypeOfSiteInMso sets TypeOfSiteInMso field to given value.
+
+### HasTypeOfSiteInMso
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasTypeOfSiteInMso() bool`
+
+HasTypeOfSiteInMso returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

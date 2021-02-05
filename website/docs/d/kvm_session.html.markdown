@@ -3,13 +3,11 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_session"
 description: |-
-  Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server.
-The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+  Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
 ---
 
 # Data Source: intersight_kvm_session
-Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server.
-The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `moid`:(string) The unique identifier of this Managed Object instance. 

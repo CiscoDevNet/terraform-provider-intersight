@@ -10,17 +10,11 @@ description: |-
 An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
 ## Argument Reference
 The following arguments are supported:
-* `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `catalog`:(Array with Maximum of one item) - A reference to a softwarerepositoryCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `catalog`:(HashMap) - A reference to a softwarerepositoryCatalog resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `download_count`:(int)(Computed) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
 * `import_action`:(string) The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.* `None` - No action should be taken on the imported file.* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.* `PreCache` - Cache the file into the Intersight Appliance.* `Cancel` - The cancel import process for the file into the repository.* `Extract` - The action to extract the file in the external repository.* `Evict` - Evict the cached file from the Intersight Appliance. 
@@ -29,28 +23,49 @@ This complex property has following sub-properties:
 * `md5sum`:(string) The md5sum checksum of the file. This information is available for all Cisco distributed images and files imported to the local repository. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `sha512sum`:(string) The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository. 
 * `size`:(int) The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. 
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
-* `nr_source`:(Array with Maximum of one item) - Location of the file in an external repository. 
+* `nr_source`:(HashMap) - Location of the file in an external repository. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `tags`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vendor`:(string) The vendor or publisher of this file. 
 * `nr_version`:(string) Vendor provided version for the file. 
 
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_operating_system_file" "osf1" {
+  nr_version = "ESXi 6.7 U2"
+  description = "ESXi6.7U2 without answers"
+  name = "ESXi6.7 w/o cifs 21"
+
+  nr_source {
+    additional_properties = jsonencode({
+      FileLocation = "10.10.10.1/Public/iso/esx67u2.iso"
+      RemoteIp = "10.10.10.1"
+      RemoteShare = "/Public/iso/"
+      RemoteFile = "esx67u2.iso"
+      Username = "user"
+      Password = "ChangeMe"
+      MountOption = "sec=ntlm"
+    })
+    object_type = "softwarerepository.CifsServer"
+  }
+  vendor = "VMware"
+  catalog {
+    moid = var.catalog
+  }
+}
+```
 
 ## Import
 `intersight_softwarerepository_operating_system_file` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_softwarerepository_operating_system_file.example 1234567890987654321abcde
-```
+``` 

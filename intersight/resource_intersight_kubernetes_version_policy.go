@@ -401,7 +401,8 @@ func resourceKubernetesVersionPolicyCreate(c context.Context, d *schema.Resource
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesVersionPolicy(conn.ctx).KubernetesVersionPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KubernetesVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -416,7 +417,8 @@ func resourceKubernetesVersionPolicyRead(c context.Context, d *schema.ResourceDa
 	var de diag.Diagnostics
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVersionPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KubernetesVersionPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -676,7 +678,8 @@ func resourceKubernetesVersionPolicyUpdate(c context.Context, d *schema.Resource
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesVersionPolicy(conn.ctx, d.Id()).KubernetesVersionPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KubernetesVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -691,7 +694,8 @@ func resourceKubernetesVersionPolicyDelete(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVersionPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KubernetesVersionPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

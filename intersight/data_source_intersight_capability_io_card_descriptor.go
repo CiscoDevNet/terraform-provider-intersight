@@ -59,7 +59,7 @@ func dataSourceCapabilityIoCardDescriptor() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -85,7 +85,7 @@ func dataSourceCapabilityIoCardDescriptor() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -117,6 +117,11 @@ func dataSourceCapabilityIoCardDescriptor() *schema.Resource {
 						},
 					},
 				},
+			},
+			"uif_connectivity": {
+				Description: "Connectivity information between UIF Uplink ports and IOM ports.\n* `inline` - UIF uplink ports and IOM ports are connected inline.\n* `cross-connected` - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"vendor": {
 				Description: "The vendor of the endpoint, for which this capability information is applicable.",
@@ -166,6 +171,10 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 		x := (v.(string))
 		o.SetRevision(x)
 	}
+	if v, ok := d.GetOk("uif_connectivity"); ok {
+		x := (v.(string))
+		o.SetUifConnectivity(x)
+	}
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -180,7 +189,8 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 		return diag.Errorf("json marshal of CapabilityIoCardDescriptor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityIoCardDescriptorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching CapabilityIoCardDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -241,6 +251,9 @@ func dataSourceCapabilityIoCardDescriptorRead(c context.Context, d *schema.Resou
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
+			}
+			if err := d.Set("uif_connectivity", (s.GetUifConnectivity())); err != nil {
+				return diag.Errorf("error occurred while setting property UifConnectivity: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
 				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())

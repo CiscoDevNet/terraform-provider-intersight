@@ -25,7 +25,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -380,7 +380,8 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexLocalCredentialPolicy(conn.ctx).HyperflexLocalCredentialPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -395,7 +396,8 @@ func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.Res
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexLocalCredentialPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexLocalCredentialPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -659,7 +661,8 @@ func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.R
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexLocalCredentialPolicy(conn.ctx, d.Id()).HyperflexLocalCredentialPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -674,7 +677,8 @@ func resourceHyperflexLocalCredentialPolicyDelete(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexLocalCredentialPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexLocalCredentialPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de
