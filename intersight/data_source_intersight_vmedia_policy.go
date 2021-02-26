@@ -108,7 +108,7 @@ func dataSourceVmediaPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"remote_file": {
-							Description: "Name of the remote file. It should be of .img format for HDD Virtual Media mapping and .iso format for CDD Virtual Media mapping.",
+							Description: "The remote file location path for the virtual media mapping. Accepted formats are:\nHDD for CIFS/NFS: hostname-or-IP/filePath/fileName.img.\nCDD for CIFS/NFS: hostname-or-IP/filePath/fileName.iso.\nHDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.img.\nCDD for HTTP/S: http[s]://hostname-or-IP/filePath/fileName.iso.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

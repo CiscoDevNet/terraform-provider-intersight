@@ -203,6 +203,12 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"contract_status_reason": {
+				Description: "Reason for contract status. In case of Not Covered, reason is either Terminated or Expired.\n* `` - There is no reason for the specified contract status.\n* `Line Item Expired` - The Cisco device does not have a valid support contract, it has expired.\n* `Line Item Terminated` - The Cisco device does not have a valid support contract, it has been terminated.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"contract_updated_time": {
 				Description: "Date and time indicating when the contract data is last fetched from Cisco's Contract API successfully.",
 				Type:        schema.TypeString,
@@ -861,6 +867,10 @@ func dataSourceAssetDeviceContractInformationRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetContractStatus(x)
 	}
+	if v, ok := d.GetOk("contract_status_reason"); ok {
+		x := (v.(string))
+		o.SetContractStatusReason(x)
+	}
 	if v, ok := d.GetOk("contract_updated_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetContractUpdatedTime(x)
@@ -994,6 +1004,9 @@ func dataSourceAssetDeviceContractInformationRead(c context.Context, d *schema.R
 			}
 			if err := d.Set("contract_status", (s.GetContractStatus())); err != nil {
 				return diag.Errorf("error occurred while setting property ContractStatus: %s", err.Error())
+			}
+			if err := d.Set("contract_status_reason", (s.GetContractStatusReason())); err != nil {
+				return diag.Errorf("error occurred while setting property ContractStatusReason: %s", err.Error())
 			}
 
 			if err := d.Set("contract_updated_time", (s.GetContractUpdatedTime()).String()); err != nil {

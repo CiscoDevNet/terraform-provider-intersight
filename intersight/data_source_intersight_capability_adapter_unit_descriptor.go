@@ -83,6 +83,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"fibre_channel_scsi_ioq_limit": {
+				Description: "The number of SCSI I/O Queue resources to allocate.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"model": {
 				Description: "The model of the endpoint, for which this capability information is applicable.",
 				Type:        schema.TypeString,
@@ -173,6 +178,10 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		x := int64(v.(int))
 		o.SetFibreChannelPortSpeed(x)
 	}
+	if v, ok := d.GetOk("fibre_channel_scsi_ioq_limit"); ok {
+		x := int64(v.(int))
+		o.SetFibreChannelScsiIoqLimit(x)
+	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
@@ -259,6 +268,9 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 			}
 			if err := d.Set("fibre_channel_port_speed", (s.GetFibreChannelPortSpeed())); err != nil {
 				return diag.Errorf("error occurred while setting property FibreChannelPortSpeed: %s", err.Error())
+			}
+			if err := d.Set("fibre_channel_scsi_ioq_limit", (s.GetFibreChannelScsiIoqLimit())); err != nil {
+				return diag.Errorf("error occurred while setting property FibreChannelScsiIoqLimit: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
 				return diag.Errorf("error occurred while setting property Model: %s", err.Error())

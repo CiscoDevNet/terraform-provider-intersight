@@ -128,7 +128,7 @@ func dataSourceStorageHitachiHostLun() *schema.Resource {
 				Computed:    true,
 			},
 			"port_id": {
-				Description: "Port ID of the lun.",
+				Description: "Port ID of the Hitachi host lun.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,

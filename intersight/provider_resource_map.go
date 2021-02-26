@@ -13,6 +13,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_appliance_data_export_policy":                            resourceApplianceDataExportPolicy(),
 		"intersight_appliance_device_claim":                                  resourceApplianceDeviceClaim(),
 		"intersight_appliance_diag_setting":                                  resourceApplianceDiagSetting(),
+		"intersight_appliance_remote_file_import":                            resourceApplianceRemoteFileImport(),
 		"intersight_appliance_restore":                                       resourceApplianceRestore(),
 		"intersight_asset_target":                                            resourceAssetTarget(),
 		"intersight_bios_policy":                                             resourceBiosPolicy(),

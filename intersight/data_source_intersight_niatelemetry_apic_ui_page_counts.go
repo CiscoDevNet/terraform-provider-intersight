@@ -96,6 +96,11 @@ func dataSourceNiatelemetryApicUiPageCounts() *schema.Resource {
 					},
 				},
 			},
+			"site_name": {
+				Description: "Name of the APIC site from which this data is being collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -156,6 +161,10 @@ func dataSourceNiatelemetryApicUiPageCountsRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("record_version"); ok {
 		x := (v.(string))
 		o.SetRecordVersion(x)
+	}
+	if v, ok := d.GetOk("site_name"); ok {
+		x := (v.(string))
+		o.SetSiteName(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -221,6 +230,9 @@ func dataSourceNiatelemetryApicUiPageCountsRead(c context.Context, d *schema.Res
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
+			}
+			if err := d.Set("site_name", (s.GetSiteName())); err != nil {
+				return diag.Errorf("error occurred while setting property SiteName: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

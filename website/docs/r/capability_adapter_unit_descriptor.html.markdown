@@ -19,6 +19,7 @@ This complex property has following sub-properties:
 * `description`:(string) Detailed information about the endpoint. 
 * `ethernet_port_speed`:(int) The port speed for ethernet ports in Mbps. 
 * `fibre_channel_port_speed`:(int) The port speed for fibre channel ports in Mbps. 
+* `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_dce_ports`:(int) Number of Dce Ports for the adaptor. 

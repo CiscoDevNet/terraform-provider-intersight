@@ -11,7 +11,7 @@ Port entity in Hitachi storage array.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `fabric_mode`:(bool) Fabric mode of the port. true, Set. false, Not set. 
-* `ipv4_address`:(string) IPv4 address. 
+* `ipv4_address`:(string) IPv4 address of Hitachi Port. 
 * `ipv6_global_address`:(string) IPv6 global address value. 
 * `ipv6_link_local_address`:(string) IPv6 link local address value. 
 * `iqn`:(string) ISCSI qualified name applicable for ethernet port. Example - 'iqn.2008-05.com.storage:fnm00151300643-514f0c50141faf05'. 

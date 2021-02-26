@@ -556,7 +556,7 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Computed:    true,
 			},
 			"name": {
-				Description: "Virtual machine name contains only letters, numbers, allowed special character and must be unique.",
+				Description: "Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -572,7 +572,7 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"provision_type": {
-				Description: "Identifies the provision type to create a new virtual machine.\n* `OVA` - Deploy virtual machine using OVA/F file.\n* `Template` - Provision virtual machine using a template file.",
+				Description: "Identifies the provision type to create a new virtual machine.\n* `OVA` - Deploy virtual machine using OVA/F file.\n* `Template` - Provision virtual machine using a template file.\n* `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
