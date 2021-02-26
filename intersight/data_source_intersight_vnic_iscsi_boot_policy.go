@@ -118,7 +118,7 @@ func dataSourceVnicIscsiBootPolicy() *schema.Resource {
 				Computed: true,
 			},
 			"initiator_ip_source": {
-				Description: "Source Type of Initiator IP Address - Auto/Static/Pool.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Description: "Source Type of Initiator IP Address - Auto/Static/Pool.\n* `DHCP` - The IP address is assigned using DHCP, if available.\n* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.\n* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -414,7 +414,7 @@ func dataSourceVnicIscsiBootPolicy() *schema.Resource {
 				},
 			},
 			"target_source_type": {
-				Description: "Source Type of Targets - Auto/Static.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Description: "Source Type of Targets - Auto/Static.\n* `Static` - Type indicates that static target interface is assigned to iSCSI boot.\n* `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

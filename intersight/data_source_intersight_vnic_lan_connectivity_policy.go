@@ -69,7 +69,7 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 				Computed: true,
 			},
 			"iqn_allocation_type": {
-				Description: "Allocation Type of iSCSI Qualified Name - Static/Dynamic/None.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Description: "Allocation Type of iSCSI Qualified Name - Static/Pool/None.\n* `None` - Type indicates that there is no IQN associated to an interface.\n* `Static` - Type represents that static IQN is associated to an interface.\n* `Pool` - Type indicates that IQN value is sourced from an associated pool.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

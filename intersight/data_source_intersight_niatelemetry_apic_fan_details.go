@@ -96,6 +96,11 @@ func dataSourceNiatelemetryApicFanDetails() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"site_name": {
+				Description: "Name of the APIC site from which this data is being collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -161,6 +166,10 @@ func dataSourceNiatelemetryApicFanDetailsRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("serial_number"); ok {
 		x := (v.(string))
 		o.SetSerialNumber(x)
+	}
+	if v, ok := d.GetOk("site_name"); ok {
+		x := (v.(string))
+		o.SetSiteName(x)
 	}
 	if v, ok := d.GetOk("vendor_name"); ok {
 		x := (v.(string))
@@ -230,6 +239,9 @@ func dataSourceNiatelemetryApicFanDetailsRead(c context.Context, d *schema.Resou
 			}
 			if err := d.Set("serial_number", (s.GetSerialNumber())); err != nil {
 				return diag.Errorf("error occurred while setting property SerialNumber: %s", err.Error())
+			}
+			if err := d.Set("site_name", (s.GetSiteName())); err != nil {
+				return diag.Errorf("error occurred while setting property SiteName: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

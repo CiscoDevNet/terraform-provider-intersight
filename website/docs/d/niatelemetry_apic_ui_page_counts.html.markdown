@@ -15,3 +15,4 @@ The following arguments can be used to get data of already created objects in In
 * `page_name`:(string) Name of the page for which page count is recorded. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
+* `site_name`:(string) Name of the APIC site from which this data is being collected. 

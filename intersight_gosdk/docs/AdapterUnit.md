@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Presence** | Pointer to **string** | Adapter Unit presence or absence. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | Thermal state of an adapter unit. | [optional] [readonly] 
 **Vid** | Pointer to **string** | Virtual Id of the adapter in the server. | [optional] [readonly] 
+**AdapterUnitExpander** | Pointer to [**AdapterUnitExpanderRelationship**](adapter.UnitExpander.Relationship.md) |  | [optional] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **Controller** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
@@ -386,6 +387,31 @@ SetVid sets Vid field to given value.
 `func (o *AdapterUnit) HasVid() bool`
 
 HasVid returns a boolean if a field has been set.
+
+### GetAdapterUnitExpander
+
+`func (o *AdapterUnit) GetAdapterUnitExpander() AdapterUnitExpanderRelationship`
+
+GetAdapterUnitExpander returns the AdapterUnitExpander field if non-nil, zero value otherwise.
+
+### GetAdapterUnitExpanderOk
+
+`func (o *AdapterUnit) GetAdapterUnitExpanderOk() (*AdapterUnitExpanderRelationship, bool)`
+
+GetAdapterUnitExpanderOk returns a tuple with the AdapterUnitExpander field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdapterUnitExpander
+
+`func (o *AdapterUnit) SetAdapterUnitExpander(v AdapterUnitExpanderRelationship)`
+
+SetAdapterUnitExpander sets AdapterUnitExpander field to given value.
+
+### HasAdapterUnitExpander
+
+`func (o *AdapterUnit) HasAdapterUnitExpander() bool`
+
+HasAdapterUnitExpander returns a boolean if a field has been set.
 
 ### GetComputeBlade
 

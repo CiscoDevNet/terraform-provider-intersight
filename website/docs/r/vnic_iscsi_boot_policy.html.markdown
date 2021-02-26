@@ -23,7 +23,7 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `initiator_ip_source`:(string) Source Type of Initiator IP Address - Auto/Static/Pool.* `None` - Type defines that property is not applicable for an interface.* `Auto` - The system selects an interface automatically - DHCP.* `Static` - Type represents that static information or properties are associated to an interface.* `Pool` - Type defines that property value will be fetched from an associated pool. 
+* `initiator_ip_source`:(string) Source Type of Initiator IP Address - Auto/Static/Pool.* `DHCP` - The IP address is assigned using DHCP, if available.* `Static` - Static IPv4 address is assigned to the iSCSI boot interface based on the information entered in this area.* `Pool` - An IPv4 address is assigned to the iSCSI boot interface from the management IP address pool. 
 * `initiator_static_ip_v4_address`:(string) Static IP address provided for iSCSI Initiator. 
 * `initiator_static_ip_v4_config`:(HashMap) - IPV4 configurations such as Netmask, Gateway and DNS for iSCSI Initiator. 
 This complex property has following sub-properties:
@@ -64,7 +64,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `target_source_type`:(string) Source Type of Targets - Auto/Static.* `None` - Type defines that property is not applicable for an interface.* `Auto` - The system selects an interface automatically - DHCP.* `Static` - Type represents that static information or properties are associated to an interface.* `Pool` - Type defines that property value will be fetched from an associated pool. 
+* `target_source_type`:(string) Source Type of Targets - Auto/Static.* `Static` - Type indicates that static target interface is assigned to iSCSI boot.* `Auto` - Type indicates that the system selects the target interface automatically during iSCSI boot. 
 
 
 ## Import

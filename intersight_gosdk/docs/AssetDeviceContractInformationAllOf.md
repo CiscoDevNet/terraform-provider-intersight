@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceContractInformation"]
 **Contract** | Pointer to [**NullableAssetContractInformation**](asset.ContractInformation.md) |  | [optional] 
 **ContractStatus** | Pointer to **string** | Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * &#x60;Unknown&#x60; - The device&#39;s contract status cannot be determined. * &#x60;Not Covered&#x60; - The Cisco device does not have a valid support contract. * &#x60;Active&#x60; - The Cisco device is covered under a active support contract. * &#x60;Expiring Soon&#x60; - The contract for this Cisco device is going to expire in the next 30 days. | [optional] [readonly] [default to "Unknown"]
+**ContractStatusReason** | Pointer to **string** | Reason for contract status. In case of Not Covered, reason is either Terminated or Expired. * &#x60;&#x60; - There is no reason for the specified contract status. * &#x60;Line Item Expired&#x60; - The Cisco device does not have a valid support contract, it has expired. * &#x60;Line Item Terminated&#x60; - The Cisco device does not have a valid support contract, it has been terminated. | [optional] [readonly] [default to ""]
 **ContractUpdatedTime** | Pointer to **time.Time** | Date and time indicating when the contract data is last fetched from Cisco&#39;s Contract API successfully. | [optional] [readonly] 
 **CoveredProductLineEndDate** | Pointer to **string** | End date of the covered product line. The coverage end date is fetched from Cisco SN2INFO API. | [optional] [readonly] 
 **DeviceId** | Pointer to **string** | Unique identifier of the Cisco device. This information is used to query Cisco APIx SN2INFO and CCWR databases. | [optional] [readonly] 
@@ -151,6 +152,31 @@ SetContractStatus sets ContractStatus field to given value.
 `func (o *AssetDeviceContractInformationAllOf) HasContractStatus() bool`
 
 HasContractStatus returns a boolean if a field has been set.
+
+### GetContractStatusReason
+
+`func (o *AssetDeviceContractInformationAllOf) GetContractStatusReason() string`
+
+GetContractStatusReason returns the ContractStatusReason field if non-nil, zero value otherwise.
+
+### GetContractStatusReasonOk
+
+`func (o *AssetDeviceContractInformationAllOf) GetContractStatusReasonOk() (*string, bool)`
+
+GetContractStatusReasonOk returns a tuple with the ContractStatusReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContractStatusReason
+
+`func (o *AssetDeviceContractInformationAllOf) SetContractStatusReason(v string)`
+
+SetContractStatusReason sets ContractStatusReason field to given value.
+
+### HasContractStatusReason
+
+`func (o *AssetDeviceContractInformationAllOf) HasContractStatusReason() bool`
+
+HasContractStatusReason returns a boolean if a field has been set.
 
 ### GetContractUpdatedTime
 

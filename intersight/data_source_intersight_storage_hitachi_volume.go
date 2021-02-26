@@ -76,13 +76,13 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"data_reduction_mode": {
-				Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - Not available.\n* `compression` - The capacity saving function (compression) is enabled.\n* `compression_deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `disabled` - The capacity saving function (compression and deduplication) is disabled.",
+				Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - Not available.\n* `Compression` - The capacity saving function (compression) is enabled.\n* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `Disabled` - The capacity saving function (compression and deduplication) is disabled.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"data_reduction_status": {
-				Description: "Status of the capacity saving function.\n* `N/A` - Not available.\n* `ENABLED` - The capacity saving function is enabled.\n* `DISABLED` - The capacity saving function is disabled.\n* `ENABLING` - The capacity saving function is being enabled.\n* `REHYDRATING` - The capacity saving function is being disabled.\n* `DELETING` - The volumes for which the capacity saving function is enabled are being deleted.\n* `FAILED` - An attempt to enable the capacity saving function failed.",
+				Description: "Status of the capacity saving function.\n* `N/A` - Not available.\n* `Enabled` - The capacity saving function is enabled.\n* `Disabled` - The capacity saving function is disabled.\n* `Enabling` - The capacity saving function is being enabled.\n* `Rehydrating` - The capacity saving function is being disabled.\n* `Deleting` - The volumes for which the capacity saving function is enabled are being deleted.\n* `Failed` - An attempt to enable the capacity saving function failed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,

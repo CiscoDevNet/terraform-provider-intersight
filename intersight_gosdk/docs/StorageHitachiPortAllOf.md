@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.HitachiPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HitachiPort"]
 **FabricMode** | Pointer to **bool** | Fabric mode of the port. true, Set. false, Not set. | [optional] [readonly] 
-**Ipv4Address** | Pointer to **string** | IPv4 address. | [optional] [readonly] 
+**Ipv4Address** | Pointer to **string** | IPv4 address of Hitachi Port. | [optional] [readonly] 
 **Ipv6GlobalAddress** | Pointer to **string** | IPv6 global address value. | [optional] [readonly] 
 **Ipv6LinkLocalAddress** | Pointer to **string** | IPv6 link local address value. | [optional] [readonly] 
 **IsIpv6Enable** | Pointer to **bool** | IPv6 mode. | [optional] [readonly] 

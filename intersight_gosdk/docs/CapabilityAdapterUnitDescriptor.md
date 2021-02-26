@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConnectivityOrder** | Pointer to **string** | Order in which the ports are connected; sequential or cyclic. | [optional] 
 **EthernetPortSpeed** | Pointer to **int64** | The port speed for ethernet ports in Mbps. | [optional] 
 **FibreChannelPortSpeed** | Pointer to **int64** | The port speed for fibre channel ports in Mbps. | [optional] 
+**FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
 **NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adaptor. | [optional] 
 **PromCardType** | Pointer to **string** | Prom card type for the adaptor. | [optional] 
 
@@ -145,6 +146,31 @@ SetFibreChannelPortSpeed sets FibreChannelPortSpeed field to given value.
 `func (o *CapabilityAdapterUnitDescriptor) HasFibreChannelPortSpeed() bool`
 
 HasFibreChannelPortSpeed returns a boolean if a field has been set.
+
+### GetFibreChannelScsiIoqLimit
+
+`func (o *CapabilityAdapterUnitDescriptor) GetFibreChannelScsiIoqLimit() int64`
+
+GetFibreChannelScsiIoqLimit returns the FibreChannelScsiIoqLimit field if non-nil, zero value otherwise.
+
+### GetFibreChannelScsiIoqLimitOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetFibreChannelScsiIoqLimitOk() (*int64, bool)`
+
+GetFibreChannelScsiIoqLimitOk returns a tuple with the FibreChannelScsiIoqLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFibreChannelScsiIoqLimit
+
+`func (o *CapabilityAdapterUnitDescriptor) SetFibreChannelScsiIoqLimit(v int64)`
+
+SetFibreChannelScsiIoqLimit sets FibreChannelScsiIoqLimit field to given value.
+
+### HasFibreChannelScsiIoqLimit
+
+`func (o *CapabilityAdapterUnitDescriptor) HasFibreChannelScsiIoqLimit() bool`
+
+HasFibreChannelScsiIoqLimit returns a boolean if a field has been set.
 
 ### GetNumDcePorts
 

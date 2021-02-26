@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the PSU in APIC. | [optional] 
+**SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **VendorName** | Pointer to **string** | Vendor name of the PSU in APIC. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -171,6 +172,31 @@ SetSerialNumber sets SerialNumber field to given value.
 `func (o *NiatelemetryApicPsuDetailsAllOf) HasSerialNumber() bool`
 
 HasSerialNumber returns a boolean if a field has been set.
+
+### GetSiteName
+
+`func (o *NiatelemetryApicPsuDetailsAllOf) GetSiteName() string`
+
+GetSiteName returns the SiteName field if non-nil, zero value otherwise.
+
+### GetSiteNameOk
+
+`func (o *NiatelemetryApicPsuDetailsAllOf) GetSiteNameOk() (*string, bool)`
+
+GetSiteNameOk returns a tuple with the SiteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteName
+
+`func (o *NiatelemetryApicPsuDetailsAllOf) SetSiteName(v string)`
+
+SetSiteName sets SiteName field to given value.
+
+### HasSiteName
+
+`func (o *NiatelemetryApicPsuDetailsAllOf) HasSiteName() bool`
+
+HasSiteName returns a boolean if a field has been set.
 
 ### GetVendorName
 

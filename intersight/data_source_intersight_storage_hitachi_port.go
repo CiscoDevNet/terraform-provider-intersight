@@ -71,7 +71,7 @@ func dataSourceStorageHitachiPort() *schema.Resource {
 				Computed:    true,
 			},
 			"ipv4_address": {
-				Description: "IPv4 address.",
+				Description: "IPv4 address of Hitachi Port.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,

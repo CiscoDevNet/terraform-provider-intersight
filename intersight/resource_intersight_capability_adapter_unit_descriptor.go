@@ -90,6 +90,11 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"fibre_channel_scsi_ioq_limit": {
+				Description: "The number of SCSI I/O Queue resources to allocate.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"model": {
 				Description: "The model of the endpoint, for which this capability information is applicable.",
 				Type:        schema.TypeString,
@@ -233,6 +238,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetFibreChannelPortSpeed(x)
 	}
 
+	if v, ok := d.GetOk("fibre_channel_scsi_ioq_limit"); ok {
+		x := int64(v.(int))
+		o.SetFibreChannelScsiIoqLimit(x)
+	}
+
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
@@ -356,6 +366,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property FibreChannelPortSpeed in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("fibre_channel_scsi_ioq_limit", (s.GetFibreChannelScsiIoqLimit())); err != nil {
+		return diag.Errorf("error occurred while setting property FibreChannelScsiIoqLimit in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("model", (s.GetModel())); err != nil {
 		return diag.Errorf("error occurred while setting property Model in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
@@ -475,6 +489,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("fibre_channel_port_speed")
 		x := int64(v.(int))
 		o.SetFibreChannelPortSpeed(x)
+	}
+
+	if d.HasChange("fibre_channel_scsi_ioq_limit") {
+		v := d.Get("fibre_channel_scsi_ioq_limit")
+		x := int64(v.(int))
+		o.SetFibreChannelScsiIoqLimit(x)
 	}
 
 	if d.HasChange("model") {

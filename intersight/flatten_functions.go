@@ -3433,6 +3433,23 @@ func flattenListMetaRelationshipDefinition(p []models.MetaRelationshipDefinition
 	}
 	return metarelationshipdefinitions
 }
+func flattenListMetadataCustomAttributes(p []models.MetadataCustomAttributes, d *schema.ResourceData) []map[string]interface{} {
+	var metadatacustomattributess []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		metadatacustomattributes := make(map[string]interface{})
+		metadatacustomattributes["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		metadatacustomattributes["attribute_name"] = item.AttributeName
+		metadatacustomattributes["attribute_type"] = item.AttributeType
+		metadatacustomattributes["attribute_value"] = item.AttributeValue
+		metadatacustomattributes["class_id"] = item.ClassId
+		metadatacustomattributes["object_type"] = item.ObjectType
+		metadatacustomattributess = append(metadatacustomattributess, metadatacustomattributes)
+	}
+	return metadatacustomattributess
+}
 func flattenListMoTag(p []models.MoTag, d *schema.ResourceData) []map[string]interface{} {
 	var motags []map[string]interface{}
 	if len(p) == 0 {
@@ -5379,6 +5396,24 @@ func flattenMapAdapterUnitRelationship(p models.AdapterUnitRelationship, d *sche
 
 	adapterunitrelationships = append(adapterunitrelationships, adapterunitrelationship)
 	return adapterunitrelationships
+}
+func flattenMapAdapterUnitExpanderRelationship(p models.AdapterUnitExpanderRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var adapterunitexpanderrelationships []map[string]interface{}
+	var ret models.AdapterUnitExpanderRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	adapterunitexpanderrelationship := make(map[string]interface{})
+	adapterunitexpanderrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	adapterunitexpanderrelationship["class_id"] = item.ClassId
+	adapterunitexpanderrelationship["moid"] = item.Moid
+	adapterunitexpanderrelationship["object_type"] = item.ObjectType
+	adapterunitexpanderrelationship["selector"] = item.Selector
+
+	adapterunitexpanderrelationships = append(adapterunitexpanderrelationships, adapterunitexpanderrelationship)
+	return adapterunitexpanderrelationships
 }
 func flattenMapApplianceCertRenewalPhase(p models.ApplianceCertRenewalPhase, d *schema.ResourceData) []map[string]interface{} {
 	var appliancecertrenewalphases []map[string]interface{}

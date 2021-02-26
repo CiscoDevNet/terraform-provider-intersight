@@ -11,7 +11,7 @@ A LAN Connectivity Policy determines the network resources and the connections b
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Description of the policy. 
-* `iqn_allocation_type`:(string) Allocation Type of iSCSI Qualified Name - Static/Dynamic/None.* `None` - Type defines that property is not applicable for an interface.* `Auto` - The system selects an interface automatically - DHCP.* `Static` - Type represents that static information or properties are associated to an interface.* `Pool` - Type defines that property value will be fetched from an associated pool. 
+* `iqn_allocation_type`:(string) Allocation Type of iSCSI Qualified Name - Static/Pool/None.* `None` - Type indicates that there is no IQN associated to an interface.* `Static` - Type represents that static IQN is associated to an interface.* `Pool` - Type indicates that IQN value is sourced from an associated pool. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
 * `placement_mode`:(string) The mode used for placement of vNICs on network adapters. It can either be Auto or Custom.* `custom` - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user.* `auto` - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system. 
