@@ -997,6 +997,12 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
 	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	resultMo, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
 	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
 	runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
 	for _, w := range runningWorkflows {
@@ -1640,6 +1646,22 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	result, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, result.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
+	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+	runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
+	for _, w := range runningWorkflows {
+		err := checkWorkflowStatus(conn, w)
+		if err != nil {
+			err := err.(models.GenericOpenAPIError)
+			return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+		}
+	}
 	return resourceServerProfileRead(c, d, meta)
 }
 

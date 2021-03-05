@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -567,6 +568,12 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
 	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	resultMo, _, responseErr = conn.ApiClient.RecoveryApi.GetRecoveryRestoreByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
 	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
 	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflow())
 	for _, w := range runningWorkflows {

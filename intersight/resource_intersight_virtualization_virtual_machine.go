@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1546,6 +1547,12 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
 	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	resultMo, _, responseErr = conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
 	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
 	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
 	for _, w := range runningWorkflows {
@@ -2514,6 +2521,22 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	result, _, responseErr = conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineByMoid(conn.ctx, result.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
+	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+	runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
+	for _, w := range runningWorkflows {
+		err := checkWorkflowStatus(conn, w)
+		if err != nil {
+			err := err.(models.GenericOpenAPIError)
+			return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualMachine: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+		}
+	}
 	return resourceVirtualizationVirtualMachineRead(c, d, meta)
 }
 

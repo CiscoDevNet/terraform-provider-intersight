@@ -6,6 +6,7 @@ import (
 	"log"
 	"reflect"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1877,6 +1878,12 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
 	// Check for Workflow Status
+	time.Sleep(2 * time.Second)
+	resultMo, _, responseErr = conn.ApiClient.OsApi.GetOsInstallByMoid(conn.ctx, resultMo.GetMoid()).Execute()
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
+		return diag.Errorf("error occurred while fetching OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+	}
 	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
 	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
 	for _, w := range runningWorkflows {
