@@ -1,0 +1,43 @@
+# Change Logs
+
+## v0.1.0 
+Release Date: 13th October 2020
+* Initial release
+
+## v0.1.1
+Release Date: 22nd Nov 2020
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model.
+
+## v0.1.2
+Release Date: 22nd December 2020
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3127).
+
+## v0.1.3
+Release Data: 8th Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3144).
+
+## v0.1.4
+Release Data: 15th Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3181).
+
+## v0.1.5
+Release Data: 22nd Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3252).
+
+## v1.0.0
+Release Date: 5th Feb 2021
+*  Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3562).
+*  Changes `secretkeyfile` to `secretkey` in provider block. Although minor, this is a breaking change. We have updated the major version of the provider to reflect the same. The new `secretkey` property also accepts the api secret text as a string in addition to the earlier supported file path string. The existing configuration files must rename `secretkeyfile` to `secretkey` when using Intersight provider version >=1.0.0
+*  Some Intersight specific properties like `object_type` and `class_id` are now internally set by the provider internally (except for a few special cases). A user need not provide these anymore. The documentation is updated to reflect the change.
+*  An effort is made to make the documentation richer by adding  hand-written examples for some resources. An infrastructure is put in place for the community to contribute examples to the documentation.
+*  Documentation for complex type objects is enhanced to include exact types and properties for each internal object.
+
+## v1.0.1
+Release Date: 26th Feb 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3714).
+
+## v1.0.2
+Release Date: 5th Mar 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3824).
+* `terraform apply` will wait till all workflows triggered due to the operation reach an end state.
+* Data sources can now store the results as a list. To access a property in the `i`th index of results, the syntax will be `data.intersight_<model_name>.<custom_name>.results[i].<property_name>`.
