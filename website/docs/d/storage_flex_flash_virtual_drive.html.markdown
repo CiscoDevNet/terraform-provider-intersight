@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_flex_flash_virtual_drive
 Virtual Drive repersenting a SD Card.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_flex_flash_virtual_drive.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -24,3 +27,4 @@ The following arguments can be used to get data of already created objects in In
 * `size`:(string) Size of virtual drive on the flex controller. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `virtual_drive`:(string) Virtual drive on the flex flash controller. 
+ 

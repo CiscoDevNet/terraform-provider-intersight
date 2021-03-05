@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 	"time"
@@ -16,11 +15,6 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceVirtualizationVmwareVirtualMachineRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"annotation": {
 				Description: "List of annotations provided to this VM by user. Can be long.",
 				Type:        schema.TypeString,
@@ -31,91 +25,10 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"capacity": {
-				Description: "Provisioned CPU and memory information for this virtual machine.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"cpu_cores": {
-							Description: "The number of cpu cores on this hardware platform.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"cpu_speed": {
-							Description: "Speed of cpu in MHz. Usually cpu speeds are reported for modern cpus in GHz but MHz makes it more precise.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"memory_size": {
-							Description: "The amount of memory allocated (bytes) to this hardware platform.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"cluster": {
-				Description: "A reference to a virtualizationVmwareCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"config_name": {
 				Description: "The configuration name for this VM. This maybe the same as the guest hostname.",
@@ -132,177 +45,6 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
-			"cpu_shares": {
-				Description: "Shows the relative importance of a VM and its CPU limits.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"cpu_limit": {
-							Description: "Upper limit on CPU allocation (MHz).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"cpu_overhead_limit": {
-							Description: "Amount of CPU for virtualization overhead.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"cpu_reservation": {
-							Description: "Guaranteed minimum allocation of CPU resource (MHz).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"cpu_shares": {
-							Description: "Shows the relative importance of a VM. There is no unit for this value. It is a relative measure based on the settings for other resource pools. For more information, see VMware documentation.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"cpu_socket_info": {
-				Description: "Details of CPUs/sockets of this VM.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"cores_per_socket": {
-							Description: "The number of core per CPU socket (value may be empty).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"num_cpus": {
-							Description: "Number of CPUs allocated to this VM.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"num_sockets": {
-							Description: "The number of CPU sockets allocated.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"custom_attributes": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-			"datacenter": {
-				Description: "A reference to a virtualizationVmwareDatacenter resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
-			"datastores": {
-				Description: "An array of relationships to virtualizationVmwareDatastore resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"default_power_off_type": {
 				Description: "Indicates how the VM will be powered off (soft, hard etc.).",
 				Type:        schema.TypeString,
@@ -313,153 +55,15 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
-			"disk_commit_info": {
-				Description: "Information about the virtual machine's disk commits, sharing and limits.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"committed_disk": {
-							Description: "Disk committed in bytes on this virtual machine (disk space used up).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"un_committed_disk": {
-							Description: "Total uncommitted disk space that is available for use (in bytes).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"unshared_disk": {
-							Description: "Total unshared disk space (in bytes).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"dns_server_list": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-			"dns_suffix_list": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"folder": {
 				Description: "The folder name associated with this VM.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"guest_info": {
-				Description: "Guest operating system details running on this machine.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"hostname": {
-							Description: "Name provided to the host OS (example, ubuntu6410, test-gateway, etc.).",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"ip_address": {
-							Description: "Primary IP address of the guest os.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"name": {
-							Description: "The name of the guest running on this VM. This may not be the same as the hostname.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"operating_system": {
-							Description: "The name of the guest OS running on this VM (Cent OS 4/5/6/7).",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"guest_state": {
 				Description: "The state of the guest OS running on this VM. Could be running, not running etc.\n* `Unknown` - Indicates that the guest OS state cannot be determined.\n* `NotRunning` - Indicates that the guest OS is not running.\n* `Resetting` - Indicates that the guest OS is resetting.\n* `Running` - Indicates that the guest OS is running normally.\n* `ShuttingDown` - Indicates that the guest OS is shutting down.\n* `Standby` - Indicates that the guest OS is in standby mode.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"host": {
-				Description: "A reference to a virtualizationVmwareHost resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"hypervisor_type": {
 				Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
@@ -481,109 +85,10 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"ip_address": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"is_template": {
 				Description: "If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-			},
-			"mac_address": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-			"mem_shares": {
-				Description: "Similar to CPU Shares but applicable to memory.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"mem_limit": {
-							Description: "Limit on the memory sharing imposed (in Mbytes).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"mem_overhead_limit": {
-							Description: "Limit on memory overhead imposed (in Mbytes).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"mem_reservation": {
-							Description: "Similar to CPU reservations (Mbytes).",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"mem_shares": {
-							Description: "Similar to CPU Shares but applicable to memory. There is no unit for this value. It is a relative measure based on the settings for other resource pools.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"memory_capacity": {
-				Description: "The capacity and usage information for memory on this virtual machine.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"capacity": {
-							Description: "The total memory capacity of the entity in bytes.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"free": {
-							Description: "Free memory (bytes) that is unused and available for allocation, as a point-in-time snapshot. The available memory capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used memory capacity is also reported.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"used": {
-							Description: "Memory (bytes) that has been already used up, as a point-in-time snapshot.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"memory_hot_add_enabled": {
 				Description: "Adding memory to a running VM.",
@@ -612,143 +117,15 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"port_groups": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"power_state": {
 				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"processor_capacity": {
-				Description: "The capacity and usage information for CPU power on this virtual machine.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"capacity": {
-							Description: "Total capacity of the entity in MHz.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"free": {
-							Description: "Free CPU capacity in MHz, as a point-in-time snapshot. The available CPU capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used CPU capacity is also reported.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"used": {
-							Description: "Used CPU capacity of the entity in MHz, as a point-in-time snapshot.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"protected_vm": {
 				Description: "Shows if this is a protected VM. VMs can be in protection groups.",
 				Type:        schema.TypeBool,
 				Optional:    true,
-			},
-			"registered_device": {
-				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"remote_display_info": {
-				Description: "Applies only when remoteDisplayvnc is enabled.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"remote_display_password": {
-							Description: "The password used for remote access. It is stored base64 encoded.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"remote_display_vnc_key": {
-							Description: "The access key for the remote display, potentially a long string.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"remote_display_vnc_port": {
-							Description: "Applies only when remoteDisplayvnc is enabled.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"remote_display_vnc_enabled": {
 				Description: "Shows if support for a remote VNC access is enabled.",
@@ -769,29 +146,6 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Description: "The parent of the current resource pool to which this VM belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
 			},
 			"tool_running_status": {
 				Description: "Indicates if guest tools are running on this VM. Could be set to guestToolNotRunning or guestToolsRunning.",
@@ -838,7 +192,833 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"annotation": {
+						Description: "List of annotations provided to this VM by user. Can be long.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"boot_time": {
+						Description: "Time when this VM booted up.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"capacity": {
+						Description: "Provisioned CPU and memory information for this virtual machine.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"cpu_cores": {
+									Description: "The number of cpu cores on this hardware platform.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cpu_speed": {
+									Description: "Speed of cpu in MHz. Usually cpu speeds are reported for modern cpus in GHz but MHz makes it more precise.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"memory_size": {
+									Description: "The amount of memory allocated (bytes) to this hardware platform.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cluster": {
+						Description: "A reference to a virtualizationVmwareCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"config_name": {
+						Description: "The configuration name for this VM. This maybe the same as the guest hostname.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"connection_state": {
+						Description: "Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cpu_hot_add_enabled": {
+						Description: "Indicates if the capability to add CPUs to a running VM is enabled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"cpu_shares": {
+						Description: "Shows the relative importance of a VM and its CPU limits.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"cpu_limit": {
+									Description: "Upper limit on CPU allocation (MHz).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cpu_overhead_limit": {
+									Description: "Amount of CPU for virtualization overhead.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cpu_reservation": {
+									Description: "Guaranteed minimum allocation of CPU resource (MHz).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cpu_shares": {
+									Description: "Shows the relative importance of a VM. There is no unit for this value. It is a relative measure based on the settings for other resource pools. For more information, see VMware documentation.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"cpu_socket_info": {
+						Description: "Details of CPUs/sockets of this VM.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"cores_per_socket": {
+									Description: "The number of core per CPU socket (value may be empty).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"num_cpus": {
+									Description: "Number of CPUs allocated to this VM.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"num_sockets": {
+									Description: "The number of CPU sockets allocated.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"custom_attributes": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"datacenter": {
+						Description: "A reference to a virtualizationVmwareDatacenter resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"datastores": {
+						Description: "An array of relationships to virtualizationVmwareDatastore resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"default_power_off_type": {
+						Description: "Indicates how the VM will be powered off (soft, hard etc.).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dhcp_enabled": {
+						Description: "Shows if DHCP is used for IP/DNS on this VM.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"disk_commit_info": {
+						Description: "Information about the virtual machine's disk commits, sharing and limits.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"committed_disk": {
+									Description: "Disk committed in bytes on this virtual machine (disk space used up).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"un_committed_disk": {
+									Description: "Total uncommitted disk space that is available for use (in bytes).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"unshared_disk": {
+									Description: "Total unshared disk space (in bytes).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"dns_server_list": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"dns_suffix_list": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"folder": {
+						Description: "The folder name associated with this VM.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"guest_info": {
+						Description: "Guest operating system details running on this machine.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hostname": {
+									Description: "Name provided to the host OS (example, ubuntu6410, test-gateway, etc.).",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"ip_address": {
+									Description: "Primary IP address of the guest os.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "The name of the guest running on this VM. This may not be the same as the hostname.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"operating_system": {
+									Description: "The name of the guest OS running on this VM (Cent OS 4/5/6/7).",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"guest_state": {
+						Description: "The state of the guest OS running on this VM. Could be running, not running etc.\n* `Unknown` - Indicates that the guest OS state cannot be determined.\n* `NotRunning` - Indicates that the guest OS is not running.\n* `Resetting` - Indicates that the guest OS is resetting.\n* `Running` - Indicates that the guest OS is running normally.\n* `ShuttingDown` - Indicates that the guest OS is shutting down.\n* `Standby` - Indicates that the guest OS is in standby mode.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"host": {
+						Description: "A reference to a virtualizationVmwareHost resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"hypervisor_type": {
+						Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"identity": {
+						Description: "The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"instance_uuid": {
+						Description: "UUID assigned by vCenter to every VM.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"inventory_path": {
+						Description: "Inventory path to the VM. Example - /DC/vm/folder/VMName.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip_address": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"is_template": {
+						Description: "If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"mac_address": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"mem_shares": {
+						Description: "Similar to CPU Shares but applicable to memory.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"mem_limit": {
+									Description: "Limit on the memory sharing imposed (in Mbytes).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"mem_overhead_limit": {
+									Description: "Limit on memory overhead imposed (in Mbytes).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"mem_reservation": {
+									Description: "Similar to CPU reservations (Mbytes).",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"mem_shares": {
+									Description: "Similar to CPU Shares but applicable to memory. There is no unit for this value. It is a relative measure based on the settings for other resource pools.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"memory_capacity": {
+						Description: "The capacity and usage information for memory on this virtual machine.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"capacity": {
+									Description: "The total memory capacity of the entity in bytes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free memory (bytes) that is unused and available for allocation, as a point-in-time snapshot. The available memory capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used memory capacity is also reported.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"used": {
+									Description: "Memory (bytes) that has been already used up, as a point-in-time snapshot.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"memory_hot_add_enabled": {
+						Description: "Adding memory to a running VM.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"name": {
+						Description: "User-provided name to identify the virtual machine.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"network_count": {
+						Description: "Indicates how many networks are used by this VM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"port_groups": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"power_state": {
+						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"processor_capacity": {
+						Description: "The capacity and usage information for CPU power on this virtual machine.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"capacity": {
+									Description: "Total capacity of the entity in MHz.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free CPU capacity in MHz, as a point-in-time snapshot. The available CPU capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used CPU capacity is also reported.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"used": {
+									Description: "Used CPU capacity of the entity in MHz, as a point-in-time snapshot.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"protected_vm": {
+						Description: "Shows if this is a protected VM. VMs can be in protection groups.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"registered_device": {
+						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"remote_display_info": {
+						Description: "Applies only when remoteDisplayvnc is enabled.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"remote_display_password": {
+									Description: "The password used for remote access. It is stored base64 encoded.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"remote_display_vnc_key": {
+									Description: "The access key for the remote display, potentially a long string.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"remote_display_vnc_port": {
+									Description: "Applies only when remoteDisplayvnc is enabled.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"remote_display_vnc_enabled": {
+						Description: "Shows if support for a remote VNC access is enabled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"resource_pool": {
+						Description: "Name of the resource pool to which this VM belongs (optional).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"resource_pool_owner": {
+						Description: "Who owns the resource pool.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"resource_pool_parent": {
+						Description: "The parent of the current resource pool to which this VM belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"tool_running_status": {
+						Description: "Indicates if guest tools are running on this VM. Could be set to guestToolNotRunning or guestToolsRunning.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tools_version": {
+						Description: "The version of the guest tools, usually not specified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"uuid": {
+						Description: "The uuid of this virtual machine. The uuid is internally generated and not user specified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vm_disk_count": {
+						Description: "Shows the number of disks assigned to this VM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"vm_overall_status": {
+						Description: "The operational state of the VM. Could be Available, Provisioned, Maintenance mode, Deleting, etc.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vm_path": {
+						Description: "Example - [datastore3] VCSA-134/VCSA-134.vmx.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vm_version": {
+						Description: "Information about the version of this VM (vmx-09, vmx-11 etc.).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vm_vnic_count": {
+						Description: "How many vnics are present.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"vnic_device_config_id": {
+						Description: "Information related to the guest info's VNIC virtual device. It is a comma-separated list.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -993,227 +1173,113 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVmwareVirtualMachine object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching VirtualizationVmwareVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.VirtualizationVmwareVirtualMachineList.GetCount()
+	var i int32
+	var virtualizationVmwareVirtualMachineResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching VirtualizationVmwareVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.VirtualizationVmwareVirtualMachineList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for VirtualizationVmwareVirtualMachine data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["annotation"] = (s.GetAnnotation())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for VirtualizationVmwareVirtualMachine list: %s", err.Error())
-	}
-	var s = &models.VirtualizationVmwareVirtualMachineList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to VirtualizationVmwareVirtualMachine list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for VirtualizationVmwareVirtualMachine data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for VirtualizationVmwareVirtualMachine data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.VirtualizationVmwareVirtualMachine{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("annotation", (s.GetAnnotation())); err != nil {
-				return diag.Errorf("error occurred while setting property Annotation: %s", err.Error())
-			}
+				temp["boot_time"] = (s.GetBootTime()).String()
 
-			if err := d.Set("boot_time", (s.GetBootTime()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property BootTime: %s", err.Error())
-			}
+				temp["capacity"] = flattenMapInfraHardwareInfo(s.GetCapacity(), d)
+				temp["class_id"] = (s.GetClassId())
 
-			if err := d.Set("capacity", flattenMapInfraHardwareInfo(s.GetCapacity(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Capacity: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["cluster"] = flattenMapVirtualizationVmwareClusterRelationship(s.GetCluster(), d)
+				temp["config_name"] = (s.GetConfigName())
+				temp["connection_state"] = (s.GetConnectionState())
+				temp["cpu_hot_add_enabled"] = (s.GetCpuHotAddEnabled())
 
-			if err := d.Set("cluster", flattenMapVirtualizationVmwareClusterRelationship(s.GetCluster(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Cluster: %s", err.Error())
-			}
-			if err := d.Set("config_name", (s.GetConfigName())); err != nil {
-				return diag.Errorf("error occurred while setting property ConfigName: %s", err.Error())
-			}
-			if err := d.Set("connection_state", (s.GetConnectionState())); err != nil {
-				return diag.Errorf("error occurred while setting property ConnectionState: %s", err.Error())
-			}
-			if err := d.Set("cpu_hot_add_enabled", (s.GetCpuHotAddEnabled())); err != nil {
-				return diag.Errorf("error occurred while setting property CpuHotAddEnabled: %s", err.Error())
-			}
+				temp["cpu_shares"] = flattenMapVirtualizationVmwareVmCpuShareInfo(s.GetCpuShares(), d)
 
-			if err := d.Set("cpu_shares", flattenMapVirtualizationVmwareVmCpuShareInfo(s.GetCpuShares(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property CpuShares: %s", err.Error())
-			}
+				temp["cpu_socket_info"] = flattenMapVirtualizationVmwareVmCpuSocketInfo(s.GetCpuSocketInfo(), d)
+				temp["custom_attributes"] = (s.GetCustomAttributes())
 
-			if err := d.Set("cpu_socket_info", flattenMapVirtualizationVmwareVmCpuSocketInfo(s.GetCpuSocketInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property CpuSocketInfo: %s", err.Error())
-			}
-			if err := d.Set("custom_attributes", (s.GetCustomAttributes())); err != nil {
-				return diag.Errorf("error occurred while setting property CustomAttributes: %s", err.Error())
-			}
+				temp["datacenter"] = flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)
 
-			if err := d.Set("datacenter", flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Datacenter: %s", err.Error())
-			}
+				temp["datastores"] = flattenListVirtualizationVmwareDatastoreRelationship(s.GetDatastores(), d)
+				temp["default_power_off_type"] = (s.GetDefaultPowerOffType())
+				temp["dhcp_enabled"] = (s.GetDhcpEnabled())
 
-			if err := d.Set("datastores", flattenListVirtualizationVmwareDatastoreRelationship(s.GetDatastores(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Datastores: %s", err.Error())
-			}
-			if err := d.Set("default_power_off_type", (s.GetDefaultPowerOffType())); err != nil {
-				return diag.Errorf("error occurred while setting property DefaultPowerOffType: %s", err.Error())
-			}
-			if err := d.Set("dhcp_enabled", (s.GetDhcpEnabled())); err != nil {
-				return diag.Errorf("error occurred while setting property DhcpEnabled: %s", err.Error())
-			}
+				temp["disk_commit_info"] = flattenMapVirtualizationVmwareVmDiskCommitInfo(s.GetDiskCommitInfo(), d)
+				temp["dns_server_list"] = (s.GetDnsServerList())
+				temp["dns_suffix_list"] = (s.GetDnsSuffixList())
+				temp["folder"] = (s.GetFolder())
 
-			if err := d.Set("disk_commit_info", flattenMapVirtualizationVmwareVmDiskCommitInfo(s.GetDiskCommitInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property DiskCommitInfo: %s", err.Error())
-			}
-			if err := d.Set("dns_server_list", (s.GetDnsServerList())); err != nil {
-				return diag.Errorf("error occurred while setting property DnsServerList: %s", err.Error())
-			}
-			if err := d.Set("dns_suffix_list", (s.GetDnsSuffixList())); err != nil {
-				return diag.Errorf("error occurred while setting property DnsSuffixList: %s", err.Error())
-			}
-			if err := d.Set("folder", (s.GetFolder())); err != nil {
-				return diag.Errorf("error occurred while setting property Folder: %s", err.Error())
-			}
+				temp["guest_info"] = flattenMapVirtualizationGuestInfo(s.GetGuestInfo(), d)
+				temp["guest_state"] = (s.GetGuestState())
 
-			if err := d.Set("guest_info", flattenMapVirtualizationGuestInfo(s.GetGuestInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property GuestInfo: %s", err.Error())
-			}
-			if err := d.Set("guest_state", (s.GetGuestState())); err != nil {
-				return diag.Errorf("error occurred while setting property GuestState: %s", err.Error())
-			}
+				temp["host"] = flattenMapVirtualizationVmwareHostRelationship(s.GetHost(), d)
+				temp["hypervisor_type"] = (s.GetHypervisorType())
+				temp["identity"] = (s.GetIdentity())
+				temp["instance_uuid"] = (s.GetInstanceUuid())
+				temp["inventory_path"] = (s.GetInventoryPath())
+				temp["ip_address"] = (s.GetIpAddress())
+				temp["is_template"] = (s.GetIsTemplate())
+				temp["mac_address"] = (s.GetMacAddress())
 
-			if err := d.Set("host", flattenMapVirtualizationVmwareHostRelationship(s.GetHost(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Host: %s", err.Error())
-			}
-			if err := d.Set("hypervisor_type", (s.GetHypervisorType())); err != nil {
-				return diag.Errorf("error occurred while setting property HypervisorType: %s", err.Error())
-			}
-			if err := d.Set("identity", (s.GetIdentity())); err != nil {
-				return diag.Errorf("error occurred while setting property Identity: %s", err.Error())
-			}
-			if err := d.Set("instance_uuid", (s.GetInstanceUuid())); err != nil {
-				return diag.Errorf("error occurred while setting property InstanceUuid: %s", err.Error())
-			}
-			if err := d.Set("inventory_path", (s.GetInventoryPath())); err != nil {
-				return diag.Errorf("error occurred while setting property InventoryPath: %s", err.Error())
-			}
-			if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
-				return diag.Errorf("error occurred while setting property IpAddress: %s", err.Error())
-			}
-			if err := d.Set("is_template", (s.GetIsTemplate())); err != nil {
-				return diag.Errorf("error occurred while setting property IsTemplate: %s", err.Error())
-			}
-			if err := d.Set("mac_address", (s.GetMacAddress())); err != nil {
-				return diag.Errorf("error occurred while setting property MacAddress: %s", err.Error())
-			}
+				temp["mem_shares"] = flattenMapVirtualizationVmwareVmMemoryShareInfo(s.GetMemShares(), d)
 
-			if err := d.Set("mem_shares", flattenMapVirtualizationVmwareVmMemoryShareInfo(s.GetMemShares(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property MemShares: %s", err.Error())
-			}
+				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
+				temp["memory_hot_add_enabled"] = (s.GetMemoryHotAddEnabled())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["network_count"] = (s.GetNetworkCount())
+				temp["object_type"] = (s.GetObjectType())
+				temp["port_groups"] = (s.GetPortGroups())
+				temp["power_state"] = (s.GetPowerState())
 
-			if err := d.Set("memory_capacity", flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property MemoryCapacity: %s", err.Error())
-			}
-			if err := d.Set("memory_hot_add_enabled", (s.GetMemoryHotAddEnabled())); err != nil {
-				return diag.Errorf("error occurred while setting property MemoryHotAddEnabled: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("network_count", (s.GetNetworkCount())); err != nil {
-				return diag.Errorf("error occurred while setting property NetworkCount: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("port_groups", (s.GetPortGroups())); err != nil {
-				return diag.Errorf("error occurred while setting property PortGroups: %s", err.Error())
-			}
-			if err := d.Set("power_state", (s.GetPowerState())); err != nil {
-				return diag.Errorf("error occurred while setting property PowerState: %s", err.Error())
-			}
+				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
+				temp["protected_vm"] = (s.GetProtectedVm())
 
-			if err := d.Set("processor_capacity", flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property ProcessorCapacity: %s", err.Error())
-			}
-			if err := d.Set("protected_vm", (s.GetProtectedVm())); err != nil {
-				return diag.Errorf("error occurred while setting property ProtectedVm: %s", err.Error())
-			}
+				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 
-			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
-			}
+				temp["remote_display_info"] = flattenMapVirtualizationVmwareRemoteDisplayInfo(s.GetRemoteDisplayInfo(), d)
+				temp["remote_display_vnc_enabled"] = (s.GetRemoteDisplayVncEnabled())
+				temp["resource_pool"] = (s.GetResourcePool())
+				temp["resource_pool_owner"] = (s.GetResourcePoolOwner())
+				temp["resource_pool_parent"] = (s.GetResourcePoolParent())
 
-			if err := d.Set("remote_display_info", flattenMapVirtualizationVmwareRemoteDisplayInfo(s.GetRemoteDisplayInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property RemoteDisplayInfo: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tool_running_status"] = (s.GetToolRunningStatus())
+				temp["tools_version"] = (s.GetToolsVersion())
+				temp["uuid"] = (s.GetUuid())
+				temp["vm_disk_count"] = (s.GetVmDiskCount())
+				temp["vm_overall_status"] = (s.GetVmOverallStatus())
+				temp["vm_path"] = (s.GetVmPath())
+				temp["vm_version"] = (s.GetVmVersion())
+				temp["vm_vnic_count"] = (s.GetVmVnicCount())
+				temp["vnic_device_config_id"] = (s.GetVnicDeviceConfigId())
+				virtualizationVmwareVirtualMachineResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("remote_display_vnc_enabled", (s.GetRemoteDisplayVncEnabled())); err != nil {
-				return diag.Errorf("error occurred while setting property RemoteDisplayVncEnabled: %s", err.Error())
-			}
-			if err := d.Set("resource_pool", (s.GetResourcePool())); err != nil {
-				return diag.Errorf("error occurred while setting property ResourcePool: %s", err.Error())
-			}
-			if err := d.Set("resource_pool_owner", (s.GetResourcePoolOwner())); err != nil {
-				return diag.Errorf("error occurred while setting property ResourcePoolOwner: %s", err.Error())
-			}
-			if err := d.Set("resource_pool_parent", (s.GetResourcePoolParent())); err != nil {
-				return diag.Errorf("error occurred while setting property ResourcePoolParent: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("tool_running_status", (s.GetToolRunningStatus())); err != nil {
-				return diag.Errorf("error occurred while setting property ToolRunningStatus: %s", err.Error())
-			}
-			if err := d.Set("tools_version", (s.GetToolsVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property ToolsVersion: %s", err.Error())
-			}
-			if err := d.Set("uuid", (s.GetUuid())); err != nil {
-				return diag.Errorf("error occurred while setting property Uuid: %s", err.Error())
-			}
-			if err := d.Set("vm_disk_count", (s.GetVmDiskCount())); err != nil {
-				return diag.Errorf("error occurred while setting property VmDiskCount: %s", err.Error())
-			}
-			if err := d.Set("vm_overall_status", (s.GetVmOverallStatus())); err != nil {
-				return diag.Errorf("error occurred while setting property VmOverallStatus: %s", err.Error())
-			}
-			if err := d.Set("vm_path", (s.GetVmPath())); err != nil {
-				return diag.Errorf("error occurred while setting property VmPath: %s", err.Error())
-			}
-			if err := d.Set("vm_version", (s.GetVmVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property VmVersion: %s", err.Error())
-			}
-			if err := d.Set("vm_vnic_count", (s.GetVmVnicCount())); err != nil {
-				return diag.Errorf("error occurred while setting property VmVnicCount: %s", err.Error())
-			}
-			if err := d.Set("vnic_device_config_id", (s.GetVnicDeviceConfigId())); err != nil {
-				return diag.Errorf("error occurred while setting property VnicDeviceConfigId: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(virtualizationVmwareVirtualMachineResults))
+	if err := d.Set("results", virtualizationVmwareVirtualMachineResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(virtualizationVmwareVirtualMachineResults[0]["moid"].(string))
 	return de
 }

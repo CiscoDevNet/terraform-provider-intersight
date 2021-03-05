@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_adapter_ext_eth_interface
 Physical port of a virtual interface card.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_adapter_ext_eth_interface.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_state`:(string) Admin configured state of an External Ethernet Interface. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `peer_slot_id`:(int) Peer Slot Id attached to an External Ethernet Interface. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `switch_id`:(string) SwitchId attached to an External Ethernet Interface. 
+ 

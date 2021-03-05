@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_fan_module
 This represents Fan module housing multiple fans for chassis/server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_fan_module.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) This field is to provide description for the fan module. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `tray_id`:(int) Tray identifier for the fan module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vid`:(string) This field identifies the Vendor ID for this Fan Module. 
+ 

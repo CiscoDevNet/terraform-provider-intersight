@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,254 +14,10 @@ func dataSourceFirmwareChassisUpgrade() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFirmwareChassisUpgradeRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
-			"chassis": {
-				Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"device": {
-				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
-			"direct_download": {
-				Description: "Direct download options in case the upgradeType is direct download based upgrade.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"http_server": {
-							Description: "HTTP Server option when the image source is a local HTTPS server.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"location_link": {
-										Description: "HTTP/HTTPS link to the image. Accepted formats HTTP[s]://server-hostname/share/image or HTTP[s]://serverip/share/image. For a successful upgrade, the remote share server must have network connectivity with the CIMC of the selected devices.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"mount_options": {
-										Description: "Mount option as configured on the HTTP server. Empty if nothing is configured.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"image_source": {
-							Description: "Source type referring the image to be downloaded from CCO or from a local HTTPS server.\n* `cisco` - Image to be downloaded from Cisco software repository.\n* `localHttp` - Image to be downloaded from a https server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"is_password_set": {
-							Description: "Indicates whether the value of the 'password' property has been set.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"password": {
-							Description: "Password as configured on the local https server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"upgradeoption": {
-							Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"username": {
-							Description: "Username as configured on the local https server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"distributable": {
-				Description: "A reference to a firmwareDistributable resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"exclude_component_list": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-			"file_server": {
-				Description: "Location of the image in user software repository.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -270,250 +25,11 @@ func dataSourceFirmwareChassisUpgrade() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"network_share": {
-				Description: "Deprecated (Use 'fileServer' property). Network share options in case of the upgradeType is network share based upgrade.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"cifs_server": {
-							Description: "CIFS file server option for network share upgrade.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"file_location": {
-										Description: "The location to the image file. The accepted format is IP-or-hostname/folder1/folder2/.../imageFile.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"mount_options": {
-										Description: "Mount option (Authentication Protocol) as configured on the CIFS Server. Example:ntlmv2.\n* `none` - The default authentication protocol is decided by the endpoint.\n* `ntlm` - The external CIFS server is configured with ntlm as the authentication protocol.\n* `ntlmi` - Mount options of CIFS file server is ntlmi.\n* `ntlmv2` - Mount options of CIFS file server is ntlmv2.\n* `ntlmv2i` - Mount options of CIFS file server is ntlmv2i.\n* `ntlmssp` - Mount options of CIFS file server is ntlmssp.\n* `ntlmsspi` - Mount options of CIFS file server is ntlmsspi.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_file": {
-										Description: "Filename of the image in the remote share location. Example:ucs-c220m5-huu-3.1.2c.iso.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_ip": {
-										Description: "CIFS Server Hostname or IP Address. For example:CIFS-server-hostname or 10.10.8.7. The remote share server should have network connectivity with the CIMC of the selected devices for a successful upgrade.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_share": {
-										Description: "Directory where the image is stored. Example:share/subfolder.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"http_server": {
-							Description: "HTTP (for WWW) file server option for network share upgrade.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"location_link": {
-										Description: "HTTP/HTTPS link to the image. Accepted formats HTTP[s]://server-hostname/share/image or HTTP[s]://serverip/share/image. For a successful upgrade, the remote share server must have network connectivity with the CIMC of the selected devices.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"mount_options": {
-										Description: "Mount option as configured on the HTTP server. Empty if nothing is configured.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"is_password_set": {
-							Description: "Indicates whether the value of the 'password' property has been set.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-						},
-						"map_type": {
-							Description: "File server protocols such as CIFS, NFS, WWW for HTTP (S) that hosts the image.\n* `nfs` - File server protocol used is NFS.\n* `cifs` - File server protocol used is CIFS.\n* `www` - File server protocol used is WWW.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"nfs_server": {
-							Description: "NFS file server option for network share upgrade.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"file_location": {
-										Description: "The location to the image file. The accepted format is IP-or-hostname/folder1/folder2/.../imageFile.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"mount_options": {
-										Description: "Mount option as configured on the NFS Server. For example:nolock.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_file": {
-										Description: "Filename of the image in the remote share location. For example:ucs-c220m5-huu-3.1.2c.iso.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_ip": {
-										Description: "NFS Server Hostname or IP Address. For example:NFS-server-hostname or 10.10.8.7. The remote share server should have network connectivity with the CIMC of the selected devices for a successful upgrade.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"remote_share": {
-										Description: "Directory where the image is stored. For example:/share/subfolder.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"password": {
-							Description: "Password as configured on the file server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"upgradeoption": {
-							Description: "Option to control the upgrade operation. Some examples, 1) nw_upgrade_mount_only - mount the image from a file server and run the upgrade on the next server boot and 2) nw_upgrade_full - mount the image and immediately run the upgrade.\n* `nw_upgrade_full` - Network upgrade option for full upgrade.\n* `nw_upgrade_mount_only` - Network upgrade mount only.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"username": {
-							Description: "Username as configured on the file server.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
-			"release": {
-				Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"skip_estimate_impact": {
 				Description: "User has the option to skip the estimate impact calculation.",
@@ -525,113 +41,16 @@ func dataSourceFirmwareChassisUpgrade() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
-			"upgrade_impact": {
-				Description: "A reference to a firmwareUpgradeImpactStatus resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
-			"upgrade_status": {
-				Description: "A reference to a firmwareUpgradeStatus resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"upgrade_type": {
 				Description: "Desired upgrade mode to choose either direct download based upgrade or network share upgrade.\n* `direct_upgrade` - Upgrade mode is direct download.\n* `network_upgrade` - Upgrade mode is network upgrade.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceFirmwareChassisUpgrade().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -670,104 +89,68 @@ func dataSourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceD
 	if err != nil {
 		return diag.Errorf("json marshal of FirmwareChassisUpgrade object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareChassisUpgradeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareChassisUpgradeList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching FirmwareChassisUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of FirmwareChassisUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.FirmwareChassisUpgradeList.GetCount()
+	var i int32
+	var firmwareChassisUpgradeResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareChassisUpgradeList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching FirmwareChassisUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.FirmwareChassisUpgradeList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for FirmwareChassisUpgrade data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for FirmwareChassisUpgrade list: %s", err.Error())
-	}
-	var s = &models.FirmwareChassisUpgradeList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to FirmwareChassisUpgrade list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for FirmwareChassisUpgrade data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for FirmwareChassisUpgrade data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.FirmwareChassisUpgrade{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
+				temp["chassis"] = flattenMapEquipmentChassisRelationship(s.GetChassis(), d)
+				temp["class_id"] = (s.GetClassId())
 
-			if err := d.Set("chassis", flattenMapEquipmentChassisRelationship(s.GetChassis(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Chassis: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetDevice(), d)
 
-			if err := d.Set("device", flattenMapAssetDeviceRegistrationRelationship(s.GetDevice(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Device: %s", err.Error())
-			}
+				temp["direct_download"] = flattenMapFirmwareDirectDownload(s.GetDirectDownload(), d)
 
-			if err := d.Set("direct_download", flattenMapFirmwareDirectDownload(s.GetDirectDownload(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property DirectDownload: %s", err.Error())
-			}
+				temp["distributable"] = flattenMapFirmwareDistributableRelationship(s.GetDistributable(), d)
+				temp["exclude_component_list"] = (s.GetExcludeComponentList())
 
-			if err := d.Set("distributable", flattenMapFirmwareDistributableRelationship(s.GetDistributable(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Distributable: %s", err.Error())
-			}
-			if err := d.Set("exclude_component_list", (s.GetExcludeComponentList())); err != nil {
-				return diag.Errorf("error occurred while setting property ExcludeComponentList: %s", err.Error())
-			}
+				temp["file_server"] = flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)
+				temp["moid"] = (s.GetMoid())
 
-			if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property FileServer: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
+				temp["network_share"] = flattenMapFirmwareNetworkShare(s.GetNetworkShare(), d)
+				temp["object_type"] = (s.GetObjectType())
 
-			if err := d.Set("network_share", flattenMapFirmwareNetworkShare(s.GetNetworkShare(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property NetworkShare: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
+				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
+				temp["skip_estimate_impact"] = (s.GetSkipEstimateImpact())
+				temp["status"] = (s.GetStatus())
 
-			if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Release: %s", err.Error())
-			}
-			if err := d.Set("skip_estimate_impact", (s.GetSkipEstimateImpact())); err != nil {
-				return diag.Errorf("error occurred while setting property SkipEstimateImpact: %s", err.Error())
-			}
-			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
-			}
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
+				temp["upgrade_impact"] = flattenMapFirmwareUpgradeImpactStatusRelationship(s.GetUpgradeImpact(), d)
 
-			if err := d.Set("upgrade_impact", flattenMapFirmwareUpgradeImpactStatusRelationship(s.GetUpgradeImpact(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property UpgradeImpact: %s", err.Error())
+				temp["upgrade_status"] = flattenMapFirmwareUpgradeStatusRelationship(s.GetUpgradeStatus(), d)
+				temp["upgrade_type"] = (s.GetUpgradeType())
+				firmwareChassisUpgradeResults[j] = temp
+				j += 1
 			}
-
-			if err := d.Set("upgrade_status", flattenMapFirmwareUpgradeStatusRelationship(s.GetUpgradeStatus(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property UpgradeStatus: %s", err.Error())
-			}
-			if err := d.Set("upgrade_type", (s.GetUpgradeType())); err != nil {
-				return diag.Errorf("error occurred while setting property UpgradeType: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(firmwareChassisUpgradeResults))
+	if err := d.Set("results", firmwareChassisUpgradeResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(firmwareChassisUpgradeResults[0]["moid"].(string))
 	return de
 }

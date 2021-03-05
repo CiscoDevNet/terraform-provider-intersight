@@ -26,7 +26,7 @@ This complex property has following sub-properties:
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 
-  + `status`:(string)(Computed) Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.* `NotStarted` - Status of rollback task when it is not started rollback.* `Not supported` - Status of task when it is not supporting rollback.* `Completed` - Status of rollback task once execution is successful.* `Failed` - Status of rollback task when it is failed. 
+  + `status`:(string)(Computed) Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.* `NotStarted` - Status of rollback task when it is not started rollback.* `NotSupported` - Status of task when it is not supporting rollback.* `Completed` - Status of rollback task once execution is successful.* `Failed` - Status of rollback task when it is failed. 
   + `task_info_moid`:(string) Moid of TaskInfo that supports rollback operation. 
   + `task_path`:(string)(Computed) Path of rollback task if it is inside sub-workflow. 
 * `rollback_workflows`:(Array)(Computed) An array of relationships to workflowWorkflowInfo resources. 
@@ -42,7 +42,7 @@ This complex property has following sub-properties:
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 
-  + `status`:(string)(Computed) Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.* `NotStarted` - Status of rollback task when it is not started rollback.* `Not supported` - Status of task when it is not supporting rollback.* `Completed` - Status of rollback task once execution is successful.* `Failed` - Status of rollback task when it is failed. 
+  + `status`:(string)(Computed) Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.* `NotStarted` - Status of rollback task when it is not started rollback.* `NotSupported` - Status of task when it is not supporting rollback.* `Completed` - Status of rollback task once execution is successful.* `Failed` - Status of rollback task when it is failed. 
   + `task_info_moid`:(string) Moid of TaskInfo that supports rollback operation. 
   + `task_path`:(string)(Computed) Path of rollback task if it is inside sub-workflow. 
 * `status`:(string)(Computed) Status of the rollback workflow instance (Created, Running, Completed, Failed).* `None` - If no status is set, then the default value is set none for the status field.* `Created` - Status of the rollback workflow when it identifies the eligible tasks for rollback.* `Running` - Status of the rollback workflow when it is in-progress.* `Completed` - Status of the rollback workflow after execution is successful.* `Failed` - Status of the rollback workflow after execution results in failure. 

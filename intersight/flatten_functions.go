@@ -586,6 +586,87 @@ func flattenListCapabilitySwitchingModeCapability(p []models.CapabilitySwitching
 	}
 	return capabilityswitchingmodecapabilitys
 }
+func flattenListCertificatemanagementCertificateBase(p []models.CertificatemanagementCertificateBase, d *schema.ResourceData) []map[string]interface{} {
+	var certificatemanagementcertificatebases []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		certificatemanagementcertificatebase := make(map[string]interface{})
+		certificatemanagementcertificatebase["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		certificatemanagementcertificatebase["certificate"] = (func(p models.X509Certificate, d *schema.ResourceData) []map[string]interface{} {
+			var x509certificates []map[string]interface{}
+			var ret models.X509Certificate
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			x509certificate := make(map[string]interface{})
+			x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			x509certificate["class_id"] = item.ClassId
+			x509certificate["issuer"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+				var pkixdistinguishednames []map[string]interface{}
+				var ret models.PkixDistinguishedName
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				pkixdistinguishedname := make(map[string]interface{})
+				pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				pkixdistinguishedname["class_id"] = item.ClassId
+				pkixdistinguishedname["common_name"] = item.CommonName
+				pkixdistinguishedname["country"] = item.Country
+				pkixdistinguishedname["locality"] = item.Locality
+				pkixdistinguishedname["object_type"] = item.ObjectType
+				pkixdistinguishedname["organization"] = item.Organization
+				pkixdistinguishedname["organizational_unit"] = item.OrganizationalUnit
+				pkixdistinguishedname["state"] = item.State
+
+				pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+				return pkixdistinguishednames
+			})(item.GetIssuer(), d)
+			x509certificate["object_type"] = item.ObjectType
+			x509certificate["pem_certificate"] = item.PemCertificate
+			x509certificate["sha256_fingerprint"] = item.Sha256Fingerprint
+			x509certificate["signature_algorithm"] = item.SignatureAlgorithm
+			x509certificate["subject"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+				var pkixdistinguishednames []map[string]interface{}
+				var ret models.PkixDistinguishedName
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				pkixdistinguishedname := make(map[string]interface{})
+				pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				pkixdistinguishedname["class_id"] = item.ClassId
+				pkixdistinguishedname["common_name"] = item.CommonName
+				pkixdistinguishedname["country"] = item.Country
+				pkixdistinguishedname["locality"] = item.Locality
+				pkixdistinguishedname["object_type"] = item.ObjectType
+				pkixdistinguishedname["organization"] = item.Organization
+				pkixdistinguishedname["organizational_unit"] = item.OrganizationalUnit
+				pkixdistinguishedname["state"] = item.State
+
+				pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+				return pkixdistinguishednames
+			})(item.GetSubject(), d)
+
+			x509certificates = append(x509certificates, x509certificate)
+			return x509certificates
+		})(item.GetCertificate(), d)
+		certificatemanagementcertificatebase["class_id"] = item.ClassId
+		certificatemanagementcertificatebase["enabled"] = item.Enabled
+		certificatemanagementcertificatebase["is_privatekey_set"] = item.IsPrivatekeySet
+		certificatemanagementcertificatebase["object_type"] = item.ObjectType
+		privatekey_x := d.Get("certificates").([]interface{})
+		if len(privatekey_x) > 0 {
+			privatekey_y := privatekey_x[0].(map[string]interface{})
+			certificatemanagementcertificatebase["privatekey"] = privatekey_y["privatekey"]
+		}
+		certificatemanagementcertificatebases = append(certificatemanagementcertificatebases, certificatemanagementcertificatebase)
+	}
+	return certificatemanagementcertificatebases
+}
 func flattenListChassisConfigChangeDetailRelationship(p []models.ChassisConfigChangeDetailRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var chassisconfigchangedetailrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -621,6 +702,23 @@ func flattenListChassisIomProfileRelationship(p []models.ChassisIomProfileRelati
 		chassisiomprofilerelationships = append(chassisiomprofilerelationships, chassisiomprofilerelationship)
 	}
 	return chassisiomprofilerelationships
+}
+func flattenListCloudCustomAttributes(p []models.CloudCustomAttributes, d *schema.ResourceData) []map[string]interface{} {
+	var cloudcustomattributess []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		cloudcustomattributes := make(map[string]interface{})
+		cloudcustomattributes["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		cloudcustomattributes["attribute_name"] = item.AttributeName
+		cloudcustomattributes["attribute_type"] = item.AttributeType
+		cloudcustomattributes["attribute_value"] = item.AttributeValue
+		cloudcustomattributes["class_id"] = item.ClassId
+		cloudcustomattributes["object_type"] = item.ObjectType
+		cloudcustomattributess = append(cloudcustomattributess, cloudcustomattributes)
+	}
+	return cloudcustomattributess
 }
 func flattenListComputeBladeRelationship(p []models.ComputeBladeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var computebladerelationships []map[string]interface{}
@@ -3432,23 +3530,6 @@ func flattenListMetaRelationshipDefinition(p []models.MetaRelationshipDefinition
 		metarelationshipdefinitions = append(metarelationshipdefinitions, metarelationshipdefinition)
 	}
 	return metarelationshipdefinitions
-}
-func flattenListMetadataCustomAttributes(p []models.MetadataCustomAttributes, d *schema.ResourceData) []map[string]interface{} {
-	var metadatacustomattributess []map[string]interface{}
-	if len(p) == 0 {
-		return nil
-	}
-	for _, item := range p {
-		metadatacustomattributes := make(map[string]interface{})
-		metadatacustomattributes["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		metadatacustomattributes["attribute_name"] = item.AttributeName
-		metadatacustomattributes["attribute_type"] = item.AttributeType
-		metadatacustomattributes["attribute_value"] = item.AttributeValue
-		metadatacustomattributes["class_id"] = item.ClassId
-		metadatacustomattributes["object_type"] = item.ObjectType
-		metadatacustomattributess = append(metadatacustomattributess, metadatacustomattributes)
-	}
-	return metadatacustomattributess
 }
 func flattenListMoTag(p []models.MoTag, d *schema.ResourceData) []map[string]interface{} {
 	var motags []map[string]interface{}
@@ -6458,6 +6539,87 @@ func flattenMapComputeServerConfig(p models.ComputeServerConfig, d *schema.Resou
 
 	computeserverconfigs = append(computeserverconfigs, computeserverconfig)
 	return computeserverconfigs
+}
+func flattenMapComputeStorageControllerOperation(p models.ComputeStorageControllerOperation, d *schema.ResourceData) []map[string]interface{} {
+	var computestoragecontrolleroperations []map[string]interface{}
+	var ret models.ComputeStorageControllerOperation
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computestoragecontrolleroperation := make(map[string]interface{})
+	computestoragecontrolleroperation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computestoragecontrolleroperation["admin_action"] = item.AdminAction
+	computestoragecontrolleroperation["class_id"] = item.ClassId
+	computestoragecontrolleroperation["controller_id"] = item.ControllerId
+	computestoragecontrolleroperation["object_type"] = item.ObjectType
+
+	computestoragecontrolleroperations = append(computestoragecontrolleroperations, computestoragecontrolleroperation)
+	return computestoragecontrolleroperations
+}
+func flattenMapComputeStoragePhysicalDriveOperation(p models.ComputeStoragePhysicalDriveOperation, d *schema.ResourceData) []map[string]interface{} {
+	var computestoragephysicaldriveoperations []map[string]interface{}
+	var ret models.ComputeStoragePhysicalDriveOperation
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computestoragephysicaldriveoperation := make(map[string]interface{})
+	computestoragephysicaldriveoperation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computestoragephysicaldriveoperation["admin_action"] = item.AdminAction
+	computestoragephysicaldriveoperation["class_id"] = item.ClassId
+	computestoragephysicaldriveoperation["controller_id"] = item.ControllerId
+	computestoragephysicaldriveoperation["object_type"] = item.ObjectType
+	computestoragephysicaldriveoperation["physical_drives"] = (func(p []models.ComputeStoragePhysicalDrive, d *schema.ResourceData) []map[string]interface{} {
+		var computestoragephysicaldrives []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			computestoragephysicaldrive := make(map[string]interface{})
+			computestoragephysicaldrive["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			computestoragephysicaldrive["class_id"] = item.ClassId
+			computestoragephysicaldrive["object_type"] = item.ObjectType
+			computestoragephysicaldrive["slot_number"] = item.SlotNumber
+			computestoragephysicaldrives = append(computestoragephysicaldrives, computestoragephysicaldrive)
+		}
+		return computestoragephysicaldrives
+	})(item.GetPhysicalDrives(), d)
+
+	computestoragephysicaldriveoperations = append(computestoragephysicaldriveoperations, computestoragephysicaldriveoperation)
+	return computestoragephysicaldriveoperations
+}
+func flattenMapComputeStorageVirtualDriveOperation(p models.ComputeStorageVirtualDriveOperation, d *schema.ResourceData) []map[string]interface{} {
+	var computestoragevirtualdriveoperations []map[string]interface{}
+	var ret models.ComputeStorageVirtualDriveOperation
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	computestoragevirtualdriveoperation := make(map[string]interface{})
+	computestoragevirtualdriveoperation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	computestoragevirtualdriveoperation["admin_action"] = item.AdminAction
+	computestoragevirtualdriveoperation["class_id"] = item.ClassId
+	computestoragevirtualdriveoperation["controller_id"] = item.ControllerId
+	computestoragevirtualdriveoperation["object_type"] = item.ObjectType
+	computestoragevirtualdriveoperation["virtual_drives"] = (func(p []models.ComputeStorageVirtualDrive, d *schema.ResourceData) []map[string]interface{} {
+		var computestoragevirtualdrives []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			computestoragevirtualdrive := make(map[string]interface{})
+			computestoragevirtualdrive["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			computestoragevirtualdrive["class_id"] = item.ClassId
+			computestoragevirtualdrive["id"] = item.Id
+			computestoragevirtualdrive["object_type"] = item.ObjectType
+			computestoragevirtualdrives = append(computestoragevirtualdrives, computestoragevirtualdrive)
+		}
+		return computestoragevirtualdrives
+	})(item.GetVirtualDrives(), d)
+
+	computestoragevirtualdriveoperations = append(computestoragevirtualdriveoperations, computestoragevirtualdriveoperation)
+	return computestoragevirtualdriveoperations
 }
 func flattenMapComputeVmediaRelationship(p models.ComputeVmediaRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var computevmediarelationships []map[string]interface{}

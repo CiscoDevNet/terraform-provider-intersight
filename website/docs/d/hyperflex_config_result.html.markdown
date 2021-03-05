@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_config_result
 Profile configuration (deploy, validation) results with the overall state and detailed result messages.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_config_result.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `config_progress`:(string) The progress percentage of the running configuration or workflow. 
 * `config_stage`:(string) The current running stage of the configuration or workflow. 
@@ -17,3 +20,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `start_time`:(string) The start time of the configuration or workflow. 
 * `validation_state`:(string) Indicates overall state for logical model validation. Values  -- Ok, Ok-with-warning, Errored. 
+ 

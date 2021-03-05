@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_cluster_profile
 A profile specifying configuration settings for a HyperFlex cluster.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_cluster_profile.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
 * `data_ip_address`:(string) The storage data IP address for the HyperFlex cluster. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `storage_type`:(string) The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..). 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `wwxn_prefix`:(string) The WWxN prefix in the form of 20:00:00:25:B5:XX. 
+ 

@@ -25,6 +25,9 @@ finishing all the initial configuration, then the Intersight UI will use this
 managed object to display the next configuration that the user needs to complete
 when the user uses the Intersight Appliance next time.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_setup_info.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `build_type`:(string) Build type of the Intersight Appliance setup (e.g. release or debug). 
 * `cloud_url`:(string) URL of the Intersight to which this Intersight Appliance is connected to. 
@@ -32,3 +35,4 @@ The following arguments can be used to get data of already created objects in In
 * `end_time`:(string) End date of the Intersight Appliance's initial setup. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `start_time`:(string) Start date of the Intersight Appliance's initial setup. 
+ 

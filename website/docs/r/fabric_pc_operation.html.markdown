@@ -11,6 +11,7 @@ PcOperation objects allows the user to alter the state of the port channel.
 ## Argument Reference
 The following arguments are supported:
 * `admin_state`:(string) Admin configured state to disable the port channel.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
+* `config_state`:(string) The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.* `None` - Nil value when no action has been triggered by the user.* `Applied` - User configured settings are in applied state.* `Applying` - User settings are being applied on the target server.* `Failed` - User configured settings could not be applied. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `network_element`:(HashMap) - A reference to a networkElement resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_virtualization_vmware_datacenter
 Datacenter object in VMware inventory. It is the logical container for all other objects like Datastore, Host, VirtualMachine, etc.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_datacenter.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cluster_count`:(int) Count of all clusters associated with this DC. 
 * `datastore_count`:(int) Count of all datastores associated with this DC. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter. 
 * `network_count`:(int) Count of all networks associated with this datacenter (DC). 
 * `vm_count`:(int) Count of all virtual machines (VMs) associated with this DC. 
+ 

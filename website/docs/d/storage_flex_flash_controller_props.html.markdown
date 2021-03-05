@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_flex_flash_controller_props
 Flex flash controller properties.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_flex_flash_controller_props.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cards_manageable`:(string) Manageable card on the flex flash controller. 
 * `configured_mode`:(string) Mode configured on the flex flash controller. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `startup_fw_version`:(string) Startup firmware version of the Flex flash controller. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `virtual_drive_count`:(string) Number of virtual drives for a specific Flex flash controller. 
+ 

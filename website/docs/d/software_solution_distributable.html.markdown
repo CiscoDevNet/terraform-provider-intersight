@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_software_solution_distributable
 A solution image distributed by Cisco.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_software_solution_distributable.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
@@ -34,3 +37,4 @@ The following arguments can be used to get data of already created objects in In
 * `sub_type`:(string) The type of the file like OS image, Script etc.* `osimage` - The solution OS image for deployment.* `script` - The Python script for the solution VM configuration and deployment. 
 * `vendor`:(string) The vendor or publisher of this file. 
 * `nr_version`:(string) Vendor provided version for the file. 
+ 

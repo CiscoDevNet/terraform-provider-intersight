@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_epg
 Object is available at End Point Group scope. This currently applies only to the APIC environemt.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_epg.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `azure_pack_count`:(int) Azure Pack NAT with ASA feature usage. 
 * `dn`:(string) Dn value for the End Point Groups present. 
@@ -28,3 +31,4 @@ The following arguments can be used to get data of already created objects in In
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. 
 * `useg_hyperv_count`:(int) Logical Operators for attribute based microsegmentation in a hypervisor. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_recommendation_physical_item
 Entity representing the recommended physical device.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_recommendation_physical_item.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `capacity`:(int) Capacity of the physical entity added. 
 * `nr_count`:(int) Count of number of items/devices to be added.For example, number of disks to add on a node PhysicalItem in case of HyperFlex Cluster recommendation. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `type`:(string) The type of physical device recommended.* `Disk` - The Enum value Disk represents that the item type recommended is a Physical Disk.* `Node` - The Enum value Node represents that the item type recommended is a Storage Node.* `Cluster` - The Enum value Cluster represents that the item type recommended is a HyperFlex Cluster. 
 * `unit`:(string) Unit of the new capacity.* `TB` - The Enum value TB represents that the measurement unit is in terabytes.* `MB` - The Enum value MB represents that the measurement unit is in megabytes. 
 * `uuid`:(string) Uuid of the recommended physical device. 
+ 

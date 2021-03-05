@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,183 +14,21 @@ func dataSourceFirmwareServerConfigurationUtilityDistributable() *schema.Resourc
 	return &schema.Resource{
 		ReadContext: dataSourceFirmwareServerConfigurationUtilityDistributableRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"bundle_type": {
 				Description: "The bundle type of the image, as published on cisco.com.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-			"catalog": {
-				Description: "A reference to a softwarerepositoryCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"component_meta": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"component_label": {
-							Description: "The name of the component in the compressed HSU bundle.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"component_type": {
-							Description: "The type of component image within the distributable.\n* `ALL` - This represents all the components.\n* `ALL,HDD` - This represents all the components plus the HDDs.\n* `Drive-U.2` - This represents the U.2 drives that are SFF/LFF drives (mostly all the drives will fall under this category).\n* `Storage` - This represents the storage controller components.\n* `None` - This represents none of the components.\n* `NXOS` - This represents NXOS components.\n* `IOM` - This represents IOM components.\n* `PSU` - This represents PSU components.\n* `CIMC` - This represents CIMC components.\n* `BIOS` - This represents BIOS components.\n* `PCIE` - This represents PCIE components.\n* `Drive` - This represents Drive components.\n* `DIMM` - This represents DIMM components.\n* `BoardController` - This represents Board Controller components.\n* `StorageController` - This represents Storage Controller components.\n* `HBA` - This represents HBA components.\n* `GPU` - This represents GPU components.\n* `SasExpander` - This represents SasExpander components.\n* `MSwitch` - This represents mSwitch components.\n* `CMC` - This represents CMC components.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"description": {
-							Description: "This shows the description of component image within the distributable.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"disruption": {
-							Description: "The type of disruption on each component. For example, host reboot, automatic power cycle, and manual power cycle.\n* `None` - Indicates that the component did not receive a disruption request.\n* `HostReboot` - Indicates that the component received a host reboot request.\n* `EndpointReboot` - Indicates that the component received an end point reboot request.\n* `ManualPowerCycle` - Indicates that the component received a manual power cycle request.\n* `AutomaticPowerCycle` - Indicates that the component received an automatic power cycle request.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"image_path": {
-							Description: "This shows the path of component image within the distributable.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"is_oob_supported": {
-							Description: "If set, the component can be updated through out-of-band management, else, is updated through host service utility boot.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"model": {
-							Description: "The model of the component image in the distributable.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"oob_manageability": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString}},
-						"packed_version": {
-							Description: "The image version of components packaged in the distributable.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"redfish_url": {
-							Description: "The redfish target for each component.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"vendor": {
-							Description: "The version of component image in the distributable.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"description": {
 				Description: "User provided description about the file. Cisco provided description for image inventoried from a Cisco repository.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"distributable_metas": {
-				Description: "An array of relationships to firmwareDistributableMeta resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"download_count": {
 				Description: "The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
@@ -264,45 +101,6 @@ func dataSourceFirmwareServerConfigurationUtilityDistributable() *schema.Resourc
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"release": {
-				Description: "A reference to a softwarerepositoryRelease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"release_notes_url": {
 				Description: "The url for the release notes of this image.",
 				Type:        schema.TypeString,
@@ -329,61 +127,6 @@ func dataSourceFirmwareServerConfigurationUtilityDistributable() *schema.Resourc
 				Optional:    true,
 				Computed:    true,
 			},
-			"nr_source": {
-				Description: "Location of the file in an external repository.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"supported_models": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"vendor": {
 				Description: "The vendor or publisher of this file.",
 				Type:        schema.TypeString,
@@ -394,7 +137,11 @@ func dataSourceFirmwareServerConfigurationUtilityDistributable() *schema.Resourc
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceFirmwareServerConfigurationUtilityDistributable().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -501,139 +248,77 @@ func dataSourceFirmwareServerConfigurationUtilityDistributableRead(c context.Con
 	if err != nil {
 		return diag.Errorf("json marshal of FirmwareServerConfigurationUtilityDistributable object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.FirmwareServerConfigurationUtilityDistributableList.GetCount()
+	var i int32
+	var firmwareServerConfigurationUtilityDistributableResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.FirmwareServerConfigurationUtilityDistributableList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for FirmwareServerConfigurationUtilityDistributable data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["bundle_type"] = (s.GetBundleType())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for FirmwareServerConfigurationUtilityDistributable list: %s", err.Error())
-	}
-	var s = &models.FirmwareServerConfigurationUtilityDistributableList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to FirmwareServerConfigurationUtilityDistributable list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for FirmwareServerConfigurationUtilityDistributable data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for FirmwareServerConfigurationUtilityDistributable data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.FirmwareServerConfigurationUtilityDistributable{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("bundle_type", (s.GetBundleType())); err != nil {
-				return diag.Errorf("error occurred while setting property BundleType: %s", err.Error())
-			}
+				temp["catalog"] = flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)
+				temp["class_id"] = (s.GetClassId())
 
-			if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Catalog: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["component_meta"] = flattenListFirmwareComponentMeta(s.GetComponentMeta(), d)
+				temp["description"] = (s.GetDescription())
 
-			if err := d.Set("component_meta", flattenListFirmwareComponentMeta(s.GetComponentMeta(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property ComponentMeta: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
+				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
+				temp["download_count"] = (s.GetDownloadCount())
+				temp["guid"] = (s.GetGuid())
+				temp["import_action"] = (s.GetImportAction())
+				temp["import_state"] = (s.GetImportState())
+				temp["md5e_tag"] = (s.GetMd5eTag())
+				temp["md5sum"] = (s.GetMd5sum())
+				temp["mdfid"] = (s.GetMdfid())
+				temp["model"] = (s.GetModel())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["object_type"] = (s.GetObjectType())
+				temp["platform_type"] = (s.GetPlatformType())
+				temp["recommended_build"] = (s.GetRecommendedBuild())
 
-			if err := d.Set("distributable_metas", flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property DistributableMetas: %s", err.Error())
-			}
-			if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
-				return diag.Errorf("error occurred while setting property DownloadCount: %s", err.Error())
-			}
-			if err := d.Set("guid", (s.GetGuid())); err != nil {
-				return diag.Errorf("error occurred while setting property Guid: %s", err.Error())
-			}
-			if err := d.Set("import_action", (s.GetImportAction())); err != nil {
-				return diag.Errorf("error occurred while setting property ImportAction: %s", err.Error())
-			}
-			if err := d.Set("import_state", (s.GetImportState())); err != nil {
-				return diag.Errorf("error occurred while setting property ImportState: %s", err.Error())
-			}
-			if err := d.Set("md5e_tag", (s.GetMd5eTag())); err != nil {
-				return diag.Errorf("error occurred while setting property Md5eTag: %s", err.Error())
-			}
-			if err := d.Set("md5sum", (s.GetMd5sum())); err != nil {
-				return diag.Errorf("error occurred while setting property Md5sum: %s", err.Error())
-			}
-			if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
-				return diag.Errorf("error occurred while setting property Mdfid: %s", err.Error())
-			}
-			if err := d.Set("model", (s.GetModel())); err != nil {
-				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-				return diag.Errorf("error occurred while setting property PlatformType: %s", err.Error())
-			}
-			if err := d.Set("recommended_build", (s.GetRecommendedBuild())); err != nil {
-				return diag.Errorf("error occurred while setting property RecommendedBuild: %s", err.Error())
-			}
+				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
+				temp["release_notes_url"] = (s.GetReleaseNotesUrl())
+				temp["sha512sum"] = (s.GetSha512sum())
+				temp["size"] = (s.GetSize())
+				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
+				temp["software_type_id"] = (s.GetSoftwareTypeId())
 
-			if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Release: %s", err.Error())
-			}
-			if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property ReleaseNotesUrl: %s", err.Error())
-			}
-			if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
-				return diag.Errorf("error occurred while setting property Sha512sum: %s", err.Error())
-			}
-			if err := d.Set("size", (s.GetSize())); err != nil {
-				return diag.Errorf("error occurred while setting property Size: %s", err.Error())
-			}
-			if err := d.Set("software_advisory_url", (s.GetSoftwareAdvisoryUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl: %s", err.Error())
-			}
-			if err := d.Set("software_type_id", (s.GetSoftwareTypeId())); err != nil {
-				return diag.Errorf("error occurred while setting property SoftwareTypeId: %s", err.Error())
-			}
+				temp["nr_source"] = flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)
+				temp["supported_models"] = (s.GetSupportedModels())
 
-			if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Source: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["vendor"] = (s.GetVendor())
+				temp["nr_version"] = (s.GetVersion())
+				firmwareServerConfigurationUtilityDistributableResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-				return diag.Errorf("error occurred while setting property SupportedModels: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
-			}
-			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(firmwareServerConfigurationUtilityDistributableResults))
+	if err := d.Set("results", firmwareServerConfigurationUtilityDistributableResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(firmwareServerConfigurationUtilityDistributableResults[0]["moid"].(string))
 	return de
 }

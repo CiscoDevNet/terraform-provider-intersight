@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
+**SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **Device** | Pointer to [**NiatelemetryNiaInventoryRelationship**](niatelemetry.NiaInventory.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -222,6 +223,31 @@ SetSerial sets Serial field to given value.
 `func (o *NiatelemetryNiaLicenseStateAllOf) HasSerial() bool`
 
 HasSerial returns a boolean if a field has been set.
+
+### GetSiteName
+
+`func (o *NiatelemetryNiaLicenseStateAllOf) GetSiteName() string`
+
+GetSiteName returns the SiteName field if non-nil, zero value otherwise.
+
+### GetSiteNameOk
+
+`func (o *NiatelemetryNiaLicenseStateAllOf) GetSiteNameOk() (*string, bool)`
+
+GetSiteNameOk returns a tuple with the SiteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteName
+
+`func (o *NiatelemetryNiaLicenseStateAllOf) SetSiteName(v string)`
+
+SetSiteName sets SiteName field to given value.
+
+### HasSiteName
+
+`func (o *NiatelemetryNiaLicenseStateAllOf) HasSiteName() bool`
+
+HasSiteName returns a boolean if a field has been set.
 
 ### GetDevice
 

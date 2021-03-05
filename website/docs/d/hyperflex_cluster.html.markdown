@@ -11,6 +11,9 @@ of the cluster.
 A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes
 of the cluster.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_cluster.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `capacity_runway`:(int) The number of days remaining before the cluster's storage utilization reaches the recommended capacity limit of 76%.Default value is math.MaxInt32 to indicate that the capacity runway is \ Unknown\  for a cluster that is not connected or with not sufficient data. 
 * `cluster_name`:(string) The name of this HyperFlex cluster. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `utilization_percentage`:(float) The storage utilization percentage is computed based on total capacity and current capacity utilization. 
 * `utilization_trend_percentage`:(float) The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. 
 * `vm_count`:(int) The number of virtual machines present on this cluster. 
+ 

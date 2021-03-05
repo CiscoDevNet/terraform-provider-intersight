@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_mso_site_details
 Details of sites in Multi-Site Orchestrator.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_mso_site_details.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `is_cloud_sec_enabled`:(string) Status of cloudSec on Multi-Site Orchestrator site. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `site_id`:(string) ID of site in Multi-Site Orchestrator. 
 * `site_name`:(string) Name of the site in Multi-Site Orchestrator. 
 * `site_version`:(string) Version of the controller in the site. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_chassis
 A physical holder housing blade servers.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_chassis.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `chassis_id`:(int) The assigned identifier for a chassis. 
 * `connection_path`:(string) This field identifies the connectivity path for the chassis enclosure. 
@@ -32,3 +35,4 @@ The following arguments can be used to get data of already created objects in In
 * `sku`:(string) This field identifies the Stock Keeping Unit for the chassis enclosure. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vid`:(string) This field identifies the Vendor ID for the chassis enclosure. 
+ 

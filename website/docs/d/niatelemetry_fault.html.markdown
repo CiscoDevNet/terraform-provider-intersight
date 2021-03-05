@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_fault
 Object is available at Fault scope in a fabric and provides details about a fault occurred.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_fault.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `code`:(string) Code of the fault present. 
 * `description`:(string) Description of the fault present. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `severity`:(string) Severity of the fault present. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters/sites. 
 * `type`:(string) Type of the fault present. 
+ 

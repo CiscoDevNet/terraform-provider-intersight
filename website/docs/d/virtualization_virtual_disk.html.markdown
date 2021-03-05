@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_virtualization_virtual_disk
 Depicts disk configuration used to be create a virtual disk on a hypervisor datastore.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_virtualization_virtual_disk.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `capacity`:(string) Disk capacity to be provided with units example - 10Gi. 
 * `discovered`:(bool) Flag to indicate whether the configuration is created from inventory object. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `source_certs`:(string) Base64 encoded CA certificates of the https source to check against. 
 * `source_disk_to_clone`:(string) Source disk from which the content is copied. 
 * `source_file_path`:(string) Image path used to import on the created disk. 
+ 

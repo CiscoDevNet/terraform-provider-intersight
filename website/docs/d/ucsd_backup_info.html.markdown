@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_ucsd_backup_info
 List of backup images available for target end device for restore operation.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_ucsd_backup_info.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `backup_file_name`:(string) Auto generated backup File Name with combination of file prefix given an user input and the timestamp. 
 * `backup_location`:(string) Backup location that contains the backup images for end device which can be used for restore operation. 
@@ -26,3 +29,4 @@ The following arguments can be used to get data of already created objects in In
 * `stage_completion`:(string) Backup current status stage information. 
 * `start_time`:(string) Start time of backup when it got initiated. 
 * `status`:(string) Current status of Backup current. 
+ 

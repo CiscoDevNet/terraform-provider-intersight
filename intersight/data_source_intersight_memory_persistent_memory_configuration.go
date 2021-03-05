@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,54 +14,10 @@ func dataSourceMemoryPersistentMemoryConfiguration() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceMemoryPersistentMemoryConfigurationRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"compute_board": {
-				Description: "A reference to a computeBoard resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"device_mo_id": {
 				Description: "The database identifier of the registered device of an object.",
@@ -75,45 +30,6 @@ func dataSourceMemoryPersistentMemoryConfiguration() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
-			"inventory_device_info": {
-				Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"memory_capacity": {
 				Description: "Memory capacity in GiB of a Persistent Memory configuration on a server.",
@@ -151,122 +67,6 @@ func dataSourceMemoryPersistentMemoryConfiguration() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"persistent_memory_config_result": {
-				Description: "A reference to a memoryPersistentMemoryConfigResult resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
-			"persistent_memory_regions": {
-				Description: "An array of relationships to memoryPersistentMemoryRegion resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
-			"registered_device": {
-				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"reserved_capacity": {
 				Description: "Reserved capacity in GiB of a Persistent Memory configuration on a server.",
 				Type:        schema.TypeString,
@@ -285,36 +85,316 @@ func dataSourceMemoryPersistentMemoryConfiguration() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"total_capacity": {
 				Description: "Total capacity in GiB of a Persistent Memory configuration on a server.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"compute_board": {
+						Description: "A reference to a computeBoard resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"device_mo_id": {
+						Description: "The database identifier of the registered device of an object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"dn": {
+						Description: "The Distinguished Name unambiguously identifies an object in the system.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"inventory_device_info": {
+						Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"memory_capacity": {
+						Description: "Memory capacity in GiB of a Persistent Memory configuration on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"num_of_modules": {
+						Description: "Number of Persistent Memory Modules on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"num_of_regions": {
+						Description: "Number of Persistent Memory Regions on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"persistent_memory_capacity": {
+						Description: "Persistent memory capacity in GiB of a Persistent Memory configuration on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"persistent_memory_config_result": {
+						Description: "A reference to a memoryPersistentMemoryConfigResult resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"persistent_memory_regions": {
+						Description: "An array of relationships to memoryPersistentMemoryRegion resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"registered_device": {
+						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"reserved_capacity": {
+						Description: "Reserved capacity in GiB of a Persistent Memory configuration on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"rn": {
+						Description: "The Relative Name uniquely identifies an object within a given context.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"security_state": {
+						Description: "Collective security state of all Persistent Memory modules on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"total_capacity": {
+						Description: "Total capacity in GiB of a Persistent Memory configuration on a server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -381,106 +461,66 @@ func dataSourceMemoryPersistentMemoryConfigurationRead(c context.Context, d *sch
 	if err != nil {
 		return diag.Errorf("json marshal of MemoryPersistentMemoryConfiguration object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryConfigurationList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryConfigurationList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching MemoryPersistentMemoryConfiguration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of MemoryPersistentMemoryConfiguration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.MemoryPersistentMemoryConfigurationList.GetCount()
+	var i int32
+	var memoryPersistentMemoryConfigurationResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryConfigurationList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching MemoryPersistentMemoryConfiguration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.MemoryPersistentMemoryConfigurationList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for MemoryPersistentMemoryConfiguration data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["class_id"] = (s.GetClassId())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for MemoryPersistentMemoryConfiguration list: %s", err.Error())
-	}
-	var s = &models.MemoryPersistentMemoryConfigurationList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to MemoryPersistentMemoryConfiguration list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for MemoryPersistentMemoryConfiguration data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for MemoryPersistentMemoryConfiguration data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.MemoryPersistentMemoryConfiguration{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["compute_board"] = flattenMapComputeBoardRelationship(s.GetComputeBoard(), d)
+				temp["device_mo_id"] = (s.GetDeviceMoId())
+				temp["dn"] = (s.GetDn())
 
-			if err := d.Set("compute_board", flattenMapComputeBoardRelationship(s.GetComputeBoard(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property ComputeBoard: %s", err.Error())
-			}
-			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
-			}
-			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
-			}
+				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+				temp["memory_capacity"] = (s.GetMemoryCapacity())
+				temp["moid"] = (s.GetMoid())
+				temp["num_of_modules"] = (s.GetNumOfModules())
+				temp["num_of_regions"] = (s.GetNumOfRegions())
+				temp["object_type"] = (s.GetObjectType())
+				temp["persistent_memory_capacity"] = (s.GetPersistentMemoryCapacity())
 
-			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property InventoryDeviceInfo: %s", err.Error())
-			}
-			if err := d.Set("memory_capacity", (s.GetMemoryCapacity())); err != nil {
-				return diag.Errorf("error occurred while setting property MemoryCapacity: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("num_of_modules", (s.GetNumOfModules())); err != nil {
-				return diag.Errorf("error occurred while setting property NumOfModules: %s", err.Error())
-			}
-			if err := d.Set("num_of_regions", (s.GetNumOfRegions())); err != nil {
-				return diag.Errorf("error occurred while setting property NumOfRegions: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("persistent_memory_capacity", (s.GetPersistentMemoryCapacity())); err != nil {
-				return diag.Errorf("error occurred while setting property PersistentMemoryCapacity: %s", err.Error())
-			}
+				temp["persistent_memory_config_result"] = flattenMapMemoryPersistentMemoryConfigResultRelationship(s.GetPersistentMemoryConfigResult(), d)
 
-			if err := d.Set("persistent_memory_config_result", flattenMapMemoryPersistentMemoryConfigResultRelationship(s.GetPersistentMemoryConfigResult(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property PersistentMemoryConfigResult: %s", err.Error())
-			}
+				temp["persistent_memory_regions"] = flattenListMemoryPersistentMemoryRegionRelationship(s.GetPersistentMemoryRegions(), d)
 
-			if err := d.Set("persistent_memory_regions", flattenListMemoryPersistentMemoryRegionRelationship(s.GetPersistentMemoryRegions(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property PersistentMemoryRegions: %s", err.Error())
-			}
+				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["reserved_capacity"] = (s.GetReservedCapacity())
+				temp["rn"] = (s.GetRn())
+				temp["security_state"] = (s.GetSecurityState())
 
-			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_capacity"] = (s.GetTotalCapacity())
+				memoryPersistentMemoryConfigurationResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("reserved_capacity", (s.GetReservedCapacity())); err != nil {
-				return diag.Errorf("error occurred while setting property ReservedCapacity: %s", err.Error())
-			}
-			if err := d.Set("rn", (s.GetRn())); err != nil {
-				return diag.Errorf("error occurred while setting property Rn: %s", err.Error())
-			}
-			if err := d.Set("security_state", (s.GetSecurityState())); err != nil {
-				return diag.Errorf("error occurred while setting property SecurityState: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("total_capacity", (s.GetTotalCapacity())); err != nil {
-				return diag.Errorf("error occurred while setting property TotalCapacity: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(memoryPersistentMemoryConfigurationResults))
+	if err := d.Set("results", memoryPersistentMemoryConfigurationResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(memoryPersistentMemoryConfigurationResults[0]["moid"].(string))
 	return de
 }

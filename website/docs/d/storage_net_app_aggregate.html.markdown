@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_aggregate
 NetApp aggregate is a collection of disks arranged into one or more RAID groups.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_aggregate.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `aggregate_type`:(string) Storage disk type for NetApp aggregate.* `HDD` - Hard Disk Drive.* `Hybrid` - Solid State Hard Disk Drive.* `Hybrid (Flash Pool)` - SSHD in a flash pool.* `SSD` - Solid State Disk.* `SSD (FabricPool)` - SSD in a flash pool.* `VMDisk (SDS)` - Storage disk with Hard disk drive.* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.* `LUN (FlexArray)` - LUN as a disk.* `Not Mapped` - Storage disk is not mapped. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `status`:(string) Human readable status of the pool, indicating the current health.* `Unknown` - Entity status is unknown.* `Degraded` - State is degraded, and might impact normal operation of the entity.* `Critical` - Entity is in a critical state, impacting operations.* `Ok` - Entity status is in a stable state, operating normally. 
 * `type`:(string) Human readable type of the pool, such as thin, tiered, active-flash, etc. 
 * `uuid`:(string) Uuid of  NetApp Aggregate. 
+ 

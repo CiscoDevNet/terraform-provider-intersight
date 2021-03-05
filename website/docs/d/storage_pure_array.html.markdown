@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_pure_array
 The details of the Pure storage array.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_pure_array.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `uuid`:(string) Unique identity of the device. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Current running software version of the device. 
+ 

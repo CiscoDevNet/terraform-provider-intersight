@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFabricEthNetworkControlPolicyRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"cdp_enabled": {
 				Description: "Enables the CDP on an interface.",
 				Type:        schema.TypeBool,
@@ -40,43 +34,6 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"lldp_settings": {
-				Description: "Determines the LLDP setting on an interface on the switch.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"receive_enabled": {
-							Description: "Determines if the LLDP frames can be received by an interface on the switch.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"transmit_enabled": {
-							Description: "Determines if the LLDP frames can be transmitted by an interface on the switch.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"mac_registration_mode": {
 				Description: "Determines the MAC addresses that have to be registered with the switch.\n* `nativeVlanOnly` - Register only the MAC addresses learnt on the native VLAN.\n* `allVlans` - Register all the MAC addresses learnt on all the allowed VLANs.",
 				Type:        schema.TypeString,
@@ -93,118 +50,22 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"network_policy": {
-				Description: "An array of relationships to vnicEthNetworkPolicy resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-			"organization": {
-				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"uplink_fail_action": {
 				Description: "Determines the state of the virtual interface (vethernet / vfc) on the switch when a suitable uplink is not pinned.\n* `linkDown` - The vethernet will go down in case a suitable uplink is not pinned.\n* `warning` - The vethernet will remain up even if a suitable uplink is not pinned.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceFabricEthNetworkControlPolicy().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -255,86 +116,58 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 	if err != nil {
 		return diag.Errorf("json marshal of FabricEthNetworkControlPolicy object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.FabricEthNetworkControlPolicyList.GetCount()
+	var i int32
+	var fabricEthNetworkControlPolicyResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.FabricEthNetworkControlPolicyList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for FabricEthNetworkControlPolicy data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["cdp_enabled"] = (s.GetCdpEnabled())
+				temp["class_id"] = (s.GetClassId())
+				temp["description"] = (s.GetDescription())
+				temp["forge_mac"] = (s.GetForgeMac())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for FabricEthNetworkControlPolicy list: %s", err.Error())
-	}
-	var s = &models.FabricEthNetworkControlPolicyList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to FabricEthNetworkControlPolicy list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for FabricEthNetworkControlPolicy data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for FabricEthNetworkControlPolicy data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.FabricEthNetworkControlPolicy{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("cdp_enabled", (s.GetCdpEnabled())); err != nil {
-				return diag.Errorf("error occurred while setting property CdpEnabled: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
-			if err := d.Set("forge_mac", (s.GetForgeMac())); err != nil {
-				return diag.Errorf("error occurred while setting property ForgeMac: %s", err.Error())
-			}
+				temp["lldp_settings"] = flattenMapFabricLldpSettings(s.GetLldpSettings(), d)
+				temp["mac_registration_mode"] = (s.GetMacRegistrationMode())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
-			if err := d.Set("lldp_settings", flattenMapFabricLldpSettings(s.GetLldpSettings(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property LldpSettings: %s", err.Error())
-			}
-			if err := d.Set("mac_registration_mode", (s.GetMacRegistrationMode())); err != nil {
-				return diag.Errorf("error occurred while setting property MacRegistrationMode: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
+				temp["network_policy"] = flattenListVnicEthNetworkPolicyRelationship(s.GetNetworkPolicy(), d)
+				temp["object_type"] = (s.GetObjectType())
 
-			if err := d.Set("network_policy", flattenListVnicEthNetworkPolicyRelationship(s.GetNetworkPolicy(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property NetworkPolicy: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
+				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
-			if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Organization: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["uplink_fail_action"] = (s.GetUplinkFailAction())
+				fabricEthNetworkControlPolicyResults[j] = temp
+				j += 1
 			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("uplink_fail_action", (s.GetUplinkFailAction())); err != nil {
-				return diag.Errorf("error occurred while setting property UplinkFailAction: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(fabricEthNetworkControlPolicyResults))
+	if err := d.Set("results", fabricEthNetworkControlPolicyResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(fabricEthNetworkControlPolicyResults[0]["moid"].(string))
 	return de
 }

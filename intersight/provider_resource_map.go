@@ -38,6 +38,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_capability_switch_capability":                            resourceCapabilitySwitchCapability(),
 		"intersight_capability_switch_descriptor":                            resourceCapabilitySwitchDescriptor(),
 		"intersight_capability_switch_manufacturing_def":                     resourceCapabilitySwitchManufacturingDef(),
+		"intersight_certificatemanagement_policy":                            resourceCertificatemanagementPolicy(),
 		"intersight_chassis_config_import":                                   resourceChassisConfigImport(),
 		"intersight_chassis_profile":                                         resourceChassisProfile(),
 		"intersight_comm_http_proxy_policy":                                  resourceCommHttpProxyPolicy(),

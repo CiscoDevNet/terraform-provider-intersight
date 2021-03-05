@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_physical_disk
 Physical Disk on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_physical_disk.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `block_size`:(string) The block size of the physical disk in bytes. 
 * `bootable`:(string) This field identifies the disk drive as bootable if set to true. 
@@ -45,3 +48,4 @@ The following arguments can be used to get data of already created objects in In
 * `type`:(string) This field identifies the type of the physical disk. 
 * `variant_type`:(string) The variant type of the physical disk. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

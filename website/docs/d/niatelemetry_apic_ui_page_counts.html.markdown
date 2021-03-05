@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_apic_ui_page_counts
 Object to capture the UI page counts in APIC.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_apic_ui_page_counts.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `page_count`:(int) Number of times that the user has opened this page. 
@@ -16,3 +19,4 @@ The following arguments can be used to get data of already created objects in In
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `site_name`:(string) Name of the APIC site from which this data is being collected. 
+ 

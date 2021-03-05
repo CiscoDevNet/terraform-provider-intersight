@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_networkconfig_policy
 Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on Cisco IMC.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_networkconfig_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `alternate_ipv4dns_server`:(string) IP address of the secondary DNS server. 
 * `alternate_ipv6dns_server`:(string) IP address of the secondary DNS server. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the concrete policy. 
 * `preferred_ipv4dns_server`:(string) IP address of the primary DNS server. 
 * `preferred_ipv6dns_server`:(string) IP address of the primary DNS server. 
+ 

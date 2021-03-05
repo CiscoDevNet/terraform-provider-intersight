@@ -33,6 +33,9 @@ To register an OAuth2 application, the following information must be provided.
 5) A list of redirect URLs
 When an AppRegistration is created, a unique OAuth2 clientId is generated and returned in the HTTP response.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_iam_app_registration.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `client_id`:(string) A unique identifier for the OAuth2 client application.The client ID is auto-generated when the AppRegistration object is created. 
 * `client_name`:(string) App Registration name specified by user. 
@@ -43,3 +46,4 @@ The following arguments can be used to get data of already created objects in In
 * `renew_client_secret`:(bool) Set value to true to renew the client-secret. Applicable to client_credentials grant type. 
 * `revocation_timestamp`:(string) Used to perform revocation for tokens of AppRegistration.Updated only internally is case Revoke property come from UI with value true.On each request with OAuth2 access token the CreationTime of the OAuth2 token will be compared to RevokationTimestamp of thecorresponding App Registration. 
 * `revoke`:(bool) Used to trigger update the revocationTimestamp value.If UI sent updating request with the Revoke value is true, then update RevocationTimestamp. 
+ 

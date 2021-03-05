@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_controller
 Storage Controller present in a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_controller.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `controller_flags`:(string) The flags for the storage controller. 
 * `controller_id`:(string) The Id of the storage controller. 
@@ -35,3 +38,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `type`:(string) Controller types are Raid, FlexFlash. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

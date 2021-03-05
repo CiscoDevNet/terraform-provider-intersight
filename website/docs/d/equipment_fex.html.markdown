@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_fex
 Fabric Extender which can mutiplex traffic from the host facing ports.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_fex.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `connection_status`:(string) Connectivity Status of FEX/IOM to Switch - A or B or AB. 
 * `description`:(string) This field is to provide description for the iocard module model. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) This field identifies the version of the IO card module. 
 * `vid`:(string) This field identifies the Vendor ID for the IO card module. 
+ 

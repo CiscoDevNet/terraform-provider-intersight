@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_cond_alarm
 A state-full entity representing a found problem. Alarms can be reported by the managed system itself or can be determined by Intersight.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_cond_alarm.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `acknowledge`:(string) Alarm acknowledgment state. Default value is None.* `None` - The Enum value None represents that the alarm is not acknowledged and is included as part of health status and overall alarm count.* `Acknowledge` - The Enum value Acknowledge represents that the alarm is acknowledged by user. The alarm will be ignored from the health status and overall alarm count. 
 * `acknowledge_by`:(string) User who acknowledged the alarm. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. 
 * `orig_severity`:(string) The original severity when the alarm was first created.* `None` - The Enum value None represents that there is no severity.* `Info` - The Enum value Info represents the Informational level of severity.* `Critical` - The Enum value Critical represents the Critical level of severity.* `Warning` - The Enum value Warning represents the Warning level of severity.* `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared. 
 * `severity`:(string) The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared.* `None` - The Enum value None represents that there is no severity.* `Info` - The Enum value Info represents the Informational level of severity.* `Critical` - The Enum value Critical represents the Critical level of severity.* `Warning` - The Enum value Warning represents the Warning level of severity.* `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared. 
+ 

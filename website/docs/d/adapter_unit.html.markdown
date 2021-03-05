@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_adapter_unit
 The physical adapter present on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_adapter_unit.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `adapter_id`:(string) Unique Identifier of an adapter Unit within a Rack Interface. 
 * `base_mac_address`:(string) Original Base Mac address of an adapter unit. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `thermal`:(string) Thermal state of an adapter unit. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vid`:(string) Virtual Id of the adapter in the server. 
+ 

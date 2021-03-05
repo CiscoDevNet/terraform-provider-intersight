@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_memory_unit
 This represents a memory DIMM on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_memory_unit.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_state`:(string) This represents the administrative state of the memory unit on a server. 
 * `array_id`:(int) This represents the memory array to which the memory unit belongs to. 
@@ -37,3 +40,4 @@ The following arguments can be used to get data of already created objects in In
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `visibility`:(string) This represents the visibility of the memory unit on a server. 
 * `width`:(string) This represents the width of the memory unit on a server. 
+ 

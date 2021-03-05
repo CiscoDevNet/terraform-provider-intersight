@@ -540,30 +540,7 @@ func resourceChassisConfigImportDelete(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	var de diag.Diagnostics
-	conn := meta.(*Config)
-	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
-	moid := x["moid"].(string)
-	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching workflow info for ChassisConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-	}
-	if getWorkflow.GetStatus() == "RUNNING" {
-		status := "Cancel"
-		var o = &models.WorkflowWorkflowInfo{Action: &status}
-		o.SetClassId("workflow.WorkflowInfo")
-		o.SetObjectType("workflow.WorkflowInfo")
-		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while cancelling workflow triggered by ChassisConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-		}
-		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
-		_, responseErr = p.Execute()
-		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while deleting workflow triggered by ChassisConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-		}
-	}
+	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ChassisConfigImport does not allow delete functionality"}
+	de = append(de, warning)
 	return de
 }

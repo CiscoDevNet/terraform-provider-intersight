@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_compute_rack_unit_identity
 Identity object that uniquely represents a server object under a DR.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_compute_rack_unit_identity.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `adapter_serial`:(string) Serial Identifier of an adapter participating in SWM. 
 * `admin_action`:(string) Updated by UI/API to trigger specific chassis action type.* `None` - No operation value for maintenance actions on an equipment.* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.* `Recommission` - Recommission the equipment.* `Reack` - Reacknowledge the equipment and discover it again.* `Remove` - Remove the equipment permanently from Intersight management. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `serial`:(string) The serial number of the equipment. 
 * `vendor`:(string) The manufacturer of the equipment. 
+ 

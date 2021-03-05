@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_hitachi_port
 Port entity in Hitachi storage array.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_hitachi_port.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `fabric_mode`:(bool) Fabric mode of the port. true, Set. false, Not set. 
 * `ipv4_address`:(string) IPv4 address of Hitachi Port. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `wwn`:(string) World wide name of FC port. It is a combination of WWNN and WWPN represented in 128 bit hexadecimal formatted with colon.Example: '51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01'. 
 * `wwnn`:(string) World wide node name of FC port. Represented in 64 bit hex digits, formatted with colon. Example - '51:4f:0c:50:14:1f:af:01'. 
 * `wwpn`:(string) World wide port name of FC port. Represented in 64 bit hex digits, formatted with colon. Example - '51:4f:0c:51:14:1f:af:01'. 
+ 

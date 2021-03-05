@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_ether_host_port
 Model object contains the details of host port available on IO card or fabric extender.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_ether_host_port.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `speed`:(string) Host Port Speed of IO card or fabric extender. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `transceiver_type`:(string) Transceiver model attached to a port in the Fabric Interconnect. 
+ 

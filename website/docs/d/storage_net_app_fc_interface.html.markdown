@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_fc_interface
 NetApp FC Interface is a logical interface.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_fc_interface.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `enabled`:(string) FC interface is enabled or not. 
 * `iqn`:(string) ISCSI qualified name applicable for ethernet port. Example - 'iqn.2008-05.com.storage:fnm00151300643-514f0c50141faf05'. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `wwn`:(string) World wide name of FC port. It is a combination of WWNN and WWPN represented in 128 bit hexadecimal formatted with colon.Example: '51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01'. 
 * `wwnn`:(string) World wide node name of FC port. Represented in 64 bit hex digits, formatted with colon. Example - '51:4f:0c:50:14:1f:af:01'. 
 * `wwpn`:(string) World wide port name of FC port. Represented in 64 bit hex digits, formatted with colon. Example - '51:4f:0c:51:14:1f:af:01'. 
+ 

@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceNiaapiApicLatestMaintainedRelease() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceNiaapiApicLatestMaintainedReleaseRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
@@ -47,35 +41,76 @@ func dataSourceNiaapiApicLatestMaintainedRelease() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"version_tag": {
 				Description: "Long lived version or short lived version.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"maintained_release": {
+						Description: "Lastest maintained release.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"software_release": {
+						Description: "Software release version string.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"version_tag": {
+						Description: "Long lived version or short lived version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -114,65 +149,49 @@ func dataSourceNiaapiApicLatestMaintainedReleaseRead(c context.Context, d *schem
 	if err != nil {
 		return diag.Errorf("json marshal of NiaapiApicLatestMaintainedRelease object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicLatestMaintainedReleaseList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicLatestMaintainedReleaseList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching NiaapiApicLatestMaintainedRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of NiaapiApicLatestMaintainedRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.NiaapiApicLatestMaintainedReleaseList.GetCount()
+	var i int32
+	var niaapiApicLatestMaintainedReleaseResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicLatestMaintainedReleaseList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching NiaapiApicLatestMaintainedRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.NiaapiApicLatestMaintainedReleaseList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for NiaapiApicLatestMaintainedRelease data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["class_id"] = (s.GetClassId())
+				temp["maintained_release"] = (s.GetMaintainedRelease())
+				temp["moid"] = (s.GetMoid())
+				temp["object_type"] = (s.GetObjectType())
+				temp["software_release"] = (s.GetSoftwareRelease())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for NiaapiApicLatestMaintainedRelease list: %s", err.Error())
-	}
-	var s = &models.NiaapiApicLatestMaintainedReleaseList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to NiaapiApicLatestMaintainedRelease list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for NiaapiApicLatestMaintainedRelease data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for NiaapiApicLatestMaintainedRelease data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.NiaapiApicLatestMaintainedRelease{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["version_tag"] = (s.GetVersionTag())
+				niaapiApicLatestMaintainedReleaseResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("maintained_release", (s.GetMaintainedRelease())); err != nil {
-				return diag.Errorf("error occurred while setting property MaintainedRelease: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("software_release", (s.GetSoftwareRelease())); err != nil {
-				return diag.Errorf("error occurred while setting property SoftwareRelease: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("version_tag", (s.GetVersionTag())); err != nil {
-				return diag.Errorf("error occurred while setting property VersionTag: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(niaapiApicLatestMaintainedReleaseResults))
+	if err := d.Set("results", niaapiApicLatestMaintainedReleaseResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(niaapiApicLatestMaintainedReleaseResults[0]["moid"].(string))
 	return de
 }

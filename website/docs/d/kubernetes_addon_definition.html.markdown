@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_kubernetes_addon_definition
 An addon that can be added to any Kubernetes cluster.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_kubernetes_addon_definition.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `chart_url`:(string) Description of the addon component. 
 * `default_install_strategy`:(string) Default installation strategy for the release.* `InstallOnly` - Only install in green field. No action in case of failure or removal.* `NoAction` - No install action performed.* `Always` - Attempt install if chart is not already installed. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of an addon component. 
 * `nr_version`:(string) Version of the addon component. 
+ 

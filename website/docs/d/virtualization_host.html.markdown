@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_virtualization_host
 Depicts operations to control the life cycle of a Hypervisor Host.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_virtualization_host.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `action`:(string) Action to be performed on a host (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host. 
 * `hypervisor_type`:(string) Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the hypervisor host. It must be unique within the targer endpoint. 
 * `serial`:(string) Serial number of this host (internally generated). 
 * `vendor`:(string) Commercial vendor details of this hardware. 
+ 

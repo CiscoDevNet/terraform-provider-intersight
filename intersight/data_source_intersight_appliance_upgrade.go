@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 	"time"
@@ -16,55 +15,11 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceApplianceUpgradeRead,
 		Schema: map[string]*schema.Schema{
-			"account": {
-				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"active": {
 				Description: "Indicates if the software upgrade is active or not.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
-			},
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"auto_created": {
 				Description: "Indicates that the request was automatically created by the system.",
@@ -76,130 +31,6 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"completed_phases": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"elapsed_time": {
-							Description: "Elapsed time in seconds to complete the current upgrade phase.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-						},
-						"end_time": {
-							Description: "End date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"failed": {
-							Description: "Indicates if the upgrade phase has failed or not.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-						},
-						"message": {
-							Description: "Status message set during the upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"name": {
-							Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"start_time": {
-							Description: "Start date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"current_phase": {
-				Description: "Current phase of the Intersight Appliance's software upgrade.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"elapsed_time": {
-							Description: "Elapsed time in seconds to complete the current upgrade phase.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-						},
-						"end_time": {
-							Description: "End date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"failed": {
-							Description: "Indicates if the upgrade phase has failed or not.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-						},
-						"message": {
-							Description: "Status message set during the upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"name": {
-							Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"start_time": {
-							Description: "Start date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"description": {
 				Description: "Description of the software upgrade.",
@@ -231,45 +62,6 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"image_bundle": {
-				Description: "A reference to a applianceImageBundle resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"is_rolling_back": {
 				Description: "Track if software upgrade is upgrading or rolling back.",
 				Type:        schema.TypeBool,
@@ -282,11 +74,6 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"messages": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -304,78 +91,12 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
-			"rollback_phases": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"elapsed_time": {
-							Description: "Elapsed time in seconds to complete the current upgrade phase.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-							Computed:    true,
-						},
-						"end_time": {
-							Description: "End date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"failed": {
-							Description: "Indicates if the upgrade phase has failed or not.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-							Computed:    true,
-						},
-						"message": {
-							Description: "Status message set during the upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"name": {
-							Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"start_time": {
-							Description: "Start date of the software upgrade phase.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"rollback_status": {
 				Description: "Status of the Intersight Appliance's software rollback status.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-			"services": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"start_time": {
 				Description: "Start date of the software upgrade. UI can modify startTime to re-schedule an upgrade.",
 				Type:        schema.TypeString,
@@ -387,47 +108,434 @@ func dataSourceApplianceUpgrade() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"total_phases": {
 				Description: "TotalPhase represents the total number of the upgradePhases for one upgrade.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
 			},
-			"ui_packages": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
 			"nr_version": {
 				Description: "Software upgrade manifest's version.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account": {
+					Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+					Type:        schema.TypeList,
+					MaxItems:    1,
+					Optional:    true,
+					Elem: &schema.Resource{
+						Schema: map[string]*schema.Schema{
+							"additional_properties": {
+								Type:             schema.TypeString,
+								Optional:         true,
+								DiffSuppressFunc: SuppressDiffAdditionProps,
+							},
+							"class_id": {
+								Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+								Type:        schema.TypeString,
+								Optional:    true,
+							},
+							"moid": {
+								Description: "The Moid of the referenced REST resource.",
+								Type:        schema.TypeString,
+								Optional:    true,
+								Computed:    true,
+							},
+							"object_type": {
+								Description: "The fully-qualified name of the remote type referred by this relationship.",
+								Type:        schema.TypeString,
+								Optional:    true,
+								Computed:    true,
+							},
+							"selector": {
+								Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+								Type:        schema.TypeString,
+								Optional:    true,
+								Computed:    true,
+							},
+						},
+					},
+					Computed: true,
+				},
+					"active": {
+						Description: "Indicates if the software upgrade is active or not.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+						Computed:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"auto_created": {
+						Description: "Indicates that the request was automatically created by the system.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+						Computed:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"completed_phases": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"elapsed_time": {
+									Description: "Elapsed time in seconds to complete the current upgrade phase.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"end_time": {
+									Description: "End date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"failed": {
+									Description: "Indicates if the upgrade phase has failed or not.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+									Computed:    true,
+								},
+								"message": {
+									Description: "Status message set during the upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"name": {
+									Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"start_time": {
+									Description: "Start date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"current_phase": {
+						Description: "Current phase of the Intersight Appliance's software upgrade.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"elapsed_time": {
+									Description: "Elapsed time in seconds to complete the current upgrade phase.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"end_time": {
+									Description: "End date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"failed": {
+									Description: "Indicates if the upgrade phase has failed or not.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+									Computed:    true,
+								},
+								"message": {
+									Description: "Status message set during the upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"name": {
+									Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"start_time": {
+									Description: "Start date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"description": {
+						Description: "Description of the software upgrade.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"elapsed_time": {
+						Description: "Elapsed time in seconds during the software upgrade.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"end_time": {
+						Description: "End date of the software upgrade.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"error_code": {
+						Description: "Error code for Intersight Appliance's software upgrade. In case of failure - this code will help decide if software upgrade can be retried.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"fingerprint": {
+						Description: "Software upgrade manifest's fingerprint.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"image_bundle": {
+						Description: "A reference to a applianceImageBundle resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"is_rolling_back": {
+						Description: "Track if software upgrade is upgrading or rolling back.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+						Computed:    true,
+					},
+					"is_user_triggered": {
+						Description: "Indicates if the upgrade is triggered by user or due to schedule.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+						Computed:    true,
+					},
+					"messages": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"rollback_needed": {
+						Description: "Track if rollback is needed.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"rollback_phases": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"elapsed_time": {
+									Description: "Elapsed time in seconds to complete the current upgrade phase.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"end_time": {
+									Description: "End date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"failed": {
+									Description: "Indicates if the upgrade phase has failed or not.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+									Computed:    true,
+								},
+								"message": {
+									Description: "Status message set during the upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"name": {
+									Description: "Name of the upgrade phase.\n* `init` - Upgrade service initialization phase.\n* `Prepare` - Upgrade service prepares folders and templated files.\n* `ServiceLoad` - Upgrade service loads the service images into the local docker cache.\n* `UiLoad` - Upgrade service loads the UI packages into the local cache.\n* `GenerateConfig` - Upgrade service generates the Kubernetes configuration files.\n* `DeployService` - Upgrade service deploys the Kubernetes services.\n* `Success` - Upgrade completed successfully.\n* `Fail` - Indicates that the upgrade process has failed.\n* `Cancel` - Indicates that the upgrade was canceled by the Intersight Appliance.\n* `Telemetry` - Upgrade service sends basic telemetry data to the Intersight.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"start_time": {
+									Description: "Start date of the software upgrade phase.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"rollback_status": {
+						Description: "Status of the Intersight Appliance's software rollback status.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"services": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"start_time": {
+						Description: "Start date of the software upgrade. UI can modify startTime to re-schedule an upgrade.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Status of the Intersight Appliance's software upgrade.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"total_phases": {
+						Description: "TotalPhase represents the total number of the upgradePhases for one upgrade.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"ui_packages": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"nr_version": {
+						Description: "Software upgrade manifest's version.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -514,132 +622,76 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 	if err != nil {
 		return diag.Errorf("json marshal of ApplianceUpgrade object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceUpgradeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceUpgradeList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching ApplianceUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of ApplianceUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.ApplianceUpgradeList.GetCount()
+	var i int32
+	var applianceUpgradeResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceUpgradeList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching ApplianceUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.ApplianceUpgradeList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for ApplianceUpgrade data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for ApplianceUpgrade list: %s", err.Error())
-	}
-	var s = &models.ApplianceUpgradeList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to ApplianceUpgrade list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for ApplianceUpgrade data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for ApplianceUpgrade data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.ApplianceUpgrade{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
+				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
+				temp["active"] = (s.GetActive())
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["auto_created"] = (s.GetAutoCreated())
+				temp["class_id"] = (s.GetClassId())
 
-			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
-			}
-			if err := d.Set("active", (s.GetActive())); err != nil {
-				return diag.Errorf("error occurred while setting property Active: %s", err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("auto_created", (s.GetAutoCreated())); err != nil {
-				return diag.Errorf("error occurred while setting property AutoCreated: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["completed_phases"] = flattenListOnpremUpgradePhase(s.GetCompletedPhases(), d)
 
-			if err := d.Set("completed_phases", flattenListOnpremUpgradePhase(s.GetCompletedPhases(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property CompletedPhases: %s", err.Error())
-			}
+				temp["current_phase"] = flattenMapOnpremUpgradePhase(s.GetCurrentPhase(), d)
+				temp["description"] = (s.GetDescription())
+				temp["elapsed_time"] = (s.GetElapsedTime())
 
-			if err := d.Set("current_phase", flattenMapOnpremUpgradePhase(s.GetCurrentPhase(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property CurrentPhase: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
-			if err := d.Set("elapsed_time", (s.GetElapsedTime())); err != nil {
-				return diag.Errorf("error occurred while setting property ElapsedTime: %s", err.Error())
-			}
+				temp["end_time"] = (s.GetEndTime()).String()
+				temp["error_code"] = (s.GetErrorCode())
+				temp["fingerprint"] = (s.GetFingerprint())
 
-			if err := d.Set("end_time", (s.GetEndTime()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndTime: %s", err.Error())
-			}
-			if err := d.Set("error_code", (s.GetErrorCode())); err != nil {
-				return diag.Errorf("error occurred while setting property ErrorCode: %s", err.Error())
-			}
-			if err := d.Set("fingerprint", (s.GetFingerprint())); err != nil {
-				return diag.Errorf("error occurred while setting property Fingerprint: %s", err.Error())
-			}
+				temp["image_bundle"] = flattenMapApplianceImageBundleRelationship(s.GetImageBundle(), d)
+				temp["is_rolling_back"] = (s.GetIsRollingBack())
+				temp["is_user_triggered"] = (s.GetIsUserTriggered())
+				temp["messages"] = (s.GetMessages())
+				temp["moid"] = (s.GetMoid())
+				temp["object_type"] = (s.GetObjectType())
+				temp["rollback_needed"] = (s.GetRollbackNeeded())
 
-			if err := d.Set("image_bundle", flattenMapApplianceImageBundleRelationship(s.GetImageBundle(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property ImageBundle: %s", err.Error())
-			}
-			if err := d.Set("is_rolling_back", (s.GetIsRollingBack())); err != nil {
-				return diag.Errorf("error occurred while setting property IsRollingBack: %s", err.Error())
-			}
-			if err := d.Set("is_user_triggered", (s.GetIsUserTriggered())); err != nil {
-				return diag.Errorf("error occurred while setting property IsUserTriggered: %s", err.Error())
-			}
-			if err := d.Set("messages", (s.GetMessages())); err != nil {
-				return diag.Errorf("error occurred while setting property Messages: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("rollback_needed", (s.GetRollbackNeeded())); err != nil {
-				return diag.Errorf("error occurred while setting property RollbackNeeded: %s", err.Error())
-			}
+				temp["rollback_phases"] = flattenListOnpremUpgradePhase(s.GetRollbackPhases(), d)
+				temp["rollback_status"] = (s.GetRollbackStatus())
+				temp["services"] = (s.GetServices())
 
-			if err := d.Set("rollback_phases", flattenListOnpremUpgradePhase(s.GetRollbackPhases(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property RollbackPhases: %s", err.Error())
-			}
-			if err := d.Set("rollback_status", (s.GetRollbackStatus())); err != nil {
-				return diag.Errorf("error occurred while setting property RollbackStatus: %s", err.Error())
-			}
-			if err := d.Set("services", (s.GetServices())); err != nil {
-				return diag.Errorf("error occurred while setting property Services: %s", err.Error())
-			}
+				temp["start_time"] = (s.GetStartTime()).String()
+				temp["status"] = (s.GetStatus())
 
-			if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property StartTime: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_phases"] = (s.GetTotalPhases())
+				temp["ui_packages"] = (s.GetUiPackages())
+				temp["nr_version"] = (s.GetVersion())
+				applianceUpgradeResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("total_phases", (s.GetTotalPhases())); err != nil {
-				return diag.Errorf("error occurred while setting property TotalPhases: %s", err.Error())
-			}
-			if err := d.Set("ui_packages", (s.GetUiPackages())); err != nil {
-				return diag.Errorf("error occurred while setting property UiPackages: %s", err.Error())
-			}
-			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(applianceUpgradeResults))
+	if err := d.Set("results", applianceUpgradeResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(applianceUpgradeResults[0]["moid"].(string))
 	return de
 }

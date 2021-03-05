@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_nexus_dashboards
 Object is available for Nexus Dashboard devices.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_nexus_dashboards.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cluster_name`:(string) Nexus Dashboard can onboard multiple APIC clusters/sites. 
 * `is_cluster_healthy`:(string) Health of Nexus Dashboard cluster. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `number_of_sites_serviced`:(int) Number of sites serviced by ND. 
 * `number_of_tenants_in_mso`:(int) Number of total tenants in Multi-Site Orchestrator. 
 * `type_of_site_in_mso`:(string) Type of site added to Multi-Site Orchestrator. 
+ 

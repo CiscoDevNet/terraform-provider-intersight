@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_network_element
 A Unified Computing Systems (UCS) Fabric Interconnect.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_network_element.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_evac_state`:(string) Administratively configured state of Fabric Evacuation feature, for this switch. 
 * `admin_inband_interface_state`:(string) The administrative state of the network Element inband management interface. 
@@ -46,3 +49,4 @@ The following arguments can be used to get data of already created objects in In
 * `thermal`:(string) The Thermal status of the fabric interconnect.* `unknown` - The default state of the sensor (in case no data is received).* `ok` - State of the sensor indicating the sensor's temperature range is okay.* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.* `upper-critical` - State of the sensor indicating that the temperature is above normal range.* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.* `lower-critical` - State of the sensor indicating that the temperature is below normal range.* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range. 
 * `total_memory`:(int) Total available memory on this switch platform. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

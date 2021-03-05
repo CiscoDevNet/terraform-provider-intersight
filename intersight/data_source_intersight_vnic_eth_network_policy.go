@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceVnicEthNetworkPolicy() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceVnicEthNetworkPolicyRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -47,116 +41,16 @@ func dataSourceVnicEthNetworkPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"organization": {
-				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"target_platform": {
 				Description: "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"vlan_settings": {
-				Description: "VLAN configuration for the virtual interface.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"allowed_vlans": {
-							Description: "Allowed VLAN IDs of the virtual interface.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"default_vlan": {
-							Description: "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"mode": {
-							Description: "Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.\n* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.\n* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceVnicEthNetworkPolicy().Schema},
 				Computed: true,
-			},
-		},
+			}},
 	}
 }
 
@@ -195,73 +89,53 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 	if err != nil {
 		return diag.Errorf("json marshal of VnicEthNetworkPolicy object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.VnicEthNetworkPolicyList.GetCount()
+	var i int32
+	var vnicEthNetworkPolicyResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthNetworkPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.VnicEthNetworkPolicyList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for VnicEthNetworkPolicy data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["class_id"] = (s.GetClassId())
+				temp["description"] = (s.GetDescription())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["object_type"] = (s.GetObjectType())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for VnicEthNetworkPolicy list: %s", err.Error())
-	}
-	var s = &models.VnicEthNetworkPolicyList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to VnicEthNetworkPolicy list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for VnicEthNetworkPolicy data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for VnicEthNetworkPolicy data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.VnicEthNetworkPolicy{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
+				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
-			if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Organization: %s", err.Error())
-			}
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_platform"] = (s.GetTargetPlatform())
 
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
+				temp["vlan_settings"] = flattenMapVnicVlanSettings(s.GetVlanSettings(), d)
+				vnicEthNetworkPolicyResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
-				return diag.Errorf("error occurred while setting property TargetPlatform: %s", err.Error())
-			}
-
-			if err := d.Set("vlan_settings", flattenMapVnicVlanSettings(s.GetVlanSettings(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property VlanSettings: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(vnicEthNetworkPolicyResults))
+	if err := d.Set("results", vnicEthNetworkPolicyResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(vnicEthNetworkPolicyResults[0]["moid"].(string))
 	return de
 }

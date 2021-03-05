@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_kubernetes_node_group_profile
 A configuration profile for a node group in a Kubernetes cluster.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_kubernetes_node_group_profile.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
 * `currentsize`:(int) Current number of nodes in this node group at any given point in time. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the concrete profile. 
 * `node_type`:(string) The node type Master, Worker or EmbeddedMaster.* `Worker` - Node will be marked as a worker node.* `Master` - Node will be marked as a master node.* `EmbeddedMaster` - Node will be both a master and a worker. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_memory_persistent_memory_namespace_config_result
 Result of a previously configured Persistent Memory Namespace on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_memory_persistent_memory_namespace_config_result.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `config_status`:(string) Status of the Persistent Memory Namespace needed to be configured. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `socket_id`:(string) Socket ID in which the Persistent Memory Namespace needed to be configured. 
 * `socket_memory_id`:(string) Socket Memory ID in which the Persistent Memory Namespace needed to be configured. 
+ 

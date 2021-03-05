@@ -17,8 +17,12 @@ a POST on this MO.
 The requests to this MO starts a OS installation workflow that can be tracked
 using workflow engine MO workflow.WorkflowInfo.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_os_install.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) User provided description about the OS install configuration. 
 * `install_method`:(string) The install method to be used for OS installation - vMedia, iPXE. Only vMedia is supported as of now.* `vMedia` - OS image is mounted as vMedia in target server for OS installation. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the OS install configuration. 
+ 

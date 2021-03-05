@@ -23,6 +23,9 @@ as well as any additional user-defined properties. The values for these placehol
 shall be given during OS installation in the form of os.Answers type and 'additionalProperties' in
 os.OsInstall object.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_os_configuration_file.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Description of the OS ConfigurationFile. 
 * `file_content`:(string) The content of the entire configuration file is stored as value. The contentcan either be a static file content or a template content.The template is expected to conform to the golang template syntax. The valuesfrom os.Answers properties will be used to populate this template. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the OS ConfigurationFile that uniquely identifies the configuration file. 
 * `supported`:(bool) An internal property that is used to distinguish between the pre-canned OSconfiguration file entries and user provided entries. 
+ 

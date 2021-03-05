@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceCapabilitySiocModuleCapabilityDef() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceCapabilitySiocModuleCapabilityDefRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -47,30 +41,11 @@ func dataSourceCapabilitySiocModuleCapabilityDef() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"tags": {
+			"results": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
-		},
+				Elem:     &schema.Resource{Schema: resourceCapabilitySiocModuleCapabilityDef().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -105,62 +80,48 @@ func dataSourceCapabilitySiocModuleCapabilityDefRead(c context.Context, d *schem
 	if err != nil {
 		return diag.Errorf("json marshal of CapabilitySiocModuleCapabilityDef object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleCapabilityDefList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleCapabilityDefList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching CapabilitySiocModuleCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of CapabilitySiocModuleCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.CapabilitySiocModuleCapabilityDefList.GetCount()
+	var i int32
+	var capabilitySiocModuleCapabilityDefResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilitySiocModuleCapabilityDefList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching CapabilitySiocModuleCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.CapabilitySiocModuleCapabilityDefList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for CapabilitySiocModuleCapabilityDef data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["class_id"] = (s.GetClassId())
+				temp["dc_supported"] = (s.GetDcSupported())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["object_type"] = (s.GetObjectType())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for CapabilitySiocModuleCapabilityDef list: %s", err.Error())
-	}
-	var s = &models.CapabilitySiocModuleCapabilityDefList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to CapabilitySiocModuleCapabilityDef list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for CapabilitySiocModuleCapabilityDef data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for CapabilitySiocModuleCapabilityDef data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.CapabilitySiocModuleCapabilityDef{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				capabilitySiocModuleCapabilityDefResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("dc_supported", (s.GetDcSupported())); err != nil {
-				return diag.Errorf("error occurred while setting property DcSupported: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(capabilitySiocModuleCapabilityDefResults))
+	if err := d.Set("results", capabilitySiocModuleCapabilityDefResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(capabilitySiocModuleCapabilityDefResults[0]["moid"].(string))
 	return de
 }

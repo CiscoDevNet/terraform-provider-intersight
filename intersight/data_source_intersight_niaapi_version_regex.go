@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,371 +14,10 @@ func dataSourceNiaapiVersionRegex() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceNiaapiVersionRegexRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
-			"apic": {
-				Description: "Version Regex mapping for APIC platform.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"anyllregex": {
-							Description: "All long live version Regex pattern.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"currentlltrain": {
-							Description: "Current long live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"latestsltrain": {
-							Description: "Latest short live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"sltrain": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"upcominglltrain": {
-							Description: "Upcoming short live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"dcnm": {
-				Description: "Version Regex mapping for DCNM platform.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"anyllregex": {
-							Description: "All long live version Regex pattern.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"currentlltrain": {
-							Description: "Current long live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"latestsltrain": {
-							Description: "Latest short live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"sltrain": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"upcominglltrain": {
-							Description: "Upcoming short live version Regex pattern.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"regex": {
-										Description: "Regular Expression pattern used to reconginze the version string.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"software_version": {
-										Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -393,35 +31,422 @@ func dataSourceNiaapiVersionRegex() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"nr_version": {
 				Description: "Version number for the Version Regex data, also used as identity.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"apic": {
+						Description: "Version Regex mapping for APIC platform.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"anyllregex": {
+									Description: "All long live version Regex pattern.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"currentlltrain": {
+									Description: "Current long live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"latestsltrain": {
+									Description: "Latest short live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"sltrain": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"upcominglltrain": {
+									Description: "Upcoming short live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dcnm": {
+						Description: "Version Regex mapping for DCNM platform.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"anyllregex": {
+									Description: "All long live version Regex pattern.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"currentlltrain": {
+									Description: "Current long live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"latestsltrain": {
+									Description: "Latest short live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"sltrain": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"upcominglltrain": {
+									Description: "Upcoming short live version Regex pattern.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"regex": {
+												Description: "Regular Expression pattern used to reconginze the version string.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"software_version": {
+												Description: "Software release. A set of Software releases seperated by comma which can be recongized by according Regex pattern.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"nr_version": {
+						Description: "Version number for the Version Regex data, also used as identity.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -452,67 +477,51 @@ func dataSourceNiaapiVersionRegexRead(c context.Context, d *schema.ResourceData,
 	if err != nil {
 		return diag.Errorf("json marshal of NiaapiVersionRegex object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiVersionRegexList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiVersionRegexList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching NiaapiVersionRegex: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of NiaapiVersionRegex: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.NiaapiVersionRegexList.GetCount()
+	var i int32
+	var niaapiVersionRegexResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiVersionRegexList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching NiaapiVersionRegex: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.NiaapiVersionRegexList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for NiaapiVersionRegex data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for NiaapiVersionRegex list: %s", err.Error())
-	}
-	var s = &models.NiaapiVersionRegexList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to NiaapiVersionRegex list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for NiaapiVersionRegex data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for NiaapiVersionRegex data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.NiaapiVersionRegex{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
+				temp["apic"] = flattenMapNiaapiVersionRegexPlatform(s.GetApic(), d)
+				temp["class_id"] = (s.GetClassId())
 
-			if err := d.Set("apic", flattenMapNiaapiVersionRegexPlatform(s.GetApic(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Apic: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
+				temp["dcnm"] = flattenMapNiaapiVersionRegexPlatform(s.GetDcnm(), d)
+				temp["moid"] = (s.GetMoid())
+				temp["object_type"] = (s.GetObjectType())
 
-			if err := d.Set("dcnm", flattenMapNiaapiVersionRegexPlatform(s.GetDcnm(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Dcnm: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["nr_version"] = (s.GetVersion())
+				niaapiVersionRegexResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(niaapiVersionRegexResults))
+	if err := d.Set("results", niaapiVersionRegexResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(niaapiVersionRegexResults[0]["moid"].(string))
 	return de
 }

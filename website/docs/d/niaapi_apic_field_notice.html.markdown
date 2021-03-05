@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niaapi_apic_field_notice
 The field notice reporting bug and related software or hardware for APIC.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niaapi_apic_field_notice.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bugid`:(string) Bug Id associated with this notice. 
 * `field_notice_desc`:(string) Field notice Description. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `sw_release`:(string) Software Release number for affected versions. 
 * `workaround_url`:(string) URL of workaround of this notice. 
+ 

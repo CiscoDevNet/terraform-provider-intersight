@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_storage_vm
 NetApp Storage Virtual Machines contain data volumes and one or more Logical Interfaces ( LIFs ) through which they serve data to the clients.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_storage_vm.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cifs_enabled`:(bool) Status for Common Internet File System protocol ( CIFS ) allowed to run on Vservers. 
 * `fcp_enabled`:(bool) Status for Fibre Channel Protocol ( FCP ) allowed to run on Vservers. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `nvme_enabled`:(bool) Status for NVME protocol allowed to run on Vservers. 
 * `state`:(string) The state of this tenant.* `Unknown` - Component state is not available.* `Starting` - Component is being started.* `Running` - Component is currently running.* `Stopping` - Component is being stopped.* `Stopped` - Component has been stopped.* `Deleting` - Component deletion is in progress. 
 * `uuid`:(string) The uuid of this tenant in storage array. 
+ 

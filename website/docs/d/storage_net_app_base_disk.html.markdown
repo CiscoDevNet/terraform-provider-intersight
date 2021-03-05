@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_base_disk
 NetApp base disk is a storage array disk.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_base_disk.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `base_disk_model`:(string) NetApp base disk model. 
 * `container_type`:(string) Supported container type for NetApp disk.* `Unknown` - Container is currently unknown. This is the default setting.* `Aggregate` - Disk is used as a physical disk in an aggregate.* `Broken` - Disk is in broken pool.* `Label Maintenance` - Disk is in online label maintenance list.* `Foreign` - Array LUN has been marked foreign.* `Maintenance` - Disk is in maintenance center.* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.* `Shared` - Disk is partitioned or in a storage pool.* `Remote` - Disk belongs to a remote cluster.* `Spare` - Disk is a spare disk.* `Unassigned` - Disk ownership has not been assigned.* `Unsupported` - Disk is not supported. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `uuid`:(string) Uuid of  NetApp Disk. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Storage disk version number. 
+ 

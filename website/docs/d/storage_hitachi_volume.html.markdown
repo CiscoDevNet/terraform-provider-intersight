@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_hitachi_volume
 A volume entity in Hitachi storage array.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_hitachi_volume.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `clpr_id`:(int) CLPR (Cache Logical Partition) number of this volume. 
 * `data_reduction_mode`:(string) Setting of the capacity saving function (dedupe and compression).* `N/A` - Not available.* `Compression` - The capacity saving function (compression) is enabled.* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.* `Disabled` - The capacity saving function (compression and deduplication) is disabled. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `raid_type`:(string) RAID type drive configuration. 
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
 * `status`:(string) Status information of the volume.* `N/A` - Not available.* `NML` - The volume is in normal status.* `BLK` - The volume is blocked.* `BSY` - The volume status is being changed.* `Unknown` - The volume status is unknown (not supported). 
+ 

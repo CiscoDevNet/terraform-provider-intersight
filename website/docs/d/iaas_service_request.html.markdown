@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_iaas_service_request
 Gets last six months Service Requests from UCSD.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_iaas_service_request.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `duration`:(string) Service request duration. 
 * `initiating_user`:(string) Service Request initiating user. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `request_type`:(string) Service request type of an SR. 
 * `status`:(string) UCSD service request status. 
 * `workflow_name`:(string) Executed workflow name for an SR. 
+ 

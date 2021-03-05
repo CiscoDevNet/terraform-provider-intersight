@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_network_element_summary
 View MO which aggregates information pertaining to a network element from mutiple MOs.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_network_element_summary.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_evac_state`:(string) Administratively configured state of Fabric Evacuation feature, for this switch. 
 * `admin_inband_interface_state`:(string) The administrative state of the network Element inband management interface. 
@@ -58,3 +61,4 @@ The following arguments can be used to get data of already created objects in In
 * `total_memory`:(int) Total available memory on this switch platform. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Version holds the firmware version related information. 
+ 

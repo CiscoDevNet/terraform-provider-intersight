@@ -17,6 +17,9 @@ pending software upgrade. User may modify an active Upgrade managed object to re
 the software upgrade start time. However, user may not be able to postpone an upgrade
 beyond the limit enforced by the upgrade grace period set in the software manifest.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_upgrade.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `active`:(bool) Indicates if the software upgrade is active or not. 
 * `auto_created`:(bool) Indicates that the request was automatically created by the system. 
@@ -34,3 +37,4 @@ The following arguments can be used to get data of already created objects in In
 * `status`:(string) Status of the Intersight Appliance's software upgrade. 
 * `total_phases`:(int) TotalPhase represents the total number of the upgradePhases for one upgrade. 
 * `nr_version`:(string) Software upgrade manifest's version. 
+ 

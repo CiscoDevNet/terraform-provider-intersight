@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_io_card_descriptor
 Descriptor that uniquely identifies an IO card module.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_io_card_descriptor.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Detailed information about the endpoint. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `uif_connectivity`:(string) Connectivity information between UIF Uplink ports and IOM ports.* `inline` - UIF uplink ports and IOM ports are connected inline.* `cross-connected` - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. 
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
+ 

@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.ApicFexDetails"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.ApicFexDetails"]
+**Dn** | Pointer to **string** | Dn for the FEX in the inventory. | [optional] 
 **ModelNumber** | Pointer to **string** | Model number of the FEX in APIC. | [optional] 
+**NodeId** | Pointer to **string** | Node id for the FEX in the inventory. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the FEX in APIC. | [optional] 
@@ -73,6 +75,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetDn
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetDn() string`
+
+GetDn returns the Dn field if non-nil, zero value otherwise.
+
+### GetDnOk
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetDnOk() (*string, bool)`
+
+GetDnOk returns a tuple with the Dn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDn
+
+`func (o *NiatelemetryApicFexDetailsAllOf) SetDn(v string)`
+
+SetDn sets Dn field to given value.
+
+### HasDn
+
+`func (o *NiatelemetryApicFexDetailsAllOf) HasDn() bool`
+
+HasDn returns a boolean if a field has been set.
+
 ### GetModelNumber
 
 `func (o *NiatelemetryApicFexDetailsAllOf) GetModelNumber() string`
@@ -97,6 +124,31 @@ SetModelNumber sets ModelNumber field to given value.
 `func (o *NiatelemetryApicFexDetailsAllOf) HasModelNumber() bool`
 
 HasModelNumber returns a boolean if a field has been set.
+
+### GetNodeId
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetNodeId() string`
+
+GetNodeId returns the NodeId field if non-nil, zero value otherwise.
+
+### GetNodeIdOk
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetNodeIdOk() (*string, bool)`
+
+GetNodeIdOk returns a tuple with the NodeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeId
+
+`func (o *NiatelemetryApicFexDetailsAllOf) SetNodeId(v string)`
+
+SetNodeId sets NodeId field to given value.
+
+### HasNodeId
+
+`func (o *NiatelemetryApicFexDetailsAllOf) HasNodeId() bool`
+
+HasNodeId returns a boolean if a field has been set.
 
 ### GetRecordType
 

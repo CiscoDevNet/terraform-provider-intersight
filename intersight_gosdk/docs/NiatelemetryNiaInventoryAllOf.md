@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **RoutePrefixV4Count** | Pointer to **int64** | Number of v4 routes per node. | [optional] 
 **RoutePrefixV6Count** | Pointer to **int64** | Number of v6 routes per node. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being invetoried. The serial number is unique per device and will be used as the key. | [optional] 
+**SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **SoftwareDownload** | Pointer to **string** | Last software downloaded of device being inventoried. This determines if software download API was used. | [optional] 
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
@@ -896,6 +897,31 @@ SetSerial sets Serial field to given value.
 `func (o *NiatelemetryNiaInventoryAllOf) HasSerial() bool`
 
 HasSerial returns a boolean if a field has been set.
+
+### GetSiteName
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetSiteName() string`
+
+GetSiteName returns the SiteName field if non-nil, zero value otherwise.
+
+### GetSiteNameOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetSiteNameOk() (*string, bool)`
+
+GetSiteNameOk returns a tuple with the SiteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteName
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetSiteName(v string)`
+
+SetSiteName sets SiteName field to given value.
+
+### HasSiteName
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasSiteName() bool`
+
+HasSiteName returns a boolean if a field has been set.
 
 ### GetSoftwareDownload
 

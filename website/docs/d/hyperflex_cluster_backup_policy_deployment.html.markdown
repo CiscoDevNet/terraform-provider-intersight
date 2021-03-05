@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_cluster_backup_policy_deployment
 Record of HyperFlex Cluster backup policy deployment.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_cluster_backup_policy_deployment.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `backup_data_store_name`:(string) Backup data store name used during the auto creation of the datastore. All VMs created in this data store will be automatically backed up. 
 * `backup_data_store_size`:(int) Replication data store size in backupDataStoreSizeUnit. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `target_detached`:(bool) True if policy was detached from target Hyperflex Cluster. 
 * `target_request_id`:(string) Unique target cluster request ID allowing retry of the same logical request following a transient communication failure. 
 * `target_uuid`:(string) Uuid of the target Hyperflex Cluster. 
+ 

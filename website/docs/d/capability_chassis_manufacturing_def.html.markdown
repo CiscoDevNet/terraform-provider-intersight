@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_chassis_manufacturing_def
 Chassis enclosure manufacturing def properties.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_chassis_manufacturing_def.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `caption`:(string) Caption for Chassis enclosure. 
 * `chassis_code_name`:(string) Chassis Code Name for Chassis enclosure. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `product_name`:(string) Product Name for Chassis enclosure. 
 * `sku`:(string) SKU information for Chassis enclosure. 
 * `vid`:(string) VID information for Chassis enclosure. 
+ 

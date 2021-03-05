@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_software_hcl_meta
 A JSON file wth HCL metadata uploaded for consumption by the HCL service.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_software_hcl_meta.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
 * `content_type`:(string) The type of content that the Json file holds (Incremental or full dump).* `Full` - Indicates that the JSON File does have full content for HCL metadata.* `Incremental` - Indicates that the JSON File does have only the diff of the Hcl meta to be uploaded. 
@@ -32,3 +35,4 @@ The following arguments can be used to get data of already created objects in In
 * `software_type_id`:(string) The software type id provided by cisco.com. 
 * `vendor`:(string) The vendor or publisher of this file. 
 * `nr_version`:(string) Vendor provided version for the file. 
+ 

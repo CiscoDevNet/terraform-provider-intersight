@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_switch_capability
 Type to represent additional switch specific capabilities.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_switch_capability.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `default_fcoe_vlan`:(int) Default Fcoe VLAN associated with this switch. 
 * `dynamic_vifs_supported`:(bool) Dynamic VIFs support on this switch. 
@@ -24,3 +27,4 @@ The following arguments can be used to get data of already created objects in In
 * `sku`:(string) SKU information for Switch/Fabric-Interconnect. 
 * `unified_rule`:(string) The Slider rule for Unified ports on this switch. 
 * `vid`:(string) VID information for Switch/Fabric-Interconnect. 
+ 

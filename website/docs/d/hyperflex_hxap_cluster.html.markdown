@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_hxap_cluster
 A HyperFlex Application Platform compute cluster. Contains inventory information concerning the health, version and ip address of the cluster. The cluster has a name assigned by user in Intersight.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_hxap_cluster.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `datacenter_name`:(string) Datacenter to which the cluster belongs. 
 * `failure_reason`:(string) Reason of the failure when cluster is in failed state. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `status`:(string) Cluster health status as reported by the hypervisor platform.* `Unknown` - Entity status is unknown.* `Degraded` - State is degraded, and might impact normal operation of the entity.* `Critical` - Entity is in a critical state, impacting operations.* `Ok` - Entity status is in a stable state, operating normally. 
 * `total_cores`:(int) Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. 
 * `nr_version`:(string) Product version of HyperFlex compute cluster. 
+ 

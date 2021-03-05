@@ -9,9 +9,13 @@ description: |-
 # Data Source: intersight_fabric_port_mode
 Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_fabric_port_mode.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `custom_mode`:(string) Custom Port Mode specified for the port range.* `FibreChannel` - Fibre Channel Port Types.* `BreakoutEthernet10G` - Breakout Ethernet 10G Port Type.* `BreakoutEthernet25G` - Breakout Ethernet 25G Port Type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `port_id_end`:(int) Ending range of the Port Identifier. 
 * `port_id_start`:(int) Starting range of the Port Identifier. 
 * `slot_id`:(int) Slot Identifier of the switch. 
+ 

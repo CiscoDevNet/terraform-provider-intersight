@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_ether_port_channel
 Model contains the details of the ethernet port-channels configured on the FI.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_ether_port_channel.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `access_vlan`:(string) Access VLANs for this port-channel, on this FI. 
 * `admin_state`:(string) Administratively configured state (enabled/disabled) for this port-channel. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `role`:(string) This port-channel's configured role (uplink, server, etc.). 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
+ 

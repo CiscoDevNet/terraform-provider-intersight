@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_fc_port_channel
 Model contains the details of the ethernet port-channels configured on the FI.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_fc_port_channel.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_speed`:(string) Administrator configured Speed applied on the port channel. 
 * `admin_state`:(string) Administratively configured state (enabled/disabled) for this portchannel. 
@@ -24,3 +27,4 @@ The following arguments can be used to get data of already created objects in In
 * `role`:(string) This port-channel's configured role (fcUplink, fcStorage, etc.). 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `vsan`:(int) Virtual San that is associated to the port-channel. 
+ 

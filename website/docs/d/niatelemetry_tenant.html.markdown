@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_tenant
 Object is available at Tenant scope.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_tenant.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bfd_if_pol_count`:(int) Number of Bidirectional Forwarding Detection bfdIfPol Model Objects. 
 * `bfd_ifp_count`:(int) Number of objects with Bidirectional Forwarding Detection Interface Policy. 
@@ -49,3 +52,4 @@ The following arguments can be used to get data of already created objects in In
 * `vz_br_cp_count`:(int) Number of Zoning Policy per tenant. 
 * `vz_rt_cons_count`:(int) Number of Client Contract between End Point Groups per tenant. 
 * `vz_rt_prov_count`:(int) Number of Client Contract between End Point Groups per tenant. 
+ 

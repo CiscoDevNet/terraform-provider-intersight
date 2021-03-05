@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_nia_feature_usage
 Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_feature_usage.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `apic_count`:(int) Number of APIC controllers. This determines the value of controllers for the fabric. 
 * `app_center_count`:(int) ACI APPs feature usage scale. 
@@ -81,3 +84,4 @@ The following arguments can be used to get data of already created objects in In
 * `vmm_ep_pd_count`:(int) Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter. 
 * `vnsm_dev_count`:(int) Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model. 
 * `vpod_count`:(int) Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics. 
+ 

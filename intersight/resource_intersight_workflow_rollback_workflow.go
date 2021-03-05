@@ -148,7 +148,7 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 							Computed:    true,
 						},
 						"status": {
-							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `Not supported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
+							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -260,7 +260,7 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 							Computed:    true,
 						},
 						"status": {
-							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `Not supported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
+							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -636,6 +636,17 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	// Check for Workflow Status
+	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+	runningWorkflows = append(runningWorkflows, resultMo.GetPrimaryWorkflow())
+	runningWorkflows = append(runningWorkflows, resultMo.GetRollbackWorkflows()...)
+	for _, w := range runningWorkflows {
+		err := checkWorkflowStatus(conn, w)
+		if err != nil {
+			err := err.(models.GenericOpenAPIError)
+			return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+		}
+	}
 	return resourceWorkflowRollbackWorkflowRead(c, d, meta)
 }
 

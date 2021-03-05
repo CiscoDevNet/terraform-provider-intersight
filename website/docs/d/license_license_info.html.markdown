@@ -13,6 +13,9 @@ License state information for a specific license entitlement. Essentials license
 licenseState attribute is used for license enforcement. When license state is one of TrialPeriod, Compliance, or OutOfCompliance,
 the feature set defined for the license entitlement is granted to the customer.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_license_license_info.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `active_admin`:(bool) The license administrative state.Set this property to 'true' to activate the license entitlements. 
 * `days_left`:(int) The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `start_time`:(string) The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state. 
 * `trial_admin`:(bool) The administrative state of the trial license.When the LicenseState is set to 'NotLicensed', 'trialAdmin' can be set to true to start the trial period,i.e. licenseState is set to be TrialPeriod. 
+ 

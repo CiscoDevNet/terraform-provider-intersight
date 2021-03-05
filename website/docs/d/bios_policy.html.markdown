@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_bios_policy
 Policy for setting BIOS tokens on the endpoint.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_bios_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `acs_control_gpu1state`:(string) BIOS Token for setting ACS Control GPU-1 configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `acs_control_gpu2state`:(string) BIOS Token for setting ACS Control GPU-2 configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
@@ -309,3 +312,4 @@ The following arguments can be used to get data of already created objects in In
 * `vmd_enable`:(string) BIOS Token for setting VMD Enablement configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `work_load_config`:(string) BIOS Token for setting Workload Configuration configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `Balanced` - Value - Balanced for configuring WorkLoadConfig token.* `I/O Sensitive` - Value - I/O Sensitive for configuring WorkLoadConfig token.* `NUMA` - Value - NUMA for configuring WorkLoadConfig token.* `UMA` - Value - UMA for configuring WorkLoadConfig token. 
 * `xpt_prefetch`:(string) BIOS Token for setting XPT Prefetch configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `Auto` - Value - Auto for configuring XptPrefetch token.* `disabled` - Value - disabled for configuring XptPrefetch token.* `enabled` - Value - enabled for configuring XptPrefetch token. 
+ 

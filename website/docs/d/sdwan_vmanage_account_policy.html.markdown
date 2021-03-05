@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_sdwan_vmanage_account_policy
 A policy specifying vManage account details.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_sdwan_vmanage_account_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Description of the policy. 
 * `endpoint_address`:(string) VManage server hostname (FQDN) that the acccount holds information for. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `password`:(string) Local password for authenticating with the vManage server. 
 * `port`:(int) VManage Port number on which the application is running. 
 * `username`:(string) Local username for authenticating with the vManage server. 
+ 

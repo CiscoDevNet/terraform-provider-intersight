@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.VmHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.VmHost"]
+**AccountMoid** | Pointer to **string** | Reference to virtualization target account ID. | [optional] [readonly] 
 **Connected** | Pointer to **int64** | The connection status of the host. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **RegisteredDeviceMoid** | Pointer to **string** | Reference to virtualization target device ID. | [optional] [readonly] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAccountMoid
+
+`func (o *AssetVmHostAllOf) GetAccountMoid() string`
+
+GetAccountMoid returns the AccountMoid field if non-nil, zero value otherwise.
+
+### GetAccountMoidOk
+
+`func (o *AssetVmHostAllOf) GetAccountMoidOk() (*string, bool)`
+
+GetAccountMoidOk returns a tuple with the AccountMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountMoid
+
+`func (o *AssetVmHostAllOf) SetAccountMoid(v string)`
+
+SetAccountMoid sets AccountMoid field to given value.
+
+### HasAccountMoid
+
+`func (o *AssetVmHostAllOf) HasAccountMoid() bool`
+
+HasAccountMoid returns a boolean if a field has been set.
 
 ### GetConnected
 

@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](compute.PersistentMemoryOperation.md) |  | [optional] 
 **ServerConfig** | Pointer to [**NullableComputeServerConfig**](compute.ServerConfig.md) |  | [optional] 
+**StorageControllerOperation** | Pointer to [**NullableComputeStorageControllerOperation**](compute.StorageControllerOperation.md) |  | [optional] 
+**StoragePhysicalDriveOperation** | Pointer to [**NullableComputeStoragePhysicalDriveOperation**](compute.StoragePhysicalDriveOperation.md) |  | [optional] 
+**StorageVirtualDriveOperation** | Pointer to [**NullableComputeStorageVirtualDriveOperation**](compute.StorageVirtualDriveOperation.md) |  | [optional] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](equipment.LocatorLed.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **RunningWorkflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
@@ -272,6 +275,111 @@ HasServerConfig returns a boolean if a field has been set.
 `func (o *ComputeServerSettingAllOf) UnsetServerConfig()`
 
 UnsetServerConfig ensures that no value is present for ServerConfig, not even an explicit nil
+### GetStorageControllerOperation
+
+`func (o *ComputeServerSettingAllOf) GetStorageControllerOperation() ComputeStorageControllerOperation`
+
+GetStorageControllerOperation returns the StorageControllerOperation field if non-nil, zero value otherwise.
+
+### GetStorageControllerOperationOk
+
+`func (o *ComputeServerSettingAllOf) GetStorageControllerOperationOk() (*ComputeStorageControllerOperation, bool)`
+
+GetStorageControllerOperationOk returns a tuple with the StorageControllerOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageControllerOperation
+
+`func (o *ComputeServerSettingAllOf) SetStorageControllerOperation(v ComputeStorageControllerOperation)`
+
+SetStorageControllerOperation sets StorageControllerOperation field to given value.
+
+### HasStorageControllerOperation
+
+`func (o *ComputeServerSettingAllOf) HasStorageControllerOperation() bool`
+
+HasStorageControllerOperation returns a boolean if a field has been set.
+
+### SetStorageControllerOperationNil
+
+`func (o *ComputeServerSettingAllOf) SetStorageControllerOperationNil(b bool)`
+
+ SetStorageControllerOperationNil sets the value for StorageControllerOperation to be an explicit nil
+
+### UnsetStorageControllerOperation
+`func (o *ComputeServerSettingAllOf) UnsetStorageControllerOperation()`
+
+UnsetStorageControllerOperation ensures that no value is present for StorageControllerOperation, not even an explicit nil
+### GetStoragePhysicalDriveOperation
+
+`func (o *ComputeServerSettingAllOf) GetStoragePhysicalDriveOperation() ComputeStoragePhysicalDriveOperation`
+
+GetStoragePhysicalDriveOperation returns the StoragePhysicalDriveOperation field if non-nil, zero value otherwise.
+
+### GetStoragePhysicalDriveOperationOk
+
+`func (o *ComputeServerSettingAllOf) GetStoragePhysicalDriveOperationOk() (*ComputeStoragePhysicalDriveOperation, bool)`
+
+GetStoragePhysicalDriveOperationOk returns a tuple with the StoragePhysicalDriveOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStoragePhysicalDriveOperation
+
+`func (o *ComputeServerSettingAllOf) SetStoragePhysicalDriveOperation(v ComputeStoragePhysicalDriveOperation)`
+
+SetStoragePhysicalDriveOperation sets StoragePhysicalDriveOperation field to given value.
+
+### HasStoragePhysicalDriveOperation
+
+`func (o *ComputeServerSettingAllOf) HasStoragePhysicalDriveOperation() bool`
+
+HasStoragePhysicalDriveOperation returns a boolean if a field has been set.
+
+### SetStoragePhysicalDriveOperationNil
+
+`func (o *ComputeServerSettingAllOf) SetStoragePhysicalDriveOperationNil(b bool)`
+
+ SetStoragePhysicalDriveOperationNil sets the value for StoragePhysicalDriveOperation to be an explicit nil
+
+### UnsetStoragePhysicalDriveOperation
+`func (o *ComputeServerSettingAllOf) UnsetStoragePhysicalDriveOperation()`
+
+UnsetStoragePhysicalDriveOperation ensures that no value is present for StoragePhysicalDriveOperation, not even an explicit nil
+### GetStorageVirtualDriveOperation
+
+`func (o *ComputeServerSettingAllOf) GetStorageVirtualDriveOperation() ComputeStorageVirtualDriveOperation`
+
+GetStorageVirtualDriveOperation returns the StorageVirtualDriveOperation field if non-nil, zero value otherwise.
+
+### GetStorageVirtualDriveOperationOk
+
+`func (o *ComputeServerSettingAllOf) GetStorageVirtualDriveOperationOk() (*ComputeStorageVirtualDriveOperation, bool)`
+
+GetStorageVirtualDriveOperationOk returns a tuple with the StorageVirtualDriveOperation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageVirtualDriveOperation
+
+`func (o *ComputeServerSettingAllOf) SetStorageVirtualDriveOperation(v ComputeStorageVirtualDriveOperation)`
+
+SetStorageVirtualDriveOperation sets StorageVirtualDriveOperation field to given value.
+
+### HasStorageVirtualDriveOperation
+
+`func (o *ComputeServerSettingAllOf) HasStorageVirtualDriveOperation() bool`
+
+HasStorageVirtualDriveOperation returns a boolean if a field has been set.
+
+### SetStorageVirtualDriveOperationNil
+
+`func (o *ComputeServerSettingAllOf) SetStorageVirtualDriveOperationNil(b bool)`
+
+ SetStorageVirtualDriveOperationNil sets the value for StorageVirtualDriveOperation to be an explicit nil
+
+### UnsetStorageVirtualDriveOperation
+`func (o *ComputeServerSettingAllOf) UnsetStorageVirtualDriveOperation()`
+
+UnsetStorageVirtualDriveOperation ensures that no value is present for StorageVirtualDriveOperation, not even an explicit nil
 ### GetLocatorLed
 
 `func (o *ComputeServerSettingAllOf) GetLocatorLed() EquipmentLocatorLedRelationship`
