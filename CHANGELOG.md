@@ -40,4 +40,4 @@ Release Date: 26th Feb 2021
 Release Date: 5th Mar 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3824).
 * `terraform apply` will wait till all workflows triggered due to the operation reach an end state.
-* Data sources can now store the results as a list. To access a property in the `i`th index of results, the syntax will be `data.intersight_<model_name>.<custom_name>.results[i].<property_name>`.
+* Data sources now store the results as a list. The syntax to access a property in the `i`th index of results is `data.intersight_<model_name>.<custom_name>.results[i].<property_name>`.
