@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_hxap_host
 A HyperFlex Application Platform compute host entity that is part of HyperFlex compute cluster and probably runs VMs.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_hxap_host.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `age`:(string) Denotes age or life time of the Host in nano seconds. 
 * `cluster_uuid`:(string) The UUID of the cluster to which this Host belongs to. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `uuid`:(string) Universally unique identity of this host (example b3d4483b-5560-9342-8309-b486c9236610). Internally generated. 
 * `vendor`:(string) Commercial vendor details of this hardware. 
 * `nr_version`:(string) Product version of the Host. 
+ 

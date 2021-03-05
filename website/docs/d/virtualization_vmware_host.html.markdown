@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_virtualization_vmware_host
 The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_host.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `boot_time`:(string) The time when this host booted up. 
 * `connection_state`:(string) Indicates if the host is connected to the vCenter. Values are connected, not connected. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `uuid`:(string) Universally unique identity of this host (example b3d4483b-5560-9342-8309-b486c9236610). Internally generated. 
 * `vcenter_host_id`:(string) The identity of this host within vCenter (optional). 
 * `vendor`:(string) Commercial vendor details of this hardware. 
+ 

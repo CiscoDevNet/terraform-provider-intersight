@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_hitachi_host
 A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_hitachi_host.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `authentication_mode`:(string) Authentication mode for the iSCSI target.* `N/A` - Not available.* `CHAP` - CHAP-authentication mode.* `NONE` - No-authentication mode.* `BOTH` - Comply with Host Setting. 
 * `description`:(string) Short description about the host. 
@@ -23,3 +26,4 @@ The following arguments can be used to get data of already created objects in In
 * `port_lun_security`:(bool) LUN security setting for the port. 
 * `type`:(string) Host Group type, it can be FC or iSCSI.* `FC` - Port supports fibre channel protocol.* `iSCSI` - Port supports iSCSI protocol.* `FCoE` - Port supports fibre channel over ethernet protocol. 
 * `wwn`:(string) World wide port name, 64 bit address represented in hexa decimal notation. 
+ 

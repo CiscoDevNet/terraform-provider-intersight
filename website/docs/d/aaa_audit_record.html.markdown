@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_aaa_audit_record
 AuditRecord presents the configuration changes made by the user per transaction.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_aaa_audit_record.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `email`:(string) The email of the associated user that made the change.  In case the user is later deleted, we still have some reference to the information. 
 * `event`:(string) The operation that was performed on this Managed Object.The event is a compound string that includes the CRUD operation such as Create, Modify, Delete, and a string representing the Managed Object type. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `timestamp`:(string) The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. 
 * `trace_id`:(string) The trace id of the request that was used to create, modify or delete a REST resource.A trace id is a unique identifier for one particular REST request. It may be used for troubleshooting purposeby the Intersight technical support team. 
 * `user_id_or_email`:(string) The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_compute_server_setting
 Models the configurable properties of a server in Intersight.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_compute_server_setting.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_locator_led_state`:(string) User configured state of the locator LED for the server.* `None` - No operation property for locator led.* `On` - The Locator Led is turned on.* `Off` - The Locator Led is turned off. 
 * `admin_power_state`:(string) User configured power state of the server.* `Policy` - Power state is set to the default value in the policy.* `PowerOn` - Power state of the server is set to On.* `PowerOff` - Power state is the server set to Off.* `PowerCycle` - Power state the server is reset.* `HardReset` - Power state the server is hard reset.* `Shutdown` - Operating system on the server is shut down.* `Reboot` - Power state of IMC is rebooted. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) The property used to identify the name of the server it is associated with. 
 * `one_time_boot_device`:(string) The name of the device chosen by user for configuring One-Time Boot device. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_pci_switch
 PCI Switch present in a server connected to two GPUs and one PCIe adapter.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_pci_switch.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_id`:(string) The device id of the switch. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `type`:(string) The type information of the switch. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vendor_id`:(string) The vendor id of the switch. 
+ 

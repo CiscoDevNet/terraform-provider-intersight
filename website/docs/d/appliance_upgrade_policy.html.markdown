@@ -23,6 +23,9 @@ Scheduled upgrade policy lets the user start software upgrade at a specified sch
 However, scheduled time cannot be beyond the time limit enforced by the upgrade grace
 period set in the software manifest.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_upgrade_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `auto_upgrade`:(bool) Indicates if the upgrade service is set to automatically start the software upgrade or not. If autoUpgrade is true, then the value of the schedule field is ignored. 
 * `blackout_dates_enabled`:(bool) If enabled, allows the user to define a blackout period during which the appliance will not be upgraded. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `blackout_start_date`:(string) Start date of the black out period. The appliance will not be upgraded during this period. 
 * `enable_meta_data_sync`:(bool) Indicates if the updated metadata files should be synced immediately or at the next upgrade. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+ 

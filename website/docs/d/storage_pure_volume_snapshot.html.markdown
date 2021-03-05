@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_pure_volume_snapshot
 Volume snapshot entity in Pure protection group. Volume snapshots are created either on-demand or using scheduler. Snapshots are immutable and it cannot be connected to hosts or host groups, and therefore the data it contains cannot be read or written.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_pure_volume_snapshot.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `created_time`:(string) Exact date and time at which snapshot was created. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -17,3 +20,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) Unique serial number of the snapshot allocated by the storage array. 
 * `size`:(int) Snapshot size represented in bytes. 
 * `nr_source`:(string) Source object on which the snapshot is created. It is the name of the originating volume. 
+ 

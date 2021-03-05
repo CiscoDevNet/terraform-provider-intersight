@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_vnic_iscsi_static_target_policy
 Configuration parameters that defines the reachability of iSCSI Target portal.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_static_target_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Description of the policy. 
 * `ip_address`:(string) The IPv4 address assigned to the iSCSI target. 
@@ -16,3 +19,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the concrete policy. 
 * `port`:(int) The port associated with the iSCSI target. 
 * `target_name`:(string) Qualified Name (IQN) or Extended Unique Identifier (EUI) name of the iSCSI target. 
+ 

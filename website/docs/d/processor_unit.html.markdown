@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_processor_unit
 The CPU present on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_processor_unit.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `architecture`:(string) The architecture of the installed processor. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -31,3 +34,4 @@ The following arguments can be used to get data of already created objects in In
 * `stepping`:(string) The CPU stepping of the installed processor. 
 * `thermal`:(string) The temperature of the processor in centigrade. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

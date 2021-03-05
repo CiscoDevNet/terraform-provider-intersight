@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_nia_inventory
 Inventory object available per device scope. This common object holds a device level information.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_inventory.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cpu`:(float) CPU usage of device being inventoried. This determines the percentage of CPU resources used. 
 * `crash_reset_logs`:(string) Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system. 
@@ -40,6 +43,8 @@ The following arguments can be used to get data of already created objects in In
 * `route_prefix_v4_count`:(int) Number of v4 routes per node. 
 * `route_prefix_v6_count`:(int) Number of v6 routes per node. 
 * `serial`:(string) Serial number of device being invetoried. The serial number is unique per device and will be used as the key. 
+* `site_name`:(string) Name of fabric domain of the controller. 
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 
 * `nr_version`:(string) Software version of device being inventoried. The various software version values for each device are available on cisco.com. 
+ 

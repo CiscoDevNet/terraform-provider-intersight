@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niaapi_dcnm_sweol
 The software end of life notice for DCNM.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niaapi_dcnm_sweol.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `affected_versions`:(string) String contains the Release versions affected by this notice, seperated by comma. 
 * `announcement_date`:(string) Date time of this notice Announced. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `migration_url`:(string) The URL of this migration notice. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `software_eol_url`:(string) Software end of life notice URL link to the notice webpage. 
+ 

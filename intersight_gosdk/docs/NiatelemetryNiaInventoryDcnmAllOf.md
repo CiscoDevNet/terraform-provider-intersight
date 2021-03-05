@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **NumFabrics** | Pointer to **int64** | Returns total number of fabrics in DCNM set-up. | [optional] 
 **NumFabricsInMsd** | Pointer to **int64** | Returns the number of fabrics in msd. | [optional] 
 **NumLocalUsers** | Pointer to **int64** | Returns the number of local users other than admin user. | [optional] 
+**Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
+**SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **Version** | Pointer to **string** | Returns the value of the version field. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -275,6 +277,56 @@ SetNumLocalUsers sets NumLocalUsers field to given value.
 `func (o *NiatelemetryNiaInventoryDcnmAllOf) HasNumLocalUsers() bool`
 
 HasNumLocalUsers returns a boolean if a field has been set.
+
+### GetSerial
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetSerial() string`
+
+GetSerial returns the Serial field if non-nil, zero value otherwise.
+
+### GetSerialOk
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetSerialOk() (*string, bool)`
+
+GetSerialOk returns a tuple with the Serial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSerial
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) SetSerial(v string)`
+
+SetSerial sets Serial field to given value.
+
+### HasSerial
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) HasSerial() bool`
+
+HasSerial returns a boolean if a field has been set.
+
+### GetSiteName
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetSiteName() string`
+
+GetSiteName returns the SiteName field if non-nil, zero value otherwise.
+
+### GetSiteNameOk
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) GetSiteNameOk() (*string, bool)`
+
+GetSiteNameOk returns a tuple with the SiteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteName
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) SetSiteName(v string)`
+
+SetSiteName sets SiteName field to given value.
+
+### HasSiteName
+
+`func (o *NiatelemetryNiaInventoryDcnmAllOf) HasSiteName() bool`
+
+HasSiteName returns a boolean if a field has been set.
 
 ### GetVersion
 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_cluster_backup_policy
 Specifies cluster backup configuration for a HyperFlex Cluster.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_cluster_backup_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `backup_data_store_name`:(string) Backup datastore name prefix used during the auto creation of the datastore. All VMs created in this datastore will be automatically backed up. 
 * `backup_data_store_size`:(int) Replication data store size in backupDataStoreSizeUnit. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the concrete policy. 
 * `replication_pair_name_prefix`:(string) Replication cluster pairing name prefix. 
 * `snapshot_retention_count`:(int) Number of snapshots that will be retained as part of the Multi Point in Time support. 
+ 

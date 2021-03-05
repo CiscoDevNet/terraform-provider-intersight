@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_flex_util_virtual_drive
 Storage Flex Util Virtual Drive.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_flex_util_virtual_drive.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `size`:(string) Size of the Flex Util virtual drive. 
 * `virtual_drive`:(string) Virtual drive on the Flex Util controller. 
+ 

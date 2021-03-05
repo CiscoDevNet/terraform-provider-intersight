@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_management_interface
 Interface that provides access to the management controller.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_management_interface.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `uem_conn_status`:(string) The event channel connection status for the interface. 
 * `virtual_host_name`:(string) Virtual hostname configured for the interface in case of clustered environment. 
 * `vlan_id`:(int) VlanId configured for the interface. 
+ 

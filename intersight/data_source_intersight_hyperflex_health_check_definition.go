@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceHyperflexHealthCheckDefinitionRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"category": {
 				Description: "Category that the health check belongs to.",
 				Type:        schema.TypeString,
@@ -40,122 +34,10 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"default_health_check_script_info": {
-				Description: "Default version Script info.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"aggregate_script_name": {
-							Description: "Health check aggregate script that runs in the HyperFlex Leader Node. |\nIt aggregates the output of all HyperFlex nodes and provides the health check result.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"hyperflex_version": {
-							Description: "HyperFlex Data Platform version running on the target device.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"script_execute_location": {
-							Description: "Location of the health check script's execution on the HyperFlex device.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"script_name": {
-							Description: "Name of the health check script to be executed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"nr_version": {
-							Description: "Version of the health check script associated with the health check definition.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"description": {
 				Description: "Description of the health check definition.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"health_check_script_infos": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"aggregate_script_name": {
-							Description: "Health check aggregate script that runs in the HyperFlex Leader Node. |\nIt aggregates the output of all HyperFlex nodes and provides the health check result.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"hyperflex_version": {
-							Description: "HyperFlex Data Platform version running on the target device.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"script_execute_location": {
-							Description: "Location of the health check script's execution on the HyperFlex device.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"script_name": {
-							Description: "Name of the health check script to be executed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"nr_version": {
-							Description: "Version of the health check script associated with the health check definition.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"health_impact": {
 				Description: "Static information detailing the health impact of the health check failure.",
@@ -204,29 +86,6 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"target_execution_type": {
 				Description: "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.",
 				Type:        schema.TypeString,
@@ -237,12 +96,11 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
-			"unsupported_hyper_flex_versions": {
+			"results": {
 				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Schema{
-					Type: schema.TypeString}},
-		},
+				Elem:     &schema.Resource{Schema: resourceHyperflexHealthCheckDefinition().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -321,106 +179,64 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexHealthCheckDefinition object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.HyperflexHealthCheckDefinitionList.GetCount()
+	var i int32
+	var hyperflexHealthCheckDefinitionResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHealthCheckDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching HyperflexHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.HyperflexHealthCheckDefinitionList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for HyperflexHealthCheckDefinition data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["category"] = (s.GetCategory())
+				temp["class_id"] = (s.GetClassId())
+				temp["common_causes"] = (s.GetCommonCauses())
+				temp["configuration"] = (s.GetConfiguration())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for HyperflexHealthCheckDefinition list: %s", err.Error())
-	}
-	var s = &models.HyperflexHealthCheckDefinitionList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to HyperflexHealthCheckDefinition list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for HyperflexHealthCheckDefinition data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for HyperflexHealthCheckDefinition data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.HyperflexHealthCheckDefinition{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("category", (s.GetCategory())); err != nil {
-				return diag.Errorf("error occurred while setting property Category: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("common_causes", (s.GetCommonCauses())); err != nil {
-				return diag.Errorf("error occurred while setting property CommonCauses: %s", err.Error())
-			}
-			if err := d.Set("configuration", (s.GetConfiguration())); err != nil {
-				return diag.Errorf("error occurred while setting property Configuration: %s", err.Error())
-			}
+				temp["default_health_check_script_info"] = flattenMapHyperflexHealthCheckScriptInfo(s.GetDefaultHealthCheckScriptInfo(), d)
+				temp["description"] = (s.GetDescription())
 
-			if err := d.Set("default_health_check_script_info", flattenMapHyperflexHealthCheckScriptInfo(s.GetDefaultHealthCheckScriptInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property DefaultHealthCheckScriptInfo: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
+				temp["health_check_script_infos"] = flattenListHyperflexHealthCheckScriptInfo(s.GetHealthCheckScriptInfos(), d)
+				temp["health_impact"] = (s.GetHealthImpact())
+				temp["internal_name"] = (s.GetInternalName())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["object_type"] = (s.GetObjectType())
+				temp["reference"] = (s.GetReference())
+				temp["resolution"] = (s.GetResolution())
+				temp["script_execution_mode"] = (s.GetScriptExecutionMode())
+				temp["script_execution_on_compute_nodes"] = (s.GetScriptExecutionOnComputeNodes())
 
-			if err := d.Set("health_check_script_infos", flattenListHyperflexHealthCheckScriptInfo(s.GetHealthCheckScriptInfos(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property HealthCheckScriptInfos: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["target_execution_type"] = (s.GetTargetExecutionType())
+				temp["timeout"] = (s.GetTimeout())
+				temp["unsupported_hyper_flex_versions"] = (s.GetUnsupportedHyperFlexVersions())
+				hyperflexHealthCheckDefinitionResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("health_impact", (s.GetHealthImpact())); err != nil {
-				return diag.Errorf("error occurred while setting property HealthImpact: %s", err.Error())
-			}
-			if err := d.Set("internal_name", (s.GetInternalName())); err != nil {
-				return diag.Errorf("error occurred while setting property InternalName: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("reference", (s.GetReference())); err != nil {
-				return diag.Errorf("error occurred while setting property Reference: %s", err.Error())
-			}
-			if err := d.Set("resolution", (s.GetResolution())); err != nil {
-				return diag.Errorf("error occurred while setting property Resolution: %s", err.Error())
-			}
-			if err := d.Set("script_execution_mode", (s.GetScriptExecutionMode())); err != nil {
-				return diag.Errorf("error occurred while setting property ScriptExecutionMode: %s", err.Error())
-			}
-			if err := d.Set("script_execution_on_compute_nodes", (s.GetScriptExecutionOnComputeNodes())); err != nil {
-				return diag.Errorf("error occurred while setting property ScriptExecutionOnComputeNodes: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("target_execution_type", (s.GetTargetExecutionType())); err != nil {
-				return diag.Errorf("error occurred while setting property TargetExecutionType: %s", err.Error())
-			}
-			if err := d.Set("timeout", (s.GetTimeout())); err != nil {
-				return diag.Errorf("error occurred while setting property Timeout: %s", err.Error())
-			}
-			if err := d.Set("unsupported_hyper_flex_versions", (s.GetUnsupportedHyperFlexVersions())); err != nil {
-				return diag.Errorf("error occurred while setting property UnsupportedHyperFlexVersions: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(hyperflexHealthCheckDefinitionResults))
+	if err := d.Set("results", hyperflexHealthCheckDefinitionResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(hyperflexHealthCheckDefinitionResults[0]["moid"].(string))
 	return de
 }

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_equipment_physical_def
 Type to represent additional switch specific capabilities.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_equipment_physical_def.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `depth`:(float) Depth information for a Switch/Fabric-Interconnect. 
 * `height`:(float) Height information for a Switch/Fabric-Interconnect. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `vid`:(string) VID information for Switch/Fabric-Interconnect. 
 * `weight`:(float) Weight information for a Switch/Fabric-Interconnect. 
 * `width`:(float) Width information for a Switch/Fabric-Interconnect. 
+ 

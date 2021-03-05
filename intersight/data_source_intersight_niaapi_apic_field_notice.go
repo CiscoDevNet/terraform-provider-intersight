@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceNiaapiApicFieldNotice() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceNiaapiApicFieldNoticeRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"bugid": {
 				Description: "Bug Id associated with this notice.",
 				Type:        schema.TypeString,
@@ -67,80 +61,146 @@ func dataSourceNiaapiApicFieldNotice() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"revision_info": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"date_published": {
-							Description: "The date the revision is made.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"revision_comment": {
-							Description: "The changes made in this revision.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"revision_no": {
-							Description: "The Revision No. of this revision.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"sw_release": {
 				Description: "Software Release number for affected versions.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
 			},
 			"workaround_url": {
 				Description: "URL of workaround of this notice.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"bugid": {
+						Description: "Bug Id associated with this notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"field_notice_desc": {
+						Description: "Field notice Description.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"field_notice_id": {
+						Description: "Fieldnotice Id of this notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"field_notice_url": {
+						Description: "Field notice URL link to the notice webpage.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"headline": {
+						Description: "The headline of this field notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hwpid": {
+						Description: "Hardware PID for affected models.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"revision_info": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"date_published": {
+									Description: "The date the revision is made.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"revision_comment": {
+									Description: "The changes made in this revision.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"revision_no": {
+									Description: "The Revision No. of this revision.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"sw_release": {
+						Description: "Software Release number for affected versions.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"workaround_url": {
+						Description: "URL of workaround of this notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -199,84 +259,56 @@ func dataSourceNiaapiApicFieldNoticeRead(c context.Context, d *schema.ResourceDa
 	if err != nil {
 		return diag.Errorf("json marshal of NiaapiApicFieldNotice object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicFieldNoticeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicFieldNoticeList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching NiaapiApicFieldNotice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of NiaapiApicFieldNotice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.NiaapiApicFieldNoticeList.GetCount()
+	var i int32
+	var niaapiApicFieldNoticeResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicFieldNoticeList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching NiaapiApicFieldNotice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.NiaapiApicFieldNoticeList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for NiaapiApicFieldNotice data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["bugid"] = (s.GetBugid())
+				temp["class_id"] = (s.GetClassId())
+				temp["field_notice_desc"] = (s.GetFieldNoticeDesc())
+				temp["field_notice_id"] = (s.GetFieldNoticeId())
+				temp["field_notice_url"] = (s.GetFieldNoticeUrl())
+				temp["headline"] = (s.GetHeadline())
+				temp["hwpid"] = (s.GetHwpid())
+				temp["moid"] = (s.GetMoid())
+				temp["object_type"] = (s.GetObjectType())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for NiaapiApicFieldNotice list: %s", err.Error())
-	}
-	var s = &models.NiaapiApicFieldNoticeList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to NiaapiApicFieldNotice list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for NiaapiApicFieldNotice data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for NiaapiApicFieldNotice data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.NiaapiApicFieldNotice{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("bugid", (s.GetBugid())); err != nil {
-				return diag.Errorf("error occurred while setting property Bugid: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("field_notice_desc", (s.GetFieldNoticeDesc())); err != nil {
-				return diag.Errorf("error occurred while setting property FieldNoticeDesc: %s", err.Error())
-			}
-			if err := d.Set("field_notice_id", (s.GetFieldNoticeId())); err != nil {
-				return diag.Errorf("error occurred while setting property FieldNoticeId: %s", err.Error())
-			}
-			if err := d.Set("field_notice_url", (s.GetFieldNoticeUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property FieldNoticeUrl: %s", err.Error())
-			}
-			if err := d.Set("headline", (s.GetHeadline())); err != nil {
-				return diag.Errorf("error occurred while setting property Headline: %s", err.Error())
-			}
-			if err := d.Set("hwpid", (s.GetHwpid())); err != nil {
-				return diag.Errorf("error occurred while setting property Hwpid: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
+				temp["revision_info"] = flattenListNiaapiRevisionInfo(s.GetRevisionInfo(), d)
+				temp["sw_release"] = (s.GetSwRelease())
 
-			if err := d.Set("revision_info", flattenListNiaapiRevisionInfo(s.GetRevisionInfo(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property RevisionInfo: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["workaround_url"] = (s.GetWorkaroundUrl())
+				niaapiApicFieldNoticeResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("sw_release", (s.GetSwRelease())); err != nil {
-				return diag.Errorf("error occurred while setting property SwRelease: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("workaround_url", (s.GetWorkaroundUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property WorkaroundUrl: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(niaapiApicFieldNoticeResults))
+	if err := d.Set("results", niaapiApicFieldNoticeResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(niaapiApicFieldNoticeResults[0]["moid"].(string))
 	return de
 }

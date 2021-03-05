@@ -9,7 +9,11 @@ description: |-
 # Data Source: intersight_techsupportmanagement_collection_control_policy
 Policy to control techsupport collection for a specific account.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_techsupportmanagement_collection_control_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `deployment_type`:(string) Deployment type defines whether the policy is associated with a SaaS or Appliance account.* `None` - Service deployment type None.* `SaaS` - Service deployment type SaaS.* `Appliance` - Service deployment type Appliance. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `tech_support_collection`:(string) Enable or Disable techsupport collection for a specific account.* `Enable` - Enable techsupport collection.* `Disable` - Disable techsupport collection. 
+ 

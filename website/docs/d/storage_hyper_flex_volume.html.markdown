@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_hyper_flex_volume
 A HyperFlex Volume entity.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_hyper_flex_volume.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `capacity`:(int) Provisioned Capacity of the Storage container in bytes. 
 * `description`:(string) Short description about the volume. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial_number`:(string) Serial number of the volume. 
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
 * `uuid`:(string) Uuid of the Datastore/Storage Container. 
+ 

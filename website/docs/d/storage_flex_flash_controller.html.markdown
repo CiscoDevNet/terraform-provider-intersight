@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_flex_flash_controller
 Storage Flex Flash Controller.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_flex_flash_controller.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `controller_state`:(string) State of the Flex Flash Storage Controller. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

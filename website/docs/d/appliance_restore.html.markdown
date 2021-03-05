@@ -13,6 +13,9 @@ Restore tracks requests to restore the Intersight Appliance. There will be only
 one Restore managed object with a 'Started' state at any time. All other Restore
 managed objects will be in terminal states.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_restore.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `elapsed_time`:(int) Elapsed time in seconds since the restore process has started. 
 * `end_time`:(string) End date and time of the restore process. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `start_time`:(string) Start date and time of the restore process. 
 * `status`:(string) Status of the restore managed object.* `Started` - Backup or restore process has started.* `Created` - Backup or restore is in created state.* `Failed` - Backup or restore process has failed.* `Completed` - Backup or restore process has completed.* `Copied` - Backup file has been copied. 
 * `username`:(string) Username to authenticate the fileserver. 
+ 

@@ -25,6 +25,9 @@ The software upgrade service creates another ImageBundle managed object named 'p
 when there is a pending software upgrade. The upgrade service renames the 'pending' bundle
 to the 'current' bundle after the software upgrade is successful.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_image_bundle.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `auto_upgrade`:(bool) Indicates that the software upgrade was automatically initiated by the Intersight Appliance. 
 * `description`:(string) Short description of the software upgrade bundle. 
@@ -42,3 +45,4 @@ The following arguments can be used to get data of already created objects in In
 * `upgrade_impact_enum`:(string) UpgradeImpactEnum is used to indicate the kind of impact the upgrade has on currently running services on the appliance.* `None` - The upgrade has no effect on the system.* `Disruptive` - The services will not be functional during the upgrade.* `Disruptive-reboot` - The upgrade needs a reboot. 
 * `upgrade_start_time`:(string) Start date of the software upgrade process. 
 * `nr_version`:(string) Software upgrade manifest's version. 
+ 

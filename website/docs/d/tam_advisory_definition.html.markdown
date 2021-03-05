@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_tam_advisory_definition
 An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_tam_advisory_definition.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `advisory_id`:(string) Cisco generated identifier for the published security advisory. 
 * `date_published`:(string) Date when the security advisory was first published by Cisco. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `type`:(string) The type (field notice, security advisory etc.) of Intersight advisory.* `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). 
 * `nr_version`:(string) Cisco assigned advisory version after latest revision. 
 * `workaround`:(string) Workarounds available for the advisory. 
+ 

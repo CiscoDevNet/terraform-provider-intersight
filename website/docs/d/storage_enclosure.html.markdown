@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_enclosure
 Storage Enclosure for physical disks.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_enclosure.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `chassis_id`:(int) This represent the chassis-ID that houses the storage enclosure. 
 * `description`:(string) This represnets the description for the storage enclosure. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `server_id`:(int) This represent the server-ID that houses the storage enclosure. 
 * `type`:(string) This represent the type of storage enclosure. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

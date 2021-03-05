@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_node
 A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_node.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `build_number`:(string) The build number of the hypervisor running on the host. 
 * `display_version`:(string) The user-friendly string representation of the hypervisor version of the host. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial_number`:(string) The serial of the host server. 
 * `status`:(string) The status of the host. Indicates whether the hypervisor is online.* `UNKNOWN` - The host status cannot be determined.* `ONLINE` - The host is online and operational.* `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster.* `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade.* `DEGRADED` - The host is degraded and may not be performing in its full operational capacity. 
 * `nr_version`:(string) The version of the hypervisor running on the host. 
+ 

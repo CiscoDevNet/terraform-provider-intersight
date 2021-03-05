@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 	"time"
@@ -16,11 +15,6 @@ func dataSourceNiaapiDcnmHweol() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceNiaapiDcnmHweolRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"affected_pids": {
 				Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
 				Type:        schema.TypeString,
@@ -158,30 +152,176 @@ func dataSourceNiaapiDcnmHweol() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
+			"results": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
+					Type:             schema.TypeString,
+					Optional:         true,
+					DiffSuppressFunc: SuppressDiffAdditionProps,
+				},
+					"affected_pids": {
+						Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"announcement_date": {
+						Description: "When this notice is announced.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"announcement_date_epoch": {
+						Description: "Epoch time of Announcement Date.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"bulletin_no": {
+						Description: "The bulletinno of this hardware end of life notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"description": {
+						Description: "The description of this hardware end of life notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_new_service_attachment_date": {
+						Description: "Date time of end of new services attachment  .",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_new_service_attachment_date_epoch": {
+						Description: "Epoch time of New service attachment Date .",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"endof_routine_failure_analysis_date": {
+						Description: "Date time of end of routinefailure analysis.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_routine_failure_analysis_date_epoch": {
+						Description: "Epoch time of End of Routine Failure Analysis Date.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"endof_sale_date": {
+						Description: "When this hardware will end sale.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_sale_date_epoch": {
+						Description: "Epoch time of End of Sale Date.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"endof_security_support": {
+						Description: "Date time of end of security support .",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_security_support_epoch": {
+						Description: "Epoch time of End of Security Support Date .",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"endof_service_contract_renewal_date": {
+						Description: "Date time of end of service contract renew .",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_service_contract_renewal_date_epoch": {
+						Description: "Epoch time of End of Renewal service contract.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"endof_sw_maintenance_date": {
+						Description: "The date of end of maintainance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"endof_sw_maintenance_date_epoch": {
+						Description: "Epoch time of End of maintenance Date.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"hardware_eol_url": {
+						Description: "Hardware end of sale URL link to the notice webpage.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"headline": {
+						Description: "The title of this hardware end of life notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"last_dateof_support": {
+						Description: "Date time of end of support .",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"last_dateof_support_epoch": {
+						Description: "Epoch time of last date of support .",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"last_ship_date": {
+						Description: "Date time of Lastship Date.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"last_ship_date_epoch": {
+						Description: "Epoch time of last ship Date.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"migration_url": {
+						Description: "The URL of this migration notice.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"tags": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"key": {
+									Description: "The string representation of a tag key.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The string representation of a tag value.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
 						},
 					},
-				},
-			},
-		},
+				}},
+				Computed: true,
+			}},
 	}
 }
 
@@ -304,137 +444,79 @@ func dataSourceNiaapiDcnmHweolRead(c context.Context, d *schema.ResourceData, me
 	if err != nil {
 		return diag.Errorf("json marshal of NiaapiDcnmHweol object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiDcnmHweolList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiDcnmHweolList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching NiaapiDcnmHweol: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of NiaapiDcnmHweol: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.NiaapiDcnmHweolList.GetCount()
+	var i int32
+	var niaapiDcnmHweolResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiDcnmHweolList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching NiaapiDcnmHweol: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.NiaapiDcnmHweolList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for NiaapiDcnmHweol data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["affected_pids"] = (s.GetAffectedPids())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for NiaapiDcnmHweol list: %s", err.Error())
-	}
-	var s = &models.NiaapiDcnmHweolList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to NiaapiDcnmHweol list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for NiaapiDcnmHweol data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for NiaapiDcnmHweol data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.NiaapiDcnmHweol{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("affected_pids", (s.GetAffectedPids())); err != nil {
-				return diag.Errorf("error occurred while setting property AffectedPids: %s", err.Error())
-			}
+				temp["announcement_date"] = (s.GetAnnouncementDate()).String()
+				temp["announcement_date_epoch"] = (s.GetAnnouncementDateEpoch())
+				temp["bulletin_no"] = (s.GetBulletinNo())
+				temp["class_id"] = (s.GetClassId())
+				temp["description"] = (s.GetDescription())
 
-			if err := d.Set("announcement_date", (s.GetAnnouncementDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property AnnouncementDate: %s", err.Error())
-			}
-			if err := d.Set("announcement_date_epoch", (s.GetAnnouncementDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property AnnouncementDateEpoch: %s", err.Error())
-			}
-			if err := d.Set("bulletin_no", (s.GetBulletinNo())); err != nil {
-				return diag.Errorf("error occurred while setting property BulletinNo: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
+				temp["endof_new_service_attachment_date"] = (s.GetEndofNewServiceAttachmentDate()).String()
+				temp["endof_new_service_attachment_date_epoch"] = (s.GetEndofNewServiceAttachmentDateEpoch())
 
-			if err := d.Set("endof_new_service_attachment_date", (s.GetEndofNewServiceAttachmentDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofNewServiceAttachmentDate: %s", err.Error())
-			}
-			if err := d.Set("endof_new_service_attachment_date_epoch", (s.GetEndofNewServiceAttachmentDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofNewServiceAttachmentDateEpoch: %s", err.Error())
-			}
+				temp["endof_routine_failure_analysis_date"] = (s.GetEndofRoutineFailureAnalysisDate()).String()
+				temp["endof_routine_failure_analysis_date_epoch"] = (s.GetEndofRoutineFailureAnalysisDateEpoch())
 
-			if err := d.Set("endof_routine_failure_analysis_date", (s.GetEndofRoutineFailureAnalysisDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofRoutineFailureAnalysisDate: %s", err.Error())
-			}
-			if err := d.Set("endof_routine_failure_analysis_date_epoch", (s.GetEndofRoutineFailureAnalysisDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofRoutineFailureAnalysisDateEpoch: %s", err.Error())
-			}
+				temp["endof_sale_date"] = (s.GetEndofSaleDate()).String()
+				temp["endof_sale_date_epoch"] = (s.GetEndofSaleDateEpoch())
 
-			if err := d.Set("endof_sale_date", (s.GetEndofSaleDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSaleDate: %s", err.Error())
-			}
-			if err := d.Set("endof_sale_date_epoch", (s.GetEndofSaleDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSaleDateEpoch: %s", err.Error())
-			}
+				temp["endof_security_support"] = (s.GetEndofSecuritySupport()).String()
+				temp["endof_security_support_epoch"] = (s.GetEndofSecuritySupportEpoch())
 
-			if err := d.Set("endof_security_support", (s.GetEndofSecuritySupport()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSecuritySupport: %s", err.Error())
-			}
-			if err := d.Set("endof_security_support_epoch", (s.GetEndofSecuritySupportEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSecuritySupportEpoch: %s", err.Error())
-			}
+				temp["endof_service_contract_renewal_date"] = (s.GetEndofServiceContractRenewalDate()).String()
+				temp["endof_service_contract_renewal_date_epoch"] = (s.GetEndofServiceContractRenewalDateEpoch())
 
-			if err := d.Set("endof_service_contract_renewal_date", (s.GetEndofServiceContractRenewalDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofServiceContractRenewalDate: %s", err.Error())
-			}
-			if err := d.Set("endof_service_contract_renewal_date_epoch", (s.GetEndofServiceContractRenewalDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofServiceContractRenewalDateEpoch: %s", err.Error())
-			}
+				temp["endof_sw_maintenance_date"] = (s.GetEndofSwMaintenanceDate()).String()
+				temp["endof_sw_maintenance_date_epoch"] = (s.GetEndofSwMaintenanceDateEpoch())
+				temp["hardware_eol_url"] = (s.GetHardwareEolUrl())
+				temp["headline"] = (s.GetHeadline())
 
-			if err := d.Set("endof_sw_maintenance_date", (s.GetEndofSwMaintenanceDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSwMaintenanceDate: %s", err.Error())
-			}
-			if err := d.Set("endof_sw_maintenance_date_epoch", (s.GetEndofSwMaintenanceDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property EndofSwMaintenanceDateEpoch: %s", err.Error())
-			}
-			if err := d.Set("hardware_eol_url", (s.GetHardwareEolUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property HardwareEolUrl: %s", err.Error())
-			}
-			if err := d.Set("headline", (s.GetHeadline())); err != nil {
-				return diag.Errorf("error occurred while setting property Headline: %s", err.Error())
-			}
+				temp["last_dateof_support"] = (s.GetLastDateofSupport()).String()
+				temp["last_dateof_support_epoch"] = (s.GetLastDateofSupportEpoch())
 
-			if err := d.Set("last_dateof_support", (s.GetLastDateofSupport()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property LastDateofSupport: %s", err.Error())
-			}
-			if err := d.Set("last_dateof_support_epoch", (s.GetLastDateofSupportEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property LastDateofSupportEpoch: %s", err.Error())
-			}
+				temp["last_ship_date"] = (s.GetLastShipDate()).String()
+				temp["last_ship_date_epoch"] = (s.GetLastShipDateEpoch())
+				temp["migration_url"] = (s.GetMigrationUrl())
+				temp["moid"] = (s.GetMoid())
+				temp["object_type"] = (s.GetObjectType())
 
-			if err := d.Set("last_ship_date", (s.GetLastShipDate()).String()); err != nil {
-				return diag.Errorf("error occurred while setting property LastShipDate: %s", err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				niaapiDcnmHweolResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("last_ship_date_epoch", (s.GetLastShipDateEpoch())); err != nil {
-				return diag.Errorf("error occurred while setting property LastShipDateEpoch: %s", err.Error())
-			}
-			if err := d.Set("migration_url", (s.GetMigrationUrl())); err != nil {
-				return diag.Errorf("error occurred while setting property MigrationUrl: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(niaapiDcnmHweolResults))
+	if err := d.Set("results", niaapiDcnmHweolResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(niaapiDcnmHweolResults[0]["moid"].(string))
 	return de
 }

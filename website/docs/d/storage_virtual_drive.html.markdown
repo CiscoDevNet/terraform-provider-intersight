@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_virtual_drive
 A Virtual Disk Drive or Logical Unit Number.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_virtual_drive.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `access_policy`:(string) The access policy of the virtual drive. 
 * `actual_write_cache_policy`:(string) The current write cache policy of the virtual drive. 
@@ -44,3 +47,4 @@ The following arguments can be used to get data of already created objects in In
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vendor_uuid`:(string) The UUID value of the vendor. 
 * `virtual_drive_id`:(string) The identifier for this Virtual drive. 
+ 

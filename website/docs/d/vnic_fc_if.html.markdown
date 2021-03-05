@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_vnic_fc_if
 Virtual Fibre Channel Interface.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_vnic_fc_if.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the virtual fibre channel interface. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `vif_id`:(int) This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA. 
 * `wwpn`:(string) The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy. 
 * `wwpn_address_type`:(string) Type of allocation selected to assign a WWPN address to the vhba.* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface. 
+ 

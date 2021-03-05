@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_firmware_driver_distributable
 A device driver image distributed by Cisco.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_firmware_driver_distributable.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
 * `category`:(string) The device type on which the driver is installable. 
@@ -35,3 +38,4 @@ The following arguments can be used to get data of already created objects in In
 * `software_type_id`:(string) The software type id provided by cisco.com. 
 * `vendor`:(string) The vendor or publisher of this file. 
 * `nr_version`:(string) Vendor provided version for the file. 
+ 

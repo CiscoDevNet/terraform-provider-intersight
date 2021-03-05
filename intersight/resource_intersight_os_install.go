@@ -1876,6 +1876,16 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	// Check for Workflow Status
+	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
+	for _, w := range runningWorkflows {
+		err := checkWorkflowStatus(conn, w)
+		if err != nil {
+			err := err.(models.GenericOpenAPIError)
+			return diag.Errorf("failed while fetching workflow information in OsInstall: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+		}
+	}
 	return resourceOsInstallRead(c, d, meta)
 }
 
@@ -1977,30 +1987,7 @@ func resourceOsInstallDelete(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	var de diag.Diagnostics
-	conn := meta.(*Config)
-	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
-	moid := x["moid"].(string)
-	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching workflow info for OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-	}
-	if getWorkflow.GetStatus() == "RUNNING" {
-		status := "Cancel"
-		var o = &models.WorkflowWorkflowInfo{Action: &status}
-		o.SetClassId("workflow.WorkflowInfo")
-		o.SetObjectType("workflow.WorkflowInfo")
-		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while cancelling workflow triggered by OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-		}
-		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
-		_, responseErr = p.Execute()
-		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while deleting workflow triggered by OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
-		}
-	}
+	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "OsInstall does not allow delete functionality"}
+	de = append(de, warning)
 	return de
 }

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_network_fc_zone_info
 FC Zone information of a Fabric Interconnect.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_network_fc_zone_info.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `user_zone_limit`:(int) The maximum number of Fibre Channel user zones allowed on a Fabric Interconnect. 
 * `zone_count`:(int) The number of Fibre Channel zones defined on a Fabric Interconnect. 
 * `zone_limit`:(int) The maximum number of Fibre Channel zones allowed on a Fabric Interconnect. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_smtp_policy
 Name that identifies the SMTP Policy.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_smtp_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Description of the policy. 
 * `enabled`:(bool) If enabled, controls the state of the SMTP client service on the managed device. 
@@ -18,3 +21,4 @@ The following arguments can be used to get data of already created objects in In
 * `sender_email`:(string) The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field. 
 * `smtp_port`:(int) Port number used by the SMTP server for outgoing SMTP communication. 
 * `smtp_server`:(string) IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications. 
+ 

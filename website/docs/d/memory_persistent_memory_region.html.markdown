@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_memory_persistent_memory_region
 Persistent Memory Region configured on the Persistent Memory Modules on a server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_memory_persistent_memory_region.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -23,3 +26,4 @@ The following arguments can be used to get data of already created objects in In
 * `socket_id`:(string) Socket ID of the Persistent Memory Region. 
 * `socket_memory_id`:(string) Socket Memory ID of the Persistent Memory Region. 
 * `total_capacity`:(string) Total capacity in GiB of the Persistent Memory Region. 
+ 

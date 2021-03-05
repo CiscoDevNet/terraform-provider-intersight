@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_identity_summary
 Consolidated view of all equipment identities.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_identity_summary.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `adapter_serial`:(string) Serial Identifier of an adapter participating in SWM. 
 * `admin_action`:(string) Updated by UI/API to trigger specific chassis action type.* `None` - No operation value for maintenance actions on an equipment.* `Decommission` - Decommission the equipment and temporarily remove it from being managed by Intersight.* `Recommission` - Recommission the equipment.* `Reack` - Reacknowledge the equipment and discover it again.* `Remove` - Remove the equipment permanently from Intersight management. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `source_object_type`:(string) The source object type of this view MO. 
 * `switch_id`:(int) Switch ID to which Fabric Extender is connected, ID can be either 1 or 2, equalent to A or B. 
 * `vendor`:(string) The manufacturer of the equipment. 
+ 

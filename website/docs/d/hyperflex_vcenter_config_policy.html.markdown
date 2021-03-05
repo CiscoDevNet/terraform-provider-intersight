@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_vcenter_config_policy
 A policy specifying vCenter configuration.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_vcenter_config_policy.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `data_center`:(string) The vCenter datacenter name. 
 * `description`:(string) Description of the policy. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `password`:(string) The password for authenticating with vCenter. Follow the corresponding password policy governed by vCenter. 
 * `sso_url`:(string) Overrides the default vCenter Single Sign-On URL. Do not specify unless instructed by Cisco TAC. 
 * `username`:(string) The vCenter username (e.g. administrator@vsphere.local). 
+ 

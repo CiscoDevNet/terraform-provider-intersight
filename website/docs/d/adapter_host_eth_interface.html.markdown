@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_adapter_host_eth_interface
 Physical / Virtual port of an adapter as seen by the host.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_adapter_host_eth_interface.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_state`:(string) Admin state of the Host Ethernet Interface. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -27,3 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `virtualization_preference`:(string) Virtualization Preference of the Host Ethernet Interface indicating if virtualization is enabled or not. 
 * `vnic_dn`:(string) The Virtual Ethernet Interface DN connected to the Host Ethernet Interface. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_license_account_license_data
 License information for an account.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_license_account_license_data.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_id`:(string) Root user's ID of the account. 
 * `agent_data`:(string) Agent trusted store data. 
@@ -33,3 +36,4 @@ The following arguments can be used to get data of already created objects in In
 * `smart_account`:(string) Name of the smart account. 
 * `sync_status`:(string) Current sync status for the account. 
 * `virtual_account`:(string) Name of the virtual account. 
+ 

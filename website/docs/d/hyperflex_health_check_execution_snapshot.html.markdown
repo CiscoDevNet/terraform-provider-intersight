@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_health_check_execution_snapshot
 Last known health check execution results of a health check Definition.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_health_check_execution_snapshot.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `category`:(string) Category that the HyperFlex health check Definition belongs to. 
 * `cause`:(string) Information detailing the possible cause of the healthcheck failure, if the check fails. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `health_check_summary`:(string) A brief summary of health check results. 
 * `hx_device_name`:(string) HyperFlex Device Name where the healthcheck is executed. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+ 

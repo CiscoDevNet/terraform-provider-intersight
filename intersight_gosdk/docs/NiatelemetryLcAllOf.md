@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | Dn value for the line cards present. | [optional] 
 **HardwareVersion** | Pointer to **string** | Hardware version of the line cards present. | [optional] 
 **Model** | Pointer to **string** | Model of the line cards present. | [optional] 
+**NodeId** | Pointer to **string** | Node Id of the line card present. | [optional] 
 **OperationalState** | Pointer to **string** | Opretaional state of the line cards present. | [optional] 
 **PowerState** | Pointer to **string** | Power state of the line cards present. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
@@ -177,6 +178,31 @@ SetModel sets Model field to given value.
 `func (o *NiatelemetryLcAllOf) HasModel() bool`
 
 HasModel returns a boolean if a field has been set.
+
+### GetNodeId
+
+`func (o *NiatelemetryLcAllOf) GetNodeId() string`
+
+GetNodeId returns the NodeId field if non-nil, zero value otherwise.
+
+### GetNodeIdOk
+
+`func (o *NiatelemetryLcAllOf) GetNodeIdOk() (*string, bool)`
+
+GetNodeIdOk returns a tuple with the NodeId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeId
+
+`func (o *NiatelemetryLcAllOf) SetNodeId(v string)`
+
+SetNodeId sets NodeId field to given value.
+
+### HasNodeId
+
+`func (o *NiatelemetryLcAllOf) HasNodeId() bool`
+
+HasNodeId returns a boolean if a field has been set.
 
 ### GetOperationalState
 

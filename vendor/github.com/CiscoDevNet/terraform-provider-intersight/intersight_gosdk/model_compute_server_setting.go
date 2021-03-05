@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-17T05:06:15Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-24T06:47:07Z.
  *
- * API version: 1.0.9-3714
+ * API version: 1.0.9-3824
  * Contact: intersight@cisco.com
  */
 
@@ -33,14 +33,17 @@ type ComputeServerSetting struct {
 	// The property used to identify the name of the server it is associated with.
 	Name *string `json:"Name,omitempty"`
 	// The name of the device chosen by user for configuring One-Time Boot device.
-	OneTimeBootDevice         *string                                  `json:"OneTimeBootDevice,omitempty"`
-	PersistentMemoryOperation NullableComputePersistentMemoryOperation `json:"PersistentMemoryOperation,omitempty"`
-	ServerConfig              NullableComputeServerConfig              `json:"ServerConfig,omitempty"`
-	LocatorLed                *EquipmentLocatorLedRelationship         `json:"LocatorLed,omitempty"`
-	RegisteredDevice          *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
-	RunningWorkflow           *WorkflowWorkflowInfoRelationship        `json:"RunningWorkflow,omitempty"`
-	Server                    *ComputePhysicalRelationship             `json:"Server,omitempty"`
-	AdditionalProperties      map[string]interface{}
+	OneTimeBootDevice             *string                                      `json:"OneTimeBootDevice,omitempty"`
+	PersistentMemoryOperation     NullableComputePersistentMemoryOperation     `json:"PersistentMemoryOperation,omitempty"`
+	ServerConfig                  NullableComputeServerConfig                  `json:"ServerConfig,omitempty"`
+	StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
+	StoragePhysicalDriveOperation NullableComputeStoragePhysicalDriveOperation `json:"StoragePhysicalDriveOperation,omitempty"`
+	StorageVirtualDriveOperation  NullableComputeStorageVirtualDriveOperation  `json:"StorageVirtualDriveOperation,omitempty"`
+	LocatorLed                    *EquipmentLocatorLedRelationship             `json:"LocatorLed,omitempty"`
+	RegisteredDevice              *AssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
+	RunningWorkflow               *WorkflowWorkflowInfoRelationship            `json:"RunningWorkflow,omitempty"`
+	Server                        *ComputePhysicalRelationship                 `json:"Server,omitempty"`
+	AdditionalProperties          map[string]interface{}
 }
 
 type _ComputeServerSetting ComputeServerSetting
@@ -374,6 +377,135 @@ func (o *ComputeServerSetting) UnsetServerConfig() {
 	o.ServerConfig.Unset()
 }
 
+// GetStorageControllerOperation returns the StorageControllerOperation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeServerSetting) GetStorageControllerOperation() ComputeStorageControllerOperation {
+	if o == nil || o.StorageControllerOperation.Get() == nil {
+		var ret ComputeStorageControllerOperation
+		return ret
+	}
+	return *o.StorageControllerOperation.Get()
+}
+
+// GetStorageControllerOperationOk returns a tuple with the StorageControllerOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeServerSetting) GetStorageControllerOperationOk() (*ComputeStorageControllerOperation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageControllerOperation.Get(), o.StorageControllerOperation.IsSet()
+}
+
+// HasStorageControllerOperation returns a boolean if a field has been set.
+func (o *ComputeServerSetting) HasStorageControllerOperation() bool {
+	if o != nil && o.StorageControllerOperation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageControllerOperation gets a reference to the given NullableComputeStorageControllerOperation and assigns it to the StorageControllerOperation field.
+func (o *ComputeServerSetting) SetStorageControllerOperation(v ComputeStorageControllerOperation) {
+	o.StorageControllerOperation.Set(&v)
+}
+
+// SetStorageControllerOperationNil sets the value for StorageControllerOperation to be an explicit nil
+func (o *ComputeServerSetting) SetStorageControllerOperationNil() {
+	o.StorageControllerOperation.Set(nil)
+}
+
+// UnsetStorageControllerOperation ensures that no value is present for StorageControllerOperation, not even an explicit nil
+func (o *ComputeServerSetting) UnsetStorageControllerOperation() {
+	o.StorageControllerOperation.Unset()
+}
+
+// GetStoragePhysicalDriveOperation returns the StoragePhysicalDriveOperation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeServerSetting) GetStoragePhysicalDriveOperation() ComputeStoragePhysicalDriveOperation {
+	if o == nil || o.StoragePhysicalDriveOperation.Get() == nil {
+		var ret ComputeStoragePhysicalDriveOperation
+		return ret
+	}
+	return *o.StoragePhysicalDriveOperation.Get()
+}
+
+// GetStoragePhysicalDriveOperationOk returns a tuple with the StoragePhysicalDriveOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeServerSetting) GetStoragePhysicalDriveOperationOk() (*ComputeStoragePhysicalDriveOperation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StoragePhysicalDriveOperation.Get(), o.StoragePhysicalDriveOperation.IsSet()
+}
+
+// HasStoragePhysicalDriveOperation returns a boolean if a field has been set.
+func (o *ComputeServerSetting) HasStoragePhysicalDriveOperation() bool {
+	if o != nil && o.StoragePhysicalDriveOperation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStoragePhysicalDriveOperation gets a reference to the given NullableComputeStoragePhysicalDriveOperation and assigns it to the StoragePhysicalDriveOperation field.
+func (o *ComputeServerSetting) SetStoragePhysicalDriveOperation(v ComputeStoragePhysicalDriveOperation) {
+	o.StoragePhysicalDriveOperation.Set(&v)
+}
+
+// SetStoragePhysicalDriveOperationNil sets the value for StoragePhysicalDriveOperation to be an explicit nil
+func (o *ComputeServerSetting) SetStoragePhysicalDriveOperationNil() {
+	o.StoragePhysicalDriveOperation.Set(nil)
+}
+
+// UnsetStoragePhysicalDriveOperation ensures that no value is present for StoragePhysicalDriveOperation, not even an explicit nil
+func (o *ComputeServerSetting) UnsetStoragePhysicalDriveOperation() {
+	o.StoragePhysicalDriveOperation.Unset()
+}
+
+// GetStorageVirtualDriveOperation returns the StorageVirtualDriveOperation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeServerSetting) GetStorageVirtualDriveOperation() ComputeStorageVirtualDriveOperation {
+	if o == nil || o.StorageVirtualDriveOperation.Get() == nil {
+		var ret ComputeStorageVirtualDriveOperation
+		return ret
+	}
+	return *o.StorageVirtualDriveOperation.Get()
+}
+
+// GetStorageVirtualDriveOperationOk returns a tuple with the StorageVirtualDriveOperation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeServerSetting) GetStorageVirtualDriveOperationOk() (*ComputeStorageVirtualDriveOperation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageVirtualDriveOperation.Get(), o.StorageVirtualDriveOperation.IsSet()
+}
+
+// HasStorageVirtualDriveOperation returns a boolean if a field has been set.
+func (o *ComputeServerSetting) HasStorageVirtualDriveOperation() bool {
+	if o != nil && o.StorageVirtualDriveOperation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageVirtualDriveOperation gets a reference to the given NullableComputeStorageVirtualDriveOperation and assigns it to the StorageVirtualDriveOperation field.
+func (o *ComputeServerSetting) SetStorageVirtualDriveOperation(v ComputeStorageVirtualDriveOperation) {
+	o.StorageVirtualDriveOperation.Set(&v)
+}
+
+// SetStorageVirtualDriveOperationNil sets the value for StorageVirtualDriveOperation to be an explicit nil
+func (o *ComputeServerSetting) SetStorageVirtualDriveOperationNil() {
+	o.StorageVirtualDriveOperation.Set(nil)
+}
+
+// UnsetStorageVirtualDriveOperation ensures that no value is present for StorageVirtualDriveOperation, not even an explicit nil
+func (o *ComputeServerSetting) UnsetStorageVirtualDriveOperation() {
+	o.StorageVirtualDriveOperation.Unset()
+}
+
 // GetLocatorLed returns the LocatorLed field value if set, zero value otherwise.
 func (o *ComputeServerSetting) GetLocatorLed() EquipmentLocatorLedRelationship {
 	if o == nil || o.LocatorLed == nil {
@@ -539,6 +671,15 @@ func (o ComputeServerSetting) MarshalJSON() ([]byte, error) {
 	if o.ServerConfig.IsSet() {
 		toSerialize["ServerConfig"] = o.ServerConfig.Get()
 	}
+	if o.StorageControllerOperation.IsSet() {
+		toSerialize["StorageControllerOperation"] = o.StorageControllerOperation.Get()
+	}
+	if o.StoragePhysicalDriveOperation.IsSet() {
+		toSerialize["StoragePhysicalDriveOperation"] = o.StoragePhysicalDriveOperation.Get()
+	}
+	if o.StorageVirtualDriveOperation.IsSet() {
+		toSerialize["StorageVirtualDriveOperation"] = o.StorageVirtualDriveOperation.Get()
+	}
 	if o.LocatorLed != nil {
 		toSerialize["LocatorLed"] = o.LocatorLed
 	}
@@ -574,13 +715,16 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		// The property used to identify the name of the server it is associated with.
 		Name *string `json:"Name,omitempty"`
 		// The name of the device chosen by user for configuring One-Time Boot device.
-		OneTimeBootDevice         *string                                  `json:"OneTimeBootDevice,omitempty"`
-		PersistentMemoryOperation NullableComputePersistentMemoryOperation `json:"PersistentMemoryOperation,omitempty"`
-		ServerConfig              NullableComputeServerConfig              `json:"ServerConfig,omitempty"`
-		LocatorLed                *EquipmentLocatorLedRelationship         `json:"LocatorLed,omitempty"`
-		RegisteredDevice          *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
-		RunningWorkflow           *WorkflowWorkflowInfoRelationship        `json:"RunningWorkflow,omitempty"`
-		Server                    *ComputePhysicalRelationship             `json:"Server,omitempty"`
+		OneTimeBootDevice             *string                                      `json:"OneTimeBootDevice,omitempty"`
+		PersistentMemoryOperation     NullableComputePersistentMemoryOperation     `json:"PersistentMemoryOperation,omitempty"`
+		ServerConfig                  NullableComputeServerConfig                  `json:"ServerConfig,omitempty"`
+		StorageControllerOperation    NullableComputeStorageControllerOperation    `json:"StorageControllerOperation,omitempty"`
+		StoragePhysicalDriveOperation NullableComputeStoragePhysicalDriveOperation `json:"StoragePhysicalDriveOperation,omitempty"`
+		StorageVirtualDriveOperation  NullableComputeStorageVirtualDriveOperation  `json:"StorageVirtualDriveOperation,omitempty"`
+		LocatorLed                    *EquipmentLocatorLedRelationship             `json:"LocatorLed,omitempty"`
+		RegisteredDevice              *AssetDeviceRegistrationRelationship         `json:"RegisteredDevice,omitempty"`
+		RunningWorkflow               *WorkflowWorkflowInfoRelationship            `json:"RunningWorkflow,omitempty"`
+		Server                        *ComputePhysicalRelationship                 `json:"Server,omitempty"`
 	}
 
 	varComputeServerSettingWithoutEmbeddedStruct := ComputeServerSettingWithoutEmbeddedStruct{}
@@ -597,6 +741,9 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeServerSetting.OneTimeBootDevice = varComputeServerSettingWithoutEmbeddedStruct.OneTimeBootDevice
 		varComputeServerSetting.PersistentMemoryOperation = varComputeServerSettingWithoutEmbeddedStruct.PersistentMemoryOperation
 		varComputeServerSetting.ServerConfig = varComputeServerSettingWithoutEmbeddedStruct.ServerConfig
+		varComputeServerSetting.StorageControllerOperation = varComputeServerSettingWithoutEmbeddedStruct.StorageControllerOperation
+		varComputeServerSetting.StoragePhysicalDriveOperation = varComputeServerSettingWithoutEmbeddedStruct.StoragePhysicalDriveOperation
+		varComputeServerSetting.StorageVirtualDriveOperation = varComputeServerSettingWithoutEmbeddedStruct.StorageVirtualDriveOperation
 		varComputeServerSetting.LocatorLed = varComputeServerSettingWithoutEmbeddedStruct.LocatorLed
 		varComputeServerSetting.RegisteredDevice = varComputeServerSettingWithoutEmbeddedStruct.RegisteredDevice
 		varComputeServerSetting.RunningWorkflow = varComputeServerSettingWithoutEmbeddedStruct.RunningWorkflow
@@ -627,6 +774,9 @@ func (o *ComputeServerSetting) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OneTimeBootDevice")
 		delete(additionalProperties, "PersistentMemoryOperation")
 		delete(additionalProperties, "ServerConfig")
+		delete(additionalProperties, "StorageControllerOperation")
+		delete(additionalProperties, "StoragePhysicalDriveOperation")
+		delete(additionalProperties, "StorageVirtualDriveOperation")
 		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "RunningWorkflow")

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hcl_exempted_catalog
 Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hcl_exempted_catalog.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `comments`:(string) Reason for the exemption. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `server_pid`:(string) Three part ID representing the server model as returned by UCSM/CIMC XML APIs. 
 * `ucs_version`:(string) Version of the UCS software. 
 * `version_type`:(string) Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release. 
+ 

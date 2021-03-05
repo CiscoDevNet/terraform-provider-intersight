@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-17T05:06:15Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-24T06:47:07Z.
  *
- * API version: 1.0.9-3714
+ * API version: 1.0.9-3824
  * Contact: intersight@cisco.com
  */
 
@@ -79,10 +79,10 @@ type WorkflowWorkflowInfoAllOf struct {
 	WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
 	// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
 	WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
-	Var0RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_0_RollbackWorkflow,omitempty"`
-	Var1SwitchProfile          *FabricSwitchProfileRelationship                `json:"_1_SwitchProfile,omitempty"`
-	Var2ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_2_ClusterProfile,omitempty"`
-	Var3Profile                *ChassisProfileRelationship                     `json:"_3_Profile,omitempty"`
+	Var0Profile                *ChassisProfileRelationship                     `json:"_0_Profile,omitempty"`
+	Var1ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_1_ClusterProfile,omitempty"`
+	Var2SwitchProfile          *FabricSwitchProfileRelationship                `json:"_2_SwitchProfile,omitempty"`
+	Var3RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_3_RollbackWorkflow,omitempty"`
 	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -1185,132 +1185,132 @@ func (o *WorkflowWorkflowInfoAllOf) SetWorkflowWorkerTaskCount(v int64) {
 	o.WorkflowWorkerTaskCount = &v
 }
 
-// GetVar0RollbackWorkflow returns the Var0RollbackWorkflow field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetVar0RollbackWorkflow() WorkflowRollbackWorkflowRelationship {
-	if o == nil || o.Var0RollbackWorkflow == nil {
-		var ret WorkflowRollbackWorkflowRelationship
-		return ret
-	}
-	return *o.Var0RollbackWorkflow
-}
-
-// GetVar0RollbackWorkflowOk returns a tuple with the Var0RollbackWorkflow field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetVar0RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool) {
-	if o == nil || o.Var0RollbackWorkflow == nil {
-		return nil, false
-	}
-	return o.Var0RollbackWorkflow, true
-}
-
-// HasVar0RollbackWorkflow returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasVar0RollbackWorkflow() bool {
-	if o != nil && o.Var0RollbackWorkflow != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar0RollbackWorkflow gets a reference to the given WorkflowRollbackWorkflowRelationship and assigns it to the Var0RollbackWorkflow field.
-func (o *WorkflowWorkflowInfoAllOf) SetVar0RollbackWorkflow(v WorkflowRollbackWorkflowRelationship) {
-	o.Var0RollbackWorkflow = &v
-}
-
-// GetVar1SwitchProfile returns the Var1SwitchProfile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfile() FabricSwitchProfileRelationship {
-	if o == nil || o.Var1SwitchProfile == nil {
-		var ret FabricSwitchProfileRelationship
-		return ret
-	}
-	return *o.Var1SwitchProfile
-}
-
-// GetVar1SwitchProfileOk returns a tuple with the Var1SwitchProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfileOk() (*FabricSwitchProfileRelationship, bool) {
-	if o == nil || o.Var1SwitchProfile == nil {
-		return nil, false
-	}
-	return o.Var1SwitchProfile, true
-}
-
-// HasVar1SwitchProfile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasVar1SwitchProfile() bool {
-	if o != nil && o.Var1SwitchProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar1SwitchProfile gets a reference to the given FabricSwitchProfileRelationship and assigns it to the Var1SwitchProfile field.
-func (o *WorkflowWorkflowInfoAllOf) SetVar1SwitchProfile(v FabricSwitchProfileRelationship) {
-	o.Var1SwitchProfile = &v
-}
-
-// GetVar2ClusterProfile returns the Var2ClusterProfile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetVar2ClusterProfile() HyperflexClusterProfileRelationship {
-	if o == nil || o.Var2ClusterProfile == nil {
-		var ret HyperflexClusterProfileRelationship
-		return ret
-	}
-	return *o.Var2ClusterProfile
-}
-
-// GetVar2ClusterProfileOk returns a tuple with the Var2ClusterProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetVar2ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.Var2ClusterProfile == nil {
-		return nil, false
-	}
-	return o.Var2ClusterProfile, true
-}
-
-// HasVar2ClusterProfile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasVar2ClusterProfile() bool {
-	if o != nil && o.Var2ClusterProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar2ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var2ClusterProfile field.
-func (o *WorkflowWorkflowInfoAllOf) SetVar2ClusterProfile(v HyperflexClusterProfileRelationship) {
-	o.Var2ClusterProfile = &v
-}
-
-// GetVar3Profile returns the Var3Profile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfoAllOf) GetVar3Profile() ChassisProfileRelationship {
-	if o == nil || o.Var3Profile == nil {
+// GetVar0Profile returns the Var0Profile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfoAllOf) GetVar0Profile() ChassisProfileRelationship {
+	if o == nil || o.Var0Profile == nil {
 		var ret ChassisProfileRelationship
 		return ret
 	}
-	return *o.Var3Profile
+	return *o.Var0Profile
 }
 
-// GetVar3ProfileOk returns a tuple with the Var3Profile field value if set, nil otherwise
+// GetVar0ProfileOk returns a tuple with the Var0Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfoAllOf) GetVar3ProfileOk() (*ChassisProfileRelationship, bool) {
-	if o == nil || o.Var3Profile == nil {
+func (o *WorkflowWorkflowInfoAllOf) GetVar0ProfileOk() (*ChassisProfileRelationship, bool) {
+	if o == nil || o.Var0Profile == nil {
 		return nil, false
 	}
-	return o.Var3Profile, true
+	return o.Var0Profile, true
 }
 
-// HasVar3Profile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfoAllOf) HasVar3Profile() bool {
-	if o != nil && o.Var3Profile != nil {
+// HasVar0Profile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasVar0Profile() bool {
+	if o != nil && o.Var0Profile != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVar3Profile gets a reference to the given ChassisProfileRelationship and assigns it to the Var3Profile field.
-func (o *WorkflowWorkflowInfoAllOf) SetVar3Profile(v ChassisProfileRelationship) {
-	o.Var3Profile = &v
+// SetVar0Profile gets a reference to the given ChassisProfileRelationship and assigns it to the Var0Profile field.
+func (o *WorkflowWorkflowInfoAllOf) SetVar0Profile(v ChassisProfileRelationship) {
+	o.Var0Profile = &v
+}
+
+// GetVar1ClusterProfile returns the Var1ClusterProfile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfoAllOf) GetVar1ClusterProfile() HyperflexClusterProfileRelationship {
+	if o == nil || o.Var1ClusterProfile == nil {
+		var ret HyperflexClusterProfileRelationship
+		return ret
+	}
+	return *o.Var1ClusterProfile
+}
+
+// GetVar1ClusterProfileOk returns a tuple with the Var1ClusterProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfoAllOf) GetVar1ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
+	if o == nil || o.Var1ClusterProfile == nil {
+		return nil, false
+	}
+	return o.Var1ClusterProfile, true
+}
+
+// HasVar1ClusterProfile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasVar1ClusterProfile() bool {
+	if o != nil && o.Var1ClusterProfile != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVar1ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var1ClusterProfile field.
+func (o *WorkflowWorkflowInfoAllOf) SetVar1ClusterProfile(v HyperflexClusterProfileRelationship) {
+	o.Var1ClusterProfile = &v
+}
+
+// GetVar2SwitchProfile returns the Var2SwitchProfile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfile() FabricSwitchProfileRelationship {
+	if o == nil || o.Var2SwitchProfile == nil {
+		var ret FabricSwitchProfileRelationship
+		return ret
+	}
+	return *o.Var2SwitchProfile
+}
+
+// GetVar2SwitchProfileOk returns a tuple with the Var2SwitchProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfileOk() (*FabricSwitchProfileRelationship, bool) {
+	if o == nil || o.Var2SwitchProfile == nil {
+		return nil, false
+	}
+	return o.Var2SwitchProfile, true
+}
+
+// HasVar2SwitchProfile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasVar2SwitchProfile() bool {
+	if o != nil && o.Var2SwitchProfile != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVar2SwitchProfile gets a reference to the given FabricSwitchProfileRelationship and assigns it to the Var2SwitchProfile field.
+func (o *WorkflowWorkflowInfoAllOf) SetVar2SwitchProfile(v FabricSwitchProfileRelationship) {
+	o.Var2SwitchProfile = &v
+}
+
+// GetVar3RollbackWorkflow returns the Var3RollbackWorkflow field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfoAllOf) GetVar3RollbackWorkflow() WorkflowRollbackWorkflowRelationship {
+	if o == nil || o.Var3RollbackWorkflow == nil {
+		var ret WorkflowRollbackWorkflowRelationship
+		return ret
+	}
+	return *o.Var3RollbackWorkflow
+}
+
+// GetVar3RollbackWorkflowOk returns a tuple with the Var3RollbackWorkflow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfoAllOf) GetVar3RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool) {
+	if o == nil || o.Var3RollbackWorkflow == nil {
+		return nil, false
+	}
+	return o.Var3RollbackWorkflow, true
+}
+
+// HasVar3RollbackWorkflow returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasVar3RollbackWorkflow() bool {
+	if o != nil && o.Var3RollbackWorkflow != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVar3RollbackWorkflow gets a reference to the given WorkflowRollbackWorkflowRelationship and assigns it to the Var3RollbackWorkflow field.
+func (o *WorkflowWorkflowInfoAllOf) SetVar3RollbackWorkflow(v WorkflowRollbackWorkflowRelationship) {
+	o.Var3RollbackWorkflow = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -1668,17 +1668,17 @@ func (o WorkflowWorkflowInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.WorkflowWorkerTaskCount != nil {
 		toSerialize["WorkflowWorkerTaskCount"] = o.WorkflowWorkerTaskCount
 	}
-	if o.Var0RollbackWorkflow != nil {
-		toSerialize["_0_RollbackWorkflow"] = o.Var0RollbackWorkflow
+	if o.Var0Profile != nil {
+		toSerialize["_0_Profile"] = o.Var0Profile
 	}
-	if o.Var1SwitchProfile != nil {
-		toSerialize["_1_SwitchProfile"] = o.Var1SwitchProfile
+	if o.Var1ClusterProfile != nil {
+		toSerialize["_1_ClusterProfile"] = o.Var1ClusterProfile
 	}
-	if o.Var2ClusterProfile != nil {
-		toSerialize["_2_ClusterProfile"] = o.Var2ClusterProfile
+	if o.Var2SwitchProfile != nil {
+		toSerialize["_2_SwitchProfile"] = o.Var2SwitchProfile
 	}
-	if o.Var3Profile != nil {
-		toSerialize["_3_Profile"] = o.Var3Profile
+	if o.Var3RollbackWorkflow != nil {
+		toSerialize["_3_RollbackWorkflow"] = o.Var3RollbackWorkflow
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -1754,10 +1754,10 @@ func (o *WorkflowWorkflowInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "WorkflowMetaType")
 		delete(additionalProperties, "WorkflowTaskCount")
 		delete(additionalProperties, "WorkflowWorkerTaskCount")
-		delete(additionalProperties, "_0_RollbackWorkflow")
-		delete(additionalProperties, "_1_SwitchProfile")
-		delete(additionalProperties, "_2_ClusterProfile")
-		delete(additionalProperties, "_3_Profile")
+		delete(additionalProperties, "_0_Profile")
+		delete(additionalProperties, "_1_ClusterProfile")
+		delete(additionalProperties, "_2_SwitchProfile")
+		delete(additionalProperties, "_3_RollbackWorkflow")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

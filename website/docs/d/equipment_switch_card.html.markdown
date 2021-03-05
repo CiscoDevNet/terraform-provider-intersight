@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_switch_card
 Fixed / Removable module on a Fabric Interconnect / Switch.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_switch_card.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Detailed description of this switch hardware. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `thermal`:(string) The Thermal status of the fabric interconnect.* `unknown` - The default state of the sensor (in case no data is received).* `ok` - State of the sensor indicating the sensor's temperature range is okay.* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.* `upper-critical` - State of the sensor indicating that the temperature is above normal range.* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.* `lower-critical` - State of the sensor indicating that the temperature is below normal range.* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

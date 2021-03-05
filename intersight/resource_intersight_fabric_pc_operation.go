@@ -36,6 +36,12 @@ func resourceFabricPcOperation() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"config_state": {
+				Description: "The configured state of these settings in the target chassis. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the admin state changes are applied successfully in the target FI domain. Applying - This state denotes that the admin state changes are being applied in the target FI domain. Failed - This state denotes that the admin state changes could not be applied in the target FI domain.\n* `None` - Nil value when no action has been triggered by the user.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "None",
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -142,6 +148,11 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetClassId("fabric.PcOperation")
+
+	if v, ok := d.GetOk("config_state"); ok {
+		x := (v.(string))
+		o.SetConfigState(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -273,6 +284,10 @@ func resourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property ClassId in FabricPcOperation object: %s", err.Error())
 	}
 
+	if err := d.Set("config_state", (s.GetConfigState())); err != nil {
+		return diag.Errorf("error occurred while setting property ConfigState in FabricPcOperation object: %s", err.Error())
+	}
+
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property Moid in FabricPcOperation object: %s", err.Error())
 	}
@@ -320,6 +335,12 @@ func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetClassId("fabric.PcOperation")
+
+	if d.HasChange("config_state") {
+		v := d.Get("config_state")
+		x := (v.(string))
+		o.SetConfigState(x)
+	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

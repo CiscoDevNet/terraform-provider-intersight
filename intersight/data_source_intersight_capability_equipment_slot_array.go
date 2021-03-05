@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,11 +14,6 @@ func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceCapabilityEquipmentSlotArrayRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -107,29 +101,6 @@ func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
 			"transverse_group_separation": {
 				Description: "Transverse Group Separation information for a Switch/Fabric-Interconnect hardware.",
 				Type:        schema.TypeFloat,
@@ -160,7 +131,11 @@ func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 				Type:        schema.TypeFloat,
 				Optional:    true,
 			},
-		},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceCapabilityEquipmentSlotArray().Schema},
+				Computed: true,
+			}},
 	}
 }
 
@@ -267,116 +242,66 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	if err != nil {
 		return diag.Errorf("json marshal of CapabilityEquipmentSlotArray object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.CapabilityEquipmentSlotArrayList.GetCount()
+	var i int32
+	var capabilityEquipmentSlotArrayResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.CapabilityEquipmentSlotArrayList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for CapabilityEquipmentSlotArray data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["class_id"] = (s.GetClassId())
+				temp["first_index"] = (s.GetFirstIndex())
+				temp["height"] = (s.GetHeight())
+				temp["horizontal_start_offset"] = (s.GetHorizontalStartOffset())
+				temp["inline_group_separation"] = (s.GetInlineGroupSeparation())
+				temp["inline_group_size"] = (s.GetInlineGroupSize())
+				temp["inline_offset"] = (s.GetInlineOffset())
+				temp["location"] = (s.GetLocation())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["number_of_slots"] = (s.GetNumberOfSlots())
+				temp["object_type"] = (s.GetObjectType())
+				temp["orientation"] = (s.GetOrientation())
+				temp["pid"] = (s.GetPid())
+				temp["selector"] = (s.GetSelector())
+				temp["sku"] = (s.GetSku())
+				temp["slots_per_line"] = (s.GetSlotsPerLine())
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for CapabilityEquipmentSlotArray list: %s", err.Error())
-	}
-	var s = &models.CapabilityEquipmentSlotArrayList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to CapabilityEquipmentSlotArray list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for CapabilityEquipmentSlotArray data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for CapabilityEquipmentSlotArray data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.CapabilityEquipmentSlotArray{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["transverse_group_separation"] = (s.GetTransverseGroupSeparation())
+				temp["transverse_group_size"] = (s.GetTransverseGroupSize())
+				temp["transverse_offset"] = (s.GetTransverseOffset())
+				temp["vertical_start_offset"] = (s.GetVerticalStartOffset())
+				temp["vid"] = (s.GetVid())
+				temp["width"] = (s.GetWidth())
+				capabilityEquipmentSlotArrayResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("first_index", (s.GetFirstIndex())); err != nil {
-				return diag.Errorf("error occurred while setting property FirstIndex: %s", err.Error())
-			}
-			if err := d.Set("height", (s.GetHeight())); err != nil {
-				return diag.Errorf("error occurred while setting property Height: %s", err.Error())
-			}
-			if err := d.Set("horizontal_start_offset", (s.GetHorizontalStartOffset())); err != nil {
-				return diag.Errorf("error occurred while setting property HorizontalStartOffset: %s", err.Error())
-			}
-			if err := d.Set("inline_group_separation", (s.GetInlineGroupSeparation())); err != nil {
-				return diag.Errorf("error occurred while setting property InlineGroupSeparation: %s", err.Error())
-			}
-			if err := d.Set("inline_group_size", (s.GetInlineGroupSize())); err != nil {
-				return diag.Errorf("error occurred while setting property InlineGroupSize: %s", err.Error())
-			}
-			if err := d.Set("inline_offset", (s.GetInlineOffset())); err != nil {
-				return diag.Errorf("error occurred while setting property InlineOffset: %s", err.Error())
-			}
-			if err := d.Set("location", (s.GetLocation())); err != nil {
-				return diag.Errorf("error occurred while setting property Location: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("number_of_slots", (s.GetNumberOfSlots())); err != nil {
-				return diag.Errorf("error occurred while setting property NumberOfSlots: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
-			if err := d.Set("orientation", (s.GetOrientation())); err != nil {
-				return diag.Errorf("error occurred while setting property Orientation: %s", err.Error())
-			}
-			if err := d.Set("pid", (s.GetPid())); err != nil {
-				return diag.Errorf("error occurred while setting property Pid: %s", err.Error())
-			}
-			if err := d.Set("selector", (s.GetSelector())); err != nil {
-				return diag.Errorf("error occurred while setting property Selector: %s", err.Error())
-			}
-			if err := d.Set("sku", (s.GetSku())); err != nil {
-				return diag.Errorf("error occurred while setting property Sku: %s", err.Error())
-			}
-			if err := d.Set("slots_per_line", (s.GetSlotsPerLine())); err != nil {
-				return diag.Errorf("error occurred while setting property SlotsPerLine: %s", err.Error())
-			}
-
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
-			if err := d.Set("transverse_group_separation", (s.GetTransverseGroupSeparation())); err != nil {
-				return diag.Errorf("error occurred while setting property TransverseGroupSeparation: %s", err.Error())
-			}
-			if err := d.Set("transverse_group_size", (s.GetTransverseGroupSize())); err != nil {
-				return diag.Errorf("error occurred while setting property TransverseGroupSize: %s", err.Error())
-			}
-			if err := d.Set("transverse_offset", (s.GetTransverseOffset())); err != nil {
-				return diag.Errorf("error occurred while setting property TransverseOffset: %s", err.Error())
-			}
-			if err := d.Set("vertical_start_offset", (s.GetVerticalStartOffset())); err != nil {
-				return diag.Errorf("error occurred while setting property VerticalStartOffset: %s", err.Error())
-			}
-			if err := d.Set("vid", (s.GetVid())); err != nil {
-				return diag.Errorf("error occurred while setting property Vid: %s", err.Error())
-			}
-			if err := d.Set("width", (s.GetWidth())); err != nil {
-				return diag.Errorf("error occurred while setting property Width: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(capabilityEquipmentSlotArrayResults))
+	if err := d.Set("results", capabilityEquipmentSlotArrayResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(capabilityEquipmentSlotArrayResults[0]["moid"].(string))
 	return de
 }

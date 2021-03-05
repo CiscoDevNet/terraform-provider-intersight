@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_cluster_replication_network_policy_deployment
 Record of HyperFlex Cluster replication network policy deployment.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_cluster_replication_network_policy_deployment.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cluster_uuid`:(string) Uuid of the HyperFlex cluster. 
 * `description`:(string) Description from corresponding ClusterReplicationNetworkPolicy. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `replication_bandwidth_mbps`:(int) Bandwidth for the Replication network in Mbps. 
 * `replication_mtu`:(int) MTU for the Replication network. 
 * `request_id`:(string) Unique request ID allowing retry of the same logical request following a transient communication failure. 
+ 

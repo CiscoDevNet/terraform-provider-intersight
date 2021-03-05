@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_softwarerepository_operating_system_file
 An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_softwarerepository_operating_system_file.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
@@ -23,3 +26,4 @@ The following arguments can be used to get data of already created objects in In
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `vendor`:(string) The vendor or publisher of this file. 
 * `nr_version`:(string) Vendor provided version for the file. 
+ 

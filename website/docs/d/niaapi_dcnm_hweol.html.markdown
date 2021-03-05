@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niaapi_dcnm_hweol
 The hardware end of life notice for DCNM.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niaapi_dcnm_hweol.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `affected_pids`:(string) String contains the PID of hardwares affected by this notice, seperated by comma. 
 * `announcement_date`:(string) When this notice is announced. 
@@ -35,3 +38,4 @@ The following arguments can be used to get data of already created objects in In
 * `last_ship_date_epoch`:(int) Epoch time of last ship Date. 
 * `migration_url`:(string) The URL of this migration notice. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_adapter_unit_descriptor
 Descriptor that uniquely identifies an adaptor.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_adapter_unit_descriptor.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `connectivity_order`:(string) Order in which the ports are connected; sequential or cyclic. 
 * `description`:(string) Detailed information about the endpoint. 
@@ -21,3 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `prom_card_type`:(string) Prom card type for the adaptor. 
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
+ 

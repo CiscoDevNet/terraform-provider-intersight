@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_memory_array
 Holder housing multiple memory units.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_memory_array.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `array_id`:(int) The instance number of the memory array. 
 * `cpu_id`:(int) ID of the CPU that access this memory array. 
@@ -26,3 +29,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

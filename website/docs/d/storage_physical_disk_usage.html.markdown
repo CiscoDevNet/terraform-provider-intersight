@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_physical_disk_usage
 Has usage map between physical disks and virtual drives.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_physical_disk_usage.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `starting_block`:(string) The starting block id of the virtual drive within the physical drive. 
 * `state`:(string) The current state of the physical disk usage. 
 * `virtual_drive`:(string) The virtual drive corresponding to the physical disk. 
+ 

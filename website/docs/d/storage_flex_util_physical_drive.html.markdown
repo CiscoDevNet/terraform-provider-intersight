@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_flex_util_physical_drive
 Storage Flex Util Physical Drive.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_flex_util_physical_drive.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `block_size`:(string) Block size of the FlexUtil Physical drive. 
 * `capacity`:(string) Capacity of the FlexUtil Physical drive. 
@@ -36,3 +39,4 @@ The following arguments can be used to get data of already created objects in In
 * `write_enabled`:(string) Write access state of the FlexUtil Physical Drive. 
 * `write_error_count`:(string) Write error count of the FlexUtil Physical Drive. 
 * `write_error_threshold`:(string) Write error threshold for FlexUtil Physical Drive. 
+ 

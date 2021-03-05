@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_niatelemetry_nia_inventory_fabric
 Inventory Object available for Fabric-scoped attributes.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_inventory_fabric.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `anycast_gw_mac`:(string) Returns the aycast gateway mac. 
 * `dcnmtracker_enabled`:(bool) Returns the value of the dcnmtrackerEnabled field. 
@@ -19,4 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `leaf_count`:(int) Returns total number of leafs in the fabric. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `nxos_vrf_count`:(int) Returns the value of the nxosVrfCount field. 
+* `serial`:(string) Serial number of device being inventoried. The serial number is unique per device. 
+* `site_name`:(string) Name of fabric domain of the controller. 
 * `spine_count`:(int) Returns total number of spines in the fabric. 
+ 

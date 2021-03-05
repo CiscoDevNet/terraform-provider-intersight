@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_ether_physical_port
 Physical ethernet port present on a FI.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_ether_physical_port.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `admin_speed`:(string) Administratively configured speed for this port. 
 * `admin_state`:(string) Administratively configured state (enabled/disabled) for this port. 
@@ -32,3 +35,4 @@ The following arguments can be used to get data of already created objects in In
 * `slot_id`:(int) Switch expansion slot module identifier. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `transceiver_type`:(string) Transceiver model attached to a port in the Fabric Interconnect. 
+ 

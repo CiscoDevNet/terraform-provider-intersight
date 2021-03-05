@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_ls_service_profile
 Logical Profile that can be associated to a physical server.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_ls_service_profile.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `assign_state`:(string) Assignment state of the service profile. 
 * `assoc_state`:(string) Association state of the service profile. 
@@ -20,3 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the UCS Manager service profile. 
 * `oper_state`:(string) Operational state of the service profile. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
+ 

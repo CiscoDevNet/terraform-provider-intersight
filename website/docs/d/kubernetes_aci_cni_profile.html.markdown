@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_kubernetes_aci_cni_profile
 Configuration for an ACI CNI profile.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_kubernetes_aci_cni_profile.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `aaep_name`:(string) Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy. 
 * `description`:(string) Description of the profile. 
@@ -30,3 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `svc_subnet_start`:(string) Start of range of Kubernetes Service IP subnets to use by Kubernetes clusters using this ACI CNI policy Currently this is fixed internally and read-only. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `vrf`:(string) VRF (Virtual Routing and Forwarding) domain to be used within ACI fabric by all k8s clusters using this policy. 
+ 

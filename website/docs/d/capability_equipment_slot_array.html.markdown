@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_capability_equipment_slot_array
 Type to represent additional switch specific capabilities.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_capability_equipment_slot_array.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `first_index`:(float) First Index information for a Switch/Fabric-Interconnect hardware. 
 * `height`:(float) Height information for a Switch/Fabric-Interconnect hardware. 
@@ -31,3 +34,4 @@ The following arguments can be used to get data of already created objects in In
 * `vertical_start_offset`:(float) Vertical Start Offset information for a Switch/Fabric-Interconnect hardware. 
 * `vid`:(string) VID information for Switch/Fabric-Interconnect. 
 * `width`:(float) Width information for a Switch/Fabric-Interconnect hardware. 
+ 

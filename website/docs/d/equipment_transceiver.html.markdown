@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_transceiver
 Transceiver information on the chassis.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_transceiver.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `type`:(string) The type of the transceiver. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

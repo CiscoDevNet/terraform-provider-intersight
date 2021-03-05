@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_lun
 NetApp LUN (logical unit number) is an identifier for a device called a logical unit addressed by a SAN protocol.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_lun.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) Short description about the volume. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
 * `state`:(string) The administrative state of a LUN.* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.* `online` - The LUN is online. 
 * `uuid`:(string) UUID of the LUN. 
+ 

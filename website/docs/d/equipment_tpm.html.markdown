@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_equipment_tpm
 TPM security chip on server board.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_equipment_tpm.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `activation_status`:(string) Identifies the activation status of the TPM. 
 * `admin_state`:(string) Identifies the admin configured state of the TPM. 
@@ -25,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `tpm_id`:(int) Enter  the ID of the trusted platform module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Identifies the version of the Trusted Platform Module. 
+ 

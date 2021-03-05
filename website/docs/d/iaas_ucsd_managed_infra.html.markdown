@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_iaas_ucsd_managed_infra
 Describes about UCSD Managed infrastructure statistics.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_iaas_ucsd_managed_infra.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `advanced_catalog_count`:(int) Total advanced catalogs in UCSD. 
 * `bm_catalog_count`:(int) Total bare metal catalogs in UCSD. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `user_count`:(int) Total user accounts in UCSD. 
 * `vdc_count`:(int) Total virtual datacenters in UCSD. 
 * `vm_count`:(int) Total Virtual machines in UCSD. 
+ 

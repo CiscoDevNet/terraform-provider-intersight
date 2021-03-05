@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_top_system
 Root container for all UCSM / CIMC MOs.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_top_system.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) The admin configured name of the system. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `time_zone`:(string) The operational timezone of the system, empty indicates no timezone has been set specifically. 
+ 

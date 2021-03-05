@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **RefName** | Pointer to **string** | Reference name of TaskInfo that need to be rolled back. | [optional] 
 **RollbackCompleted** | Pointer to **bool** | Status of the rollback operation for the task. | [optional] [readonly] 
 **RollbackTaskName** | Pointer to **string** | Name of TaskInfo that performs the rollback operation. | [optional] [readonly] 
-**Status** | Pointer to **string** | Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed. * &#x60;NotStarted&#x60; - Status of rollback task when it is not started rollback. * &#x60;Not supported&#x60; - Status of task when it is not supporting rollback. * &#x60;Completed&#x60; - Status of rollback task once execution is successful. * &#x60;Failed&#x60; - Status of rollback task when it is failed. | [optional] [readonly] [default to "NotStarted"]
+**Status** | Pointer to **string** | Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed. * &#x60;NotStarted&#x60; - Status of rollback task when it is not started rollback. * &#x60;NotSupported&#x60; - Status of task when it is not supporting rollback. * &#x60;Completed&#x60; - Status of rollback task once execution is successful. * &#x60;Failed&#x60; - Status of rollback task when it is failed. | [optional] [readonly] [default to "NotStarted"]
 **TaskInfoMoid** | Pointer to **string** | Moid of TaskInfo that supports rollback operation. | [optional] 
 **TaskPath** | Pointer to **string** | Path of rollback task if it is inside sub-workflow. | [optional] [readonly] 
 

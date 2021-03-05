@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_net_app_ip_interface
 NetApp IP interface is a logical interface.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_ip_interface.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `enabled`:(string) IP interface is enabled or not. 
 * `home_node`:(string) Name of home node of IP interface. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `service_policy_uuid`:(string) Services of IP interface. 
 * `state`:(string) State of IP interface.* `down` - An inactive port is listed as Down.* `up` - An active port is listed as Up.* `present` - An active port is listed as present. 
 * `uuid`:(string) Uuid of  NetApp IP Interface. 
+ 

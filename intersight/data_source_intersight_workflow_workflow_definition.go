@@ -2,7 +2,6 @@ package intersight
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 	"reflect"
 
@@ -15,50 +14,6 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceWorkflowWorkflowDefinitionRead,
 		Schema: map[string]*schema.Schema{
-			"additional_properties": {
-				Type:             schema.TypeString,
-				Optional:         true,
-				DiffSuppressFunc: SuppressDiffAdditionProps,
-			},
-			"catalog": {
-				Description: "A reference to a workflowCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -73,184 +28,6 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 				Description: "The description for this workflow.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"input_definition": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"default": {
-							Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"override": {
-										Description: "Override the default value provided for the data type. When true, allow the user to enter value for the data type.",
-										Type:        schema.TypeBool,
-										Optional:    true,
-									},
-									"value": {
-										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-										Type:        schema.TypeMap,
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										}, Optional: true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"description": {
-							Description: "Provide a detailed description of the data type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"display_meta": {
-							Description: "Captures the meta data needed for displaying workflow data types in Intersight User Interface.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"inventory_selector": {
-										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
-										Type:        schema.TypeBool,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"widget_type": {
-										Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"input_parameters": {
-							Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
-						},
-						"label": {
-							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"name": {
-							Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"required": {
-							Description: "Specifies whether this parameter is required. The field is applicable for task and workflow.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"input_parameter_set": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"condition": {
-							Description: "The condition to be evaluated.\n* `eq` - Checks if the values of the two parameters are equal.\n* `ne` - Checks if the values of the two parameters are not equal.\n* `contains` - Checks if the second parameter string value is a substring of the first parameter string value.\n* `matchesPattern` - Checks if a string matches a regular expression.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"control_parameter": {
-							Description: "Name of the controlling entity, whose value will be used for evaluating the parameter set.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"enable_parameters": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString}},
-						"name": {
-							Description: "Name for the parameter set.  Limited to 64 alphanumeric characters (upper and lower case), and special characters '-' and '_'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"value": {
-							Description: "The controlling parameter will be evaluated against this 'value'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"label": {
 				Description: "A user friendly short name to identify the workflow. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
@@ -292,420 +69,16 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"output_definition": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"default": {
-							Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"override": {
-										Description: "Override the default value provided for the data type. When true, allow the user to enter value for the data type.",
-										Type:        schema.TypeBool,
-										Optional:    true,
-									},
-									"value": {
-										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-										Type:        schema.TypeMap,
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										}, Optional: true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"description": {
-							Description: "Provide a detailed description of the data type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"display_meta": {
-							Description: "Captures the meta data needed for displaying workflow data types in Intersight User Interface.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"inventory_selector": {
-										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
-										Type:        schema.TypeBool,
-										Optional:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"widget_type": {
-										Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-						"input_parameters": {
-							Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
-						},
-						"label": {
-							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"name": {
-							Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"required": {
-							Description: "Specifies whether this parameter is required. The field is applicable for task and workflow.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"output_parameters": {
-				Description: "The output mappings for the workflow. The outputs for worflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}'. 'Source' is the name of the task within the workflow. You can map any task output to a workflow output as long as the types are compatible. Following this is JSON path expression to extract JSON fragment from source's output.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
-			},
-			"properties": {
-				Description: "Type to capture the properties of a workflow definition. Some of these properties are passed to workflow execution instance.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"external_meta": {
-							Description: "When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"retryable": {
-							Description: "When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"support_status": {
-							Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"key": {
-							Description: "The string representation of a tag key.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"value": {
-							Description: "The string representation of a tag value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-			},
-			"tasks": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"description": {
-							Description: "The description of this task instance in the workflow.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"label": {
-							Description: "A user defined label identifier of the workflow task used for UI display.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"name": {
-							Description: "The name of the task within the workflow and it must be unique among all WorkflowTasks within a workflow definition. This name serves as the internal unique identifier for the task and is used to pick input and output parameters to feed into other tasks.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"ui_input_filters": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"filters": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Schema{
-								Type: schema.TypeString}},
-						"name": {
-							Description: "Name for the input definition to which this filter applies. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. When defining the cascade filter for a sub property, use a period (.) to seperate each section of the name like \"StorageConfig.Volume\" where 'StorageConfig' is an input name and 'Volume' is a sub property defined through custom data type definition.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"user_help_message": {
-							Description: "Help message shown to the user about which prior input needs to be selected to enable the input mapped to this filter.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
-			"ui_rendering_data": {
-				Description: "This will hold the data needed for workflow to be rendered in the user interface.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
-			},
-			"validation_information": {
-				Description: "The current validation state and associated information for this workflow.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"state": {
-							Description: "The current validation state of this workflow. The possible states are Valid, Invalid, NotValidated (default).\n* `NotValidated` - The state when workflow definition has not been validated.\n* `Valid` - The state when workflow definition is valid.\n* `Invalid` - The state when workflow definition is invalid.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"validation_error": {
-							Type:     schema.TypeList,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"error_log": {
-										Description: "Description of the error.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"field": {
-										Description: "When populated this refers to the input or output field within the workflow or task.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"task_name": {
-										Description: "The task name on which the error is found, when empty the error applies to the top level workflow.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"transition_name": {
-										Description: "When populated this refers to the transition connection that has a problem. When this field has value OnSuccess it means the transition connection OnSuccess for the task has an issue.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-								},
-							},
-							Computed: true,
-						},
-					},
-				},
-			},
 			"nr_version": {
 				Description: "The version of the workflow to support multiple versions.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
-			"workflow_metadata": {
-				Description: "A reference to a workflowWorkflowMetadata resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
+			"results": {
+				Type:     schema.TypeList,
+				Elem:     &schema.Resource{Schema: resourceWorkflowWorkflowDefinition().Schema},
 				Computed: true,
-			},
-		},
+			}},
 	}
 }
 
@@ -764,116 +137,72 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	if err != nil {
 		return diag.Errorf("json marshal of WorkflowWorkflowDefinition object failed with error : %s", err.Error())
 	}
-	resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
 		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
+	count := countResponse.WorkflowWorkflowDefinitionList.GetCount()
+	var i int32
+	var workflowWorkflowDefinitionResults = make([]map[string]interface{}, count, count)
+	var j = 0
+	for i = 0; i < count; i += 100 {
+		resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		results := resMo.WorkflowWorkflowDefinitionList.GetResults()
+		length := len(results)
+		if length == 0 {
+			return diag.Errorf("your query for WorkflowWorkflowDefinition data source did not return results. Please change your search criteria and try again")
+		}
+		switch reflect.TypeOf(results).Kind() {
+		case reflect.Slice:
+			for i := 0; i < len(results); i++ {
+				var s = results[i]
+				var temp = make(map[string]interface{})
+				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-	x, err := resMo.MarshalJSON()
-	if err != nil {
-		return diag.Errorf("error occurred while marshalling response for WorkflowWorkflowDefinition list: %s", err.Error())
-	}
-	var s = &models.WorkflowWorkflowDefinitionList{}
-	err = json.Unmarshal(x, s)
-	if err != nil {
-		return diag.Errorf("error occurred while unmarshalling response to WorkflowWorkflowDefinition list: %s", err.Error())
-	}
-	result := s.GetResults()
-	length := len(result)
-	if length == 0 {
-		return diag.Errorf("your query for WorkflowWorkflowDefinition data source did not return results. Please change your search criteria and try again")
-	}
-	if length > 1 {
-		return diag.Errorf("your query for WorkflowWorkflowDefinition data source returned more than one result. Please change your search criteria and try again")
-	}
-	switch reflect.TypeOf(result).Kind() {
-	case reflect.Slice:
-		r := reflect.ValueOf(result)
-		for i := 0; i < r.Len(); i++ {
-			var s = &models.WorkflowWorkflowDefinition{}
-			oo, _ := json.Marshal(r.Index(i).Interface())
-			if err = json.Unmarshal(oo, s); err != nil {
-				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
-			}
-			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
-			}
+				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
+				temp["class_id"] = (s.GetClassId())
+				temp["default_version"] = (s.GetDefaultVersion())
+				temp["description"] = (s.GetDescription())
 
-			if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Catalog: %s", err.Error())
-			}
-			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
-			}
-			if err := d.Set("default_version", (s.GetDefaultVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property DefaultVersion: %s", err.Error())
-			}
-			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
-			}
+				temp["input_definition"] = flattenListWorkflowBaseDataType(s.GetInputDefinition(), d)
 
-			if err := d.Set("input_definition", flattenListWorkflowBaseDataType(s.GetInputDefinition(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property InputDefinition: %s", err.Error())
-			}
+				temp["input_parameter_set"] = flattenListWorkflowParameterSet(s.GetInputParameterSet(), d)
+				temp["label"] = (s.GetLabel())
+				temp["license_entitlement"] = (s.GetLicenseEntitlement())
+				temp["max_task_count"] = (s.GetMaxTaskCount())
+				temp["max_worker_task_count"] = (s.GetMaxWorkerTaskCount())
+				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["object_type"] = (s.GetObjectType())
 
-			if err := d.Set("input_parameter_set", flattenListWorkflowParameterSet(s.GetInputParameterSet(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property InputParameterSet: %s", err.Error())
-			}
-			if err := d.Set("label", (s.GetLabel())); err != nil {
-				return diag.Errorf("error occurred while setting property Label: %s", err.Error())
-			}
-			if err := d.Set("license_entitlement", (s.GetLicenseEntitlement())); err != nil {
-				return diag.Errorf("error occurred while setting property LicenseEntitlement: %s", err.Error())
-			}
-			if err := d.Set("max_task_count", (s.GetMaxTaskCount())); err != nil {
-				return diag.Errorf("error occurred while setting property MaxTaskCount: %s", err.Error())
-			}
-			if err := d.Set("max_worker_task_count", (s.GetMaxWorkerTaskCount())); err != nil {
-				return diag.Errorf("error occurred while setting property MaxWorkerTaskCount: %s", err.Error())
-			}
-			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
-			}
-			if err := d.Set("name", (s.GetName())); err != nil {
-				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
-			}
-			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
-			}
+				temp["output_definition"] = flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)
 
-			if err := d.Set("output_definition", flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property OutputDefinition: %s", err.Error())
-			}
+				temp["properties"] = flattenMapWorkflowWorkflowProperties(s.GetProperties(), d)
 
-			if err := d.Set("properties", flattenMapWorkflowWorkflowProperties(s.GetProperties(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Properties: %s", err.Error())
-			}
+				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
-			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
-			}
+				temp["tasks"] = flattenListWorkflowWorkflowTask(s.GetTasks(), d)
 
-			if err := d.Set("tasks", flattenListWorkflowWorkflowTask(s.GetTasks(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property Tasks: %s", err.Error())
-			}
+				temp["ui_input_filters"] = flattenListWorkflowUiInputFilter(s.GetUiInputFilters(), d)
 
-			if err := d.Set("ui_input_filters", flattenListWorkflowUiInputFilter(s.GetUiInputFilters(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property UiInputFilters: %s", err.Error())
-			}
+				temp["validation_information"] = flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)
+				temp["nr_version"] = (s.GetVersion())
 
-			if err := d.Set("validation_information", flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property ValidationInformation: %s", err.Error())
+				temp["workflow_metadata"] = flattenMapWorkflowWorkflowMetadataRelationship(s.GetWorkflowMetadata(), d)
+				workflowWorkflowDefinitionResults[j] = temp
+				j += 1
 			}
-			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
-			}
-
-			if err := d.Set("workflow_metadata", flattenMapWorkflowWorkflowMetadataRelationship(s.GetWorkflowMetadata(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property WorkflowMetadata: %s", err.Error())
-			}
-			d.SetId(s.GetMoid())
 		}
 	}
+	log.Println("length of results: ", len(workflowWorkflowDefinitionResults))
+	if err := d.Set("results", workflowWorkflowDefinitionResults); err != nil {
+		return diag.Errorf("error occurred while setting results: %s", err.Error())
+	}
+	d.SetId(workflowWorkflowDefinitionResults[0]["moid"].(string))
 	return de
 }

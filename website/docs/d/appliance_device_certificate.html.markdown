@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_appliance_device_certificate
 DeviceCertificate managed object stores the CA Certificate used by device connector and it allow tracks it renewal.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_appliance_device_certificate.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `ca_certificate`:(string) The base64 encoded certificate in PEM format. 
 * `ca_certificate_expiry_time`:(string) The expiry datetime of new ca certificate which need to be applied on device connector. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `start_time`:(string) Start date of the certificate renewal. 
 * `status`:(string) The status of ca certificate renewal. 
+ 

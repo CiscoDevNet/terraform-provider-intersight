@@ -1958,6 +1958,16 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	// Check for Workflow Status
+	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
+	for _, w := range runningWorkflows {
+		err := checkWorkflowStatus(conn, w)
+		if err != nil {
+			err := err.(models.GenericOpenAPIError)
+			return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+		}
+	}
 	return resourceKubernetesClusterProfileRead(c, d, meta)
 }
 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_pci_link
 The PCI Switch Link connected to PCIe Switch.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_pci_link.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `adapter`:(string) The name of the PCI device. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -24,3 +27,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `slot_status`:(string) The health information of the PCI device. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+ 

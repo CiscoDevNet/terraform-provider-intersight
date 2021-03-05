@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_virtualization_vmware_virtual_machine
 The VMware Virtual machine. It has details such as power state, IP address, resource consumption, etc. Basic elements come from the base class and VMware specific details are provided here.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_virtual_machine.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `annotation`:(string) List of annotations provided to this VM by user. Can be long. 
 * `boot_time`:(string) Time when this VM booted up. 
@@ -43,3 +46,4 @@ The following arguments can be used to get data of already created objects in In
 * `vm_version`:(string) Information about the version of this VM (vmx-09, vmx-11 etc.). 
 * `vm_vnic_count`:(int) How many vnics are present. 
 * `vnic_device_config_id`:(string) Information related to the guest info's VNIC virtual device. It is a comma-separated list. 
+ 

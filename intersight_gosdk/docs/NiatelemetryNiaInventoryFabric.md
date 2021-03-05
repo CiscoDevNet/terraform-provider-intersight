@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **LeafCount** | Pointer to **int64** | Returns total number of leafs in the fabric. | [optional] 
 **LogicalLinks** | Pointer to [**[]NiatelemetryLogicalLink**](NiatelemetryLogicalLink.md) |  | [optional] 
 **NxosVrfCount** | Pointer to **int64** | Returns the value of the nxosVrfCount field. | [optional] 
+**Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
+**SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **SpineCount** | Pointer to **int64** | Returns total number of spines in the fabric. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -311,6 +313,56 @@ SetNxosVrfCount sets NxosVrfCount field to given value.
 `func (o *NiatelemetryNiaInventoryFabric) HasNxosVrfCount() bool`
 
 HasNxosVrfCount returns a boolean if a field has been set.
+
+### GetSerial
+
+`func (o *NiatelemetryNiaInventoryFabric) GetSerial() string`
+
+GetSerial returns the Serial field if non-nil, zero value otherwise.
+
+### GetSerialOk
+
+`func (o *NiatelemetryNiaInventoryFabric) GetSerialOk() (*string, bool)`
+
+GetSerialOk returns a tuple with the Serial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSerial
+
+`func (o *NiatelemetryNiaInventoryFabric) SetSerial(v string)`
+
+SetSerial sets Serial field to given value.
+
+### HasSerial
+
+`func (o *NiatelemetryNiaInventoryFabric) HasSerial() bool`
+
+HasSerial returns a boolean if a field has been set.
+
+### GetSiteName
+
+`func (o *NiatelemetryNiaInventoryFabric) GetSiteName() string`
+
+GetSiteName returns the SiteName field if non-nil, zero value otherwise.
+
+### GetSiteNameOk
+
+`func (o *NiatelemetryNiaInventoryFabric) GetSiteNameOk() (*string, bool)`
+
+GetSiteNameOk returns a tuple with the SiteName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSiteName
+
+`func (o *NiatelemetryNiaInventoryFabric) SetSiteName(v string)`
+
+SetSiteName sets SiteName field to given value.
+
+### HasSiteName
+
+`func (o *NiatelemetryNiaInventoryFabric) HasSiteName() bool`
+
+HasSiteName returns a boolean if a field has been set.
 
 ### GetSpineCount
 

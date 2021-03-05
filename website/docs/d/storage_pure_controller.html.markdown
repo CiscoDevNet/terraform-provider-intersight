@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_storage_pure_controller
 A storage controller entity in Pure FlashArray.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_storage_pure_controller.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -22,3 +25,4 @@ The following arguments can be used to get data of already created objects in In
 * `status`:(string) Status of the storage controller.* `Unknown` - Component status is not available.* `Ok` - Component is healthy and no issues found.* `Degraded` - Functioning, but not at full capability due to a non-fatal failure.* `Critical` - Not functioning or requiring immediate attention.* `Offline` - Component is installed, but powered off.* `Identifying` - Component is in initialization process.* `NotAvailable` - Component is not installed or not available.* `Updating` - Software update is in progress.* `Unrecognized` - Component is not recognized. It may be because the component is not installed properly or it is not supported. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `nr_version`:(string) Software version running on a storage controller. 
+ 

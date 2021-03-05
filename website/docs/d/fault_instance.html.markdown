@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_fault_instance
 An endpoint anomaly is represented by this object.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_fault_instance.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `acknowledged`:(string) The user acknowledgement state of the fault. 
 * `affected_dn`:(string) The Distinguished Name of the Managed object which was affected. 
@@ -29,3 +32,4 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `rule`:(string) The rule that is responsible for generation of the fault. 
 * `severity`:(string) Severity of the fault found. 
+ 

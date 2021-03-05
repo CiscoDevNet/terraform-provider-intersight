@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_workflow_task_info
 Task instance which represents the run time instance of a task within a workflow.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_workflow_task_info.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `description`:(string) The task description and this is the description that was added when the task was included into the workflow. 
 * `end_time`:(string) The time stamp when the task reached a final state. 
@@ -24,3 +27,4 @@ The following arguments can be used to get data of already created objects in In
 * `running_inst_id`:(string) The instance ID of the task that is currently being executed. When retrying a workflow with failed tasks, the task in workflow engine will have a new instance ID, but the task may still be in-progress. In this case, the task instId reflects the instance ID in the workflow engine, while runningInstId reflects the instance ID of the instance that is currently being executed. 
 * `start_time`:(string) The time stamp when the task started execution. 
 * `status`:(string) The status of the task and this will specify if the task is running or has reached a final state. 
+ 

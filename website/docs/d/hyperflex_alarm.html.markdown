@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_hyperflex_alarm
 An alarm representing a fault in the HyperFlex cluster configuration or hardware.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_alarm.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `acknowledged`:(bool) The acknowledgement state of the alarm. It is 'true' when the alarm is acknowledged and false otherwise. 
 * `acknowledged_by`:(string) The username of the user who acknowledged the alarm. 
@@ -26,3 +29,4 @@ The following arguments can be used to get data of already created objects in In
 * `triggered_time`:(int) The time when alarm was triggered as a Unix timestamp. 
 * `triggered_time_as_utc`:(string) The time when alarm was triggered in ISO 6801 UTC format. 
 * `uuid`:(string) The unique identifier for this alarm instance. 
+ 

@@ -9,6 +9,9 @@ description: |-
 # Data Source: intersight_management_entity
 Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
 ## Argument Reference
+The results of this data source are stored in `results` property.
+All objects matching the filter criteria are fetched through pagination.
+To access the ith object of the results obtained, use `data.intersight_management_entity.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cluster_link_state`:(string) Cluster link state between the Fabric Interconnects. 
 * `cluster_readiness`:(string) Cluster readiness of the Fabric Interconnect. 
@@ -19,3 +22,4 @@ The following arguments can be used to get data of already created objects in In
 * `leadership`:(string) Role (Primary / Subordinate) of the Fabric Interconnect. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
+ 
