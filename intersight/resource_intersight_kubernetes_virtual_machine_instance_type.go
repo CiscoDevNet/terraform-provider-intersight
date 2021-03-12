@@ -183,6 +183,7 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesVirtualMachineInstanceTypeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -355,7 +356,7 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesVirtualMachineInstanceTypeRead(c, d, meta)
+	return append(de, resourceKubernetesVirtualMachineInstanceTypeRead(c, d, meta)...)
 }
 
 func resourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -432,6 +433,7 @@ func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineInstanceType{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -614,7 +616,7 @@ func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesVirtualMachineInstanceTypeRead(c, d, meta)
+	return append(de, resourceKubernetesVirtualMachineInstanceTypeRead(c, d, meta)...)
 }
 
 func resourceKubernetesVirtualMachineInstanceTypeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -287,6 +287,7 @@ func resourceTechsupportmanagementTechSupportBundleCreate(c context.Context, d *
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewTechsupportmanagementTechSupportBundleWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -534,7 +535,7 @@ func resourceTechsupportmanagementTechSupportBundleCreate(c context.Context, d *
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceTechsupportmanagementTechSupportBundleRead(c, d, meta)
+	return append(de, resourceTechsupportmanagementTechSupportBundleRead(c, d, meta)...)
 }
 
 func resourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

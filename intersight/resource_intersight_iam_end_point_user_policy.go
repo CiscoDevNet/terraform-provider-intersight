@@ -277,6 +277,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamEndPointUserPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -549,7 +550,7 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamEndPointUserPolicyRead(c, d, meta)
+	return append(de, resourceIamEndPointUserPolicyRead(c, d, meta)...)
 }
 func detachIamEndPointUserPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -640,6 +641,7 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamEndPointUserPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -921,7 +923,7 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserPolicyRead(c, d, meta)
+	return append(de, resourceIamEndPointUserPolicyRead(c, d, meta)...)
 }
 
 func resourceIamEndPointUserPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -246,6 +246,7 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewChassisConfigImportWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -463,7 +464,7 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceChassisConfigImportRead(c, d, meta)
+	return append(de, resourceChassisConfigImportRead(c, d, meta)...)
 }
 
 func resourceChassisConfigImportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

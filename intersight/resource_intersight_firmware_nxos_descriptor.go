@@ -149,6 +149,7 @@ func resourceFirmwareNxosDescriptorCreate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareNxosDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -288,7 +289,7 @@ func resourceFirmwareNxosDescriptorCreate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareNxosDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareNxosDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareNxosDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -369,6 +370,7 @@ func resourceFirmwareNxosDescriptorUpdate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareNxosDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -519,7 +521,7 @@ func resourceFirmwareNxosDescriptorUpdate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareNxosDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareNxosDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareNxosDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

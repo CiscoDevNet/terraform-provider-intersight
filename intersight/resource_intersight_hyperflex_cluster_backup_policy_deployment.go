@@ -326,6 +326,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterBackupPolicyDeploymentWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -634,7 +635,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexClusterBackupPolicyDeploymentRead(c, d, meta)
+	return append(de, resourceHyperflexClusterBackupPolicyDeploymentRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -763,6 +764,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexClusterBackupPolicyDeployment{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1094,7 +1096,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterBackupPolicyDeploymentRead(c, d, meta)
+	return append(de, resourceHyperflexClusterBackupPolicyDeploymentRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterBackupPolicyDeploymentDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -399,6 +399,7 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewRecoveryBackupProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -799,7 +800,7 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceRecoveryBackupProfileRead(c, d, meta)
+	return append(de, resourceRecoveryBackupProfileRead(c, d, meta)...)
 }
 
 func resourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -896,6 +897,7 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.RecoveryBackupProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1311,7 +1313,7 @@ func resourceRecoveryBackupProfileUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceRecoveryBackupProfileRead(c, d, meta)
+	return append(de, resourceRecoveryBackupProfileRead(c, d, meta)...)
 }
 
 func resourceRecoveryBackupProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

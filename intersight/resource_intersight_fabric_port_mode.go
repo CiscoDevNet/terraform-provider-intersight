@@ -136,6 +136,7 @@ func resourceFabricPortModeCreate(c context.Context, d *schema.ResourceData, met
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricPortModeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -261,7 +262,7 @@ func resourceFabricPortModeCreate(c context.Context, d *schema.ResourceData, met
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricPortModeRead(c, d, meta)
+	return append(de, resourceFabricPortModeRead(c, d, meta)...)
 }
 
 func resourceFabricPortModeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -330,6 +331,7 @@ func resourceFabricPortModeUpdate(c context.Context, d *schema.ResourceData, met
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricPortMode{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -463,7 +465,7 @@ func resourceFabricPortModeUpdate(c context.Context, d *schema.ResourceData, met
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricPortModeRead(c, d, meta)
+	return append(de, resourceFabricPortModeRead(c, d, meta)...)
 }
 
 func resourceFabricPortModeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -1051,7 +1051,12 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -1059,6 +1064,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -2147,6 +2153,10 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -2154,16 +2164,21 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in HyperflexClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in HyperflexClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceHyperflexClusterProfileRead(c, d, meta)
+	return append(de, resourceHyperflexClusterProfileRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -2356,6 +2371,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexClusterProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -3483,6 +3499,10 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -3490,16 +3510,21 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in HyperflexClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in HyperflexClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceHyperflexClusterProfileRead(c, d, meta)
+	return append(de, resourceHyperflexClusterProfileRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

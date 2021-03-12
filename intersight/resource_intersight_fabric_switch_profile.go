@@ -464,7 +464,12 @@ func resourceFabricSwitchProfile() *schema.Resource {
 				Optional:    true,
 				Default:     "instance",
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -472,6 +477,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricSwitchProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -963,6 +969,10 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.FabricApi.GetFabricSwitchProfileByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -970,16 +980,21 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceFabricSwitchProfileRead(c, d, meta)
+	return append(de, resourceFabricSwitchProfileRead(c, d, meta)...)
 }
 
 func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1080,6 +1095,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricSwitchProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1587,6 +1603,10 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.FabricApi.GetFabricSwitchProfileByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -1594,16 +1614,21 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FabricSwitchProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in FabricSwitchProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceFabricSwitchProfileRead(c, d, meta)
+	return append(de, resourceFabricSwitchProfileRead(c, d, meta)...)
 }
 
 func resourceFabricSwitchProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

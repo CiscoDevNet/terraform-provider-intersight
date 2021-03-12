@@ -167,6 +167,7 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamIpAccessManagementWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -324,7 +325,7 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamIpAccessManagementRead(c, d, meta)
+	return append(de, resourceIamIpAccessManagementRead(c, d, meta)...)
 }
 
 func resourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -389,6 +390,7 @@ func resourceIamIpAccessManagementUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamIpAccessManagement{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -553,7 +555,7 @@ func resourceIamIpAccessManagementUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamIpAccessManagementRead(c, d, meta)
+	return append(de, resourceIamIpAccessManagementRead(c, d, meta)...)
 }
 
 func resourceIamIpAccessManagementDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

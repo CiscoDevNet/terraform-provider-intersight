@@ -192,6 +192,7 @@ func resourceHyperflexProxySettingPolicyCreate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexProxySettingPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -374,7 +375,7 @@ func resourceHyperflexProxySettingPolicyCreate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexProxySettingPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexProxySettingPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexProxySettingPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -455,6 +456,7 @@ func resourceHyperflexProxySettingPolicyUpdate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexProxySettingPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -649,7 +651,7 @@ func resourceHyperflexProxySettingPolicyUpdate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexProxySettingPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexProxySettingPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexProxySettingPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

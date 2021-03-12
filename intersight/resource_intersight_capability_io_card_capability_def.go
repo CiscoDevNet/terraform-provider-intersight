@@ -84,6 +84,7 @@ func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityIoCardCapabilityDefWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -156,7 +157,7 @@ func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityIoCardCapabilityDefRead(c, d, meta)
+	return append(de, resourceCapabilityIoCardCapabilityDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityIoCardCapabilityDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -213,6 +214,7 @@ func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityIoCardCapabilityDef{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -290,7 +292,7 @@ func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityIoCardCapabilityDefRead(c, d, meta)
+	return append(de, resourceCapabilityIoCardCapabilityDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityIoCardCapabilityDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

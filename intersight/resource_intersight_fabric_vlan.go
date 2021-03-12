@@ -177,6 +177,7 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricVlanWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -345,7 +346,7 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricVlanRead(c, d, meta)
+	return append(de, resourceFabricVlanRead(c, d, meta)...)
 }
 
 func resourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -418,6 +419,7 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricVlan{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -595,7 +597,7 @@ func resourceFabricVlanUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricVlanRead(c, d, meta)
+	return append(de, resourceFabricVlanRead(c, d, meta)...)
 }
 
 func resourceFabricVlanDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

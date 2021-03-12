@@ -452,6 +452,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamUserWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -898,7 +899,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamUserRead(c, d, meta)
+	return append(de, resourceIamUserRead(c, d, meta)...)
 }
 
 func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1015,6 +1016,7 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamUser{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1481,7 +1483,7 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamUserRead(c, d, meta)
+	return append(de, resourceIamUserRead(c, d, meta)...)
 }
 
 func resourceIamUserDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

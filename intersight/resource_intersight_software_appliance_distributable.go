@@ -426,6 +426,7 @@ func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwareApplianceDistributableWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -860,7 +861,7 @@ func resourceSoftwareApplianceDistributableCreate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwareApplianceDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareApplianceDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareApplianceDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1013,6 +1014,7 @@ func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwareApplianceDistributable{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1476,7 +1478,7 @@ func resourceSoftwareApplianceDistributableUpdate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwareApplianceDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareApplianceDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareApplianceDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

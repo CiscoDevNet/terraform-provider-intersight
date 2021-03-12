@@ -120,6 +120,7 @@ func resourceTamAdvisoryCountCreate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewTamAdvisoryCountWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -230,7 +231,7 @@ func resourceTamAdvisoryCountCreate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceTamAdvisoryCountRead(c, d, meta)
+	return append(de, resourceTamAdvisoryCountRead(c, d, meta)...)
 }
 
 func resourceTamAdvisoryCountRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -287,6 +288,7 @@ func resourceTamAdvisoryCountUpdate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.TamAdvisoryCount{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -402,7 +404,7 @@ func resourceTamAdvisoryCountUpdate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceTamAdvisoryCountRead(c, d, meta)
+	return append(de, resourceTamAdvisoryCountRead(c, d, meta)...)
 }
 
 func resourceTamAdvisoryCountDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

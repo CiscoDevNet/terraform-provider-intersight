@@ -152,6 +152,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryCategorySupportConstraintWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -310,7 +311,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwarerepositoryCategorySupportConstraintRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryCategorySupportConstraintRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryCategorySupportConstraintRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -387,6 +388,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintUpdate(c context.Context
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategorySupportConstraint{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -555,7 +557,7 @@ func resourceSoftwarerepositoryCategorySupportConstraintUpdate(c context.Context
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryCategorySupportConstraintRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryCategorySupportConstraintRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryCategorySupportConstraintDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

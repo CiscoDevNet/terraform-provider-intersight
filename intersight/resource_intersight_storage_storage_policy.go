@@ -351,6 +351,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewStorageStoragePolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -704,7 +705,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceStorageStoragePolicyRead(c, d, meta)
+	return append(de, resourceStorageStoragePolicyRead(c, d, meta)...)
 }
 func detachStorageStoragePolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -807,6 +808,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StorageStoragePolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1172,7 +1174,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceStorageStoragePolicyRead(c, d, meta)
+	return append(de, resourceStorageStoragePolicyRead(c, d, meta)...)
 }
 
 func resourceStorageStoragePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

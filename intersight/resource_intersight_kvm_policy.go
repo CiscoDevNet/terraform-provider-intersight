@@ -196,6 +196,7 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKvmPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -378,7 +379,7 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKvmPolicyRead(c, d, meta)
+	return append(de, resourceKvmPolicyRead(c, d, meta)...)
 }
 func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -481,6 +482,7 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KvmPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -675,7 +677,7 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKvmPolicyRead(c, d, meta)
+	return append(de, resourceKvmPolicyRead(c, d, meta)...)
 }
 
 func resourceKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

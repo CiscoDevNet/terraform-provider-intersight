@@ -216,6 +216,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamApiKeyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -421,7 +422,7 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamApiKeyRead(c, d, meta)
+	return append(de, resourceIamApiKeyRead(c, d, meta)...)
 }
 
 func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -498,6 +499,7 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamApiKey{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -713,7 +715,7 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamApiKeyRead(c, d, meta)
+	return append(de, resourceIamApiKeyRead(c, d, meta)...)
 }
 
 func resourceIamApiKeyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

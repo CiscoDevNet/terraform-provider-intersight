@@ -180,6 +180,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamSessionLimitsWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -348,7 +349,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamSessionLimitsRead(c, d, meta)
+	return append(de, resourceIamSessionLimitsRead(c, d, meta)...)
 }
 
 func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -421,6 +422,7 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamSessionLimits{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -598,7 +600,7 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamSessionLimitsRead(c, d, meta)
+	return append(de, resourceIamSessionLimitsRead(c, d, meta)...)
 }
 
 func resourceIamSessionLimitsDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

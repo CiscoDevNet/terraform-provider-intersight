@@ -322,6 +322,7 @@ func resourceSdwanRouterNodeCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSdwanRouterNodeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -648,7 +649,7 @@ func resourceSdwanRouterNodeCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSdwanRouterNodeRead(c, d, meta)
+	return append(de, resourceSdwanRouterNodeRead(c, d, meta)...)
 }
 
 func resourceSdwanRouterNodeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -729,6 +730,7 @@ func resourceSdwanRouterNodeUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SdwanRouterNode{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1066,7 +1068,7 @@ func resourceSdwanRouterNodeUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdwanRouterNodeRead(c, d, meta)
+	return append(de, resourceSdwanRouterNodeRead(c, d, meta)...)
 }
 
 func resourceSdwanRouterNodeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -125,6 +125,7 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVrfVrfWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -240,7 +241,7 @@ func resourceVrfVrfCreate(c context.Context, d *schema.ResourceData, meta interf
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVrfVrfRead(c, d, meta)
+	return append(de, resourceVrfVrfRead(c, d, meta)...)
 }
 
 func resourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -301,6 +302,7 @@ func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interf
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VrfVrf{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -422,7 +424,7 @@ func resourceVrfVrfUpdate(c context.Context, d *schema.ResourceData, meta interf
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVrfVrfRead(c, d, meta)
+	return append(de, resourceVrfVrfRead(c, d, meta)...)
 }
 
 func resourceVrfVrfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

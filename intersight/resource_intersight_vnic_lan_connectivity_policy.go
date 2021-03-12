@@ -270,6 +270,7 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicLanConnectivityPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -532,7 +533,7 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicLanConnectivityPolicyRead(c, d, meta)
+	return append(de, resourceVnicLanConnectivityPolicyRead(c, d, meta)...)
 }
 func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -639,6 +640,7 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicLanConnectivityPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -914,7 +916,7 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicLanConnectivityPolicyRead(c, d, meta)
+	return append(de, resourceVnicLanConnectivityPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicLanConnectivityPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

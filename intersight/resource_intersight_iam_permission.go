@@ -407,6 +407,7 @@ func resourceIamPermissionCreate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamPermissionWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -817,7 +818,7 @@ func resourceIamPermissionCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamPermissionRead(c, d, meta)
+	return append(de, resourceIamPermissionRead(c, d, meta)...)
 }
 
 func resourceIamPermissionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -906,6 +907,7 @@ func resourceIamPermissionUpdate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamPermission{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -1329,7 +1331,7 @@ func resourceIamPermissionUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamPermissionRead(c, d, meta)
+	return append(de, resourceIamPermissionRead(c, d, meta)...)
 }
 
 func resourceIamPermissionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -177,6 +177,7 @@ func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexAutoSupportPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -344,7 +345,7 @@ func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexAutoSupportPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexAutoSupportPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexAutoSupportPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -417,6 +418,7 @@ func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexAutoSupportPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -593,7 +595,7 @@ func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexAutoSupportPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexAutoSupportPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexAutoSupportPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

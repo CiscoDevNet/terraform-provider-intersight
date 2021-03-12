@@ -216,6 +216,7 @@ func resourceKubernetesAddonCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesAddonWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -426,7 +427,7 @@ func resourceKubernetesAddonCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesAddonRead(c, d, meta)
+	return append(de, resourceKubernetesAddonRead(c, d, meta)...)
 }
 
 func resourceKubernetesAddonRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -503,6 +504,7 @@ func resourceKubernetesAddonUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesAddon{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -723,7 +725,7 @@ func resourceKubernetesAddonUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesAddonRead(c, d, meta)
+	return append(de, resourceKubernetesAddonRead(c, d, meta)...)
 }
 
 func resourceKubernetesAddonDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

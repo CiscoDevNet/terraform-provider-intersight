@@ -241,6 +241,7 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIqnpoolPoolWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -472,7 +473,7 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIqnpoolPoolRead(c, d, meta)
+	return append(de, resourceIqnpoolPoolRead(c, d, meta)...)
 }
 
 func resourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -557,6 +558,7 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IqnpoolPool{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -800,7 +802,7 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIqnpoolPoolRead(c, d, meta)
+	return append(de, resourceIqnpoolPoolRead(c, d, meta)...)
 }
 
 func resourceIqnpoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

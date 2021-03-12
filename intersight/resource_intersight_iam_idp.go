@@ -349,6 +349,7 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamIdpWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -696,7 +697,7 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamIdpRead(c, d, meta)
+	return append(de, resourceIamIdpRead(c, d, meta)...)
 }
 
 func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -793,6 +794,7 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamIdp{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -1155,7 +1157,7 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamIdpRead(c, d, meta)
+	return append(de, resourceIamIdpRead(c, d, meta)...)
 }
 
 func resourceIamIdpDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

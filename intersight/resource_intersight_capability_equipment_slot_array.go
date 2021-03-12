@@ -175,6 +175,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityEquipmentSlotArrayWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -337,7 +338,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityEquipmentSlotArrayRead(c, d, meta)
+	return append(de, resourceCapabilityEquipmentSlotArrayRead(c, d, meta)...)
 }
 
 func resourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -466,6 +467,7 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentSlotArray{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -651,7 +653,7 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityEquipmentSlotArrayRead(c, d, meta)
+	return append(de, resourceCapabilityEquipmentSlotArrayRead(c, d, meta)...)
 }
 
 func resourceCapabilityEquipmentSlotArrayDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -143,6 +143,7 @@ func resourceExternalsiteAuthorizationCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewExternalsiteAuthorizationWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -273,7 +274,7 @@ func resourceExternalsiteAuthorizationCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceExternalsiteAuthorizationRead(c, d, meta)
+	return append(de, resourceExternalsiteAuthorizationRead(c, d, meta)...)
 }
 
 func resourceExternalsiteAuthorizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -338,6 +339,7 @@ func resourceExternalsiteAuthorizationUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ExternalsiteAuthorization{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -477,7 +479,7 @@ func resourceExternalsiteAuthorizationUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceExternalsiteAuthorizationRead(c, d, meta)
+	return append(de, resourceExternalsiteAuthorizationRead(c, d, meta)...)
 }
 
 func resourceExternalsiteAuthorizationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

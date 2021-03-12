@@ -496,6 +496,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesNodeGroupProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -1004,7 +1005,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesNodeGroupProfileRead(c, d, meta)
+	return append(de, resourceKubernetesNodeGroupProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1125,6 +1126,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesNodeGroupProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1654,7 +1656,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesNodeGroupProfileRead(c, d, meta)
+	return append(de, resourceKubernetesNodeGroupProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesNodeGroupProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

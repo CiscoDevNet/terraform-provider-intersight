@@ -211,6 +211,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterStoragePolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -415,7 +416,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexClusterStoragePolicyRead(c, d, meta)
+	return append(de, resourceHyperflexClusterStoragePolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -492,6 +493,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexClusterStoragePolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -706,7 +708,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterStoragePolicyRead(c, d, meta)
+	return append(de, resourceHyperflexClusterStoragePolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterStoragePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

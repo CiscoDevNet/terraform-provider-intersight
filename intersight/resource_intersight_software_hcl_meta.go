@@ -432,6 +432,7 @@ func resourceSoftwareHclMetaCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwareHclMetaWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -871,7 +872,7 @@ func resourceSoftwareHclMetaCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwareHclMetaRead(c, d, meta)
+	return append(de, resourceSoftwareHclMetaRead(c, d, meta)...)
 }
 
 func resourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1028,6 +1029,7 @@ func resourceSoftwareHclMetaUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwareHclMeta{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1497,7 +1499,7 @@ func resourceSoftwareHclMetaUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwareHclMetaRead(c, d, meta)
+	return append(de, resourceSoftwareHclMetaRead(c, d, meta)...)
 }
 
 func resourceSoftwareHclMetaDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

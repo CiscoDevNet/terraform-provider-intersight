@@ -197,6 +197,7 @@ func resourceHyperflexVcenterConfigPolicyCreate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexVcenterConfigPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -384,7 +385,7 @@ func resourceHyperflexVcenterConfigPolicyCreate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexVcenterConfigPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexVcenterConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexVcenterConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -469,6 +470,7 @@ func resourceHyperflexVcenterConfigPolicyUpdate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexVcenterConfigPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -669,7 +671,7 @@ func resourceHyperflexVcenterConfigPolicyUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexVcenterConfigPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexVcenterConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexVcenterConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

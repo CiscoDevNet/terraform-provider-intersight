@@ -141,6 +141,7 @@ func resourceFirmwareEulaCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareEulaWithDefaults()
 	if v, ok := d.GetOkExists("accepted"); ok {
 		x := v.(bool)
@@ -256,7 +257,7 @@ func resourceFirmwareEulaCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareEulaRead(c, d, meta)
+	return append(de, resourceFirmwareEulaRead(c, d, meta)...)
 }
 
 func resourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

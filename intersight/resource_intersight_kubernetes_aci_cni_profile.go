@@ -378,6 +378,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesAciCniProfileWithDefaults()
 	if v, ok := d.GetOk("aaep_name"); ok {
 		x := (v.(string))
@@ -748,7 +749,7 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesAciCniProfileRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -893,6 +894,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesAciCniProfile{}
 	if d.HasChange("aaep_name") {
 		v := d.Get("aaep_name")
@@ -1290,7 +1292,7 @@ func resourceKubernetesAciCniProfileUpdate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesAciCniProfileRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

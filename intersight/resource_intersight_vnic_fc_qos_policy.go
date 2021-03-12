@@ -156,6 +156,7 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicFcQosPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -296,7 +297,7 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicFcQosPolicyRead(c, d, meta)
+	return append(de, resourceVnicFcQosPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicFcQosPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -377,6 +378,7 @@ func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicFcQosPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -528,7 +530,7 @@ func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicFcQosPolicyRead(c, d, meta)
+	return append(de, resourceVnicFcQosPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicFcQosPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

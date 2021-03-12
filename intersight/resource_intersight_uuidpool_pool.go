@@ -233,6 +233,7 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewUuidpoolPoolWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -458,7 +459,7 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceUuidpoolPoolRead(c, d, meta)
+	return append(de, resourceUuidpoolPoolRead(c, d, meta)...)
 }
 
 func resourceUuidpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -543,6 +544,7 @@ func resourceUuidpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.UuidpoolPool{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -780,7 +782,7 @@ func resourceUuidpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceUuidpoolPoolRead(c, d, meta)
+	return append(de, resourceUuidpoolPoolRead(c, d, meta)...)
 }
 
 func resourceUuidpoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

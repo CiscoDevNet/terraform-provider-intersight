@@ -178,6 +178,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicEthNetworkPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -347,7 +348,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicEthNetworkPolicyRead(c, d, meta)
+	return append(de, resourceVnicEthNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -416,6 +417,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicEthNetworkPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -593,7 +595,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicEthNetworkPolicyRead(c, d, meta)
+	return append(de, resourceVnicEthNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicEthNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

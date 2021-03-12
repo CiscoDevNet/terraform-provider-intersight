@@ -944,7 +944,12 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -952,6 +957,7 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesClusterProfileWithDefaults()
 	if v, ok := d.GetOk("aci_cni_profile"); ok {
 		p := make([]models.KubernetesAciCniProfileRelationship, 0, 1)
@@ -1959,6 +1965,10 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -1966,16 +1976,21 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceKubernetesClusterProfileRead(c, d, meta)
+	return append(de, resourceKubernetesClusterProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -2124,6 +2139,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesClusterProfile{}
 	if d.HasChange("aci_cni_profile") {
 		v := d.Get("aci_cni_profile")
@@ -3159,6 +3175,10 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.KubernetesApi.GetKubernetesClusterProfileByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -3166,16 +3186,21 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching KubernetesClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in KubernetesClusterProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceKubernetesClusterProfileRead(c, d, meta)
+	return append(de, resourceKubernetesClusterProfileRead(c, d, meta)...)
 }
 
 func resourceKubernetesClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

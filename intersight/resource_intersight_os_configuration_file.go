@@ -525,6 +525,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewOsConfigurationFileWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1081,7 +1082,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceOsConfigurationFileRead(c, d, meta)
+	return append(de, resourceOsConfigurationFileRead(c, d, meta)...)
 }
 
 func resourceOsConfigurationFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1162,6 +1163,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.OsConfigurationFile{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1729,7 +1731,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceOsConfigurationFileRead(c, d, meta)
+	return append(de, resourceOsConfigurationFileRead(c, d, meta)...)
 }
 
 func resourceOsConfigurationFileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

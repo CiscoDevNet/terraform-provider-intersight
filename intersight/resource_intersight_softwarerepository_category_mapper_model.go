@@ -105,6 +105,7 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryCategoryMapperModelWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -203,7 +204,7 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwarerepositoryCategoryMapperModelRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryCategoryMapperModelRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -276,6 +277,7 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategoryMapperModel{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -383,7 +385,7 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryCategoryMapperModelRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryCategoryMapperModelRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryCategoryMapperModelDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

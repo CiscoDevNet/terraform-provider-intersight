@@ -130,6 +130,7 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityEquipmentPhysicalDefWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -247,7 +248,7 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityEquipmentPhysicalDefRead(c, d, meta)
+	return append(de, resourceCapabilityEquipmentPhysicalDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -340,6 +341,7 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentPhysicalDef{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -471,7 +473,7 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityEquipmentPhysicalDefRead(c, d, meta)
+	return append(de, resourceCapabilityEquipmentPhysicalDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityEquipmentPhysicalDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

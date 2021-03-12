@@ -363,6 +363,7 @@ func resourceHyperflexAppCatalogCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexAppCatalogWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -728,7 +729,7 @@ func resourceHyperflexAppCatalogCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexAppCatalogRead(c, d, meta)
+	return append(de, resourceHyperflexAppCatalogRead(c, d, meta)...)
 }
 
 func resourceHyperflexAppCatalogRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -809,6 +810,7 @@ func resourceHyperflexAppCatalogUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexAppCatalog{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1185,7 +1187,7 @@ func resourceHyperflexAppCatalogUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexAppCatalogRead(c, d, meta)
+	return append(de, resourceHyperflexAppCatalogRead(c, d, meta)...)
 }
 
 func resourceHyperflexAppCatalogDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

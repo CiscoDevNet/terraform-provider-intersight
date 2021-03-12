@@ -148,6 +148,7 @@ func resourceFabricFcoeUplinkRoleCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricFcoeUplinkRoleWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -283,7 +284,7 @@ func resourceFabricFcoeUplinkRoleCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricFcoeUplinkRoleRead(c, d, meta)
+	return append(de, resourceFabricFcoeUplinkRoleRead(c, d, meta)...)
 }
 
 func resourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -360,6 +361,7 @@ func resourceFabricFcoeUplinkRoleUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricFcoeUplinkRole{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -505,7 +507,7 @@ func resourceFabricFcoeUplinkRoleUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricFcoeUplinkRoleRead(c, d, meta)
+	return append(de, resourceFabricFcoeUplinkRoleRead(c, d, meta)...)
 }
 
 func resourceFabricFcoeUplinkRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

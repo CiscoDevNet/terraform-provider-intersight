@@ -210,6 +210,7 @@ func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewRecoveryBackupConfigPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -407,7 +408,7 @@ func resourceRecoveryBackupConfigPolicyCreate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceRecoveryBackupConfigPolicyRead(c, d, meta)
+	return append(de, resourceRecoveryBackupConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceRecoveryBackupConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -500,6 +501,7 @@ func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.RecoveryBackupConfigPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -712,7 +714,7 @@ func resourceRecoveryBackupConfigPolicyUpdate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceRecoveryBackupConfigPolicyRead(c, d, meta)
+	return append(de, resourceRecoveryBackupConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceRecoveryBackupConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

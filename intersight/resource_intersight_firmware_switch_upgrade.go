@@ -776,6 +776,7 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareSwitchUpgradeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1480,7 +1481,7 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareSwitchUpgradeRead(c, d, meta)
+	return append(de, resourceFirmwareSwitchUpgradeRead(c, d, meta)...)
 }
 
 func resourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
