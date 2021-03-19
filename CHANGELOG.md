@@ -1,28 +1,19 @@
 # Change Logs
 
-## v0.1.0 
-Release Date: 13th October 2020
-* Initial release
+## v1.0.3
+Release Date: 19th Mar 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3942).
+* option to disable waiting for the workflow
 
-## v0.1.1
-Release Date: 22nd Nov 2020
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model.
+## v1.0.2
+Release Date: 5th Mar 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3824).
+* `terraform apply` will wait till all workflows triggered due to the operation reach an end state.
+* Data sources now store the results as a list. The syntax to access a property in the `i`th index of results is `data.intersight_<model_name>.<custom_name>.results[i].<property_name>`.
 
-## v0.1.2
-Release Date: 22nd December 2020
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3127).
-
-## v0.1.3
-Release Data: 8th Jan 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3144).
-
-## v0.1.4
-Release Data: 15th Jan 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3181).
-
-## v0.1.5
-Release Data: 22nd Jan 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3252).
+## v1.0.1
+Release Date: 26th Feb 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3714).
 
 ## v1.0.0
 Release Date: 5th Feb 2021
@@ -32,17 +23,26 @@ Release Date: 5th Feb 2021
 *  An effort is made to make the documentation richer by adding  hand-written examples for some resources. An infrastructure is put in place for the community to contribute examples to the documentation.
 *  Documentation for complex type objects is enhanced to include exact types and properties for each internal object.
 
-## v1.0.1
-Release Date: 26th Feb 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3714).
+## v0.1.5
+Release Data: 22nd Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3252).
 
-## v1.0.2
-Release Date: 5th Mar 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3824).
-* `terraform apply` will wait till all workflows triggered due to the operation reach an end state.
-* Data sources now store the results as a list. The syntax to access a property in the `i`th index of results is `data.intersight_<model_name>.<custom_name>.results[i].<property_name>`.
+## v0.1.4
+Release Data: 15th Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3181).
 
-## v1.0.3
-Release Date: 19th Mar 2021
-* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3942).
-* option to disable waiting for the workflow
+## v0.1.3
+Release Data: 8th Jan 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3144).
+
+## v0.1.2
+Release Date: 22nd December 2020
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 3127).
+
+## v0.1.1
+Release Date: 22nd Nov 2020
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model.
+
+## v0.1.0 
+Release Date: 13th October 2020
+* Initial release
