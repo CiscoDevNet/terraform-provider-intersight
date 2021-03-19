@@ -5,6 +5,7 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateIppoolPool**](IppoolApi.md#CreateIppoolPool) | **Post** /api/v1/ippool/Pools | Create a &#39;ippool.Pool&#39; resource.
+[**DeleteIppoolIpLease**](IppoolApi.md#DeleteIppoolIpLease) | **Delete** /api/v1/ippool/IpLeases/{Moid} | Delete a &#39;ippool.IpLease&#39; resource.
 [**DeleteIppoolPool**](IppoolApi.md#DeleteIppoolPool) | **Delete** /api/v1/ippool/Pools/{Moid} | Delete a &#39;ippool.Pool&#39; resource.
 [**GetIppoolBlockLeaseByMoid**](IppoolApi.md#GetIppoolBlockLeaseByMoid) | **Get** /api/v1/ippool/BlockLeases/{Moid} | Read a &#39;ippool.BlockLease&#39; resource.
 [**GetIppoolBlockLeaseList**](IppoolApi.md#GetIppoolBlockLeaseList) | **Get** /api/v1/ippool/BlockLeases | Read a &#39;ippool.BlockLease&#39; resource.
@@ -86,6 +87,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteIppoolIpLease
+
+> DeleteIppoolIpLease(ctx, moid).Execute()
+
+Delete a 'ippool.IpLease' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.IppoolApi.DeleteIppoolIpLease(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `IppoolApi.DeleteIppoolIpLease``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteIppoolIpLeaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

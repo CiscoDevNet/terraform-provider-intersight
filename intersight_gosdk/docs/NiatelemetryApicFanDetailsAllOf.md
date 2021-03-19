@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.ApicFanDetails"]
 **Dn** | Pointer to **string** | Dn for the fan in the inventory. | [optional] 
 **ModelNumber** | Pointer to **string** | Model number of the fan in APIC. | [optional] 
-**NodeId** | Pointer to **string** | Node id for the fan in the inventory. | [optional] 
+**NodeId** | Pointer to **int64** | Node id for the fan in the inventory. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the fan in APIC. | [optional] 
@@ -127,20 +127,20 @@ HasModelNumber returns a boolean if a field has been set.
 
 ### GetNodeId
 
-`func (o *NiatelemetryApicFanDetailsAllOf) GetNodeId() string`
+`func (o *NiatelemetryApicFanDetailsAllOf) GetNodeId() int64`
 
 GetNodeId returns the NodeId field if non-nil, zero value otherwise.
 
 ### GetNodeIdOk
 
-`func (o *NiatelemetryApicFanDetailsAllOf) GetNodeIdOk() (*string, bool)`
+`func (o *NiatelemetryApicFanDetailsAllOf) GetNodeIdOk() (*int64, bool)`
 
 GetNodeIdOk returns a tuple with the NodeId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNodeId
 
-`func (o *NiatelemetryApicFanDetailsAllOf) SetNodeId(v string)`
+`func (o *NiatelemetryApicFanDetailsAllOf) SetNodeId(v int64)`
 
 SetNodeId sets NodeId field to given value.
 

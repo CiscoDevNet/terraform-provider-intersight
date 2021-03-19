@@ -213,6 +213,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewRecoveryScheduleConfigPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -419,7 +420,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceRecoveryScheduleConfigPolicyRead(c, d, meta)
+	return append(de, resourceRecoveryScheduleConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -488,6 +489,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.RecoveryScheduleConfigPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -702,7 +704,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceRecoveryScheduleConfigPolicyRead(c, d, meta)
+	return append(de, resourceRecoveryScheduleConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceRecoveryScheduleConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -184,6 +184,7 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSshPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -356,7 +357,7 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSshPolicyRead(c, d, meta)
+	return append(de, resourceSshPolicyRead(c, d, meta)...)
 }
 func detachSshPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -451,6 +452,7 @@ func resourceSshPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SshPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -633,7 +635,7 @@ func resourceSshPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSshPolicyRead(c, d, meta)
+	return append(de, resourceSshPolicyRead(c, d, meta)...)
 }
 
 func resourceSshPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

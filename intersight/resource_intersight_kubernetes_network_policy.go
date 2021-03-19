@@ -221,6 +221,7 @@ func resourceKubernetesNetworkPolicyCreate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesNetworkPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -436,7 +437,7 @@ func resourceKubernetesNetworkPolicyCreate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesNetworkPolicyRead(c, d, meta)
+	return append(de, resourceKubernetesNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceKubernetesNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -517,6 +518,7 @@ func resourceKubernetesNetworkPolicyUpdate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesNetworkPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -743,7 +745,7 @@ func resourceKubernetesNetworkPolicyUpdate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesNetworkPolicyRead(c, d, meta)
+	return append(de, resourceKubernetesNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceKubernetesNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

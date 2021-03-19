@@ -186,6 +186,7 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewLicenseLicenseInfoWithDefaults()
 	if v, ok := d.GetOk("account_license_data"); ok {
 		p := make([]models.LicenseAccountLicenseDataRelationship, 0, 1)
@@ -351,7 +352,7 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceLicenseLicenseInfoRead(c, d, meta)
+	return append(de, resourceLicenseLicenseInfoRead(c, d, meta)...)
 }
 
 func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -452,6 +453,7 @@ func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData,
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.LicenseLicenseInfo{}
 	if d.HasChange("account_license_data") {
 		v := d.Get("account_license_data")
@@ -633,7 +635,7 @@ func resourceLicenseLicenseInfoUpdate(c context.Context, d *schema.ResourceData,
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceLicenseLicenseInfoRead(c, d, meta)
+	return append(de, resourceLicenseLicenseInfoRead(c, d, meta)...)
 }
 
 func resourceLicenseLicenseInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

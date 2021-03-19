@@ -283,6 +283,11 @@ func dataSourceAdapterHostFcInterface() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"oper_reason": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"oper_state": {
 						Description: "Operational State of Host Fibre Channel Interface.",
 						Type:        schema.TypeString,
@@ -552,6 +557,7 @@ func dataSourceAdapterHostFcInterfaceRead(c context.Context, d *schema.ResourceD
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
 				temp["operability"] = (s.GetOperability())
 				temp["original_wwnn"] = (s.GetOriginalWwnn())

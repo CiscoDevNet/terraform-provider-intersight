@@ -140,6 +140,7 @@ func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesAciCniTenantClusterAllocationWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -265,7 +266,7 @@ func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesAciCniTenantClusterAllocationRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniTenantClusterAllocationRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniTenantClusterAllocationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -334,6 +335,7 @@ func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesAciCniTenantClusterAllocation{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -467,7 +469,7 @@ func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesAciCniTenantClusterAllocationRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniTenantClusterAllocationRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniTenantClusterAllocationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

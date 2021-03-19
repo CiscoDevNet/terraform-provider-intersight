@@ -249,6 +249,7 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexExtIscsiStoragePolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -497,7 +498,7 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexExtIscsiStoragePolicyRead(c, d, meta)
+	return append(de, resourceHyperflexExtIscsiStoragePolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -574,6 +575,7 @@ func resourceHyperflexExtIscsiStoragePolicyUpdate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexExtIscsiStoragePolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -832,7 +834,7 @@ func resourceHyperflexExtIscsiStoragePolicyUpdate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexExtIscsiStoragePolicyRead(c, d, meta)
+	return append(de, resourceHyperflexExtIscsiStoragePolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexExtIscsiStoragePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

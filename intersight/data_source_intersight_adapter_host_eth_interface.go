@@ -315,6 +315,11 @@ func dataSourceAdapterHostEthInterface() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"oper_reason": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"oper_state": {
 						Description: "Operational state of an Interface.",
 						Type:        schema.TypeString,
@@ -599,6 +604,7 @@ func dataSourceAdapterHostEthInterfaceRead(c context.Context, d *schema.Resource
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
 				temp["operability"] = (s.GetOperability())
 				temp["original_mac_address"] = (s.GetOriginalMacAddress())

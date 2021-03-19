@@ -228,6 +228,7 @@ func resourceVmrcConsoleCreate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVmrcConsoleWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -424,7 +425,7 @@ func resourceVmrcConsoleCreate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVmrcConsoleRead(c, d, meta)
+	return append(de, resourceVmrcConsoleRead(c, d, meta)...)
 }
 
 func resourceVmrcConsoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

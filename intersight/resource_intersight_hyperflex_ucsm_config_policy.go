@@ -259,6 +259,7 @@ func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexUcsmConfigPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -519,7 +520,7 @@ func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexUcsmConfigPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexUcsmConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexUcsmConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -596,6 +597,7 @@ func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexUcsmConfigPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -866,7 +868,7 @@ func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexUcsmConfigPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexUcsmConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexUcsmConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

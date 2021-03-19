@@ -100,6 +100,7 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexHealthCheckPackageChecksumWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -187,7 +188,7 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexHealthCheckPackageChecksumRead(c, d, meta)
+	return append(de, resourceHyperflexHealthCheckPackageChecksumRead(c, d, meta)...)
 }
 
 func resourceHyperflexHealthCheckPackageChecksumRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -256,6 +257,7 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexHealthCheckPackageChecksum{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -351,7 +353,7 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexHealthCheckPackageChecksumRead(c, d, meta)
+	return append(de, resourceHyperflexHealthCheckPackageChecksumRead(c, d, meta)...)
 }
 
 func resourceHyperflexHealthCheckPackageChecksumDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

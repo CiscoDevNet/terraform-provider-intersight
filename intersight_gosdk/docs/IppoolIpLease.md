@@ -11,10 +11,6 @@ Name | Type | Description | Notes
 **IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
 **IpV6Address** | Pointer to **string** | IPv6 Address given as a lease to an external entity like server profiles. | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](ippool.IpV6Config.md) |  | [optional] 
-**Var0VirtualMachineNodeProfile** | Pointer to [**KubernetesVirtualMachineNodeProfileRelationship**](kubernetes.VirtualMachineNodeProfile.Relationship.md) |  | [optional] 
-**Var1VirtualMachineNodeProfile** | Pointer to [**KubernetesVirtualMachineNodeProfileRelationship**](kubernetes.VirtualMachineNodeProfile.Relationship.md) |  | [optional] 
-**Var2ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](kubernetes.ClusterProfile.Relationship.md) |  | [optional] 
-**Var3ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](kubernetes.ClusterProfile.Relationship.md) |  | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **BlockLease** | Pointer to [**IppoolBlockLeaseRelationship**](ippool.BlockLease.Relationship.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolPoolRelationship**](ippool.Pool.Relationship.md) |  | [optional] 
@@ -226,106 +222,6 @@ HasIpV6Config returns a boolean if a field has been set.
 `func (o *IppoolIpLease) UnsetIpV6Config()`
 
 UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
-### GetVar0VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) GetVar0VirtualMachineNodeProfile() KubernetesVirtualMachineNodeProfileRelationship`
-
-GetVar0VirtualMachineNodeProfile returns the Var0VirtualMachineNodeProfile field if non-nil, zero value otherwise.
-
-### GetVar0VirtualMachineNodeProfileOk
-
-`func (o *IppoolIpLease) GetVar0VirtualMachineNodeProfileOk() (*KubernetesVirtualMachineNodeProfileRelationship, bool)`
-
-GetVar0VirtualMachineNodeProfileOk returns a tuple with the Var0VirtualMachineNodeProfile field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) SetVar0VirtualMachineNodeProfile(v KubernetesVirtualMachineNodeProfileRelationship)`
-
-SetVar0VirtualMachineNodeProfile sets Var0VirtualMachineNodeProfile field to given value.
-
-### HasVar0VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) HasVar0VirtualMachineNodeProfile() bool`
-
-HasVar0VirtualMachineNodeProfile returns a boolean if a field has been set.
-
-### GetVar1VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) GetVar1VirtualMachineNodeProfile() KubernetesVirtualMachineNodeProfileRelationship`
-
-GetVar1VirtualMachineNodeProfile returns the Var1VirtualMachineNodeProfile field if non-nil, zero value otherwise.
-
-### GetVar1VirtualMachineNodeProfileOk
-
-`func (o *IppoolIpLease) GetVar1VirtualMachineNodeProfileOk() (*KubernetesVirtualMachineNodeProfileRelationship, bool)`
-
-GetVar1VirtualMachineNodeProfileOk returns a tuple with the Var1VirtualMachineNodeProfile field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar1VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) SetVar1VirtualMachineNodeProfile(v KubernetesVirtualMachineNodeProfileRelationship)`
-
-SetVar1VirtualMachineNodeProfile sets Var1VirtualMachineNodeProfile field to given value.
-
-### HasVar1VirtualMachineNodeProfile
-
-`func (o *IppoolIpLease) HasVar1VirtualMachineNodeProfile() bool`
-
-HasVar1VirtualMachineNodeProfile returns a boolean if a field has been set.
-
-### GetVar2ClusterProfile
-
-`func (o *IppoolIpLease) GetVar2ClusterProfile() KubernetesClusterProfileRelationship`
-
-GetVar2ClusterProfile returns the Var2ClusterProfile field if non-nil, zero value otherwise.
-
-### GetVar2ClusterProfileOk
-
-`func (o *IppoolIpLease) GetVar2ClusterProfileOk() (*KubernetesClusterProfileRelationship, bool)`
-
-GetVar2ClusterProfileOk returns a tuple with the Var2ClusterProfile field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar2ClusterProfile
-
-`func (o *IppoolIpLease) SetVar2ClusterProfile(v KubernetesClusterProfileRelationship)`
-
-SetVar2ClusterProfile sets Var2ClusterProfile field to given value.
-
-### HasVar2ClusterProfile
-
-`func (o *IppoolIpLease) HasVar2ClusterProfile() bool`
-
-HasVar2ClusterProfile returns a boolean if a field has been set.
-
-### GetVar3ClusterProfile
-
-`func (o *IppoolIpLease) GetVar3ClusterProfile() KubernetesClusterProfileRelationship`
-
-GetVar3ClusterProfile returns the Var3ClusterProfile field if non-nil, zero value otherwise.
-
-### GetVar3ClusterProfileOk
-
-`func (o *IppoolIpLease) GetVar3ClusterProfileOk() (*KubernetesClusterProfileRelationship, bool)`
-
-GetVar3ClusterProfileOk returns a tuple with the Var3ClusterProfile field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar3ClusterProfile
-
-`func (o *IppoolIpLease) SetVar3ClusterProfile(v KubernetesClusterProfileRelationship)`
-
-SetVar3ClusterProfile sets Var3ClusterProfile field to given value.
-
-### HasVar3ClusterProfile
-
-`func (o *IppoolIpLease) HasVar3ClusterProfile() bool`
-
-HasVar3ClusterProfile returns a boolean if a field has been set.
-
 ### GetAssignedToEntity
 
 `func (o *IppoolIpLease) GetAssignedToEntity() MoBaseMoRelationship`

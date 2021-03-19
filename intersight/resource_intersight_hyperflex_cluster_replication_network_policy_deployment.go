@@ -296,6 +296,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterReplicationNetworkPolicyDeploymentWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -586,7 +587,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c, d, meta)
+	return append(de, resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -687,6 +688,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexClusterReplicationNetworkPolicyDeployment{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -993,7 +995,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentUpdate(c context.
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c, d, meta)
+	return append(de, resourceHyperflexClusterReplicationNetworkPolicyDeploymentRead(c, d, meta)...)
 }
 
 func resourceHyperflexClusterReplicationNetworkPolicyDeploymentDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -236,6 +236,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricApplianceRoleWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -462,7 +463,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricApplianceRoleRead(c, d, meta)
+	return append(de, resourceFabricApplianceRoleRead(c, d, meta)...)
 }
 
 func resourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -551,6 +552,7 @@ func resourceFabricApplianceRoleUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricApplianceRole{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -790,7 +792,7 @@ func resourceFabricApplianceRoleUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricApplianceRoleRead(c, d, meta)
+	return append(de, resourceFabricApplianceRoleRead(c, d, meta)...)
 }
 
 func resourceFabricApplianceRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

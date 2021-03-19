@@ -13,8 +13,11 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_compute_vmedia.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `device_mo_id`:(string) The database identifier of the registered device of an object. 
+* `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `enabled`:(bool) State of the Virtual Media service on the server. 
 * `encryption`:(bool) If enabled, allows encryption of all Virtual Media communications. 
 * `low_power_usb`:(bool) If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
  

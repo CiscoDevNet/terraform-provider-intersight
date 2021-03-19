@@ -443,6 +443,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewTamSecurityAdvisoryWithDefaults()
 	if v, ok := d.GetOk("actions"); ok {
 		x := make([]models.TamAction, 0)
@@ -909,7 +910,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceTamSecurityAdvisoryRead(c, d, meta)
+	return append(de, resourceTamSecurityAdvisoryRead(c, d, meta)...)
 }
 
 func resourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1034,6 +1035,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.TamSecurityAdvisory{}
 	if d.HasChange("actions") {
 		v := d.Get("actions")
@@ -1522,7 +1524,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceTamSecurityAdvisoryRead(c, d, meta)
+	return append(de, resourceTamSecurityAdvisoryRead(c, d, meta)...)
 }
 
 func resourceTamSecurityAdvisoryDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

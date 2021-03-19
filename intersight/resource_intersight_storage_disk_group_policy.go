@@ -268,6 +268,7 @@ func resourceStorageDiskGroupPolicyCreate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewStorageDiskGroupPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -538,7 +539,7 @@ func resourceStorageDiskGroupPolicyCreate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceStorageDiskGroupPolicyRead(c, d, meta)
+	return append(de, resourceStorageDiskGroupPolicyRead(c, d, meta)...)
 }
 
 func resourceStorageDiskGroupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -619,6 +620,7 @@ func resourceStorageDiskGroupPolicyUpdate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StorageDiskGroupPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -900,7 +902,7 @@ func resourceStorageDiskGroupPolicyUpdate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceStorageDiskGroupPolicyRead(c, d, meta)
+	return append(de, resourceStorageDiskGroupPolicyRead(c, d, meta)...)
 }
 
 func resourceStorageDiskGroupPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

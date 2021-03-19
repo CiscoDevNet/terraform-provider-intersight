@@ -180,6 +180,7 @@ func resourceApplianceDeviceClaimCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceDeviceClaimWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -340,7 +341,7 @@ func resourceApplianceDeviceClaimCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceDeviceClaimRead(c, d, meta)
+	return append(de, resourceApplianceDeviceClaimRead(c, d, meta)...)
 }
 
 func resourceApplianceDeviceClaimRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -433,6 +434,7 @@ func resourceApplianceDeviceClaimUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceDeviceClaim{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -608,7 +610,7 @@ func resourceApplianceDeviceClaimUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceApplianceDeviceClaimRead(c, d, meta)
+	return append(de, resourceApplianceDeviceClaimRead(c, d, meta)...)
 }
 
 func resourceApplianceDeviceClaimDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

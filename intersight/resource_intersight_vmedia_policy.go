@@ -280,6 +280,7 @@ func resourceVmediaPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVmediaPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -560,7 +561,7 @@ func resourceVmediaPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVmediaPolicyRead(c, d, meta)
+	return append(de, resourceVmediaPolicyRead(c, d, meta)...)
 }
 func detachVmediaPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -659,6 +660,7 @@ func resourceVmediaPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VmediaPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -950,7 +952,7 @@ func resourceVmediaPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVmediaPolicyRead(c, d, meta)
+	return append(de, resourceVmediaPolicyRead(c, d, meta)...)
 }
 
 func resourceVmediaPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

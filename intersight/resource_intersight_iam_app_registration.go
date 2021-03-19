@@ -339,6 +339,7 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamAppRegistrationWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -687,7 +688,7 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamAppRegistrationRead(c, d, meta)
+	return append(de, resourceIamAppRegistrationRead(c, d, meta)...)
 }
 
 func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -800,6 +801,7 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamAppRegistration{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -1167,7 +1169,7 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamAppRegistrationRead(c, d, meta)
+	return append(de, resourceIamAppRegistrationRead(c, d, meta)...)
 }
 
 func resourceIamAppRegistrationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -325,6 +325,7 @@ func resourceIamTrustPointCreate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamTrustPointWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -679,7 +680,7 @@ func resourceIamTrustPointCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamTrustPointRead(c, d, meta)
+	return append(de, resourceIamTrustPointRead(c, d, meta)...)
 }
 
 func resourceIamTrustPointRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

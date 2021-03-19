@@ -149,6 +149,7 @@ func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareDriveDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -288,7 +289,7 @@ func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareDriveDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareDriveDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareDriveDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -369,6 +370,7 @@ func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareDriveDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -519,7 +521,7 @@ func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareDriveDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareDriveDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareDriveDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

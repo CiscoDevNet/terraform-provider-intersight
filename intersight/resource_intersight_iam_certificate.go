@@ -289,6 +289,7 @@ func resourceIamCertificateCreate(c context.Context, d *schema.ResourceData, met
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamCertificateWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -644,7 +645,7 @@ func resourceIamCertificateCreate(c context.Context, d *schema.ResourceData, met
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamCertificateRead(c, d, meta)
+	return append(de, resourceIamCertificateRead(c, d, meta)...)
 }
 
 func resourceIamCertificateRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -705,6 +706,7 @@ func resourceIamCertificateUpdate(c context.Context, d *schema.ResourceData, met
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamCertificate{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1066,7 +1068,7 @@ func resourceIamCertificateUpdate(c context.Context, d *schema.ResourceData, met
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamCertificateRead(c, d, meta)
+	return append(de, resourceIamCertificateRead(c, d, meta)...)
 }
 
 func resourceIamCertificateDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

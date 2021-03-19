@@ -37,7 +37,7 @@ func dataSourceNiatelemetryApicPsuDetails() *schema.Resource {
 			},
 			"node_id": {
 				Description: "Node id for the PSU in the inventory.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"object_type": {
@@ -101,7 +101,7 @@ func dataSourceNiatelemetryApicPsuDetails() *schema.Resource {
 					},
 					"node_id": {
 						Description: "Node id for the PSU in the inventory.",
-						Type:        schema.TypeString,
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"object_type": {
@@ -226,7 +226,7 @@ func dataSourceNiatelemetryApicPsuDetailsRead(c context.Context, d *schema.Resou
 		o.SetMoid(x)
 	}
 	if v, ok := d.GetOk("node_id"); ok {
-		x := (v.(string))
+		x := int64(v.(int))
 		o.SetNodeId(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {

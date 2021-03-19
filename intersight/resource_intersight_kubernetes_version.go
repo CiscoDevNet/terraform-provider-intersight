@@ -290,6 +290,7 @@ func resourceKubernetesVersionCreate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesVersionWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -577,7 +578,7 @@ func resourceKubernetesVersionCreate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesVersionRead(c, d, meta)
+	return append(de, resourceKubernetesVersionRead(c, d, meta)...)
 }
 
 func resourceKubernetesVersionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -654,6 +655,7 @@ func resourceKubernetesVersionUpdate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesVersion{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -951,7 +953,7 @@ func resourceKubernetesVersionUpdate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesVersionRead(c, d, meta)
+	return append(de, resourceKubernetesVersionRead(c, d, meta)...)
 }
 
 func resourceKubernetesVersionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

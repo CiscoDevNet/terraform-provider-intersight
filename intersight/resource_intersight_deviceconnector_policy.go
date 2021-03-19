@@ -172,6 +172,7 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewDeviceconnectorPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -334,7 +335,7 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceDeviceconnectorPolicyRead(c, d, meta)
+	return append(de, resourceDeviceconnectorPolicyRead(c, d, meta)...)
 }
 func detachDeviceconnectorPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -421,6 +422,7 @@ func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.DeviceconnectorPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -591,7 +593,7 @@ func resourceDeviceconnectorPolicyUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceDeviceconnectorPolicyRead(c, d, meta)
+	return append(de, resourceDeviceconnectorPolicyRead(c, d, meta)...)
 }
 
 func resourceDeviceconnectorPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

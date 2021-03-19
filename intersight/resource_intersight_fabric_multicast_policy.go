@@ -148,6 +148,7 @@ func resourceFabricMulticastPolicyCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricMulticastPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -283,7 +284,7 @@ func resourceFabricMulticastPolicyCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricMulticastPolicyRead(c, d, meta)
+	return append(de, resourceFabricMulticastPolicyRead(c, d, meta)...)
 }
 
 func resourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -360,6 +361,7 @@ func resourceFabricMulticastPolicyUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricMulticastPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -505,7 +507,7 @@ func resourceFabricMulticastPolicyUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricMulticastPolicyRead(c, d, meta)
+	return append(de, resourceFabricMulticastPolicyRead(c, d, meta)...)
 }
 
 func resourceFabricMulticastPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

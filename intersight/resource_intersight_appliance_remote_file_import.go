@@ -177,6 +177,7 @@ func resourceApplianceRemoteFileImportCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceRemoteFileImportWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -322,7 +323,7 @@ func resourceApplianceRemoteFileImportCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceRemoteFileImportRead(c, d, meta)
+	return append(de, resourceApplianceRemoteFileImportRead(c, d, meta)...)
 }
 
 func resourceApplianceRemoteFileImportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

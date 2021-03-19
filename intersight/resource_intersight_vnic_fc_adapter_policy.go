@@ -454,6 +454,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicFcAdapterPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -907,7 +908,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicFcAdapterPolicyRead(c, d, meta)
+	return append(de, resourceVnicFcAdapterPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1016,6 +1017,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicFcAdapterPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1487,7 +1489,7 @@ func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicFcAdapterPolicyRead(c, d, meta)
+	return append(de, resourceVnicFcAdapterPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicFcAdapterPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

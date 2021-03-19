@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-24T06:47:07Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
  *
- * API version: 1.0.9-3824
+ * API version: 1.0.9-3942
  * Contact: intersight@cisco.com
  */
 
@@ -27,19 +27,15 @@ type IppoolIpLeaseAllOf struct {
 	IpV4Address *string                  `json:"IpV4Address,omitempty"`
 	IpV4Config  NullableIppoolIpV4Config `json:"IpV4Config,omitempty"`
 	// IPv6 Address given as a lease to an external entity like server profiles.
-	IpV6Address                   *string                                          `json:"IpV6Address,omitempty"`
-	IpV6Config                    NullableIppoolIpV6Config                         `json:"IpV6Config,omitempty"`
-	Var0VirtualMachineNodeProfile *KubernetesVirtualMachineNodeProfileRelationship `json:"_0_VirtualMachineNodeProfile,omitempty"`
-	Var1VirtualMachineNodeProfile *KubernetesVirtualMachineNodeProfileRelationship `json:"_1_VirtualMachineNodeProfile,omitempty"`
-	Var2ClusterProfile            *KubernetesClusterProfileRelationship            `json:"_2_ClusterProfile,omitempty"`
-	Var3ClusterProfile            *KubernetesClusterProfileRelationship            `json:"_3_ClusterProfile,omitempty"`
-	AssignedToEntity              *MoBaseMoRelationship                            `json:"AssignedToEntity,omitempty"`
-	BlockLease                    *IppoolBlockLeaseRelationship                    `json:"BlockLease,omitempty"`
-	Pool                          *IppoolPoolRelationship                          `json:"Pool,omitempty"`
-	PoolMember                    *IppoolPoolMemberRelationship                    `json:"PoolMember,omitempty"`
-	Universe                      *IppoolUniverseRelationship                      `json:"Universe,omitempty"`
-	Vrf                           *VrfVrfRelationship                              `json:"Vrf,omitempty"`
-	AdditionalProperties          map[string]interface{}
+	IpV6Address          *string                       `json:"IpV6Address,omitempty"`
+	IpV6Config           NullableIppoolIpV6Config      `json:"IpV6Config,omitempty"`
+	AssignedToEntity     *MoBaseMoRelationship         `json:"AssignedToEntity,omitempty"`
+	BlockLease           *IppoolBlockLeaseRelationship `json:"BlockLease,omitempty"`
+	Pool                 *IppoolPoolRelationship       `json:"Pool,omitempty"`
+	PoolMember           *IppoolPoolMemberRelationship `json:"PoolMember,omitempty"`
+	Universe             *IppoolUniverseRelationship   `json:"Universe,omitempty"`
+	Vrf                  *VrfVrfRelationship           `json:"Vrf,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IppoolIpLeaseAllOf IppoolIpLeaseAllOf
@@ -301,134 +297,6 @@ func (o *IppoolIpLeaseAllOf) UnsetIpV6Config() {
 	o.IpV6Config.Unset()
 }
 
-// GetVar0VirtualMachineNodeProfile returns the Var0VirtualMachineNodeProfile field value if set, zero value otherwise.
-func (o *IppoolIpLeaseAllOf) GetVar0VirtualMachineNodeProfile() KubernetesVirtualMachineNodeProfileRelationship {
-	if o == nil || o.Var0VirtualMachineNodeProfile == nil {
-		var ret KubernetesVirtualMachineNodeProfileRelationship
-		return ret
-	}
-	return *o.Var0VirtualMachineNodeProfile
-}
-
-// GetVar0VirtualMachineNodeProfileOk returns a tuple with the Var0VirtualMachineNodeProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IppoolIpLeaseAllOf) GetVar0VirtualMachineNodeProfileOk() (*KubernetesVirtualMachineNodeProfileRelationship, bool) {
-	if o == nil || o.Var0VirtualMachineNodeProfile == nil {
-		return nil, false
-	}
-	return o.Var0VirtualMachineNodeProfile, true
-}
-
-// HasVar0VirtualMachineNodeProfile returns a boolean if a field has been set.
-func (o *IppoolIpLeaseAllOf) HasVar0VirtualMachineNodeProfile() bool {
-	if o != nil && o.Var0VirtualMachineNodeProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar0VirtualMachineNodeProfile gets a reference to the given KubernetesVirtualMachineNodeProfileRelationship and assigns it to the Var0VirtualMachineNodeProfile field.
-func (o *IppoolIpLeaseAllOf) SetVar0VirtualMachineNodeProfile(v KubernetesVirtualMachineNodeProfileRelationship) {
-	o.Var0VirtualMachineNodeProfile = &v
-}
-
-// GetVar1VirtualMachineNodeProfile returns the Var1VirtualMachineNodeProfile field value if set, zero value otherwise.
-func (o *IppoolIpLeaseAllOf) GetVar1VirtualMachineNodeProfile() KubernetesVirtualMachineNodeProfileRelationship {
-	if o == nil || o.Var1VirtualMachineNodeProfile == nil {
-		var ret KubernetesVirtualMachineNodeProfileRelationship
-		return ret
-	}
-	return *o.Var1VirtualMachineNodeProfile
-}
-
-// GetVar1VirtualMachineNodeProfileOk returns a tuple with the Var1VirtualMachineNodeProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IppoolIpLeaseAllOf) GetVar1VirtualMachineNodeProfileOk() (*KubernetesVirtualMachineNodeProfileRelationship, bool) {
-	if o == nil || o.Var1VirtualMachineNodeProfile == nil {
-		return nil, false
-	}
-	return o.Var1VirtualMachineNodeProfile, true
-}
-
-// HasVar1VirtualMachineNodeProfile returns a boolean if a field has been set.
-func (o *IppoolIpLeaseAllOf) HasVar1VirtualMachineNodeProfile() bool {
-	if o != nil && o.Var1VirtualMachineNodeProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar1VirtualMachineNodeProfile gets a reference to the given KubernetesVirtualMachineNodeProfileRelationship and assigns it to the Var1VirtualMachineNodeProfile field.
-func (o *IppoolIpLeaseAllOf) SetVar1VirtualMachineNodeProfile(v KubernetesVirtualMachineNodeProfileRelationship) {
-	o.Var1VirtualMachineNodeProfile = &v
-}
-
-// GetVar2ClusterProfile returns the Var2ClusterProfile field value if set, zero value otherwise.
-func (o *IppoolIpLeaseAllOf) GetVar2ClusterProfile() KubernetesClusterProfileRelationship {
-	if o == nil || o.Var2ClusterProfile == nil {
-		var ret KubernetesClusterProfileRelationship
-		return ret
-	}
-	return *o.Var2ClusterProfile
-}
-
-// GetVar2ClusterProfileOk returns a tuple with the Var2ClusterProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IppoolIpLeaseAllOf) GetVar2ClusterProfileOk() (*KubernetesClusterProfileRelationship, bool) {
-	if o == nil || o.Var2ClusterProfile == nil {
-		return nil, false
-	}
-	return o.Var2ClusterProfile, true
-}
-
-// HasVar2ClusterProfile returns a boolean if a field has been set.
-func (o *IppoolIpLeaseAllOf) HasVar2ClusterProfile() bool {
-	if o != nil && o.Var2ClusterProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar2ClusterProfile gets a reference to the given KubernetesClusterProfileRelationship and assigns it to the Var2ClusterProfile field.
-func (o *IppoolIpLeaseAllOf) SetVar2ClusterProfile(v KubernetesClusterProfileRelationship) {
-	o.Var2ClusterProfile = &v
-}
-
-// GetVar3ClusterProfile returns the Var3ClusterProfile field value if set, zero value otherwise.
-func (o *IppoolIpLeaseAllOf) GetVar3ClusterProfile() KubernetesClusterProfileRelationship {
-	if o == nil || o.Var3ClusterProfile == nil {
-		var ret KubernetesClusterProfileRelationship
-		return ret
-	}
-	return *o.Var3ClusterProfile
-}
-
-// GetVar3ClusterProfileOk returns a tuple with the Var3ClusterProfile field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IppoolIpLeaseAllOf) GetVar3ClusterProfileOk() (*KubernetesClusterProfileRelationship, bool) {
-	if o == nil || o.Var3ClusterProfile == nil {
-		return nil, false
-	}
-	return o.Var3ClusterProfile, true
-}
-
-// HasVar3ClusterProfile returns a boolean if a field has been set.
-func (o *IppoolIpLeaseAllOf) HasVar3ClusterProfile() bool {
-	if o != nil && o.Var3ClusterProfile != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar3ClusterProfile gets a reference to the given KubernetesClusterProfileRelationship and assigns it to the Var3ClusterProfile field.
-func (o *IppoolIpLeaseAllOf) SetVar3ClusterProfile(v KubernetesClusterProfileRelationship) {
-	o.Var3ClusterProfile = &v
-}
-
 // GetAssignedToEntity returns the AssignedToEntity field value if set, zero value otherwise.
 func (o *IppoolIpLeaseAllOf) GetAssignedToEntity() MoBaseMoRelationship {
 	if o == nil || o.AssignedToEntity == nil {
@@ -644,18 +512,6 @@ func (o IppoolIpLeaseAllOf) MarshalJSON() ([]byte, error) {
 	if o.IpV6Config.IsSet() {
 		toSerialize["IpV6Config"] = o.IpV6Config.Get()
 	}
-	if o.Var0VirtualMachineNodeProfile != nil {
-		toSerialize["_0_VirtualMachineNodeProfile"] = o.Var0VirtualMachineNodeProfile
-	}
-	if o.Var1VirtualMachineNodeProfile != nil {
-		toSerialize["_1_VirtualMachineNodeProfile"] = o.Var1VirtualMachineNodeProfile
-	}
-	if o.Var2ClusterProfile != nil {
-		toSerialize["_2_ClusterProfile"] = o.Var2ClusterProfile
-	}
-	if o.Var3ClusterProfile != nil {
-		toSerialize["_3_ClusterProfile"] = o.Var3ClusterProfile
-	}
 	if o.AssignedToEntity != nil {
 		toSerialize["AssignedToEntity"] = o.AssignedToEntity
 	}
@@ -699,10 +555,6 @@ func (o *IppoolIpLeaseAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IpV4Config")
 		delete(additionalProperties, "IpV6Address")
 		delete(additionalProperties, "IpV6Config")
-		delete(additionalProperties, "_0_VirtualMachineNodeProfile")
-		delete(additionalProperties, "_1_VirtualMachineNodeProfile")
-		delete(additionalProperties, "_2_ClusterProfile")
-		delete(additionalProperties, "_3_ClusterProfile")
 		delete(additionalProperties, "AssignedToEntity")
 		delete(additionalProperties, "BlockLease")
 		delete(additionalProperties, "Pool")

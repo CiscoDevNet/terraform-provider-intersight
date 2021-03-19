@@ -466,6 +466,7 @@ func resourceSoftwareHyperflexBundleDistributableCreate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwareHyperflexBundleDistributableWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -942,7 +943,7 @@ func resourceSoftwareHyperflexBundleDistributableCreate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwareHyperflexBundleDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareHyperflexBundleDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareHyperflexBundleDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1099,6 +1100,7 @@ func resourceSoftwareHyperflexBundleDistributableUpdate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwareHyperflexBundleDistributable{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1605,7 +1607,7 @@ func resourceSoftwareHyperflexBundleDistributableUpdate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwareHyperflexBundleDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareHyperflexBundleDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareHyperflexBundleDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

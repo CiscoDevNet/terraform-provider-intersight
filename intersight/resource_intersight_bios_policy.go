@@ -1942,6 +1942,7 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewBiosPolicyWithDefaults()
 	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
 		x := (v.(string))
@@ -3579,7 +3580,7 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceBiosPolicyRead(c, d, meta)
+	return append(de, resourceBiosPolicyRead(c, d, meta)...)
 }
 func detachBiosPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -4846,6 +4847,7 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
 	if d.HasChange("acs_control_gpu1state") {
 		v := d.Get("acs_control_gpu1state")
@@ -6786,7 +6788,7 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceBiosPolicyRead(c, d, meta)
+	return append(de, resourceBiosPolicyRead(c, d, meta)...)
 }
 
 func resourceBiosPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -127,6 +127,7 @@ func resourceTechsupportmanagementCollectionControlPolicyCreate(c context.Contex
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewTechsupportmanagementCollectionControlPolicyWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -242,7 +243,7 @@ func resourceTechsupportmanagementCollectionControlPolicyCreate(c context.Contex
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceTechsupportmanagementCollectionControlPolicyRead(c, d, meta)
+	return append(de, resourceTechsupportmanagementCollectionControlPolicyRead(c, d, meta)...)
 }
 
 func resourceTechsupportmanagementCollectionControlPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -303,6 +304,7 @@ func resourceTechsupportmanagementCollectionControlPolicyUpdate(c context.Contex
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.TechsupportmanagementCollectionControlPolicy{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -424,7 +426,7 @@ func resourceTechsupportmanagementCollectionControlPolicyUpdate(c context.Contex
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceTechsupportmanagementCollectionControlPolicyRead(c, d, meta)
+	return append(de, resourceTechsupportmanagementCollectionControlPolicyRead(c, d, meta)...)
 }
 
 func resourceTechsupportmanagementCollectionControlPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

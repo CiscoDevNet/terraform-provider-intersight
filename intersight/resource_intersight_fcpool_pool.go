@@ -232,6 +232,7 @@ func resourceFcpoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFcpoolPoolWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -457,7 +458,7 @@ func resourceFcpoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFcpoolPoolRead(c, d, meta)
+	return append(de, resourceFcpoolPoolRead(c, d, meta)...)
 }
 
 func resourceFcpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -542,6 +543,7 @@ func resourceFcpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FcpoolPool{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -779,7 +781,7 @@ func resourceFcpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFcpoolPoolRead(c, d, meta)
+	return append(de, resourceFcpoolPoolRead(c, d, meta)...)
 }
 
 func resourceFcpoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

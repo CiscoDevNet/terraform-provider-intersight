@@ -208,6 +208,7 @@ func resourceHyperflexHxapDatacenterCreate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexHxapDatacenterWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -409,7 +410,7 @@ func resourceHyperflexHxapDatacenterCreate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexHxapDatacenterRead(c, d, meta)
+	return append(de, resourceHyperflexHxapDatacenterRead(c, d, meta)...)
 }
 
 func resourceHyperflexHxapDatacenterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -478,6 +479,7 @@ func resourceHyperflexHxapDatacenterUpdate(c context.Context, d *schema.Resource
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexHxapDatacenter{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -687,7 +689,7 @@ func resourceHyperflexHxapDatacenterUpdate(c context.Context, d *schema.Resource
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexHxapDatacenterRead(c, d, meta)
+	return append(de, resourceHyperflexHxapDatacenterRead(c, d, meta)...)
 }
 
 func resourceHyperflexHxapDatacenterDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

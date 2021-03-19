@@ -287,6 +287,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKvmSessionWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -536,7 +537,7 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKvmSessionRead(c, d, meta)
+	return append(de, resourceKvmSessionRead(c, d, meta)...)
 }
 
 func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -125,6 +125,7 @@ func resourceIamIpAddressCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamIpAddressWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -240,7 +241,7 @@ func resourceIamIpAddressCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamIpAddressRead(c, d, meta)
+	return append(de, resourceIamIpAddressRead(c, d, meta)...)
 }
 
 func resourceIamIpAddressRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -301,6 +302,7 @@ func resourceIamIpAddressUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamIpAddress{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -422,7 +424,7 @@ func resourceIamIpAddressUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamIpAddressRead(c, d, meta)
+	return append(de, resourceIamIpAddressRead(c, d, meta)...)
 }
 
 func resourceIamIpAddressDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

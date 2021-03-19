@@ -25,7 +25,6 @@ Name | Type | Description | Notes
 **PowerState** | Pointer to **string** | Expected power state of virtual machine (PowerOn, PowerOff, Restart). * &#x60;PowerOff&#x60; - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected. * &#x60;PowerOn&#x60; - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected. * &#x60;Suspend&#x60; - The virtual machine will be put into  a suspended state. * &#x60;ShutDownGuestOS&#x60; - The guest operating system is shut down gracefully. * &#x60;RestartGuestOS&#x60; - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts. * &#x60;Reset&#x60; - Resets the virtual machine abruptly, with no consideration for work in progress. * &#x60;Restart&#x60; - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up. * &#x60;Unknown&#x60; - Power state of the entity is unknown. | [optional] [default to "PowerOff"]
 **ProvisionType** | Pointer to **string** | Identifies the provision type to create a new virtual machine. * &#x60;OVA&#x60; - Deploy virtual machine using OVA/F file. * &#x60;Template&#x60; - Provision virtual machine using a template file. * &#x60;Discovered&#x60; - A virtual machine was &#39;discovered&#39; and not created from Intersight. No provisioning information is available. | [optional] [default to "OVA"]
 **VmConfig** | Pointer to [**NullableVirtualizationBaseVmConfiguration**](virtualization.BaseVmConfiguration.md) |  | [optional] 
-**Var0VirtualMachineNodeProfile** | Pointer to [**KubernetesVirtualMachineNodeProfileRelationship**](kubernetes.VirtualMachineNodeProfile.Relationship.md) |  | [optional] 
 **Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](virtualization.BaseCluster.Relationship.md) |  | [optional] 
 **Host** | Pointer to [**VirtualizationBaseHostRelationship**](virtualization.BaseHost.Relationship.md) |  | [optional] 
 **Inventory** | Pointer to [**VirtualizationBaseVirtualMachineRelationship**](virtualization.BaseVirtualMachine.Relationship.md) |  | [optional] 
@@ -646,31 +645,6 @@ HasVmConfig returns a boolean if a field has been set.
 `func (o *VirtualizationVirtualMachine) UnsetVmConfig()`
 
 UnsetVmConfig ensures that no value is present for VmConfig, not even an explicit nil
-### GetVar0VirtualMachineNodeProfile
-
-`func (o *VirtualizationVirtualMachine) GetVar0VirtualMachineNodeProfile() KubernetesVirtualMachineNodeProfileRelationship`
-
-GetVar0VirtualMachineNodeProfile returns the Var0VirtualMachineNodeProfile field if non-nil, zero value otherwise.
-
-### GetVar0VirtualMachineNodeProfileOk
-
-`func (o *VirtualizationVirtualMachine) GetVar0VirtualMachineNodeProfileOk() (*KubernetesVirtualMachineNodeProfileRelationship, bool)`
-
-GetVar0VirtualMachineNodeProfileOk returns a tuple with the Var0VirtualMachineNodeProfile field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0VirtualMachineNodeProfile
-
-`func (o *VirtualizationVirtualMachine) SetVar0VirtualMachineNodeProfile(v KubernetesVirtualMachineNodeProfileRelationship)`
-
-SetVar0VirtualMachineNodeProfile sets Var0VirtualMachineNodeProfile field to given value.
-
-### HasVar0VirtualMachineNodeProfile
-
-`func (o *VirtualizationVirtualMachine) HasVar0VirtualMachineNodeProfile() bool`
-
-HasVar0VirtualMachineNodeProfile returns a boolean if a field has been set.
-
 ### GetCluster
 
 `func (o *VirtualizationVirtualMachine) GetCluster() VirtualizationBaseClusterRelationship`

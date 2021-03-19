@@ -96,12 +96,14 @@ func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) b
 	return b
 }
 
-func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship) error {
+func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship) (string, error) {
+	var workflowInfo models.WorkflowWorkflowInfo
+	var responseErr error
 	for { // infinite loop
 		moid := w.MoMoRef.GetMoid()
-		workflowInfo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
+		workflowInfo, _, responseErr = conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
 		if responseErr != nil {
-			return responseErr
+			return "", responseErr
 		}
 		if endsOfWorkflow[workflowInfo.GetStatus()] {
 			break
@@ -110,5 +112,6 @@ func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship
 			log.Printf("Workflow %s is %s ... %f percent \n", workflowInfo.GetName(), workflowInfo.GetStatus(), workflowInfo.GetProgress())
 		}
 	}
-	return nil
+	warning := fmt.Sprintf("Workflow moid: %d name: %s is in status %s", workflowInfo.GetMoid(), workflowInfo.GetName(), workflowInfo.GetStatus())
+	return warning, nil
 }

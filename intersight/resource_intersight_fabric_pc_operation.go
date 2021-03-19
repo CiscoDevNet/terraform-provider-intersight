@@ -132,6 +132,7 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricPcOperationWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -252,7 +253,7 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricPcOperationRead(c, d, meta)
+	return append(de, resourceFabricPcOperationRead(c, d, meta)...)
 }
 
 func resourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -317,6 +318,7 @@ func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricPcOperation{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -444,7 +446,7 @@ func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricPcOperationRead(c, d, meta)
+	return append(de, resourceFabricPcOperationRead(c, d, meta)...)
 }
 
 func resourceFabricPcOperationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

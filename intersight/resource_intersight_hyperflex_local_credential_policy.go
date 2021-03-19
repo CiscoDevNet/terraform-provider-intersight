@@ -199,6 +199,7 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexLocalCredentialPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -386,7 +387,7 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexLocalCredentialPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexLocalCredentialPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -467,6 +468,7 @@ func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.R
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexLocalCredentialPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -667,7 +669,7 @@ func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.R
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexLocalCredentialPolicyRead(c, d, meta)
+	return append(de, resourceHyperflexLocalCredentialPolicyRead(c, d, meta)...)
 }
 
 func resourceHyperflexLocalCredentialPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

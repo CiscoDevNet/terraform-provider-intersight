@@ -213,6 +213,7 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceRestoreWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -389,7 +390,7 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceRestoreRead(c, d, meta)
+	return append(de, resourceApplianceRestoreRead(c, d, meta)...)
 }
 
 func resourceApplianceRestoreRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

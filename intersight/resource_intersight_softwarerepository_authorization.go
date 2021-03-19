@@ -143,6 +143,7 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwarerepositoryAuthorizationWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -273,7 +274,7 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwarerepositoryAuthorizationRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryAuthorizationRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -338,6 +339,7 @@ func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryAuthorization{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -477,7 +479,7 @@ func resourceSoftwarerepositoryAuthorizationUpdate(c context.Context, d *schema.
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryAuthorizationRead(c, d, meta)
+	return append(de, resourceSoftwarerepositoryAuthorizationRead(c, d, meta)...)
 }
 
 func resourceSoftwarerepositoryAuthorizationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -426,6 +426,7 @@ func resourceSoftwareUcsdDistributableCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSoftwareUcsdDistributableWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -860,7 +861,7 @@ func resourceSoftwareUcsdDistributableCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSoftwareUcsdDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareUcsdDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareUcsdDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1013,6 +1014,7 @@ func resourceSoftwareUcsdDistributableUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwareUcsdDistributable{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1476,7 +1478,7 @@ func resourceSoftwareUcsdDistributableUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwareUcsdDistributableRead(c, d, meta)
+	return append(de, resourceSoftwareUcsdDistributableRead(c, d, meta)...)
 }
 
 func resourceSoftwareUcsdDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -109,6 +109,7 @@ func resourceCapabilityPsuManufacturingDefCreate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityPsuManufacturingDefWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -206,7 +207,7 @@ func resourceCapabilityPsuManufacturingDefCreate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityPsuManufacturingDefRead(c, d, meta)
+	return append(de, resourceCapabilityPsuManufacturingDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -283,6 +284,7 @@ func resourceCapabilityPsuManufacturingDefUpdate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityPsuManufacturingDef{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -390,7 +392,7 @@ func resourceCapabilityPsuManufacturingDefUpdate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityPsuManufacturingDefRead(c, d, meta)
+	return append(de, resourceCapabilityPsuManufacturingDefRead(c, d, meta)...)
 }
 
 func resourceCapabilityPsuManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

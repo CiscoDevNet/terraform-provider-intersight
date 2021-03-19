@@ -325,6 +325,7 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewMemoryPersistentMemoryPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -649,7 +650,7 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceMemoryPersistentMemoryPolicyRead(c, d, meta)
+	return append(de, resourceMemoryPersistentMemoryPolicyRead(c, d, meta)...)
 }
 func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -752,6 +753,7 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.MemoryPersistentMemoryPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1088,7 +1090,7 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceMemoryPersistentMemoryPolicyRead(c, d, meta)
+	return append(de, resourceMemoryPersistentMemoryPolicyRead(c, d, meta)...)
 }
 
 func resourceMemoryPersistentMemoryPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -149,6 +149,7 @@ func resourceFirmwareBoardControllerDescriptorCreate(c context.Context, d *schem
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareBoardControllerDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -288,7 +289,7 @@ func resourceFirmwareBoardControllerDescriptorCreate(c context.Context, d *schem
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareBoardControllerDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareBoardControllerDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareBoardControllerDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -369,6 +370,7 @@ func resourceFirmwareBoardControllerDescriptorUpdate(c context.Context, d *schem
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareBoardControllerDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -519,7 +521,7 @@ func resourceFirmwareBoardControllerDescriptorUpdate(c context.Context, d *schem
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareBoardControllerDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareBoardControllerDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareBoardControllerDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

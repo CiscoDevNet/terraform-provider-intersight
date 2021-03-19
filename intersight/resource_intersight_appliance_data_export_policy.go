@@ -207,6 +207,7 @@ func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceDataExportPolicyWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -407,7 +408,7 @@ func resourceApplianceDataExportPolicyCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceDataExportPolicyRead(c, d, meta)
+	return append(de, resourceApplianceDataExportPolicyRead(c, d, meta)...)
 }
 
 func resourceApplianceDataExportPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -476,6 +477,7 @@ func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceDataExportPolicy{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -684,7 +686,7 @@ func resourceApplianceDataExportPolicyUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceApplianceDataExportPolicyRead(c, d, meta)
+	return append(de, resourceApplianceDataExportPolicyRead(c, d, meta)...)
 }
 
 func resourceApplianceDataExportPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

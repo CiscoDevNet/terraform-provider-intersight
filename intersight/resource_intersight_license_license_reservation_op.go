@@ -154,6 +154,7 @@ func resourceLicenseLicenseReservationOpCreate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewLicenseLicenseReservationOpWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -294,7 +295,7 @@ func resourceLicenseLicenseReservationOpCreate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceLicenseLicenseReservationOpRead(c, d, meta)
+	return append(de, resourceLicenseLicenseReservationOpRead(c, d, meta)...)
 }
 
 func resourceLicenseLicenseReservationOpRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -375,6 +376,7 @@ func resourceLicenseLicenseReservationOpUpdate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.LicenseLicenseReservationOp{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -526,7 +528,7 @@ func resourceLicenseLicenseReservationOpUpdate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceLicenseLicenseReservationOpRead(c, d, meta)
+	return append(de, resourceLicenseLicenseReservationOpRead(c, d, meta)...)
 }
 
 func resourceLicenseLicenseReservationOpDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

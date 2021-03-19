@@ -373,6 +373,7 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewAssetTargetWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -761,7 +762,7 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceAssetTargetRead(c, d, meta)
+	return append(de, resourceAssetTargetRead(c, d, meta)...)
 }
 
 func resourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -874,6 +875,7 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.AssetTarget{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -1281,7 +1283,7 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceAssetTargetRead(c, d, meta)
+	return append(de, resourceAssetTargetRead(c, d, meta)...)
 }
 
 func resourceAssetTargetDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -244,6 +244,7 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewResourceGroupWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -485,7 +486,7 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceResourceGroupRead(c, d, meta)
+	return append(de, resourceResourceGroupRead(c, d, meta)...)
 }
 
 func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -558,6 +559,7 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ResourceGroup{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -808,7 +810,7 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceResourceGroupRead(c, d, meta)
+	return append(de, resourceResourceGroupRead(c, d, meta)...)
 }
 
 func resourceResourceGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

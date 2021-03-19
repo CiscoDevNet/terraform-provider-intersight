@@ -1,4 +1,4 @@
-# KubernetesVirtualMachineNodeProfileRelationship
+# ComputeMappingRelationship
 
 ## Properties
 
@@ -12,135 +12,135 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewKubernetesVirtualMachineNodeProfileRelationship
+### NewComputeMappingRelationship
 
-`func NewKubernetesVirtualMachineNodeProfileRelationship(classId string, objectType string, ) *KubernetesVirtualMachineNodeProfileRelationship`
+`func NewComputeMappingRelationship(classId string, objectType string, ) *ComputeMappingRelationship`
 
-NewKubernetesVirtualMachineNodeProfileRelationship instantiates a new KubernetesVirtualMachineNodeProfileRelationship object
+NewComputeMappingRelationship instantiates a new ComputeMappingRelationship object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewKubernetesVirtualMachineNodeProfileRelationshipWithDefaults
+### NewComputeMappingRelationshipWithDefaults
 
-`func NewKubernetesVirtualMachineNodeProfileRelationshipWithDefaults() *KubernetesVirtualMachineNodeProfileRelationship`
+`func NewComputeMappingRelationshipWithDefaults() *ComputeMappingRelationship`
 
-NewKubernetesVirtualMachineNodeProfileRelationshipWithDefaults instantiates a new KubernetesVirtualMachineNodeProfileRelationship object
+NewComputeMappingRelationshipWithDefaults instantiates a new ComputeMappingRelationship object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetClassId
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetClassId() string`
+`func (o *ComputeMappingRelationship) GetClassId() string`
 
 GetClassId returns the ClassId field if non-nil, zero value otherwise.
 
 ### GetClassIdOk
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetClassIdOk() (*string, bool)`
+`func (o *ComputeMappingRelationship) GetClassIdOk() (*string, bool)`
 
 GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetClassId
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) SetClassId(v string)`
+`func (o *ComputeMappingRelationship) SetClassId(v string)`
 
 SetClassId sets ClassId field to given value.
 
 
 ### GetObjectType
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetObjectType() string`
+`func (o *ComputeMappingRelationship) GetObjectType() string`
 
 GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
 
 ### GetObjectTypeOk
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetObjectTypeOk() (*string, bool)`
+`func (o *ComputeMappingRelationship) GetObjectTypeOk() (*string, bool)`
 
 GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetObjectType
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) SetObjectType(v string)`
+`func (o *ComputeMappingRelationship) SetObjectType(v string)`
 
 SetObjectType sets ObjectType field to given value.
 
 
 ### GetMoid
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetMoid() string`
+`func (o *ComputeMappingRelationship) GetMoid() string`
 
 GetMoid returns the Moid field if non-nil, zero value otherwise.
 
 ### GetMoidOk
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetMoidOk() (*string, bool)`
+`func (o *ComputeMappingRelationship) GetMoidOk() (*string, bool)`
 
 GetMoidOk returns a tuple with the Moid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMoid
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) SetMoid(v string)`
+`func (o *ComputeMappingRelationship) SetMoid(v string)`
 
 SetMoid sets Moid field to given value.
 
 ### HasMoid
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) HasMoid() bool`
+`func (o *ComputeMappingRelationship) HasMoid() bool`
 
 HasMoid returns a boolean if a field has been set.
 
 ### GetSelector
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetSelector() string`
+`func (o *ComputeMappingRelationship) GetSelector() string`
 
 GetSelector returns the Selector field if non-nil, zero value otherwise.
 
 ### GetSelectorOk
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetSelectorOk() (*string, bool)`
+`func (o *ComputeMappingRelationship) GetSelectorOk() (*string, bool)`
 
 GetSelectorOk returns a tuple with the Selector field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSelector
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) SetSelector(v string)`
+`func (o *ComputeMappingRelationship) SetSelector(v string)`
 
 SetSelector sets Selector field to given value.
 
 ### HasSelector
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) HasSelector() bool`
+`func (o *ComputeMappingRelationship) HasSelector() bool`
 
 HasSelector returns a boolean if a field has been set.
 
 ### GetLink
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetLink() string`
+`func (o *ComputeMappingRelationship) GetLink() string`
 
 GetLink returns the Link field if non-nil, zero value otherwise.
 
 ### GetLinkOk
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) GetLinkOk() (*string, bool)`
+`func (o *ComputeMappingRelationship) GetLinkOk() (*string, bool)`
 
 GetLinkOk returns a tuple with the Link field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLink
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) SetLink(v string)`
+`func (o *ComputeMappingRelationship) SetLink(v string)`
 
 SetLink sets Link field to given value.
 
 ### HasLink
 
-`func (o *KubernetesVirtualMachineNodeProfileRelationship) HasLink() bool`
+`func (o *ComputeMappingRelationship) HasLink() bool`
 
 HasLink returns a boolean if a field has been set.
 
