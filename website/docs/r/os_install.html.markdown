@@ -26,6 +26,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
 This complex property has following sub-properties:
+    + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
     + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
@@ -125,6 +126,9 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 
+### Custom keywords
+These are
+* `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
 ## Usage Example
 ### Resource Creation
 

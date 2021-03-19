@@ -139,6 +139,7 @@ func resourceCapabilityFanModuleDescriptorCreate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityFanModuleDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -268,7 +269,7 @@ func resourceCapabilityFanModuleDescriptorCreate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityFanModuleDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityFanModuleDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityFanModuleDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -341,6 +342,7 @@ func resourceCapabilityFanModuleDescriptorUpdate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityFanModuleDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -479,7 +481,7 @@ func resourceCapabilityFanModuleDescriptorUpdate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityFanModuleDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityFanModuleDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityFanModuleDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -173,6 +173,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHclHyperflexSoftwareCompatibilityInfoWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -340,7 +341,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHclHyperflexSoftwareCompatibilityInfoRead(c, d, meta)
+	return append(de, resourceHclHyperflexSoftwareCompatibilityInfoRead(c, d, meta)...)
 }
 
 func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -413,6 +414,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HclHyperflexSoftwareCompatibilityInfo{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -589,7 +591,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHclHyperflexSoftwareCompatibilityInfoRead(c, d, meta)
+	return append(de, resourceHclHyperflexSoftwareCompatibilityInfoRead(c, d, meta)...)
 }
 
 func resourceHclHyperflexSoftwareCompatibilityInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

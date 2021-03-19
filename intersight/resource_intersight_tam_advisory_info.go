@@ -162,6 +162,7 @@ func resourceTamAdvisoryInfoCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewTamAdvisoryInfoWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -315,7 +316,7 @@ func resourceTamAdvisoryInfoCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceTamAdvisoryInfoRead(c, d, meta)
+	return append(de, resourceTamAdvisoryInfoRead(c, d, meta)...)
 }
 
 func resourceTamAdvisoryInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -376,6 +377,7 @@ func resourceTamAdvisoryInfoUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.TamAdvisoryInfo{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -535,7 +537,7 @@ func resourceTamAdvisoryInfoUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceTamAdvisoryInfoRead(c, d, meta)
+	return append(de, resourceTamAdvisoryInfoRead(c, d, meta)...)
 }
 
 func resourceTamAdvisoryInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

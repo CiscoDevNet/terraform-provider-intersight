@@ -236,6 +236,7 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamResourceRolesWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -467,7 +468,7 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamResourceRolesRead(c, d, meta)
+	return append(de, resourceIamResourceRolesRead(c, d, meta)...)
 }
 
 func resourceIamResourceRolesRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -532,6 +533,7 @@ func resourceIamResourceRolesUpdate(c context.Context, d *schema.ResourceData, m
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamResourceRoles{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -770,7 +772,7 @@ func resourceIamResourceRolesUpdate(c context.Context, d *schema.ResourceData, m
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamResourceRolesRead(c, d, meta)
+	return append(de, resourceIamResourceRolesRead(c, d, meta)...)
 }
 
 func resourceIamResourceRolesDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

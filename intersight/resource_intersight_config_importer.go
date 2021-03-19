@@ -213,6 +213,7 @@ func resourceConfigImporterCreate(c context.Context, d *schema.ResourceData, met
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewConfigImporterWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -390,7 +391,7 @@ func resourceConfigImporterCreate(c context.Context, d *schema.ResourceData, met
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceConfigImporterRead(c, d, meta)
+	return append(de, resourceConfigImporterRead(c, d, meta)...)
 }
 
 func resourceConfigImporterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

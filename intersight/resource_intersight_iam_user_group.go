@@ -283,6 +283,7 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamUserGroupWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -563,7 +564,7 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamUserGroupRead(c, d, meta)
+	return append(de, resourceIamUserGroupRead(c, d, meta)...)
 }
 
 func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -636,6 +637,7 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamUserGroup{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -925,7 +927,7 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamUserGroupRead(c, d, meta)
+	return append(de, resourceIamUserGroupRead(c, d, meta)...)
 }
 
 func resourceIamUserGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -351,6 +351,7 @@ func resourceSdwanProfileCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSdwanProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -702,7 +703,7 @@ func resourceSdwanProfileCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSdwanProfileRead(c, d, meta)
+	return append(de, resourceSdwanProfileRead(c, d, meta)...)
 }
 
 func resourceSdwanProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -791,6 +792,7 @@ func resourceSdwanProfileUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SdwanProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1155,7 +1157,7 @@ func resourceSdwanProfileUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdwanProfileRead(c, d, meta)
+	return append(de, resourceSdwanProfileRead(c, d, meta)...)
 }
 
 func resourceSdwanProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

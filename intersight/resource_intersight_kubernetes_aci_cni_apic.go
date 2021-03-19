@@ -207,6 +207,7 @@ func resourceKubernetesAciCniApicCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesAciCniApicWithDefaults()
 	if v, ok := d.GetOk("aci_cni_profiles"); ok {
 		x := make([]models.KubernetesAciCniProfileRelationship, 0)
@@ -407,7 +408,7 @@ func resourceKubernetesAciCniApicCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesAciCniApicRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniApicRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniApicRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -476,6 +477,7 @@ func resourceKubernetesAciCniApicUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesAciCniApic{}
 	if d.HasChange("aci_cni_profiles") {
 		v := d.Get("aci_cni_profiles")
@@ -684,7 +686,7 @@ func resourceKubernetesAciCniApicUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesAciCniApicRead(c, d, meta)
+	return append(de, resourceKubernetesAciCniApicRead(c, d, meta)...)
 }
 
 func resourceKubernetesAciCniApicDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

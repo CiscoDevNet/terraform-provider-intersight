@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **FreeCapacity** | Pointer to **int64** | The amount of storage capacity currently not in use, represented in bytes. | [optional] [readonly] 
 **HealingInfo** | Pointer to [**NullableHyperflexStPlatformClusterHealingInfo**](hyperflex.StPlatformClusterHealingInfo.md) |  | [optional] 
 **Name** | Pointer to **string** | The name of the HyperFlex cluster. | [optional] [readonly] 
-**ResiliencyDetails** | Pointer to **map[string]interface{}** | The details about the resiliency health of the cluster. Includes information about the cluster healing status and the storage cluster health. | [optional] [readonly] 
+**ResiliencyDetails** | Pointer to **interface{}** | The details about the resiliency health of the cluster. Includes information about the cluster healing status and the storage cluster health. | [optional] [readonly] 
 **ResiliencyDetailsSize** | Pointer to **int64** | The number of elements in the resiliency details property. | [optional] [readonly] 
 **ResiliencyInfo** | Pointer to [**NullableHyperflexStPlatformClusterResiliencyInfo**](hyperflex.StPlatformClusterResiliencyInfo.md) |  | [optional] 
 **SpaceStatus** | Pointer to **string** | The space utilization status of the HyperFlex cluster. | [optional] [readonly] 
@@ -399,20 +399,20 @@ HasName returns a boolean if a field has been set.
 
 ### GetResiliencyDetails
 
-`func (o *HyperflexSummaryAllOf) GetResiliencyDetails() map[string]interface{}`
+`func (o *HyperflexSummaryAllOf) GetResiliencyDetails() interface{}`
 
 GetResiliencyDetails returns the ResiliencyDetails field if non-nil, zero value otherwise.
 
 ### GetResiliencyDetailsOk
 
-`func (o *HyperflexSummaryAllOf) GetResiliencyDetailsOk() (*map[string]interface{}, bool)`
+`func (o *HyperflexSummaryAllOf) GetResiliencyDetailsOk() (*interface{}, bool)`
 
 GetResiliencyDetailsOk returns a tuple with the ResiliencyDetails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResiliencyDetails
 
-`func (o *HyperflexSummaryAllOf) SetResiliencyDetails(v map[string]interface{})`
+`func (o *HyperflexSummaryAllOf) SetResiliencyDetails(v interface{})`
 
 SetResiliencyDetails sets ResiliencyDetails field to given value.
 
@@ -422,6 +422,16 @@ SetResiliencyDetails sets ResiliencyDetails field to given value.
 
 HasResiliencyDetails returns a boolean if a field has been set.
 
+### SetResiliencyDetailsNil
+
+`func (o *HyperflexSummaryAllOf) SetResiliencyDetailsNil(b bool)`
+
+ SetResiliencyDetailsNil sets the value for ResiliencyDetails to be an explicit nil
+
+### UnsetResiliencyDetails
+`func (o *HyperflexSummaryAllOf) UnsetResiliencyDetails()`
+
+UnsetResiliencyDetails ensures that no value is present for ResiliencyDetails, not even an explicit nil
 ### GetResiliencyDetailsSize
 
 `func (o *HyperflexSummaryAllOf) GetResiliencyDetailsSize() int64`

@@ -897,6 +897,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilitySwitchCapabilityWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1891,7 +1892,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilitySwitchCapabilityRead(c, d, meta)
+	return append(de, resourceCapabilitySwitchCapabilityRead(c, d, meta)...)
 }
 
 func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -2052,6 +2053,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilitySwitchCapability{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -3077,7 +3079,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilitySwitchCapabilityRead(c, d, meta)
+	return append(de, resourceCapabilitySwitchCapabilityRead(c, d, meta)...)
 }
 
 func resourceCapabilitySwitchCapabilityDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

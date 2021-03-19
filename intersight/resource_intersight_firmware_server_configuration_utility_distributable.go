@@ -426,6 +426,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareServerConfigurationUtilityDistributableWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -860,7 +861,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareServerConfigurationUtilityDistributableRead(c, d, meta)
+	return append(de, resourceFirmwareServerConfigurationUtilityDistributableRead(c, d, meta)...)
 }
 
 func resourceFirmwareServerConfigurationUtilityDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1013,6 +1014,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Con
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareServerConfigurationUtilityDistributable{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1476,7 +1478,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Con
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareServerConfigurationUtilityDistributableRead(c, d, meta)
+	return append(de, resourceFirmwareServerConfigurationUtilityDistributableRead(c, d, meta)...)
 }
 
 func resourceFirmwareServerConfigurationUtilityDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

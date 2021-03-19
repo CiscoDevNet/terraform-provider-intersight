@@ -69,6 +69,9 @@ This complex property has following sub-properties:
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
 
+### Custom keywords
+These are
+* `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
 
 ## Import
 `intersight_fabric_switch_profile` can be imported using the Moid of the object, e.g.

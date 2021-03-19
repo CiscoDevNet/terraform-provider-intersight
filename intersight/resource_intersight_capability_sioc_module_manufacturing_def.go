@@ -109,6 +109,7 @@ func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilitySiocModuleManufacturingDefWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -206,7 +207,7 @@ func resourceCapabilitySiocModuleManufacturingDefCreate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilitySiocModuleManufacturingDefRead(c, d, meta)
+	return append(de, resourceCapabilitySiocModuleManufacturingDefRead(c, d, meta)...)
 }
 
 func resourceCapabilitySiocModuleManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -283,6 +284,7 @@ func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *sc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilitySiocModuleManufacturingDef{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -390,7 +392,7 @@ func resourceCapabilitySiocModuleManufacturingDefUpdate(c context.Context, d *sc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilitySiocModuleManufacturingDefRead(c, d, meta)
+	return append(de, resourceCapabilitySiocModuleManufacturingDefRead(c, d, meta)...)
 }
 
 func resourceCapabilitySiocModuleManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

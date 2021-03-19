@@ -311,7 +311,12 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 					},
 				},
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -319,6 +324,7 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewWorkflowRollbackWorkflowWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -637,6 +643,10 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.WorkflowApi.GetWorkflowRollbackWorkflowByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -644,17 +654,26 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetPrimaryWorkflow())
-	runningWorkflows = append(runningWorkflows, resultMo.GetRollbackWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := resultMo.GetPrimaryWorkflowOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetPrimaryWorkflow())
+		}
+		if _, ok := resultMo.GetRollbackWorkflowsOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetRollbackWorkflows()...)
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceWorkflowRollbackWorkflowRead(c, d, meta)
+	return append(de, resourceWorkflowRollbackWorkflowRead(c, d, meta)...)
 }
 
 func resourceWorkflowRollbackWorkflowRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -731,6 +750,7 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.WorkflowRollbackWorkflow{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1059,6 +1079,10 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.WorkflowApi.GetWorkflowRollbackWorkflowByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -1066,17 +1090,26 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetPrimaryWorkflow())
-	runningWorkflows = append(runningWorkflows, result.GetRollbackWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := result.GetPrimaryWorkflowOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetPrimaryWorkflow())
+		}
+		if _, ok := result.GetRollbackWorkflowsOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetRollbackWorkflows()...)
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceWorkflowRollbackWorkflowRead(c, d, meta)
+	return append(de, resourceWorkflowRollbackWorkflowRead(c, d, meta)...)
 }
 
 func resourceWorkflowRollbackWorkflowDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

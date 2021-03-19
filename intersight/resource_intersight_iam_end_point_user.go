@@ -161,6 +161,7 @@ func resourceIamEndPointUserCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamEndPointUserWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -313,7 +314,7 @@ func resourceIamEndPointUserCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamEndPointUserRead(c, d, meta)
+	return append(de, resourceIamEndPointUserRead(c, d, meta)...)
 }
 
 func resourceIamEndPointUserRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -374,6 +375,7 @@ func resourceIamEndPointUserUpdate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamEndPointUser{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -532,7 +534,7 @@ func resourceIamEndPointUserUpdate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserRead(c, d, meta)
+	return append(de, resourceIamEndPointUserRead(c, d, meta)...)
 }
 
 func resourceIamEndPointUserDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

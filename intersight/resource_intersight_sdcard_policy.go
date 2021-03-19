@@ -231,6 +231,7 @@ func resourceSdcardPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSdcardPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -461,7 +462,7 @@ func resourceSdcardPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSdcardPolicyRead(c, d, meta)
+	return append(de, resourceSdcardPolicyRead(c, d, meta)...)
 }
 func detachSdcardPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -548,6 +549,7 @@ func resourceSdcardPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SdcardPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -786,7 +788,7 @@ func resourceSdcardPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdcardPolicyRead(c, d, meta)
+	return append(de, resourceSdcardPolicyRead(c, d, meta)...)
 }
 
 func resourceSdcardPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

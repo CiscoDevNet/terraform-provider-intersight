@@ -234,6 +234,7 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceBackupPolicyWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -462,7 +463,7 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceBackupPolicyRead(c, d, meta)
+	return append(de, resourceApplianceBackupPolicyRead(c, d, meta)...)
 }
 
 func resourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -555,6 +556,7 @@ func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceBackupPolicy{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -798,7 +800,7 @@ func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceApplianceBackupPolicyRead(c, d, meta)
+	return append(de, resourceApplianceBackupPolicyRead(c, d, meta)...)
 }
 
 func resourceApplianceBackupPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

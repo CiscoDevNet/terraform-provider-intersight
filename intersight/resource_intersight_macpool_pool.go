@@ -227,6 +227,7 @@ func resourceMacpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewMacpoolPoolWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -447,7 +448,7 @@ func resourceMacpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceMacpoolPoolRead(c, d, meta)
+	return append(de, resourceMacpoolPoolRead(c, d, meta)...)
 }
 
 func resourceMacpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -528,6 +529,7 @@ func resourceMacpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.MacpoolPool{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -759,7 +761,7 @@ func resourceMacpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceMacpoolPoolRead(c, d, meta)
+	return append(de, resourceMacpoolPoolRead(c, d, meta)...)
 }
 
 func resourceMacpoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

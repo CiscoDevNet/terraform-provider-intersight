@@ -139,6 +139,7 @@ func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityCimcFirmwareDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -268,7 +269,7 @@ func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityCimcFirmwareDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityCimcFirmwareDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -341,6 +342,7 @@ func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityCimcFirmwareDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -479,7 +481,7 @@ func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityCimcFirmwareDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityCimcFirmwareDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityCimcFirmwareDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

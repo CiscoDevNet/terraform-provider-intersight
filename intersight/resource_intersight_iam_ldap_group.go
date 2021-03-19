@@ -165,6 +165,7 @@ func resourceIamLdapGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamLdapGroupWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -322,7 +323,7 @@ func resourceIamLdapGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamLdapGroupRead(c, d, meta)
+	return append(de, resourceIamLdapGroupRead(c, d, meta)...)
 }
 
 func resourceIamLdapGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -387,6 +388,7 @@ func resourceIamLdapGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamLdapGroup{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -551,7 +553,7 @@ func resourceIamLdapGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamLdapGroupRead(c, d, meta)
+	return append(de, resourceIamLdapGroupRead(c, d, meta)...)
 }
 
 func resourceIamLdapGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

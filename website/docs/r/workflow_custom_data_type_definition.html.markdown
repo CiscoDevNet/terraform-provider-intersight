@@ -42,6 +42,7 @@ This complex property has following sub-properties:
 [workflow.TargetDataType](#workflowTargetDataType)
   + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
 This complex property has following sub-properties:
+    + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
     + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 

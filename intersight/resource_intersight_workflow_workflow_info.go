@@ -787,6 +787,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewWorkflowWorkflowInfoWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -1560,7 +1561,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceWorkflowWorkflowInfoRead(c, d, meta)
+	return append(de, resourceWorkflowWorkflowInfoRead(c, d, meta)...)
 }
 
 func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1761,6 +1762,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowInfo{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -2575,7 +2577,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowWorkflowInfoRead(c, d, meta)
+	return append(de, resourceWorkflowWorkflowInfoRead(c, d, meta)...)
 }
 
 func resourceWorkflowWorkflowInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -210,6 +210,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Optional:    true,
 													Computed:    true,
 												},
+												"is_value_set": {
+													Description: "A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses.",
+													Type:        schema.TypeBool,
+													Optional:    true,
+													Computed:    true,
+												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 													Type:        schema.TypeString,
@@ -525,6 +531,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewOsConfigurationFileWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -714,6 +721,12 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 										}
 									}
 									o.SetClassId("workflow.DefaultValue")
+									if v, ok := l["is_value_set"]; ok {
+										{
+											x := (v.(bool))
+											o.SetIsValueSet(x)
+										}
+									}
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1081,7 +1094,7 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceOsConfigurationFileRead(c, d, meta)
+	return append(de, resourceOsConfigurationFileRead(c, d, meta)...)
 }
 
 func resourceOsConfigurationFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1162,6 +1175,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.OsConfigurationFile{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1360,6 +1374,12 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 										}
 									}
 									o.SetClassId("workflow.DefaultValue")
+									if v, ok := l["is_value_set"]; ok {
+										{
+											x := (v.(bool))
+											o.SetIsValueSet(x)
+										}
+									}
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1729,7 +1749,7 @@ func resourceOsConfigurationFileUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceOsConfigurationFileRead(c, d, meta)
+	return append(de, resourceOsConfigurationFileRead(c, d, meta)...)
 }
 
 func resourceOsConfigurationFileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

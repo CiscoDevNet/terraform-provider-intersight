@@ -342,6 +342,7 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSnmpPolicyWithDefaults()
 	if v, ok := d.GetOk("access_community_string"); ok {
 		x := (v.(string))
@@ -683,7 +684,7 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSnmpPolicyRead(c, d, meta)
+	return append(de, resourceSnmpPolicyRead(c, d, meta)...)
 }
 func detachSnmpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -806,6 +807,7 @@ func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SnmpPolicy{}
 	if d.HasChange("access_community_string") {
 		v := d.Get("access_community_string")
@@ -1164,7 +1166,7 @@ func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSnmpPolicyRead(c, d, meta)
+	return append(de, resourceSnmpPolicyRead(c, d, meta)...)
 }
 
 func resourceSnmpPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

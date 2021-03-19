@@ -149,6 +149,7 @@ func resourceFirmwareGpuDescriptorCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareGpuDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -288,7 +289,7 @@ func resourceFirmwareGpuDescriptorCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareGpuDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareGpuDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareGpuDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -369,6 +370,7 @@ func resourceFirmwareGpuDescriptorUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareGpuDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -519,7 +521,7 @@ func resourceFirmwareGpuDescriptorUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareGpuDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareGpuDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareGpuDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

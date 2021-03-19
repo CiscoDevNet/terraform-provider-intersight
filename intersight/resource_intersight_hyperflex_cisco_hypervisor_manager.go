@@ -173,6 +173,7 @@ func resourceHyperflexCiscoHypervisorManagerCreate(c context.Context, d *schema.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexCiscoHypervisorManagerWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -336,7 +337,7 @@ func resourceHyperflexCiscoHypervisorManagerCreate(c context.Context, d *schema.
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexCiscoHypervisorManagerRead(c, d, meta)
+	return append(de, resourceHyperflexCiscoHypervisorManagerRead(c, d, meta)...)
 }
 
 func resourceHyperflexCiscoHypervisorManagerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -405,6 +406,7 @@ func resourceHyperflexCiscoHypervisorManagerUpdate(c context.Context, d *schema.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexCiscoHypervisorManager{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -576,7 +578,7 @@ func resourceHyperflexCiscoHypervisorManagerUpdate(c context.Context, d *schema.
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexCiscoHypervisorManagerRead(c, d, meta)
+	return append(de, resourceHyperflexCiscoHypervisorManagerRead(c, d, meta)...)
 }
 
 func resourceHyperflexCiscoHypervisorManagerDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

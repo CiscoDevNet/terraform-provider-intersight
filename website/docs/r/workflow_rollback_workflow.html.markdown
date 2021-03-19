@@ -51,6 +51,9 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 
+### Custom keywords
+These are
+* `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
 
 ## Import
 `intersight_workflow_rollback_workflow` can be imported using the Moid of the object, e.g.

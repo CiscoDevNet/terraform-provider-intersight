@@ -751,7 +751,12 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -759,6 +764,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVirtualizationVirtualMachineWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -1546,6 +1552,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -1553,16 +1563,23 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualMachine: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := resultMo.GetWorkflowInfoOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetWorkflowInfo())
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualMachine: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceVirtualizationVirtualMachineRead(c, d, meta)
+	return append(de, resourceVirtualizationVirtualMachineRead(c, d, meta)...)
 }
 
 func resourceVirtualizationVirtualMachineRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1707,6 +1724,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualMachine{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -2521,6 +2539,10 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -2528,16 +2550,23 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualMachine: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := result.GetWorkflowInfoOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetWorkflowInfo())
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualMachine: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceVirtualizationVirtualMachineRead(c, d, meta)
+	return append(de, resourceVirtualizationVirtualMachineRead(c, d, meta)...)
 }
 
 func resourceVirtualizationVirtualMachineDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

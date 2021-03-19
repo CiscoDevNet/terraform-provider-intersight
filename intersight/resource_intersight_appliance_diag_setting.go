@@ -131,6 +131,7 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceDiagSettingWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -251,7 +252,7 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceDiagSettingRead(c, d, meta)
+	return append(de, resourceApplianceDiagSettingRead(c, d, meta)...)
 }
 
 func resourceApplianceDiagSettingRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -312,6 +313,7 @@ func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceDiagSetting{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -439,7 +441,7 @@ func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceApplianceDiagSettingRead(c, d, meta)
+	return append(de, resourceApplianceDiagSettingRead(c, d, meta)...)
 }
 
 func resourceApplianceDiagSettingDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

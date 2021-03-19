@@ -172,6 +172,7 @@ func resourceKubernetesClusterCreate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesClusterWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -334,7 +335,7 @@ func resourceKubernetesClusterCreate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesClusterRead(c, d, meta)
+	return append(de, resourceKubernetesClusterRead(c, d, meta)...)
 }
 
 func resourceKubernetesClusterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -403,6 +404,7 @@ func resourceKubernetesClusterUpdate(c context.Context, d *schema.ResourceData, 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesCluster{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -573,7 +575,7 @@ func resourceKubernetesClusterUpdate(c context.Context, d *schema.ResourceData, 
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesClusterRead(c, d, meta)
+	return append(de, resourceKubernetesClusterRead(c, d, meta)...)
 }
 
 func resourceKubernetesClusterDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

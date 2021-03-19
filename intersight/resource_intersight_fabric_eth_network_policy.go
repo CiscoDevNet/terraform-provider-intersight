@@ -166,6 +166,7 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFabricEthNetworkPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -323,7 +324,7 @@ func resourceFabricEthNetworkPolicyCreate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFabricEthNetworkPolicyRead(c, d, meta)
+	return append(de, resourceFabricEthNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceFabricEthNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -388,6 +389,7 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FabricEthNetworkPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -552,7 +554,7 @@ func resourceFabricEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricEthNetworkPolicyRead(c, d, meta)
+	return append(de, resourceFabricEthNetworkPolicyRead(c, d, meta)...)
 }
 
 func resourceFabricEthNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

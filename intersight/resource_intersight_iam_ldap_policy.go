@@ -447,6 +447,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamLdapPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -904,7 +905,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamLdapPolicyRead(c, d, meta)
+	return append(de, resourceIamLdapPolicyRead(c, d, meta)...)
 }
 func detachIamLdapPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -1019,6 +1020,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamLdapPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1491,7 +1493,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamLdapPolicyRead(c, d, meta)
+	return append(de, resourceIamLdapPolicyRead(c, d, meta)...)
 }
 
 func resourceIamLdapPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -283,6 +283,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewKubernetesVirtualMachineInfrastructureProviderWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -569,7 +570,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceKubernetesVirtualMachineInfrastructureProviderRead(c, d, meta)
+	return append(de, resourceKubernetesVirtualMachineInfrastructureProviderRead(c, d, meta)...)
 }
 
 func resourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -646,6 +647,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineInfrastructureProvider{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -942,7 +944,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKubernetesVirtualMachineInfrastructureProviderRead(c, d, meta)
+	return append(de, resourceKubernetesVirtualMachineInfrastructureProviderRead(c, d, meta)...)
 }
 
 func resourceKubernetesVirtualMachineInfrastructureProviderDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

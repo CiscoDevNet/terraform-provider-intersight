@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `hardware_version`:(string) Hardware version of the line cards present. 
 * `model`:(string) Model of the line cards present. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `node_id`:(string) Node Id of the line card present. 
+* `node_id`:(int) Node Id of the line card present. 
 * `operational_state`:(string) Opretaional state of the line cards present. 
 * `power_state`:(string) Power state of the line cards present. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 

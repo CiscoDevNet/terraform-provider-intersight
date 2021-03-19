@@ -203,6 +203,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewHyperflexFeatureLimitInternalWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -406,7 +407,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceHyperflexFeatureLimitInternalRead(c, d, meta)
+	return append(de, resourceHyperflexFeatureLimitInternalRead(c, d, meta)...)
 }
 
 func resourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -463,6 +464,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexFeatureLimitInternal{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -671,7 +673,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexFeatureLimitInternalRead(c, d, meta)
+	return append(de, resourceHyperflexFeatureLimitInternalRead(c, d, meta)...)
 }
 
 func resourceHyperflexFeatureLimitInternalDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

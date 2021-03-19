@@ -331,6 +331,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamCertificateRequestWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -718,7 +719,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamCertificateRequestRead(c, d, meta)
+	return append(de, resourceIamCertificateRequestRead(c, d, meta)...)
 }
 
 func resourceIamCertificateRequestRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -803,6 +804,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamCertificateRequest{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -1202,7 +1204,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamCertificateRequestRead(c, d, meta)
+	return append(de, resourceIamCertificateRequestRead(c, d, meta)...)
 }
 
 func resourceIamCertificateRequestDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

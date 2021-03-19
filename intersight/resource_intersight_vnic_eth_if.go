@@ -911,6 +911,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicEthIfWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1849,7 +1850,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicEthIfRead(c, d, meta)
+	return append(de, resourceVnicEthIfRead(c, d, meta)...)
 }
 func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -2028,6 +2029,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -2997,7 +2999,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicEthIfRead(c, d, meta)
+	return append(de, resourceVnicEthIfRead(c, d, meta)...)
 }
 
 func resourceVnicEthIfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

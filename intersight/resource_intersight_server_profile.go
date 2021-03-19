@@ -482,7 +482,12 @@ func resourceServerProfile() *schema.Resource {
 				Optional:    true,
 				Default:     "instance",
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true,
+			}},
 	}
 }
 
@@ -490,6 +495,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewServerProfileWithDefaults()
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -996,6 +1002,10 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -1003,16 +1013,23 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := resultMo.GetRunningWorkflowsOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetRunningWorkflows()...)
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceServerProfileRead(c, d, meta)
+	return append(de, resourceServerProfileRead(c, d, meta)...)
 }
 
 func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1121,6 +1138,7 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ServerProfile{}
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1646,6 +1664,10 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	result, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, result.GetMoid()).Execute()
@@ -1653,16 +1675,23 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := result.GetRunningWorkflowsOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceServerProfileRead(c, d, meta)
+	return append(de, resourceServerProfileRead(c, d, meta)...)
 }
 
 func resourceServerProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

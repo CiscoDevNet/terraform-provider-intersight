@@ -200,6 +200,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewSmtpPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -393,7 +394,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceSmtpPolicyRead(c, d, meta)
+	return append(de, resourceSmtpPolicyRead(c, d, meta)...)
 }
 func detachSmtpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -500,6 +501,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SmtpPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -706,7 +708,7 @@ func resourceSmtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSmtpPolicyRead(c, d, meta)
+	return append(de, resourceSmtpPolicyRead(c, d, meta)...)
 }
 
 func resourceSmtpPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

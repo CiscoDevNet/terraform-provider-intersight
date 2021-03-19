@@ -149,6 +149,7 @@ func resourceFirmwareMswitchDescriptorCreate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareMswitchDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -288,7 +289,7 @@ func resourceFirmwareMswitchDescriptorCreate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareMswitchDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareMswitchDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareMswitchDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -369,6 +370,7 @@ func resourceFirmwareMswitchDescriptorUpdate(c context.Context, d *schema.Resour
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareMswitchDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -519,7 +521,7 @@ func resourceFirmwareMswitchDescriptorUpdate(c context.Context, d *schema.Resour
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareMswitchDescriptorRead(c, d, meta)
+	return append(de, resourceFirmwareMswitchDescriptorRead(c, d, meta)...)
 }
 
 func resourceFirmwareMswitchDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

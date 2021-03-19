@@ -254,6 +254,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareUnsupportedVersionUpgradeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -502,7 +503,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareUnsupportedVersionUpgradeRead(c, d, meta)
+	return append(de, resourceFirmwareUnsupportedVersionUpgradeRead(c, d, meta)...)
 }
 
 func resourceFirmwareUnsupportedVersionUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -583,6 +584,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareUnsupportedVersionUpgrade{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -842,7 +844,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareUnsupportedVersionUpgradeRead(c, d, meta)
+	return append(de, resourceFirmwareUnsupportedVersionUpgradeRead(c, d, meta)...)
 }
 
 func resourceFirmwareUnsupportedVersionUpgradeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

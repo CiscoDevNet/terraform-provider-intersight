@@ -148,6 +148,7 @@ func resourceIamAccountExperienceCreate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewIamAccountExperienceWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -289,7 +290,7 @@ func resourceIamAccountExperienceCreate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceIamAccountExperienceRead(c, d, meta)
+	return append(de, resourceIamAccountExperienceRead(c, d, meta)...)
 }
 
 func resourceIamAccountExperienceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -346,6 +347,7 @@ func resourceIamAccountExperienceUpdate(c context.Context, d *schema.ResourceDat
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamAccountExperience{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -492,7 +494,7 @@ func resourceIamAccountExperienceUpdate(c context.Context, d *schema.ResourceDat
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamAccountExperienceRead(c, d, meta)
+	return append(de, resourceIamAccountExperienceRead(c, d, meta)...)
 }
 
 func resourceIamAccountExperienceDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

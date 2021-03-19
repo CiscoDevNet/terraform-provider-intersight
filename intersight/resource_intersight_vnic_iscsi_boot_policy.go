@@ -451,6 +451,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewVnicIscsiBootPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -911,7 +912,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceVnicIscsiBootPolicyRead(c, d, meta)
+	return append(de, resourceVnicIscsiBootPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1016,6 +1017,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicIscsiBootPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1493,7 +1495,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicIscsiBootPolicyRead(c, d, meta)
+	return append(de, resourceVnicIscsiBootPolicyRead(c, d, meta)...)
 }
 
 func resourceVnicIscsiBootPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

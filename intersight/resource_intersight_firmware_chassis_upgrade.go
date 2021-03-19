@@ -777,6 +777,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareChassisUpgradeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1488,7 +1489,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareChassisUpgradeRead(c, d, meta)
+	return append(de, resourceFirmwareChassisUpgradeRead(c, d, meta)...)
 }
 
 func resourceFirmwareChassisUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

@@ -377,6 +377,7 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCertificatemanagementPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -828,7 +829,7 @@ func resourceCertificatemanagementPolicyCreate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCertificatemanagementPolicyRead(c, d, meta)
+	return append(de, resourceCertificatemanagementPolicyRead(c, d, meta)...)
 }
 func detachCertificatemanagementPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -915,6 +916,7 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CertificatemanagementPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1374,7 +1376,7 @@ func resourceCertificatemanagementPolicyUpdate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCertificatemanagementPolicyRead(c, d, meta)
+	return append(de, resourceCertificatemanagementPolicyRead(c, d, meta)...)
 }
 
 func resourceCertificatemanagementPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

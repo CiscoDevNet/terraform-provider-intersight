@@ -446,6 +446,7 @@ func resourceFirmwareDriverDistributableCreate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewFirmwareDriverDistributableWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -900,7 +901,7 @@ func resourceFirmwareDriverDistributableCreate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceFirmwareDriverDistributableRead(c, d, meta)
+	return append(de, resourceFirmwareDriverDistributableRead(c, d, meta)...)
 }
 
 func resourceFirmwareDriverDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -1069,6 +1070,7 @@ func resourceFirmwareDriverDistributableUpdate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareDriverDistributable{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1556,7 +1558,7 @@ func resourceFirmwareDriverDistributableUpdate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareDriverDistributableRead(c, d, meta)
+	return append(de, resourceFirmwareDriverDistributableRead(c, d, meta)...)
 }
 
 func resourceFirmwareDriverDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

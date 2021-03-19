@@ -47,7 +47,7 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 			},
 			"node_id": {
 				Description: "Node Id of the line card present.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"object_type": {
@@ -131,7 +131,7 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 					},
 					"node_id": {
 						Description: "Node Id of the line card present.",
-						Type:        schema.TypeString,
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"object_type": {
@@ -274,7 +274,7 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 		o.SetMoid(x)
 	}
 	if v, ok := d.GetOk("node_id"); ok {
-		x := (v.(string))
+		x := int64(v.(int))
 		o.SetNodeId(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {

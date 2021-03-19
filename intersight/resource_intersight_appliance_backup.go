@@ -213,6 +213,7 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewApplianceBackupWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -389,7 +390,7 @@ func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, me
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceApplianceBackupRead(c, d, meta)
+	return append(de, resourceApplianceBackupRead(c, d, meta)...)
 }
 
 func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

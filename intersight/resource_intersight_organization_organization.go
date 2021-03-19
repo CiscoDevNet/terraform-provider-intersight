@@ -165,6 +165,7 @@ func resourceOrganizationOrganizationCreate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewOrganizationOrganizationWithDefaults()
 	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
@@ -322,7 +323,7 @@ func resourceOrganizationOrganizationCreate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceOrganizationOrganizationRead(c, d, meta)
+	return append(de, resourceOrganizationOrganizationRead(c, d, meta)...)
 }
 
 func resourceOrganizationOrganizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -387,6 +388,7 @@ func resourceOrganizationOrganizationUpdate(c context.Context, d *schema.Resourc
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.OrganizationOrganization{}
 	if d.HasChange("account") {
 		v := d.Get("account")
@@ -551,7 +553,7 @@ func resourceOrganizationOrganizationUpdate(c context.Context, d *schema.Resourc
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceOrganizationOrganizationRead(c, d, meta)
+	return append(de, resourceOrganizationOrganizationRead(c, d, meta)...)
 }
 
 func resourceOrganizationOrganizationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

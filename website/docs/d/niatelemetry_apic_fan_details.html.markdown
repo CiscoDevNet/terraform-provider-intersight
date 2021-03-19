@@ -16,7 +16,7 @@ The following arguments can be used to get data of already created objects in In
 * `dn`:(string) Dn for the fan in the inventory. 
 * `model_number`:(string) Model number of the fan in APIC. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `node_id`:(string) Node id for the fan in the inventory. 
+* `node_id`:(int) Node id for the fan in the inventory. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `serial_number`:(string) Serial number of the fan in APIC. 

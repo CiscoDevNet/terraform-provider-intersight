@@ -139,6 +139,7 @@ func resourceCapabilityChassisDescriptorCreate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewCapabilityChassisDescriptorWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -268,7 +269,7 @@ func resourceCapabilityChassisDescriptorCreate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceCapabilityChassisDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityChassisDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityChassisDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -341,6 +342,7 @@ func resourceCapabilityChassisDescriptorUpdate(c context.Context, d *schema.Reso
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityChassisDescriptor{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -479,7 +481,7 @@ func resourceCapabilityChassisDescriptorUpdate(c context.Context, d *schema.Reso
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityChassisDescriptorRead(c, d, meta)
+	return append(de, resourceCapabilityChassisDescriptorRead(c, d, meta)...)
 }
 
 func resourceCapabilityChassisDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

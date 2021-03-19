@@ -341,6 +341,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewAdapterConfigPolicyWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -691,7 +692,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
-	return resourceAdapterConfigPolicyRead(c, d, meta)
+	return append(de, resourceAdapterConfigPolicyRead(c, d, meta)...)
 }
 func detachAdapterConfigPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -778,6 +779,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.AdapterConfigPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1136,7 +1138,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceAdapterConfigPolicyRead(c, d, meta)
+	return append(de, resourceAdapterConfigPolicyRead(c, d, meta)...)
 }
 
 func resourceAdapterConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

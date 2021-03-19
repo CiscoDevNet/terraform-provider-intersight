@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **InterfaceType** | Pointer to **string** | Type of External Ethernet Interface. | [optional] [readonly] 
 **MacAddress** | Pointer to **string** | Mac address of the Host Ethernet Interface. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of Host Ethernet Interface. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **Operability** | Pointer to **string** | Operability status of Host Ethernet Channel Interface. | [optional] [readonly] 
 **OriginalMacAddress** | Pointer to **string** | The factory default Mac address of the Host Ethernet Interface. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The PCI address of the Host Ethernet Interface. | [optional] [readonly] 
@@ -231,6 +232,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *AdapterHostEthInterfaceAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *AdapterHostEthInterfaceAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *AdapterHostEthInterfaceAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *AdapterHostEthInterfaceAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *AdapterHostEthInterfaceAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *AdapterHostEthInterfaceAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperability
 
 `func (o *AdapterHostEthInterfaceAllOf) GetOperability() string`

@@ -174,7 +174,12 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				ForceNew:   true,
 			},
-		},
+			"wait_for_completion": {
+				Description: "This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state.",
+				Type:        schema.TypeBool,
+				Default:     true,
+				Optional:    true, ForceNew: true,
+			}},
 	}
 }
 
@@ -182,6 +187,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = models.NewConnectorpackConnectorPackUpgradeWithDefaults()
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -335,6 +341,10 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
 	// Check for Workflow Status
 	time.Sleep(2 * time.Second)
 	resultMo, _, responseErr = conn.ApiClient.ConnectorpackApi.GetConnectorpackConnectorPackUpgradeByMoid(conn.ctx, resultMo.GetMoid()).Execute()
@@ -342,16 +352,23 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	var runningWorkflows []models.WorkflowWorkflowInfoRelationship
-	runningWorkflows = append(runningWorkflows, resultMo.GetWorkflow())
-	for _, w := range runningWorkflows {
-		err := checkWorkflowStatus(conn, w)
-		if err != nil {
-			err := err.(models.GenericOpenAPIError)
-			return diag.Errorf("failed while fetching workflow information in ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+	if waitForCompletion {
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := resultMo.GetWorkflowOk(); ok {
+			runningWorkflows = append(runningWorkflows, resultMo.GetWorkflow())
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				err := err.(models.GenericOpenAPIError)
+				return diag.Errorf("failed while fetching workflow information in ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
 		}
 	}
-	return resourceConnectorpackConnectorPackUpgradeRead(c, d, meta)
+	return append(de, resourceConnectorpackConnectorPackUpgradeRead(c, d, meta)...)
 }
 
 func resourceConnectorpackConnectorPackUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {

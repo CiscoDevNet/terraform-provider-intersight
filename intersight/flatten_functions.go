@@ -757,6 +757,18 @@ func flattenListComputeIpAddress(p []models.ComputeIpAddress, d *schema.Resource
 	}
 	return computeipaddresss
 }
+func flattenListComputeMappingRelationship(p []models.ComputeMappingRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var computemappingrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		computemappingrelationship := flattenMoMoRef(item)
+		computemappingrelationships = append(computemappingrelationships, computemappingrelationship)
+	}
+	return computemappingrelationships
+}
 func flattenListComputeRackUnitRelationship(p []models.ComputeRackUnitRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var computerackunitrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -3736,6 +3748,7 @@ func flattenListOsPlaceHolder(p []models.OsPlaceHolder, d *schema.ResourceData) 
 				workflowdefaultvalue := make(map[string]interface{})
 				workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 				workflowdefaultvalue["class_id"] = item.ClassId
+				workflowdefaultvalue["is_value_set"] = item.IsValueSet
 				workflowdefaultvalue["object_type"] = item.ObjectType
 				workflowdefaultvalue["override"] = item.Override
 				workflowdefaultvalue["value"] = item.Value
@@ -5171,6 +5184,7 @@ func flattenListWorkflowBaseDataType(p []models.WorkflowBaseDataType, d *schema.
 			workflowdefaultvalue := make(map[string]interface{})
 			workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 			workflowdefaultvalue["class_id"] = item.ClassId
+			workflowdefaultvalue["is_value_set"] = item.IsValueSet
 			workflowdefaultvalue["object_type"] = item.ObjectType
 			workflowdefaultvalue["override"] = item.Override
 			workflowdefaultvalue["value"] = item.Value
@@ -13660,6 +13674,7 @@ func flattenMapWorkflowProperties(p models.WorkflowProperties, d *schema.Resourc
 				workflowdefaultvalue := make(map[string]interface{})
 				workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 				workflowdefaultvalue["class_id"] = item.ClassId
+				workflowdefaultvalue["is_value_set"] = item.IsValueSet
 				workflowdefaultvalue["object_type"] = item.ObjectType
 				workflowdefaultvalue["override"] = item.Override
 				workflowdefaultvalue["value"] = item.Value
@@ -13714,6 +13729,7 @@ func flattenMapWorkflowProperties(p models.WorkflowProperties, d *schema.Resourc
 				workflowdefaultvalue := make(map[string]interface{})
 				workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 				workflowdefaultvalue["class_id"] = item.ClassId
+				workflowdefaultvalue["is_value_set"] = item.IsValueSet
 				workflowdefaultvalue["object_type"] = item.ObjectType
 				workflowdefaultvalue["override"] = item.Override
 				workflowdefaultvalue["value"] = item.Value
