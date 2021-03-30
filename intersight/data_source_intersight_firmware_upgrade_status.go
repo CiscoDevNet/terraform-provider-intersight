@@ -20,7 +20,7 @@ func dataSourceFirmwareUpgradeStatus() *schema.Resource {
 				Optional:    true,
 			},
 			"download_error": {
-				Description: "The error message from the endpoint during the download.",
+				Description: "Any error encountered. Set to empty when download is in progress or completed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -93,13 +93,45 @@ func dataSourceFirmwareUpgradeStatus() *schema.Resource {
 					Optional:         true,
 					DiffSuppressFunc: SuppressDiffAdditionProps,
 				},
+					"checksum": {
+						Description: "The checksum of the downloaded file as calculated by the download plugin after successfully downloading a file.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hash_algorithm": {
+									Description: "The hash algorithm used to calculate the checksum.\n* `crc` - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial.\n* `sha256` - A SHA256 hash as defined by RFC 4634.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"download_error": {
-						Description: "The error message from the endpoint during the download.",
+						Description: "Any error encountered. Set to empty when download is in progress or completed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -365,6 +397,8 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 				var s = results[i]
 				var temp = make(map[string]interface{})
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["checksum"] = flattenMapConnectorFileChecksum(s.GetChecksum(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["download_error"] = (s.GetDownloadError())
 				temp["download_message"] = (s.GetDownloadMessage())

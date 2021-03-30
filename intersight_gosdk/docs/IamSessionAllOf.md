@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **IdleTimeExpiration** | Pointer to **time.Time** | Idle time expiration for the session. | [optional] [readonly] 
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
 **LastLoginTime** | Pointer to **time.Time** | The last login time for user. | [optional] [readonly] 
+**SessionId** | Pointer to **string** | Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization. | [optional] 
 **Permission** | Pointer to [**IamPermissionRelationship**](iam.Permission.Relationship.md) |  | [optional] 
 **User** | Pointer to [**IamUserRelationship**](iam.User.Relationship.md) |  | [optional] 
 
@@ -233,6 +234,31 @@ SetLastLoginTime sets LastLoginTime field to given value.
 `func (o *IamSessionAllOf) HasLastLoginTime() bool`
 
 HasLastLoginTime returns a boolean if a field has been set.
+
+### GetSessionId
+
+`func (o *IamSessionAllOf) GetSessionId() string`
+
+GetSessionId returns the SessionId field if non-nil, zero value otherwise.
+
+### GetSessionIdOk
+
+`func (o *IamSessionAllOf) GetSessionIdOk() (*string, bool)`
+
+GetSessionIdOk returns a tuple with the SessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSessionId
+
+`func (o *IamSessionAllOf) SetSessionId(v string)`
+
+SetSessionId sets SessionId field to given value.
+
+### HasSessionId
+
+`func (o *IamSessionAllOf) HasSessionId() bool`
+
+HasSessionId returns a boolean if a field has been set.
 
 ### GetPermission
 

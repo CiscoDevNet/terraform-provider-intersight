@@ -37,9 +37,10 @@ Name | Type | Description | Notes
 **ResourcePoolParent** | Pointer to **string** | The parent of the current resource pool to which this VM belongs. | [optional] 
 **ToolRunningStatus** | Pointer to **string** | Indicates if guest tools are running on this VM. Could be set to guestToolNotRunning or guestToolsRunning. | [optional] 
 **ToolsVersion** | Pointer to **string** | The version of the guest tools, usually not specified. | [optional] 
+**VirtualDisks** | Pointer to **[]int64** |  | [optional] 
 **VmDiskCount** | Pointer to **int64** | Shows the number of disks assigned to this VM. | [optional] 
 **VmOverallStatus** | Pointer to **string** | The operational state of the VM. Could be Available, Provisioned, Maintenance mode, Deleting, etc. | [optional] 
-**VmPath** | Pointer to **string** | Example - [datastore3] VCSA-134/VCSA-134.vmx. | [optional] 
+**VmPath** | Pointer to **string** | Path to the vmx file of the VM. Example - [datastore3] VCSA-134/VCSA-134.vmx. | [optional] 
 **VmVersion** | Pointer to **string** | Information about the version of this VM (vmx-09, vmx-11 etc.). | [optional] 
 **VmVnicCount** | Pointer to **int64** | How many vnics are present. | [optional] 
 **VnicDeviceConfigId** | Pointer to **string** | Information related to the guest info&#39;s VNIC virtual device. It is a comma-separated list. | [optional] 
@@ -982,6 +983,41 @@ SetToolsVersion sets ToolsVersion field to given value.
 
 HasToolsVersion returns a boolean if a field has been set.
 
+### GetVirtualDisks
+
+`func (o *VirtualizationVmwareVirtualMachine) GetVirtualDisks() []int64`
+
+GetVirtualDisks returns the VirtualDisks field if non-nil, zero value otherwise.
+
+### GetVirtualDisksOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetVirtualDisksOk() (*[]int64, bool)`
+
+GetVirtualDisksOk returns a tuple with the VirtualDisks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualDisks
+
+`func (o *VirtualizationVmwareVirtualMachine) SetVirtualDisks(v []int64)`
+
+SetVirtualDisks sets VirtualDisks field to given value.
+
+### HasVirtualDisks
+
+`func (o *VirtualizationVmwareVirtualMachine) HasVirtualDisks() bool`
+
+HasVirtualDisks returns a boolean if a field has been set.
+
+### SetVirtualDisksNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetVirtualDisksNil(b bool)`
+
+ SetVirtualDisksNil sets the value for VirtualDisks to be an explicit nil
+
+### UnsetVirtualDisks
+`func (o *VirtualizationVmwareVirtualMachine) UnsetVirtualDisks()`
+
+UnsetVirtualDisks ensures that no value is present for VirtualDisks, not even an explicit nil
 ### GetVmDiskCount
 
 `func (o *VirtualizationVmwareVirtualMachine) GetVmDiskCount() int64`

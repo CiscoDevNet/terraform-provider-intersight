@@ -27,7 +27,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Default:     "None",
 			},
 			"action_info": {
-				Description: "Details of an action performed on the virtul machine. Contains name of the action performed, status, failure reason message etc.",
+				Description: "Details of an action performed on the virtual machine. Contains name of the action performed, status, failure reason message etc.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -348,11 +348,6 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 										Optional:    true,
 										Default:     "Block",
 									},
-									"name": {
-										Description: "Name of the virtual disk.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
@@ -388,6 +383,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
+			},
+			"force_delete": {
+				Description: "Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine.",
+				Type:        schema.TypeBool,
+				Optional:    true,
 			},
 			"guest_os": {
 				Description: "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
@@ -454,7 +454,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"adaptor_type": {
-							Description: "Virtual machine network adaptor type.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.",
+							Description: "Virtual machine network adaptor type.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "Unknown",
@@ -487,6 +487,11 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 						},
 						"mac_address": {
 							Description: "Virtual machine network mac address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"name": {
+							Description: "Name of the network interface. This may be different from guest operating assigned.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -582,7 +587,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Computed:   true,
 			},
 			"memory": {
-				Description: "Virtual machine memory defined in mega bytes.",
+				Description: "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -1111,12 +1116,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 								o.SetMode(x)
 							}
 						}
-						if v, ok := l["name"]; ok {
-							{
-								x := (v.(string))
-								o.SetName(x)
-							}
-						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1160,6 +1159,11 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		if len(x) > 0 {
 			o.SetDisk(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("force_delete"); ok {
+		x := v.(bool)
+		o.SetForceDelete(x)
 	}
 
 	if v, ok := d.GetOk("guest_os"); ok {
@@ -1265,6 +1269,12 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 				{
 					x := (v.(string))
 					o.SetMacAddress(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1645,6 +1655,10 @@ func resourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Resou
 
 	if err := d.Set("disk", flattenListVirtualizationVirtualMachineDisk(s.GetDisk(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Disk in VirtualizationVirtualMachine object: %s", err.Error())
+	}
+
+	if err := d.Set("force_delete", (s.GetForceDelete())); err != nil {
+		return diag.Errorf("error occurred while setting property ForceDelete in VirtualizationVirtualMachine object: %s", err.Error())
 	}
 
 	if err := d.Set("guest_os", (s.GetGuestOs())); err != nil {
@@ -2082,12 +2096,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 								o.SetMode(x)
 							}
 						}
-						if v, ok := l["name"]; ok {
-							{
-								x := (v.(string))
-								o.SetName(x)
-							}
-						}
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2131,6 +2139,12 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		if len(x) > 0 {
 			o.SetDisk(x)
 		}
+	}
+
+	if d.HasChange("force_delete") {
+		v := d.Get("force_delete")
+		x := (v.(bool))
+		o.SetForceDelete(x)
 	}
 
 	if d.HasChange("guest_os") {
@@ -2241,6 +2255,12 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 				{
 					x := (v.(string))
 					o.SetMacAddress(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {

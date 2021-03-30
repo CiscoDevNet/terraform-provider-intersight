@@ -15,7 +15,7 @@ func dataSourceStorageHitachiHost() *schema.Resource {
 		ReadContext: dataSourceStorageHitachiHostRead,
 		Schema: map[string]*schema.Schema{
 			"authentication_mode": {
-				Description: "Authentication mode for the iSCSI target.\n* `N/A` - Not available.\n* `CHAP` - CHAP-authentication mode.\n* `NONE` - No-authentication mode.\n* `BOTH` - Comply with Host Setting.",
+				Description: "Authentication mode for the iSCSI target.\n* `N/A` - Authentication Mode is not available.\n* `CHAP` - CHAP-authentication mode.\n* `NONE` - Authentication mode is not set.\n* `BOTH` - Comply with Host Setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -149,7 +149,7 @@ func dataSourceStorageHitachiHost() *schema.Resource {
 						},
 					},
 					"authentication_mode": {
-						Description: "Authentication mode for the iSCSI target.\n* `N/A` - Not available.\n* `CHAP` - CHAP-authentication mode.\n* `NONE` - No-authentication mode.\n* `BOTH` - Comply with Host Setting.",
+						Description: "Authentication mode for the iSCSI target.\n* `N/A` - Authentication Mode is not available.\n* `CHAP` - CHAP-authentication mode.\n* `NONE` - Authentication mode is not set.\n* `BOTH` - Comply with Host Setting.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

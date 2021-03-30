@@ -44,7 +44,7 @@ This complex property has following sub-properties:
 * `server_firmware_versions`:(Array)
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `server_platform`:(string) The platform type for UCS server.* `M5` - M5 generation of UCS server.* `M4` - M4 generation of UCS server. 
+  + `server_platform`:(string) The platform type for UCS server.* `M5` - M5 generation of UCS server.* `M3` - M3 generation of UCS server.* `M4` - M4 generation of UCS server. 
   + `nr_version`:(string) The server firmware bundle version. 
 * `tags`:(Array)
 This complex property has following sub-properties:

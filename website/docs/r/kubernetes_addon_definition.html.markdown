@@ -16,9 +16,9 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `chart_url`:(string) Description of the addon component. 
-* `default_install_strategy`:(string) Default installation strategy for the release.* `InstallOnly` - Only install in green field. No action in case of failure or removal.* `NoAction` - No install action performed.* `Always` - Attempt install if chart is not already installed. 
+* `default_install_strategy`:(string) Default installation strategy for the release.* `None` - Unspecified install strategy.* `NoAction` - No install action performed.* `InstallOnly` - Only install in green field. No action in case of failure or removal.* `Always` - Attempt install if chart is not already installed. 
 * `default_namespace`:(string) Default namespace to install the release. 
-* `default_upgrade_strategy`:(string) Default upgrade strategy for the release.* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.* `NoAction` - This choice enables No upgrades to be performed.* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.* `AlwaysReinstall` - Always remove older release and reinstall. 
+* `default_upgrade_strategy`:(string) Default upgrade strategy for the release.* `None` - Unspecified upgrade strategy.* `NoAction` - This choice enables No upgrades to be performed.* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.* `AlwaysReinstall` - Always remove older release and reinstall. 
 * `description`:(string) Description of the addon component. 
 * `digest`:(string) Digest used to verify the integrity of an addon. 
 * `icon_url`:(string) Icon used to represent the addon in UI. 
@@ -33,7 +33,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `nr_version`:(string)(Computed) Version of the addon component. 
+* `nr_version`:(string) Version of the addon component. 
 
 
 ## Import

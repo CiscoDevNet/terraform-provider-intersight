@@ -13,7 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_firmware_upgrade_status.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `download_error`:(string) The error message from the endpoint during the download. 
+* `download_error`:(string) Any error encountered. Set to empty when download is in progress or completed. 
 * `download_message`:(string) The message from the endpoint during the download. 
 * `download_percentage`:(int) The percentage of the image downloaded in the endpoint. 
 * `download_progress`:(int) The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent. 

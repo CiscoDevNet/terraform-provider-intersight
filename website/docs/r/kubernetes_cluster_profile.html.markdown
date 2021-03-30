@@ -22,11 +22,6 @@ This complex property has following sub-properties:
   + `name`:(string)(Computed) Name of the Action performed on a resource like VM, Disk etc. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `status`:(string)(Computed) Status of the Action like InProgress, Success, Failure etc.* `None` - A place holder for the default value.* `InProgress` - Action triggered on the resource is still running.* `Success` - Action triggered on the resource is completed successfully.* `Failure` - Action triggered on the resource is failed. 
-* `addons`:(Array) An array of relationships to kubernetesAddonPolicy resources. 
-This complex property has following sub-properties:
-  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
-  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
-  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `associated_cluster`:(HashMap) -(Computed) A reference to a kubernetesCluster resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
@@ -52,7 +47,7 @@ This complex property has following sub-properties:
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `config_context`:(HashMap) - The configuration state and results of the last configuration operation. 
 This complex property has following sub-properties:
-  + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed. 
+  + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
   + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -63,6 +58,28 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `description`:(string) Description of the profile. 
+* `essential_addons`:(Array)
+This complex property has following sub-properties:
+  + `addon_configuration`:(HashMap) - Addon configuration settings that are specific to a single cluster. 
+This complex property has following sub-properties:
+    + `install_strategy`:(string) Addon install strategy to determine whether an addon is installed if not present.* `None` - Unspecified install strategy.* `NoAction` - No install action performed.* `InstallOnly` - Only install in green field. No action in case of failure or removal.* `Always` - Attempt install if chart is not already installed. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `override_sets`:(Array)
+This complex property has following sub-properties:
+    + `key`:(string) Key or property name in a key/value pair. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `value`:(string) Property value in a key/value pair. 
+  + `overrides`:(string) Properties that can be overridden for an addon. 
+  + `release_name`:(string) Name for the helm release. 
+  + `release_namespace`:(string) Namespace for the helm release. 
+  + `upgrade_strategy`:(string) Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.* `None` - Unspecified upgrade strategy.* `NoAction` - This choice enables No upgrades to be performed.* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.* `AlwaysReinstall` - Always remove older release and reinstall. 
+  + `addon_definition`:(HashMap) - Addon definition associated with the addon. 
+This complex property has following sub-properties:
+    + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `name`:(string) Name of addon to be installed on a Kubernetes cluster. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `kube_config`:(HashMap) -(Computed) Certificates and keys that are used to access a Kubernetescluster. 
 This complex property has following sub-properties:
   + `kube_config`:(string)(Computed) Kubernetes configuration to connect to the cluster as an system administrator. 
@@ -107,12 +124,17 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `policy_bucket`:(Array) An array of relationships to policyAbstractPolicy resources. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `status`:(string) Status of the Kubernetes cluster and its nodes.* `Configuring` - The cluster is being configured.* `Deploying` - The cluster is being deployed.* `Undeploying` - The cluster is being undeployed.* `DeployFailed` - The cluster deployment failed.* `Upgrading` - The cluster is being upgraded.* `Deleting` - The cluster is being deleted.* `DeleteFailed` - The cluster delete failed.* `Ready` - The cluster is ready for use.* `Active` - The cluster is being active.* `Shutdown` - All the nodes in the cluster are powered off.* `Terminated` - The cluster is terminated.* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.* `UndeployFailed` - The cluster undeploy action failed.* `NotReady` - The cluster is created and some nodes are not ready. 
+* `status`:(string) Status of the Kubernetes cluster and its nodes.* `Undeployed` - The cluster is undeployed.* `Configuring` - The cluster is being configured.* `Deploying` - The cluster is being deployed.* `Undeploying` - The cluster is being undeployed.* `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered.* `DeployFailed` - The cluster deployment failed.* `Upgrading` - The cluster is being upgraded.* `Deleting` - The cluster is being deleted.* `DeleteFailed` - The cluster delete failed.* `Ready` - The cluster is ready for use.* `Active` - The cluster is being active.* `Shutdown` - All the nodes in the cluster are powered off.* `Terminated` - The cluster is terminated.* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.* `UndeployFailed` - The cluster undeploy action failed.* `NotReady` - The cluster is created and some nodes are not ready. 
 * `sys_config`:(HashMap) - A reference to a kubernetesSysConfigPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 

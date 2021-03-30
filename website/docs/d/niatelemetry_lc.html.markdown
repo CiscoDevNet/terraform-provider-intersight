@@ -26,4 +26,5 @@ The following arguments can be used to get data of already created objects in In
 * `redundancy_state`:(string) Redundancy state of the line cards present. 
 * `serial_number`:(string) Serial number of the line card present. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. 
+* `vid`:(string) VID for the line card in the inventory. 
  

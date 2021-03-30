@@ -25,7 +25,7 @@ This complex property has following sub-properties:
 * `vlan_settings`:(HashMap) - VLAN configuration for the virtual interface. 
 This complex property has following sub-properties:
   + `allowed_vlans`:(string) Allowed VLAN IDs of the virtual interface. 
-  + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface. 
+  + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. If the native VLAN is not a part of the allowed VLANs, it will automatically be added to the list of allowed VLANs. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
 

@@ -40,6 +40,11 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"force_delete": {
+				Description: "Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"guest_os": {
 				Description: "Guest operating system running on virtual machine.\n* `linux` - A Linux operating system.\n* `windows` - A Windows operating system.",
 				Type:        schema.TypeString,
@@ -57,7 +62,7 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Computed:    true,
 			},
 			"memory": {
-				Description: "Virtual machine memory defined in mega bytes.",
+				Description: "Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -121,6 +126,10 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("discovered"); ok {
 		x := (v.(bool))
 		o.SetDiscovered(x)
+	}
+	if v, ok := d.GetOk("force_delete"); ok {
+		x := (v.(bool))
+		o.SetForceDelete(x)
 	}
 	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
@@ -206,6 +215,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 				temp["discovered"] = (s.GetDiscovered())
 
 				temp["disk"] = flattenListVirtualizationVirtualMachineDisk(s.GetDisk(), d)
+				temp["force_delete"] = (s.GetForceDelete())
 				temp["guest_os"] = (s.GetGuestOs())
 
 				temp["host"] = flattenMapVirtualizationBaseHostRelationship(s.GetHost(), d)

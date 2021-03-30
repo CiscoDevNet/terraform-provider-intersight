@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -25,11 +25,11 @@ type StorageNetAppVolumeAllOf struct {
 	AutosizeMode *string `json:"AutosizeMode,omitempty"`
 	// Name of Export Policy.
 	ExportPolicyName *string `json:"ExportPolicyName,omitempty"`
-	// Name of Snapshot Policy.
+	// Name of the snapshot policy.
 	SnapshotPolicyName *string `json:"SnapshotPolicyName,omitempty"`
-	// Name of Snapshot Policy.
+	// Uuid of the snapshot policy.
 	SnapshotPolicyUuid *string `json:"SnapshotPolicyUuid,omitempty"`
-	// The total space used by Snapshot copies in the volume represented in bytes.
+	// The total space used by snapshot copies in the volume represented in bytes.
 	SnapshotUtilizedCapacity *int64 `json:"SnapshotUtilizedCapacity,omitempty"`
 	// The current state of a NetApp volume. * `offline` - Read and write access to the volume is not allowed. * `online` - Read and write access to the volume is allowed. * `error` - Storage volume state of error type. * `mixed` - The constituents of a FlexGroup volume are not all in the same state.
 	State *string `json:"State,omitempty"`

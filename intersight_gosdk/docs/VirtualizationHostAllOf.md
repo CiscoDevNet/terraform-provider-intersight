@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **HypervisorType** | Pointer to **string** | Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
 **Identity** | Pointer to **string** | Unique identifier assigned to the hypervisor host. | [optional] [readonly] 
 **Model** | Pointer to **string** | Commercial model information about this hardware. | [optional] [readonly] 
-**Name** | Pointer to **string** | Name of the hypervisor host. It must be unique within the targer endpoint. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the hypervisor host. It must be unique within the target endpoint. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Serial number of this host (internally generated). | [optional] [readonly] 
 **Vendor** | Pointer to **string** | Commercial vendor details of this hardware. | [optional] [readonly] 
 **Inventory** | Pointer to [**VirtualizationBaseHostRelationship**](virtualization.BaseHost.Relationship.md) |  | [optional] 

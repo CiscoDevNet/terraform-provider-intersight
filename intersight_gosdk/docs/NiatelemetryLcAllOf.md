@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **RedundancyState** | Pointer to **string** | Redundancy state of the line cards present. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the line card present. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. | [optional] 
+**Vid** | Pointer to **string** | VID for the line card in the inventory. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -378,6 +379,31 @@ SetSiteName sets SiteName field to given value.
 `func (o *NiatelemetryLcAllOf) HasSiteName() bool`
 
 HasSiteName returns a boolean if a field has been set.
+
+### GetVid
+
+`func (o *NiatelemetryLcAllOf) GetVid() string`
+
+GetVid returns the Vid field if non-nil, zero value otherwise.
+
+### GetVidOk
+
+`func (o *NiatelemetryLcAllOf) GetVidOk() (*string, bool)`
+
+GetVidOk returns a tuple with the Vid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVid
+
+`func (o *NiatelemetryLcAllOf) SetVid(v string)`
+
+SetVid sets Vid field to given value.
+
+### HasVid
+
+`func (o *NiatelemetryLcAllOf) HasVid() bool`
+
+HasVid returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -41,11 +41,6 @@ func dataSourceKubernetesAddonPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"system_managed": {
-				Description: "To determine if Addon Policy is automatically managed by the system.",
-				Type:        schema.TypeBool,
-				Optional:    true,
-			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceKubernetesAddonPolicy().Schema},
@@ -80,10 +75,6 @@ func dataSourceKubernetesAddonPolicyRead(c context.Context, d *schema.ResourceDa
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
-	if v, ok := d.GetOk("system_managed"); ok {
-		x := (v.(bool))
-		o.SetSystemManaged(x)
-	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -116,17 +107,16 @@ func dataSourceKubernetesAddonPolicyRead(c context.Context, d *schema.ResourceDa
 				var temp = make(map[string]interface{})
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-				temp["addons"] = flattenListKubernetesAddonRelationship(s.GetAddons(), d)
-				temp["class_id"] = (s.GetClassId())
+				temp["addon_configuration"] = flattenMapKubernetesAddonConfiguration(s.GetAddonConfiguration(), d)
 
-				temp["cluster_profiles"] = flattenListKubernetesClusterProfileRelationship(s.GetClusterProfiles(), d)
+				temp["addon_definition"] = flattenMapKubernetesAddonDefinitionRelationship(s.GetAddonDefinition(), d)
+				temp["class_id"] = (s.GetClassId())
 				temp["description"] = (s.GetDescription())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
-				temp["system_managed"] = (s.GetSystemManaged())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				kubernetesAddonPolicyResults[j] = temp

@@ -18,9 +18,9 @@ The following arguments can be used to get data of already created objects in In
 * `export_policy_name`:(string) Name of Export Policy. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the storage container. 
-* `snapshot_policy_name`:(string) Name of Snapshot Policy. 
-* `snapshot_policy_uuid`:(string) Name of Snapshot Policy. 
-* `snapshot_utilized_capacity`:(int) The total space used by Snapshot copies in the volume represented in bytes. 
+* `snapshot_policy_name`:(string) Name of the snapshot policy. 
+* `snapshot_policy_uuid`:(string) Uuid of the snapshot policy. 
+* `snapshot_utilized_capacity`:(int) The total space used by snapshot copies in the volume represented in bytes. 
 * `state`:(string) The current state of a NetApp volume.* `offline` - Read and write access to the volume is not allowed.* `online` - Read and write access to the volume is allowed.* `error` - Storage volume state of error type.* `mixed` - The constituents of a FlexGroup volume are not all in the same state. 
 * `type`:(string) NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.* `data-protection` - Prevents modification of the data on the Volume.* `read-write` - Data on the Volume can be modified.* `load-sharing` - Load Sharing. 
 * `uuid`:(string) UUID of NetApp Volume. 

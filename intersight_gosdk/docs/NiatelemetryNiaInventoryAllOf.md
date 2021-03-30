@@ -28,9 +28,16 @@ Name | Type | Description | Notes
 **MacsecTotalCount** | Pointer to **int64** | Number of total Macsec configured interfaces for all nodes. | [optional] 
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
-**NxosEvpnMacRoutes** | Pointer to **int64** | Returns the total number of evpn mac routes. | [optional] 
+**NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](niatelemetry.NxosBgpMvpn.md) |  | [optional] 
+**NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
 **NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](niatelemetry.Interface.md) |  | [optional] 
+**NxosNveInterfaceStatus** | Pointer to **string** | Returns the value of the nxosNveInterface field. | [optional] 
+**NxosNveVni** | Pointer to [**NullableNiatelemetryNveVni**](niatelemetry.NveVni.md) |  | [optional] 
+**NxosOspfNeighbors** | Pointer to **int64** | Total number of ospf neighbors per switch in DCNM. | [optional] 
+**NxosPimNeighbors** | Pointer to **string** | Total number of pim neighbors per switch in DCNM. | [optional] 
 **NxosTelnet** | Pointer to **string** | Returns the value of the nxosTelnet field. | [optional] 
+**NxosTotalRoutes** | Pointer to **int64** | Total number of routes configured in the DCNM. | [optional] 
+**NxosVtp** | Pointer to [**NullableNiatelemetryNxosVtp**](niatelemetry.NxosVtp.md) |  | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RoutePrefixCount** | Pointer to **int64** | Total nuumber of v4 and v6 routes per node. | [optional] 
@@ -663,30 +670,65 @@ SetNodeId sets NodeId field to given value.
 
 HasNodeId returns a boolean if a field has been set.
 
-### GetNxosEvpnMacRoutes
+### GetNxosBgpMvpn
 
-`func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutes() int64`
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosBgpMvpn() NiatelemetryNxosBgpMvpn`
 
-GetNxosEvpnMacRoutes returns the NxosEvpnMacRoutes field if non-nil, zero value otherwise.
+GetNxosBgpMvpn returns the NxosBgpMvpn field if non-nil, zero value otherwise.
 
-### GetNxosEvpnMacRoutesOk
+### GetNxosBgpMvpnOk
 
-`func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutesOk() (*int64, bool)`
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosBgpMvpnOk() (*NiatelemetryNxosBgpMvpn, bool)`
 
-GetNxosEvpnMacRoutesOk returns a tuple with the NxosEvpnMacRoutes field if it's non-nil, zero value otherwise
+GetNxosBgpMvpnOk returns a tuple with the NxosBgpMvpn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNxosEvpnMacRoutes
+### SetNxosBgpMvpn
 
-`func (o *NiatelemetryNiaInventoryAllOf) SetNxosEvpnMacRoutes(v int64)`
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosBgpMvpn(v NiatelemetryNxosBgpMvpn)`
 
-SetNxosEvpnMacRoutes sets NxosEvpnMacRoutes field to given value.
+SetNxosBgpMvpn sets NxosBgpMvpn field to given value.
 
-### HasNxosEvpnMacRoutes
+### HasNxosBgpMvpn
 
-`func (o *NiatelemetryNiaInventoryAllOf) HasNxosEvpnMacRoutes() bool`
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosBgpMvpn() bool`
 
-HasNxosEvpnMacRoutes returns a boolean if a field has been set.
+HasNxosBgpMvpn returns a boolean if a field has been set.
+
+### SetNxosBgpMvpnNil
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosBgpMvpnNil(b bool)`
+
+ SetNxosBgpMvpnNil sets the value for NxosBgpMvpn to be an explicit nil
+
+### UnsetNxosBgpMvpn
+`func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosBgpMvpn()`
+
+UnsetNxosBgpMvpn ensures that no value is present for NxosBgpMvpn, not even an explicit nil
+### GetNxosDciInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosDciInterfaceStatus() string`
+
+GetNxosDciInterfaceStatus returns the NxosDciInterfaceStatus field if non-nil, zero value otherwise.
+
+### GetNxosDciInterfaceStatusOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosDciInterfaceStatusOk() (*string, bool)`
+
+GetNxosDciInterfaceStatusOk returns a tuple with the NxosDciInterfaceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosDciInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosDciInterfaceStatus(v string)`
+
+SetNxosDciInterfaceStatus sets NxosDciInterfaceStatus field to given value.
+
+### HasNxosDciInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosDciInterfaceStatus() bool`
+
+HasNxosDciInterfaceStatus returns a boolean if a field has been set.
 
 ### GetNxosInterfaceBrief
 
@@ -723,6 +765,116 @@ HasNxosInterfaceBrief returns a boolean if a field has been set.
 `func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosInterfaceBrief()`
 
 UnsetNxosInterfaceBrief ensures that no value is present for NxosInterfaceBrief, not even an explicit nil
+### GetNxosNveInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveInterfaceStatus() string`
+
+GetNxosNveInterfaceStatus returns the NxosNveInterfaceStatus field if non-nil, zero value otherwise.
+
+### GetNxosNveInterfaceStatusOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveInterfaceStatusOk() (*string, bool)`
+
+GetNxosNveInterfaceStatusOk returns a tuple with the NxosNveInterfaceStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosNveInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveInterfaceStatus(v string)`
+
+SetNxosNveInterfaceStatus sets NxosNveInterfaceStatus field to given value.
+
+### HasNxosNveInterfaceStatus
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosNveInterfaceStatus() bool`
+
+HasNxosNveInterfaceStatus returns a boolean if a field has been set.
+
+### GetNxosNveVni
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveVni() NiatelemetryNveVni`
+
+GetNxosNveVni returns the NxosNveVni field if non-nil, zero value otherwise.
+
+### GetNxosNveVniOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveVniOk() (*NiatelemetryNveVni, bool)`
+
+GetNxosNveVniOk returns a tuple with the NxosNveVni field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosNveVni
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveVni(v NiatelemetryNveVni)`
+
+SetNxosNveVni sets NxosNveVni field to given value.
+
+### HasNxosNveVni
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosNveVni() bool`
+
+HasNxosNveVni returns a boolean if a field has been set.
+
+### SetNxosNveVniNil
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveVniNil(b bool)`
+
+ SetNxosNveVniNil sets the value for NxosNveVni to be an explicit nil
+
+### UnsetNxosNveVni
+`func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosNveVni()`
+
+UnsetNxosNveVni ensures that no value is present for NxosNveVni, not even an explicit nil
+### GetNxosOspfNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosOspfNeighbors() int64`
+
+GetNxosOspfNeighbors returns the NxosOspfNeighbors field if non-nil, zero value otherwise.
+
+### GetNxosOspfNeighborsOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosOspfNeighborsOk() (*int64, bool)`
+
+GetNxosOspfNeighborsOk returns a tuple with the NxosOspfNeighbors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosOspfNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosOspfNeighbors(v int64)`
+
+SetNxosOspfNeighbors sets NxosOspfNeighbors field to given value.
+
+### HasNxosOspfNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosOspfNeighbors() bool`
+
+HasNxosOspfNeighbors returns a boolean if a field has been set.
+
+### GetNxosPimNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosPimNeighbors() string`
+
+GetNxosPimNeighbors returns the NxosPimNeighbors field if non-nil, zero value otherwise.
+
+### GetNxosPimNeighborsOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosPimNeighborsOk() (*string, bool)`
+
+GetNxosPimNeighborsOk returns a tuple with the NxosPimNeighbors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosPimNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosPimNeighbors(v string)`
+
+SetNxosPimNeighbors sets NxosPimNeighbors field to given value.
+
+### HasNxosPimNeighbors
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosPimNeighbors() bool`
+
+HasNxosPimNeighbors returns a boolean if a field has been set.
+
 ### GetNxosTelnet
 
 `func (o *NiatelemetryNiaInventoryAllOf) GetNxosTelnet() string`
@@ -748,6 +900,66 @@ SetNxosTelnet sets NxosTelnet field to given value.
 
 HasNxosTelnet returns a boolean if a field has been set.
 
+### GetNxosTotalRoutes
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosTotalRoutes() int64`
+
+GetNxosTotalRoutes returns the NxosTotalRoutes field if non-nil, zero value otherwise.
+
+### GetNxosTotalRoutesOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosTotalRoutesOk() (*int64, bool)`
+
+GetNxosTotalRoutesOk returns a tuple with the NxosTotalRoutes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosTotalRoutes
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosTotalRoutes(v int64)`
+
+SetNxosTotalRoutes sets NxosTotalRoutes field to given value.
+
+### HasNxosTotalRoutes
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosTotalRoutes() bool`
+
+HasNxosTotalRoutes returns a boolean if a field has been set.
+
+### GetNxosVtp
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosVtp() NiatelemetryNxosVtp`
+
+GetNxosVtp returns the NxosVtp field if non-nil, zero value otherwise.
+
+### GetNxosVtpOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetNxosVtpOk() (*NiatelemetryNxosVtp, bool)`
+
+GetNxosVtpOk returns a tuple with the NxosVtp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosVtp
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosVtp(v NiatelemetryNxosVtp)`
+
+SetNxosVtp sets NxosVtp field to given value.
+
+### HasNxosVtp
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasNxosVtp() bool`
+
+HasNxosVtp returns a boolean if a field has been set.
+
+### SetNxosVtpNil
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetNxosVtpNil(b bool)`
+
+ SetNxosVtpNil sets the value for NxosVtp to be an explicit nil
+
+### UnsetNxosVtp
+`func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosVtp()`
+
+UnsetNxosVtp ensures that no value is present for NxosVtp, not even an explicit nil
 ### GetRecordType
 
 `func (o *NiatelemetryNiaInventoryAllOf) GetRecordType() string`

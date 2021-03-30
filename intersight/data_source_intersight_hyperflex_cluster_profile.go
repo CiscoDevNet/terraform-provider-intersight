@@ -256,6 +256,8 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+
 				temp["proxy_setting"] = flattenMapHyperflexProxySettingPolicyRelationship(s.GetProxySetting(), d)
 				temp["replication"] = (s.GetReplication())
 

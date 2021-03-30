@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ExportWithPeer** | Pointer to **bool** | When turned on, the local MO is exported when the peer is exported. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the relationship. | [optional] [readonly] 
 **PeerRelName** | Pointer to **string** | Name of relationship in peer managed object. | [optional] [readonly] 
+**PeerSync** | Pointer to **bool** | When turned on, peer MO corresponding to the reference provided in relation is updated with a reference to the current MO. | [optional] [readonly] 
 **Type** | Pointer to **string** | Fully qualified type of the peer managed object. | [optional] [readonly] 
 
 ## Methods
@@ -222,6 +223,31 @@ SetPeerRelName sets PeerRelName field to given value.
 `func (o *MetaRelationshipDefinitionAllOf) HasPeerRelName() bool`
 
 HasPeerRelName returns a boolean if a field has been set.
+
+### GetPeerSync
+
+`func (o *MetaRelationshipDefinitionAllOf) GetPeerSync() bool`
+
+GetPeerSync returns the PeerSync field if non-nil, zero value otherwise.
+
+### GetPeerSyncOk
+
+`func (o *MetaRelationshipDefinitionAllOf) GetPeerSyncOk() (*bool, bool)`
+
+GetPeerSyncOk returns a tuple with the PeerSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerSync
+
+`func (o *MetaRelationshipDefinitionAllOf) SetPeerSync(v bool)`
+
+SetPeerSync sets PeerSync field to given value.
+
+### HasPeerSync
+
+`func (o *MetaRelationshipDefinitionAllOf) HasPeerSync() bool`
+
+HasPeerSync returns a boolean if a field has been set.
 
 ### GetType
 

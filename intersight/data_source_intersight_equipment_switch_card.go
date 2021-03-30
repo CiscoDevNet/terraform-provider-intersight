@@ -85,6 +85,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"out_of_band_ip_mask": {
+				Description: "Field specifies the Netmask for this Switch's Out-of-band IP address.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"presence": {
 				Description: "Presence for this switch hardware.",
 				Type:        schema.TypeString,
@@ -331,6 +336,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"out_of_band_ip_mask": {
+						Description: "Field specifies the Netmask for this Switch's Out-of-band IP address.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"port_channels": {
 						Description: "An array of relationships to etherPortChannel resources.",
@@ -583,6 +593,10 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetOutOfBandIpGateway(x)
 	}
+	if v, ok := d.GetOk("out_of_band_ip_mask"); ok {
+		x := (v.(string))
+		o.SetOutOfBandIpMask(x)
+	}
 	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
@@ -668,6 +682,7 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["object_type"] = (s.GetObjectType())
 				temp["out_of_band_ip_address"] = (s.GetOutOfBandIpAddress())
 				temp["out_of_band_ip_gateway"] = (s.GetOutOfBandIpGateway())
+				temp["out_of_band_ip_mask"] = (s.GetOutOfBandIpMask())
 
 				temp["port_channels"] = flattenListEtherPortChannelRelationship(s.GetPortChannels(), d)
 

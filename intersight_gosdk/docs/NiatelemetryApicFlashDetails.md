@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ModelNumber** | Pointer to **string** | Model number of the flash in APIC. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
-**Revision** | Pointer to **string** | Vendor name of the flash in APIC. | [optional] 
+**Revision** | Pointer to **string** | Revision of the flash Mo in APIC. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the flash in APIC. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 

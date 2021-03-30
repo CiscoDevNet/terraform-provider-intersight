@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -20,18 +20,11 @@ type KubernetesAddonAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// Addon install strategy to determine whether an addon is installed if not present. * `InstallOnly` - Only install in green field. No action in case of failure or removal. * `NoAction` - No install action performed. * `Always` - Attempt install if chart is not already installed.
-	InstallStrategy *string `json:"InstallStrategy,omitempty"`
+	ObjectType         string                               `json:"ObjectType"`
+	AddonConfiguration NullableKubernetesAddonConfiguration `json:"AddonConfiguration,omitempty"`
+	AddonPolicy        *MoMoRef                             `json:"AddonPolicy,omitempty"`
 	// Name of addon to be installed on a Kubernetes cluster.
-	Name         *string              `json:"Name,omitempty"`
-	OverrideSets []KubernetesKeyValue `json:"OverrideSets,omitempty"`
-	// Properties that can be overridden for an addon.
-	Overrides *string `json:"Overrides,omitempty"`
-	// Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade. * `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * `NoAction` - This choice enables No upgrades to be performed. * `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure. * `AlwaysReinstall` - Always remove older release and reinstall.
-	UpgradeStrategy      *string                                `json:"UpgradeStrategy,omitempty"`
-	AddonDefinition      *KubernetesAddonDefinitionRelationship `json:"AddonDefinition,omitempty"`
-	Organization         *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
+	Name                 *string `json:"Name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,10 +38,6 @@ func NewKubernetesAddonAllOf(classId string, objectType string) *KubernetesAddon
 	this := KubernetesAddonAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var installStrategy string = "InstallOnly"
-	this.InstallStrategy = &installStrategy
-	var upgradeStrategy string = "UpgradeOnly"
-	this.UpgradeStrategy = &upgradeStrategy
 	return &this
 }
 
@@ -61,10 +50,6 @@ func NewKubernetesAddonAllOfWithDefaults() *KubernetesAddonAllOf {
 	this.ClassId = classId
 	var objectType string = "kubernetes.Addon"
 	this.ObjectType = objectType
-	var installStrategy string = "InstallOnly"
-	this.InstallStrategy = &installStrategy
-	var upgradeStrategy string = "UpgradeOnly"
-	this.UpgradeStrategy = &upgradeStrategy
 	return &this
 }
 
@@ -116,36 +101,79 @@ func (o *KubernetesAddonAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetInstallStrategy returns the InstallStrategy field value if set, zero value otherwise.
-func (o *KubernetesAddonAllOf) GetInstallStrategy() string {
-	if o == nil || o.InstallStrategy == nil {
-		var ret string
+// GetAddonConfiguration returns the AddonConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesAddonAllOf) GetAddonConfiguration() KubernetesAddonConfiguration {
+	if o == nil || o.AddonConfiguration.Get() == nil {
+		var ret KubernetesAddonConfiguration
 		return ret
 	}
-	return *o.InstallStrategy
+	return *o.AddonConfiguration.Get()
 }
 
-// GetInstallStrategyOk returns a tuple with the InstallStrategy field value if set, nil otherwise
+// GetAddonConfigurationOk returns a tuple with the AddonConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KubernetesAddonAllOf) GetInstallStrategyOk() (*string, bool) {
-	if o == nil || o.InstallStrategy == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *KubernetesAddonAllOf) GetAddonConfigurationOk() (*KubernetesAddonConfiguration, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InstallStrategy, true
+	return o.AddonConfiguration.Get(), o.AddonConfiguration.IsSet()
 }
 
-// HasInstallStrategy returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasInstallStrategy() bool {
-	if o != nil && o.InstallStrategy != nil {
+// HasAddonConfiguration returns a boolean if a field has been set.
+func (o *KubernetesAddonAllOf) HasAddonConfiguration() bool {
+	if o != nil && o.AddonConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetInstallStrategy gets a reference to the given string and assigns it to the InstallStrategy field.
-func (o *KubernetesAddonAllOf) SetInstallStrategy(v string) {
-	o.InstallStrategy = &v
+// SetAddonConfiguration gets a reference to the given NullableKubernetesAddonConfiguration and assigns it to the AddonConfiguration field.
+func (o *KubernetesAddonAllOf) SetAddonConfiguration(v KubernetesAddonConfiguration) {
+	o.AddonConfiguration.Set(&v)
+}
+
+// SetAddonConfigurationNil sets the value for AddonConfiguration to be an explicit nil
+func (o *KubernetesAddonAllOf) SetAddonConfigurationNil() {
+	o.AddonConfiguration.Set(nil)
+}
+
+// UnsetAddonConfiguration ensures that no value is present for AddonConfiguration, not even an explicit nil
+func (o *KubernetesAddonAllOf) UnsetAddonConfiguration() {
+	o.AddonConfiguration.Unset()
+}
+
+// GetAddonPolicy returns the AddonPolicy field value if set, zero value otherwise.
+func (o *KubernetesAddonAllOf) GetAddonPolicy() MoMoRef {
+	if o == nil || o.AddonPolicy == nil {
+		var ret MoMoRef
+		return ret
+	}
+	return *o.AddonPolicy
+}
+
+// GetAddonPolicyOk returns a tuple with the AddonPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesAddonAllOf) GetAddonPolicyOk() (*MoMoRef, bool) {
+	if o == nil || o.AddonPolicy == nil {
+		return nil, false
+	}
+	return o.AddonPolicy, true
+}
+
+// HasAddonPolicy returns a boolean if a field has been set.
+func (o *KubernetesAddonAllOf) HasAddonPolicy() bool {
+	if o != nil && o.AddonPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAddonPolicy gets a reference to the given MoMoRef and assigns it to the AddonPolicy field.
+func (o *KubernetesAddonAllOf) SetAddonPolicy(v MoMoRef) {
+	o.AddonPolicy = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -180,167 +208,6 @@ func (o *KubernetesAddonAllOf) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOverrideSets returns the OverrideSets field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *KubernetesAddonAllOf) GetOverrideSets() []KubernetesKeyValue {
-	if o == nil {
-		var ret []KubernetesKeyValue
-		return ret
-	}
-	return o.OverrideSets
-}
-
-// GetOverrideSetsOk returns a tuple with the OverrideSets field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesAddonAllOf) GetOverrideSetsOk() (*[]KubernetesKeyValue, bool) {
-	if o == nil || o.OverrideSets == nil {
-		return nil, false
-	}
-	return &o.OverrideSets, true
-}
-
-// HasOverrideSets returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasOverrideSets() bool {
-	if o != nil && o.OverrideSets != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOverrideSets gets a reference to the given []KubernetesKeyValue and assigns it to the OverrideSets field.
-func (o *KubernetesAddonAllOf) SetOverrideSets(v []KubernetesKeyValue) {
-	o.OverrideSets = v
-}
-
-// GetOverrides returns the Overrides field value if set, zero value otherwise.
-func (o *KubernetesAddonAllOf) GetOverrides() string {
-	if o == nil || o.Overrides == nil {
-		var ret string
-		return ret
-	}
-	return *o.Overrides
-}
-
-// GetOverridesOk returns a tuple with the Overrides field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesAddonAllOf) GetOverridesOk() (*string, bool) {
-	if o == nil || o.Overrides == nil {
-		return nil, false
-	}
-	return o.Overrides, true
-}
-
-// HasOverrides returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasOverrides() bool {
-	if o != nil && o.Overrides != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOverrides gets a reference to the given string and assigns it to the Overrides field.
-func (o *KubernetesAddonAllOf) SetOverrides(v string) {
-	o.Overrides = &v
-}
-
-// GetUpgradeStrategy returns the UpgradeStrategy field value if set, zero value otherwise.
-func (o *KubernetesAddonAllOf) GetUpgradeStrategy() string {
-	if o == nil || o.UpgradeStrategy == nil {
-		var ret string
-		return ret
-	}
-	return *o.UpgradeStrategy
-}
-
-// GetUpgradeStrategyOk returns a tuple with the UpgradeStrategy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesAddonAllOf) GetUpgradeStrategyOk() (*string, bool) {
-	if o == nil || o.UpgradeStrategy == nil {
-		return nil, false
-	}
-	return o.UpgradeStrategy, true
-}
-
-// HasUpgradeStrategy returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasUpgradeStrategy() bool {
-	if o != nil && o.UpgradeStrategy != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUpgradeStrategy gets a reference to the given string and assigns it to the UpgradeStrategy field.
-func (o *KubernetesAddonAllOf) SetUpgradeStrategy(v string) {
-	o.UpgradeStrategy = &v
-}
-
-// GetAddonDefinition returns the AddonDefinition field value if set, zero value otherwise.
-func (o *KubernetesAddonAllOf) GetAddonDefinition() KubernetesAddonDefinitionRelationship {
-	if o == nil || o.AddonDefinition == nil {
-		var ret KubernetesAddonDefinitionRelationship
-		return ret
-	}
-	return *o.AddonDefinition
-}
-
-// GetAddonDefinitionOk returns a tuple with the AddonDefinition field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesAddonAllOf) GetAddonDefinitionOk() (*KubernetesAddonDefinitionRelationship, bool) {
-	if o == nil || o.AddonDefinition == nil {
-		return nil, false
-	}
-	return o.AddonDefinition, true
-}
-
-// HasAddonDefinition returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasAddonDefinition() bool {
-	if o != nil && o.AddonDefinition != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAddonDefinition gets a reference to the given KubernetesAddonDefinitionRelationship and assigns it to the AddonDefinition field.
-func (o *KubernetesAddonAllOf) SetAddonDefinition(v KubernetesAddonDefinitionRelationship) {
-	o.AddonDefinition = &v
-}
-
-// GetOrganization returns the Organization field value if set, zero value otherwise.
-func (o *KubernetesAddonAllOf) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
-		var ret OrganizationOrganizationRelationship
-		return ret
-	}
-	return *o.Organization
-}
-
-// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesAddonAllOf) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
-		return nil, false
-	}
-	return o.Organization, true
-}
-
-// HasOrganization returns a boolean if a field has been set.
-func (o *KubernetesAddonAllOf) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
-func (o *KubernetesAddonAllOf) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
-}
-
 func (o KubernetesAddonAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -349,26 +216,14 @@ func (o KubernetesAddonAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.InstallStrategy != nil {
-		toSerialize["InstallStrategy"] = o.InstallStrategy
+	if o.AddonConfiguration.IsSet() {
+		toSerialize["AddonConfiguration"] = o.AddonConfiguration.Get()
+	}
+	if o.AddonPolicy != nil {
+		toSerialize["AddonPolicy"] = o.AddonPolicy
 	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
-	}
-	if o.OverrideSets != nil {
-		toSerialize["OverrideSets"] = o.OverrideSets
-	}
-	if o.Overrides != nil {
-		toSerialize["Overrides"] = o.Overrides
-	}
-	if o.UpgradeStrategy != nil {
-		toSerialize["UpgradeStrategy"] = o.UpgradeStrategy
-	}
-	if o.AddonDefinition != nil {
-		toSerialize["AddonDefinition"] = o.AddonDefinition
-	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -390,13 +245,9 @@ func (o *KubernetesAddonAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "InstallStrategy")
+		delete(additionalProperties, "AddonConfiguration")
+		delete(additionalProperties, "AddonPolicy")
 		delete(additionalProperties, "Name")
-		delete(additionalProperties, "OverrideSets")
-		delete(additionalProperties, "Overrides")
-		delete(additionalProperties, "UpgradeStrategy")
-		delete(additionalProperties, "AddonDefinition")
-		delete(additionalProperties, "Organization")
 		o.AdditionalProperties = additionalProperties
 	}
 

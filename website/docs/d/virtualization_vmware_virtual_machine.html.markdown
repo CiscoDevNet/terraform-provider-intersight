@@ -42,7 +42,7 @@ The following arguments can be used to get data of already created objects in In
 * `uuid`:(string) The uuid of this virtual machine. The uuid is internally generated and not user specified. 
 * `vm_disk_count`:(int) Shows the number of disks assigned to this VM. 
 * `vm_overall_status`:(string) The operational state of the VM. Could be Available, Provisioned, Maintenance mode, Deleting, etc. 
-* `vm_path`:(string) Example - [datastore3] VCSA-134/VCSA-134.vmx. 
+* `vm_path`:(string) Path to the vmx file of the VM. Example - [datastore3] VCSA-134/VCSA-134.vmx. 
 * `vm_version`:(string) Information about the version of this VM (vmx-09, vmx-11 etc.). 
 * `vm_vnic_count`:(int) How many vnics are present. 
 * `vnic_device_config_id`:(string) Information related to the guest info's VNIC virtual device. It is a comma-separated list. 

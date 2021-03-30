@@ -6,9 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.AddonPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.AddonPolicy"]
-**SystemManaged** | Pointer to **bool** | To determine if Addon Policy is automatically managed by the system. | [optional] 
-**Addons** | Pointer to [**[]KubernetesAddonRelationship**](KubernetesAddonRelationship.md) | An array of relationships to kubernetesAddon resources. | [optional] 
-**ClusterProfiles** | Pointer to [**[]KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) | An array of relationships to kubernetesClusterProfile resources. | [optional] 
+**AddonConfiguration** | Pointer to [**NullableKubernetesAddonConfiguration**](kubernetes.AddonConfiguration.md) |  | [optional] 
+**AddonDefinition** | Pointer to [**KubernetesAddonDefinitionRelationship**](kubernetes.AddonDefinition.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -70,101 +69,66 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetSystemManaged
+### GetAddonConfiguration
 
-`func (o *KubernetesAddonPolicyAllOf) GetSystemManaged() bool`
+`func (o *KubernetesAddonPolicyAllOf) GetAddonConfiguration() KubernetesAddonConfiguration`
 
-GetSystemManaged returns the SystemManaged field if non-nil, zero value otherwise.
+GetAddonConfiguration returns the AddonConfiguration field if non-nil, zero value otherwise.
 
-### GetSystemManagedOk
+### GetAddonConfigurationOk
 
-`func (o *KubernetesAddonPolicyAllOf) GetSystemManagedOk() (*bool, bool)`
+`func (o *KubernetesAddonPolicyAllOf) GetAddonConfigurationOk() (*KubernetesAddonConfiguration, bool)`
 
-GetSystemManagedOk returns a tuple with the SystemManaged field if it's non-nil, zero value otherwise
+GetAddonConfigurationOk returns a tuple with the AddonConfiguration field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSystemManaged
+### SetAddonConfiguration
 
-`func (o *KubernetesAddonPolicyAllOf) SetSystemManaged(v bool)`
+`func (o *KubernetesAddonPolicyAllOf) SetAddonConfiguration(v KubernetesAddonConfiguration)`
 
-SetSystemManaged sets SystemManaged field to given value.
+SetAddonConfiguration sets AddonConfiguration field to given value.
 
-### HasSystemManaged
+### HasAddonConfiguration
 
-`func (o *KubernetesAddonPolicyAllOf) HasSystemManaged() bool`
+`func (o *KubernetesAddonPolicyAllOf) HasAddonConfiguration() bool`
 
-HasSystemManaged returns a boolean if a field has been set.
+HasAddonConfiguration returns a boolean if a field has been set.
 
-### GetAddons
+### SetAddonConfigurationNil
 
-`func (o *KubernetesAddonPolicyAllOf) GetAddons() []KubernetesAddonRelationship`
+`func (o *KubernetesAddonPolicyAllOf) SetAddonConfigurationNil(b bool)`
 
-GetAddons returns the Addons field if non-nil, zero value otherwise.
+ SetAddonConfigurationNil sets the value for AddonConfiguration to be an explicit nil
 
-### GetAddonsOk
+### UnsetAddonConfiguration
+`func (o *KubernetesAddonPolicyAllOf) UnsetAddonConfiguration()`
 
-`func (o *KubernetesAddonPolicyAllOf) GetAddonsOk() (*[]KubernetesAddonRelationship, bool)`
+UnsetAddonConfiguration ensures that no value is present for AddonConfiguration, not even an explicit nil
+### GetAddonDefinition
 
-GetAddonsOk returns a tuple with the Addons field if it's non-nil, zero value otherwise
+`func (o *KubernetesAddonPolicyAllOf) GetAddonDefinition() KubernetesAddonDefinitionRelationship`
+
+GetAddonDefinition returns the AddonDefinition field if non-nil, zero value otherwise.
+
+### GetAddonDefinitionOk
+
+`func (o *KubernetesAddonPolicyAllOf) GetAddonDefinitionOk() (*KubernetesAddonDefinitionRelationship, bool)`
+
+GetAddonDefinitionOk returns a tuple with the AddonDefinition field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAddons
+### SetAddonDefinition
 
-`func (o *KubernetesAddonPolicyAllOf) SetAddons(v []KubernetesAddonRelationship)`
+`func (o *KubernetesAddonPolicyAllOf) SetAddonDefinition(v KubernetesAddonDefinitionRelationship)`
 
-SetAddons sets Addons field to given value.
+SetAddonDefinition sets AddonDefinition field to given value.
 
-### HasAddons
+### HasAddonDefinition
 
-`func (o *KubernetesAddonPolicyAllOf) HasAddons() bool`
+`func (o *KubernetesAddonPolicyAllOf) HasAddonDefinition() bool`
 
-HasAddons returns a boolean if a field has been set.
+HasAddonDefinition returns a boolean if a field has been set.
 
-### SetAddonsNil
-
-`func (o *KubernetesAddonPolicyAllOf) SetAddonsNil(b bool)`
-
- SetAddonsNil sets the value for Addons to be an explicit nil
-
-### UnsetAddons
-`func (o *KubernetesAddonPolicyAllOf) UnsetAddons()`
-
-UnsetAddons ensures that no value is present for Addons, not even an explicit nil
-### GetClusterProfiles
-
-`func (o *KubernetesAddonPolicyAllOf) GetClusterProfiles() []KubernetesClusterProfileRelationship`
-
-GetClusterProfiles returns the ClusterProfiles field if non-nil, zero value otherwise.
-
-### GetClusterProfilesOk
-
-`func (o *KubernetesAddonPolicyAllOf) GetClusterProfilesOk() (*[]KubernetesClusterProfileRelationship, bool)`
-
-GetClusterProfilesOk returns a tuple with the ClusterProfiles field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClusterProfiles
-
-`func (o *KubernetesAddonPolicyAllOf) SetClusterProfiles(v []KubernetesClusterProfileRelationship)`
-
-SetClusterProfiles sets ClusterProfiles field to given value.
-
-### HasClusterProfiles
-
-`func (o *KubernetesAddonPolicyAllOf) HasClusterProfiles() bool`
-
-HasClusterProfiles returns a boolean if a field has been set.
-
-### SetClusterProfilesNil
-
-`func (o *KubernetesAddonPolicyAllOf) SetClusterProfilesNil(b bool)`
-
- SetClusterProfilesNil sets the value for ClusterProfiles to be an explicit nil
-
-### UnsetClusterProfiles
-`func (o *KubernetesAddonPolicyAllOf) UnsetClusterProfiles()`
-
-UnsetClusterProfiles ensures that no value is present for ClusterProfiles, not even an explicit nil
 ### GetOrganization
 
 `func (o *KubernetesAddonPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship`

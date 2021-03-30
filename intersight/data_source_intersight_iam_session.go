@@ -62,6 +62,11 @@ func dataSourceIamSession() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"session_id": {
+				Description: "Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_permissions": {
@@ -235,6 +240,11 @@ func dataSourceIamSession() *schema.Resource {
 							},
 						},
 					},
+					"session_id": {
+						Description: "Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"tags": {
 						Type:     schema.TypeList,
 						Optional: true,
@@ -341,6 +351,10 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("session_id"); ok {
+		x := (v.(string))
+		o.SetSessionId(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -387,6 +401,7 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["permission"] = flattenMapIamPermissionRelationship(s.GetPermission(), d)
+				temp["session_id"] = (s.GetSessionId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

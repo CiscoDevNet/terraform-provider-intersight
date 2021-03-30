@@ -115,6 +115,8 @@ func dataSourceHyperflexAppCatalogRead(c context.Context, d *schema.ResourceData
 
 				temp["server_model"] = flattenMapHyperflexServerModelRelationship(s.GetServerModel(), d)
 
+				temp["software_distributions"] = flattenListHyperflexSoftwareDistributionEntryRelationship(s.GetSoftwareDistributions(), d)
+
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["nr_version"] = (s.GetVersion())
 				hyperflexAppCatalogResults[j] = temp

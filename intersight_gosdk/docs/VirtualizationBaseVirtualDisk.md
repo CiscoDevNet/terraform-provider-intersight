@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.HxapVirtualDisk"]
-**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.HxapVirtualDisk"]
-**Capacity** | Pointer to **int64** | Disk capacity represented in bytes. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Name** | Pointer to **string** | Name of the storage disk. Name must be unique within a Datastore. | [optional] 
+**Size** | Pointer to **int64** | Disk size represented in bytes. | [optional] 
 
 ## Methods
 
@@ -68,31 +68,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetCapacity
-
-`func (o *VirtualizationBaseVirtualDisk) GetCapacity() int64`
-
-GetCapacity returns the Capacity field if non-nil, zero value otherwise.
-
-### GetCapacityOk
-
-`func (o *VirtualizationBaseVirtualDisk) GetCapacityOk() (*int64, bool)`
-
-GetCapacityOk returns a tuple with the Capacity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCapacity
-
-`func (o *VirtualizationBaseVirtualDisk) SetCapacity(v int64)`
-
-SetCapacity sets Capacity field to given value.
-
-### HasCapacity
-
-`func (o *VirtualizationBaseVirtualDisk) HasCapacity() bool`
-
-HasCapacity returns a boolean if a field has been set.
-
 ### GetName
 
 `func (o *VirtualizationBaseVirtualDisk) GetName() string`
@@ -117,6 +92,31 @@ SetName sets Name field to given value.
 `func (o *VirtualizationBaseVirtualDisk) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetSize
+
+`func (o *VirtualizationBaseVirtualDisk) GetSize() int64`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *VirtualizationBaseVirtualDisk) GetSizeOk() (*int64, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *VirtualizationBaseVirtualDisk) SetSize(v int64)`
+
+SetSize sets Size field to given value.
+
+### HasSize
+
+`func (o *VirtualizationBaseVirtualDisk) HasSize() bool`
+
+HasSize returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

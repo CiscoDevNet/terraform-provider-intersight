@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.VmHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.VmHost"]
 **AccountMoid** | Pointer to **string** | Reference to virtualization target account ID. | [optional] [readonly] 
+**ClusterIdentity** | Pointer to **string** | Reference to virtualization cluster identity. | [optional] [readonly] 
+**ClusterMoid** | Pointer to **string** | Reference to virtualization cluster ID. | [optional] [readonly] 
+**ClusterName** | Pointer to **string** | Reference to virtualization cluster name. | [optional] [readonly] 
 **Connected** | Pointer to **int64** | The connection status of the host. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **RegisteredDeviceMoid** | Pointer to **string** | Reference to virtualization target device ID. | [optional] [readonly] 
 
@@ -93,6 +96,81 @@ SetAccountMoid sets AccountMoid field to given value.
 `func (o *AssetVmHostAllOf) HasAccountMoid() bool`
 
 HasAccountMoid returns a boolean if a field has been set.
+
+### GetClusterIdentity
+
+`func (o *AssetVmHostAllOf) GetClusterIdentity() string`
+
+GetClusterIdentity returns the ClusterIdentity field if non-nil, zero value otherwise.
+
+### GetClusterIdentityOk
+
+`func (o *AssetVmHostAllOf) GetClusterIdentityOk() (*string, bool)`
+
+GetClusterIdentityOk returns a tuple with the ClusterIdentity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterIdentity
+
+`func (o *AssetVmHostAllOf) SetClusterIdentity(v string)`
+
+SetClusterIdentity sets ClusterIdentity field to given value.
+
+### HasClusterIdentity
+
+`func (o *AssetVmHostAllOf) HasClusterIdentity() bool`
+
+HasClusterIdentity returns a boolean if a field has been set.
+
+### GetClusterMoid
+
+`func (o *AssetVmHostAllOf) GetClusterMoid() string`
+
+GetClusterMoid returns the ClusterMoid field if non-nil, zero value otherwise.
+
+### GetClusterMoidOk
+
+`func (o *AssetVmHostAllOf) GetClusterMoidOk() (*string, bool)`
+
+GetClusterMoidOk returns a tuple with the ClusterMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterMoid
+
+`func (o *AssetVmHostAllOf) SetClusterMoid(v string)`
+
+SetClusterMoid sets ClusterMoid field to given value.
+
+### HasClusterMoid
+
+`func (o *AssetVmHostAllOf) HasClusterMoid() bool`
+
+HasClusterMoid returns a boolean if a field has been set.
+
+### GetClusterName
+
+`func (o *AssetVmHostAllOf) GetClusterName() string`
+
+GetClusterName returns the ClusterName field if non-nil, zero value otherwise.
+
+### GetClusterNameOk
+
+`func (o *AssetVmHostAllOf) GetClusterNameOk() (*string, bool)`
+
+GetClusterNameOk returns a tuple with the ClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterName
+
+`func (o *AssetVmHostAllOf) SetClusterName(v string)`
+
+SetClusterName sets ClusterName field to given value.
+
+### HasClusterName
+
+`func (o *AssetVmHostAllOf) HasClusterName() bool`
+
+HasClusterName returns a boolean if a field has been set.
 
 ### GetConnected
 

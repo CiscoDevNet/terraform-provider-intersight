@@ -50,7 +50,7 @@ func dataSourceStorageHitachiPool() *schema.Resource {
 				Computed:    true,
 			},
 			"monitoring_mode": {
-				Description: "Performance monitoring execution mode (monitor mode).\n* `N/A` - Not available.\n* `Period mode` - Period mode.\n* `Continuous mode` - Continuous mode.",
+				Description: "Performance monitoring execution mode (monitor mode).\n* `N/A` - Performance monitoring is not available.\n* `Period mode` - Period mode is the default setting. If Period mode is enabled, tier range values and page relocations are determined based solely on the monitoring data from the last complete cycle.\n* `Continuous mode` - When Continuous mode is enabled, the weighted average efficiency is calculated using the latest monitoring information and the collected monitoring information in the past cycles. Page relocations are determined using this weighted average efficiency.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -74,7 +74,7 @@ func dataSourceStorageHitachiPool() *schema.Resource {
 				Computed:    true,
 			},
 			"pool_action_mode": {
-				Description: "Execution mode for the pool.\n* `N/A` - Not available.\n* `Auto` - The mode in which the monitor is started or stopped at the specified time, and the Tier range is specified by automatic calculation of the DKC (specified by using Storage Navigator).\n* `Manual` - The mode in which the monitor is started or stopped by instructions from the REST API server, and the Tier range is specified by automatic calculation of the DKC.",
+				Description: "Execution mode for the pool.\n* `N/A` - Execution Mode is not available for the pool.\n* `Auto` - The mode in which the monitor is started or stopped at the specified time, and the Tier range is specified by automatic calculation of the DKC (specified by using Storage Navigator).\n* `Manual` - The mode in which the monitor is started or stopped by instructions from the REST API server, and the Tier range is specified by automatic calculation of the DKC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -197,7 +197,7 @@ func dataSourceStorageHitachiPool() *schema.Resource {
 						Computed:    true,
 					},
 					"monitoring_mode": {
-						Description: "Performance monitoring execution mode (monitor mode).\n* `N/A` - Not available.\n* `Period mode` - Period mode.\n* `Continuous mode` - Continuous mode.",
+						Description: "Performance monitoring execution mode (monitor mode).\n* `N/A` - Performance monitoring is not available.\n* `Period mode` - Period mode is the default setting. If Period mode is enabled, tier range values and page relocations are determined based solely on the monitoring data from the last complete cycle.\n* `Continuous mode` - When Continuous mode is enabled, the weighted average efficiency is calculated using the latest monitoring information and the collected monitoring information in the past cycles. Page relocations are determined using this weighted average efficiency.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -221,7 +221,7 @@ func dataSourceStorageHitachiPool() *schema.Resource {
 						Computed:    true,
 					},
 					"pool_action_mode": {
-						Description: "Execution mode for the pool.\n* `N/A` - Not available.\n* `Auto` - The mode in which the monitor is started or stopped at the specified time, and the Tier range is specified by automatic calculation of the DKC (specified by using Storage Navigator).\n* `Manual` - The mode in which the monitor is started or stopped by instructions from the REST API server, and the Tier range is specified by automatic calculation of the DKC.",
+						Description: "Execution mode for the pool.\n* `N/A` - Execution Mode is not available for the pool.\n* `Auto` - The mode in which the monitor is started or stopped at the specified time, and the Tier range is specified by automatic calculation of the DKC (specified by using Storage Navigator).\n* `Manual` - The mode in which the monitor is started or stopped by instructions from the REST API server, and the Tier range is specified by automatic calculation of the DKC.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

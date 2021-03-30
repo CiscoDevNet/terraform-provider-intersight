@@ -12,7 +12,7 @@ A configuration profile per node in the HyperFlex cluster.
 It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
 ## Argument Reference
 The following arguments are supported:
-* `assigned_server`:(HashMap) - A reference to a computeRackUnit resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `assigned_server`:(HashMap) - A reference to a computePhysical resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 

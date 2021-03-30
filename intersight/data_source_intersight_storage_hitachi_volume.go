@@ -26,13 +26,13 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"data_reduction_mode": {
-				Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - Not available.\n* `Compression` - The capacity saving function (compression) is enabled.\n* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `Disabled` - The capacity saving function (compression and deduplication) is disabled.",
+				Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - The capacity saving function is not available.\n* `Compression` - The capacity saving function (compression) is enabled.\n* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `Disabled` - The capacity saving function (compression and deduplication) is disabled.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"data_reduction_status": {
-				Description: "Status of the capacity saving function.\n* `N/A` - Not available.\n* `Enabled` - The capacity saving function is enabled.\n* `Disabled` - The capacity saving function is disabled.\n* `Enabling` - The capacity saving function is being enabled.\n* `Rehydrating` - The capacity saving function is being disabled.\n* `Deleting` - The volumes for which the capacity saving function is enabled are being deleted.\n* `Failed` - An attempt to enable the capacity saving function failed.",
+				Description: "Status of the capacity saving function.\n* `N/A` - The capacity saving function is not available.\n* `Enabled` - The capacity saving function is enabled.\n* `Disabled` - The capacity saving function is disabled.\n* `Enabling` - The capacity saving function is being enabled.\n* `Rehydrating` - The capacity saving function is being disabled.\n* `Deleting` - The volumes for which the capacity saving function is enabled are being deleted.\n* `Failed` - An attempt to enable the capacity saving function failed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -104,7 +104,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"raid_level": {
-				Description: "RAID level for the volume.\n* `N/A` - Not available.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
+				Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -122,7 +122,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"status": {
-				Description: "Status information of the volume.\n* `N/A` - Not available.\n* `NML` - The volume is in normal status.\n* `BLK` - The volume is blocked.\n* `BSY` - The volume status is being changed.\n* `Unknown` - The volume status is unknown (not supported).",
+				Description: "Status information of the volume.\n* `N/A` - The volume status is not available.\n* `NML` - The volume is in normal status.\n* `BLK` - The volume is in blocked state.\n* `BSY` - The volume status is being changed.\n* `Unknown` - The volume status is unknown (not supported).",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -190,13 +190,13 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 						Computed:    true,
 					},
 					"data_reduction_mode": {
-						Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - Not available.\n* `Compression` - The capacity saving function (compression) is enabled.\n* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `Disabled` - The capacity saving function (compression and deduplication) is disabled.",
+						Description: "Setting of the capacity saving function (dedupe and compression).\n* `N/A` - The capacity saving function is not available.\n* `Compression` - The capacity saving function (compression) is enabled.\n* `Compression Deduplication` - The capacity saving function (compression and deduplication) is enabled.\n* `Disabled` - The capacity saving function (compression and deduplication) is disabled.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
 					},
 					"data_reduction_status": {
-						Description: "Status of the capacity saving function.\n* `N/A` - Not available.\n* `Enabled` - The capacity saving function is enabled.\n* `Disabled` - The capacity saving function is disabled.\n* `Enabling` - The capacity saving function is being enabled.\n* `Rehydrating` - The capacity saving function is being disabled.\n* `Deleting` - The volumes for which the capacity saving function is enabled are being deleted.\n* `Failed` - An attempt to enable the capacity saving function failed.",
+						Description: "Status of the capacity saving function.\n* `N/A` - The capacity saving function is not available.\n* `Enabled` - The capacity saving function is enabled.\n* `Disabled` - The capacity saving function is disabled.\n* `Enabling` - The capacity saving function is being enabled.\n* `Rehydrating` - The capacity saving function is being disabled.\n* `Deleting` - The volumes for which the capacity saving function is enabled are being deleted.\n* `Failed` - An attempt to enable the capacity saving function failed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -350,7 +350,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 						Computed:    true,
 					},
 					"raid_level": {
-						Description: "RAID level for the volume.\n* `N/A` - Not available.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
+						Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -407,7 +407,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 						Computed:    true,
 					},
 					"status": {
-						Description: "Status information of the volume.\n* `N/A` - Not available.\n* `NML` - The volume is in normal status.\n* `BLK` - The volume is blocked.\n* `BSY` - The volume status is being changed.\n* `Unknown` - The volume status is unknown (not supported).",
+						Description: "Status information of the volume.\n* `N/A` - The volume status is not available.\n* `NML` - The volume is in normal status.\n* `BLK` - The volume is in blocked state.\n* `BSY` - The volume status is being changed.\n* `Unknown` - The volume status is unknown (not supported).",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

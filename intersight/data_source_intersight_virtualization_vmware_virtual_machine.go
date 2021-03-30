@@ -173,7 +173,7 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"vm_path": {
-				Description: "Example - [datastore3] VCSA-134/VCSA-134.vmx.",
+				Description: "Path to the vmx file of the VM. Example - [datastore3] VCSA-134/VCSA-134.vmx.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -986,6 +986,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"virtual_disks": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeInt}},
 					"vm_disk_count": {
 						Description: "Shows the number of disks assigned to this VM.",
 						Type:        schema.TypeInt,
@@ -997,7 +1002,7 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Optional:    true,
 					},
 					"vm_path": {
-						Description: "Example - [datastore3] VCSA-134/VCSA-134.vmx.",
+						Description: "Path to the vmx file of the VM. Example - [datastore3] VCSA-134/VCSA-134.vmx.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1265,6 +1270,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["tool_running_status"] = (s.GetToolRunningStatus())
 				temp["tools_version"] = (s.GetToolsVersion())
 				temp["uuid"] = (s.GetUuid())
+				temp["virtual_disks"] = (s.GetVirtualDisks())
 				temp["vm_disk_count"] = (s.GetVmDiskCount())
 				temp["vm_overall_status"] = (s.GetVmOverallStatus())
 				temp["vm_path"] = (s.GetVmPath())

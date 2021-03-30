@@ -19,14 +19,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"bgp_established_interface_count": {
+				Description: "Counts the number of BGP interfaces that are in established state.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"bgw_interface_up_count": {
+				Description: "Count number of active interfaces on border gateways.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"border_gateway_spine_count": {
+				Description: "Count number of border gateway spines in the fabric inventory.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"border_leaf_count": {
+				Description: "Count number of border leafs in the fabric inventory.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"dci_subnet_range": {
+				Description: "Returns the dci subnet range.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"dci_subnet_target_mask": {
+				Description: "Returns the dci subnet target mask.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"dcnmtracker_enabled": {
 				Description: "Returns the value of the dcnmtrackerEnabled field.",
 				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"ebgp_evpn_link_up_count": {
+				Description: "Count number of ebgp evpn active interfaces.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"fabric_id": {
@@ -39,14 +74,19 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"is_bgw_present": {
+				Description: "Checks if border gateway is present in the fabric inventory.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"is_ngoam_enabled": {
 				Description: "Returns if ngoam is enabled.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"is_scheduled_back_up_enabled": {
 				Description: "Returns if the scheduled backup is enabled.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"leaf_count": {
@@ -59,6 +99,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"nxos_vni_bw_sites_count": {
+				Description: "Returns the count of vnis between sites.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"nxos_vrf_bw_sites_count": {
+				Description: "Returns the count of vrfs between sites.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"nxos_vrf_count": {
 				Description: "Returns the value of the nxosVrfCount field.",
@@ -86,6 +136,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"vlan_vni_mappings": {
+				Description: "VLAN to VNI mappings configured in the DCNM.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"vni_ip_count": {
+				Description: "Count number of IP addresses configured in the DCNM networks.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
@@ -98,14 +158,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"bgp_established_interface_count": {
+						Description: "Counts the number of BGP interfaces that are in established state.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"bgw_interface_up_count": {
+						Description: "Count number of active interfaces on border gateways.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"border_gateway_spine_count": {
+						Description: "Count number of border gateway spines in the fabric inventory.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"border_leaf_count": {
+						Description: "Count number of border leafs in the fabric inventory.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dci_subnet_range": {
+						Description: "Returns the dci subnet range.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dci_subnet_target_mask": {
+						Description: "Returns the dci subnet target mask.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"dcnmtracker_enabled": {
 						Description: "Returns the value of the dcnmtrackerEnabled field.",
 						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"ebgp_evpn_link_up_count": {
+						Description: "Count number of ebgp evpn active interfaces.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"fabric_id": {
@@ -118,14 +213,19 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"is_bgw_present": {
+						Description: "Checks if border gateway is present in the fabric inventory.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"is_ngoam_enabled": {
 						Description: "Returns if ngoam is enabled.",
-						Type:        schema.TypeString,
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"is_scheduled_back_up_enabled": {
 						Description: "Returns if the scheduled backup is enabled.",
-						Type:        schema.TypeString,
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"leaf_count": {
@@ -198,6 +298,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"nxos_vni_bw_sites_count": {
+						Description: "Returns the count of vnis between sites.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"nxos_vrf_bw_sites_count": {
+						Description: "Returns the count of vrfs between sites.",
+						Type:        schema.TypeInt,
+						Optional:    true,
 					},
 					"nxos_vrf_count": {
 						Description: "Returns the value of the nxosVrfCount field.",
@@ -287,6 +397,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 							},
 						},
 					},
+					"vlan_vni_mappings": {
+						Description: "VLAN to VNI mappings configured in the DCNM.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_ip_count": {
+						Description: "Count number of IP addresses configured in the DCNM networks.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -303,13 +423,41 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetAnycastGwMac(x)
 	}
+	if v, ok := d.GetOk("bgp_established_interface_count"); ok {
+		x := int64(v.(int))
+		o.SetBgpEstablishedInterfaceCount(x)
+	}
+	if v, ok := d.GetOk("bgw_interface_up_count"); ok {
+		x := int64(v.(int))
+		o.SetBgwInterfaceUpCount(x)
+	}
+	if v, ok := d.GetOk("border_gateway_spine_count"); ok {
+		x := int64(v.(int))
+		o.SetBorderGatewaySpineCount(x)
+	}
+	if v, ok := d.GetOk("border_leaf_count"); ok {
+		x := int64(v.(int))
+		o.SetBorderLeafCount(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("dci_subnet_range"); ok {
+		x := (v.(string))
+		o.SetDciSubnetRange(x)
+	}
+	if v, ok := d.GetOk("dci_subnet_target_mask"); ok {
+		x := (v.(string))
+		o.SetDciSubnetTargetMask(x)
+	}
 	if v, ok := d.GetOk("dcnmtracker_enabled"); ok {
 		x := (v.(bool))
 		o.SetDcnmtrackerEnabled(x)
+	}
+	if v, ok := d.GetOk("ebgp_evpn_link_up_count"); ok {
+		x := int64(v.(int))
+		o.SetEbgpEvpnLinkUpCount(x)
 	}
 	if v, ok := d.GetOk("fabric_id"); ok {
 		x := (v.(string))
@@ -319,12 +467,16 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetFabricName(x)
 	}
+	if v, ok := d.GetOk("is_bgw_present"); ok {
+		x := (v.(bool))
+		o.SetIsBgwPresent(x)
+	}
 	if v, ok := d.GetOk("is_ngoam_enabled"); ok {
-		x := (v.(string))
+		x := (v.(bool))
 		o.SetIsNgoamEnabled(x)
 	}
 	if v, ok := d.GetOk("is_scheduled_back_up_enabled"); ok {
-		x := (v.(string))
+		x := (v.(bool))
 		o.SetIsScheduledBackUpEnabled(x)
 	}
 	if v, ok := d.GetOk("leaf_count"); ok {
@@ -334,6 +486,14 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+	if v, ok := d.GetOk("nxos_vni_bw_sites_count"); ok {
+		x := int64(v.(int))
+		o.SetNxosVniBwSitesCount(x)
+	}
+	if v, ok := d.GetOk("nxos_vrf_bw_sites_count"); ok {
+		x := int64(v.(int))
+		o.SetNxosVrfBwSitesCount(x)
 	}
 	if v, ok := d.GetOk("nxos_vrf_count"); ok {
 		x := int64(v.(int))
@@ -354,6 +514,14 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("spine_count"); ok {
 		x := int64(v.(int))
 		o.SetSpineCount(x)
+	}
+	if v, ok := d.GetOk("vlan_vni_mappings"); ok {
+		x := (v.(string))
+		o.SetVlanVniMappings(x)
+	}
+	if v, ok := d.GetOk("vni_ip_count"); ok {
+		x := int64(v.(int))
+		o.SetVniIpCount(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -387,16 +555,26 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				var temp = make(map[string]interface{})
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["anycast_gw_mac"] = (s.GetAnycastGwMac())
+				temp["bgp_established_interface_count"] = (s.GetBgpEstablishedInterfaceCount())
+				temp["bgw_interface_up_count"] = (s.GetBgwInterfaceUpCount())
+				temp["border_gateway_spine_count"] = (s.GetBorderGatewaySpineCount())
+				temp["border_leaf_count"] = (s.GetBorderLeafCount())
 				temp["class_id"] = (s.GetClassId())
+				temp["dci_subnet_range"] = (s.GetDciSubnetRange())
+				temp["dci_subnet_target_mask"] = (s.GetDciSubnetTargetMask())
 				temp["dcnmtracker_enabled"] = (s.GetDcnmtrackerEnabled())
+				temp["ebgp_evpn_link_up_count"] = (s.GetEbgpEvpnLinkUpCount())
 				temp["fabric_id"] = (s.GetFabricId())
 				temp["fabric_name"] = (s.GetFabricName())
+				temp["is_bgw_present"] = (s.GetIsBgwPresent())
 				temp["is_ngoam_enabled"] = (s.GetIsNgoamEnabled())
 				temp["is_scheduled_back_up_enabled"] = (s.GetIsScheduledBackUpEnabled())
 				temp["leaf_count"] = (s.GetLeafCount())
 
 				temp["logical_links"] = flattenListNiatelemetryLogicalLink(s.GetLogicalLinks(), d)
 				temp["moid"] = (s.GetMoid())
+				temp["nxos_vni_bw_sites_count"] = (s.GetNxosVniBwSitesCount())
+				temp["nxos_vrf_bw_sites_count"] = (s.GetNxosVrfBwSitesCount())
 				temp["nxos_vrf_count"] = (s.GetNxosVrfCount())
 				temp["object_type"] = (s.GetObjectType())
 
@@ -406,6 +584,8 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["spine_count"] = (s.GetSpineCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["vlan_vni_mappings"] = (s.GetVlanVniMappings())
+				temp["vni_ip_count"] = (s.GetVniIpCount())
 				niatelemetryNiaInventoryFabricResults[j] = temp
 				j += 1
 			}

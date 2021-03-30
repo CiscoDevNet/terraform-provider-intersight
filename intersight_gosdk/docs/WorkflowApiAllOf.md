@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AssetTargetMoid** | Pointer to **string** | Asset target defines the remote target endpoints which are either managed by Intersight or their service APIs are invoked from Intersight. Generic API executor service Jasmine can invoke these remote APIs via its executors. Asset targets can be accessed directly for cloud targets or via an associated Intersight Assist. Prerequisite to use asset targets is to persist the target details. Asset target MoRef can be given as task input of type TargetDataType. Fusion determines and populates the target context with the Assist if associated with. It is set internally at the API level. In case of an associated assist, it is used by Assist to fetch the target details and form the API request to send to endpoints. In case of cloud asset targets, Jasmine fetched the target details from DB, forms the API request and sends it to the target. | [optional] [readonly] 
 **Body** | Pointer to **string** | The optional request body that is sent as part of this API request. The request body can contain a golang template that can be populated with task input parameters and previous API output parameters. | [optional] 
-**ContentType** | Pointer to **string** | Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML and JSON. The type of the content that gets passed as payload and response in this API. The supported values are json, xml, text. | [optional] 
+**ContentType** | Pointer to **string** | Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML, JSON and Text. The type of the content that gets passed as payload and response in this API. The supported values are json, xml, text. | [optional] 
 **Description** | Pointer to **string** | A description that task designer can add to individual API requests that explain  what the API call is about. | [optional] 
+**ErrorContentType** | Pointer to **string** | Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML, JSON and Text. Optional input to specify the content type in case of error API response. This should be used if the content type of error response is different from that of the success response. If not specified, contentType input value is used to parse the error response. | [optional] 
 **Label** | Pointer to **string** | A user friendly label that task designers have given to the batch API request. | [optional] 
 **Name** | Pointer to **string** | A reference name for this API request within the batch API request. This name shall be used to map the API output parameters to subsequent API input parameters within a batch API task. | [optional] 
 **Outcomes** | Pointer to **interface{}** | All the possible outcomes of this API are captured here. Outcomes property is a collection property of type workflow.Outcome objects. The outcomes can be mapped to the message to be shown. The outcomes are evaluated in the order they are given. At the end of the outcomes list, an catchall success/fail outcome can be added with condition as &#39;true&#39;. This is an optional property and if not specified the task will be marked as success. | [optional] 
@@ -176,6 +177,31 @@ SetDescription sets Description field to given value.
 `func (o *WorkflowApiAllOf) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetErrorContentType
+
+`func (o *WorkflowApiAllOf) GetErrorContentType() string`
+
+GetErrorContentType returns the ErrorContentType field if non-nil, zero value otherwise.
+
+### GetErrorContentTypeOk
+
+`func (o *WorkflowApiAllOf) GetErrorContentTypeOk() (*string, bool)`
+
+GetErrorContentTypeOk returns a tuple with the ErrorContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorContentType
+
+`func (o *WorkflowApiAllOf) SetErrorContentType(v string)`
+
+SetErrorContentType sets ErrorContentType field to given value.
+
+### HasErrorContentType
+
+`func (o *WorkflowApiAllOf) HasErrorContentType() bool`
+
+HasErrorContentType returns a boolean if a field has been set.
 
 ### GetLabel
 

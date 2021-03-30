@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Action** | Pointer to **string** | User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](policy.ConfigContext.md) |  | [optional] 
+**PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
 ## Methods
 
@@ -128,6 +129,41 @@ HasConfigContext returns a boolean if a field has been set.
 `func (o *PolicyAbstractConfigProfile) UnsetConfigContext()`
 
 UnsetConfigContext ensures that no value is present for ConfigContext, not even an explicit nil
+### GetPolicyBucket
+
+`func (o *PolicyAbstractConfigProfile) GetPolicyBucket() []PolicyAbstractPolicyRelationship`
+
+GetPolicyBucket returns the PolicyBucket field if non-nil, zero value otherwise.
+
+### GetPolicyBucketOk
+
+`func (o *PolicyAbstractConfigProfile) GetPolicyBucketOk() (*[]PolicyAbstractPolicyRelationship, bool)`
+
+GetPolicyBucketOk returns a tuple with the PolicyBucket field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyBucket
+
+`func (o *PolicyAbstractConfigProfile) SetPolicyBucket(v []PolicyAbstractPolicyRelationship)`
+
+SetPolicyBucket sets PolicyBucket field to given value.
+
+### HasPolicyBucket
+
+`func (o *PolicyAbstractConfigProfile) HasPolicyBucket() bool`
+
+HasPolicyBucket returns a boolean if a field has been set.
+
+### SetPolicyBucketNil
+
+`func (o *PolicyAbstractConfigProfile) SetPolicyBucketNil(b bool)`
+
+ SetPolicyBucketNil sets the value for PolicyBucket to be an explicit nil
+
+### UnsetPolicyBucket
+`func (o *PolicyAbstractConfigProfile) UnsetPolicyBucket()`
+
+UnsetPolicyBucket ensures that no value is present for PolicyBucket, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

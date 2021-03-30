@@ -21,6 +21,6 @@ The following arguments can be used to get data of already created objects in In
 * `minsize`:(int) Minimum number of nodes desired in this node group. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete profile. 
-* `node_type`:(string) The node type Master, Worker or EmbeddedMaster.* `Worker` - Node will be marked as a worker node.* `Master` - Node will be marked as a master node.* `EmbeddedMaster` - Node will be both a master and a worker. 
+* `node_type`:(string) The node type ControlPlane, Worker or ControlPlaneWorker.* `Worker` - Node will be marked as a worker node.* `ControlPlane` - Node will be marked as a control plane node.* `ControlPlaneWorker` - Node will be both a controle plane and a worker. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
  

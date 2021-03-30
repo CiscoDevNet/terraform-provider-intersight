@@ -52,12 +52,17 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 							Computed:    true,
 						},
 						"content_type": {
-							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML and JSON.\nThe type of the content that gets passed as payload and response in this\nAPI. The supported values are json, xml, text.",
+							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML, JSON and Text.\nThe type of the content that gets passed as payload and response in this\nAPI. The supported values are json, xml, text.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"description": {
 							Description: "A description that task designer can add to individual API requests that explain \nwhat the API call is about.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"error_content_type": {
+							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML, JSON and Text.\nOptional input to specify the content type in case of error API response. This\nshould be used if the content type of error response is different from that of\nthe success response. If not specified, contentType input value is used to parse\nthe error response.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -364,6 +369,12 @@ func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.Resourc
 				{
 					x := (v.(string))
 					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["error_content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorContentType(x)
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -767,6 +778,12 @@ func resourceWorkflowBatchApiExecutorUpdate(c context.Context, d *schema.Resourc
 				{
 					x := (v.(string))
 					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["error_content_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorContentType(x)
 				}
 			}
 			if v, ok := l["label"]; ok {

@@ -116,7 +116,7 @@ func dataSourceStorageHitachiDisk() *schema.Resource {
 				Computed:    true,
 			},
 			"type_detail": {
-				Description: "Drive type.\n* `N/A` - Not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
+				Description: "Drive type.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -445,7 +445,7 @@ func dataSourceStorageHitachiDisk() *schema.Resource {
 						Computed:    true,
 					},
 					"type_detail": {
-						Description: "Drive type.\n* `N/A` - Not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
+						Description: "Drive type.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

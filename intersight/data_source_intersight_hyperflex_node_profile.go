@@ -161,7 +161,7 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 				var temp = make(map[string]interface{})
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-				temp["assigned_server"] = flattenMapComputeRackUnitRelationship(s.GetAssignedServer(), d)
+				temp["assigned_server"] = flattenMapComputePhysicalRelationship(s.GetAssignedServer(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_profile"] = flattenMapHyperflexClusterProfileRelationship(s.GetClusterProfile(), d)

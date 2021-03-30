@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -15,6 +15,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"strings"
+	"time"
 )
 
 // ForecastInstance Entity representing forecast result for instance of managed object, ie, data source.
@@ -29,6 +30,8 @@ type ForecastInstance struct {
 	DeviceId *string `json:"DeviceId,omitempty"`
 	// The number of days remaining before the device reaches its full functional capacity.
 	FullCapDays *int64 `json:"FullCapDays,omitempty"`
+	// The time when the forecast model was last updated.
+	LastModelUpdateTime *time.Time `json:"LastModelUpdateTime,omitempty"`
 	// The name of the metric for which regression model is generated.
 	MetricName *string `json:"MetricName,omitempty"`
 	// The minimum number of days the HyperFlex cluster should be up for computing forecast.
@@ -213,6 +216,38 @@ func (o *ForecastInstance) HasFullCapDays() bool {
 // SetFullCapDays gets a reference to the given int64 and assigns it to the FullCapDays field.
 func (o *ForecastInstance) SetFullCapDays(v int64) {
 	o.FullCapDays = &v
+}
+
+// GetLastModelUpdateTime returns the LastModelUpdateTime field value if set, zero value otherwise.
+func (o *ForecastInstance) GetLastModelUpdateTime() time.Time {
+	if o == nil || o.LastModelUpdateTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastModelUpdateTime
+}
+
+// GetLastModelUpdateTimeOk returns a tuple with the LastModelUpdateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastInstance) GetLastModelUpdateTimeOk() (*time.Time, bool) {
+	if o == nil || o.LastModelUpdateTime == nil {
+		return nil, false
+	}
+	return o.LastModelUpdateTime, true
+}
+
+// HasLastModelUpdateTime returns a boolean if a field has been set.
+func (o *ForecastInstance) HasLastModelUpdateTime() bool {
+	if o != nil && o.LastModelUpdateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastModelUpdateTime gets a reference to the given time.Time and assigns it to the LastModelUpdateTime field.
+func (o *ForecastInstance) SetLastModelUpdateTime(v time.Time) {
+	o.LastModelUpdateTime = &v
 }
 
 // GetMetricName returns the MetricName field value if set, zero value otherwise.
@@ -443,6 +478,9 @@ func (o ForecastInstance) MarshalJSON() ([]byte, error) {
 	if o.FullCapDays != nil {
 		toSerialize["FullCapDays"] = o.FullCapDays
 	}
+	if o.LastModelUpdateTime != nil {
+		toSerialize["LastModelUpdateTime"] = o.LastModelUpdateTime
+	}
 	if o.MetricName != nil {
 		toSerialize["MetricName"] = o.MetricName
 	}
@@ -480,6 +518,8 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 		DeviceId *string `json:"DeviceId,omitempty"`
 		// The number of days remaining before the device reaches its full functional capacity.
 		FullCapDays *int64 `json:"FullCapDays,omitempty"`
+		// The time when the forecast model was last updated.
+		LastModelUpdateTime *time.Time `json:"LastModelUpdateTime,omitempty"`
 		// The name of the metric for which regression model is generated.
 		MetricName *string `json:"MetricName,omitempty"`
 		// The minimum number of days the HyperFlex cluster should be up for computing forecast.
@@ -501,6 +541,7 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 		varForecastInstance.AltModel = varForecastInstanceWithoutEmbeddedStruct.AltModel
 		varForecastInstance.DeviceId = varForecastInstanceWithoutEmbeddedStruct.DeviceId
 		varForecastInstance.FullCapDays = varForecastInstanceWithoutEmbeddedStruct.FullCapDays
+		varForecastInstance.LastModelUpdateTime = varForecastInstanceWithoutEmbeddedStruct.LastModelUpdateTime
 		varForecastInstance.MetricName = varForecastInstanceWithoutEmbeddedStruct.MetricName
 		varForecastInstance.MinDaysForForecast = varForecastInstanceWithoutEmbeddedStruct.MinDaysForForecast
 		varForecastInstance.Model = varForecastInstanceWithoutEmbeddedStruct.Model
@@ -529,6 +570,7 @@ func (o *ForecastInstance) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AltModel")
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "FullCapDays")
+		delete(additionalProperties, "LastModelUpdateTime")
 		delete(additionalProperties, "MetricName")
 		delete(additionalProperties, "MinDaysForForecast")
 		delete(additionalProperties, "Model")

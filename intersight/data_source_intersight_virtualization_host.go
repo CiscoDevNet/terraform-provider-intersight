@@ -49,7 +49,7 @@ func dataSourceVirtualizationHost() *schema.Resource {
 				Computed:    true,
 			},
 			"name": {
-				Description: "Name of the hypervisor host. It must be unique within the targer endpoint.",
+				Description: "Name of the hypervisor host. It must be unique within the target endpoint.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -153,7 +153,7 @@ func dataSourceVirtualizationHost() *schema.Resource {
 						Computed:    true,
 					},
 					"name": {
-						Description: "Name of the hypervisor host. It must be unique within the targer endpoint.",
+						Description: "Name of the hypervisor host. It must be unique within the target endpoint.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.PermissionToRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PermissionToRoles"]
-**Permission** | Pointer to [**NullableCmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
-**Roles** | Pointer to [**[]CmrfCmRf**](CmrfCmRf.md) |  | [optional] 
+**Permission** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
+**Roles** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 
 ## Methods
 
@@ -70,20 +70,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetPermission
 
-`func (o *IamPermissionToRolesAllOf) GetPermission() CmrfCmRf`
+`func (o *IamPermissionToRolesAllOf) GetPermission() MoMoRef`
 
 GetPermission returns the Permission field if non-nil, zero value otherwise.
 
 ### GetPermissionOk
 
-`func (o *IamPermissionToRolesAllOf) GetPermissionOk() (*CmrfCmRf, bool)`
+`func (o *IamPermissionToRolesAllOf) GetPermissionOk() (*MoMoRef, bool)`
 
 GetPermissionOk returns a tuple with the Permission field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPermission
 
-`func (o *IamPermissionToRolesAllOf) SetPermission(v CmrfCmRf)`
+`func (o *IamPermissionToRolesAllOf) SetPermission(v MoMoRef)`
 
 SetPermission sets Permission field to given value.
 
@@ -93,32 +93,22 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
-### SetPermissionNil
-
-`func (o *IamPermissionToRolesAllOf) SetPermissionNil(b bool)`
-
- SetPermissionNil sets the value for Permission to be an explicit nil
-
-### UnsetPermission
-`func (o *IamPermissionToRolesAllOf) UnsetPermission()`
-
-UnsetPermission ensures that no value is present for Permission, not even an explicit nil
 ### GetRoles
 
-`func (o *IamPermissionToRolesAllOf) GetRoles() []CmrfCmRf`
+`func (o *IamPermissionToRolesAllOf) GetRoles() []MoMoRef`
 
 GetRoles returns the Roles field if non-nil, zero value otherwise.
 
 ### GetRolesOk
 
-`func (o *IamPermissionToRolesAllOf) GetRolesOk() (*[]CmrfCmRf, bool)`
+`func (o *IamPermissionToRolesAllOf) GetRolesOk() (*[]MoMoRef, bool)`
 
 GetRolesOk returns a tuple with the Roles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRoles
 
-`func (o *IamPermissionToRolesAllOf) SetRoles(v []CmrfCmRf)`
+`func (o *IamPermissionToRolesAllOf) SetRoles(v []MoMoRef)`
 
 SetRoles sets Roles field to given value.
 

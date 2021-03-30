@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **SerialNumber** | Pointer to **string** | Serial number of the FEX in APIC. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **VendorName** | Pointer to **string** | Vendor name of the FEX in APIC. | [optional] 
+**Vid** | Pointer to **string** | VID for the FEX in the inventory. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -274,6 +275,31 @@ SetVendorName sets VendorName field to given value.
 `func (o *NiatelemetryApicFexDetailsAllOf) HasVendorName() bool`
 
 HasVendorName returns a boolean if a field has been set.
+
+### GetVid
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetVid() string`
+
+GetVid returns the Vid field if non-nil, zero value otherwise.
+
+### GetVidOk
+
+`func (o *NiatelemetryApicFexDetailsAllOf) GetVidOk() (*string, bool)`
+
+GetVidOk returns a tuple with the Vid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVid
+
+`func (o *NiatelemetryApicFexDetailsAllOf) SetVid(v string)`
+
+SetVid sets Vid field to given value.
+
+### HasVid
+
+`func (o *NiatelemetryApicFexDetailsAllOf) HasVid() bool`
+
+HasVid returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -151,6 +151,8 @@ func dataSourceRecoveryBackupProfileRead(c context.Context, d *schema.ResourceDa
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+
 				temp["schedule_config"] = flattenMapRecoveryScheduleConfigPolicyRelationship(s.GetScheduleConfig(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)

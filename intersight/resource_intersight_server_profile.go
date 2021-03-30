@@ -119,6 +119,98 @@ func resourceServerProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"config_change_context": {
+				Description: "The configuration change state and results of the last change operation.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"config_change_error": {
+							Description: "Indicates reason for failure state of configChangeState.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"config_change_state": {
+							Description: "Indicates a profile's configuration change state. Used for tracking pending-changes and out-of-synch states.\n* `Ok` - Config change state represents Validation for change/drift is successful or is not applicable.\n* `Validating-change` - Config change state represents policy changes are being validated. This state starts when policy is changed and becomes different from deployed changes (Pending-changes).\n* `Validating-drift` - Config change state represents endpoint configuration changes are being validated. This state starts when endpoint is changed and endpoint configuration becomes different from policy configured changes (Out-of-sync).\n* `Change-failed` - Config change state represents there is internal error in calculating policy change.\n* `Drift-failed` - Config change state represents there is internal error in calculating endpoint configuraion drift.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"initial_config_context": {
+							Description: "Stores initial Configuration state. Used for reverting back to initial state of ConfigContext in case of validation failure.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"config_state": {
+										Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"control_action": {
+										Description: "System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"error_state": {
+										Description: "Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"oper_state": {
+										Description: "Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+								},
+							},
+							ConfigMode: schema.SchemaConfigModeAttr,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+			},
 			"config_change_details": {
 				Description: "An array of relationships to serverConfigChangeDetail resources.",
 				Type:        schema.TypeList,
@@ -217,7 +309,7 @@ func resourceServerProfile() *schema.Resource {
 							Computed:    true,
 						},
 						"config_state": {
-							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed.",
+							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -365,6 +457,46 @@ func resourceServerProfile() *schema.Resource {
 				Description: "Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"policy_bucket": {
+				Description: "An array of relationships to policyAbstractPolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 			},
 			"running_workflows": {
 				Description: "An array of relationships to workflowWorkflowInfo resources.",
@@ -598,6 +730,105 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	}
 
 	o.SetClassId("server.Profile")
+
+	if v, ok := d.GetOk("config_change_context"); ok {
+		p := make([]models.PolicyConfigChangeContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewPolicyConfigChangeContextWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigChangeContext")
+			if v, ok := l["config_change_error"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeError(x)
+				}
+			}
+			if v, ok := l["config_change_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeState(x)
+				}
+			}
+			if v, ok := l["initial_config_context"]; ok {
+				{
+					p := make([]models.PolicyConfigContext, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyConfigContextWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ConfigContext")
+						if v, ok := l["config_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetConfigState(x)
+							}
+						}
+						if v, ok := l["control_action"]; ok {
+							{
+								x := (v.(string))
+								o.SetControlAction(x)
+							}
+						}
+						if v, ok := l["error_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetErrorState(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["oper_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetOperState(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetInitialConfigContext(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConfigChangeContext(x)
+		}
+	}
 
 	if v, ok := d.GetOk("config_change_details"); ok {
 		x := make([]models.ServerConfigChangeDetailRelationship, 0)
@@ -864,6 +1095,48 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		o.SetPmcDeployedSecurePassphrase(x)
 	}
 
+	if v, ok := d.GetOk("policy_bucket"); ok {
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPolicyBucket(x)
+		}
+	}
+
 	if v, ok := d.GetOk("running_workflows"); ok {
 		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
 		s := v.([]interface{})
@@ -1069,6 +1342,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property ClassId in ServerProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("config_change_context", flattenMapPolicyConfigChangeContext(s.GetConfigChangeContext(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ConfigChangeContext in ServerProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("config_change_details", flattenListServerConfigChangeDetailRelationship(s.GetConfigChangeDetails(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ConfigChangeDetails in ServerProfile object: %s", err.Error())
 	}
@@ -1107,6 +1384,10 @@ func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta i
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Organization in ServerProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PolicyBucket in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("running_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)); err != nil {
@@ -1245,6 +1526,106 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 
 	o.SetClassId("server.Profile")
+
+	if d.HasChange("config_change_context") {
+		v := d.Get("config_change_context")
+		p := make([]models.PolicyConfigChangeContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.PolicyConfigChangeContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigChangeContext")
+			if v, ok := l["config_change_error"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeError(x)
+				}
+			}
+			if v, ok := l["config_change_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigChangeState(x)
+				}
+			}
+			if v, ok := l["initial_config_context"]; ok {
+				{
+					p := make([]models.PolicyConfigContext, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewPolicyConfigContextWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("policy.ConfigContext")
+						if v, ok := l["config_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetConfigState(x)
+							}
+						}
+						if v, ok := l["control_action"]; ok {
+							{
+								x := (v.(string))
+								o.SetControlAction(x)
+							}
+						}
+						if v, ok := l["error_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetErrorState(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["oper_state"]; ok {
+							{
+								x := (v.(string))
+								o.SetOperState(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetInitialConfigContext(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConfigChangeContext(x)
+		}
+	}
 
 	if d.HasChange("config_change_details") {
 		v := d.Get("config_change_details")
@@ -1519,6 +1900,49 @@ func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta
 		v := d.Get("pmc_deployed_secure_passphrase")
 		x := (v.(string))
 		o.SetPmcDeployedSecurePassphrase(x)
+	}
+
+	if d.HasChange("policy_bucket") {
+		v := d.Get("policy_bucket")
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPolicyBucket(x)
+		}
 	}
 
 	if d.HasChange("running_workflows") {

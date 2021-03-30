@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AltModel** | Pointer to **[]float32** |  | [optional] 
 **DeviceId** | Pointer to **string** | The Moid of the Intersight managed device instance for which regression model is derived. | [optional] [readonly] 
 **FullCapDays** | Pointer to **int64** | The number of days remaining before the device reaches its full functional capacity. | [optional] [readonly] 
+**LastModelUpdateTime** | Pointer to **time.Time** | The time when the forecast model was last updated. | [optional] [readonly] 
 **MetricName** | Pointer to **string** | The name of the metric for which regression model is generated. | [optional] [readonly] 
 **MinDaysForForecast** | Pointer to **int64** | The minimum number of days the HyperFlex cluster should be up for computing forecast. | [optional] [readonly] 
 **Model** | Pointer to [**NullableForecastModel**](forecast.Model.md) |  | [optional] 
@@ -159,6 +160,31 @@ SetFullCapDays sets FullCapDays field to given value.
 `func (o *ForecastInstance) HasFullCapDays() bool`
 
 HasFullCapDays returns a boolean if a field has been set.
+
+### GetLastModelUpdateTime
+
+`func (o *ForecastInstance) GetLastModelUpdateTime() time.Time`
+
+GetLastModelUpdateTime returns the LastModelUpdateTime field if non-nil, zero value otherwise.
+
+### GetLastModelUpdateTimeOk
+
+`func (o *ForecastInstance) GetLastModelUpdateTimeOk() (*time.Time, bool)`
+
+GetLastModelUpdateTimeOk returns a tuple with the LastModelUpdateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastModelUpdateTime
+
+`func (o *ForecastInstance) SetLastModelUpdateTime(v time.Time)`
+
+SetLastModelUpdateTime sets LastModelUpdateTime field to given value.
+
+### HasLastModelUpdateTime
+
+`func (o *ForecastInstance) HasLastModelUpdateTime() bool`
+
+HasLastModelUpdateTime returns a boolean if a field has been set.
 
 ### GetMetricName
 

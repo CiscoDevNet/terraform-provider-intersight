@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -63,12 +63,23 @@ type NiatelemetryNiaInventoryAllOf struct {
 	// Memory usage of device being inventoried. This determines the percentage of memory resources used.
 	Memory *int64 `json:"Memory,omitempty"`
 	// The ID of the device being inventoried.
-	NodeId *string `json:"NodeId,omitempty"`
-	// Returns the total number of evpn mac routes.
-	NxosEvpnMacRoutes  *int64                        `json:"NxosEvpnMacRoutes,omitempty"`
-	NxosInterfaceBrief NullableNiatelemetryInterface `json:"NxosInterfaceBrief,omitempty"`
+	NodeId      *string                         `json:"NodeId,omitempty"`
+	NxosBgpMvpn NullableNiatelemetryNxosBgpMvpn `json:"NxosBgpMvpn,omitempty"`
+	// Returns the status of dci interface configured.
+	NxosDciInterfaceStatus *string                       `json:"NxosDciInterfaceStatus,omitempty"`
+	NxosInterfaceBrief     NullableNiatelemetryInterface `json:"NxosInterfaceBrief,omitempty"`
+	// Returns the value of the nxosNveInterface field.
+	NxosNveInterfaceStatus *string                    `json:"NxosNveInterfaceStatus,omitempty"`
+	NxosNveVni             NullableNiatelemetryNveVni `json:"NxosNveVni,omitempty"`
+	// Total number of ospf neighbors per switch in DCNM.
+	NxosOspfNeighbors *int64 `json:"NxosOspfNeighbors,omitempty"`
+	// Total number of pim neighbors per switch in DCNM.
+	NxosPimNeighbors *string `json:"NxosPimNeighbors,omitempty"`
 	// Returns the value of the nxosTelnet field.
 	NxosTelnet *string `json:"NxosTelnet,omitempty"`
+	// Total number of routes configured in the DCNM.
+	NxosTotalRoutes *int64                      `json:"NxosTotalRoutes,omitempty"`
+	NxosVtp         NullableNiatelemetryNxosVtp `json:"NxosVtp,omitempty"`
 	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 	RecordType *string `json:"RecordType,omitempty"`
 	// Version of record being pushed. This determines what was the API version for data available from the device.
@@ -882,36 +893,79 @@ func (o *NiatelemetryNiaInventoryAllOf) SetNodeId(v string) {
 	o.NodeId = &v
 }
 
-// GetNxosEvpnMacRoutes returns the NxosEvpnMacRoutes field value if set, zero value otherwise.
-func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutes() int64 {
-	if o == nil || o.NxosEvpnMacRoutes == nil {
-		var ret int64
+// GetNxosBgpMvpn returns the NxosBgpMvpn field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosBgpMvpn() NiatelemetryNxosBgpMvpn {
+	if o == nil || o.NxosBgpMvpn.Get() == nil {
+		var ret NiatelemetryNxosBgpMvpn
 		return ret
 	}
-	return *o.NxosEvpnMacRoutes
+	return *o.NxosBgpMvpn.Get()
 }
 
-// GetNxosEvpnMacRoutesOk returns a tuple with the NxosEvpnMacRoutes field value if set, nil otherwise
+// GetNxosBgpMvpnOk returns a tuple with the NxosBgpMvpn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutesOk() (*int64, bool) {
-	if o == nil || o.NxosEvpnMacRoutes == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosBgpMvpnOk() (*NiatelemetryNxosBgpMvpn, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NxosEvpnMacRoutes, true
+	return o.NxosBgpMvpn.Get(), o.NxosBgpMvpn.IsSet()
 }
 
-// HasNxosEvpnMacRoutes returns a boolean if a field has been set.
-func (o *NiatelemetryNiaInventoryAllOf) HasNxosEvpnMacRoutes() bool {
-	if o != nil && o.NxosEvpnMacRoutes != nil {
+// HasNxosBgpMvpn returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosBgpMvpn() bool {
+	if o != nil && o.NxosBgpMvpn.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNxosEvpnMacRoutes gets a reference to the given int64 and assigns it to the NxosEvpnMacRoutes field.
-func (o *NiatelemetryNiaInventoryAllOf) SetNxosEvpnMacRoutes(v int64) {
-	o.NxosEvpnMacRoutes = &v
+// SetNxosBgpMvpn gets a reference to the given NullableNiatelemetryNxosBgpMvpn and assigns it to the NxosBgpMvpn field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosBgpMvpn(v NiatelemetryNxosBgpMvpn) {
+	o.NxosBgpMvpn.Set(&v)
+}
+
+// SetNxosBgpMvpnNil sets the value for NxosBgpMvpn to be an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosBgpMvpnNil() {
+	o.NxosBgpMvpn.Set(nil)
+}
+
+// UnsetNxosBgpMvpn ensures that no value is present for NxosBgpMvpn, not even an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosBgpMvpn() {
+	o.NxosBgpMvpn.Unset()
+}
+
+// GetNxosDciInterfaceStatus returns the NxosDciInterfaceStatus field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosDciInterfaceStatus() string {
+	if o == nil || o.NxosDciInterfaceStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.NxosDciInterfaceStatus
+}
+
+// GetNxosDciInterfaceStatusOk returns a tuple with the NxosDciInterfaceStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosDciInterfaceStatusOk() (*string, bool) {
+	if o == nil || o.NxosDciInterfaceStatus == nil {
+		return nil, false
+	}
+	return o.NxosDciInterfaceStatus, true
+}
+
+// HasNxosDciInterfaceStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosDciInterfaceStatus() bool {
+	if o != nil && o.NxosDciInterfaceStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosDciInterfaceStatus gets a reference to the given string and assigns it to the NxosDciInterfaceStatus field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosDciInterfaceStatus(v string) {
+	o.NxosDciInterfaceStatus = &v
 }
 
 // GetNxosInterfaceBrief returns the NxosInterfaceBrief field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -957,6 +1011,145 @@ func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosInterfaceBrief() {
 	o.NxosInterfaceBrief.Unset()
 }
 
+// GetNxosNveInterfaceStatus returns the NxosNveInterfaceStatus field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveInterfaceStatus() string {
+	if o == nil || o.NxosNveInterfaceStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.NxosNveInterfaceStatus
+}
+
+// GetNxosNveInterfaceStatusOk returns a tuple with the NxosNveInterfaceStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveInterfaceStatusOk() (*string, bool) {
+	if o == nil || o.NxosNveInterfaceStatus == nil {
+		return nil, false
+	}
+	return o.NxosNveInterfaceStatus, true
+}
+
+// HasNxosNveInterfaceStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosNveInterfaceStatus() bool {
+	if o != nil && o.NxosNveInterfaceStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosNveInterfaceStatus gets a reference to the given string and assigns it to the NxosNveInterfaceStatus field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveInterfaceStatus(v string) {
+	o.NxosNveInterfaceStatus = &v
+}
+
+// GetNxosNveVni returns the NxosNveVni field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveVni() NiatelemetryNveVni {
+	if o == nil || o.NxosNveVni.Get() == nil {
+		var ret NiatelemetryNveVni
+		return ret
+	}
+	return *o.NxosNveVni.Get()
+}
+
+// GetNxosNveVniOk returns a tuple with the NxosNveVni field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosNveVniOk() (*NiatelemetryNveVni, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NxosNveVni.Get(), o.NxosNveVni.IsSet()
+}
+
+// HasNxosNveVni returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosNveVni() bool {
+	if o != nil && o.NxosNveVni.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosNveVni gets a reference to the given NullableNiatelemetryNveVni and assigns it to the NxosNveVni field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveVni(v NiatelemetryNveVni) {
+	o.NxosNveVni.Set(&v)
+}
+
+// SetNxosNveVniNil sets the value for NxosNveVni to be an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosNveVniNil() {
+	o.NxosNveVni.Set(nil)
+}
+
+// UnsetNxosNveVni ensures that no value is present for NxosNveVni, not even an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosNveVni() {
+	o.NxosNveVni.Unset()
+}
+
+// GetNxosOspfNeighbors returns the NxosOspfNeighbors field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosOspfNeighbors() int64 {
+	if o == nil || o.NxosOspfNeighbors == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosOspfNeighbors
+}
+
+// GetNxosOspfNeighborsOk returns a tuple with the NxosOspfNeighbors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosOspfNeighborsOk() (*int64, bool) {
+	if o == nil || o.NxosOspfNeighbors == nil {
+		return nil, false
+	}
+	return o.NxosOspfNeighbors, true
+}
+
+// HasNxosOspfNeighbors returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosOspfNeighbors() bool {
+	if o != nil && o.NxosOspfNeighbors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosOspfNeighbors gets a reference to the given int64 and assigns it to the NxosOspfNeighbors field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosOspfNeighbors(v int64) {
+	o.NxosOspfNeighbors = &v
+}
+
+// GetNxosPimNeighbors returns the NxosPimNeighbors field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosPimNeighbors() string {
+	if o == nil || o.NxosPimNeighbors == nil {
+		var ret string
+		return ret
+	}
+	return *o.NxosPimNeighbors
+}
+
+// GetNxosPimNeighborsOk returns a tuple with the NxosPimNeighbors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosPimNeighborsOk() (*string, bool) {
+	if o == nil || o.NxosPimNeighbors == nil {
+		return nil, false
+	}
+	return o.NxosPimNeighbors, true
+}
+
+// HasNxosPimNeighbors returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosPimNeighbors() bool {
+	if o != nil && o.NxosPimNeighbors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosPimNeighbors gets a reference to the given string and assigns it to the NxosPimNeighbors field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosPimNeighbors(v string) {
+	o.NxosPimNeighbors = &v
+}
+
 // GetNxosTelnet returns the NxosTelnet field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryAllOf) GetNxosTelnet() string {
 	if o == nil || o.NxosTelnet == nil {
@@ -987,6 +1180,81 @@ func (o *NiatelemetryNiaInventoryAllOf) HasNxosTelnet() bool {
 // SetNxosTelnet gets a reference to the given string and assigns it to the NxosTelnet field.
 func (o *NiatelemetryNiaInventoryAllOf) SetNxosTelnet(v string) {
 	o.NxosTelnet = &v
+}
+
+// GetNxosTotalRoutes returns the NxosTotalRoutes field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosTotalRoutes() int64 {
+	if o == nil || o.NxosTotalRoutes == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosTotalRoutes
+}
+
+// GetNxosTotalRoutesOk returns a tuple with the NxosTotalRoutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosTotalRoutesOk() (*int64, bool) {
+	if o == nil || o.NxosTotalRoutes == nil {
+		return nil, false
+	}
+	return o.NxosTotalRoutes, true
+}
+
+// HasNxosTotalRoutes returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosTotalRoutes() bool {
+	if o != nil && o.NxosTotalRoutes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosTotalRoutes gets a reference to the given int64 and assigns it to the NxosTotalRoutes field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosTotalRoutes(v int64) {
+	o.NxosTotalRoutes = &v
+}
+
+// GetNxosVtp returns the NxosVtp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosVtp() NiatelemetryNxosVtp {
+	if o == nil || o.NxosVtp.Get() == nil {
+		var ret NiatelemetryNxosVtp
+		return ret
+	}
+	return *o.NxosVtp.Get()
+}
+
+// GetNxosVtpOk returns a tuple with the NxosVtp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosVtpOk() (*NiatelemetryNxosVtp, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NxosVtp.Get(), o.NxosVtp.IsSet()
+}
+
+// HasNxosVtp returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosVtp() bool {
+	if o != nil && o.NxosVtp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosVtp gets a reference to the given NullableNiatelemetryNxosVtp and assigns it to the NxosVtp field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosVtp(v NiatelemetryNxosVtp) {
+	o.NxosVtp.Set(&v)
+}
+
+// SetNxosVtpNil sets the value for NxosVtp to be an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosVtpNil() {
+	o.NxosVtp.Set(nil)
+}
+
+// UnsetNxosVtp ensures that no value is present for NxosVtp, not even an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosVtp() {
+	o.NxosVtp.Unset()
 }
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
@@ -1447,14 +1715,35 @@ func (o NiatelemetryNiaInventoryAllOf) MarshalJSON() ([]byte, error) {
 	if o.NodeId != nil {
 		toSerialize["NodeId"] = o.NodeId
 	}
-	if o.NxosEvpnMacRoutes != nil {
-		toSerialize["NxosEvpnMacRoutes"] = o.NxosEvpnMacRoutes
+	if o.NxosBgpMvpn.IsSet() {
+		toSerialize["NxosBgpMvpn"] = o.NxosBgpMvpn.Get()
+	}
+	if o.NxosDciInterfaceStatus != nil {
+		toSerialize["NxosDciInterfaceStatus"] = o.NxosDciInterfaceStatus
 	}
 	if o.NxosInterfaceBrief.IsSet() {
 		toSerialize["NxosInterfaceBrief"] = o.NxosInterfaceBrief.Get()
 	}
+	if o.NxosNveInterfaceStatus != nil {
+		toSerialize["NxosNveInterfaceStatus"] = o.NxosNveInterfaceStatus
+	}
+	if o.NxosNveVni.IsSet() {
+		toSerialize["NxosNveVni"] = o.NxosNveVni.Get()
+	}
+	if o.NxosOspfNeighbors != nil {
+		toSerialize["NxosOspfNeighbors"] = o.NxosOspfNeighbors
+	}
+	if o.NxosPimNeighbors != nil {
+		toSerialize["NxosPimNeighbors"] = o.NxosPimNeighbors
+	}
 	if o.NxosTelnet != nil {
 		toSerialize["NxosTelnet"] = o.NxosTelnet
+	}
+	if o.NxosTotalRoutes != nil {
+		toSerialize["NxosTotalRoutes"] = o.NxosTotalRoutes
+	}
+	if o.NxosVtp.IsSet() {
+		toSerialize["NxosVtp"] = o.NxosVtp.Get()
 	}
 	if o.RecordType != nil {
 		toSerialize["RecordType"] = o.RecordType
@@ -1534,9 +1823,16 @@ func (o *NiatelemetryNiaInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "MacsecTotalCount")
 		delete(additionalProperties, "Memory")
 		delete(additionalProperties, "NodeId")
-		delete(additionalProperties, "NxosEvpnMacRoutes")
+		delete(additionalProperties, "NxosBgpMvpn")
+		delete(additionalProperties, "NxosDciInterfaceStatus")
 		delete(additionalProperties, "NxosInterfaceBrief")
+		delete(additionalProperties, "NxosNveInterfaceStatus")
+		delete(additionalProperties, "NxosNveVni")
+		delete(additionalProperties, "NxosOspfNeighbors")
+		delete(additionalProperties, "NxosPimNeighbors")
 		delete(additionalProperties, "NxosTelnet")
+		delete(additionalProperties, "NxosTotalRoutes")
+		delete(additionalProperties, "NxosVtp")
 		delete(additionalProperties, "RecordType")
 		delete(additionalProperties, "RecordVersion")
 		delete(additionalProperties, "RoutePrefixCount")

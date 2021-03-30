@@ -14,6 +14,11 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceKubernetesVirtualMachineNodeProfileRead,
 		Schema: map[string]*schema.Schema{
+			"action": {
+				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -65,6 +70,10 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineNodeProfile{}
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -123,9 +132,14 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["class_id"] = (s.GetClassId())
 				temp["cloud_provider"] = (s.GetCloudProvider())
+
+				temp["config_context"] = flattenMapPolicyConfigContext(s.GetConfigContext(), d)
+
+				temp["config_result"] = flattenMapKubernetesConfigResultRelationship(s.GetConfigResult(), d)
 				temp["description"] = (s.GetDescription())
 
 				temp["ip_addresses"] = flattenListIppoolIpLeaseRelationship(s.GetIpAddresses(), d)
@@ -136,6 +150,8 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 
 				temp["node_ip"] = flattenMapIppoolIpLeaseRelationship(s.GetNodeIp(), d)
 				temp["object_type"] = (s.GetObjectType())
+
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
 

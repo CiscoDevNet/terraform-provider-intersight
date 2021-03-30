@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **HypervisorControlIp** | Pointer to **string** | IP address for hypervisor control such as VM migration or pod management. | [optional] 
 **HypervisorDataIp** | Pointer to **string** | IP address for storage data network (Hypervisor interface). | [optional] 
 **HypervisorMgmtIp** | Pointer to **string** | IP address for Hypervisor management network. | [optional] 
-**AssignedServer** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
+**AssignedServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 **ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -200,20 +200,20 @@ HasHypervisorMgmtIp returns a boolean if a field has been set.
 
 ### GetAssignedServer
 
-`func (o *HyperflexNodeProfile) GetAssignedServer() ComputeRackUnitRelationship`
+`func (o *HyperflexNodeProfile) GetAssignedServer() ComputePhysicalRelationship`
 
 GetAssignedServer returns the AssignedServer field if non-nil, zero value otherwise.
 
 ### GetAssignedServerOk
 
-`func (o *HyperflexNodeProfile) GetAssignedServerOk() (*ComputeRackUnitRelationship, bool)`
+`func (o *HyperflexNodeProfile) GetAssignedServerOk() (*ComputePhysicalRelationship, bool)`
 
 GetAssignedServerOk returns a tuple with the AssignedServer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssignedServer
 
-`func (o *HyperflexNodeProfile) SetAssignedServer(v ComputeRackUnitRelationship)`
+`func (o *HyperflexNodeProfile) SetAssignedServer(v ComputePhysicalRelationship)`
 
 SetAssignedServer sets AssignedServer field to given value.
 

@@ -22,4 +22,5 @@ The following arguments can be used to get data of already created objects in In
 * `serial_number`:(string) Serial number of the PSU in APIC. 
 * `site_name`:(string) Name of the APIC site from which this data is being collected. 
 * `vendor_name`:(string) Vendor name of the PSU in APIC. 
+* `vid`:(string) VID for the PSU in the inventory. 
  

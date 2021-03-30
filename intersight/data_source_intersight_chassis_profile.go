@@ -156,6 +156,8 @@ func dataSourceChassisProfileRead(c context.Context, d *schema.ResourceData, met
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+
 				temp["running_workflows"] = flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
