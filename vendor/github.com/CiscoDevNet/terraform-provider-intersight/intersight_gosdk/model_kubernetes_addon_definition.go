@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -26,11 +26,11 @@ type KubernetesAddonDefinition struct {
 	ObjectType string `json:"ObjectType"`
 	// Description of the addon component.
 	ChartUrl *string `json:"ChartUrl,omitempty"`
-	// Default installation strategy for the release. * `InstallOnly` - Only install in green field. No action in case of failure or removal. * `NoAction` - No install action performed. * `Always` - Attempt install if chart is not already installed.
+	// Default installation strategy for the release. * `None` - Unspecified install strategy. * `NoAction` - No install action performed. * `InstallOnly` - Only install in green field. No action in case of failure or removal. * `Always` - Attempt install if chart is not already installed.
 	DefaultInstallStrategy *string `json:"DefaultInstallStrategy,omitempty"`
 	// Default namespace to install the release.
 	DefaultNamespace *string `json:"DefaultNamespace,omitempty"`
-	// Default upgrade strategy for the release. * `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * `NoAction` - This choice enables No upgrades to be performed. * `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure. * `AlwaysReinstall` - Always remove older release and reinstall.
+	// Default upgrade strategy for the release. * `None` - Unspecified upgrade strategy. * `NoAction` - This choice enables No upgrades to be performed. * `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure. * `AlwaysReinstall` - Always remove older release and reinstall.
 	DefaultUpgradeStrategy *string `json:"DefaultUpgradeStrategy,omitempty"`
 	// Description of the addon component.
 	Description *string `json:"Description,omitempty"`
@@ -57,9 +57,9 @@ func NewKubernetesAddonDefinition(classId string, objectType string) *Kubernetes
 	this := KubernetesAddonDefinition{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var defaultInstallStrategy string = "InstallOnly"
+	var defaultInstallStrategy string = "None"
 	this.DefaultInstallStrategy = &defaultInstallStrategy
-	var defaultUpgradeStrategy string = "UpgradeOnly"
+	var defaultUpgradeStrategy string = "None"
 	this.DefaultUpgradeStrategy = &defaultUpgradeStrategy
 	return &this
 }
@@ -73,9 +73,9 @@ func NewKubernetesAddonDefinitionWithDefaults() *KubernetesAddonDefinition {
 	this.ClassId = classId
 	var objectType string = "kubernetes.AddonDefinition"
 	this.ObjectType = objectType
-	var defaultInstallStrategy string = "InstallOnly"
+	var defaultInstallStrategy string = "None"
 	this.DefaultInstallStrategy = &defaultInstallStrategy
-	var defaultUpgradeStrategy string = "UpgradeOnly"
+	var defaultUpgradeStrategy string = "None"
 	this.DefaultUpgradeStrategy = &defaultUpgradeStrategy
 	return &this
 }
@@ -545,11 +545,11 @@ func (o *KubernetesAddonDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Description of the addon component.
 		ChartUrl *string `json:"ChartUrl,omitempty"`
-		// Default installation strategy for the release. * `InstallOnly` - Only install in green field. No action in case of failure or removal. * `NoAction` - No install action performed. * `Always` - Attempt install if chart is not already installed.
+		// Default installation strategy for the release. * `None` - Unspecified install strategy. * `NoAction` - No install action performed. * `InstallOnly` - Only install in green field. No action in case of failure or removal. * `Always` - Attempt install if chart is not already installed.
 		DefaultInstallStrategy *string `json:"DefaultInstallStrategy,omitempty"`
 		// Default namespace to install the release.
 		DefaultNamespace *string `json:"DefaultNamespace,omitempty"`
-		// Default upgrade strategy for the release. * `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * `NoAction` - This choice enables No upgrades to be performed. * `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure. * `AlwaysReinstall` - Always remove older release and reinstall.
+		// Default upgrade strategy for the release. * `None` - Unspecified upgrade strategy. * `NoAction` - This choice enables No upgrades to be performed. * `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure. * `AlwaysReinstall` - Always remove older release and reinstall.
 		DefaultUpgradeStrategy *string `json:"DefaultUpgradeStrategy,omitempty"`
 		// Description of the addon component.
 		Description *string `json:"Description,omitempty"`

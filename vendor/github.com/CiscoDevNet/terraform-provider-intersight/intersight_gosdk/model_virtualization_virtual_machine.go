@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -37,6 +37,8 @@ type VirtualizationVirtualMachine struct {
 	// Flag to indicate whether the configuration is created from inventory object.
 	Discovered *bool                              `json:"Discovered,omitempty"`
 	Disk       []VirtualizationVirtualMachineDisk `json:"Disk,omitempty"`
+	// Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine.
+	ForceDelete *bool `json:"ForceDelete,omitempty"`
 	// Guest operating system running on virtual machine. * `linux` - A Linux operating system. * `windows` - A Windows operating system.
 	GuestOs *string `json:"GuestOs,omitempty"`
 	// Host where virtual machine is deployed.
@@ -45,7 +47,7 @@ type VirtualizationVirtualMachine struct {
 	HypervisorType *string                          `json:"HypervisorType,omitempty"`
 	Interfaces     []VirtualizationNetworkInterface `json:"Interfaces,omitempty"`
 	Labels         []InfraMetaData                  `json:"Labels,omitempty"`
-	// Virtual machine memory defined in mega bytes.
+	// Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.
 	Memory *int64 `json:"Memory,omitempty"`
 	// Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.
 	Name *string `json:"Name,omitempty"`
@@ -466,6 +468,38 @@ func (o *VirtualizationVirtualMachine) HasDisk() bool {
 // SetDisk gets a reference to the given []VirtualizationVirtualMachineDisk and assigns it to the Disk field.
 func (o *VirtualizationVirtualMachine) SetDisk(v []VirtualizationVirtualMachineDisk) {
 	o.Disk = v
+}
+
+// GetForceDelete returns the ForceDelete field value if set, zero value otherwise.
+func (o *VirtualizationVirtualMachine) GetForceDelete() bool {
+	if o == nil || o.ForceDelete == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ForceDelete
+}
+
+// GetForceDeleteOk returns a tuple with the ForceDelete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVirtualMachine) GetForceDeleteOk() (*bool, bool) {
+	if o == nil || o.ForceDelete == nil {
+		return nil, false
+	}
+	return o.ForceDelete, true
+}
+
+// HasForceDelete returns a boolean if a field has been set.
+func (o *VirtualizationVirtualMachine) HasForceDelete() bool {
+	if o != nil && o.ForceDelete != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetForceDelete gets a reference to the given bool and assigns it to the ForceDelete field.
+func (o *VirtualizationVirtualMachine) SetForceDelete(v bool) {
+	o.ForceDelete = &v
 }
 
 // GetGuestOs returns the GuestOs field value if set, zero value otherwise.
@@ -1004,6 +1038,9 @@ func (o VirtualizationVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.Disk != nil {
 		toSerialize["Disk"] = o.Disk
 	}
+	if o.ForceDelete != nil {
+		toSerialize["ForceDelete"] = o.ForceDelete
+	}
 	if o.GuestOs != nil {
 		toSerialize["GuestOs"] = o.GuestOs
 	}
@@ -1076,6 +1113,8 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		// Flag to indicate whether the configuration is created from inventory object.
 		Discovered *bool                              `json:"Discovered,omitempty"`
 		Disk       []VirtualizationVirtualMachineDisk `json:"Disk,omitempty"`
+		// Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine.
+		ForceDelete *bool `json:"ForceDelete,omitempty"`
 		// Guest operating system running on virtual machine. * `linux` - A Linux operating system. * `windows` - A Windows operating system.
 		GuestOs *string `json:"GuestOs,omitempty"`
 		// Host where virtual machine is deployed.
@@ -1084,7 +1123,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		HypervisorType *string                          `json:"HypervisorType,omitempty"`
 		Interfaces     []VirtualizationNetworkInterface `json:"Interfaces,omitempty"`
 		Labels         []InfraMetaData                  `json:"Labels,omitempty"`
-		// Virtual machine memory defined in mega bytes.
+		// Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03.
 		Memory *int64 `json:"Memory,omitempty"`
 		// Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere.
 		Name *string `json:"Name,omitempty"`
@@ -1116,6 +1155,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		varVirtualizationVirtualMachine.Cpu = varVirtualizationVirtualMachineWithoutEmbeddedStruct.Cpu
 		varVirtualizationVirtualMachine.Discovered = varVirtualizationVirtualMachineWithoutEmbeddedStruct.Discovered
 		varVirtualizationVirtualMachine.Disk = varVirtualizationVirtualMachineWithoutEmbeddedStruct.Disk
+		varVirtualizationVirtualMachine.ForceDelete = varVirtualizationVirtualMachineWithoutEmbeddedStruct.ForceDelete
 		varVirtualizationVirtualMachine.GuestOs = varVirtualizationVirtualMachineWithoutEmbeddedStruct.GuestOs
 		varVirtualizationVirtualMachine.HostEsxi = varVirtualizationVirtualMachineWithoutEmbeddedStruct.HostEsxi
 		varVirtualizationVirtualMachine.HypervisorType = varVirtualizationVirtualMachineWithoutEmbeddedStruct.HypervisorType
@@ -1159,6 +1199,7 @@ func (o *VirtualizationVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Cpu")
 		delete(additionalProperties, "Discovered")
 		delete(additionalProperties, "Disk")
+		delete(additionalProperties, "ForceDelete")
 		delete(additionalProperties, "GuestOs")
 		delete(additionalProperties, "HostEsxi")
 		delete(additionalProperties, "HypervisorType")

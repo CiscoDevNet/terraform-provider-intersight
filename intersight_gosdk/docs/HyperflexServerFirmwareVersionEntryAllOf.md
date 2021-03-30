@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ServerFirmwareVersionEntry"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ServerFirmwareVersionEntry"]
 **Constraint** | Pointer to [**NullableHyperflexAppSettingConstraint**](hyperflex.AppSettingConstraint.md) |  | [optional] 
-**ServerPlatform** | Pointer to **string** | The server platform type that is applicable for the server firmware bundle version. * &#x60;M5&#x60; - M5 generation of UCS server. * &#x60;M4&#x60; - M4 generation of UCS server. | [optional] [default to "M5"]
+**ServerPlatform** | Pointer to **string** | The server platform type that is applicable for the server firmware bundle version. * &#x60;M5&#x60; - M5 generation of UCS server. * &#x60;M3&#x60; - M3 generation of UCS server. * &#x60;M4&#x60; - M4 generation of UCS server. | [optional] [default to "M5"]
 **Version** | Pointer to **string** | The server firmware bundle version. | [optional] 
 **ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](hyperflex.ServerFirmwareVersion.Relationship.md) |  | [optional] 
 

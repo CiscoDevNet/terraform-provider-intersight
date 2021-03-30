@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -20,19 +20,18 @@ type KubernetesClusterProfileAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                                            `json:"ObjectType"`
-	ActionInfo NullableKubernetesActionInfo                      `json:"ActionInfo,omitempty"`
-	CertConfig NullableKubernetesClusterCertificateConfiguration `json:"CertConfig,omitempty"`
-	KubeConfig NullableKubernetesConfiguration                   `json:"KubeConfig,omitempty"`
+	ObjectType      string                                            `json:"ObjectType"`
+	ActionInfo      NullableKubernetesActionInfo                      `json:"ActionInfo,omitempty"`
+	CertConfig      NullableKubernetesClusterCertificateConfiguration `json:"CertConfig,omitempty"`
+	EssentialAddons []KubernetesEssentialAddon                        `json:"EssentialAddons,omitempty"`
+	KubeConfig      NullableKubernetesConfiguration                   `json:"KubeConfig,omitempty"`
 	// Management mode for the cluster. In some cases Intersight kubernetes service is not required to provision and manage the management entities and endpoints (for e.g. EKS). In most other cases it will be required to provision and manage these entities and endpoints. * `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform. * `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service.
 	ManagedMode      *string                                   `json:"ManagedMode,omitempty"`
 	ManagementConfig NullableKubernetesClusterManagementConfig `json:"ManagementConfig,omitempty"`
-	// Status of the Kubernetes cluster and its nodes. * `Configuring` - The cluster is being configured. * `Deploying` - The cluster is being deployed. * `Undeploying` - The cluster is being undeployed. * `DeployFailed` - The cluster deployment failed. * `Upgrading` - The cluster is being upgraded. * `Deleting` - The cluster is being deleted. * `DeleteFailed` - The cluster delete failed. * `Ready` - The cluster is ready for use. * `Active` - The cluster is being active. * `Shutdown` - All the nodes in the cluster are powered off. * `Terminated` - The cluster is terminated. * `Deployed` - The cluster is deployed. The cluster may not yet be ready for use. * `UndeployFailed` - The cluster undeploy action failed. * `NotReady` - The cluster is created and some nodes are not ready.
-	Status        *string                              `json:"Status,omitempty"`
-	AciCniProfile *KubernetesAciCniProfileRelationship `json:"AciCniProfile,omitempty"`
-	// An array of relationships to kubernetesAddonPolicy resources.
-	Addons            []KubernetesAddonPolicyRelationship `json:"Addons,omitempty"`
-	AssociatedCluster *KubernetesClusterRelationship      `json:"AssociatedCluster,omitempty"`
+	// Status of the Kubernetes cluster and its nodes. * `Undeployed` - The cluster is undeployed. * `Configuring` - The cluster is being configured. * `Deploying` - The cluster is being deployed. * `Undeploying` - The cluster is being undeployed. * `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered. * `DeployFailed` - The cluster deployment failed. * `Upgrading` - The cluster is being upgraded. * `Deleting` - The cluster is being deleted. * `DeleteFailed` - The cluster delete failed. * `Ready` - The cluster is ready for use. * `Active` - The cluster is being active. * `Shutdown` - All the nodes in the cluster are powered off. * `Terminated` - The cluster is terminated. * `Deployed` - The cluster is deployed. The cluster may not yet be ready for use. * `UndeployFailed` - The cluster undeploy action failed. * `NotReady` - The cluster is created and some nodes are not ready.
+	Status            *string                              `json:"Status,omitempty"`
+	AciCniProfile     *KubernetesAciCniProfileRelationship `json:"AciCniProfile,omitempty"`
+	AssociatedCluster *KubernetesClusterRelationship       `json:"AssociatedCluster,omitempty"`
 	// An array of relationships to ippoolPool resources.
 	ClusterIpPools         []IppoolPoolRelationship                      `json:"ClusterIpPools,omitempty"`
 	ContainerRuntimeConfig *KubernetesContainerRuntimePolicyRelationship `json:"ContainerRuntimeConfig,omitempty"`
@@ -61,7 +60,7 @@ func NewKubernetesClusterProfileAllOf(classId string, objectType string) *Kubern
 	this.ObjectType = objectType
 	var managedMode string = "Provided"
 	this.ManagedMode = &managedMode
-	var status string = "Configuring"
+	var status string = "Undeployed"
 	this.Status = &status
 	return &this
 }
@@ -77,7 +76,7 @@ func NewKubernetesClusterProfileAllOfWithDefaults() *KubernetesClusterProfileAll
 	this.ObjectType = objectType
 	var managedMode string = "Provided"
 	this.ManagedMode = &managedMode
-	var status string = "Configuring"
+	var status string = "Undeployed"
 	this.Status = &status
 	return &this
 }
@@ -214,6 +213,39 @@ func (o *KubernetesClusterProfileAllOf) SetCertConfigNil() {
 // UnsetCertConfig ensures that no value is present for CertConfig, not even an explicit nil
 func (o *KubernetesClusterProfileAllOf) UnsetCertConfig() {
 	o.CertConfig.Unset()
+}
+
+// GetEssentialAddons returns the EssentialAddons field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesClusterProfileAllOf) GetEssentialAddons() []KubernetesEssentialAddon {
+	if o == nil {
+		var ret []KubernetesEssentialAddon
+		return ret
+	}
+	return o.EssentialAddons
+}
+
+// GetEssentialAddonsOk returns a tuple with the EssentialAddons field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *KubernetesClusterProfileAllOf) GetEssentialAddonsOk() (*[]KubernetesEssentialAddon, bool) {
+	if o == nil || o.EssentialAddons == nil {
+		return nil, false
+	}
+	return &o.EssentialAddons, true
+}
+
+// HasEssentialAddons returns a boolean if a field has been set.
+func (o *KubernetesClusterProfileAllOf) HasEssentialAddons() bool {
+	if o != nil && o.EssentialAddons != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEssentialAddons gets a reference to the given []KubernetesEssentialAddon and assigns it to the EssentialAddons field.
+func (o *KubernetesClusterProfileAllOf) SetEssentialAddons(v []KubernetesEssentialAddon) {
+	o.EssentialAddons = v
 }
 
 // GetKubeConfig returns the KubeConfig field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -396,39 +428,6 @@ func (o *KubernetesClusterProfileAllOf) HasAciCniProfile() bool {
 // SetAciCniProfile gets a reference to the given KubernetesAciCniProfileRelationship and assigns it to the AciCniProfile field.
 func (o *KubernetesClusterProfileAllOf) SetAciCniProfile(v KubernetesAciCniProfileRelationship) {
 	o.AciCniProfile = &v
-}
-
-// GetAddons returns the Addons field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *KubernetesClusterProfileAllOf) GetAddons() []KubernetesAddonPolicyRelationship {
-	if o == nil {
-		var ret []KubernetesAddonPolicyRelationship
-		return ret
-	}
-	return o.Addons
-}
-
-// GetAddonsOk returns a tuple with the Addons field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesClusterProfileAllOf) GetAddonsOk() (*[]KubernetesAddonPolicyRelationship, bool) {
-	if o == nil || o.Addons == nil {
-		return nil, false
-	}
-	return &o.Addons, true
-}
-
-// HasAddons returns a boolean if a field has been set.
-func (o *KubernetesClusterProfileAllOf) HasAddons() bool {
-	if o != nil && o.Addons != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAddons gets a reference to the given []KubernetesAddonPolicyRelationship and assigns it to the Addons field.
-func (o *KubernetesClusterProfileAllOf) SetAddons(v []KubernetesAddonPolicyRelationship) {
-	o.Addons = v
 }
 
 // GetAssociatedCluster returns the AssociatedCluster field value if set, zero value otherwise.
@@ -800,6 +799,9 @@ func (o KubernetesClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	if o.CertConfig.IsSet() {
 		toSerialize["CertConfig"] = o.CertConfig.Get()
 	}
+	if o.EssentialAddons != nil {
+		toSerialize["EssentialAddons"] = o.EssentialAddons
+	}
 	if o.KubeConfig.IsSet() {
 		toSerialize["KubeConfig"] = o.KubeConfig.Get()
 	}
@@ -814,9 +816,6 @@ func (o KubernetesClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.AciCniProfile != nil {
 		toSerialize["AciCniProfile"] = o.AciCniProfile
-	}
-	if o.Addons != nil {
-		toSerialize["Addons"] = o.Addons
 	}
 	if o.AssociatedCluster != nil {
 		toSerialize["AssociatedCluster"] = o.AssociatedCluster
@@ -873,12 +872,12 @@ func (o *KubernetesClusterProfileAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ActionInfo")
 		delete(additionalProperties, "CertConfig")
+		delete(additionalProperties, "EssentialAddons")
 		delete(additionalProperties, "KubeConfig")
 		delete(additionalProperties, "ManagedMode")
 		delete(additionalProperties, "ManagementConfig")
 		delete(additionalProperties, "Status")
 		delete(additionalProperties, "AciCniProfile")
-		delete(additionalProperties, "Addons")
 		delete(additionalProperties, "AssociatedCluster")
 		delete(additionalProperties, "ClusterIpPools")
 		delete(additionalProperties, "ContainerRuntimeConfig")

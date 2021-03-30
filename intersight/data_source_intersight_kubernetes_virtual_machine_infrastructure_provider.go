@@ -111,14 +111,14 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 
 				temp["infra_config"] = flattenMapKubernetesBaseVirtualMachineInfraConfig(s.GetInfraConfig(), d)
 
+				temp["infra_config_policy"] = flattenMapKubernetesVirtualMachineInfraConfigPolicyRelationship(s.GetInfraConfigPolicy(), d)
+
 				temp["instance_type"] = flattenMapKubernetesVirtualMachineInstanceTypeRelationship(s.GetInstanceType(), d)
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 
-				temp["node_groups"] = flattenListKubernetesNodeGroupProfileRelationship(s.GetNodeGroups(), d)
+				temp["node_group"] = flattenMapKubernetesNodeGroupProfileRelationship(s.GetNodeGroup(), d)
 				temp["object_type"] = (s.GetObjectType())
-
-				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

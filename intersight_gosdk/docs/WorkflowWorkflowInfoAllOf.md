@@ -36,9 +36,9 @@ Name | Type | Description | Notes
 **WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
 **WorkflowTaskCount** | Pointer to **int64** | Total number of workflow tasks in this workflow. | [optional] [readonly] 
 **WorkflowWorkerTaskCount** | Pointer to **int64** | Total number of worker tasks in this workflow. This count doesn&#39;t include the control tasks in the workflow. | [optional] [readonly] 
-**Var0ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
-**Var1SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
-**Var2RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
+**Var0RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
+**Var1ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
+**Var2SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
 **Var3Profile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
@@ -908,80 +908,80 @@ SetWorkflowWorkerTaskCount sets WorkflowWorkerTaskCount field to given value.
 
 HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
 
-### GetVar0ClusterProfile
+### GetVar0RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar0ClusterProfile() HyperflexClusterProfileRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar0RollbackWorkflow() WorkflowRollbackWorkflowRelationship`
 
-GetVar0ClusterProfile returns the Var0ClusterProfile field if non-nil, zero value otherwise.
+GetVar0RollbackWorkflow returns the Var0RollbackWorkflow field if non-nil, zero value otherwise.
 
-### GetVar0ClusterProfileOk
+### GetVar0RollbackWorkflowOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar0ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar0RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool)`
 
-GetVar0ClusterProfileOk returns a tuple with the Var0ClusterProfile field if it's non-nil, zero value otherwise
+GetVar0RollbackWorkflowOk returns a tuple with the Var0RollbackWorkflow field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar0ClusterProfile
+### SetVar0RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar0ClusterProfile(v HyperflexClusterProfileRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar0RollbackWorkflow(v WorkflowRollbackWorkflowRelationship)`
 
-SetVar0ClusterProfile sets Var0ClusterProfile field to given value.
+SetVar0RollbackWorkflow sets Var0RollbackWorkflow field to given value.
 
-### HasVar0ClusterProfile
+### HasVar0RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar0ClusterProfile() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar0RollbackWorkflow() bool`
 
-HasVar0ClusterProfile returns a boolean if a field has been set.
+HasVar0RollbackWorkflow returns a boolean if a field has been set.
 
-### GetVar1SwitchProfile
+### GetVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfile() FabricSwitchProfileRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1ClusterProfile() HyperflexClusterProfileRelationship`
 
-GetVar1SwitchProfile returns the Var1SwitchProfile field if non-nil, zero value otherwise.
+GetVar1ClusterProfile returns the Var1ClusterProfile field if non-nil, zero value otherwise.
 
-### GetVar1SwitchProfileOk
+### GetVar1ClusterProfileOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
 
-GetVar1SwitchProfileOk returns a tuple with the Var1SwitchProfile field if it's non-nil, zero value otherwise
+GetVar1ClusterProfileOk returns a tuple with the Var1ClusterProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar1SwitchProfile
+### SetVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar1SwitchProfile(v FabricSwitchProfileRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar1ClusterProfile(v HyperflexClusterProfileRelationship)`
 
-SetVar1SwitchProfile sets Var1SwitchProfile field to given value.
+SetVar1ClusterProfile sets Var1ClusterProfile field to given value.
 
-### HasVar1SwitchProfile
+### HasVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar1SwitchProfile() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar1ClusterProfile() bool`
 
-HasVar1SwitchProfile returns a boolean if a field has been set.
+HasVar1ClusterProfile returns a boolean if a field has been set.
 
-### GetVar2RollbackWorkflow
+### GetVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2RollbackWorkflow() WorkflowRollbackWorkflowRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfile() FabricSwitchProfileRelationship`
 
-GetVar2RollbackWorkflow returns the Var2RollbackWorkflow field if non-nil, zero value otherwise.
+GetVar2SwitchProfile returns the Var2SwitchProfile field if non-nil, zero value otherwise.
 
-### GetVar2RollbackWorkflowOk
+### GetVar2SwitchProfileOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
 
-GetVar2RollbackWorkflowOk returns a tuple with the Var2RollbackWorkflow field if it's non-nil, zero value otherwise
+GetVar2SwitchProfileOk returns a tuple with the Var2SwitchProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar2RollbackWorkflow
+### SetVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar2RollbackWorkflow(v WorkflowRollbackWorkflowRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar2SwitchProfile(v FabricSwitchProfileRelationship)`
 
-SetVar2RollbackWorkflow sets Var2RollbackWorkflow field to given value.
+SetVar2SwitchProfile sets Var2SwitchProfile field to given value.
 
-### HasVar2RollbackWorkflow
+### HasVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar2RollbackWorkflow() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar2SwitchProfile() bool`
 
-HasVar2RollbackWorkflow returns a boolean if a field has been set.
+HasVar2SwitchProfile returns a boolean if a field has been set.
 
 ### GetVar3Profile
 

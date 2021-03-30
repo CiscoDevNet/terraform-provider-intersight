@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterProfile"]
 **ActionInfo** | Pointer to [**NullableKubernetesActionInfo**](kubernetes.ActionInfo.md) |  | [optional] 
 **CertConfig** | Pointer to [**NullableKubernetesClusterCertificateConfiguration**](kubernetes.ClusterCertificateConfiguration.md) |  | [optional] 
+**EssentialAddons** | Pointer to [**[]KubernetesEssentialAddon**](KubernetesEssentialAddon.md) |  | [optional] 
 **KubeConfig** | Pointer to [**NullableKubernetesConfiguration**](kubernetes.Configuration.md) |  | [optional] 
 **ManagedMode** | Pointer to **string** | Management mode for the cluster. In some cases Intersight kubernetes service is not required to provision and manage the management entities and endpoints (for e.g. EKS). In most other cases it will be required to provision and manage these entities and endpoints. * &#x60;Provided&#x60; - Cluster management entities and endpoints are provided by the infrastructure platform. * &#x60;Managed&#x60; - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service. | [optional] [default to "Provided"]
 **ManagementConfig** | Pointer to [**NullableKubernetesClusterManagementConfig**](kubernetes.ClusterManagementConfig.md) |  | [optional] 
-**Status** | Pointer to **string** | Status of the Kubernetes cluster and its nodes. * &#x60;Configuring&#x60; - The cluster is being configured. * &#x60;Deploying&#x60; - The cluster is being deployed. * &#x60;Undeploying&#x60; - The cluster is being undeployed. * &#x60;DeployFailed&#x60; - The cluster deployment failed. * &#x60;Upgrading&#x60; - The cluster is being upgraded. * &#x60;Deleting&#x60; - The cluster is being deleted. * &#x60;DeleteFailed&#x60; - The cluster delete failed. * &#x60;Ready&#x60; - The cluster is ready for use. * &#x60;Active&#x60; - The cluster is being active. * &#x60;Shutdown&#x60; - All the nodes in the cluster are powered off. * &#x60;Terminated&#x60; - The cluster is terminated. * &#x60;Deployed&#x60; - The cluster is deployed. The cluster may not yet be ready for use. * &#x60;UndeployFailed&#x60; - The cluster undeploy action failed. * &#x60;NotReady&#x60; - The cluster is created and some nodes are not ready. | [optional] [default to "Configuring"]
+**Status** | Pointer to **string** | Status of the Kubernetes cluster and its nodes. * &#x60;Undeployed&#x60; - The cluster is undeployed. * &#x60;Configuring&#x60; - The cluster is being configured. * &#x60;Deploying&#x60; - The cluster is being deployed. * &#x60;Undeploying&#x60; - The cluster is being undeployed. * &#x60;DeployFailedTerminal&#x60; - The cluster deployment failed terminally and can not be recovered. * &#x60;DeployFailed&#x60; - The cluster deployment failed. * &#x60;Upgrading&#x60; - The cluster is being upgraded. * &#x60;Deleting&#x60; - The cluster is being deleted. * &#x60;DeleteFailed&#x60; - The cluster delete failed. * &#x60;Ready&#x60; - The cluster is ready for use. * &#x60;Active&#x60; - The cluster is being active. * &#x60;Shutdown&#x60; - All the nodes in the cluster are powered off. * &#x60;Terminated&#x60; - The cluster is terminated. * &#x60;Deployed&#x60; - The cluster is deployed. The cluster may not yet be ready for use. * &#x60;UndeployFailed&#x60; - The cluster undeploy action failed. * &#x60;NotReady&#x60; - The cluster is created and some nodes are not ready. | [optional] [default to "Undeployed"]
 **AciCniProfile** | Pointer to [**KubernetesAciCniProfileRelationship**](kubernetes.AciCniProfile.Relationship.md) |  | [optional] 
-**Addons** | Pointer to [**[]KubernetesAddonPolicyRelationship**](KubernetesAddonPolicyRelationship.md) | An array of relationships to kubernetesAddonPolicy resources. | [optional] 
 **AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](kubernetes.Cluster.Relationship.md) |  | [optional] 
 **ClusterIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
 **ContainerRuntimeConfig** | Pointer to [**KubernetesContainerRuntimePolicyRelationship**](kubernetes.ContainerRuntimePolicy.Relationship.md) |  | [optional] 
@@ -155,6 +155,41 @@ HasCertConfig returns a boolean if a field has been set.
 `func (o *KubernetesClusterProfileAllOf) UnsetCertConfig()`
 
 UnsetCertConfig ensures that no value is present for CertConfig, not even an explicit nil
+### GetEssentialAddons
+
+`func (o *KubernetesClusterProfileAllOf) GetEssentialAddons() []KubernetesEssentialAddon`
+
+GetEssentialAddons returns the EssentialAddons field if non-nil, zero value otherwise.
+
+### GetEssentialAddonsOk
+
+`func (o *KubernetesClusterProfileAllOf) GetEssentialAddonsOk() (*[]KubernetesEssentialAddon, bool)`
+
+GetEssentialAddonsOk returns a tuple with the EssentialAddons field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEssentialAddons
+
+`func (o *KubernetesClusterProfileAllOf) SetEssentialAddons(v []KubernetesEssentialAddon)`
+
+SetEssentialAddons sets EssentialAddons field to given value.
+
+### HasEssentialAddons
+
+`func (o *KubernetesClusterProfileAllOf) HasEssentialAddons() bool`
+
+HasEssentialAddons returns a boolean if a field has been set.
+
+### SetEssentialAddonsNil
+
+`func (o *KubernetesClusterProfileAllOf) SetEssentialAddonsNil(b bool)`
+
+ SetEssentialAddonsNil sets the value for EssentialAddons to be an explicit nil
+
+### UnsetEssentialAddons
+`func (o *KubernetesClusterProfileAllOf) UnsetEssentialAddons()`
+
+UnsetEssentialAddons ensures that no value is present for EssentialAddons, not even an explicit nil
 ### GetKubeConfig
 
 `func (o *KubernetesClusterProfileAllOf) GetKubeConfig() KubernetesConfiguration`
@@ -300,41 +335,6 @@ SetAciCniProfile sets AciCniProfile field to given value.
 
 HasAciCniProfile returns a boolean if a field has been set.
 
-### GetAddons
-
-`func (o *KubernetesClusterProfileAllOf) GetAddons() []KubernetesAddonPolicyRelationship`
-
-GetAddons returns the Addons field if non-nil, zero value otherwise.
-
-### GetAddonsOk
-
-`func (o *KubernetesClusterProfileAllOf) GetAddonsOk() (*[]KubernetesAddonPolicyRelationship, bool)`
-
-GetAddonsOk returns a tuple with the Addons field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddons
-
-`func (o *KubernetesClusterProfileAllOf) SetAddons(v []KubernetesAddonPolicyRelationship)`
-
-SetAddons sets Addons field to given value.
-
-### HasAddons
-
-`func (o *KubernetesClusterProfileAllOf) HasAddons() bool`
-
-HasAddons returns a boolean if a field has been set.
-
-### SetAddonsNil
-
-`func (o *KubernetesClusterProfileAllOf) SetAddonsNil(b bool)`
-
- SetAddonsNil sets the value for Addons to be an explicit nil
-
-### UnsetAddons
-`func (o *KubernetesClusterProfileAllOf) UnsetAddons()`
-
-UnsetAddons ensures that no value is present for Addons, not even an explicit nil
 ### GetAssociatedCluster
 
 `func (o *KubernetesClusterProfileAllOf) GetAssociatedCluster() KubernetesClusterRelationship`

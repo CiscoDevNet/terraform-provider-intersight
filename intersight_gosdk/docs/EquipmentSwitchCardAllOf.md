@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NumPorts** | Pointer to **int64** | Number of ports present in this switch hardware. | [optional] [readonly] 
 **OutOfBandIpAddress** | Pointer to **string** | Field specifies this Switch&#39;s Out-of-band IP address. | [optional] [readonly] 
 **OutOfBandIpGateway** | Pointer to **string** | Field specifies this Switch&#39;s default gateway for the out-of-band management interface. | [optional] [readonly] 
+**OutOfBandIpMask** | Pointer to **string** | Field specifies the Netmask for this Switch&#39;s Out-of-band IP address. | [optional] 
 **Presence** | Pointer to **string** | Presence for this switch hardware. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | Slot identifier of the local Switch slot Interface. | [optional] [readonly] 
 **State** | Pointer to **string** | Operational state of the switch hardware. | [optional] [readonly] 
@@ -232,6 +233,31 @@ SetOutOfBandIpGateway sets OutOfBandIpGateway field to given value.
 `func (o *EquipmentSwitchCardAllOf) HasOutOfBandIpGateway() bool`
 
 HasOutOfBandIpGateway returns a boolean if a field has been set.
+
+### GetOutOfBandIpMask
+
+`func (o *EquipmentSwitchCardAllOf) GetOutOfBandIpMask() string`
+
+GetOutOfBandIpMask returns the OutOfBandIpMask field if non-nil, zero value otherwise.
+
+### GetOutOfBandIpMaskOk
+
+`func (o *EquipmentSwitchCardAllOf) GetOutOfBandIpMaskOk() (*string, bool)`
+
+GetOutOfBandIpMaskOk returns a tuple with the OutOfBandIpMask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandIpMask
+
+`func (o *EquipmentSwitchCardAllOf) SetOutOfBandIpMask(v string)`
+
+SetOutOfBandIpMask sets OutOfBandIpMask field to given value.
+
+### HasOutOfBandIpMask
+
+`func (o *EquipmentSwitchCardAllOf) HasOutOfBandIpMask() bool`
+
+HasOutOfBandIpMask returns a boolean if a field has been set.
 
 ### GetPresence
 

@@ -116,6 +116,8 @@ func dataSourceKubernetesClusterRead(c context.Context, d *schema.ResourceData, 
 				var temp = make(map[string]interface{})
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cluster_addon_profile"] = flattenMapKubernetesClusterAddonProfileRelationship(s.GetClusterAddonProfile(), d)
 				temp["connection_status"] = (s.GetConnectionStatus())
 				temp["kube_config"] = (s.GetKubeConfig())
 				temp["moid"] = (s.GetMoid())

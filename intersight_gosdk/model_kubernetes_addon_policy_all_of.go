@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -20,13 +20,9 @@ type KubernetesAddonPolicyAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// To determine if Addon Policy is automatically managed by the system.
-	SystemManaged *bool `json:"SystemManaged,omitempty"`
-	// An array of relationships to kubernetesAddon resources.
-	Addons []KubernetesAddonRelationship `json:"Addons,omitempty"`
-	// An array of relationships to kubernetesClusterProfile resources.
-	ClusterProfiles      []KubernetesClusterProfileRelationship `json:"ClusterProfiles,omitempty"`
+	ObjectType           string                                 `json:"ObjectType"`
+	AddonConfiguration   NullableKubernetesAddonConfiguration   `json:"AddonConfiguration,omitempty"`
+	AddonDefinition      *KubernetesAddonDefinitionRelationship `json:"AddonDefinition,omitempty"`
 	Organization         *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -104,102 +100,79 @@ func (o *KubernetesAddonPolicyAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetSystemManaged returns the SystemManaged field value if set, zero value otherwise.
-func (o *KubernetesAddonPolicyAllOf) GetSystemManaged() bool {
-	if o == nil || o.SystemManaged == nil {
-		var ret bool
+// GetAddonConfiguration returns the AddonConfiguration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesAddonPolicyAllOf) GetAddonConfiguration() KubernetesAddonConfiguration {
+	if o == nil || o.AddonConfiguration.Get() == nil {
+		var ret KubernetesAddonConfiguration
 		return ret
 	}
-	return *o.SystemManaged
+	return *o.AddonConfiguration.Get()
 }
 
-// GetSystemManagedOk returns a tuple with the SystemManaged field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesAddonPolicyAllOf) GetSystemManagedOk() (*bool, bool) {
-	if o == nil || o.SystemManaged == nil {
-		return nil, false
-	}
-	return o.SystemManaged, true
-}
-
-// HasSystemManaged returns a boolean if a field has been set.
-func (o *KubernetesAddonPolicyAllOf) HasSystemManaged() bool {
-	if o != nil && o.SystemManaged != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSystemManaged gets a reference to the given bool and assigns it to the SystemManaged field.
-func (o *KubernetesAddonPolicyAllOf) SetSystemManaged(v bool) {
-	o.SystemManaged = &v
-}
-
-// GetAddons returns the Addons field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *KubernetesAddonPolicyAllOf) GetAddons() []KubernetesAddonRelationship {
-	if o == nil {
-		var ret []KubernetesAddonRelationship
-		return ret
-	}
-	return o.Addons
-}
-
-// GetAddonsOk returns a tuple with the Addons field value if set, nil otherwise
+// GetAddonConfigurationOk returns a tuple with the AddonConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesAddonPolicyAllOf) GetAddonsOk() (*[]KubernetesAddonRelationship, bool) {
-	if o == nil || o.Addons == nil {
+func (o *KubernetesAddonPolicyAllOf) GetAddonConfigurationOk() (*KubernetesAddonConfiguration, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.Addons, true
+	return o.AddonConfiguration.Get(), o.AddonConfiguration.IsSet()
 }
 
-// HasAddons returns a boolean if a field has been set.
-func (o *KubernetesAddonPolicyAllOf) HasAddons() bool {
-	if o != nil && o.Addons != nil {
+// HasAddonConfiguration returns a boolean if a field has been set.
+func (o *KubernetesAddonPolicyAllOf) HasAddonConfiguration() bool {
+	if o != nil && o.AddonConfiguration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAddons gets a reference to the given []KubernetesAddonRelationship and assigns it to the Addons field.
-func (o *KubernetesAddonPolicyAllOf) SetAddons(v []KubernetesAddonRelationship) {
-	o.Addons = v
+// SetAddonConfiguration gets a reference to the given NullableKubernetesAddonConfiguration and assigns it to the AddonConfiguration field.
+func (o *KubernetesAddonPolicyAllOf) SetAddonConfiguration(v KubernetesAddonConfiguration) {
+	o.AddonConfiguration.Set(&v)
 }
 
-// GetClusterProfiles returns the ClusterProfiles field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *KubernetesAddonPolicyAllOf) GetClusterProfiles() []KubernetesClusterProfileRelationship {
-	if o == nil {
-		var ret []KubernetesClusterProfileRelationship
+// SetAddonConfigurationNil sets the value for AddonConfiguration to be an explicit nil
+func (o *KubernetesAddonPolicyAllOf) SetAddonConfigurationNil() {
+	o.AddonConfiguration.Set(nil)
+}
+
+// UnsetAddonConfiguration ensures that no value is present for AddonConfiguration, not even an explicit nil
+func (o *KubernetesAddonPolicyAllOf) UnsetAddonConfiguration() {
+	o.AddonConfiguration.Unset()
+}
+
+// GetAddonDefinition returns the AddonDefinition field value if set, zero value otherwise.
+func (o *KubernetesAddonPolicyAllOf) GetAddonDefinition() KubernetesAddonDefinitionRelationship {
+	if o == nil || o.AddonDefinition == nil {
+		var ret KubernetesAddonDefinitionRelationship
 		return ret
 	}
-	return o.ClusterProfiles
+	return *o.AddonDefinition
 }
 
-// GetClusterProfilesOk returns a tuple with the ClusterProfiles field value if set, nil otherwise
+// GetAddonDefinitionOk returns a tuple with the AddonDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *KubernetesAddonPolicyAllOf) GetClusterProfilesOk() (*[]KubernetesClusterProfileRelationship, bool) {
-	if o == nil || o.ClusterProfiles == nil {
+func (o *KubernetesAddonPolicyAllOf) GetAddonDefinitionOk() (*KubernetesAddonDefinitionRelationship, bool) {
+	if o == nil || o.AddonDefinition == nil {
 		return nil, false
 	}
-	return &o.ClusterProfiles, true
+	return o.AddonDefinition, true
 }
 
-// HasClusterProfiles returns a boolean if a field has been set.
-func (o *KubernetesAddonPolicyAllOf) HasClusterProfiles() bool {
-	if o != nil && o.ClusterProfiles != nil {
+// HasAddonDefinition returns a boolean if a field has been set.
+func (o *KubernetesAddonPolicyAllOf) HasAddonDefinition() bool {
+	if o != nil && o.AddonDefinition != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetClusterProfiles gets a reference to the given []KubernetesClusterProfileRelationship and assigns it to the ClusterProfiles field.
-func (o *KubernetesAddonPolicyAllOf) SetClusterProfiles(v []KubernetesClusterProfileRelationship) {
-	o.ClusterProfiles = v
+// SetAddonDefinition gets a reference to the given KubernetesAddonDefinitionRelationship and assigns it to the AddonDefinition field.
+func (o *KubernetesAddonPolicyAllOf) SetAddonDefinition(v KubernetesAddonDefinitionRelationship) {
+	o.AddonDefinition = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -242,14 +215,11 @@ func (o KubernetesAddonPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.SystemManaged != nil {
-		toSerialize["SystemManaged"] = o.SystemManaged
+	if o.AddonConfiguration.IsSet() {
+		toSerialize["AddonConfiguration"] = o.AddonConfiguration.Get()
 	}
-	if o.Addons != nil {
-		toSerialize["Addons"] = o.Addons
-	}
-	if o.ClusterProfiles != nil {
-		toSerialize["ClusterProfiles"] = o.ClusterProfiles
+	if o.AddonDefinition != nil {
+		toSerialize["AddonDefinition"] = o.AddonDefinition
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -274,9 +244,8 @@ func (o *KubernetesAddonPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "SystemManaged")
-		delete(additionalProperties, "Addons")
-		delete(additionalProperties, "ClusterProfiles")
+		delete(additionalProperties, "AddonConfiguration")
+		delete(additionalProperties, "AddonDefinition")
 		delete(additionalProperties, "Organization")
 		o.AdditionalProperties = additionalProperties
 	}

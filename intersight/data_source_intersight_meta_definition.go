@@ -342,6 +342,12 @@ func dataSourceMetaDefinition() *schema.Resource {
 									Optional:    true,
 									Computed:    true,
 								},
+								"peer_sync": {
+									Description: "When turned on, peer MO corresponding to the reference provided in relation is updated with a reference to the current MO.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+									Computed:    true,
+								},
 								"type": {
 									Description: "Fully qualified type of the peer managed object.",
 									Type:        schema.TypeString,

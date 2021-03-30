@@ -13,7 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_hitachi_host.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `authentication_mode`:(string) Authentication mode for the iSCSI target.* `N/A` - Not available.* `CHAP` - CHAP-authentication mode.* `NONE` - No-authentication mode.* `BOTH` - Comply with Host Setting. 
+* `authentication_mode`:(string) Authentication mode for the iSCSI target.* `N/A` - Authentication Mode is not available.* `CHAP` - CHAP-authentication mode.* `NONE` - Authentication mode is not set.* `BOTH` - Comply with Host Setting. 
 * `description`:(string) Short description about the host. 
 * `host_group_id`:(string) ID of the host group. 
 * `host_group_number`:(int) Host group number for this host. 

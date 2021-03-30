@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.Profile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.Profile"]
+**ConfigChangeContext** | Pointer to [**NullablePolicyConfigChangeContext**](policy.ConfigChangeContext.md) |  | [optional] 
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](policy.ConfigChange.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
@@ -76,6 +77,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetConfigChangeContext
+
+`func (o *ServerProfile) GetConfigChangeContext() PolicyConfigChangeContext`
+
+GetConfigChangeContext returns the ConfigChangeContext field if non-nil, zero value otherwise.
+
+### GetConfigChangeContextOk
+
+`func (o *ServerProfile) GetConfigChangeContextOk() (*PolicyConfigChangeContext, bool)`
+
+GetConfigChangeContextOk returns a tuple with the ConfigChangeContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigChangeContext
+
+`func (o *ServerProfile) SetConfigChangeContext(v PolicyConfigChangeContext)`
+
+SetConfigChangeContext sets ConfigChangeContext field to given value.
+
+### HasConfigChangeContext
+
+`func (o *ServerProfile) HasConfigChangeContext() bool`
+
+HasConfigChangeContext returns a boolean if a field has been set.
+
+### SetConfigChangeContextNil
+
+`func (o *ServerProfile) SetConfigChangeContextNil(b bool)`
+
+ SetConfigChangeContextNil sets the value for ConfigChangeContext to be an explicit nil
+
+### UnsetConfigChangeContext
+`func (o *ServerProfile) UnsetConfigChangeContext()`
+
+UnsetConfigChangeContext ensures that no value is present for ConfigChangeContext, not even an explicit nil
 ### GetConfigChanges
 
 `func (o *ServerProfile) GetConfigChanges() PolicyConfigChange`

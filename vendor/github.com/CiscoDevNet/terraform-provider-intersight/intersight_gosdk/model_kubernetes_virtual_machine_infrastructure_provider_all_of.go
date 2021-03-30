@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -20,11 +20,11 @@ type KubernetesVirtualMachineInfrastructureProviderAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                            `json:"ObjectType"`
-	InfraConfig          NullableKubernetesBaseVirtualMachineInfraConfig   `json:"InfraConfig,omitempty"`
-	InstanceType         *KubernetesVirtualMachineInstanceTypeRelationship `json:"InstanceType,omitempty"`
-	Organization         *OrganizationOrganizationRelationship             `json:"Organization,omitempty"`
-	Target               *AssetDeviceRegistrationRelationship              `json:"Target,omitempty"`
+	ObjectType           string                                                 `json:"ObjectType"`
+	InfraConfig          NullableKubernetesBaseVirtualMachineInfraConfig        `json:"InfraConfig,omitempty"`
+	InfraConfigPolicy    *KubernetesVirtualMachineInfraConfigPolicyRelationship `json:"InfraConfigPolicy,omitempty"`
+	InstanceType         *KubernetesVirtualMachineInstanceTypeRelationship      `json:"InstanceType,omitempty"`
+	Target               *AssetDeviceRegistrationRelationship                   `json:"Target,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -144,6 +144,38 @@ func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) UnsetInfraConfig()
 	o.InfraConfig.Unset()
 }
 
+// GetInfraConfigPolicy returns the InfraConfigPolicy field value if set, zero value otherwise.
+func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInfraConfigPolicy() KubernetesVirtualMachineInfraConfigPolicyRelationship {
+	if o == nil || o.InfraConfigPolicy == nil {
+		var ret KubernetesVirtualMachineInfraConfigPolicyRelationship
+		return ret
+	}
+	return *o.InfraConfigPolicy
+}
+
+// GetInfraConfigPolicyOk returns a tuple with the InfraConfigPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInfraConfigPolicyOk() (*KubernetesVirtualMachineInfraConfigPolicyRelationship, bool) {
+	if o == nil || o.InfraConfigPolicy == nil {
+		return nil, false
+	}
+	return o.InfraConfigPolicy, true
+}
+
+// HasInfraConfigPolicy returns a boolean if a field has been set.
+func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasInfraConfigPolicy() bool {
+	if o != nil && o.InfraConfigPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInfraConfigPolicy gets a reference to the given KubernetesVirtualMachineInfraConfigPolicyRelationship and assigns it to the InfraConfigPolicy field.
+func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) SetInfraConfigPolicy(v KubernetesVirtualMachineInfraConfigPolicyRelationship) {
+	o.InfraConfigPolicy = &v
+}
+
 // GetInstanceType returns the InstanceType field value if set, zero value otherwise.
 func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInstanceType() KubernetesVirtualMachineInstanceTypeRelationship {
 	if o == nil || o.InstanceType == nil {
@@ -174,38 +206,6 @@ func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasInstanceType() 
 // SetInstanceType gets a reference to the given KubernetesVirtualMachineInstanceTypeRelationship and assigns it to the InstanceType field.
 func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) SetInstanceType(v KubernetesVirtualMachineInstanceTypeRelationship) {
 	o.InstanceType = &v
-}
-
-// GetOrganization returns the Organization field value if set, zero value otherwise.
-func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetOrganization() OrganizationOrganizationRelationship {
-	if o == nil || o.Organization == nil {
-		var ret OrganizationOrganizationRelationship
-		return ret
-	}
-	return *o.Organization
-}
-
-// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool) {
-	if o == nil || o.Organization == nil {
-		return nil, false
-	}
-	return o.Organization, true
-}
-
-// HasOrganization returns a boolean if a field has been set.
-func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
-func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) SetOrganization(v OrganizationOrganizationRelationship) {
-	o.Organization = &v
 }
 
 // GetTarget returns the Target field value if set, zero value otherwise.
@@ -251,11 +251,11 @@ func (o KubernetesVirtualMachineInfrastructureProviderAllOf) MarshalJSON() ([]by
 	if o.InfraConfig.IsSet() {
 		toSerialize["InfraConfig"] = o.InfraConfig.Get()
 	}
+	if o.InfraConfigPolicy != nil {
+		toSerialize["InfraConfigPolicy"] = o.InfraConfigPolicy
+	}
 	if o.InstanceType != nil {
 		toSerialize["InstanceType"] = o.InstanceType
-	}
-	if o.Organization != nil {
-		toSerialize["Organization"] = o.Organization
 	}
 	if o.Target != nil {
 		toSerialize["Target"] = o.Target
@@ -281,8 +281,8 @@ func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) UnmarshalJSON(byte
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "InfraConfig")
+		delete(additionalProperties, "InfraConfigPolicy")
 		delete(additionalProperties, "InstanceType")
-		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Target")
 		o.AdditionalProperties = additionalProperties
 	}

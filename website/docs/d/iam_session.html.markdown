@@ -19,4 +19,5 @@ The following arguments can be used to get data of already created objects in In
 * `last_login_client`:(string) The client address from which last login is initiated. 
 * `last_login_time`:(string) The last login time for user. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `session_id`:(string) Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization. 
  

@@ -30,6 +30,47 @@ func resourceKubernetesCluster() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"cluster_addon_profile": {
+				Description: "A reference to a kubernetesClusterAddonProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"connection_status": {
 				Description: "Status of the endpoint connection of this Kubernetes cluster.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Targets of type HTTP Endpoint in Intersight.\n* `Claimed` - Target of type HTTP Endpoint is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target API credentials are incorrect.",
 				Type:        schema.TypeString,
@@ -184,6 +225,49 @@ func resourceKubernetesClusterCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetClassId("kubernetes.Cluster")
+
+	if v, ok := d.GetOk("cluster_addon_profile"); ok {
+		p := make([]models.KubernetesClusterAddonProfileRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesClusterAddonProfileRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterAddonProfile(x)
+		}
+	}
 
 	if v, ok := d.GetOk("connection_status"); ok {
 		x := (v.(string))
@@ -363,6 +447,10 @@ func resourceKubernetesClusterRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property ClassId in KubernetesCluster object: %s", err.Error())
 	}
 
+	if err := d.Set("cluster_addon_profile", flattenMapKubernetesClusterAddonProfileRelationship(s.GetClusterAddonProfile(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClusterAddonProfile in KubernetesCluster object: %s", err.Error())
+	}
+
 	if err := d.Set("connection_status", (s.GetConnectionStatus())); err != nil {
 		return diag.Errorf("error occurred while setting property ConnectionStatus in KubernetesCluster object: %s", err.Error())
 	}
@@ -417,6 +505,50 @@ func resourceKubernetesClusterUpdate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetClassId("kubernetes.Cluster")
+
+	if d.HasChange("cluster_addon_profile") {
+		v := d.Get("cluster_addon_profile")
+		p := make([]models.KubernetesClusterAddonProfileRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesClusterAddonProfileRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterAddonProfile(x)
+		}
+	}
 
 	if d.HasChange("connection_status") {
 		v := d.Get("connection_status")

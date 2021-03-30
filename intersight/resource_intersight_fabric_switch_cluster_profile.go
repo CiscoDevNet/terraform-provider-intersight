@@ -50,7 +50,7 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 							Computed:    true,
 						},
 						"config_state": {
-							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed.",
+							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,

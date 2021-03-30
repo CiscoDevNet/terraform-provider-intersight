@@ -7,11 +7,11 @@ Method | HTTP request | Description
 [**CreateKubernetesAciCniApic**](KubernetesApi.md#CreateKubernetesAciCniApic) | **Post** /api/v1/kubernetes/AciCniApics | Create a &#39;kubernetes.AciCniApic&#39; resource.
 [**CreateKubernetesAciCniProfile**](KubernetesApi.md#CreateKubernetesAciCniProfile) | **Post** /api/v1/kubernetes/AciCniProfiles | Create a &#39;kubernetes.AciCniProfile&#39; resource.
 [**CreateKubernetesAciCniTenantClusterAllocation**](KubernetesApi.md#CreateKubernetesAciCniTenantClusterAllocation) | **Post** /api/v1/kubernetes/AciCniTenantClusterAllocations | Create a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
-[**CreateKubernetesAddon**](KubernetesApi.md#CreateKubernetesAddon) | **Post** /api/v1/kubernetes/Addons | Create a &#39;kubernetes.Addon&#39; resource.
 [**CreateKubernetesAddonDefinition**](KubernetesApi.md#CreateKubernetesAddonDefinition) | **Post** /api/v1/kubernetes/AddonDefinitions | Create a &#39;kubernetes.AddonDefinition&#39; resource.
 [**CreateKubernetesAddonPolicy**](KubernetesApi.md#CreateKubernetesAddonPolicy) | **Post** /api/v1/kubernetes/AddonPolicies | Create a &#39;kubernetes.AddonPolicy&#39; resource.
 [**CreateKubernetesAddonRepository**](KubernetesApi.md#CreateKubernetesAddonRepository) | **Post** /api/v1/kubernetes/AddonRepositories | Create a &#39;kubernetes.AddonRepository&#39; resource.
 [**CreateKubernetesCluster**](KubernetesApi.md#CreateKubernetesCluster) | **Post** /api/v1/kubernetes/Clusters | Create a &#39;kubernetes.Cluster&#39; resource.
+[**CreateKubernetesClusterAddonProfile**](KubernetesApi.md#CreateKubernetesClusterAddonProfile) | **Post** /api/v1/kubernetes/ClusterAddonProfiles | Create a &#39;kubernetes.ClusterAddonProfile&#39; resource.
 [**CreateKubernetesClusterProfile**](KubernetesApi.md#CreateKubernetesClusterProfile) | **Post** /api/v1/kubernetes/ClusterProfiles | Create a &#39;kubernetes.ClusterProfile&#39; resource.
 [**CreateKubernetesContainerRuntimePolicy**](KubernetesApi.md#CreateKubernetesContainerRuntimePolicy) | **Post** /api/v1/kubernetes/ContainerRuntimePolicies | Create a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**CreateKubernetesNetworkPolicy**](KubernetesApi.md#CreateKubernetesNetworkPolicy) | **Post** /api/v1/kubernetes/NetworkPolicies | Create a &#39;kubernetes.NetworkPolicy&#39; resource.
@@ -20,17 +20,18 @@ Method | HTTP request | Description
 [**CreateKubernetesTrustedRegistriesPolicy**](KubernetesApi.md#CreateKubernetesTrustedRegistriesPolicy) | **Post** /api/v1/kubernetes/TrustedRegistriesPolicies | Create a &#39;kubernetes.TrustedRegistriesPolicy&#39; resource.
 [**CreateKubernetesVersion**](KubernetesApi.md#CreateKubernetesVersion) | **Post** /api/v1/kubernetes/Versions | Create a &#39;kubernetes.Version&#39; resource.
 [**CreateKubernetesVersionPolicy**](KubernetesApi.md#CreateKubernetesVersionPolicy) | **Post** /api/v1/kubernetes/VersionPolicies | Create a &#39;kubernetes.VersionPolicy&#39; resource.
+[**CreateKubernetesVirtualMachineInfraConfigPolicy**](KubernetesApi.md#CreateKubernetesVirtualMachineInfraConfigPolicy) | **Post** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies | Create a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
 [**CreateKubernetesVirtualMachineInfrastructureProvider**](KubernetesApi.md#CreateKubernetesVirtualMachineInfrastructureProvider) | **Post** /api/v1/kubernetes/VirtualMachineInfrastructureProviders | Create a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**CreateKubernetesVirtualMachineInstanceType**](KubernetesApi.md#CreateKubernetesVirtualMachineInstanceType) | **Post** /api/v1/kubernetes/VirtualMachineInstanceTypes | Create a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
 [**CreateKubernetesVirtualMachineNodeProfile**](KubernetesApi.md#CreateKubernetesVirtualMachineNodeProfile) | **Post** /api/v1/kubernetes/VirtualMachineNodeProfiles | Create a &#39;kubernetes.VirtualMachineNodeProfile&#39; resource.
 [**DeleteKubernetesAciCniApic**](KubernetesApi.md#DeleteKubernetesAciCniApic) | **Delete** /api/v1/kubernetes/AciCniApics/{Moid} | Delete a &#39;kubernetes.AciCniApic&#39; resource.
 [**DeleteKubernetesAciCniProfile**](KubernetesApi.md#DeleteKubernetesAciCniProfile) | **Delete** /api/v1/kubernetes/AciCniProfiles/{Moid} | Delete a &#39;kubernetes.AciCniProfile&#39; resource.
 [**DeleteKubernetesAciCniTenantClusterAllocation**](KubernetesApi.md#DeleteKubernetesAciCniTenantClusterAllocation) | **Delete** /api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid} | Delete a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
-[**DeleteKubernetesAddon**](KubernetesApi.md#DeleteKubernetesAddon) | **Delete** /api/v1/kubernetes/Addons/{Moid} | Delete a &#39;kubernetes.Addon&#39; resource.
 [**DeleteKubernetesAddonDefinition**](KubernetesApi.md#DeleteKubernetesAddonDefinition) | **Delete** /api/v1/kubernetes/AddonDefinitions/{Moid} | Delete a &#39;kubernetes.AddonDefinition&#39; resource.
 [**DeleteKubernetesAddonPolicy**](KubernetesApi.md#DeleteKubernetesAddonPolicy) | **Delete** /api/v1/kubernetes/AddonPolicies/{Moid} | Delete a &#39;kubernetes.AddonPolicy&#39; resource.
 [**DeleteKubernetesAddonRepository**](KubernetesApi.md#DeleteKubernetesAddonRepository) | **Delete** /api/v1/kubernetes/AddonRepositories/{Moid} | Delete a &#39;kubernetes.AddonRepository&#39; resource.
 [**DeleteKubernetesCluster**](KubernetesApi.md#DeleteKubernetesCluster) | **Delete** /api/v1/kubernetes/Clusters/{Moid} | Delete a &#39;kubernetes.Cluster&#39; resource.
+[**DeleteKubernetesClusterAddonProfile**](KubernetesApi.md#DeleteKubernetesClusterAddonProfile) | **Delete** /api/v1/kubernetes/ClusterAddonProfiles/{Moid} | Delete a &#39;kubernetes.ClusterAddonProfile&#39; resource.
 [**DeleteKubernetesClusterProfile**](KubernetesApi.md#DeleteKubernetesClusterProfile) | **Delete** /api/v1/kubernetes/ClusterProfiles/{Moid} | Delete a &#39;kubernetes.ClusterProfile&#39; resource.
 [**DeleteKubernetesContainerRuntimePolicy**](KubernetesApi.md#DeleteKubernetesContainerRuntimePolicy) | **Delete** /api/v1/kubernetes/ContainerRuntimePolicies/{Moid} | Delete a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**DeleteKubernetesDaemonSet**](KubernetesApi.md#DeleteKubernetesDaemonSet) | **Delete** /api/v1/kubernetes/DaemonSets/{Moid} | Delete a &#39;kubernetes.DaemonSet&#39; resource.
@@ -46,6 +47,7 @@ Method | HTTP request | Description
 [**DeleteKubernetesTrustedRegistriesPolicy**](KubernetesApi.md#DeleteKubernetesTrustedRegistriesPolicy) | **Delete** /api/v1/kubernetes/TrustedRegistriesPolicies/{Moid} | Delete a &#39;kubernetes.TrustedRegistriesPolicy&#39; resource.
 [**DeleteKubernetesVersion**](KubernetesApi.md#DeleteKubernetesVersion) | **Delete** /api/v1/kubernetes/Versions/{Moid} | Delete a &#39;kubernetes.Version&#39; resource.
 [**DeleteKubernetesVersionPolicy**](KubernetesApi.md#DeleteKubernetesVersionPolicy) | **Delete** /api/v1/kubernetes/VersionPolicies/{Moid} | Delete a &#39;kubernetes.VersionPolicy&#39; resource.
+[**DeleteKubernetesVirtualMachineInfraConfigPolicy**](KubernetesApi.md#DeleteKubernetesVirtualMachineInfraConfigPolicy) | **Delete** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies/{Moid} | Delete a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
 [**DeleteKubernetesVirtualMachineInfrastructureProvider**](KubernetesApi.md#DeleteKubernetesVirtualMachineInfrastructureProvider) | **Delete** /api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid} | Delete a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**DeleteKubernetesVirtualMachineInstanceType**](KubernetesApi.md#DeleteKubernetesVirtualMachineInstanceType) | **Delete** /api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid} | Delete a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
 [**DeleteKubernetesVirtualMachineNodeProfile**](KubernetesApi.md#DeleteKubernetesVirtualMachineNodeProfile) | **Delete** /api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid} | Delete a &#39;kubernetes.VirtualMachineNodeProfile&#39; resource.
@@ -55,20 +57,24 @@ Method | HTTP request | Description
 [**GetKubernetesAciCniProfileList**](KubernetesApi.md#GetKubernetesAciCniProfileList) | **Get** /api/v1/kubernetes/AciCniProfiles | Read a &#39;kubernetes.AciCniProfile&#39; resource.
 [**GetKubernetesAciCniTenantClusterAllocationByMoid**](KubernetesApi.md#GetKubernetesAciCniTenantClusterAllocationByMoid) | **Get** /api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid} | Read a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
 [**GetKubernetesAciCniTenantClusterAllocationList**](KubernetesApi.md#GetKubernetesAciCniTenantClusterAllocationList) | **Get** /api/v1/kubernetes/AciCniTenantClusterAllocations | Read a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
-[**GetKubernetesAddonByMoid**](KubernetesApi.md#GetKubernetesAddonByMoid) | **Get** /api/v1/kubernetes/Addons/{Moid} | Read a &#39;kubernetes.Addon&#39; resource.
 [**GetKubernetesAddonDefinitionByMoid**](KubernetesApi.md#GetKubernetesAddonDefinitionByMoid) | **Get** /api/v1/kubernetes/AddonDefinitions/{Moid} | Read a &#39;kubernetes.AddonDefinition&#39; resource.
 [**GetKubernetesAddonDefinitionList**](KubernetesApi.md#GetKubernetesAddonDefinitionList) | **Get** /api/v1/kubernetes/AddonDefinitions | Read a &#39;kubernetes.AddonDefinition&#39; resource.
-[**GetKubernetesAddonList**](KubernetesApi.md#GetKubernetesAddonList) | **Get** /api/v1/kubernetes/Addons | Read a &#39;kubernetes.Addon&#39; resource.
 [**GetKubernetesAddonPolicyByMoid**](KubernetesApi.md#GetKubernetesAddonPolicyByMoid) | **Get** /api/v1/kubernetes/AddonPolicies/{Moid} | Read a &#39;kubernetes.AddonPolicy&#39; resource.
 [**GetKubernetesAddonPolicyList**](KubernetesApi.md#GetKubernetesAddonPolicyList) | **Get** /api/v1/kubernetes/AddonPolicies | Read a &#39;kubernetes.AddonPolicy&#39; resource.
 [**GetKubernetesAddonRepositoryByMoid**](KubernetesApi.md#GetKubernetesAddonRepositoryByMoid) | **Get** /api/v1/kubernetes/AddonRepositories/{Moid} | Read a &#39;kubernetes.AddonRepository&#39; resource.
 [**GetKubernetesAddonRepositoryList**](KubernetesApi.md#GetKubernetesAddonRepositoryList) | **Get** /api/v1/kubernetes/AddonRepositories | Read a &#39;kubernetes.AddonRepository&#39; resource.
 [**GetKubernetesCatalogByMoid**](KubernetesApi.md#GetKubernetesCatalogByMoid) | **Get** /api/v1/kubernetes/Catalogs/{Moid} | Read a &#39;kubernetes.Catalog&#39; resource.
 [**GetKubernetesCatalogList**](KubernetesApi.md#GetKubernetesCatalogList) | **Get** /api/v1/kubernetes/Catalogs | Read a &#39;kubernetes.Catalog&#39; resource.
+[**GetKubernetesClusterAddonProfileByMoid**](KubernetesApi.md#GetKubernetesClusterAddonProfileByMoid) | **Get** /api/v1/kubernetes/ClusterAddonProfiles/{Moid} | Read a &#39;kubernetes.ClusterAddonProfile&#39; resource.
+[**GetKubernetesClusterAddonProfileList**](KubernetesApi.md#GetKubernetesClusterAddonProfileList) | **Get** /api/v1/kubernetes/ClusterAddonProfiles | Read a &#39;kubernetes.ClusterAddonProfile&#39; resource.
 [**GetKubernetesClusterByMoid**](KubernetesApi.md#GetKubernetesClusterByMoid) | **Get** /api/v1/kubernetes/Clusters/{Moid} | Read a &#39;kubernetes.Cluster&#39; resource.
 [**GetKubernetesClusterList**](KubernetesApi.md#GetKubernetesClusterList) | **Get** /api/v1/kubernetes/Clusters | Read a &#39;kubernetes.Cluster&#39; resource.
 [**GetKubernetesClusterProfileByMoid**](KubernetesApi.md#GetKubernetesClusterProfileByMoid) | **Get** /api/v1/kubernetes/ClusterProfiles/{Moid} | Read a &#39;kubernetes.ClusterProfile&#39; resource.
 [**GetKubernetesClusterProfileList**](KubernetesApi.md#GetKubernetesClusterProfileList) | **Get** /api/v1/kubernetes/ClusterProfiles | Read a &#39;kubernetes.ClusterProfile&#39; resource.
+[**GetKubernetesConfigResultByMoid**](KubernetesApi.md#GetKubernetesConfigResultByMoid) | **Get** /api/v1/kubernetes/ConfigResults/{Moid} | Read a &#39;kubernetes.ConfigResult&#39; resource.
+[**GetKubernetesConfigResultEntryByMoid**](KubernetesApi.md#GetKubernetesConfigResultEntryByMoid) | **Get** /api/v1/kubernetes/ConfigResultEntries/{Moid} | Read a &#39;kubernetes.ConfigResultEntry&#39; resource.
+[**GetKubernetesConfigResultEntryList**](KubernetesApi.md#GetKubernetesConfigResultEntryList) | **Get** /api/v1/kubernetes/ConfigResultEntries | Read a &#39;kubernetes.ConfigResultEntry&#39; resource.
+[**GetKubernetesConfigResultList**](KubernetesApi.md#GetKubernetesConfigResultList) | **Get** /api/v1/kubernetes/ConfigResults | Read a &#39;kubernetes.ConfigResult&#39; resource.
 [**GetKubernetesContainerRuntimePolicyByMoid**](KubernetesApi.md#GetKubernetesContainerRuntimePolicyByMoid) | **Get** /api/v1/kubernetes/ContainerRuntimePolicies/{Moid} | Read a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**GetKubernetesContainerRuntimePolicyList**](KubernetesApi.md#GetKubernetesContainerRuntimePolicyList) | **Get** /api/v1/kubernetes/ContainerRuntimePolicies | Read a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**GetKubernetesDaemonSetByMoid**](KubernetesApi.md#GetKubernetesDaemonSetByMoid) | **Get** /api/v1/kubernetes/DaemonSets/{Moid} | Read a &#39;kubernetes.DaemonSet&#39; resource.
@@ -97,6 +103,8 @@ Method | HTTP request | Description
 [**GetKubernetesVersionList**](KubernetesApi.md#GetKubernetesVersionList) | **Get** /api/v1/kubernetes/Versions | Read a &#39;kubernetes.Version&#39; resource.
 [**GetKubernetesVersionPolicyByMoid**](KubernetesApi.md#GetKubernetesVersionPolicyByMoid) | **Get** /api/v1/kubernetes/VersionPolicies/{Moid} | Read a &#39;kubernetes.VersionPolicy&#39; resource.
 [**GetKubernetesVersionPolicyList**](KubernetesApi.md#GetKubernetesVersionPolicyList) | **Get** /api/v1/kubernetes/VersionPolicies | Read a &#39;kubernetes.VersionPolicy&#39; resource.
+[**GetKubernetesVirtualMachineInfraConfigPolicyByMoid**](KubernetesApi.md#GetKubernetesVirtualMachineInfraConfigPolicyByMoid) | **Get** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies/{Moid} | Read a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
+[**GetKubernetesVirtualMachineInfraConfigPolicyList**](KubernetesApi.md#GetKubernetesVirtualMachineInfraConfigPolicyList) | **Get** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies | Read a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
 [**GetKubernetesVirtualMachineInfrastructureProviderByMoid**](KubernetesApi.md#GetKubernetesVirtualMachineInfrastructureProviderByMoid) | **Get** /api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid} | Read a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**GetKubernetesVirtualMachineInfrastructureProviderList**](KubernetesApi.md#GetKubernetesVirtualMachineInfrastructureProviderList) | **Get** /api/v1/kubernetes/VirtualMachineInfrastructureProviders | Read a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**GetKubernetesVirtualMachineInstanceTypeByMoid**](KubernetesApi.md#GetKubernetesVirtualMachineInstanceTypeByMoid) | **Get** /api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid} | Read a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
@@ -106,11 +114,11 @@ Method | HTTP request | Description
 [**PatchKubernetesAciCniApic**](KubernetesApi.md#PatchKubernetesAciCniApic) | **Patch** /api/v1/kubernetes/AciCniApics/{Moid} | Update a &#39;kubernetes.AciCniApic&#39; resource.
 [**PatchKubernetesAciCniProfile**](KubernetesApi.md#PatchKubernetesAciCniProfile) | **Patch** /api/v1/kubernetes/AciCniProfiles/{Moid} | Update a &#39;kubernetes.AciCniProfile&#39; resource.
 [**PatchKubernetesAciCniTenantClusterAllocation**](KubernetesApi.md#PatchKubernetesAciCniTenantClusterAllocation) | **Patch** /api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid} | Update a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
-[**PatchKubernetesAddon**](KubernetesApi.md#PatchKubernetesAddon) | **Patch** /api/v1/kubernetes/Addons/{Moid} | Update a &#39;kubernetes.Addon&#39; resource.
 [**PatchKubernetesAddonDefinition**](KubernetesApi.md#PatchKubernetesAddonDefinition) | **Patch** /api/v1/kubernetes/AddonDefinitions/{Moid} | Update a &#39;kubernetes.AddonDefinition&#39; resource.
 [**PatchKubernetesAddonPolicy**](KubernetesApi.md#PatchKubernetesAddonPolicy) | **Patch** /api/v1/kubernetes/AddonPolicies/{Moid} | Update a &#39;kubernetes.AddonPolicy&#39; resource.
 [**PatchKubernetesAddonRepository**](KubernetesApi.md#PatchKubernetesAddonRepository) | **Patch** /api/v1/kubernetes/AddonRepositories/{Moid} | Update a &#39;kubernetes.AddonRepository&#39; resource.
 [**PatchKubernetesCluster**](KubernetesApi.md#PatchKubernetesCluster) | **Patch** /api/v1/kubernetes/Clusters/{Moid} | Update a &#39;kubernetes.Cluster&#39; resource.
+[**PatchKubernetesClusterAddonProfile**](KubernetesApi.md#PatchKubernetesClusterAddonProfile) | **Patch** /api/v1/kubernetes/ClusterAddonProfiles/{Moid} | Update a &#39;kubernetes.ClusterAddonProfile&#39; resource.
 [**PatchKubernetesClusterProfile**](KubernetesApi.md#PatchKubernetesClusterProfile) | **Patch** /api/v1/kubernetes/ClusterProfiles/{Moid} | Update a &#39;kubernetes.ClusterProfile&#39; resource.
 [**PatchKubernetesContainerRuntimePolicy**](KubernetesApi.md#PatchKubernetesContainerRuntimePolicy) | **Patch** /api/v1/kubernetes/ContainerRuntimePolicies/{Moid} | Update a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**PatchKubernetesNetworkPolicy**](KubernetesApi.md#PatchKubernetesNetworkPolicy) | **Patch** /api/v1/kubernetes/NetworkPolicies/{Moid} | Update a &#39;kubernetes.NetworkPolicy&#39; resource.
@@ -119,17 +127,18 @@ Method | HTTP request | Description
 [**PatchKubernetesTrustedRegistriesPolicy**](KubernetesApi.md#PatchKubernetesTrustedRegistriesPolicy) | **Patch** /api/v1/kubernetes/TrustedRegistriesPolicies/{Moid} | Update a &#39;kubernetes.TrustedRegistriesPolicy&#39; resource.
 [**PatchKubernetesVersion**](KubernetesApi.md#PatchKubernetesVersion) | **Patch** /api/v1/kubernetes/Versions/{Moid} | Update a &#39;kubernetes.Version&#39; resource.
 [**PatchKubernetesVersionPolicy**](KubernetesApi.md#PatchKubernetesVersionPolicy) | **Patch** /api/v1/kubernetes/VersionPolicies/{Moid} | Update a &#39;kubernetes.VersionPolicy&#39; resource.
+[**PatchKubernetesVirtualMachineInfraConfigPolicy**](KubernetesApi.md#PatchKubernetesVirtualMachineInfraConfigPolicy) | **Patch** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies/{Moid} | Update a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
 [**PatchKubernetesVirtualMachineInfrastructureProvider**](KubernetesApi.md#PatchKubernetesVirtualMachineInfrastructureProvider) | **Patch** /api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid} | Update a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**PatchKubernetesVirtualMachineInstanceType**](KubernetesApi.md#PatchKubernetesVirtualMachineInstanceType) | **Patch** /api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid} | Update a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
 [**PatchKubernetesVirtualMachineNodeProfile**](KubernetesApi.md#PatchKubernetesVirtualMachineNodeProfile) | **Patch** /api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid} | Update a &#39;kubernetes.VirtualMachineNodeProfile&#39; resource.
 [**UpdateKubernetesAciCniApic**](KubernetesApi.md#UpdateKubernetesAciCniApic) | **Post** /api/v1/kubernetes/AciCniApics/{Moid} | Update a &#39;kubernetes.AciCniApic&#39; resource.
 [**UpdateKubernetesAciCniProfile**](KubernetesApi.md#UpdateKubernetesAciCniProfile) | **Post** /api/v1/kubernetes/AciCniProfiles/{Moid} | Update a &#39;kubernetes.AciCniProfile&#39; resource.
 [**UpdateKubernetesAciCniTenantClusterAllocation**](KubernetesApi.md#UpdateKubernetesAciCniTenantClusterAllocation) | **Post** /api/v1/kubernetes/AciCniTenantClusterAllocations/{Moid} | Update a &#39;kubernetes.AciCniTenantClusterAllocation&#39; resource.
-[**UpdateKubernetesAddon**](KubernetesApi.md#UpdateKubernetesAddon) | **Post** /api/v1/kubernetes/Addons/{Moid} | Update a &#39;kubernetes.Addon&#39; resource.
 [**UpdateKubernetesAddonDefinition**](KubernetesApi.md#UpdateKubernetesAddonDefinition) | **Post** /api/v1/kubernetes/AddonDefinitions/{Moid} | Update a &#39;kubernetes.AddonDefinition&#39; resource.
 [**UpdateKubernetesAddonPolicy**](KubernetesApi.md#UpdateKubernetesAddonPolicy) | **Post** /api/v1/kubernetes/AddonPolicies/{Moid} | Update a &#39;kubernetes.AddonPolicy&#39; resource.
 [**UpdateKubernetesAddonRepository**](KubernetesApi.md#UpdateKubernetesAddonRepository) | **Post** /api/v1/kubernetes/AddonRepositories/{Moid} | Update a &#39;kubernetes.AddonRepository&#39; resource.
 [**UpdateKubernetesCluster**](KubernetesApi.md#UpdateKubernetesCluster) | **Post** /api/v1/kubernetes/Clusters/{Moid} | Update a &#39;kubernetes.Cluster&#39; resource.
+[**UpdateKubernetesClusterAddonProfile**](KubernetesApi.md#UpdateKubernetesClusterAddonProfile) | **Post** /api/v1/kubernetes/ClusterAddonProfiles/{Moid} | Update a &#39;kubernetes.ClusterAddonProfile&#39; resource.
 [**UpdateKubernetesClusterProfile**](KubernetesApi.md#UpdateKubernetesClusterProfile) | **Post** /api/v1/kubernetes/ClusterProfiles/{Moid} | Update a &#39;kubernetes.ClusterProfile&#39; resource.
 [**UpdateKubernetesContainerRuntimePolicy**](KubernetesApi.md#UpdateKubernetesContainerRuntimePolicy) | **Post** /api/v1/kubernetes/ContainerRuntimePolicies/{Moid} | Update a &#39;kubernetes.ContainerRuntimePolicy&#39; resource.
 [**UpdateKubernetesNetworkPolicy**](KubernetesApi.md#UpdateKubernetesNetworkPolicy) | **Post** /api/v1/kubernetes/NetworkPolicies/{Moid} | Update a &#39;kubernetes.NetworkPolicy&#39; resource.
@@ -138,6 +147,7 @@ Method | HTTP request | Description
 [**UpdateKubernetesTrustedRegistriesPolicy**](KubernetesApi.md#UpdateKubernetesTrustedRegistriesPolicy) | **Post** /api/v1/kubernetes/TrustedRegistriesPolicies/{Moid} | Update a &#39;kubernetes.TrustedRegistriesPolicy&#39; resource.
 [**UpdateKubernetesVersion**](KubernetesApi.md#UpdateKubernetesVersion) | **Post** /api/v1/kubernetes/Versions/{Moid} | Update a &#39;kubernetes.Version&#39; resource.
 [**UpdateKubernetesVersionPolicy**](KubernetesApi.md#UpdateKubernetesVersionPolicy) | **Post** /api/v1/kubernetes/VersionPolicies/{Moid} | Update a &#39;kubernetes.VersionPolicy&#39; resource.
+[**UpdateKubernetesVirtualMachineInfraConfigPolicy**](KubernetesApi.md#UpdateKubernetesVirtualMachineInfraConfigPolicy) | **Post** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies/{Moid} | Update a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
 [**UpdateKubernetesVirtualMachineInfrastructureProvider**](KubernetesApi.md#UpdateKubernetesVirtualMachineInfrastructureProvider) | **Post** /api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid} | Update a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**UpdateKubernetesVirtualMachineInstanceType**](KubernetesApi.md#UpdateKubernetesVirtualMachineInstanceType) | **Post** /api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid} | Update a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
 [**UpdateKubernetesVirtualMachineNodeProfile**](KubernetesApi.md#UpdateKubernetesVirtualMachineNodeProfile) | **Post** /api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid} | Update a &#39;kubernetes.VirtualMachineNodeProfile&#39; resource.
@@ -333,74 +343,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesAciCniTenantClusterAllocation**](kubernetes.AciCniTenantClusterAllocation.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateKubernetesAddon
-
-> KubernetesAddon CreateKubernetesAddon(ctx).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-
-Create a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    kubernetesAddon := *openapiclient.NewKubernetesAddon("ClassId_example", "ObjectType_example") // KubernetesAddon | The 'kubernetes.Addon' resource to create.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.CreateKubernetesAddon(context.Background()).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.CreateKubernetesAddon``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateKubernetesAddon`: KubernetesAddon
-    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.CreateKubernetesAddon`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateKubernetesAddonRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **kubernetesAddon** | [**KubernetesAddon**](KubernetesAddon.md) | The &#39;kubernetes.Addon&#39; resource to create. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
- **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
-
-### Return type
-
-[**KubernetesAddon**](kubernetes.Addon.md)
 
 ### Authorization
 
@@ -673,6 +615,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesCluster**](kubernetes.Cluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateKubernetesClusterAddonProfile
+
+> KubernetesClusterAddonProfile CreateKubernetesClusterAddonProfile(ctx).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    kubernetesClusterAddonProfile := *openapiclient.NewKubernetesClusterAddonProfile("ClassId_example", "ObjectType_example") // KubernetesClusterAddonProfile | The 'kubernetes.ClusterAddonProfile' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.CreateKubernetesClusterAddonProfile(context.Background()).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.CreateKubernetesClusterAddonProfile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateKubernetesClusterAddonProfile`: KubernetesClusterAddonProfile
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.CreateKubernetesClusterAddonProfile`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateKubernetesClusterAddonProfileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **kubernetesClusterAddonProfile** | [**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md) | The &#39;kubernetes.ClusterAddonProfile&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
 
 ### Authorization
 
@@ -1232,6 +1242,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateKubernetesVirtualMachineInfraConfigPolicy
+
+> KubernetesVirtualMachineInfraConfigPolicy CreateKubernetesVirtualMachineInfraConfigPolicy(ctx).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    kubernetesVirtualMachineInfraConfigPolicy := *openapiclient.NewKubernetesVirtualMachineInfraConfigPolicy("ClassId_example", "ObjectType_example") // KubernetesVirtualMachineInfraConfigPolicy | The 'kubernetes.VirtualMachineInfraConfigPolicy' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.CreateKubernetesVirtualMachineInfraConfigPolicy(context.Background()).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.CreateKubernetesVirtualMachineInfraConfigPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateKubernetesVirtualMachineInfraConfigPolicy`: KubernetesVirtualMachineInfraConfigPolicy
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.CreateKubernetesVirtualMachineInfraConfigPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateKubernetesVirtualMachineInfraConfigPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **kubernetesVirtualMachineInfraConfigPolicy** | [**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md) | The &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateKubernetesVirtualMachineInfrastructureProvider
 
 > KubernetesVirtualMachineInfrastructureProvider CreateKubernetesVirtualMachineInfrastructureProvider(ctx).KubernetesVirtualMachineInfrastructureProvider(kubernetesVirtualMachineInfrastructureProvider).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1634,72 +1712,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteKubernetesAddon
-
-> DeleteKubernetesAddon(ctx, moid).Execute()
-
-Delete a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.DeleteKubernetesAddon(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.DeleteKubernetesAddon``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteKubernetesAddonRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteKubernetesAddonDefinition
 
 > DeleteKubernetesAddonDefinition(ctx, moid).Execute()
@@ -1940,6 +1952,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteKubernetesClusterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteKubernetesClusterAddonProfile
+
+> DeleteKubernetesClusterAddonProfile(ctx, moid).Execute()
+
+Delete a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.DeleteKubernetesClusterAddonProfile(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.DeleteKubernetesClusterAddonProfile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteKubernetesClusterAddonProfileRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2954,6 +3032,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteKubernetesVirtualMachineInfraConfigPolicy
+
+> DeleteKubernetesVirtualMachineInfraConfigPolicy(ctx, moid).Execute()
+
+Delete a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.DeleteKubernetesVirtualMachineInfraConfigPolicy(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.DeleteKubernetesVirtualMachineInfraConfigPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteKubernetesVirtualMachineInfrastructureProvider
 
 > DeleteKubernetesVirtualMachineInfrastructureProvider(ctx, moid).Execute()
@@ -3608,74 +3752,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetKubernetesAddonByMoid
-
-> KubernetesAddon GetKubernetesAddonByMoid(ctx, moid).Execute()
-
-Read a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.GetKubernetesAddonByMoid(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesAddonByMoid``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetKubernetesAddonByMoid`: KubernetesAddon
-    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesAddonByMoid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetKubernetesAddonByMoidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**KubernetesAddon**](kubernetes.Addon.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetKubernetesAddonDefinitionByMoid
 
 > KubernetesAddonDefinition GetKubernetesAddonDefinitionByMoid(ctx, moid).Execute()
@@ -3813,90 +3889,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesAddonDefinitionResponse**](kubernetes.AddonDefinition.Response.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetKubernetesAddonList
-
-> KubernetesAddonResponse GetKubernetesAddonList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-
-Read a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
-    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
-    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
-    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.GetKubernetesAddonList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesAddonList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetKubernetesAddonList`: KubernetesAddonResponse
-    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesAddonList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetKubernetesAddonListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
- **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
- **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
- **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
- **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
- **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
- **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
- **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
- **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
- **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
- **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
-
-### Return type
-
-[**KubernetesAddonResponse**](kubernetes.Addon.Response.md)
 
 ### Authorization
 
@@ -4368,6 +4360,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetKubernetesClusterAddonProfileByMoid
+
+> KubernetesClusterAddonProfile GetKubernetesClusterAddonProfileByMoid(ctx, moid).Execute()
+
+Read a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesClusterAddonProfileByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesClusterAddonProfileByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesClusterAddonProfileByMoid`: KubernetesClusterAddonProfile
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesClusterAddonProfileByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesClusterAddonProfileByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesClusterAddonProfileList
+
+> KubernetesClusterAddonProfileResponse GetKubernetesClusterAddonProfileList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesClusterAddonProfileList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesClusterAddonProfileList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesClusterAddonProfileList`: KubernetesClusterAddonProfileResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesClusterAddonProfileList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesClusterAddonProfileListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**KubernetesClusterAddonProfileResponse**](kubernetes.ClusterAddonProfile.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetKubernetesClusterByMoid
 
 > KubernetesCluster GetKubernetesClusterByMoid(ctx, moid).Execute()
@@ -4657,6 +4801,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesClusterProfileResponse**](kubernetes.ClusterProfile.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesConfigResultByMoid
+
+> KubernetesConfigResult GetKubernetesConfigResultByMoid(ctx, moid).Execute()
+
+Read a 'kubernetes.ConfigResult' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesConfigResultByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesConfigResultByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesConfigResultByMoid`: KubernetesConfigResult
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesConfigResultByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesConfigResultByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**KubernetesConfigResult**](kubernetes.ConfigResult.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesConfigResultEntryByMoid
+
+> KubernetesConfigResultEntry GetKubernetesConfigResultEntryByMoid(ctx, moid).Execute()
+
+Read a 'kubernetes.ConfigResultEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesConfigResultEntryByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesConfigResultEntryByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesConfigResultEntryByMoid`: KubernetesConfigResultEntry
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesConfigResultEntryByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesConfigResultEntryByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**KubernetesConfigResultEntry**](kubernetes.ConfigResultEntry.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesConfigResultEntryList
+
+> KubernetesConfigResultEntryResponse GetKubernetesConfigResultEntryList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'kubernetes.ConfigResultEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesConfigResultEntryList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesConfigResultEntryList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesConfigResultEntryList`: KubernetesConfigResultEntryResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesConfigResultEntryList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesConfigResultEntryListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**KubernetesConfigResultEntryResponse**](kubernetes.ConfigResultEntry.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesConfigResultList
+
+> KubernetesConfigResultResponse GetKubernetesConfigResultList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'kubernetes.ConfigResult' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesConfigResultList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesConfigResultList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesConfigResultList`: KubernetesConfigResultResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesConfigResultList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesConfigResultListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**KubernetesConfigResultResponse**](kubernetes.ConfigResult.Response.md)
 
 ### Authorization
 
@@ -6800,6 +7248,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetKubernetesVirtualMachineInfraConfigPolicyByMoid
+
+> KubernetesVirtualMachineInfraConfigPolicy GetKubernetesVirtualMachineInfraConfigPolicyByMoid(ctx, moid).Execute()
+
+Read a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesVirtualMachineInfraConfigPolicyByMoid`: KubernetesVirtualMachineInfraConfigPolicy
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesVirtualMachineInfraConfigPolicyByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetKubernetesVirtualMachineInfraConfigPolicyList
+
+> KubernetesVirtualMachineInfraConfigPolicyResponse GetKubernetesVirtualMachineInfraConfigPolicyList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetKubernetesVirtualMachineInfraConfigPolicyList`: KubernetesVirtualMachineInfraConfigPolicyResponse
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetKubernetesVirtualMachineInfraConfigPolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**KubernetesVirtualMachineInfraConfigPolicyResponse**](kubernetes.VirtualMachineInfraConfigPolicy.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetKubernetesVirtualMachineInfrastructureProviderByMoid
 
 > KubernetesVirtualMachineInfrastructureProvider GetKubernetesVirtualMachineInfrastructureProviderByMoid(ctx, moid).Execute()
@@ -7472,78 +8072,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchKubernetesAddon
-
-> KubernetesAddon PatchKubernetesAddon(ctx, moid).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).Execute()
-
-Update a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    kubernetesAddon := *openapiclient.NewKubernetesAddon("ClassId_example", "ObjectType_example") // KubernetesAddon | The 'kubernetes.Addon' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.PatchKubernetesAddon(context.Background(), moid).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.PatchKubernetesAddon``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchKubernetesAddon`: KubernetesAddon
-    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.PatchKubernetesAddon`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchKubernetesAddonRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **kubernetesAddon** | [**KubernetesAddon**](KubernetesAddon.md) | The &#39;kubernetes.Addon&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**KubernetesAddon**](kubernetes.Addon.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchKubernetesAddonDefinition
 
 > KubernetesAddonDefinition PatchKubernetesAddonDefinition(ctx, moid).KubernetesAddonDefinition(kubernetesAddonDefinition).IfMatch(ifMatch).Execute()
@@ -7817,6 +8345,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesCluster**](kubernetes.Cluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchKubernetesClusterAddonProfile
+
+> KubernetesClusterAddonProfile PatchKubernetesClusterAddonProfile(ctx, moid).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).Execute()
+
+Update a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kubernetesClusterAddonProfile := *openapiclient.NewKubernetesClusterAddonProfile("ClassId_example", "ObjectType_example") // KubernetesClusterAddonProfile | The 'kubernetes.ClusterAddonProfile' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.PatchKubernetesClusterAddonProfile(context.Background(), moid).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.PatchKubernetesClusterAddonProfile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchKubernetesClusterAddonProfile`: KubernetesClusterAddonProfile
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.PatchKubernetesClusterAddonProfile`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchKubernetesClusterAddonProfileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kubernetesClusterAddonProfile** | [**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md) | The &#39;kubernetes.ClusterAddonProfile&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
 
 ### Authorization
 
@@ -8408,6 +9008,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchKubernetesVirtualMachineInfraConfigPolicy
+
+> KubernetesVirtualMachineInfraConfigPolicy PatchKubernetesVirtualMachineInfraConfigPolicy(ctx, moid).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kubernetesVirtualMachineInfraConfigPolicy := *openapiclient.NewKubernetesVirtualMachineInfraConfigPolicy("ClassId_example", "ObjectType_example") // KubernetesVirtualMachineInfraConfigPolicy | The 'kubernetes.VirtualMachineInfraConfigPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.PatchKubernetesVirtualMachineInfraConfigPolicy(context.Background(), moid).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.PatchKubernetesVirtualMachineInfraConfigPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchKubernetesVirtualMachineInfraConfigPolicy`: KubernetesVirtualMachineInfraConfigPolicy
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.PatchKubernetesVirtualMachineInfraConfigPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchKubernetesVirtualMachineInfraConfigPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kubernetesVirtualMachineInfraConfigPolicy** | [**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md) | The &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchKubernetesVirtualMachineInfrastructureProvider
 
 > KubernetesVirtualMachineInfrastructureProvider PatchKubernetesVirtualMachineInfrastructureProvider(ctx, moid).KubernetesVirtualMachineInfrastructureProvider(kubernetesVirtualMachineInfrastructureProvider).IfMatch(ifMatch).Execute()
@@ -8840,78 +9512,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateKubernetesAddon
-
-> KubernetesAddon UpdateKubernetesAddon(ctx, moid).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).Execute()
-
-Update a 'kubernetes.Addon' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    kubernetesAddon := *openapiclient.NewKubernetesAddon("ClassId_example", "ObjectType_example") // KubernetesAddon | The 'kubernetes.Addon' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.UpdateKubernetesAddon(context.Background(), moid).KubernetesAddon(kubernetesAddon).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.UpdateKubernetesAddon``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateKubernetesAddon`: KubernetesAddon
-    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.UpdateKubernetesAddon`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateKubernetesAddonRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **kubernetesAddon** | [**KubernetesAddon**](KubernetesAddon.md) | The &#39;kubernetes.Addon&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**KubernetesAddon**](kubernetes.Addon.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateKubernetesAddonDefinition
 
 > KubernetesAddonDefinition UpdateKubernetesAddonDefinition(ctx, moid).KubernetesAddonDefinition(kubernetesAddonDefinition).IfMatch(ifMatch).Execute()
@@ -9185,6 +9785,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesCluster**](kubernetes.Cluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKubernetesClusterAddonProfile
+
+> KubernetesClusterAddonProfile UpdateKubernetesClusterAddonProfile(ctx, moid).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).Execute()
+
+Update a 'kubernetes.ClusterAddonProfile' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kubernetesClusterAddonProfile := *openapiclient.NewKubernetesClusterAddonProfile("ClassId_example", "ObjectType_example") // KubernetesClusterAddonProfile | The 'kubernetes.ClusterAddonProfile' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.UpdateKubernetesClusterAddonProfile(context.Background(), moid).KubernetesClusterAddonProfile(kubernetesClusterAddonProfile).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.UpdateKubernetesClusterAddonProfile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKubernetesClusterAddonProfile`: KubernetesClusterAddonProfile
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.UpdateKubernetesClusterAddonProfile`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKubernetesClusterAddonProfileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kubernetesClusterAddonProfile** | [**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md) | The &#39;kubernetes.ClusterAddonProfile&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
 
 ### Authorization
 
@@ -9761,6 +10433,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KubernetesVersionPolicy**](kubernetes.VersionPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKubernetesVirtualMachineInfraConfigPolicy
+
+> KubernetesVirtualMachineInfraConfigPolicy UpdateKubernetesVirtualMachineInfraConfigPolicy(ctx, moid).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'kubernetes.VirtualMachineInfraConfigPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kubernetesVirtualMachineInfraConfigPolicy := *openapiclient.NewKubernetesVirtualMachineInfraConfigPolicy("ClassId_example", "ObjectType_example") // KubernetesVirtualMachineInfraConfigPolicy | The 'kubernetes.VirtualMachineInfraConfigPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KubernetesApi.UpdateKubernetesVirtualMachineInfraConfigPolicy(context.Background(), moid).KubernetesVirtualMachineInfraConfigPolicy(kubernetesVirtualMachineInfraConfigPolicy).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.UpdateKubernetesVirtualMachineInfraConfigPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKubernetesVirtualMachineInfraConfigPolicy`: KubernetesVirtualMachineInfraConfigPolicy
+    fmt.Fprintf(os.Stdout, "Response from `KubernetesApi.UpdateKubernetesVirtualMachineInfraConfigPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKubernetesVirtualMachineInfraConfigPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kubernetesVirtualMachineInfraConfigPolicy** | [**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md) | The &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
 
 ### Authorization
 

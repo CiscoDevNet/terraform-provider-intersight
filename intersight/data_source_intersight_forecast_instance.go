@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"reflect"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -28,6 +29,12 @@ func dataSourceForecastInstance() *schema.Resource {
 			"full_cap_days": {
 				Description: "The number of days remaining before the device reaches its full functional capacity.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"last_model_update_time": {
+				Description: "The time when the forecast model was last updated.",
+				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -126,6 +133,12 @@ func dataSourceForecastInstance() *schema.Resource {
 					"full_cap_days": {
 						Description: "The number of days remaining before the device reaches its full functional capacity.",
 						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"last_model_update_time": {
+						Description: "The time when the forecast model was last updated.",
+						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
 					},
@@ -287,6 +300,10 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 		x := int64(v.(int))
 		o.SetFullCapDays(x)
 	}
+	if v, ok := d.GetOk("last_model_update_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastModelUpdateTime(x)
+	}
 	if v, ok := d.GetOk("metric_name"); ok {
 		x := (v.(string))
 		o.SetMetricName(x)
@@ -344,6 +361,8 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 
 				temp["forecast_def"] = flattenMapForecastDefinitionRelationship(s.GetForecastDef(), d)
 				temp["full_cap_days"] = (s.GetFullCapDays())
+
+				temp["last_model_update_time"] = (s.GetLastModelUpdateTime()).String()
 				temp["metric_name"] = (s.GetMetricName())
 				temp["min_days_for_forecast"] = (s.GetMinDaysForForecast())
 

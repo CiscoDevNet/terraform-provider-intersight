@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.VirtualMachineInfrastructureProvider"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.VirtualMachineInfrastructureProvider"]
 **InfraConfig** | Pointer to [**NullableKubernetesBaseVirtualMachineInfraConfig**](kubernetes.BaseVirtualMachineInfraConfig.md) |  | [optional] 
+**InfraConfigPolicy** | Pointer to [**KubernetesVirtualMachineInfraConfigPolicyRelationship**](kubernetes.VirtualMachineInfraConfigPolicy.Relationship.md) |  | [optional] 
 **InstanceType** | Pointer to [**KubernetesVirtualMachineInstanceTypeRelationship**](kubernetes.VirtualMachineInstanceType.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Target** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -105,6 +105,31 @@ HasInfraConfig returns a boolean if a field has been set.
 `func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) UnsetInfraConfig()`
 
 UnsetInfraConfig ensures that no value is present for InfraConfig, not even an explicit nil
+### GetInfraConfigPolicy
+
+`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInfraConfigPolicy() KubernetesVirtualMachineInfraConfigPolicyRelationship`
+
+GetInfraConfigPolicy returns the InfraConfigPolicy field if non-nil, zero value otherwise.
+
+### GetInfraConfigPolicyOk
+
+`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInfraConfigPolicyOk() (*KubernetesVirtualMachineInfraConfigPolicyRelationship, bool)`
+
+GetInfraConfigPolicyOk returns a tuple with the InfraConfigPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInfraConfigPolicy
+
+`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) SetInfraConfigPolicy(v KubernetesVirtualMachineInfraConfigPolicyRelationship)`
+
+SetInfraConfigPolicy sets InfraConfigPolicy field to given value.
+
+### HasInfraConfigPolicy
+
+`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasInfraConfigPolicy() bool`
+
+HasInfraConfigPolicy returns a boolean if a field has been set.
+
 ### GetInstanceType
 
 `func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetInstanceType() KubernetesVirtualMachineInstanceTypeRelationship`
@@ -129,31 +154,6 @@ SetInstanceType sets InstanceType field to given value.
 `func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasInstanceType() bool`
 
 HasInstanceType returns a boolean if a field has been set.
-
-### GetOrganization
-
-`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetOrganization() OrganizationOrganizationRelationship`
-
-GetOrganization returns the Organization field if non-nil, zero value otherwise.
-
-### GetOrganizationOk
-
-`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
-
-GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganization
-
-`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) SetOrganization(v OrganizationOrganizationRelationship)`
-
-SetOrganization sets Organization field to given value.
-
-### HasOrganization
-
-`func (o *KubernetesVirtualMachineInfrastructureProviderAllOf) HasOrganization() bool`
-
-HasOrganization returns a boolean if a field has been set.
 
 ### GetTarget
 

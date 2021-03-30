@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -25,10 +25,12 @@ type WorkflowApiAllOf struct {
 	AssetTargetMoid *string `json:"AssetTargetMoid,omitempty"`
 	// The optional request body that is sent as part of this API request. The request body can contain a golang template that can be populated with task input parameters and previous API output parameters.
 	Body *string `json:"Body,omitempty"`
-	// Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML and JSON. The type of the content that gets passed as payload and response in this API. The supported values are json, xml, text.
+	// Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML, JSON and Text. The type of the content that gets passed as payload and response in this API. The supported values are json, xml, text.
 	ContentType *string `json:"ContentType,omitempty"`
 	// A description that task designer can add to individual API requests that explain  what the API call is about.
 	Description *string `json:"Description,omitempty"`
+	// Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML, JSON and Text. Optional input to specify the content type in case of error API response. This should be used if the content type of error response is different from that of the success response. If not specified, contentType input value is used to parse the error response.
+	ErrorContentType *string `json:"ErrorContentType,omitempty"`
 	// A user friendly label that task designers have given to the batch API request.
 	Label *string `json:"Label,omitempty"`
 	// A reference name for this API request within the batch API request. This name shall be used to map the API output parameters to subsequent API input parameters within a batch API task.
@@ -241,6 +243,38 @@ func (o *WorkflowApiAllOf) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *WorkflowApiAllOf) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetErrorContentType returns the ErrorContentType field value if set, zero value otherwise.
+func (o *WorkflowApiAllOf) GetErrorContentType() string {
+	if o == nil || o.ErrorContentType == nil {
+		var ret string
+		return ret
+	}
+	return *o.ErrorContentType
+}
+
+// GetErrorContentTypeOk returns a tuple with the ErrorContentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowApiAllOf) GetErrorContentTypeOk() (*string, bool) {
+	if o == nil || o.ErrorContentType == nil {
+		return nil, false
+	}
+	return o.ErrorContentType, true
+}
+
+// HasErrorContentType returns a boolean if a field has been set.
+func (o *WorkflowApiAllOf) HasErrorContentType() bool {
+	if o != nil && o.ErrorContentType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorContentType gets a reference to the given string and assigns it to the ErrorContentType field.
+func (o *WorkflowApiAllOf) SetErrorContentType(v string) {
+	o.ErrorContentType = &v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
@@ -489,6 +523,9 @@ func (o WorkflowApiAllOf) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
 	}
+	if o.ErrorContentType != nil {
+		toSerialize["ErrorContentType"] = o.ErrorContentType
+	}
 	if o.Label != nil {
 		toSerialize["Label"] = o.Label
 	}
@@ -534,6 +571,7 @@ func (o *WorkflowApiAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Body")
 		delete(additionalProperties, "ContentType")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "ErrorContentType")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Outcomes")

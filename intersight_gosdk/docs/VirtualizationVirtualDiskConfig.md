@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VirtualDiskConfig"]
 **Capacity** | Pointer to **string** | Disk capacity to be provided with units example - 10Gi. | [optional] 
 **Mode** | Pointer to **string** | File mode of the disk, example - Filesystem, Block. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. | [optional] [default to "Block"]
-**Name** | Pointer to **string** | Name of the virtual disk. | [optional] 
 **SourceCerts** | Pointer to **string** | Base64 encoded CA certificates of the https source to check against. | [optional] 
 **SourceDiskToClone** | Pointer to **string** | Source disk name from where the clone is done. | [optional] 
 **SourceFilePath** | Pointer to **string** | Disk image source for the virtual machine. | [optional] 
@@ -121,31 +120,6 @@ SetMode sets Mode field to given value.
 `func (o *VirtualizationVirtualDiskConfig) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
-
-### GetName
-
-`func (o *VirtualizationVirtualDiskConfig) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *VirtualizationVirtualDiskConfig) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *VirtualizationVirtualDiskConfig) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *VirtualizationVirtualDiskConfig) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetSourceCerts
 

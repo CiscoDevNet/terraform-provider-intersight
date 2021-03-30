@@ -130,14 +130,34 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"nxos_evpn_mac_routes": {
-				Description: "Returns the total number of evpn mac routes.",
+			"nxos_dci_interface_status": {
+				Description: "Returns the status of dci interface configured.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"nxos_nve_interface_status": {
+				Description: "Returns the value of the nxosNveInterface field.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"nxos_ospf_neighbors": {
+				Description: "Total number of ospf neighbors per switch in DCNM.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"nxos_pim_neighbors": {
+				Description: "Total number of pim neighbors per switch in DCNM.",
+				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"nxos_telnet": {
 				Description: "Returns the value of the nxosTelnet field.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"nxos_total_routes": {
+				Description: "Total number of routes configured in the DCNM.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"object_type": {
@@ -405,9 +425,76 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"nxos_evpn_mac_routes": {
-						Description: "Returns the total number of evpn mac routes.",
-						Type:        schema.TypeInt,
+					"nxos_bgp_mvpn": {
+						Description: "Returns the value of the nxosTrmConfigs field.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"capable_peers": {
+									Description: "Return count of BGP MVPN table capable peers.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"configured_peers": {
+									Description: "Return count of BGP MVPN configured peers.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"memory_used": {
+									Description: "Return value of BGP MVPN memory used.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"number_of_cluster_lists": {
+									Description: "Return value of BGP MVPN cluster list.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"number_of_communities": {
+									Description: "Return count of BGP MVPN communities.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"table_version": {
+									Description: "Return value of BGP MVPN table version.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"total_networks": {
+									Description: "Return count of BGP MVPN networks.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"total_paths": {
+									Description: "Return count of BGP MVPN paths.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"nxos_dci_interface_status": {
+						Description: "Returns the status of dci interface configured.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"nxos_interface_brief": {
@@ -447,10 +534,144 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"nxos_nve_interface_status": {
+						Description: "Returns the value of the nxosNveInterface field.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nxos_nve_vni": {
+						Description: "Returns the value of the nxosNveVni field.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"cp_vni_count": {
+									Description: "Return value of cp vni count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cp_vni_down": {
+									Description: "Return value of cp vni down count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"cp_vni_up": {
+									Description: "Return value of cp vni up count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"dp_vni_count": {
+									Description: "Return value of dp vni count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"dp_vni_down": {
+									Description: "Return value of cp vni down count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"dp_vni_up": {
+									Description: "Return value of cp vni up count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
+					"nxos_ospf_neighbors": {
+						Description: "Total number of ospf neighbors per switch in DCNM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"nxos_pim_neighbors": {
+						Description: "Total number of pim neighbors per switch in DCNM.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"nxos_telnet": {
 						Description: "Returns the value of the nxosTelnet field.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"nxos_total_routes": {
+						Description: "Total number of routes configured in the DCNM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"nxos_vtp": {
+						Description: "Returns the value of the nxosVtpStatus field.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"oper_mode": {
+									Description: "Returns the status of operational mode of vtp.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"pruning_mode": {
+									Description: "Returns the status pruning mode of vtp.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"running_version": {
+									Description: "Returns the running version of vtp.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"trap_enabled": {
+									Description: "Returns the status of trap in vtp.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"v2_mode": {
+									Description: "Returns the status of v2 mode of vtp.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"nr_version": {
+									Description: "Returns version of vtp running.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -674,13 +895,29 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetNodeId(x)
 	}
-	if v, ok := d.GetOk("nxos_evpn_mac_routes"); ok {
+	if v, ok := d.GetOk("nxos_dci_interface_status"); ok {
+		x := (v.(string))
+		o.SetNxosDciInterfaceStatus(x)
+	}
+	if v, ok := d.GetOk("nxos_nve_interface_status"); ok {
+		x := (v.(string))
+		o.SetNxosNveInterfaceStatus(x)
+	}
+	if v, ok := d.GetOk("nxos_ospf_neighbors"); ok {
 		x := int64(v.(int))
-		o.SetNxosEvpnMacRoutes(x)
+		o.SetNxosOspfNeighbors(x)
+	}
+	if v, ok := d.GetOk("nxos_pim_neighbors"); ok {
+		x := (v.(string))
+		o.SetNxosPimNeighbors(x)
 	}
 	if v, ok := d.GetOk("nxos_telnet"); ok {
 		x := (v.(string))
 		o.SetNxosTelnet(x)
+	}
+	if v, ok := d.GetOk("nxos_total_routes"); ok {
+		x := int64(v.(int))
+		o.SetNxosTotalRoutes(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
@@ -784,10 +1021,20 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["memory"] = (s.GetMemory())
 				temp["moid"] = (s.GetMoid())
 				temp["node_id"] = (s.GetNodeId())
-				temp["nxos_evpn_mac_routes"] = (s.GetNxosEvpnMacRoutes())
+
+				temp["nxos_bgp_mvpn"] = flattenMapNiatelemetryNxosBgpMvpn(s.GetNxosBgpMvpn(), d)
+				temp["nxos_dci_interface_status"] = (s.GetNxosDciInterfaceStatus())
 
 				temp["nxos_interface_brief"] = flattenMapNiatelemetryInterface(s.GetNxosInterfaceBrief(), d)
+				temp["nxos_nve_interface_status"] = (s.GetNxosNveInterfaceStatus())
+
+				temp["nxos_nve_vni"] = flattenMapNiatelemetryNveVni(s.GetNxosNveVni(), d)
+				temp["nxos_ospf_neighbors"] = (s.GetNxosOspfNeighbors())
+				temp["nxos_pim_neighbors"] = (s.GetNxosPimNeighbors())
 				temp["nxos_telnet"] = (s.GetNxosTelnet())
+				temp["nxos_total_routes"] = (s.GetNxosTotalRoutes())
+
+				temp["nxos_vtp"] = flattenMapNiatelemetryNxosVtp(s.GetNxosVtp(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["record_type"] = (s.GetRecordType())
 				temp["record_version"] = (s.GetRecordVersion())

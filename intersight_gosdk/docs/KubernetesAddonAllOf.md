@@ -6,13 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.Addon"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.Addon"]
-**InstallStrategy** | Pointer to **string** | Addon install strategy to determine whether an addon is installed if not present. * &#x60;InstallOnly&#x60; - Only install in green field. No action in case of failure or removal. * &#x60;NoAction&#x60; - No install action performed. * &#x60;Always&#x60; - Attempt install if chart is not already installed. | [optional] [default to "InstallOnly"]
+**AddonConfiguration** | Pointer to [**NullableKubernetesAddonConfiguration**](kubernetes.AddonConfiguration.md) |  | [optional] 
+**AddonPolicy** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of addon to be installed on a Kubernetes cluster. | [optional] 
-**OverrideSets** | Pointer to [**[]KubernetesKeyValue**](KubernetesKeyValue.md) |  | [optional] 
-**Overrides** | Pointer to **string** | Properties that can be overridden for an addon. | [optional] 
-**UpgradeStrategy** | Pointer to **string** | Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade. * &#x60;UpgradeOnly&#x60; - Attempt upgrade if chart or overrides options change, no action on upgrade failure. * &#x60;NoAction&#x60; - This choice enables No upgrades to be performed. * &#x60;ReinstallOnFailure&#x60; - Attempt upgrade first. Remove and install on upgrade failure. * &#x60;AlwaysReinstall&#x60; - Always remove older release and reinstall. | [optional] [default to "UpgradeOnly"]
-**AddonDefinition** | Pointer to [**KubernetesAddonDefinitionRelationship**](kubernetes.AddonDefinition.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -73,30 +69,65 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetInstallStrategy
+### GetAddonConfiguration
 
-`func (o *KubernetesAddonAllOf) GetInstallStrategy() string`
+`func (o *KubernetesAddonAllOf) GetAddonConfiguration() KubernetesAddonConfiguration`
 
-GetInstallStrategy returns the InstallStrategy field if non-nil, zero value otherwise.
+GetAddonConfiguration returns the AddonConfiguration field if non-nil, zero value otherwise.
 
-### GetInstallStrategyOk
+### GetAddonConfigurationOk
 
-`func (o *KubernetesAddonAllOf) GetInstallStrategyOk() (*string, bool)`
+`func (o *KubernetesAddonAllOf) GetAddonConfigurationOk() (*KubernetesAddonConfiguration, bool)`
 
-GetInstallStrategyOk returns a tuple with the InstallStrategy field if it's non-nil, zero value otherwise
+GetAddonConfigurationOk returns a tuple with the AddonConfiguration field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInstallStrategy
+### SetAddonConfiguration
 
-`func (o *KubernetesAddonAllOf) SetInstallStrategy(v string)`
+`func (o *KubernetesAddonAllOf) SetAddonConfiguration(v KubernetesAddonConfiguration)`
 
-SetInstallStrategy sets InstallStrategy field to given value.
+SetAddonConfiguration sets AddonConfiguration field to given value.
 
-### HasInstallStrategy
+### HasAddonConfiguration
 
-`func (o *KubernetesAddonAllOf) HasInstallStrategy() bool`
+`func (o *KubernetesAddonAllOf) HasAddonConfiguration() bool`
 
-HasInstallStrategy returns a boolean if a field has been set.
+HasAddonConfiguration returns a boolean if a field has been set.
+
+### SetAddonConfigurationNil
+
+`func (o *KubernetesAddonAllOf) SetAddonConfigurationNil(b bool)`
+
+ SetAddonConfigurationNil sets the value for AddonConfiguration to be an explicit nil
+
+### UnsetAddonConfiguration
+`func (o *KubernetesAddonAllOf) UnsetAddonConfiguration()`
+
+UnsetAddonConfiguration ensures that no value is present for AddonConfiguration, not even an explicit nil
+### GetAddonPolicy
+
+`func (o *KubernetesAddonAllOf) GetAddonPolicy() MoMoRef`
+
+GetAddonPolicy returns the AddonPolicy field if non-nil, zero value otherwise.
+
+### GetAddonPolicyOk
+
+`func (o *KubernetesAddonAllOf) GetAddonPolicyOk() (*MoMoRef, bool)`
+
+GetAddonPolicyOk returns a tuple with the AddonPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddonPolicy
+
+`func (o *KubernetesAddonAllOf) SetAddonPolicy(v MoMoRef)`
+
+SetAddonPolicy sets AddonPolicy field to given value.
+
+### HasAddonPolicy
+
+`func (o *KubernetesAddonAllOf) HasAddonPolicy() bool`
+
+HasAddonPolicy returns a boolean if a field has been set.
 
 ### GetName
 
@@ -122,141 +153,6 @@ SetName sets Name field to given value.
 `func (o *KubernetesAddonAllOf) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetOverrideSets
-
-`func (o *KubernetesAddonAllOf) GetOverrideSets() []KubernetesKeyValue`
-
-GetOverrideSets returns the OverrideSets field if non-nil, zero value otherwise.
-
-### GetOverrideSetsOk
-
-`func (o *KubernetesAddonAllOf) GetOverrideSetsOk() (*[]KubernetesKeyValue, bool)`
-
-GetOverrideSetsOk returns a tuple with the OverrideSets field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOverrideSets
-
-`func (o *KubernetesAddonAllOf) SetOverrideSets(v []KubernetesKeyValue)`
-
-SetOverrideSets sets OverrideSets field to given value.
-
-### HasOverrideSets
-
-`func (o *KubernetesAddonAllOf) HasOverrideSets() bool`
-
-HasOverrideSets returns a boolean if a field has been set.
-
-### SetOverrideSetsNil
-
-`func (o *KubernetesAddonAllOf) SetOverrideSetsNil(b bool)`
-
- SetOverrideSetsNil sets the value for OverrideSets to be an explicit nil
-
-### UnsetOverrideSets
-`func (o *KubernetesAddonAllOf) UnsetOverrideSets()`
-
-UnsetOverrideSets ensures that no value is present for OverrideSets, not even an explicit nil
-### GetOverrides
-
-`func (o *KubernetesAddonAllOf) GetOverrides() string`
-
-GetOverrides returns the Overrides field if non-nil, zero value otherwise.
-
-### GetOverridesOk
-
-`func (o *KubernetesAddonAllOf) GetOverridesOk() (*string, bool)`
-
-GetOverridesOk returns a tuple with the Overrides field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOverrides
-
-`func (o *KubernetesAddonAllOf) SetOverrides(v string)`
-
-SetOverrides sets Overrides field to given value.
-
-### HasOverrides
-
-`func (o *KubernetesAddonAllOf) HasOverrides() bool`
-
-HasOverrides returns a boolean if a field has been set.
-
-### GetUpgradeStrategy
-
-`func (o *KubernetesAddonAllOf) GetUpgradeStrategy() string`
-
-GetUpgradeStrategy returns the UpgradeStrategy field if non-nil, zero value otherwise.
-
-### GetUpgradeStrategyOk
-
-`func (o *KubernetesAddonAllOf) GetUpgradeStrategyOk() (*string, bool)`
-
-GetUpgradeStrategyOk returns a tuple with the UpgradeStrategy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpgradeStrategy
-
-`func (o *KubernetesAddonAllOf) SetUpgradeStrategy(v string)`
-
-SetUpgradeStrategy sets UpgradeStrategy field to given value.
-
-### HasUpgradeStrategy
-
-`func (o *KubernetesAddonAllOf) HasUpgradeStrategy() bool`
-
-HasUpgradeStrategy returns a boolean if a field has been set.
-
-### GetAddonDefinition
-
-`func (o *KubernetesAddonAllOf) GetAddonDefinition() KubernetesAddonDefinitionRelationship`
-
-GetAddonDefinition returns the AddonDefinition field if non-nil, zero value otherwise.
-
-### GetAddonDefinitionOk
-
-`func (o *KubernetesAddonAllOf) GetAddonDefinitionOk() (*KubernetesAddonDefinitionRelationship, bool)`
-
-GetAddonDefinitionOk returns a tuple with the AddonDefinition field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddonDefinition
-
-`func (o *KubernetesAddonAllOf) SetAddonDefinition(v KubernetesAddonDefinitionRelationship)`
-
-SetAddonDefinition sets AddonDefinition field to given value.
-
-### HasAddonDefinition
-
-`func (o *KubernetesAddonAllOf) HasAddonDefinition() bool`
-
-HasAddonDefinition returns a boolean if a field has been set.
-
-### GetOrganization
-
-`func (o *KubernetesAddonAllOf) GetOrganization() OrganizationOrganizationRelationship`
-
-GetOrganization returns the Organization field if non-nil, zero value otherwise.
-
-### GetOrganizationOk
-
-`func (o *KubernetesAddonAllOf) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
-
-GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrganization
-
-`func (o *KubernetesAddonAllOf) SetOrganization(v OrganizationOrganizationRelationship)`
-
-SetOrganization sets Organization field to given value.
-
-### HasOrganization
-
-`func (o *KubernetesAddonAllOf) HasOrganization() bool`
-
-HasOrganization returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

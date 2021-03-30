@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -26,19 +26,39 @@ type NiatelemetryNiaInventoryFabric struct {
 	ObjectType string `json:"ObjectType"`
 	// Returns the aycast gateway mac.
 	AnycastGwMac *string `json:"AnycastGwMac,omitempty"`
+	// Counts the number of BGP interfaces that are in established state.
+	BgpEstablishedInterfaceCount *int64 `json:"BgpEstablishedInterfaceCount,omitempty"`
+	// Count number of active interfaces on border gateways.
+	BgwInterfaceUpCount *int64 `json:"BgwInterfaceUpCount,omitempty"`
+	// Count number of border gateway spines in the fabric inventory.
+	BorderGatewaySpineCount *int64 `json:"BorderGatewaySpineCount,omitempty"`
+	// Count number of border leafs in the fabric inventory.
+	BorderLeafCount *int64 `json:"BorderLeafCount,omitempty"`
+	// Returns the dci subnet range.
+	DciSubnetRange *string `json:"DciSubnetRange,omitempty"`
+	// Returns the dci subnet target mask.
+	DciSubnetTargetMask *string `json:"DciSubnetTargetMask,omitempty"`
 	// Returns the value of the dcnmtrackerEnabled field.
 	DcnmtrackerEnabled *bool `json:"DcnmtrackerEnabled,omitempty"`
+	// Count number of ebgp evpn active interfaces.
+	EbgpEvpnLinkUpCount *int64 `json:"EbgpEvpnLinkUpCount,omitempty"`
 	// Uniquely identifies a fabric.
 	FabricId *string `json:"FabricId,omitempty"`
 	// Returns the value of the Name of a fabric.
 	FabricName *string `json:"FabricName,omitempty"`
+	// Checks if border gateway is present in the fabric inventory.
+	IsBgwPresent *bool `json:"IsBgwPresent,omitempty"`
 	// Returns if ngoam is enabled.
-	IsNgoamEnabled *string `json:"IsNgoamEnabled,omitempty"`
+	IsNgoamEnabled *bool `json:"IsNgoamEnabled,omitempty"`
 	// Returns if the scheduled backup is enabled.
-	IsScheduledBackUpEnabled *string `json:"IsScheduledBackUpEnabled,omitempty"`
+	IsScheduledBackUpEnabled *bool `json:"IsScheduledBackUpEnabled,omitempty"`
 	// Returns total number of leafs in the fabric.
 	LeafCount    *int64                    `json:"LeafCount,omitempty"`
 	LogicalLinks []NiatelemetryLogicalLink `json:"LogicalLinks,omitempty"`
+	// Returns the count of vnis between sites.
+	NxosVniBwSitesCount *int64 `json:"NxosVniBwSitesCount,omitempty"`
+	// Returns the count of vrfs between sites.
+	NxosVrfBwSitesCount *int64 `json:"NxosVrfBwSitesCount,omitempty"`
 	// Returns the value of the nxosVrfCount field.
 	NxosVrfCount *int64 `json:"NxosVrfCount,omitempty"`
 	// Serial number of device being inventoried. The serial number is unique per device.
@@ -46,7 +66,11 @@ type NiatelemetryNiaInventoryFabric struct {
 	// Name of fabric domain of the controller.
 	SiteName *string `json:"SiteName,omitempty"`
 	// Returns total number of spines in the fabric.
-	SpineCount           *int64                               `json:"SpineCount,omitempty"`
+	SpineCount *int64 `json:"SpineCount,omitempty"`
+	// VLAN to VNI mappings configured in the DCNM.
+	VlanVniMappings *string `json:"VlanVniMappings,omitempty"`
+	// Count number of IP addresses configured in the DCNM networks.
+	VniIpCount           *int64                               `json:"VniIpCount,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -156,6 +180,198 @@ func (o *NiatelemetryNiaInventoryFabric) SetAnycastGwMac(v string) {
 	o.AnycastGwMac = &v
 }
 
+// GetBgpEstablishedInterfaceCount returns the BgpEstablishedInterfaceCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCount() int64 {
+	if o == nil || o.BgpEstablishedInterfaceCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.BgpEstablishedInterfaceCount
+}
+
+// GetBgpEstablishedInterfaceCountOk returns a tuple with the BgpEstablishedInterfaceCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetBgpEstablishedInterfaceCountOk() (*int64, bool) {
+	if o == nil || o.BgpEstablishedInterfaceCount == nil {
+		return nil, false
+	}
+	return o.BgpEstablishedInterfaceCount, true
+}
+
+// HasBgpEstablishedInterfaceCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasBgpEstablishedInterfaceCount() bool {
+	if o != nil && o.BgpEstablishedInterfaceCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBgpEstablishedInterfaceCount gets a reference to the given int64 and assigns it to the BgpEstablishedInterfaceCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetBgpEstablishedInterfaceCount(v int64) {
+	o.BgpEstablishedInterfaceCount = &v
+}
+
+// GetBgwInterfaceUpCount returns the BgwInterfaceUpCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCount() int64 {
+	if o == nil || o.BgwInterfaceUpCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.BgwInterfaceUpCount
+}
+
+// GetBgwInterfaceUpCountOk returns a tuple with the BgwInterfaceUpCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetBgwInterfaceUpCountOk() (*int64, bool) {
+	if o == nil || o.BgwInterfaceUpCount == nil {
+		return nil, false
+	}
+	return o.BgwInterfaceUpCount, true
+}
+
+// HasBgwInterfaceUpCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasBgwInterfaceUpCount() bool {
+	if o != nil && o.BgwInterfaceUpCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBgwInterfaceUpCount gets a reference to the given int64 and assigns it to the BgwInterfaceUpCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetBgwInterfaceUpCount(v int64) {
+	o.BgwInterfaceUpCount = &v
+}
+
+// GetBorderGatewaySpineCount returns the BorderGatewaySpineCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCount() int64 {
+	if o == nil || o.BorderGatewaySpineCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.BorderGatewaySpineCount
+}
+
+// GetBorderGatewaySpineCountOk returns a tuple with the BorderGatewaySpineCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetBorderGatewaySpineCountOk() (*int64, bool) {
+	if o == nil || o.BorderGatewaySpineCount == nil {
+		return nil, false
+	}
+	return o.BorderGatewaySpineCount, true
+}
+
+// HasBorderGatewaySpineCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasBorderGatewaySpineCount() bool {
+	if o != nil && o.BorderGatewaySpineCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBorderGatewaySpineCount gets a reference to the given int64 and assigns it to the BorderGatewaySpineCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetBorderGatewaySpineCount(v int64) {
+	o.BorderGatewaySpineCount = &v
+}
+
+// GetBorderLeafCount returns the BorderLeafCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCount() int64 {
+	if o == nil || o.BorderLeafCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.BorderLeafCount
+}
+
+// GetBorderLeafCountOk returns a tuple with the BorderLeafCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetBorderLeafCountOk() (*int64, bool) {
+	if o == nil || o.BorderLeafCount == nil {
+		return nil, false
+	}
+	return o.BorderLeafCount, true
+}
+
+// HasBorderLeafCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasBorderLeafCount() bool {
+	if o != nil && o.BorderLeafCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBorderLeafCount gets a reference to the given int64 and assigns it to the BorderLeafCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetBorderLeafCount(v int64) {
+	o.BorderLeafCount = &v
+}
+
+// GetDciSubnetRange returns the DciSubnetRange field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRange() string {
+	if o == nil || o.DciSubnetRange == nil {
+		var ret string
+		return ret
+	}
+	return *o.DciSubnetRange
+}
+
+// GetDciSubnetRangeOk returns a tuple with the DciSubnetRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetRangeOk() (*string, bool) {
+	if o == nil || o.DciSubnetRange == nil {
+		return nil, false
+	}
+	return o.DciSubnetRange, true
+}
+
+// HasDciSubnetRange returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasDciSubnetRange() bool {
+	if o != nil && o.DciSubnetRange != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDciSubnetRange gets a reference to the given string and assigns it to the DciSubnetRange field.
+func (o *NiatelemetryNiaInventoryFabric) SetDciSubnetRange(v string) {
+	o.DciSubnetRange = &v
+}
+
+// GetDciSubnetTargetMask returns the DciSubnetTargetMask field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMask() string {
+	if o == nil || o.DciSubnetTargetMask == nil {
+		var ret string
+		return ret
+	}
+	return *o.DciSubnetTargetMask
+}
+
+// GetDciSubnetTargetMaskOk returns a tuple with the DciSubnetTargetMask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetDciSubnetTargetMaskOk() (*string, bool) {
+	if o == nil || o.DciSubnetTargetMask == nil {
+		return nil, false
+	}
+	return o.DciSubnetTargetMask, true
+}
+
+// HasDciSubnetTargetMask returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasDciSubnetTargetMask() bool {
+	if o != nil && o.DciSubnetTargetMask != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDciSubnetTargetMask gets a reference to the given string and assigns it to the DciSubnetTargetMask field.
+func (o *NiatelemetryNiaInventoryFabric) SetDciSubnetTargetMask(v string) {
+	o.DciSubnetTargetMask = &v
+}
+
 // GetDcnmtrackerEnabled returns the DcnmtrackerEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetDcnmtrackerEnabled() bool {
 	if o == nil || o.DcnmtrackerEnabled == nil {
@@ -186,6 +402,38 @@ func (o *NiatelemetryNiaInventoryFabric) HasDcnmtrackerEnabled() bool {
 // SetDcnmtrackerEnabled gets a reference to the given bool and assigns it to the DcnmtrackerEnabled field.
 func (o *NiatelemetryNiaInventoryFabric) SetDcnmtrackerEnabled(v bool) {
 	o.DcnmtrackerEnabled = &v
+}
+
+// GetEbgpEvpnLinkUpCount returns the EbgpEvpnLinkUpCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCount() int64 {
+	if o == nil || o.EbgpEvpnLinkUpCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.EbgpEvpnLinkUpCount
+}
+
+// GetEbgpEvpnLinkUpCountOk returns a tuple with the EbgpEvpnLinkUpCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetEbgpEvpnLinkUpCountOk() (*int64, bool) {
+	if o == nil || o.EbgpEvpnLinkUpCount == nil {
+		return nil, false
+	}
+	return o.EbgpEvpnLinkUpCount, true
+}
+
+// HasEbgpEvpnLinkUpCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasEbgpEvpnLinkUpCount() bool {
+	if o != nil && o.EbgpEvpnLinkUpCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEbgpEvpnLinkUpCount gets a reference to the given int64 and assigns it to the EbgpEvpnLinkUpCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetEbgpEvpnLinkUpCount(v int64) {
+	o.EbgpEvpnLinkUpCount = &v
 }
 
 // GetFabricId returns the FabricId field value if set, zero value otherwise.
@@ -252,10 +500,42 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricName(v string) {
 	o.FabricName = &v
 }
 
+// GetIsBgwPresent returns the IsBgwPresent field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresent() bool {
+	if o == nil || o.IsBgwPresent == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsBgwPresent
+}
+
+// GetIsBgwPresentOk returns a tuple with the IsBgwPresent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetIsBgwPresentOk() (*bool, bool) {
+	if o == nil || o.IsBgwPresent == nil {
+		return nil, false
+	}
+	return o.IsBgwPresent, true
+}
+
+// HasIsBgwPresent returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasIsBgwPresent() bool {
+	if o != nil && o.IsBgwPresent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsBgwPresent gets a reference to the given bool and assigns it to the IsBgwPresent field.
+func (o *NiatelemetryNiaInventoryFabric) SetIsBgwPresent(v bool) {
+	o.IsBgwPresent = &v
+}
+
 // GetIsNgoamEnabled returns the IsNgoamEnabled field value if set, zero value otherwise.
-func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabled() string {
+func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabled() bool {
 	if o == nil || o.IsNgoamEnabled == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsNgoamEnabled
@@ -263,7 +543,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabled() string {
 
 // GetIsNgoamEnabledOk returns a tuple with the IsNgoamEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabledOk() (*string, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetIsNgoamEnabledOk() (*bool, bool) {
 	if o == nil || o.IsNgoamEnabled == nil {
 		return nil, false
 	}
@@ -279,15 +559,15 @@ func (o *NiatelemetryNiaInventoryFabric) HasIsNgoamEnabled() bool {
 	return false
 }
 
-// SetIsNgoamEnabled gets a reference to the given string and assigns it to the IsNgoamEnabled field.
-func (o *NiatelemetryNiaInventoryFabric) SetIsNgoamEnabled(v string) {
+// SetIsNgoamEnabled gets a reference to the given bool and assigns it to the IsNgoamEnabled field.
+func (o *NiatelemetryNiaInventoryFabric) SetIsNgoamEnabled(v bool) {
 	o.IsNgoamEnabled = &v
 }
 
 // GetIsScheduledBackUpEnabled returns the IsScheduledBackUpEnabled field value if set, zero value otherwise.
-func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabled() string {
+func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabled() bool {
 	if o == nil || o.IsScheduledBackUpEnabled == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsScheduledBackUpEnabled
@@ -295,7 +575,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabled() string {
 
 // GetIsScheduledBackUpEnabledOk returns a tuple with the IsScheduledBackUpEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabledOk() (*string, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetIsScheduledBackUpEnabledOk() (*bool, bool) {
 	if o == nil || o.IsScheduledBackUpEnabled == nil {
 		return nil, false
 	}
@@ -311,8 +591,8 @@ func (o *NiatelemetryNiaInventoryFabric) HasIsScheduledBackUpEnabled() bool {
 	return false
 }
 
-// SetIsScheduledBackUpEnabled gets a reference to the given string and assigns it to the IsScheduledBackUpEnabled field.
-func (o *NiatelemetryNiaInventoryFabric) SetIsScheduledBackUpEnabled(v string) {
+// SetIsScheduledBackUpEnabled gets a reference to the given bool and assigns it to the IsScheduledBackUpEnabled field.
+func (o *NiatelemetryNiaInventoryFabric) SetIsScheduledBackUpEnabled(v bool) {
 	o.IsScheduledBackUpEnabled = &v
 }
 
@@ -379,6 +659,70 @@ func (o *NiatelemetryNiaInventoryFabric) HasLogicalLinks() bool {
 // SetLogicalLinks gets a reference to the given []NiatelemetryLogicalLink and assigns it to the LogicalLinks field.
 func (o *NiatelemetryNiaInventoryFabric) SetLogicalLinks(v []NiatelemetryLogicalLink) {
 	o.LogicalLinks = v
+}
+
+// GetNxosVniBwSitesCount returns the NxosVniBwSitesCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCount() int64 {
+	if o == nil || o.NxosVniBwSitesCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosVniBwSitesCount
+}
+
+// GetNxosVniBwSitesCountOk returns a tuple with the NxosVniBwSitesCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetNxosVniBwSitesCountOk() (*int64, bool) {
+	if o == nil || o.NxosVniBwSitesCount == nil {
+		return nil, false
+	}
+	return o.NxosVniBwSitesCount, true
+}
+
+// HasNxosVniBwSitesCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasNxosVniBwSitesCount() bool {
+	if o != nil && o.NxosVniBwSitesCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosVniBwSitesCount gets a reference to the given int64 and assigns it to the NxosVniBwSitesCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetNxosVniBwSitesCount(v int64) {
+	o.NxosVniBwSitesCount = &v
+}
+
+// GetNxosVrfBwSitesCount returns the NxosVrfBwSitesCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCount() int64 {
+	if o == nil || o.NxosVrfBwSitesCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosVrfBwSitesCount
+}
+
+// GetNxosVrfBwSitesCountOk returns a tuple with the NxosVrfBwSitesCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetNxosVrfBwSitesCountOk() (*int64, bool) {
+	if o == nil || o.NxosVrfBwSitesCount == nil {
+		return nil, false
+	}
+	return o.NxosVrfBwSitesCount, true
+}
+
+// HasNxosVrfBwSitesCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasNxosVrfBwSitesCount() bool {
+	if o != nil && o.NxosVrfBwSitesCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosVrfBwSitesCount gets a reference to the given int64 and assigns it to the NxosVrfBwSitesCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetNxosVrfBwSitesCount(v int64) {
+	o.NxosVrfBwSitesCount = &v
 }
 
 // GetNxosVrfCount returns the NxosVrfCount field value if set, zero value otherwise.
@@ -509,6 +853,70 @@ func (o *NiatelemetryNiaInventoryFabric) SetSpineCount(v int64) {
 	o.SpineCount = &v
 }
 
+// GetVlanVniMappings returns the VlanVniMappings field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappings() string {
+	if o == nil || o.VlanVniMappings == nil {
+		var ret string
+		return ret
+	}
+	return *o.VlanVniMappings
+}
+
+// GetVlanVniMappingsOk returns a tuple with the VlanVniMappings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetVlanVniMappingsOk() (*string, bool) {
+	if o == nil || o.VlanVniMappings == nil {
+		return nil, false
+	}
+	return o.VlanVniMappings, true
+}
+
+// HasVlanVniMappings returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasVlanVniMappings() bool {
+	if o != nil && o.VlanVniMappings != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVlanVniMappings gets a reference to the given string and assigns it to the VlanVniMappings field.
+func (o *NiatelemetryNiaInventoryFabric) SetVlanVniMappings(v string) {
+	o.VlanVniMappings = &v
+}
+
+// GetVniIpCount returns the VniIpCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryFabric) GetVniIpCount() int64 {
+	if o == nil || o.VniIpCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.VniIpCount
+}
+
+// GetVniIpCountOk returns a tuple with the VniIpCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryFabric) GetVniIpCountOk() (*int64, bool) {
+	if o == nil || o.VniIpCount == nil {
+		return nil, false
+	}
+	return o.VniIpCount, true
+}
+
+// HasVniIpCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryFabric) HasVniIpCount() bool {
+	if o != nil && o.VniIpCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVniIpCount gets a reference to the given int64 and assigns it to the VniIpCount field.
+func (o *NiatelemetryNiaInventoryFabric) SetVniIpCount(v int64) {
+	o.VniIpCount = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryFabric) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -560,14 +968,38 @@ func (o NiatelemetryNiaInventoryFabric) MarshalJSON() ([]byte, error) {
 	if o.AnycastGwMac != nil {
 		toSerialize["AnycastGwMac"] = o.AnycastGwMac
 	}
+	if o.BgpEstablishedInterfaceCount != nil {
+		toSerialize["BgpEstablishedInterfaceCount"] = o.BgpEstablishedInterfaceCount
+	}
+	if o.BgwInterfaceUpCount != nil {
+		toSerialize["BgwInterfaceUpCount"] = o.BgwInterfaceUpCount
+	}
+	if o.BorderGatewaySpineCount != nil {
+		toSerialize["BorderGatewaySpineCount"] = o.BorderGatewaySpineCount
+	}
+	if o.BorderLeafCount != nil {
+		toSerialize["BorderLeafCount"] = o.BorderLeafCount
+	}
+	if o.DciSubnetRange != nil {
+		toSerialize["DciSubnetRange"] = o.DciSubnetRange
+	}
+	if o.DciSubnetTargetMask != nil {
+		toSerialize["DciSubnetTargetMask"] = o.DciSubnetTargetMask
+	}
 	if o.DcnmtrackerEnabled != nil {
 		toSerialize["DcnmtrackerEnabled"] = o.DcnmtrackerEnabled
+	}
+	if o.EbgpEvpnLinkUpCount != nil {
+		toSerialize["EbgpEvpnLinkUpCount"] = o.EbgpEvpnLinkUpCount
 	}
 	if o.FabricId != nil {
 		toSerialize["FabricId"] = o.FabricId
 	}
 	if o.FabricName != nil {
 		toSerialize["FabricName"] = o.FabricName
+	}
+	if o.IsBgwPresent != nil {
+		toSerialize["IsBgwPresent"] = o.IsBgwPresent
 	}
 	if o.IsNgoamEnabled != nil {
 		toSerialize["IsNgoamEnabled"] = o.IsNgoamEnabled
@@ -581,6 +1013,12 @@ func (o NiatelemetryNiaInventoryFabric) MarshalJSON() ([]byte, error) {
 	if o.LogicalLinks != nil {
 		toSerialize["LogicalLinks"] = o.LogicalLinks
 	}
+	if o.NxosVniBwSitesCount != nil {
+		toSerialize["NxosVniBwSitesCount"] = o.NxosVniBwSitesCount
+	}
+	if o.NxosVrfBwSitesCount != nil {
+		toSerialize["NxosVrfBwSitesCount"] = o.NxosVrfBwSitesCount
+	}
 	if o.NxosVrfCount != nil {
 		toSerialize["NxosVrfCount"] = o.NxosVrfCount
 	}
@@ -592,6 +1030,12 @@ func (o NiatelemetryNiaInventoryFabric) MarshalJSON() ([]byte, error) {
 	}
 	if o.SpineCount != nil {
 		toSerialize["SpineCount"] = o.SpineCount
+	}
+	if o.VlanVniMappings != nil {
+		toSerialize["VlanVniMappings"] = o.VlanVniMappings
+	}
+	if o.VniIpCount != nil {
+		toSerialize["VniIpCount"] = o.VniIpCount
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -612,19 +1056,39 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		ObjectType string `json:"ObjectType"`
 		// Returns the aycast gateway mac.
 		AnycastGwMac *string `json:"AnycastGwMac,omitempty"`
+		// Counts the number of BGP interfaces that are in established state.
+		BgpEstablishedInterfaceCount *int64 `json:"BgpEstablishedInterfaceCount,omitempty"`
+		// Count number of active interfaces on border gateways.
+		BgwInterfaceUpCount *int64 `json:"BgwInterfaceUpCount,omitempty"`
+		// Count number of border gateway spines in the fabric inventory.
+		BorderGatewaySpineCount *int64 `json:"BorderGatewaySpineCount,omitempty"`
+		// Count number of border leafs in the fabric inventory.
+		BorderLeafCount *int64 `json:"BorderLeafCount,omitempty"`
+		// Returns the dci subnet range.
+		DciSubnetRange *string `json:"DciSubnetRange,omitempty"`
+		// Returns the dci subnet target mask.
+		DciSubnetTargetMask *string `json:"DciSubnetTargetMask,omitempty"`
 		// Returns the value of the dcnmtrackerEnabled field.
 		DcnmtrackerEnabled *bool `json:"DcnmtrackerEnabled,omitempty"`
+		// Count number of ebgp evpn active interfaces.
+		EbgpEvpnLinkUpCount *int64 `json:"EbgpEvpnLinkUpCount,omitempty"`
 		// Uniquely identifies a fabric.
 		FabricId *string `json:"FabricId,omitempty"`
 		// Returns the value of the Name of a fabric.
 		FabricName *string `json:"FabricName,omitempty"`
+		// Checks if border gateway is present in the fabric inventory.
+		IsBgwPresent *bool `json:"IsBgwPresent,omitempty"`
 		// Returns if ngoam is enabled.
-		IsNgoamEnabled *string `json:"IsNgoamEnabled,omitempty"`
+		IsNgoamEnabled *bool `json:"IsNgoamEnabled,omitempty"`
 		// Returns if the scheduled backup is enabled.
-		IsScheduledBackUpEnabled *string `json:"IsScheduledBackUpEnabled,omitempty"`
+		IsScheduledBackUpEnabled *bool `json:"IsScheduledBackUpEnabled,omitempty"`
 		// Returns total number of leafs in the fabric.
 		LeafCount    *int64                    `json:"LeafCount,omitempty"`
 		LogicalLinks []NiatelemetryLogicalLink `json:"LogicalLinks,omitempty"`
+		// Returns the count of vnis between sites.
+		NxosVniBwSitesCount *int64 `json:"NxosVniBwSitesCount,omitempty"`
+		// Returns the count of vrfs between sites.
+		NxosVrfBwSitesCount *int64 `json:"NxosVrfBwSitesCount,omitempty"`
 		// Returns the value of the nxosVrfCount field.
 		NxosVrfCount *int64 `json:"NxosVrfCount,omitempty"`
 		// Serial number of device being inventoried. The serial number is unique per device.
@@ -632,7 +1096,11 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		// Name of fabric domain of the controller.
 		SiteName *string `json:"SiteName,omitempty"`
 		// Returns total number of spines in the fabric.
-		SpineCount       *int64                               `json:"SpineCount,omitempty"`
+		SpineCount *int64 `json:"SpineCount,omitempty"`
+		// VLAN to VNI mappings configured in the DCNM.
+		VlanVniMappings *string `json:"VlanVniMappings,omitempty"`
+		// Count number of IP addresses configured in the DCNM networks.
+		VniIpCount       *int64                               `json:"VniIpCount,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -644,17 +1112,29 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		varNiatelemetryNiaInventoryFabric.ClassId = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.ClassId
 		varNiatelemetryNiaInventoryFabric.ObjectType = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.ObjectType
 		varNiatelemetryNiaInventoryFabric.AnycastGwMac = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.AnycastGwMac
+		varNiatelemetryNiaInventoryFabric.BgpEstablishedInterfaceCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.BgpEstablishedInterfaceCount
+		varNiatelemetryNiaInventoryFabric.BgwInterfaceUpCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.BgwInterfaceUpCount
+		varNiatelemetryNiaInventoryFabric.BorderGatewaySpineCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.BorderGatewaySpineCount
+		varNiatelemetryNiaInventoryFabric.BorderLeafCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.BorderLeafCount
+		varNiatelemetryNiaInventoryFabric.DciSubnetRange = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.DciSubnetRange
+		varNiatelemetryNiaInventoryFabric.DciSubnetTargetMask = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.DciSubnetTargetMask
 		varNiatelemetryNiaInventoryFabric.DcnmtrackerEnabled = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.DcnmtrackerEnabled
+		varNiatelemetryNiaInventoryFabric.EbgpEvpnLinkUpCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.EbgpEvpnLinkUpCount
 		varNiatelemetryNiaInventoryFabric.FabricId = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.FabricId
 		varNiatelemetryNiaInventoryFabric.FabricName = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.FabricName
+		varNiatelemetryNiaInventoryFabric.IsBgwPresent = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.IsBgwPresent
 		varNiatelemetryNiaInventoryFabric.IsNgoamEnabled = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.IsNgoamEnabled
 		varNiatelemetryNiaInventoryFabric.IsScheduledBackUpEnabled = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.IsScheduledBackUpEnabled
 		varNiatelemetryNiaInventoryFabric.LeafCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.LeafCount
 		varNiatelemetryNiaInventoryFabric.LogicalLinks = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.LogicalLinks
+		varNiatelemetryNiaInventoryFabric.NxosVniBwSitesCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.NxosVniBwSitesCount
+		varNiatelemetryNiaInventoryFabric.NxosVrfBwSitesCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.NxosVrfBwSitesCount
 		varNiatelemetryNiaInventoryFabric.NxosVrfCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.NxosVrfCount
 		varNiatelemetryNiaInventoryFabric.Serial = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.Serial
 		varNiatelemetryNiaInventoryFabric.SiteName = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.SiteName
 		varNiatelemetryNiaInventoryFabric.SpineCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.SpineCount
+		varNiatelemetryNiaInventoryFabric.VlanVniMappings = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.VlanVniMappings
+		varNiatelemetryNiaInventoryFabric.VniIpCount = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.VniIpCount
 		varNiatelemetryNiaInventoryFabric.RegisteredDevice = varNiatelemetryNiaInventoryFabricWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetryNiaInventoryFabric(varNiatelemetryNiaInventoryFabric)
 	} else {
@@ -676,17 +1156,29 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AnycastGwMac")
+		delete(additionalProperties, "BgpEstablishedInterfaceCount")
+		delete(additionalProperties, "BgwInterfaceUpCount")
+		delete(additionalProperties, "BorderGatewaySpineCount")
+		delete(additionalProperties, "BorderLeafCount")
+		delete(additionalProperties, "DciSubnetRange")
+		delete(additionalProperties, "DciSubnetTargetMask")
 		delete(additionalProperties, "DcnmtrackerEnabled")
+		delete(additionalProperties, "EbgpEvpnLinkUpCount")
 		delete(additionalProperties, "FabricId")
 		delete(additionalProperties, "FabricName")
+		delete(additionalProperties, "IsBgwPresent")
 		delete(additionalProperties, "IsNgoamEnabled")
 		delete(additionalProperties, "IsScheduledBackUpEnabled")
 		delete(additionalProperties, "LeafCount")
 		delete(additionalProperties, "LogicalLinks")
+		delete(additionalProperties, "NxosVniBwSitesCount")
+		delete(additionalProperties, "NxosVrfBwSitesCount")
 		delete(additionalProperties, "NxosVrfCount")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SiteName")
 		delete(additionalProperties, "SpineCount")
+		delete(additionalProperties, "VlanVniMappings")
+		delete(additionalProperties, "VniIpCount")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

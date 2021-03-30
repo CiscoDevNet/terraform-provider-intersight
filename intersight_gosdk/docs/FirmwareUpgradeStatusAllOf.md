@@ -6,18 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UpgradeStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeStatus"]
-**DownloadError** | Pointer to **string** | The error message from the endpoint during the download. | [optional] 
 **DownloadMessage** | Pointer to **string** | The message from the endpoint during the download. | [optional] 
 **DownloadPercentage** | Pointer to **int64** | The percentage of the image downloaded in the endpoint. | [optional] 
-**DownloadProgress** | Pointer to **int64** | The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent. | [optional] 
-**DownloadRetries** | Pointer to **int64** | The number of retries the plugin attempted before succeeding or failing the download. | [optional] 
 **DownloadStage** | Pointer to **string** | The image download stages. Example:downloading, flashing. | [optional] 
 **EpPowerStatus** | Pointer to **string** | The server power status after the upgrade request is submitted in the endpoint. * &#x60;none&#x60; - Server power status is none. * &#x60;powered on&#x60; - Server power status is powered on. * &#x60;powered off&#x60; - Server power status is powered off. | [optional] [default to "none"]
 **OverallError** | Pointer to **string** | The reason for the operation failure. | [optional] 
 **OverallPercentage** | Pointer to **int64** | The overall percentage of the operation. | [optional] 
 **Overallstatus** | Pointer to **string** | The overall status of the operation. * &#x60;none&#x60; - Upgrade stage is no upgrade stage. * &#x60;started&#x60; - Upgrade stage is started. * &#x60;prepare initiating&#x60; - Upgrade configuration is being prepared. * &#x60;prepare initiated&#x60; - Upgrade configuration is initiated. * &#x60;prepared&#x60; - Upgrade configuration is prepared. * &#x60;download initiating&#x60; - Upgrade stage is download initiating. * &#x60;download initiated&#x60; - Upgrade stage is download initiated. * &#x60;downloading&#x60; - Upgrade stage is downloading. * &#x60;downloaded&#x60; - Upgrade stage is downloaded. * &#x60;upgrade initiating on fabric A&#x60; - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * &#x60;upgrade initiated on fabric A&#x60; - Upgrade stage is in upgrade initiated when the upgrade has started in endpoint. * &#x60;upgrading fabric A&#x60; - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * &#x60;rebooting fabric A&#x60; - Upgrade is in rebooting when the endpoint is being rebooted. * &#x60;upgraded fabric A&#x60; - Upgrade stage is in upgraded when the corresponding endpoint has completed. * &#x60;upgrade initiating on fabric B&#x60; - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * &#x60;upgrade initiated on fabric B&#x60; - Upgrade stage is in upgrade initiated when upgrade has started in endpoint. * &#x60;upgrading fabric B&#x60; - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * &#x60;rebooting fabric B&#x60; - Upgrade is in rebooting when the endpoint is being rebooted. * &#x60;upgraded fabric B&#x60; - Upgrade stage is in upgraded when the corresponding endpoint has completed. * &#x60;upgrade initiating&#x60; - Upgrade stage is upgrade initiating. * &#x60;upgrade initiated&#x60; - Upgrade stage is upgrade initiated. * &#x60;upgrading&#x60; - Upgrade stage is upgrading. * &#x60;oob images staging&#x60; - Out-of-band component images staging. * &#x60;oob images staged&#x60; - Out-of-band component images staged. * &#x60;rebooting&#x60; - Upgrade is rebooting the endpoint. * &#x60;upgraded&#x60; - Upgrade stage is upgraded. * &#x60;success&#x60; - Upgrade stage is success. * &#x60;failed&#x60; - Upgrade stage is upgrade failed. * &#x60;terminated&#x60; - Upgrade stage is terminated. * &#x60;pending&#x60; - Upgrade stage is pending. * &#x60;ReadyForCache&#x60; - The image is ready to be cached into the Intersight Appliance. * &#x60;Caching&#x60; - The image will be cached into Intersight Appliance or an endpoint cache. * &#x60;Cached&#x60; - The image has been cached into the Intersight Appliance or endpoint cache. * &#x60;CachingFailed&#x60; - The image caching into the Intersight Appliance failed or endpoint cache. | [optional] [default to "none"]
 **PendingType** | Pointer to **string** | Pending reason for the upgrade waiting. * &#x60;none&#x60; - Upgrade pending reason is none. * &#x60;pending for next reboot&#x60; - Upgrade pending reason is pending for next reboot. | [optional] [default to "none"]
-**Sha256checksum** | Pointer to **string** | The sha256checksum of the downloaded file as calculated by the download plugin after successfully downloading a file. | [optional] 
 **Upgrade** | Pointer to [**FirmwareUpgradeBaseRelationship**](firmware.UpgradeBase.Relationship.md) |  | [optional] 
 **Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
 
@@ -80,31 +76,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetDownloadError
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadError() string`
-
-GetDownloadError returns the DownloadError field if non-nil, zero value otherwise.
-
-### GetDownloadErrorOk
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadErrorOk() (*string, bool)`
-
-GetDownloadErrorOk returns a tuple with the DownloadError field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDownloadError
-
-`func (o *FirmwareUpgradeStatusAllOf) SetDownloadError(v string)`
-
-SetDownloadError sets DownloadError field to given value.
-
-### HasDownloadError
-
-`func (o *FirmwareUpgradeStatusAllOf) HasDownloadError() bool`
-
-HasDownloadError returns a boolean if a field has been set.
-
 ### GetDownloadMessage
 
 `func (o *FirmwareUpgradeStatusAllOf) GetDownloadMessage() string`
@@ -154,56 +125,6 @@ SetDownloadPercentage sets DownloadPercentage field to given value.
 `func (o *FirmwareUpgradeStatusAllOf) HasDownloadPercentage() bool`
 
 HasDownloadPercentage returns a boolean if a field has been set.
-
-### GetDownloadProgress
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadProgress() int64`
-
-GetDownloadProgress returns the DownloadProgress field if non-nil, zero value otherwise.
-
-### GetDownloadProgressOk
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadProgressOk() (*int64, bool)`
-
-GetDownloadProgressOk returns a tuple with the DownloadProgress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDownloadProgress
-
-`func (o *FirmwareUpgradeStatusAllOf) SetDownloadProgress(v int64)`
-
-SetDownloadProgress sets DownloadProgress field to given value.
-
-### HasDownloadProgress
-
-`func (o *FirmwareUpgradeStatusAllOf) HasDownloadProgress() bool`
-
-HasDownloadProgress returns a boolean if a field has been set.
-
-### GetDownloadRetries
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadRetries() int64`
-
-GetDownloadRetries returns the DownloadRetries field if non-nil, zero value otherwise.
-
-### GetDownloadRetriesOk
-
-`func (o *FirmwareUpgradeStatusAllOf) GetDownloadRetriesOk() (*int64, bool)`
-
-GetDownloadRetriesOk returns a tuple with the DownloadRetries field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDownloadRetries
-
-`func (o *FirmwareUpgradeStatusAllOf) SetDownloadRetries(v int64)`
-
-SetDownloadRetries sets DownloadRetries field to given value.
-
-### HasDownloadRetries
-
-`func (o *FirmwareUpgradeStatusAllOf) HasDownloadRetries() bool`
-
-HasDownloadRetries returns a boolean if a field has been set.
 
 ### GetDownloadStage
 
@@ -354,31 +275,6 @@ SetPendingType sets PendingType field to given value.
 `func (o *FirmwareUpgradeStatusAllOf) HasPendingType() bool`
 
 HasPendingType returns a boolean if a field has been set.
-
-### GetSha256checksum
-
-`func (o *FirmwareUpgradeStatusAllOf) GetSha256checksum() string`
-
-GetSha256checksum returns the Sha256checksum field if non-nil, zero value otherwise.
-
-### GetSha256checksumOk
-
-`func (o *FirmwareUpgradeStatusAllOf) GetSha256checksumOk() (*string, bool)`
-
-GetSha256checksumOk returns a tuple with the Sha256checksum field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSha256checksum
-
-`func (o *FirmwareUpgradeStatusAllOf) SetSha256checksum(v string)`
-
-SetSha256checksum sets Sha256checksum field to given value.
-
-### HasSha256checksum
-
-`func (o *FirmwareUpgradeStatusAllOf) HasSha256checksum() bool`
-
-HasSha256checksum returns a boolean if a field has been set.
 
 ### GetUpgrade
 

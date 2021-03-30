@@ -12,7 +12,7 @@ This specifies the configuration policies for a cluster of switches.
 The following arguments are supported:
 * `config_context`:(HashMap) -(Computed) This provides consolidated configuration context of all the switch profiles referred by Switch Cluster Profile. 
 This complex property has following sub-properties:
-  + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed. 
+  + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
   + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 

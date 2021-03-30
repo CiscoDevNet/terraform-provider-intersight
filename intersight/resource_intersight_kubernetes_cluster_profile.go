@@ -119,46 +119,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
-			"addons": {
-				Description: "An array of relationships to kubernetesAddonPolicy resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-			},
 			"associated_cluster": {
 				Description: "A reference to a kubernetesCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -339,7 +299,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Computed:    true,
 						},
 						"config_state": {
-							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed.",
+							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -416,6 +376,172 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Description: "Description of the profile.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"essential_addons": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"addon_configuration": {
+							Description: "Addon configuration settings that are specific to a single cluster.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"install_strategy": {
+										Description: "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "None",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"override_sets": {
+										Type:     schema.TypeList,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"key": {
+													Description: "Key or property name in a key/value pair.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"value": {
+													Description: "Property value in a key/value pair.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+									},
+									"overrides": {
+										Description: "Properties that can be overridden for an addon.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"release_name": {
+										Description: "Name for the helm release.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"release_namespace": {
+										Description: "Namespace for the helm release.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"upgrade_strategy": {
+										Description: "Addon upgrade strategy to determine whether an addon configuration is overwritten on upgrade.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "None",
+									},
+								},
+							},
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+						},
+						"addon_definition": {
+							Description: "Addon definition associated with the addon.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+								},
+							},
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"name": {
+							Description: "Name of addon to be installed on a Kubernetes cluster.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 			},
 			"kube_config": {
 				Description: "Certificates and keys that are used to access a Kubernetes\ncluster.",
@@ -745,6 +871,46 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Computed:   true,
 				ForceNew:   true,
 			},
+			"policy_bucket": {
+				Description: "An array of relationships to policyAbstractPolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"src_template": {
 				Description: "A reference to a policyAbstractProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -787,10 +953,10 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Computed:   true,
 			},
 			"status": {
-				Description: "Status of the Kubernetes cluster and its nodes.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The cluster delete failed.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
+				Description: "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The cluster delete failed.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "Configuring",
+				Default:     "Undeployed",
 			},
 			"sys_config": {
 				Description: "A reference to a kubernetesSysConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1062,48 +1228,6 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("addons"); ok {
-		x := make([]models.KubernetesAddonPolicyRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsKubernetesAddonPolicyRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAddons(x)
 		}
 	}
 
@@ -1386,6 +1510,191 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("essential_addons"); ok {
+		x := make([]models.KubernetesEssentialAddon, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewKubernetesEssentialAddonWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["addon_configuration"]; ok {
+				{
+					p := make([]models.KubernetesAddonConfiguration, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewKubernetesAddonConfigurationWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.AddonConfiguration")
+						if v, ok := l["install_strategy"]; ok {
+							{
+								x := (v.(string))
+								o.SetInstallStrategy(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["override_sets"]; ok {
+							{
+								x := make([]models.KubernetesKeyValue, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesKeyValueWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.KeyValue")
+									if v, ok := l["key"]; ok {
+										{
+											x := (v.(string))
+											o.SetKey(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["value"]; ok {
+										{
+											x := (v.(string))
+											o.SetValue(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetOverrideSets(x)
+								}
+							}
+						}
+						if v, ok := l["overrides"]; ok {
+							{
+								x := (v.(string))
+								o.SetOverrides(x)
+							}
+						}
+						if v, ok := l["release_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetReleaseName(x)
+							}
+						}
+						if v, ok := l["release_namespace"]; ok {
+							{
+								x := (v.(string))
+								o.SetReleaseNamespace(x)
+							}
+						}
+						if v, ok := l["upgrade_strategy"]; ok {
+							{
+								x := (v.(string))
+								o.SetUpgradeStrategy(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetAddonConfiguration(x)
+					}
+				}
+			}
+			if v, ok := l["addon_definition"]; ok {
+				{
+					p := make([]models.MoMoRef, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewMoMoRefWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetAddonDefinition(x)
+					}
+				}
+			}
+			o.SetClassId("kubernetes.EssentialAddon")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetEssentialAddons(x)
+		}
 	}
 
 	if v, ok := d.GetOk("kube_config"); ok {
@@ -1740,6 +2049,48 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("policy_bucket"); ok {
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPolicyBucket(x)
+		}
+	}
+
 	if v, ok := d.GetOk("src_template"); ok {
 		p := make([]models.PolicyAbstractProfileRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2028,10 +2379,6 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while setting property AdditionalProperties in KubernetesClusterProfile object: %s", err.Error())
 	}
 
-	if err := d.Set("addons", flattenListKubernetesAddonPolicyRelationship(s.GetAddons(), d)); err != nil {
-		return diag.Errorf("error occurred while setting property Addons in KubernetesClusterProfile object: %s", err.Error())
-	}
-
 	if err := d.Set("associated_cluster", flattenMapKubernetesClusterRelationship(s.GetAssociatedCluster(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property AssociatedCluster in KubernetesClusterProfile object: %s", err.Error())
 	}
@@ -2058,6 +2405,10 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in KubernetesClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("essential_addons", flattenListKubernetesEssentialAddon(s.GetEssentialAddons(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property EssentialAddons in KubernetesClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("kube_config", flattenMapKubernetesConfiguration(s.GetKubeConfig(), d)); err != nil {
@@ -2102,6 +2453,10 @@ func resourceKubernetesClusterProfileRead(c context.Context, d *schema.ResourceD
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Organization in KubernetesClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PolicyBucket in KubernetesClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
@@ -2250,49 +2605,6 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if d.HasChange("addons") {
-		v := d.Get("addons")
-		x := make([]models.KubernetesAddonPolicyRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsKubernetesAddonPolicyRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAddons(x)
 		}
 	}
 
@@ -2581,6 +2893,192 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("essential_addons") {
+		v := d.Get("essential_addons")
+		x := make([]models.KubernetesEssentialAddon, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.KubernetesEssentialAddon{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["addon_configuration"]; ok {
+				{
+					p := make([]models.KubernetesAddonConfiguration, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewKubernetesAddonConfigurationWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.AddonConfiguration")
+						if v, ok := l["install_strategy"]; ok {
+							{
+								x := (v.(string))
+								o.SetInstallStrategy(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["override_sets"]; ok {
+							{
+								x := make([]models.KubernetesKeyValue, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesKeyValueWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.KeyValue")
+									if v, ok := l["key"]; ok {
+										{
+											x := (v.(string))
+											o.SetKey(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["value"]; ok {
+										{
+											x := (v.(string))
+											o.SetValue(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetOverrideSets(x)
+								}
+							}
+						}
+						if v, ok := l["overrides"]; ok {
+							{
+								x := (v.(string))
+								o.SetOverrides(x)
+							}
+						}
+						if v, ok := l["release_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetReleaseName(x)
+							}
+						}
+						if v, ok := l["release_namespace"]; ok {
+							{
+								x := (v.(string))
+								o.SetReleaseNamespace(x)
+							}
+						}
+						if v, ok := l["upgrade_strategy"]; ok {
+							{
+								x := (v.(string))
+								o.SetUpgradeStrategy(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetAddonConfiguration(x)
+					}
+				}
+			}
+			if v, ok := l["addon_definition"]; ok {
+				{
+					p := make([]models.MoMoRef, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewMoMoRefWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetAddonDefinition(x)
+					}
+				}
+			}
+			o.SetClassId("kubernetes.EssentialAddon")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetEssentialAddons(x)
+		}
 	}
 
 	if d.HasChange("kube_config") {
@@ -2942,6 +3440,49 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOrganization(x)
+		}
+	}
+
+	if d.HasChange("policy_bucket") {
+		v := d.Get("policy_bucket")
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPolicyBucket(x)
 		}
 	}
 

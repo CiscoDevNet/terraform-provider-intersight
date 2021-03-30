@@ -91,6 +91,11 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"vid": {
+				Description: "VID for the line card in the inventory.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
@@ -237,6 +242,11 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 							},
 						},
 					},
+					"vid": {
+						Description: "VID for the line card in the inventory.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -309,6 +319,10 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
+	if v, ok := d.GetOk("vid"); ok {
+		x := (v.(string))
+		o.SetVid(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -359,6 +373,7 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 				temp["site_name"] = (s.GetSiteName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["vid"] = (s.GetVid())
 				niatelemetryLcResults[j] = temp
 				j += 1
 			}

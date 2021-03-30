@@ -78,10 +78,10 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"default_install_strategy": {
-				Description: "Default installation strategy for the release.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `NoAction` - No install action performed.\n* `Always` - Attempt install if chart is not already installed.",
+				Description: "Default installation strategy for the release.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "InstallOnly",
+				Default:     "None",
 			},
 			"default_namespace": {
 				Description: "Default namespace to install the release.",
@@ -89,10 +89,10 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Optional:    true,
 			},
 			"default_upgrade_strategy": {
-				Description: "Default upgrade strategy for the release.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
+				Description: "Default upgrade strategy for the release.\n* `None` - Unspecified upgrade strategy.\n* `NoAction` - This choice enables No upgrades to be performed.\n* `UpgradeOnly` - Attempt upgrade if chart or overrides options change, no action on upgrade failure.\n* `ReinstallOnFailure` - Attempt upgrade first. Remove and install on upgrade failure.\n* `AlwaysReinstall` - Always remove older release and reinstall.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "UpgradeOnly",
+				Default:     "None",
 			},
 			"description": {
 				Description: "Description of the addon component.",
@@ -196,7 +196,6 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Description: "Version of the addon component.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 		},
 	}

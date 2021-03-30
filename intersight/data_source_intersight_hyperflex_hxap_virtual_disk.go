@@ -20,11 +20,6 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"capacity": {
-				Description: "Disk capacity represented in bytes.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -52,6 +47,11 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"size": {
+				Description: "Disk size represented in bytes.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"source_file_path": {
 				Description: "Source file path associated with virtual machine disk.",
@@ -83,11 +83,6 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capacity": {
-						Description: "Disk capacity represented in bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -194,6 +189,11 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 							},
 						},
 						Computed: true,
+					},
+					"size": {
+						Description: "Disk size represented in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
 					},
 					"source_file_path": {
 						Description: "Source file path associated with virtual machine disk.",
@@ -336,10 +336,6 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetAccessMode(x)
 	}
-	if v, ok := d.GetOk("capacity"); ok {
-		x := int64(v.(int))
-		o.SetCapacity(x)
-	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -359,6 +355,10 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+	if v, ok := d.GetOk("size"); ok {
+		x := int64(v.(int))
+		o.SetSize(x)
 	}
 	if v, ok := d.GetOk("source_file_path"); ok {
 		x := (v.(string))
@@ -404,7 +404,6 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 				var temp = make(map[string]interface{})
 				temp["access_mode"] = (s.GetAccessMode())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
-				temp["capacity"] = (s.GetCapacity())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster"] = flattenMapHyperflexHxapClusterRelationship(s.GetCluster(), d)
@@ -414,6 +413,7 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["size"] = (s.GetSize())
 				temp["source_file_path"] = (s.GetSourceFilePath())
 				temp["source_virtual_disk"] = (s.GetSourceVirtualDisk())
 

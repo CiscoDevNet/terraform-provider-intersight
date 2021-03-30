@@ -35,8 +35,12 @@ The following arguments can be used to get data of already created objects in In
 * `memory`:(int) Memory usage of device being inventoried. This determines the percentage of memory resources used. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `node_id`:(string) The ID of the device being inventoried. 
-* `nxos_evpn_mac_routes`:(int) Returns the total number of evpn mac routes. 
+* `nxos_dci_interface_status`:(string) Returns the status of dci interface configured. 
+* `nxos_nve_interface_status`:(string) Returns the value of the nxosNveInterface field. 
+* `nxos_ospf_neighbors`:(int) Total number of ospf neighbors per switch in DCNM. 
+* `nxos_pim_neighbors`:(string) Total number of pim neighbors per switch in DCNM. 
 * `nxos_telnet`:(string) Returns the value of the nxosTelnet field. 
+* `nxos_total_routes`:(int) Total number of routes configured in the DCNM. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `route_prefix_count`:(int) Total nuumber of v4 and v6 routes per node. 

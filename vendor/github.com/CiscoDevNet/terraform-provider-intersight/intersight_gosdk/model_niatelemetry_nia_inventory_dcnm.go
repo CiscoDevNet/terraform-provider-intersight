@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -26,24 +26,48 @@ type NiatelemetryNiaInventoryDcnm struct {
 	ObjectType string `json:"ObjectType"`
 	// Returns the value of the dev Field.
 	Dev *bool `json:"Dev,omitempty"`
+	// Number of EPLD images uploaded to DCNM.
+	EpldImageCount *int64 `json:"EpldImageCount,omitempty"`
 	// Returns the value of the haEnabled field.
 	HaEnabled *bool `json:"HaEnabled,omitempty"`
 	// Returns the value of the haReplicationStatus field.
 	HaReplicationStatus *string `json:"HaReplicationStatus,omitempty"`
 	// Returns the value of the install field.
 	Install *string `json:"Install,omitempty"`
+	// Returns true if ISN is configured.
+	IsIsnConfigured *bool `json:"IsIsnConfigured,omitempty"`
 	// Returns the value of the isMediaController field.
 	IsMediaController *bool `json:"IsMediaController,omitempty"`
+	// Returns true if the Smart license is enabled and is in use.
+	IsSmartLicenseEnabled *bool `json:"IsSmartLicenseEnabled,omitempty"`
 	// Returns total number of fabrics in DCNM set-up.
 	NumFabrics *int64 `json:"NumFabrics,omitempty"`
 	// Returns the number of fabrics in msd.
 	NumFabricsInMsd *int64 `json:"NumFabricsInMsd,omitempty"`
+	// Returns the number of fabrics that have ingress replication type.
+	NumIngressReplicationFabrics *int64 `json:"NumIngressReplicationFabrics,omitempty"`
 	// Returns the number of local users other than admin user.
 	NumLocalUsers *int64 `json:"NumLocalUsers,omitempty"`
+	// Returns the number of MSD fabrics.
+	NumMsd *int64 `json:"NumMsd,omitempty"`
+	// Returns the number of svi interfaces configured for VRF vlans.
+	NumSviVrfCount *int64 `json:"NumSviVrfCount,omitempty"`
+	// Returns the number of links where TRM is enabled.
+	NumTrmEnabledCount *int64 `json:"NumTrmEnabledCount,omitempty"`
+	// Number of users who have upgrade privileges excluding the admin.
+	NumUpgUsers *int64 `json:"NumUpgUsers,omitempty"`
+	// Number of NXOS images uploaded to DCNM.
+	NxosImageCount *int64 `json:"NxosImageCount,omitempty"`
 	// Serial number of device being inventoried. The serial number is unique per device.
 	Serial *string `json:"Serial,omitempty"`
 	// Name of fabric domain of the controller.
 	SiteName *string `json:"SiteName,omitempty"`
+	// Returns the number of underlay peering active links.
+	UnderlayPeeringActiveLinksCount *int64 `json:"UnderlayPeeringActiveLinksCount,omitempty"`
+	// Number of upgrade jobs configured on DCNM.
+	UpgJobCount *int64 `json:"UpgJobCount,omitempty"`
+	// Upgrade status of jobs created on DCNM.
+	UpgStatus *string `json:"UpgStatus,omitempty"`
 	// Returns the value of the version field.
 	Version              *string                              `json:"Version,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -155,6 +179,38 @@ func (o *NiatelemetryNiaInventoryDcnm) SetDev(v bool) {
 	o.Dev = &v
 }
 
+// GetEpldImageCount returns the EpldImageCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetEpldImageCount() int64 {
+	if o == nil || o.EpldImageCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.EpldImageCount
+}
+
+// GetEpldImageCountOk returns a tuple with the EpldImageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetEpldImageCountOk() (*int64, bool) {
+	if o == nil || o.EpldImageCount == nil {
+		return nil, false
+	}
+	return o.EpldImageCount, true
+}
+
+// HasEpldImageCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasEpldImageCount() bool {
+	if o != nil && o.EpldImageCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEpldImageCount gets a reference to the given int64 and assigns it to the EpldImageCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetEpldImageCount(v int64) {
+	o.EpldImageCount = &v
+}
+
 // GetHaEnabled returns the HaEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryDcnm) GetHaEnabled() bool {
 	if o == nil || o.HaEnabled == nil {
@@ -251,6 +307,38 @@ func (o *NiatelemetryNiaInventoryDcnm) SetInstall(v string) {
 	o.Install = &v
 }
 
+// GetIsIsnConfigured returns the IsIsnConfigured field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetIsIsnConfigured() bool {
+	if o == nil || o.IsIsnConfigured == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsIsnConfigured
+}
+
+// GetIsIsnConfiguredOk returns a tuple with the IsIsnConfigured field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetIsIsnConfiguredOk() (*bool, bool) {
+	if o == nil || o.IsIsnConfigured == nil {
+		return nil, false
+	}
+	return o.IsIsnConfigured, true
+}
+
+// HasIsIsnConfigured returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasIsIsnConfigured() bool {
+	if o != nil && o.IsIsnConfigured != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsIsnConfigured gets a reference to the given bool and assigns it to the IsIsnConfigured field.
+func (o *NiatelemetryNiaInventoryDcnm) SetIsIsnConfigured(v bool) {
+	o.IsIsnConfigured = &v
+}
+
 // GetIsMediaController returns the IsMediaController field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryDcnm) GetIsMediaController() bool {
 	if o == nil || o.IsMediaController == nil {
@@ -281,6 +369,38 @@ func (o *NiatelemetryNiaInventoryDcnm) HasIsMediaController() bool {
 // SetIsMediaController gets a reference to the given bool and assigns it to the IsMediaController field.
 func (o *NiatelemetryNiaInventoryDcnm) SetIsMediaController(v bool) {
 	o.IsMediaController = &v
+}
+
+// GetIsSmartLicenseEnabled returns the IsSmartLicenseEnabled field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetIsSmartLicenseEnabled() bool {
+	if o == nil || o.IsSmartLicenseEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSmartLicenseEnabled
+}
+
+// GetIsSmartLicenseEnabledOk returns a tuple with the IsSmartLicenseEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetIsSmartLicenseEnabledOk() (*bool, bool) {
+	if o == nil || o.IsSmartLicenseEnabled == nil {
+		return nil, false
+	}
+	return o.IsSmartLicenseEnabled, true
+}
+
+// HasIsSmartLicenseEnabled returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasIsSmartLicenseEnabled() bool {
+	if o != nil && o.IsSmartLicenseEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSmartLicenseEnabled gets a reference to the given bool and assigns it to the IsSmartLicenseEnabled field.
+func (o *NiatelemetryNiaInventoryDcnm) SetIsSmartLicenseEnabled(v bool) {
+	o.IsSmartLicenseEnabled = &v
 }
 
 // GetNumFabrics returns the NumFabrics field value if set, zero value otherwise.
@@ -347,6 +467,38 @@ func (o *NiatelemetryNiaInventoryDcnm) SetNumFabricsInMsd(v int64) {
 	o.NumFabricsInMsd = &v
 }
 
+// GetNumIngressReplicationFabrics returns the NumIngressReplicationFabrics field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumIngressReplicationFabrics() int64 {
+	if o == nil || o.NumIngressReplicationFabrics == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumIngressReplicationFabrics
+}
+
+// GetNumIngressReplicationFabricsOk returns a tuple with the NumIngressReplicationFabrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumIngressReplicationFabricsOk() (*int64, bool) {
+	if o == nil || o.NumIngressReplicationFabrics == nil {
+		return nil, false
+	}
+	return o.NumIngressReplicationFabrics, true
+}
+
+// HasNumIngressReplicationFabrics returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumIngressReplicationFabrics() bool {
+	if o != nil && o.NumIngressReplicationFabrics != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumIngressReplicationFabrics gets a reference to the given int64 and assigns it to the NumIngressReplicationFabrics field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumIngressReplicationFabrics(v int64) {
+	o.NumIngressReplicationFabrics = &v
+}
+
 // GetNumLocalUsers returns the NumLocalUsers field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryDcnm) GetNumLocalUsers() int64 {
 	if o == nil || o.NumLocalUsers == nil {
@@ -377,6 +529,166 @@ func (o *NiatelemetryNiaInventoryDcnm) HasNumLocalUsers() bool {
 // SetNumLocalUsers gets a reference to the given int64 and assigns it to the NumLocalUsers field.
 func (o *NiatelemetryNiaInventoryDcnm) SetNumLocalUsers(v int64) {
 	o.NumLocalUsers = &v
+}
+
+// GetNumMsd returns the NumMsd field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumMsd() int64 {
+	if o == nil || o.NumMsd == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumMsd
+}
+
+// GetNumMsdOk returns a tuple with the NumMsd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumMsdOk() (*int64, bool) {
+	if o == nil || o.NumMsd == nil {
+		return nil, false
+	}
+	return o.NumMsd, true
+}
+
+// HasNumMsd returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumMsd() bool {
+	if o != nil && o.NumMsd != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumMsd gets a reference to the given int64 and assigns it to the NumMsd field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumMsd(v int64) {
+	o.NumMsd = &v
+}
+
+// GetNumSviVrfCount returns the NumSviVrfCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumSviVrfCount() int64 {
+	if o == nil || o.NumSviVrfCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumSviVrfCount
+}
+
+// GetNumSviVrfCountOk returns a tuple with the NumSviVrfCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumSviVrfCountOk() (*int64, bool) {
+	if o == nil || o.NumSviVrfCount == nil {
+		return nil, false
+	}
+	return o.NumSviVrfCount, true
+}
+
+// HasNumSviVrfCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumSviVrfCount() bool {
+	if o != nil && o.NumSviVrfCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumSviVrfCount gets a reference to the given int64 and assigns it to the NumSviVrfCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumSviVrfCount(v int64) {
+	o.NumSviVrfCount = &v
+}
+
+// GetNumTrmEnabledCount returns the NumTrmEnabledCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumTrmEnabledCount() int64 {
+	if o == nil || o.NumTrmEnabledCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumTrmEnabledCount
+}
+
+// GetNumTrmEnabledCountOk returns a tuple with the NumTrmEnabledCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumTrmEnabledCountOk() (*int64, bool) {
+	if o == nil || o.NumTrmEnabledCount == nil {
+		return nil, false
+	}
+	return o.NumTrmEnabledCount, true
+}
+
+// HasNumTrmEnabledCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumTrmEnabledCount() bool {
+	if o != nil && o.NumTrmEnabledCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumTrmEnabledCount gets a reference to the given int64 and assigns it to the NumTrmEnabledCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumTrmEnabledCount(v int64) {
+	o.NumTrmEnabledCount = &v
+}
+
+// GetNumUpgUsers returns the NumUpgUsers field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumUpgUsers() int64 {
+	if o == nil || o.NumUpgUsers == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumUpgUsers
+}
+
+// GetNumUpgUsersOk returns a tuple with the NumUpgUsers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNumUpgUsersOk() (*int64, bool) {
+	if o == nil || o.NumUpgUsers == nil {
+		return nil, false
+	}
+	return o.NumUpgUsers, true
+}
+
+// HasNumUpgUsers returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNumUpgUsers() bool {
+	if o != nil && o.NumUpgUsers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumUpgUsers gets a reference to the given int64 and assigns it to the NumUpgUsers field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNumUpgUsers(v int64) {
+	o.NumUpgUsers = &v
+}
+
+// GetNxosImageCount returns the NxosImageCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetNxosImageCount() int64 {
+	if o == nil || o.NxosImageCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosImageCount
+}
+
+// GetNxosImageCountOk returns a tuple with the NxosImageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetNxosImageCountOk() (*int64, bool) {
+	if o == nil || o.NxosImageCount == nil {
+		return nil, false
+	}
+	return o.NxosImageCount, true
+}
+
+// HasNxosImageCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasNxosImageCount() bool {
+	if o != nil && o.NxosImageCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosImageCount gets a reference to the given int64 and assigns it to the NxosImageCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetNxosImageCount(v int64) {
+	o.NxosImageCount = &v
 }
 
 // GetSerial returns the Serial field value if set, zero value otherwise.
@@ -441,6 +753,102 @@ func (o *NiatelemetryNiaInventoryDcnm) HasSiteName() bool {
 // SetSiteName gets a reference to the given string and assigns it to the SiteName field.
 func (o *NiatelemetryNiaInventoryDcnm) SetSiteName(v string) {
 	o.SiteName = &v
+}
+
+// GetUnderlayPeeringActiveLinksCount returns the UnderlayPeeringActiveLinksCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetUnderlayPeeringActiveLinksCount() int64 {
+	if o == nil || o.UnderlayPeeringActiveLinksCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.UnderlayPeeringActiveLinksCount
+}
+
+// GetUnderlayPeeringActiveLinksCountOk returns a tuple with the UnderlayPeeringActiveLinksCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetUnderlayPeeringActiveLinksCountOk() (*int64, bool) {
+	if o == nil || o.UnderlayPeeringActiveLinksCount == nil {
+		return nil, false
+	}
+	return o.UnderlayPeeringActiveLinksCount, true
+}
+
+// HasUnderlayPeeringActiveLinksCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasUnderlayPeeringActiveLinksCount() bool {
+	if o != nil && o.UnderlayPeeringActiveLinksCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUnderlayPeeringActiveLinksCount gets a reference to the given int64 and assigns it to the UnderlayPeeringActiveLinksCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetUnderlayPeeringActiveLinksCount(v int64) {
+	o.UnderlayPeeringActiveLinksCount = &v
+}
+
+// GetUpgJobCount returns the UpgJobCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetUpgJobCount() int64 {
+	if o == nil || o.UpgJobCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.UpgJobCount
+}
+
+// GetUpgJobCountOk returns a tuple with the UpgJobCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetUpgJobCountOk() (*int64, bool) {
+	if o == nil || o.UpgJobCount == nil {
+		return nil, false
+	}
+	return o.UpgJobCount, true
+}
+
+// HasUpgJobCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasUpgJobCount() bool {
+	if o != nil && o.UpgJobCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgJobCount gets a reference to the given int64 and assigns it to the UpgJobCount field.
+func (o *NiatelemetryNiaInventoryDcnm) SetUpgJobCount(v int64) {
+	o.UpgJobCount = &v
+}
+
+// GetUpgStatus returns the UpgStatus field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatus() string {
+	if o == nil || o.UpgStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpgStatus
+}
+
+// GetUpgStatusOk returns a tuple with the UpgStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatusOk() (*string, bool) {
+	if o == nil || o.UpgStatus == nil {
+		return nil, false
+	}
+	return o.UpgStatus, true
+}
+
+// HasUpgStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnm) HasUpgStatus() bool {
+	if o != nil && o.UpgStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgStatus gets a reference to the given string and assigns it to the UpgStatus field.
+func (o *NiatelemetryNiaInventoryDcnm) SetUpgStatus(v string) {
+	o.UpgStatus = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
@@ -526,6 +934,9 @@ func (o NiatelemetryNiaInventoryDcnm) MarshalJSON() ([]byte, error) {
 	if o.Dev != nil {
 		toSerialize["Dev"] = o.Dev
 	}
+	if o.EpldImageCount != nil {
+		toSerialize["EpldImageCount"] = o.EpldImageCount
+	}
 	if o.HaEnabled != nil {
 		toSerialize["HaEnabled"] = o.HaEnabled
 	}
@@ -535,8 +946,14 @@ func (o NiatelemetryNiaInventoryDcnm) MarshalJSON() ([]byte, error) {
 	if o.Install != nil {
 		toSerialize["Install"] = o.Install
 	}
+	if o.IsIsnConfigured != nil {
+		toSerialize["IsIsnConfigured"] = o.IsIsnConfigured
+	}
 	if o.IsMediaController != nil {
 		toSerialize["IsMediaController"] = o.IsMediaController
+	}
+	if o.IsSmartLicenseEnabled != nil {
+		toSerialize["IsSmartLicenseEnabled"] = o.IsSmartLicenseEnabled
 	}
 	if o.NumFabrics != nil {
 		toSerialize["NumFabrics"] = o.NumFabrics
@@ -544,14 +961,41 @@ func (o NiatelemetryNiaInventoryDcnm) MarshalJSON() ([]byte, error) {
 	if o.NumFabricsInMsd != nil {
 		toSerialize["NumFabricsInMsd"] = o.NumFabricsInMsd
 	}
+	if o.NumIngressReplicationFabrics != nil {
+		toSerialize["NumIngressReplicationFabrics"] = o.NumIngressReplicationFabrics
+	}
 	if o.NumLocalUsers != nil {
 		toSerialize["NumLocalUsers"] = o.NumLocalUsers
+	}
+	if o.NumMsd != nil {
+		toSerialize["NumMsd"] = o.NumMsd
+	}
+	if o.NumSviVrfCount != nil {
+		toSerialize["NumSviVrfCount"] = o.NumSviVrfCount
+	}
+	if o.NumTrmEnabledCount != nil {
+		toSerialize["NumTrmEnabledCount"] = o.NumTrmEnabledCount
+	}
+	if o.NumUpgUsers != nil {
+		toSerialize["NumUpgUsers"] = o.NumUpgUsers
+	}
+	if o.NxosImageCount != nil {
+		toSerialize["NxosImageCount"] = o.NxosImageCount
 	}
 	if o.Serial != nil {
 		toSerialize["Serial"] = o.Serial
 	}
 	if o.SiteName != nil {
 		toSerialize["SiteName"] = o.SiteName
+	}
+	if o.UnderlayPeeringActiveLinksCount != nil {
+		toSerialize["UnderlayPeeringActiveLinksCount"] = o.UnderlayPeeringActiveLinksCount
+	}
+	if o.UpgJobCount != nil {
+		toSerialize["UpgJobCount"] = o.UpgJobCount
+	}
+	if o.UpgStatus != nil {
+		toSerialize["UpgStatus"] = o.UpgStatus
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
@@ -575,24 +1019,48 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Returns the value of the dev Field.
 		Dev *bool `json:"Dev,omitempty"`
+		// Number of EPLD images uploaded to DCNM.
+		EpldImageCount *int64 `json:"EpldImageCount,omitempty"`
 		// Returns the value of the haEnabled field.
 		HaEnabled *bool `json:"HaEnabled,omitempty"`
 		// Returns the value of the haReplicationStatus field.
 		HaReplicationStatus *string `json:"HaReplicationStatus,omitempty"`
 		// Returns the value of the install field.
 		Install *string `json:"Install,omitempty"`
+		// Returns true if ISN is configured.
+		IsIsnConfigured *bool `json:"IsIsnConfigured,omitempty"`
 		// Returns the value of the isMediaController field.
 		IsMediaController *bool `json:"IsMediaController,omitempty"`
+		// Returns true if the Smart license is enabled and is in use.
+		IsSmartLicenseEnabled *bool `json:"IsSmartLicenseEnabled,omitempty"`
 		// Returns total number of fabrics in DCNM set-up.
 		NumFabrics *int64 `json:"NumFabrics,omitempty"`
 		// Returns the number of fabrics in msd.
 		NumFabricsInMsd *int64 `json:"NumFabricsInMsd,omitempty"`
+		// Returns the number of fabrics that have ingress replication type.
+		NumIngressReplicationFabrics *int64 `json:"NumIngressReplicationFabrics,omitempty"`
 		// Returns the number of local users other than admin user.
 		NumLocalUsers *int64 `json:"NumLocalUsers,omitempty"`
+		// Returns the number of MSD fabrics.
+		NumMsd *int64 `json:"NumMsd,omitempty"`
+		// Returns the number of svi interfaces configured for VRF vlans.
+		NumSviVrfCount *int64 `json:"NumSviVrfCount,omitempty"`
+		// Returns the number of links where TRM is enabled.
+		NumTrmEnabledCount *int64 `json:"NumTrmEnabledCount,omitempty"`
+		// Number of users who have upgrade privileges excluding the admin.
+		NumUpgUsers *int64 `json:"NumUpgUsers,omitempty"`
+		// Number of NXOS images uploaded to DCNM.
+		NxosImageCount *int64 `json:"NxosImageCount,omitempty"`
 		// Serial number of device being inventoried. The serial number is unique per device.
 		Serial *string `json:"Serial,omitempty"`
 		// Name of fabric domain of the controller.
 		SiteName *string `json:"SiteName,omitempty"`
+		// Returns the number of underlay peering active links.
+		UnderlayPeeringActiveLinksCount *int64 `json:"UnderlayPeeringActiveLinksCount,omitempty"`
+		// Number of upgrade jobs configured on DCNM.
+		UpgJobCount *int64 `json:"UpgJobCount,omitempty"`
+		// Upgrade status of jobs created on DCNM.
+		UpgStatus *string `json:"UpgStatus,omitempty"`
 		// Returns the value of the version field.
 		Version          *string                              `json:"Version,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -606,15 +1074,27 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventoryDcnm.ClassId = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.ClassId
 		varNiatelemetryNiaInventoryDcnm.ObjectType = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.ObjectType
 		varNiatelemetryNiaInventoryDcnm.Dev = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.Dev
+		varNiatelemetryNiaInventoryDcnm.EpldImageCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.EpldImageCount
 		varNiatelemetryNiaInventoryDcnm.HaEnabled = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.HaEnabled
 		varNiatelemetryNiaInventoryDcnm.HaReplicationStatus = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.HaReplicationStatus
 		varNiatelemetryNiaInventoryDcnm.Install = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.Install
+		varNiatelemetryNiaInventoryDcnm.IsIsnConfigured = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.IsIsnConfigured
 		varNiatelemetryNiaInventoryDcnm.IsMediaController = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.IsMediaController
+		varNiatelemetryNiaInventoryDcnm.IsSmartLicenseEnabled = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.IsSmartLicenseEnabled
 		varNiatelemetryNiaInventoryDcnm.NumFabrics = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumFabrics
 		varNiatelemetryNiaInventoryDcnm.NumFabricsInMsd = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumFabricsInMsd
+		varNiatelemetryNiaInventoryDcnm.NumIngressReplicationFabrics = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumIngressReplicationFabrics
 		varNiatelemetryNiaInventoryDcnm.NumLocalUsers = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumLocalUsers
+		varNiatelemetryNiaInventoryDcnm.NumMsd = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumMsd
+		varNiatelemetryNiaInventoryDcnm.NumSviVrfCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumSviVrfCount
+		varNiatelemetryNiaInventoryDcnm.NumTrmEnabledCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumTrmEnabledCount
+		varNiatelemetryNiaInventoryDcnm.NumUpgUsers = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NumUpgUsers
+		varNiatelemetryNiaInventoryDcnm.NxosImageCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.NxosImageCount
 		varNiatelemetryNiaInventoryDcnm.Serial = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.Serial
 		varNiatelemetryNiaInventoryDcnm.SiteName = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.SiteName
+		varNiatelemetryNiaInventoryDcnm.UnderlayPeeringActiveLinksCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.UnderlayPeeringActiveLinksCount
+		varNiatelemetryNiaInventoryDcnm.UpgJobCount = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.UpgJobCount
+		varNiatelemetryNiaInventoryDcnm.UpgStatus = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.UpgStatus
 		varNiatelemetryNiaInventoryDcnm.Version = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.Version
 		varNiatelemetryNiaInventoryDcnm.RegisteredDevice = varNiatelemetryNiaInventoryDcnmWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetryNiaInventoryDcnm(varNiatelemetryNiaInventoryDcnm)
@@ -637,15 +1117,27 @@ func (o *NiatelemetryNiaInventoryDcnm) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Dev")
+		delete(additionalProperties, "EpldImageCount")
 		delete(additionalProperties, "HaEnabled")
 		delete(additionalProperties, "HaReplicationStatus")
 		delete(additionalProperties, "Install")
+		delete(additionalProperties, "IsIsnConfigured")
 		delete(additionalProperties, "IsMediaController")
+		delete(additionalProperties, "IsSmartLicenseEnabled")
 		delete(additionalProperties, "NumFabrics")
 		delete(additionalProperties, "NumFabricsInMsd")
+		delete(additionalProperties, "NumIngressReplicationFabrics")
 		delete(additionalProperties, "NumLocalUsers")
+		delete(additionalProperties, "NumMsd")
+		delete(additionalProperties, "NumSviVrfCount")
+		delete(additionalProperties, "NumTrmEnabledCount")
+		delete(additionalProperties, "NumUpgUsers")
+		delete(additionalProperties, "NxosImageCount")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SiteName")
+		delete(additionalProperties, "UnderlayPeeringActiveLinksCount")
+		delete(additionalProperties, "UpgJobCount")
+		delete(additionalProperties, "UpgStatus")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "RegisteredDevice")
 

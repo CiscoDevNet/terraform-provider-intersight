@@ -6,15 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.NodeGroupProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.NodeGroupProfile"]
-**Currentsize** | Pointer to **int64** | Current number of nodes in this node group at any given point in time. | [optional] 
+**Currentsize** | Pointer to **int64** | Current number of nodes in this node group at any given point in time. | [optional] [readonly] 
 **Desiredsize** | Pointer to **int64** | Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler. | [optional] [default to 3]
 **Labels** | Pointer to [**[]KubernetesNodeGroupLabel**](KubernetesNodeGroupLabel.md) |  | [optional] 
 **Maxsize** | Pointer to **int64** | Maximum number of nodes desired in this node group. | [optional] 
 **Minsize** | Pointer to **int64** | Minimum number of nodes desired in this node group. | [optional] 
-**NodeType** | Pointer to **string** | The node type Master, Worker or EmbeddedMaster. * &#x60;Worker&#x60; - Node will be marked as a worker node. * &#x60;Master&#x60; - Node will be marked as a master node. * &#x60;EmbeddedMaster&#x60; - Node will be both a master and a worker. | [optional] [default to "Worker"]
+**NodeType** | Pointer to **string** | The node type ControlPlane, Worker or ControlPlaneWorker. * &#x60;Worker&#x60; - Node will be marked as a worker node. * &#x60;ControlPlane&#x60; - Node will be marked as a control plane node. * &#x60;ControlPlaneWorker&#x60; - Node will be both a controle plane and a worker. | [optional] [default to "Worker"]
 **Taints** | Pointer to [**[]KubernetesNodeGroupTaint**](KubernetesNodeGroupTaint.md) |  | [optional] 
 **ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](kubernetes.ClusterProfile.Relationship.md) |  | [optional] 
-**InfraProvider** | Pointer to [**KubernetesInfrastructureProviderRelationship**](kubernetes.InfrastructureProvider.Relationship.md) |  | [optional] 
+**InfraProvider** | Pointer to [**KubernetesBaseInfrastructureProviderRelationship**](kubernetes.BaseInfrastructureProvider.Relationship.md) |  | [optional] 
 **IpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
 **KubernetesVersion** | Pointer to [**KubernetesVersionPolicyRelationship**](kubernetes.VersionPolicy.Relationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]KubernetesNodeProfileRelationship**](KubernetesNodeProfileRelationship.md) | An array of relationships to kubernetesNodeProfile resources. | [optional] 
@@ -300,20 +300,20 @@ HasClusterProfile returns a boolean if a field has been set.
 
 ### GetInfraProvider
 
-`func (o *KubernetesNodeGroupProfileAllOf) GetInfraProvider() KubernetesInfrastructureProviderRelationship`
+`func (o *KubernetesNodeGroupProfileAllOf) GetInfraProvider() KubernetesBaseInfrastructureProviderRelationship`
 
 GetInfraProvider returns the InfraProvider field if non-nil, zero value otherwise.
 
 ### GetInfraProviderOk
 
-`func (o *KubernetesNodeGroupProfileAllOf) GetInfraProviderOk() (*KubernetesInfrastructureProviderRelationship, bool)`
+`func (o *KubernetesNodeGroupProfileAllOf) GetInfraProviderOk() (*KubernetesBaseInfrastructureProviderRelationship, bool)`
 
 GetInfraProviderOk returns a tuple with the InfraProvider field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInfraProvider
 
-`func (o *KubernetesNodeGroupProfileAllOf) SetInfraProvider(v KubernetesInfrastructureProviderRelationship)`
+`func (o *KubernetesNodeGroupProfileAllOf) SetInfraProvider(v KubernetesBaseInfrastructureProviderRelationship)`
 
 SetInfraProvider sets InfraProvider field to given value.
 

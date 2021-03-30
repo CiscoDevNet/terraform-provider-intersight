@@ -25,7 +25,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"assigned_server": {
-				Description: "A reference to a computeRackUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Description: "A reference to a computePhysical resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -250,7 +250,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("assigned_server"); ok {
-		p := make([]models.ComputeRackUnitRelationship, 0, 1)
+		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -284,7 +284,7 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsComputeRackUnitRelationship(o))
+			p = append(p, models.MoMoRefAsComputePhysicalRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -494,7 +494,7 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexNodeProfile object: %s", err.Error())
 	}
 
-	if err := d.Set("assigned_server", flattenMapComputeRackUnitRelationship(s.GetAssignedServer(), d)); err != nil {
+	if err := d.Set("assigned_server", flattenMapComputePhysicalRelationship(s.GetAssignedServer(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property AssignedServer in HyperflexNodeProfile object: %s", err.Error())
 	}
 
@@ -577,7 +577,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("assigned_server") {
 		v := d.Get("assigned_server")
-		p := make([]models.ComputeRackUnitRelationship, 0, 1)
+		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -611,7 +611,7 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsComputeRackUnitRelationship(o))
+			p = append(p, models.MoMoRefAsComputePhysicalRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]

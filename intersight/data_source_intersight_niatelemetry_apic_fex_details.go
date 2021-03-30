@@ -71,6 +71,11 @@ func dataSourceNiatelemetryApicFexDetails() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"vid": {
+				Description: "VID for the FEX in the inventory.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
@@ -197,6 +202,11 @@ func dataSourceNiatelemetryApicFexDetails() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"vid": {
+						Description: "VID for the FEX in the inventory.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -253,6 +263,10 @@ func dataSourceNiatelemetryApicFexDetailsRead(c context.Context, d *schema.Resou
 		x := (v.(string))
 		o.SetVendorName(x)
 	}
+	if v, ok := d.GetOk("vid"); ok {
+		x := (v.(string))
+		o.SetVid(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -299,6 +313,7 @@ func dataSourceNiatelemetryApicFexDetailsRead(c context.Context, d *schema.Resou
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor_name"] = (s.GetVendorName())
+				temp["vid"] = (s.GetVid())
 				niatelemetryApicFexDetailsResults[j] = temp
 				j += 1
 			}

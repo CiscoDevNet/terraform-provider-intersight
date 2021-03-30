@@ -13,6 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_kubernetes_virtual_machine_node_profile.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
 * `cloud_provider`:(string) Cloud provider for this node profile.* `noProvider` - Enables the use of no cloud provider.* `external` - Out of tree cloud provider, e.g. CPI for vsphere. 
 * `description`:(string) Description of the profile. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

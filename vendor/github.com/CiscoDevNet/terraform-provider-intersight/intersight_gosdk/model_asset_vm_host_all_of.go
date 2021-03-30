@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -23,6 +23,12 @@ type AssetVmHostAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Reference to virtualization target account ID.
 	AccountMoid *string `json:"AccountMoid,omitempty"`
+	// Reference to virtualization cluster identity.
+	ClusterIdentity *string `json:"ClusterIdentity,omitempty"`
+	// Reference to virtualization cluster ID.
+	ClusterMoid *string `json:"ClusterMoid,omitempty"`
+	// Reference to virtualization cluster name.
+	ClusterName *string `json:"ClusterName,omitempty"`
 	// The connection status of the host. 1 represents being connected and 0 represents being disconnected.
 	Connected *int64 `json:"Connected,omitempty"`
 	// Reference to virtualization target device ID.
@@ -135,6 +141,102 @@ func (o *AssetVmHostAllOf) SetAccountMoid(v string) {
 	o.AccountMoid = &v
 }
 
+// GetClusterIdentity returns the ClusterIdentity field value if set, zero value otherwise.
+func (o *AssetVmHostAllOf) GetClusterIdentity() string {
+	if o == nil || o.ClusterIdentity == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterIdentity
+}
+
+// GetClusterIdentityOk returns a tuple with the ClusterIdentity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetVmHostAllOf) GetClusterIdentityOk() (*string, bool) {
+	if o == nil || o.ClusterIdentity == nil {
+		return nil, false
+	}
+	return o.ClusterIdentity, true
+}
+
+// HasClusterIdentity returns a boolean if a field has been set.
+func (o *AssetVmHostAllOf) HasClusterIdentity() bool {
+	if o != nil && o.ClusterIdentity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterIdentity gets a reference to the given string and assigns it to the ClusterIdentity field.
+func (o *AssetVmHostAllOf) SetClusterIdentity(v string) {
+	o.ClusterIdentity = &v
+}
+
+// GetClusterMoid returns the ClusterMoid field value if set, zero value otherwise.
+func (o *AssetVmHostAllOf) GetClusterMoid() string {
+	if o == nil || o.ClusterMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterMoid
+}
+
+// GetClusterMoidOk returns a tuple with the ClusterMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetVmHostAllOf) GetClusterMoidOk() (*string, bool) {
+	if o == nil || o.ClusterMoid == nil {
+		return nil, false
+	}
+	return o.ClusterMoid, true
+}
+
+// HasClusterMoid returns a boolean if a field has been set.
+func (o *AssetVmHostAllOf) HasClusterMoid() bool {
+	if o != nil && o.ClusterMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterMoid gets a reference to the given string and assigns it to the ClusterMoid field.
+func (o *AssetVmHostAllOf) SetClusterMoid(v string) {
+	o.ClusterMoid = &v
+}
+
+// GetClusterName returns the ClusterName field value if set, zero value otherwise.
+func (o *AssetVmHostAllOf) GetClusterName() string {
+	if o == nil || o.ClusterName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterName
+}
+
+// GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetVmHostAllOf) GetClusterNameOk() (*string, bool) {
+	if o == nil || o.ClusterName == nil {
+		return nil, false
+	}
+	return o.ClusterName, true
+}
+
+// HasClusterName returns a boolean if a field has been set.
+func (o *AssetVmHostAllOf) HasClusterName() bool {
+	if o != nil && o.ClusterName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterName gets a reference to the given string and assigns it to the ClusterName field.
+func (o *AssetVmHostAllOf) SetClusterName(v string) {
+	o.ClusterName = &v
+}
+
 // GetConnected returns the Connected field value if set, zero value otherwise.
 func (o *AssetVmHostAllOf) GetConnected() int64 {
 	if o == nil || o.Connected == nil {
@@ -210,6 +312,15 @@ func (o AssetVmHostAllOf) MarshalJSON() ([]byte, error) {
 	if o.AccountMoid != nil {
 		toSerialize["AccountMoid"] = o.AccountMoid
 	}
+	if o.ClusterIdentity != nil {
+		toSerialize["ClusterIdentity"] = o.ClusterIdentity
+	}
+	if o.ClusterMoid != nil {
+		toSerialize["ClusterMoid"] = o.ClusterMoid
+	}
+	if o.ClusterName != nil {
+		toSerialize["ClusterName"] = o.ClusterName
+	}
 	if o.Connected != nil {
 		toSerialize["Connected"] = o.Connected
 	}
@@ -237,6 +348,9 @@ func (o *AssetVmHostAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountMoid")
+		delete(additionalProperties, "ClusterIdentity")
+		delete(additionalProperties, "ClusterMoid")
+		delete(additionalProperties, "ClusterName")
 		delete(additionalProperties, "Connected")
 		delete(additionalProperties, "RegisteredDeviceMoid")
 		o.AdditionalProperties = additionalProperties

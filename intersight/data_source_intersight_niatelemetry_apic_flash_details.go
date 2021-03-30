@@ -47,7 +47,7 @@ func dataSourceNiatelemetryApicFlashDetails() *schema.Resource {
 				Optional:    true,
 			},
 			"revision": {
-				Description: "Vendor name of the flash in APIC.",
+				Description: "Revision of the flash Mo in APIC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -140,7 +140,7 @@ func dataSourceNiatelemetryApicFlashDetails() *schema.Resource {
 						},
 					},
 					"revision": {
-						Description: "Vendor name of the flash in APIC.",
+						Description: "Revision of the flash Mo in APIC.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

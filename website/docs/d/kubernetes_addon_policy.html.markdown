@@ -16,5 +16,4 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Description of the policy. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `system_managed`:(bool) To determine if Addon Policy is automatically managed by the system. 
  

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **KubeConfig** | Pointer to **string** | Kubeconfig for the cluster to collect inventory for. | [optional] 
 **Name** | Pointer to **string** | Name of the Kubernetes cluster. | [optional] 
 **Var0ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](kubernetes.ClusterProfile.Relationship.md) |  | [optional] 
+**ClusterAddonProfile** | Pointer to [**KubernetesClusterAddonProfileRelationship**](kubernetes.ClusterAddonProfile.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **RegisteredDevices** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] 
 
@@ -171,6 +172,31 @@ SetVar0ClusterProfile sets Var0ClusterProfile field to given value.
 `func (o *KubernetesCluster) HasVar0ClusterProfile() bool`
 
 HasVar0ClusterProfile returns a boolean if a field has been set.
+
+### GetClusterAddonProfile
+
+`func (o *KubernetesCluster) GetClusterAddonProfile() KubernetesClusterAddonProfileRelationship`
+
+GetClusterAddonProfile returns the ClusterAddonProfile field if non-nil, zero value otherwise.
+
+### GetClusterAddonProfileOk
+
+`func (o *KubernetesCluster) GetClusterAddonProfileOk() (*KubernetesClusterAddonProfileRelationship, bool)`
+
+GetClusterAddonProfileOk returns a tuple with the ClusterAddonProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterAddonProfile
+
+`func (o *KubernetesCluster) SetClusterAddonProfile(v KubernetesClusterAddonProfileRelationship)`
+
+SetClusterAddonProfile sets ClusterAddonProfile field to given value.
+
+### HasClusterAddonProfile
+
+`func (o *KubernetesCluster) HasClusterAddonProfile() bool`
+
+HasClusterAddonProfile returns a boolean if a field has been set.
 
 ### GetOrganization
 

@@ -22,4 +22,5 @@ The following arguments can be used to get data of already created objects in In
 * `serial_number`:(string) Serial number of the fan in APIC. 
 * `site_name`:(string) Name of the APIC site from which this data is being collected. 
 * `vendor_name`:(string) Vendor name of the fan in APIC. 
+* `vid`:(string) VID for the fan in the inventory. 
  

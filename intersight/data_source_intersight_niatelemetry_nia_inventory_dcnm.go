@@ -24,6 +24,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"epld_image_count": {
+				Description: "Number of EPLD images uploaded to DCNM.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"ha_enabled": {
 				Description: "Returns the value of the haEnabled field.",
 				Type:        schema.TypeBool,
@@ -39,8 +44,18 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"is_isn_configured": {
+				Description: "Returns true if ISN is configured.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"is_media_controller": {
 				Description: "Returns the value of the isMediaController field.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_smart_license_enabled": {
+				Description: "Returns true if the Smart license is enabled and is in use.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -60,8 +75,38 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"num_ingress_replication_fabrics": {
+				Description: "Returns the number of fabrics that have ingress replication type.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"num_local_users": {
 				Description: "Returns the number of local users other than admin user.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"num_msd": {
+				Description: "Returns the number of MSD fabrics.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"num_svi_vrf_count": {
+				Description: "Returns the number of svi interfaces configured for VRF vlans.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"num_trm_enabled_count": {
+				Description: "Returns the number of links where TRM is enabled.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"num_upg_users": {
+				Description: "Number of users who have upgrade privileges excluding the admin.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"nxos_image_count": {
+				Description: "Number of NXOS images uploaded to DCNM.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -78,6 +123,21 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			},
 			"site_name": {
 				Description: "Name of fabric domain of the controller.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"underlay_peering_active_links_count": {
+				Description: "Returns the number of underlay peering active links.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"upg_job_count": {
+				Description: "Number of upgrade jobs configured on DCNM.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"upg_status": {
+				Description: "Upgrade status of jobs created on DCNM.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -103,6 +163,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"epld_image_count": {
+						Description: "Number of EPLD images uploaded to DCNM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"ha_enabled": {
 						Description: "Returns the value of the haEnabled field.",
 						Type:        schema.TypeBool,
@@ -118,8 +183,18 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"is_isn_configured": {
+						Description: "Returns true if ISN is configured.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"is_media_controller": {
 						Description: "Returns the value of the isMediaController field.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_smart_license_enabled": {
+						Description: "Returns true if the Smart license is enabled and is in use.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -139,8 +214,38 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"num_ingress_replication_fabrics": {
+						Description: "Returns the number of fabrics that have ingress replication type.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"num_local_users": {
 						Description: "Returns the number of local users other than admin user.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"num_msd": {
+						Description: "Returns the number of MSD fabrics.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"num_svi_vrf_count": {
+						Description: "Returns the number of svi interfaces configured for VRF vlans.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"num_trm_enabled_count": {
+						Description: "Returns the number of links where TRM is enabled.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"num_upg_users": {
+						Description: "Number of users who have upgrade privileges excluding the admin.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"nxos_image_count": {
+						Description: "Number of NXOS images uploaded to DCNM.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -222,6 +327,21 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 							},
 						},
 					},
+					"underlay_peering_active_links_count": {
+						Description: "Returns the number of underlay peering active links.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"upg_job_count": {
+						Description: "Number of upgrade jobs configured on DCNM.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"upg_status": {
+						Description: "Upgrade status of jobs created on DCNM.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"nr_version": {
 						Description: "Returns the value of the version field.",
 						Type:        schema.TypeString,
@@ -247,6 +367,10 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		x := (v.(bool))
 		o.SetDev(x)
 	}
+	if v, ok := d.GetOk("epld_image_count"); ok {
+		x := int64(v.(int))
+		o.SetEpldImageCount(x)
+	}
 	if v, ok := d.GetOk("ha_enabled"); ok {
 		x := (v.(bool))
 		o.SetHaEnabled(x)
@@ -259,9 +383,17 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		x := (v.(string))
 		o.SetInstall(x)
 	}
+	if v, ok := d.GetOk("is_isn_configured"); ok {
+		x := (v.(bool))
+		o.SetIsIsnConfigured(x)
+	}
 	if v, ok := d.GetOk("is_media_controller"); ok {
 		x := (v.(bool))
 		o.SetIsMediaController(x)
+	}
+	if v, ok := d.GetOk("is_smart_license_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsSmartLicenseEnabled(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -275,9 +407,33 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		x := int64(v.(int))
 		o.SetNumFabricsInMsd(x)
 	}
+	if v, ok := d.GetOk("num_ingress_replication_fabrics"); ok {
+		x := int64(v.(int))
+		o.SetNumIngressReplicationFabrics(x)
+	}
 	if v, ok := d.GetOk("num_local_users"); ok {
 		x := int64(v.(int))
 		o.SetNumLocalUsers(x)
+	}
+	if v, ok := d.GetOk("num_msd"); ok {
+		x := int64(v.(int))
+		o.SetNumMsd(x)
+	}
+	if v, ok := d.GetOk("num_svi_vrf_count"); ok {
+		x := int64(v.(int))
+		o.SetNumSviVrfCount(x)
+	}
+	if v, ok := d.GetOk("num_trm_enabled_count"); ok {
+		x := int64(v.(int))
+		o.SetNumTrmEnabledCount(x)
+	}
+	if v, ok := d.GetOk("num_upg_users"); ok {
+		x := int64(v.(int))
+		o.SetNumUpgUsers(x)
+	}
+	if v, ok := d.GetOk("nxos_image_count"); ok {
+		x := int64(v.(int))
+		o.SetNxosImageCount(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
@@ -290,6 +446,18 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
+	}
+	if v, ok := d.GetOk("underlay_peering_active_links_count"); ok {
+		x := int64(v.(int))
+		o.SetUnderlayPeeringActiveLinksCount(x)
+	}
+	if v, ok := d.GetOk("upg_job_count"); ok {
+		x := int64(v.(int))
+		o.SetUpgJobCount(x)
+	}
+	if v, ok := d.GetOk("upg_status"); ok {
+		x := (v.(string))
+		o.SetUpgStatus(x)
 	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
@@ -328,14 +496,23 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["class_id"] = (s.GetClassId())
 				temp["dev"] = (s.GetDev())
+				temp["epld_image_count"] = (s.GetEpldImageCount())
 				temp["ha_enabled"] = (s.GetHaEnabled())
 				temp["ha_replication_status"] = (s.GetHaReplicationStatus())
 				temp["install"] = (s.GetInstall())
+				temp["is_isn_configured"] = (s.GetIsIsnConfigured())
 				temp["is_media_controller"] = (s.GetIsMediaController())
+				temp["is_smart_license_enabled"] = (s.GetIsSmartLicenseEnabled())
 				temp["moid"] = (s.GetMoid())
 				temp["num_fabrics"] = (s.GetNumFabrics())
 				temp["num_fabrics_in_msd"] = (s.GetNumFabricsInMsd())
+				temp["num_ingress_replication_fabrics"] = (s.GetNumIngressReplicationFabrics())
 				temp["num_local_users"] = (s.GetNumLocalUsers())
+				temp["num_msd"] = (s.GetNumMsd())
+				temp["num_svi_vrf_count"] = (s.GetNumSviVrfCount())
+				temp["num_trm_enabled_count"] = (s.GetNumTrmEnabledCount())
+				temp["num_upg_users"] = (s.GetNumUpgUsers())
+				temp["nxos_image_count"] = (s.GetNxosImageCount())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
@@ -343,6 +520,9 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["site_name"] = (s.GetSiteName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["underlay_peering_active_links_count"] = (s.GetUnderlayPeeringActiveLinksCount())
+				temp["upg_job_count"] = (s.GetUpgJobCount())
+				temp["upg_status"] = (s.GetUpgStatus())
 				temp["nr_version"] = (s.GetVersion())
 				niatelemetryNiaInventoryDcnmResults[j] = temp
 				j += 1

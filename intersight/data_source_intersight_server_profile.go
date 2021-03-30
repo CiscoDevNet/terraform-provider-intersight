@@ -159,6 +159,8 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["associated_server"] = flattenMapComputePhysicalRelationship(s.GetAssociatedServer(), d)
 				temp["class_id"] = (s.GetClassId())
 
+				temp["config_change_context"] = flattenMapPolicyConfigChangeContext(s.GetConfigChangeContext(), d)
+
 				temp["config_change_details"] = flattenListServerConfigChangeDetailRelationship(s.GetConfigChangeDetails(), d)
 
 				temp["config_changes"] = flattenMapPolicyConfigChange(s.GetConfigChanges(), d)
@@ -173,6 +175,8 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
 				temp["running_workflows"] = flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)
 

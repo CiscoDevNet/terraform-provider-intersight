@@ -28,6 +28,7 @@ func dataSourceKubernetesNodeGroupProfile() *schema.Resource {
 				Description: "Current number of nodes in this node group at any given point in time.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Computed:    true,
 			},
 			"description": {
 				Description: "Description of the profile.",
@@ -61,7 +62,7 @@ func dataSourceKubernetesNodeGroupProfile() *schema.Resource {
 				Optional:    true,
 			},
 			"node_type": {
-				Description: "The node type Master, Worker or EmbeddedMaster.\n* `Worker` - Node will be marked as a worker node.\n* `Master` - Node will be marked as a master node.\n* `EmbeddedMaster` - Node will be both a master and a worker.",
+				Description: "The node type ControlPlane, Worker or ControlPlaneWorker.\n* `Worker` - Node will be marked as a worker node.\n* `ControlPlane` - Node will be marked as a control plane node.\n* `ControlPlaneWorker` - Node will be both a controle plane and a worker.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -179,7 +180,7 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 				temp["description"] = (s.GetDescription())
 				temp["desiredsize"] = (s.GetDesiredsize())
 
-				temp["infra_provider"] = flattenMapKubernetesInfrastructureProviderRelationship(s.GetInfraProvider(), d)
+				temp["infra_provider"] = flattenMapKubernetesBaseInfrastructureProviderRelationship(s.GetInfraProvider(), d)
 
 				temp["ip_pools"] = flattenListIppoolPoolRelationship(s.GetIpPools(), d)
 
@@ -194,6 +195,8 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 
 				temp["nodes"] = flattenListKubernetesNodeProfileRelationship(s.GetNodes(), d)
 				temp["object_type"] = (s.GetObjectType())
+
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
 

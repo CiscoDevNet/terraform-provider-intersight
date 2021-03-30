@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -33,7 +33,9 @@ type HyperflexAppCatalogAllOf struct {
 	HyperflexSoftwareCompatibilityInfos []HclHyperflexSoftwareCompatibilityInfoRelationship `json:"HyperflexSoftwareCompatibilityInfos,omitempty"`
 	ServerFirmwareVersion               *HyperflexServerFirmwareVersionRelationship         `json:"ServerFirmwareVersion,omitempty"`
 	ServerModel                         *HyperflexServerModelRelationship                   `json:"ServerModel,omitempty"`
-	AdditionalProperties                map[string]interface{}
+	// An array of relationships to hyperflexSoftwareDistributionEntry resources.
+	SoftwareDistributions []HyperflexSoftwareDistributionEntryRelationship `json:"SoftwareDistributions,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _HyperflexAppCatalogAllOf HyperflexAppCatalogAllOf
@@ -368,6 +370,39 @@ func (o *HyperflexAppCatalogAllOf) SetServerModel(v HyperflexServerModelRelation
 	o.ServerModel = &v
 }
 
+// GetSoftwareDistributions returns the SoftwareDistributions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexAppCatalogAllOf) GetSoftwareDistributions() []HyperflexSoftwareDistributionEntryRelationship {
+	if o == nil {
+		var ret []HyperflexSoftwareDistributionEntryRelationship
+		return ret
+	}
+	return o.SoftwareDistributions
+}
+
+// GetSoftwareDistributionsOk returns a tuple with the SoftwareDistributions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexAppCatalogAllOf) GetSoftwareDistributionsOk() (*[]HyperflexSoftwareDistributionEntryRelationship, bool) {
+	if o == nil || o.SoftwareDistributions == nil {
+		return nil, false
+	}
+	return &o.SoftwareDistributions, true
+}
+
+// HasSoftwareDistributions returns a boolean if a field has been set.
+func (o *HyperflexAppCatalogAllOf) HasSoftwareDistributions() bool {
+	if o != nil && o.SoftwareDistributions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSoftwareDistributions gets a reference to the given []HyperflexSoftwareDistributionEntryRelationship and assigns it to the SoftwareDistributions field.
+func (o *HyperflexAppCatalogAllOf) SetSoftwareDistributions(v []HyperflexSoftwareDistributionEntryRelationship) {
+	o.SoftwareDistributions = v
+}
+
 func (o HyperflexAppCatalogAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -400,6 +435,9 @@ func (o HyperflexAppCatalogAllOf) MarshalJSON() ([]byte, error) {
 	if o.ServerModel != nil {
 		toSerialize["ServerModel"] = o.ServerModel
 	}
+	if o.SoftwareDistributions != nil {
+		toSerialize["SoftwareDistributions"] = o.SoftwareDistributions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -428,6 +466,7 @@ func (o *HyperflexAppCatalogAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "HyperflexSoftwareCompatibilityInfos")
 		delete(additionalProperties, "ServerFirmwareVersion")
 		delete(additionalProperties, "ServerModel")
+		delete(additionalProperties, "SoftwareDistributions")
 		o.AdditionalProperties = additionalProperties
 	}
 

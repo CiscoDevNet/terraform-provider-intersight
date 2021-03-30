@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **HyperflexSoftwareCompatibilityInfos** | Pointer to [**[]HclHyperflexSoftwareCompatibilityInfoRelationship**](HclHyperflexSoftwareCompatibilityInfoRelationship.md) | An array of relationships to hclHyperflexSoftwareCompatibilityInfo resources. | [optional] 
 **ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](hyperflex.ServerFirmwareVersion.Relationship.md) |  | [optional] 
 **ServerModel** | Pointer to [**HyperflexServerModelRelationship**](hyperflex.ServerModel.Relationship.md) |  | [optional] 
+**SoftwareDistributions** | Pointer to [**[]HyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) | An array of relationships to hyperflexSoftwareDistributionEntry resources. | [optional] 
 
 ## Methods
 
@@ -304,6 +305,41 @@ SetServerModel sets ServerModel field to given value.
 
 HasServerModel returns a boolean if a field has been set.
 
+### GetSoftwareDistributions
+
+`func (o *HyperflexAppCatalog) GetSoftwareDistributions() []HyperflexSoftwareDistributionEntryRelationship`
+
+GetSoftwareDistributions returns the SoftwareDistributions field if non-nil, zero value otherwise.
+
+### GetSoftwareDistributionsOk
+
+`func (o *HyperflexAppCatalog) GetSoftwareDistributionsOk() (*[]HyperflexSoftwareDistributionEntryRelationship, bool)`
+
+GetSoftwareDistributionsOk returns a tuple with the SoftwareDistributions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareDistributions
+
+`func (o *HyperflexAppCatalog) SetSoftwareDistributions(v []HyperflexSoftwareDistributionEntryRelationship)`
+
+SetSoftwareDistributions sets SoftwareDistributions field to given value.
+
+### HasSoftwareDistributions
+
+`func (o *HyperflexAppCatalog) HasSoftwareDistributions() bool`
+
+HasSoftwareDistributions returns a boolean if a field has been set.
+
+### SetSoftwareDistributionsNil
+
+`func (o *HyperflexAppCatalog) SetSoftwareDistributionsNil(b bool)`
+
+ SetSoftwareDistributionsNil sets the value for SoftwareDistributions to be an explicit nil
+
+### UnsetSoftwareDistributions
+`func (o *HyperflexAppCatalog) UnsetSoftwareDistributions()`
+
+UnsetSoftwareDistributions ensures that no value is present for SoftwareDistributions, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

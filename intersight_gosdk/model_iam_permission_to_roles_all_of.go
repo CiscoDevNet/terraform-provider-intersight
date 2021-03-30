@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -20,9 +20,9 @@ type IamPermissionToRolesAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string           `json:"ObjectType"`
-	Permission           NullableCmrfCmRf `json:"Permission,omitempty"`
-	Roles                []CmrfCmRf       `json:"Roles,omitempty"`
+	ObjectType           string    `json:"ObjectType"`
+	Permission           *MoMoRef  `json:"Permission,omitempty"`
+	Roles                []MoMoRef `json:"Roles,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -99,53 +99,42 @@ func (o *IamPermissionToRolesAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamPermissionToRolesAllOf) GetPermission() CmrfCmRf {
-	if o == nil || o.Permission.Get() == nil {
-		var ret CmrfCmRf
+// GetPermission returns the Permission field value if set, zero value otherwise.
+func (o *IamPermissionToRolesAllOf) GetPermission() MoMoRef {
+	if o == nil || o.Permission == nil {
+		var ret MoMoRef
 		return ret
 	}
-	return *o.Permission.Get()
+	return *o.Permission
 }
 
 // GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamPermissionToRolesAllOf) GetPermissionOk() (*CmrfCmRf, bool) {
-	if o == nil {
+func (o *IamPermissionToRolesAllOf) GetPermissionOk() (*MoMoRef, bool) {
+	if o == nil || o.Permission == nil {
 		return nil, false
 	}
-	return o.Permission.Get(), o.Permission.IsSet()
+	return o.Permission, true
 }
 
 // HasPermission returns a boolean if a field has been set.
 func (o *IamPermissionToRolesAllOf) HasPermission() bool {
-	if o != nil && o.Permission.IsSet() {
+	if o != nil && o.Permission != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given NullableCmrfCmRf and assigns it to the Permission field.
-func (o *IamPermissionToRolesAllOf) SetPermission(v CmrfCmRf) {
-	o.Permission.Set(&v)
-}
-
-// SetPermissionNil sets the value for Permission to be an explicit nil
-func (o *IamPermissionToRolesAllOf) SetPermissionNil() {
-	o.Permission.Set(nil)
-}
-
-// UnsetPermission ensures that no value is present for Permission, not even an explicit nil
-func (o *IamPermissionToRolesAllOf) UnsetPermission() {
-	o.Permission.Unset()
+// SetPermission gets a reference to the given MoMoRef and assigns it to the Permission field.
+func (o *IamPermissionToRolesAllOf) SetPermission(v MoMoRef) {
+	o.Permission = &v
 }
 
 // GetRoles returns the Roles field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IamPermissionToRolesAllOf) GetRoles() []CmrfCmRf {
+func (o *IamPermissionToRolesAllOf) GetRoles() []MoMoRef {
 	if o == nil {
-		var ret []CmrfCmRf
+		var ret []MoMoRef
 		return ret
 	}
 	return o.Roles
@@ -154,7 +143,7 @@ func (o *IamPermissionToRolesAllOf) GetRoles() []CmrfCmRf {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamPermissionToRolesAllOf) GetRolesOk() (*[]CmrfCmRf, bool) {
+func (o *IamPermissionToRolesAllOf) GetRolesOk() (*[]MoMoRef, bool) {
 	if o == nil || o.Roles == nil {
 		return nil, false
 	}
@@ -170,8 +159,8 @@ func (o *IamPermissionToRolesAllOf) HasRoles() bool {
 	return false
 }
 
-// SetRoles gets a reference to the given []CmrfCmRf and assigns it to the Roles field.
-func (o *IamPermissionToRolesAllOf) SetRoles(v []CmrfCmRf) {
+// SetRoles gets a reference to the given []MoMoRef and assigns it to the Roles field.
+func (o *IamPermissionToRolesAllOf) SetRoles(v []MoMoRef) {
 	o.Roles = v
 }
 
@@ -183,8 +172,8 @@ func (o IamPermissionToRolesAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.Permission.IsSet() {
-		toSerialize["Permission"] = o.Permission.Get()
+	if o.Permission != nil {
+		toSerialize["Permission"] = o.Permission
 	}
 	if o.Roles != nil {
 		toSerialize["Roles"] = o.Roles

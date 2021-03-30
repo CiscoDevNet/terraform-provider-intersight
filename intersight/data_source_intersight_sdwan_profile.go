@@ -135,6 +135,8 @@ func dataSourceSdwanProfileRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
 
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+
 				temp["router_nodes"] = flattenListSdwanRouterNodeRelationship(s.GetRouterNodes(), d)
 
 				temp["router_policy"] = flattenMapSdwanRouterPolicyRelationship(s.GetRouterPolicy(), d)

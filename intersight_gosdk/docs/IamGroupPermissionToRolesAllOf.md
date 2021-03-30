@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.GroupPermissionToRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.GroupPermissionToRoles"]
-**Group** | Pointer to [**NullableCmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
-**Orgs** | Pointer to [**[]CmrfCmRf**](CmrfCmRf.md) |  | [optional] 
+**Group** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
+**Orgs** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
 
 ## Methods
 
@@ -70,20 +70,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetGroup
 
-`func (o *IamGroupPermissionToRolesAllOf) GetGroup() CmrfCmRf`
+`func (o *IamGroupPermissionToRolesAllOf) GetGroup() MoMoRef`
 
 GetGroup returns the Group field if non-nil, zero value otherwise.
 
 ### GetGroupOk
 
-`func (o *IamGroupPermissionToRolesAllOf) GetGroupOk() (*CmrfCmRf, bool)`
+`func (o *IamGroupPermissionToRolesAllOf) GetGroupOk() (*MoMoRef, bool)`
 
 GetGroupOk returns a tuple with the Group field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGroup
 
-`func (o *IamGroupPermissionToRolesAllOf) SetGroup(v CmrfCmRf)`
+`func (o *IamGroupPermissionToRolesAllOf) SetGroup(v MoMoRef)`
 
 SetGroup sets Group field to given value.
 
@@ -93,32 +93,22 @@ SetGroup sets Group field to given value.
 
 HasGroup returns a boolean if a field has been set.
 
-### SetGroupNil
-
-`func (o *IamGroupPermissionToRolesAllOf) SetGroupNil(b bool)`
-
- SetGroupNil sets the value for Group to be an explicit nil
-
-### UnsetGroup
-`func (o *IamGroupPermissionToRolesAllOf) UnsetGroup()`
-
-UnsetGroup ensures that no value is present for Group, not even an explicit nil
 ### GetOrgs
 
-`func (o *IamGroupPermissionToRolesAllOf) GetOrgs() []CmrfCmRf`
+`func (o *IamGroupPermissionToRolesAllOf) GetOrgs() []MoMoRef`
 
 GetOrgs returns the Orgs field if non-nil, zero value otherwise.
 
 ### GetOrgsOk
 
-`func (o *IamGroupPermissionToRolesAllOf) GetOrgsOk() (*[]CmrfCmRf, bool)`
+`func (o *IamGroupPermissionToRolesAllOf) GetOrgsOk() (*[]MoMoRef, bool)`
 
 GetOrgsOk returns a tuple with the Orgs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrgs
 
-`func (o *IamGroupPermissionToRolesAllOf) SetOrgs(v []CmrfCmRf)`
+`func (o *IamGroupPermissionToRolesAllOf) SetOrgs(v []MoMoRef)`
 
 SetOrgs sets Orgs field to given value.
 

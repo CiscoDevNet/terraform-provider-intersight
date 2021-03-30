@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.TerraformIntegrationTerraformAgentOptions"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.TerraformIntegrationTerraformAgentOptions"]
 **ManagedHosts** | Pointer to **[]string** |  | [optional] 
-**TerraformAgentPoolName** | Pointer to **string** | Agent pool name for Terraform Agent platform type. | [optional] [default to "default"]
+**TerraformAgentPoolName** | Pointer to **string** | Agent pool name for Terraform Agent platform type. | [optional] 
 **TerraformOrganization** | Pointer to **string** | Organization for Terraform Agent platform type. | [optional] 
 
 ## Methods

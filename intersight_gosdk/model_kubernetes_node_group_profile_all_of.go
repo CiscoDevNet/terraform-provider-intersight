@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-10T06:51:24Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-27T10:08:12Z.
  *
- * API version: 1.0.9-3942
+ * API version: 1.0.9-4136
  * Contact: intersight@cisco.com
  */
 
@@ -30,11 +30,11 @@ type KubernetesNodeGroupProfileAllOf struct {
 	Maxsize *int64 `json:"Maxsize,omitempty"`
 	// Minimum number of nodes desired in this node group.
 	Minsize *int64 `json:"Minsize,omitempty"`
-	// The node type Master, Worker or EmbeddedMaster. * `Worker` - Node will be marked as a worker node. * `Master` - Node will be marked as a master node. * `EmbeddedMaster` - Node will be both a master and a worker.
-	NodeType       *string                                       `json:"NodeType,omitempty"`
-	Taints         []KubernetesNodeGroupTaint                    `json:"Taints,omitempty"`
-	ClusterProfile *KubernetesClusterProfileRelationship         `json:"ClusterProfile,omitempty"`
-	InfraProvider  *KubernetesInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
+	// The node type ControlPlane, Worker or ControlPlaneWorker. * `Worker` - Node will be marked as a worker node. * `ControlPlane` - Node will be marked as a control plane node. * `ControlPlaneWorker` - Node will be both a controle plane and a worker.
+	NodeType       *string                                           `json:"NodeType,omitempty"`
+	Taints         []KubernetesNodeGroupTaint                        `json:"Taints,omitempty"`
+	ClusterProfile *KubernetesClusterProfileRelationship             `json:"ClusterProfile,omitempty"`
+	InfraProvider  *KubernetesBaseInfrastructureProviderRelationship `json:"InfraProvider,omitempty"`
 	// An array of relationships to ippoolPool resources.
 	IpPools           []IppoolPoolRelationship             `json:"IpPools,omitempty"`
 	KubernetesVersion *KubernetesVersionPolicyRelationship `json:"KubernetesVersion,omitempty"`
@@ -383,9 +383,9 @@ func (o *KubernetesNodeGroupProfileAllOf) SetClusterProfile(v KubernetesClusterP
 }
 
 // GetInfraProvider returns the InfraProvider field value if set, zero value otherwise.
-func (o *KubernetesNodeGroupProfileAllOf) GetInfraProvider() KubernetesInfrastructureProviderRelationship {
+func (o *KubernetesNodeGroupProfileAllOf) GetInfraProvider() KubernetesBaseInfrastructureProviderRelationship {
 	if o == nil || o.InfraProvider == nil {
-		var ret KubernetesInfrastructureProviderRelationship
+		var ret KubernetesBaseInfrastructureProviderRelationship
 		return ret
 	}
 	return *o.InfraProvider
@@ -393,7 +393,7 @@ func (o *KubernetesNodeGroupProfileAllOf) GetInfraProvider() KubernetesInfrastru
 
 // GetInfraProviderOk returns a tuple with the InfraProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KubernetesNodeGroupProfileAllOf) GetInfraProviderOk() (*KubernetesInfrastructureProviderRelationship, bool) {
+func (o *KubernetesNodeGroupProfileAllOf) GetInfraProviderOk() (*KubernetesBaseInfrastructureProviderRelationship, bool) {
 	if o == nil || o.InfraProvider == nil {
 		return nil, false
 	}
@@ -409,8 +409,8 @@ func (o *KubernetesNodeGroupProfileAllOf) HasInfraProvider() bool {
 	return false
 }
 
-// SetInfraProvider gets a reference to the given KubernetesInfrastructureProviderRelationship and assigns it to the InfraProvider field.
-func (o *KubernetesNodeGroupProfileAllOf) SetInfraProvider(v KubernetesInfrastructureProviderRelationship) {
+// SetInfraProvider gets a reference to the given KubernetesBaseInfrastructureProviderRelationship and assigns it to the InfraProvider field.
+func (o *KubernetesNodeGroupProfileAllOf) SetInfraProvider(v KubernetesBaseInfrastructureProviderRelationship) {
 	o.InfraProvider = &v
 }
 

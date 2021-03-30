@@ -52,7 +52,7 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 				Computed:    true,
 			},
 			"status": {
-				Description: "Status of the Kubernetes cluster and its nodes.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The cluster delete failed.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
+				Description: "Status of the Kubernetes cluster and its nodes.\n* `Undeployed` - The cluster is undeployed.\n* `Configuring` - The cluster is being configured.\n* `Deploying` - The cluster is being deployed.\n* `Undeploying` - The cluster is being undeployed.\n* `DeployFailedTerminal` - The cluster deployment failed terminally and can not be recovered.\n* `DeployFailed` - The cluster deployment failed.\n* `Upgrading` - The cluster is being upgraded.\n* `Deleting` - The cluster is being deleted.\n* `DeleteFailed` - The cluster delete failed.\n* `Ready` - The cluster is ready for use.\n* `Active` - The cluster is being active.\n* `Shutdown` - All the nodes in the cluster are powered off.\n* `Terminated` - The cluster is terminated.\n* `Deployed` - The cluster is deployed. The cluster may not yet be ready for use.\n* `UndeployFailed` - The cluster undeploy action failed.\n* `NotReady` - The cluster is created and some nodes are not ready.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -148,8 +148,6 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["action_info"] = flattenMapKubernetesActionInfo(s.GetActionInfo(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-				temp["addons"] = flattenListKubernetesAddonPolicyRelationship(s.GetAddons(), d)
-
 				temp["associated_cluster"] = flattenMapKubernetesClusterRelationship(s.GetAssociatedCluster(), d)
 
 				temp["cert_config"] = flattenMapKubernetesClusterCertificateConfiguration(s.GetCertConfig(), d)
@@ -161,6 +159,8 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 
 				temp["container_runtime_config"] = flattenMapKubernetesContainerRuntimePolicyRelationship(s.GetContainerRuntimeConfig(), d)
 				temp["description"] = (s.GetDescription())
+
+				temp["essential_addons"] = flattenListKubernetesEssentialAddon(s.GetEssentialAddons(), d)
 
 				temp["kube_config"] = flattenMapKubernetesConfiguration(s.GetKubeConfig(), d)
 
@@ -179,6 +179,8 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
 				temp["status"] = (s.GetStatus())

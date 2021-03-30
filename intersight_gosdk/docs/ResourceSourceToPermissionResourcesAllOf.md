@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.SourceToPermissionResources"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.SourceToPermissionResources"]
-**PermissionResources** | Pointer to [**[]CmrfCmRf**](CmrfCmRf.md) |  | [optional] 
-**SourceObject** | Pointer to [**NullableCmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
+**PermissionResources** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
+**SourceObject** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
 
 ## Methods
 
@@ -70,20 +70,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetPermissionResources
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) GetPermissionResources() []CmrfCmRf`
+`func (o *ResourceSourceToPermissionResourcesAllOf) GetPermissionResources() []MoMoRef`
 
 GetPermissionResources returns the PermissionResources field if non-nil, zero value otherwise.
 
 ### GetPermissionResourcesOk
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) GetPermissionResourcesOk() (*[]CmrfCmRf, bool)`
+`func (o *ResourceSourceToPermissionResourcesAllOf) GetPermissionResourcesOk() (*[]MoMoRef, bool)`
 
 GetPermissionResourcesOk returns a tuple with the PermissionResources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPermissionResources
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) SetPermissionResources(v []CmrfCmRf)`
+`func (o *ResourceSourceToPermissionResourcesAllOf) SetPermissionResources(v []MoMoRef)`
 
 SetPermissionResources sets PermissionResources field to given value.
 
@@ -105,20 +105,20 @@ HasPermissionResources returns a boolean if a field has been set.
 UnsetPermissionResources ensures that no value is present for PermissionResources, not even an explicit nil
 ### GetSourceObject
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) GetSourceObject() CmrfCmRf`
+`func (o *ResourceSourceToPermissionResourcesAllOf) GetSourceObject() MoMoRef`
 
 GetSourceObject returns the SourceObject field if non-nil, zero value otherwise.
 
 ### GetSourceObjectOk
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) GetSourceObjectOk() (*CmrfCmRf, bool)`
+`func (o *ResourceSourceToPermissionResourcesAllOf) GetSourceObjectOk() (*MoMoRef, bool)`
 
 GetSourceObjectOk returns a tuple with the SourceObject field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSourceObject
 
-`func (o *ResourceSourceToPermissionResourcesAllOf) SetSourceObject(v CmrfCmRf)`
+`func (o *ResourceSourceToPermissionResourcesAllOf) SetSourceObject(v MoMoRef)`
 
 SetSourceObject sets SourceObject field to given value.
 
@@ -128,16 +128,6 @@ SetSourceObject sets SourceObject field to given value.
 
 HasSourceObject returns a boolean if a field has been set.
 
-### SetSourceObjectNil
-
-`func (o *ResourceSourceToPermissionResourcesAllOf) SetSourceObjectNil(b bool)`
-
- SetSourceObjectNil sets the value for SourceObject to be an explicit nil
-
-### UnsetSourceObject
-`func (o *ResourceSourceToPermissionResourcesAllOf) UnsetSourceObject()`
-
-UnsetSourceObject ensures that no value is present for SourceObject, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

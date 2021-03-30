@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `identity`:(string) Unique identifier assigned to the hypervisor host. 
 * `model`:(string) Commercial model information about this hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the hypervisor host. It must be unique within the targer endpoint. 
+* `name`:(string) Name of the hypervisor host. It must be unique within the target endpoint. 
 * `serial`:(string) Serial number of this host (internally generated). 
 * `vendor`:(string) Commercial vendor details of this hardware. 
  

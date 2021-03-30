@@ -136,7 +136,7 @@ func resourceHyperflexServerFirmwareVersionEntry() *schema.Resource {
 				Computed:   true,
 			},
 			"server_platform": {
-				Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+				Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "M5",
