@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_vmedia_policy" "vmedia1" {
   name          = "vmedia1"

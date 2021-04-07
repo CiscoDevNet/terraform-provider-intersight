@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_sdcard_policy" "sdcard1" {
   name        = "sdcard1"

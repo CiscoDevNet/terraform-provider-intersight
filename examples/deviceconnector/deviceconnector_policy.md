@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_deviceconnector_policy" "dcp1" {
   name            = "device_con1"

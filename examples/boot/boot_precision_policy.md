@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_boot_precision_policy" "boot_precision1" {
   name                     = "boot_precision1"
@@ -49,6 +50,5 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
     moid        = intersight_server_profile.server1.id
     object_type = "server.Profile"
   }
-
 }
 ```

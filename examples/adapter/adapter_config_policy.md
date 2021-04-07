@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_adapter_config_policy" "adapter_config1" {
   name        = "adapter_config1"

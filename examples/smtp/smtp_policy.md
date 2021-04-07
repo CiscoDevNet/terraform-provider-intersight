@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_smtp_policy" "smtp1" {
   enabled      = false
@@ -9,8 +10,8 @@ resource "intersight_smtp_policy" "smtp1" {
   smtp_server  = "10.10.10.1"
   sender_email = "IMCSQAAutomation@cisco.com"
   smtp_recipients = [
-    "aw@cisco.com",
-    "cy@cisco.com",
+    "aw@cisco.com"
+    "cy@cisco.com"
     "dz@cisco.com"]
   organization {
     object_type = "organization.Organization"

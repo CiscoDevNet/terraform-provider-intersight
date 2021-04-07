@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_server_profile" "server1" {
   name = "server1"

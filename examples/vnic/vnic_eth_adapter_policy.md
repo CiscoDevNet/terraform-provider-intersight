@@ -1,48 +1,29 @@
 ### Resource Creation
+
 ```hcl
-resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
-  name = "v_eth_adapter1"
-  rss_settings = true
-  uplink_failback_timeout = 5
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  vxlan_settings {
-    enabled = false
-  }
-
-  nvgre_settings {
-    enabled = true
-  }
-
-  arfs_settings {
-    enabled = true
-  }
-
-  interrupt_settings {
-    coalescing_time = 125
-    coalescing_type = "MIN"
-    nr_count = 4
-    mode = "MSI"
-  }
-  completion_queue_settings {
-    nr_count = 4
-    ring_size = 1
-  }
-  rx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tcp_offload_settings {
-    large_receive = true
-    large_send = true
-    rx_checksum = true
-    tx_checksum = true
-  }
+resource "intersight_vnic_eth_adapter_policy" "vnic_eth_adapter_policy" {
+    name        = "vnic_eth_adapter_policy1"
+    description = "vnic ethernet adapter policy"
+    interrupt_scaling   = true
+    uplink_failback_timeout = 5
+    interrupt_settings  = {
+        object_type = "vnic.EthInterruptSettings"
+        coalescing_time     = 5
+        coalescing_type     = "MIN"
+        count       = 10
+        mode        = "MSI"
+    }
+    nvgre_settings  = {
+        object_type = "vnic.NvgreSettings"
+        enabled     = false
+    }
+    vxlan_settings  = {
+        object_type = "vnic.VxlanSettings"
+        enabled     = false
+    }
+    organization {
+        object_type = "organization.Organization"
+        moid = var.organization
+    }
 }
 ```

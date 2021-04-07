@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_sol_policy" "sol1" {
   name      = "sol2"

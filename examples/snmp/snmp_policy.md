@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_snmp_policy" "snmp1" {
   name                    = "snmp1"

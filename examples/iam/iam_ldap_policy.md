@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_iam_ldap_policy" "ldap1" {
   name                   = "ldap1"
@@ -12,8 +13,8 @@ resource "intersight_iam_ldap_policy" "ldap1" {
   }
   base_properties {
     attribute                  = "CiscoAvPair"
-    base_dn                    = "DC=QATCSLABTPI02,DC=cisco,DC=com"
-    bind_dn                    = "CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com"
+    base_dn                    = "DC=QATCSLABTPI02DC=ciscoDC=com"
+    bind_dn                    = "CN=administratorCN=UsersDC=QATCSLABTPI02DC=ciscoDC=com"
     bind_method                = "Anonymous"
     domain                     = "QATCSLABTPI02.cisco.com"
     enable_encryption          = true

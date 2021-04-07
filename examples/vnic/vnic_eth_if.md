@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_vnic_eth_if" "eth1" {
   name = "eth0"
