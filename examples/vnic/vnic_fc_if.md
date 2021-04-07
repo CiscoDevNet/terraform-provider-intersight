@@ -2,16 +2,16 @@
 
 ```hcl
 resource "intersight_vnic_fc_if" "fc1" {
-  name = "fc0"
+  name  = "fc0"
   order = 1
   placement {
-    id = "1"
+    id       = "1"
     pci_link = 0
-    uplink = 0
+    uplink   = 0
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.vnic_san1.id
+    moid        = intersight_vnic_san_connectivity_policy.vnic_san1.id
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {

@@ -9,7 +9,7 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
   encryption_key = var.encryption_key
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   profiles {
     moid        = intersight_server_profile.server1.id

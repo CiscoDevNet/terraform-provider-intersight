@@ -8,7 +8,7 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
   enforce_uefi_secure_boot = false
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   boot_devices {
     enabled     = true

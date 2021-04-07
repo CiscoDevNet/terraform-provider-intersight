@@ -4,17 +4,17 @@
 resource "intersight_iam_user" "iam_user1" {
   email = "email@example.com"
   idpreference {
-    moid = var.iam_idp_reference
+    moid        = var.iam_idp_reference
     object_type = "iam.IdpReference"
   }
   name = "user1"
   parent {
-    moid = var.iam_idp_reference
+    moid        = var.iam_idp_reference
     object_type = "iam.IdpReference"
   }
-  permissions [
+  permissions = [
     {
-      moid = var.iam_idp_reference
+      moid        = var.iam_idp_reference
       object_type = "iam.Permission"
     }
   ]

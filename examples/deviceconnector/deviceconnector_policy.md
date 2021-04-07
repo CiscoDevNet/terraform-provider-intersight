@@ -7,7 +7,7 @@ resource "intersight_deviceconnector_policy" "dcp1" {
   lockout_enabled = true
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

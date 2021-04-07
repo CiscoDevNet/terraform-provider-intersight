@@ -2,51 +2,51 @@
 
 ```hcl
 resource "intersight_hyperflex_feature_limit_internal" "hyperflex_feature_limit_internal1" {
-    app_catalog {
-        object_type = "hyperflex.AppCatalog"
-        moid = "hyperflex_app_catalog"
+  app_catalog {
+    object_type = "hyperflex.AppCatalog"
+    moid        = "hyperflex_app_catalog"
+  }
+  feature_limit_entries = [
+    {
+      constraint = {
+        hxdp_version    = "^[3-9]\\.[0-9]"
+        hypervisor_type = "ESXi"
+        mgmt_platform   = "FI"
+        object_type     = "hyperflex.AppSettingConstraint"
+        server_model    = "^HX"
+      }
+      name        = "MAX_NODE"
+      object_type = "hyperflex.FeatureLimitEntry"
+      value       = "32"
+    },
+    {
+      constraint = {
+        hxdp_version    = "^[3-9]\\.[0-9]"
+        hypervisor_type = "ESXi"
+        mgmt_platform   = "FI"
+        object_type     = "hyperflex.AppSettingConstraint"
+        server_model    = "^HX.*L$"
+      }
+      name        = "MAX_NODE"
+      object_type = "hyperflex.FeatureLimitEntry"
+      value       = "8"
+    },
+    {
+      constraint = {
+        hxdp_version    = "^4\\.[5-9]|^4\\.0\\(2"
+        hypervisor_type = "ESXi"
+        mgmt_platform   = "EDGE"
+        object_type     = "hyperflex.AppSettingConstraint"
+        server_model    = "^HX"
+      }
+      name        = "MAX_NODE"
+      object_type = "hyperflex.FeatureLimitEntry"
+      value       = "8"
     }
-    feature_limit_entries [
-      {
-        constraint {
-          hxdp_version = "^[3-9]\\.[0-9]"
-          hypervisor_type = "ESXi"
-          mgmt_platform = "FI"
-          object_type = "hyperflex.AppSettingConstraint"
-          server_model = "^HX"
-        }
-        name = "MAX_NODE"
-        object_type = "hyperflex.FeatureLimitEntry"
-        value = "32"
-      }
-      {
-        Constraint {
-          hxdp_version = "^[3-9]\\.[0-9]"
-          hypervisor_type = "ESXi"
-          mgmt_platform = "FI"
-          object_type = "hyperflex.AppSettingConstraint"
-          server_model = "^HX.*L$"
-        }
-        name = "MAX_NODE"
-        object_type = "hyperflex.FeatureLimitEntry"
-        value = "8"
-      }
-      {
-        Constraint {
-          hxdp_version = "^4\\.[5-9]|^4\\.0\\(2"
-          hypervisor_type = "ESXi"
-          mgmt_platform = "EDGE"
-          object_type = "hyperflex.AppSettingConstraint"
-          server_model = "^HX"
-        }
-        name = "MAX_NODE"
-        object_type = "hyperflex.FeatureLimitEntry"
-        value = "8"
-      }
-    ]
-    parent {
-        object_type = "hyperflex.AppCatalog"
-        moid = var.hyperflex_app_catalog
-    }
+  ]
+  parent {
+    object_type = "hyperflex.AppCatalog"
+    moid        = var.hyperflex_app_catalog
+  }
 }
 ```

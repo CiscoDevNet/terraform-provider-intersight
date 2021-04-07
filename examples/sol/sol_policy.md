@@ -13,7 +13,7 @@ resource "intersight_sol_policy" "sol1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

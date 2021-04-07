@@ -18,7 +18,7 @@ resource "intersight_syslog_policy" "syslog1" {
   }
   remote_clients {
     enabled      = true
-    hostname     = "20010db80a0b12f00000000000000004"
+    hostname     = "2001:0db8:0a0b:12f0:0000:0000:0000:0004"
     port         = 64000
     protocol     = "udp"
     min_severity = "emergency"
@@ -30,7 +30,7 @@ resource "intersight_syslog_policy" "syslog1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

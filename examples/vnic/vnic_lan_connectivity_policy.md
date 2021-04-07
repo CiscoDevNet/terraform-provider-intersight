@@ -1,14 +1,15 @@
 ### Resource Creation
 
 ```hcl
-resource "intersight_vnic_lan_connectivity_policy" "vnic_lan_connectivity_policy" {
-    name        = "vnic_lan_connectivity_policy1"
-    description = "vnic lan connectivity policy"
-    iqn_allocation_type = "Static"
-    placement_mode      = "custom"
-    organization {
-        object_type = "organization.Organization"
-        moid = var.organization
-    }
+resource "intersight_vnic_lan_connectivity_policy" "vnic_lan1" {
+  name = "vnic_lan1"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
 }
 ```

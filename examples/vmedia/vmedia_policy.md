@@ -14,7 +14,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

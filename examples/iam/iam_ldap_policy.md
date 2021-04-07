@@ -9,7 +9,7 @@ resource "intersight_iam_ldap_policy" "ldap1" {
   user_search_precedence = "LocalUserDb"
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   base_properties {
     attribute                  = "CiscoAvPair"
@@ -25,7 +25,7 @@ resource "intersight_iam_ldap_policy" "ldap1" {
     timeout                    = 180
   }
   dns_parameters {
-    nr_source        = "Extracted"
+    nr_source     = "Extracted"
     search_forest = "xyz"
     search_domain = "abc"
   }
