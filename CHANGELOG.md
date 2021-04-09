@@ -1,5 +1,12 @@
 # Change Logs
 
+## v1.0.5
+Release Date: 9th Apr 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4155).
+* Response error typecasting failure fixed by removing force typecasting to GenericOpenApiError
+* Triggered Workflow information polling added
+* Missing BaseMo properties like CreateTime, Parents, Owners, Resources etc. are now available
+
 ## v1.0.4
 Release Date: 30th Mar 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4136).
