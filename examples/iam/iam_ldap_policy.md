@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_iam_ldap_policy" "ldap1" {
   name                   = "ldap1"
@@ -8,12 +9,12 @@ resource "intersight_iam_ldap_policy" "ldap1" {
   user_search_precedence = "LocalUserDb"
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   base_properties {
     attribute                  = "CiscoAvPair"
-    base_dn                    = "DC=QATCSLABTPI02,DC=cisco,DC=com"
-    bind_dn                    = "CN=administrator,CN=Users,DC=QATCSLABTPI02,DC=cisco,DC=com"
+    base_dn                    = "DC=QATCSLABTPI02DC=ciscoDC=com"
+    bind_dn                    = "CN=administratorCN=UsersDC=QATCSLABTPI02DC=ciscoDC=com"
     bind_method                = "Anonymous"
     domain                     = "QATCSLABTPI02.cisco.com"
     enable_encryption          = true
@@ -24,7 +25,7 @@ resource "intersight_iam_ldap_policy" "ldap1" {
     timeout                    = 180
   }
   dns_parameters {
-    nr_source        = "Extracted"
+    nr_source     = "Extracted"
     search_forest = "xyz"
     search_domain = "abc"
   }

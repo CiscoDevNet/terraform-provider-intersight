@@ -1,11 +1,12 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_sdcard_policy" "sdcard1" {
   name        = "sdcard1"
   description = "test policy"
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   partitions {
     type        = "OS"
