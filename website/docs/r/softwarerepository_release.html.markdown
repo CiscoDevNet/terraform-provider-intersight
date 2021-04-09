@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_softwarerepository_release
 A Cisco release containing one or more firmware images. Cisco releases images for rack server components or blade server components or for Fabric Interconnect components. The version for the firmware images is the same as specific Cisco release version.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_release" "softwarerepository_release1" {
+  type = "FabricSwitch"
+  catalog {
+    object_type = "softwarerepository.Catalog"
+    moid        = var.softwarerepository_catalog
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

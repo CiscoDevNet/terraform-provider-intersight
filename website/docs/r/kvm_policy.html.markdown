@@ -8,6 +8,28 @@ description: |-
 
 # Resource: intersight_kvm_policy
 Policy to configure KVM Launch settings.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kvm_policy" "kvm1" {
+  name                      = "kvm1"
+  description               = "demo kvm policy"
+  enabled                   = true
+  maximum_sessions          = 3
+  remote_port               = 2069
+  enable_video_encryption   = true
+  enable_local_server_video = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -71,27 +93,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_kvm_policy" "kvm1" {
-  name                      = "kvm1"
-  description               = "demo kvm policy"
-  enabled                   = true
-  maximum_sessions          = 3
-  remote_port               = 2069
-  enable_video_encryption   = true
-  enable_local_server_video = true
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-}
-```
 
 ## Import
 `intersight_kvm_policy` can be imported using the Moid of the object, e.g.

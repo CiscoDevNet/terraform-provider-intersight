@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_techsupportmanagement_tech_support_bundle
 A request to collect techsupport and upload it to Intersight Storage Service. The serial number, PID and/or relationship to the target resource provided by the user is used to determine the device type for techsupport collection. If the serial number, PID and target resource are specified in the request, the values must match. Valid values of device types are network.Element for fabric interconnect, compute.Blade for blade server, compute.RackUnit for rack server, equipment.Chassis for chassis, equipment.IoCard for IO Module, equipment.FEX for fabric extender and adapter.Unit for network adapter. UCSM techsupport is collected for device type network.Element. Chassis techsupport is collected for compute.Blade, equipment.Chassis, equipment.IoCard, and blade adapter.Unit. Server techsupport is collected for compute.RackUnit and rack adapter.Unit. Fabric extender techsupport is collected for device type equipment.FEX. Hyper Flex node level techsupport is collected when the request specifies the platform type (HX) and the device type is Hyperflex.Node.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_techsupportmanagement_tech_support_bundle" "techsupportmanagement_tech_support_bundle" {
+  platform_type = "UCSD"
+  target_resource = {
+    object_type   = "techsupportmanagement.TechSupportBundle"
+    platform_type = "UCSD"
+  }
+  device_registration {
+    moid        = var.asset.deviceRegistration
+    object_type = "asset.DeviceRegistration"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

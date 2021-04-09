@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_firmware_pcie_descriptor
 Descriptor to uniquely identify a PCIE component.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_pcie_descriptor" "firmware_pcie_descriptor1" {
+  description = "firmware iom descriptor"
+  model       = "UCSC-PCIE-IRJ45"
+  vendor      = "Cisco Systems, Inc"
+  revision    = "0"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

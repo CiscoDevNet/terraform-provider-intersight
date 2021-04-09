@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_softwarerepository_category_mapper
 Maps a Cisco software repository image category identifier to its applicable hardware models.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_category_mapper" "softwarerepository_category_mapper1" {
+  name      = "softwarerepository_category_mapper1"
+  category  = "Integrated Services Routers"
+  file_type = "OperatingSystemFile"
+  source    = "IntersightCloud"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

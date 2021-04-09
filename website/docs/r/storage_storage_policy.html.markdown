@@ -8,6 +8,34 @@ description: |-
 
 # Resource: intersight_storage_storage_policy
 The storage policy models the reusable storage related configuration that can be applied on many servers. This policy allows creation of RAID groups using existing disk group policies and virtual drives on the drive groups. The user has options to move all unused disks to JBOD or Unconfigured good state. The encryption of drives can be enabled through this policy using remote keys from a KMIP server.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_storage_storage_policy" "storage_storage1" {
+  name                         = "storage_storage_policy1"
+  description                  = "storage policy test"
+  retain_policy_virtual_drives = true
+  unused_disks_state           = "UnconfiguredGood"
+  virtual_drives {
+    object_type         = "storage.VirtualDriveConfig"
+    boot_drive          = true
+    drive_cache         = "NoChange"
+    expand_to_available = false
+    io_policy           = "Direct"
+    name                = "RAID0_1"
+    access_policy       = "ReadWrite"
+    disk_group_policy   = intersight_storage_disk_group_policy.storage_disk_group1.id
+    read_policy         = "NoReadAhead"
+    size                = 285148
+    write_policy        = "WriteThrough"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -93,34 +121,6 @@ This complex property has following sub-properties:
   + `vdid`:(string)(Computed) Unique Id of the Virtual Drive to be used to identify Virtual Drive when name is empty. 
   + `write_policy`:(string) Write mode to be used to write data to this virtual drive.* `Default` - Use platform default write mode.* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_storage_storage_policy" "storage_storage1" {
-  name = "storage_storage_policy1"
-  description = "storage policy test"
-  retain_policy_virtual_drives = true
-  unused_disks_state = "UnconfiguredGood"
-  virtual_drives {
-    object_type = "storage.VirtualDriveConfig"
-    boot_drive = true
-    drive_cache = "NoChange"
-    expand_to_available = false
-    io_policy = "Direct"
-    name = "RAID0_1"
-    access_policy = "ReadWrite"
-    disk_group_policy = intersight_storage_disk_group_policy.storage_disk_group1.id
-    read_policy = "NoReadAhead"
-    size = 285148
-    write_policy = "WriteThrough"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_storage_storage_policy` can be imported using the Moid of the object, e.g.

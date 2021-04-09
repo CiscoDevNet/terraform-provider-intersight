@@ -8,6 +8,30 @@ description: |-
 
 # Resource: intersight_iam_user_group
 User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_user_group" "iam_user_group1" {
+  name = "iam_user_group1"
+  idp {
+    domain_name          = "cisco.com"
+    enable_single_logout = true
+    name                 = "Cisco"
+    account {
+      object_type = "iam.Account"
+      moid        = intersight_iam_account.account1.id
+    }
+    type = "saml"
+  }
+  permissions = [
+    {
+      moid        = var.iam_permission
+      object_type = "iam.Permission"
+    }
+  ]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

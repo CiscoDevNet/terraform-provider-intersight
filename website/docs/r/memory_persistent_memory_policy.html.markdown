@@ -8,6 +8,39 @@ description: |-
 
 # Resource: intersight_memory_persistent_memory_policy
 The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_memory_persistent_memory_policy" "memory_persistent_memory_policy1" {
+  name        = "memory_persistent_memory_policy1"
+  description = "memory persistent memory policies"
+  goals {
+    object_type            = "memory.PersistentMemoryGoal"
+    persistent_memory_type = "app-direct"
+    socket_id              = "All Sockets"
+  }
+  local_security {
+    object_type       = "memory.PersistentMemoryLocalSecurity"
+    enabled           = true
+    secure_passphrase = "ChangeMe"
+  }
+  logical_name_spaces = [
+    {
+      object_type      = "memory.PersistentMemoryLocalSecurity"
+      mode             = "block"
+      socket_id        = 1
+      socket_memory_id = 6
+    }
+  ]
+  management_mode    = "configured-from-intersight"
+  retain_name_spaces = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

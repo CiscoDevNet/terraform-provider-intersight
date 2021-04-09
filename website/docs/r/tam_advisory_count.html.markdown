@@ -8,6 +8,38 @@ description: |-
 
 # Resource: intersight_tam_advisory_count
 Total number of advisories currently affecting a given Account.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_tam_advisory_count" "tam_advisory_count" {
+  name           = "tam_advisory_count"
+  operation_type = "create"
+  state          = "ready"
+  severity = {
+    object_type = "tam.SecurityAdvisoryDetails"
+  }
+  actions = {
+    object_type = "tam.SecurityAdvisoryDetails"
+    alert_type  = "psirt"
+  }
+  type = "securityAdvisory"
+  api_data_sources {
+    object_type = "tam.ApiDataSource"
+    name        = "api_data_source_1"
+    type        = "intersightApi"
+
+  }
+  advisory_details = {
+    object_type = "tam.SecurityAdvisoryDetails"
+    description = "tam security advisory"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

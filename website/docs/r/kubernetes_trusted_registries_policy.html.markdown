@@ -8,6 +8,15 @@ description: |-
 
 # Resource: intersight_kubernetes_trusted_registries_policy
 A policy specifying self signed docker registries and CA certificates to trust.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_trusted_registries_policy" "kubernetes_trusted_registries_policy1" {
+  description = "kubernetes trusted registries policy"
+  name        = "kubernetes_trusted_registries_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

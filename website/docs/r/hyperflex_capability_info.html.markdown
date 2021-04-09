@@ -8,6 +8,39 @@ description: |-
 
 # Resource: intersight_hyperflex_capability_info
 A capabilityInfo is like a feature set and/or feature limit for different components of a HyperFlex Cluster. A set of constraints defines the rules, and the corresponding value either determines if the feature would work on a HyperFlex cluster with specific component set, or corresponds to a limit for a set of HyperFlex components. For example, "minUcsVersion" for HyperFlex version "4.0.1a" corresponds to "3.2.3" or "minHxdpVersion" for HyperFlex Upgrade operation is "4.0.1a" etc. This data can be captured as a capability and at run-time, decision can be made to proceed with the intended operation or not, or proceed with the intended operation with a value catered to specific feature sets.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_capability_info" "hyperflex_capability_info1" {
+  app_catalog {
+    object_type = "hyperflex.AppCatalog"
+    moid        = "hyperflex_app_catalog"
+  }
+  capability_constraints = [
+    {
+      constraint_name  = "targetHxdpVersion"
+      constraint_value = "^4\\.0.*$|^4\\.5.*$"
+      object_type      = "hcl.Constraint"
+    },
+    {
+      constraint_name  = "serverPlatform"
+      constraint_value = "M4|M5"
+      object_type      = "hcl.Constraint"
+    },
+    {
+      constraint_name  = "mgmtPlatform"
+      constraint_value = "FI|EDGE"
+      object_type      = "hcl.Constraint"
+    }
+  ]
+  name = "minUcsVersion"
+  parent {
+    object_type = "hyperflex.AppCatalog"
+    moid        = var.hyperflex_app_catalog
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

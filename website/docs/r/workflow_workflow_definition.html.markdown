@@ -8,6 +8,53 @@ description: |-
 
 # Resource: intersight_workflow_workflow_definition
 Workflow definition is a collection of tasks that are sequenced in a certain way using control tasks. The tasks in the workflow definition is represented as a directed acyclic graph where each node in the graph is a task and the edges in the graph are transitions from one task to another.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_workflow_workflow_definition" "workflow_workflow_definition1" {
+  name = "workflow_workflow_definition1"
+  output_definition = [{
+    object_type = "workflow.PrimitiveDataType"
+    name        = "status"
+    label       = "status"
+    required    = false
+    default = {
+      object_type = "workflow.DefaultValue"
+      override    = false
+      value       = null
+    }
+    display_meta = {
+      object_type        = "workflow.DisplayMeta"
+      inventory_selector = true
+      widget_type        = None
+    }
+  }]
+  tasks = [{
+    description = "Create a vm"
+    label       = "StartTask"
+    name        = "StartTask"
+    next_task   = "NewCloudVirtualMachineAndMonitor1"
+    object_type = "workflow.StartTask"
+  }]
+  ui_rendering_data {
+    positions = [{
+      name = "StartTask"
+      x    = 209
+      y    = 79
+    }]
+    version = 1
+    catalog = {
+      object_type = "workflow.Catalog"
+      moid        = var.workflow_catalog
+    }
+    workflow_metadata = {
+      object_type = "workflow.WorkflowMetadata"
+      moid        = var.workflow_workflow_metadata
+    }
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

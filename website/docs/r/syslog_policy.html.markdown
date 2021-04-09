@@ -8,6 +8,43 @@ description: |-
 
 # Resource: intersight_syslog_policy
 The syslog policy configure the syslog server to receive CIMC log entries.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_syslog_policy" "syslog1" {
+  name        = "syslog1"
+  description = "demo syslog policy"
+  local_clients {
+    min_severity = "emergency"
+    object_type  = "syslog.LocalFileLoggingClient"
+  }
+  remote_clients {
+    enabled      = true
+    hostname     = "10.10.10.10"
+    port         = 514
+    protocol     = "tcp"
+    min_severity = "emergency"
+    object_type  = "syslog.RemoteLoggingClient"
+  }
+  remote_clients {
+    enabled      = true
+    hostname     = "2001:0db8:0a0b:12f0:0000:0000:0000:0004"
+    port         = 64000
+    protocol     = "udp"
+    min_severity = "emergency"
+    object_type  = "syslog.RemoteLoggingClient"
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -78,43 +115,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_syslog_policy" "syslog1" {
-  name        = "syslog1"
-  description = "demo syslog policy"
-  local_clients {
-    min_severity = "emergency"
-    object_type  = "syslog.LocalFileLoggingClient"
-  }
-  remote_clients {
-    enabled      = true
-    hostname     = "10.10.10.10"
-    port         = 514
-    protocol     = "tcp"
-    min_severity = "emergency"
-    object_type  = "syslog.RemoteLoggingClient"
-  }
-  remote_clients {
-    enabled      = true
-    hostname     = "2001:0db8:0a0b:12f0:0000:0000:0000:0004"
-    port         = 64000
-    protocol     = "udp"
-    min_severity = "emergency"
-    object_type  = "syslog.RemoteLoggingClient"
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_syslog_policy` can be imported using the Moid of the object, e.g.

@@ -8,6 +8,32 @@ description: |-
 
 # Resource: intersight_smtp_policy
 Name that identifies the SMTP Policy.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_smtp_policy" "smtp1" {
+  enabled      = false
+  name         = "smtp1"
+  description  = "testing smtp policy"
+  smtp_port    = 32
+  min_severity = "critical"
+  smtp_server  = "10.10.10.1"
+  sender_email = "IMCSQAAutomation@cisco.com"
+  smtp_recipients = [
+    "aw@cisco.com",
+    "cy@cisco.com",
+  "dz@cisco.com"]
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -73,31 +99,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_smtp_policy" "smtp1" {
-  enabled      = false
-  name         = "smtp1"
-  description  = "testing smtp policy"
-  smtp_port    = 32
-  min_severity = "critical"
-  smtp_server  = "10.10.10.1"
-  sender_email = "IMCSQAAutomation@cisco.com"
-  smtp_recipients = [
-    "aw@cisco.com",
-    "cy@cisco.com",
-    "dz@cisco.com"]
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-}
-```
 
 ## Import
 `intersight_smtp_policy` can be imported using the Moid of the object, e.g.

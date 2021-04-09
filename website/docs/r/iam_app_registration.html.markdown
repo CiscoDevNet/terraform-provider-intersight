@@ -32,6 +32,27 @@ To register an OAuth2 application, the following information must be provided.
 4) A short description of the application
 5) A list of redirect URLs
 When an AppRegistration is created, a unique OAuth2 clientId is generated and returned in the HTTP response.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_app_registration" "iam_app_registration1" {
+  client_name         = "name1"
+  client_type         = confidential
+  revoke              = true
+  renew_client_secret = true
+  roles = [
+    {
+      moid        = var.iam_role
+      object_type = "iam.Role"
+    }
+  ]
+  permission {
+    moid        = var.iam_permission
+    object_type = "iam.Permission"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

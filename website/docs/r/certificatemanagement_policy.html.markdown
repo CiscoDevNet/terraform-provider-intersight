@@ -8,6 +8,26 @@ description: |-
 
 # Resource: intersight_certificatemanagement_policy
 Certificate Management policy models a reusable certificate and private key configuration that can be applied to multiple servers via profile association.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_certificatemanagement_policy" "certificatemanagement_policy1" {
+  name        = "certificatemanagement_policy1"
+  description = "certificate management policy"
+  certificates = [{
+    object_type = "certificatemanagement.Imc"
+    certificate = {
+      object_type = "x509.Certificate"
+      enabled     = true
+    }
+  }]
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_fabric_multicast_policy
 A policy to configure Multicast settings for all the Virtual LAN networks.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
+  name               = "fabric_multicast_policy1"
+  description        = "fabric multicast policy"
+  querier_ip_address = "192.168.0.1"
+  querier_state      = "Enabled"
+  snooping_state     = "Enabled"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

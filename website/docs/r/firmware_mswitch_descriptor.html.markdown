@@ -8,6 +8,12 @@ description: |-
 
 # Resource: intersight_firmware_mswitch_descriptor
 Descriptor to uniquely identify a mSwitch component.
+## Usage Example
+### Resource Creation
+
+resource "intersight_firmware_mswitch_descriptor" "firmware_mswitch_descriptor" {
+    moid            = var.firmware_mswitch_descriptor_moid 
+}
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

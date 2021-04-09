@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_externalsite_authorization
 An authentication request that will be used to get authorized from external repository like cisco.com in order to download the image. This MO creation is a one time configuration before calling firmware.Upgrade API. This MO has to be modified with updated details whenever the user has updated the credentials in external repository.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_externalsite_authorization" "externalsite_authorization1" {
+  password        = "ChangeMe"
+  repository_type = "cisco"
+  user_id         = "user1"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

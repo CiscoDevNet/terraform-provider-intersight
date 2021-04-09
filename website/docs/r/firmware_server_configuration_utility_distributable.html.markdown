@@ -8,6 +8,35 @@ description: |-
 
 # Resource: intersight_firmware_server_configuration_utility_distributable
 A server configuration utility image distributed by Cisco.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_server_configuration_utility_distributable" "scu1" {
+  name = "SCU-6.0.4c nfs"
+  nr_source {
+    object_type = "softwarerepository.CifsServer"
+    additional_properties = jsonencode({
+      FileLocation = "/path/to/filelocation"
+      RemoteIp     = "10.10.10.1"
+      RemoteShare  = "/path/to/remote/share"
+      RemoteFile   = "/path/to/remote/file"
+      Username     = "user"
+      Password     = "ChangeMe"
+      MountOption  = "sec=ntlm"
+    })
+  }
+  vendor     = "Cisco"
+  nr_version = "6.0.(4c)"
+  supported_models = [
+    "C-series"
+  ]
+  description = "Cisco SCU-6.0(4c)"
+  catalog {
+    moid = var.catalog
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -112,35 +141,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_firmware_server_configuration_utility_distributable" "scu1" {
-  name = "SCU-6.0.4c nfs"
-  nr_source {
-    object_type = "softwarerepository.CifsServer"
-    additional_properties = jsonencode({
-      FileLocation: "10.10.10.1/Public/iso/scu-604c.iso"
-      RemoteIp: "10.10.10.1"
-      RemoteShare: "/Public/iso/"
-      RemoteFile: "scu-604c.iso"
-      Username: "user"
-      Password: "ChangeMe"
-      MountOption: "sec=ntlm"
-    })
-  }
-  vendor = "Cisco"
-  nr_version = "6.0.(4c)"
-  supported_models = [
-    "C-series",
-  ]
-  description = "Cisco SCU-6.0(4c)"
-  catalog {
-    moid = var.catalog
-  }
-}
-```
 
 ## Import
 `intersight_firmware_server_configuration_utility_distributable` can be imported using the Moid of the object, e.g.

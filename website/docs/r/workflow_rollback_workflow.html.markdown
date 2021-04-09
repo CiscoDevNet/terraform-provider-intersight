@@ -8,6 +8,25 @@ description: |-
 
 # Resource: intersight_workflow_rollback_workflow
 Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_workflow_rollback_workflow" {
+  action                   = "start"
+  continue_on_Task_failure = false
+  primary_workflow {
+    object_type = "workflow/WorkflowInfos"
+    moid        = var.workflow_workflowInfos
+  }
+  selected_tasks = [{
+    object_type    = "workflow.RollbackWorkflowTask"
+    name           = "taskInfo_name"
+    ref_name       = "reference_name_task_info_rollback"
+    task_info_moid = var.workflow.rollback_workflowTask
+  }]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

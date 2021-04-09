@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_iam_private_key_spec
 Parameters used to generate a private key.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_private_key_spec" "iam_private_key_spec1" {
+  certificate_request {
+    email_address = "email@example.com"
+    name          = "iam_certificate_request1"
+    self_signed   = false
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

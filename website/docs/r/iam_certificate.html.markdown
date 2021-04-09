@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_iam_certificate
 Holds a certificate, signed by a CAcert.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_certificate" "iam_certificate1" {
+  certificate {
+    moid        = intersight_certificate_iam.iam1.id
+    object_type = "x509.Certificate"
+    enabled     = true
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

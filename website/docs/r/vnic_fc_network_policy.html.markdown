@@ -8,6 +8,21 @@ description: |-
 
 # Resource: intersight_vnic_fc_network_policy
 A Fibre Channel Network policy governs the vSAN configuration for the virtual interfaces.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
+  name = "v_fc_network1"
+  vsan_settings {
+    id = 100
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -66,21 +81,6 @@ This complex property has following sub-properties:
   + `id`:(int) VSAN ID of the virtual interface in FI attached server (1-4094). 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
-  name = "v_fc_network1"
-  vsan_settings {
-    id = 100
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_vnic_fc_network_policy` can be imported using the Moid of the object, e.g.

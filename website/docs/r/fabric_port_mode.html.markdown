@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_fabric_port_mode
 Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_port_mode" "fabric_port_mode1" {
+  custom_mode   = "FibreChannel"
+  port_id_end   = 5000
+  port_id_start = 1000
+  slot_id       = 100
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

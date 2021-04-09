@@ -8,6 +8,47 @@ description: |-
 
 # Resource: intersight_adapter_config_policy
 An Adapter Configuration Policy configures the Ethernet and Fibre-Channel settings for the VIC adapter.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_adapter_config_policy" "adapter_config1" {
+  name        = "adapter_config1"
+  description = "test policy"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  settings {
+    object_type = "adapter.AdapterConfig"
+    slot_id     = "1"
+    eth_settings {
+      lldp_enabled = true
+      object_type  = "adapter.EthSettings"
+    }
+    fc_settings {
+      object_type = "adapter.FcSettings"
+      fip_enabled = true
+    }
+  }
+  settings {
+    object_type = "adapter.AdapterConfig"
+    slot_id     = "MLOM"
+    eth_settings {
+      object_type  = "adapter.EthSettings"
+      lldp_enabled = true
+    }
+    fc_settings {
+      object_type = "adapter.FcSettings"
+      fip_enabled = true
+    }
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -87,46 +128,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_adapter_config_policy" "adapter_config1" {
-  name        = "adapter_config1"
-  description = "test policy"
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  settings {
-    object_type="adapter.AdapterConfig"
-    slot_id = "1"
-    eth_settings {
-      lldp_enabled = true
-      object_type="adapter.EthSettings"
-    }
-    fc_settings {
-      object_type="adapter.FcSettings"
-      fip_enabled = true
-    }
-  }
-  settings {
-    object_type="adapter.AdapterConfig"
-    slot_id = "MLOM"
-    eth_settings {
-      object_type="adapter.EthSettings"
-      lldp_enabled = true
-    }
-    fc_settings {
-      object_type="adapter.FcSettings"
-      fip_enabled = true
-    }
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-}
-```
 
 ## Import
 `intersight_adapter_config_policy` can be imported using the Moid of the object, e.g.

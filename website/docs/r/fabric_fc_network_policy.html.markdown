@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_fabric_fc_network_policy
 A policy for all the Virtual SAN networks to be deployed on the Fabric Interconnect.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy1" {
+  name            = "fabric_eth_network_policy1"
+  description     = "fabric ethernet network policy"
+  enable_trunking = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

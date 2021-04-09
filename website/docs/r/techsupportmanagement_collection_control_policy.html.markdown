@@ -8,6 +8,19 @@ description: |-
 
 # Resource: intersight_techsupportmanagement_collection_control_policy
 Policy to control techsupport collection for a specific account.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_techsupportmanagement_collection_control_policy" {
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  tech_support_collection = "Enable"
+
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

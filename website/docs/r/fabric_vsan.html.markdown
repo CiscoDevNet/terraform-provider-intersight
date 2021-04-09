@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_fabric_vsan
 Configuration object sent by user to create VSAN configurations.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_vsan" "fabric_vsan1" {
+  default_zoning       = "Enabled"
+  fc_zone_sharing_mode = "Active"
+  fcoe_vlan            = 100
+  name                 = "fabric_vsan1"
+  vsan_id              = 10
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

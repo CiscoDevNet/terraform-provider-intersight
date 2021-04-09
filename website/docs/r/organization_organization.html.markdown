@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_organization_organization
 Organization provides multi-tenancy within an account. Multiple organizations can be present under an account. Resources are associated to organization using resource groups. Organization can have heterogeneous resources. Resources can be shared among multiple organizations. Organizations are associated to user permissions and privileges can be specified to provide access control. User can have access to multiple organizations in same permission and with different privileges on each organization.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_organization_organization" "organization1" {
+  name = "organization1"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  resource_groups = [{
+    moid        = intersight_resource_group.resource1.id
+    object_type = "resource.Group"
+  }]
+
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

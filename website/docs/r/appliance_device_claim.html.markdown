@@ -18,6 +18,26 @@ device when users claim and unclaim devices repeatedly.
 Claiming an endpoint device is a multi-step operation. The Intersight Appliance
 starts a workflow with multiple tasks to process the device claim request. The status
 of the device claim operation can be obtained from the claim workflow.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_appliance_device_claim" "appliance_device_claim1" {
+  name           = "appliance_device_claim1"
+  device_id      = "WZP23350KMU"
+  hostname       = "10.106.233.221"
+  message        = "Endpoint claimed successfully"
+  platform_type  = "IMC"
+  request_id     = "718"
+  security_token = "8707352528DC"
+  status         = "completed"
+  username       = "admin"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

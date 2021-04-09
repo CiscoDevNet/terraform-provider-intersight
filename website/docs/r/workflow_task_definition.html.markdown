@@ -8,6 +8,39 @@ description: |-
 
 # Resource: intersight_workflow_task_definition
 Used to define a task which can be included within a workflow. Task definition conveys the intent that we want to achieve with the task. We can have a standalone task definition that is bound to a single implementation for that task, or we can define an TaskDefinition that will serve as the interface task definition which is linked to multiple implementation tasks. Each implemented TaskDefinition will be bound to its own implementation so we can achieve a case where single TaskDefinition has multiple implementations.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_workflow_task_definition" "workflow_task_definition1" {
+  name = "workflow_task_definition1"
+  properties {
+    object_type    = "workflow.Properties"
+    external_meta  = true
+    retry_count    = 6
+    retry_delay    = 60
+    retry_policy   = "Fixed"
+    support_status = "Supported"
+    time_out       = 60
+    time_retry     = "retry"
+  }
+  label   = "inventory.ScopedInventoryTask"
+  version = 1
+  catalog {
+    object_type = "workflow.Catalog"
+    moid        = var.workflow_catalog
+  }
+  interface_task {
+    object_type = "workflow.TaskDefinition"
+    moid        = var.workflow_task_definition
+  }
+  task_metadata {
+    object_type = "workflow.TaskMetadata"
+    moid        = var.workflow_task_metadata
+  }
+
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

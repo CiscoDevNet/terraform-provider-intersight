@@ -8,6 +8,29 @@ description: |-
 
 # Resource: intersight_tam_security_advisory
 Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_tam_security_advisory" "tam_security_advisory1" {
+  name           = "tam_security_advisories1"
+  operation_type = "create"
+  state          = "ready"
+  severity = {
+    object_type = "tam.SecurityAdvisoryDetails"
+  }
+  actions = {
+    object_type = "tam.SecurityAdvisoryDetails"
+    alert_type  = "psirt"
+  }
+  type   = "psirt"
+  status = "final"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

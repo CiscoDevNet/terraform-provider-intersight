@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_server_profile
 A profile specifying configuration settings for a physical server.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_server_profile" "server1" {
+  name   = "server1"
+  action = "No-op"
+  tags {
+    key   = "server"
+    value = "demo"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -130,22 +147,6 @@ This complex property has following sub-properties:
 ### Custom keywords
 These are
 * `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_server_profile" "server1" {
-  name = "server1"
-  action = "No-op"
-  tags {
-    key = "server"
-    value = "demo"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_server_profile` can be imported using the Moid of the object, e.g.

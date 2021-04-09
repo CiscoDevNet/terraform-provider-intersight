@@ -8,6 +8,19 @@ description: |-
 
 # Resource: intersight_license_license_reservation_op
 Customer operation object to request reservation code.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_license_license_reservation_op" "license_license_reservation_op1" {
+  generate_request_code = true
+  generate_return_code  = true
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

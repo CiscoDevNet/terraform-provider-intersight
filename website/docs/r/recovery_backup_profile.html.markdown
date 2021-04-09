@@ -8,6 +8,33 @@ description: |-
 
 # Resource: intersight_recovery_backup_profile
 Backup profile to initiate on-demand or scheduled backups at end points.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_recovery_backup_profile" "recovery_backup_profile1" {
+  name        = "recovery_backup_profile1"
+  description = "recovery_backup_profile"
+  type        = "instance"
+  config_context {
+    object_type    = "policy.ConfigContext"
+    control_action = "deploy"
+  }
+  enabled = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  backup_config {
+    object_type = "recovery.BackupProfile"
+    moid        = var.recovery_backup_profile
+  }
+  schedule_config {
+    object_type = "recovery.ScheduleConfigPolicies"
+    moid        = var.recovery_schedule_config_policy
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

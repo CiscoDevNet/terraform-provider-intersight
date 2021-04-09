@@ -10,6 +10,25 @@ which is a block of encoded text that is given to a Certificate Authority when a
 # Resource: intersight_iam_certificate_request
 The information required to generate a certificate signing request (CSR),
 which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_certificate_request" "iam_certificate_request1" {
+  email_address = "email@example.com"
+  name          = "iam_certificate_request1"
+  self_signed   = false
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  certificate {
+    moid        = intersight_certificate_iam.iam1.id
+    object_type = "x509.Certificate"
+    enabled     = true
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

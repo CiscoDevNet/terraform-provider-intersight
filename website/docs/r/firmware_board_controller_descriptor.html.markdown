@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_firmware_board_controller_descriptor
 Descriptor to uniquely identify a board controller.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_board_controller_descriptor" "firmware_board_controller_descriptor1" {
+  description = "firmware board controller descriptor"
+  model       = "UCSC-C220-M3S"
+  version     = "5.0"
+  vendor      = "Cisco Systems Inc"
+  revision    = "0"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

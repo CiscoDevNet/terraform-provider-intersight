@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_fabric_port_operation
 PortOperation objects allows the user to alter the state of the port.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_port_operation" "fabric_port_operation1" {
+  aggregate_port_id = 0
+  port_id           = 1
+  slot_id           = 100
+  config_state      = "Applied"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

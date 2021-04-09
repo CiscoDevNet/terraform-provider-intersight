@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_hyperflex_cisco_hypervisor_manager
 A hypervisor manager to manage Cisco HyperFlex compute clusters and is available per user account.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_cisco_hypervisor_manager" "hyperflex_cisco_hypervisor_manager1" {
+  name = "hyperflex_cisco_hypervisor_manager1"
+  registered_device {
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

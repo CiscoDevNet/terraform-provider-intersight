@@ -18,6 +18,35 @@ The client owns the private key and is responsible for maintaining the confident
 The client must have a cryptographic provider compatible with the cryptographic parameters specified in the API key. For example, if you use the powershell SDK to write the client, make sure the appropriate cryptographic providers are installed on the local system. If you create an RSA key pair with modulus set to 2048, the client must support 2048-bit private keys. A maximum of 3 API keys per user is allowed.
 API keys are used to sign HTTP requests as follows: 1. A cryptographic digest of the body of the HTTP request is calculated using one of the supported cryptographic hash algorithms. 2. The value of the digest is base-64 encoded in the `Digest` HTTP header. 3. A signature is calculated as specified in the HTTP signature scheme, and the signature is added to the `Authorization` HTTP request header.
 All published Intersight SDKs support API keys.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_api_key" "iam_api_key1" {
+  hash_algorithm = "SHA256"
+  key_spec = {
+    class_id    = "pkix.RsaAlgorithm"
+    modulus     = 2048
+    name        = "RSA"
+    object_type = "pkix.RsaAlgorithm"
+  }
+  parent = {
+    moid        = var.iam_user
+    object_type = "iam.User"
+  }
+  permission = {
+    moid        = var.iam_permission
+    object_type = "iam.Permission"
+  }
+  purpose           = "admin api"
+  shared_scope      = ""
+  signing_algorithm = "RSASSA-PKCS1-v1_5"
+  user = {
+    moid        = var.iam_user
+    object_type = "iam.User"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

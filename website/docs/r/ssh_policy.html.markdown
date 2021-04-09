@@ -8,6 +8,26 @@ description: |-
 
 # Resource: intersight_ssh_policy
 Secure shell policy on the endpoint.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_ssh_policy" "ssh_policy1" {
+  name        = "ssh_policy1"
+  description = "ssh policy"
+  enabled     = true
+  port        = 22
+  timeout     = 1800
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

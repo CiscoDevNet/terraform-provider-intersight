@@ -8,6 +8,56 @@ description: |-
 
 # Resource: intersight_vnic_eth_adapter_policy
 An Ethernet adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. For each VIC Virtual Ethernet Interface various features like VXLAN, NVGRE, ARFS, Interrupt settings, and TCP Offload settings can be configured.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
+  name                    = "v_eth_adapter1"
+  rss_settings            = true
+  uplink_failback_timeout = 5
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  vxlan_settings {
+    enabled = false
+  }
+
+  nvgre_settings {
+    enabled = true
+  }
+
+  arfs_settings {
+    enabled = true
+  }
+
+  interrupt_settings {
+    coalescing_time = 125
+    coalescing_type = "MIN"
+    nr_count        = 4
+    mode            = "MSI"
+  }
+  completion_queue_settings {
+    nr_count  = 4
+    ring_size = 1
+  }
+  rx_queue_settings {
+    nr_count  = 4
+    ring_size = 512
+  }
+  tx_queue_settings {
+    nr_count  = 4
+    ring_size = 512
+  }
+  tcp_offload_settings {
+    large_receive = true
+    large_send    = true
+    rx_checksum   = true
+    tx_checksum   = true
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -126,55 +176,6 @@ This complex property has following sub-properties:
   + `enabled`:(bool) Status of the Virtual Extensible LAN Protocol on the virtual ethernet interface. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
-  name = "v_eth_adapter1"
-  rss_settings = true
-  uplink_failback_timeout = 5
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  vxlan_settings {
-    enabled = false
-  }
-
-  nvgre_settings {
-    enabled = true
-  }
-
-  arfs_settings {
-    enabled = true
-  }
-
-  interrupt_settings {
-    coalescing_time = 125
-    coalescing_type = "MIN"
-    nr_count = 4
-    mode = "MSI"
-  }
-  completion_queue_settings {
-    nr_count = 4
-    ring_size = 1
-  }
-  rx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tx_queue_settings {
-    nr_count = 4
-    ring_size = 512
-  }
-  tcp_offload_settings {
-    large_receive = true
-    large_send = true
-    rx_checksum = true
-    tx_checksum = true
-  }
-}
-```
 
 ## Import
 `intersight_vnic_eth_adapter_policy` can be imported using the Moid of the object, e.g.

@@ -8,6 +8,24 @@ description: |-
 
 # Resource: intersight_capability_cimc_firmware_descriptor
 Descriptor that identifies the server's redfish integration capability using cimc firmware info.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_capability_cimc_firmware_descriptor" "capability_cimc_firmware_descriptor1" {
+  capabilities = [
+    {
+      moid        = var.capability_cimc_firmware_descriptor
+      object_type = "capability.CimcFirmwareDescriptor"
+    }
+  ]
+  description = "capability of cimc firmware descriptor"
+  model       = "UCSC-C240-M5L"
+  revision    = "0"
+  vendor      = "Cisco Systems Inc"
+  version     = "4.1(3)"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,32 @@ description: |-
 
 # Resource: intersight_asset_target
 Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_asset_target" "asset_target1" {
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+  assist = None
+  connections = [
+    {
+      credential  = None
+      object_type = "asset.IntersightDeviceConnectorConnection"
+    }
+  ]
+  moid = var.asset_target1
+  name = "C240-WZP21330QS5"
+  registered_device {
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }
+  status      = NotConnected
+  target_type = "IMCM5"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

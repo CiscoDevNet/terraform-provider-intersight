@@ -8,6 +8,33 @@ description: |-
 
 # Resource: intersight_resource_group
 A group of REST resources, such as a group of compute.Blade MOs. A ResourceGroup can contain static members which are specified as a set of object references, or it can contain dynamic members, which are specified through OData query filters. A Resource can be part of multiple resource groups.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_resource_group" "resource_group1" {
+  name = "resource_group1"
+  per_type_combined_selector = [{
+    combined_selector    = "( Tags/any(tt/Key eq \"Intersight.LicenseTier\" and t/Value eq Essential) )"
+    empty_filter         = false
+    object_type          = "resource.PerTypeCombinedSelector"
+    selector_object_type = "compute.Blade"
+  }]
+  qualifier = "Allow-Selectors"
+  selectors = [{
+    object_type = "resource.Selector"
+    selector    = "/api/v1/asset/DeviceRegistrations?$filter=Moid in(\"intersight_asset_device_registrations_registeration1.id\")"
+  }]
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_fabric_port_policy
 A policy for all the physical ports of the Fabric Interconnect.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_port_policy" "fabric_port_policy1" {
+  name         = "fabric_port_policy1"
+  description  = "fabric port policy"
+  device_model = "UCS-FI-6454"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

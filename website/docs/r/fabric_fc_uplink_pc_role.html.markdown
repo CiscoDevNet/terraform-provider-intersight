@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_fabric_fc_uplink_pc_role
 Object sent by user to configure a fc uplink port-channel on the collection of ports.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
+  pcid         = 100
+  admin_speed  = "Auto"
+  fill_pattern = "Idle"
+  vsanid       = 10
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

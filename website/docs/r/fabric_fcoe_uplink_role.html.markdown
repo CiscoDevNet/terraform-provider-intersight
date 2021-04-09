@@ -8,6 +8,16 @@ description: |-
 
 # Resource: intersight_fabric_fcoe_uplink_role
 Configuration object sent by user to create a fcoe uplink port.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_fcoe_uplink_role" "fabric_fcoe_uplink_role1" {
+  pcid              = 100
+  admin_speed       = "Auto"
+  ud_ld_admin_state = true
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

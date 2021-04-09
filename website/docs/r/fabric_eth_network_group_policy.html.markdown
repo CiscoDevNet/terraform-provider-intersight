@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_fabric_eth_network_group_policy
 The allowed VLAN/s on an interface.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_policy1" {
+  name            = "AUTO_FabricEthNetworkGroupPolicy"
+  target_platform = "FIAttached"
+  vlan_settings {
+    default_vlan  = 1
+    allowed_vlans = "313"
+    mode          = "ACCESS"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

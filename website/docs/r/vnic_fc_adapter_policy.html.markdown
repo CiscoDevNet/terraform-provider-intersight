@@ -8,6 +8,61 @@ description: |-
 
 # Resource: intersight_vnic_fc_adapter_policy
 A Fibre Channel Adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. You can enable FCP Error Recovery, change the default settings of Queues and Interrupt handling for performance enhancement.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
+  name                    = "v_fc_adapter1"
+  error_detection_timeout = 100000
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  error_recovery_settings {
+    enabled           = false
+    io_retry_count    = 255
+    io_retry_timeout  = 50
+    link_down_timeout = 240000
+    port_down_timeout = 240000
+  }
+
+  flogi_settings {
+    retries = 0
+    timeout = 255000
+  }
+
+  interrupt_settings {
+    mode = "MSIx"
+  }
+
+  io_throttle_count = 1024
+  lun_count         = 1024
+  lun_queue_depth   = 254
+
+  plogi_settings {
+    retries = 255
+    timeout = 255000
+  }
+  resource_allocation_timeout = 100000
+
+  rx_queue_settings {
+    nr_count  = 1
+    ring_size = 128
+  }
+  tx_queue_settings {
+    nr_count  = 1
+    ring_size = 128
+  }
+
+
+  scsi_queue_settings {
+    nr_count  = 8
+    ring_size = 152
+  }
+
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -103,61 +158,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
-  name = "v_fc_adapter1"
-  error_detection_timeout = 100000
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  error_recovery_settings {
-    enabled = false
-    io_retry_count = 255
-    io_retry_timeout = 50
-    link_down_timeout = 240000
-    port_down_timeout = 240000
-  }
-
-  flogi_settings {
-    retries = 0
-    timeout = 255000
-  }
-
-  interrupt_settings {
-    mode = "MSIx"
-  }
-
-  io_throttle_count = 1024
-  lun_count = 1024
-  lun_queue_depth = 254
-
-  plogi_settings {
-    retries = 255
-    timeout = 255000
-  }
-  resource_allocation_timeout = 100000
-
-  rx_queue_settings {
-    nr_count = 1
-    ring_size = 128
-  }
-  tx_queue_settings {
-    nr_count = 1
-    ring_size = 128
-  }
-
-
-  scsi_queue_settings {
-    nr_count = 8
-    ring_size = 152
-  }
-
-}
-```
 
 ## Import
 `intersight_vnic_fc_adapter_policy` can be imported using the Moid of the object, e.g.

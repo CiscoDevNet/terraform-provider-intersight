@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_firmware_unsupported_version_upgrade
 This represents an operation managed object used for upgrading equipment that cannot be discovered due to unsupported firmware. Currently, it only supports blade upgrades.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_unsupported_version_upgrade" "firmware_unsupported_version_upgrade1" {
+  download_error    = ""
+  download_progress = 20
+  download_retries  = 5
+  upgrade_status    = "None"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

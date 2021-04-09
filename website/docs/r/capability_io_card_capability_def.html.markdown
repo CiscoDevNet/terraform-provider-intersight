@@ -8,6 +8,15 @@ description: |-
 
 # Resource: intersight_capability_io_card_capability_def
 Chassis Iocard module capabilities.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_capability_io_card_capability_def" "capability_io_card_capability_def1" {
+  name         = "capability_io_card_capability_def1"
+  dc_supported = true
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

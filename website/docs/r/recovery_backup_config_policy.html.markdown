@@ -8,6 +8,26 @@ description: |-
 
 # Resource: intersight_recovery_backup_config_policy
 Backup config policy which contains all the required inputs to do backup on a local or remote server.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_recovery_backup_config_policy" "recovery_backup_config_policy1" {
+  name             = "recovery_backup_config_policy1"
+  description      = "recovery_backup_config_policy"
+  file_name_prefix = "file_name"
+  location_type    = ""
+  password         = "ChangeMe"
+  path             = "path/to/backup"
+  protocol         = "SCP"
+  retention_count  = 120
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  user_name = "backup_server_name"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

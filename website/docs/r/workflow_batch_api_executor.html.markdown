@@ -16,6 +16,19 @@ body and a response parser specification in the form of content.Grammar object.
 Batch API associates the list of API requests to be executed as part of single
 task execution. Each API request takes the request body and a response parser
 specification.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_workflow_batch_api_executor" "workflow_batch_api_executor1" {
+  name                  = "workflow_batch_api_executor1"
+  retry_from_failed_api = false
+  task_definition {
+    object_type = "workflow.TaskDefinition"
+    moid        = var.workflow_task_definition
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

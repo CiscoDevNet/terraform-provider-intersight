@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_firmware_nxos_descriptor
 Descriptor to uniquely identify a Fabric interconnect.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_nxos_descriptor" "firmware_nxos_descriptor1" {
+  description = "firmware nxos descriptor"
+  version     = "7.0(3)I7(9)"
+  vendor      = "Cisco"
+  revision    = "0"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

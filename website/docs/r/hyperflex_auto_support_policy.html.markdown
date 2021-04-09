@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_hyperflex_auto_support_policy
 A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_auto_support_policy" "hyperflex_auto_support_policy1" {
+  admin_state               = true
+  service_ticket_receipient = "test@example.com"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_auto_support_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

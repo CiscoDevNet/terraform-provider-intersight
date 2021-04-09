@@ -8,6 +8,36 @@ description: |-
 
 # Resource: intersight_sdcard_policy
 Policy for configuring SD Card settings on endpoint.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_sdcard_policy" "sdcard1" {
+  name        = "sdcard1"
+  description = "test policy"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  partitions {
+    type        = "OS"
+    object_type = "sdcard.Partition"
+
+    virtual_drives {
+      enable      = true
+      object_type = "sdcard.OperatingSystem"
+      additional_properties = jsonencode({
+        Name = "Hypervisor"
+      })
+    }
+  }
+
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -80,35 +110,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_sdcard_policy" "sdcard1" {
-  name        = "sdcard1"
-  description = "test policy"
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  partitions {
-    type        = "OS"
-    object_type = "sdcard.Partition"
-
-    virtual_drives {
-      enable      = true
-      object_type = "sdcard.OperatingSystem"
-      additional_properties = jsonencode({
-        Name = "Hypervisor"
-      })
-    }
-  }
-
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-}
-```
 
 ## Import
 `intersight_sdcard_policy` can be imported using the Moid of the object, e.g.

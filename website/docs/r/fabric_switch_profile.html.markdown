@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_fabric_switch_profile
 This specifies configuration policies for a managed network switch.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_switch_profile" "fabric_switch_profile1" {
+  name        = "fabric_switch_profile1"
+  description = "fabric switch profile"
+  type        = "instance"
+  action      = "Deploy"
+  config_context {
+    object_type    = "policy.ConfigContext"
+    control_action = "deploy"
+    error_state    = "Config-error"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -12,6 +12,28 @@ managed objects will be in terminal states.
 Restore tracks requests to restore the Intersight Appliance. There will be only
 one Restore managed object with a 'Started' state at any time. All other Restore
 managed objects will be in terminal states.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_appliance_restore" "appliance_restore1" {
+  name        = "appliance_restore1"
+  filename    = "name_of_the_file.txt"
+  protocol    = "SFTP"
+  remote_host = "appliance-remote.hostname.com"
+  remote_path = "path/to/the/remote/host"
+  remote_port = 22
+  username    = "authenicate_user"
+  password    = "ChangeMe"
+  message = [
+    "Message generated during restore process"
+  ]
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

@@ -8,6 +8,31 @@ description: |-
 
 # Resource: intersight_workflow_custom_data_type_definition
 Captures a customized data type definition that can be used for task or workflow input/output. This can be reused across multiple tasks and workflow definitions.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_workflow_custom_data_type_definition" "workflow_custom_data_type_definition1" {
+  name        = "workflow_custom_data_type_definition1"
+  description = "captures a customized data type definition for workflow input/output"
+  label       = "custom_data_dfn1"
+  catalog {
+    object_type = "workflow.Catalog"
+    moid        = var.workflow_catalog
+  }
+  parameter_set = [{
+    object_type       = "workflow.ParameterSet"
+    name              = "show-netapp"
+    condition         = "eq"
+    control_parameter = "PlatformType"
+    enable_parameters = [
+      "ExpandedVolumeCapacity"
+    ]
+    value = "storage.NetAppCluster"
+
+  }]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

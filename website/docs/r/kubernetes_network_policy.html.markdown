@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_kubernetes_network_policy
 A policy specifying the CIDR for internal networks in a Kubernetes cluster like POD network, and Service network.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_network_policy" "kubernetes_network_policy1" {
+  description = "kubernetes network policy"
+  name        = "kubernetes_network_policy1"
+  cni_type    = "Calico"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

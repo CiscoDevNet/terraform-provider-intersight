@@ -8,6 +8,20 @@ description: |-
 
 # Resource: intersight_softwarerepository_authorization
 User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_authorization" "softwarerepository_authorization" {
+  password        = "ChangeMe"
+  repository_type = "IntersightCloud"
+  user_id         = "user_1"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

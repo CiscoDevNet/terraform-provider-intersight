@@ -8,6 +8,30 @@ description: |-
 
 # Resource: intersight_iam_user
 The Intersight account user.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_user" "iam_user1" {
+  email = "email@example.com"
+  idpreference {
+    moid        = var.iam_idp_reference
+    object_type = "iam.IdpReference"
+  }
+  name = "user1"
+  parent {
+    moid        = var.iam_idp_reference
+    object_type = "iam.IdpReference"
+  }
+  permissions = [
+    {
+      moid        = var.iam_idp_reference
+      object_type = "iam.Permission"
+    }
+  ]
+  user_id_or_email = "email@example.com"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

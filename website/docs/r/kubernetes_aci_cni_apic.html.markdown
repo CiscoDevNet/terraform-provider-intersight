@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_kubernetes_aci_cni_apic
 Internally generated object of claimed APIC device known to Razor.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_aci_cni_apic" "kubernetes_aci_cni_apic1" {
+  num_aci_cni_profiles = 3
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  registered_device {
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,25 @@ description: |-
 
 # Resource: intersight_hyperflex_ucsm_config_policy
 A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_ucsm_config_policy" "hyperflex_ucsm_config_policy1" {
+  name        = "hyperflex_ucsm_config_policy1"
+  description = "hyperflex ucsm configuration policy"
+  kvm_ip_range {
+    end_addr   = "10.10.10.100"
+    gateway    = "10.10.10.1"
+    netmask    = "255.255.255.0"
+    start_addr = "10.10.10.10"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

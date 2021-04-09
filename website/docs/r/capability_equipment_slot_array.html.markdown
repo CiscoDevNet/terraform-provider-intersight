@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_capability_equipment_slot_array
 Type to represent additional switch specific capabilities.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_capability_equipment_slot_array" "capability_equipment_slot_array1" {
+  name   = "capability_equipment_slot_array1"
+  pid    = "UCS-FI-6454"
+  sku    = "CON-NCF4P-FI6454CH"
+  height = 4.4
+  width  = 43.9
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

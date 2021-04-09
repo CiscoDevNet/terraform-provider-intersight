@@ -8,6 +8,19 @@ description: |-
 
 # Resource: intersight_hyperflex_software_version_policy
 A policy capturing software versions for different HyperFlex Cluster compatible components ( like HyperFlex Data Platform, Hypervisor, etc. ), that the user wishes to apply on the HyperFlex cluster.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_software_version_policy" "hyperflex_software_version_policy1" {
+  hxdp_version = "4.5(1a)"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_software_version_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

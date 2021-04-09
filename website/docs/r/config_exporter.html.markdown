@@ -10,6 +10,22 @@ mo to track the export operation progress.
 # Resource: intersight_config_exporter
 All export operations are captured as Exporter instances. Users shall use this Exporter
 mo to track the export operation progress.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_config_exporter" "config_exporter1" {
+  name = "config_exporter1"
+  items = [{
+    object_type = "config.MoRef"
+    moid        = var.config_mo_ref
+  }]
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
