@@ -8,6 +8,24 @@ description: |-
 
 # Resource: intersight_fabric_switch_control_policy
 A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range of the FI.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy1" {
+  name        = "fabric_switch_control_policy1"
+  description = "fabric switch control policy"
+  mac_aging_settings {
+    mac_aging_option = "Custom"
+    mac_aging_time   = 3000
+  }
+  vlan_port_optimization_enabled = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

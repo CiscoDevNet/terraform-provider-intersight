@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_firmware_storage_controller_descriptor
 Descriptor to uniquely identify a storage controller.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_storage_controller_descriptor" "firmware_storage_controller_descriptor1" {
+  description = "firmware storage controller descriptor"
+  model       = "UCSC-RAID-M5"
+  version     = "C220M5SX"
+  vendor      = "Cisco Systems, Inc"
+  revision    = "0"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

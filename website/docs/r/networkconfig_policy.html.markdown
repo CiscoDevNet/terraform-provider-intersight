@@ -8,6 +8,28 @@ description: |-
 
 # Resource: intersight_networkconfig_policy
 Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on Cisco IMC.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_networkconfig_policy" "network_config1" {
+  name                     = "network_config1"
+  description              = "test policy"
+  enable_dynamic_dns       = false
+  preferred_ipv6dns_server = "::"
+  enable_ipv6              = true
+  enable_ipv6dns_from_dhcp = false
+  preferred_ipv4dns_server = "10.10.10.1"
+  alternate_ipv4dns_server = "10.10.10.1"
+  alternate_ipv6dns_server = "::"
+  dynamic_dns_domain       = ""
+  enable_ipv4dns_from_dhcp = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -80,27 +102,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_networkconfig_policy" "network_config1" {
-  name                     = "network_config1"
-  description              = "test policy"
-  enable_dynamic_dns       = false
-  preferred_ipv6dns_server = "::"
-  enable_ipv6              = true
-  enable_ipv6dns_from_dhcp = false
-  preferred_ipv4dns_server = "10.10.10.1"
-  alternate_ipv4dns_server = "10.10.10.1"
-  alternate_ipv6dns_server = "::"
-  dynamic_dns_domain       = ""
-  enable_ipv4dns_from_dhcp = false
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_networkconfig_policy` can be imported using the Moid of the object, e.g.

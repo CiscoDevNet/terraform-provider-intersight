@@ -8,6 +8,26 @@ description: |-
 
 # Resource: intersight_fcpool_pool
 Pool represents a collection of WWN addresses that can be allocated to VHBAs of a server profile.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fcpool_pool" "fcpool_pool1" {
+  name             = "fcpool_pool1"
+  description      = "fcpool pool"
+  assignment_order = "sequential"
+  id_blocks = [{
+    object_type = "fcpool.Block"
+    from        = "50:00:00:00:00:00:00:00"
+    to          = "5F:FF:FF:FF:FF:FF:FF:FF"
+  }]
+  pool_purpose = "To create fcpool"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

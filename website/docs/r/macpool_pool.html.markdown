@@ -8,6 +8,19 @@ description: |-
 
 # Resource: intersight_macpool_pool
 Pool represents a collection of MAC addresses that can be allocated to VNICs of a server profile.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_macpool_pool" "macpool_pool1" {
+  name = "AUTO_test_macpool"
+  mac_blocks {
+    object_type = "macpool.Block"
+    from        = "0025B59d6816"
+    to          = "70DF2F870640"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

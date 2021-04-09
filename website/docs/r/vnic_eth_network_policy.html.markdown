@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_vnic_eth_network_policy
 An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_eth_network_policy" "v_eth_network1" {
+  name = "v_eth_network1"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  vlan_settings {
+    object_type  = "vnic.VlanSettings"
+    default_vlan = 1
+    mode         = "ACCESS"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -68,22 +85,6 @@ This complex property has following sub-properties:
   + `mode`:(string) Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_vnic_eth_network_policy" "v_eth_network1" {
-  name = "v_eth_network1"
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  vlan_settings {
-    object_type = "vnic.VlanSettings"
-    default_vlan = 1
-    mode = "ACCESS"
-  }
-}
-```
 
 ## Import
 `intersight_vnic_eth_network_policy` can be imported using the Moid of the object, e.g.

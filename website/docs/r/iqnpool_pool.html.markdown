@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_iqnpool_pool
 Pool represents a collection of iSCSI Qualified Names (IQNs) for use as initiator identifiers by iSCSI vNICs.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iqnpool_pool" "iqnpool_pool1" {
+  name             = "ippool_pool1"
+  description      = "ippool pool"
+  assignment_order = "sequential"
+  prefix           = "iqn1.alpha.com"
+  iqn_suffix_blocks {
+    moid        = var.iqn_suffix_blocks
+    object_type = "iqn.SuffixBlocks"
+    suffix      = "alphadc-1"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

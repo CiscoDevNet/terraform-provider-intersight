@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_hyperflex_hxap_datacenter
 A datacenter object in HyperFlex Application Platform. It is a pre-defined object created internally by the system which acts as a container (logically) for all other objects (Host, VirtualMachine, Volume etc).
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_hxap_datacenter" "hyperflex_hxap_datacenter1" {
+  name = "hyperflex_hxap_datacenter1"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  registered_device {
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

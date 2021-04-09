@@ -8,6 +8,61 @@ description: |-
 
 # Resource: intersight_boot_precision_policy
 Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_boot_precision_policy" "boot_precision1" {
+  name                     = "boot_precision1"
+  description              = "test policy"
+  configured_boot_mode     = "Legacy"
+  enforce_uefi_secure_boot = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  boot_devices {
+    enabled     = true
+    name        = "scu-device-hdd"
+    object_type = "boot.LocalDisk"
+    additional_properties = jsonencode({
+      Slot = "MRAID"
+      Bootloader = {
+        Description = ""
+        Name        = ""
+        ObjectType  = "boot.Bootloader"
+        Path        = ""
+      }
+    })
+  }
+  boot_devices {
+    enabled     = true
+    name        = "NIIODCIMCDVD"
+    object_type = "boot.VirtualMedia"
+    additional_properties = jsonencode({
+      Subtype = "cimc-mapped-dvd"
+    })
+  }
+  boot_devices {
+    enabled     = true
+    name        = "hdd"
+    object_type = "boot.LocalDisk"
+    additional_properties = jsonencode({
+      Slot = "MRAID"
+      Bootloader = {
+        Description = ""
+        Name        = ""
+        ObjectType  = "boot.Bootloader"
+        Path        = ""
+      }
+    })
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -84,61 +139,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "boot_precision1"
-  description              = "test policy"
-  configured_boot_mode     = "Legacy"
-  enforce_uefi_secure_boot = false
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  boot_devices {
-    enabled     = true
-    name        = "scu-device-hdd"
-    object_type = "boot.LocalDisk"
-    additional_properties = jsonencode({
-      Slot = "MRAID"
-      Bootloader = {
-        Description = ""
-        Name        = ""
-        ObjectType  = "boot.Bootloader"
-        Path        = ""
-      }
-    })
-  }
-  boot_devices {
-    enabled     = true
-    name        = "NIIODCIMCDVD"
-    object_type = "boot.VirtualMedia"
-    additional_properties = jsonencode({
-      Subtype = "cimc-mapped-dvd"
-    })
-  }
-  boot_devices {
-    enabled     = true
-    name        = "hdd"
-    object_type = "boot.LocalDisk"
-    additional_properties = jsonencode({
-      Slot = "MRAID"
-      Bootloader = {
-        Description = ""
-        Name        = ""
-        ObjectType  = "boot.Bootloader"
-        Path        = ""
-      }
-    })
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-
-}
-```
 
 ## Import
 `intersight_boot_precision_policy` can be imported using the Moid of the object, e.g.

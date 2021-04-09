@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_capability_psu_descriptor
 Descriptor that uniquely identifies a power supply.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_capability_psu_descriptor" "capability_psu_descriptor1" {
+  description = "capability psu descriptor"
+  model       = "UCSC-PSU1-1050W"
+  vendor      = "Cisco Systems Inc"
+  version     = "3.0(2)"
+  capabilities = [
+    {
+      moid        = var.capability_psu_descriptor
+      object_type = "capability.PsuDescriptor"
+    }
+  ]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

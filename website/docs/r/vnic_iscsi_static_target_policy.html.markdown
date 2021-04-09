@@ -8,6 +8,26 @@ description: |-
 
 # Resource: intersight_vnic_iscsi_static_target_policy
 Configuration parameters that defines the reachability of iSCSI Target portal.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_iscsi_static_target_policy" "vnic_iscsi_static_target_policy" {
+  name        = "vnic_iscsi_static_target_policy1"
+  description = "vnic iscsi static target policy"
+  ip_address  = "10.1.1.1"
+  port        = 860
+  lun = {
+    object_type = "vnic.Lun"
+    bootable    = true
+    lun_id      = 4
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

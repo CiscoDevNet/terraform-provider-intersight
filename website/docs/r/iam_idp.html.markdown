@@ -8,6 +8,29 @@ description: |-
 
 # Resource: intersight_iam_idp
 The SAML identity provider such as Cisco, that has been used to log in to Intersight.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_idp" "idp1" {
+  domain_name          = "cisco.com"
+  enable_single_logout = true
+  name                 = "Cisco"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  parent {
+    moid        = var.iam_system
+    object_type = "iam.System"
+  }
+  system {
+    moid        = var.iam_system
+    object_type = "iam.System"
+  }
+  type = "saml"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

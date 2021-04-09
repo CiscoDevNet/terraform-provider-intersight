@@ -18,6 +18,21 @@ virtual machine.
 The diagnostic user account is protected by two separate authentication mechanisms: user's
 password and Cisco CT-engine generated key. Only the Intersight Appliance's local account
 administrator has the privileges to use this REST API.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_appliance_diag_setting" "appliance_diag_setting1" {
+  name      = "appliance_diag_setting1"
+  device_id = "WZP23350KMU"
+  hostname  = "10.106.233.221"
+  password  = "ChangeMe"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

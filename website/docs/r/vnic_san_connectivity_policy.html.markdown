@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_vnic_san_connectivity_policy
 SAN connectivity policy determines the network storage resources and the connections between the server and the SAN on the network. This policy enables configuration of vHBAs that the servers use to communicate with the storage network.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vnic_san_connectivity_policy" "vnic_san1" {
+  name = "vnic_san1"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -80,21 +96,6 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_vnic_san_connectivity_policy" "vnic_san1" {
-  name = "vnic_san1"
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-}
-```
 
 ## Import
 `intersight_vnic_san_connectivity_policy` can be imported using the Moid of the object, e.g.

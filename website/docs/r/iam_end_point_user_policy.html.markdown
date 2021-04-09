@@ -8,6 +8,28 @@ description: |-
 
 # Resource: intersight_iam_end_point_user_policy
 Enables creation of local users on endpoints.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_end_point_user_policy" "user_policy1" {
+  name        = "user_policy1"
+  description = "test policy"
+
+  password_properties {
+    enforce_strong_password  = true
+    enable_password_expiry   = true
+    password_expiry_duration = 50
+    password_history         = 5
+    notification_period      = 1
+    grace_period             = 2
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -81,28 +103,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_iam_end_point_user_policy" "user_policy1" {
-  name = "user_policy1"
-  description = "test policy"
-
-  password_properties {
-    enforce_strong_password = true
-    enable_password_expiry = true
-    password_expiry_duration = 50
-    password_history = 5
-    notification_period = 1
-    grace_period = 2
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_iam_end_point_user_policy` can be imported using the Moid of the object, e.g.

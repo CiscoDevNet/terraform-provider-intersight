@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_hyperflex_cluster_storage_policy
 A policy specifying HyperFlex cluster storage settings (optional).
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_cluster_storage_policy" "hyperflex_cluster_storage_policy1" {
+  disk_partition_cleanup = true
+  vdi_optimization       = true
+  logical_avalability_zone_config = {
+    auto_config = false
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_cluster_storage_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

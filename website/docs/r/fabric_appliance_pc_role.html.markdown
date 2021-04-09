@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_fabric_appliance_pc_role
 Configuration object sent by user to create an appliance port channel.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_appliance_pc_role" "fabric_appliance_pc_role1" {
+  pcid        = 100
+  admin_speed = "Auto"
+  mode        = "trunk"
+  priority    = "Best Effort"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

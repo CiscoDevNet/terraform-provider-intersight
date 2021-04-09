@@ -8,6 +8,33 @@ description: |-
 
 # Resource: intersight_softwarerepository_operating_system_file
 An operating system image that resides either in an external repository or has been imported to the local repository. If the file is available in the local repository, it is marked as cached. If not, it represents a pointer to a file in an external repository.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_operating_system_file" "osf1" {
+  nr_version  = "ESXi 6.7 U2"
+  description = "ESXi6.7U2 without answers"
+  name        = "ESXi6.7 w/o cifs 21"
+
+  nr_source {
+    additional_properties = jsonencode({
+      FileLocation = "10.10.10.1/Public/iso/esx67u2.iso"
+      RemoteIp     = "10.10.10.1"
+      RemoteShare  = "/Public/iso/"
+      RemoteFile   = "esx67u2.iso"
+      Username     = "user"
+      Password     = "ChangeMe"
+      MountOption  = "sec=ntlm"
+    })
+    object_type = "softwarerepository.CifsServer"
+  }
+  vendor = "VMware"
+  catalog {
+    moid = var.catalog
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -77,33 +104,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_softwarerepository_operating_system_file" "osf1" {
-  nr_version = "ESXi 6.7 U2"
-  description = "ESXi6.7U2 without answers"
-  name = "ESXi6.7 w/o cifs 21"
-
-  nr_source {
-    additional_properties = jsonencode({
-      FileLocation = "10.10.10.1/Public/iso/esx67u2.iso"
-      RemoteIp = "10.10.10.1"
-      RemoteShare = "/Public/iso/"
-      RemoteFile = "esx67u2.iso"
-      Username = "user"
-      Password = "ChangeMe"
-      MountOption = "sec=ntlm"
-    })
-    object_type = "softwarerepository.CifsServer"
-  }
-  vendor = "VMware"
-  catalog {
-    moid = var.catalog
-  }
-}
-```
 
 ## Import
 `intersight_softwarerepository_operating_system_file` can be imported using the Moid of the object, e.g.

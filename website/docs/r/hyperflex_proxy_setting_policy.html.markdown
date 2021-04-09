@@ -8,6 +8,27 @@ description: |-
 
 # Resource: intersight_hyperflex_proxy_setting_policy
 A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_policy1" {
+  hostname    = "10.10.10.1"
+  port        = 32628
+  username    = ""
+  password    = "ChangeMe"
+  description = "This is autoProxy"
+  tags {
+    key   = "test"
+    value = "autoProxy"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_proxy_setting_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

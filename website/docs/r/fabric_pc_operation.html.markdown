@@ -8,6 +8,16 @@ description: |-
 
 # Resource: intersight_fabric_pc_operation
 PcOperation objects allows the user to alter the state of the port channel.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_fabric_pc_operation" "fabric_pc_operation1" {
+  admin_state  = "Enabled"
+  config_state = "Applied"
+  pcid         = 100
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

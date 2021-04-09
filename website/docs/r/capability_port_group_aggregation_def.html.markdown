@@ -8,6 +8,16 @@ description: |-
 
 # Resource: intersight_capability_port_group_aggregation_def
 FEX/IOCARD module port group aggregation capabilities.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_capability_port_group_aggregation_def" "capability_port_group_aggregation_def1" {
+  name                   = "capability_port_group_aggregation_def1"
+  aggregation_cap        = "operational"
+  hw_40_g_port_group_cap = false
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

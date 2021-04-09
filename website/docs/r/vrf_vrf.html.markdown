@@ -8,6 +8,19 @@ description: |-
 
 # Resource: intersight_vrf_vrf
 Virtual Routing and Forwarding (VRF) is a networking technology that implements an isolated Layer 3 domain.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_vrf_vrf" "vrf_vrf1" {
+  name        = "vrf_vrf1"
+  description = "virtual routing and forwarding"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

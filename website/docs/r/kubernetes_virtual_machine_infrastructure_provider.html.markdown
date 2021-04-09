@@ -8,6 +8,15 @@ description: |-
 
 # Resource: intersight_kubernetes_virtual_machine_infrastructure_provider
 Infrastructure backend for providing virtual machines from a target.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_virtual_machine_infrastructure_provider" "kubernetes_virtual_machine_infrastructure_provider1" {
+  description = "kubernetes virtual machine infrastructure provider"
+  name        = "kubernetes_virtual_machine_infrastructure_provider1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

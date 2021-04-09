@@ -16,6 +16,36 @@ OS installation. The OS installation can be started in the target server by doin
 a POST on this MO.
 The requests to this MO starts a OS installation workflow that can be tracked
 using workflow engine MO workflow.WorkflowInfo.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_os_install" "os1" {
+  name = "InstallTemplatee165"
+  server {
+    object_type = "compute.RackUnit"
+    moid        = var.server_moid
+  }
+  image {
+    object_type = "softwarerepository.OperatingSystemFile"
+    moid        = intersight_softwarerepository_operating_system_file.osf1.moid
+  }
+  osdu_image {
+    moid        = intersight_firmware_server_configuration_utility_distributable.scu1.moid
+    object_type = "firmware.ServerConfigurationUtilityDistributable"
+  }
+  answers {
+    answer_file = var.answer_file
+    nr_source   = "File"
+  }
+  description    = "Install Template 5"
+  install_method = "vMedia"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 
@@ -167,36 +197,6 @@ This complex property has following sub-properties:
 ### Custom keywords
 These are
 * `wait_for_completion`:(bool) This model object can trigger workflows. Use this option to wait for all running workflows to reach a complete state. Default value is True i.e. wait.
-## Usage Example
-### Resource Creation
-
-```hcl
-resource "intersight_os_install" "os1" {
-  name = "InstallTemplatee165"
-  server {
-    object_type = "compute.RackUnit"
-    moid = var.server_moid
-  }
-  image {
-    object_type = "softwarerepository.OperatingSystemFile"
-    moid = intersight_softwarerepository_operating_system_file.osf1.moid
-  }
-  osdu_image {
-    moid = intersight_firmware_server_configuration_utility_distributable.scu1.moid
-    object_type = "firmware.ServerConfigurationUtilityDistributable"
-  }
-  answers {
-    answer_file = var.answer_file
-    nr_source = "File"
-  }
-  description = "Install Template 5"
-  install_method = "vMedia"
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_os_install` can be imported using the Moid of the object, e.g.

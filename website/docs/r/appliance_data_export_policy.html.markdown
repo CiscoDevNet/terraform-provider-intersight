@@ -28,6 +28,18 @@ Export Policy configuration is organized hierarchically as follows.
 When the DataExportPolicy for a category is enabled/disabled, all the sub-category configurations
 are enabled/disabled as well. For example, if you enable/disable Inventory, all its sub-category
 configurations (ie. Network and Storage) are also enabled/disabled.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_appliance_data_export_policy" "appliance_data_export_policy1" {
+  name = "appliance_data_export1"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

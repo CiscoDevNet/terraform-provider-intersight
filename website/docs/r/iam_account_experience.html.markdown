@@ -8,6 +8,27 @@ description: |-
 
 # Resource: intersight_iam_account_experience
 The beta features enabled for the specified account.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_account_experience" "iam_account_experience1" {
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_iam_account.account1.id
+  }
+  features = [
+    {
+      feature     = "UnrecognizedValue"
+      object_type = "iam.FeatureDefinition"
+    }
+  ]
+  parent = {
+    moid        = var.iam_account
+    object_type = "iam.Account"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

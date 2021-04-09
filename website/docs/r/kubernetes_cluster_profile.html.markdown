@@ -8,6 +8,31 @@ description: |-
 
 # Resource: intersight_kubernetes_cluster_profile
 Cluster profile specifies the config profile for a Kubernetes cluster. It also depicts operations to control the life cycle of a Kubernetes cluster.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
+  description = "kubernetes cluster profile"
+  name        = "kubernetes_cluster_profile1"
+  type        = "instance"
+  action      = "Deploy"
+  config_context {
+    control_action = "Deploy"
+    error_state    = "Pre-config-error"
+  }
+  managed_mode = "Managed"
+  status       = "Deploying"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  workflow_info {
+    object_type = "workflow.WorkflowInfo"
+    moid        = var.workflow_workflow_info
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,23 @@ description: |-
 
 # Resource: intersight_kubernetes_cluster
 Inventories a Kubernetes cluster state. A Cluster object is automatically created when a Kubernetes API server is configured for a cluster.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_cluster" "kubernetes_cluster1" {
+  connection_status = "Connected"
+  name              = "kubernetes_cluster1"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+  registered_device = [{
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

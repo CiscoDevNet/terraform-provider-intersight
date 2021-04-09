@@ -8,6 +8,38 @@ description: |-
 
 # Resource: intersight_tam_advisory_definition
 An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_tam_advisory_definition" "tam_advisory_definition" {
+  name           = "tam_advisory_definition"
+  operation_type = "create"
+  state          = "ready"
+  severity = {
+    object_type = "tam.SecurityAdvisoryDetails"
+  }
+  actions = {
+    object_type = "tam.SecurityAdvisoryDetails"
+    alert_type  = "psirt"
+  }
+  type = "securityAdvisory"
+  api_data_sources {
+    object_type = "tam.ApiDataSource"
+    name        = "api_data_source_1"
+    type        = "intersightApi"
+
+  }
+  advisory_details = {
+    object_type = "tam.SecurityAdvisoryDetails"
+    description = "tam security advisory"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,25 @@ description: |-
 
 # Resource: intersight_hyperflex_cluster_backup_policy_deployment
 Record of HyperFlex Cluster backup policy deployment.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_cluster_backup_policy_deployment" "hyperflex_cluster_backup_policy_deployment1" {
+  discovered      = true
+  source_detached = true
+  target_detached = true
+  replication_schedule {
+    object_type     = "hyperflex.ReplicationSchedule"
+    moid            = var.hyperflex_replication_schedule
+    backup_interval = 1440
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

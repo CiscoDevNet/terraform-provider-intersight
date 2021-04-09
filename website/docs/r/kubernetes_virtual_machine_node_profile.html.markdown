@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_kubernetes_virtual_machine_node_profile
 A profile specifying configuration settings for a Virtual Machine node. It is auto-generated based on the NodeGroupProfile and VirtualMachineNodePolicy configuration. Users can do operations like Drain, Cordon, Rebuild on a node.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_virtual_machine_node_profile" "kubernetes_virtual_machine_node_profile1" {
+  description = "kubernetes virtual machine node profile"
+  name        = "kubernetes_virtual_machine_node_profile1"
+  type        = "instance"
+  action      = "Deploy"
+  config_context {
+    control_action = "Deploy"
+    error_state    = "Pre-config-error"
+  }
+  cloud_provider = "noProvider"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_iam_ip_access_management
 The access management based on IP address.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_ip_access_management" "iam_ip_access_management1" {
+  enable = true
+  security_holder {
+    moid        = var.iam_security_holder
+    object_type = "iam.SecurityHolder"
+  }
+  parent {
+    moid        = var.iam_system
+    object_type = "iam.System"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

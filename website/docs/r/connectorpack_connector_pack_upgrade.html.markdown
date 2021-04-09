@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_connectorpack_connector_pack_upgrade
 Used to download or install connector packs on the target device.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_connectorpack_connector_pack_upgrade" "connectorpack_connector_pack_upgrade1" {
+  connector_pack_op_type = "Install"
+  workflow_info {
+    object_type = "workflow.WorkflowInfo"
+    moid        = var.workflow_workflow_info
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

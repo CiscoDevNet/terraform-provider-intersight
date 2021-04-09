@@ -10,6 +10,21 @@ This must be specified while creating the vKVM session to gain tunneled access.
 # Resource: intersight_kvm_tunnel
 Tunneled Virtual KVM access to the vKVM console of a server.
 This must be specified while creating the vKVM session to gain tunneled access.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kvm_tunnel" "kvm_tunnel1" {
+  device {
+    moid        = var.asset_device_registration
+    object_type = "asset.DeviceRegistration"
+  }
+  server {
+    moid        = var.compute_rack_unit
+    object_type = "compute.RackUnit"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

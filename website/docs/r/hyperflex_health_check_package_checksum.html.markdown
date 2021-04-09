@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_hyperflex_health_check_package_checksum
 HyperFlex health check Debian Package SHA512 checksum.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_health_check_package_checksum" "hyperflex_health_check_package_checksum1" {
+  checksum     = "a5dd9d00d84a2e9f2bc5df326fd9b8f1878d79c431b8c7f5032a52b47d993d63"
+  name         = "hx-health-monitor"
+  package_name = "hx-health-monitor_1.0.0_69_x86_64.deb"
+  time_stamp   = "2021-01-14T00:14:19Z"
+  version      = "1.0.0"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

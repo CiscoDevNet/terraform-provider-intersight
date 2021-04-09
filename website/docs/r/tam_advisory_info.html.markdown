@@ -8,6 +8,18 @@ description: |-
 
 # Resource: intersight_tam_advisory_info
 State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_tam_advisory_info" "tam_advisory_info" {
+  state = "active"
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account`:(HashMap) -(Computed) A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

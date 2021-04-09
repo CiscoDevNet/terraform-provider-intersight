@@ -10,6 +10,21 @@ It defines node settings such as IP address configuration for hypervisor managem
 # Resource: intersight_hyperflex_node_profile
 A configuration profile per node in the HyperFlex cluster.
 It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_node_profile" "hyperflex_node_profile1" {
+  description = "This is hyperflex_node_profile1"
+  assigned_server = {
+    moid = var.hyperflex_node_profile
+  }
+  cluster_profile = {
+    moid = var.hyperflex_cluster_profile
+  }
+  name = "ucsback-10G-3nodehx-cluster-NP1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

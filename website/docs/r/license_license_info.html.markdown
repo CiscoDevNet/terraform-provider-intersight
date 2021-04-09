@@ -12,6 +12,19 @@ the feature set defined for the license entitlement is granted to the customer.
 License state information for a specific license entitlement. Essentials license entitlement is supported currently.
 licenseState attribute is used for license enforcement. When license state is one of TrialPeriod, Compliance, or OutOfCompliance,
 the feature set defined for the license entitlement is granted to the customer.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_license_license_info" "license_license_info1" {
+  evaluation_period = 30
+  extra_evaluation  = 15
+  tags {
+    key   = "main_license"
+    value = "license_license_info1"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_license_data`:(HashMap) - A reference to a licenseAccountLicenseData resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

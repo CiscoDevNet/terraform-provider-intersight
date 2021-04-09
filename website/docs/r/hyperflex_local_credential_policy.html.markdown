@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_hyperflex_local_credential_policy
 A policy specifying credentials for HyperFlex cluster such as controller VM password, hypervisor username, and password.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_local_credential_policy" "hyperflex_local_credential_policy1" {
+  hxdp_root_pwd               = "ChangeMe"
+  hypervisor_admin            = "admin"
+  hypervisor_admin_pwd        = "ChangeMe"
+  factory_hypervisor_password = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_local_credential_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

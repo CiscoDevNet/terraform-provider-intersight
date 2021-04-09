@@ -8,6 +8,22 @@ description: |-
 
 # Resource: intersight_hyperflex_hxdp_version
 A HyperFlex Data Platform version.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_hxdp_version" "hyperflex_hxdp_version1" {
+  app_catalog {
+    object_type = "hyperflex.AppCatalog"
+    moid        = "hyperflex_app_catalog"
+  }
+  parent {
+    object_type = "hyperflex.AppCatalog"
+    moid        = var.hyperflex_app_catalog
+  }
+  version = "4.0(2e)"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

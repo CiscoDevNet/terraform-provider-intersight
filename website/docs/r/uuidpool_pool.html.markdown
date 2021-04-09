@@ -8,6 +8,28 @@ description: |-
 
 # Resource: intersight_uuidpool_pool
 Pool represents a collection of UUID items that can be allocated to server profiles.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_uuidpool_pool" "uuidpool_pool1" {
+  name             = "uuidpool_pool1"
+  description      = "uuidpool_pool"
+  assignment_order = "default"
+  size             = 774325
+  prefix           = "123e4567-e89b-42d3"
+  uuid_suffix_blocks = [{
+    object_type = "uuidpool.UuidBlock"
+    from        = "123e4567-e89b-42d3"
+    to          = "123e4567-e89b-84e6"
+  }]
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

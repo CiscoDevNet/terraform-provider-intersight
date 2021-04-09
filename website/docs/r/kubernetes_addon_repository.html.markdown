@@ -8,6 +8,24 @@ description: |-
 
 # Resource: intersight_kubernetes_addon_repository
 Docker registry or helm repository which hosts helm charts and docker images.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kubernetes_addon_repository" "kubernetes_addon_repository1" {
+  insecure_skip_verification = false
+  name                       = "kubernetes_addon_repository1"
+  username                   = "admin1"
+  catalog {
+    moid        = var.kubernetes_catalog
+    object_type = "kubernetes.Catalog"
+  }
+  registered_device {
+    moid        = intersight_registered_device.device1.id
+    object_type = "asset.DeviceRegistrations"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

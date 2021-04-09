@@ -8,6 +8,31 @@ description: |-
 
 # Resource: intersight_hyperflex_node_config_policy
 A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_node_config_policy" "hyperflex_node_config_policy1" {
+  mgmt_ip_range {
+    end_addr   = "10.225.68.240"
+    gateway    = "10.225.68.1"
+    netmask    = "255.255.255.0"
+    start_addr = "10.225.68.238"
+  }
+  hxdp_ip_range {
+    end_addr   = "10.225.68.243"
+    gateway    = "10.225.68.1"
+    netmask    = "255.255.255.0"
+    start_addr = "10.225.68.241"
+  }
+  node_name_prefix = "EdgeM4"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
+  name = "hyperflex_node_config_policy1"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

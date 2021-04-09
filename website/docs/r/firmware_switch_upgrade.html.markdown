@@ -8,6 +8,33 @@ description: |-
 
 # Resource: intersight_firmware_switch_upgrade
 Firmware upgrade operation for Fabric Interconnects that downloads the image located at Cisco/appliance/user provided HTTP repository or uses the image from a network share and upgrade. Direct download is used for upgrade that uses the image from a Cisco repository or an appliance repository. Network share is used for upgrade that use the image from a network share from your data center.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_switch_upgrade" "firmware_switch_upgrade1" {
+  direct_download {
+    object_type   = "firmware.DirectDownload"
+    image_source  = "cisco"
+    password      = "ChangeMe"
+    upgradeoption = "chassis_upgrade_full"
+    username      = "admin1"
+  }
+  network_share {
+    cifs_server {
+      file_location = "10.1.1.1"
+      object_type   = "firmware.NetworkShare"
+      mount_options = "none"
+    }
+    map_type      = "cifs"
+    upgradeoption = "nw_upgrade_full"
+    username      = "admin1"
+  }
+  skip_estimate_impact = false
+  status               = "SUCCESSFUL"
+  upgrade_type         = "network_upgrade"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

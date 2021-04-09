@@ -8,6 +8,27 @@ description: |-
 
 # Resource: intersight_hyperflex_server_firmware_version
 The server firmware version represents the UCS server firmware details.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_hyperflex_server_firmware_version" "hyperflex_server_firmware_version1" {
+  app_catalog {
+    object_type = "hyperflex.AppCatalog"
+    moid        = "hyperflex_app_catalog"
+  }
+  parent {
+    object_type = "hyperflex.AppCatalog"
+    moid        = var.hyperflex_app_catalog
+  }
+  server_firmware_version_entries = [
+    {
+      object_type = "hyperflex.ServerFirmwareVersionEntry"
+      moid        = var.hyperflex_server_firmware_version_entry
+    }
+  ]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

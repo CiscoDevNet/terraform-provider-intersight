@@ -8,6 +8,15 @@ description: |-
 
 # Resource: intersight_iam_end_point_user_role
 Mapping of endpoint user to endpoint roles.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_end_point_user_role" "iam_end_point_user_role1" {
+  enabled  = true
+  password = "ChangeMe"
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

@@ -8,6 +8,38 @@ description: |-
 
 # Resource: intersight_software_ucsd_distributable
 A UCSD connector pack image distributed by Cisco.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_software_ucsd_distributable" "software_ucsd_distributable1" {
+  name        = "software_ucsd_distributable1"
+  sha_512_sum = "<sha_512_checksum>"
+  size        = 7471044747
+  component_meta = [{
+    object_type     = "firmware.ComponentMeta"
+    component_label = "BIOS"
+  }]
+  image_path    = ""
+  model         = ""
+  mdfid         = ""
+  platform_type = ""
+  release_date {
+    object_type = "softwarerepository.Release"
+    moid        = var.release
+  }
+  catalog {
+    object_type = "softwarerepository.Catalog"
+    moid        = var.catalog
+  }
+  vendor = "Cisco"
+  distributable_metas = [{
+    object_type = "firmware.DistributableMeta"
+  }]
+  release_url      = "< url for release notes of this image >"
+  suppotred_models = ["HyperFlex Data Platform"]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

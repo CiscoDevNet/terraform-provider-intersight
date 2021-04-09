@@ -8,6 +8,25 @@ description: |-
 
 # Resource: intersight_kvm_session
 Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_kvm_session" "kvm_session1" {
+  device {
+    moid        = var.asset_device_registration
+    object_type = "asset.DeviceRegistration"
+  }
+  server {
+    moid        = var.compute_rack_unit
+    object_type = "compute.RackUnit"
+  }
+  tunnel {
+    moid        = var.kvm_tunnel
+    object_type = "kvm.Tunnel"
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

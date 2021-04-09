@@ -8,6 +8,31 @@ description: |-
 
 # Resource: intersight_iam_resource_roles
 ResourceRoles provides a way to specify the roles associated with a resource like organization in a permission which can be assigned to a user or user group.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_iam_resource_roles" "iam_resource_roles1" {
+  parent {
+    moid        = var.iam_permission
+    object_type = "iam.Permission"
+  }
+  permission {
+    moid        = var.iam_permission
+    object_type = "iam.Permission"
+  }
+  resource {
+    moid        = var.organization_organization
+    object_type = "organization.Organization"
+  }
+  roles = [
+    {
+      moid        = var.iam_role
+      object_type = "iam.Role"
+    }
+  ]
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(Computed) The Account ID for this managed object. 

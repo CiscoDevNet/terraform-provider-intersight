@@ -8,6 +8,17 @@ description: |-
 
 # Resource: intersight_firmware_eula
 End User License Agreement (EULA) acceptance status for an account to access cisco.com and download software.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_firmware_eula" "firmware_eula1" {
+  account {
+    object_type = "iam.Account"
+    moid        = intersight_account_iam.iam1.id
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `accepted`:(bool)(Computed) EULA acceptance status for the account. 

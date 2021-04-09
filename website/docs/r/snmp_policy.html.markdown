@@ -8,6 +8,47 @@ description: |-
 
 # Resource: intersight_snmp_policy
 Policy to configure SNMP settings on endpoint.
+## Usage Example
+### Resource Creation
+
+```hcl
+resource "intersight_snmp_policy" "snmp1" {
+  name                    = "snmp1"
+  description             = "testing smtp policy"
+  enabled                 = true
+  snmp_port               = 1983
+  access_community_string = "dummy123"
+  community_access        = "Disabled"
+  trap_community          = "TrapCommunity"
+  sys_contact             = "aanimish"
+  sys_location            = "Karnataka"
+  engine_id               = "vvb"
+  snmp_users {
+    name             = "demouser"
+    privacy_type     = "AES"
+    auth_password    = var.auth_password
+    privacy_password = var.privacy_password
+    security_level   = "AuthPriv"
+    auth_type        = "SHA"
+  }
+  snmp_traps {
+    destination = "10.10.10.1"
+    enabled     = false
+    port        = 660
+    type        = "Trap"
+    user        = "demouser"
+    nr_version  = "V3"
+  }
+  profiles {
+    moid        = intersight_server_profile.server1.id
+    object_type = "server.Profile"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization
+  }
+}
+```
 ## Argument Reference
 The following arguments are supported:
 * `access_community_string`:(string) The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long. 
@@ -94,46 +135,6 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
-## Usage Example
-### Resource Creation
-```hcl
-resource "intersight_snmp_policy" "snmp1" {
-  name                    = "snmp1"
-  description             = "testing smtp policy"
-  enabled                 = true
-  snmp_port               = 1983
-  access_community_string = "dummy123"
-  community_access        = "Disabled"
-  trap_community          = "TrapCommunity"
-  sys_contact             = "aanimish"
-  sys_location            = "Karnataka"
-  engine_id               = "vvb"
-  snmp_users {
-    name             = "demouser"
-    privacy_type     = "AES"
-    auth_password    = var.auth_password
-    privacy_password = var.privacy_password
-    security_level   = "AuthPriv"
-    auth_type        = "SHA"
-  }
-  snmp_traps {
-    destination = "10.10.10.1"
-    enabled     = false
-    port        = 660
-    type        = "Trap"
-    user        = "demouser"
-    nr_version     = "V3"
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-}
-```
 
 ## Import
 `intersight_snmp_policy` can be imported using the Moid of the object, e.g.
