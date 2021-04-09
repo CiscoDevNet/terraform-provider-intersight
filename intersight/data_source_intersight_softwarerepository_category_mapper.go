@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceSoftwarerepositoryCategoryMapperRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"category": {
 				Description: "The category of the model series.",
 				Type:        schema.TypeString,
@@ -24,6 +33,18 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"file_type": {
 				Description: "The type of distributable image, example huu, scu, driver, os.\n* `Distributable` - Stores firmware host utility images and fabric images.\n* `DriverDistributable` - Stores driver distributable images.\n* `ServerConfigurationUtilityDistributable` - Stores server configuration utility images.\n* `OperatingSystemFile` - Stores operating system iso images.\n* `HyperflexDistributable` - It stores HyperFlex images.",
 				Type:        schema.TypeString,
@@ -33,6 +54,12 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Description: "Cisco software repository image category identifier.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -55,6 +82,12 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Description: "The regex that all images of this category follow.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"nr_source": {
 				Description: "The image can be downloaded from cisco.com or external cloud store.\n* `Cisco` - External repository hosted on cisco.com.\n* `IntersightCloud` - Repository hosted by the Intersight Cloud.\n* `LocalMachine` - The file is available on the local client machine. Used as an upload source type.\n* `NetworkShare` - External repository in the customer datacenter. This will typically be a file server.",
@@ -85,6 +118,10 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategoryMapper{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("category"); ok {
 		x := (v.(string))
 		o.SetCategory(x)
@@ -93,6 +130,14 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("file_type"); ok {
 		x := (v.(string))
 		o.SetFileType(x)
@@ -100,6 +145,10 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	if v, ok := d.GetOk("mdf_id"); ok {
 		x := (v.(string))
 		o.SetMdfId(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -116,6 +165,10 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	if v, ok := d.GetOk("regex_pattern"); ok {
 		x := (v.(string))
 		o.SetRegexPattern(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
@@ -136,8 +189,12 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	}
 	countResponse, _, responseErr := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryCategoryMapper: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwarerepositoryCategoryMapperList.GetCount()
 	var i int32
@@ -146,8 +203,12 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s", responseErr.Error())
 		}
 		results := resMo.SoftwarerepositoryCategoryMapperList.GetResults()
 		length := len(results)
@@ -159,15 +220,29 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["category"] = (s.GetCategory())
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["file_type"] = (s.GetFileType())
 				temp["mdf_id"] = (s.GetMdfId())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["regex_pattern"] = (s.GetRegexPattern())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["nr_source"] = (s.GetSource())
 				temp["supported_models"] = (s.GetSupportedModels())
 				temp["sw_id"] = (s.GetSwId())
@@ -175,6 +250,8 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				softwarerepositoryCategoryMapperResults[j] = temp
 				j += 1
 			}

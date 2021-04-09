@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceVirtualizationVirtualMachineRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"action": {
 				Description: "Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerState` - Power action is performed on the virtual machine.\n* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.\n* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.\n* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object.",
 				Type:        schema.TypeString,
@@ -34,9 +43,21 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"discovered": {
 				Description: "Flag to indicate whether the configuration is created from inventory object.",
 				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -66,6 +87,12 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -93,6 +120,12 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceVirtualizationVirtualMachine().Schema},
@@ -107,6 +140,10 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualMachine{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
@@ -123,9 +160,17 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		x := int64(v.(int))
 		o.SetCpu(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("discovered"); ok {
 		x := (v.(bool))
 		o.SetDiscovered(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("force_delete"); ok {
 		x := (v.(bool))
@@ -147,6 +192,10 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		x := int64(v.(int))
 		o.SetMemory(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -167,6 +216,10 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		x := (v.(string))
 		o.SetProvisionType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -174,8 +227,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	}
 	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of VirtualizationVirtualMachine: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVirtualMachineList.GetCount()
 	var i int32
@@ -184,8 +241,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVirtualMachineList.GetResults()
 		length := len(results)
@@ -197,12 +258,15 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 
 				temp["action_info"] = flattenMapVirtualizationActionInfo(s.GetActionInfo(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["affinity_selectors"] = flattenListInfraMetaData(s.GetAffinitySelectors(), d)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["anti_affinity_selectors"] = flattenListInfraMetaData(s.GetAntiAffinitySelectors(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -212,9 +276,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 				temp["cluster"] = flattenMapVirtualizationBaseClusterRelationship(s.GetCluster(), d)
 				temp["cluster_esxi"] = (s.GetClusterEsxi())
 				temp["cpu"] = (s.GetCpu())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["discovered"] = (s.GetDiscovered())
 
 				temp["disk"] = flattenListVirtualizationVirtualMachineDisk(s.GetDisk(), d)
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["force_delete"] = (s.GetForceDelete())
 				temp["guest_os"] = (s.GetGuestOs())
 
@@ -228,15 +295,25 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 
 				temp["labels"] = flattenListInfraMetaData(s.GetLabels(), d)
 				temp["memory"] = (s.GetMemory())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["power_state"] = (s.GetPowerState())
 				temp["provision_type"] = (s.GetProvisionType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["vm_config"] = flattenMapVirtualizationBaseVmConfiguration(s.GetVmConfig(), d)
 

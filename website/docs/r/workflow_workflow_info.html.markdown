@@ -15,13 +15,21 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `account_moid`:(string)(Computed) The Account ID for this managed object. 
 * `action`:(string) The action of the workflow such as start, cancel, retry, pause.* `None` - No action is set, this is the default value for action field.* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.* `Start` - Start a new execution of the workflow.* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true on the workflow. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn't run in the previous iteration.* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.* `Cancel` - Cancel the workflow that is in running or waiting state. 
+* `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `associated_object`:(HashMap) - A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `cleanup_time`:(string)(Computed) The time when the workflow info will be removed from database. 
+* `create_time`:(string)(Computed) The time when this managed object was created. 
+* `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `email`:(string)(Computed) The email address of the user who started this workflow. 
 * `end_time`:(string)(Computed) The time when the workflow reached a final state. 
 * `failed_workflow_cleanup_duration`:(int) The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. 
@@ -35,6 +43,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `severity`:(string) The severity of the Task or Workflow message warning/error/info etc.* `Info` - The enum represents the log level to be used to convey info message.* `Warning` - The enum represents the log level to be used to convey warning message.* `Debug` - The enum represents the log level to be used to convey debug message.* `Error` - The enum represents the log level to be used to convey error message. 
 * `meta_version`:(int) Version of the workflow metadata for which this workflow execution was started. 
+* `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) A name of the workflow execution instance. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -43,6 +52,13 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `output`:(Computed) All the generated outputs for the workflow. 
+* `owners`:
+                (Array of schema.TypeString) -(Computed)
+* `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `parent_task_info`:(HashMap) -(Computed) A reference to a workflowTaskInfo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
@@ -59,6 +75,11 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `permission_resources`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `progress`:(float)(Computed) This field indicates percentage of workflow task execution. 
 * `properties`:(HashMap) -(Computed) Type to capture all the properties for the workflow info passed on from workflow definition. 
 This complex property has following sub-properties:
@@ -66,6 +87,7 @@ This complex property has following sub-properties:
   + `retryable`:(bool) When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. 
   + `rollback_action`:(string)(Computed) Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed.* `Disabled` - Status of the rollback action when workflow is disabled for rollback.* `Enabled` - Status of the rollback action when workflow is enabled for rollback.* `Completed` - Status of the rollback action once workflow completes the rollback for all eligiable tasks. 
 * `retry_from_task_name`:(string) This field is applicable when Retry action is issued for a workflow which is in a final state. When this field is not specified then the workflow will retry from the start of the workflow. When this field is specified then the workflow will be retried from the specified task. The field should carry the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn't run in the previous iteration. 
+* `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src`:(string)(Computed) The source microservice name which is the owner for this workflow. 
 * `start_time`:(string)(Computed) The time when the workflow was started for execution. 
 * `status`:(string)(Computed) A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). 
@@ -83,6 +105,22 @@ This complex property has following sub-properties:
 * `type`:(string)(Computed) A type of the workflow (serverconfig, ansible_monitoring). 
 * `user_action_required`:(bool)(Computed) Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. 
 * `user_id`:(string)(Computed) The user identifier which indicates the user that started this workflow. 
+* `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
+This complex property has following sub-properties:
+  + `interested_mos`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `ref_mo`:(HashMap) -(Computed) A reference to the original Managed Object. 
+This complex property has following sub-properties:
+    + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `timestamp`:(string)(Computed) The time this versioned Managed Object was created. 
+  + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
+  + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `wait_reason`:(string) Denotes the reason workflow is in waiting status.* `None` - Wait reason is none, which indicates there is no reason for the waiting state.* `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks.* `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow.* `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold.* `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update.* `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. 
 * `workflow_ctx`:(HashMap) - The workflow context which contains initiator and target information. 
 This complex property has following sub-properties:

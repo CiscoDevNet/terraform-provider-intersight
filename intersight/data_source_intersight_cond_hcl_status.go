@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceCondHclStatusRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -23,6 +32,18 @@ func dataSourceCondHclStatus() *schema.Resource {
 				Description: "The overall status for the components found in the HCL. This will provide the HCL validation status for all the components. It can be one of the following. \"Validated\" - all the components hardware/software profiles are listed in the HCL. \"Not-Listed\" - one or more components hardware/software profiles are not listed in the HCL \"Incomplete\" - the components are not evaluated as the server's software/hardware profiles are not listed in the HCL. \"Not-Evaluated\" - The components are not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"hardware_status": {
 				Description: "The server model, processor and firmware are considered as part of the hardware profile for the server. This will provide the HCL validation status for the hardware profile. For the failure reason see the serverReason property. The status can be one of the following \"Validated\" - The server model, processor and firmware combination is listed in the HCL \"Not-Listed\" - The server model, processor and firmware combination is not listed in the HCL. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
@@ -79,6 +100,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -101,6 +128,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"software_status": {
 				Description: "The OS vendor and version are considered part of the software profile for the server. This will provide the HCL validation status for the software profile. For the failure reason see the serverReason property. The status can be be one of the following \"Validated\" - The os vendor/version is listed in the HCL for the server model, processor and firmware \"Not-Listed\" - The os vendor/version is not listed in the HCL for the server model, processor and firmware \"Incomplete\" - The inventory is missing os vendor/version and HCL validation was not performed. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
 				Type:        schema.TypeString,
@@ -113,11 +146,55 @@ func dataSourceCondHclStatus() *schema.Resource {
 			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
+					Description: "The Account ID for this managed object.",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Computed:    true,
 				},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"ancestors": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -127,6 +204,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 						Description: "The overall status for the components found in the HCL. This will provide the HCL validation status for all the components. It can be one of the following. \"Validated\" - all the components hardware/software profiles are listed in the HCL. \"Not-Listed\" - one or more components hardware/software profiles are not listed in the HCL \"Incomplete\" - the components are not evaluated as the server's software/hardware profiles are not listed in the HCL. \"Not-Evaluated\" - The components are not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"create_time": {
+						Description: "The time when this managed object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"details": {
 						Description: "An array of relationships to condHclStatusDetail resources.",
@@ -165,6 +248,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 								},
 							},
 						},
+					},
+					"domain_group_moid": {
+						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"hardware_status": {
 						Description: "The server model, processor and firmware are considered as part of the hardware profile for the server. This will provide the HCL validation status for the hardware profile. For the failure reason see the serverReason property. The status can be one of the following \"Validated\" - The server model, processor and firmware combination is listed in the HCL \"Not-Listed\" - The server model, processor and firmware combination is not listed in the HCL. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
@@ -260,6 +349,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 							},
 						},
 					},
+					"mod_time": {
+						Description: "The time when this managed object was last modified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"moid": {
 						Description: "The unique identifier of this Managed Object instance.",
 						Type:        schema.TypeString,
@@ -271,6 +366,89 @@ func dataSourceCondHclStatus() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"owners": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"parent": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"permission_resources": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
 					},
 					"reason": {
 						Description: "The reason for the HCL status. It will be one of the following \"Missing-Os-Info\" - we are missing os information in the inventory from the device connector \"Incompatible-Components\" - we have 1 or more components with \"Not-Validated\" status \"Compatible\" - all the components have \"Validated\" status. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted.\n* `Missing-Os-Info` - This means the HclStatus for the sever failed HCL validation because we have missing os information. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Incompatible-Components` - This means the HclStatus for the sever failed HCL validation because one or more of its components failed validation. To see why components failed check the related HclStatusDetails.\n* `Compatible` - This means the HclStatus for the sever has passed HCL validation for all of its related components.\n* `Not-Evaluated` - This means the HclStatus for the sever has not been evaluated because it is exempted.",
@@ -321,6 +499,12 @@ func dataSourceCondHclStatus() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"shared_scope": {
+						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"software_status": {
 						Description: "The OS vendor and version are considered part of the software profile for the server. This will provide the HCL validation status for the software profile. For the failure reason see the serverReason property. The status can be be one of the following \"Validated\" - The os vendor/version is listed in the HCL for the server model, processor and firmware \"Not-Listed\" - The os vendor/version is not listed in the HCL for the server model, processor and firmware \"Incomplete\" - The inventory is missing os vendor/version and HCL validation was not performed. \"Not-Evaluated\" - The server is not evaluated against the HCL because it is exempted.\n* `Incomplete` - This means we do not have os information in Intersight for this server. Either install ucstools vib or use power shell scripts to tag proper OS information.\n* `Not-Found` - At HclStatus level, this means that one of the components has failed validation. At HclStatusDetail level, this means that his component's hardware or software profile was not found in the HCL.\n* `Not-Listed` - At the HclStatus level, this means that some part of the HCL validation has failed. This could be that either the server's hardware or software profile was not listed in the HCL or one of the components' hardware or software profile was not found in the HCL.\n* `Validated` - At the HclStatus level, this means that all of the components have passed validation. At HclStatusDetail level, this means that the component's hardware or software profile was found in the HCL.\n* `Not-Evaluated` - At the HclStatus level this means that this means that SW or Component status has not been evaluated as the previous evaluation step has not passed yet. At the HclStatusDetail level this means that either HW or SW status has not been evaluted because a previous evaluation step has not passed yet.",
 						Type:        schema.TypeString,
@@ -354,6 +538,127 @@ func dataSourceCondHclStatus() *schema.Resource {
 							},
 						},
 					},
+					"version_context": {
+						Description: "The versioning info for this managed object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"interested_mos": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ref_mo": {
+									Description: "A reference to the original Managed Object.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Computed:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+								},
+								"timestamp": {
+									Description: "The time this versioned Managed Object was created.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"nr_version": {
+									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"version_type": {
+									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 				}},
 				Computed: true,
 			}},
@@ -366,6 +671,10 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CondHclStatus{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -373,6 +682,14 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 	if v, ok := d.GetOk("component_status"); ok {
 		x := (v.(string))
 		o.SetComponentStatus(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("hardware_status"); ok {
 		x := (v.(string))
@@ -418,6 +735,10 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 		x := (v.(string))
 		o.SetInvProcessor(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -434,6 +755,10 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 		x := (v.(string))
 		o.SetServerReason(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("software_status"); ok {
 		x := (v.(string))
 		o.SetSoftwareStatus(x)
@@ -449,8 +774,12 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 	}
 	countResponse, _, responseErr := conn.ApiClient.CondApi.GetCondHclStatusList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of CondHclStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of CondHclStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of CondHclStatus: %s", responseErr.Error())
 	}
 	count := countResponse.CondHclStatusList.GetCount()
 	var i int32
@@ -459,8 +788,12 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.CondApi.GetCondHclStatusList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching CondHclStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching CondHclStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching CondHclStatus: %s", responseErr.Error())
 		}
 		results := resMo.CondHclStatusList.GetResults()
 		length := len(results)
@@ -472,11 +805,17 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["component_status"] = (s.GetComponentStatus())
 
+				temp["create_time"] = (s.GetCreateTime()).String()
+
 				temp["details"] = flattenListCondHclStatusDetailRelationship(s.GetDetails(), d)
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hardware_status"] = (s.GetHardwareStatus())
 				temp["hcl_firmware_version"] = (s.GetHclFirmwareVersion())
 				temp["hcl_model"] = (s.GetHclModel())
@@ -490,16 +829,26 @@ func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta
 				temp["inv_processor"] = (s.GetInvProcessor())
 
 				temp["managed_object"] = flattenMapInventoryBaseRelationship(s.GetManagedObject(), d)
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["reason"] = (s.GetReason())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["server_reason"] = (s.GetServerReason())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["software_status"] = (s.GetSoftwareStatus())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				condHclStatusResults[j] = temp
 				j += 1
 			}

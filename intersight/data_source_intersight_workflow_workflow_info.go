@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -15,6 +17,12 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceWorkflowWorkflowInfoRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"action": {
 				Description: "The action of the workflow such as start, cancel, retry, pause.\n* `None` - No action is set, this is the default value for action field.\n* `Create` - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow.\n* `Start` - Start a new execution of the workflow.\n* `Pause` - Pause the workflow, this can only be issued on workflows that are in running state.\n* `Resume` - Resume the workflow which was previously paused through pause action on the workflow.\n* `Retry` - Retry the workflow that has previously reached a final state and has the retryable property set to true on the workflow. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn't run in the previous iteration.\n* `RetryFailed` - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task.\n* `Cancel` - Cancel the workflow that is in running or waiting state.",
 				Type:        schema.TypeString,
@@ -27,6 +35,18 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 			},
 			"cleanup_time": {
 				Description: "The time when the workflow info will be removed from database.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -70,6 +90,12 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -102,6 +128,12 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 				Description: "This field is applicable when Retry action is issued for a workflow which is in a final state. When this field is not specified then the workflow will retry from the start of the workflow. When this field is specified then the workflow will be retried from the specified task. The field should carry the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn't run in the previous iteration.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"src": {
 				Description: "The source microservice name which is the owner for this workflow.",
@@ -186,6 +218,10 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowInfo{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
@@ -197,6 +233,14 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("cleanup_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCleanupTime(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("email"); ok {
 		x := (v.(string))
@@ -226,6 +270,10 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		x := int64(v.(int))
 		o.SetMetaVersion(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -249,6 +297,10 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("retry_from_task_name"); ok {
 		x := (v.(string))
 		o.SetRetryFromTaskName(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("src"); ok {
 		x := (v.(string))
@@ -305,8 +357,12 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	}
 	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowInfo: %s", responseErr.Error())
 	}
 	count := countResponse.WorkflowWorkflowInfoList.GetCount()
 	var i int32
@@ -315,8 +371,12 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s", responseErr.Error())
 		}
 		results := resMo.WorkflowWorkflowInfoList.GetResults()
 		length := len(results)
@@ -330,13 +390,19 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				var temp = make(map[string]interface{})
 
 				temp["account"] = flattenMapIamAccountRelationship(s.GetAccount(), d)
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["associated_object"] = flattenMapMoBaseMoRelationship(s.GetAssociatedObject(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cleanup_time"] = (s.GetCleanupTime()).String()
+
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["email"] = (s.GetEmail())
 
 				temp["end_time"] = (s.GetEndTime()).String()
@@ -347,11 +413,16 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 
 				temp["message"] = flattenListWorkflowMessage(s.GetMessage(), d)
 				temp["meta_version"] = (s.GetMetaVersion())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["parent_task_info"] = flattenMapWorkflowTaskInfoRelationship(s.GetParentTaskInfo(), d)
 				temp["pause_reason"] = (s.GetPauseReason())
@@ -359,10 +430,13 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["pending_dynamic_workflow_info"] = flattenMapWorkflowPendingDynamicWorkflowInfoRelationship(s.GetPendingDynamicWorkflowInfo(), d)
 
 				temp["permission"] = flattenMapIamPermissionRelationship(s.GetPermission(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["progress"] = (s.GetProgress())
 
 				temp["properties"] = flattenMapWorkflowWorkflowInfoProperties(s.GetProperties(), d)
 				temp["retry_from_task_name"] = (s.GetRetryFromTaskName())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["src"] = (s.GetSrc())
 
 				temp["start_time"] = (s.GetStartTime()).String()
@@ -376,6 +450,8 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["type"] = (s.GetType())
 				temp["user_action_required"] = (s.GetUserActionRequired())
 				temp["user_id"] = (s.GetUserId())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["wait_reason"] = (s.GetWaitReason())
 
 				temp["workflow_ctx"] = flattenMapWorkflowWorkflowCtx(s.GetWorkflowCtx(), d)

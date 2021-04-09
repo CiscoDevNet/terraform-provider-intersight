@@ -13,17 +13,21 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_compute_blade.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `admin_power_state`:(string) The desired power state of the server. 
 * `asset_tag`:(string) The user defined asset tag assigned to the server. 
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `chassis_id`:(string) The id of the chassis that the blade is located in. 
+* `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fault_summary`:(int) The fault summary for the server. 
 * `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `memory_speed`:(string) The maximum memory speed in MHz available on the server. 
 * `mgmt_ip_address`:(string) Management address of the server. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_adaptors`:(int) The total number of network adapters present on the server. 
@@ -43,6 +47,7 @@ The following arguments can be used to get data of already created objects in In
 * `scaled_mode`:(string) The mode of the server that determines it is scaled. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `service_profile`:(string) The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `slot_id`:(int) The slot number in the chassis that the blade is located in. 
 * `total_memory`:(int) The total memory available on the server. 
 * `user_label`:(string) The user defined label assigned to the server. 

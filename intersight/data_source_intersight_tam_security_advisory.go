@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -15,6 +17,12 @@ func dataSourceTamSecurityAdvisory() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceTamSecurityAdvisoryRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"advisory_id": {
 				Description: "Cisco generated identifier for the published security advisory.",
 				Type:        schema.TypeString,
@@ -29,6 +37,12 @@ func dataSourceTamSecurityAdvisory() *schema.Resource {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"date_published": {
 				Description: "Date when the security advisory was first published by Cisco.",
@@ -45,6 +59,12 @@ func dataSourceTamSecurityAdvisory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"environmental_score": {
 				Description: "CVSS version 3 environmental score for the security Advisory.",
 				Type:        schema.TypeFloat,
@@ -54,6 +74,12 @@ func dataSourceTamSecurityAdvisory() *schema.Resource {
 				Description: "A link to an external URL describing security Advisory in more details.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -76,6 +102,12 @@ func dataSourceTamSecurityAdvisory() *schema.Resource {
 				Description: "Recommended action to resolve the security advisory.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"state": {
 				Description: "Current state of the advisory.\n* `ready` - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created.\n* `evaluating` - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation.",
@@ -116,6 +148,10 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TamSecurityAdvisory{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("advisory_id"); ok {
 		x := (v.(string))
 		o.SetAdvisoryId(x)
@@ -127,6 +163,10 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
 	}
 	if v, ok := d.GetOk("date_published"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -140,6 +180,10 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetDescription(x)
 	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("environmental_score"); ok {
 		x := v.(float32)
 		o.SetEnvironmentalScore(x)
@@ -147,6 +191,10 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("external_url"); ok {
 		x := (v.(string))
 		o.SetExternalUrl(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -163,6 +211,10 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("recommendation"); ok {
 		x := (v.(string))
 		o.SetRecommendation(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("state"); ok {
 		x := (v.(string))
@@ -191,8 +243,12 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	}
 	countResponse, _, responseErr := conn.ApiClient.TamApi.GetTamSecurityAdvisoryList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of TamSecurityAdvisory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of TamSecurityAdvisory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of TamSecurityAdvisory: %s", responseErr.Error())
 	}
 	count := countResponse.TamSecurityAdvisoryList.GetCount()
 	var i int32
@@ -201,8 +257,12 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.TamApi.GetTamSecurityAdvisoryList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching TamSecurityAdvisory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching TamSecurityAdvisory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching TamSecurityAdvisory: %s", responseErr.Error())
 		}
 		results := resMo.TamSecurityAdvisoryList.GetResults()
 		length := len(results)
@@ -214,36 +274,52 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 
 				temp["actions"] = flattenListTamAction(s.GetActions(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["advisory_id"] = (s.GetAdvisoryId())
 
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
 				temp["api_data_sources"] = flattenListTamApiDataSource(s.GetApiDataSources(), d)
 				temp["base_score"] = (s.GetBaseScore())
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["cve_ids"] = (s.GetCveIds())
 
 				temp["date_published"] = (s.GetDatePublished()).String()
 
 				temp["date_updated"] = (s.GetDateUpdated()).String()
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["environmental_score"] = (s.GetEnvironmentalScore())
 				temp["external_url"] = (s.GetExternalUrl())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["recommendation"] = (s.GetRecommendation())
 
 				temp["severity"] = flattenMapTamSeverity(s.GetSeverity(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["temporal_score"] = (s.GetTemporalScore())
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["workaround"] = (s.GetWorkaround())
 				tamSecurityAdvisoryResults[j] = temp
 				j += 1

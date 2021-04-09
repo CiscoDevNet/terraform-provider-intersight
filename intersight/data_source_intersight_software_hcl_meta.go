@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceSoftwareHclMetaRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"bundle_type": {
 				Description: "The bundle type of the image, as published on cisco.com.",
 				Type:        schema.TypeString,
@@ -30,10 +39,22 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "User provided description about the file. Cisco provided description for image inventoried from a Cisco repository.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"download_count": {
 				Description: "The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
@@ -58,6 +79,18 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"imported_time": {
+				Description: "The time at which this image or file was imported/cached into the repositry. if the 'ImportState' is 'Imported', the time at which this image or file was imported. if the 'ImportState' is 'Cached', the time at which this image or file was cached.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"last_access_time": {
+				Description: "The time at which this file was last downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"md5e_tag": {
 				Description: "The MD5 ETag for a file that is stored in Intersight repository or in the appliance cache. Warning - MD5 is currently broken and this will be migrated to SHA shortly.",
 				Type:        schema.TypeString,
@@ -72,6 +105,12 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 				Description: "The mdfid of the image provided by cisco.com.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"model": {
 				Description: "The endpoint model for which this firmware image is applicable.",
@@ -106,6 +145,12 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"release_date": {
+				Description: "The date on which the file was released or distributed by its vendor.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"release_notes_url": {
 				Description: "The url for the release notes of this image.",
 				Type:        schema.TypeString,
@@ -115,6 +160,12 @@ func dataSourceSoftwareHclMeta() *schema.Resource {
 				Description: "The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"size": {
 				Description: "The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository.",
@@ -156,6 +207,10 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareHclMeta{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("bundle_type"); ok {
 		x := (v.(string))
 		o.SetBundleType(x)
@@ -168,9 +223,17 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 		x := (v.(string))
 		o.SetContentType(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("download_count"); ok {
 		x := int64(v.(int))
@@ -188,6 +251,14 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 		x := (v.(string))
 		o.SetImportState(x)
 	}
+	if v, ok := d.GetOk("imported_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetImportedTime(x)
+	}
+	if v, ok := d.GetOk("last_access_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastAccessTime(x)
+	}
 	if v, ok := d.GetOk("md5e_tag"); ok {
 		x := (v.(string))
 		o.SetMd5eTag(x)
@@ -199,6 +270,10 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("mdfid"); ok {
 		x := (v.(string))
 		o.SetMdfid(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -224,6 +299,10 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 		x := (v.(string))
 		o.SetRecommendedBuild(x)
 	}
+	if v, ok := d.GetOk("release_date"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetReleaseDate(x)
+	}
 	if v, ok := d.GetOk("release_notes_url"); ok {
 		x := (v.(string))
 		o.SetReleaseNotesUrl(x)
@@ -231,6 +310,10 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("size"); ok {
 		x := int64(v.(int))
@@ -259,8 +342,12 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 	}
 	countResponse, _, responseErr := conn.ApiClient.SoftwareApi.GetSoftwareHclMetaList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of SoftwareHclMeta: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwareHclMetaList.GetCount()
 	var i int32
@@ -269,8 +356,12 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.SoftwareApi.GetSoftwareHclMetaList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching SoftwareHclMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching SoftwareHclMeta: %s", responseErr.Error())
 		}
 		results := resMo.SoftwareHclMetaList.GetResults()
 		length := len(results)
@@ -282,7 +373,10 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["bundle_type"] = (s.GetBundleType())
 
 				temp["catalog"] = flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)
@@ -290,26 +384,43 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 
 				temp["component_meta"] = flattenListFirmwareComponentMeta(s.GetComponentMeta(), d)
 				temp["content_type"] = (s.GetContentType())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 
 				temp["distributable_metas"] = flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["download_count"] = (s.GetDownloadCount())
 				temp["guid"] = (s.GetGuid())
 				temp["import_action"] = (s.GetImportAction())
 				temp["import_state"] = (s.GetImportState())
+
+				temp["imported_time"] = (s.GetImportedTime()).String()
+
+				temp["last_access_time"] = (s.GetLastAccessTime()).String()
 				temp["md5e_tag"] = (s.GetMd5eTag())
 				temp["md5sum"] = (s.GetMd5sum())
 				temp["mdfid"] = (s.GetMdfid())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["platform_type"] = (s.GetPlatformType())
 				temp["recommended_build"] = (s.GetRecommendedBuild())
 
 				temp["release"] = flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)
+
+				temp["release_date"] = (s.GetReleaseDate()).String()
 				temp["release_notes_url"] = (s.GetReleaseNotesUrl())
 				temp["sha512sum"] = (s.GetSha512sum())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["size"] = (s.GetSize())
 				temp["software_advisory_url"] = (s.GetSoftwareAdvisoryUrl())
 				temp["software_type_id"] = (s.GetSoftwareTypeId())
@@ -320,6 +431,8 @@ func dataSourceSoftwareHclMetaRead(c context.Context, d *schema.ResourceData, me
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				softwareHclMetaResults[j] = temp
 				j += 1
 			}

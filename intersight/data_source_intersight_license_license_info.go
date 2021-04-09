@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -15,6 +17,12 @@ func dataSourceLicenseLicenseInfo() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceLicenseLicenseInfoRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"active_admin": {
 				Description: "The license administrative state.\nSet this property to 'true' to activate the license entitlements.",
 				Type:        schema.TypeBool,
@@ -26,9 +34,21 @@ func dataSourceLicenseLicenseInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"days_left": {
 				Description: "The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -78,6 +98,12 @@ func dataSourceLicenseLicenseInfo() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -86,6 +112,12 @@ func dataSourceLicenseLicenseInfo() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -116,6 +148,10 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseLicenseInfo{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("active_admin"); ok {
 		x := (v.(bool))
 		o.SetActiveAdmin(x)
@@ -124,9 +160,17 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("days_left"); ok {
 		x := int64(v.(int))
 		o.SetDaysLeft(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("end_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -160,6 +204,10 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 		x := (v.(string))
 		o.SetLicenseType(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -167,6 +215,10 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("start_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -183,8 +235,12 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	}
 	countResponse, _, responseErr := conn.ApiClient.LicenseApi.GetLicenseLicenseInfoList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of LicenseLicenseInfo: %s", responseErr.Error())
 	}
 	count := countResponse.LicenseLicenseInfoList.GetCount()
 	var i int32
@@ -193,8 +249,12 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.LicenseApi.GetLicenseLicenseInfoList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching LicenseLicenseInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching LicenseLicenseInfo: %s", responseErr.Error())
 		}
 		results := resMo.LicenseLicenseInfoList.GetResults()
 		length := len(results)
@@ -208,10 +268,16 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 				var temp = make(map[string]interface{})
 
 				temp["account_license_data"] = flattenMapLicenseAccountLicenseDataRelationship(s.GetAccountLicenseData(), d)
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["active_admin"] = (s.GetActiveAdmin())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["days_left"] = (s.GetDaysLeft())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["enforce_mode"] = (s.GetEnforceMode())
@@ -221,13 +287,23 @@ func dataSourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData,
 				temp["license_count"] = (s.GetLicenseCount())
 				temp["license_state"] = (s.GetLicenseState())
 				temp["license_type"] = (s.GetLicenseType())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["start_time"] = (s.GetStartTime()).String()
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["trial_admin"] = (s.GetTrialAdmin())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				licenseLicenseInfoResults[j] = temp
 				j += 1
 			}

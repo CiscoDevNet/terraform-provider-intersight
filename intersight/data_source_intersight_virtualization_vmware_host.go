@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -15,6 +17,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceVirtualizationVmwareHostRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"boot_time": {
 				Description: "The time when this host booted up.",
 				Type:        schema.TypeString,
@@ -29,6 +37,18 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				Description: "Indicates if the host is connected to the vCenter. Values are connected, not connected.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"hw_power_state": {
 				Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
@@ -49,6 +69,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				Description: "Is this host in maintenance mode. Set to true or false.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"model": {
 				Description: "Commercial model information about this hardware.",
@@ -82,6 +108,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"status": {
 				Description: "Host health status, as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
 				Type:        schema.TypeString,
@@ -114,11 +146,55 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
+					Description: "The Account ID for this managed object.",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Computed:    true,
 				},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"ancestors": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"boot_time": {
 						Description: "The time when this host booted up.",
 						Type:        schema.TypeString,
@@ -225,6 +301,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"create_time": {
+						Description: "The time when this managed object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"datacenter": {
 						Description: "A reference to a virtualizationVmwareDatacenter resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 						Type:        schema.TypeList,
@@ -301,6 +383,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 								},
 							},
 						},
+					},
+					"domain_group_moid": {
+						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"hardware_info": {
 						Description: "The hardware details of this host. It includes capacity, manufacturer, and model information.",
@@ -406,6 +494,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"mod_time": {
+						Description: "The time when this managed object was last modified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"model": {
 						Description: "Commercial model information about this hardware.",
 						Type:        schema.TypeString,
@@ -432,6 +526,89 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"owners": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"parent": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"permission_resources": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
 					},
 					"processor_capacity": {
 						Description: "The capacity and usage information for CPU power on this host.",
@@ -603,6 +780,12 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"shared_scope": {
+						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"status": {
 						Description: "Host health status, as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
 						Type:        schema.TypeString,
@@ -656,6 +839,127 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"version_context": {
+						Description: "The versioning info for this managed object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"interested_mos": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ref_mo": {
+									Description: "A reference to the original Managed Object.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Computed:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+								},
+								"timestamp": {
+									Description: "The time this versioned Managed Object was created.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"nr_version": {
+									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"version_type": {
+									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 				}},
 				Computed: true,
 			}},
@@ -668,6 +972,10 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareHost{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("boot_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetBootTime(x)
@@ -679,6 +987,14 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("connection_state"); ok {
 		x := (v.(string))
 		o.SetConnectionState(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("hw_power_state"); ok {
 		x := (v.(string))
@@ -695,6 +1011,10 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("maintenance_mode"); ok {
 		x := (v.(bool))
 		o.SetMaintenanceMode(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -719,6 +1039,10 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
@@ -751,8 +1075,12 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	}
 	countResponse, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareHostList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareHost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of VirtualizationVmwareHost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareHost: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVmwareHostList.GetCount()
 	var i int32
@@ -761,8 +1089,12 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareHostList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching VirtualizationVmwareHost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching VirtualizationVmwareHost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching VirtualizationVmwareHost: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVmwareHostList.GetResults()
 		length := len(results)
@@ -774,7 +1106,10 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["boot_time"] = (s.GetBootTime()).String()
 				temp["class_id"] = (s.GetClassId())
@@ -784,9 +1119,12 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 
 				temp["cpu_info"] = flattenMapVirtualizationCpuInfo(s.GetCpuInfo(), d)
 
+				temp["create_time"] = (s.GetCreateTime()).String()
+
 				temp["datacenter"] = flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)
 
 				temp["datastores"] = flattenListVirtualizationVmwareDatastoreRelationship(s.GetDatastores(), d)
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["hardware_info"] = flattenMapInfraHardwareInfo(s.GetHardwareInfo(), d)
 				temp["hw_power_state"] = (s.GetHwPowerState())
@@ -795,11 +1133,18 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["maintenance_mode"] = (s.GetMaintenanceMode())
 
 				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["network_adapter_count"] = (s.GetNetworkAdapterCount())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 
@@ -809,6 +1154,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 
 				temp["resource_consumed"] = flattenMapVirtualizationVmwareResourceConsumption(s.GetResourceConsumed(), d)
 				temp["serial"] = (s.GetSerial())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())
 				temp["storage_adapter_count"] = (s.GetStorageAdapterCount())
 
@@ -817,6 +1163,8 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["uuid"] = (s.GetUuid())
 				temp["vcenter_host_id"] = (s.GetVcenterHostId())
 				temp["vendor"] = (s.GetVendor())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				virtualizationVmwareHostResults[j] = temp
 				j += 1
 			}

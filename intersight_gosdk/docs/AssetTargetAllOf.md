@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ConnectorVersion** | Pointer to **string** | The Device Connector version for target types which are managed by via embedded Device Connector. | [optional] [readonly] 
 **ExternalIpAddress** | Pointer to **string** | ExternalIpAddress is applicable for targets which are managed via an Intersight Device Connector. The value is the IP Address of the target as seen from Intersight. It is either the IP Address of the managed target&#39;s interface which has a route to the internet or a NAT IP Addresss when the target is deployed in a private network. | [optional] [readonly] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
+**ManagementLocation** | Pointer to **string** | The location from which Intersight manages the target. * &#x60;Unknown&#x60; - The management mechanism is not detected. Unknown is used as a default by the implementation and is not an allowed user input. * &#x60;Intersight&#x60; - Management of a target is performed directly from Intersight. Network connections are established from Intersight to a management interface of the Target and authenticated using user provided credentials. * &#x60;IntersightAssist&#x60; - Management of a target is performed via a selected Intersight Assist. Network connections are established from the Intersight Assist to a management interface of the Target. * &#x60;DeviceConnector&#x60; - An Intersight Device Connector running within the Target establishes a connection to Intersight and management of the target is performed via this connection. | [optional] [default to "Unknown"]
 **Name** | Pointer to **string** | A user provided name for the managed target. | [optional] 
 **ProductId** | Pointer to **[]string** |  | [optional] 
 **ReadOnly** | Pointer to **bool** | For targets which are managed by an embedded Intersight Device Connector, this field indicates that an administrator of the target has disabled management operations of the Device Connector and only monitoring is permitted. | [optional] [readonly] 
@@ -227,6 +228,31 @@ HasIpAddress returns a boolean if a field has been set.
 `func (o *AssetTargetAllOf) UnsetIpAddress()`
 
 UnsetIpAddress ensures that no value is present for IpAddress, not even an explicit nil
+### GetManagementLocation
+
+`func (o *AssetTargetAllOf) GetManagementLocation() string`
+
+GetManagementLocation returns the ManagementLocation field if non-nil, zero value otherwise.
+
+### GetManagementLocationOk
+
+`func (o *AssetTargetAllOf) GetManagementLocationOk() (*string, bool)`
+
+GetManagementLocationOk returns a tuple with the ManagementLocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementLocation
+
+`func (o *AssetTargetAllOf) SetManagementLocation(v string)`
+
+SetManagementLocation sets ManagementLocation field to given value.
+
+### HasManagementLocation
+
+`func (o *AssetTargetAllOf) HasManagementLocation() bool`
+
+HasManagementLocation returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *AssetTargetAllOf) GetName() string`

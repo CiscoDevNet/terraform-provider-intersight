@@ -10,6 +10,7 @@ description: |-
 Depicts operations to control the life cycle of a virtual machine on a hypervisor.
 ## Argument Reference
 The following arguments are supported:
+* `account_moid`:(string)(Computed) The Account ID for this managed object. 
 * `action`:(string) Action to be performed on a virtual machine (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `PowerState` - Power action is performed on the virtual machine.* `Migrate` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.* `Create` - The virtual machine will be created on the specified hypervisor. This action is also useful if the virtual machine creation failed during first POST operation on VirtualMachine managed object. User can set this action to retry the virtual machine creation.* `Delete` - The virtual machine will be deleted from the specified hypervisor. User can either set this action or can do a DELETE operation on the VirtualMachine managed object. 
 * `action_info`:(HashMap) -(Computed) Details of an action performed on the virtual machine. Contains name of the action performed, status, failure reason message etc. 
 This complex property has following sub-properties:
@@ -22,6 +23,11 @@ This complex property has following sub-properties:
   + `name`:(string)(Computed) Name of the meta property which identifies a specific resource. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string)(Computed) Value of the meta property which identifies a specific resource. 
+* `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `anti_affinity_selectors`:(Array)
 This complex property has following sub-properties:
   + `name`:(string)(Computed) Name of the meta property which identifies a specific resource. 
@@ -42,6 +48,7 @@ This complex property has following sub-properties:
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `cluster_esxi`:(string) Cluster where virtual machine is deployed. 
 * `cpu`:(int) Number of vCPUs allocated to virtual machine. 
+* `create_time`:(string)(Computed) The time when this managed object was created. 
 * `discovered`:(bool)(Computed) Flag to indicate whether the configuration is created from inventory object. 
 * `disk`:(Array)
 This complex property has following sub-properties:
@@ -59,6 +66,7 @@ This complex property has following sub-properties:
     + `source_disk_to_clone`:(string) Source disk name from where the clone is done. 
     + `source_file_path`:(string) Disk image source for the virtual machine. 
   + `virtual_disk_reference`:(string) Name of the existing virtual disk to be attached to the Virtual Machine. 
+* `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `force_delete`:(bool) Normally any virtual machine that is still powered on cannot be deleted. The expected sequence from a user is to first power off the virtual machine and then invoke the delete operation. However, in special circumstances, the owner of the virtual machine may know very well that the virtual machine is no longer needed and just wants to dispose it off. In such situations a delete operation of a virtual machine object is accepted only when this forceDelete attribute is set to true. Under normal circumstances (forceDelete is false), delete operation first confirms that the virtual machine is powered off and then proceeds to delete the virtual machine. 
 * `guest_os`:(string) Guest operating system running on virtual machine.* `linux` - A Linux operating system.* `windows` - A Windows operating system. 
 * `host`:(HashMap) - A reference to a virtualizationBaseHost resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -88,8 +96,21 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string)(Computed) Value of the meta property which identifies a specific resource. 
 * `memory`:(int) Virtual machine memory in mebi bytes (one mebibyte, 1MiB, is 1048576 bytes, and 1KiB is 1024 bytes). Input must be a whole number and scientific notation is not acceptable. For example, enter 1730 and not 1.73e03. 
+* `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Virtual machine name that is unique. Hypervisors enforce platform specific limits and character sets. The name length limit, both min and max, vary among hypervisors. Therefore, the basic limits are set here and proper enforcement is done elsewhere. 
+* `owners`:
+                (Array of schema.TypeString) -(Computed)
+* `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `permission_resources`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+This complex property has following sub-properties:
+  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `power_state`:(string) Expected power state of virtual machine (PowerOn, PowerOff, Restart).* `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected.* `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected.* `Suspend` - The virtual machine will be put into  a suspended state.* `ShutDownGuestOS` - The guest operating system is shut down gracefully.* `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts.* `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress.* `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up.* `Unknown` - Power state of the entity is unknown. 
 * `provision_type`:(string) Identifies the provision type to create a new virtual machine.* `OVA` - Deploy virtual machine using OVA/F file.* `Template` - Provision virtual machine using a template file.* `Discovered` - A virtual machine was 'discovered' and not created from Intersight. No provisioning information is available. 
 * `registered_device`:(HashMap) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -97,10 +118,27 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
+This complex property has following sub-properties:
+  + `interested_mos`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `ref_mo`:(HashMap) -(Computed) A reference to the original Managed Object. 
+This complex property has following sub-properties:
+    + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `timestamp`:(string)(Computed) The time this versioned Managed Object was created. 
+  + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
+  + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `vm_config`:(HashMap) - Virtual machine configuration to provision. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 

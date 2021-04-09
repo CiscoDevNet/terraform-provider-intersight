@@ -2,8 +2,10 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -15,6 +17,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceApplianceImageBundleRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"auto_upgrade": {
 				Description: "Indicates that the software upgrade was automatically initiated by the Intersight Appliance.",
 				Type:        schema.TypeBool,
@@ -26,8 +34,20 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Short description of the software upgrade bundle.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -41,6 +61,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 			"has_error": {
 				Description: "Indicates that the ImageBundle has errors. The upgrade service sets this field when it encounters errors during the manifest processing.",
 				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -76,6 +102,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 			},
 			"release_time": {
 				Description: "Software upgrade manifest's release date and time.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -124,11 +156,55 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
+					Description: "The Account ID for this managed object.",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Computed:    true,
 				},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"ancestors": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"ansible_packages": {
 						Type:     schema.TypeList,
 						Optional: true,
@@ -212,6 +288,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"create_time": {
+						Description: "The time when this managed object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"dc_packages": {
 						Type:     schema.TypeList,
@@ -361,6 +443,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 					},
 					"description": {
 						Description: "Short description of the software upgrade bundle.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"domain_group_moid": {
+						Description: "The DomainGroup ID for this managed object.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -596,6 +684,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"mod_time": {
+						Description: "The time when this managed object was last modified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"moid": {
 						Description: "The unique identifier of this Managed Object instance.",
 						Type:        schema.TypeString,
@@ -619,6 +713,89 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"owners": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"parent": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"permission_resources": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
 					},
 					"priority": {
 						Description: "Software upgrade manifest's upgrade priority. The upgrade service supports two priorities, Normal and Critical. Normal priority is used for regular software upgrades, and the upgrade service uses the Upgrade Policy to compute upgrade start time. Critical priority is used for the critical software security patches, and the upgrade service ignores the Upgrade Policy when it computes the upgrade start time.\n* `Normal` - Normal upgrade priority is used for all the software upgrades except for the critical security updates. The upgrade service of Intersight Appliance uses the Software Upgrade Policy settings to start the upgrade process.\n* `Critical` - Critical upgrade priority is used for critical updates such as security patches. The upgrade service of the Intersight Appliance starts the upgrade as specified by the upgrade properties in the software manifest file. The upgrade service will not use the settings specified in the Software Upgrade Policy.",
@@ -704,6 +881,12 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 							},
 						},
 						Computed: true,
+					},
+					"shared_scope": {
+						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"status_message": {
 						Description: "Status message set during the manifest processing.",
@@ -916,6 +1099,127 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"version_context": {
+						Description: "The versioning info for this managed object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"interested_mos": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ref_mo": {
+									Description: "A reference to the original Managed Object.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Computed:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+								},
+								"timestamp": {
+									Description: "The time this versioned Managed Object was created.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"nr_version": {
+									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"version_type": {
+									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 				}},
 				Computed: true,
 			}},
@@ -928,6 +1232,10 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceImageBundle{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("auto_upgrade"); ok {
 		x := (v.(bool))
 		o.SetAutoUpgrade(x)
@@ -936,9 +1244,17 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("fingerprint"); ok {
 		x := (v.(string))
@@ -947,6 +1263,10 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("has_error"); ok {
 		x := (v.(bool))
 		o.SetHasError(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -971,6 +1291,10 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("release_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetReleaseTime(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("status_message"); ok {
 		x := (v.(string))
@@ -1007,8 +1331,12 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	}
 	countResponse, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceImageBundleList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of ApplianceImageBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of ApplianceImageBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of ApplianceImageBundle: %s", responseErr.Error())
 	}
 	count := countResponse.ApplianceImageBundleList.GetCount()
 	var i int32
@@ -1017,8 +1345,12 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceImageBundleList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching ApplianceImageBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching ApplianceImageBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching ApplianceImageBundle: %s", responseErr.Error())
 		}
 		results := resMo.ApplianceImageBundleList.GetResults()
 		length := len(results)
@@ -1030,16 +1362,22 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["ansible_packages"] = flattenListOnpremImagePackage(s.GetAnsiblePackages(), d)
 				temp["auto_upgrade"] = (s.GetAutoUpgrade())
 				temp["class_id"] = (s.GetClassId())
 
+				temp["create_time"] = (s.GetCreateTime()).String()
+
 				temp["dc_packages"] = flattenListOnpremImagePackage(s.GetDcPackages(), d)
 
 				temp["debug_packages"] = flattenListOnpremImagePackage(s.GetDebugPackages(), d)
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["endpoint_packages"] = flattenListOnpremImagePackage(s.GetEndpointPackages(), d)
 				temp["fingerprint"] = (s.GetFingerprint())
@@ -1048,15 +1386,23 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 				temp["infra_packages"] = flattenListOnpremImagePackage(s.GetInfraPackages(), d)
 
 				temp["init_packages"] = flattenListOnpremImagePackage(s.GetInitPackages(), d)
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["notes"] = (s.GetNotes())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["priority"] = (s.GetPriority())
 
 				temp["release_time"] = (s.GetReleaseTime()).String()
 
 				temp["service_packages"] = flattenListOnpremImagePackage(s.GetServicePackages(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status_message"] = (s.GetStatusMessage())
 
 				temp["system_packages"] = flattenListOnpremImagePackage(s.GetSystemPackages(), d)
@@ -1072,6 +1418,8 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 
 				temp["upgrade_start_time"] = (s.GetUpgradeStartTime()).String()
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				applianceImageBundleResults[j] = temp
 				j += 1
 			}

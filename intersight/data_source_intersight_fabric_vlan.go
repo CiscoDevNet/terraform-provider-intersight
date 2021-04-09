@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceFabricVlan() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFabricVlanRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"auto_allow_on_uplinks": {
 				Description: "Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI.",
 				Type:        schema.TypeBool,
@@ -24,10 +33,28 @@ func dataSourceFabricVlan() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"is_native": {
 				Description: "Used to define whether this VLAN is to be classified as 'native' for traffic in this FI.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -42,6 +69,12 @@ func dataSourceFabricVlan() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -65,6 +98,10 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricVlan{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("auto_allow_on_uplinks"); ok {
 		x := (v.(bool))
 		o.SetAutoAllowOnUplinks(x)
@@ -73,9 +110,21 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("is_native"); ok {
 		x := (v.(bool))
 		o.SetIsNative(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -89,6 +138,10 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("vlan_id"); ok {
 		x := int64(v.(int))
 		o.SetVlanId(x)
@@ -100,8 +153,12 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 	}
 	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricVlanList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of FabricVlan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of FabricVlan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of FabricVlan: %s", responseErr.Error())
 	}
 	count := countResponse.FabricVlanList.GetCount()
 	var i int32
@@ -110,8 +167,12 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricVlanList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching FabricVlan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching FabricVlan: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching FabricVlan: %s", responseErr.Error())
 		}
 		results := resMo.FabricVlanList.GetResults()
 		length := len(results)
@@ -123,19 +184,35 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["auto_allow_on_uplinks"] = (s.GetAutoAllowOnUplinks())
 				temp["class_id"] = (s.GetClassId())
 
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
 				temp["eth_network_policy"] = flattenMapFabricEthNetworkPolicyRelationship(s.GetEthNetworkPolicy(), d)
 				temp["is_native"] = (s.GetIsNative())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 
 				temp["multicast_policy"] = flattenMapFabricMulticastPolicyRelationship(s.GetMulticastPolicy(), d)
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vlan_id"] = (s.GetVlanId())
 				fabricVlanResults[j] = temp
 				j += 1

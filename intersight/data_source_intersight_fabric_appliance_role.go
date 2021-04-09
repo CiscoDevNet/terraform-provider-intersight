@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceFabricApplianceRole() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFabricApplianceRoleRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"admin_speed": {
 				Description: "Admin configured speed for the port.\n* `Auto` - Admin configurable speed AUTO ( default ).\n* `1Gbps` - Admin configurable speed 1Gbps.\n* `10Gbps` - Admin configurable speed 10Gbps.\n* `25Gbps` - Admin configurable speed 25Gbps.\n* `40Gbps` - Admin configurable speed 40Gbps.\n* `100Gbps` - Admin configurable speed 100Gbps.",
 				Type:        schema.TypeString,
@@ -29,10 +38,28 @@ func dataSourceFabricApplianceRole() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"fec": {
 				Description: "Forward error correction configuration for the port.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"mode": {
 				Description: "Port mode to be set on the appliance port.\n* `trunk` - Trunk Mode Switch Port Type.\n* `access` - Access Mode Switch Port Type.",
@@ -61,6 +88,12 @@ func dataSourceFabricApplianceRole() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"slot_id": {
 				Description: "Slot Identifier of the Switch/FEX/Chassis Interface.",
 				Type:        schema.TypeInt,
@@ -80,6 +113,10 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricApplianceRole{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("admin_speed"); ok {
 		x := (v.(string))
 		o.SetAdminSpeed(x)
@@ -92,9 +129,21 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("fec"); ok {
 		x := (v.(string))
 		o.SetFec(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("mode"); ok {
 		x := (v.(string))
@@ -116,6 +165,10 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetPriority(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
@@ -127,8 +180,12 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 	}
 	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricApplianceRoleList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of FabricApplianceRole: %s", responseErr.Error())
 	}
 	count := countResponse.FabricApplianceRoleList.GetCount()
 	var i int32
@@ -137,8 +194,12 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricApplianceRoleList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching FabricApplianceRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching FabricApplianceRole: %s", responseErr.Error())
 		}
 		results := resMo.FabricApplianceRoleList.GetResults()
 		length := len(results)
@@ -150,25 +211,41 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_speed"] = (s.GetAdminSpeed())
 				temp["aggregate_port_id"] = (s.GetAggregatePortId())
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["eth_network_control_policy"] = flattenMapFabricEthNetworkControlPolicyRelationship(s.GetEthNetworkControlPolicy(), d)
 
 				temp["eth_network_group_policy"] = flattenMapFabricEthNetworkGroupPolicyRelationship(s.GetEthNetworkGroupPolicy(), d)
 				temp["fec"] = (s.GetFec())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["port_id"] = (s.GetPortId())
 
 				temp["port_policy"] = flattenMapFabricPortPolicyRelationship(s.GetPortPolicy(), d)
 				temp["priority"] = (s.GetPriority())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricApplianceRoleResults[j] = temp
 				j += 1
 			}

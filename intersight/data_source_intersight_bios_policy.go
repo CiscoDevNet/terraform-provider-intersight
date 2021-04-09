@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceBiosPolicyRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"acs_control_gpu1state": {
 				Description: "BIOS Token for setting ACS Control GPU-1 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -304,6 +313,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"crfastgo_config": {
 				Description: "BIOS Token for setting CR FastGo Config configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CrfastgoConfig token.\n* `Default` - Value - Default for configuring CrfastgoConfig token.\n* `Option 1` - Value - Option 1 for configuring CrfastgoConfig token.\n* `Option 2` - Value - Option 2 for configuring CrfastgoConfig token.\n* `Option 3` - Value - Option 3 for configuring CrfastgoConfig token.\n* `Option 4` - Value - Option 4 for configuring CrfastgoConfig token.\n* `Option 5` - Value - Option 5 for configuring CrfastgoConfig token.",
 				Type:        schema.TypeString,
@@ -328,6 +343,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting Direct Cache Access Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `auto` - Value - auto for configuring DirectCacheAccess token.\n* `disabled` - Value - disabled for configuring DirectCacheAccess token.\n* `enabled` - Value - enabled for configuring DirectCacheAccess token.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"dram_clock_throttling": {
 				Description: "BIOS Token for setting DRAM Clock Throttling configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring DramClockThrottling token.\n* `Balanced` - Value - Balanced for configuring DramClockThrottling token.\n* `Energy Efficient` - Value - Energy Efficient for configuring DramClockThrottling token.\n* `Performance` - Value - Performance for configuring DramClockThrottling token.",
@@ -578,6 +599,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting MMCFG BASE configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 GB` - Value - 1 GiB for configuring MmcfgBase token.\n* `2 GB` - Value - 2 GiB for configuring MmcfgBase token.\n* `2.5 GB` - Value - 2.5 GiB for configuring MmcfgBase token.\n* `3 GB` - Value - 3 GiB for configuring MmcfgBase token.\n* `Auto` - Value - Auto for configuring MmcfgBase token.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -900,6 +927,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting Secured Encrypted Virtualization configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `253 ASIDs` - Value - 253 ASIDs for configuring Sev token.\n* `509 ASIDs` - Value - 509 ASIDs for configuring Sev token.\n* `Auto` - Value - Auto for configuring Sev token.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"single_pctl_enable": {
 				Description: "BIOS Token for setting Single PCTL configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `No` - Value - No for configuring SinglePctlEnable token.\n* `Yes` - Value - Yes for configuring SinglePctlEnable token.",
@@ -1535,6 +1568,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu1state(x)
@@ -1767,6 +1804,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetCrQos(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("crfastgo_config"); ok {
 		x := (v.(string))
 		o.SetCrfastgoConfig(x)
@@ -1786,6 +1827,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("direct_cache_access"); ok {
 		x := (v.(string))
 		o.SetDirectCacheAccess(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("dram_clock_throttling"); ok {
 		x := (v.(string))
@@ -1986,6 +2031,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("mmcfg_base"); ok {
 		x := (v.(string))
 		o.SetMmcfgBase(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -2242,6 +2291,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("sev"); ok {
 		x := (v.(string))
 		o.SetSev(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("single_pctl_enable"); ok {
 		x := (v.(string))
@@ -2746,8 +2799,12 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	}
 	countResponse, _, responseErr := conn.ApiClient.BiosApi.GetBiosPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of BiosPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.BiosPolicyList.GetCount()
 	var i int32
@@ -2756,8 +2813,12 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.BiosApi.GetBiosPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching BiosPolicy: %s", responseErr.Error())
 		}
 		results := resMo.BiosPolicyList.GetResults()
 		length := len(results)
@@ -2769,6 +2830,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["acs_control_gpu1state"] = (s.GetAcsControlGpu1state())
 				temp["acs_control_gpu2state"] = (s.GetAcsControlGpu2state())
 				temp["acs_control_gpu3state"] = (s.GetAcsControlGpu3state())
@@ -2786,6 +2848,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["advanced_mem_test"] = (s.GetAdvancedMemTest())
 				temp["all_usb_devices"] = (s.GetAllUsbDevices())
 				temp["altitude"] = (s.GetAltitude())
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["aspm_support"] = (s.GetAspmSupport())
 				temp["assert_nmi_on_perr"] = (s.GetAssertNmiOnPerr())
 				temp["assert_nmi_on_serr"] = (s.GetAssertNmiOnSerr())
@@ -2828,11 +2892,14 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["cpu_performance"] = (s.GetCpuPerformance())
 				temp["cpu_power_management"] = (s.GetCpuPowerManagement())
 				temp["cr_qos"] = (s.GetCrQos())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["crfastgo_config"] = (s.GetCrfastgoConfig())
 				temp["dcpmm_firmware_downgrade"] = (s.GetDcpmmFirmwareDowngrade())
 				temp["demand_scrub"] = (s.GetDemandScrub())
 				temp["description"] = (s.GetDescription())
 				temp["direct_cache_access"] = (s.GetDirectCacheAccess())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["dram_clock_throttling"] = (s.GetDramClockThrottling())
 				temp["dram_refresh_rate"] = (s.GetDramRefreshRate())
 				temp["dram_sw_thermal_throttling"] = (s.GetDramSwThermalThrottling())
@@ -2883,6 +2950,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["memory_thermal_throttling"] = (s.GetMemoryThermalThrottling())
 				temp["mirroring_mode"] = (s.GetMirroringMode())
 				temp["mmcfg_base"] = (s.GetMmcfgBase())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["network_stack"] = (s.GetNetworkStack())
@@ -2899,8 +2968,11 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["os_boot_watchdog_timer_policy"] = (s.GetOsBootWatchdogTimerPolicy())
 				temp["os_boot_watchdog_timer_timeout"] = (s.GetOsBootWatchdogTimerTimeout())
 				temp["out_of_band_mgmt_port"] = (s.GetOutOfBandMgmtPort())
+				temp["owners"] = (s.GetOwners())
 				temp["package_cstate_limit"] = (s.GetPackageCstateLimit())
 				temp["panic_high_watermark"] = (s.GetPanicHighWatermark())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["partial_mirror_mode_config"] = (s.GetPartialMirrorModeConfig())
 				temp["partial_mirror_percent"] = (s.GetPartialMirrorPercent())
 				temp["partial_mirror_value1"] = (s.GetPartialMirrorValue1())
@@ -2929,6 +3001,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["pcie_slot_nvme5option_rom"] = (s.GetPcieSlotNvme5optionRom())
 				temp["pcie_slot_nvme6link_speed"] = (s.GetPcieSlotNvme6linkSpeed())
 				temp["pcie_slot_nvme6option_rom"] = (s.GetPcieSlotNvme6optionRom())
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pop_support"] = (s.GetPopSupport())
 				temp["post_error_pause"] = (s.GetPostErrorPause())
 				temp["processor_c1e"] = (s.GetProcessorC1e())
@@ -2951,6 +3025,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["select_ppr_type"] = (s.GetSelectPprType())
 				temp["serial_port_aenable"] = (s.GetSerialPortAenable())
 				temp["sev"] = (s.GetSev())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["single_pctl_enable"] = (s.GetSinglePctlEnable())
 				temp["slot10link_speed"] = (s.GetSlot10linkSpeed())
 				temp["slot10state"] = (s.GetSlot10state())
@@ -3073,6 +3148,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["usb_port_sd_card"] = (s.GetUsbPortSdCard())
 				temp["usb_port_vmedia"] = (s.GetUsbPortVmedia())
 				temp["usb_xhci_support"] = (s.GetUsbXhciSupport())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vga_priority"] = (s.GetVgaPriority())
 				temp["vmd_enable"] = (s.GetVmdEnable())
 				temp["work_load_config"] = (s.GetWorkLoadConfig())

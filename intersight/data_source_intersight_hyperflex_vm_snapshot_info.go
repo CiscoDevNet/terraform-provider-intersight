@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,15 +17,39 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceHyperflexVmSnapshotInfoRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"label": {
 				Description: "The name of the Virtual Machine and the time stamp of the snapshot.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"mode": {
 				Description: "Quiesce Mode for snapshot taken on Hyperflex cluster.\n* `NONE` - The snapshot quiesce mode is none.\n* `CRASH` - The snapshot quiesce mode is crash.\n* `VMTOOLS` - The snapshot quiesce mode is VMTOOLS.\n* `APP_CONSISTENT` - The snapshot quiesce mode is app consistent.",
@@ -48,6 +75,12 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"snapshot_status": {
 				Description: "Snapshot status of the source cluster.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.",
 				Type:        schema.TypeString,
@@ -62,11 +95,55 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
+					Description: "The Account ID for this managed object.",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Computed:    true,
 				},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"ancestors": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -999,6 +1076,18 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"create_time": {
+						Description: "The time when this managed object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"domain_group_moid": {
+						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"error_stack": {
 						Description: "List of errors associated with this VmBackupInfo.",
 						Type:        schema.TypeList,
@@ -1043,6 +1132,12 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"mod_time": {
+						Description: "The time when this managed object was last modified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"mode": {
 						Description: "Quiesce Mode for snapshot taken on Hyperflex cluster.\n* `NONE` - The snapshot quiesce mode is none.\n* `CRASH` - The snapshot quiesce mode is crash.\n* `VMTOOLS` - The snapshot quiesce mode is VMTOOLS.\n* `APP_CONSISTENT` - The snapshot quiesce mode is app consistent.",
 						Type:        schema.TypeString,
@@ -1060,6 +1155,51 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"owners": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"parent": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
 					},
 					"parent_snapshot": {
 						Description: "Entity reference to the parent snapshot of this VmSnapshotInfo.",
@@ -1118,8 +1258,52 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 							},
 						},
 					},
+					"permission_resources": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"replication_status": {
 						Description: "Replication status of the least successful target cluster.\n* `NONE` - Snapshot replication state is none.\n* `SUCCESS` - Snapshot completed successfully.\n* `FAILED` - Snapshot failed replication status code.\n* `PAUSED` - Snapshot replication paused status code.\n* `IN_USE` - Snapshot replica in use status code.\n* `STARTING` - Snapshot replication starting.\n* `REPLICATING` - Snapshot replication in progress.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"shared_scope": {
+						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -1230,6 +1414,127 @@ func dataSourceHyperflexVmSnapshotInfo() *schema.Resource {
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"version_context": {
+						Description: "The versioning info for this managed object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"interested_mos": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ref_mo": {
+									Description: "A reference to the original Managed Object.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Computed:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+								},
+								"timestamp": {
+									Description: "The time this versioned Managed Object was created.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"nr_version": {
+									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"version_type": {
+									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -1402,13 +1707,29 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexVmSnapshotInfo{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("label"); ok {
 		x := (v.(string))
 		o.SetLabel(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("mode"); ok {
 		x := (v.(string))
@@ -1426,6 +1747,10 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 		x := (v.(string))
 		o.SetReplicationStatus(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("snapshot_status"); ok {
 		x := (v.(string))
 		o.SetSnapshotStatus(x)
@@ -1441,8 +1766,12 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 	}
 	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexVmSnapshotInfoList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of HyperflexVmSnapshotInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of HyperflexVmSnapshotInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of HyperflexVmSnapshotInfo: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexVmSnapshotInfoList.GetCount()
 	var i int32
@@ -1451,8 +1780,12 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexVmSnapshotInfoList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching HyperflexVmSnapshotInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching HyperflexVmSnapshotInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching HyperflexVmSnapshotInfo: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexVmSnapshotInfoList.GetResults()
 		length := len(results)
@@ -1464,19 +1797,33 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_id_snap_map"] = flattenListHyperflexMapClusterIdToStSnapshotPoint(s.GetClusterIdSnapMap(), d)
 
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
 				temp["error_stack"] = flattenMapHyperflexErrorStack(s.GetErrorStack(), d)
 				temp["label"] = (s.GetLabel())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["parent_snapshot"] = flattenMapHyperflexEntityReference(s.GetParentSnapshot(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["replication_status"] = (s.GetReplicationStatus())
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["snapshot_status"] = (s.GetSnapshotStatus())
 				temp["source_timestamp"] = (s.GetSourceTimestamp())
 
@@ -1485,6 +1832,8 @@ func dataSourceHyperflexVmSnapshotInfoRead(c context.Context, d *schema.Resource
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["tgt_cluster"] = flattenMapHyperflexClusterRelationship(s.GetTgtCluster(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["vm_backup_info"] = flattenMapHyperflexVmBackupInfoRelationship(s.GetVmBackupInfo(), d)
 
