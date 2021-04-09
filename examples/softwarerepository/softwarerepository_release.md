@@ -1,0 +1,11 @@
+### Resource Creation
+
+```hcl
+resource "intersight_softwarerepository_release" "softwarerepository_release1" {
+  type = "FabricSwitch"
+  catalog {
+    object_type = "softwarerepository.Catalog"
+    moid        = var.softwarerepository_catalog
+  }
+}
+```

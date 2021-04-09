@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_ntp_policy" "ntp1" {
   name    = "ntp1"
@@ -10,7 +11,7 @@ resource "intersight_ntp_policy" "ntp1" {
   ]
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

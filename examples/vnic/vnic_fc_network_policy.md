@@ -8,7 +8,7 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

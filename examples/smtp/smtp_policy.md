@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_smtp_policy" "smtp1" {
   enabled      = false
@@ -11,10 +12,10 @@ resource "intersight_smtp_policy" "smtp1" {
   smtp_recipients = [
     "aw@cisco.com",
     "cy@cisco.com",
-    "dz@cisco.com"]
+  "dz@cisco.com"]
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   profiles {
     moid        = intersight_server_profile.server1.id

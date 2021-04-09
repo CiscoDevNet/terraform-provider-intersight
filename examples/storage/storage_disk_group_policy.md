@@ -2,10 +2,10 @@
 
 ```hcl
 resource "intersight_storage_disk_group_policy" "storage_disk_group3" {
-  name = "storage_disk_group2"
+  name        = "storage_disk_group2"
   description = "Disk Group Test policy"
-  raid_level = "Raid1"
-  use_jbods = true
+  raid_level  = "Raid1"
+  use_jbods   = true
   span_groups {
     disks {
       slot_number = 2
@@ -19,7 +19,7 @@ resource "intersight_storage_disk_group_policy" "storage_disk_group3" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

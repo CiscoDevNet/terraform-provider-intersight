@@ -30,7 +30,7 @@ resource "intersight_syslog_policy" "syslog1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

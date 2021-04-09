@@ -2,16 +2,16 @@
 
 ```hcl
 resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
-  name = "v_fc_adapter1"
+  name                    = "v_fc_adapter1"
   error_detection_timeout = 100000
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   error_recovery_settings {
-    enabled = false
-    io_retry_count = 255
-    io_retry_timeout = 50
+    enabled           = false
+    io_retry_count    = 255
+    io_retry_timeout  = 50
     link_down_timeout = 240000
     port_down_timeout = 240000
   }
@@ -26,8 +26,8 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
   }
 
   io_throttle_count = 1024
-  lun_count = 1024
-  lun_queue_depth = 254
+  lun_count         = 1024
+  lun_queue_depth   = 254
 
   plogi_settings {
     retries = 255
@@ -36,17 +36,17 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
   resource_allocation_timeout = 100000
 
   rx_queue_settings {
-    nr_count = 1
+    nr_count  = 1
     ring_size = 128
   }
   tx_queue_settings {
-    nr_count = 1
+    nr_count  = 1
     ring_size = 128
   }
 
 
   scsi_queue_settings {
-    nr_count = 8
+    nr_count  = 8
     ring_size = 152
   }
 

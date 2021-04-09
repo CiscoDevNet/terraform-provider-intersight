@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_boot_precision_policy" "boot_precision1" {
   name                     = "boot_precision1"
@@ -7,7 +8,7 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
   enforce_uefi_secure_boot = false
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
   boot_devices {
     enabled     = true
@@ -49,6 +50,5 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
     moid        = intersight_server_profile.server1.id
     object_type = "server.Profile"
   }
-
 }
 ```

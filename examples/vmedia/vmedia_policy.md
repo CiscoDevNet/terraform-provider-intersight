@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_vmedia_policy" "vmedia1" {
   name          = "vmedia1"
@@ -13,7 +14,7 @@ resource "intersight_vmedia_policy" "vmedia1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```

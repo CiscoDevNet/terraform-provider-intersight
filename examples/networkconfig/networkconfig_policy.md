@@ -1,4 +1,5 @@
 ### Resource Creation
+
 ```hcl
 resource "intersight_networkconfig_policy" "network_config1" {
   name                     = "network_config1"
@@ -14,7 +15,7 @@ resource "intersight_networkconfig_policy" "network_config1" {
   enable_ipv4dns_from_dhcp = false
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid        = var.organization
   }
 }
 ```
