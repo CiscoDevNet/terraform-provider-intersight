@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,10 +17,28 @@ func dataSourceVnicEthIf() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceVnicEthIfRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"failover_enabled": {
 				Description: "Setting this to true esnures that the traffic failsover from one uplink to another auotmatically in case of an uplink failure. It is applicable for Cisco VIC adapters only which are connected to Fabric Interconnect cluster. The uplink if specified determines the primary uplink in case of a failover.",
@@ -47,6 +68,12 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -68,6 +95,12 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Description: "The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"standby_vif_id": {
 				Description: "The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.",
@@ -100,9 +133,21 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("failover_enabled"); ok {
 		x := (v.(bool))
@@ -124,6 +169,10 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		x := (v.(string))
 		o.SetMacAddressType(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -139,6 +188,10 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("order"); ok {
 		x := int64(v.(int))
 		o.SetOrder(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("standby_vif_id"); ok {
 		x := int64(v.(int))
@@ -159,8 +212,12 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	}
 	countResponse, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthIfList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of VnicEthIf: %s", responseErr.Error())
 	}
 	count := countResponse.VnicEthIfList.GetCount()
 	var i int32
@@ -169,8 +226,12 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicEthIfList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching VnicEthIf: %s", responseErr.Error())
 		}
 		results := resMo.VnicEthIfList.GetResults()
 		length := len(results)
@@ -182,10 +243,16 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["cdn"] = flattenMapVnicCdn(s.GetCdn(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["eth_adapter_policy"] = flattenMapVnicEthAdapterPolicyRelationship(s.GetEthAdapterPolicy(), d)
 
@@ -215,14 +282,22 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 				temp["mac_lease"] = flattenMapMacpoolLeaseRelationship(s.GetMacLease(), d)
 
 				temp["mac_pool"] = flattenMapMacpoolPoolRelationship(s.GetMacPool(), d)
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["order"] = (s.GetOrder())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["placement"] = flattenMapVnicPlacementSettings(s.GetPlacement(), d)
 
 				temp["profile"] = flattenMapPolicyAbstractConfigProfileRelationship(s.GetProfile(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["sp_vnics"] = flattenListVnicEthIfRelationship(s.GetSpVnics(), d)
 				temp["standby_vif_id"] = (s.GetStandbyVifId())
@@ -231,6 +306,8 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["usnic_settings"] = flattenMapVnicUsnicSettings(s.GetUsnicSettings(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vif_id"] = (s.GetVifId())
 
 				temp["vmq_settings"] = flattenMapVnicVmqSettings(s.GetVmqSettings(), d)

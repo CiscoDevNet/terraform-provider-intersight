@@ -13,6 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_memory_persistent_memory_unit.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `admin_state`:(string) This represents the administrative state of the memory unit on a server. 
 * `app_direct_capacity`:(string) AppDirect capacity in GiB of the Persistent Memory Module on a server. 
 * `array_id`:(int) This represents the memory array to which the memory unit belongs to. 
@@ -20,8 +21,10 @@ The following arguments can be used to get data of already created objects in In
 * `capacity`:(string) This represents the memory capacity in MiB of the memory unit on a server. 
 * `clock`:(string) This represents the clock of the memory unit on a server. 
 * `count_status`:(string) Count status of the Persistent Memory Module on a server. 
+* `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `firmware_version`:(string) Firmware version of the firware running on the Persistent Memory Module on a server. 
 * `form_factor`:(string) This represents the form factor of the memory unit on a server. 
 * `frozen_status`:(string) Frozen status of the Persistent Memory Module on a server. 
@@ -31,6 +34,7 @@ The following arguments can be used to get data of already created objects in In
 * `lock_status`:(string) Lock status of the Persistent Memory Module on a server. 
 * `memory_capacity`:(string) Memory capacity in GiB of the Persistent Memory Module on a server. 
 * `memory_id`:(int) ID of the Persistent Memory Module on a server. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `oper_power_state`:(string) This represents the operational power state of the memory unit on a server. 
@@ -44,6 +48,7 @@ The following arguments can be used to get data of already created objects in In
 * `security_status`:(string) Security status of the Persistent Memory Module on a server. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `set`:(int) This represents the set of the memory unit on a server. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `socket_id`:(string) Socket ID of the Persistent Memory Module on a server. 
 * `socket_memory_id`:(string) Socket Memory ID of the Persistent Memory Module on a server. 
 * `speed`:(string) This represents the speed of the memory unit on a server. 

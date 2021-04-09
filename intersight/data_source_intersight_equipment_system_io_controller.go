@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceEquipmentSystemIoControllerRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"chassis_id": {
 				Description: "The assigned identifier for a chassis.",
 				Type:        schema.TypeString,
@@ -37,6 +46,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "This field gives a brief information on systemIOController.",
 				Type:        schema.TypeString,
@@ -55,8 +70,20 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"managing_instance": {
 				Description: "This field identifies the CIMC that manages the controller.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -115,6 +142,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"system_io_controller_id": {
 				Description: "This represents system I/O Controller identifier.",
 				Type:        schema.TypeInt,
@@ -129,11 +162,55 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"additional_properties": {
-					Type:             schema.TypeString,
-					Optional:         true,
-					DiffSuppressFunc: SuppressDiffAdditionProps,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
+					Description: "The Account ID for this managed object.",
+					Type:        schema.TypeString,
+					Optional:    true,
+					Computed:    true,
 				},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"ancestors": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"chassis_id": {
 						Description: "The assigned identifier for a chassis.",
 						Type:        schema.TypeString,
@@ -196,6 +273,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"create_time": {
+						Description: "The time when this managed object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"description": {
 						Description: "This field gives a brief information on systemIOController.",
 						Type:        schema.TypeString,
@@ -210,6 +293,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 					},
 					"dn": {
 						Description: "The Distinguished Name unambiguously identifies an object in the system.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"domain_group_moid": {
+						Description: "The DomainGroup ID for this managed object.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -298,6 +387,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"mod_time": {
+						Description: "The time when this managed object was last modified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"model": {
 						Description: "This field identifies the model of the given component.",
 						Type:        schema.TypeString,
@@ -322,11 +417,94 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"owners": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Computed: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"parent": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 					"part_number": {
 						Description: "Part Number identifier for the IO module.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"permission_resources": {
+						Description: "An array of relationships to moBaseMo resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
 					},
 					"pid": {
 						Description: "This field identifies the Product ID for systemIOController.",
@@ -430,6 +608,12 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"shared_scope": {
+						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"system_io_controller_id": {
 						Description: "This represents system I/O Controller identifier.",
 						Type:        schema.TypeInt,
@@ -465,6 +649,127 @@ func dataSourceEquipmentSystemIoController() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"version_context": {
+						Description: "The versioning info for this managed object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"interested_mos": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+									Computed: true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ref_mo": {
+									Description: "A reference to the original Managed Object.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Computed:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+										},
+									},
+								},
+								"timestamp": {
+									Description: "The time this versioned Managed Object was created.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"nr_version": {
+									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"version_type": {
+									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
 				}},
 				Computed: true,
 			}},
@@ -477,6 +782,10 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EquipmentSystemIoController{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("chassis_id"); ok {
 		x := (v.(string))
 		o.SetChassisId(x)
@@ -493,6 +802,10 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetConnectionStatus(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -505,9 +818,17 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetDn(x)
 	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("managing_instance"); ok {
 		x := (v.(string))
 		o.SetManagingInstance(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -545,6 +866,10 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetSerial(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("system_io_controller_id"); ok {
 		x := int64(v.(int))
 		o.SetSystemIoControllerId(x)
@@ -560,8 +885,12 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 	}
 	countResponse, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentSystemIoControllerList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of EquipmentSystemIoController: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of EquipmentSystemIoController: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of EquipmentSystemIoController: %s", responseErr.Error())
 	}
 	count := countResponse.EquipmentSystemIoControllerList.GetCount()
 	var i int32
@@ -570,8 +899,12 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentSystemIoControllerList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching EquipmentSystemIoController: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching EquipmentSystemIoController: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching EquipmentSystemIoController: %s", responseErr.Error())
 		}
 		results := resMo.EquipmentSystemIoControllerList.GetResults()
 		length := len(results)
@@ -583,26 +916,39 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["chassis_id"] = (s.GetChassisId())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cmc"] = flattenMapManagementControllerRelationship(s.GetCmc(), d)
 				temp["connection_path"] = (s.GetConnectionPath())
 				temp["connection_status"] = (s.GetConnectionStatus())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["managing_instance"] = (s.GetManagingInstance())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_state"] = (s.GetOperState())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["part_number"] = (s.GetPartNumber())
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pid"] = (s.GetPid())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
@@ -611,10 +957,13 @@ func dataSourceEquipmentSystemIoControllerRead(c context.Context, d *schema.Reso
 				temp["serial"] = (s.GetSerial())
 
 				temp["shared_io_module"] = flattenMapEquipmentSharedIoModuleRelationship(s.GetSharedIoModule(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["system_io_controller_id"] = (s.GetSystemIoControllerId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				equipmentSystemIoControllerResults[j] = temp
 				j += 1
 			}

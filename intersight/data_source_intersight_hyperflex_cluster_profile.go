@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceHyperflexClusterProfileRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"action": {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
 				Type:        schema.TypeString,
@@ -24,6 +33,12 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"data_ip_address": {
 				Description: "The storage data IP address for the HyperFlex cluster.",
 				Type:        schema.TypeString,
@@ -33,6 +48,12 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Description: "Description of the profile.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"host_name_prefix": {
 				Description: "The node name prefix that is used to automatically generate the default hostname for each server.\nA dash (-) will be appended to the prefix followed by the node number to form a hostname.\nThis default naming scheme can be manually overridden in the node configuration.\nThe maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must\nstart with an alphanumeric character.",
@@ -64,6 +85,12 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -85,6 +112,12 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Description: "The number of copies of each data block written.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"storage_type": {
 				Description: "The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).\n* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.\n* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).",
@@ -115,6 +148,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterProfile{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
@@ -123,6 +160,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("data_ip_address"); ok {
 		x := (v.(string))
 		o.SetDataIpAddress(x)
@@ -130,6 +171,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("host_name_prefix"); ok {
 		x := (v.(string))
@@ -155,6 +200,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		x := (v.(string))
 		o.SetMgmtPlatform(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -170,6 +219,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	if v, ok := d.GetOk("replication"); ok {
 		x := int64(v.(int))
 		o.SetReplication(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("storage_type"); ok {
 		x := (v.(string))
@@ -190,8 +243,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	}
 	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of HyperflexClusterProfile: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexClusterProfileList.GetCount()
 	var i int32
@@ -200,8 +257,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexClusterProfileList.GetResults()
 		length := len(results)
@@ -213,8 +274,11 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["associated_cluster"] = flattenMapHyperflexClusterRelationship(s.GetAssociatedCluster(), d)
 
@@ -230,8 +294,11 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["config_context"] = flattenMapPolicyConfigContext(s.GetConfigContext(), d)
 
 				temp["config_result"] = flattenMapHyperflexConfigResultRelationship(s.GetConfigResult(), d)
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["data_ip_address"] = (s.GetDataIpAddress())
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["ext_fc_storage"] = flattenMapHyperflexExtFcStoragePolicyRelationship(s.GetExtFcStorage(), d)
 
@@ -246,6 +313,8 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["mac_address_prefix"] = (s.GetMacAddressPrefix())
 				temp["mgmt_ip_address"] = (s.GetMgmtIpAddress())
 				temp["mgmt_platform"] = (s.GetMgmtPlatform())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 
@@ -255,6 +324,11 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 
@@ -262,6 +336,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["replication"] = (s.GetReplication())
 
 				temp["running_workflows"] = flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["software_version"] = flattenMapHyperflexSoftwareVersionPolicyRelationship(s.GetSoftwareVersion(), d)
 
@@ -278,6 +353,8 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["ucsm_config"] = flattenMapHyperflexUcsmConfigPolicyRelationship(s.GetUcsmConfig(), d)
 
 				temp["vcenter_config"] = flattenMapHyperflexVcenterConfigPolicyRelationship(s.GetVcenterConfig(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["wwxn_prefix"] = (s.GetWwxnPrefix())
 				hyperflexClusterProfileResults[j] = temp
 				j += 1

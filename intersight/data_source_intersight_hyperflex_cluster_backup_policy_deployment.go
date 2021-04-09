@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceHyperflexClusterBackupPolicyDeploymentRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"backup_data_store_name": {
 				Description: "Backup data store name used during the auto creation of the datastore. All VMs created in this data store will be automatically backed up.",
 				Type:        schema.TypeString,
@@ -37,6 +46,12 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Description from corresponding ClusterBackupPolicy.",
 				Type:        schema.TypeString,
@@ -47,6 +62,18 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 				Description: "True if record created by discovery on HyperFlex cluster.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -80,6 +107,12 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 			},
 			"replication_pair_name_prefix": {
 				Description: "Replication cluster pairing name prefix.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -138,6 +171,10 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterBackupPolicyDeployment{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("backup_data_store_name"); ok {
 		x := (v.(string))
 		o.SetBackupDataStoreName(x)
@@ -154,6 +191,10 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -161,6 +202,14 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	if v, ok := d.GetOk("discovered"); ok {
 		x := (v.(bool))
 		o.SetDiscovered(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -185,6 +234,10 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	if v, ok := d.GetOk("replication_pair_name_prefix"); ok {
 		x := (v.(string))
 		o.SetReplicationPairNamePrefix(x)
+	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 	if v, ok := d.GetOk("snapshot_retention_count"); ok {
 		x := int64(v.(int))
@@ -221,8 +274,12 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	}
 	countResponse, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of HyperflexClusterBackupPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of HyperflexClusterBackupPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of HyperflexClusterBackupPolicyDeployment: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexClusterBackupPolicyDeploymentList.GetCount()
 	var i int32
@@ -231,8 +288,12 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicyDeployment: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicyDeployment: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexClusterBackupPolicyDeploymentList.GetResults()
 		length := len(results)
@@ -244,25 +305,39 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["backup_data_store_name"] = (s.GetBackupDataStoreName())
 				temp["backup_data_store_size"] = (s.GetBackupDataStoreSize())
 				temp["backup_data_store_size_unit"] = (s.GetBackupDataStoreSizeUnit())
 
 				temp["backup_target"] = flattenMapHyperflexClusterRelationship(s.GetBackupTarget(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["discovered"] = (s.GetDiscovered())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["policy_moid"] = (s.GetPolicyMoid())
 				temp["profile_moid"] = (s.GetProfileMoid())
 				temp["replication_pair_name_prefix"] = (s.GetReplicationPairNamePrefix())
 
 				temp["replication_schedule"] = flattenMapHyperflexReplicationSchedule(s.GetReplicationSchedule(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 				temp["snapshot_retention_count"] = (s.GetSnapshotRetentionCount())
 
 				temp["source_cluster"] = flattenMapHyperflexClusterRelationship(s.GetSourceCluster(), d)
@@ -274,6 +349,8 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 				temp["target_detached"] = (s.GetTargetDetached())
 				temp["target_request_id"] = (s.GetTargetRequestId())
 				temp["target_uuid"] = (s.GetTargetUuid())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				hyperflexClusterBackupPolicyDeploymentResults[j] = temp
 				j += 1
 			}

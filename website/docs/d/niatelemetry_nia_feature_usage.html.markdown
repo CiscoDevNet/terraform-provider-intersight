@@ -13,6 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_feature_usage.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `apic_count`:(int) Number of APIC controllers. This determines the value of controllers for the fabric. 
 * `app_center_count`:(int) ACI APPs feature usage scale. 
 * `ave`:(string) AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled. 
@@ -24,7 +25,9 @@ The following arguments can be used to get data of already created objects in In
 * `config_job_count`:(int) Number of system backup configure jobs on the fanric. 
 * `consistency_checker_app`:(string) Consistency checker application usage. This determines if the fabric has Consistency checker application installed. 
 * `contract_count`:(int) Number of contracts. This determines the total number of Contracts configured across the fabric. 
+* `create_time`:(string) The time when this managed object was created. 
 * `dns_count`:(int) DNS feature usage. This determines the total number of DNS configurations across the fabric. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `eigrp_count`:(int) Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric. 
 * `epg_count`:(int) Number of End Point Groups. This determines the total number of End Point Groups across the fabric. 
 * `fabric_setupp_count`:(int) Number of Multi-Pods per fabric. 
@@ -45,6 +48,7 @@ The following arguments can be used to get data of already created objects in In
 * `maintenance_mode_count`:(int) Maintenance Mode feature usage. This determines the number of switches that are currently in maintenance mode. 
 * `management_over_v6_count`:(int) Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. 
 * `microsoft_useg_vmm_ep_pd_count`:(int) Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `net_flow_count`:(int) Number of Netflow monitor policies. 
 * `nir`:(string) NIR application usage. This determines if the fabric has NIR application installed. 
@@ -61,6 +65,7 @@ The following arguments can be used to get data of already created objects in In
 * `remote_leaf_count`:(int) Number of remote Leafs. This determines the total number of remote leaf switches in the fabric. 
 * `scvmm_count`:(int) SCVMM feature usage. This determines the total number of SCVMM configurations in the fabric. 
 * `shared_l3_out_count`:(int) SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made. 
 * `smart_call_home`:(string) Smart callhome feature usage. This determines if this feature is being enabled or disabled. 
 * `snapshot_count`:(int) Returns count of snapshots. 

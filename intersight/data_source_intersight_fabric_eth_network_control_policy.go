@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFabricEthNetworkControlPolicyRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"cdp_enabled": {
 				Description: "Enables the CDP on an interface.",
 				Type:        schema.TypeBool,
@@ -24,10 +33,22 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Description of the policy.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"forge_mac": {
 				Description: "Determines if the MAC forging is allowed or denied on an interface.\n* `allow` - Allows mac forging on an interface.\n* `deny` - Denies mac forging on an interface.",
@@ -38,6 +59,12 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Description: "Determines the MAC addresses that have to be registered with the switch.\n* `nativeVlanOnly` - Register only the MAC addresses learnt on the native VLAN.\n* `allVlans` - Register all the MAC addresses learnt on all the allowed VLANs.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -52,6 +79,12 @@ func dataSourceFabricEthNetworkControlPolicy() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -75,6 +108,10 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricEthNetworkControlPolicy{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("cdp_enabled"); ok {
 		x := (v.(bool))
 		o.SetCdpEnabled(x)
@@ -83,9 +120,17 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("forge_mac"); ok {
 		x := (v.(string))
@@ -94,6 +139,10 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 	if v, ok := d.GetOk("mac_registration_mode"); ok {
 		x := (v.(string))
 		o.SetMacRegistrationMode(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -107,6 +156,10 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("uplink_fail_action"); ok {
 		x := (v.(string))
 		o.SetUplinkFailAction(x)
@@ -118,8 +171,12 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 	}
 	countResponse, _, responseErr := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of FabricEthNetworkControlPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.FabricEthNetworkControlPolicyList.GetCount()
 	var i int32
@@ -128,8 +185,12 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s", responseErr.Error())
 		}
 		results := resMo.FabricEthNetworkControlPolicyList.GetResults()
 		length := len(results)
@@ -141,14 +202,22 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["cdp_enabled"] = (s.GetCdpEnabled())
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["forge_mac"] = (s.GetForgeMac())
 
 				temp["lldp_settings"] = flattenMapFabricLldpSettings(s.GetLldpSettings(), d)
 				temp["mac_registration_mode"] = (s.GetMacRegistrationMode())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 
@@ -156,9 +225,17 @@ func dataSourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.Re
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uplink_fail_action"] = (s.GetUplinkFailAction())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricEthNetworkControlPolicyResults[j] = temp
 				j += 1
 			}

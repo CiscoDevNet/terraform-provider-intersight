@@ -3,9 +3,11 @@ package intersight
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"reflect"
 	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -20,10 +22,56 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 		DeleteContext: resourceSoftwareHyperflexDistributableDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
+			},
+			"ancestors": {
+				Description: "An array of relationships to moBaseMo resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"bundle_type": {
 				Description: "The bundle type of the image, as published on cisco.com.",
@@ -163,6 +211,12 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "User provided description about the file. Cisco provided description for image inventoried from a Cisco repository.",
 				Type:        schema.TypeString,
@@ -208,6 +262,12 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"download_count": {
 				Description: "The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
 				Type:        schema.TypeInt,
@@ -232,6 +292,18 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"imported_time": {
+				Description: "The time at which this image or file was imported/cached into the repositry. if the 'ImportState' is 'Imported', the time at which this image or file was imported. if the 'ImportState' is 'Cached', the time at which this image or file was cached.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"last_access_time": {
+				Description: "The time at which this file was last downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"md5e_tag": {
 				Description: "The MD5 ETag for a file that is stored in Intersight repository or in the appliance cache. Warning - MD5 is currently broken and this will be migrated to SHA shortly.",
 				Type:        schema.TypeString,
@@ -247,6 +319,12 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Description: "The mdfid of the image provided by cisco.com.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"model": {
 				Description: "The endpoint model for which this firmware image is applicable.",
@@ -270,6 +348,93 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"owners": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
+			"parent": {
+				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+			},
+			"permission_resources": {
+				Description: "An array of relationships to moBaseMo resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"platform_type": {
 				Description: "The platform type of the image.",
@@ -323,6 +488,12 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"release_date": {
+				Description: "The date on which the file was released or distributed by its vendor.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"release_notes_url": {
 				Description: "The url for the release notes of this image.",
 				Type:        schema.TypeString,
@@ -333,6 +504,12 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"size": {
 				Description: "The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository.",
@@ -418,6 +595,133 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"version_context": {
+				Description: "The versioning info for this managed object.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"interested_mos": {
+							Type:     schema.TypeList,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+								},
+							},
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"ref_mo": {
+							Description: "A reference to the original Managed Object.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"moid": {
+										Description: "The Moid of the referenced REST resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the remote type referred by this relationship.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+									"selector": {
+										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
+									},
+								},
+							},
+							ConfigMode: schema.SchemaConfigModeAttr,
+						},
+						"timestamp": {
+							Description: "The time this versioned Managed Object was created.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"nr_version": {
+							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"version_type": {
+							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+			},
 		},
 	}
 }
@@ -428,12 +732,59 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwareHyperflexDistributableWithDefaults()
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if v, ok := d.GetOk("ancestors"); ok {
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetAncestors(x)
 		}
 	}
 
@@ -589,6 +940,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
@@ -636,6 +992,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
 	if v, ok := d.GetOk("download_count"); ok {
 		x := int64(v.(int))
 		o.SetDownloadCount(x)
@@ -656,6 +1017,16 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		o.SetImportState(x)
 	}
 
+	if v, ok := d.GetOk("imported_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetImportedTime(x)
+	}
+
+	if v, ok := d.GetOk("last_access_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastAccessTime(x)
+	}
+
 	if v, ok := d.GetOk("md5e_tag"); ok {
 		x := (v.(string))
 		o.SetMd5eTag(x)
@@ -669,6 +1040,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 	if v, ok := d.GetOk("mdfid"); ok {
 		x := (v.(string))
 		o.SetMdfid(x)
+	}
+
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 
 	if v, ok := d.GetOk("model"); ok {
@@ -687,6 +1063,102 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 	}
 
 	o.SetObjectType("software.HyperflexDistributable")
+
+	if v, ok := d.GetOk("owners"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		if len(x) > 0 {
+			o.SetOwners(x)
+		}
+	}
+
+	if v, ok := d.GetOk("parent"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if v, ok := d.GetOk("permission_resources"); ok {
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewMoMoRefWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPermissionResources(x)
+		}
+	}
 
 	if v, ok := d.GetOk("platform_type"); ok {
 		x := (v.(string))
@@ -741,6 +1213,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("release_date"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetReleaseDate(x)
+	}
+
 	if v, ok := d.GetOk("release_notes_url"); ok {
 		x := (v.(string))
 		o.SetReleaseNotesUrl(x)
@@ -749,6 +1226,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 	if v, ok := d.GetOk("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
+	}
+
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("size"); ok {
@@ -853,11 +1335,151 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		o.SetVersion(x)
 	}
 
+	if v, ok := d.GetOk("version_context"); ok {
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoVersionContextWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["ref_mo"]; ok {
+				{
+					p := make([]models.MoMoRef, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewMoMoRefWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetRefMo(x)
+					}
+				}
+			}
+			if v, ok := l["timestamp"]; ok {
+				{
+					x, _ := time.Parse(v.(string), time.RFC1123)
+					o.SetTimestamp(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			if v, ok := l["version_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersionType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
 	r := conn.ApiClient.SoftwareApi.CreateSoftwareHyperflexDistributable(conn.ctx).SoftwareHyperflexDistributable(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("failed while creating SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while creating SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while creating SoftwareHyperflexDistributable: %s", responseErr.Error())
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
@@ -872,17 +1494,29 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 	r := conn.ApiClient.SoftwareApi.GetSoftwareHyperflexDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "SoftwareHyperflexDistributable object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
 			return de
 		}
-		return diag.Errorf("error occurred while fetching SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching SoftwareHyperflexDistributable: %s", responseErr.Error())
+	}
+
+	if err := d.Set("account_moid", (s.GetAccountMoid())); err != nil {
+		return diag.Errorf("error occurred while setting property AccountMoid in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("ancestors", flattenListMoBaseMoRelationship(s.GetAncestors(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Ancestors in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("bundle_type", (s.GetBundleType())); err != nil {
@@ -901,12 +1535,20 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property ComponentMeta in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property CreateTime in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("distributable_metas", flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property DistributableMetas in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
+		return diag.Errorf("error occurred while setting property DomainGroupMoid in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
@@ -925,6 +1567,14 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property ImportState in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("imported_time", (s.GetImportedTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ImportedTime in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("last_access_time", (s.GetLastAccessTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property LastAccessTime in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("md5e_tag", (s.GetMd5eTag())); err != nil {
 		return diag.Errorf("error occurred while setting property Md5eTag in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
@@ -935,6 +1585,10 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 
 	if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
 		return diag.Errorf("error occurred while setting property Mdfid in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ModTime in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("model", (s.GetModel())); err != nil {
@@ -953,6 +1607,18 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property ObjectType in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("owners", (s.GetOwners())); err != nil {
+		return diag.Errorf("error occurred while setting property Owners in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("parent", flattenMapMoBaseMoRelationship(s.GetParent(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Parent in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PermissionResources in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
 		return diag.Errorf("error occurred while setting property PlatformType in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
@@ -965,12 +1631,20 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property Release in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("release_date", (s.GetReleaseDate()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ReleaseDate in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
 		return diag.Errorf("error occurred while setting property ReleaseNotesUrl in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
 		return diag.Errorf("error occurred while setting property Sha512sum in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
+	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
+		return diag.Errorf("error occurred while setting property SharedScope in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("size", (s.GetSize())); err != nil {
@@ -1005,6 +1679,10 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property Version in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property VersionContext in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
 	return de
@@ -1016,6 +1694,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareHyperflexDistributable{}
+	if d.HasChange("account_moid") {
+		v := d.Get("account_moid")
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
 		x := []byte(v.(string))
@@ -1023,6 +1707,49 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("ancestors") {
+		v := d.Get("ancestors")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetAncestors(x)
 		}
 	}
 
@@ -1181,6 +1908,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		}
 	}
 
+	if d.HasChange("create_time") {
+		v := d.Get("create_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
@@ -1230,6 +1963,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		}
 	}
 
+	if d.HasChange("domain_group_moid") {
+		v := d.Get("domain_group_moid")
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
 	if d.HasChange("download_count") {
 		v := d.Get("download_count")
 		x := int64(v.(int))
@@ -1254,6 +1993,18 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		o.SetImportState(x)
 	}
 
+	if d.HasChange("imported_time") {
+		v := d.Get("imported_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetImportedTime(x)
+	}
+
+	if d.HasChange("last_access_time") {
+		v := d.Get("last_access_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastAccessTime(x)
+	}
+
 	if d.HasChange("md5e_tag") {
 		v := d.Get("md5e_tag")
 		x := (v.(string))
@@ -1270,6 +2021,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		v := d.Get("mdfid")
 		x := (v.(string))
 		o.SetMdfid(x)
+	}
+
+	if d.HasChange("mod_time") {
+		v := d.Get("mod_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 
 	if d.HasChange("model") {
@@ -1291,6 +2048,105 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 	}
 
 	o.SetObjectType("software.HyperflexDistributable")
+
+	if d.HasChange("owners") {
+		v := d.Get("owners")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		if len(x) > 0 {
+			o.SetOwners(x)
+		}
+	}
+
+	if d.HasChange("parent") {
+		v := d.Get("parent")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if d.HasChange("permission_resources") {
+		v := d.Get("permission_resources")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetPermissionResources(x)
+		}
+	}
 
 	if d.HasChange("platform_type") {
 		v := d.Get("platform_type")
@@ -1348,6 +2204,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		}
 	}
 
+	if d.HasChange("release_date") {
+		v := d.Get("release_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetReleaseDate(x)
+	}
+
 	if d.HasChange("release_notes_url") {
 		v := d.Get("release_notes_url")
 		x := (v.(string))
@@ -1358,6 +2220,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		v := d.Get("sha512sum")
 		x := (v.(string))
 		o.SetSha512sum(x)
+	}
+
+	if d.HasChange("shared_scope") {
+		v := d.Get("shared_scope")
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 
 	if d.HasChange("size") {
@@ -1470,11 +2338,152 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		o.SetVersion(x)
 	}
 
+	if d.HasChange("version_context") {
+		v := d.Get("version_context")
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoVersionContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["ref_mo"]; ok {
+				{
+					p := make([]models.MoMoRef, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewMoMoRefWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetRefMo(x)
+					}
+				}
+			}
+			if v, ok := l["timestamp"]; ok {
+				{
+					x, _ := time.Parse(v.(string), time.RFC1123)
+					o.SetTimestamp(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			if v, ok := l["version_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersionType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
 	r := conn.ApiClient.SoftwareApi.UpdateSoftwareHyperflexDistributable(conn.ctx, d.Id()).SoftwareHyperflexDistributable(*o)
 	result, _, responseErr := r.Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while updating SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while updating SoftwareHyperflexDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while updating SoftwareHyperflexDistributable: %s", responseErr.Error())
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
@@ -1489,8 +2498,12 @@ func resourceSoftwareHyperflexDistributableDelete(c context.Context, d *schema.R
 	p := conn.ApiClient.SoftwareApi.DeleteSoftwareHyperflexDistributable(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
-		deleteErr := deleteErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while deleting SoftwareHyperflexDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
+		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while deleting SoftwareHyperflexDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
+		}
+		return diag.Errorf("error occurred while deleting SoftwareHyperflexDistributable object: %s", deleteErr.Error())
 	}
 	return de
 }

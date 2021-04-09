@@ -13,15 +13,19 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_controller.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `controller_flags`:(string) The flags for the storage controller. 
 * `controller_id`:(string) The Id of the storage controller. 
 * `controller_status`:(string) The current status of controller. 
+* `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `foreign_config_present`:(bool) Storage controller has detected disks in foreign config. 
 * `hw_revision`:(string) The hardware revision of controller. 
 * `interface_type`:(string) Interface types are Sas, Sata, PCH. 
 * `max_volumes_supported`:(int) Maximum virtual drives that can be created on this Storage Controller. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `oob_interface_supported`:(string) The CIMC support for out-of-band configuration of controller. 
@@ -36,6 +40,7 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `self_encrypt_enabled`:(string) Storage controller disk self encryption state. 
 * `serial`:(string) This field identifies the serial of the given component. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `type`:(string) Controller types are Raid, FlexFlash. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
  

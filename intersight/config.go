@@ -128,6 +128,7 @@ func (c *Client) getHttpClientContext(ctx context.Context) context.Context {
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: c.skipTlsVerification,
 		},
+		Proxy: http.ProxyFromEnvironment,
 	})
 	trace := &httptrace.ClientTrace{
 		GotConn: t.GotConn,
@@ -245,6 +246,7 @@ func (c *Client) GetApiClient(ctx context.Context, enableDebug bool) *gosdk.APIC
 			IdleConnTimeout:    30 * time.Second,
 			DisableCompression: true,
 			TLSClientConfig:    &tls.Config{InsecureSkipVerify: c.skipTlsVerification},
+			Proxy:              http.ProxyFromEnvironment,
 		},
 	}
 	cfg.Debug = enableDebug

@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,10 +17,22 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceKubernetesContainerRuntimePolicyRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"description": {
 				Description: "Description of the policy.",
@@ -28,6 +43,18 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				Description: "The DNS Search Domain Name.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -46,6 +73,12 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceKubernetesContainerRuntimePolicy().Schema},
@@ -60,9 +93,17 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesContainerRuntimePolicy{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
 	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
@@ -71,6 +112,14 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 	if v, ok := d.GetOk("docker_bridge_network_cidr"); ok {
 		x := (v.(string))
 		o.SetDockerBridgeNetworkCidr(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -84,6 +133,10 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -91,8 +144,12 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 	}
 	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of KubernetesContainerRuntimePolicy: %s", responseErr.Error())
 	}
 	count := countResponse.KubernetesContainerRuntimePolicyList.GetCount()
 	var i int32
@@ -101,8 +158,12 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s", responseErr.Error())
 		}
 		results := resMo.KubernetesContainerRuntimePolicyList.GetResults()
 		length := len(results)
@@ -114,10 +175,15 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster_profiles"] = flattenListKubernetesClusterProfileRelationship(s.GetClusterProfiles(), d)
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["docker_bridge_network_cidr"] = (s.GetDockerBridgeNetworkCidr())
 
@@ -125,13 +191,24 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 
 				temp["docker_https_proxy"] = flattenMapKubernetesProxyConfig(s.GetDockerHttpsProxy(), d)
 				temp["docker_no_proxy"] = (s.GetDockerNoProxy())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				kubernetesContainerRuntimePolicyResults[j] = temp
 				j += 1
 			}

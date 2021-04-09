@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ClusterManagementConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterManagementConfig"]
 **EncryptedEtcd** | Pointer to **bool** | Encrypt ETCD data at rest using the etcdEncryptionKey specified in the cluster Kubernetes configuration. | [optional] 
-**InternalMgmtPrivateKey** | Pointer to **string** | Private key for internal mgmt of the cluster via SSH. | [optional] 
-**InternalMgmtPublicKey** | Pointer to **string** | Public key for internal mgmt of the cluster via SSH. | [optional] 
 **LoadBalancerCount** | Pointer to **int64** | Number of IP addresses to reserve for load balancer services. | [optional] 
 **LoadBalancers** | Pointer to **[]string** |  | [optional] 
 **MasterVip** | Pointer to **string** | VIP for the cluster Kubernetes API server. If this is empty and a cluster IP pool is specified, it will be allocated from the IP pool. | [optional] 
@@ -98,56 +96,6 @@ SetEncryptedEtcd sets EncryptedEtcd field to given value.
 `func (o *KubernetesClusterManagementConfigAllOf) HasEncryptedEtcd() bool`
 
 HasEncryptedEtcd returns a boolean if a field has been set.
-
-### GetInternalMgmtPrivateKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetInternalMgmtPrivateKey() string`
-
-GetInternalMgmtPrivateKey returns the InternalMgmtPrivateKey field if non-nil, zero value otherwise.
-
-### GetInternalMgmtPrivateKeyOk
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetInternalMgmtPrivateKeyOk() (*string, bool)`
-
-GetInternalMgmtPrivateKeyOk returns a tuple with the InternalMgmtPrivateKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInternalMgmtPrivateKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) SetInternalMgmtPrivateKey(v string)`
-
-SetInternalMgmtPrivateKey sets InternalMgmtPrivateKey field to given value.
-
-### HasInternalMgmtPrivateKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) HasInternalMgmtPrivateKey() bool`
-
-HasInternalMgmtPrivateKey returns a boolean if a field has been set.
-
-### GetInternalMgmtPublicKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetInternalMgmtPublicKey() string`
-
-GetInternalMgmtPublicKey returns the InternalMgmtPublicKey field if non-nil, zero value otherwise.
-
-### GetInternalMgmtPublicKeyOk
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetInternalMgmtPublicKeyOk() (*string, bool)`
-
-GetInternalMgmtPublicKeyOk returns a tuple with the InternalMgmtPublicKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInternalMgmtPublicKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) SetInternalMgmtPublicKey(v string)`
-
-SetInternalMgmtPublicKey sets InternalMgmtPublicKey field to given value.
-
-### HasInternalMgmtPublicKey
-
-`func (o *KubernetesClusterManagementConfigAllOf) HasInternalMgmtPublicKey() bool`
-
-HasInternalMgmtPublicKey returns a boolean if a field has been set.
 
 ### GetLoadBalancerCount
 

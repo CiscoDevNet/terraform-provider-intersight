@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceFirmwareSasExpanderDescriptor() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceFirmwareSasExpanderDescriptorRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"brand_string": {
 				Description: "The brand string of the endpoint for which this capability information is applicable.",
 				Type:        schema.TypeString,
@@ -24,15 +33,33 @@ func dataSourceFirmwareSasExpanderDescriptor() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Detailed information about the endpoint.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"label": {
 				Description: "The label type for the component.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"model": {
 				Description: "The model of the endpoint, for which this capability information is applicable.",
@@ -55,6 +82,12 @@ func dataSourceFirmwareSasExpanderDescriptor() *schema.Resource {
 				Description: "The revision for the component.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"vendor": {
 				Description: "The vendor of the endpoint, for which this capability information is applicable.",
@@ -80,6 +113,10 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareSasExpanderDescriptor{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("brand_string"); ok {
 		x := (v.(string))
 		o.SetBrandString(x)
@@ -88,13 +125,25 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
 	if v, ok := d.GetOk("label"); ok {
 		x := (v.(string))
 		o.SetLabel(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -112,6 +161,10 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 		x := (v.(string))
 		o.SetRevision(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -127,8 +180,12 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 	}
 	countResponse, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of FirmwareSasExpanderDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of FirmwareSasExpanderDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of FirmwareSasExpanderDescriptor: %s", responseErr.Error())
 	}
 	count := countResponse.FirmwareSasExpanderDescriptorList.GetCount()
 	var i int32
@@ -137,8 +194,12 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareSasExpanderDescriptorList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching FirmwareSasExpanderDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching FirmwareSasExpanderDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching FirmwareSasExpanderDescriptor: %s", responseErr.Error())
 		}
 		results := resMo.FirmwareSasExpanderDescriptorList.GetResults()
 		length := len(results)
@@ -150,21 +211,37 @@ func dataSourceFirmwareSasExpanderDescriptorRead(c context.Context, d *schema.Re
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["brand_string"] = (s.GetBrandString())
 
 				temp["capabilities"] = flattenListCapabilityCapabilityRelationship(s.GetCapabilities(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["label"] = (s.GetLabel())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["revision"] = (s.GetRevision())
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				firmwareSasExpanderDescriptorResults[j] = temp
 				j += 1
 			}

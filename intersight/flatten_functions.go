@@ -625,6 +625,8 @@ func flattenListCertificatemanagementCertificateBase(p []models.Certificatemanag
 				pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 				return pkixdistinguishednames
 			})(item.GetIssuer(), d)
+			x509certificate["not_after"] = item.NotAfter
+			x509certificate["not_before"] = item.NotBefore
 			x509certificate["object_type"] = item.ObjectType
 			x509certificate["pem_certificate"] = item.PemCertificate
 			x509certificate["sha256_fingerprint"] = item.Sha256Fingerprint
@@ -3710,6 +3712,18 @@ func flattenListMetaRelationshipDefinition(p []models.MetaRelationshipDefinition
 	}
 	return metarelationshipdefinitions
 }
+func flattenListMoBaseMoRelationship(p []models.MoBaseMoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var mobasemorelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		mobasemorelationship := flattenMoMoRef(item)
+		mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
+	}
+	return mobasemorelationships
+}
 func flattenListMoTag(p []models.MoTag, d *schema.ResourceData) []map[string]interface{} {
 	var motags []map[string]interface{}
 	if len(p) == 0 {
@@ -5608,6 +5622,8 @@ func flattenListX509Certificate(p []models.X509Certificate, d *schema.ResourceDa
 			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 			return pkixdistinguishednames
 		})(item.GetIssuer(), d)
+		x509certificate["not_after"] = item.NotAfter
+		x509certificate["not_before"] = item.NotBefore
 		x509certificate["object_type"] = item.ObjectType
 		x509certificate["pem_certificate"] = item.PemCertificate
 		x509certificate["sha256_fingerprint"] = item.Sha256Fingerprint
@@ -6169,6 +6185,7 @@ func flattenMapAssetParentConnectionSignature(p models.AssetParentConnectionSign
 	assetparentconnectionsignature["device_id"] = item.DeviceId
 	assetparentconnectionsignature["node_id"] = item.NodeId
 	assetparentconnectionsignature["object_type"] = item.ObjectType
+	assetparentconnectionsignature["time_stamp"] = item.TimeStamp
 
 	assetparentconnectionsignatures = append(assetparentconnectionsignatures, assetparentconnectionsignature)
 	return assetparentconnectionsignatures
@@ -6291,6 +6308,8 @@ func flattenMapAssetSudiInfo(p models.AssetSudiInfo, d *schema.ResourceData) []m
 			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 			return pkixdistinguishednames
 		})(item.GetIssuer(), d)
+		x509certificate["not_after"] = item.NotAfter
+		x509certificate["not_before"] = item.NotBefore
 		x509certificate["object_type"] = item.ObjectType
 		x509certificate["pem_certificate"] = item.PemCertificate
 		x509certificate["sha256_fingerprint"] = item.Sha256Fingerprint
@@ -10387,7 +10406,6 @@ func flattenMapKubernetesClusterManagementConfig(p models.KubernetesClusterManag
 	kubernetesclustermanagementconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesclustermanagementconfig["class_id"] = item.ClassId
 	kubernetesclustermanagementconfig["encrypted_etcd"] = item.EncryptedEtcd
-	kubernetesclustermanagementconfig["internal_mgmt_public_key"] = item.InternalMgmtPublicKey
 	kubernetesclustermanagementconfig["load_balancer_count"] = item.LoadBalancerCount
 	kubernetesclustermanagementconfig["load_balancers"] = item.LoadBalancers
 	kubernetesclustermanagementconfig["master_vip"] = item.MasterVip
@@ -11244,6 +11262,57 @@ func flattenMapMoBaseMoRelationship(p models.MoBaseMoRelationship, d *schema.Res
 
 	mobasemorelationships = append(mobasemorelationships, mobasemorelationship)
 	return mobasemorelationships
+}
+func flattenMapMoVersionContext(p models.MoVersionContext, d *schema.ResourceData) []map[string]interface{} {
+	var moversioncontexts []map[string]interface{}
+	var ret models.MoVersionContext
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	moversioncontext := make(map[string]interface{})
+	moversioncontext["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	moversioncontext["class_id"] = item.ClassId
+	moversioncontext["interested_mos"] = (func(p []models.MoMoRef, d *schema.ResourceData) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			momoref := make(map[string]interface{})
+			momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			momoref["class_id"] = item.ClassId
+			momoref["moid"] = item.Moid
+			momoref["object_type"] = item.ObjectType
+			momoref["selector"] = item.Selector
+			momorefs = append(momorefs, momoref)
+		}
+		return momorefs
+	})(item.GetInterestedMos(), d)
+	moversioncontext["object_type"] = item.ObjectType
+	moversioncontext["ref_mo"] = (func(p models.MoMoRef, d *schema.ResourceData) []map[string]interface{} {
+		var momorefs []map[string]interface{}
+		var ret models.MoMoRef
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		momoref := make(map[string]interface{})
+		momoref["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		momoref["class_id"] = item.ClassId
+		momoref["moid"] = item.Moid
+		momoref["object_type"] = item.ObjectType
+		momoref["selector"] = item.Selector
+
+		momorefs = append(momorefs, momoref)
+		return momorefs
+	})(item.GetRefMo(), d)
+	moversioncontext["timestamp"] = item.Timestamp
+	moversioncontext["nr_version"] = item.Version
+	moversioncontext["version_type"] = item.VersionType
+
+	moversioncontexts = append(moversioncontexts, moversioncontext)
+	return moversioncontexts
 }
 func flattenMapNetworkElementRelationship(p models.NetworkElementRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var networkelementrelationships []map[string]interface{}
@@ -14822,6 +14891,8 @@ func flattenMapX509Certificate(p models.X509Certificate, d *schema.ResourceData)
 		pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
 		return pkixdistinguishednames
 	})(item.GetIssuer(), d)
+	x509certificate["not_after"] = item.NotAfter
+	x509certificate["not_before"] = item.NotBefore
 	x509certificate["object_type"] = item.ObjectType
 	x509certificate["pem_certificate"] = item.PemCertificate
 	x509certificate["sha256_fingerprint"] = item.Sha256Fingerprint

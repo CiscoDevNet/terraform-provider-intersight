@@ -13,12 +13,16 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_enclosure_disk.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `block_size`:(string) The block size of the physical disk in bytes. 
+* `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `disk_id`:(string) This field represents the disk Id in the storage enclosure. 
 * `disk_state`:(string) This field identifies the current disk configuration applied in the physical disk. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `health`:(string) The current health state of the enclosure disk. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_blocks`:(string) The number of blocks present on the physical disk. 
@@ -28,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `sas_address1`:(string) This field identifies the SAS address assigned to the disk SAS port-1. 
 * `sas_address2`:(string) This field identifies the SAS address assigned to the disk SAS port-2. 
 * `serial`:(string) This field identifies the serial of the given component. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(string) The size of the physical disk in MB. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
  

@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,10 +17,22 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceWorkflowWorkflowDefinitionRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"default_version": {
 				Description: "When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version.",
@@ -28,6 +43,12 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 				Description: "The description for this workflow.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"label": {
 				Description: "A user friendly short name to identify the workflow. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_).",
@@ -52,6 +73,12 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -65,6 +92,12 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -88,9 +121,17 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowDefinition{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
 	}
 	if v, ok := d.GetOk("default_version"); ok {
 		x := (v.(bool))
@@ -99,6 +140,10 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
 	}
 	if v, ok := d.GetOk("label"); ok {
 		x := (v.(string))
@@ -116,6 +161,10 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		x := int64(v.(int))
 		o.SetMaxWorkerTaskCount(x)
 	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -128,6 +177,10 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
@@ -139,8 +192,12 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	}
 	countResponse, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s", responseErr.Error())
 	}
 	count := countResponse.WorkflowWorkflowDefinitionList.GetCount()
 	var i int32
@@ -149,8 +206,12 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s", responseErr.Error())
 		}
 		results := resMo.WorkflowWorkflowDefinitionList.GetResults()
 		length := len(results)
@@ -162,12 +223,18 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_version"] = (s.GetDefaultVersion())
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["input_definition"] = flattenListWorkflowBaseDataType(s.GetInputDefinition(), d)
 
@@ -176,13 +243,21 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["license_entitlement"] = (s.GetLicenseEntitlement())
 				temp["max_task_count"] = (s.GetMaxTaskCount())
 				temp["max_worker_task_count"] = (s.GetMaxWorkerTaskCount())
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["output_definition"] = flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["properties"] = flattenMapWorkflowWorkflowProperties(s.GetProperties(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
@@ -192,6 +267,8 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 
 				temp["validation_information"] = flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)
 				temp["nr_version"] = (s.GetVersion())
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["workflow_metadata"] = flattenMapWorkflowWorkflowMetadataRelationship(s.GetWorkflowMetadata(), d)
 				workflowWorkflowDefinitionResults[j] = temp

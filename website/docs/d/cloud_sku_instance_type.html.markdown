@@ -13,16 +13,20 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_cloud_sku_instance_type.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `account_moid`:(string) The Account ID for this managed object. 
 * `architecture_type`:(string) Indicates if the instance type supports 32 or 64 bit or both.* `64Bit` - Enum to indicate that the instance type suppports only 64 bit architecture.* `32Bit` - Enum to indicate that the instance type supports only 32 bit architecture.* `both` - Enum to indicate that the instance type supports both 32 and 64 bit architecture. 
 * `cpu_unit`:(string) The cpu unit for this instance type.* `VIRTUAL_CPU` - The CPU unit used for virtual machines.* `MILLI_CPU` - The CPU unit used by containers. 
+* `create_time`:(string) The time when this managed object was created. 
 * `cuda_support`:(bool) Does the instanceType support CUDA architecture. 
 * `description`:(string) Any additional description for the instance type. 
+* `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_active`:(bool) Flag to indicate if this SKU is active or not. 
 * `is_auto_discovered`:(bool) Flag to indicate if SKU is discovered during inventory collection. 
 * `local_storage_size`:(float) Total size of local storage for this instance type. 
 * `local_storage_size_unit`:(string) The units for this storage. For e.g. MB or GB or TB.* `MB` - Enum to represent mega byte storage unit.* `GB` - Enum to represent Giga byte storage unit.* `TB` - Enum to represent Tera byte storage unit. 
 * `memory_size`:(float) The RAM size for this instance type. 
 * `memory_size_unit`:(string) Units to represent memory, for e.g. MB or GB.* `MB` - Enum to represent mega byte storage unit.* `GB` - Enum to represent Giga byte storage unit.* `TB` - Enum to represent Tera byte storage unit. 
+* `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The display name for instance type. 
 * `network_performance`:(string) Network performance of this instance type. 
@@ -32,4 +36,5 @@ The following arguments can be used to get data of already created objects in In
 * `service_category`:(string) Indicates if this sku belongs to Compute, Storage, Database or Network category.* `Compute` - Compute service offered by cloud provider.* `Storage` - Storage service offered by cloud provider.* `Database` - Database service offered by cloud provider.* `Network` - Network service offered by cloud provider. 
 * `service_family`:(string) Property to identify the family of service that the sku belongs to. 
 * `service_name`:(string) Any display name for the ServiceCategory if available. 
+* `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

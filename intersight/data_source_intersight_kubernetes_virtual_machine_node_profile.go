@@ -2,8 +2,11 @@ package intersight
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"reflect"
+	"strings"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -14,6 +17,12 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceKubernetesVirtualMachineNodeProfileRead,
 		Schema: map[string]*schema.Schema{
+			"account_moid": {
+				Description: "The Account ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"action": {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
 				Type:        schema.TypeString,
@@ -29,10 +38,28 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"create_time": {
+				Description: "The time when this managed object was created.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Description of the profile.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"mod_time": {
+				Description: "The time when this managed object was last modified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -47,6 +74,12 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"shared_scope": {
+				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -70,6 +103,10 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineNodeProfile{}
+	if v, ok := d.GetOk("account_moid"); ok {
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
@@ -82,9 +119,21 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 		x := (v.(string))
 		o.SetCloudProvider(x)
 	}
+	if v, ok := d.GetOk("create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+	if v, ok := d.GetOk("domain_group_moid"); ok {
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("mod_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -98,6 +147,10 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -109,8 +162,12 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 	}
 	countResponse, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineNodeProfileList(conn.ctx).Filter(getRequestParams(data)).Inlinecount("allpages").Execute()
 	if responseErr != nil {
-		responseErr := responseErr.(models.GenericOpenAPIError)
-		return diag.Errorf("error occurred while fetching count of KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		errorType := fmt.Sprintf("%T", responseErr)
+		if strings.Contains(errorType, "GenericOpenAPIError") {
+			responseErr := responseErr.(models.GenericOpenAPIError)
+			return diag.Errorf("error occurred while fetching count of KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		return diag.Errorf("error occurred while fetching count of KubernetesVirtualMachineNodeProfile: %s", responseErr.Error())
 	}
 	count := countResponse.KubernetesVirtualMachineNodeProfileList.GetCount()
 	var i int32
@@ -119,8 +176,12 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 	for i = 0; i < count; i += 100 {
 		resMo, _, responseErr := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineNodeProfileList(conn.ctx).Filter(getRequestParams(data)).Top(100).Skip(i).Execute()
 		if responseErr != nil {
-			responseErr := responseErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineNodeProfile: %s", responseErr.Error())
 		}
 		results := resMo.KubernetesVirtualMachineNodeProfileList.GetResults()
 		length := len(results)
@@ -132,17 +193,25 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["account_moid"] = (s.GetAccountMoid())
 				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cloud_provider"] = (s.GetCloudProvider())
 
 				temp["config_context"] = flattenMapPolicyConfigContext(s.GetConfigContext(), d)
 
 				temp["config_result"] = flattenMapKubernetesConfigResultRelationship(s.GetConfigResult(), d)
+
+				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
+				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["ip_addresses"] = flattenListIppoolIpLeaseRelationship(s.GetIpAddresses(), d)
+
+				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 
@@ -150,8 +219,14 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 
 				temp["node_ip"] = flattenMapIppoolIpLeaseRelationship(s.GetNodeIp(), d)
 				temp["object_type"] = (s.GetObjectType())
+				temp["owners"] = (s.GetOwners())
+
+				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
 
@@ -161,6 +236,8 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 				temp["type"] = (s.GetType())
 
 				temp["nr_version"] = flattenMapKubernetesVersionRelationship(s.GetVersion(), d)
+
+				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
 				temp["virtual_machine"] = flattenMapVirtualizationVirtualMachineRelationship(s.GetVirtualMachine(), d)
 				kubernetesVirtualMachineNodeProfileResults[j] = temp
