@@ -162,6 +162,9 @@ func dataSourceSoftwarerepositoryReleaseRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryRelease: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwarerepositoryReleaseList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for SoftwarerepositoryRelease data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var softwarerepositoryReleaseResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -176,10 +179,6 @@ func dataSourceSoftwarerepositoryReleaseRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryRelease: %s", responseErr.Error())
 		}
 		results := resMo.SoftwarerepositoryReleaseList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for SoftwarerepositoryRelease data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

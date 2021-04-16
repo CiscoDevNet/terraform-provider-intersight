@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.InitiatorContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.InitiatorContext"]
-**InitiatorMoid** | Pointer to **string** | The moid of the Intersigt managed object that initiated the workflow. | [optional] 
+**InitiatorMoid** | Pointer to **string** | The moid of the Intersight managed object that initiated the workflow. | [optional] 
 **InitiatorName** | Pointer to **string** | Name of the initiator who started the workflow. The initiator can be Intersight managed object that triggered the workflow. | [optional] 
 **InitiatorType** | Pointer to **string** | Type of Intersight managed object that initiated the workflow. | [optional] 
 

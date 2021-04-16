@@ -29,7 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) Operational state of IO card or fabric extender. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for the IO module. 
-* `presence`:(string) This field identifies the Presence state of the IO card module. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `product_name`:(string) This field identifies the Product Name for the iocard module model. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

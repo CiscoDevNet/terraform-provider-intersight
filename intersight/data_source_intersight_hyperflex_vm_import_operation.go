@@ -125,6 +125,9 @@ func dataSourceHyperflexVmImportOperationRead(c context.Context, d *schema.Resou
 		return diag.Errorf("error occurred while fetching count of HyperflexVmImportOperation: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexVmImportOperationList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexVmImportOperation data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexVmImportOperationResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -139,10 +142,6 @@ func dataSourceHyperflexVmImportOperationRead(c context.Context, d *schema.Resou
 			return diag.Errorf("error occurred while fetching HyperflexVmImportOperation: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexVmImportOperationList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexVmImportOperation data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

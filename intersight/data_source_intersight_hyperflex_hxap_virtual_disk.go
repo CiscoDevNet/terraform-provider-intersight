@@ -18,7 +18,7 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 		ReadContext: dataSourceHyperflexHxapVirtualDiskRead,
 		Schema: map[string]*schema.Schema{
 			"access_mode": {
-				Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.",
+				Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -53,7 +53,7 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 				Computed:    true,
 			},
 			"mode": {
-				Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.",
+				Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -93,10 +93,9 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 				Computed:    true,
 			},
 			"source_virtual_disk": {
-				Description: "Source disk name from where the clone is done.",
+				Description: "Virtual disk used for cloning new disk.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"uuid": {
 				Description: "UUID of the virtual disk.",
@@ -107,7 +106,7 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"access_mode": {
-					Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.",
+					Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
 					Type:        schema.TypeString,
 					Optional:    true,
 					Computed:    true,
@@ -224,7 +223,7 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 						Computed:    true,
 					},
 					"mode": {
-						Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.",
+						Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -386,10 +385,9 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 						Computed:    true,
 					},
 					"source_virtual_disk": {
-						Description: "Source disk name from where the clone is done.",
+						Description: "Virtual disk used for cloning new disk.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
 					"status": {
 						Description: "Download status of virtual machine disk.",
@@ -422,13 +420,19 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 									Computed:    true,
 								},
 								"state": {
-									Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.",
+									Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
 								},
 								"volume_handle": {
 									Description: "Identity of the Volume associated with virtual machine disk.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"volume_name": {
+									Description: "Name of the Volume associated with virtual machine disk.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -712,6 +716,9 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while fetching count of HyperflexHxapVirtualDisk: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexHxapVirtualDiskList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexHxapVirtualDisk data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexHxapVirtualDiskResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -726,10 +733,6 @@ func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.Resourc
 			return diag.Errorf("error occurred while fetching HyperflexHxapVirtualDisk: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexHxapVirtualDiskList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexHxapVirtualDisk data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

@@ -537,6 +537,9 @@ func dataSourceFabricPcMemberRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while fetching count of FabricPcMember: %s", responseErr.Error())
 	}
 	count := countResponse.FabricPcMemberList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricPcMember data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricPcMemberResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -551,10 +554,6 @@ func dataSourceFabricPcMemberRead(c context.Context, d *schema.ResourceData, met
 			return diag.Errorf("error occurred while fetching FabricPcMember: %s", responseErr.Error())
 		}
 		results := resMo.FabricPcMemberList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricPcMember data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

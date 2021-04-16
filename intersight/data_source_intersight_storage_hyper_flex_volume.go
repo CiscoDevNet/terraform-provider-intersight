@@ -24,7 +24,7 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"capacity": {
-				Description: "Provisioned Capacity of the Storage container in bytes.",
+				Description: "Provisioned Capacity of the Storage container in Bytes.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -33,6 +33,12 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"client_id": {
+				Description: "Client ID to which the volume belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -48,6 +54,18 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"last_modified_time": {
+				Description: "Last modified time as UTC of the volume.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"lun_uuid": {
+				Description: "UUID of Lun associated with the volume.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -101,7 +119,25 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"uuid": {
-				Description: "Uuid of the Datastore/Storage Container.",
+				Description: "UUID of the Datastore/Storage Containter.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"volume_access_mode": {
+				Description: "Access Mode of the volume.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"volume_mode": {
+				Description: "Mode of the volume.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"volume_type": {
+				Description: "The Type of the volume.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -158,7 +194,7 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 						},
 					},
 					"capacity": {
-						Description: "Provisioned Capacity of the Storage container in bytes.",
+						Description: "Provisioned Capacity of the Storage container in Bytes.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 						Computed:    true,
@@ -167,6 +203,12 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"client_id": {
+						Description: "Client ID to which the volume belongs.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"cluster": {
 						Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -221,6 +263,18 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"last_modified_time": {
+						Description: "Last modified time as UTC of the volume.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"lun_uuid": {
+						Description: "UUID of Lun associated with the volume.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -515,7 +569,7 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 						},
 					},
 					"uuid": {
-						Description: "Uuid of the Datastore/Storage Container.",
+						Description: "UUID of the Datastore/Storage Containter.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -641,6 +695,24 @@ func dataSourceStorageHyperFlexVolume() *schema.Resource {
 							},
 						},
 					},
+					"volume_access_mode": {
+						Description: "Access Mode of the volume.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"volume_mode": {
+						Description: "Mode of the volume.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"volume_type": {
+						Description: "The Type of the volume.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -665,6 +737,10 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("client_id"); ok {
+		x := (v.(string))
+		o.SetClientId(x)
+	}
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
@@ -676,6 +752,14 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("last_modified_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastModifiedTime(x)
+	}
+	if v, ok := d.GetOk("lun_uuid"); ok {
+		x := (v.(string))
+		o.SetLunUuid(x)
 	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -713,6 +797,18 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 		x := (v.(string))
 		o.SetUuid(x)
 	}
+	if v, ok := d.GetOk("volume_access_mode"); ok {
+		x := (v.(string))
+		o.SetVolumeAccessMode(x)
+	}
+	if v, ok := d.GetOk("volume_mode"); ok {
+		x := (v.(string))
+		o.SetVolumeMode(x)
+	}
+	if v, ok := d.GetOk("volume_type"); ok {
+		x := (v.(string))
+		o.SetVolumeType(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -728,6 +824,9 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while fetching count of StorageHyperFlexVolume: %s", responseErr.Error())
 	}
 	count := countResponse.StorageHyperFlexVolumeList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for StorageHyperFlexVolume data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var storageHyperFlexVolumeResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -742,10 +841,6 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 			return diag.Errorf("error occurred while fetching StorageHyperFlexVolume: %s", responseErr.Error())
 		}
 		results := resMo.StorageHyperFlexVolumeList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for StorageHyperFlexVolume data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -757,12 +852,16 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["capacity"] = (s.GetCapacity())
 				temp["class_id"] = (s.GetClassId())
+				temp["client_id"] = (s.GetClientId())
 
 				temp["cluster"] = flattenMapHyperflexClusterRelationship(s.GetCluster(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["last_modified_time"] = (s.GetLastModifiedTime()).String()
+				temp["lun_uuid"] = (s.GetLunUuid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -788,6 +887,9 @@ func dataSourceStorageHyperFlexVolumeRead(c context.Context, d *schema.ResourceD
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["volume_access_mode"] = (s.GetVolumeAccessMode())
+				temp["volume_mode"] = (s.GetVolumeMode())
+				temp["volume_type"] = (s.GetVolumeType())
 				storageHyperFlexVolumeResults[j] = temp
 				j += 1
 			}

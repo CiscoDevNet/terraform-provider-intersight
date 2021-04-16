@@ -72,6 +72,11 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `udld_settings`:(HashMap) - This specifies the UDLD Global configurations for this switch. 
+This complex property has following sub-properties:
+  + `message_interval`:(int) Configures the time between UDLD probe messages on ports that are in advertisement mode and arecurrently determined to be bidirectional.Valid values are from 7 to 90 seconds. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `recovery_action`:(string) UDLD recovery when enabled, attempts to bring an UDLD error-disabled port out of reset.* `none` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `reset` - The expanded 4th generation UCS Fabric Interconnect with 108 ports. 
 * `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

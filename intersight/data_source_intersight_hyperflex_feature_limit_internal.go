@@ -125,6 +125,9 @@ func dataSourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while fetching count of HyperflexFeatureLimitInternal: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexFeatureLimitInternalList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexFeatureLimitInternal data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexFeatureLimitInternalResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -139,10 +142,6 @@ func dataSourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.Re
 			return diag.Errorf("error occurred while fetching HyperflexFeatureLimitInternal: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexFeatureLimitInternalList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexFeatureLimitInternal data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

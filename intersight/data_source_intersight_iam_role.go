@@ -593,6 +593,9 @@ func dataSourceIamRoleRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while fetching count of IamRole: %s", responseErr.Error())
 	}
 	count := countResponse.IamRoleList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for IamRole data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var iamRoleResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -607,10 +610,6 @@ func dataSourceIamRoleRead(c context.Context, d *schema.ResourceData, meta inter
 			return diag.Errorf("error occurred while fetching IamRole: %s", responseErr.Error())
 		}
 		results := resMo.IamRoleList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for IamRole data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

@@ -512,7 +512,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 												Optional:    true,
 											},
 											"initiator_moid": {
-												Description: "The moid of the Intersigt managed object that initiated the workflow.",
+												Description: "The moid of the Intersight managed object that initiated the workflow.",
 												Type:        schema.TypeString,
 												Optional:    true,
 											},
@@ -731,6 +731,9 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 		return diag.Errorf("error occurred while fetching count of WorkflowPendingDynamicWorkflowInfo: %s", responseErr.Error())
 	}
 	count := countResponse.WorkflowPendingDynamicWorkflowInfoList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for WorkflowPendingDynamicWorkflowInfo data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var workflowPendingDynamicWorkflowInfoResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -745,10 +748,6 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 			return diag.Errorf("error occurred while fetching WorkflowPendingDynamicWorkflowInfo: %s", responseErr.Error())
 		}
 		results := resMo.WorkflowPendingDynamicWorkflowInfoList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for WorkflowPendingDynamicWorkflowInfo data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

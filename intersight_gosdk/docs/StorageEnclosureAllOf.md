@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | This represnets the description for the storage enclosure. | [optional] [readonly] 
 **EnclosureId** | Pointer to **int64** | This represnets the Identifier for the storage enclosure. | [optional] [readonly] 
 **NumSlots** | Pointer to **int64** | This represent the number of slots present in storage enclosure. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This represent the availability of storage enclosure. | [optional] [readonly] 
 **ServerId** | Pointer to **int64** | This represent the server-ID that houses the storage enclosure. | [optional] [readonly] 
 **Type** | Pointer to **string** | This represent the type of storage enclosure. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
@@ -180,31 +179,6 @@ SetNumSlots sets NumSlots field to given value.
 `func (o *StorageEnclosureAllOf) HasNumSlots() bool`
 
 HasNumSlots returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *StorageEnclosureAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *StorageEnclosureAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *StorageEnclosureAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *StorageEnclosureAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetServerId
 

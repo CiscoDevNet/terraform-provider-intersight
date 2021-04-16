@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -30,19 +30,15 @@ type HyperflexHxapVirtualMachine struct {
 	AntiAffinitySelectors []InfraMetaData   `json:"AntiAffinitySelectors,omitempty"`
 	Disks                 []HyperflexVmDisk `json:"Disks,omitempty"`
 	// Reason of the failure when VM is in failed state.
-	FailureReason *string `json:"FailureReason,omitempty"`
-	// Graphical console URL of this VM.
-	GraphicConsoleUrl *string                `json:"GraphicConsoleUrl,omitempty"`
-	Interfaces        []HyperflexVmInterface `json:"Interfaces,omitempty"`
-	Labels            []InfraMetaData        `json:"Labels,omitempty"`
+	FailureReason *string                `json:"FailureReason,omitempty"`
+	Interfaces    []HyperflexVmInterface `json:"Interfaces,omitempty"`
+	Labels        []InfraMetaData        `json:"Labels,omitempty"`
 	// Number network interfaces associated with the virtual machine.
 	NetworkCount *int64 `json:"NetworkCount,omitempty"`
 	// Denotes the VM start timestamp.
 	StartTime *string `json:"StartTime,omitempty"`
-	// Status of virtual machine. * `Unknown` - Virtual machine state is not available. * `Running` - Virtual machine is running normally. * `Stopped` - Virtual machine has been stopped. * `WaitForLaunch` - Virtual machine is wating to be launched. * `Paused` - Virtual machine is currently paused. * `ImportInProgress` - Virtual machine image is being imported into the platform. * `ImportFailed` - Virtual machine image import operation failed. * `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress. * `DiskCloneFailed` - Disk clone operation for the virtual machine failed. * `Processing` - Virtual machine is being created. * `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.
-	Status *string `json:"Status,omitempty"`
-	// Denotes how long this VM has been running in nano seconds.
-	UpTime               *string                           `json:"UpTime,omitempty"`
+	// Status of virtual machine. * `Unknown` - Virtual machine state is not available. * `Running` - Virtual machine is running normally. * `Stopped` - Virtual machine has been stopped. * `WaitForLaunch` - Virtual machine is wating to be launched. * `Paused` - Virtual machine is currently paused. * `ImportInProgress` - Virtual machine image is being imported into the platform. * `ImportFailed` - Virtual machine image import operation failed. * `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress. * `DiskCloneFailed` - Disk clone operation for the virtual machine failed. * `Processing` - Virtual machine is being created. * `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation. * `` - Virtual machine status is not available.
+	Status               *string                           `json:"Status,omitempty"`
 	Cluster              *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
 	Host                 *HyperflexHxapHostRelationship    `json:"Host,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -288,38 +284,6 @@ func (o *HyperflexHxapVirtualMachine) SetFailureReason(v string) {
 	o.FailureReason = &v
 }
 
-// GetGraphicConsoleUrl returns the GraphicConsoleUrl field value if set, zero value otherwise.
-func (o *HyperflexHxapVirtualMachine) GetGraphicConsoleUrl() string {
-	if o == nil || o.GraphicConsoleUrl == nil {
-		var ret string
-		return ret
-	}
-	return *o.GraphicConsoleUrl
-}
-
-// GetGraphicConsoleUrlOk returns a tuple with the GraphicConsoleUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HyperflexHxapVirtualMachine) GetGraphicConsoleUrlOk() (*string, bool) {
-	if o == nil || o.GraphicConsoleUrl == nil {
-		return nil, false
-	}
-	return o.GraphicConsoleUrl, true
-}
-
-// HasGraphicConsoleUrl returns a boolean if a field has been set.
-func (o *HyperflexHxapVirtualMachine) HasGraphicConsoleUrl() bool {
-	if o != nil && o.GraphicConsoleUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetGraphicConsoleUrl gets a reference to the given string and assigns it to the GraphicConsoleUrl field.
-func (o *HyperflexHxapVirtualMachine) SetGraphicConsoleUrl(v string) {
-	o.GraphicConsoleUrl = &v
-}
-
 // GetInterfaces returns the Interfaces field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexHxapVirtualMachine) GetInterfaces() []HyperflexVmInterface {
 	if o == nil {
@@ -482,38 +446,6 @@ func (o *HyperflexHxapVirtualMachine) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUpTime returns the UpTime field value if set, zero value otherwise.
-func (o *HyperflexHxapVirtualMachine) GetUpTime() string {
-	if o == nil || o.UpTime == nil {
-		var ret string
-		return ret
-	}
-	return *o.UpTime
-}
-
-// GetUpTimeOk returns a tuple with the UpTime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HyperflexHxapVirtualMachine) GetUpTimeOk() (*string, bool) {
-	if o == nil || o.UpTime == nil {
-		return nil, false
-	}
-	return o.UpTime, true
-}
-
-// HasUpTime returns a boolean if a field has been set.
-func (o *HyperflexHxapVirtualMachine) HasUpTime() bool {
-	if o != nil && o.UpTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUpTime gets a reference to the given string and assigns it to the UpTime field.
-func (o *HyperflexHxapVirtualMachine) SetUpTime(v string) {
-	o.UpTime = &v
-}
-
 // GetCluster returns the Cluster field value if set, zero value otherwise.
 func (o *HyperflexHxapVirtualMachine) GetCluster() HyperflexHxapClusterRelationship {
 	if o == nil || o.Cluster == nil {
@@ -609,9 +541,6 @@ func (o HyperflexHxapVirtualMachine) MarshalJSON() ([]byte, error) {
 	if o.FailureReason != nil {
 		toSerialize["FailureReason"] = o.FailureReason
 	}
-	if o.GraphicConsoleUrl != nil {
-		toSerialize["GraphicConsoleUrl"] = o.GraphicConsoleUrl
-	}
 	if o.Interfaces != nil {
 		toSerialize["Interfaces"] = o.Interfaces
 	}
@@ -626,9 +555,6 @@ func (o HyperflexHxapVirtualMachine) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
-	}
-	if o.UpTime != nil {
-		toSerialize["UpTime"] = o.UpTime
 	}
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
@@ -656,19 +582,15 @@ func (o *HyperflexHxapVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		AntiAffinitySelectors []InfraMetaData   `json:"AntiAffinitySelectors,omitempty"`
 		Disks                 []HyperflexVmDisk `json:"Disks,omitempty"`
 		// Reason of the failure when VM is in failed state.
-		FailureReason *string `json:"FailureReason,omitempty"`
-		// Graphical console URL of this VM.
-		GraphicConsoleUrl *string                `json:"GraphicConsoleUrl,omitempty"`
-		Interfaces        []HyperflexVmInterface `json:"Interfaces,omitempty"`
-		Labels            []InfraMetaData        `json:"Labels,omitempty"`
+		FailureReason *string                `json:"FailureReason,omitempty"`
+		Interfaces    []HyperflexVmInterface `json:"Interfaces,omitempty"`
+		Labels        []InfraMetaData        `json:"Labels,omitempty"`
 		// Number network interfaces associated with the virtual machine.
 		NetworkCount *int64 `json:"NetworkCount,omitempty"`
 		// Denotes the VM start timestamp.
 		StartTime *string `json:"StartTime,omitempty"`
-		// Status of virtual machine. * `Unknown` - Virtual machine state is not available. * `Running` - Virtual machine is running normally. * `Stopped` - Virtual machine has been stopped. * `WaitForLaunch` - Virtual machine is wating to be launched. * `Paused` - Virtual machine is currently paused. * `ImportInProgress` - Virtual machine image is being imported into the platform. * `ImportFailed` - Virtual machine image import operation failed. * `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress. * `DiskCloneFailed` - Disk clone operation for the virtual machine failed. * `Processing` - Virtual machine is being created. * `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.
-		Status *string `json:"Status,omitempty"`
-		// Denotes how long this VM has been running in nano seconds.
-		UpTime  *string                           `json:"UpTime,omitempty"`
+		// Status of virtual machine. * `Unknown` - Virtual machine state is not available. * `Running` - Virtual machine is running normally. * `Stopped` - Virtual machine has been stopped. * `WaitForLaunch` - Virtual machine is wating to be launched. * `Paused` - Virtual machine is currently paused. * `ImportInProgress` - Virtual machine image is being imported into the platform. * `ImportFailed` - Virtual machine image import operation failed. * `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress. * `DiskCloneFailed` - Disk clone operation for the virtual machine failed. * `Processing` - Virtual machine is being created. * `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation. * `` - Virtual machine status is not available.
+		Status  *string                           `json:"Status,omitempty"`
 		Cluster *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
 		Host    *HyperflexHxapHostRelationship    `json:"Host,omitempty"`
 	}
@@ -685,13 +607,11 @@ func (o *HyperflexHxapVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexHxapVirtualMachine.AntiAffinitySelectors = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.AntiAffinitySelectors
 		varHyperflexHxapVirtualMachine.Disks = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Disks
 		varHyperflexHxapVirtualMachine.FailureReason = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.FailureReason
-		varHyperflexHxapVirtualMachine.GraphicConsoleUrl = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.GraphicConsoleUrl
 		varHyperflexHxapVirtualMachine.Interfaces = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Interfaces
 		varHyperflexHxapVirtualMachine.Labels = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Labels
 		varHyperflexHxapVirtualMachine.NetworkCount = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.NetworkCount
 		varHyperflexHxapVirtualMachine.StartTime = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.StartTime
 		varHyperflexHxapVirtualMachine.Status = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Status
-		varHyperflexHxapVirtualMachine.UpTime = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.UpTime
 		varHyperflexHxapVirtualMachine.Cluster = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Cluster
 		varHyperflexHxapVirtualMachine.Host = varHyperflexHxapVirtualMachineWithoutEmbeddedStruct.Host
 		*o = HyperflexHxapVirtualMachine(varHyperflexHxapVirtualMachine)
@@ -718,13 +638,11 @@ func (o *HyperflexHxapVirtualMachine) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AntiAffinitySelectors")
 		delete(additionalProperties, "Disks")
 		delete(additionalProperties, "FailureReason")
-		delete(additionalProperties, "GraphicConsoleUrl")
 		delete(additionalProperties, "Interfaces")
 		delete(additionalProperties, "Labels")
 		delete(additionalProperties, "NetworkCount")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Status")
-		delete(additionalProperties, "UpTime")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "Host")
 

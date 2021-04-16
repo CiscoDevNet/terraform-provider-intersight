@@ -25,6 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) Operational state of the transceiver. 
 * `oper_state_qual`:(string) Reason for this transceiver's operational state. 
 * `port_id`:(int) Switch physical port identifier. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

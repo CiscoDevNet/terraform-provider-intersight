@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -23,10 +23,12 @@ type HyperflexDiskStatusAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Percentage of download completed.
 	DownloadPercentage *string `json:"DownloadPercentage,omitempty"`
-	// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending.
+	// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending. * `` - Disk state is not available.
 	State *string `json:"State,omitempty"`
 	// Identity of the Volume associated with virtual machine disk.
-	VolumeHandle         *string `json:"VolumeHandle,omitempty"`
+	VolumeHandle *string `json:"VolumeHandle,omitempty"`
+	// Name of the Volume associated with virtual machine disk.
+	VolumeName           *string `json:"VolumeName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -203,6 +205,38 @@ func (o *HyperflexDiskStatusAllOf) SetVolumeHandle(v string) {
 	o.VolumeHandle = &v
 }
 
+// GetVolumeName returns the VolumeName field value if set, zero value otherwise.
+func (o *HyperflexDiskStatusAllOf) GetVolumeName() string {
+	if o == nil || o.VolumeName == nil {
+		var ret string
+		return ret
+	}
+	return *o.VolumeName
+}
+
+// GetVolumeNameOk returns a tuple with the VolumeName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDiskStatusAllOf) GetVolumeNameOk() (*string, bool) {
+	if o == nil || o.VolumeName == nil {
+		return nil, false
+	}
+	return o.VolumeName, true
+}
+
+// HasVolumeName returns a boolean if a field has been set.
+func (o *HyperflexDiskStatusAllOf) HasVolumeName() bool {
+	if o != nil && o.VolumeName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeName gets a reference to the given string and assigns it to the VolumeName field.
+func (o *HyperflexDiskStatusAllOf) SetVolumeName(v string) {
+	o.VolumeName = &v
+}
+
 func (o HyperflexDiskStatusAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -219,6 +253,9 @@ func (o HyperflexDiskStatusAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.VolumeHandle != nil {
 		toSerialize["VolumeHandle"] = o.VolumeHandle
+	}
+	if o.VolumeName != nil {
+		toSerialize["VolumeName"] = o.VolumeName
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -243,6 +280,7 @@ func (o *HyperflexDiskStatusAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DownloadPercentage")
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "VolumeHandle")
+		delete(additionalProperties, "VolumeName")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.FcoeUplinkPcRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.FcoeUplinkPcRole"]
 **AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. | [optional] [default to "Auto"]
-**UdldAdminState** | Pointer to **string** | Admin configured state for UDLD for this port. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
+**LinkAggregationPolicy** | Pointer to [**FabricLinkAggregationPolicyRelationship**](fabric.LinkAggregationPolicy.Relationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](fabric.LinkControlPolicy.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,30 +94,55 @@ SetAdminSpeed sets AdminSpeed field to given value.
 
 HasAdminSpeed returns a boolean if a field has been set.
 
-### GetUdldAdminState
+### GetLinkAggregationPolicy
 
-`func (o *FabricFcoeUplinkPcRole) GetUdldAdminState() string`
+`func (o *FabricFcoeUplinkPcRole) GetLinkAggregationPolicy() FabricLinkAggregationPolicyRelationship`
 
-GetUdldAdminState returns the UdldAdminState field if non-nil, zero value otherwise.
+GetLinkAggregationPolicy returns the LinkAggregationPolicy field if non-nil, zero value otherwise.
 
-### GetUdldAdminStateOk
+### GetLinkAggregationPolicyOk
 
-`func (o *FabricFcoeUplinkPcRole) GetUdldAdminStateOk() (*string, bool)`
+`func (o *FabricFcoeUplinkPcRole) GetLinkAggregationPolicyOk() (*FabricLinkAggregationPolicyRelationship, bool)`
 
-GetUdldAdminStateOk returns a tuple with the UdldAdminState field if it's non-nil, zero value otherwise
+GetLinkAggregationPolicyOk returns a tuple with the LinkAggregationPolicy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUdldAdminState
+### SetLinkAggregationPolicy
 
-`func (o *FabricFcoeUplinkPcRole) SetUdldAdminState(v string)`
+`func (o *FabricFcoeUplinkPcRole) SetLinkAggregationPolicy(v FabricLinkAggregationPolicyRelationship)`
 
-SetUdldAdminState sets UdldAdminState field to given value.
+SetLinkAggregationPolicy sets LinkAggregationPolicy field to given value.
 
-### HasUdldAdminState
+### HasLinkAggregationPolicy
 
-`func (o *FabricFcoeUplinkPcRole) HasUdldAdminState() bool`
+`func (o *FabricFcoeUplinkPcRole) HasLinkAggregationPolicy() bool`
 
-HasUdldAdminState returns a boolean if a field has been set.
+HasLinkAggregationPolicy returns a boolean if a field has been set.
+
+### GetLinkControlPolicy
+
+`func (o *FabricFcoeUplinkPcRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
+
+GetLinkControlPolicy returns the LinkControlPolicy field if non-nil, zero value otherwise.
+
+### GetLinkControlPolicyOk
+
+`func (o *FabricFcoeUplinkPcRole) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool)`
+
+GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkControlPolicy
+
+`func (o *FabricFcoeUplinkPcRole) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship)`
+
+SetLinkControlPolicy sets LinkControlPolicy field to given value.
+
+### HasLinkControlPolicy
+
+`func (o *FabricFcoeUplinkPcRole) HasLinkControlPolicy() bool`
+
+HasLinkControlPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

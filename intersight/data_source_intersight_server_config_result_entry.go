@@ -600,6 +600,9 @@ func dataSourceServerConfigResultEntryRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while fetching count of ServerConfigResultEntry: %s", responseErr.Error())
 	}
 	count := countResponse.ServerConfigResultEntryList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ServerConfigResultEntry data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var serverConfigResultEntryResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -614,10 +617,6 @@ func dataSourceServerConfigResultEntryRead(c context.Context, d *schema.Resource
 			return diag.Errorf("error occurred while fetching ServerConfigResultEntry: %s", responseErr.Error())
 		}
 		results := resMo.ServerConfigResultEntryList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ServerConfigResultEntry data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

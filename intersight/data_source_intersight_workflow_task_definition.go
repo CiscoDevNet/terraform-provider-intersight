@@ -85,7 +85,7 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"secure_prop_access": {
-				Description: "If set to true, the task requires access to secure properties and uses an encyption token associated with a workflow moid to encrypt or decrypt the secure properties.",
+				Description: "If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -189,6 +189,9 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while fetching count of WorkflowTaskDefinition: %s", responseErr.Error())
 	}
 	count := countResponse.WorkflowTaskDefinitionList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for WorkflowTaskDefinition data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var workflowTaskDefinitionResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -203,10 +206,6 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 			return diag.Errorf("error occurred while fetching WorkflowTaskDefinition: %s", responseErr.Error())
 		}
 		results := resMo.WorkflowTaskDefinitionList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for WorkflowTaskDefinition data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

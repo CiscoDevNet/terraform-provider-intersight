@@ -529,6 +529,9 @@ func dataSourceIamEndPointPrivilegeRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while fetching count of IamEndPointPrivilege: %s", responseErr.Error())
 	}
 	count := countResponse.IamEndPointPrivilegeList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for IamEndPointPrivilege data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var iamEndPointPrivilegeResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -543,10 +546,6 @@ func dataSourceIamEndPointPrivilegeRead(c context.Context, d *schema.ResourceDat
 			return diag.Errorf("error occurred while fetching IamEndPointPrivilege: %s", responseErr.Error())
 		}
 		results := resMo.IamEndPointPrivilegeList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for IamEndPointPrivilege data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

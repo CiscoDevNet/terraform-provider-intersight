@@ -696,6 +696,9 @@ func dataSourceIamIdpReferenceRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while fetching count of IamIdpReference: %s", responseErr.Error())
 	}
 	count := countResponse.IamIdpReferenceList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for IamIdpReference data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var iamIdpReferenceResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -710,10 +713,6 @@ func dataSourceIamIdpReferenceRead(c context.Context, d *schema.ResourceData, me
 			return diag.Errorf("error occurred while fetching IamIdpReference: %s", responseErr.Error())
 		}
 		results := resMo.IamIdpReferenceList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for IamIdpReference data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

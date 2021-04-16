@@ -9,9 +9,11 @@ Name | Type | Description | Notes
 **ClusterCount** | Pointer to **int64** | Count of all clusters associated with this DC. | [optional] 
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this DC. | [optional] 
 **HostCount** | Pointer to **int64** | Count of all hosts associated with this DC. | [optional] 
+**InventoryPath** | Pointer to **string** | Inventory path of the DC. | [optional] 
 **NetworkCount** | Pointer to **int64** | Count of all networks associated with this datacenter (DC). | [optional] 
 **VmCount** | Pointer to **int64** | Count of all virtual machines (VMs) associated with this DC. | [optional] 
 **HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](virtualization.VmwareVcenter.Relationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](virtualization.VmwareFolder.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -147,6 +149,31 @@ SetHostCount sets HostCount field to given value.
 
 HasHostCount returns a boolean if a field has been set.
 
+### GetInventoryPath
+
+`func (o *VirtualizationVmwareDatacenter) GetInventoryPath() string`
+
+GetInventoryPath returns the InventoryPath field if non-nil, zero value otherwise.
+
+### GetInventoryPathOk
+
+`func (o *VirtualizationVmwareDatacenter) GetInventoryPathOk() (*string, bool)`
+
+GetInventoryPathOk returns a tuple with the InventoryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryPath
+
+`func (o *VirtualizationVmwareDatacenter) SetInventoryPath(v string)`
+
+SetInventoryPath sets InventoryPath field to given value.
+
+### HasInventoryPath
+
+`func (o *VirtualizationVmwareDatacenter) HasInventoryPath() bool`
+
+HasInventoryPath returns a boolean if a field has been set.
+
 ### GetNetworkCount
 
 `func (o *VirtualizationVmwareDatacenter) GetNetworkCount() int64`
@@ -221,6 +248,31 @@ SetHypervisorManager sets HypervisorManager field to given value.
 `func (o *VirtualizationVmwareDatacenter) HasHypervisorManager() bool`
 
 HasHypervisorManager returns a boolean if a field has been set.
+
+### GetParentFolder
+
+`func (o *VirtualizationVmwareDatacenter) GetParentFolder() VirtualizationVmwareFolderRelationship`
+
+GetParentFolder returns the ParentFolder field if non-nil, zero value otherwise.
+
+### GetParentFolderOk
+
+`func (o *VirtualizationVmwareDatacenter) GetParentFolderOk() (*VirtualizationVmwareFolderRelationship, bool)`
+
+GetParentFolderOk returns a tuple with the ParentFolder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentFolder
+
+`func (o *VirtualizationVmwareDatacenter) SetParentFolder(v VirtualizationVmwareFolderRelationship)`
+
+SetParentFolder sets ParentFolder field to given value.
+
+### HasParentFolder
+
+`func (o *VirtualizationVmwareDatacenter) HasParentFolder() bool`
+
+HasParentFolder returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

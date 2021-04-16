@@ -32,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `part_number`:(string) Part Number identifier for the chassis enclosure. 
 * `pid`:(string) This field identifies the Product ID for the chassis enclosure. 
 * `platform_type`:(string) The platform type that the chassis is a part of. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `product_name`:(string) This field identifies the Product Name for the chassis enclosure. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

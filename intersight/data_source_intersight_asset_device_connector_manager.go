@@ -481,6 +481,9 @@ func dataSourceAssetDeviceConnectorManagerRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while fetching count of AssetDeviceConnectorManager: %s", responseErr.Error())
 	}
 	count := countResponse.AssetDeviceConnectorManagerList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for AssetDeviceConnectorManager data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var assetDeviceConnectorManagerResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -495,10 +498,6 @@ func dataSourceAssetDeviceConnectorManagerRead(c context.Context, d *schema.Reso
 			return diag.Errorf("error occurred while fetching AssetDeviceConnectorManager: %s", responseErr.Error())
 		}
 		results := resMo.AssetDeviceConnectorManagerList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for AssetDeviceConnectorManager data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

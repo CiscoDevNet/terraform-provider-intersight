@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **PartNumber** | Pointer to **string** | The part number of the security unit. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | PCIe slot of the security unit in the server. | [optional] [readonly] 
 **Power** | Pointer to **string** | Power state of the security unit. | [optional] [readonly] 
-**Presence** | Pointer to **string** | Security unit presence (equipped) or absence. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | Thermal state of the security unit. | [optional] [readonly] 
 **UnitId** | Pointer to **int64** | The unique identifier assigned to the security unit within the server. | [optional] [readonly] 
 **Vid** | Pointer to **string** | The vendor identifier of the security unit. | [optional] [readonly] 
@@ -203,31 +202,6 @@ SetPower sets Power field to given value.
 `func (o *SecurityUnitAllOf) HasPower() bool`
 
 HasPower returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *SecurityUnitAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *SecurityUnitAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *SecurityUnitAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *SecurityUnitAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetThermal
 

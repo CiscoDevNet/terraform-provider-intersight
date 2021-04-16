@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchControlPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchControlPolicy"]
 **MacAgingSettings** | Pointer to [**NullableFabricMacAgingSettings**](fabric.MacAgingSettings.md) |  | [optional] 
+**UdldSettings** | Pointer to [**NullableFabricUdldGlobalSettings**](fabric.UdldGlobalSettings.md) |  | [optional] 
 **VlanPortOptimizationEnabled** | Pointer to **bool** | To enable or disable the VLAN port count optimization. | [optional] [default to false]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
@@ -105,6 +106,41 @@ HasMacAgingSettings returns a boolean if a field has been set.
 `func (o *FabricSwitchControlPolicyAllOf) UnsetMacAgingSettings()`
 
 UnsetMacAgingSettings ensures that no value is present for MacAgingSettings, not even an explicit nil
+### GetUdldSettings
+
+`func (o *FabricSwitchControlPolicyAllOf) GetUdldSettings() FabricUdldGlobalSettings`
+
+GetUdldSettings returns the UdldSettings field if non-nil, zero value otherwise.
+
+### GetUdldSettingsOk
+
+`func (o *FabricSwitchControlPolicyAllOf) GetUdldSettingsOk() (*FabricUdldGlobalSettings, bool)`
+
+GetUdldSettingsOk returns a tuple with the UdldSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUdldSettings
+
+`func (o *FabricSwitchControlPolicyAllOf) SetUdldSettings(v FabricUdldGlobalSettings)`
+
+SetUdldSettings sets UdldSettings field to given value.
+
+### HasUdldSettings
+
+`func (o *FabricSwitchControlPolicyAllOf) HasUdldSettings() bool`
+
+HasUdldSettings returns a boolean if a field has been set.
+
+### SetUdldSettingsNil
+
+`func (o *FabricSwitchControlPolicyAllOf) SetUdldSettingsNil(b bool)`
+
+ SetUdldSettingsNil sets the value for UdldSettings to be an explicit nil
+
+### UnsetUdldSettings
+`func (o *FabricSwitchControlPolicyAllOf) UnsetUdldSettings()`
+
+UnsetUdldSettings ensures that no value is present for UdldSettings, not even an explicit nil
 ### GetVlanPortOptimizationEnabled
 
 `func (o *FabricSwitchControlPolicyAllOf) GetVlanPortOptimizationEnabled() bool`

@@ -6,10 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxapCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapCluster"]
+**ConfiguredCpuOverSubFactor** | Pointer to **float64** | CPU oversubscription factor configured on the cluster. | [optional] 
+**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](virtualization.CpuAllocation.md) |  | [optional] 
+**CurrentCpuOverSubFactor** | Pointer to **float64** | Current oversubscription factor of the cluster. | [optional] 
 **DatacenterName** | Pointer to **string** | Datacenter to which the cluster belongs. | [optional] 
-**FailureReason** | Pointer to **string** | Reason of the failure when cluster is in failed state. | [optional] 
+**FailureReason** | Pointer to **string** | Reason for the failure when cluster is in failed state. | [optional] 
+**HypervisorBuild** | Pointer to **string** | Hypervisor version of HyperFlex compute cluster along with build number. | [optional] 
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the cluster. | [optional] 
-**Version** | Pointer to **string** | Product version of HyperFlex compute cluster. | [optional] 
+**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](virtualization.MemoryAllocation.md) |  | [optional] 
 **HxCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -72,6 +76,91 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetConfiguredCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) GetConfiguredCpuOverSubFactor() float64`
+
+GetConfiguredCpuOverSubFactor returns the ConfiguredCpuOverSubFactor field if non-nil, zero value otherwise.
+
+### GetConfiguredCpuOverSubFactorOk
+
+`func (o *HyperflexHxapClusterAllOf) GetConfiguredCpuOverSubFactorOk() (*float64, bool)`
+
+GetConfiguredCpuOverSubFactorOk returns a tuple with the ConfiguredCpuOverSubFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguredCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) SetConfiguredCpuOverSubFactor(v float64)`
+
+SetConfiguredCpuOverSubFactor sets ConfiguredCpuOverSubFactor field to given value.
+
+### HasConfiguredCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) HasConfiguredCpuOverSubFactor() bool`
+
+HasConfiguredCpuOverSubFactor returns a boolean if a field has been set.
+
+### GetCpuAllocation
+
+`func (o *HyperflexHxapClusterAllOf) GetCpuAllocation() VirtualizationCpuAllocation`
+
+GetCpuAllocation returns the CpuAllocation field if non-nil, zero value otherwise.
+
+### GetCpuAllocationOk
+
+`func (o *HyperflexHxapClusterAllOf) GetCpuAllocationOk() (*VirtualizationCpuAllocation, bool)`
+
+GetCpuAllocationOk returns a tuple with the CpuAllocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuAllocation
+
+`func (o *HyperflexHxapClusterAllOf) SetCpuAllocation(v VirtualizationCpuAllocation)`
+
+SetCpuAllocation sets CpuAllocation field to given value.
+
+### HasCpuAllocation
+
+`func (o *HyperflexHxapClusterAllOf) HasCpuAllocation() bool`
+
+HasCpuAllocation returns a boolean if a field has been set.
+
+### SetCpuAllocationNil
+
+`func (o *HyperflexHxapClusterAllOf) SetCpuAllocationNil(b bool)`
+
+ SetCpuAllocationNil sets the value for CpuAllocation to be an explicit nil
+
+### UnsetCpuAllocation
+`func (o *HyperflexHxapClusterAllOf) UnsetCpuAllocation()`
+
+UnsetCpuAllocation ensures that no value is present for CpuAllocation, not even an explicit nil
+### GetCurrentCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) GetCurrentCpuOverSubFactor() float64`
+
+GetCurrentCpuOverSubFactor returns the CurrentCpuOverSubFactor field if non-nil, zero value otherwise.
+
+### GetCurrentCpuOverSubFactorOk
+
+`func (o *HyperflexHxapClusterAllOf) GetCurrentCpuOverSubFactorOk() (*float64, bool)`
+
+GetCurrentCpuOverSubFactorOk returns a tuple with the CurrentCpuOverSubFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) SetCurrentCpuOverSubFactor(v float64)`
+
+SetCurrentCpuOverSubFactor sets CurrentCpuOverSubFactor field to given value.
+
+### HasCurrentCpuOverSubFactor
+
+`func (o *HyperflexHxapClusterAllOf) HasCurrentCpuOverSubFactor() bool`
+
+HasCurrentCpuOverSubFactor returns a boolean if a field has been set.
+
 ### GetDatacenterName
 
 `func (o *HyperflexHxapClusterAllOf) GetDatacenterName() string`
@@ -122,6 +211,31 @@ SetFailureReason sets FailureReason field to given value.
 
 HasFailureReason returns a boolean if a field has been set.
 
+### GetHypervisorBuild
+
+`func (o *HyperflexHxapClusterAllOf) GetHypervisorBuild() string`
+
+GetHypervisorBuild returns the HypervisorBuild field if non-nil, zero value otherwise.
+
+### GetHypervisorBuildOk
+
+`func (o *HyperflexHxapClusterAllOf) GetHypervisorBuildOk() (*string, bool)`
+
+GetHypervisorBuildOk returns a tuple with the HypervisorBuild field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorBuild
+
+`func (o *HyperflexHxapClusterAllOf) SetHypervisorBuild(v string)`
+
+SetHypervisorBuild sets HypervisorBuild field to given value.
+
+### HasHypervisorBuild
+
+`func (o *HyperflexHxapClusterAllOf) HasHypervisorBuild() bool`
+
+HasHypervisorBuild returns a boolean if a field has been set.
+
 ### GetManagementIpAddress
 
 `func (o *HyperflexHxapClusterAllOf) GetManagementIpAddress() string`
@@ -147,31 +261,41 @@ SetManagementIpAddress sets ManagementIpAddress field to given value.
 
 HasManagementIpAddress returns a boolean if a field has been set.
 
-### GetVersion
+### GetMemoryAllocation
 
-`func (o *HyperflexHxapClusterAllOf) GetVersion() string`
+`func (o *HyperflexHxapClusterAllOf) GetMemoryAllocation() VirtualizationMemoryAllocation`
 
-GetVersion returns the Version field if non-nil, zero value otherwise.
+GetMemoryAllocation returns the MemoryAllocation field if non-nil, zero value otherwise.
 
-### GetVersionOk
+### GetMemoryAllocationOk
 
-`func (o *HyperflexHxapClusterAllOf) GetVersionOk() (*string, bool)`
+`func (o *HyperflexHxapClusterAllOf) GetMemoryAllocationOk() (*VirtualizationMemoryAllocation, bool)`
 
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+GetMemoryAllocationOk returns a tuple with the MemoryAllocation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVersion
+### SetMemoryAllocation
 
-`func (o *HyperflexHxapClusterAllOf) SetVersion(v string)`
+`func (o *HyperflexHxapClusterAllOf) SetMemoryAllocation(v VirtualizationMemoryAllocation)`
 
-SetVersion sets Version field to given value.
+SetMemoryAllocation sets MemoryAllocation field to given value.
 
-### HasVersion
+### HasMemoryAllocation
 
-`func (o *HyperflexHxapClusterAllOf) HasVersion() bool`
+`func (o *HyperflexHxapClusterAllOf) HasMemoryAllocation() bool`
 
-HasVersion returns a boolean if a field has been set.
+HasMemoryAllocation returns a boolean if a field has been set.
 
+### SetMemoryAllocationNil
+
+`func (o *HyperflexHxapClusterAllOf) SetMemoryAllocationNil(b bool)`
+
+ SetMemoryAllocationNil sets the value for MemoryAllocation to be an explicit nil
+
+### UnsetMemoryAllocation
+`func (o *HyperflexHxapClusterAllOf) UnsetMemoryAllocation()`
+
+UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
 ### GetHxCluster
 
 `func (o *HyperflexHxapClusterAllOf) GetHxCluster() HyperflexClusterRelationship`

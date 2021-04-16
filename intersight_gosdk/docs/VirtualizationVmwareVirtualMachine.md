@@ -48,6 +48,7 @@ Name | Type | Description | Notes
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
 **Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](virtualization.VmwareFolder.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1277,6 +1278,31 @@ SetHost sets Host field to given value.
 `func (o *VirtualizationVmwareVirtualMachine) HasHost() bool`
 
 HasHost returns a boolean if a field has been set.
+
+### GetParentFolder
+
+`func (o *VirtualizationVmwareVirtualMachine) GetParentFolder() VirtualizationVmwareFolderRelationship`
+
+GetParentFolder returns the ParentFolder field if non-nil, zero value otherwise.
+
+### GetParentFolderOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetParentFolderOk() (*VirtualizationVmwareFolderRelationship, bool)`
+
+GetParentFolderOk returns a tuple with the ParentFolder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentFolder
+
+`func (o *VirtualizationVmwareVirtualMachine) SetParentFolder(v VirtualizationVmwareFolderRelationship)`
+
+SetParentFolder sets ParentFolder field to given value.
+
+### HasParentFolder
+
+`func (o *VirtualizationVmwareVirtualMachine) HasParentFolder() bool`
+
+HasParentFolder returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

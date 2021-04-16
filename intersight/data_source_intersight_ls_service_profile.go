@@ -664,6 +664,9 @@ func dataSourceLsServiceProfileRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while fetching count of LsServiceProfile: %s", responseErr.Error())
 	}
 	count := countResponse.LsServiceProfileList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for LsServiceProfile data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var lsServiceProfileResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -678,10 +681,6 @@ func dataSourceLsServiceProfileRead(c context.Context, d *schema.ResourceData, m
 			return diag.Errorf("error occurred while fetching LsServiceProfile: %s", responseErr.Error())
 		}
 		results := resMo.LsServiceProfileList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for LsServiceProfile data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

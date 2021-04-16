@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name  of the installed storage expander. | [optional] 
 **OperState** | Pointer to **string** | The operational state of the storage expander. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability status of the storage expander. | [optional] [readonly] 
-**Presence** | Pointer to **string** | The availability of the storage expander. | [optional] [readonly] 
 **SasAddress** | Pointer to **string** | The SAS address of the SAS expander. | [optional] [readonly] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **Controller** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
@@ -176,31 +175,6 @@ SetOperability sets Operability field to given value.
 `func (o *StorageSasExpanderAllOf) HasOperability() bool`
 
 HasOperability returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *StorageSasExpanderAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *StorageSasExpanderAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *StorageSasExpanderAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *StorageSasExpanderAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetSasAddress
 

@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **OutOfBandIpAddress** | Pointer to **string** | Field specifies this Switch&#39;s Out-of-band IP address. | [optional] [readonly] 
 **OutOfBandIpGateway** | Pointer to **string** | Field specifies this Switch&#39;s default gateway for the out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpMask** | Pointer to **string** | Field specifies the Netmask for this Switch&#39;s Out-of-band IP address. | [optional] 
-**Presence** | Pointer to **string** | Presence for this switch hardware. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | Slot identifier of the local Switch slot Interface. | [optional] [readonly] 
 **State** | Pointer to **string** | Operational state of the switch hardware. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
@@ -258,31 +257,6 @@ SetOutOfBandIpMask sets OutOfBandIpMask field to given value.
 `func (o *EquipmentSwitchCard) HasOutOfBandIpMask() bool`
 
 HasOutOfBandIpMask returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *EquipmentSwitchCard) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *EquipmentSwitchCard) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *EquipmentSwitchCard) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *EquipmentSwitchCard) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetSlotId
 

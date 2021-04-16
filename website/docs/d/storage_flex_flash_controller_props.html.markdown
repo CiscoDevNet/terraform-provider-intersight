@@ -29,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `operating_mode`:(string) Operating mode of flex flash controller. 
 * `physical_drive_count`:(string) Number of connected physical drives to a specific Flex flash controller. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `product_name`:(string) Product name of the flex flash controller. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

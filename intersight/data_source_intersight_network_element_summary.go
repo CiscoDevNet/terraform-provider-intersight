@@ -286,6 +286,12 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"presence": {
+				Description: "This field identifies the presence (equipped) or absence of the given component.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"revision": {
 				Description: "This field identifies the revision of the given component.",
 				Type:        schema.TypeString,
@@ -780,6 +786,12 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 							},
 						},
 					},
+					"presence": {
+						Description: "This field identifies the presence (equipped) or absence of the given component.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"registered_device": {
 						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 						Type:        schema.TypeList,
@@ -1215,6 +1227,10 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		x := (v.(string))
 		o.SetOutOfBandMac(x)
 	}
+	if v, ok := d.GetOk("presence"); ok {
+		x := (v.(string))
+		o.SetPresence(x)
+	}
 	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
@@ -1270,6 +1286,9 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while fetching count of NetworkElementSummary: %s", responseErr.Error())
 	}
 	count := countResponse.NetworkElementSummaryList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NetworkElementSummary data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var networkElementSummaryResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1284,10 +1303,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 			return diag.Errorf("error occurred while fetching NetworkElementSummary: %s", responseErr.Error())
 		}
 		results := resMo.NetworkElementSummaryList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NetworkElementSummary data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -1350,6 +1365,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["presence"] = (s.GetPresence())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["revision"] = (s.GetRevision())

@@ -24,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `partition_id`:(string) The partition Id of the flex flash virtual Drive. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `resident_image`:(string) The resident image on the flex flash virtual Drive. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

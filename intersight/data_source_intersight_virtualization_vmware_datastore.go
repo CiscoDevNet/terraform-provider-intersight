@@ -55,6 +55,11 @@ func dataSourceVirtualizationVmwareDatastore() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"inventory_path": {
+				Description: "Inventory path of the Datastore.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"maintenance_mode": {
 				Description: "Indicates if the datastore is in maintenance mode. Will be set to True, when in maintenance mode.",
 				Type:        schema.TypeBool,
@@ -362,6 +367,11 @@ func dataSourceVirtualizationVmwareDatastore() *schema.Resource {
 					},
 					"identity": {
 						Description: "The internally generated identity of this datastore. This entity is not manipulated by users. It aids in uniquely identifying the datastore object. For VMware, this is a MOR (managed object reference).",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"inventory_path": {
+						Description: "Inventory path of the Datastore.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -740,6 +750,10 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
+	if v, ok := d.GetOk("inventory_path"); ok {
+		x := (v.(string))
+		o.SetInventoryPath(x)
+	}
 	if v, ok := d.GetOk("maintenance_mode"); ok {
 		x := (v.(bool))
 		o.SetMaintenanceMode(x)
@@ -807,6 +821,9 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareDatastore: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVmwareDatastoreList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VirtualizationVmwareDatastore data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var virtualizationVmwareDatastoreResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -821,10 +838,6 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareDatastore: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVmwareDatastoreList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VirtualizationVmwareDatastore data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -849,6 +862,7 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 
 				temp["hosts"] = flattenListVirtualizationVmwareHostRelationship(s.GetHosts(), d)
 				temp["identity"] = (s.GetIdentity())
+				temp["inventory_path"] = (s.GetInventoryPath())
 				temp["maintenance_mode"] = (s.GetMaintenanceMode())
 
 				temp["mod_time"] = (s.GetModTime()).String()

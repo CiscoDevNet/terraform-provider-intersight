@@ -470,6 +470,9 @@ func dataSourceNiaapiNibFileDownloaderRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while fetching count of NiaapiNibFileDownloader: %s", responseErr.Error())
 	}
 	count := countResponse.NiaapiNibFileDownloaderList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiaapiNibFileDownloader data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niaapiNibFileDownloaderResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -484,10 +487,6 @@ func dataSourceNiaapiNibFileDownloaderRead(c context.Context, d *schema.Resource
 			return diag.Errorf("error occurred while fetching NiaapiNibFileDownloader: %s", responseErr.Error())
 		}
 		results := resMo.NiaapiNibFileDownloaderList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiaapiNibFileDownloader data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

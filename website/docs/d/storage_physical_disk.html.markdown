@@ -40,7 +40,7 @@ The following arguments can be used to get data of already created objects in In
 * `operability`:(string) This field identifies the disk operability of the disk. 
 * `physical_block_size`:(string) The block size of the installed physical disk. 
 * `pid`:(string) This field identifies the Product ID for physicalDisk. 
-* `presence`:(string) The presence state of the physical disk. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `protocol`:(string) This field identifies the disk protocol used for communication. 
 * `raw_size`:(string) The raw size of the physical disk in MB. 
 * `revision`:(string) This field identifies the revision of the given component. 

@@ -135,6 +135,9 @@ func dataSourceIamQualifierRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("error occurred while fetching count of IamQualifier: %s", responseErr.Error())
 	}
 	count := countResponse.IamQualifierList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for IamQualifier data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var iamQualifierResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -149,10 +152,6 @@ func dataSourceIamQualifierRead(c context.Context, d *schema.ResourceData, meta 
 			return diag.Errorf("error occurred while fetching IamQualifier: %s", responseErr.Error())
 		}
 		results := resMo.IamQualifierList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for IamQualifier data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

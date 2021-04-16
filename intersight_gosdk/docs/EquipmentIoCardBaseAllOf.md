@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | Operational state of IO card or fabric extender. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the IO module. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the IO module. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the Presence state of the IO card module. | [optional] [readonly] 
 **ProductName** | Pointer to **string** | This field identifies the Product Name for the iocard module model. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the IO card module. | [optional] [readonly] 
 **Version** | Pointer to **string** | This field identifies the version of the IO card module. | [optional] [readonly] 
@@ -265,31 +264,6 @@ SetPid sets Pid field to given value.
 `func (o *EquipmentIoCardBaseAllOf) HasPid() bool`
 
 HasPid returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *EquipmentIoCardBaseAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *EquipmentIoCardBaseAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *EquipmentIoCardBaseAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *EquipmentIoCardBaseAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetProductName
 

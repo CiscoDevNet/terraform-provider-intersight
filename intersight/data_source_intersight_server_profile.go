@@ -189,6 +189,9 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while fetching count of ServerProfile: %s", responseErr.Error())
 	}
 	count := countResponse.ServerProfileList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ServerProfile data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var serverProfileResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -203,10 +206,6 @@ func dataSourceServerProfileRead(c context.Context, d *schema.ResourceData, meta
 			return diag.Errorf("error occurred while fetching ServerProfile: %s", responseErr.Error())
 		}
 		results := resMo.ServerProfileList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ServerProfile data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

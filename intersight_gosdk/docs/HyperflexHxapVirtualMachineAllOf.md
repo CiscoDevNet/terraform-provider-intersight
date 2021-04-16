@@ -11,13 +11,11 @@ Name | Type | Description | Notes
 **AntiAffinitySelectors** | Pointer to [**[]InfraMetaData**](InfraMetaData.md) |  | [optional] 
 **Disks** | Pointer to [**[]HyperflexVmDisk**](HyperflexVmDisk.md) |  | [optional] 
 **FailureReason** | Pointer to **string** | Reason of the failure when VM is in failed state. | [optional] 
-**GraphicConsoleUrl** | Pointer to **string** | Graphical console URL of this VM. | [optional] 
 **Interfaces** | Pointer to [**[]HyperflexVmInterface**](HyperflexVmInterface.md) |  | [optional] 
 **Labels** | Pointer to [**[]InfraMetaData**](InfraMetaData.md) |  | [optional] 
 **NetworkCount** | Pointer to **int64** | Number network interfaces associated with the virtual machine. | [optional] 
 **StartTime** | Pointer to **string** | Denotes the VM start timestamp. | [optional] 
-**Status** | Pointer to **string** | Status of virtual machine. * &#x60;Unknown&#x60; - Virtual machine state is not available. * &#x60;Running&#x60; - Virtual machine is running normally. * &#x60;Stopped&#x60; - Virtual machine has been stopped. * &#x60;WaitForLaunch&#x60; - Virtual machine is wating to be launched. * &#x60;Paused&#x60; - Virtual machine is currently paused. * &#x60;ImportInProgress&#x60; - Virtual machine image is being imported into the platform. * &#x60;ImportFailed&#x60; - Virtual machine image import operation failed. * &#x60;DiskCloneInProgress&#x60; - Disk clone operation for the virtual machine is in progress. * &#x60;DiskCloneFailed&#x60; - Disk clone operation for the virtual machine failed. * &#x60;Processing&#x60; - Virtual machine is being created. * &#x60;UnSchedulable&#x60; - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * &#x60;Failed&#x60; - Some virtual machine operation has failed. More information is available as part of the results of the operation. | [optional] [default to "Unknown"]
-**UpTime** | Pointer to **string** | Denotes how long this VM has been running in nano seconds. | [optional] 
+**Status** | Pointer to **string** | Status of virtual machine. * &#x60;Unknown&#x60; - Virtual machine state is not available. * &#x60;Running&#x60; - Virtual machine is running normally. * &#x60;Stopped&#x60; - Virtual machine has been stopped. * &#x60;WaitForLaunch&#x60; - Virtual machine is wating to be launched. * &#x60;Paused&#x60; - Virtual machine is currently paused. * &#x60;ImportInProgress&#x60; - Virtual machine image is being imported into the platform. * &#x60;ImportFailed&#x60; - Virtual machine image import operation failed. * &#x60;DiskCloneInProgress&#x60; - Disk clone operation for the virtual machine is in progress. * &#x60;DiskCloneFailed&#x60; - Disk clone operation for the virtual machine failed. * &#x60;Processing&#x60; - Virtual machine is being created. * &#x60;UnSchedulable&#x60; - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications. * &#x60;Failed&#x60; - Some virtual machine operation has failed. More information is available as part of the results of the operation. * &#x60;&#x60; - Virtual machine status is not available. | [optional] [default to "Unknown"]
 **Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
 **Host** | Pointer to [**HyperflexHxapHostRelationship**](hyperflex.HxapHost.Relationship.md) |  | [optional] 
 
@@ -235,31 +233,6 @@ SetFailureReason sets FailureReason field to given value.
 
 HasFailureReason returns a boolean if a field has been set.
 
-### GetGraphicConsoleUrl
-
-`func (o *HyperflexHxapVirtualMachineAllOf) GetGraphicConsoleUrl() string`
-
-GetGraphicConsoleUrl returns the GraphicConsoleUrl field if non-nil, zero value otherwise.
-
-### GetGraphicConsoleUrlOk
-
-`func (o *HyperflexHxapVirtualMachineAllOf) GetGraphicConsoleUrlOk() (*string, bool)`
-
-GetGraphicConsoleUrlOk returns a tuple with the GraphicConsoleUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGraphicConsoleUrl
-
-`func (o *HyperflexHxapVirtualMachineAllOf) SetGraphicConsoleUrl(v string)`
-
-SetGraphicConsoleUrl sets GraphicConsoleUrl field to given value.
-
-### HasGraphicConsoleUrl
-
-`func (o *HyperflexHxapVirtualMachineAllOf) HasGraphicConsoleUrl() bool`
-
-HasGraphicConsoleUrl returns a boolean if a field has been set.
-
 ### GetInterfaces
 
 `func (o *HyperflexHxapVirtualMachineAllOf) GetInterfaces() []HyperflexVmInterface`
@@ -404,31 +377,6 @@ SetStatus sets Status field to given value.
 `func (o *HyperflexHxapVirtualMachineAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetUpTime
-
-`func (o *HyperflexHxapVirtualMachineAllOf) GetUpTime() string`
-
-GetUpTime returns the UpTime field if non-nil, zero value otherwise.
-
-### GetUpTimeOk
-
-`func (o *HyperflexHxapVirtualMachineAllOf) GetUpTimeOk() (*string, bool)`
-
-GetUpTimeOk returns a tuple with the UpTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpTime
-
-`func (o *HyperflexHxapVirtualMachineAllOf) SetUpTime(v string)`
-
-SetUpTime sets UpTime field to given value.
-
-### HasUpTime
-
-`func (o *HyperflexHxapVirtualMachineAllOf) HasUpTime() bool`
-
-HasUpTime returns a boolean if a field has been set.
 
 ### GetCluster
 

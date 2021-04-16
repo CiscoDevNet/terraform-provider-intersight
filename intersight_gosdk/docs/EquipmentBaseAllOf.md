@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**PreviousFru** | Pointer to [**EquipmentFruRelationship**](equipment.Fru.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -95,6 +97,31 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### GetPresence
+
+`func (o *EquipmentBaseAllOf) GetPresence() string`
+
+GetPresence returns the Presence field if non-nil, zero value otherwise.
+
+### GetPresenceOk
+
+`func (o *EquipmentBaseAllOf) GetPresenceOk() (*string, bool)`
+
+GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPresence
+
+`func (o *EquipmentBaseAllOf) SetPresence(v string)`
+
+SetPresence sets Presence field to given value.
+
+### HasPresence
+
+`func (o *EquipmentBaseAllOf) HasPresence() bool`
+
+HasPresence returns a boolean if a field has been set.
+
 ### GetRevision
 
 `func (o *EquipmentBaseAllOf) GetRevision() string`
@@ -169,6 +196,31 @@ SetVendor sets Vendor field to given value.
 `func (o *EquipmentBaseAllOf) HasVendor() bool`
 
 HasVendor returns a boolean if a field has been set.
+
+### GetPreviousFru
+
+`func (o *EquipmentBaseAllOf) GetPreviousFru() EquipmentFruRelationship`
+
+GetPreviousFru returns the PreviousFru field if non-nil, zero value otherwise.
+
+### GetPreviousFruOk
+
+`func (o *EquipmentBaseAllOf) GetPreviousFruOk() (*EquipmentFruRelationship, bool)`
+
+GetPreviousFruOk returns a tuple with the PreviousFru field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreviousFru
+
+`func (o *EquipmentBaseAllOf) SetPreviousFru(v EquipmentFruRelationship)`
+
+SetPreviousFru sets PreviousFru field to given value.
+
+### HasPreviousFru
+
+`func (o *EquipmentBaseAllOf) HasPreviousFru() bool`
+
+HasPreviousFru returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

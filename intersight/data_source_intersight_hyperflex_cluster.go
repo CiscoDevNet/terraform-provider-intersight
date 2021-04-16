@@ -40,6 +40,11 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"cluster_purpose": {
+				Description: "This can be a Storage or Compute cluster. A storage cluster contains storage nodes that are used to persist data. A compute cluster contains compute nodes that are used for executing business logic.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"cluster_type": {
 				Description: "The storage type of this cluster (All Flash or Hybrid).",
 				Type:        schema.TypeInt,
@@ -88,6 +93,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"drive_type": {
+				Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the HyperFlex cluster is not available.\n* `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only.\n* `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"flt_aggr": {
 				Description: "The number of yellow (warning) and red (critical) alarms stored as an aggregate.\nThe first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms.",
 				Type:        schema.TypeInt,
@@ -95,7 +106,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Computed:    true,
 			},
 			"hx_version": {
-				Description: "The HyperFlex Data Platform version of this cluster.",
+				Description: "The HyperFlex Data or Application Platform version of this cluster.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -107,13 +118,18 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Computed:    true,
 			},
 			"hypervisor_type": {
-				Description: "The type of hypervisor running on this cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"hypervisor_version": {
+				Description: "The version of hypervisor running on this cluster.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
-			"hypervisor_version": {
-				Description: "The version of hypervisor running on this cluster.",
+			"identity": {
+				Description: "The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference).",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -130,6 +146,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"name": {
+				Description: "The user-provided name for this cluster to facilitate identification.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -141,6 +163,35 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"status": {
+				Description: "Cluster health status as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"storage_capacity": {
+				Description: "The storage capacity in this cluster.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"storage_node_count": {
+				Description: "The number of storage nodes that belong to this cluster.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"storage_utilization": {
+				Description: "The storage utilization is computed based on total capacity and current capacity utilization.",
+				Type:        schema.TypeFloat,
+				Optional:    true,
+				Computed:    true,
+			},
+			"total_cores": {
+				Description: "Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"utilization_percentage": {
 				Description: "The storage utilization percentage is computed based on total capacity and current capacity utilization.",
@@ -286,11 +337,88 @@ func dataSourceHyperflexCluster() *schema.Resource {
 							},
 						},
 					},
+					"associated_profile": {
+						Description: "A reference to a policyAbstractProfile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"capacity_runway": {
 						Description: "The number of days remaining before the cluster's storage utilization reaches the recommended capacity limit of 76%.\nDefault value is math.MaxInt32 to indicate that the capacity runway is \"Unknown\" for a cluster that is not connected or with not sufficient data.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 						Computed:    true,
+					},
+					"child_clusters": {
+						Description: "An array of relationships to hyperflexBaseCluster resources.",
+						Type:        schema.TypeList,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -302,6 +430,11 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"cluster_purpose": {
+						Description: "This can be a Storage or Compute cluster. A storage cluster contains storage nodes that are used to persist data. A compute cluster contains compute nodes that are used for executing business logic.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"cluster_type": {
 						Description: "The storage type of this cluster (All Flash or Hybrid).",
@@ -347,6 +480,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"drive_type": {
+						Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the HyperFlex cluster is not available.\n* `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only.\n* `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -397,7 +536,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						},
 					},
 					"hx_version": {
-						Description: "The HyperFlex Data Platform version of this cluster.",
+						Description: "The HyperFlex Data or Application Platform version of this cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -409,16 +548,102 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						Computed:    true,
 					},
 					"hypervisor_type": {
-						Description: "The type of hypervisor running on this cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+						Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
 					"hypervisor_version": {
 						Description: "The version of hypervisor running on this cluster.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"identity": {
+						Description: "The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference).",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"license": {
+						Description: "A reference to a hyperflexLicense resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+					},
+					"memory_capacity": {
+						Description: "The capacity and usage information for memory on this cluster.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"capacity": {
+									Description: "The total memory capacity of the entity in bytes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free memory (bytes) that is unused and available for allocation, as a point-in-time snapshot. The available memory capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used memory capacity is also reported.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"used": {
+									Description: "Memory (bytes) that has been already used up, as a point-in-time snapshot.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"mod_time": {
 						Description: "The time when this managed object was last modified.",
@@ -428,6 +653,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 					"moid": {
 						Description: "The unique identifier of this Managed Object instance.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"name": {
+						Description: "The user-provided name for this cluster to facilitate identification.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -521,6 +752,45 @@ func dataSourceHyperflexCluster() *schema.Resource {
 							},
 						},
 					},
+					"parent_cluster": {
+						Description: "A reference to a hyperflexBaseCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"permission_resources": {
 						Description: "An array of relationships to moBaseMo resources.",
 						Type:        schema.TypeList,
@@ -558,6 +828,48 @@ func dataSourceHyperflexCluster() *schema.Resource {
 								},
 							},
 						},
+					},
+					"processor_capacity": {
+						Description: "The capacity and usage information for CPU power on this cluster.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"capacity": {
+									Description: "Total capacity of the entity in MHz.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free CPU capacity in MHz, as a point-in-time snapshot. The available CPU capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used CPU capacity is also reported.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"used": {
+									Description: "Used CPU capacity of the entity in MHz, as a point-in-time snapshot.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"registered_device": {
 						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -604,6 +916,18 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"status": {
+						Description: "Cluster health status as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"storage_capacity": {
+						Description: "The storage capacity in this cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
 					"storage_containers": {
 						Description: "An array of relationships to storageHyperFlexStorageContainer resources.",
 						Type:        schema.TypeList,
@@ -641,6 +965,18 @@ func dataSourceHyperflexCluster() *schema.Resource {
 								},
 							},
 						},
+					},
+					"storage_node_count": {
+						Description: "The number of storage nodes that belong to this cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"storage_utilization": {
+						Description: "The storage utilization is computed based on total capacity and current capacity utilization.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+						Computed:    true,
 					},
 					"summary": {
 						Description: "The summary of HyperFlex cluster health, storage, and number of nodes.",
@@ -942,6 +1278,11 @@ func dataSourceHyperflexCluster() *schema.Resource {
 							},
 						},
 					},
+					"total_cores": {
+						Description: "Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"utilization_percentage": {
 						Description: "The storage utilization percentage is computed based on total capacity and current capacity utilization.",
 						Type:        schema.TypeFloat,
@@ -1147,6 +1488,10 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		x := (v.(string))
 		o.SetClusterName(x)
 	}
+	if v, ok := d.GetOk("cluster_purpose"); ok {
+		x := (v.(string))
+		o.SetClusterPurpose(x)
+	}
 	if v, ok := d.GetOk("cluster_type"); ok {
 		x := int64(v.(int))
 		o.SetClusterType(x)
@@ -1179,6 +1524,10 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("drive_type"); ok {
+		x := (v.(string))
+		o.SetDriveType(x)
+	}
 	if v, ok := d.GetOk("flt_aggr"); ok {
 		x := int64(v.(int))
 		o.SetFltAggr(x)
@@ -1199,6 +1548,10 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		x := (v.(string))
 		o.SetHypervisorVersion(x)
 	}
+	if v, ok := d.GetOk("identity"); ok {
+		x := (v.(string))
+		o.SetIdentity(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -1207,6 +1560,10 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		x := (v.(string))
 		o.SetMoid(x)
 	}
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1214,6 +1571,26 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+	if v, ok := d.GetOk("storage_capacity"); ok {
+		x := int64(v.(int))
+		o.SetStorageCapacity(x)
+	}
+	if v, ok := d.GetOk("storage_node_count"); ok {
+		x := int64(v.(int))
+		o.SetStorageNodeCount(x)
+	}
+	if v, ok := d.GetOk("storage_utilization"); ok {
+		x := v.(float32)
+		o.SetStorageUtilization(x)
+	}
+	if v, ok := d.GetOk("total_cores"); ok {
+		x := int64(v.(int))
+		o.SetTotalCores(x)
 	}
 	if v, ok := d.GetOk("utilization_percentage"); ok {
 		x := v.(float32)
@@ -1242,6 +1619,9 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while fetching count of HyperflexCluster: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexClusterList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexCluster data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexClusterResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1256,10 +1636,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 			return diag.Errorf("error occurred while fetching HyperflexCluster: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexClusterList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexCluster data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -1273,9 +1649,14 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["alarm_summary"] = flattenMapHyperflexAlarmSummary(s.GetAlarmSummary(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["associated_profile"] = flattenMapPolicyAbstractProfileRelationship(s.GetAssociatedProfile(), d)
 				temp["capacity_runway"] = (s.GetCapacityRunway())
+
+				temp["child_clusters"] = flattenListHyperflexBaseClusterRelationship(s.GetChildClusters(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cluster_name"] = (s.GetClusterName())
+				temp["cluster_purpose"] = (s.GetClusterPurpose())
 				temp["cluster_type"] = (s.GetClusterType())
 				temp["cluster_uuid"] = (s.GetClusterUuid())
 				temp["compute_node_count"] = (s.GetComputeNodeCount())
@@ -1285,6 +1666,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["deployment_type"] = (s.GetDeploymentType())
 				temp["device_id"] = (s.GetDeviceId())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["drive_type"] = (s.GetDriveType())
 				temp["flt_aggr"] = (s.GetFltAggr())
 
 				temp["health"] = flattenMapHyperflexHealthRelationship(s.GetHealth(), d)
@@ -1292,9 +1674,15 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["hxdp_build_version"] = (s.GetHxdpBuildVersion())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["hypervisor_version"] = (s.GetHypervisorVersion())
+				temp["identity"] = (s.GetIdentity())
+
+				temp["license"] = flattenMapHyperflexLicenseRelationship(s.GetLicense(), d)
+
+				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
 				temp["nodes"] = flattenListHyperflexNodeRelationship(s.GetNodes(), d)
 				temp["object_type"] = (s.GetObjectType())
@@ -1302,16 +1690,25 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
+				temp["parent_cluster"] = flattenMapHyperflexBaseClusterRelationship(s.GetParentCluster(), d)
+
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
+				temp["storage_capacity"] = (s.GetStorageCapacity())
 
 				temp["storage_containers"] = flattenListStorageHyperFlexStorageContainerRelationship(s.GetStorageContainers(), d)
+				temp["storage_node_count"] = (s.GetStorageNodeCount())
+				temp["storage_utilization"] = (s.GetStorageUtilization())
 
 				temp["summary"] = flattenMapHyperflexSummary(s.GetSummary(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_cores"] = (s.GetTotalCores())
 				temp["utilization_percentage"] = (s.GetUtilizationPercentage())
 				temp["utilization_trend_percentage"] = (s.GetUtilizationTrendPercentage())
 

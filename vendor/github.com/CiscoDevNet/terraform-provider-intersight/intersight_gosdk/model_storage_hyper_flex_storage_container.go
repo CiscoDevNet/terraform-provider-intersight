@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -25,18 +25,28 @@ type StorageHyperFlexStorageContainer struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Capacity Utilization of Storage Container.
+	CapacityUtilization *float32 `json:"CapacityUtilization,omitempty"`
+	// Storage Container data block size
+	DataBlockSize *int64 `json:"DataBlockSize,omitempty"`
+	// Indicates whether the Storage Container has Volumes.
+	InUse *bool `json:"InUse,omitempty"`
 	// Storage container's last access time.
 	LastAccessTime *time.Time `json:"LastAccessTime,omitempty"`
 	// Storage container's last modified time.
 	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
-	// Provisioned Capacity of the Storage container in bytes.
+	// Provisioned Capacity of the Storage container.
 	ProvisionedCapacity *int64 `json:"ProvisionedCapacity,omitempty"`
+	// Provisioned Capacity Utilization of All Volumes associated with the Storage Container.
+	ProvisionedVolumeCapacityUtilization *float32 `json:"ProvisionedVolumeCapacityUtilization,omitempty"`
 	// Storage Container type (SMB/NFS/iSCSI). * `NFS` - Storage container created/accesed through NFS protocol. * `SMB` - Storage container created/accessed through SMB protocol. * `iSCSI` - Storage container created/accessed through iSCSI protocol.
 	Type *string `json:"Type,omitempty"`
 	// Uncompressed bytes on Storage Container.
 	UnCompressedUsedBytes *int64 `json:"UnCompressedUsedBytes,omitempty"`
-	// Uuid of the Datastore/Storage Container.
-	Uuid                 *string                              `json:"Uuid,omitempty"`
+	// UUID of the Datastore/Storage Containter.
+	Uuid *string `json:"Uuid,omitempty"`
+	// Number of Volumes associated with the Storage Container.
+	VolumeCount          *int64                               `json:"VolumeCount,omitempty"`
 	Cluster              *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -117,6 +127,102 @@ func (o *StorageHyperFlexStorageContainer) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StorageHyperFlexStorageContainer) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetCapacityUtilization returns the CapacityUtilization field value if set, zero value otherwise.
+func (o *StorageHyperFlexStorageContainer) GetCapacityUtilization() float32 {
+	if o == nil || o.CapacityUtilization == nil {
+		var ret float32
+		return ret
+	}
+	return *o.CapacityUtilization
+}
+
+// GetCapacityUtilizationOk returns a tuple with the CapacityUtilization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHyperFlexStorageContainer) GetCapacityUtilizationOk() (*float32, bool) {
+	if o == nil || o.CapacityUtilization == nil {
+		return nil, false
+	}
+	return o.CapacityUtilization, true
+}
+
+// HasCapacityUtilization returns a boolean if a field has been set.
+func (o *StorageHyperFlexStorageContainer) HasCapacityUtilization() bool {
+	if o != nil && o.CapacityUtilization != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCapacityUtilization gets a reference to the given float32 and assigns it to the CapacityUtilization field.
+func (o *StorageHyperFlexStorageContainer) SetCapacityUtilization(v float32) {
+	o.CapacityUtilization = &v
+}
+
+// GetDataBlockSize returns the DataBlockSize field value if set, zero value otherwise.
+func (o *StorageHyperFlexStorageContainer) GetDataBlockSize() int64 {
+	if o == nil || o.DataBlockSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DataBlockSize
+}
+
+// GetDataBlockSizeOk returns a tuple with the DataBlockSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHyperFlexStorageContainer) GetDataBlockSizeOk() (*int64, bool) {
+	if o == nil || o.DataBlockSize == nil {
+		return nil, false
+	}
+	return o.DataBlockSize, true
+}
+
+// HasDataBlockSize returns a boolean if a field has been set.
+func (o *StorageHyperFlexStorageContainer) HasDataBlockSize() bool {
+	if o != nil && o.DataBlockSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDataBlockSize gets a reference to the given int64 and assigns it to the DataBlockSize field.
+func (o *StorageHyperFlexStorageContainer) SetDataBlockSize(v int64) {
+	o.DataBlockSize = &v
+}
+
+// GetInUse returns the InUse field value if set, zero value otherwise.
+func (o *StorageHyperFlexStorageContainer) GetInUse() bool {
+	if o == nil || o.InUse == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InUse
+}
+
+// GetInUseOk returns a tuple with the InUse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHyperFlexStorageContainer) GetInUseOk() (*bool, bool) {
+	if o == nil || o.InUse == nil {
+		return nil, false
+	}
+	return o.InUse, true
+}
+
+// HasInUse returns a boolean if a field has been set.
+func (o *StorageHyperFlexStorageContainer) HasInUse() bool {
+	if o != nil && o.InUse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInUse gets a reference to the given bool and assigns it to the InUse field.
+func (o *StorageHyperFlexStorageContainer) SetInUse(v bool) {
+	o.InUse = &v
 }
 
 // GetLastAccessTime returns the LastAccessTime field value if set, zero value otherwise.
@@ -215,6 +321,38 @@ func (o *StorageHyperFlexStorageContainer) SetProvisionedCapacity(v int64) {
 	o.ProvisionedCapacity = &v
 }
 
+// GetProvisionedVolumeCapacityUtilization returns the ProvisionedVolumeCapacityUtilization field value if set, zero value otherwise.
+func (o *StorageHyperFlexStorageContainer) GetProvisionedVolumeCapacityUtilization() float32 {
+	if o == nil || o.ProvisionedVolumeCapacityUtilization == nil {
+		var ret float32
+		return ret
+	}
+	return *o.ProvisionedVolumeCapacityUtilization
+}
+
+// GetProvisionedVolumeCapacityUtilizationOk returns a tuple with the ProvisionedVolumeCapacityUtilization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHyperFlexStorageContainer) GetProvisionedVolumeCapacityUtilizationOk() (*float32, bool) {
+	if o == nil || o.ProvisionedVolumeCapacityUtilization == nil {
+		return nil, false
+	}
+	return o.ProvisionedVolumeCapacityUtilization, true
+}
+
+// HasProvisionedVolumeCapacityUtilization returns a boolean if a field has been set.
+func (o *StorageHyperFlexStorageContainer) HasProvisionedVolumeCapacityUtilization() bool {
+	if o != nil && o.ProvisionedVolumeCapacityUtilization != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProvisionedVolumeCapacityUtilization gets a reference to the given float32 and assigns it to the ProvisionedVolumeCapacityUtilization field.
+func (o *StorageHyperFlexStorageContainer) SetProvisionedVolumeCapacityUtilization(v float32) {
+	o.ProvisionedVolumeCapacityUtilization = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StorageHyperFlexStorageContainer) GetType() string {
 	if o == nil || o.Type == nil {
@@ -311,6 +449,38 @@ func (o *StorageHyperFlexStorageContainer) SetUuid(v string) {
 	o.Uuid = &v
 }
 
+// GetVolumeCount returns the VolumeCount field value if set, zero value otherwise.
+func (o *StorageHyperFlexStorageContainer) GetVolumeCount() int64 {
+	if o == nil || o.VolumeCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.VolumeCount
+}
+
+// GetVolumeCountOk returns a tuple with the VolumeCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHyperFlexStorageContainer) GetVolumeCountOk() (*int64, bool) {
+	if o == nil || o.VolumeCount == nil {
+		return nil, false
+	}
+	return o.VolumeCount, true
+}
+
+// HasVolumeCount returns a boolean if a field has been set.
+func (o *StorageHyperFlexStorageContainer) HasVolumeCount() bool {
+	if o != nil && o.VolumeCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeCount gets a reference to the given int64 and assigns it to the VolumeCount field.
+func (o *StorageHyperFlexStorageContainer) SetVolumeCount(v int64) {
+	o.VolumeCount = &v
+}
+
 // GetCluster returns the Cluster field value if set, zero value otherwise.
 func (o *StorageHyperFlexStorageContainer) GetCluster() HyperflexClusterRelationship {
 	if o == nil || o.Cluster == nil {
@@ -391,6 +561,15 @@ func (o StorageHyperFlexStorageContainer) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.CapacityUtilization != nil {
+		toSerialize["CapacityUtilization"] = o.CapacityUtilization
+	}
+	if o.DataBlockSize != nil {
+		toSerialize["DataBlockSize"] = o.DataBlockSize
+	}
+	if o.InUse != nil {
+		toSerialize["InUse"] = o.InUse
+	}
 	if o.LastAccessTime != nil {
 		toSerialize["LastAccessTime"] = o.LastAccessTime
 	}
@@ -400,6 +579,9 @@ func (o StorageHyperFlexStorageContainer) MarshalJSON() ([]byte, error) {
 	if o.ProvisionedCapacity != nil {
 		toSerialize["ProvisionedCapacity"] = o.ProvisionedCapacity
 	}
+	if o.ProvisionedVolumeCapacityUtilization != nil {
+		toSerialize["ProvisionedVolumeCapacityUtilization"] = o.ProvisionedVolumeCapacityUtilization
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -408,6 +590,9 @@ func (o StorageHyperFlexStorageContainer) MarshalJSON() ([]byte, error) {
 	}
 	if o.Uuid != nil {
 		toSerialize["Uuid"] = o.Uuid
+	}
+	if o.VolumeCount != nil {
+		toSerialize["VolumeCount"] = o.VolumeCount
 	}
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
@@ -429,18 +614,28 @@ func (o *StorageHyperFlexStorageContainer) UnmarshalJSON(bytes []byte) (err erro
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Capacity Utilization of Storage Container.
+		CapacityUtilization *float32 `json:"CapacityUtilization,omitempty"`
+		// Storage Container data block size
+		DataBlockSize *int64 `json:"DataBlockSize,omitempty"`
+		// Indicates whether the Storage Container has Volumes.
+		InUse *bool `json:"InUse,omitempty"`
 		// Storage container's last access time.
 		LastAccessTime *time.Time `json:"LastAccessTime,omitempty"`
 		// Storage container's last modified time.
 		LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
-		// Provisioned Capacity of the Storage container in bytes.
+		// Provisioned Capacity of the Storage container.
 		ProvisionedCapacity *int64 `json:"ProvisionedCapacity,omitempty"`
+		// Provisioned Capacity Utilization of All Volumes associated with the Storage Container.
+		ProvisionedVolumeCapacityUtilization *float32 `json:"ProvisionedVolumeCapacityUtilization,omitempty"`
 		// Storage Container type (SMB/NFS/iSCSI). * `NFS` - Storage container created/accesed through NFS protocol. * `SMB` - Storage container created/accessed through SMB protocol. * `iSCSI` - Storage container created/accessed through iSCSI protocol.
 		Type *string `json:"Type,omitempty"`
 		// Uncompressed bytes on Storage Container.
 		UnCompressedUsedBytes *int64 `json:"UnCompressedUsedBytes,omitempty"`
-		// Uuid of the Datastore/Storage Container.
-		Uuid             *string                              `json:"Uuid,omitempty"`
+		// UUID of the Datastore/Storage Containter.
+		Uuid *string `json:"Uuid,omitempty"`
+		// Number of Volumes associated with the Storage Container.
+		VolumeCount      *int64                               `json:"VolumeCount,omitempty"`
 		Cluster          *HyperflexClusterRelationship        `json:"Cluster,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
@@ -452,12 +647,17 @@ func (o *StorageHyperFlexStorageContainer) UnmarshalJSON(bytes []byte) (err erro
 		varStorageHyperFlexStorageContainer := _StorageHyperFlexStorageContainer{}
 		varStorageHyperFlexStorageContainer.ClassId = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.ClassId
 		varStorageHyperFlexStorageContainer.ObjectType = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.ObjectType
+		varStorageHyperFlexStorageContainer.CapacityUtilization = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.CapacityUtilization
+		varStorageHyperFlexStorageContainer.DataBlockSize = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.DataBlockSize
+		varStorageHyperFlexStorageContainer.InUse = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.InUse
 		varStorageHyperFlexStorageContainer.LastAccessTime = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.LastAccessTime
 		varStorageHyperFlexStorageContainer.LastModifiedTime = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.LastModifiedTime
 		varStorageHyperFlexStorageContainer.ProvisionedCapacity = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.ProvisionedCapacity
+		varStorageHyperFlexStorageContainer.ProvisionedVolumeCapacityUtilization = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.ProvisionedVolumeCapacityUtilization
 		varStorageHyperFlexStorageContainer.Type = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.Type
 		varStorageHyperFlexStorageContainer.UnCompressedUsedBytes = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.UnCompressedUsedBytes
 		varStorageHyperFlexStorageContainer.Uuid = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.Uuid
+		varStorageHyperFlexStorageContainer.VolumeCount = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.VolumeCount
 		varStorageHyperFlexStorageContainer.Cluster = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.Cluster
 		varStorageHyperFlexStorageContainer.RegisteredDevice = varStorageHyperFlexStorageContainerWithoutEmbeddedStruct.RegisteredDevice
 		*o = StorageHyperFlexStorageContainer(varStorageHyperFlexStorageContainer)
@@ -479,12 +679,17 @@ func (o *StorageHyperFlexStorageContainer) UnmarshalJSON(bytes []byte) (err erro
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "CapacityUtilization")
+		delete(additionalProperties, "DataBlockSize")
+		delete(additionalProperties, "InUse")
 		delete(additionalProperties, "LastAccessTime")
 		delete(additionalProperties, "LastModifiedTime")
 		delete(additionalProperties, "ProvisionedCapacity")
+		delete(additionalProperties, "ProvisionedVolumeCapacityUtilization")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "UnCompressedUsedBytes")
 		delete(additionalProperties, "Uuid")
+		delete(additionalProperties, "VolumeCount")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "RegisteredDevice")
 

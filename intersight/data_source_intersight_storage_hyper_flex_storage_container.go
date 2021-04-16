@@ -23,6 +23,12 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"capacity_utilization": {
+				Description: "Capacity Utilization of Storage Container.",
+				Type:        schema.TypeFloat,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -40,9 +46,21 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"data_block_size": {
+				Description: "Storage Container data block size",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"in_use": {
+				Description: "Indicates whether the Storage Container has Volumes.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -83,8 +101,14 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 				Computed:    true,
 			},
 			"provisioned_capacity": {
-				Description: "Provisioned Capacity of the Storage container in bytes.",
+				Description: "Provisioned Capacity of the Storage container.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"provisioned_volume_capacity_utilization": {
+				Description: "Provisioned Capacity Utilization of All Volumes associated with the Storage Container.",
+				Type:        schema.TypeFloat,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -107,8 +131,14 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 				Computed:    true,
 			},
 			"uuid": {
-				Description: "Uuid of the Datastore/Storage Container.",
+				Description: "UUID of the Datastore/Storage Containter.",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"volume_count": {
+				Description: "Number of Volumes associated with the Storage Container.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -162,6 +192,12 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 								},
 							},
 						},
+					},
+					"capacity_utilization": {
+						Description: "Capacity Utilization of Storage Container.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+						Computed:    true,
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -219,9 +255,21 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"data_block_size": {
+						Description: "Storage Container data block size",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
 						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"in_use": {
+						Description: "Indicates whether the Storage Container has Volumes.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 						Computed:    true,
 					},
@@ -345,8 +393,14 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 						},
 					},
 					"provisioned_capacity": {
-						Description: "Provisioned Capacity of the Storage container in bytes.",
+						Description: "Provisioned Capacity of the Storage container.",
 						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
+					"provisioned_volume_capacity_utilization": {
+						Description: "Provisioned Capacity Utilization of All Volumes associated with the Storage Container.",
+						Type:        schema.TypeFloat,
 						Optional:    true,
 						Computed:    true,
 					},
@@ -488,7 +542,7 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 						Computed:    true,
 					},
 					"uuid": {
-						Description: "Uuid of the Datastore/Storage Container.",
+						Description: "UUID of the Datastore/Storage Containter.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -614,6 +668,12 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 							},
 						},
 					},
+					"volume_count": {
+						Description: "Number of Volumes associated with the Storage Container.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+						Computed:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -630,6 +690,10 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
+	if v, ok := d.GetOk("capacity_utilization"); ok {
+		x := v.(float32)
+		o.SetCapacityUtilization(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -642,9 +706,17 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreatedTime(x)
 	}
+	if v, ok := d.GetOk("data_block_size"); ok {
+		x := int64(v.(int))
+		o.SetDataBlockSize(x)
+	}
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("in_use"); ok {
+		x := (v.(bool))
+		o.SetInUse(x)
 	}
 	if v, ok := d.GetOk("last_access_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -674,6 +746,10 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		x := int64(v.(int))
 		o.SetProvisionedCapacity(x)
 	}
+	if v, ok := d.GetOk("provisioned_volume_capacity_utilization"); ok {
+		x := v.(float32)
+		o.SetProvisionedVolumeCapacityUtilization(x)
+	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -690,6 +766,10 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetUuid(x)
 	}
+	if v, ok := d.GetOk("volume_count"); ok {
+		x := int64(v.(int))
+		o.SetVolumeCount(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -705,6 +785,9 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		return diag.Errorf("error occurred while fetching count of StorageHyperFlexStorageContainer: %s", responseErr.Error())
 	}
 	count := countResponse.StorageHyperFlexStorageContainerList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for StorageHyperFlexStorageContainer data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var storageHyperFlexStorageContainerResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -719,10 +802,6 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 			return diag.Errorf("error occurred while fetching StorageHyperFlexStorageContainer: %s", responseErr.Error())
 		}
 		results := resMo.StorageHyperFlexStorageContainerList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for StorageHyperFlexStorageContainer data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -732,6 +811,7 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["capacity_utilization"] = (s.GetCapacityUtilization())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster"] = flattenMapHyperflexClusterRelationship(s.GetCluster(), d)
@@ -739,7 +819,9 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["created_time"] = (s.GetCreatedTime()).String()
+				temp["data_block_size"] = (s.GetDataBlockSize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["in_use"] = (s.GetInUse())
 
 				temp["last_access_time"] = (s.GetLastAccessTime()).String()
 
@@ -755,6 +837,7 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["provisioned_capacity"] = (s.GetProvisionedCapacity())
+				temp["provisioned_volume_capacity_utilization"] = (s.GetProvisionedVolumeCapacityUtilization())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
@@ -767,6 +850,7 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["volume_count"] = (s.GetVolumeCount())
 				storageHyperFlexStorageContainerResults[j] = temp
 				j += 1
 			}

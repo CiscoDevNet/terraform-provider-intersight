@@ -23,7 +23,6 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | The current operational state of Virtual drive. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The current operability state of Virtual drive. | [optional] [readonly] 
 **PhysicalBlockSize** | Pointer to **string** | The block size of the the virtual drive. | [optional] [readonly] 
-**Presence** | Pointer to **string** | The presence status of the virtual drive. | [optional] [readonly] 
 **ReadPolicy** | Pointer to **string** | The read-ahead cache mode of the virtual drive. | [optional] [readonly] 
 **SecurityFlags** | Pointer to **string** | The security flags set for this virtual drive. | [optional] [readonly] 
 **Size** | Pointer to **string** | The size of the virtual drive in MB. | [optional] [readonly] 
@@ -524,31 +523,6 @@ SetPhysicalBlockSize sets PhysicalBlockSize field to given value.
 `func (o *StorageVirtualDrive) HasPhysicalBlockSize() bool`
 
 HasPhysicalBlockSize returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *StorageVirtualDrive) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *StorageVirtualDrive) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *StorageVirtualDrive) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *StorageVirtualDrive) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetReadPolicy
 

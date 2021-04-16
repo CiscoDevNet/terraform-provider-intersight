@@ -18,6 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `capacity_runway`:(int) The number of days remaining before the cluster's storage utilization reaches the recommended capacity limit of 76%.Default value is math.MaxInt32 to indicate that the capacity runway is \ Unknown\  for a cluster that is not connected or with not sufficient data. 
 * `cluster_name`:(string) The name of this HyperFlex cluster. 
+* `cluster_purpose`:(string) This can be a Storage or Compute cluster. A storage cluster contains storage nodes that are used to persist data. A compute cluster contains compute nodes that are used for executing business logic.* `Storage` - Cluster of storage nodes used to persist data.* `Compute` - Cluster of compute nodes used to execute business logic.* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values. 
 * `cluster_type`:(int) The storage type of this cluster (All Flash or Hybrid). 
 * `cluster_uuid`:(string) The unique identifier for this HyperFlex cluster. 
 * `compute_node_count`:(int) The number of compute nodes that belong to this cluster. 
@@ -26,14 +27,22 @@ The following arguments can be used to get data of already created objects in In
 * `deployment_type`:(string) The deployment type of the HyperFlex cluster.The cluster can have one of the following configurations:1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site.2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites.3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes.If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined,the deployment type is set as 'NA' (not available).* `NA` - The deployment type of the HyperFlex cluster is not available.* `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.* `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.* `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes. 
 * `device_id`:(string) The unique identifier of the device registration that represents this HyperFlex cluster's connection to Intersight. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `drive_type`:(string) The type of the drives used for storage in this cluster.* `NA` - The drive type of the HyperFlex cluster is not available.* `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only.* `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives. 
 * `flt_aggr`:(int) The number of yellow (warning) and red (critical) alarms stored as an aggregate.The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. 
-* `hx_version`:(string) The HyperFlex Data Platform version of this cluster. 
+* `hx_version`:(string) The HyperFlex Data or Application Platform version of this cluster. 
 * `hxdp_build_version`:(string) The version and build number of the HyperFlex Data Platform for this cluster.After a cluster upgrade, this version string will be updated on the next inventory cycle to reflectthe newly installed version. 
-* `hypervisor_type`:(string) The type of hypervisor running on this cluster.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
+* `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `hypervisor_version`:(string) The version of hypervisor running on this cluster. 
+* `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference). 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The user-provided name for this cluster to facilitate identification. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `status`:(string) Cluster health status as reported by the hypervisor platform.* `Unknown` - Entity status is unknown.* `Degraded` - State is degraded, and might impact normal operation of the entity.* `Critical` - Entity is in a critical state, impacting operations.* `Ok` - Entity status is in a stable state, operating normally. 
+* `storage_capacity`:(int) The storage capacity in this cluster. 
+* `storage_node_count`:(int) The number of storage nodes that belong to this cluster. 
+* `storage_utilization`:(float) The storage utilization is computed based on total capacity and current capacity utilization. 
+* `total_cores`:(int) Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. 
 * `utilization_percentage`:(float) The storage utilization percentage is computed based on total capacity and current capacity utilization. 
 * `utilization_trend_percentage`:(float) The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. 
 * `vm_count`:(int) The number of virtual machines present on this cluster. 

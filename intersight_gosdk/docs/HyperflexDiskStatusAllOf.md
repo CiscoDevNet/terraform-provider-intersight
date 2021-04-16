@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.DiskStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.DiskStatus"]
 **DownloadPercentage** | Pointer to **string** | Percentage of download completed. | [optional] [readonly] 
-**State** | Pointer to **string** | Current state of the virtual disk. * &#x60;Unknown&#x60; - No details available on the disk state. * &#x60;Succeeded&#x60; - Last operation on the disk has been successful. * &#x60;ImportInProgress&#x60; - Import operation on the disk is in progress. * &#x60;ImportFailed&#x60; - Import operation on the disk has failed. * &#x60;CloneInProgress&#x60; - Disk clone operation on the disk is in progress. * &#x60;CloneFailed&#x60; - Clone operation on the disk has failed. * &#x60;CloneScheduled&#x60; - Clone operation on the disk has been scheduled. * &#x60;ImportScheduled&#x60; - Import operation on the disk has been scheduled. * &#x60;Pending&#x60; - Submitted operation on the disk is currently pending. | [optional] [readonly] [default to "Unknown"]
+**State** | Pointer to **string** | Current state of the virtual disk. * &#x60;Unknown&#x60; - No details available on the disk state. * &#x60;Succeeded&#x60; - Last operation on the disk has been successful. * &#x60;ImportInProgress&#x60; - Import operation on the disk is in progress. * &#x60;ImportFailed&#x60; - Import operation on the disk has failed. * &#x60;CloneInProgress&#x60; - Disk clone operation on the disk is in progress. * &#x60;CloneFailed&#x60; - Clone operation on the disk has failed. * &#x60;CloneScheduled&#x60; - Clone operation on the disk has been scheduled. * &#x60;ImportScheduled&#x60; - Import operation on the disk has been scheduled. * &#x60;Pending&#x60; - Submitted operation on the disk is currently pending. * &#x60;&#x60; - Disk state is not available. | [optional] [readonly] [default to "Unknown"]
 **VolumeHandle** | Pointer to **string** | Identity of the Volume associated with virtual machine disk. | [optional] [readonly] 
+**VolumeName** | Pointer to **string** | Name of the Volume associated with virtual machine disk. | [optional] [readonly] 
 
 ## Methods
 
@@ -143,6 +144,31 @@ SetVolumeHandle sets VolumeHandle field to given value.
 `func (o *HyperflexDiskStatusAllOf) HasVolumeHandle() bool`
 
 HasVolumeHandle returns a boolean if a field has been set.
+
+### GetVolumeName
+
+`func (o *HyperflexDiskStatusAllOf) GetVolumeName() string`
+
+GetVolumeName returns the VolumeName field if non-nil, zero value otherwise.
+
+### GetVolumeNameOk
+
+`func (o *HyperflexDiskStatusAllOf) GetVolumeNameOk() (*string, bool)`
+
+GetVolumeNameOk returns a tuple with the VolumeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeName
+
+`func (o *HyperflexDiskStatusAllOf) SetVolumeName(v string)`
+
+SetVolumeName sets VolumeName field to given value.
+
+### HasVolumeName
+
+`func (o *HyperflexDiskStatusAllOf) HasVolumeName() bool`
+
+HasVolumeName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

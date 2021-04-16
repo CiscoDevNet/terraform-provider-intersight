@@ -25,7 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) The name  of the installed storage expander. 
 * `oper_state`:(string) The operational state of the storage expander. 
 * `operability`:(string) The operability status of the storage expander. 
-* `presence`:(string) The availability of the storage expander. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `sas_address`:(string) The SAS address of the SAS expander. 

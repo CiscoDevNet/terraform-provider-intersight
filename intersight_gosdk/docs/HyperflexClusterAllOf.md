@@ -6,26 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Cluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Cluster"]
-**AlarmSummary** | Pointer to [**NullableHyperflexAlarmSummary**](hyperflex.AlarmSummary.md) |  | [optional] 
-**CapacityRunway** | Pointer to **int64** | The number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit of 76%. Default value is math.MaxInt32 to indicate that the capacity runway is \&quot;Unknown\&quot; for a cluster that is not connected or with not sufficient data. | [optional] [readonly] [default to 2147483647]
-**ClusterName** | Pointer to **string** | The name of this HyperFlex cluster. | [optional] [readonly] 
 **ClusterType** | Pointer to **int64** | The storage type of this cluster (All Flash or Hybrid). | [optional] [readonly] 
 **ClusterUuid** | Pointer to **string** | The unique identifier for this HyperFlex cluster. | [optional] [readonly] 
-**ComputeNodeCount** | Pointer to **int64** | The number of compute nodes that belong to this cluster. | [optional] [readonly] 
-**ConvergedNodeCount** | Pointer to **int64** | The number of converged nodes that belong to this cluster. | [optional] [readonly] 
-**DeploymentType** | Pointer to **string** | The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as &#39;NA&#39; (not available). * &#x60;NA&#x60; - The deployment type of the HyperFlex cluster is not available. * &#x60;Datacenter&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * &#x60;Stretched Cluster&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * &#x60;Edge&#x60; - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes. | [optional] [readonly] [default to "NA"]
 **DeviceId** | Pointer to **string** | The unique identifier of the device registration that represents this HyperFlex cluster&#39;s connection to Intersight. | [optional] [readonly] 
 **FltAggr** | Pointer to **int64** | The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. | [optional] [readonly] 
-**HxVersion** | Pointer to **string** | The HyperFlex Data Platform version of this cluster. | [optional] [readonly] 
 **HxdpBuildVersion** | Pointer to **string** | The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version. | [optional] [readonly] 
-**HypervisorType** | Pointer to **string** | The type of hypervisor running on this cluster. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
-**HypervisorVersion** | Pointer to **string** | The version of hypervisor running on this cluster. | [optional] [readonly] 
 **Summary** | Pointer to [**NullableHyperflexSummary**](hyperflex.Summary.md) |  | [optional] 
-**UtilizationPercentage** | Pointer to **float32** | The storage utilization percentage is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
-**UtilizationTrendPercentage** | Pointer to **float32** | The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. | [optional] [readonly] 
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
 **Health** | Pointer to [**HyperflexHealthRelationship**](hyperflex.Health.Relationship.md) |  | [optional] 
+**License** | Pointer to [**HyperflexLicenseRelationship**](hyperflex.License.Relationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HyperflexNodeRelationship**](HyperflexNodeRelationship.md) | An array of relationships to hyperflexNode resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **StorageContainers** | Pointer to [**[]StorageHyperFlexStorageContainerRelationship**](StorageHyperFlexStorageContainerRelationship.md) | An array of relationships to storageHyperFlexStorageContainer resources. | [optional] [readonly] 
@@ -90,91 +80,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetAlarmSummary
-
-`func (o *HyperflexClusterAllOf) GetAlarmSummary() HyperflexAlarmSummary`
-
-GetAlarmSummary returns the AlarmSummary field if non-nil, zero value otherwise.
-
-### GetAlarmSummaryOk
-
-`func (o *HyperflexClusterAllOf) GetAlarmSummaryOk() (*HyperflexAlarmSummary, bool)`
-
-GetAlarmSummaryOk returns a tuple with the AlarmSummary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAlarmSummary
-
-`func (o *HyperflexClusterAllOf) SetAlarmSummary(v HyperflexAlarmSummary)`
-
-SetAlarmSummary sets AlarmSummary field to given value.
-
-### HasAlarmSummary
-
-`func (o *HyperflexClusterAllOf) HasAlarmSummary() bool`
-
-HasAlarmSummary returns a boolean if a field has been set.
-
-### SetAlarmSummaryNil
-
-`func (o *HyperflexClusterAllOf) SetAlarmSummaryNil(b bool)`
-
- SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
-
-### UnsetAlarmSummary
-`func (o *HyperflexClusterAllOf) UnsetAlarmSummary()`
-
-UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
-### GetCapacityRunway
-
-`func (o *HyperflexClusterAllOf) GetCapacityRunway() int64`
-
-GetCapacityRunway returns the CapacityRunway field if non-nil, zero value otherwise.
-
-### GetCapacityRunwayOk
-
-`func (o *HyperflexClusterAllOf) GetCapacityRunwayOk() (*int64, bool)`
-
-GetCapacityRunwayOk returns a tuple with the CapacityRunway field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCapacityRunway
-
-`func (o *HyperflexClusterAllOf) SetCapacityRunway(v int64)`
-
-SetCapacityRunway sets CapacityRunway field to given value.
-
-### HasCapacityRunway
-
-`func (o *HyperflexClusterAllOf) HasCapacityRunway() bool`
-
-HasCapacityRunway returns a boolean if a field has been set.
-
-### GetClusterName
-
-`func (o *HyperflexClusterAllOf) GetClusterName() string`
-
-GetClusterName returns the ClusterName field if non-nil, zero value otherwise.
-
-### GetClusterNameOk
-
-`func (o *HyperflexClusterAllOf) GetClusterNameOk() (*string, bool)`
-
-GetClusterNameOk returns a tuple with the ClusterName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClusterName
-
-`func (o *HyperflexClusterAllOf) SetClusterName(v string)`
-
-SetClusterName sets ClusterName field to given value.
-
-### HasClusterName
-
-`func (o *HyperflexClusterAllOf) HasClusterName() bool`
-
-HasClusterName returns a boolean if a field has been set.
-
 ### GetClusterType
 
 `func (o *HyperflexClusterAllOf) GetClusterType() int64`
@@ -224,81 +129,6 @@ SetClusterUuid sets ClusterUuid field to given value.
 `func (o *HyperflexClusterAllOf) HasClusterUuid() bool`
 
 HasClusterUuid returns a boolean if a field has been set.
-
-### GetComputeNodeCount
-
-`func (o *HyperflexClusterAllOf) GetComputeNodeCount() int64`
-
-GetComputeNodeCount returns the ComputeNodeCount field if non-nil, zero value otherwise.
-
-### GetComputeNodeCountOk
-
-`func (o *HyperflexClusterAllOf) GetComputeNodeCountOk() (*int64, bool)`
-
-GetComputeNodeCountOk returns a tuple with the ComputeNodeCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetComputeNodeCount
-
-`func (o *HyperflexClusterAllOf) SetComputeNodeCount(v int64)`
-
-SetComputeNodeCount sets ComputeNodeCount field to given value.
-
-### HasComputeNodeCount
-
-`func (o *HyperflexClusterAllOf) HasComputeNodeCount() bool`
-
-HasComputeNodeCount returns a boolean if a field has been set.
-
-### GetConvergedNodeCount
-
-`func (o *HyperflexClusterAllOf) GetConvergedNodeCount() int64`
-
-GetConvergedNodeCount returns the ConvergedNodeCount field if non-nil, zero value otherwise.
-
-### GetConvergedNodeCountOk
-
-`func (o *HyperflexClusterAllOf) GetConvergedNodeCountOk() (*int64, bool)`
-
-GetConvergedNodeCountOk returns a tuple with the ConvergedNodeCount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConvergedNodeCount
-
-`func (o *HyperflexClusterAllOf) SetConvergedNodeCount(v int64)`
-
-SetConvergedNodeCount sets ConvergedNodeCount field to given value.
-
-### HasConvergedNodeCount
-
-`func (o *HyperflexClusterAllOf) HasConvergedNodeCount() bool`
-
-HasConvergedNodeCount returns a boolean if a field has been set.
-
-### GetDeploymentType
-
-`func (o *HyperflexClusterAllOf) GetDeploymentType() string`
-
-GetDeploymentType returns the DeploymentType field if non-nil, zero value otherwise.
-
-### GetDeploymentTypeOk
-
-`func (o *HyperflexClusterAllOf) GetDeploymentTypeOk() (*string, bool)`
-
-GetDeploymentTypeOk returns a tuple with the DeploymentType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeploymentType
-
-`func (o *HyperflexClusterAllOf) SetDeploymentType(v string)`
-
-SetDeploymentType sets DeploymentType field to given value.
-
-### HasDeploymentType
-
-`func (o *HyperflexClusterAllOf) HasDeploymentType() bool`
-
-HasDeploymentType returns a boolean if a field has been set.
 
 ### GetDeviceId
 
@@ -350,31 +180,6 @@ SetFltAggr sets FltAggr field to given value.
 
 HasFltAggr returns a boolean if a field has been set.
 
-### GetHxVersion
-
-`func (o *HyperflexClusterAllOf) GetHxVersion() string`
-
-GetHxVersion returns the HxVersion field if non-nil, zero value otherwise.
-
-### GetHxVersionOk
-
-`func (o *HyperflexClusterAllOf) GetHxVersionOk() (*string, bool)`
-
-GetHxVersionOk returns a tuple with the HxVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHxVersion
-
-`func (o *HyperflexClusterAllOf) SetHxVersion(v string)`
-
-SetHxVersion sets HxVersion field to given value.
-
-### HasHxVersion
-
-`func (o *HyperflexClusterAllOf) HasHxVersion() bool`
-
-HasHxVersion returns a boolean if a field has been set.
-
 ### GetHxdpBuildVersion
 
 `func (o *HyperflexClusterAllOf) GetHxdpBuildVersion() string`
@@ -399,56 +204,6 @@ SetHxdpBuildVersion sets HxdpBuildVersion field to given value.
 `func (o *HyperflexClusterAllOf) HasHxdpBuildVersion() bool`
 
 HasHxdpBuildVersion returns a boolean if a field has been set.
-
-### GetHypervisorType
-
-`func (o *HyperflexClusterAllOf) GetHypervisorType() string`
-
-GetHypervisorType returns the HypervisorType field if non-nil, zero value otherwise.
-
-### GetHypervisorTypeOk
-
-`func (o *HyperflexClusterAllOf) GetHypervisorTypeOk() (*string, bool)`
-
-GetHypervisorTypeOk returns a tuple with the HypervisorType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHypervisorType
-
-`func (o *HyperflexClusterAllOf) SetHypervisorType(v string)`
-
-SetHypervisorType sets HypervisorType field to given value.
-
-### HasHypervisorType
-
-`func (o *HyperflexClusterAllOf) HasHypervisorType() bool`
-
-HasHypervisorType returns a boolean if a field has been set.
-
-### GetHypervisorVersion
-
-`func (o *HyperflexClusterAllOf) GetHypervisorVersion() string`
-
-GetHypervisorVersion returns the HypervisorVersion field if non-nil, zero value otherwise.
-
-### GetHypervisorVersionOk
-
-`func (o *HyperflexClusterAllOf) GetHypervisorVersionOk() (*string, bool)`
-
-GetHypervisorVersionOk returns a tuple with the HypervisorVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHypervisorVersion
-
-`func (o *HyperflexClusterAllOf) SetHypervisorVersion(v string)`
-
-SetHypervisorVersion sets HypervisorVersion field to given value.
-
-### HasHypervisorVersion
-
-`func (o *HyperflexClusterAllOf) HasHypervisorVersion() bool`
-
-HasHypervisorVersion returns a boolean if a field has been set.
 
 ### GetSummary
 
@@ -485,56 +240,6 @@ HasSummary returns a boolean if a field has been set.
 `func (o *HyperflexClusterAllOf) UnsetSummary()`
 
 UnsetSummary ensures that no value is present for Summary, not even an explicit nil
-### GetUtilizationPercentage
-
-`func (o *HyperflexClusterAllOf) GetUtilizationPercentage() float32`
-
-GetUtilizationPercentage returns the UtilizationPercentage field if non-nil, zero value otherwise.
-
-### GetUtilizationPercentageOk
-
-`func (o *HyperflexClusterAllOf) GetUtilizationPercentageOk() (*float32, bool)`
-
-GetUtilizationPercentageOk returns a tuple with the UtilizationPercentage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUtilizationPercentage
-
-`func (o *HyperflexClusterAllOf) SetUtilizationPercentage(v float32)`
-
-SetUtilizationPercentage sets UtilizationPercentage field to given value.
-
-### HasUtilizationPercentage
-
-`func (o *HyperflexClusterAllOf) HasUtilizationPercentage() bool`
-
-HasUtilizationPercentage returns a boolean if a field has been set.
-
-### GetUtilizationTrendPercentage
-
-`func (o *HyperflexClusterAllOf) GetUtilizationTrendPercentage() float32`
-
-GetUtilizationTrendPercentage returns the UtilizationTrendPercentage field if non-nil, zero value otherwise.
-
-### GetUtilizationTrendPercentageOk
-
-`func (o *HyperflexClusterAllOf) GetUtilizationTrendPercentageOk() (*float32, bool)`
-
-GetUtilizationTrendPercentageOk returns a tuple with the UtilizationTrendPercentage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUtilizationTrendPercentage
-
-`func (o *HyperflexClusterAllOf) SetUtilizationTrendPercentage(v float32)`
-
-SetUtilizationTrendPercentage sets UtilizationTrendPercentage field to given value.
-
-### HasUtilizationTrendPercentage
-
-`func (o *HyperflexClusterAllOf) HasUtilizationTrendPercentage() bool`
-
-HasUtilizationTrendPercentage returns a boolean if a field has been set.
-
 ### GetVmCount
 
 `func (o *HyperflexClusterAllOf) GetVmCount() int64`
@@ -619,6 +324,31 @@ SetHealth sets Health field to given value.
 `func (o *HyperflexClusterAllOf) HasHealth() bool`
 
 HasHealth returns a boolean if a field has been set.
+
+### GetLicense
+
+`func (o *HyperflexClusterAllOf) GetLicense() HyperflexLicenseRelationship`
+
+GetLicense returns the License field if non-nil, zero value otherwise.
+
+### GetLicenseOk
+
+`func (o *HyperflexClusterAllOf) GetLicenseOk() (*HyperflexLicenseRelationship, bool)`
+
+GetLicenseOk returns a tuple with the License field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicense
+
+`func (o *HyperflexClusterAllOf) SetLicense(v HyperflexLicenseRelationship)`
+
+SetLicense sets License field to given value.
+
+### HasLicense
+
+`func (o *HyperflexClusterAllOf) HasLicense() bool`
+
+HasLicense returns a boolean if a field has been set.
 
 ### GetNodes
 

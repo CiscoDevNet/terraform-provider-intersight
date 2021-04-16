@@ -79,7 +79,7 @@ func dataSourceFabricMulticastPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"querier_state": {
-				Description: "Administrative state of the IGMP Querier for this VLAN.\n* `Disabled` - IGMP Querier Disabled State.\n* `Enabled` - IGMP Querier Enabled State.",
+				Description: "Administrative state of the IGMP Querier for this VLAN.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -90,7 +90,7 @@ func dataSourceFabricMulticastPolicy() *schema.Resource {
 				Computed:    true,
 			},
 			"snooping_state": {
-				Description: "Administrative state of the IGMP Snooping for this VLAN.\n* `Enabled` - IGMP Snooping Enabled State.\n* `Disabled` - IGMP Snooping Disabled State.",
+				Description: "Administrative state of the IGMP Snooping for this VLAN.\n* `Enabled` - Admin configured Enabled State.\n* `Disabled` - Admin configured Disabled State.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -179,6 +179,9 @@ func dataSourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while fetching count of FabricMulticastPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.FabricMulticastPolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricMulticastPolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricMulticastPolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -193,10 +196,6 @@ func dataSourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceDa
 			return diag.Errorf("error occurred while fetching FabricMulticastPolicy: %s", responseErr.Error())
 		}
 		results := resMo.FabricMulticastPolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricMulticastPolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

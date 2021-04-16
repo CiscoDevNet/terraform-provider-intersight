@@ -574,6 +574,9 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while fetching count of ApplianceNodeInfo: %s", responseErr.Error())
 	}
 	count := countResponse.ApplianceNodeInfoList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ApplianceNodeInfo data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var applianceNodeInfoResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -588,10 +591,6 @@ func dataSourceApplianceNodeInfoRead(c context.Context, d *schema.ResourceData, 
 			return diag.Errorf("error occurred while fetching ApplianceNodeInfo: %s", responseErr.Error())
 		}
 		results := resMo.ApplianceNodeInfoList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ApplianceNodeInfo data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

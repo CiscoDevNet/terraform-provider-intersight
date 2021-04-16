@@ -594,6 +594,9 @@ func dataSourceNiaapiDcnmFieldNoticeRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while fetching count of NiaapiDcnmFieldNotice: %s", responseErr.Error())
 	}
 	count := countResponse.NiaapiDcnmFieldNoticeList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiaapiDcnmFieldNotice data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niaapiDcnmFieldNoticeResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -608,10 +611,6 @@ func dataSourceNiaapiDcnmFieldNoticeRead(c context.Context, d *schema.ResourceDa
 			return diag.Errorf("error occurred while fetching NiaapiDcnmFieldNotice: %s", responseErr.Error())
 		}
 		results := resMo.NiaapiDcnmFieldNoticeList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiaapiDcnmFieldNotice data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

@@ -606,6 +606,9 @@ func dataSourceBiosSystemBootOrderRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while fetching count of BiosSystemBootOrder: %s", responseErr.Error())
 	}
 	count := countResponse.BiosSystemBootOrderList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for BiosSystemBootOrder data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var biosSystemBootOrderResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -620,10 +623,6 @@ func dataSourceBiosSystemBootOrderRead(c context.Context, d *schema.ResourceData
 			return diag.Errorf("error occurred while fetching BiosSystemBootOrder: %s", responseErr.Error())
 		}
 		results := resMo.BiosSystemBootOrderList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for BiosSystemBootOrder data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

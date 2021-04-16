@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Storage array controller name. 
 * `operational_mode`:(string) Controller running mode, Primary or Secondary.* `Unknown` - Component operational state is unknown.* `Primary` - Component operates in primary mode and accepts workloads.* `Secondary` - Component is running as a secondary or standby mode.* `Maintenance` - Component is in maintenance mode for upgrade. During maintenance mode, component does not perform any workload. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "adapter.UnitExpander"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "adapter.UnitExpander"]
 **PartNumber** | Pointer to **string** | This field identifies the partNumber of the given component. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the presence state of the given component. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the virtual id of the given component. | [optional] [readonly] 
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](adapter.Unit.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -95,31 +94,6 @@ SetPartNumber sets PartNumber field to given value.
 `func (o *AdapterUnitExpander) HasPartNumber() bool`
 
 HasPartNumber returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *AdapterUnitExpander) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *AdapterUnitExpander) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *AdapterUnitExpander) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *AdapterUnitExpander) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetVid
 

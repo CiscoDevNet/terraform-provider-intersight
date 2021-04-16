@@ -863,6 +863,9 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while fetching count of NiatelemetryNiaInventoryFabric: %s", responseErr.Error())
 	}
 	count := countResponse.NiatelemetryNiaInventoryFabricList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiatelemetryNiaInventoryFabric data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niatelemetryNiaInventoryFabricResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -877,10 +880,6 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 			return diag.Errorf("error occurred while fetching NiatelemetryNiaInventoryFabric: %s", responseErr.Error())
 		}
 		results := resMo.NiatelemetryNiaInventoryFabricList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiatelemetryNiaInventoryFabric data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

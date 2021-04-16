@@ -152,6 +152,9 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 		return diag.Errorf("error occurred while fetching count of KubernetesContainerRuntimePolicy: %s", responseErr.Error())
 	}
 	count := countResponse.KubernetesContainerRuntimePolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for KubernetesContainerRuntimePolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var kubernetesContainerRuntimePolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -166,10 +169,6 @@ func dataSourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema
 			return diag.Errorf("error occurred while fetching KubernetesContainerRuntimePolicy: %s", responseErr.Error())
 		}
 		results := resMo.KubernetesContainerRuntimePolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for KubernetesContainerRuntimePolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

@@ -235,6 +235,9 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while fetching count of VirtualizationVirtualMachine: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVirtualMachineList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VirtualizationVirtualMachine data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var virtualizationVirtualMachineResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -249,10 +252,6 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualMachine: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVirtualMachineList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VirtualizationVirtualMachine data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

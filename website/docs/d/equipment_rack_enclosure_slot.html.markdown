@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `rack_id`:(int) Server ID which is part of Rack Enclosure Slot. 
 * `rack_unit_dn`:(string) Server DN which is part of Rack Enclosure Slot. 
 * `revision`:(string) This field identifies the revision of the given component. 

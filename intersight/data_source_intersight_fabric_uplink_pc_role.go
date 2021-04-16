@@ -74,11 +74,6 @@ func dataSourceFabricUplinkPcRole() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"udld_admin_state": {
-				Description: "Admin configured state for UDLD for this port.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceFabricUplinkPcRole().Schema},
@@ -133,10 +128,6 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
-	if v, ok := d.GetOk("udld_admin_state"); ok {
-		x := (v.(string))
-		o.SetUdldAdminState(x)
-	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -152,6 +143,9 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while fetching count of FabricUplinkPcRole: %s", responseErr.Error())
 	}
 	count := countResponse.FabricUplinkPcRoleList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricUplinkPcRole data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricUplinkPcRoleResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -166,10 +160,6 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 			return diag.Errorf("error occurred while fetching FabricUplinkPcRole: %s", responseErr.Error())
 		}
 		results := resMo.FabricUplinkPcRoleList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricUplinkPcRole data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -184,6 +174,12 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["flow_control_policy"] = flattenMapFabricFlowControlPolicyRelationship(s.GetFlowControlPolicy(), d)
+
+				temp["link_aggregation_policy"] = flattenMapFabricLinkAggregationPolicyRelationship(s.GetLinkAggregationPolicy(), d)
+
+				temp["link_control_policy"] = flattenMapFabricLinkControlPolicyRelationship(s.GetLinkControlPolicy(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -201,7 +197,6 @@ func dataSourceFabricUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["udld_admin_state"] = (s.GetUdldAdminState())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricUplinkPcRoleResults[j] = temp

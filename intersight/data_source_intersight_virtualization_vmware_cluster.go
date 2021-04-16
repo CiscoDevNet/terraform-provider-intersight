@@ -56,6 +56,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"inventory_path": {
+				Description: "Inventory path of the cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -219,6 +224,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"inventory_path": {
+						Description: "Inventory path of the cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"memory_capacity": {
 						Description: "The capacity and usage information for memory on this cluster.",
@@ -651,6 +661,10 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
+	if v, ok := d.GetOk("inventory_path"); ok {
+		x := (v.(string))
+		o.SetInventoryPath(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -694,6 +708,9 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareCluster: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVmwareClusterList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VirtualizationVmwareCluster data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var virtualizationVmwareClusterResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -708,10 +725,6 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareCluster: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVmwareClusterList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VirtualizationVmwareCluster data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -730,6 +743,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["identity"] = (s.GetIdentity())
+				temp["inventory_path"] = (s.GetInventoryPath())
 
 				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
 

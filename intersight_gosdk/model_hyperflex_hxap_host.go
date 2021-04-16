@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -26,18 +26,22 @@ type HyperflexHxapHost struct {
 	ObjectType string `json:"ObjectType"`
 	// Denotes age or life time of the Host in nano seconds.
 	Age *string `json:"Age,omitempty"`
+	// Chassis version of the Host.
+	ChassisVersion *string `json:"ChassisVersion,omitempty"`
 	// The UUID of the cluster to which this Host belongs to.
-	ClusterUuid *string `json:"ClusterUuid,omitempty"`
+	ClusterUuid   *string                             `json:"ClusterUuid,omitempty"`
+	CpuAllocation NullableVirtualizationCpuAllocation `json:"CpuAllocation,omitempty"`
 	// Reason of the failure when host is in failed state.
 	FailureReason *string `json:"FailureReason,omitempty"`
-	// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweredOn` - The entity is powered on. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state.
+	// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweredOn` - The entity is powered on. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `` - The entity's power state is not available.
 	HwPowerState *string `json:"HwPowerState,omitempty"`
 	// Internal IP Address of the Host.
 	InternalIpAddress *string `json:"InternalIpAddress,omitempty"`
 	// Management IP Address of the Host.
 	ManagementIpAddress *string `json:"ManagementIpAddress,omitempty"`
 	// Is the role of this host is master in the cluster? true or false.
-	MasterRole *bool `json:"MasterRole,omitempty"`
+	MasterRole       *bool                                  `json:"MasterRole,omitempty"`
+	MemoryAllocation NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
 	// Product version of the Host.
 	Version              *string                           `json:"Version,omitempty"`
 	Cluster              *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
@@ -155,6 +159,38 @@ func (o *HyperflexHxapHost) SetAge(v string) {
 	o.Age = &v
 }
 
+// GetChassisVersion returns the ChassisVersion field value if set, zero value otherwise.
+func (o *HyperflexHxapHost) GetChassisVersion() string {
+	if o == nil || o.ChassisVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChassisVersion
+}
+
+// GetChassisVersionOk returns a tuple with the ChassisVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxapHost) GetChassisVersionOk() (*string, bool) {
+	if o == nil || o.ChassisVersion == nil {
+		return nil, false
+	}
+	return o.ChassisVersion, true
+}
+
+// HasChassisVersion returns a boolean if a field has been set.
+func (o *HyperflexHxapHost) HasChassisVersion() bool {
+	if o != nil && o.ChassisVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisVersion gets a reference to the given string and assigns it to the ChassisVersion field.
+func (o *HyperflexHxapHost) SetChassisVersion(v string) {
+	o.ChassisVersion = &v
+}
+
 // GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
 func (o *HyperflexHxapHost) GetClusterUuid() string {
 	if o == nil || o.ClusterUuid == nil {
@@ -185,6 +221,49 @@ func (o *HyperflexHxapHost) HasClusterUuid() bool {
 // SetClusterUuid gets a reference to the given string and assigns it to the ClusterUuid field.
 func (o *HyperflexHxapHost) SetClusterUuid(v string) {
 	o.ClusterUuid = &v
+}
+
+// GetCpuAllocation returns the CpuAllocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexHxapHost) GetCpuAllocation() VirtualizationCpuAllocation {
+	if o == nil || o.CpuAllocation.Get() == nil {
+		var ret VirtualizationCpuAllocation
+		return ret
+	}
+	return *o.CpuAllocation.Get()
+}
+
+// GetCpuAllocationOk returns a tuple with the CpuAllocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexHxapHost) GetCpuAllocationOk() (*VirtualizationCpuAllocation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CpuAllocation.Get(), o.CpuAllocation.IsSet()
+}
+
+// HasCpuAllocation returns a boolean if a field has been set.
+func (o *HyperflexHxapHost) HasCpuAllocation() bool {
+	if o != nil && o.CpuAllocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuAllocation gets a reference to the given NullableVirtualizationCpuAllocation and assigns it to the CpuAllocation field.
+func (o *HyperflexHxapHost) SetCpuAllocation(v VirtualizationCpuAllocation) {
+	o.CpuAllocation.Set(&v)
+}
+
+// SetCpuAllocationNil sets the value for CpuAllocation to be an explicit nil
+func (o *HyperflexHxapHost) SetCpuAllocationNil() {
+	o.CpuAllocation.Set(nil)
+}
+
+// UnsetCpuAllocation ensures that no value is present for CpuAllocation, not even an explicit nil
+func (o *HyperflexHxapHost) UnsetCpuAllocation() {
+	o.CpuAllocation.Unset()
 }
 
 // GetFailureReason returns the FailureReason field value if set, zero value otherwise.
@@ -347,6 +426,49 @@ func (o *HyperflexHxapHost) SetMasterRole(v bool) {
 	o.MasterRole = &v
 }
 
+// GetMemoryAllocation returns the MemoryAllocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexHxapHost) GetMemoryAllocation() VirtualizationMemoryAllocation {
+	if o == nil || o.MemoryAllocation.Get() == nil {
+		var ret VirtualizationMemoryAllocation
+		return ret
+	}
+	return *o.MemoryAllocation.Get()
+}
+
+// GetMemoryAllocationOk returns a tuple with the MemoryAllocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexHxapHost) GetMemoryAllocationOk() (*VirtualizationMemoryAllocation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MemoryAllocation.Get(), o.MemoryAllocation.IsSet()
+}
+
+// HasMemoryAllocation returns a boolean if a field has been set.
+func (o *HyperflexHxapHost) HasMemoryAllocation() bool {
+	if o != nil && o.MemoryAllocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryAllocation gets a reference to the given NullableVirtualizationMemoryAllocation and assigns it to the MemoryAllocation field.
+func (o *HyperflexHxapHost) SetMemoryAllocation(v VirtualizationMemoryAllocation) {
+	o.MemoryAllocation.Set(&v)
+}
+
+// SetMemoryAllocationNil sets the value for MemoryAllocation to be an explicit nil
+func (o *HyperflexHxapHost) SetMemoryAllocationNil() {
+	o.MemoryAllocation.Set(nil)
+}
+
+// UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
+func (o *HyperflexHxapHost) UnsetMemoryAllocation() {
+	o.MemoryAllocation.Unset()
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexHxapHost) GetVersion() string {
 	if o == nil || o.Version == nil {
@@ -494,8 +616,14 @@ func (o HyperflexHxapHost) MarshalJSON() ([]byte, error) {
 	if o.Age != nil {
 		toSerialize["Age"] = o.Age
 	}
+	if o.ChassisVersion != nil {
+		toSerialize["ChassisVersion"] = o.ChassisVersion
+	}
 	if o.ClusterUuid != nil {
 		toSerialize["ClusterUuid"] = o.ClusterUuid
+	}
+	if o.CpuAllocation.IsSet() {
+		toSerialize["CpuAllocation"] = o.CpuAllocation.Get()
 	}
 	if o.FailureReason != nil {
 		toSerialize["FailureReason"] = o.FailureReason
@@ -511,6 +639,9 @@ func (o HyperflexHxapHost) MarshalJSON() ([]byte, error) {
 	}
 	if o.MasterRole != nil {
 		toSerialize["MasterRole"] = o.MasterRole
+	}
+	if o.MemoryAllocation.IsSet() {
+		toSerialize["MemoryAllocation"] = o.MemoryAllocation.Get()
 	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
@@ -540,18 +671,22 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Denotes age or life time of the Host in nano seconds.
 		Age *string `json:"Age,omitempty"`
+		// Chassis version of the Host.
+		ChassisVersion *string `json:"ChassisVersion,omitempty"`
 		// The UUID of the cluster to which this Host belongs to.
-		ClusterUuid *string `json:"ClusterUuid,omitempty"`
+		ClusterUuid   *string                             `json:"ClusterUuid,omitempty"`
+		CpuAllocation NullableVirtualizationCpuAllocation `json:"CpuAllocation,omitempty"`
 		// Reason of the failure when host is in failed state.
 		FailureReason *string `json:"FailureReason,omitempty"`
-		// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweredOn` - The entity is powered on. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state.
+		// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweredOn` - The entity is powered on. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `` - The entity's power state is not available.
 		HwPowerState *string `json:"HwPowerState,omitempty"`
 		// Internal IP Address of the Host.
 		InternalIpAddress *string `json:"InternalIpAddress,omitempty"`
 		// Management IP Address of the Host.
 		ManagementIpAddress *string `json:"ManagementIpAddress,omitempty"`
 		// Is the role of this host is master in the cluster? true or false.
-		MasterRole *bool `json:"MasterRole,omitempty"`
+		MasterRole       *bool                                  `json:"MasterRole,omitempty"`
+		MemoryAllocation NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
 		// Product version of the Host.
 		Version        *string                           `json:"Version,omitempty"`
 		Cluster        *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
@@ -567,12 +702,15 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexHxapHost.ClassId = varHyperflexHxapHostWithoutEmbeddedStruct.ClassId
 		varHyperflexHxapHost.ObjectType = varHyperflexHxapHostWithoutEmbeddedStruct.ObjectType
 		varHyperflexHxapHost.Age = varHyperflexHxapHostWithoutEmbeddedStruct.Age
+		varHyperflexHxapHost.ChassisVersion = varHyperflexHxapHostWithoutEmbeddedStruct.ChassisVersion
 		varHyperflexHxapHost.ClusterUuid = varHyperflexHxapHostWithoutEmbeddedStruct.ClusterUuid
+		varHyperflexHxapHost.CpuAllocation = varHyperflexHxapHostWithoutEmbeddedStruct.CpuAllocation
 		varHyperflexHxapHost.FailureReason = varHyperflexHxapHostWithoutEmbeddedStruct.FailureReason
 		varHyperflexHxapHost.HwPowerState = varHyperflexHxapHostWithoutEmbeddedStruct.HwPowerState
 		varHyperflexHxapHost.InternalIpAddress = varHyperflexHxapHostWithoutEmbeddedStruct.InternalIpAddress
 		varHyperflexHxapHost.ManagementIpAddress = varHyperflexHxapHostWithoutEmbeddedStruct.ManagementIpAddress
 		varHyperflexHxapHost.MasterRole = varHyperflexHxapHostWithoutEmbeddedStruct.MasterRole
+		varHyperflexHxapHost.MemoryAllocation = varHyperflexHxapHostWithoutEmbeddedStruct.MemoryAllocation
 		varHyperflexHxapHost.Version = varHyperflexHxapHostWithoutEmbeddedStruct.Version
 		varHyperflexHxapHost.Cluster = varHyperflexHxapHostWithoutEmbeddedStruct.Cluster
 		varHyperflexHxapHost.ClusterMember = varHyperflexHxapHostWithoutEmbeddedStruct.ClusterMember
@@ -597,12 +735,15 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Age")
+		delete(additionalProperties, "ChassisVersion")
 		delete(additionalProperties, "ClusterUuid")
+		delete(additionalProperties, "CpuAllocation")
 		delete(additionalProperties, "FailureReason")
 		delete(additionalProperties, "HwPowerState")
 		delete(additionalProperties, "InternalIpAddress")
 		delete(additionalProperties, "ManagementIpAddress")
 		delete(additionalProperties, "MasterRole")
+		delete(additionalProperties, "MemoryAllocation")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "ClusterMember")

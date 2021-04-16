@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"net/http/httptrace"
 	"os"
+	"strings"
 	"time"
 
 	gosdk "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -238,6 +239,7 @@ func (c *Client) getAuthorizationCodePKCEContext(ctx context.Context, flagClient
 
 func (c *Client) GetApiClient(ctx context.Context, enableDebug bool) *gosdk.APIClient {
 	cfg := gosdk.NewConfiguration()
+	cfg.UserAgent = strings.Replace(cfg.UserAgent, "go", "terraform", -1)
 	cfg.Host = c.hostname
 	cfg.AddDefaultHeader("Content-Type", "application/json")
 	cfg.HTTPClient = &http.Client{

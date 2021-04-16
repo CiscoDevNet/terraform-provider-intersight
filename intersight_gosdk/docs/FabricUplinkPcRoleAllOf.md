@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UplinkPcRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkPcRole"]
 **AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. | [optional] [default to "Auto"]
-**UdldAdminState** | Pointer to **string** | Admin configured state for UDLD for this port. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
+**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](fabric.FlowControlPolicy.Relationship.md) |  | [optional] 
+**LinkAggregationPolicy** | Pointer to [**FabricLinkAggregationPolicyRelationship**](fabric.LinkAggregationPolicy.Relationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](fabric.LinkControlPolicy.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -93,30 +95,80 @@ SetAdminSpeed sets AdminSpeed field to given value.
 
 HasAdminSpeed returns a boolean if a field has been set.
 
-### GetUdldAdminState
+### GetFlowControlPolicy
 
-`func (o *FabricUplinkPcRoleAllOf) GetUdldAdminState() string`
+`func (o *FabricUplinkPcRoleAllOf) GetFlowControlPolicy() FabricFlowControlPolicyRelationship`
 
-GetUdldAdminState returns the UdldAdminState field if non-nil, zero value otherwise.
+GetFlowControlPolicy returns the FlowControlPolicy field if non-nil, zero value otherwise.
 
-### GetUdldAdminStateOk
+### GetFlowControlPolicyOk
 
-`func (o *FabricUplinkPcRoleAllOf) GetUdldAdminStateOk() (*string, bool)`
+`func (o *FabricUplinkPcRoleAllOf) GetFlowControlPolicyOk() (*FabricFlowControlPolicyRelationship, bool)`
 
-GetUdldAdminStateOk returns a tuple with the UdldAdminState field if it's non-nil, zero value otherwise
+GetFlowControlPolicyOk returns a tuple with the FlowControlPolicy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUdldAdminState
+### SetFlowControlPolicy
 
-`func (o *FabricUplinkPcRoleAllOf) SetUdldAdminState(v string)`
+`func (o *FabricUplinkPcRoleAllOf) SetFlowControlPolicy(v FabricFlowControlPolicyRelationship)`
 
-SetUdldAdminState sets UdldAdminState field to given value.
+SetFlowControlPolicy sets FlowControlPolicy field to given value.
 
-### HasUdldAdminState
+### HasFlowControlPolicy
 
-`func (o *FabricUplinkPcRoleAllOf) HasUdldAdminState() bool`
+`func (o *FabricUplinkPcRoleAllOf) HasFlowControlPolicy() bool`
 
-HasUdldAdminState returns a boolean if a field has been set.
+HasFlowControlPolicy returns a boolean if a field has been set.
+
+### GetLinkAggregationPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) GetLinkAggregationPolicy() FabricLinkAggregationPolicyRelationship`
+
+GetLinkAggregationPolicy returns the LinkAggregationPolicy field if non-nil, zero value otherwise.
+
+### GetLinkAggregationPolicyOk
+
+`func (o *FabricUplinkPcRoleAllOf) GetLinkAggregationPolicyOk() (*FabricLinkAggregationPolicyRelationship, bool)`
+
+GetLinkAggregationPolicyOk returns a tuple with the LinkAggregationPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkAggregationPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) SetLinkAggregationPolicy(v FabricLinkAggregationPolicyRelationship)`
+
+SetLinkAggregationPolicy sets LinkAggregationPolicy field to given value.
+
+### HasLinkAggregationPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) HasLinkAggregationPolicy() bool`
+
+HasLinkAggregationPolicy returns a boolean if a field has been set.
+
+### GetLinkControlPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
+
+GetLinkControlPolicy returns the LinkControlPolicy field if non-nil, zero value otherwise.
+
+### GetLinkControlPolicyOk
+
+`func (o *FabricUplinkPcRoleAllOf) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool)`
+
+GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkControlPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship)`
+
+SetLinkControlPolicy sets LinkControlPolicy field to given value.
+
+### HasLinkControlPolicy
+
+`func (o *FabricUplinkPcRoleAllOf) HasLinkControlPolicy() bool`
+
+HasLinkControlPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
