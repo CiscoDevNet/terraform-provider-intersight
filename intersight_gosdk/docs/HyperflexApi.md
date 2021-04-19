@@ -55,7 +55,9 @@ Method | HTTP request | Description
 [**DeleteHyperflexFeatureLimitInternal**](HyperflexApi.md#DeleteHyperflexFeatureLimitInternal) | **Delete** /api/v1/hyperflex/FeatureLimitInternals/{Moid} | Delete a &#39;hyperflex.FeatureLimitInternal&#39; resource.
 [**DeleteHyperflexHealthCheckDefinition**](HyperflexApi.md#DeleteHyperflexHealthCheckDefinition) | **Delete** /api/v1/hyperflex/HealthCheckDefinitions/{Moid} | Delete a &#39;hyperflex.HealthCheckDefinition&#39; resource.
 [**DeleteHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#DeleteHyperflexHealthCheckPackageChecksum) | **Delete** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Delete a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
+[**DeleteHyperflexHxapCluster**](HyperflexApi.md#DeleteHyperflexHxapCluster) | **Delete** /api/v1/hyperflex/HxapClusters/{Moid} | Delete a &#39;hyperflex.HxapCluster&#39; resource.
 [**DeleteHyperflexHxapDatacenter**](HyperflexApi.md#DeleteHyperflexHxapDatacenter) | **Delete** /api/v1/hyperflex/HxapDatacenters/{Moid} | Delete a &#39;hyperflex.HxapDatacenter&#39; resource.
+[**DeleteHyperflexHxapVirtualMachineNetworkInterface**](HyperflexApi.md#DeleteHyperflexHxapVirtualMachineNetworkInterface) | **Delete** /api/v1/hyperflex/HxapVirtualMachineNetworkInterfaces/{Moid} | Delete a &#39;hyperflex.HxapVirtualMachineNetworkInterface&#39; resource.
 [**DeleteHyperflexHxdpVersion**](HyperflexApi.md#DeleteHyperflexHxdpVersion) | **Delete** /api/v1/hyperflex/HxdpVersions/{Moid} | Delete a &#39;hyperflex.HxdpVersion&#39; resource.
 [**DeleteHyperflexLocalCredentialPolicy**](HyperflexApi.md#DeleteHyperflexLocalCredentialPolicy) | **Delete** /api/v1/hyperflex/LocalCredentialPolicies/{Moid} | Delete a &#39;hyperflex.LocalCredentialPolicy&#39; resource.
 [**DeleteHyperflexNodeConfigPolicy**](HyperflexApi.md#DeleteHyperflexNodeConfigPolicy) | **Delete** /api/v1/hyperflex/NodeConfigPolicies/{Moid} | Delete a &#39;hyperflex.NodeConfigPolicy&#39; resource.
@@ -135,16 +137,28 @@ Method | HTTP request | Description
 [**GetHyperflexHxapClusterList**](HyperflexApi.md#GetHyperflexHxapClusterList) | **Get** /api/v1/hyperflex/HxapClusters | Read a &#39;hyperflex.HxapCluster&#39; resource.
 [**GetHyperflexHxapDatacenterByMoid**](HyperflexApi.md#GetHyperflexHxapDatacenterByMoid) | **Get** /api/v1/hyperflex/HxapDatacenters/{Moid} | Read a &#39;hyperflex.HxapDatacenter&#39; resource.
 [**GetHyperflexHxapDatacenterList**](HyperflexApi.md#GetHyperflexHxapDatacenterList) | **Get** /api/v1/hyperflex/HxapDatacenters | Read a &#39;hyperflex.HxapDatacenter&#39; resource.
-[**GetHyperflexHxapEventByMoid**](HyperflexApi.md#GetHyperflexHxapEventByMoid) | **Get** /api/v1/hyperflex/HxapEvents/{Moid} | Read a &#39;hyperflex.HxapEvent&#39; resource.
-[**GetHyperflexHxapEventList**](HyperflexApi.md#GetHyperflexHxapEventList) | **Get** /api/v1/hyperflex/HxapEvents | Read a &#39;hyperflex.HxapEvent&#39; resource.
+[**GetHyperflexHxapDvUplinkByMoid**](HyperflexApi.md#GetHyperflexHxapDvUplinkByMoid) | **Get** /api/v1/hyperflex/HxapDvUplinks/{Moid} | Read a &#39;hyperflex.HxapDvUplink&#39; resource.
+[**GetHyperflexHxapDvUplinkList**](HyperflexApi.md#GetHyperflexHxapDvUplinkList) | **Get** /api/v1/hyperflex/HxapDvUplinks | Read a &#39;hyperflex.HxapDvUplink&#39; resource.
+[**GetHyperflexHxapDvswitchByMoid**](HyperflexApi.md#GetHyperflexHxapDvswitchByMoid) | **Get** /api/v1/hyperflex/HxapDvswitches/{Moid} | Read a &#39;hyperflex.HxapDvswitch&#39; resource.
+[**GetHyperflexHxapDvswitchList**](HyperflexApi.md#GetHyperflexHxapDvswitchList) | **Get** /api/v1/hyperflex/HxapDvswitches | Read a &#39;hyperflex.HxapDvswitch&#39; resource.
 [**GetHyperflexHxapHostByMoid**](HyperflexApi.md#GetHyperflexHxapHostByMoid) | **Get** /api/v1/hyperflex/HxapHosts/{Moid} | Read a &#39;hyperflex.HxapHost&#39; resource.
+[**GetHyperflexHxapHostInterfaceByMoid**](HyperflexApi.md#GetHyperflexHxapHostInterfaceByMoid) | **Get** /api/v1/hyperflex/HxapHostInterfaces/{Moid} | Read a &#39;hyperflex.HxapHostInterface&#39; resource.
+[**GetHyperflexHxapHostInterfaceList**](HyperflexApi.md#GetHyperflexHxapHostInterfaceList) | **Get** /api/v1/hyperflex/HxapHostInterfaces | Read a &#39;hyperflex.HxapHostInterface&#39; resource.
 [**GetHyperflexHxapHostList**](HyperflexApi.md#GetHyperflexHxapHostList) | **Get** /api/v1/hyperflex/HxapHosts | Read a &#39;hyperflex.HxapHost&#39; resource.
+[**GetHyperflexHxapHostVswitchByMoid**](HyperflexApi.md#GetHyperflexHxapHostVswitchByMoid) | **Get** /api/v1/hyperflex/HxapHostVswitches/{Moid} | Read a &#39;hyperflex.HxapHostVswitch&#39; resource.
+[**GetHyperflexHxapHostVswitchList**](HyperflexApi.md#GetHyperflexHxapHostVswitchList) | **Get** /api/v1/hyperflex/HxapHostVswitches | Read a &#39;hyperflex.HxapHostVswitch&#39; resource.
+[**GetHyperflexHxapNetworkByMoid**](HyperflexApi.md#GetHyperflexHxapNetworkByMoid) | **Get** /api/v1/hyperflex/HxapNetworks/{Moid} | Read a &#39;hyperflex.HxapNetwork&#39; resource.
+[**GetHyperflexHxapNetworkList**](HyperflexApi.md#GetHyperflexHxapNetworkList) | **Get** /api/v1/hyperflex/HxapNetworks | Read a &#39;hyperflex.HxapNetwork&#39; resource.
 [**GetHyperflexHxapVirtualDiskByMoid**](HyperflexApi.md#GetHyperflexHxapVirtualDiskByMoid) | **Get** /api/v1/hyperflex/HxapVirtualDisks/{Moid} | Read a &#39;hyperflex.HxapVirtualDisk&#39; resource.
 [**GetHyperflexHxapVirtualDiskList**](HyperflexApi.md#GetHyperflexHxapVirtualDiskList) | **Get** /api/v1/hyperflex/HxapVirtualDisks | Read a &#39;hyperflex.HxapVirtualDisk&#39; resource.
 [**GetHyperflexHxapVirtualMachineByMoid**](HyperflexApi.md#GetHyperflexHxapVirtualMachineByMoid) | **Get** /api/v1/hyperflex/HxapVirtualMachines/{Moid} | Read a &#39;hyperflex.HxapVirtualMachine&#39; resource.
 [**GetHyperflexHxapVirtualMachineList**](HyperflexApi.md#GetHyperflexHxapVirtualMachineList) | **Get** /api/v1/hyperflex/HxapVirtualMachines | Read a &#39;hyperflex.HxapVirtualMachine&#39; resource.
+[**GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid**](HyperflexApi.md#GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid) | **Get** /api/v1/hyperflex/HxapVirtualMachineNetworkInterfaces/{Moid} | Read a &#39;hyperflex.HxapVirtualMachineNetworkInterface&#39; resource.
+[**GetHyperflexHxapVirtualMachineNetworkInterfaceList**](HyperflexApi.md#GetHyperflexHxapVirtualMachineNetworkInterfaceList) | **Get** /api/v1/hyperflex/HxapVirtualMachineNetworkInterfaces | Read a &#39;hyperflex.HxapVirtualMachineNetworkInterface&#39; resource.
 [**GetHyperflexHxdpVersionByMoid**](HyperflexApi.md#GetHyperflexHxdpVersionByMoid) | **Get** /api/v1/hyperflex/HxdpVersions/{Moid} | Read a &#39;hyperflex.HxdpVersion&#39; resource.
 [**GetHyperflexHxdpVersionList**](HyperflexApi.md#GetHyperflexHxdpVersionList) | **Get** /api/v1/hyperflex/HxdpVersions | Read a &#39;hyperflex.HxdpVersion&#39; resource.
+[**GetHyperflexLicenseByMoid**](HyperflexApi.md#GetHyperflexLicenseByMoid) | **Get** /api/v1/hyperflex/Licenses/{Moid} | Read a &#39;hyperflex.License&#39; resource.
+[**GetHyperflexLicenseList**](HyperflexApi.md#GetHyperflexLicenseList) | **Get** /api/v1/hyperflex/Licenses | Read a &#39;hyperflex.License&#39; resource.
 [**GetHyperflexLocalCredentialPolicyByMoid**](HyperflexApi.md#GetHyperflexLocalCredentialPolicyByMoid) | **Get** /api/v1/hyperflex/LocalCredentialPolicies/{Moid} | Read a &#39;hyperflex.LocalCredentialPolicy&#39; resource.
 [**GetHyperflexLocalCredentialPolicyList**](HyperflexApi.md#GetHyperflexLocalCredentialPolicyList) | **Get** /api/v1/hyperflex/LocalCredentialPolicies | Read a &#39;hyperflex.LocalCredentialPolicy&#39; resource.
 [**GetHyperflexNodeByMoid**](HyperflexApi.md#GetHyperflexNodeByMoid) | **Get** /api/v1/hyperflex/Nodes/{Moid} | Read a &#39;hyperflex.Node&#39; resource.
@@ -203,7 +217,6 @@ Method | HTTP request | Description
 [**PatchHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#PatchHyperflexHealthCheckPackageChecksum) | **Patch** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Update a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**PatchHyperflexHxapCluster**](HyperflexApi.md#PatchHyperflexHxapCluster) | **Patch** /api/v1/hyperflex/HxapClusters/{Moid} | Update a &#39;hyperflex.HxapCluster&#39; resource.
 [**PatchHyperflexHxapDatacenter**](HyperflexApi.md#PatchHyperflexHxapDatacenter) | **Patch** /api/v1/hyperflex/HxapDatacenters/{Moid} | Update a &#39;hyperflex.HxapDatacenter&#39; resource.
-[**PatchHyperflexHxapEvent**](HyperflexApi.md#PatchHyperflexHxapEvent) | **Patch** /api/v1/hyperflex/HxapEvents/{Moid} | Update a &#39;hyperflex.HxapEvent&#39; resource.
 [**PatchHyperflexHxapHost**](HyperflexApi.md#PatchHyperflexHxapHost) | **Patch** /api/v1/hyperflex/HxapHosts/{Moid} | Update a &#39;hyperflex.HxapHost&#39; resource.
 [**PatchHyperflexHxapVirtualDisk**](HyperflexApi.md#PatchHyperflexHxapVirtualDisk) | **Patch** /api/v1/hyperflex/HxapVirtualDisks/{Moid} | Update a &#39;hyperflex.HxapVirtualDisk&#39; resource.
 [**PatchHyperflexHxapVirtualMachine**](HyperflexApi.md#PatchHyperflexHxapVirtualMachine) | **Patch** /api/v1/hyperflex/HxapVirtualMachines/{Moid} | Update a &#39;hyperflex.HxapVirtualMachine&#39; resource.
@@ -242,7 +255,6 @@ Method | HTTP request | Description
 [**UpdateHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#UpdateHyperflexHealthCheckPackageChecksum) | **Post** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Update a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**UpdateHyperflexHxapCluster**](HyperflexApi.md#UpdateHyperflexHxapCluster) | **Post** /api/v1/hyperflex/HxapClusters/{Moid} | Update a &#39;hyperflex.HxapCluster&#39; resource.
 [**UpdateHyperflexHxapDatacenter**](HyperflexApi.md#UpdateHyperflexHxapDatacenter) | **Post** /api/v1/hyperflex/HxapDatacenters/{Moid} | Update a &#39;hyperflex.HxapDatacenter&#39; resource.
-[**UpdateHyperflexHxapEvent**](HyperflexApi.md#UpdateHyperflexHxapEvent) | **Post** /api/v1/hyperflex/HxapEvents/{Moid} | Update a &#39;hyperflex.HxapEvent&#39; resource.
 [**UpdateHyperflexHxapHost**](HyperflexApi.md#UpdateHyperflexHxapHost) | **Post** /api/v1/hyperflex/HxapHosts/{Moid} | Update a &#39;hyperflex.HxapHost&#39; resource.
 [**UpdateHyperflexHxapVirtualDisk**](HyperflexApi.md#UpdateHyperflexHxapVirtualDisk) | **Post** /api/v1/hyperflex/HxapVirtualDisks/{Moid} | Update a &#39;hyperflex.HxapVirtualDisk&#39; resource.
 [**UpdateHyperflexHxapVirtualMachine**](HyperflexApi.md#UpdateHyperflexHxapVirtualMachine) | **Post** /api/v1/hyperflex/HxapVirtualMachines/{Moid} | Update a &#39;hyperflex.HxapVirtualMachine&#39; resource.
@@ -3700,6 +3712,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteHyperflexHxapCluster
+
+> DeleteHyperflexHxapCluster(ctx, moid).Execute()
+
+Delete a 'hyperflex.HxapCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexHxapCluster(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHxapCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexHxapClusterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteHyperflexHxapDatacenter
 
 > DeleteHyperflexHxapDatacenter(ctx, moid).Execute()
@@ -3742,6 +3820,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteHyperflexHxapDatacenterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexHxapVirtualMachineNetworkInterface
+
+> DeleteHyperflexHxapVirtualMachineNetworkInterface(ctx, moid).Execute()
+
+Delete a 'hyperflex.HxapVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexHxapVirtualMachineNetworkInterface(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHxapVirtualMachineNetworkInterface``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexHxapVirtualMachineNetworkInterfaceRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -9600,11 +9744,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetHyperflexHxapEventByMoid
+## GetHyperflexHxapDvUplinkByMoid
 
-> HyperflexHxapEvent GetHyperflexHxapEventByMoid(ctx, moid).Execute()
+> HyperflexHxapDvUplink GetHyperflexHxapDvUplinkByMoid(ctx, moid).Execute()
 
-Read a 'hyperflex.HxapEvent' resource.
+Read a 'hyperflex.HxapDvUplink' resource.
 
 ### Example
 
@@ -9623,13 +9767,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapEventByMoid(context.Background(), moid).Execute()
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDvUplinkByMoid(context.Background(), moid).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapEventByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDvUplinkByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetHyperflexHxapEventByMoid`: HyperflexHxapEvent
-    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapEventByMoid`: %v\n", resp)
+    // response from `GetHyperflexHxapDvUplinkByMoid`: HyperflexHxapDvUplink
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapDvUplinkByMoid`: %v\n", resp)
 }
 ```
 
@@ -9643,7 +9787,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetHyperflexHxapEventByMoidRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetHyperflexHxapDvUplinkByMoidRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -9652,7 +9796,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapEvent**](hyperflex.HxapEvent.md)
+[**HyperflexHxapDvUplink**](hyperflex.HxapDvUplink.md)
 
 ### Authorization
 
@@ -9668,11 +9812,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetHyperflexHxapEventList
+## GetHyperflexHxapDvUplinkList
 
-> HyperflexHxapEventResponse GetHyperflexHxapEventList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+> HyperflexHxapDvUplinkResponse GetHyperflexHxapDvUplinkList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
 
-Read a 'hyperflex.HxapEvent' resource.
+Read a 'hyperflex.HxapDvUplink' resource.
 
 ### Example
 
@@ -9701,13 +9845,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapEventList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDvUplinkList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapEventList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDvUplinkList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetHyperflexHxapEventList`: HyperflexHxapEventResponse
-    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapEventList`: %v\n", resp)
+    // response from `GetHyperflexHxapDvUplinkList`: HyperflexHxapDvUplinkResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapDvUplinkList`: %v\n", resp)
 }
 ```
 
@@ -9717,7 +9861,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetHyperflexHxapEventListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetHyperflexHxapDvUplinkListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -9736,7 +9880,159 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapEventResponse**](hyperflex.HxapEvent.Response.md)
+[**HyperflexHxapDvUplinkResponse**](hyperflex.HxapDvUplink.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapDvswitchByMoid
+
+> HyperflexHxapDvswitch GetHyperflexHxapDvswitchByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HxapDvswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDvswitchByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDvswitchByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapDvswitchByMoid`: HyperflexHxapDvswitch
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapDvswitchByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapDvswitchByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHxapDvswitch**](hyperflex.HxapDvswitch.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapDvswitchList
+
+> HyperflexHxapDvswitchResponse GetHyperflexHxapDvswitchList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HxapDvswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDvswitchList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDvswitchList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapDvswitchList`: HyperflexHxapDvswitchResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapDvswitchList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapDvswitchListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHxapDvswitchResponse**](hyperflex.HxapDvswitch.Response.md)
 
 ### Authorization
 
@@ -9805,6 +10101,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexHxapHost**](hyperflex.HxapHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapHostInterfaceByMoid
+
+> HyperflexHxapHostInterface GetHyperflexHxapHostInterfaceByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HxapHostInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostInterfaceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostInterfaceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapHostInterfaceByMoid`: HyperflexHxapHostInterface
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapHostInterfaceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapHostInterfaceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHxapHostInterface**](hyperflex.HxapHostInterface.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapHostInterfaceList
+
+> HyperflexHxapHostInterfaceResponse GetHyperflexHxapHostInterfaceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HxapHostInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostInterfaceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostInterfaceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapHostInterfaceList`: HyperflexHxapHostInterfaceResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapHostInterfaceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapHostInterfaceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHxapHostInterfaceResponse**](hyperflex.HxapHostInterface.Response.md)
 
 ### Authorization
 
@@ -9889,6 +10337,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexHxapHostResponse**](hyperflex.HxapHost.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapHostVswitchByMoid
+
+> HyperflexHxapHostVswitch GetHyperflexHxapHostVswitchByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HxapHostVswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostVswitchByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostVswitchByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapHostVswitchByMoid`: HyperflexHxapHostVswitch
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapHostVswitchByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapHostVswitchByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHxapHostVswitch**](hyperflex.HxapHostVswitch.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapHostVswitchList
+
+> HyperflexHxapHostVswitchResponse GetHyperflexHxapHostVswitchList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HxapHostVswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostVswitchList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostVswitchList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapHostVswitchList`: HyperflexHxapHostVswitchResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapHostVswitchList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapHostVswitchListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHxapHostVswitchResponse**](hyperflex.HxapHostVswitch.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapNetworkByMoid
+
+> HyperflexHxapNetwork GetHyperflexHxapNetworkByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HxapNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapNetworkByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapNetworkByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapNetworkByMoid`: HyperflexHxapNetwork
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapNetworkByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapNetworkByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHxapNetwork**](hyperflex.HxapNetwork.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapNetworkList
+
+> HyperflexHxapNetworkResponse GetHyperflexHxapNetworkList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HxapNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapNetworkList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapNetworkList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapNetworkList`: HyperflexHxapNetworkResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapNetworkList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapNetworkListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHxapNetworkResponse**](hyperflex.HxapNetwork.Response.md)
 
 ### Authorization
 
@@ -10208,6 +10960,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid
+
+> HyperflexHxapVirtualMachineNetworkInterface GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HxapVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid`: HyperflexHxapVirtualMachineNetworkInterface
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapVirtualMachineNetworkInterfaceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHxapVirtualMachineNetworkInterface**](hyperflex.HxapVirtualMachineNetworkInterface.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHxapVirtualMachineNetworkInterfaceList
+
+> HyperflexHxapVirtualMachineNetworkInterfaceResponse GetHyperflexHxapVirtualMachineNetworkInterfaceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HxapVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHxapVirtualMachineNetworkInterfaceList`: HyperflexHxapVirtualMachineNetworkInterfaceResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHxapVirtualMachineNetworkInterfaceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHxapVirtualMachineNetworkInterfaceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHxapVirtualMachineNetworkInterfaceResponse**](hyperflex.HxapVirtualMachineNetworkInterface.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexHxdpVersionByMoid
 
 > HyperflexHxdpVersion GetHyperflexHxdpVersionByMoid(ctx, moid).Execute()
@@ -10345,6 +11249,158 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexHxdpVersionResponse**](hyperflex.HxdpVersion.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexLicenseByMoid
+
+> HyperflexLicense GetHyperflexLicenseByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.License' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexLicenseByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexLicenseByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexLicenseByMoid`: HyperflexLicense
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexLicenseByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexLicenseByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexLicense**](hyperflex.License.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexLicenseList
+
+> HyperflexLicenseResponse GetHyperflexLicenseList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.License' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexLicenseList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexLicenseList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexLicenseList`: HyperflexLicenseResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexLicenseList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexLicenseListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexLicenseResponse**](hyperflex.License.Response.md)
 
 ### Authorization
 
@@ -14688,78 +15744,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchHyperflexHxapEvent
-
-> HyperflexHxapEvent PatchHyperflexHxapEvent(ctx, moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-
-Update a 'hyperflex.HxapEvent' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapEvent := *openapiclient.NewHyperflexHxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapEvent(context.Background(), moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchHyperflexHxapEvent`: HyperflexHxapEvent
-    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexHxapEvent`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchHyperflexHxapEventRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **hyperflexHxapEvent** | [**HyperflexHxapEvent**](HyperflexHxapEvent.md) | The &#39;hyperflex.HxapEvent&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**HyperflexHxapEvent**](hyperflex.HxapEvent.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PatchHyperflexHxapHost
 
 > HyperflexHxapHost PatchHyperflexHxapHost(ctx, moid).HyperflexHxapHost(hyperflexHxapHost).IfMatch(ifMatch).Execute()
@@ -17481,78 +18465,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexHxapDatacenter**](hyperflex.HxapDatacenter.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/json-patch+json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateHyperflexHxapEvent
-
-> HyperflexHxapEvent UpdateHyperflexHxapEvent(ctx, moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-
-Update a 'hyperflex.HxapEvent' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapEvent := *openapiclient.NewHyperflexHxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
-    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapEvent(context.Background(), moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapEvent``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateHyperflexHxapEvent`: HyperflexHxapEvent
-    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexHxapEvent`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateHyperflexHxapEventRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **hyperflexHxapEvent** | [**HyperflexHxapEvent**](HyperflexHxapEvent.md) | The &#39;hyperflex.HxapEvent&#39; resource to update. | 
- **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
-
-### Return type
-
-[**HyperflexHxapEvent**](hyperflex.HxapEvent.md)
 
 ### Authorization
 

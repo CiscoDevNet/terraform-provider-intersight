@@ -626,6 +626,9 @@ func dataSourceFcpoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while fetching count of FcpoolPoolMember: %s", responseErr.Error())
 	}
 	count := countResponse.FcpoolPoolMemberList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FcpoolPoolMember data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fcpoolPoolMemberResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -640,10 +643,6 @@ func dataSourceFcpoolPoolMemberRead(c context.Context, d *schema.ResourceData, m
 			return diag.Errorf("error occurred while fetching FcpoolPoolMember: %s", responseErr.Error())
 		}
 		results := resMo.FcpoolPoolMemberList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FcpoolPoolMember data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

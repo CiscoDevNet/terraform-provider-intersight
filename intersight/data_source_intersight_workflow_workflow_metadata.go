@@ -561,6 +561,9 @@ func dataSourceWorkflowWorkflowMetadataRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowMetadata: %s", responseErr.Error())
 	}
 	count := countResponse.WorkflowWorkflowMetadataList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for WorkflowWorkflowMetadata data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var workflowWorkflowMetadataResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -575,10 +578,6 @@ func dataSourceWorkflowWorkflowMetadataRead(c context.Context, d *schema.Resourc
 			return diag.Errorf("error occurred while fetching WorkflowWorkflowMetadata: %s", responseErr.Error())
 		}
 		results := resMo.WorkflowWorkflowMetadataList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for WorkflowWorkflowMetadata data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

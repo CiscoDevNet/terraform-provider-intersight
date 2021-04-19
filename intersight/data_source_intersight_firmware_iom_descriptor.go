@@ -188,6 +188,9 @@ func dataSourceFirmwareIomDescriptorRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while fetching count of FirmwareIomDescriptor: %s", responseErr.Error())
 	}
 	count := countResponse.FirmwareIomDescriptorList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FirmwareIomDescriptor data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var firmwareIomDescriptorResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -202,10 +205,6 @@ func dataSourceFirmwareIomDescriptorRead(c context.Context, d *schema.ResourceDa
 			return diag.Errorf("error occurred while fetching FirmwareIomDescriptor: %s", responseErr.Error())
 		}
 		results := resMo.FirmwareIomDescriptorList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FirmwareIomDescriptor data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

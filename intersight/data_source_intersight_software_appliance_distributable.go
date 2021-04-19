@@ -341,6 +341,9 @@ func dataSourceSoftwareApplianceDistributableRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while fetching count of SoftwareApplianceDistributable: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwareApplianceDistributableList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for SoftwareApplianceDistributable data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var softwareApplianceDistributableResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -355,10 +358,6 @@ func dataSourceSoftwareApplianceDistributableRead(c context.Context, d *schema.R
 			return diag.Errorf("error occurred while fetching SoftwareApplianceDistributable: %s", responseErr.Error())
 		}
 		results := resMo.SoftwareApplianceDistributableList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for SoftwareApplianceDistributable data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

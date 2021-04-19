@@ -551,6 +551,9 @@ func dataSourceResourceLicenseResourceCountRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while fetching count of ResourceLicenseResourceCount: %s", responseErr.Error())
 	}
 	count := countResponse.ResourceLicenseResourceCountList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ResourceLicenseResourceCount data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var resourceLicenseResourceCountResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -565,10 +568,6 @@ func dataSourceResourceLicenseResourceCountRead(c context.Context, d *schema.Res
 			return diag.Errorf("error occurred while fetching ResourceLicenseResourceCount: %s", responseErr.Error())
 		}
 		results := resMo.ResourceLicenseResourceCountList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ResourceLicenseResourceCount data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

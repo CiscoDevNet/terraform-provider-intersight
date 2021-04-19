@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This represents the operational state of the memory unit on a server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | This represents the operability of the memory unit on a server. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This represents the presence state of the memory unit on a server. | [optional] [readonly] 
 **Set** | Pointer to **int64** | This represents the set of the memory unit on a server. | [optional] [readonly] 
 **Speed** | Pointer to **string** | This represents the speed of the memory unit on a server. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | This represents the thremal state of the memory unit on a server. | [optional] [readonly] 
@@ -394,31 +393,6 @@ SetOperability sets Operability field to given value.
 `func (o *MemoryAbstractUnit) HasOperability() bool`
 
 HasOperability returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *MemoryAbstractUnit) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *MemoryAbstractUnit) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *MemoryAbstractUnit) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *MemoryAbstractUnit) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetSet
 

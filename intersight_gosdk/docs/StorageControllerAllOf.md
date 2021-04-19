@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **Operability** | Pointer to **string** | Operability state of the storage controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The current pci address of controller. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The pci slot name for the controller. | [optional] [readonly] 
-**Presence** | Pointer to **string** | Physical Presence State for the Storage Controller. | [optional] [readonly] 
 **RaidSupport** | Pointer to **string** | The RAID levels supported by controller. | [optional] [readonly] 
 **RebuildRate** | Pointer to **string** | Logical volume or RAID rebuild rate of Storage Controller. | [optional] [readonly] 
 **SelfEncryptEnabled** | Pointer to **string** | Storage controller disk self encryption state. | [optional] 
@@ -27,6 +26,7 @@ Name | Type | Description | Notes
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **DiskGroup** | Pointer to [**[]StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) | An array of relationships to storageDiskGroup resources. | [optional] 
+**DiskSlot** | Pointer to [**StorageDiskSlotRelationship**](storage.DiskSlot.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] [readonly] 
 **PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
@@ -394,31 +394,6 @@ SetPciSlot sets PciSlot field to given value.
 
 HasPciSlot returns a boolean if a field has been set.
 
-### GetPresence
-
-`func (o *StorageControllerAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *StorageControllerAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *StorageControllerAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *StorageControllerAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
-
 ### GetRaidSupport
 
 `func (o *StorageControllerAllOf) GetRaidSupport() string`
@@ -629,6 +604,31 @@ HasDiskGroup returns a boolean if a field has been set.
 `func (o *StorageControllerAllOf) UnsetDiskGroup()`
 
 UnsetDiskGroup ensures that no value is present for DiskGroup, not even an explicit nil
+### GetDiskSlot
+
+`func (o *StorageControllerAllOf) GetDiskSlot() StorageDiskSlotRelationship`
+
+GetDiskSlot returns the DiskSlot field if non-nil, zero value otherwise.
+
+### GetDiskSlotOk
+
+`func (o *StorageControllerAllOf) GetDiskSlotOk() (*StorageDiskSlotRelationship, bool)`
+
+GetDiskSlotOk returns a tuple with the DiskSlot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskSlot
+
+`func (o *StorageControllerAllOf) SetDiskSlot(v StorageDiskSlotRelationship)`
+
+SetDiskSlot sets DiskSlot field to given value.
+
+### HasDiskSlot
+
+`func (o *StorageControllerAllOf) HasDiskSlot() bool`
+
+HasDiskSlot returns a boolean if a field has been set.
+
 ### GetInventoryDeviceInfo
 
 `func (o *StorageControllerAllOf) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

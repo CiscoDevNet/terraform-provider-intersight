@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -23,9 +23,9 @@ type FabricUplinkRole struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
-	// Admin configured state for UDLD for this port. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
-	UdldAdminState       *string `json:"UdldAdminState,omitempty"`
+	ObjectType           string                               `json:"ObjectType"`
+	FlowControlPolicy    *FabricFlowControlPolicyRelationship `json:"FlowControlPolicy,omitempty"`
+	LinkControlPolicy    *FabricLinkControlPolicyRelationship `json:"LinkControlPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,8 +39,6 @@ func NewFabricUplinkRole(classId string, objectType string) *FabricUplinkRole {
 	this := FabricUplinkRole{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var udldAdminState string = "Disabled"
-	this.UdldAdminState = &udldAdminState
 	return &this
 }
 
@@ -53,8 +51,6 @@ func NewFabricUplinkRoleWithDefaults() *FabricUplinkRole {
 	this.ClassId = classId
 	var objectType string = "fabric.UplinkRole"
 	this.ObjectType = objectType
-	var udldAdminState string = "Disabled"
-	this.UdldAdminState = &udldAdminState
 	return &this
 }
 
@@ -106,36 +102,68 @@ func (o *FabricUplinkRole) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetUdldAdminState returns the UdldAdminState field value if set, zero value otherwise.
-func (o *FabricUplinkRole) GetUdldAdminState() string {
-	if o == nil || o.UdldAdminState == nil {
-		var ret string
+// GetFlowControlPolicy returns the FlowControlPolicy field value if set, zero value otherwise.
+func (o *FabricUplinkRole) GetFlowControlPolicy() FabricFlowControlPolicyRelationship {
+	if o == nil || o.FlowControlPolicy == nil {
+		var ret FabricFlowControlPolicyRelationship
 		return ret
 	}
-	return *o.UdldAdminState
+	return *o.FlowControlPolicy
 }
 
-// GetUdldAdminStateOk returns a tuple with the UdldAdminState field value if set, nil otherwise
+// GetFlowControlPolicyOk returns a tuple with the FlowControlPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FabricUplinkRole) GetUdldAdminStateOk() (*string, bool) {
-	if o == nil || o.UdldAdminState == nil {
+func (o *FabricUplinkRole) GetFlowControlPolicyOk() (*FabricFlowControlPolicyRelationship, bool) {
+	if o == nil || o.FlowControlPolicy == nil {
 		return nil, false
 	}
-	return o.UdldAdminState, true
+	return o.FlowControlPolicy, true
 }
 
-// HasUdldAdminState returns a boolean if a field has been set.
-func (o *FabricUplinkRole) HasUdldAdminState() bool {
-	if o != nil && o.UdldAdminState != nil {
+// HasFlowControlPolicy returns a boolean if a field has been set.
+func (o *FabricUplinkRole) HasFlowControlPolicy() bool {
+	if o != nil && o.FlowControlPolicy != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetUdldAdminState gets a reference to the given string and assigns it to the UdldAdminState field.
-func (o *FabricUplinkRole) SetUdldAdminState(v string) {
-	o.UdldAdminState = &v
+// SetFlowControlPolicy gets a reference to the given FabricFlowControlPolicyRelationship and assigns it to the FlowControlPolicy field.
+func (o *FabricUplinkRole) SetFlowControlPolicy(v FabricFlowControlPolicyRelationship) {
+	o.FlowControlPolicy = &v
+}
+
+// GetLinkControlPolicy returns the LinkControlPolicy field value if set, zero value otherwise.
+func (o *FabricUplinkRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship {
+	if o == nil || o.LinkControlPolicy == nil {
+		var ret FabricLinkControlPolicyRelationship
+		return ret
+	}
+	return *o.LinkControlPolicy
+}
+
+// GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricUplinkRole) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool) {
+	if o == nil || o.LinkControlPolicy == nil {
+		return nil, false
+	}
+	return o.LinkControlPolicy, true
+}
+
+// HasLinkControlPolicy returns a boolean if a field has been set.
+func (o *FabricUplinkRole) HasLinkControlPolicy() bool {
+	if o != nil && o.LinkControlPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkControlPolicy gets a reference to the given FabricLinkControlPolicyRelationship and assigns it to the LinkControlPolicy field.
+func (o *FabricUplinkRole) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship) {
+	o.LinkControlPolicy = &v
 }
 
 func (o FabricUplinkRole) MarshalJSON() ([]byte, error) {
@@ -154,8 +182,11 @@ func (o FabricUplinkRole) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.UdldAdminState != nil {
-		toSerialize["UdldAdminState"] = o.UdldAdminState
+	if o.FlowControlPolicy != nil {
+		toSerialize["FlowControlPolicy"] = o.FlowControlPolicy
+	}
+	if o.LinkControlPolicy != nil {
+		toSerialize["LinkControlPolicy"] = o.LinkControlPolicy
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -170,9 +201,9 @@ func (o *FabricUplinkRole) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
-		// Admin configured state for UDLD for this port. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
-		UdldAdminState *string `json:"UdldAdminState,omitempty"`
+		ObjectType        string                               `json:"ObjectType"`
+		FlowControlPolicy *FabricFlowControlPolicyRelationship `json:"FlowControlPolicy,omitempty"`
+		LinkControlPolicy *FabricLinkControlPolicyRelationship `json:"LinkControlPolicy,omitempty"`
 	}
 
 	varFabricUplinkRoleWithoutEmbeddedStruct := FabricUplinkRoleWithoutEmbeddedStruct{}
@@ -182,7 +213,8 @@ func (o *FabricUplinkRole) UnmarshalJSON(bytes []byte) (err error) {
 		varFabricUplinkRole := _FabricUplinkRole{}
 		varFabricUplinkRole.ClassId = varFabricUplinkRoleWithoutEmbeddedStruct.ClassId
 		varFabricUplinkRole.ObjectType = varFabricUplinkRoleWithoutEmbeddedStruct.ObjectType
-		varFabricUplinkRole.UdldAdminState = varFabricUplinkRoleWithoutEmbeddedStruct.UdldAdminState
+		varFabricUplinkRole.FlowControlPolicy = varFabricUplinkRoleWithoutEmbeddedStruct.FlowControlPolicy
+		varFabricUplinkRole.LinkControlPolicy = varFabricUplinkRoleWithoutEmbeddedStruct.LinkControlPolicy
 		*o = FabricUplinkRole(varFabricUplinkRole)
 	} else {
 		return err
@@ -202,7 +234,8 @@ func (o *FabricUplinkRole) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "UdldAdminState")
+		delete(additionalProperties, "FlowControlPolicy")
+		delete(additionalProperties, "LinkControlPolicy")
 
 		// remove fields from embedded structs
 		reflectFabricTransceiverRole := reflect.ValueOf(o.FabricTransceiverRole)

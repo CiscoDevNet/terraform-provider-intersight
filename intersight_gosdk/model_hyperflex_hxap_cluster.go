@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -19,21 +19,27 @@ import (
 
 // HyperflexHxapCluster A HyperFlex Application Platform compute cluster. Contains inventory information concerning the health, version and ip address of the cluster. The cluster has a name assigned by user in Intersight.
 type HyperflexHxapCluster struct {
-	VirtualizationBaseCluster
+	HyperflexBaseCluster
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// CPU oversubscription factor configured on the cluster.
+	ConfiguredCpuOverSubFactor *float64                            `json:"ConfiguredCpuOverSubFactor,omitempty"`
+	CpuAllocation              NullableVirtualizationCpuAllocation `json:"CpuAllocation,omitempty"`
+	// Current oversubscription factor of the cluster.
+	CurrentCpuOverSubFactor *float64 `json:"CurrentCpuOverSubFactor,omitempty"`
 	// Datacenter to which the cluster belongs.
 	DatacenterName *string `json:"DatacenterName,omitempty"`
-	// Reason of the failure when cluster is in failed state.
+	// Reason for the failure when cluster is in failed state.
 	FailureReason *string `json:"FailureReason,omitempty"`
+	// Hypervisor version of HyperFlex compute cluster along with build number.
+	HypervisorBuild *string `json:"HypervisorBuild,omitempty"`
 	// Management IP Address of the cluster.
-	ManagementIpAddress *string `json:"ManagementIpAddress,omitempty"`
-	// Product version of HyperFlex compute cluster.
-	Version              *string                              `json:"Version,omitempty"`
-	HxCluster            *HyperflexClusterRelationship        `json:"HxCluster,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ManagementIpAddress  *string                                `json:"ManagementIpAddress,omitempty"`
+	MemoryAllocation     NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
+	HxCluster            *HyperflexClusterRelationship          `json:"HxCluster,omitempty"`
+	RegisteredDevice     *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,6 +116,113 @@ func (o *HyperflexHxapCluster) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetConfiguredCpuOverSubFactor returns the ConfiguredCpuOverSubFactor field value if set, zero value otherwise.
+func (o *HyperflexHxapCluster) GetConfiguredCpuOverSubFactor() float64 {
+	if o == nil || o.ConfiguredCpuOverSubFactor == nil {
+		var ret float64
+		return ret
+	}
+	return *o.ConfiguredCpuOverSubFactor
+}
+
+// GetConfiguredCpuOverSubFactorOk returns a tuple with the ConfiguredCpuOverSubFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxapCluster) GetConfiguredCpuOverSubFactorOk() (*float64, bool) {
+	if o == nil || o.ConfiguredCpuOverSubFactor == nil {
+		return nil, false
+	}
+	return o.ConfiguredCpuOverSubFactor, true
+}
+
+// HasConfiguredCpuOverSubFactor returns a boolean if a field has been set.
+func (o *HyperflexHxapCluster) HasConfiguredCpuOverSubFactor() bool {
+	if o != nil && o.ConfiguredCpuOverSubFactor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguredCpuOverSubFactor gets a reference to the given float64 and assigns it to the ConfiguredCpuOverSubFactor field.
+func (o *HyperflexHxapCluster) SetConfiguredCpuOverSubFactor(v float64) {
+	o.ConfiguredCpuOverSubFactor = &v
+}
+
+// GetCpuAllocation returns the CpuAllocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexHxapCluster) GetCpuAllocation() VirtualizationCpuAllocation {
+	if o == nil || o.CpuAllocation.Get() == nil {
+		var ret VirtualizationCpuAllocation
+		return ret
+	}
+	return *o.CpuAllocation.Get()
+}
+
+// GetCpuAllocationOk returns a tuple with the CpuAllocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexHxapCluster) GetCpuAllocationOk() (*VirtualizationCpuAllocation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CpuAllocation.Get(), o.CpuAllocation.IsSet()
+}
+
+// HasCpuAllocation returns a boolean if a field has been set.
+func (o *HyperflexHxapCluster) HasCpuAllocation() bool {
+	if o != nil && o.CpuAllocation.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuAllocation gets a reference to the given NullableVirtualizationCpuAllocation and assigns it to the CpuAllocation field.
+func (o *HyperflexHxapCluster) SetCpuAllocation(v VirtualizationCpuAllocation) {
+	o.CpuAllocation.Set(&v)
+}
+
+// SetCpuAllocationNil sets the value for CpuAllocation to be an explicit nil
+func (o *HyperflexHxapCluster) SetCpuAllocationNil() {
+	o.CpuAllocation.Set(nil)
+}
+
+// UnsetCpuAllocation ensures that no value is present for CpuAllocation, not even an explicit nil
+func (o *HyperflexHxapCluster) UnsetCpuAllocation() {
+	o.CpuAllocation.Unset()
+}
+
+// GetCurrentCpuOverSubFactor returns the CurrentCpuOverSubFactor field value if set, zero value otherwise.
+func (o *HyperflexHxapCluster) GetCurrentCpuOverSubFactor() float64 {
+	if o == nil || o.CurrentCpuOverSubFactor == nil {
+		var ret float64
+		return ret
+	}
+	return *o.CurrentCpuOverSubFactor
+}
+
+// GetCurrentCpuOverSubFactorOk returns a tuple with the CurrentCpuOverSubFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxapCluster) GetCurrentCpuOverSubFactorOk() (*float64, bool) {
+	if o == nil || o.CurrentCpuOverSubFactor == nil {
+		return nil, false
+	}
+	return o.CurrentCpuOverSubFactor, true
+}
+
+// HasCurrentCpuOverSubFactor returns a boolean if a field has been set.
+func (o *HyperflexHxapCluster) HasCurrentCpuOverSubFactor() bool {
+	if o != nil && o.CurrentCpuOverSubFactor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentCpuOverSubFactor gets a reference to the given float64 and assigns it to the CurrentCpuOverSubFactor field.
+func (o *HyperflexHxapCluster) SetCurrentCpuOverSubFactor(v float64) {
+	o.CurrentCpuOverSubFactor = &v
+}
+
 // GetDatacenterName returns the DatacenterName field value if set, zero value otherwise.
 func (o *HyperflexHxapCluster) GetDatacenterName() string {
 	if o == nil || o.DatacenterName == nil {
@@ -174,6 +287,38 @@ func (o *HyperflexHxapCluster) SetFailureReason(v string) {
 	o.FailureReason = &v
 }
 
+// GetHypervisorBuild returns the HypervisorBuild field value if set, zero value otherwise.
+func (o *HyperflexHxapCluster) GetHypervisorBuild() string {
+	if o == nil || o.HypervisorBuild == nil {
+		var ret string
+		return ret
+	}
+	return *o.HypervisorBuild
+}
+
+// GetHypervisorBuildOk returns a tuple with the HypervisorBuild field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxapCluster) GetHypervisorBuildOk() (*string, bool) {
+	if o == nil || o.HypervisorBuild == nil {
+		return nil, false
+	}
+	return o.HypervisorBuild, true
+}
+
+// HasHypervisorBuild returns a boolean if a field has been set.
+func (o *HyperflexHxapCluster) HasHypervisorBuild() bool {
+	if o != nil && o.HypervisorBuild != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorBuild gets a reference to the given string and assigns it to the HypervisorBuild field.
+func (o *HyperflexHxapCluster) SetHypervisorBuild(v string) {
+	o.HypervisorBuild = &v
+}
+
 // GetManagementIpAddress returns the ManagementIpAddress field value if set, zero value otherwise.
 func (o *HyperflexHxapCluster) GetManagementIpAddress() string {
 	if o == nil || o.ManagementIpAddress == nil {
@@ -206,36 +351,47 @@ func (o *HyperflexHxapCluster) SetManagementIpAddress(v string) {
 	o.ManagementIpAddress = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *HyperflexHxapCluster) GetVersion() string {
-	if o == nil || o.Version == nil {
-		var ret string
+// GetMemoryAllocation returns the MemoryAllocation field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexHxapCluster) GetMemoryAllocation() VirtualizationMemoryAllocation {
+	if o == nil || o.MemoryAllocation.Get() == nil {
+		var ret VirtualizationMemoryAllocation
 		return ret
 	}
-	return *o.Version
+	return *o.MemoryAllocation.Get()
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetMemoryAllocationOk returns a tuple with the MemoryAllocation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HyperflexHxapCluster) GetVersionOk() (*string, bool) {
-	if o == nil || o.Version == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexHxapCluster) GetMemoryAllocationOk() (*VirtualizationMemoryAllocation, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.MemoryAllocation.Get(), o.MemoryAllocation.IsSet()
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *HyperflexHxapCluster) HasVersion() bool {
-	if o != nil && o.Version != nil {
+// HasMemoryAllocation returns a boolean if a field has been set.
+func (o *HyperflexHxapCluster) HasMemoryAllocation() bool {
+	if o != nil && o.MemoryAllocation.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
-func (o *HyperflexHxapCluster) SetVersion(v string) {
-	o.Version = &v
+// SetMemoryAllocation gets a reference to the given NullableVirtualizationMemoryAllocation and assigns it to the MemoryAllocation field.
+func (o *HyperflexHxapCluster) SetMemoryAllocation(v VirtualizationMemoryAllocation) {
+	o.MemoryAllocation.Set(&v)
+}
+
+// SetMemoryAllocationNil sets the value for MemoryAllocation to be an explicit nil
+func (o *HyperflexHxapCluster) SetMemoryAllocationNil() {
+	o.MemoryAllocation.Set(nil)
+}
+
+// UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
+func (o *HyperflexHxapCluster) UnsetMemoryAllocation() {
+	o.MemoryAllocation.Unset()
 }
 
 // GetHxCluster returns the HxCluster field value if set, zero value otherwise.
@@ -304,13 +460,13 @@ func (o *HyperflexHxapCluster) SetRegisteredDevice(v AssetDeviceRegistrationRela
 
 func (o HyperflexHxapCluster) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedVirtualizationBaseCluster, errVirtualizationBaseCluster := json.Marshal(o.VirtualizationBaseCluster)
-	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+	serializedHyperflexBaseCluster, errHyperflexBaseCluster := json.Marshal(o.HyperflexBaseCluster)
+	if errHyperflexBaseCluster != nil {
+		return []byte{}, errHyperflexBaseCluster
 	}
-	errVirtualizationBaseCluster = json.Unmarshal([]byte(serializedVirtualizationBaseCluster), &toSerialize)
-	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+	errHyperflexBaseCluster = json.Unmarshal([]byte(serializedHyperflexBaseCluster), &toSerialize)
+	if errHyperflexBaseCluster != nil {
+		return []byte{}, errHyperflexBaseCluster
 	}
 	if true {
 		toSerialize["ClassId"] = o.ClassId
@@ -318,17 +474,29 @@ func (o HyperflexHxapCluster) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ConfiguredCpuOverSubFactor != nil {
+		toSerialize["ConfiguredCpuOverSubFactor"] = o.ConfiguredCpuOverSubFactor
+	}
+	if o.CpuAllocation.IsSet() {
+		toSerialize["CpuAllocation"] = o.CpuAllocation.Get()
+	}
+	if o.CurrentCpuOverSubFactor != nil {
+		toSerialize["CurrentCpuOverSubFactor"] = o.CurrentCpuOverSubFactor
+	}
 	if o.DatacenterName != nil {
 		toSerialize["DatacenterName"] = o.DatacenterName
 	}
 	if o.FailureReason != nil {
 		toSerialize["FailureReason"] = o.FailureReason
 	}
+	if o.HypervisorBuild != nil {
+		toSerialize["HypervisorBuild"] = o.HypervisorBuild
+	}
 	if o.ManagementIpAddress != nil {
 		toSerialize["ManagementIpAddress"] = o.ManagementIpAddress
 	}
-	if o.Version != nil {
-		toSerialize["Version"] = o.Version
+	if o.MemoryAllocation.IsSet() {
+		toSerialize["MemoryAllocation"] = o.MemoryAllocation.Get()
 	}
 	if o.HxCluster != nil {
 		toSerialize["HxCluster"] = o.HxCluster
@@ -350,16 +518,22 @@ func (o *HyperflexHxapCluster) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// CPU oversubscription factor configured on the cluster.
+		ConfiguredCpuOverSubFactor *float64                            `json:"ConfiguredCpuOverSubFactor,omitempty"`
+		CpuAllocation              NullableVirtualizationCpuAllocation `json:"CpuAllocation,omitempty"`
+		// Current oversubscription factor of the cluster.
+		CurrentCpuOverSubFactor *float64 `json:"CurrentCpuOverSubFactor,omitempty"`
 		// Datacenter to which the cluster belongs.
 		DatacenterName *string `json:"DatacenterName,omitempty"`
-		// Reason of the failure when cluster is in failed state.
+		// Reason for the failure when cluster is in failed state.
 		FailureReason *string `json:"FailureReason,omitempty"`
+		// Hypervisor version of HyperFlex compute cluster along with build number.
+		HypervisorBuild *string `json:"HypervisorBuild,omitempty"`
 		// Management IP Address of the cluster.
-		ManagementIpAddress *string `json:"ManagementIpAddress,omitempty"`
-		// Product version of HyperFlex compute cluster.
-		Version          *string                              `json:"Version,omitempty"`
-		HxCluster        *HyperflexClusterRelationship        `json:"HxCluster,omitempty"`
-		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ManagementIpAddress *string                                `json:"ManagementIpAddress,omitempty"`
+		MemoryAllocation    NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
+		HxCluster           *HyperflexClusterRelationship          `json:"HxCluster,omitempty"`
+		RegisteredDevice    *AssetDeviceRegistrationRelationship   `json:"RegisteredDevice,omitempty"`
 	}
 
 	varHyperflexHxapClusterWithoutEmbeddedStruct := HyperflexHxapClusterWithoutEmbeddedStruct{}
@@ -369,10 +543,14 @@ func (o *HyperflexHxapCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexHxapCluster := _HyperflexHxapCluster{}
 		varHyperflexHxapCluster.ClassId = varHyperflexHxapClusterWithoutEmbeddedStruct.ClassId
 		varHyperflexHxapCluster.ObjectType = varHyperflexHxapClusterWithoutEmbeddedStruct.ObjectType
+		varHyperflexHxapCluster.ConfiguredCpuOverSubFactor = varHyperflexHxapClusterWithoutEmbeddedStruct.ConfiguredCpuOverSubFactor
+		varHyperflexHxapCluster.CpuAllocation = varHyperflexHxapClusterWithoutEmbeddedStruct.CpuAllocation
+		varHyperflexHxapCluster.CurrentCpuOverSubFactor = varHyperflexHxapClusterWithoutEmbeddedStruct.CurrentCpuOverSubFactor
 		varHyperflexHxapCluster.DatacenterName = varHyperflexHxapClusterWithoutEmbeddedStruct.DatacenterName
 		varHyperflexHxapCluster.FailureReason = varHyperflexHxapClusterWithoutEmbeddedStruct.FailureReason
+		varHyperflexHxapCluster.HypervisorBuild = varHyperflexHxapClusterWithoutEmbeddedStruct.HypervisorBuild
 		varHyperflexHxapCluster.ManagementIpAddress = varHyperflexHxapClusterWithoutEmbeddedStruct.ManagementIpAddress
-		varHyperflexHxapCluster.Version = varHyperflexHxapClusterWithoutEmbeddedStruct.Version
+		varHyperflexHxapCluster.MemoryAllocation = varHyperflexHxapClusterWithoutEmbeddedStruct.MemoryAllocation
 		varHyperflexHxapCluster.HxCluster = varHyperflexHxapClusterWithoutEmbeddedStruct.HxCluster
 		varHyperflexHxapCluster.RegisteredDevice = varHyperflexHxapClusterWithoutEmbeddedStruct.RegisteredDevice
 		*o = HyperflexHxapCluster(varHyperflexHxapCluster)
@@ -384,7 +562,7 @@ func (o *HyperflexHxapCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varHyperflexHxapCluster)
 	if err == nil {
-		o.VirtualizationBaseCluster = varHyperflexHxapCluster.VirtualizationBaseCluster
+		o.HyperflexBaseCluster = varHyperflexHxapCluster.HyperflexBaseCluster
 	} else {
 		return err
 	}
@@ -394,17 +572,21 @@ func (o *HyperflexHxapCluster) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ConfiguredCpuOverSubFactor")
+		delete(additionalProperties, "CpuAllocation")
+		delete(additionalProperties, "CurrentCpuOverSubFactor")
 		delete(additionalProperties, "DatacenterName")
 		delete(additionalProperties, "FailureReason")
+		delete(additionalProperties, "HypervisorBuild")
 		delete(additionalProperties, "ManagementIpAddress")
-		delete(additionalProperties, "Version")
+		delete(additionalProperties, "MemoryAllocation")
 		delete(additionalProperties, "HxCluster")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs
-		reflectVirtualizationBaseCluster := reflect.ValueOf(o.VirtualizationBaseCluster)
-		for i := 0; i < reflectVirtualizationBaseCluster.Type().NumField(); i++ {
-			t := reflectVirtualizationBaseCluster.Type().Field(i)
+		reflectHyperflexBaseCluster := reflect.ValueOf(o.HyperflexBaseCluster)
+		for i := 0; i < reflectHyperflexBaseCluster.Type().NumField(); i++ {
+			t := reflectHyperflexBaseCluster.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

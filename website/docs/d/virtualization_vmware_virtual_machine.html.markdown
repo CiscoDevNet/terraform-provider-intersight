@@ -35,7 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) User-provided name to identify the virtual machine. 
 * `network_count`:(int) Indicates how many networks are used by this VM. 
-* `power_state`:(string) Power state of the virtual machine.* `Unknown` - The entity's power state is unknown.* `PoweredOn` - The entity is powered on.* `PoweredOff` - The entity is powered down.* `StandBy` - The entity is in standby mode.* `Paused` - The entity is in pause state. 
+* `power_state`:(string) Power state of the virtual machine.* `Unknown` - The entity's power state is unknown.* `PoweredOn` - The entity is powered on.* `PoweredOff` - The entity is powered down.* `StandBy` - The entity is in standby mode.* `Paused` - The entity is in pause state.* `` - The entity's power state is not available. 
 * `protected_vm`:(bool) Shows if this is a protected VM. VMs can be in protection groups. 
 * `remote_display_vnc_enabled`:(bool) Shows if support for a remote VNC access is enabled. 
 * `resource_pool`:(string) Name of the resource pool to which this VM belongs (optional). 

@@ -578,6 +578,9 @@ func dataSourceApplianceFileSystemStatusRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of ApplianceFileSystemStatus: %s", responseErr.Error())
 	}
 	count := countResponse.ApplianceFileSystemStatusList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ApplianceFileSystemStatus data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var applianceFileSystemStatusResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -592,10 +595,6 @@ func dataSourceApplianceFileSystemStatusRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching ApplianceFileSystemStatus: %s", responseErr.Error())
 		}
 		results := resMo.ApplianceFileSystemStatusList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ApplianceFileSystemStatus data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

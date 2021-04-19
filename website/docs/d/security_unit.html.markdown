@@ -26,7 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `part_number`:(string) The part number of the security unit. 
 * `pci_slot`:(string) PCIe slot of the security unit in the server. 
 * `power`:(string) Power state of the security unit. 
-* `presence`:(string) Security unit presence (equipped) or absence. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

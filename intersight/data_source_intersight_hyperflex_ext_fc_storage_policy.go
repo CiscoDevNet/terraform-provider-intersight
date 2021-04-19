@@ -152,6 +152,9 @@ func dataSourceHyperflexExtFcStoragePolicyRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while fetching count of HyperflexExtFcStoragePolicy: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexExtFcStoragePolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexExtFcStoragePolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexExtFcStoragePolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -166,10 +169,6 @@ func dataSourceHyperflexExtFcStoragePolicyRead(c context.Context, d *schema.Reso
 			return diag.Errorf("error occurred while fetching HyperflexExtFcStoragePolicy: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexExtFcStoragePolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexExtFcStoragePolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

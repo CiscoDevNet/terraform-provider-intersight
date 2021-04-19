@@ -1006,6 +1006,9 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while fetching count of ComputeServerSetting: %s", responseErr.Error())
 	}
 	count := countResponse.ComputeServerSettingList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ComputeServerSetting data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var computeServerSettingResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1020,10 +1023,6 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 			return diag.Errorf("error occurred while fetching ComputeServerSetting: %s", responseErr.Error())
 		}
 		results := resMo.ComputeServerSettingList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ComputeServerSetting data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

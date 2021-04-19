@@ -34,8 +34,10 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"addons": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -48,6 +50,8 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -59,7 +63,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "kubernetes.AddonConfiguration",
 									},
 									"install_strategy": {
 										Description: "Addon install strategy to determine whether an addon is installed if not present.\n* `None` - Unspecified install strategy.\n* `NoAction` - No install action performed.\n* `InstallOnly` - Only install in green field. No action in case of failure or removal.\n* `Always` - Attempt install if chart is not already installed.",
@@ -71,11 +75,13 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "kubernetes.AddonConfiguration",
 									},
 									"override_sets": {
-										Type:     schema.TypeList,
-										Optional: true,
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"additional_properties": {
@@ -87,7 +93,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "kubernetes.KeyValue",
 												},
 												"key": {
 													Description: "Key or property name in a key/value pair.",
@@ -98,7 +104,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "kubernetes.KeyValue",
 												},
 												"value": {
 													Description: "Property value in a key/value pair.",
@@ -107,8 +113,6 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 												},
 											},
 										},
-										ConfigMode: schema.SchemaConfigModeAttr,
-										Computed:   true,
 									},
 									"overrides": {
 										Description: "Properties that can be overridden for an addon.",
@@ -133,14 +137,14 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
 						},
 						"addon_policy": {
 							Description: "Addon policy associated with the addon.",
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -152,7 +156,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "mo.MoRef",
 									},
 									"moid": {
 										Description: "The Moid of the referenced REST resource.",
@@ -174,14 +178,12 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "kubernetes.Addon",
 						},
 						"name": {
 							Description: "Name of addon to be installed on a Kubernetes cluster.",
@@ -192,18 +194,17 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "kubernetes.Addon",
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"ancestors": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -215,7 +216,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -237,13 +238,14 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"associated_cluster": {
 				Description: "A reference to a kubernetesCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -255,7 +257,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -277,14 +279,12 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "kubernetes.ClusterAddonProfile",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -320,13 +320,15 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "kubernetes.ClusterAddonProfile",
 			},
 			"organization": {
 				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -338,7 +340,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -360,14 +362,13 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-				ForceNew:   true,
+				ForceNew: true,
 			},
 			"owners": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Computed: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				Computed:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
 					Type: schema.TypeString}},
 			"parent": {
@@ -376,6 +377,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -387,7 +389,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -409,13 +411,13 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -427,7 +429,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -449,7 +451,6 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -458,8 +459,10 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 				Computed:    true,
 			},
 			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -486,6 +489,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -497,11 +501,13 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.VersionContext",
 						},
 						"interested_mos": {
-							Type:     schema.TypeList,
-							Optional: true,
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -513,7 +519,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "mo.MoRef",
 									},
 									"moid": {
 										Description: "The Moid of the referenced REST resource.",
@@ -535,14 +541,12 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.VersionContext",
 						},
 						"ref_mo": {
 							Description: "A reference to the original Managed Object.",
@@ -550,6 +554,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 							MaxItems:    1,
 							Optional:    true,
 							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -561,7 +566,7 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "mo.MoRef",
 									},
 									"moid": {
 										Description: "The Moid of the referenced REST resource.",
@@ -583,7 +588,6 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
 						},
 						"timestamp": {
 							Description: "The time this versioned Managed Object was created.",
@@ -605,7 +609,6 @@ func resourceKubernetesClusterAddonProfile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 		},
 	}

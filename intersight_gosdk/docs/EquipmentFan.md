@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | This field is used to indicate this fan unit&#39;s operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Unit. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the fans. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field is used to indicate this fan unit&#39;s presence. | [optional] [readonly] 
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Fan Unit. | [optional] [readonly] 
 **TrayId** | Pointer to **int64** | Tray identifier for the fan module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Unit. | [optional] [readonly] 
@@ -291,31 +290,6 @@ SetPid sets Pid field to given value.
 `func (o *EquipmentFan) HasPid() bool`
 
 HasPid returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *EquipmentFan) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *EquipmentFan) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *EquipmentFan) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *EquipmentFan) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetSku
 

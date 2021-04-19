@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **CpuTypeController** | Pointer to **string** | The type of central processing unit on the mother board. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | Current power state of the mother board of the server. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
-**Presence** | Pointer to **string** | Identifies the presence of the mother board of the server. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **EquipmentTpms** | Pointer to [**[]EquipmentTpmRelationship**](EquipmentTpmRelationship.md) | An array of relationships to equipmentTpm resources. | [optional] [readonly] 
@@ -196,31 +195,6 @@ HasOperReason returns a boolean if a field has been set.
 `func (o *ComputeBoard) UnsetOperReason()`
 
 UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
-### GetPresence
-
-`func (o *ComputeBoard) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *ComputeBoard) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *ComputeBoard) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *ComputeBoard) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
-
 ### GetComputeBlade
 
 `func (o *ComputeBoard) GetComputeBlade() ComputeBladeRelationship`

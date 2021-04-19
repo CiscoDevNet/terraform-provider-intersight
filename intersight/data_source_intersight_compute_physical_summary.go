@@ -227,7 +227,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 				Computed:    true,
 			},
 			"presence": {
-				Description: "Indicates if a server is present in a slot and is applicable for blade servers.",
+				Description: "This field identifies the presence (equipped) or absence of the given component.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -865,7 +865,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 						Computed:    true,
 					},
 					"presence": {
-						Description: "Indicates if a server is present in a slot and is applicable for blade servers.",
+						Description: "This field identifies the presence (equipped) or absence of the given component.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -1364,6 +1364,9 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while fetching count of ComputePhysicalSummary: %s", responseErr.Error())
 	}
 	count := countResponse.ComputePhysicalSummaryList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ComputePhysicalSummary data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var computePhysicalSummaryResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1378,10 +1381,6 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 			return diag.Errorf("error occurred while fetching ComputePhysicalSummary: %s", responseErr.Error())
 		}
 		results := resMo.ComputePhysicalSummaryList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ComputePhysicalSummary data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

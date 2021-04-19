@@ -50,11 +50,6 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"graphic_console_url": {
-				Description: "Graphical console URL of this VM.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
 			"hypervisor_type": {
 				Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 				Type:        schema.TypeString,
@@ -94,7 +89,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Computed:    true,
 			},
 			"power_state": {
-				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -110,12 +105,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"status": {
-				Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"up_time": {
-				Description: "Denotes how long this VM has been running in nano seconds.",
+				Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `` - Virtual machine status is not available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -363,7 +353,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 									Computed:    true,
 								},
 								"bus": {
-									Description: "Virtual machine brige name of interface.\n* `virtio` - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration.\n* `sata` - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives.\n* `scsi` - SCSI (Small Computer System Interface) bus used..",
+									Description: "Virtual machine bridge name of interface.\n* `virtio` - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration.\n* `sata` - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives.\n* `scsi` - SCSI (Small Computer System Interface) bus used..",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -400,7 +390,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 									Elem: &schema.Resource{
 										Schema: map[string]*schema.Schema{
 											"access_mode": {
-												Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.",
+												Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
 												Type:        schema.TypeString,
 												Optional:    true,
 												Computed:    true,
@@ -411,7 +401,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 												DiffSuppressFunc: SuppressDiffAdditionProps,
 											},
 											"capacity": {
-												Description: "Total disk capacity represented in Gibibytes (GiB).",
+												Description: "Disk capacity represented in bytes.",
 												Type:        schema.TypeInt,
 												Optional:    true,
 												Computed:    true,
@@ -422,7 +412,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 												Optional:    true,
 											},
 											"mode": {
-												Description: "File mode of the disk, example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.",
+												Description: "File mode of the disk, example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
 												Type:        schema.TypeString,
 												Optional:    true,
 												Computed:    true,
@@ -482,13 +472,19 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 															Computed:    true,
 														},
 														"state": {
-															Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.",
+															Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.",
 															Type:        schema.TypeString,
 															Optional:    true,
 															Computed:    true,
 														},
 														"volume_handle": {
 															Description: "Identity of the Volume associated with virtual machine disk.",
+															Type:        schema.TypeString,
+															Optional:    true,
+															Computed:    true,
+														},
+														"volume_name": {
+															Description: "Name of the Volume associated with virtual machine disk.",
 															Type:        schema.TypeString,
 															Optional:    true,
 															Computed:    true,
@@ -523,11 +519,6 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 					},
 					"failure_reason": {
 						Description: "Reason of the failure when VM is in failed state.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"graphic_console_url": {
-						Description: "Graphical console URL of this VM.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -660,10 +651,15 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 									Computed:    true,
 								},
 								"model": {
-									Description: "Virtual machine interface model.",
+									Description: "Virtual machine interface model.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
+								},
+								"name": {
+									Description: "Name of the virtual machine interface.",
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -871,7 +867,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 						},
 					},
 					"power_state": {
-						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -968,7 +964,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 						Optional:    true,
 					},
 					"status": {
-						Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.",
+						Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `` - Virtual machine status is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -994,11 +990,6 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 								},
 							},
 						},
-					},
-					"up_time": {
-						Description: "Denotes how long this VM has been running in nano seconds.",
-						Type:        schema.TypeString,
-						Optional:    true,
 					},
 					"uuid": {
 						Description: "The uuid of this virtual machine. The uuid is internally generated and not user specified.",
@@ -1162,10 +1153,6 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetFailureReason(x)
 	}
-	if v, ok := d.GetOk("graphic_console_url"); ok {
-		x := (v.(string))
-		o.SetGraphicConsoleUrl(x)
-	}
 	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
@@ -1210,10 +1197,6 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetStatus(x)
 	}
-	if v, ok := d.GetOk("up_time"); ok {
-		x := (v.(string))
-		o.SetUpTime(x)
-	}
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
@@ -1233,6 +1216,9 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while fetching count of HyperflexHxapVirtualMachine: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexHxapVirtualMachineList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexHxapVirtualMachine data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexHxapVirtualMachineResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1247,10 +1233,6 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 			return diag.Errorf("error occurred while fetching HyperflexHxapVirtualMachine: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexHxapVirtualMachineList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexHxapVirtualMachine data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -1276,7 +1258,6 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 				temp["disks"] = flattenListHyperflexVmDisk(s.GetDisks(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["failure_reason"] = (s.GetFailureReason())
-				temp["graphic_console_url"] = (s.GetGraphicConsoleUrl())
 
 				temp["guest_info"] = flattenMapVirtualizationGuestInfo(s.GetGuestInfo(), d)
 
@@ -1311,7 +1292,6 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["up_time"] = (s.GetUpTime())
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

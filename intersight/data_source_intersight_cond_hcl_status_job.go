@@ -520,6 +520,9 @@ func dataSourceCondHclStatusJobRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while fetching count of CondHclStatusJob: %s", responseErr.Error())
 	}
 	count := countResponse.CondHclStatusJobList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for CondHclStatusJob data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var condHclStatusJobResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -534,10 +537,6 @@ func dataSourceCondHclStatusJobRead(c context.Context, d *schema.ResourceData, m
 			return diag.Errorf("error occurred while fetching CondHclStatusJob: %s", responseErr.Error())
 		}
 		results := resMo.CondHclStatusJobList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for CondHclStatusJob data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

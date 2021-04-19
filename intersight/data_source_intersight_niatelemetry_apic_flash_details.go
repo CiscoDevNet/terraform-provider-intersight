@@ -565,6 +565,9 @@ func dataSourceNiatelemetryApicFlashDetailsRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while fetching count of NiatelemetryApicFlashDetails: %s", responseErr.Error())
 	}
 	count := countResponse.NiatelemetryApicFlashDetailsList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiatelemetryApicFlashDetails data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niatelemetryApicFlashDetailsResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -579,10 +582,6 @@ func dataSourceNiatelemetryApicFlashDetailsRead(c context.Context, d *schema.Res
 			return diag.Errorf("error occurred while fetching NiatelemetryApicFlashDetails: %s", responseErr.Error())
 		}
 		results := resMo.NiatelemetryApicFlashDetailsList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiatelemetryApicFlashDetails data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

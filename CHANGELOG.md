@@ -1,5 +1,11 @@
 # Change Logs
 
+## v1.0.6
+Release Date: 16th Apr 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4240).
+* Better error handling when if not results obtained in data sources
+* Default values added to ObjectType and ClassId properties
+
 ## v1.0.5
 Release Date: 9th Apr 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4155).

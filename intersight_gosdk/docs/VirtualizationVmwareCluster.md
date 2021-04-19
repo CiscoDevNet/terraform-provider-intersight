@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareCluster"]
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this cluster. | [optional] 
+**InventoryPath** | Pointer to **string** | Inventory path of the cluster. | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -93,6 +94,31 @@ SetDatastoreCount sets DatastoreCount field to given value.
 `func (o *VirtualizationVmwareCluster) HasDatastoreCount() bool`
 
 HasDatastoreCount returns a boolean if a field has been set.
+
+### GetInventoryPath
+
+`func (o *VirtualizationVmwareCluster) GetInventoryPath() string`
+
+GetInventoryPath returns the InventoryPath field if non-nil, zero value otherwise.
+
+### GetInventoryPathOk
+
+`func (o *VirtualizationVmwareCluster) GetInventoryPathOk() (*string, bool)`
+
+GetInventoryPathOk returns a tuple with the InventoryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryPath
+
+`func (o *VirtualizationVmwareCluster) SetInventoryPath(v string)`
+
+SetInventoryPath sets InventoryPath field to given value.
+
+### HasInventoryPath
+
+`func (o *VirtualizationVmwareCluster) HasInventoryPath() bool`
+
+HasInventoryPath returns a boolean if a field has been set.
 
 ### GetDatacenter
 

@@ -144,6 +144,9 @@ func dataSourceApplianceDataExportPolicyRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of ApplianceDataExportPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.ApplianceDataExportPolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ApplianceDataExportPolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var applianceDataExportPolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -158,10 +161,6 @@ func dataSourceApplianceDataExportPolicyRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching ApplianceDataExportPolicy: %s", responseErr.Error())
 		}
 		results := resMo.ApplianceDataExportPolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ApplianceDataExportPolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

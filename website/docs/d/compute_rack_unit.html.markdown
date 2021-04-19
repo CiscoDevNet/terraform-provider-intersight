@@ -41,7 +41,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) The operational state of the server. 
 * `operability`:(string) The operability of the server. 
 * `platform_type`:(string) The platform type of the registered device - whether managed by UCSM or operating in standalone mode. 
-* `presence`:(string) Indicates if a server is present in a slot and is applicable for blade servers. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

@@ -143,6 +143,9 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 		return diag.Errorf("error occurred while fetching count of VrfVrf: %s", responseErr.Error())
 	}
 	count := countResponse.VrfVrfList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VrfVrf data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var vrfVrfResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -157,10 +160,6 @@ func dataSourceVrfVrfRead(c context.Context, d *schema.ResourceData, meta interf
 			return diag.Errorf("error occurred while fetching VrfVrf: %s", responseErr.Error())
 		}
 		results := resMo.VrfVrfList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VrfVrf data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

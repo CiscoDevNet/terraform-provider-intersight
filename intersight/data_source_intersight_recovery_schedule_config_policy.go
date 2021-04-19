@@ -143,6 +143,9 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while fetching count of RecoveryScheduleConfigPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.RecoveryScheduleConfigPolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for RecoveryScheduleConfigPolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var recoveryScheduleConfigPolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -157,10 +160,6 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 			return diag.Errorf("error occurred while fetching RecoveryScheduleConfigPolicy: %s", responseErr.Error())
 		}
 		results := resMo.RecoveryScheduleConfigPolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for RecoveryScheduleConfigPolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

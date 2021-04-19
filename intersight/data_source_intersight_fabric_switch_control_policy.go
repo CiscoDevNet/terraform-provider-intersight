@@ -152,6 +152,9 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of FabricSwitchControlPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.FabricSwitchControlPolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricSwitchControlPolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricSwitchControlPolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -166,10 +169,6 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching FabricSwitchControlPolicy: %s", responseErr.Error())
 		}
 		results := resMo.FabricSwitchControlPolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricSwitchControlPolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -203,6 +202,8 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["udld_settings"] = flattenMapFabricUdldGlobalSettings(s.GetUdldSettings(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vlan_port_optimization_enabled"] = (s.GetVlanPortOptimizationEnabled())

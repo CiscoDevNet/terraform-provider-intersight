@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `num_of_adaptors`:(string) The number of GPUs and PCI adapters connected the switch. 
 * `pci_address`:(string) The PCI address of the switch. 
 * `pci_slot`:(string) The PCI slot name of the switch. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `product_name`:(string) The model information for the switch. 
 * `product_revision`:(string) The product revision of the switch. 
 * `revision`:(string) This field identifies the revision of the given component. 

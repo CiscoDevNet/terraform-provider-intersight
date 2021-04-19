@@ -38,6 +38,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Type:        schema.TypeList,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -49,7 +50,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -71,13 +72,14 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"catalog": {
 				Description: "A reference to a osCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -89,7 +91,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -111,14 +113,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "os.ConfigurationFile",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -135,6 +135,8 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Description: "An array of relationships to hclOperatingSystem resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -146,7 +148,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -168,8 +170,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -210,12 +210,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "os.ConfigurationFile",
 			},
 			"owners": {
-				Type:     schema.TypeList,
-				Optional: true,
-				Computed: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				Computed:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
 				Elem: &schema.Schema{
 					Type: schema.TypeString}},
 			"parent": {
@@ -224,6 +225,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -235,7 +237,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -257,13 +259,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -275,7 +277,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.MoRef",
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -297,11 +299,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"placeholders": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -313,7 +316,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "os.PlaceHolder",
 						},
 						"is_value_set": {
 							Description: "Flag to indicate if value is set. Value will be used to check if any edit.",
@@ -325,13 +328,15 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "os.PlaceHolder",
 						},
 						"type": {
 							Description: "Definition of place holder.",
 							Type:        schema.TypeList,
 							MaxItems:    1,
 							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -343,13 +348,15 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "workflow.PrimitiveDataType",
 									},
 									"default": {
 										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
 										Type:        schema.TypeList,
 										MaxItems:    1,
 										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"additional_properties": {
@@ -361,7 +368,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.DefaultValue",
 												},
 												"is_value_set": {
 													Description: "A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses.",
@@ -373,7 +380,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.DefaultValue",
 												},
 												"override": {
 													Description: "Override the default value provided for the data type. When true, allow the user to enter value for the data type.",
@@ -389,8 +396,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 												},
 											},
 										},
-										ConfigMode: schema.SchemaConfigModeAttr,
-										Computed:   true,
 									},
 									"description": {
 										Description: "Provide a detailed description of the data type.",
@@ -402,6 +407,8 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Type:        schema.TypeList,
 										MaxItems:    1,
 										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"additional_properties": {
@@ -413,7 +420,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.DisplayMeta",
 												},
 												"inventory_selector": {
 													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
@@ -425,7 +432,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.DisplayMeta",
 												},
 												"widget_type": {
 													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
@@ -435,8 +442,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 												},
 											},
 										},
-										ConfigMode: schema.SchemaConfigModeAttr,
-										Computed:   true,
 									},
 									"input_parameters": {
 										Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
@@ -459,13 +464,15 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "workflow.PrimitiveDataType",
 									},
 									"properties": {
 										Description: "Primitive data type properties.",
 										Type:        schema.TypeList,
 										MaxItems:    1,
 										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
 										Elem: &schema.Resource{
 											Schema: map[string]*schema.Schema{
 												"additional_properties": {
@@ -477,13 +484,15 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.PrimitiveDataProperty",
 												},
 												"constraints": {
 													Description: "Constraints that must be applied to the parameter value supplied for this data type.",
 													Type:        schema.TypeList,
 													MaxItems:    1,
 													Optional:    true,
+													ConfigMode:  schema.SchemaConfigModeAttr,
+													Computed:    true,
 													Elem: &schema.Resource{
 														Schema: map[string]*schema.Schema{
 															"additional_properties": {
@@ -495,11 +504,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
+																Default:     "workflow.Constraints",
 															},
 															"enum_list": {
-																Type:     schema.TypeList,
-																Optional: true,
+																Type:       schema.TypeList,
+																Optional:   true,
+																ConfigMode: schema.SchemaConfigModeAttr,
+																Computed:   true,
 																Elem: &schema.Resource{
 																	Schema: map[string]*schema.Schema{
 																		"additional_properties": {
@@ -511,7 +522,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
-																			Computed:    true,
+																			Default:     "workflow.EnumEntry",
 																		},
 																		"label": {
 																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
@@ -522,7 +533,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
-																			Computed:    true,
+																			Default:     "workflow.EnumEntry",
 																		},
 																		"value": {
 																			Description: "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
@@ -531,8 +542,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 																		},
 																	},
 																},
-																ConfigMode: schema.SchemaConfigModeAttr,
-																Computed:   true,
 															},
 															"max": {
 																Description: "Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced.",
@@ -548,7 +557,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
+																Default:     "workflow.Constraints",
 															},
 															"regex": {
 																Description: "When the parameter is a string this regular expression is used to ensure the value is valid.",
@@ -557,12 +566,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 															},
 														},
 													},
-													ConfigMode: schema.SchemaConfigModeAttr,
-													Computed:   true,
 												},
 												"inventory_selector": {
-													Type:     schema.TypeList,
-													Optional: true,
+													Type:       schema.TypeList,
+													Optional:   true,
+													ConfigMode: schema.SchemaConfigModeAttr,
+													Computed:   true,
 													Elem: &schema.Resource{
 														Schema: map[string]*schema.Schema{
 															"additional_properties": {
@@ -574,18 +583,20 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
+																Default:     "workflow.MoReferenceProperty",
 															},
 															"display_attributes": {
-																Type:     schema.TypeList,
-																Optional: true,
+																Type:       schema.TypeList,
+																Optional:   true,
+																ConfigMode: schema.SchemaConfigModeAttr,
+																Computed:   true,
 																Elem: &schema.Schema{
 																	Type: schema.TypeString}},
 															"object_type": {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
+																Default:     "workflow.MoReferenceProperty",
 															},
 															"selector": {
 																Description: "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
@@ -599,14 +610,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 															},
 														},
 													},
-													ConfigMode: schema.SchemaConfigModeAttr,
-													Computed:   true,
 												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
+													Default:     "workflow.PrimitiveDataProperty",
 												},
 												"secure": {
 													Description: "Intersight supports secure properties as task input/output. The values of\nthese properties are encrypted and stored in Intersight.\nThis flag marks the property to be secure when it is set to true.",
@@ -622,8 +631,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 												},
 											},
 										},
-										ConfigMode: schema.SchemaConfigModeAttr,
-										Computed:   true,
 									},
 									"required": {
 										Description: "Specifies whether this parameter is required. The field is applicable for task and workflow.",
@@ -632,8 +639,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
 						},
 						"value": {
 							Description: "Value for placeholder provided by user.",
@@ -644,8 +649,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -660,8 +663,10 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Computed:    true,
 			},
 			"tags": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -688,6 +693,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 				MaxItems:    1,
 				Optional:    true,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -699,11 +705,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.VersionContext",
 						},
 						"interested_mos": {
-							Type:     schema.TypeList,
-							Optional: true,
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -715,7 +723,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "mo.MoRef",
 									},
 									"moid": {
 										Description: "The Moid of the referenced REST resource.",
@@ -737,14 +745,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "mo.VersionContext",
 						},
 						"ref_mo": {
 							Description: "A reference to the original Managed Object.",
@@ -752,6 +758,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 							MaxItems:    1,
 							Optional:    true,
 							Computed:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"additional_properties": {
@@ -763,7 +770,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
+										Default:     "mo.MoRef",
 									},
 									"moid": {
 										Description: "The Moid of the referenced REST resource.",
@@ -785,7 +792,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 									},
 								},
 							},
-							ConfigMode: schema.SchemaConfigModeAttr,
 						},
 						"timestamp": {
 							Description: "The time this versioned Managed Object was created.",
@@ -807,7 +813,6 @@ func resourceOsConfigurationFile() *schema.Resource {
 						},
 					},
 				},
-				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 		},
 	}

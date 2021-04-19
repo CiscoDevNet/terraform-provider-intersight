@@ -45,6 +45,7 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
+**Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
@@ -1099,6 +1100,31 @@ SetOutOfBandMac sets OutOfBandMac field to given value.
 `func (o *NetworkElementSummary) HasOutOfBandMac() bool`
 
 HasOutOfBandMac returns a boolean if a field has been set.
+
+### GetPresence
+
+`func (o *NetworkElementSummary) GetPresence() string`
+
+GetPresence returns the Presence field if non-nil, zero value otherwise.
+
+### GetPresenceOk
+
+`func (o *NetworkElementSummary) GetPresenceOk() (*string, bool)`
+
+GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPresence
+
+`func (o *NetworkElementSummary) SetPresence(v string)`
+
+SetPresence sets Presence field to given value.
+
+### HasPresence
+
+`func (o *NetworkElementSummary) HasPresence() bool`
+
+HasPresence returns a boolean if a field has been set.
 
 ### GetRevision
 

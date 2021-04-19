@@ -26,7 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) This field is used to indicate this fan module's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Module. 
 * `pid`:(string) This field identifies the Product ID for the fan module. 
-* `presence`:(string) This field is used to indicate this fan module's presence. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

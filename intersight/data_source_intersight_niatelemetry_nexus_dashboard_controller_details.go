@@ -523,6 +523,9 @@ func dataSourceNiatelemetryNexusDashboardControllerDetailsRead(c context.Context
 		return diag.Errorf("error occurred while fetching count of NiatelemetryNexusDashboardControllerDetails: %s", responseErr.Error())
 	}
 	count := countResponse.NiatelemetryNexusDashboardControllerDetailsList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiatelemetryNexusDashboardControllerDetails data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niatelemetryNexusDashboardControllerDetailsResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -537,10 +540,6 @@ func dataSourceNiatelemetryNexusDashboardControllerDetailsRead(c context.Context
 			return diag.Errorf("error occurred while fetching NiatelemetryNexusDashboardControllerDetails: %s", responseErr.Error())
 		}
 		results := resMo.NiatelemetryNexusDashboardControllerDetailsList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiatelemetryNexusDashboardControllerDetails data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

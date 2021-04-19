@@ -58,7 +58,7 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 				Computed:    true,
 			},
 			"mode": {
-				Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.",
+				Description: "File mode of the disk  example - Filesystem, Block.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -189,6 +189,9 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of VirtualizationVirtualDisk: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVirtualDiskList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VirtualizationVirtualDisk data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var virtualizationVirtualDiskResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -203,10 +206,6 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVirtualDiskList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VirtualizationVirtualDisk data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

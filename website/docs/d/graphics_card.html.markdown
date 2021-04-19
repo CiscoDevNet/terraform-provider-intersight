@@ -31,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `pci_address`:(string) The PCI address of the graphics card. 
 * `pci_address_list`:(string) This list contains the PCI address of all controllers for corresponding card. 
 * `pci_slot`:(string) The PCI slot name of the graphics card. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

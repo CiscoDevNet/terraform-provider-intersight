@@ -51,7 +51,7 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				Computed:    true,
 			},
 			"hw_power_state": {
-				Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+				Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -433,7 +433,7 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 						Computed: true,
 					},
 					"hw_power_state": {
-						Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+						Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1083,6 +1083,9 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareHost: %s", responseErr.Error())
 	}
 	count := countResponse.VirtualizationVmwareHostList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for VirtualizationVmwareHost data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var virtualizationVmwareHostResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1097,10 +1100,6 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareHost: %s", responseErr.Error())
 		}
 		results := resMo.VirtualizationVmwareHostList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for VirtualizationVmwareHost data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

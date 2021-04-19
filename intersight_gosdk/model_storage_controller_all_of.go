@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-03-31T00:43:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
  *
- * API version: 1.0.9-4155
+ * API version: 1.0.9-4240
  * Contact: intersight@cisco.com
  */
 
@@ -45,8 +45,6 @@ type StorageControllerAllOf struct {
 	PciAddr *string `json:"PciAddr,omitempty"`
 	// The pci slot name for the controller.
 	PciSlot *string `json:"PciSlot,omitempty"`
-	// Physical Presence State for the Storage Controller.
-	Presence *string `json:"Presence,omitempty"`
 	// The RAID levels supported by controller.
 	RaidSupport *string `json:"RaidSupport,omitempty"`
 	// Logical volume or RAID rebuild rate of Storage Controller.
@@ -60,6 +58,7 @@ type StorageControllerAllOf struct {
 	ComputeRackUnit *ComputeRackUnitRelationship `json:"ComputeRackUnit,omitempty"`
 	// An array of relationships to storageDiskGroup resources.
 	DiskGroup           []StorageDiskGroupRelationship   `json:"DiskGroup,omitempty"`
+	DiskSlot            *StorageDiskSlotRelationship     `json:"DiskSlot,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to storagePhysicalDiskExtension resources.
 	PhysicalDiskExtensions []StoragePhysicalDiskExtensionRelationship `json:"PhysicalDiskExtensions,omitempty"`
@@ -532,38 +531,6 @@ func (o *StorageControllerAllOf) SetPciSlot(v string) {
 	o.PciSlot = &v
 }
 
-// GetPresence returns the Presence field value if set, zero value otherwise.
-func (o *StorageControllerAllOf) GetPresence() string {
-	if o == nil || o.Presence == nil {
-		var ret string
-		return ret
-	}
-	return *o.Presence
-}
-
-// GetPresenceOk returns a tuple with the Presence field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageControllerAllOf) GetPresenceOk() (*string, bool) {
-	if o == nil || o.Presence == nil {
-		return nil, false
-	}
-	return o.Presence, true
-}
-
-// HasPresence returns a boolean if a field has been set.
-func (o *StorageControllerAllOf) HasPresence() bool {
-	if o != nil && o.Presence != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPresence gets a reference to the given string and assigns it to the Presence field.
-func (o *StorageControllerAllOf) SetPresence(v string) {
-	o.Presence = &v
-}
-
 // GetRaidSupport returns the RaidSupport field value if set, zero value otherwise.
 func (o *StorageControllerAllOf) GetRaidSupport() string {
 	if o == nil || o.RaidSupport == nil {
@@ -819,6 +786,38 @@ func (o *StorageControllerAllOf) HasDiskGroup() bool {
 // SetDiskGroup gets a reference to the given []StorageDiskGroupRelationship and assigns it to the DiskGroup field.
 func (o *StorageControllerAllOf) SetDiskGroup(v []StorageDiskGroupRelationship) {
 	o.DiskGroup = v
+}
+
+// GetDiskSlot returns the DiskSlot field value if set, zero value otherwise.
+func (o *StorageControllerAllOf) GetDiskSlot() StorageDiskSlotRelationship {
+	if o == nil || o.DiskSlot == nil {
+		var ret StorageDiskSlotRelationship
+		return ret
+	}
+	return *o.DiskSlot
+}
+
+// GetDiskSlotOk returns a tuple with the DiskSlot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageControllerAllOf) GetDiskSlotOk() (*StorageDiskSlotRelationship, bool) {
+	if o == nil || o.DiskSlot == nil {
+		return nil, false
+	}
+	return o.DiskSlot, true
+}
+
+// HasDiskSlot returns a boolean if a field has been set.
+func (o *StorageControllerAllOf) HasDiskSlot() bool {
+	if o != nil && o.DiskSlot != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskSlot gets a reference to the given StorageDiskSlotRelationship and assigns it to the DiskSlot field.
+func (o *StorageControllerAllOf) SetDiskSlot(v StorageDiskSlotRelationship) {
+	o.DiskSlot = &v
 }
 
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
@@ -1094,9 +1093,6 @@ func (o StorageControllerAllOf) MarshalJSON() ([]byte, error) {
 	if o.PciSlot != nil {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
-	if o.Presence != nil {
-		toSerialize["Presence"] = o.Presence
-	}
 	if o.RaidSupport != nil {
 		toSerialize["RaidSupport"] = o.RaidSupport
 	}
@@ -1120,6 +1116,9 @@ func (o StorageControllerAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.DiskGroup != nil {
 		toSerialize["DiskGroup"] = o.DiskGroup
+	}
+	if o.DiskSlot != nil {
+		toSerialize["DiskSlot"] = o.DiskSlot
 	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
@@ -1174,7 +1173,6 @@ func (o *StorageControllerAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Operability")
 		delete(additionalProperties, "PciAddr")
 		delete(additionalProperties, "PciSlot")
-		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "RaidSupport")
 		delete(additionalProperties, "RebuildRate")
 		delete(additionalProperties, "SelfEncryptEnabled")
@@ -1183,6 +1181,7 @@ func (o *StorageControllerAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ComputeBoard")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "DiskGroup")
+		delete(additionalProperties, "DiskSlot")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "PhysicalDiskExtensions")
 		delete(additionalProperties, "PhysicalDisks")

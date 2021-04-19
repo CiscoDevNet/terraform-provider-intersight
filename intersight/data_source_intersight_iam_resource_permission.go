@@ -637,6 +637,9 @@ func dataSourceIamResourcePermissionRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while fetching count of IamResourcePermission: %s", responseErr.Error())
 	}
 	count := countResponse.IamResourcePermissionList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for IamResourcePermission data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var iamResourcePermissionResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -651,10 +654,6 @@ func dataSourceIamResourcePermissionRead(c context.Context, d *schema.ResourceDa
 			return diag.Errorf("error occurred while fetching IamResourcePermission: %s", responseErr.Error())
 		}
 		results := resMo.IamResourcePermissionList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for IamResourcePermission data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

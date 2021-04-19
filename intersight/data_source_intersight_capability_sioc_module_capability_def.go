@@ -143,6 +143,9 @@ func dataSourceCapabilitySiocModuleCapabilityDefRead(c context.Context, d *schem
 		return diag.Errorf("error occurred while fetching count of CapabilitySiocModuleCapabilityDef: %s", responseErr.Error())
 	}
 	count := countResponse.CapabilitySiocModuleCapabilityDefList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for CapabilitySiocModuleCapabilityDef data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var capabilitySiocModuleCapabilityDefResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -157,10 +160,6 @@ func dataSourceCapabilitySiocModuleCapabilityDefRead(c context.Context, d *schem
 			return diag.Errorf("error occurred while fetching CapabilitySiocModuleCapabilityDef: %s", responseErr.Error())
 		}
 		results := resMo.CapabilitySiocModuleCapabilityDefList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for CapabilitySiocModuleCapabilityDef data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

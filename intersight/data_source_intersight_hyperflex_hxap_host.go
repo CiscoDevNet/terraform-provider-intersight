@@ -28,6 +28,11 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"chassis_version": {
+				Description: "Chassis version of the Host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -56,7 +61,7 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 				Optional:    true,
 			},
 			"hw_power_state": {
-				Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+				Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -210,6 +215,11 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 							},
 						},
 					},
+					"chassis_version": {
+						Description: "Chassis version of the Host.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -297,6 +307,53 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 						Description: "The UUID of the cluster to which this Host belongs to.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"cpu_allocation": {
+						Description: "CPU allocation details of the host.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free CPU count on the entity.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"reserved": {
+									Description: "Reserved CPU count on the entity. These reserved CPUs can be used for system purposes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"total": {
+									Description: "Total number of CPU available on the entity.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"used": {
+									Description: "Used or allocated CPU count on the entity.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"cpu_info": {
 						Description: "Details about the CPUs installed on this host are represented here.",
@@ -410,7 +467,7 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 						Computed: true,
 					},
 					"hw_power_state": {
-						Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.",
+						Description: "Is the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -443,6 +500,53 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 						Description: "Is the role of this host is master in the cluster? true or false.",
 						Type:        schema.TypeBool,
 						Optional:    true,
+					},
+					"memory_allocation": {
+						Description: "Memory allocation details of the host.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"free": {
+									Description: "Free memory on the entity in bytes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"reserved": {
+									Description: "Reserved memory on the entity in bytes. These reserved memory can be used for system purposes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"total": {
+									Description: "The total memory capacity of the entity in bytes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"used": {
+									Description: "Used or allocated memory on the entity represented in bytes.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"memory_capacity": {
 						Description: "The memory capacity and usage information on this host.",
@@ -964,6 +1068,10 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		x := (v.(string))
 		o.SetAge(x)
 	}
+	if v, ok := d.GetOk("chassis_version"); ok {
+		x := (v.(string))
+		o.SetChassisVersion(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1075,6 +1183,9 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while fetching count of HyperflexHxapHost: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexHxapHostList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexHxapHost data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexHxapHostResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -1089,10 +1200,6 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 			return diag.Errorf("error occurred while fetching HyperflexHxapHost: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexHxapHostList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexHxapHost data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -1103,12 +1210,15 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 				temp["age"] = (s.GetAge())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["chassis_version"] = (s.GetChassisVersion())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster"] = flattenMapHyperflexHxapClusterRelationship(s.GetCluster(), d)
 
 				temp["cluster_member"] = flattenMapAssetClusterMemberRelationship(s.GetClusterMember(), d)
 				temp["cluster_uuid"] = (s.GetClusterUuid())
+
+				temp["cpu_allocation"] = flattenMapVirtualizationCpuAllocation(s.GetCpuAllocation(), d)
 
 				temp["cpu_info"] = flattenMapVirtualizationCpuInfo(s.GetCpuInfo(), d)
 
@@ -1124,6 +1234,8 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 				temp["maintenance_mode"] = (s.GetMaintenanceMode())
 				temp["management_ip_address"] = (s.GetManagementIpAddress())
 				temp["master_role"] = (s.GetMasterRole())
+
+				temp["memory_allocation"] = flattenMapVirtualizationMemoryAllocation(s.GetMemoryAllocation(), d)
 
 				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
 

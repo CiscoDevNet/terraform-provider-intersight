@@ -89,11 +89,6 @@ func dataSourceFabricFcoeUplinkRole() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
-			"udld_admin_state": {
-				Description: "Admin configured state for UDLD for this port.\n* `Disabled` - Admin configured Disabled State.\n* `Enabled` - Admin configured Enabled State.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceFabricFcoeUplinkRole().Schema},
@@ -160,10 +155,6 @@ func dataSourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceDat
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}
-	if v, ok := d.GetOk("udld_admin_state"); ok {
-		x := (v.(string))
-		o.SetUdldAdminState(x)
-	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -179,6 +170,9 @@ func dataSourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while fetching count of FabricFcoeUplinkRole: %s", responseErr.Error())
 	}
 	count := countResponse.FabricFcoeUplinkRoleList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricFcoeUplinkRole data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricFcoeUplinkRoleResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -193,10 +187,6 @@ func dataSourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceDat
 			return diag.Errorf("error occurred while fetching FabricFcoeUplinkRole: %s", responseErr.Error())
 		}
 		results := resMo.FabricFcoeUplinkRoleList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricFcoeUplinkRole data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -214,6 +204,8 @@ func dataSourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceDat
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["fec"] = (s.GetFec())
 
+				temp["link_control_policy"] = flattenMapFabricLinkControlPolicyRelationship(s.GetLinkControlPolicy(), d)
+
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["object_type"] = (s.GetObjectType())
@@ -229,7 +221,6 @@ func dataSourceFabricFcoeUplinkRoleRead(c context.Context, d *schema.ResourceDat
 				temp["slot_id"] = (s.GetSlotId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["udld_admin_state"] = (s.GetUdldAdminState())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				fabricFcoeUplinkRoleResults[j] = temp

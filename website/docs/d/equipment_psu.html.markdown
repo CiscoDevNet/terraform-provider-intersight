@@ -25,7 +25,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) This field identifies the psu operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Power Supply Unit. 
 * `pid`:(string) This field identifies the Product ID for the Power Supply. 
-* `presence`:(string) This field identifies the presence state of the psu. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `psu_fw_version`:(string) This field identifies the Firmware Version of the Power Supply. 
 * `psu_id`:(int) This represents power supply unit identifier in chassis/server. 
 * `psu_input_src`:(string) This field identifies the input source for the Power Supply. 

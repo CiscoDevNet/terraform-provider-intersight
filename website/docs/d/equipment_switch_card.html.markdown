@@ -28,7 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_ip_address`:(string) Field specifies this Switch's Out-of-band IP address. 
 * `out_of_band_ip_gateway`:(string) Field specifies this Switch's default gateway for the out-of-band management interface. 
 * `out_of_band_ip_mask`:(string) Field specifies the Netmask for this Switch's Out-of-band IP address. 
-* `presence`:(string) Presence for this switch hardware. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

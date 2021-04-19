@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Priority** | Pointer to **string** | The &#39;name&#39; of the System QoS Class. * &#x60;Best Effort&#x60; - QoS Priority for Best-effort traffic. * &#x60;FC&#x60; - QoS Priority for FC traffic. * &#x60;Platinum&#x60; - QoS Priority for Platinum traffic. * &#x60;Gold&#x60; - QoS Priority for Gold traffic. * &#x60;Silver&#x60; - QoS Priority for Silver traffic. * &#x60;Bronze&#x60; - QoS Priority for Bronze traffic. | [optional] [default to "Best Effort"]
 **EthNetworkControlPolicy** | Pointer to [**FabricEthNetworkControlPolicyRelationship**](fabric.EthNetworkControlPolicy.Relationship.md) |  | [optional] 
 **EthNetworkGroupPolicy** | Pointer to [**FabricEthNetworkGroupPolicyRelationship**](fabric.EthNetworkGroupPolicy.Relationship.md) |  | [optional] 
+**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](fabric.FlowControlPolicy.Relationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](fabric.LinkControlPolicy.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -169,6 +171,56 @@ SetEthNetworkGroupPolicy sets EthNetworkGroupPolicy field to given value.
 `func (o *FabricApplianceRoleAllOf) HasEthNetworkGroupPolicy() bool`
 
 HasEthNetworkGroupPolicy returns a boolean if a field has been set.
+
+### GetFlowControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) GetFlowControlPolicy() FabricFlowControlPolicyRelationship`
+
+GetFlowControlPolicy returns the FlowControlPolicy field if non-nil, zero value otherwise.
+
+### GetFlowControlPolicyOk
+
+`func (o *FabricApplianceRoleAllOf) GetFlowControlPolicyOk() (*FabricFlowControlPolicyRelationship, bool)`
+
+GetFlowControlPolicyOk returns a tuple with the FlowControlPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFlowControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) SetFlowControlPolicy(v FabricFlowControlPolicyRelationship)`
+
+SetFlowControlPolicy sets FlowControlPolicy field to given value.
+
+### HasFlowControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) HasFlowControlPolicy() bool`
+
+HasFlowControlPolicy returns a boolean if a field has been set.
+
+### GetLinkControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
+
+GetLinkControlPolicy returns the LinkControlPolicy field if non-nil, zero value otherwise.
+
+### GetLinkControlPolicyOk
+
+`func (o *FabricApplianceRoleAllOf) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool)`
+
+GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship)`
+
+SetLinkControlPolicy sets LinkControlPolicy field to given value.
+
+### HasLinkControlPolicy
+
+`func (o *FabricApplianceRoleAllOf) HasLinkControlPolicy() bool`
+
+HasLinkControlPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

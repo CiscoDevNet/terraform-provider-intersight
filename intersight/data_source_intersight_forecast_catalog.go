@@ -512,6 +512,9 @@ func dataSourceForecastCatalogRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while fetching count of ForecastCatalog: %s", responseErr.Error())
 	}
 	count := countResponse.ForecastCatalogList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ForecastCatalog data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var forecastCatalogResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -526,10 +529,6 @@ func dataSourceForecastCatalogRead(c context.Context, d *schema.ResourceData, me
 			return diag.Errorf("error occurred while fetching ForecastCatalog: %s", responseErr.Error())
 		}
 		results := resMo.ForecastCatalogList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ForecastCatalog data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

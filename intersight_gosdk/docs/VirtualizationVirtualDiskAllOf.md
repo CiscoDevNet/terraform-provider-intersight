@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VirtualDisk"]
 **Capacity** | Pointer to **string** | Disk capacity to be provided with units example - 10Gi. | [optional] 
 **Discovered** | Pointer to **bool** | Flag to indicate whether the configuration is created from inventory object. | [optional] [readonly] 
-**Mode** | Pointer to **string** | File mode of the disk  example - Filesystem, Block. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. | [optional] [default to "Block"]
+**Mode** | Pointer to **string** | File mode of the disk  example - Filesystem, Block. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [default to "Block"]
 **Name** | Pointer to **string** | Name of the storage disk. Name must be unique within a Datastore. | [optional] 
 **SourceCerts** | Pointer to **string** | Base64 encoded CA certificates of the https source to check against. | [optional] 
 **SourceDiskToClone** | Pointer to **string** | Source disk from which the content is copied. | [optional] 

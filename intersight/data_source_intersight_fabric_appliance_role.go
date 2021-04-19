@@ -188,6 +188,9 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while fetching count of FabricApplianceRole: %s", responseErr.Error())
 	}
 	count := countResponse.FabricApplianceRoleList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for FabricApplianceRole data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var fabricApplianceRoleResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -202,10 +205,6 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 			return diag.Errorf("error occurred while fetching FabricApplianceRole: %s", responseErr.Error())
 		}
 		results := resMo.FabricApplianceRoleList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for FabricApplianceRole data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {
@@ -226,6 +225,10 @@ func dataSourceFabricApplianceRoleRead(c context.Context, d *schema.ResourceData
 
 				temp["eth_network_group_policy"] = flattenMapFabricEthNetworkGroupPolicyRelationship(s.GetEthNetworkGroupPolicy(), d)
 				temp["fec"] = (s.GetFec())
+
+				temp["flow_control_policy"] = flattenMapFabricFlowControlPolicyRelationship(s.GetFlowControlPolicy(), d)
+
+				temp["link_control_policy"] = flattenMapFabricLinkControlPolicyRelationship(s.GetLinkControlPolicy(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())

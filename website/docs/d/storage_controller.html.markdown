@@ -33,7 +33,7 @@ The following arguments can be used to get data of already created objects in In
 * `operability`:(string) Operability state of the storage controller. 
 * `pci_addr`:(string) The current pci address of controller. 
 * `pci_slot`:(string) The pci slot name for the controller. 
-* `presence`:(string) Physical Presence State for the Storage Controller. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `raid_support`:(string) The RAID levels supported by controller. 
 * `rebuild_rate`:(string) Logical volume or RAID rebuild rate of Storage Controller. 
 * `revision`:(string) This field identifies the revision of the given component. 

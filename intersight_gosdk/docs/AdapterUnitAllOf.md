@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **PartNumber** | Pointer to **string** | Part number of an adapter unit. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | PCIe slot of the adapter in the server. | [optional] [readonly] 
 **Power** | Pointer to **string** | Power state of an adapter unit. | [optional] [readonly] 
-**Presence** | Pointer to **string** | Adapter Unit presence or absence. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | Thermal state of an adapter unit. | [optional] [readonly] 
 **Vid** | Pointer to **string** | Virtual Id of the adapter in the server. | [optional] [readonly] 
 **AdapterUnitExpander** | Pointer to [**AdapterUnitExpanderRelationship**](adapter.UnitExpander.Relationship.md) |  | [optional] 
@@ -312,31 +311,6 @@ SetPower sets Power field to given value.
 `func (o *AdapterUnitAllOf) HasPower() bool`
 
 HasPower returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *AdapterUnitAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *AdapterUnitAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *AdapterUnitAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *AdapterUnitAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetThermal
 

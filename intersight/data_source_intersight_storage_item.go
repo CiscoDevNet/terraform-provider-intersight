@@ -687,6 +687,9 @@ func dataSourceStorageItemRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while fetching count of StorageItem: %s", responseErr.Error())
 	}
 	count := countResponse.StorageItemList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for StorageItem data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var storageItemResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -701,10 +704,6 @@ func dataSourceStorageItemRead(c context.Context, d *schema.ResourceData, meta i
 			return diag.Errorf("error occurred while fetching StorageItem: %s", responseErr.Error())
 		}
 		results := resMo.StorageItemList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for StorageItem data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

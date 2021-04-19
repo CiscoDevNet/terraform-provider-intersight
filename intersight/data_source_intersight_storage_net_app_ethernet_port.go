@@ -609,6 +609,9 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while fetching count of StorageNetAppEthernetPort: %s", responseErr.Error())
 	}
 	count := countResponse.StorageNetAppEthernetPortList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for StorageNetAppEthernetPort data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var storageNetAppEthernetPortResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -623,10 +626,6 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 			return diag.Errorf("error occurred while fetching StorageNetAppEthernetPort: %s", responseErr.Error())
 		}
 		results := resMo.StorageNetAppEthernetPortList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for StorageNetAppEthernetPort data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

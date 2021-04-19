@@ -29,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) This field identifies the SIOC operational state. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for systemIOController. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

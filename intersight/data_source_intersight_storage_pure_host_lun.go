@@ -717,6 +717,9 @@ func dataSourceStoragePureHostLunRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while fetching count of StoragePureHostLun: %s", responseErr.Error())
 	}
 	count := countResponse.StoragePureHostLunList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for StoragePureHostLun data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var storagePureHostLunResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -731,10 +734,6 @@ func dataSourceStoragePureHostLunRead(c context.Context, d *schema.ResourceData,
 			return diag.Errorf("error occurred while fetching StoragePureHostLun: %s", responseErr.Error())
 		}
 		results := resMo.StoragePureHostLunList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for StoragePureHostLun data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

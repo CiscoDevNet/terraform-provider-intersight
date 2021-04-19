@@ -600,6 +600,9 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while fetching count of ChassisConfigResultEntry: %s", responseErr.Error())
 	}
 	count := countResponse.ChassisConfigResultEntryList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for ChassisConfigResultEntry data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var chassisConfigResultEntryResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -614,10 +617,6 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 			return diag.Errorf("error occurred while fetching ChassisConfigResultEntry: %s", responseErr.Error())
 		}
 		results := resMo.ChassisConfigResultEntryList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for ChassisConfigResultEntry data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

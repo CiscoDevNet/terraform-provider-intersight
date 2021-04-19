@@ -56,6 +56,7 @@ The following arguments can be used to get data of already created objects in In
 * `out_of_band_ipv6_gateway`:(string) The default IPv6 gateway of the network Element out-of-band management interface. 
 * `out_of_band_ipv6_prefix`:(string) The network mask of the network Element out-of-band management interface. 
 * `out_of_band_mac`:(string) The MAC address of the network Element out-of-band management interface. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

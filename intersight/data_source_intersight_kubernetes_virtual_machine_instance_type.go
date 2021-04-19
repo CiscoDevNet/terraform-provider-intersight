@@ -170,6 +170,9 @@ func dataSourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sc
 		return diag.Errorf("error occurred while fetching count of KubernetesVirtualMachineInstanceType: %s", responseErr.Error())
 	}
 	count := countResponse.KubernetesVirtualMachineInstanceTypeList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for KubernetesVirtualMachineInstanceType data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var kubernetesVirtualMachineInstanceTypeResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -184,10 +187,6 @@ func dataSourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sc
 			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInstanceType: %s", responseErr.Error())
 		}
 		results := resMo.KubernetesVirtualMachineInstanceTypeList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for KubernetesVirtualMachineInstanceType data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

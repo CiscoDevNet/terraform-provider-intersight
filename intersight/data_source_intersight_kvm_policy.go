@@ -188,6 +188,9 @@ func dataSourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("error occurred while fetching count of KvmPolicy: %s", responseErr.Error())
 	}
 	count := countResponse.KvmPolicyList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for KvmPolicy data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var kvmPolicyResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -202,10 +205,6 @@ func dataSourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta int
 			return diag.Errorf("error occurred while fetching KvmPolicy: %s", responseErr.Error())
 		}
 		results := resMo.KvmPolicyList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for KvmPolicy data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

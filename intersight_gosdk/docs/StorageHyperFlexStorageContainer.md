@@ -6,12 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.HyperFlexStorageContainer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HyperFlexStorageContainer"]
+**CapacityUtilization** | Pointer to **float32** | Capacity Utilization of Storage Container. | [optional] [readonly] 
+**DataBlockSize** | Pointer to **int64** | Storage Container data block size | [optional] [readonly] 
+**InUse** | Pointer to **bool** | Indicates whether the Storage Container has Volumes. | [optional] [readonly] 
 **LastAccessTime** | Pointer to **time.Time** | Storage container&#39;s last access time. | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** | Storage container&#39;s last modified time. | [optional] [readonly] 
-**ProvisionedCapacity** | Pointer to **int64** | Provisioned Capacity of the Storage container in bytes. | [optional] [readonly] 
+**ProvisionedCapacity** | Pointer to **int64** | Provisioned Capacity of the Storage container. | [optional] [readonly] 
+**ProvisionedVolumeCapacityUtilization** | Pointer to **float32** | Provisioned Capacity Utilization of All Volumes associated with the Storage Container. | [optional] [readonly] 
 **Type** | Pointer to **string** | Storage Container type (SMB/NFS/iSCSI). * &#x60;NFS&#x60; - Storage container created/accesed through NFS protocol. * &#x60;SMB&#x60; - Storage container created/accessed through SMB protocol. * &#x60;iSCSI&#x60; - Storage container created/accessed through iSCSI protocol. | [optional] [readonly] [default to "NFS"]
 **UnCompressedUsedBytes** | Pointer to **int64** | Uncompressed bytes on Storage Container. | [optional] [readonly] 
-**Uuid** | Pointer to **string** | Uuid of the Datastore/Storage Container. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | UUID of the Datastore/Storage Containter. | [optional] [readonly] 
+**VolumeCount** | Pointer to **int64** | Number of Volumes associated with the Storage Container. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -73,6 +78,81 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) GetCapacityUtilization() float32`
+
+GetCapacityUtilization returns the CapacityUtilization field if non-nil, zero value otherwise.
+
+### GetCapacityUtilizationOk
+
+`func (o *StorageHyperFlexStorageContainer) GetCapacityUtilizationOk() (*float32, bool)`
+
+GetCapacityUtilizationOk returns a tuple with the CapacityUtilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) SetCapacityUtilization(v float32)`
+
+SetCapacityUtilization sets CapacityUtilization field to given value.
+
+### HasCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) HasCapacityUtilization() bool`
+
+HasCapacityUtilization returns a boolean if a field has been set.
+
+### GetDataBlockSize
+
+`func (o *StorageHyperFlexStorageContainer) GetDataBlockSize() int64`
+
+GetDataBlockSize returns the DataBlockSize field if non-nil, zero value otherwise.
+
+### GetDataBlockSizeOk
+
+`func (o *StorageHyperFlexStorageContainer) GetDataBlockSizeOk() (*int64, bool)`
+
+GetDataBlockSizeOk returns a tuple with the DataBlockSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataBlockSize
+
+`func (o *StorageHyperFlexStorageContainer) SetDataBlockSize(v int64)`
+
+SetDataBlockSize sets DataBlockSize field to given value.
+
+### HasDataBlockSize
+
+`func (o *StorageHyperFlexStorageContainer) HasDataBlockSize() bool`
+
+HasDataBlockSize returns a boolean if a field has been set.
+
+### GetInUse
+
+`func (o *StorageHyperFlexStorageContainer) GetInUse() bool`
+
+GetInUse returns the InUse field if non-nil, zero value otherwise.
+
+### GetInUseOk
+
+`func (o *StorageHyperFlexStorageContainer) GetInUseOk() (*bool, bool)`
+
+GetInUseOk returns a tuple with the InUse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInUse
+
+`func (o *StorageHyperFlexStorageContainer) SetInUse(v bool)`
+
+SetInUse sets InUse field to given value.
+
+### HasInUse
+
+`func (o *StorageHyperFlexStorageContainer) HasInUse() bool`
+
+HasInUse returns a boolean if a field has been set.
 
 ### GetLastAccessTime
 
@@ -149,6 +229,31 @@ SetProvisionedCapacity sets ProvisionedCapacity field to given value.
 
 HasProvisionedCapacity returns a boolean if a field has been set.
 
+### GetProvisionedVolumeCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) GetProvisionedVolumeCapacityUtilization() float32`
+
+GetProvisionedVolumeCapacityUtilization returns the ProvisionedVolumeCapacityUtilization field if non-nil, zero value otherwise.
+
+### GetProvisionedVolumeCapacityUtilizationOk
+
+`func (o *StorageHyperFlexStorageContainer) GetProvisionedVolumeCapacityUtilizationOk() (*float32, bool)`
+
+GetProvisionedVolumeCapacityUtilizationOk returns a tuple with the ProvisionedVolumeCapacityUtilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvisionedVolumeCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) SetProvisionedVolumeCapacityUtilization(v float32)`
+
+SetProvisionedVolumeCapacityUtilization sets ProvisionedVolumeCapacityUtilization field to given value.
+
+### HasProvisionedVolumeCapacityUtilization
+
+`func (o *StorageHyperFlexStorageContainer) HasProvisionedVolumeCapacityUtilization() bool`
+
+HasProvisionedVolumeCapacityUtilization returns a boolean if a field has been set.
+
 ### GetType
 
 `func (o *StorageHyperFlexStorageContainer) GetType() string`
@@ -223,6 +328,31 @@ SetUuid sets Uuid field to given value.
 `func (o *StorageHyperFlexStorageContainer) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
+
+### GetVolumeCount
+
+`func (o *StorageHyperFlexStorageContainer) GetVolumeCount() int64`
+
+GetVolumeCount returns the VolumeCount field if non-nil, zero value otherwise.
+
+### GetVolumeCountOk
+
+`func (o *StorageHyperFlexStorageContainer) GetVolumeCountOk() (*int64, bool)`
+
+GetVolumeCountOk returns a tuple with the VolumeCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeCount
+
+`func (o *StorageHyperFlexStorageContainer) SetVolumeCount(v int64)`
+
+SetVolumeCount sets VolumeCount field to given value.
+
+### HasVolumeCount
+
+`func (o *StorageHyperFlexStorageContainer) HasVolumeCount() bool`
+
+HasVolumeCount returns a boolean if a field has been set.
 
 ### GetCluster
 

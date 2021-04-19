@@ -20,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `host_count`:(int) Count of all hosts associated with this DC. 
 * `identity`:(string) Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference). 
+* `inventory_path`:(string) Inventory path of the DC. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter. 

@@ -7,12 +7,15 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxapHost"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapHost"]
 **Age** | Pointer to **string** | Denotes age or life time of the Host in nano seconds. | [optional] 
+**ChassisVersion** | Pointer to **string** | Chassis version of the Host. | [optional] 
 **ClusterUuid** | Pointer to **string** | The UUID of the cluster to which this Host belongs to. | [optional] 
+**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](virtualization.CpuAllocation.md) |  | [optional] 
 **FailureReason** | Pointer to **string** | Reason of the failure when host is in failed state. | [optional] 
-**HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. | [optional] [default to "Unknown"]
+**HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **InternalIpAddress** | Pointer to **string** | Internal IP Address of the Host. | [optional] 
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the Host. | [optional] 
 **MasterRole** | Pointer to **bool** | Is the role of this host is master in the cluster? true or false. | [optional] 
+**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](virtualization.MemoryAllocation.md) |  | [optional] 
 **Version** | Pointer to **string** | Product version of the Host. | [optional] 
 **Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
 **ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](asset.ClusterMember.Relationship.md) |  | [optional] 
@@ -102,6 +105,31 @@ SetAge sets Age field to given value.
 
 HasAge returns a boolean if a field has been set.
 
+### GetChassisVersion
+
+`func (o *HyperflexHxapHostAllOf) GetChassisVersion() string`
+
+GetChassisVersion returns the ChassisVersion field if non-nil, zero value otherwise.
+
+### GetChassisVersionOk
+
+`func (o *HyperflexHxapHostAllOf) GetChassisVersionOk() (*string, bool)`
+
+GetChassisVersionOk returns a tuple with the ChassisVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassisVersion
+
+`func (o *HyperflexHxapHostAllOf) SetChassisVersion(v string)`
+
+SetChassisVersion sets ChassisVersion field to given value.
+
+### HasChassisVersion
+
+`func (o *HyperflexHxapHostAllOf) HasChassisVersion() bool`
+
+HasChassisVersion returns a boolean if a field has been set.
+
 ### GetClusterUuid
 
 `func (o *HyperflexHxapHostAllOf) GetClusterUuid() string`
@@ -127,6 +155,41 @@ SetClusterUuid sets ClusterUuid field to given value.
 
 HasClusterUuid returns a boolean if a field has been set.
 
+### GetCpuAllocation
+
+`func (o *HyperflexHxapHostAllOf) GetCpuAllocation() VirtualizationCpuAllocation`
+
+GetCpuAllocation returns the CpuAllocation field if non-nil, zero value otherwise.
+
+### GetCpuAllocationOk
+
+`func (o *HyperflexHxapHostAllOf) GetCpuAllocationOk() (*VirtualizationCpuAllocation, bool)`
+
+GetCpuAllocationOk returns a tuple with the CpuAllocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuAllocation
+
+`func (o *HyperflexHxapHostAllOf) SetCpuAllocation(v VirtualizationCpuAllocation)`
+
+SetCpuAllocation sets CpuAllocation field to given value.
+
+### HasCpuAllocation
+
+`func (o *HyperflexHxapHostAllOf) HasCpuAllocation() bool`
+
+HasCpuAllocation returns a boolean if a field has been set.
+
+### SetCpuAllocationNil
+
+`func (o *HyperflexHxapHostAllOf) SetCpuAllocationNil(b bool)`
+
+ SetCpuAllocationNil sets the value for CpuAllocation to be an explicit nil
+
+### UnsetCpuAllocation
+`func (o *HyperflexHxapHostAllOf) UnsetCpuAllocation()`
+
+UnsetCpuAllocation ensures that no value is present for CpuAllocation, not even an explicit nil
 ### GetFailureReason
 
 `func (o *HyperflexHxapHostAllOf) GetFailureReason() string`
@@ -252,6 +315,41 @@ SetMasterRole sets MasterRole field to given value.
 
 HasMasterRole returns a boolean if a field has been set.
 
+### GetMemoryAllocation
+
+`func (o *HyperflexHxapHostAllOf) GetMemoryAllocation() VirtualizationMemoryAllocation`
+
+GetMemoryAllocation returns the MemoryAllocation field if non-nil, zero value otherwise.
+
+### GetMemoryAllocationOk
+
+`func (o *HyperflexHxapHostAllOf) GetMemoryAllocationOk() (*VirtualizationMemoryAllocation, bool)`
+
+GetMemoryAllocationOk returns a tuple with the MemoryAllocation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryAllocation
+
+`func (o *HyperflexHxapHostAllOf) SetMemoryAllocation(v VirtualizationMemoryAllocation)`
+
+SetMemoryAllocation sets MemoryAllocation field to given value.
+
+### HasMemoryAllocation
+
+`func (o *HyperflexHxapHostAllOf) HasMemoryAllocation() bool`
+
+HasMemoryAllocation returns a boolean if a field has been set.
+
+### SetMemoryAllocationNil
+
+`func (o *HyperflexHxapHostAllOf) SetMemoryAllocationNil(b bool)`
+
+ SetMemoryAllocationNil sets the value for MemoryAllocation to be an explicit nil
+
+### UnsetMemoryAllocation
+`func (o *HyperflexHxapHostAllOf) UnsetMemoryAllocation()`
+
+UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
 ### GetVersion
 
 `func (o *HyperflexHxapHostAllOf) GetVersion() string`

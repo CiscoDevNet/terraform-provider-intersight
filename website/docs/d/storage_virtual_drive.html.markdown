@@ -38,7 +38,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_state`:(string) The current operational state of Virtual drive. 
 * `operability`:(string) The current operability state of Virtual drive. 
 * `physical_block_size`:(string) The block size of the the virtual drive. 
-* `presence`:(string) The presence status of the virtual drive. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `read_policy`:(string) The read-ahead cache mode of the virtual drive. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The health indicator of the processor, &#39;OK&#39; indicates the processor is operatinal. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of the central processing unit. | [optional] [readonly] 
-**Presence** | Pointer to **string** | The valid values are &#39;equipped&#39; and &#39;absent&#39;. | [optional] [readonly] 
 **ProcessorId** | Pointer to **int64** | The ID number of a given processor. | [optional] [readonly] 
 **SocketDesignation** | Pointer to **string** | The socket ID of the installed processor. | [optional] [readonly] 
 **Speed** | Pointer to **float32** | The maximum speed of the installed processor in GHz. | [optional] [readonly] 
@@ -294,31 +293,6 @@ SetOperability sets Operability field to given value.
 `func (o *ProcessorUnit) HasOperability() bool`
 
 HasOperability returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *ProcessorUnit) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *ProcessorUnit) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *ProcessorUnit) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *ProcessorUnit) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetProcessorId
 

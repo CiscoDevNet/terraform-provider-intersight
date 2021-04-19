@@ -872,6 +872,9 @@ func dataSourceAssetSubscriptionDeviceContractInformationRead(c context.Context,
 		return diag.Errorf("error occurred while fetching count of AssetSubscriptionDeviceContractInformation: %s", responseErr.Error())
 	}
 	count := countResponse.AssetSubscriptionDeviceContractInformationList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for AssetSubscriptionDeviceContractInformation data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var assetSubscriptionDeviceContractInformationResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -886,10 +889,6 @@ func dataSourceAssetSubscriptionDeviceContractInformationRead(c context.Context,
 			return diag.Errorf("error occurred while fetching AssetSubscriptionDeviceContractInformation: %s", responseErr.Error())
 		}
 		results := resMo.AssetSubscriptionDeviceContractInformationList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for AssetSubscriptionDeviceContractInformation data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

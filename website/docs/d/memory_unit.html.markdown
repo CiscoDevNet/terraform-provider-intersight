@@ -33,7 +33,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) This represents the operational power state of the memory unit on a server. 
 * `oper_state`:(string) This represents the operational state of the memory unit on a server. 
 * `operability`:(string) This represents the operability of the memory unit on a server. 
-* `presence`:(string) This represents the presence state of the memory unit on a server. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

@@ -341,6 +341,9 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 		return diag.Errorf("error occurred while fetching count of SoftwareUcsdBundleDistributable: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwareUcsdBundleDistributableList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for SoftwareUcsdBundleDistributable data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var softwareUcsdBundleDistributableResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -355,10 +358,6 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 			return diag.Errorf("error occurred while fetching SoftwareUcsdBundleDistributable: %s", responseErr.Error())
 		}
 		results := resMo.SoftwareUcsdBundleDistributableList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for SoftwareUcsdBundleDistributable data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

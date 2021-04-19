@@ -92,7 +92,7 @@ This complex property has following sub-properties:
   + `virtual_disk`:(HashMap) - Virtual disk configuration. 
 This complex property has following sub-properties:
     + `capacity`:(string) Disk capacity to be provided with units example - 10Gi. 
-    + `mode`:(string) File mode of the disk, example - Filesystem, Block.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk. 
+    + `mode`:(string) File mode of the disk, example - Filesystem, Block.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk.* `` - Disk mode is either unknown or not supported. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `source_certs`:(string) Base64 encoded CA certificates of the https source to check against. 
     + `source_disk_to_clone`:(string) Source disk name from where the clone is done. 

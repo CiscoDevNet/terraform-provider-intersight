@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | This field identifies the psu operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Power Supply Unit. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the Power Supply. | [optional] [readonly] 
-**Presence** | Pointer to **string** | This field identifies the presence state of the psu. | [optional] [readonly] 
 **PsuFwVersion** | Pointer to **string** | This field identifies the Firmware Version of the Power Supply. | [optional] [readonly] 
 **PsuId** | Pointer to **int64** | This represents power supply unit identifier in chassis/server. | [optional] [readonly] 
 **PsuInputSrc** | Pointer to **string** | This field identifies the input source for the Power Supply. | [optional] [readonly] 
@@ -221,31 +220,6 @@ SetPid sets Pid field to given value.
 `func (o *EquipmentPsuAllOf) HasPid() bool`
 
 HasPid returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *EquipmentPsuAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *EquipmentPsuAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *EquipmentPsuAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *EquipmentPsuAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetPsuFwVersion
 

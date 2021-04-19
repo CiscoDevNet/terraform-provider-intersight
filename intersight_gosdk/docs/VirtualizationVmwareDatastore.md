@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareDatastore"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareDatastore"]
 **Accessible** | Pointer to **bool** | Shows if this datastore is accessible. | [optional] 
+**InventoryPath** | Pointer to **string** | Inventory path of the Datastore. | [optional] 
 **MaintenanceMode** | Pointer to **bool** | Indicates if the datastore is in maintenance mode. Will be set to True, when in maintenance mode. | [optional] 
 **MultipleHostAccess** | Pointer to **bool** | Indicates if this datastore is connected to multiple hosts. | [optional] 
 **Status** | Pointer to **string** | Datastore health status, as reported by the hypervisor platform. * &#x60;Unknown&#x60; - Entity status is unknown. * &#x60;Degraded&#x60; - State is degraded, and might impact normal operation of the entity. * &#x60;Critical&#x60; - Entity is in a critical state, impacting operations. * &#x60;Ok&#x60; - Entity status is in a stable state, operating normally. | [optional] [default to "Unknown"]
@@ -100,6 +101,31 @@ SetAccessible sets Accessible field to given value.
 `func (o *VirtualizationVmwareDatastore) HasAccessible() bool`
 
 HasAccessible returns a boolean if a field has been set.
+
+### GetInventoryPath
+
+`func (o *VirtualizationVmwareDatastore) GetInventoryPath() string`
+
+GetInventoryPath returns the InventoryPath field if non-nil, zero value otherwise.
+
+### GetInventoryPathOk
+
+`func (o *VirtualizationVmwareDatastore) GetInventoryPathOk() (*string, bool)`
+
+GetInventoryPathOk returns a tuple with the InventoryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryPath
+
+`func (o *VirtualizationVmwareDatastore) SetInventoryPath(v string)`
+
+SetInventoryPath sets InventoryPath field to given value.
+
+### HasInventoryPath
+
+`func (o *VirtualizationVmwareDatastore) HasInventoryPath() bool`
+
+HasInventoryPath returns a boolean if a field has been set.
 
 ### GetMaintenanceMode
 

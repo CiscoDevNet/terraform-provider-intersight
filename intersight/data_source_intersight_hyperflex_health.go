@@ -368,7 +368,7 @@ func dataSourceHyperflexHealth() *schema.Resource {
 									Computed:    true,
 								},
 								"resiliency_state": {
-									Description: "The resiliency state of the storage platform. The resiliency state is the storage cluster's current ability to maintain data.\n* `UNKNOWN` - The resiliency status of the HyperFlex cluster cannot be determined, or the cluster is transitioning into ONLINE state.\n* `HEALTHY` - The HyperFlex cluster is healthy. The cluster is able to perform IO operations and data is available.\n* `WARNING` - The HyperFlex cluster or data availability is adversely affected. This can happen if there are node or storage device failures beyond the tolerable failure threshold.\n* `OFFLINE` - The HyperFlex cluster is offline and not performing IO operations.",
+									Description: "The resiliency state of the storage platform. The resiliency state is the storage cluster's current ability to maintain data.\n* `UNKNOWN` - The resiliency status of the HyperFlex cluster cannot be determined, or the cluster is transitioning into ONLINE state.\n* `HEALTHY` - The HyperFlex cluster is healthy. The cluster is able to perform IO operations and data is available.\n* `WARNING` - The HyperFlex cluster or data availability is adversely affected. This can happen if there are node or storage device failures beyond the tolerable failure threshold.\n* `OFFLINE` - The HyperFlex cluster is offline and not performing IO operations.\n* `CRITICAL` - The HyperFlex cluster has severe faults that affect cluster and data availability.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -631,7 +631,7 @@ func dataSourceHyperflexHealth() *schema.Resource {
 												Computed:    true,
 											},
 											"resiliency_state": {
-												Description: "The resiliency state of the storage platform. The resiliency state is the storage cluster's current ability to maintain data.\n* `UNKNOWN` - The resiliency status of the HyperFlex cluster cannot be determined, or the cluster is transitioning into ONLINE state.\n* `HEALTHY` - The HyperFlex cluster is healthy. The cluster is able to perform IO operations and data is available.\n* `WARNING` - The HyperFlex cluster or data availability is adversely affected. This can happen if there are node or storage device failures beyond the tolerable failure threshold.\n* `OFFLINE` - The HyperFlex cluster is offline and not performing IO operations.",
+												Description: "The resiliency state of the storage platform. The resiliency state is the storage cluster's current ability to maintain data.\n* `UNKNOWN` - The resiliency status of the HyperFlex cluster cannot be determined, or the cluster is transitioning into ONLINE state.\n* `HEALTHY` - The HyperFlex cluster is healthy. The cluster is able to perform IO operations and data is available.\n* `WARNING` - The HyperFlex cluster or data availability is adversely affected. This can happen if there are node or storage device failures beyond the tolerable failure threshold.\n* `OFFLINE` - The HyperFlex cluster is offline and not performing IO operations.\n* `CRITICAL` - The HyperFlex cluster has severe faults that affect cluster and data availability.",
 												Type:        schema.TypeString,
 												Optional:    true,
 												Computed:    true,
@@ -728,6 +728,9 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while fetching count of HyperflexHealth: %s", responseErr.Error())
 	}
 	count := countResponse.HyperflexHealthList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for HyperflexHealth data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var hyperflexHealthResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -742,10 +745,6 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 			return diag.Errorf("error occurred while fetching HyperflexHealth: %s", responseErr.Error())
 		}
 		results := resMo.HyperflexHealthList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for HyperflexHealth data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

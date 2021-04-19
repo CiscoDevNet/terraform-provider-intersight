@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UplinkRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkRole"]
-**UdldAdminState** | Pointer to **string** | Admin configured state for UDLD for this port. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
+**FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](fabric.FlowControlPolicy.Relationship.md) |  | [optional] 
+**LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](fabric.LinkControlPolicy.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -67,30 +68,55 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetUdldAdminState
+### GetFlowControlPolicy
 
-`func (o *FabricUplinkRole) GetUdldAdminState() string`
+`func (o *FabricUplinkRole) GetFlowControlPolicy() FabricFlowControlPolicyRelationship`
 
-GetUdldAdminState returns the UdldAdminState field if non-nil, zero value otherwise.
+GetFlowControlPolicy returns the FlowControlPolicy field if non-nil, zero value otherwise.
 
-### GetUdldAdminStateOk
+### GetFlowControlPolicyOk
 
-`func (o *FabricUplinkRole) GetUdldAdminStateOk() (*string, bool)`
+`func (o *FabricUplinkRole) GetFlowControlPolicyOk() (*FabricFlowControlPolicyRelationship, bool)`
 
-GetUdldAdminStateOk returns a tuple with the UdldAdminState field if it's non-nil, zero value otherwise
+GetFlowControlPolicyOk returns a tuple with the FlowControlPolicy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUdldAdminState
+### SetFlowControlPolicy
 
-`func (o *FabricUplinkRole) SetUdldAdminState(v string)`
+`func (o *FabricUplinkRole) SetFlowControlPolicy(v FabricFlowControlPolicyRelationship)`
 
-SetUdldAdminState sets UdldAdminState field to given value.
+SetFlowControlPolicy sets FlowControlPolicy field to given value.
 
-### HasUdldAdminState
+### HasFlowControlPolicy
 
-`func (o *FabricUplinkRole) HasUdldAdminState() bool`
+`func (o *FabricUplinkRole) HasFlowControlPolicy() bool`
 
-HasUdldAdminState returns a boolean if a field has been set.
+HasFlowControlPolicy returns a boolean if a field has been set.
+
+### GetLinkControlPolicy
+
+`func (o *FabricUplinkRole) GetLinkControlPolicy() FabricLinkControlPolicyRelationship`
+
+GetLinkControlPolicy returns the LinkControlPolicy field if non-nil, zero value otherwise.
+
+### GetLinkControlPolicyOk
+
+`func (o *FabricUplinkRole) GetLinkControlPolicyOk() (*FabricLinkControlPolicyRelationship, bool)`
+
+GetLinkControlPolicyOk returns a tuple with the LinkControlPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkControlPolicy
+
+`func (o *FabricUplinkRole) SetLinkControlPolicy(v FabricLinkControlPolicyRelationship)`
+
+SetLinkControlPolicy sets LinkControlPolicy field to given value.
+
+### HasLinkControlPolicy
+
+`func (o *FabricUplinkRole) HasLinkControlPolicy() bool`
+
+HasLinkControlPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -143,6 +143,9 @@ func dataSourceKubernetesVersionRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while fetching count of KubernetesVersion: %s", responseErr.Error())
 	}
 	count := countResponse.KubernetesVersionList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for KubernetesVersion data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var kubernetesVersionResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -157,10 +160,6 @@ func dataSourceKubernetesVersionRead(c context.Context, d *schema.ResourceData, 
 			return diag.Errorf("error occurred while fetching KubernetesVersion: %s", responseErr.Error())
 		}
 		results := resMo.KubernetesVersionList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for KubernetesVersion data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

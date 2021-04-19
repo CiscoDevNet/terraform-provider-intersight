@@ -750,6 +750,9 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while fetching count of EquipmentIdentitySummary: %s", responseErr.Error())
 	}
 	count := countResponse.EquipmentIdentitySummaryList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for EquipmentIdentitySummary data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var equipmentIdentitySummaryResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -764,10 +767,6 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 			return diag.Errorf("error occurred while fetching EquipmentIdentitySummary: %s", responseErr.Error())
 		}
 		results := resMo.EquipmentIdentitySummaryList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for EquipmentIdentitySummary data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

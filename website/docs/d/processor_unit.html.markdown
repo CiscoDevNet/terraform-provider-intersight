@@ -28,7 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) The power state of the processor. 
 * `oper_state`:(string) The health indicator of the processor, 'OK' indicates the processor is operatinal. 
 * `operability`:(string) Operability state of the central processing unit. 
-* `presence`:(string) The valid values are 'equipped' and 'absent'. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `processor_id`:(int) The ID number of a given processor. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

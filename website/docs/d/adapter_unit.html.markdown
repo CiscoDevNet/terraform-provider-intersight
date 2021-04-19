@@ -30,7 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `part_number`:(string) Part number of an adapter unit. 
 * `pci_slot`:(string) PCIe slot of the adapter in the server. 
 * `power`:(string) Power state of an adapter unit. 
-* `presence`:(string) Adapter Unit presence or absence. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 

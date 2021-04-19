@@ -593,6 +593,9 @@ func dataSourceNiatelemetryFaultRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while fetching count of NiatelemetryFault: %s", responseErr.Error())
 	}
 	count := countResponse.NiatelemetryFaultList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for NiatelemetryFault data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var niatelemetryFaultResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -607,10 +610,6 @@ func dataSourceNiatelemetryFaultRead(c context.Context, d *schema.ResourceData, 
 			return diag.Errorf("error occurred while fetching NiatelemetryFault: %s", responseErr.Error())
 		}
 		results := resMo.NiatelemetryFaultList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for NiatelemetryFault data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

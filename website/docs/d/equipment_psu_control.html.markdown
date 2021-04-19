@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_qualifier`:(string) This field identifies the operational qualifier for the psu redundancy. 
 * `oper_state`:(string) This field identifies the operational state of the psu redundancy. 
 * `output_power_state`:(string) This field identifies the output power state of the psus. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `redundancy`:(string) This field identifies the redundancy state of the psus. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

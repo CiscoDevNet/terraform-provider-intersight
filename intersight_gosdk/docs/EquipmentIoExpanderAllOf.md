@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.IoExpander"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoExpander"]
 **OperState** | Pointer to **string** | Identifies the operational state of I/O expander. | [optional] [readonly] 
-**Presence** | Pointer to **string** | Identifies the availability of I/O expander. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -95,31 +94,6 @@ SetOperState sets OperState field to given value.
 `func (o *EquipmentIoExpanderAllOf) HasOperState() bool`
 
 HasOperState returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *EquipmentIoExpanderAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *EquipmentIoExpanderAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *EquipmentIoExpanderAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *EquipmentIoExpanderAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetComputeBlade
 

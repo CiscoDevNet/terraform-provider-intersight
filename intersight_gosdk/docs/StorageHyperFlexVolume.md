@@ -6,9 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.HyperFlexVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HyperFlexVolume"]
-**Capacity** | Pointer to **int64** | Provisioned Capacity of the Storage container in bytes. | [optional] [readonly] 
+**Capacity** | Pointer to **int64** | Provisioned Capacity of the Storage container in Bytes. | [optional] [readonly] 
+**ClientId** | Pointer to **string** | Client ID to which the volume belongs. | [optional] [readonly] 
+**LastModifiedTime** | Pointer to **time.Time** | Last modified time as UTC of the volume. | [optional] [readonly] 
+**LunUuid** | Pointer to **string** | UUID of Lun associated with the volume. | [optional] [readonly] 
 **SerialNumber** | Pointer to **string** | Serial number of the volume. | [optional] [readonly] 
-**Uuid** | Pointer to **string** | Uuid of the Datastore/Storage Container. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | UUID of the Datastore/Storage Containter. | [optional] [readonly] 
+**VolumeAccessMode** | Pointer to **string** | Access Mode of the volume. * &#x60;ReadWriteOnce&#x60; - Read write permisisons to a Virtual disk by a single virtual machine. * &#x60;ReadWriteMany&#x60; - Read write permisisons to a Virtual disk by multiple virtual machines. * &#x60;ReadOnlyMany&#x60; - Read only permisisons to a Virtual disk by multiple virtual machines. * &#x60;&#x60; - Unknown disk access mode. | [optional] [readonly] [default to "ReadWriteOnce"]
+**VolumeMode** | Pointer to **string** | Mode of the volume. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [readonly] [default to "Block"]
+**VolumeType** | Pointer to **string** | The Type of the volume. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **StorageContainer** | Pointer to [**StorageHyperFlexStorageContainerRelationship**](storage.HyperFlexStorageContainer.Relationship.md) |  | [optional] 
@@ -97,6 +103,81 @@ SetCapacity sets Capacity field to given value.
 
 HasCapacity returns a boolean if a field has been set.
 
+### GetClientId
+
+`func (o *StorageHyperFlexVolume) GetClientId() string`
+
+GetClientId returns the ClientId field if non-nil, zero value otherwise.
+
+### GetClientIdOk
+
+`func (o *StorageHyperFlexVolume) GetClientIdOk() (*string, bool)`
+
+GetClientIdOk returns a tuple with the ClientId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientId
+
+`func (o *StorageHyperFlexVolume) SetClientId(v string)`
+
+SetClientId sets ClientId field to given value.
+
+### HasClientId
+
+`func (o *StorageHyperFlexVolume) HasClientId() bool`
+
+HasClientId returns a boolean if a field has been set.
+
+### GetLastModifiedTime
+
+`func (o *StorageHyperFlexVolume) GetLastModifiedTime() time.Time`
+
+GetLastModifiedTime returns the LastModifiedTime field if non-nil, zero value otherwise.
+
+### GetLastModifiedTimeOk
+
+`func (o *StorageHyperFlexVolume) GetLastModifiedTimeOk() (*time.Time, bool)`
+
+GetLastModifiedTimeOk returns a tuple with the LastModifiedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastModifiedTime
+
+`func (o *StorageHyperFlexVolume) SetLastModifiedTime(v time.Time)`
+
+SetLastModifiedTime sets LastModifiedTime field to given value.
+
+### HasLastModifiedTime
+
+`func (o *StorageHyperFlexVolume) HasLastModifiedTime() bool`
+
+HasLastModifiedTime returns a boolean if a field has been set.
+
+### GetLunUuid
+
+`func (o *StorageHyperFlexVolume) GetLunUuid() string`
+
+GetLunUuid returns the LunUuid field if non-nil, zero value otherwise.
+
+### GetLunUuidOk
+
+`func (o *StorageHyperFlexVolume) GetLunUuidOk() (*string, bool)`
+
+GetLunUuidOk returns a tuple with the LunUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLunUuid
+
+`func (o *StorageHyperFlexVolume) SetLunUuid(v string)`
+
+SetLunUuid sets LunUuid field to given value.
+
+### HasLunUuid
+
+`func (o *StorageHyperFlexVolume) HasLunUuid() bool`
+
+HasLunUuid returns a boolean if a field has been set.
+
 ### GetSerialNumber
 
 `func (o *StorageHyperFlexVolume) GetSerialNumber() string`
@@ -146,6 +227,81 @@ SetUuid sets Uuid field to given value.
 `func (o *StorageHyperFlexVolume) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
+
+### GetVolumeAccessMode
+
+`func (o *StorageHyperFlexVolume) GetVolumeAccessMode() string`
+
+GetVolumeAccessMode returns the VolumeAccessMode field if non-nil, zero value otherwise.
+
+### GetVolumeAccessModeOk
+
+`func (o *StorageHyperFlexVolume) GetVolumeAccessModeOk() (*string, bool)`
+
+GetVolumeAccessModeOk returns a tuple with the VolumeAccessMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeAccessMode
+
+`func (o *StorageHyperFlexVolume) SetVolumeAccessMode(v string)`
+
+SetVolumeAccessMode sets VolumeAccessMode field to given value.
+
+### HasVolumeAccessMode
+
+`func (o *StorageHyperFlexVolume) HasVolumeAccessMode() bool`
+
+HasVolumeAccessMode returns a boolean if a field has been set.
+
+### GetVolumeMode
+
+`func (o *StorageHyperFlexVolume) GetVolumeMode() string`
+
+GetVolumeMode returns the VolumeMode field if non-nil, zero value otherwise.
+
+### GetVolumeModeOk
+
+`func (o *StorageHyperFlexVolume) GetVolumeModeOk() (*string, bool)`
+
+GetVolumeModeOk returns a tuple with the VolumeMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeMode
+
+`func (o *StorageHyperFlexVolume) SetVolumeMode(v string)`
+
+SetVolumeMode sets VolumeMode field to given value.
+
+### HasVolumeMode
+
+`func (o *StorageHyperFlexVolume) HasVolumeMode() bool`
+
+HasVolumeMode returns a boolean if a field has been set.
+
+### GetVolumeType
+
+`func (o *StorageHyperFlexVolume) GetVolumeType() string`
+
+GetVolumeType returns the VolumeType field if non-nil, zero value otherwise.
+
+### GetVolumeTypeOk
+
+`func (o *StorageHyperFlexVolume) GetVolumeTypeOk() (*string, bool)`
+
+GetVolumeTypeOk returns a tuple with the VolumeType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeType
+
+`func (o *StorageHyperFlexVolume) SetVolumeType(v string)`
+
+SetVolumeType sets VolumeType field to given value.
+
+### HasVolumeType
+
+`func (o *StorageHyperFlexVolume) HasVolumeType() bool`
+
+HasVolumeType returns a boolean if a field has been set.
 
 ### GetCluster
 

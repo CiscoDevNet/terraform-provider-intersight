@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_blocks`:(string) The number of blocks present on the physical disk. 
 * `pid`:(string) This field identifies the Product ID for physicalDisk. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `sas_address1`:(string) This field identifies the SAS address assigned to the disk SAS port-1. 

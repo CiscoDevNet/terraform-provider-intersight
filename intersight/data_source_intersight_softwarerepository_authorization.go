@@ -172,6 +172,9 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 		return diag.Errorf("error occurred while fetching count of SoftwarerepositoryAuthorization: %s", responseErr.Error())
 	}
 	count := countResponse.SoftwarerepositoryAuthorizationList.GetCount()
+	if count == 0 {
+		return diag.Errorf("your query for SoftwarerepositoryAuthorization data source did not return any results. Please change your search criteria and try again")
+	}
 	var i int32
 	var softwarerepositoryAuthorizationResults = make([]map[string]interface{}, count, count)
 	var j = 0
@@ -186,10 +189,6 @@ func dataSourceSoftwarerepositoryAuthorizationRead(c context.Context, d *schema.
 			return diag.Errorf("error occurred while fetching SoftwarerepositoryAuthorization: %s", responseErr.Error())
 		}
 		results := resMo.SoftwarerepositoryAuthorizationList.GetResults()
-		length := len(results)
-		if length == 0 {
-			return diag.Errorf("your query for SoftwarerepositoryAuthorization data source did not return results. Please change your search criteria and try again")
-		}
 		switch reflect.TypeOf(results).Kind() {
 		case reflect.Slice:
 			for i := 0; i < len(results); i++ {

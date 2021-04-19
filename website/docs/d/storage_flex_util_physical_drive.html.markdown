@@ -32,6 +32,7 @@ The following arguments can be used to get data of already created objects in In
 * `partition_count`:(string) The number of partitions present on the FlexUtil Physical Drive. 
 * `pd_status`:(string) Status of the FlexUtil Physical Drive. 
 * `physical_drive`:(string) The type of physical drive. Example - microSD. 
+* `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `product_name`:(string) Product name of the FlexUtil Physical Drive. 
 * `product_revision`:(string) Product revision of the FlexUtil Physical Drive. 
 * `read_error_count`:(string) Read error count of the FlexUtil Physical Drive. 

@@ -25,7 +25,6 @@ Name | Type | Description | Notes
 **Operability** | Pointer to **string** | This field identifies the disk operability of the disk. | [optional] [readonly] 
 **PhysicalBlockSize** | Pointer to **string** | The block size of the installed physical disk. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for physicalDisk. | [optional] [readonly] 
-**Presence** | Pointer to **string** | The presence state of the physical disk. | [optional] [readonly] 
 **Protocol** | Pointer to **string** | This field identifies the disk protocol used for communication. | [optional] [readonly] 
 **RawSize** | Pointer to **string** | The raw size of the physical disk in MB. | [optional] [readonly] 
 **Secured** | Pointer to **string** | This field identifies whether the disk is encrypted. | [optional] 
@@ -575,31 +574,6 @@ SetPid sets Pid field to given value.
 `func (o *StoragePhysicalDiskAllOf) HasPid() bool`
 
 HasPid returns a boolean if a field has been set.
-
-### GetPresence
-
-`func (o *StoragePhysicalDiskAllOf) GetPresence() string`
-
-GetPresence returns the Presence field if non-nil, zero value otherwise.
-
-### GetPresenceOk
-
-`func (o *StoragePhysicalDiskAllOf) GetPresenceOk() (*string, bool)`
-
-GetPresenceOk returns a tuple with the Presence field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPresence
-
-`func (o *StoragePhysicalDiskAllOf) SetPresence(v string)`
-
-SetPresence sets Presence field to given value.
-
-### HasPresence
-
-`func (o *StoragePhysicalDiskAllOf) HasPresence() bool`
-
-HasPresence returns a boolean if a field has been set.
 
 ### GetProtocol
 
