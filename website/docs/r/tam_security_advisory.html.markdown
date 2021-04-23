@@ -70,7 +70,7 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `priority`:(int) An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection. 
     + `query`:(string) A SparkSQL query to be used on a given data source. 
-  + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `nxos` - Collector type for this data collection is NXOS.* `intersightApi` - Collector type for this data collection is Intersight APIs. 
+  + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `intersightApi` - Collector type for this data collection is Intersight APIs.* `nxos` - Collector type for this data collection is NXOS.* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket. 
 * `base_score`:(float) CVSS version 3 base score for the security Advisory. 
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `cve_ids`:

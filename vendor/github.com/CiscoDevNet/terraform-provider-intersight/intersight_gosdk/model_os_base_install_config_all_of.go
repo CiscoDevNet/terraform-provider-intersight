@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
  *
- * API version: 1.0.9-4240
+ * API version: 1.0.9-4247
  * Contact: intersight@cisco.com
  */
 
@@ -25,9 +25,13 @@ type OsBaseInstallConfigAllOf struct {
 	Answers              NullableOsAnswers `json:"Answers,omitempty"`
 	// User provided description about the OS install configuration.
 	Description *string `json:"Description,omitempty"`
+	// The failure message of the API.
+	ErrorMsg *string `json:"ErrorMsg,omitempty"`
 	// The install method to be used for OS installation - vMedia, iPXE.  Only vMedia is supported as of now. * `vMedia` - OS image is mounted as vMedia in target server for OS installation.
-	InstallMethod             *string                             `json:"InstallMethod,omitempty"`
-	InstallTarget             NullableOsInstallTarget             `json:"InstallTarget,omitempty"`
+	InstallMethod *string                 `json:"InstallMethod,omitempty"`
+	InstallTarget NullableOsInstallTarget `json:"InstallTarget,omitempty"`
+	// Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status. * `Pending` - The initial value of the OperStatus. * `InProgress` - The OperStatus value will be InProgress during execution. * `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk. * `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError. * `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning.
+	OperState                 *string                             `json:"OperState,omitempty"`
 	OperatingSystemParameters NullableOsOperatingSystemParameters `json:"OperatingSystemParameters,omitempty"`
 	AdditionalProperties      map[string]interface{}
 }
@@ -44,6 +48,8 @@ func NewOsBaseInstallConfigAllOf(classId string, objectType string) *OsBaseInsta
 	this.ObjectType = objectType
 	var installMethod string = "vMedia"
 	this.InstallMethod = &installMethod
+	var operState string = "Pending"
+	this.OperState = &operState
 	return &this
 }
 
@@ -58,6 +64,8 @@ func NewOsBaseInstallConfigAllOfWithDefaults() *OsBaseInstallConfigAllOf {
 	this.ObjectType = objectType
 	var installMethod string = "vMedia"
 	this.InstallMethod = &installMethod
+	var operState string = "Pending"
+	this.OperState = &operState
 	return &this
 }
 
@@ -217,6 +225,38 @@ func (o *OsBaseInstallConfigAllOf) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetErrorMsg returns the ErrorMsg field value if set, zero value otherwise.
+func (o *OsBaseInstallConfigAllOf) GetErrorMsg() string {
+	if o == nil || o.ErrorMsg == nil {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMsg
+}
+
+// GetErrorMsgOk returns a tuple with the ErrorMsg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsBaseInstallConfigAllOf) GetErrorMsgOk() (*string, bool) {
+	if o == nil || o.ErrorMsg == nil {
+		return nil, false
+	}
+	return o.ErrorMsg, true
+}
+
+// HasErrorMsg returns a boolean if a field has been set.
+func (o *OsBaseInstallConfigAllOf) HasErrorMsg() bool {
+	if o != nil && o.ErrorMsg != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMsg gets a reference to the given string and assigns it to the ErrorMsg field.
+func (o *OsBaseInstallConfigAllOf) SetErrorMsg(v string) {
+	o.ErrorMsg = &v
+}
+
 // GetInstallMethod returns the InstallMethod field value if set, zero value otherwise.
 func (o *OsBaseInstallConfigAllOf) GetInstallMethod() string {
 	if o == nil || o.InstallMethod == nil {
@@ -292,6 +332,38 @@ func (o *OsBaseInstallConfigAllOf) UnsetInstallTarget() {
 	o.InstallTarget.Unset()
 }
 
+// GetOperState returns the OperState field value if set, zero value otherwise.
+func (o *OsBaseInstallConfigAllOf) GetOperState() string {
+	if o == nil || o.OperState == nil {
+		var ret string
+		return ret
+	}
+	return *o.OperState
+}
+
+// GetOperStateOk returns a tuple with the OperState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OsBaseInstallConfigAllOf) GetOperStateOk() (*string, bool) {
+	if o == nil || o.OperState == nil {
+		return nil, false
+	}
+	return o.OperState, true
+}
+
+// HasOperState returns a boolean if a field has been set.
+func (o *OsBaseInstallConfigAllOf) HasOperState() bool {
+	if o != nil && o.OperState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOperState gets a reference to the given string and assigns it to the OperState field.
+func (o *OsBaseInstallConfigAllOf) SetOperState(v string) {
+	o.OperState = &v
+}
+
 // GetOperatingSystemParameters returns the OperatingSystemParameters field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OsBaseInstallConfigAllOf) GetOperatingSystemParameters() OsOperatingSystemParameters {
 	if o == nil || o.OperatingSystemParameters.Get() == nil {
@@ -352,11 +424,17 @@ func (o OsBaseInstallConfigAllOf) MarshalJSON() ([]byte, error) {
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
 	}
+	if o.ErrorMsg != nil {
+		toSerialize["ErrorMsg"] = o.ErrorMsg
+	}
 	if o.InstallMethod != nil {
 		toSerialize["InstallMethod"] = o.InstallMethod
 	}
 	if o.InstallTarget.IsSet() {
 		toSerialize["InstallTarget"] = o.InstallTarget.Get()
+	}
+	if o.OperState != nil {
+		toSerialize["OperState"] = o.OperState
 	}
 	if o.OperatingSystemParameters.IsSet() {
 		toSerialize["OperatingSystemParameters"] = o.OperatingSystemParameters.Get()
@@ -384,8 +462,10 @@ func (o *OsBaseInstallConfigAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdditionalParameters")
 		delete(additionalProperties, "Answers")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "ErrorMsg")
 		delete(additionalProperties, "InstallMethod")
 		delete(additionalProperties, "InstallTarget")
+		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "OperatingSystemParameters")
 		o.AdditionalProperties = additionalProperties
 	}

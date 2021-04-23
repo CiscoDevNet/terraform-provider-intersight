@@ -11,7 +11,7 @@ Model contains the details of the ethernet port-channels configured on the FI.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_ether_port_channel.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_ether_port_channel.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `access_vlan`:(string) Access VLANs for this port-channel, on this FI. 
 * `account_moid`:(string) The Account ID for this managed object. 

@@ -20,6 +20,7 @@ func resourceOsInstall() *schema.Resource {
 		ReadContext:   resourceOsInstallRead,
 		DeleteContext: resourceOsInstallDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -687,6 +688,13 @@ func resourceOsInstall() *schema.Resource {
 				Computed:    true,
 				ForceNew:    true,
 			},
+			"error_msg": {
+				Description: "The failure message of the API.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ForceNew:    true,
+			},
 			"image": {
 				Description: "A reference to a softwarerepositoryOperatingSystemFile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -799,6 +807,13 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "os.Install",
+				ForceNew:    true,
+			},
+			"oper_state": {
+				Description: "Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status.\n* `Pending` - The initial value of the OperStatus.\n* `InProgress` - The OperStatus value will be InProgress during execution.\n* `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk.\n* `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError.\n* `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 				ForceNew:    true,
 			},
 			"operating_system_parameters": {
@@ -1949,6 +1964,11 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("error_msg"); ok {
+		x := (v.(string))
+		o.SetErrorMsg(x)
+	}
+
 	if v, ok := d.GetOk("image"); ok {
 		p := make([]models.SoftwarerepositoryOperatingSystemFileRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2044,6 +2064,11 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	o.SetObjectType("os.Install")
+
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
+	}
 
 	if v, ok := d.GetOk("operating_system_parameters"); ok {
 		p := make([]models.OsOperatingSystemParameters, 0, 1)
@@ -2645,6 +2670,10 @@ func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in OsInstall object: %s", err.Error())
 	}
 
+	if err := d.Set("error_msg", (s.GetErrorMsg())); err != nil {
+		return diag.Errorf("error occurred while setting property ErrorMsg in OsInstall object: %s", err.Error())
+	}
+
 	if err := d.Set("image", flattenMapSoftwarerepositoryOperatingSystemFileRelationship(s.GetImage(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Image in OsInstall object: %s", err.Error())
 	}
@@ -2671,6 +2700,10 @@ func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta inter
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 		return diag.Errorf("error occurred while setting property ObjectType in OsInstall object: %s", err.Error())
+	}
+
+	if err := d.Set("oper_state", (s.GetOperState())); err != nil {
+		return diag.Errorf("error occurred while setting property OperState in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("operating_system_parameters", flattenMapOsOperatingSystemParameters(s.GetOperatingSystemParameters(), d)); err != nil {

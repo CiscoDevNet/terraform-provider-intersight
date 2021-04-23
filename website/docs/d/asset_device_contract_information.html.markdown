@@ -11,7 +11,7 @@ Contains information about the Cisco device identified by a unique identifier li
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_asset_device_contract_information.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_asset_device_contract_information.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `contract_status`:(string) Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered.* `Unknown` - The device's contract status cannot be determined.* `Not Covered` - The Cisco device does not have a valid support contract.* `Active` - The Cisco device is covered under a active support contract.* `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days. 

@@ -11,7 +11,7 @@ Details for an instance type.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_cloud_sku_instance_type.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_cloud_sku_instance_type.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `architecture_type`:(string) Indicates if the instance type supports 32 or 64 bit or both.* `64Bit` - Enum to indicate that the instance type suppports only 64 bit architecture.* `32Bit` - Enum to indicate that the instance type supports only 32 bit architecture.* `both` - Enum to indicate that the instance type supports both 32 and 64 bit architecture. 

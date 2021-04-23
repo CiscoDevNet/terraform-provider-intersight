@@ -11,7 +11,7 @@ Models the configuration states of a FEX in Intersight.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_equipment_fex_operation.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_equipment_fex_operation.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_locator_led_action`:(string) Action performed on the locator LED for a FEX.* `None` - No operation action for the Locator Led of an equipment.* `TurnOn` - Turn on the Locator Led of an equipment.* `TurnOff` - Turn off the Locator Led of an equipment. 

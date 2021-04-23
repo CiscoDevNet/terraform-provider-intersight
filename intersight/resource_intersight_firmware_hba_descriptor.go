@@ -21,6 +21,7 @@ func resourceFirmwareHbaDescriptor() *schema.Resource {
 		UpdateContext: resourceFirmwareHbaDescriptorUpdate,
 		DeleteContext: resourceFirmwareHbaDescriptorDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

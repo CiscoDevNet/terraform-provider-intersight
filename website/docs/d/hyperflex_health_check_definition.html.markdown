@@ -11,7 +11,7 @@ HyperFlex health check definition metadata.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_health_check_definition.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_health_check_definition.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `category`:(string) Category that the health check belongs to. 

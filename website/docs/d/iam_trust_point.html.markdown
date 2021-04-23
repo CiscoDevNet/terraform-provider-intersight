@@ -15,7 +15,7 @@ It can be a root CA or an trust chain that leads to a root CA.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_iam_trust_point.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_iam_trust_point.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `chain`:(string) The certificate information for this trusted point. The certificate must be in Base64 encoded X.509 (CER) format. 

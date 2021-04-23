@@ -11,7 +11,7 @@ I/O module on a chassis which multiplexes traffic from blade servers.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_equipment_io_card.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_equipment_io_card.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `connection_path`:(string) Switch Id to which the IOM is connected to. The value can be A or B. 

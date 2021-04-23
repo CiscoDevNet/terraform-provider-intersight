@@ -11,7 +11,7 @@ Captures a customized data type definition that can be used for task or workflow
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_workflow_custom_data_type_definition.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_workflow_custom_data_type_definition.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `composite_type`:(bool) When true this data type definition is a collection of type definitions to represent composite data like JSON. 

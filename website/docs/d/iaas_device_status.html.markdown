@@ -11,7 +11,7 @@ List of infra accounts managed by UCSD.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_iaas_device_status.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_iaas_device_status.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `account_name`:(string) The UCSD infra account name. Account Name is created when UCSD admin adds any new infra account (Physical/Virtual/Compute/Network) to be managed by UCSD. 

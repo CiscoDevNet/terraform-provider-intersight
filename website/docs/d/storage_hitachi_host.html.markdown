@@ -11,7 +11,7 @@ A host group entity in Hitachi storage array. It is an abstraction used by Hitac
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_hitachi_host.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_hitachi_host.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `authentication_mode`:(string) Authentication mode for the iSCSI target.* `N/A` - Authentication Mode is not available.* `CHAP` - CHAP-authentication mode.* `NONE` - Authentication mode is not set.* `BOTH` - Comply with Host Setting. 

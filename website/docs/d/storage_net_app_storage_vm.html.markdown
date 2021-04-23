@@ -11,7 +11,7 @@ NetApp Storage Virtual Machines contain data volumes and one or more Logical Int
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_net_app_storage_vm.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_storage_vm.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cifs_enabled`:(bool) Status for Common Internet File System protocol ( CIFS ) allowed to run on Vservers. 

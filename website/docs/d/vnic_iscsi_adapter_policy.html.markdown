@@ -11,7 +11,7 @@ Set of iSCSI properties that govern the host-side behavior of the adapter.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_adapter_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_adapter_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `connection_time_out`:(int) The number of seconds to wait until Cisco UCS assumes that the initial login has failed and the iSCSI adapter is unavailable. 

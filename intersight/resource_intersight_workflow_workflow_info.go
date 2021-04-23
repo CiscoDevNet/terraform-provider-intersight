@@ -21,6 +21,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 		UpdateContext: resourceWorkflowWorkflowInfoUpdate,
 		DeleteContext: resourceWorkflowWorkflowInfoDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",

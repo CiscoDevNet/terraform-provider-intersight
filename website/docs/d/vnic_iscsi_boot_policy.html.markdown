@@ -11,7 +11,7 @@ Configuration parameters to enable a server to boot its operating system from an
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_boot_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_vnic_iscsi_boot_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `auto_targetvendor_name`:(string) Auto target interface that is represented via the Initiator name or the DHCP vendor ID. The vendor ID can be up to 32 alphanumeric characters. 

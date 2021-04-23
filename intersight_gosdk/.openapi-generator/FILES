@@ -564,6 +564,10 @@ docs/BootVmediaDeviceResponse.md
 docs/BulkApi.md
 docs/BulkApiResult.md
 docs/BulkApiResultAllOf.md
+docs/BulkMoCloner.md
+docs/BulkMoClonerAllOf.md
+docs/BulkMoMerger.md
+docs/BulkMoMergerAllOf.md
 docs/BulkRequest.md
 docs/BulkRequestAllOf.md
 docs/BulkRestResult.md
@@ -3329,6 +3333,8 @@ docs/NiatelemetryNiaLicenseStateList.md
 docs/NiatelemetryNiaLicenseStateListAllOf.md
 docs/NiatelemetryNiaLicenseStateRelationship.md
 docs/NiatelemetryNiaLicenseStateResponse.md
+docs/NiatelemetryNvePacketCounters.md
+docs/NiatelemetryNvePacketCountersAllOf.md
 docs/NiatelemetryNveVni.md
 docs/NiatelemetryNveVniAllOf.md
 docs/NiatelemetryNxosBgpMvpn.md
@@ -3376,6 +3382,11 @@ docs/OsAnswersAllOf.md
 docs/OsApi.md
 docs/OsBaseInstallConfig.md
 docs/OsBaseInstallConfigAllOf.md
+docs/OsBulkInstallInfo.md
+docs/OsBulkInstallInfoAllOf.md
+docs/OsBulkInstallInfoList.md
+docs/OsBulkInstallInfoListAllOf.md
+docs/OsBulkInstallInfoResponse.md
 docs/OsCatalog.md
 docs/OsCatalogAllOf.md
 docs/OsCatalogList.md
@@ -3394,6 +3405,8 @@ docs/OsDistributionList.md
 docs/OsDistributionListAllOf.md
 docs/OsDistributionRelationship.md
 docs/OsDistributionResponse.md
+docs/OsGlobalConfig.md
+docs/OsGlobalConfigAllOf.md
 docs/OsInstall.md
 docs/OsInstallAllOf.md
 docs/OsInstallList.md
@@ -3414,6 +3427,8 @@ docs/OsPhysicalDiskResponse.md
 docs/OsPhysicalDiskResponseAllOf.md
 docs/OsPlaceHolder.md
 docs/OsPlaceHolderAllOf.md
+docs/OsServerConfig.md
+docs/OsServerConfigAllOf.md
 docs/OsSupportedVersion.md
 docs/OsSupportedVersionAllOf.md
 docs/OsSupportedVersionList.md
@@ -3423,6 +3438,8 @@ docs/OsTemplateFile.md
 docs/OsTemplateFileAllOf.md
 docs/OsValidInstallTarget.md
 docs/OsValidInstallTargetAllOf.md
+docs/OsValidationInformation.md
+docs/OsValidationInformationAllOf.md
 docs/OsVirtualDrive.md
 docs/OsVirtualDriveAllOf.md
 docs/OsVirtualDriveResponse.md
@@ -3712,6 +3729,8 @@ docs/SecurityUnitListAllOf.md
 docs/SecurityUnitRelationship.md
 docs/SecurityUnitResponse.md
 docs/ServerApi.md
+docs/ServerBaseProfile.md
+docs/ServerBaseProfileAllOf.md
 docs/ServerConfigChangeDetail.md
 docs/ServerConfigChangeDetailAllOf.md
 docs/ServerConfigChangeDetailList.md
@@ -3741,6 +3760,11 @@ docs/ServerProfileList.md
 docs/ServerProfileListAllOf.md
 docs/ServerProfileRelationship.md
 docs/ServerProfileResponse.md
+docs/ServerProfileTemplate.md
+docs/ServerProfileTemplateAllOf.md
+docs/ServerProfileTemplateList.md
+docs/ServerProfileTemplateListAllOf.md
+docs/ServerProfileTemplateResponse.md
 docs/SmtpApi.md
 docs/SmtpPolicy.md
 docs/SmtpPolicyAllOf.md
@@ -4374,6 +4398,8 @@ docs/TamPsirtSeverity.md
 docs/TamPsirtSeverityAllOf.md
 docs/TamQueryEntry.md
 docs/TamQueryEntryAllOf.md
+docs/TamS3DataSource.md
+docs/TamS3DataSourceAllOf.md
 docs/TamSecurityAdvisory.md
 docs/TamSecurityAdvisoryAllOf.md
 docs/TamSecurityAdvisoryDetails.md
@@ -5605,6 +5631,10 @@ model_boot_vmedia_device_relationship.go
 model_boot_vmedia_device_response.go
 model_bulk_api_result.go
 model_bulk_api_result_all_of.go
+model_bulk_mo_cloner.go
+model_bulk_mo_cloner_all_of.go
+model_bulk_mo_merger.go
+model_bulk_mo_merger_all_of.go
 model_bulk_request.go
 model_bulk_request_all_of.go
 model_bulk_rest_result.go
@@ -8328,6 +8358,8 @@ model_niatelemetry_nia_license_state_list.go
 model_niatelemetry_nia_license_state_list_all_of.go
 model_niatelemetry_nia_license_state_relationship.go
 model_niatelemetry_nia_license_state_response.go
+model_niatelemetry_nve_packet_counters.go
+model_niatelemetry_nve_packet_counters_all_of.go
 model_niatelemetry_nve_vni.go
 model_niatelemetry_nve_vni_all_of.go
 model_niatelemetry_nxos_bgp_mvpn.go
@@ -8371,6 +8403,11 @@ model_os_answers.go
 model_os_answers_all_of.go
 model_os_base_install_config.go
 model_os_base_install_config_all_of.go
+model_os_bulk_install_info.go
+model_os_bulk_install_info_all_of.go
+model_os_bulk_install_info_list.go
+model_os_bulk_install_info_list_all_of.go
+model_os_bulk_install_info_response.go
 model_os_catalog.go
 model_os_catalog_all_of.go
 model_os_catalog_list.go
@@ -8389,6 +8426,8 @@ model_os_distribution_list.go
 model_os_distribution_list_all_of.go
 model_os_distribution_relationship.go
 model_os_distribution_response.go
+model_os_global_config.go
+model_os_global_config_all_of.go
 model_os_install.go
 model_os_install_all_of.go
 model_os_install_list.go
@@ -8409,6 +8448,8 @@ model_os_physical_disk_response.go
 model_os_physical_disk_response_all_of.go
 model_os_place_holder.go
 model_os_place_holder_all_of.go
+model_os_server_config.go
+model_os_server_config_all_of.go
 model_os_supported_version.go
 model_os_supported_version_all_of.go
 model_os_supported_version_list.go
@@ -8418,6 +8459,8 @@ model_os_template_file.go
 model_os_template_file_all_of.go
 model_os_valid_install_target.go
 model_os_valid_install_target_all_of.go
+model_os_validation_information.go
+model_os_validation_information_all_of.go
 model_os_virtual_drive.go
 model_os_virtual_drive_all_of.go
 model_os_virtual_drive_response.go
@@ -8695,6 +8738,8 @@ model_security_unit_list.go
 model_security_unit_list_all_of.go
 model_security_unit_relationship.go
 model_security_unit_response.go
+model_server_base_profile.go
+model_server_base_profile_all_of.go
 model_server_config_change_detail.go
 model_server_config_change_detail_all_of.go
 model_server_config_change_detail_list.go
@@ -8724,6 +8769,11 @@ model_server_profile_list.go
 model_server_profile_list_all_of.go
 model_server_profile_relationship.go
 model_server_profile_response.go
+model_server_profile_template.go
+model_server_profile_template_all_of.go
+model_server_profile_template_list.go
+model_server_profile_template_list_all_of.go
+model_server_profile_template_response.go
 model_smtp_policy.go
 model_smtp_policy_all_of.go
 model_smtp_policy_list.go
@@ -9348,6 +9398,8 @@ model_tam_psirt_severity.go
 model_tam_psirt_severity_all_of.go
 model_tam_query_entry.go
 model_tam_query_entry_all_of.go
+model_tam_s3_data_source.go
+model_tam_s3_data_source_all_of.go
 model_tam_security_advisory.go
 model_tam_security_advisory_all_of.go
 model_tam_security_advisory_details.go

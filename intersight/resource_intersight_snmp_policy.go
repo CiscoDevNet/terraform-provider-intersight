@@ -21,6 +21,7 @@ func resourceSnmpPolicy() *schema.Resource {
 		UpdateContext: resourceSnmpPolicyUpdate,
 		DeleteContext: resourceSnmpPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"access_community_string": {
 				Description: "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long.",

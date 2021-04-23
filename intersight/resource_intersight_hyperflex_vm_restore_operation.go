@@ -20,6 +20,7 @@ func resourceHyperflexVmRestoreOperation() *schema.Resource {
 		ReadContext:   resourceHyperflexVmRestoreOperationRead,
 		DeleteContext: resourceHyperflexVmRestoreOperationDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

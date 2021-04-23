@@ -74,7 +74,7 @@ This complex property has following sub-properties:
 * `minsize`:(int) Minimum number of nodes desired in this node group. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the concrete profile. 
+* `name`:(string) Name of the profile instance or profile template. 
 * `node_type`:(string) The node type ControlPlane, Worker or ControlPlaneWorker.* `Worker` - Node will be marked as a worker node.* `ControlPlane` - Node will be marked as a control plane node.* `ControlPlaneWorker` - Node will be both a controle plane and a worker. 
 * `nodes`:(Array) An array of relationships to kubernetesNodeProfile resources. 
 This complex property has following sub-properties:
@@ -114,7 +114,7 @@ This complex property has following sub-properties:
   + `key`:(string) The key for a Kubernetes taint. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string) If the key does not match this value, the specified effect is enforced. 
-* `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

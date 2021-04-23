@@ -21,6 +21,7 @@ func resourceHyperflexHealthCheckPackageChecksum() *schema.Resource {
 		UpdateContext: resourceHyperflexHealthCheckPackageChecksumUpdate,
 		DeleteContext: resourceHyperflexHealthCheckPackageChecksumDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

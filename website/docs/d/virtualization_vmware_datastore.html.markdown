@@ -11,7 +11,7 @@ The VMware Datastore entity with its attributes. Each Datastore belongs to a Dat
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_datastore.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_datastore.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `accessible`:(bool) Shows if this datastore is accessible. 
 * `account_moid`:(string) The Account ID for this managed object. 

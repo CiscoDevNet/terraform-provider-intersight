@@ -11,7 +11,7 @@ Models the configurable properties of a server in Intersight.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_compute_server_setting.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_compute_server_setting.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_locator_led_state`:(string) User configured state of the locator LED for the server.* `None` - No operation property for locator led.* `On` - The Locator Led is turned on.* `Off` - The Locator Led is turned off. 

@@ -125,6 +125,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `description`:(string) User provided description about the OS install configuration. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `error_msg`:(string)(Computed) The failure message of the API. 
 * `image`:(HashMap) - A reference to a softwarerepositoryOperatingSystemFile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
@@ -137,6 +138,7 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the OS install configuration. 
+* `oper_state`:(string)(Computed) Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status.* `Pending` - The initial value of the OperStatus.* `InProgress` - The OperStatus value will be InProgress during execution.* `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk.* `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError.* `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning. 
 * `operating_system_parameters`:(HashMap) - Parameters specific to selected OS. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 

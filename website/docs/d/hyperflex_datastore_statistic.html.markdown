@@ -11,7 +11,7 @@ Datastore Statistic describing more detailed information about the Data Protecti
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_datastore_statistic.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_datastore_statistic.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `accessibility_summary`:(string) HyperFlex datastore accessibility summary.* `ACCESSIBLE` - The HyperFlex Accessibility Summary is Accessible.* `NOT_ACCESSIBLE` - The HyperFlex Accessibility Summary is Not Accessible.* `PARTIALLY_ACCESSIBLE` - The HyperFlex Accessibility Summary is Partially Accessible. 
 * `account_moid`:(string) The Account ID for this managed object. 

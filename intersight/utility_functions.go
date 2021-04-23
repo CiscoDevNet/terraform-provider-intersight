@@ -1,6 +1,7 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -114,4 +115,52 @@ func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship
 	}
 	warning := fmt.Sprintf("Workflow moid: %d name: %s is in status %s", workflowInfo.GetMoid(), workflowInfo.GetName(), workflowInfo.GetStatus())
 	return warning, nil
+}
+
+// CustomizeTagDiff Customize tag diff to ignore cisco.meta tags
+func CustomizeTagDiff(ctx context.Context, diff *schema.ResourceDiff, i interface{}) error {
+	if tags, ok := diff.GetOk("tags"); ok {
+		tagsArray := tags.([]interface{})
+		log.Println("tags", tagsArray) // user config
+		old, _new := diff.GetChange("tags")
+		oldArray := old.([]interface{})
+		newArray := _new.([]interface{})
+		var newTags, subNew []map[string]interface{}
+		if reflect.DeepEqual(old, _new) {
+			// tags is emptied out in update
+			for _, item := range oldArray {
+				x := item.(map[string]interface{})
+				var s = x["key"].(string)
+				if strings.HasPrefix(s, "cisco.meta") {
+					newTags = append(newTags, x)
+				}
+			}
+			err := diff.SetNew("tags", newTags)
+			return err
+		}
+		log.Println("new", newArray)
+		log.Println("old", oldArray)
+
+		var existingKeys = make(map[string]bool)
+		for _, item := range newArray {
+			x := item.(map[string]interface{})
+			existingKeys[x["key"].(string)] = true
+		}
+		for _, item := range oldArray {
+			x := item.(map[string]interface{})
+			var s = x["key"].(string)
+			_, ok := existingKeys[s]
+			if strings.HasPrefix(s, "cisco.meta") && !ok {
+				newTags = append(newTags, x)
+			}
+		}
+		for _, item := range tagsArray {
+			x := item.(map[string]interface{})
+			subNew = append(subNew, x)
+		}
+		newTags = append(newTags, subNew...)
+		err := diff.SetNew("tags", newTags)
+		return err
+	}
+	return nil
 }

@@ -11,7 +11,7 @@ NetApp aggregate is a collection of disks arranged into one or more RAID groups.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_net_app_aggregate.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_aggregate.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `aggregate_type`:(string) Storage disk type for NetApp aggregate.* `HDD` - Hard Disk Drive.* `Hybrid` - Solid State Hard Disk Drive.* `Hybrid (Flash Pool)` - SSHD in a flash pool.* `SSD` - Solid State Disk.* `SSD (FabricPool)` - SSD in a flash pool.* `VMDisk (SDS)` - Storage disk with Hard disk drive.* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.* `LUN (FlexArray)` - LUN as a disk.* `Not Mapped` - Storage disk is not mapped. 

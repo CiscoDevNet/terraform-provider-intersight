@@ -21,6 +21,7 @@ func resourceSshPolicy() *schema.Resource {
 		UpdateContext: resourceSshPolicyUpdate,
 		DeleteContext: resourceSshPolicyDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

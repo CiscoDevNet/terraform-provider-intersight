@@ -11,7 +11,7 @@ DeviceCertificate managed object stores the CA Certificate used by device connec
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_appliance_device_certificate.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_appliance_device_certificate.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `ca_certificate`:(string) The base64 encoded certificate in PEM format. 

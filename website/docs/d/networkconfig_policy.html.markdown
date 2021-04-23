@@ -11,7 +11,7 @@ Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on C
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_networkconfig_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_networkconfig_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `alternate_ipv4dns_server`:(string) IP address of the secondary DNS server. 

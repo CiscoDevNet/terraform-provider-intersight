@@ -5,6 +5,7 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateMacpoolPool**](MacpoolApi.md#CreateMacpoolPool) | **Post** /api/v1/macpool/Pools | Create a &#39;macpool.Pool&#39; resource.
+[**DeleteMacpoolLease**](MacpoolApi.md#DeleteMacpoolLease) | **Delete** /api/v1/macpool/Leases/{Moid} | Delete a &#39;macpool.Lease&#39; resource.
 [**DeleteMacpoolPool**](MacpoolApi.md#DeleteMacpoolPool) | **Delete** /api/v1/macpool/Pools/{Moid} | Delete a &#39;macpool.Pool&#39; resource.
 [**GetMacpoolIdBlockByMoid**](MacpoolApi.md#GetMacpoolIdBlockByMoid) | **Get** /api/v1/macpool/IdBlocks/{Moid} | Read a &#39;macpool.IdBlock&#39; resource.
 [**GetMacpoolIdBlockList**](MacpoolApi.md#GetMacpoolIdBlockList) | **Get** /api/v1/macpool/IdBlocks | Read a &#39;macpool.IdBlock&#39; resource.
@@ -82,6 +83,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteMacpoolLease
+
+> DeleteMacpoolLease(ctx, moid).Execute()
+
+Delete a 'macpool.Lease' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.MacpoolApi.DeleteMacpoolLease(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MacpoolApi.DeleteMacpoolLease``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteMacpoolLeaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -72,7 +72,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the concrete profile. 
+* `name`:(string) Name of the profile instance or profile template. 
 * `owners`:
                 (Array of schema.TypeString) -(Computed)
 * `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -110,7 +110,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
+* `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

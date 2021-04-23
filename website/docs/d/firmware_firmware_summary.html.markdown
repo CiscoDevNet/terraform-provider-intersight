@@ -11,7 +11,7 @@ Update inventory that contains the details for the firmware running on each comp
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_firmware_firmware_summary.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_firmware_firmware_summary.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `bundle_version`:(string) Version details at the bundle level for the each of server. 

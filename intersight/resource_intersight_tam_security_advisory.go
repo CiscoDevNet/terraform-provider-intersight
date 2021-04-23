@@ -21,6 +21,7 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 		UpdateContext: resourceTamSecurityAdvisoryUpdate,
 		DeleteContext: resourceTamSecurityAdvisoryDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -289,10 +290,10 @@ func resourceTamSecurityAdvisory() *schema.Resource {
 							},
 						},
 						"type": {
-							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `nxos` - Collector type for this data collection is NXOS.\n* `intersightApi` - Collector type for this data collection is Intersight APIs.",
+							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `intersightApi` - Collector type for this data collection is Intersight APIs.\n* `nxos` - Collector type for this data collection is NXOS.\n* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "nxos",
+							Default:     "intersightApi",
 						},
 					},
 				},

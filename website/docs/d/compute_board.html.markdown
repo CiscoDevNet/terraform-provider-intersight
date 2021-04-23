@@ -11,7 +11,7 @@ Mother board of a server.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_compute_board.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_compute_board.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `board_id`:(int) Unique identifier of the mother board present in the server. 

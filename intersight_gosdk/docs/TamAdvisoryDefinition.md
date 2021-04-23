@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DateUpdated** | Pointer to **time.Time** | Date when the security advisory was last updated by Cisco. | [optional] 
 **ExternalUrl** | Pointer to **string** | A link to an external URL describing security Advisory in more details. | [optional] 
 **Recommendation** | Pointer to **string** | Recommended action to resolve the security advisory. | [optional] 
+**S3DataSources** | Pointer to [**[]TamS3DataSource**](TamS3DataSource.md) |  | [optional] 
 **Type** | Pointer to **string** | The type (field notice, security advisory etc.) of Intersight advisory. * &#x60;securityAdvisory&#x60; - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * &#x60;fieldNotice&#x60; - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). | [optional] [default to "securityAdvisory"]
 **Version** | Pointer to **string** | Cisco assigned advisory version after latest revision. | [optional] 
 **Workaround** | Pointer to **string** | Workarounds available for the advisory. | [optional] 
@@ -308,6 +309,41 @@ SetRecommendation sets Recommendation field to given value.
 
 HasRecommendation returns a boolean if a field has been set.
 
+### GetS3DataSources
+
+`func (o *TamAdvisoryDefinition) GetS3DataSources() []TamS3DataSource`
+
+GetS3DataSources returns the S3DataSources field if non-nil, zero value otherwise.
+
+### GetS3DataSourcesOk
+
+`func (o *TamAdvisoryDefinition) GetS3DataSourcesOk() (*[]TamS3DataSource, bool)`
+
+GetS3DataSourcesOk returns a tuple with the S3DataSources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetS3DataSources
+
+`func (o *TamAdvisoryDefinition) SetS3DataSources(v []TamS3DataSource)`
+
+SetS3DataSources sets S3DataSources field to given value.
+
+### HasS3DataSources
+
+`func (o *TamAdvisoryDefinition) HasS3DataSources() bool`
+
+HasS3DataSources returns a boolean if a field has been set.
+
+### SetS3DataSourcesNil
+
+`func (o *TamAdvisoryDefinition) SetS3DataSourcesNil(b bool)`
+
+ SetS3DataSourcesNil sets the value for S3DataSources to be an explicit nil
+
+### UnsetS3DataSources
+`func (o *TamAdvisoryDefinition) UnsetS3DataSources()`
+
+UnsetS3DataSources ensures that no value is present for S3DataSources, not even an explicit nil
 ### GetType
 
 `func (o *TamAdvisoryDefinition) GetType() string`

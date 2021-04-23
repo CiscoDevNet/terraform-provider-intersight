@@ -83,7 +83,7 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `priority`:(int) An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection. 
     + `query`:(string) A SparkSQL query to be used on a given data source. 
-  + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `nxos` - Collector type for this data collection is NXOS.* `intersightApi` - Collector type for this data collection is Intersight APIs. 
+  + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `intersightApi` - Collector type for this data collection is Intersight APIs.* `nxos` - Collector type for this data collection is NXOS.* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket. 
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `date_published`:(string) Date when the security advisory was first published by Cisco. 
 * `date_updated`:(string) Date when the security advisory was last updated by Cisco. 
@@ -111,6 +111,18 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `recommendation`:(string) Recommended action to resolve the security advisory. 
+* `s3_data_sources`:(Array)
+This complex property has following sub-properties:
+  + `name`:(string) Name is used to unique identify and refer a given data source in an alert definition. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `queries`:(Array)
+This complex property has following sub-properties:
+    + `name`:(string) Name is used to unique identify and result of the given query which can be used by subsequent queries as input data source. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `priority`:(int) An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection. 
+    + `query`:(string) A SparkSQL query to be used on a given data source. 
+  + `s3_path`:(string) Path used to access file in s3 containing data. 
+  + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `intersightApi` - Collector type for this data collection is Intersight APIs.* `nxos` - Collector type for this data collection is NXOS.* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket. 
 * `severity`:(HashMap) - Severity level of the Intersight Advisory. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 

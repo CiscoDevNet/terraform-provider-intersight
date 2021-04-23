@@ -21,6 +21,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 		UpdateContext: resourceHyperflexNodeProfileUpdate,
 		DeleteContext: resourceHyperflexNodeProfileDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -217,7 +218,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "Name of the concrete profile.",
+				Description: "Name of the profile instance or profile template.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -388,7 +389,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "Defines the type of the profile. Accepted value is instance.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
+				Description: "Defines the type of the profile. Accepted values are instance or template.\n* `instance` - The profile defines the configuration for a specific instance of a target.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "instance",

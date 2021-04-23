@@ -11,7 +11,7 @@ Managed object for all equipments which contains the previous vendor /model / se
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_equipment_fru.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_equipment_fru.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `action`:(string) This field identifies the action performed on a component.* `None` - No action performed on the FRU.* `Inserted` - A new FRU is inserted or added.* `Removed` - The previous FRU is removed.* `Replaced` - The previous FRU is replaced with a new FRU.* `ReplacedWithAlarm` - The previous FRU is replaced with a new FRU and a alarm is raised. 

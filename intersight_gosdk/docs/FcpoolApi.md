@@ -5,6 +5,7 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateFcpoolPool**](FcpoolApi.md#CreateFcpoolPool) | **Post** /api/v1/fcpool/Pools | Create a &#39;fcpool.Pool&#39; resource.
+[**DeleteFcpoolLease**](FcpoolApi.md#DeleteFcpoolLease) | **Delete** /api/v1/fcpool/Leases/{Moid} | Delete a &#39;fcpool.Lease&#39; resource.
 [**DeleteFcpoolPool**](FcpoolApi.md#DeleteFcpoolPool) | **Delete** /api/v1/fcpool/Pools/{Moid} | Delete a &#39;fcpool.Pool&#39; resource.
 [**GetFcpoolFcBlockByMoid**](FcpoolApi.md#GetFcpoolFcBlockByMoid) | **Get** /api/v1/fcpool/FcBlocks/{Moid} | Read a &#39;fcpool.FcBlock&#39; resource.
 [**GetFcpoolFcBlockList**](FcpoolApi.md#GetFcpoolFcBlockList) | **Get** /api/v1/fcpool/FcBlocks | Read a &#39;fcpool.FcBlock&#39; resource.
@@ -82,6 +83,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteFcpoolLease
+
+> DeleteFcpoolLease(ctx, moid).Execute()
+
+Delete a 'fcpool.Lease' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.FcpoolApi.DeleteFcpoolLease(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FcpoolApi.DeleteFcpoolLease``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteFcpoolLeaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

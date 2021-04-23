@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Cpu** | Pointer to **float32** | CPU usage of device being inventoried. This determines the percentage of CPU resources used. | [optional] 
 **CrashResetLogs** | Pointer to **string** | Last crash reset reason of device being inventoried. This determines the last reason for a device&#39;s restart due to crash of the system. | [optional] 
 **CustomerDeviceConnector** | Pointer to **string** | Returns the value of the customerDeviceConnector field. | [optional] 
+**DcnmLicenseState** | Pointer to **string** | Returns the License state of the device. | [optional] 
 **DeviceDiscovery** | Pointer to **string** | Returns the value of the deviceDiscovery field. | [optional] 
 **DeviceHealth** | Pointer to **int64** | Returns the device health. | [optional] 
 **DeviceId** | Pointer to **string** | Returns the value of the deviceId field. | [optional] 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 **InfraWiNodeCount** | Pointer to **int64** | Number of appliances as physical device that are wired into the cluster. | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the device being inventoried. | [optional] 
 **IsVirtualNode** | Pointer to **string** | Flag to specify if the node is virtual. | [optional] 
+**LicenseType** | Pointer to **string** | Returns the License type of the device. | [optional] 
 **LogInTime** | Pointer to **string** | Last log in time device being inventoried. This determines the last login time on the device. | [optional] 
 **LogOutTime** | Pointer to **string** | Last log out time of device being inventoried. This determines the last logout time on the device. | [optional] 
 **MacSecCount** | Pointer to **int64** | Number of Macsec configured interfaces on a TOR. | [optional] 
@@ -32,6 +34,7 @@ Name | Type | Description | Notes
 **NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
 **NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](niatelemetry.Interface.md) |  | [optional] 
 **NxosNveInterfaceStatus** | Pointer to **string** | Returns the value of the nxosNveInterface field. | [optional] 
+**NxosNvePacketCounters** | Pointer to [**NullableNiatelemetryNvePacketCounters**](niatelemetry.NvePacketCounters.md) |  | [optional] 
 **NxosNveVni** | Pointer to [**NullableNiatelemetryNveVni**](niatelemetry.NveVni.md) |  | [optional] 
 **NxosOspfNeighbors** | Pointer to **int64** | Total number of ospf neighbors per switch in DCNM. | [optional] 
 **NxosPimNeighbors** | Pointer to **string** | Total number of pim neighbors per switch in DCNM. | [optional] 
@@ -45,6 +48,7 @@ Name | Type | Description | Notes
 **RoutePrefixV6Count** | Pointer to **int64** | Number of v6 routes per node. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being invetoried. The serial number is unique per device and will be used as the key. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
+**SmartAccountId** | Pointer to **int64** | Returns the value of the smartAccountId/CustomerId field. | [optional] 
 **SoftwareDownload** | Pointer to **string** | Last software downloaded of device being inventoried. This determines if software download API was used. | [optional] 
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
@@ -184,6 +188,31 @@ SetCustomerDeviceConnector sets CustomerDeviceConnector field to given value.
 `func (o *NiatelemetryNiaInventory) HasCustomerDeviceConnector() bool`
 
 HasCustomerDeviceConnector returns a boolean if a field has been set.
+
+### GetDcnmLicenseState
+
+`func (o *NiatelemetryNiaInventory) GetDcnmLicenseState() string`
+
+GetDcnmLicenseState returns the DcnmLicenseState field if non-nil, zero value otherwise.
+
+### GetDcnmLicenseStateOk
+
+`func (o *NiatelemetryNiaInventory) GetDcnmLicenseStateOk() (*string, bool)`
+
+GetDcnmLicenseStateOk returns a tuple with the DcnmLicenseState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDcnmLicenseState
+
+`func (o *NiatelemetryNiaInventory) SetDcnmLicenseState(v string)`
+
+SetDcnmLicenseState sets DcnmLicenseState field to given value.
+
+### HasDcnmLicenseState
+
+`func (o *NiatelemetryNiaInventory) HasDcnmLicenseState() bool`
+
+HasDcnmLicenseState returns a boolean if a field has been set.
 
 ### GetDeviceDiscovery
 
@@ -495,6 +524,31 @@ SetIsVirtualNode sets IsVirtualNode field to given value.
 
 HasIsVirtualNode returns a boolean if a field has been set.
 
+### GetLicenseType
+
+`func (o *NiatelemetryNiaInventory) GetLicenseType() string`
+
+GetLicenseType returns the LicenseType field if non-nil, zero value otherwise.
+
+### GetLicenseTypeOk
+
+`func (o *NiatelemetryNiaInventory) GetLicenseTypeOk() (*string, bool)`
+
+GetLicenseTypeOk returns a tuple with the LicenseType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseType
+
+`func (o *NiatelemetryNiaInventory) SetLicenseType(v string)`
+
+SetLicenseType sets LicenseType field to given value.
+
+### HasLicenseType
+
+`func (o *NiatelemetryNiaInventory) HasLicenseType() bool`
+
+HasLicenseType returns a boolean if a field has been set.
+
 ### GetLogInTime
 
 `func (o *NiatelemetryNiaInventory) GetLogInTime() string`
@@ -790,6 +844,41 @@ SetNxosNveInterfaceStatus sets NxosNveInterfaceStatus field to given value.
 
 HasNxosNveInterfaceStatus returns a boolean if a field has been set.
 
+### GetNxosNvePacketCounters
+
+`func (o *NiatelemetryNiaInventory) GetNxosNvePacketCounters() NiatelemetryNvePacketCounters`
+
+GetNxosNvePacketCounters returns the NxosNvePacketCounters field if non-nil, zero value otherwise.
+
+### GetNxosNvePacketCountersOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosNvePacketCountersOk() (*NiatelemetryNvePacketCounters, bool)`
+
+GetNxosNvePacketCountersOk returns a tuple with the NxosNvePacketCounters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosNvePacketCounters
+
+`func (o *NiatelemetryNiaInventory) SetNxosNvePacketCounters(v NiatelemetryNvePacketCounters)`
+
+SetNxosNvePacketCounters sets NxosNvePacketCounters field to given value.
+
+### HasNxosNvePacketCounters
+
+`func (o *NiatelemetryNiaInventory) HasNxosNvePacketCounters() bool`
+
+HasNxosNvePacketCounters returns a boolean if a field has been set.
+
+### SetNxosNvePacketCountersNil
+
+`func (o *NiatelemetryNiaInventory) SetNxosNvePacketCountersNil(b bool)`
+
+ SetNxosNvePacketCountersNil sets the value for NxosNvePacketCounters to be an explicit nil
+
+### UnsetNxosNvePacketCounters
+`func (o *NiatelemetryNiaInventory) UnsetNxosNvePacketCounters()`
+
+UnsetNxosNvePacketCounters ensures that no value is present for NxosNvePacketCounters, not even an explicit nil
 ### GetNxosNveVni
 
 `func (o *NiatelemetryNiaInventory) GetNxosNveVni() NiatelemetryNveVni`
@@ -1134,6 +1223,31 @@ SetSiteName sets SiteName field to given value.
 `func (o *NiatelemetryNiaInventory) HasSiteName() bool`
 
 HasSiteName returns a boolean if a field has been set.
+
+### GetSmartAccountId
+
+`func (o *NiatelemetryNiaInventory) GetSmartAccountId() int64`
+
+GetSmartAccountId returns the SmartAccountId field if non-nil, zero value otherwise.
+
+### GetSmartAccountIdOk
+
+`func (o *NiatelemetryNiaInventory) GetSmartAccountIdOk() (*int64, bool)`
+
+GetSmartAccountIdOk returns a tuple with the SmartAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartAccountId
+
+`func (o *NiatelemetryNiaInventory) SetSmartAccountId(v int64)`
+
+SetSmartAccountId sets SmartAccountId field to given value.
+
+### HasSmartAccountId
+
+`func (o *NiatelemetryNiaInventory) HasSmartAccountId() bool`
+
+HasSmartAccountId returns a boolean if a field has been set.
 
 ### GetSoftwareDownload
 
