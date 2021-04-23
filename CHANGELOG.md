@@ -3,8 +3,8 @@
 ## v1.0.7
 Release Date: 23rd Apr 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4247)
-* Minor typo in documentation of data sources
-* Fix the incorrect config drift due to cisco meta tags 
+* Fixes a typo in data sources documentation
+* Ignores tags with "cisco.meta." prefixes from drift calculation
 
 ## v1.0.6
 Release Date: 19th Apr 2021
