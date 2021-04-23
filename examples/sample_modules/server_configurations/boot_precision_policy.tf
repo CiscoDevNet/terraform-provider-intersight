@@ -47,7 +47,10 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
     moid        = intersight_server_profile.server1.id
     object_type = "server.Profile"
   }
-
+  tags {
+    key = "source"
+    value = "terraform"
+  }
 }
 
 /*

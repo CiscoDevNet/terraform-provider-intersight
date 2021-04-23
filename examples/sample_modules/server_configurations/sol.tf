@@ -12,6 +12,10 @@ resource "intersight_sol_policy" "sol1" {
     object_type = "organization.Organization"
     moid = var.organization
   }
+  tags {
+    key = "source"
+    value = "terraform"
+  }
 }
 
 /*
