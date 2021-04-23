@@ -45,6 +45,12 @@ func dataSourceOsInstall() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"error_msg": {
+				Description: "The failure message of the API.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"install_method": {
 				Description: "The install method to be used for OS installation - vMedia, iPXE. \nOnly vMedia is supported as of now.\n* `vMedia` - OS image is mounted as vMedia in target server for OS installation.",
 				Type:        schema.TypeString,
@@ -69,6 +75,12 @@ func dataSourceOsInstall() *schema.Resource {
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"oper_state": {
+				Description: "Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status.\n* `Pending` - The initial value of the OperStatus.\n* `InProgress` - The OperStatus value will be InProgress during execution.\n* `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk.\n* `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError.\n* `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -113,6 +125,10 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("error_msg"); ok {
+		x := (v.(string))
+		o.SetErrorMsg(x)
+	}
 	if v, ok := d.GetOk("install_method"); ok {
 		x := (v.(string))
 		o.SetInstallMethod(x)
@@ -132,6 +148,10 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+	if v, ok := d.GetOk("oper_state"); ok {
+		x := (v.(string))
+		o.SetOperState(x)
 	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
@@ -189,6 +209,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["error_msg"] = (s.GetErrorMsg())
 
 				temp["image"] = flattenMapSoftwarerepositoryOperatingSystemFileRelationship(s.GetImage(), d)
 				temp["install_method"] = (s.GetInstallMethod())
@@ -199,6 +220,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_state"] = (s.GetOperState())
 
 				temp["operating_system_parameters"] = flattenMapOsOperatingSystemParameters(s.GetOperatingSystemParameters(), d)
 

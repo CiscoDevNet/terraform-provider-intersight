@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateUuidpoolPool**](UuidpoolApi.md#CreateUuidpoolPool) | **Post** /api/v1/uuidpool/Pools | Create a &#39;uuidpool.Pool&#39; resource.
 [**DeleteUuidpoolPool**](UuidpoolApi.md#DeleteUuidpoolPool) | **Delete** /api/v1/uuidpool/Pools/{Moid} | Delete a &#39;uuidpool.Pool&#39; resource.
+[**DeleteUuidpoolUuidLease**](UuidpoolApi.md#DeleteUuidpoolUuidLease) | **Delete** /api/v1/uuidpool/UuidLeases/{Moid} | Delete a &#39;uuidpool.UuidLease&#39; resource.
 [**GetUuidpoolBlockByMoid**](UuidpoolApi.md#GetUuidpoolBlockByMoid) | **Get** /api/v1/uuidpool/Blocks/{Moid} | Read a &#39;uuidpool.Block&#39; resource.
 [**GetUuidpoolBlockList**](UuidpoolApi.md#GetUuidpoolBlockList) | **Get** /api/v1/uuidpool/Blocks | Read a &#39;uuidpool.Block&#39; resource.
 [**GetUuidpoolPoolByMoid**](UuidpoolApi.md#GetUuidpoolPoolByMoid) | **Get** /api/v1/uuidpool/Pools/{Moid} | Read a &#39;uuidpool.Pool&#39; resource.
@@ -131,6 +132,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteUuidpoolPoolRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteUuidpoolUuidLease
+
+> DeleteUuidpoolUuidLease(ctx, moid).Execute()
+
+Delete a 'uuidpool.UuidLease' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UuidpoolApi.DeleteUuidpoolUuidLease(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UuidpoolApi.DeleteUuidpoolUuidLease``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteUuidpoolUuidLeaseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

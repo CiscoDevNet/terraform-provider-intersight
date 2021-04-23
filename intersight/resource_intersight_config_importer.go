@@ -20,6 +20,7 @@ func resourceConfigImporter() *schema.Resource {
 		ReadContext:   resourceConfigImporterRead,
 		DeleteContext: resourceConfigImporterDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

@@ -21,6 +21,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 		UpdateContext: resourceTamAdvisoryDefinitionUpdate,
 		DeleteContext: resourceTamAdvisoryDefinitionDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
@@ -323,10 +324,10 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 							},
 						},
 						"type": {
-							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `nxos` - Collector type for this data collection is NXOS.\n* `intersightApi` - Collector type for this data collection is Intersight APIs.",
+							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `intersightApi` - Collector type for this data collection is Intersight APIs.\n* `nxos` - Collector type for this data collection is NXOS.\n* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "nxos",
+							Default:     "intersightApi",
 						},
 					},
 				},
@@ -527,6 +528,91 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 				Description: "Recommended action to resolve the security advisory.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"s3_data_sources": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "tam.S3DataSource",
+						},
+						"name": {
+							Description: "Name is used to unique identify and refer a given data source in an alert definition.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "tam.S3DataSource",
+						},
+						"queries": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "tam.QueryEntry",
+									},
+									"name": {
+										Description: "Name is used to unique identify and result of the given query which can be used by subsequent queries as input data source.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "tam.QueryEntry",
+									},
+									"priority": {
+										Description: "An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+									},
+									"query": {
+										Description: "A SparkSQL query to be used on a given data source.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+								},
+							},
+						},
+						"s3_path": {
+							Description: "Path used to access file in s3 containing data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"type": {
+							Description: "Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).\n* `intersightApi` - Collector type for this data collection is Intersight APIs.\n* `nxos` - Collector type for this data collection is NXOS.\n* `s3File` - Collector type for this data collection is a file in a cloud hosted object storage bucket.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "intersightApi",
+						},
+					},
+				},
 			},
 			"severity": {
 				Description: "Severity level of the Intersight Advisory.",
@@ -1287,6 +1373,103 @@ func resourceTamAdvisoryDefinitionCreate(c context.Context, d *schema.ResourceDa
 		o.SetRecommendation(x)
 	}
 
+	if v, ok := d.GetOk("s3_data_sources"); ok {
+		x := make([]models.TamS3DataSource, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewTamS3DataSourceWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("tam.S3DataSource")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["queries"]; ok {
+				{
+					x := make([]models.TamQueryEntry, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewTamQueryEntryWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("tam.QueryEntry")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["priority"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetPriority(x)
+							}
+						}
+						if v, ok := l["query"]; ok {
+							{
+								x := (v.(string))
+								o.SetQuery(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetQueries(x)
+					}
+				}
+			}
+			if v, ok := l["s3_path"]; ok {
+				{
+					x := (v.(string))
+					o.SetS3Path(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetS3DataSources(x)
+		}
+	}
+
 	if v, ok := d.GetOk("severity"); ok {
 		p := make([]models.TamSeverity, 0, 1)
 		s := v.([]interface{})
@@ -1640,6 +1823,10 @@ func resourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceData
 
 	if err := d.Set("recommendation", (s.GetRecommendation())); err != nil {
 		return diag.Errorf("error occurred while setting property Recommendation in TamAdvisoryDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("s3_data_sources", flattenListTamS3DataSource(s.GetS3DataSources(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property S3DataSources in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("severity", flattenMapTamSeverity(s.GetSeverity(), d)); err != nil {
@@ -2244,6 +2431,104 @@ func resourceTamAdvisoryDefinitionUpdate(c context.Context, d *schema.ResourceDa
 		v := d.Get("recommendation")
 		x := (v.(string))
 		o.SetRecommendation(x)
+	}
+
+	if d.HasChange("s3_data_sources") {
+		v := d.Get("s3_data_sources")
+		x := make([]models.TamS3DataSource, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.TamS3DataSource{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("tam.S3DataSource")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["queries"]; ok {
+				{
+					x := make([]models.TamQueryEntry, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewTamQueryEntryWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("tam.QueryEntry")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["priority"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetPriority(x)
+							}
+						}
+						if v, ok := l["query"]; ok {
+							{
+								x := (v.(string))
+								o.SetQuery(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetQueries(x)
+					}
+				}
+			}
+			if v, ok := l["s3_path"]; ok {
+				{
+					x := (v.(string))
+					o.SetS3Path(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetS3DataSources(x)
+		}
 	}
 
 	if d.HasChange("severity") {

@@ -11,7 +11,7 @@ Depicts disk configuration used to create a virtual disk on a hypervisor datasto
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_virtual_disk.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_virtual_disk.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `compatibility_mode`:(string) Compatibility mode of the raw disk mapping (RDM).* `notApplicable` - Value specified for any disk which is not of raw device mapping type.* `physicalMode` - A disk device backed by a physical compatibility mode raw disk mapping cannot use disk modes, and commands are passed straight through to the LUN indicated by the raw disk mapping.* `virtualMode` - A disk device backed by a virtual compatibility mode raw disk mapping can use disk modes. 

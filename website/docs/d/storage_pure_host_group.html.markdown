@@ -11,7 +11,7 @@ A host group represents a collection of hosts with common connectivity to volume
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_pure_host_group.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_pure_host_group.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 

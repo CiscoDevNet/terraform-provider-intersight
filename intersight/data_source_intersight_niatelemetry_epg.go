@@ -144,6 +144,11 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"static_path_attachment_count": {
+				Description: "Number of static path Attachments.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"useg_hyperv_count": {
 				Description: "Logical Operators for attribute based microsegmentation in a hypervisor.",
 				Type:        schema.TypeInt,
@@ -443,6 +448,11 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"static_path_attachment_count": {
+						Description: "Number of static path Attachments.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"tags": {
 						Type:     schema.TypeList,
 						Optional: true,
@@ -700,6 +710,10 @@ func dataSourceNiatelemetryEpgRead(c context.Context, d *schema.ResourceData, me
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
+	if v, ok := d.GetOk("static_path_attachment_count"); ok {
+		x := int64(v.(int))
+		o.SetStaticPathAttachmentCount(x)
+	}
 	if v, ok := d.GetOk("useg_hyperv_count"); ok {
 		x := int64(v.(int))
 		o.SetUsegHypervCount(x)
@@ -777,6 +791,7 @@ func dataSourceNiatelemetryEpgRead(c context.Context, d *schema.ResourceData, me
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
+				temp["static_path_attachment_count"] = (s.GetStaticPathAttachmentCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["useg_hyperv_count"] = (s.GetUsegHypervCount())

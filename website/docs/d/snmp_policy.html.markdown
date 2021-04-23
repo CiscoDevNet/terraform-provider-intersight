@@ -11,7 +11,7 @@ Policy to configure SNMP settings on endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_snmp_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_snmp_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `access_community_string`:(string) The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long. 
 * `account_moid`:(string) The Account ID for this managed object. 

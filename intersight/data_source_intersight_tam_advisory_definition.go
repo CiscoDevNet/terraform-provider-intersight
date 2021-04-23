@@ -281,6 +281,8 @@ func dataSourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceDa
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["recommendation"] = (s.GetRecommendation())
 
+				temp["s3_data_sources"] = flattenListTamS3DataSource(s.GetS3DataSources(), d)
+
 				temp["severity"] = flattenMapTamSeverity(s.GetSeverity(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["state"] = (s.GetState())

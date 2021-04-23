@@ -11,7 +11,7 @@ Internally generated object of claimed APIC device known to Razor.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_kubernetes_aci_cni_apic.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_kubernetes_aci_cni_apic.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `asset_apic_moid`:(string) The Moid of the apic device under the asset service. 

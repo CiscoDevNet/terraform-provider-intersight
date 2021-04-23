@@ -11,7 +11,7 @@ An Ethernet adapter policy governs the host-side behavior of the adapter, includ
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_vnic_eth_adapter_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_vnic_eth_adapter_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `advanced_filter`:(bool) Enables advanced filtering on the interface. 

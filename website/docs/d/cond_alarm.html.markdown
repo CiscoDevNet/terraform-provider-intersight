@@ -11,7 +11,7 @@ A state-full entity representing a found problem. Alarms can be reported by the 
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_cond_alarm.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_cond_alarm.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `acknowledge`:(string) Alarm acknowledgment state. Default value is None.* `None` - The Enum value None represents that the alarm is not acknowledged and is included as part of health status and overall alarm count.* `Acknowledge` - The Enum value Acknowledge represents that the alarm is acknowledged by user. The alarm will be ignored from the health status and overall alarm count. 

@@ -11,7 +11,7 @@ Virtual Machine backup information.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_vm_backup_info.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_vm_backup_info.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `backup_status`:(string) Description of the backup status of this VmBackupInfo.* `InitializingProtection` - Protection has started, but not completed.* `Protected` - Protection has completed successfully.* `ExceedsInterval` - Protection has not completed successfully in over two times the backup interval. 

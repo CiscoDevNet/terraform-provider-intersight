@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](policy.ConfigChange.md) |  | [optional] 
 **IsPmcDeployedSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;pmcDeployedSecurePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
 **PmcDeployedSecurePassphrase** | Pointer to **string** | Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy. | [optional] 
-**TargetPlatform** | Pointer to **string** | The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
 **AssignedServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 **AssociatedServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]ServerConfigChangeDetailRelationship**](ServerConfigChangeDetailRelationship.md) | An array of relationships to serverConfigChangeDetail resources. | [optional] [readonly] 
@@ -196,31 +195,6 @@ SetPmcDeployedSecurePassphrase sets PmcDeployedSecurePassphrase field to given v
 `func (o *ServerProfileAllOf) HasPmcDeployedSecurePassphrase() bool`
 
 HasPmcDeployedSecurePassphrase returns a boolean if a field has been set.
-
-### GetTargetPlatform
-
-`func (o *ServerProfileAllOf) GetTargetPlatform() string`
-
-GetTargetPlatform returns the TargetPlatform field if non-nil, zero value otherwise.
-
-### GetTargetPlatformOk
-
-`func (o *ServerProfileAllOf) GetTargetPlatformOk() (*string, bool)`
-
-GetTargetPlatformOk returns a tuple with the TargetPlatform field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetPlatform
-
-`func (o *ServerProfileAllOf) SetTargetPlatform(v string)`
-
-SetTargetPlatform sets TargetPlatform field to given value.
-
-### HasTargetPlatform
-
-`func (o *ServerProfileAllOf) HasTargetPlatform() bool`
-
-HasTargetPlatform returns a boolean if a field has been set.
 
 ### GetAssignedServer
 

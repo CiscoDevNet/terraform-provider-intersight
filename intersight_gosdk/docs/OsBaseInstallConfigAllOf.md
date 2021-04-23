@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 **AdditionalParameters** | Pointer to [**[]OsPlaceHolder**](OsPlaceHolder.md) |  | [optional] 
 **Answers** | Pointer to [**NullableOsAnswers**](os.Answers.md) |  | [optional] 
 **Description** | Pointer to **string** | User provided description about the OS install configuration. | [optional] 
+**ErrorMsg** | Pointer to **string** | The failure message of the API. | [optional] [readonly] 
 **InstallMethod** | Pointer to **string** | The install method to be used for OS installation - vMedia, iPXE.  Only vMedia is supported as of now. * &#x60;vMedia&#x60; - OS image is mounted as vMedia in target server for OS installation. | [optional] [default to "vMedia"]
 **InstallTarget** | Pointer to [**NullableOsInstallTarget**](os.InstallTarget.md) |  | [optional] 
+**OperState** | Pointer to **string** | Denotes API operating status as pending, in_progress, completed_ok, completed_error based on the execution status. * &#x60;Pending&#x60; - The initial value of the OperStatus. * &#x60;InProgress&#x60; - The OperStatus value will be InProgress during execution. * &#x60;CompletedOk&#x60; - The API is successful with operation then OperStatus will be marked as CompletedOk. * &#x60;CompletedError&#x60; - The API is failed with operation then OperStatus will be marked as CompletedError. * &#x60;CompletedWarning&#x60; - The API is completed with some warning then OperStatus will be CompletedWarning. | [optional] [readonly] [default to "Pending"]
 **OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](os.OperatingSystemParameters.md) |  | [optional] 
 
 ## Methods
@@ -167,6 +169,31 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetErrorMsg
+
+`func (o *OsBaseInstallConfigAllOf) GetErrorMsg() string`
+
+GetErrorMsg returns the ErrorMsg field if non-nil, zero value otherwise.
+
+### GetErrorMsgOk
+
+`func (o *OsBaseInstallConfigAllOf) GetErrorMsgOk() (*string, bool)`
+
+GetErrorMsgOk returns a tuple with the ErrorMsg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorMsg
+
+`func (o *OsBaseInstallConfigAllOf) SetErrorMsg(v string)`
+
+SetErrorMsg sets ErrorMsg field to given value.
+
+### HasErrorMsg
+
+`func (o *OsBaseInstallConfigAllOf) HasErrorMsg() bool`
+
+HasErrorMsg returns a boolean if a field has been set.
+
 ### GetInstallMethod
 
 `func (o *OsBaseInstallConfigAllOf) GetInstallMethod() string`
@@ -227,6 +254,31 @@ HasInstallTarget returns a boolean if a field has been set.
 `func (o *OsBaseInstallConfigAllOf) UnsetInstallTarget()`
 
 UnsetInstallTarget ensures that no value is present for InstallTarget, not even an explicit nil
+### GetOperState
+
+`func (o *OsBaseInstallConfigAllOf) GetOperState() string`
+
+GetOperState returns the OperState field if non-nil, zero value otherwise.
+
+### GetOperStateOk
+
+`func (o *OsBaseInstallConfigAllOf) GetOperStateOk() (*string, bool)`
+
+GetOperStateOk returns a tuple with the OperState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperState
+
+`func (o *OsBaseInstallConfigAllOf) SetOperState(v string)`
+
+SetOperState sets OperState field to given value.
+
+### HasOperState
+
+`func (o *OsBaseInstallConfigAllOf) HasOperState() bool`
+
+HasOperState returns a boolean if a field has been set.
+
 ### GetOperatingSystemParameters
 
 `func (o *OsBaseInstallConfigAllOf) GetOperatingSystemParameters() OsOperatingSystemParameters`

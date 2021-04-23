@@ -37,8 +37,8 @@ Name | Type | Description | Notes
 **WorkflowTaskCount** | Pointer to **int64** | Total number of workflow tasks in this workflow. | [optional] [readonly] 
 **WorkflowWorkerTaskCount** | Pointer to **int64** | Total number of worker tasks in this workflow. This count doesn&#39;t include the control tasks in the workflow. | [optional] [readonly] 
 **Var0SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
-**Var1RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
-**Var2Profile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
+**Var1Profile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
+**Var2RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
 **Var3ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
@@ -933,55 +933,55 @@ SetVar0SwitchProfile sets Var0SwitchProfile field to given value.
 
 HasVar0SwitchProfile returns a boolean if a field has been set.
 
-### GetVar1RollbackWorkflow
+### GetVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1RollbackWorkflow() WorkflowRollbackWorkflowRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1Profile() ChassisProfileRelationship`
 
-GetVar1RollbackWorkflow returns the Var1RollbackWorkflow field if non-nil, zero value otherwise.
+GetVar1Profile returns the Var1Profile field if non-nil, zero value otherwise.
 
-### GetVar1RollbackWorkflowOk
+### GetVar1ProfileOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1ProfileOk() (*ChassisProfileRelationship, bool)`
 
-GetVar1RollbackWorkflowOk returns a tuple with the Var1RollbackWorkflow field if it's non-nil, zero value otherwise
+GetVar1ProfileOk returns a tuple with the Var1Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar1RollbackWorkflow
+### SetVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar1RollbackWorkflow(v WorkflowRollbackWorkflowRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar1Profile(v ChassisProfileRelationship)`
 
-SetVar1RollbackWorkflow sets Var1RollbackWorkflow field to given value.
+SetVar1Profile sets Var1Profile field to given value.
 
-### HasVar1RollbackWorkflow
+### HasVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar1RollbackWorkflow() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar1Profile() bool`
 
-HasVar1RollbackWorkflow returns a boolean if a field has been set.
+HasVar1Profile returns a boolean if a field has been set.
 
-### GetVar2Profile
+### GetVar2RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2Profile() ChassisProfileRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2RollbackWorkflow() WorkflowRollbackWorkflowRelationship`
 
-GetVar2Profile returns the Var2Profile field if non-nil, zero value otherwise.
+GetVar2RollbackWorkflow returns the Var2RollbackWorkflow field if non-nil, zero value otherwise.
 
-### GetVar2ProfileOk
+### GetVar2RollbackWorkflowOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2ProfileOk() (*ChassisProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool)`
 
-GetVar2ProfileOk returns a tuple with the Var2Profile field if it's non-nil, zero value otherwise
+GetVar2RollbackWorkflowOk returns a tuple with the Var2RollbackWorkflow field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar2Profile
+### SetVar2RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar2Profile(v ChassisProfileRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar2RollbackWorkflow(v WorkflowRollbackWorkflowRelationship)`
 
-SetVar2Profile sets Var2Profile field to given value.
+SetVar2RollbackWorkflow sets Var2RollbackWorkflow field to given value.
 
-### HasVar2Profile
+### HasVar2RollbackWorkflow
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar2Profile() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar2RollbackWorkflow() bool`
 
-HasVar2Profile returns a boolean if a field has been set.
+HasVar2RollbackWorkflow returns a boolean if a field has been set.
 
 ### GetVar3ClusterProfile
 

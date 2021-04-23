@@ -771,6 +771,18 @@ func flattenListComputeMappingRelationship(p []models.ComputeMappingRelationship
 	}
 	return computemappingrelationships
 }
+func flattenListComputePhysicalRelationship(p []models.ComputePhysicalRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var computephysicalrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		computephysicalrelationship := flattenMoMoRef(item)
+		computephysicalrelationships = append(computephysicalrelationships, computephysicalrelationship)
+	}
+	return computephysicalrelationships
+}
 func flattenListComputeRackUnitRelationship(p []models.ComputeRackUnitRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var computerackunitrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -4139,6 +4151,242 @@ func flattenListOsPlaceHolder(p []models.OsPlaceHolder, d *schema.ResourceData) 
 	}
 	return osplaceholders
 }
+func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData) []map[string]interface{} {
+	var osserverconfigs []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		osserverconfig := make(map[string]interface{})
+		osserverconfig["additional_parameters"] = (func(p []models.OsPlaceHolder, d *schema.ResourceData) []map[string]interface{} {
+			var osplaceholders []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				osplaceholder := make(map[string]interface{})
+				osplaceholder["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				osplaceholder["class_id"] = item.ClassId
+				osplaceholder["is_value_set"] = item.IsValueSet
+				osplaceholder["object_type"] = item.ObjectType
+				osplaceholder["type"] = (func(p models.WorkflowPrimitiveDataType, d *schema.ResourceData) []map[string]interface{} {
+					var workflowprimitivedatatypes []map[string]interface{}
+					var ret models.WorkflowPrimitiveDataType
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					workflowprimitivedatatype := make(map[string]interface{})
+					workflowprimitivedatatype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					workflowprimitivedatatype["class_id"] = item.ClassId
+					workflowprimitivedatatype["default"] = (func(p models.WorkflowDefaultValue, d *schema.ResourceData) []map[string]interface{} {
+						var workflowdefaultvalues []map[string]interface{}
+						var ret models.WorkflowDefaultValue
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						workflowdefaultvalue := make(map[string]interface{})
+						workflowdefaultvalue["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						workflowdefaultvalue["class_id"] = item.ClassId
+						workflowdefaultvalue["is_value_set"] = item.IsValueSet
+						workflowdefaultvalue["object_type"] = item.ObjectType
+						workflowdefaultvalue["override"] = item.Override
+						workflowdefaultvalue["value"] = item.Value
+
+						workflowdefaultvalues = append(workflowdefaultvalues, workflowdefaultvalue)
+						return workflowdefaultvalues
+					})(item.GetDefault(), d)
+					workflowprimitivedatatype["description"] = item.Description
+					workflowprimitivedatatype["display_meta"] = (func(p models.WorkflowDisplayMeta, d *schema.ResourceData) []map[string]interface{} {
+						var workflowdisplaymetas []map[string]interface{}
+						var ret models.WorkflowDisplayMeta
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						workflowdisplaymeta := make(map[string]interface{})
+						workflowdisplaymeta["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						workflowdisplaymeta["class_id"] = item.ClassId
+						workflowdisplaymeta["inventory_selector"] = item.InventorySelector
+						workflowdisplaymeta["object_type"] = item.ObjectType
+						workflowdisplaymeta["widget_type"] = item.WidgetType
+
+						workflowdisplaymetas = append(workflowdisplaymetas, workflowdisplaymeta)
+						return workflowdisplaymetas
+					})(item.GetDisplayMeta(), d)
+					workflowprimitivedatatype["input_parameters"] = item.InputParameters
+					workflowprimitivedatatype["label"] = item.Label
+					workflowprimitivedatatype["name"] = item.Name
+					workflowprimitivedatatype["object_type"] = item.ObjectType
+					workflowprimitivedatatype["properties"] = (func(p models.WorkflowPrimitiveDataProperty, d *schema.ResourceData) []map[string]interface{} {
+						var workflowprimitivedatapropertys []map[string]interface{}
+						var ret models.WorkflowPrimitiveDataProperty
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						workflowprimitivedataproperty := make(map[string]interface{})
+						workflowprimitivedataproperty["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						workflowprimitivedataproperty["class_id"] = item.ClassId
+						workflowprimitivedataproperty["constraints"] = (func(p models.WorkflowConstraints, d *schema.ResourceData) []map[string]interface{} {
+							var workflowconstraintss []map[string]interface{}
+							var ret models.WorkflowConstraints
+							if reflect.DeepEqual(ret, p) {
+								return nil
+							}
+							item := p
+							workflowconstraints := make(map[string]interface{})
+							workflowconstraints["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+							workflowconstraints["class_id"] = item.ClassId
+							workflowconstraints["enum_list"] = (func(p []models.WorkflowEnumEntry, d *schema.ResourceData) []map[string]interface{} {
+								var workflowenumentrys []map[string]interface{}
+								if len(p) == 0 {
+									return nil
+								}
+								for _, item := range p {
+									workflowenumentry := make(map[string]interface{})
+									workflowenumentry["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+									workflowenumentry["class_id"] = item.ClassId
+									workflowenumentry["label"] = item.Label
+									workflowenumentry["object_type"] = item.ObjectType
+									workflowenumentry["value"] = item.Value
+									workflowenumentrys = append(workflowenumentrys, workflowenumentry)
+								}
+								return workflowenumentrys
+							})(item.GetEnumList(), d)
+							workflowconstraints["max"] = item.Max
+							workflowconstraints["min"] = item.Min
+							workflowconstraints["object_type"] = item.ObjectType
+							workflowconstraints["regex"] = item.Regex
+
+							workflowconstraintss = append(workflowconstraintss, workflowconstraints)
+							return workflowconstraintss
+						})(item.GetConstraints(), d)
+						workflowprimitivedataproperty["inventory_selector"] = (func(p []models.WorkflowMoReferenceProperty, d *schema.ResourceData) []map[string]interface{} {
+							var workflowmoreferencepropertys []map[string]interface{}
+							if len(p) == 0 {
+								return nil
+							}
+							for _, item := range p {
+								workflowmoreferenceproperty := make(map[string]interface{})
+								workflowmoreferenceproperty["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+								workflowmoreferenceproperty["class_id"] = item.ClassId
+								workflowmoreferenceproperty["display_attributes"] = item.DisplayAttributes
+								workflowmoreferenceproperty["object_type"] = item.ObjectType
+								workflowmoreferenceproperty["selector"] = item.Selector
+								workflowmoreferenceproperty["value_attribute"] = item.ValueAttribute
+								workflowmoreferencepropertys = append(workflowmoreferencepropertys, workflowmoreferenceproperty)
+							}
+							return workflowmoreferencepropertys
+						})(item.GetInventorySelector(), d)
+						workflowprimitivedataproperty["object_type"] = item.ObjectType
+						workflowprimitivedataproperty["secure"] = item.Secure
+						workflowprimitivedataproperty["type"] = item.Type
+
+						workflowprimitivedatapropertys = append(workflowprimitivedatapropertys, workflowprimitivedataproperty)
+						return workflowprimitivedatapropertys
+					})(item.GetProperties(), d)
+					workflowprimitivedatatype["required"] = item.Required
+
+					workflowprimitivedatatypes = append(workflowprimitivedatatypes, workflowprimitivedatatype)
+					return workflowprimitivedatatypes
+				})(item.GetType(), d)
+				osplaceholder["value"] = item.Value
+				osplaceholders = append(osplaceholders, osplaceholder)
+			}
+			return osplaceholders
+		})(item.GetAdditionalParameters(), d)
+		osserverconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		osserverconfig["answers"] = (func(p models.OsAnswers, d *schema.ResourceData) []map[string]interface{} {
+			var osanswerss []map[string]interface{}
+			var ret models.OsAnswers
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			osanswers := make(map[string]interface{})
+			osanswers["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			answer_file_x := d.Get("answers").([]interface{})
+			if len(answer_file_x) > 0 {
+				answer_file_y := answer_file_x[0].(map[string]interface{})
+				osanswers["answer_file"] = answer_file_y["answer_file"]
+			}
+			osanswers["class_id"] = item.ClassId
+			osanswers["hostname"] = item.Hostname
+			osanswers["ip_config_type"] = item.IpConfigType
+			osanswers["ip_configuration"] = (func(p models.OsIpConfiguration, d *schema.ResourceData) []map[string]interface{} {
+				var osipconfigurations []map[string]interface{}
+				var ret models.OsIpConfiguration
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				osipconfiguration := make(map[string]interface{})
+				osipconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				osipconfiguration["class_id"] = item.ClassId
+				osipconfiguration["object_type"] = item.ObjectType
+
+				osipconfigurations = append(osipconfigurations, osipconfiguration)
+				return osipconfigurations
+			})(item.GetIpConfiguration(), d)
+			osanswers["is_answer_file_set"] = item.IsAnswerFileSet
+			osanswers["is_root_password_crypted"] = item.IsRootPasswordCrypted
+			osanswers["is_root_password_set"] = item.IsRootPasswordSet
+			osanswers["nameserver"] = item.Nameserver
+			osanswers["object_type"] = item.ObjectType
+			osanswers["product_key"] = item.ProductKey
+			root_password_x := d.Get("answers").([]interface{})
+			if len(root_password_x) > 0 {
+				root_password_y := root_password_x[0].(map[string]interface{})
+				osanswers["root_password"] = root_password_y["root_password"]
+			}
+			osanswers["nr_source"] = item.Source
+
+			osanswerss = append(osanswerss, osanswers)
+			return osanswerss
+		})(item.GetAnswers(), d)
+		osserverconfig["class_id"] = item.ClassId
+		osserverconfig["error_msgs"] = item.ErrorMsgs
+		osserverconfig["install_target"] = item.InstallTarget
+		osserverconfig["object_type"] = item.ObjectType
+		osserverconfig["processed_install_target"] = (func(p models.OsInstallTarget, d *schema.ResourceData) []map[string]interface{} {
+			var osinstalltargets []map[string]interface{}
+			var ret models.OsInstallTarget
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			osinstalltarget := make(map[string]interface{})
+			osinstalltarget["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			osinstalltarget["class_id"] = item.ClassId
+			osinstalltarget["object_type"] = item.ObjectType
+
+			osinstalltargets = append(osinstalltargets, osinstalltarget)
+			return osinstalltargets
+		})(item.GetProcessedInstallTarget(), d)
+		osserverconfig["serial_number"] = item.SerialNumber
+		osserverconfigs = append(osserverconfigs, osserverconfig)
+	}
+	return osserverconfigs
+}
+func flattenListOsValidationInformation(p []models.OsValidationInformation, d *schema.ResourceData) []map[string]interface{} {
+	var osvalidationinformations []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		osvalidationinformation := make(map[string]interface{})
+		osvalidationinformation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		osvalidationinformation["class_id"] = item.ClassId
+		osvalidationinformation["error_msg"] = item.ErrorMsg
+		osvalidationinformation["object_type"] = item.ObjectType
+		osvalidationinformation["status"] = item.Status
+		osvalidationinformation["step_name"] = item.StepName
+		osvalidationinformations = append(osvalidationinformations, osvalidationinformation)
+	}
+	return osvalidationinformations
+}
 func flattenListPciCoprocessorCardRelationship(p []models.PciCoprocessorCardRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var pcicoprocessorcardrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -5217,6 +5465,40 @@ func flattenListTamApiDataSource(p []models.TamApiDataSource, d *schema.Resource
 		tamapidatasources = append(tamapidatasources, tamapidatasource)
 	}
 	return tamapidatasources
+}
+func flattenListTamS3DataSource(p []models.TamS3DataSource, d *schema.ResourceData) []map[string]interface{} {
+	var tams3datasources []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		tams3datasource := make(map[string]interface{})
+		tams3datasource["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		tams3datasource["class_id"] = item.ClassId
+		tams3datasource["name"] = item.Name
+		tams3datasource["object_type"] = item.ObjectType
+		tams3datasource["queries"] = (func(p []models.TamQueryEntry, d *schema.ResourceData) []map[string]interface{} {
+			var tamqueryentrys []map[string]interface{}
+			if len(p) == 0 {
+				return nil
+			}
+			for _, item := range p {
+				tamqueryentry := make(map[string]interface{})
+				tamqueryentry["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				tamqueryentry["class_id"] = item.ClassId
+				tamqueryentry["name"] = item.Name
+				tamqueryentry["object_type"] = item.ObjectType
+				tamqueryentry["priority"] = item.Priority
+				tamqueryentry["query"] = item.Query
+				tamqueryentrys = append(tamqueryentrys, tamqueryentry)
+			}
+			return tamqueryentrys
+		})(item.GetQueries(), d)
+		tams3datasource["s3_path"] = item.S3Path
+		tams3datasource["type"] = item.Type
+		tams3datasources = append(tams3datasources, tams3datasource)
+	}
+	return tams3datasources
 }
 func flattenListUcsdConnectorPack(p []models.UcsdConnectorPack, d *schema.ResourceData) []map[string]interface{} {
 	var ucsdconnectorpacks []map[string]interface{}
@@ -11924,6 +12206,25 @@ func flattenMapNiatelemetryNiaLicenseStateRelationship(p models.NiatelemetryNiaL
 	niatelemetrynialicensestaterelationships = append(niatelemetrynialicensestaterelationships, niatelemetrynialicensestaterelationship)
 	return niatelemetrynialicensestaterelationships
 }
+func flattenMapNiatelemetryNvePacketCounters(p models.NiatelemetryNvePacketCounters, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrynvepacketcounterss []map[string]interface{}
+	var ret models.NiatelemetryNvePacketCounters
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetrynvepacketcounters := make(map[string]interface{})
+	niatelemetrynvepacketcounters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetrynvepacketcounters["class_id"] = item.ClassId
+	niatelemetrynvepacketcounters["mcast_inpkts"] = item.McastInpkts
+	niatelemetrynvepacketcounters["mcast_outbytes"] = item.McastOutbytes
+	niatelemetrynvepacketcounters["object_type"] = item.ObjectType
+	niatelemetrynvepacketcounters["ucast_inpkts"] = item.UcastInpkts
+	niatelemetrynvepacketcounters["ucast_outpkts"] = item.UcastOutpkts
+
+	niatelemetrynvepacketcounterss = append(niatelemetrynvepacketcounterss, niatelemetrynvepacketcounters)
+	return niatelemetrynvepacketcounterss
+}
 func flattenMapNiatelemetryNveVni(p models.NiatelemetryNveVni, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrynvevnis []map[string]interface{}
 	var ret models.NiatelemetryNveVni
@@ -12152,6 +12453,43 @@ func flattenMapOsConfigurationFileRelationship(p models.OsConfigurationFileRelat
 
 	osconfigurationfilerelationships = append(osconfigurationfilerelationships, osconfigurationfilerelationship)
 	return osconfigurationfilerelationships
+}
+func flattenMapOsGlobalConfig(p models.OsGlobalConfig, d *schema.ResourceData) []map[string]interface{} {
+	var osglobalconfigs []map[string]interface{}
+	var ret models.OsGlobalConfig
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	osglobalconfig := make(map[string]interface{})
+	osglobalconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	osglobalconfig["class_id"] = item.ClassId
+	osglobalconfig["configuration_file_name"] = item.ConfigurationFileName
+	osglobalconfig["configuration_source"] = item.ConfigurationSource
+	osglobalconfig["install_method"] = item.InstallMethod
+	osglobalconfig["install_target_type"] = item.InstallTargetType
+	osglobalconfig["object_type"] = item.ObjectType
+	osglobalconfig["operating_system_parameters"] = (func(p models.OsOperatingSystemParameters, d *schema.ResourceData) []map[string]interface{} {
+		var osoperatingsystemparameterss []map[string]interface{}
+		var ret models.OsOperatingSystemParameters
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		osoperatingsystemparameters := make(map[string]interface{})
+		osoperatingsystemparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		osoperatingsystemparameters["class_id"] = item.ClassId
+		osoperatingsystemparameters["object_type"] = item.ObjectType
+
+		osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
+		return osoperatingsystemparameterss
+	})(item.GetOperatingSystemParameters(), d)
+	osglobalconfig["os_image_name"] = item.OsImageName
+	osglobalconfig["scu_image_name"] = item.ScuImageName
+	osglobalconfig["windows_edition"] = item.WindowsEdition
+
+	osglobalconfigs = append(osglobalconfigs, osglobalconfig)
+	return osglobalconfigs
 }
 func flattenMapOsInstallTarget(p models.OsInstallTarget, d *schema.ResourceData) []map[string]interface{} {
 	var osinstalltargets []map[string]interface{}

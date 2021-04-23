@@ -21,6 +21,7 @@ func resourceIamEndPointUserRole() *schema.Resource {
 		UpdateContext: resourceIamEndPointUserRoleUpdate,
 		DeleteContext: resourceIamEndPointUserRoleDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"account_moid": {
 				Description: "The Account ID for this managed object.",

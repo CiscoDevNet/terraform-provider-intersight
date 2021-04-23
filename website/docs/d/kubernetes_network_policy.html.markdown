@@ -11,7 +11,7 @@ A policy specifying the CIDR for internal networks in a Kubernetes cluster like 
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_kubernetes_network_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_kubernetes_network_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cni_type`:(string) Supported CNI type. Currently we only support Calico.* `Calico` - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin.* `Aci` - Cisco ACI Container Network Interface plugin. 

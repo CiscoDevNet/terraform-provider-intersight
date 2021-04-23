@@ -11,13 +11,14 @@ Inventory object available per device scope. This common object holds a device l
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_inventory.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_inventory.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cpu`:(float) CPU usage of device being inventoried. This determines the percentage of CPU resources used. 
 * `crash_reset_logs`:(string) Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system. 
 * `create_time`:(string) The time when this managed object was created. 
 * `customer_device_connector`:(string) Returns the value of the customerDeviceConnector field. 
+* `dcnm_license_state`:(string) Returns the License state of the device. 
 * `device_discovery`:(string) Returns the value of the deviceDiscovery field. 
 * `device_health`:(int) Returns the device health. 
 * `device_id`:(string) Returns the value of the deviceId field. 
@@ -30,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `infra_wi_node_count`:(int) Number of appliances as physical device that are wired into the cluster. 
 * `ip_address`:(string) The IP address of the device being inventoried. 
 * `is_virtual_node`:(string) Flag to specify if the node is virtual. 
+* `license_type`:(string) Returns the License type of the device. 
 * `log_in_time`:(string) Last log in time device being inventoried. This determines the last login time on the device. 
 * `log_out_time`:(string) Last log out time of device being inventoried. This determines the last logout time on the device. 
 * `mac_sec_count`:(int) Number of Macsec configured interfaces on a TOR. 
@@ -53,6 +55,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) Serial number of device being invetoried. The serial number is unique per device and will be used as the key. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_name`:(string) Name of fabric domain of the controller. 
+* `smart_account_id`:(int) Returns the value of the smartAccountId/CustomerId field. 
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 
 * `nr_version`:(string) Software version of device being inventoried. The various software version values for each device are available on cisco.com. 

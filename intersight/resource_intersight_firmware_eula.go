@@ -20,6 +20,7 @@ func resourceFirmwareEula() *schema.Resource {
 		ReadContext:   resourceFirmwareEulaRead,
 		DeleteContext: resourceFirmwareEulaDelete,
 		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
+		CustomizeDiff: CustomizeTagDiff,
 		Schema: map[string]*schema.Schema{
 			"accepted": {
 				Description: "EULA acceptance status for the account.",

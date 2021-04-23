@@ -11,7 +11,7 @@ Policy for setting BIOS tokens on the endpoint.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_bios_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_bios_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `acs_control_gpu1state`:(string) BIOS Token for setting ACS Control GPU-1 configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 

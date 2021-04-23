@@ -11,7 +11,7 @@ Instance of an Intersight advisory applicable for an Intersight managed object. 
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_tam_advisory_instance.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_tam_advisory_instance.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `affected_object_moid`:(string) Moid of the Intersight MO affected by the alert. Deprecated now and will be removed in subsequent releases. 

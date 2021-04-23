@@ -11,7 +11,7 @@ A volume entity in Hitachi storage array.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_hitachi_volume.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_hitachi_volume.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `clpr_id`:(int) CLPR (Cache Logical Partition) number of this volume. 

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. | [optional] 
+**StaticPathAttachmentCount** | Pointer to **int64** | Number of static path Attachments. | [optional] 
 **UsegHypervCount** | Pointer to **int64** | Logical Operators for attribute based microsegmentation in a hypervisor. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -483,6 +484,31 @@ SetSiteName sets SiteName field to given value.
 `func (o *NiatelemetryEpgAllOf) HasSiteName() bool`
 
 HasSiteName returns a boolean if a field has been set.
+
+### GetStaticPathAttachmentCount
+
+`func (o *NiatelemetryEpgAllOf) GetStaticPathAttachmentCount() int64`
+
+GetStaticPathAttachmentCount returns the StaticPathAttachmentCount field if non-nil, zero value otherwise.
+
+### GetStaticPathAttachmentCountOk
+
+`func (o *NiatelemetryEpgAllOf) GetStaticPathAttachmentCountOk() (*int64, bool)`
+
+GetStaticPathAttachmentCountOk returns a tuple with the StaticPathAttachmentCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticPathAttachmentCount
+
+`func (o *NiatelemetryEpgAllOf) SetStaticPathAttachmentCount(v int64)`
+
+SetStaticPathAttachmentCount sets StaticPathAttachmentCount field to given value.
+
+### HasStaticPathAttachmentCount
+
+`func (o *NiatelemetryEpgAllOf) HasStaticPathAttachmentCount() bool`
+
+HasStaticPathAttachmentCount returns a boolean if a field has been set.
 
 ### GetUsegHypervCount
 

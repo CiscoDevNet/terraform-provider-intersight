@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-12T05:47:20Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
  *
- * API version: 1.0.9-4240
+ * API version: 1.0.9-4247
  * Contact: intersight@cisco.com
  */
 
@@ -30,6 +30,8 @@ type NiatelemetryNiaInventory struct {
 	CrashResetLogs *string `json:"CrashResetLogs,omitempty"`
 	// Returns the value of the customerDeviceConnector field.
 	CustomerDeviceConnector *string `json:"CustomerDeviceConnector,omitempty"`
+	// Returns the License state of the device.
+	DcnmLicenseState *string `json:"DcnmLicenseState,omitempty"`
 	// Returns the value of the deviceDiscovery field.
 	DeviceDiscovery *string `json:"DeviceDiscovery,omitempty"`
 	// Returns the device health.
@@ -53,6 +55,8 @@ type NiatelemetryNiaInventory struct {
 	IpAddress *string `json:"IpAddress,omitempty"`
 	// Flag to specify if the node is virtual.
 	IsVirtualNode *string `json:"IsVirtualNode,omitempty"`
+	// Returns the License type of the device.
+	LicenseType *string `json:"LicenseType,omitempty"`
 	// Last log in time device being inventoried. This determines the last login time on the device.
 	LogInTime *string `json:"LogInTime,omitempty"`
 	// Last log out time of device being inventoried. This determines the last logout time on the device.
@@ -72,8 +76,9 @@ type NiatelemetryNiaInventory struct {
 	NxosDciInterfaceStatus *string                       `json:"NxosDciInterfaceStatus,omitempty"`
 	NxosInterfaceBrief     NullableNiatelemetryInterface `json:"NxosInterfaceBrief,omitempty"`
 	// Returns the value of the nxosNveInterface field.
-	NxosNveInterfaceStatus *string                    `json:"NxosNveInterfaceStatus,omitempty"`
-	NxosNveVni             NullableNiatelemetryNveVni `json:"NxosNveVni,omitempty"`
+	NxosNveInterfaceStatus *string                               `json:"NxosNveInterfaceStatus,omitempty"`
+	NxosNvePacketCounters  NullableNiatelemetryNvePacketCounters `json:"NxosNvePacketCounters,omitempty"`
+	NxosNveVni             NullableNiatelemetryNveVni            `json:"NxosNveVni,omitempty"`
 	// Total number of ospf neighbors per switch in DCNM.
 	NxosOspfNeighbors *int64 `json:"NxosOspfNeighbors,omitempty"`
 	// Total number of pim neighbors per switch in DCNM.
@@ -97,6 +102,8 @@ type NiatelemetryNiaInventory struct {
 	Serial *string `json:"Serial,omitempty"`
 	// Name of fabric domain of the controller.
 	SiteName *string `json:"SiteName,omitempty"`
+	// Returns the value of the smartAccountId/CustomerId field.
+	SmartAccountId *int64 `json:"SmartAccountId,omitempty"`
 	// Last software downloaded of device being inventoried. This determines if software download API was used.
 	SoftwareDownload *string `json:"SoftwareDownload,omitempty"`
 	// The amount of time that the device being inventoried been up.
@@ -275,6 +282,38 @@ func (o *NiatelemetryNiaInventory) HasCustomerDeviceConnector() bool {
 // SetCustomerDeviceConnector gets a reference to the given string and assigns it to the CustomerDeviceConnector field.
 func (o *NiatelemetryNiaInventory) SetCustomerDeviceConnector(v string) {
 	o.CustomerDeviceConnector = &v
+}
+
+// GetDcnmLicenseState returns the DcnmLicenseState field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetDcnmLicenseState() string {
+	if o == nil || o.DcnmLicenseState == nil {
+		var ret string
+		return ret
+	}
+	return *o.DcnmLicenseState
+}
+
+// GetDcnmLicenseStateOk returns a tuple with the DcnmLicenseState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetDcnmLicenseStateOk() (*string, bool) {
+	if o == nil || o.DcnmLicenseState == nil {
+		return nil, false
+	}
+	return o.DcnmLicenseState, true
+}
+
+// HasDcnmLicenseState returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasDcnmLicenseState() bool {
+	if o != nil && o.DcnmLicenseState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDcnmLicenseState gets a reference to the given string and assigns it to the DcnmLicenseState field.
+func (o *NiatelemetryNiaInventory) SetDcnmLicenseState(v string) {
+	o.DcnmLicenseState = &v
 }
 
 // GetDeviceDiscovery returns the DeviceDiscovery field value if set, zero value otherwise.
@@ -672,6 +711,38 @@ func (o *NiatelemetryNiaInventory) SetIsVirtualNode(v string) {
 	o.IsVirtualNode = &v
 }
 
+// GetLicenseType returns the LicenseType field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetLicenseType() string {
+	if o == nil || o.LicenseType == nil {
+		var ret string
+		return ret
+	}
+	return *o.LicenseType
+}
+
+// GetLicenseTypeOk returns a tuple with the LicenseType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetLicenseTypeOk() (*string, bool) {
+	if o == nil || o.LicenseType == nil {
+		return nil, false
+	}
+	return o.LicenseType, true
+}
+
+// HasLicenseType returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasLicenseType() bool {
+	if o != nil && o.LicenseType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLicenseType gets a reference to the given string and assigns it to the LicenseType field.
+func (o *NiatelemetryNiaInventory) SetLicenseType(v string) {
+	o.LicenseType = &v
+}
+
 // GetLogInTime returns the LogInTime field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventory) GetLogInTime() string {
 	if o == nil || o.LogInTime == nil {
@@ -1044,6 +1115,49 @@ func (o *NiatelemetryNiaInventory) HasNxosNveInterfaceStatus() bool {
 // SetNxosNveInterfaceStatus gets a reference to the given string and assigns it to the NxosNveInterfaceStatus field.
 func (o *NiatelemetryNiaInventory) SetNxosNveInterfaceStatus(v string) {
 	o.NxosNveInterfaceStatus = &v
+}
+
+// GetNxosNvePacketCounters returns the NxosNvePacketCounters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventory) GetNxosNvePacketCounters() NiatelemetryNvePacketCounters {
+	if o == nil || o.NxosNvePacketCounters.Get() == nil {
+		var ret NiatelemetryNvePacketCounters
+		return ret
+	}
+	return *o.NxosNvePacketCounters.Get()
+}
+
+// GetNxosNvePacketCountersOk returns a tuple with the NxosNvePacketCounters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventory) GetNxosNvePacketCountersOk() (*NiatelemetryNvePacketCounters, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NxosNvePacketCounters.Get(), o.NxosNvePacketCounters.IsSet()
+}
+
+// HasNxosNvePacketCounters returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasNxosNvePacketCounters() bool {
+	if o != nil && o.NxosNvePacketCounters.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosNvePacketCounters gets a reference to the given NullableNiatelemetryNvePacketCounters and assigns it to the NxosNvePacketCounters field.
+func (o *NiatelemetryNiaInventory) SetNxosNvePacketCounters(v NiatelemetryNvePacketCounters) {
+	o.NxosNvePacketCounters.Set(&v)
+}
+
+// SetNxosNvePacketCountersNil sets the value for NxosNvePacketCounters to be an explicit nil
+func (o *NiatelemetryNiaInventory) SetNxosNvePacketCountersNil() {
+	o.NxosNvePacketCounters.Set(nil)
+}
+
+// UnsetNxosNvePacketCounters ensures that no value is present for NxosNvePacketCounters, not even an explicit nil
+func (o *NiatelemetryNiaInventory) UnsetNxosNvePacketCounters() {
+	o.NxosNvePacketCounters.Unset()
 }
 
 // GetNxosNveVni returns the NxosNveVni field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1484,6 +1598,38 @@ func (o *NiatelemetryNiaInventory) SetSiteName(v string) {
 	o.SiteName = &v
 }
 
+// GetSmartAccountId returns the SmartAccountId field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetSmartAccountId() int64 {
+	if o == nil || o.SmartAccountId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SmartAccountId
+}
+
+// GetSmartAccountIdOk returns a tuple with the SmartAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetSmartAccountIdOk() (*int64, bool) {
+	if o == nil || o.SmartAccountId == nil {
+		return nil, false
+	}
+	return o.SmartAccountId, true
+}
+
+// HasSmartAccountId returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasSmartAccountId() bool {
+	if o != nil && o.SmartAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSmartAccountId gets a reference to the given int64 and assigns it to the SmartAccountId field.
+func (o *NiatelemetryNiaInventory) SetSmartAccountId(v int64) {
+	o.SmartAccountId = &v
+}
+
 // GetSoftwareDownload returns the SoftwareDownload field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventory) GetSoftwareDownload() string {
 	if o == nil || o.SoftwareDownload == nil {
@@ -1669,6 +1815,9 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	if o.CustomerDeviceConnector != nil {
 		toSerialize["CustomerDeviceConnector"] = o.CustomerDeviceConnector
 	}
+	if o.DcnmLicenseState != nil {
+		toSerialize["DcnmLicenseState"] = o.DcnmLicenseState
+	}
 	if o.DeviceDiscovery != nil {
 		toSerialize["DeviceDiscovery"] = o.DeviceDiscovery
 	}
@@ -1705,6 +1854,9 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	if o.IsVirtualNode != nil {
 		toSerialize["IsVirtualNode"] = o.IsVirtualNode
 	}
+	if o.LicenseType != nil {
+		toSerialize["LicenseType"] = o.LicenseType
+	}
 	if o.LogInTime != nil {
 		toSerialize["LogInTime"] = o.LogInTime
 	}
@@ -1737,6 +1889,9 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	}
 	if o.NxosNveInterfaceStatus != nil {
 		toSerialize["NxosNveInterfaceStatus"] = o.NxosNveInterfaceStatus
+	}
+	if o.NxosNvePacketCounters.IsSet() {
+		toSerialize["NxosNvePacketCounters"] = o.NxosNvePacketCounters.Get()
 	}
 	if o.NxosNveVni.IsSet() {
 		toSerialize["NxosNveVni"] = o.NxosNveVni.Get()
@@ -1777,6 +1932,9 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	if o.SiteName != nil {
 		toSerialize["SiteName"] = o.SiteName
 	}
+	if o.SmartAccountId != nil {
+		toSerialize["SmartAccountId"] = o.SmartAccountId
+	}
 	if o.SoftwareDownload != nil {
 		toSerialize["SoftwareDownload"] = o.SoftwareDownload
 	}
@@ -1812,6 +1970,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		CrashResetLogs *string `json:"CrashResetLogs,omitempty"`
 		// Returns the value of the customerDeviceConnector field.
 		CustomerDeviceConnector *string `json:"CustomerDeviceConnector,omitempty"`
+		// Returns the License state of the device.
+		DcnmLicenseState *string `json:"DcnmLicenseState,omitempty"`
 		// Returns the value of the deviceDiscovery field.
 		DeviceDiscovery *string `json:"DeviceDiscovery,omitempty"`
 		// Returns the device health.
@@ -1835,6 +1995,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		IpAddress *string `json:"IpAddress,omitempty"`
 		// Flag to specify if the node is virtual.
 		IsVirtualNode *string `json:"IsVirtualNode,omitempty"`
+		// Returns the License type of the device.
+		LicenseType *string `json:"LicenseType,omitempty"`
 		// Last log in time device being inventoried. This determines the last login time on the device.
 		LogInTime *string `json:"LogInTime,omitempty"`
 		// Last log out time of device being inventoried. This determines the last logout time on the device.
@@ -1854,8 +2016,9 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		NxosDciInterfaceStatus *string                       `json:"NxosDciInterfaceStatus,omitempty"`
 		NxosInterfaceBrief     NullableNiatelemetryInterface `json:"NxosInterfaceBrief,omitempty"`
 		// Returns the value of the nxosNveInterface field.
-		NxosNveInterfaceStatus *string                    `json:"NxosNveInterfaceStatus,omitempty"`
-		NxosNveVni             NullableNiatelemetryNveVni `json:"NxosNveVni,omitempty"`
+		NxosNveInterfaceStatus *string                               `json:"NxosNveInterfaceStatus,omitempty"`
+		NxosNvePacketCounters  NullableNiatelemetryNvePacketCounters `json:"NxosNvePacketCounters,omitempty"`
+		NxosNveVni             NullableNiatelemetryNveVni            `json:"NxosNveVni,omitempty"`
 		// Total number of ospf neighbors per switch in DCNM.
 		NxosOspfNeighbors *int64 `json:"NxosOspfNeighbors,omitempty"`
 		// Total number of pim neighbors per switch in DCNM.
@@ -1879,6 +2042,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		Serial *string `json:"Serial,omitempty"`
 		// Name of fabric domain of the controller.
 		SiteName *string `json:"SiteName,omitempty"`
+		// Returns the value of the smartAccountId/CustomerId field.
+		SmartAccountId *int64 `json:"SmartAccountId,omitempty"`
 		// Last software downloaded of device being inventoried. This determines if software download API was used.
 		SoftwareDownload *string `json:"SoftwareDownload,omitempty"`
 		// The amount of time that the device being inventoried been up.
@@ -1899,6 +2064,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.Cpu = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.Cpu
 		varNiatelemetryNiaInventory.CrashResetLogs = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.CrashResetLogs
 		varNiatelemetryNiaInventory.CustomerDeviceConnector = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.CustomerDeviceConnector
+		varNiatelemetryNiaInventory.DcnmLicenseState = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.DcnmLicenseState
 		varNiatelemetryNiaInventory.DeviceDiscovery = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.DeviceDiscovery
 		varNiatelemetryNiaInventory.DeviceHealth = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.DeviceHealth
 		varNiatelemetryNiaInventory.DeviceId = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.DeviceId
@@ -1911,6 +2077,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.InfraWiNodeCount = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.InfraWiNodeCount
 		varNiatelemetryNiaInventory.IpAddress = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.IpAddress
 		varNiatelemetryNiaInventory.IsVirtualNode = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.IsVirtualNode
+		varNiatelemetryNiaInventory.LicenseType = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LicenseType
 		varNiatelemetryNiaInventory.LogInTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LogInTime
 		varNiatelemetryNiaInventory.LogOutTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LogOutTime
 		varNiatelemetryNiaInventory.MacSecCount = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.MacSecCount
@@ -1922,6 +2089,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.NxosDciInterfaceStatus = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosDciInterfaceStatus
 		varNiatelemetryNiaInventory.NxosInterfaceBrief = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosInterfaceBrief
 		varNiatelemetryNiaInventory.NxosNveInterfaceStatus = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosNveInterfaceStatus
+		varNiatelemetryNiaInventory.NxosNvePacketCounters = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosNvePacketCounters
 		varNiatelemetryNiaInventory.NxosNveVni = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosNveVni
 		varNiatelemetryNiaInventory.NxosOspfNeighbors = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosOspfNeighbors
 		varNiatelemetryNiaInventory.NxosPimNeighbors = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.NxosPimNeighbors
@@ -1935,6 +2103,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.RoutePrefixV6Count = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.RoutePrefixV6Count
 		varNiatelemetryNiaInventory.Serial = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.Serial
 		varNiatelemetryNiaInventory.SiteName = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SiteName
+		varNiatelemetryNiaInventory.SmartAccountId = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SmartAccountId
 		varNiatelemetryNiaInventory.SoftwareDownload = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SoftwareDownload
 		varNiatelemetryNiaInventory.SystemUpTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SystemUpTime
 		varNiatelemetryNiaInventory.Version = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.Version
@@ -1962,6 +2131,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Cpu")
 		delete(additionalProperties, "CrashResetLogs")
 		delete(additionalProperties, "CustomerDeviceConnector")
+		delete(additionalProperties, "DcnmLicenseState")
 		delete(additionalProperties, "DeviceDiscovery")
 		delete(additionalProperties, "DeviceHealth")
 		delete(additionalProperties, "DeviceId")
@@ -1974,6 +2144,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InfraWiNodeCount")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "IsVirtualNode")
+		delete(additionalProperties, "LicenseType")
 		delete(additionalProperties, "LogInTime")
 		delete(additionalProperties, "LogOutTime")
 		delete(additionalProperties, "MacSecCount")
@@ -1985,6 +2156,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "NxosDciInterfaceStatus")
 		delete(additionalProperties, "NxosInterfaceBrief")
 		delete(additionalProperties, "NxosNveInterfaceStatus")
+		delete(additionalProperties, "NxosNvePacketCounters")
 		delete(additionalProperties, "NxosNveVni")
 		delete(additionalProperties, "NxosOspfNeighbors")
 		delete(additionalProperties, "NxosPimNeighbors")
@@ -1998,6 +2170,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "RoutePrefixV6Count")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SiteName")
+		delete(additionalProperties, "SmartAccountId")
 		delete(additionalProperties, "SoftwareDownload")
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Version")

@@ -11,7 +11,7 @@ Establishes relationship between the ports and connected end points based on LLD
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_port_mac_binding.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_port_mac_binding.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `aggregate_port_id`:(int) Aggregate Port ID of the local Switch Interface. 

@@ -11,7 +11,7 @@ NetApp volume are data containers that enable you to partition and manage your d
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_storage_net_app_volume.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_storage_net_app_volume.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `autosize_mode`:(string) The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink.* `off` - The volume will not grow or shrink in size in response to the amount of used space.* `grow` - The volume will automatically grow when used space in the volume is above the grow threshold.* `grow_shrink` - The volume will grow or shrink in size in response to the amount of used space. 

@@ -11,7 +11,7 @@ The data health status and ability of the HyperFlex storage cluster to tolerate 
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_health.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_health.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `arbitration_service_state`:(string) The status of the HyperFlex cluster's connection to the Intersight arbitration service. The arbitration service state is only applicable to 2-node edge clusters.* `NOT_AVAILABLE` - The cluster does not require a connection to the arbitration service.* `UNKNOWN` - The cluster's connection state to the arbitration service cannot be determined.* `ONLINE` - The cluster is connected to the arbitration service.* `OFFLINE` - The cluster is disconnected from the arbitration service. 

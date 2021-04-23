@@ -49,6 +49,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"dcnm_license_state": {
+				Description: "Returns the License state of the device.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"device_discovery": {
 				Description: "Returns the value of the deviceDiscovery field.",
 				Type:        schema.TypeString,
@@ -107,6 +112,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			},
 			"is_virtual_node": {
 				Description: "Flag to specify if the node is virtual.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"license_type": {
+				Description: "Returns the License type of the device.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -234,6 +244,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"smart_account_id": {
+				Description: "Returns the value of the smartAccountId/CustomerId field.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"software_download": {
 				Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
 				Type:        schema.TypeString,
@@ -323,6 +338,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 					},
 					"customer_device_connector": {
 						Description: "Returns the value of the customerDeviceConnector field.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"dcnm_license_state": {
+						Description: "Returns the License state of the device.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -472,6 +492,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							},
 						},
 						Computed: true,
+					},
+					"license_type": {
+						Description: "Returns the License type of the device.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"log_in_time": {
 						Description: "Last log in time device being inventoried. This determines the last login time on the device.",
@@ -633,6 +658,53 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						Description: "Returns the value of the nxosNveInterface field.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"nxos_nve_packet_counters": {
+						Description: "Returns the value of the nxosNvePacketCounters field.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"mcast_inpkts": {
+									Description: "Return mcast in packet count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"mcast_outbytes": {
+									Description: "Return mcast outbytes count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"ucast_inpkts": {
+									Description: "Return ucast in packet count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+								"ucast_outpkts": {
+									Description: "Return ucast out packet count.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
 					},
 					"nxos_nve_vni": {
 						Description: "Returns the value of the nxosNveVni field.",
@@ -937,6 +1009,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"smart_account_id": {
+						Description: "Returns the value of the smartAccountId/CustomerId field.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"software_download": {
 						Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
 						Type:        schema.TypeString,
@@ -1132,6 +1209,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetCustomerDeviceConnector(x)
 	}
+	if v, ok := d.GetOk("dcnm_license_state"); ok {
+		x := (v.(string))
+		o.SetDcnmLicenseState(x)
+	}
 	if v, ok := d.GetOk("device_discovery"); ok {
 		x := (v.(string))
 		o.SetDeviceDiscovery(x)
@@ -1179,6 +1260,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("is_virtual_node"); ok {
 		x := (v.(string))
 		o.SetIsVirtualNode(x)
+	}
+	if v, ok := d.GetOk("license_type"); ok {
+		x := (v.(string))
+		o.SetLicenseType(x)
 	}
 	if v, ok := d.GetOk("log_in_time"); ok {
 		x := (v.(string))
@@ -1276,6 +1361,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
+	if v, ok := d.GetOk("smart_account_id"); ok {
+		x := int64(v.(int))
+		o.SetSmartAccountId(x)
+	}
 	if v, ok := d.GetOk("software_download"); ok {
 		x := (v.(string))
 		o.SetSoftwareDownload(x)
@@ -1335,6 +1424,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["customer_device_connector"] = (s.GetCustomerDeviceConnector())
+				temp["dcnm_license_state"] = (s.GetDcnmLicenseState())
 				temp["device_discovery"] = (s.GetDeviceDiscovery())
 				temp["device_health"] = (s.GetDeviceHealth())
 				temp["device_id"] = (s.GetDeviceId())
@@ -1351,6 +1441,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["is_virtual_node"] = (s.GetIsVirtualNode())
 
 				temp["license_state"] = flattenMapNiatelemetryNiaLicenseStateRelationship(s.GetLicenseState(), d)
+				temp["license_type"] = (s.GetLicenseType())
 				temp["log_in_time"] = (s.GetLogInTime())
 				temp["log_out_time"] = (s.GetLogOutTime())
 				temp["mac_sec_count"] = (s.GetMacSecCount())
@@ -1367,6 +1458,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 
 				temp["nxos_interface_brief"] = flattenMapNiatelemetryInterface(s.GetNxosInterfaceBrief(), d)
 				temp["nxos_nve_interface_status"] = (s.GetNxosNveInterfaceStatus())
+
+				temp["nxos_nve_packet_counters"] = flattenMapNiatelemetryNvePacketCounters(s.GetNxosNvePacketCounters(), d)
 
 				temp["nxos_nve_vni"] = flattenMapNiatelemetryNveVni(s.GetNxosNveVni(), d)
 				temp["nxos_ospf_neighbors"] = (s.GetNxosOspfNeighbors())
@@ -1391,6 +1484,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
+				temp["smart_account_id"] = (s.GetSmartAccountId())
 				temp["software_download"] = (s.GetSoftwareDownload())
 				temp["system_up_time"] = (s.GetSystemUpTime())
 

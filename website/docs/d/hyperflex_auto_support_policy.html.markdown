@@ -11,7 +11,7 @@ A policy specifying the configuration to automatically generate support tickets 
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_auto_support_policy.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_auto_support_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_state`:(bool) Enable or disable Auto-Support. 

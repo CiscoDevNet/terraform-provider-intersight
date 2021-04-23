@@ -11,7 +11,7 @@ The Virtual disk created on HyperFlex Application Platform compute cluster.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
-To access the ith object of the results obtained, use `data.intersight_hyperflex_hxap_virtual_disk.results[i].<propertyname>`.
+To access the ith object of the results obtained, use `data.intersight_hyperflex_hxap_virtual_disk.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `access_mode`:(string) Access mode of the virtual disk.* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.* `` - Unknown disk access mode. 
 * `account_moid`:(string) The Account ID for this managed object. 
