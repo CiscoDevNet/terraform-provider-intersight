@@ -9,4 +9,8 @@ resource "intersight_server_profile" "server1" {
     object_type = "organization.Organization"
     moid = var.organization
   }
+  tags {
+    key = "source"
+    value = "terraform"
+  }
 }

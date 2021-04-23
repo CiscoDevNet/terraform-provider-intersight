@@ -14,6 +14,10 @@ resource "intersight_kvm_policy" "kvm1" {
     moid        = intersight_server_profile.server1.id
     object_type = "server.Profile"
   }
+  tags {
+    key = "source"
+    value = "terraform"
+  }
 }
 
 /*

@@ -18,6 +18,10 @@ resource "intersight_smtp_policy" "smtp1" {
     moid        = intersight_server_profile.server1.id
     object_type = "server.Profile"
   }
+  tags {
+    key = "source"
+    value = "terraform"
+  }
 }
 
 /*
