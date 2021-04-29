@@ -4,10 +4,12 @@ The reader of the Cisco Intersight Terraform Provider guide must be familiar wit
 * HashiCorp Configuration Language
 * Cisco Intersight Platform
 
+The provider will accept the latest HCL updates implemented by Terraform, unless Terraform itself provides backward compatibility.
+
 ## Installing Terraform
-* Download terraform zip from https://www.terraform.io/downloads.html as per your operating system specifications.
+* Download terraform zip from https://www.terraform.io/downloads.html
 * Extract the zip and move it to a directory of your choice.
-* Add the path of the directory to PATH variable of the system. 
+* Add the path to this directory to PATH variable of the system. 
 * For a detailed video on installing terraform, visit 
 [terraform website](https://learn.hashicorp.com/terraform/getting-started/install.html)
 
@@ -19,12 +21,13 @@ The system must have:
 * Cisco Intersight Terraform Provider 
 * An active Cisco Intersight Account.
 
-To start using the provider, API Key, Secret Key and Intersight endpoint URL are required. 
-The following code must be included in a .tf file in the working directory, to pair the provider with Intersight account.
+API Key, Secret Key and Intersight endpoint URL are required to start using the provider.
+The following code must be included in a `.tf` file in the working directory, to establish connection between
+the provider and your Intersight account.
 ```hcl-terraform
 provider "intersight" {
   apikey    = "<api key>"
-  secretkeyfile = "<secret key in a file>"
+  secretkey = "<secret key as a string or in a file>"
   endpoint = "https://intersight.com"
 }
 ```
@@ -36,19 +39,19 @@ tracking and referencing.
 The following is an example of a resource for server profile and NTP policy attached to the server profile:
 ```hcl-terraform
 resource "intersight_server_profile" "server1" {
-  name = "server1"
-  tags {
-    key   = "server"
-    value = "demo"
+  name = "demo_server_profile"
+  organization {
+    moid   = "changeMe"
+    object_type = "organization.Organization"
   }
-  assigned_server {
-    moid        = "56789acbcd67890"
-    object_type = "compute.RackUnit"
+  policy_bucket {
+    object_type = "ntp.Policy"
+    moid = intersight_ntp_policy.ntp1.moid
   }
 }
 
 resource "intersight_ntp_policy" "ntp1" {
-  name    = "ntp2"
+  name    = "demo_ntp"
   enabled = true
   ntp_servers = [
     "10.10.10.10",
@@ -56,15 +59,15 @@ resource "intersight_ntp_policy" "ntp1" {
     "10.10.10.12",
     "10.10.10.13"
   ]
-  profiles {
-    moid        = intersight_server_profile.server1.moid
-    object_type = "server.Profile"
+  organization {
+    moid   = "changeMe"
+    object_type = "organization.Organization"
   }
 }
 ```
 The first resource is for creation of `server profile`. It is named `server1`. This name will not be reflected anywhere 
-in the Cisco Intersight. It is for reference among the .tf files. The NTP policy is attached to the server profile created 
-earlier. This is done by referencing to the `server1` profile in `profiles.moid`. A resource can point or reference to 
+in the Cisco Intersight. It is for reference among the .tf files. The server profile is attached to the NTP policy created 
+later. This is done by referencing to the `ntp1` policy in `policy_bucket`. A resource can point or reference to 
 another resource in the format `<resource>.<resource_name>.<property_name>` . 
 
 ### Referencing Intersight MOs using data source
@@ -73,33 +76,30 @@ is the data source object for SOL Policy. Each data source is assigned a name wh
 referencing.
 The following is an example of accessing a pre-existing server profile and attaching a NTP policy to the server profile.
 ```hcl-terraform
-data "intersight_server_profile" "server1" {
+resource "intersight_server_profile" "server1" {
   name = "demo_server_profile"
-}
-
-resource "intersight_ntp_policy" "ntp1" {
-  name    = "ntp2"
-  enabled = true
-  ntp_servers = [
-    "10.10.10.10",
-    "10.10.10.11",
-    "10.10.10.12",
-    "10.10.10.13"
-  ]
-  profiles {
-    moid        = data.intersight_server_profile.server1.moid
-    object_type = "server.Profile"
+  organization {
+    moid   = "changeMe"
+    object_type = "organization.Organization"
+  }
+  policy_bucket {
+    object_type = "ntp.Policy"
+    moid = data.intersight_ntp_policy.ntp1.results.0.moid
   }
 }
+
+data "intersight_ntp_policy" "ntp1" {
+  name    = "demo_ntp"
+}
 ```
-A server profile with the given constraints i.e. name as `demo_server_profile` must exist in the Intersight account. Data source 
-is used to access this MO. The source is named `server1`. The NTP policy is attached to the server profile with the name 
-`server1`. This is done by referencing to the `server1` profile in `profiles.moid`. A resource can have a reference to a 
-data source in the format `data.<data_source>.<data_source_name>.<property_name>`. 
+An NTP policy with the given constraints i.e. name as `demo_ntp` must exist in the Intersight account. Data source 
+is used to access this object. The data source is named `ntp1`. The NTP policy is attached to the server profile with the name 
+`server1`. Data sources are referenced in the format `data.<data_source>.<data_source_name>.results.<index>.<property_name>`. 
 
 ###	Viewing the Logs
-`TF_LOG` is a terraform variable that is used for viewing different category of logs. By default, it is left empty. To 
-view logs for terraform operations, this variable must be set to *DEBUG*.  
+`TF_LOG` is a terraform-specific environment variable that is used for viewing different category of logs. 
+By default, it is left empty. To view logs for terraform operations, this variable must be set to *DEBUG*. 
+You can view the request sent by the provider and the response received by the endpoint for debugging purposes.
 #### Mac and Linux Bash
 `export TF_LOG=debug`
 #### Windows PowerShell
