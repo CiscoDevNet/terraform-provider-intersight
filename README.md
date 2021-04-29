@@ -11,8 +11,8 @@
 ## Using the Provider
 The Intersight Terraform provider can be downloaded from the 
 [release](https://github.com/CiscoDevNet/terraform-provider-intersight/releases) section of this repository. 
-The providers are available for Darwin, FreeBSD(386, amd64, arm, arm64) 
-and Linux(386, amd64, arm, arm64) and Windows (366 and amd64) systems.
+The providers are available for Darwin, FreeBSD(386, amd64, arm, arm64), 
+Linux(386, amd64, arm, arm64) and Windows(386 and amd64) systems.
 Documentation of the provider resources, data sources and configuration options can be found
 [here](https://github.com/CiscoDevNet/terraform-provider-intersight/tree/master/website/docs).
 For a detailed explanation on usage of Intersight Terraform Provider, please read the
@@ -37,14 +37,12 @@ cp $GOPATH/src/github.com/CiscoDevNet/terraform-provider-intersight/.build/<OS_A
 `OS_ARCH` can be one of `linux_amd64`, `darwin_amd64` and `windows`.
 
 ## Frequency of update
-The provider is updated with each production push on Intersight, i.e., every Friday. There might be exceptions when a high priority bug is fixed.
-Such incidents may lead to unscheduled releases. 
+The provider is updated with each production push on Intersight, i.e., every Friday. Exceptions are made for high priority bug fixes.
 
 ## Contribution
-The community can contribute to expand the example base for the provider. This includes HCL configurations for resources and data sources.
-The provider source code is generated using a custom generator that take OpenAPI specification of Intersight as input.
-The generator is not available publicly. Hence, pull requests on `examples` directory only will be accepted. For all other change requests,
-raise an issue.
+The community can contribute to expanding the example base for the provider. This includes HCL configurations for resources and data sources.
+A large part of the provider is generated using a custom generator. Hence, pull requests only on the `examples` directory are welcome at this time. 
+For all other change requests, raise an issue.
 
 ## Community
 We are on Slack - slack requires registration, but the terraform-provider-intersight team is open invitation to anyone
