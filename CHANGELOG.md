@@ -3,6 +3,9 @@
 ## v1.0.7
 Release Date: 4th May 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4267)
+* Fixes an issue with cisco.meta tags
+* Fixes an issue around trying to delete object instances that did not exist.
+* Adds a landing page (https://github.com/CiscoDevNet/terraform-provider-intersight/blob/master/guides/index.html.markdown) for the documentation. The community can contribute to this page by raising PRs. 
 
 ## v1.0.7
 Release Date: 23rd Apr 2021
