@@ -48,7 +48,6 @@ Method | HTTP request | Description
 [**DeleteKubernetesVersion**](KubernetesApi.md#DeleteKubernetesVersion) | **Delete** /api/v1/kubernetes/Versions/{Moid} | Delete a &#39;kubernetes.Version&#39; resource.
 [**DeleteKubernetesVersionPolicy**](KubernetesApi.md#DeleteKubernetesVersionPolicy) | **Delete** /api/v1/kubernetes/VersionPolicies/{Moid} | Delete a &#39;kubernetes.VersionPolicy&#39; resource.
 [**DeleteKubernetesVirtualMachineInfraConfigPolicy**](KubernetesApi.md#DeleteKubernetesVirtualMachineInfraConfigPolicy) | **Delete** /api/v1/kubernetes/VirtualMachineInfraConfigPolicies/{Moid} | Delete a &#39;kubernetes.VirtualMachineInfraConfigPolicy&#39; resource.
-[**DeleteKubernetesVirtualMachineInfrastructureProvider**](KubernetesApi.md#DeleteKubernetesVirtualMachineInfrastructureProvider) | **Delete** /api/v1/kubernetes/VirtualMachineInfrastructureProviders/{Moid} | Delete a &#39;kubernetes.VirtualMachineInfrastructureProvider&#39; resource.
 [**DeleteKubernetesVirtualMachineInstanceType**](KubernetesApi.md#DeleteKubernetesVirtualMachineInstanceType) | **Delete** /api/v1/kubernetes/VirtualMachineInstanceTypes/{Moid} | Delete a &#39;kubernetes.VirtualMachineInstanceType&#39; resource.
 [**DeleteKubernetesVirtualMachineNodeProfile**](KubernetesApi.md#DeleteKubernetesVirtualMachineNodeProfile) | **Delete** /api/v1/kubernetes/VirtualMachineNodeProfiles/{Moid} | Delete a &#39;kubernetes.VirtualMachineNodeProfile&#39; resource.
 [**GetKubernetesAciCniApicByMoid**](KubernetesApi.md#GetKubernetesAciCniApicByMoid) | **Get** /api/v1/kubernetes/AciCniApics/{Moid} | Read a &#39;kubernetes.AciCniApic&#39; resource.
@@ -3074,72 +3073,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteKubernetesVirtualMachineInfraConfigPolicyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteKubernetesVirtualMachineInfrastructureProvider
-
-> DeleteKubernetesVirtualMachineInfrastructureProvider(ctx, moid).Execute()
-
-Delete a 'kubernetes.VirtualMachineInfrastructureProvider' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesApi.DeleteKubernetesVirtualMachineInfrastructureProvider(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KubernetesApi.DeleteKubernetesVirtualMachineInfrastructureProvider``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteKubernetesVirtualMachineInfrastructureProviderRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

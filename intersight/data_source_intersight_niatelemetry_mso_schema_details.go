@@ -68,6 +68,11 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"record_type": {
+				Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"schema_id": {
 				Description: "Schema ID in Multi-Site Orchestrator.",
 				Type:        schema.TypeString,
@@ -130,7 +135,6 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -220,7 +224,6 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -258,10 +261,14 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
+					},
+					"record_type": {
+						Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"registered_device": {
 						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -297,7 +304,6 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -390,7 +396,6 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -436,7 +441,6 @@ func dataSourceNiatelemetryMsoSchemaDetails() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -510,6 +514,10 @@ func dataSourceNiatelemetryMsoSchemaDetailsRead(c context.Context, d *schema.Res
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("record_type"); ok {
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
 	if v, ok := d.GetOk("schema_id"); ok {
 		x := (v.(string))
 		o.SetSchemaId(x)
@@ -578,6 +586,7 @@ func dataSourceNiatelemetryMsoSchemaDetailsRead(c context.Context, d *schema.Res
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["record_type"] = (s.GetRecordType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["schema_id"] = (s.GetSchemaId())

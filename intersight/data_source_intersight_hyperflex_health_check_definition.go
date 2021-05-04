@@ -70,6 +70,11 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"minimum_hyper_flex_version": {
+				Description: "Minimum HyperFlex version that the check is supported on. Defaults to version 3.0.1.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -183,6 +188,10 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetInternalName(x)
 	}
+	if v, ok := d.GetOk("minimum_hyper_flex_version"); ok {
+		x := (v.(string))
+		o.SetMinimumHyperFlexVersion(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -282,6 +291,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 				temp["health_check_script_infos"] = flattenListHyperflexHealthCheckScriptInfo(s.GetHealthCheckScriptInfos(), d)
 				temp["health_impact"] = (s.GetHealthImpact())
 				temp["internal_name"] = (s.GetInternalName())
+				temp["minimum_hyper_flex_version"] = (s.GetMinimumHyperFlexVersion())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

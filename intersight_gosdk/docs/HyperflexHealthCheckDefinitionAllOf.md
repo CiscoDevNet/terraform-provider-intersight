@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **HealthCheckScriptInfos** | Pointer to [**[]HyperflexHealthCheckScriptInfo**](HyperflexHealthCheckScriptInfo.md) |  | [optional] 
 **HealthImpact** | Pointer to **string** | Static information detailing the health impact of the health check failure. | [optional] 
 **InternalName** | Pointer to **string** | Internal name of the health check definition. | [optional] 
+**MinimumHyperFlexVersion** | Pointer to **string** | Minimum HyperFlex version that the check is supported on. Defaults to version 3.0.1. | [optional] [default to "3"]
 **Name** | Pointer to **string** | Name of the health check definition. | [optional] 
 **Reference** | Pointer to **string** | Static information containing additional reference for the health check. | [optional] 
 **Resolution** | Pointer to **string** | Static information detailing the possible remediation actions that can be taken to remedy the health check failure. | [optional] 
@@ -301,6 +302,31 @@ SetInternalName sets InternalName field to given value.
 `func (o *HyperflexHealthCheckDefinitionAllOf) HasInternalName() bool`
 
 HasInternalName returns a boolean if a field has been set.
+
+### GetMinimumHyperFlexVersion
+
+`func (o *HyperflexHealthCheckDefinitionAllOf) GetMinimumHyperFlexVersion() string`
+
+GetMinimumHyperFlexVersion returns the MinimumHyperFlexVersion field if non-nil, zero value otherwise.
+
+### GetMinimumHyperFlexVersionOk
+
+`func (o *HyperflexHealthCheckDefinitionAllOf) GetMinimumHyperFlexVersionOk() (*string, bool)`
+
+GetMinimumHyperFlexVersionOk returns a tuple with the MinimumHyperFlexVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinimumHyperFlexVersion
+
+`func (o *HyperflexHealthCheckDefinitionAllOf) SetMinimumHyperFlexVersion(v string)`
+
+SetMinimumHyperFlexVersion sets MinimumHyperFlexVersion field to given value.
+
+### HasMinimumHyperFlexVersion
+
+`func (o *HyperflexHealthCheckDefinitionAllOf) HasMinimumHyperFlexVersion() bool`
+
+HasMinimumHyperFlexVersion returns a boolean if a field has been set.
 
 ### GetName
 

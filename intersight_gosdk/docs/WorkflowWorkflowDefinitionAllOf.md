@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](workflow.ValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workflow to support multiple versions. | [optional] [default to 1]
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](workflow.WorkflowDefinition.Relationship.md) |  | [optional] 
 **WorkflowMetadata** | Pointer to [**WorkflowWorkflowMetadataRelationship**](workflow.WorkflowMetadata.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -624,6 +625,31 @@ SetCatalog sets Catalog field to given value.
 `func (o *WorkflowWorkflowDefinitionAllOf) HasCatalog() bool`
 
 HasCatalog returns a boolean if a field has been set.
+
+### GetClonedFrom
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetClonedFrom() WorkflowWorkflowDefinitionRelationship`
+
+GetClonedFrom returns the ClonedFrom field if non-nil, zero value otherwise.
+
+### GetClonedFromOk
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetClonedFromOk() (*WorkflowWorkflowDefinitionRelationship, bool)`
+
+GetClonedFromOk returns a tuple with the ClonedFrom field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClonedFrom
+
+`func (o *WorkflowWorkflowDefinitionAllOf) SetClonedFrom(v WorkflowWorkflowDefinitionRelationship)`
+
+SetClonedFrom sets ClonedFrom field to given value.
+
+### HasClonedFrom
+
+`func (o *WorkflowWorkflowDefinitionAllOf) HasClonedFrom() bool`
+
+HasClonedFrom returns a boolean if a field has been set.
 
 ### GetWorkflowMetadata
 

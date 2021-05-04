@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareCluster"]
+**CpuOverCommitment** | Pointer to **int64** | CPU over commitment associated with this cluster. | [optional] 
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this cluster. | [optional] 
 **InventoryPath** | Pointer to **string** | Inventory path of the cluster. | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCpuOverCommitment
+
+`func (o *VirtualizationVmwareCluster) GetCpuOverCommitment() int64`
+
+GetCpuOverCommitment returns the CpuOverCommitment field if non-nil, zero value otherwise.
+
+### GetCpuOverCommitmentOk
+
+`func (o *VirtualizationVmwareCluster) GetCpuOverCommitmentOk() (*int64, bool)`
+
+GetCpuOverCommitmentOk returns a tuple with the CpuOverCommitment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuOverCommitment
+
+`func (o *VirtualizationVmwareCluster) SetCpuOverCommitment(v int64)`
+
+SetCpuOverCommitment sets CpuOverCommitment field to given value.
+
+### HasCpuOverCommitment
+
+`func (o *VirtualizationVmwareCluster) HasCpuOverCommitment() bool`
+
+HasCpuOverCommitment returns a boolean if a field has been set.
 
 ### GetDatastoreCount
 

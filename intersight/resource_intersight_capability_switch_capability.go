@@ -69,7 +69,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -345,7 +344,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -385,7 +383,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1102,7 +1099,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1149,7 +1145,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -2747,9 +2742,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	o.SetClassId("capability.SwitchCapability")
@@ -2834,9 +2827,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetFcEndHostModeReservedVsans(x)
-		}
+		o.SetFcEndHostModeReservedVsans(x)
 	}
 
 	if d.HasChange("fc_uplink_ports_auto_negotiation_supported") {
@@ -3012,9 +3003,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -3099,9 +3088,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("pid") {
@@ -3160,9 +3147,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupporting100gSpeed(x)
-		}
+		o.SetPortsSupporting100gSpeed(x)
 	}
 
 	if d.HasChange("ports_supporting10g_speed") {
@@ -3215,9 +3200,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupporting10gSpeed(x)
-		}
+		o.SetPortsSupporting10gSpeed(x)
 	}
 
 	if d.HasChange("ports_supporting1g_speed") {
@@ -3270,9 +3253,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupporting1gSpeed(x)
-		}
+		o.SetPortsSupporting1gSpeed(x)
 	}
 
 	if d.HasChange("ports_supporting25g_speed") {
@@ -3325,9 +3306,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupporting25gSpeed(x)
-		}
+		o.SetPortsSupporting25gSpeed(x)
 	}
 
 	if d.HasChange("ports_supporting40g_speed") {
@@ -3380,9 +3359,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupporting40gSpeed(x)
-		}
+		o.SetPortsSupporting40gSpeed(x)
 	}
 
 	if d.HasChange("ports_supporting_breakout") {
@@ -3435,9 +3412,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupportingBreakout(x)
-		}
+		o.SetPortsSupportingBreakout(x)
 	}
 
 	if d.HasChange("ports_supporting_fcoe") {
@@ -3490,9 +3465,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupportingFcoe(x)
-		}
+		o.SetPortsSupportingFcoe(x)
 	}
 
 	if d.HasChange("ports_supporting_server_role") {
@@ -3545,9 +3518,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetPortsSupportingServerRole(x)
-		}
+		o.SetPortsSupportingServerRole(x)
 	}
 
 	if d.HasChange("reserved_vsans") {
@@ -3600,9 +3571,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetReservedVsans(x)
-		}
+		o.SetReservedVsans(x)
 	}
 
 	if d.HasChange("sereno_netflow_supported") {
@@ -3723,9 +3692,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetSwitchingModeCapabilities(x)
-		}
+		o.SetSwitchingModeCapabilities(x)
 	}
 
 	if d.HasChange("system_limits") {
@@ -3809,9 +3776,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("unified_ports") {
@@ -3864,9 +3829,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetUnifiedPorts(x)
-		}
+		o.SetUnifiedPorts(x)
 	}
 
 	if d.HasChange("unified_rule") {
@@ -4042,6 +4005,10 @@ func resourceCapabilitySwitchCapabilityDelete(c context.Context, d *schema.Resou
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
 		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(deleteErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "CapabilitySwitchCapabilityDelete: CapabilitySwitchCapability object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			return de
+		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			deleteErr := deleteErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilitySwitchCapability object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))

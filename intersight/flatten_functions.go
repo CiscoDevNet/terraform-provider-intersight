@@ -1508,6 +1508,7 @@ func flattenListHyperflexHealthCheckScriptInfo(p []models.HyperflexHealthCheckSc
 		hyperflexhealthcheckscriptinfo["hyperflex_version"] = item.HyperflexVersion
 		hyperflexhealthcheckscriptinfo["object_type"] = item.ObjectType
 		hyperflexhealthcheckscriptinfo["script_execute_location"] = item.ScriptExecuteLocation
+		hyperflexhealthcheckscriptinfo["script_input"] = item.ScriptInput
 		hyperflexhealthcheckscriptinfo["script_name"] = item.ScriptName
 		hyperflexhealthcheckscriptinfo["nr_version"] = item.Version
 		hyperflexhealthcheckscriptinfos = append(hyperflexhealthcheckscriptinfos, hyperflexhealthcheckscriptinfo)
@@ -8871,6 +8872,7 @@ func flattenMapHyperflexHealthCheckScriptInfo(p models.HyperflexHealthCheckScrip
 	hyperflexhealthcheckscriptinfo["hyperflex_version"] = item.HyperflexVersion
 	hyperflexhealthcheckscriptinfo["object_type"] = item.ObjectType
 	hyperflexhealthcheckscriptinfo["script_execute_location"] = item.ScriptExecuteLocation
+	hyperflexhealthcheckscriptinfo["script_input"] = item.ScriptInput
 	hyperflexhealthcheckscriptinfo["script_name"] = item.ScriptName
 	hyperflexhealthcheckscriptinfo["nr_version"] = item.Version
 
@@ -12134,6 +12136,24 @@ func flattenMapNiaapiVersionRegexPlatform(p models.NiaapiVersionRegexPlatform, d
 	niaapiversionregexplatforms = append(niaapiversionregexplatforms, niaapiversionregexplatform)
 	return niaapiversionregexplatforms
 }
+func flattenMapNiatelemetryBootflashDetails(p models.NiatelemetryBootflashDetails, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrybootflashdetailss []map[string]interface{}
+	var ret models.NiatelemetryBootflashDetails
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	niatelemetrybootflashdetails := make(map[string]interface{})
+	niatelemetrybootflashdetails["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	niatelemetrybootflashdetails["class_id"] = item.ClassId
+	niatelemetrybootflashdetails["fw_rev"] = item.FwRev
+	niatelemetrybootflashdetails["model_type"] = item.ModelType
+	niatelemetrybootflashdetails["object_type"] = item.ObjectType
+	niatelemetrybootflashdetails["serial"] = item.Serial
+
+	niatelemetrybootflashdetailss = append(niatelemetrybootflashdetailss, niatelemetrybootflashdetails)
+	return niatelemetrybootflashdetailss
+}
 func flattenMapNiatelemetryDiskinfo(p models.NiatelemetryDiskinfo, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrydiskinfos []map[string]interface{}
 	var ret models.NiatelemetryDiskinfo
@@ -15204,6 +15224,23 @@ func flattenMapWorkflowCatalogRelationship(p models.WorkflowCatalogRelationship,
 	workflowcatalogrelationships = append(workflowcatalogrelationships, workflowcatalogrelationship)
 	return workflowcatalogrelationships
 }
+func flattenMapWorkflowComments(p models.WorkflowComments, d *schema.ResourceData) []map[string]interface{} {
+	var workflowcommentss []map[string]interface{}
+	var ret models.WorkflowComments
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workflowcomments := make(map[string]interface{})
+	workflowcomments["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workflowcomments["class_id"] = item.ClassId
+	workflowcomments["description"] = item.Description
+	workflowcomments["examples"] = item.Examples
+	workflowcomments["object_type"] = item.ObjectType
+
+	workflowcommentss = append(workflowcommentss, workflowcomments)
+	return workflowcommentss
+}
 func flattenMapWorkflowErrorResponseHandlerRelationship(p models.WorkflowErrorResponseHandlerRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var workflowerrorresponsehandlerrelationships []map[string]interface{}
 	var ret models.WorkflowErrorResponseHandlerRelationship
@@ -15642,6 +15679,7 @@ func flattenMapWorkflowWorkflowProperties(p models.WorkflowWorkflowProperties, d
 	workflowworkflowproperties := make(map[string]interface{})
 	workflowworkflowproperties["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	workflowworkflowproperties["class_id"] = item.ClassId
+	workflowworkflowproperties["enable_debug"] = item.EnableDebug
 	workflowworkflowproperties["external_meta"] = item.ExternalMeta
 	workflowworkflowproperties["object_type"] = item.ObjectType
 	workflowworkflowproperties["retryable"] = item.Retryable

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
  *
- * API version: 1.0.9-4247
+ * API version: 1.0.9-4267
  * Contact: intersight@cisco.com
  */
 
@@ -26,6 +26,8 @@ type NiatelemetryNexusDashboards struct {
 	ObjectType string `json:"ObjectType"`
 	// Nexus Dashboard can onboard multiple APIC clusters/sites.
 	ClusterName *string `json:"ClusterName,omitempty"`
+	// Dn of the objects present for Nexus Dashboard devices.
+	Dn *string `json:"Dn,omitempty"`
 	// Health of Nexus Dashboard cluster.
 	IsClusterHealthy *string `json:"IsClusterHealthy,omitempty"`
 	// Number of nodes in Nexus Dashboard cluster.
@@ -44,6 +46,8 @@ type NiatelemetryNexusDashboards struct {
 	NumberOfSitesServiced *int64 `json:"NumberOfSitesServiced,omitempty"`
 	// Number of total tenants in Multi-Site Orchestrator.
 	NumberOfTenantsInMso *int64 `json:"NumberOfTenantsInMso,omitempty"`
+	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
+	RecordType *string `json:"RecordType,omitempty"`
 	// Type of site added to Multi-Site Orchestrator.
 	TypeOfSiteInMso      *string                              `json:"TypeOfSiteInMso,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -153,6 +157,38 @@ func (o *NiatelemetryNexusDashboards) HasClusterName() bool {
 // SetClusterName gets a reference to the given string and assigns it to the ClusterName field.
 func (o *NiatelemetryNexusDashboards) SetClusterName(v string) {
 	o.ClusterName = &v
+}
+
+// GetDn returns the Dn field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetDn() string {
+	if o == nil || o.Dn == nil {
+		var ret string
+		return ret
+	}
+	return *o.Dn
+}
+
+// GetDnOk returns a tuple with the Dn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetDnOk() (*string, bool) {
+	if o == nil || o.Dn == nil {
+		return nil, false
+	}
+	return o.Dn, true
+}
+
+// HasDn returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasDn() bool {
+	if o != nil && o.Dn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDn gets a reference to the given string and assigns it to the Dn field.
+func (o *NiatelemetryNexusDashboards) SetDn(v string) {
+	o.Dn = &v
 }
 
 // GetIsClusterHealthy returns the IsClusterHealthy field value if set, zero value otherwise.
@@ -443,6 +479,38 @@ func (o *NiatelemetryNexusDashboards) SetNumberOfTenantsInMso(v int64) {
 	o.NumberOfTenantsInMso = &v
 }
 
+// GetRecordType returns the RecordType field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboards) GetRecordType() string {
+	if o == nil || o.RecordType == nil {
+		var ret string
+		return ret
+	}
+	return *o.RecordType
+}
+
+// GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboards) GetRecordTypeOk() (*string, bool) {
+	if o == nil || o.RecordType == nil {
+		return nil, false
+	}
+	return o.RecordType, true
+}
+
+// HasRecordType returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboards) HasRecordType() bool {
+	if o != nil && o.RecordType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecordType gets a reference to the given string and assigns it to the RecordType field.
+func (o *NiatelemetryNexusDashboards) SetRecordType(v string) {
+	o.RecordType = &v
+}
+
 // GetTypeOfSiteInMso returns the TypeOfSiteInMso field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboards) GetTypeOfSiteInMso() string {
 	if o == nil || o.TypeOfSiteInMso == nil {
@@ -526,6 +594,9 @@ func (o NiatelemetryNexusDashboards) MarshalJSON() ([]byte, error) {
 	if o.ClusterName != nil {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
+	if o.Dn != nil {
+		toSerialize["Dn"] = o.Dn
+	}
 	if o.IsClusterHealthy != nil {
 		toSerialize["IsClusterHealthy"] = o.IsClusterHealthy
 	}
@@ -553,6 +624,9 @@ func (o NiatelemetryNexusDashboards) MarshalJSON() ([]byte, error) {
 	if o.NumberOfTenantsInMso != nil {
 		toSerialize["NumberOfTenantsInMso"] = o.NumberOfTenantsInMso
 	}
+	if o.RecordType != nil {
+		toSerialize["RecordType"] = o.RecordType
+	}
 	if o.TypeOfSiteInMso != nil {
 		toSerialize["TypeOfSiteInMso"] = o.TypeOfSiteInMso
 	}
@@ -575,6 +649,8 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Nexus Dashboard can onboard multiple APIC clusters/sites.
 		ClusterName *string `json:"ClusterName,omitempty"`
+		// Dn of the objects present for Nexus Dashboard devices.
+		Dn *string `json:"Dn,omitempty"`
 		// Health of Nexus Dashboard cluster.
 		IsClusterHealthy *string `json:"IsClusterHealthy,omitempty"`
 		// Number of nodes in Nexus Dashboard cluster.
@@ -593,6 +669,8 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		NumberOfSitesServiced *int64 `json:"NumberOfSitesServiced,omitempty"`
 		// Number of total tenants in Multi-Site Orchestrator.
 		NumberOfTenantsInMso *int64 `json:"NumberOfTenantsInMso,omitempty"`
+		// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
+		RecordType *string `json:"RecordType,omitempty"`
 		// Type of site added to Multi-Site Orchestrator.
 		TypeOfSiteInMso  *string                              `json:"TypeOfSiteInMso,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -606,6 +684,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNexusDashboards.ClassId = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClassId
 		varNiatelemetryNexusDashboards.ObjectType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ObjectType
 		varNiatelemetryNexusDashboards.ClusterName = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.ClusterName
+		varNiatelemetryNexusDashboards.Dn = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.Dn
 		varNiatelemetryNexusDashboards.IsClusterHealthy = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.IsClusterHealthy
 		varNiatelemetryNexusDashboards.NdClusterSize = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdClusterSize
 		varNiatelemetryNexusDashboards.NdType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NdType
@@ -615,6 +694,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNexusDashboards.NumberOfSitesInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfSitesInMso
 		varNiatelemetryNexusDashboards.NumberOfSitesServiced = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfSitesServiced
 		varNiatelemetryNexusDashboards.NumberOfTenantsInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.NumberOfTenantsInMso
+		varNiatelemetryNexusDashboards.RecordType = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RecordType
 		varNiatelemetryNexusDashboards.TypeOfSiteInMso = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.TypeOfSiteInMso
 		varNiatelemetryNexusDashboards.RegisteredDevice = varNiatelemetryNexusDashboardsWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetryNexusDashboards(varNiatelemetryNexusDashboards)
@@ -637,6 +717,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterName")
+		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "IsClusterHealthy")
 		delete(additionalProperties, "NdClusterSize")
 		delete(additionalProperties, "NdType")
@@ -646,6 +727,7 @@ func (o *NiatelemetryNexusDashboards) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "NumberOfSitesInMso")
 		delete(additionalProperties, "NumberOfSitesServiced")
 		delete(additionalProperties, "NumberOfTenantsInMso")
+		delete(additionalProperties, "RecordType")
 		delete(additionalProperties, "TypeOfSiteInMso")
 		delete(additionalProperties, "RegisteredDevice")
 

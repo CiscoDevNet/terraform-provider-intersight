@@ -69,7 +69,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -169,7 +168,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -210,7 +208,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -269,7 +266,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -324,7 +320,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -364,7 +359,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -436,7 +430,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -495,7 +488,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -542,7 +534,6 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1344,9 +1335,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	o.SetClassId("kubernetes.VirtualMachineInfrastructureProvider")
@@ -1572,9 +1561,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -1659,9 +1646,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("shared_scope") {
@@ -1701,9 +1686,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("target") {
@@ -1906,16 +1889,7 @@ func resourceKubernetesVirtualMachineInfrastructureProviderDelete(c context.Cont
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	var de diag.Diagnostics
-	conn := meta.(*Config)
-	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVirtualMachineInfrastructureProvider(conn.ctx, d.Id())
-	_, deleteErr := p.Execute()
-	if deleteErr != nil {
-		errorType := fmt.Sprintf("%T", deleteErr)
-		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
-			return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInfrastructureProvider object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
-		}
-		return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInfrastructureProvider object: %s", deleteErr.Error())
-	}
+	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "KubernetesVirtualMachineInfrastructureProvider does not allow delete functionality"}
+	de = append(de, warning)
 	return de
 }

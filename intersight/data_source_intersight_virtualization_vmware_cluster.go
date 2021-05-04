@@ -28,6 +28,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"cpu_over_commitment": {
+				Description: "CPU over commitment associated with this cluster.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -148,7 +153,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -156,6 +160,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cpu_over_commitment": {
+						Description: "CPU over commitment associated with this cluster.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"create_time": {
@@ -198,7 +207,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -336,7 +344,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -374,7 +381,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -454,7 +460,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -549,7 +554,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -595,7 +599,6 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -640,6 +643,10 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+	if v, ok := d.GetOk("cpu_over_commitment"); ok {
+		x := int64(v.(int))
+		o.SetCpuOverCommitment(x)
 	}
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -735,6 +742,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cpu_over_commitment"] = (s.GetCpuOverCommitment())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 

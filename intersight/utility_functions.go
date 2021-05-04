@@ -126,21 +126,6 @@ func CustomizeTagDiff(ctx context.Context, diff *schema.ResourceDiff, i interfac
 		oldArray := old.([]interface{})
 		newArray := _new.([]interface{})
 		var newTags, subNew []map[string]interface{}
-		if reflect.DeepEqual(old, _new) {
-			// tags is emptied out in update
-			for _, item := range oldArray {
-				x := item.(map[string]interface{})
-				var s = x["key"].(string)
-				if strings.HasPrefix(s, "cisco.meta") {
-					newTags = append(newTags, x)
-				}
-			}
-			err := diff.SetNew("tags", newTags)
-			return err
-		}
-		log.Println("new", newArray)
-		log.Println("old", oldArray)
-
 		var existingKeys = make(map[string]bool)
 		for _, item := range newArray {
 			x := item.(map[string]interface{})

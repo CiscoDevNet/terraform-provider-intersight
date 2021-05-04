@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
  *
- * API version: 1.0.9-4247
+ * API version: 1.0.9-4267
  * Contact: intersight@cisco.com
  */
 
@@ -39,7 +39,9 @@ type FirmwareUpgradeStatus struct {
 	// The overall status of the operation. * `none` - Upgrade stage is no upgrade stage. * `started` - Upgrade stage is started. * `prepare initiating` - Upgrade configuration is being prepared. * `prepare initiated` - Upgrade configuration is initiated. * `prepared` - Upgrade configuration is prepared. * `download initiating` - Upgrade stage is download initiating. * `download initiated` - Upgrade stage is download initiated. * `downloading` - Upgrade stage is downloading. * `downloaded` - Upgrade stage is downloaded. * `upgrade initiating on fabric A` - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * `upgrade initiated on fabric A` - Upgrade stage is in upgrade initiated when the upgrade has started in endpoint. * `upgrading fabric A` - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * `rebooting fabric A` - Upgrade is in rebooting when the endpoint is being rebooted. * `upgraded fabric A` - Upgrade stage is in upgraded when the corresponding endpoint has completed. * `upgrade initiating on fabric B` - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * `upgrade initiated on fabric B` - Upgrade stage is in upgrade initiated when upgrade has started in endpoint. * `upgrading fabric B` - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * `rebooting fabric B` - Upgrade is in rebooting when the endpoint is being rebooted. * `upgraded fabric B` - Upgrade stage is in upgraded when the corresponding endpoint has completed. * `upgrade initiating` - Upgrade stage is upgrade initiating. * `upgrade initiated` - Upgrade stage is upgrade initiated. * `upgrading` - Upgrade stage is upgrading. * `oob images staging` - Out-of-band component images staging. * `oob images staged` - Out-of-band component images staged. * `rebooting` - Upgrade is rebooting the endpoint. * `upgraded` - Upgrade stage is upgraded. * `success` - Upgrade stage is success. * `failed` - Upgrade stage is upgrade failed. * `terminated` - Upgrade stage is terminated. * `pending` - Upgrade stage is pending. * `ReadyForCache` - The image is ready to be cached into the Intersight Appliance. * `Caching` - The image will be cached into Intersight Appliance or an endpoint cache. * `Cached` - The image has been cached into the Intersight Appliance or endpoint cache. * `CachingFailed` - The image caching into the Intersight Appliance failed or endpoint cache.
 	Overallstatus *string `json:"Overallstatus,omitempty"`
 	// Pending reason for the upgrade waiting. * `none` - Upgrade pending reason is none. * `pending for next reboot` - Upgrade pending reason is pending for next reboot.
-	PendingType          *string                           `json:"PendingType,omitempty"`
+	PendingType *string `json:"PendingType,omitempty"`
+	// The error message from the endpoint during the SD card download.
+	SdCardDownloadError  *string                           `json:"SdCardDownloadError,omitempty"`
 	Upgrade              *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
 	Workflow             *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -386,6 +388,38 @@ func (o *FirmwareUpgradeStatus) SetPendingType(v string) {
 	o.PendingType = &v
 }
 
+// GetSdCardDownloadError returns the SdCardDownloadError field value if set, zero value otherwise.
+func (o *FirmwareUpgradeStatus) GetSdCardDownloadError() string {
+	if o == nil || o.SdCardDownloadError == nil {
+		var ret string
+		return ret
+	}
+	return *o.SdCardDownloadError
+}
+
+// GetSdCardDownloadErrorOk returns a tuple with the SdCardDownloadError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FirmwareUpgradeStatus) GetSdCardDownloadErrorOk() (*string, bool) {
+	if o == nil || o.SdCardDownloadError == nil {
+		return nil, false
+	}
+	return o.SdCardDownloadError, true
+}
+
+// HasSdCardDownloadError returns a boolean if a field has been set.
+func (o *FirmwareUpgradeStatus) HasSdCardDownloadError() bool {
+	if o != nil && o.SdCardDownloadError != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSdCardDownloadError gets a reference to the given string and assigns it to the SdCardDownloadError field.
+func (o *FirmwareUpgradeStatus) SetSdCardDownloadError(v string) {
+	o.SdCardDownloadError = &v
+}
+
 // GetUpgrade returns the Upgrade field value if set, zero value otherwise.
 func (o *FirmwareUpgradeStatus) GetUpgrade() FirmwareUpgradeBaseRelationship {
 	if o == nil || o.Upgrade == nil {
@@ -490,6 +524,9 @@ func (o FirmwareUpgradeStatus) MarshalJSON() ([]byte, error) {
 	if o.PendingType != nil {
 		toSerialize["PendingType"] = o.PendingType
 	}
+	if o.SdCardDownloadError != nil {
+		toSerialize["SdCardDownloadError"] = o.SdCardDownloadError
+	}
 	if o.Upgrade != nil {
 		toSerialize["Upgrade"] = o.Upgrade
 	}
@@ -525,9 +562,11 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 		// The overall status of the operation. * `none` - Upgrade stage is no upgrade stage. * `started` - Upgrade stage is started. * `prepare initiating` - Upgrade configuration is being prepared. * `prepare initiated` - Upgrade configuration is initiated. * `prepared` - Upgrade configuration is prepared. * `download initiating` - Upgrade stage is download initiating. * `download initiated` - Upgrade stage is download initiated. * `downloading` - Upgrade stage is downloading. * `downloaded` - Upgrade stage is downloaded. * `upgrade initiating on fabric A` - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * `upgrade initiated on fabric A` - Upgrade stage is in upgrade initiated when the upgrade has started in endpoint. * `upgrading fabric A` - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * `rebooting fabric A` - Upgrade is in rebooting when the endpoint is being rebooted. * `upgraded fabric A` - Upgrade stage is in upgraded when the corresponding endpoint has completed. * `upgrade initiating on fabric B` - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * `upgrade initiated on fabric B` - Upgrade stage is in upgrade initiated when upgrade has started in endpoint. * `upgrading fabric B` - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * `rebooting fabric B` - Upgrade is in rebooting when the endpoint is being rebooted. * `upgraded fabric B` - Upgrade stage is in upgraded when the corresponding endpoint has completed. * `upgrade initiating` - Upgrade stage is upgrade initiating. * `upgrade initiated` - Upgrade stage is upgrade initiated. * `upgrading` - Upgrade stage is upgrading. * `oob images staging` - Out-of-band component images staging. * `oob images staged` - Out-of-band component images staged. * `rebooting` - Upgrade is rebooting the endpoint. * `upgraded` - Upgrade stage is upgraded. * `success` - Upgrade stage is success. * `failed` - Upgrade stage is upgrade failed. * `terminated` - Upgrade stage is terminated. * `pending` - Upgrade stage is pending. * `ReadyForCache` - The image is ready to be cached into the Intersight Appliance. * `Caching` - The image will be cached into Intersight Appliance or an endpoint cache. * `Cached` - The image has been cached into the Intersight Appliance or endpoint cache. * `CachingFailed` - The image caching into the Intersight Appliance failed or endpoint cache.
 		Overallstatus *string `json:"Overallstatus,omitempty"`
 		// Pending reason for the upgrade waiting. * `none` - Upgrade pending reason is none. * `pending for next reboot` - Upgrade pending reason is pending for next reboot.
-		PendingType *string                           `json:"PendingType,omitempty"`
-		Upgrade     *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
-		Workflow    *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
+		PendingType *string `json:"PendingType,omitempty"`
+		// The error message from the endpoint during the SD card download.
+		SdCardDownloadError *string                           `json:"SdCardDownloadError,omitempty"`
+		Upgrade             *FirmwareUpgradeBaseRelationship  `json:"Upgrade,omitempty"`
+		Workflow            *WorkflowWorkflowInfoRelationship `json:"Workflow,omitempty"`
 	}
 
 	varFirmwareUpgradeStatusWithoutEmbeddedStruct := FirmwareUpgradeStatusWithoutEmbeddedStruct{}
@@ -545,6 +584,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 		varFirmwareUpgradeStatus.OverallPercentage = varFirmwareUpgradeStatusWithoutEmbeddedStruct.OverallPercentage
 		varFirmwareUpgradeStatus.Overallstatus = varFirmwareUpgradeStatusWithoutEmbeddedStruct.Overallstatus
 		varFirmwareUpgradeStatus.PendingType = varFirmwareUpgradeStatusWithoutEmbeddedStruct.PendingType
+		varFirmwareUpgradeStatus.SdCardDownloadError = varFirmwareUpgradeStatusWithoutEmbeddedStruct.SdCardDownloadError
 		varFirmwareUpgradeStatus.Upgrade = varFirmwareUpgradeStatusWithoutEmbeddedStruct.Upgrade
 		varFirmwareUpgradeStatus.Workflow = varFirmwareUpgradeStatusWithoutEmbeddedStruct.Workflow
 		*o = FirmwareUpgradeStatus(varFirmwareUpgradeStatus)
@@ -574,6 +614,7 @@ func (o *FirmwareUpgradeStatus) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OverallPercentage")
 		delete(additionalProperties, "Overallstatus")
 		delete(additionalProperties, "PendingType")
+		delete(additionalProperties, "SdCardDownloadError")
 		delete(additionalProperties, "Upgrade")
 		delete(additionalProperties, "Workflow")
 

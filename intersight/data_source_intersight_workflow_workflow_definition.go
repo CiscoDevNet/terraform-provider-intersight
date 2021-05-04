@@ -230,6 +230,8 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
 
+				temp["cloned_from"] = flattenMapWorkflowWorkflowDefinitionRelationship(s.GetClonedFrom(), d)
+
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_version"] = (s.GetDefaultVersion())
 				temp["description"] = (s.GetDescription())

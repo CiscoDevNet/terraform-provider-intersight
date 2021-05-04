@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
 **NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](niatelemetry.NxosBgpMvpn.md) |  | [optional] 
+**NxosBootflashDetails** | Pointer to [**NullableNiatelemetryBootflashDetails**](niatelemetry.BootflashDetails.md) |  | [optional] 
 **NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
 **NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](niatelemetry.Interface.md) |  | [optional] 
 **NxosNveInterfaceStatus** | Pointer to **string** | Returns the value of the nxosNveInterface field. | [optional] 
@@ -759,6 +760,41 @@ HasNxosBgpMvpn returns a boolean if a field has been set.
 `func (o *NiatelemetryNiaInventory) UnsetNxosBgpMvpn()`
 
 UnsetNxosBgpMvpn ensures that no value is present for NxosBgpMvpn, not even an explicit nil
+### GetNxosBootflashDetails
+
+`func (o *NiatelemetryNiaInventory) GetNxosBootflashDetails() NiatelemetryBootflashDetails`
+
+GetNxosBootflashDetails returns the NxosBootflashDetails field if non-nil, zero value otherwise.
+
+### GetNxosBootflashDetailsOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosBootflashDetailsOk() (*NiatelemetryBootflashDetails, bool)`
+
+GetNxosBootflashDetailsOk returns a tuple with the NxosBootflashDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosBootflashDetails
+
+`func (o *NiatelemetryNiaInventory) SetNxosBootflashDetails(v NiatelemetryBootflashDetails)`
+
+SetNxosBootflashDetails sets NxosBootflashDetails field to given value.
+
+### HasNxosBootflashDetails
+
+`func (o *NiatelemetryNiaInventory) HasNxosBootflashDetails() bool`
+
+HasNxosBootflashDetails returns a boolean if a field has been set.
+
+### SetNxosBootflashDetailsNil
+
+`func (o *NiatelemetryNiaInventory) SetNxosBootflashDetailsNil(b bool)`
+
+ SetNxosBootflashDetailsNil sets the value for NxosBootflashDetails to be an explicit nil
+
+### UnsetNxosBootflashDetails
+`func (o *NiatelemetryNiaInventory) UnsetNxosBootflashDetails()`
+
+UnsetNxosBootflashDetails ensures that no value is present for NxosBootflashDetails, not even an explicit nil
 ### GetNxosDciInterfaceStatus
 
 `func (o *NiatelemetryNiaInventory) GetNxosDciInterfaceStatus() string`

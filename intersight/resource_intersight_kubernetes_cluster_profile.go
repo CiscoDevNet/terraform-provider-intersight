@@ -65,7 +65,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -162,7 +161,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -203,7 +201,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -325,7 +322,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -417,7 +413,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -580,7 +575,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -675,7 +669,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -786,7 +779,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -845,7 +837,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -885,7 +876,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -932,7 +922,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -981,7 +970,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1021,7 +1009,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1061,7 +1048,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1108,7 +1094,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1155,7 +1140,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1221,7 +1205,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1286,7 +1269,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1333,7 +1315,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1395,7 +1376,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -3305,9 +3285,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	if d.HasChange("associated_cluster") {
@@ -3486,9 +3464,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsIppoolPoolRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetClusterIpPools(x)
-		}
+		o.SetClusterIpPools(x)
 	}
 
 	if d.HasChange("config_context") {
@@ -3790,9 +3766,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetEssentialAddons(x)
-		}
+		o.SetEssentialAddons(x)
 	}
 
 	if d.HasChange("kube_config") {
@@ -3871,9 +3845,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsIppoolIpLeaseRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetLoadbalancerIpLeases(x)
-		}
+		o.SetLoadbalancerIpLeases(x)
 	}
 
 	if d.HasChange("managed_mode") {
@@ -4106,9 +4078,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsKubernetesNodeGroupProfileRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetNodeGroups(x)
-		}
+		o.SetNodeGroups(x)
 	}
 
 	o.SetObjectType("kubernetes.ClusterProfile")
@@ -4164,9 +4134,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -4251,9 +4219,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("policy_bucket") {
@@ -4294,9 +4260,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPolicyBucket(x)
-		}
+		o.SetPolicyBucket(x)
 	}
 
 	if d.HasChange("shared_scope") {
@@ -4430,9 +4394,7 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("trusted_registries") {
@@ -4739,6 +4701,10 @@ func resourceKubernetesClusterProfileDelete(c context.Context, d *schema.Resourc
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
 		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(deleteErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "KubernetesClusterProfileDelete: KubernetesClusterProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			return de
+		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			deleteErr := deleteErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesClusterProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))

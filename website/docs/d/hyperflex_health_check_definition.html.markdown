@@ -22,6 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `health_impact`:(string) Static information detailing the health impact of the health check failure. 
 * `internal_name`:(string) Internal name of the health check definition. 
+* `minimum_hyper_flex_version`:(string) Minimum HyperFlex version that the check is supported on. Defaults to version 3.0.1. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the health check definition. 

@@ -22,6 +22,7 @@ The following arguments can be used to get data of already created objects in In
 * `number_of_leafs_per_site_in_mso`:(int) Number of leafs per site in Multi-Site Orchestrator. 
 * `number_of_pods_per_site_in_mso`:(int) Number of pods per site in Multi-Site Orchestrator. 
 * `number_of_spines_per_site_in_mso`:(int) Number of spines per site in Multi-Site Orchestrator. 
+* `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_id`:(string) ID of site in Multi-Site Orchestrator. 
 * `site_name`:(string) Name of the site in Multi-Site Orchestrator. 
