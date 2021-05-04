@@ -1,6 +1,6 @@
 # Change Logs
 
-## v1.0.7
+## v1.0.8
 Release Date: 4th May 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4267)
 * Fixes an issue with cisco.meta tags
