@@ -4,20 +4,15 @@ page_title: "Provider: Intersight"
 description: |-
 The Cisco Intersight provider is used to interact with the many resources supported by Intersight.
 ---
-# User Guide for Cisco Intersight Terraform Provider
-The reader of the Cisco Intersight Terraform Provider guide must be familiar with the following:
-* Terraform
-* HashiCorp Configuration Language
-* Cisco Intersight Platform
 
-The provider will accept the latest HCL updates implemented by Terraform, unless Terraform itself provides backward compatibility.
+# Cisco Intersight Terraform Provider
+The Cisco Intersight Terraform Provider is used to interact with the
+many resources supported by Cisco Intersight. You must have a valid Intersight account in order to use the provider.
+
+Use the navigation to the left to read about the available resources.
 
 ## Installing Terraform
-* Download terraform zip from https://www.terraform.io/downloads.html
-* Extract the zip and move it to a directory of your choice.
-* Add the path to this directory to PATH variable of the system.
-* For a detailed video on installing terraform, visit
-  [terraform website](https://learn.hashicorp.com/terraform/getting-started/install.html)
+* Follow the steps [here](https://www.terraform.io/downloads.html) for installing terraform.
 
 ## Using the Cisco Intersight Terraform Provider
 
@@ -27,7 +22,8 @@ The system must have:
 * Cisco Intersight Terraform Provider
 * An active Cisco Intersight Account.
 
-API Key, Secret Key and Intersight endpoint URL are required to start using the provider.
+
+A `apikey`, `secretkey` and Intersight `endpoint` URL are required to start using the provider.
 The following code must be included in a `.tf` file in the working directory, to establish connection between
 the provider and your Intersight account.
 ```hcl-terraform
