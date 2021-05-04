@@ -69,7 +69,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -357,7 +356,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -406,7 +404,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -446,7 +443,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -486,7 +482,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -606,7 +601,6 @@ func resourceIppoolPool() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -653,7 +647,6 @@ func resourceIppoolPool() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1598,9 +1591,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	if d.HasChange("assigned") {
@@ -1679,9 +1670,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetIpV4Blocks(x)
-		}
+		o.SetIpV4Blocks(x)
 	}
 
 	if d.HasChange("ip_v4_config") {
@@ -1784,9 +1773,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetIpV6Blocks(x)
-		}
+		o.SetIpV6Blocks(x)
 	}
 
 	if d.HasChange("ip_v6_config") {
@@ -1916,9 +1903,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -2003,9 +1988,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("shadow_pools") {
@@ -2046,9 +2029,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, models.MoMoRefAsIppoolShadowPoolRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetShadowPools(x)
-		}
+		o.SetShadowPools(x)
 	}
 
 	if d.HasChange("shared_scope") {
@@ -2094,9 +2075,7 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("v4_assigned") {
@@ -2284,6 +2263,10 @@ func resourceIppoolPoolDelete(c context.Context, d *schema.ResourceData, meta in
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
 		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(deleteErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IppoolPoolDelete: IppoolPool object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			return de
+		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			deleteErr := deleteErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IppoolPool object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))

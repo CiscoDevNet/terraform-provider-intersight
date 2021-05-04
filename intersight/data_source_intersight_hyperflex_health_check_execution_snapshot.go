@@ -123,6 +123,11 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"suggested_resolution": {
+				Description: "Information detailing a suggegsted resolution for the healthcheck failure, if the check fails.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
@@ -169,7 +174,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -242,7 +246,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -317,7 +320,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -386,7 +388,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -424,7 +425,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -463,7 +463,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -473,6 +472,11 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"suggested_resolution": {
+						Description: "Information detailing a suggegsted resolution for the healthcheck failure, if the check fails.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"tags": {
 						Type:     schema.TypeList,
@@ -546,7 +550,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -592,7 +595,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 												Type:        schema.TypeString,
 												Optional:    true,
-												Computed:    true,
 											},
 										},
 									},
@@ -652,7 +654,6 @@ func dataSourceHyperflexHealthCheckExecutionSnapshot() *schema.Resource {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
@@ -741,6 +742,10 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
+	if v, ok := d.GetOk("suggested_resolution"); ok {
+		x := (v.(string))
+		o.SetSuggestedResolution(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -813,6 +818,7 @@ func dataSourceHyperflexHealthCheckExecutionSnapshotRead(c context.Context, d *s
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["suggested_resolution"] = (s.GetSuggestedResolution())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

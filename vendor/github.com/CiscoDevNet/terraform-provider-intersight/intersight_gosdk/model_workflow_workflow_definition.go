@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
  *
- * API version: 1.0.9-4247
+ * API version: 1.0.9-4267
  * Contact: intersight@cisco.com
  */
 
@@ -50,9 +50,10 @@ type WorkflowWorkflowDefinition struct {
 	UiRenderingData       interface{}                           `json:"UiRenderingData,omitempty"`
 	ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 	// The version of the workflow to support multiple versions.
-	Version              *int64                                `json:"Version,omitempty"`
-	Catalog              *WorkflowCatalogRelationship          `json:"Catalog,omitempty"`
-	WorkflowMetadata     *WorkflowWorkflowMetadataRelationship `json:"WorkflowMetadata,omitempty"`
+	Version              *int64                                  `json:"Version,omitempty"`
+	Catalog              *WorkflowCatalogRelationship            `json:"Catalog,omitempty"`
+	ClonedFrom           *WorkflowWorkflowDefinitionRelationship `json:"ClonedFrom,omitempty"`
+	WorkflowMetadata     *WorkflowWorkflowMetadataRelationship   `json:"WorkflowMetadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -742,6 +743,38 @@ func (o *WorkflowWorkflowDefinition) SetCatalog(v WorkflowCatalogRelationship) {
 	o.Catalog = &v
 }
 
+// GetClonedFrom returns the ClonedFrom field value if set, zero value otherwise.
+func (o *WorkflowWorkflowDefinition) GetClonedFrom() WorkflowWorkflowDefinitionRelationship {
+	if o == nil || o.ClonedFrom == nil {
+		var ret WorkflowWorkflowDefinitionRelationship
+		return ret
+	}
+	return *o.ClonedFrom
+}
+
+// GetClonedFromOk returns a tuple with the ClonedFrom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowDefinition) GetClonedFromOk() (*WorkflowWorkflowDefinitionRelationship, bool) {
+	if o == nil || o.ClonedFrom == nil {
+		return nil, false
+	}
+	return o.ClonedFrom, true
+}
+
+// HasClonedFrom returns a boolean if a field has been set.
+func (o *WorkflowWorkflowDefinition) HasClonedFrom() bool {
+	if o != nil && o.ClonedFrom != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClonedFrom gets a reference to the given WorkflowWorkflowDefinitionRelationship and assigns it to the ClonedFrom field.
+func (o *WorkflowWorkflowDefinition) SetClonedFrom(v WorkflowWorkflowDefinitionRelationship) {
+	o.ClonedFrom = &v
+}
+
 // GetWorkflowMetadata returns the WorkflowMetadata field value if set, zero value otherwise.
 func (o *WorkflowWorkflowDefinition) GetWorkflowMetadata() WorkflowWorkflowMetadataRelationship {
 	if o == nil || o.WorkflowMetadata == nil {
@@ -844,6 +877,9 @@ func (o WorkflowWorkflowDefinition) MarshalJSON() ([]byte, error) {
 	if o.Catalog != nil {
 		toSerialize["Catalog"] = o.Catalog
 	}
+	if o.ClonedFrom != nil {
+		toSerialize["ClonedFrom"] = o.ClonedFrom
+	}
 	if o.WorkflowMetadata != nil {
 		toSerialize["WorkflowMetadata"] = o.WorkflowMetadata
 	}
@@ -887,9 +923,10 @@ func (o *WorkflowWorkflowDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		UiRenderingData       interface{}                           `json:"UiRenderingData,omitempty"`
 		ValidationInformation NullableWorkflowValidationInformation `json:"ValidationInformation,omitempty"`
 		// The version of the workflow to support multiple versions.
-		Version          *int64                                `json:"Version,omitempty"`
-		Catalog          *WorkflowCatalogRelationship          `json:"Catalog,omitempty"`
-		WorkflowMetadata *WorkflowWorkflowMetadataRelationship `json:"WorkflowMetadata,omitempty"`
+		Version          *int64                                  `json:"Version,omitempty"`
+		Catalog          *WorkflowCatalogRelationship            `json:"Catalog,omitempty"`
+		ClonedFrom       *WorkflowWorkflowDefinitionRelationship `json:"ClonedFrom,omitempty"`
+		WorkflowMetadata *WorkflowWorkflowMetadataRelationship   `json:"WorkflowMetadata,omitempty"`
 	}
 
 	varWorkflowWorkflowDefinitionWithoutEmbeddedStruct := WorkflowWorkflowDefinitionWithoutEmbeddedStruct{}
@@ -917,6 +954,7 @@ func (o *WorkflowWorkflowDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowDefinition.ValidationInformation = varWorkflowWorkflowDefinitionWithoutEmbeddedStruct.ValidationInformation
 		varWorkflowWorkflowDefinition.Version = varWorkflowWorkflowDefinitionWithoutEmbeddedStruct.Version
 		varWorkflowWorkflowDefinition.Catalog = varWorkflowWorkflowDefinitionWithoutEmbeddedStruct.Catalog
+		varWorkflowWorkflowDefinition.ClonedFrom = varWorkflowWorkflowDefinitionWithoutEmbeddedStruct.ClonedFrom
 		varWorkflowWorkflowDefinition.WorkflowMetadata = varWorkflowWorkflowDefinitionWithoutEmbeddedStruct.WorkflowMetadata
 		*o = WorkflowWorkflowDefinition(varWorkflowWorkflowDefinition)
 	} else {
@@ -955,6 +993,7 @@ func (o *WorkflowWorkflowDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Catalog")
+		delete(additionalProperties, "ClonedFrom")
 		delete(additionalProperties, "WorkflowMetadata")
 
 		// remove fields from embedded structs

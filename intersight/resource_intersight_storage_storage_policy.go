@@ -69,7 +69,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -126,7 +125,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -229,7 +227,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -278,7 +275,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -318,7 +314,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -358,7 +353,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -460,7 +454,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -507,7 +500,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1506,9 +1498,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	o.SetClassId("storage.StoragePolicy")
@@ -1563,9 +1553,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, models.MoMoRefAsStorageDiskGroupPolicyRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetDiskGroupPolicies(x)
-		}
+		o.SetDiskGroupPolicies(x)
 	}
 
 	if d.HasChange("domain_group_moid") {
@@ -1606,9 +1594,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetGlobalHotSpares(x)
-		}
+		o.SetGlobalHotSpares(x)
 	}
 
 	if d.HasChange("mod_time") {
@@ -1682,9 +1668,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -1769,9 +1753,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("profiles") {
@@ -1812,9 +1794,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, models.MoMoRefAsPolicyAbstractConfigProfileRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetProfiles(x)
-		}
+		o.SetProfiles(x)
 	}
 
 	if d.HasChange("retain_policy_virtual_drives") {
@@ -1860,9 +1840,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("unused_disks_state") {
@@ -2112,9 +2090,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetVirtualDrives(x)
-		}
+		o.SetVirtualDrives(x)
 	}
 
 	r := conn.ApiClient.StorageApi.UpdateStorageStoragePolicy(conn.ctx, d.Id()).StorageStoragePolicy(*o)
@@ -2149,6 +2125,10 @@ func resourceStorageStoragePolicyDelete(c context.Context, d *schema.ResourceDat
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
 		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(deleteErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "StorageStoragePolicyDelete: StorageStoragePolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			return de
+		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			deleteErr := deleteErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting StorageStoragePolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))

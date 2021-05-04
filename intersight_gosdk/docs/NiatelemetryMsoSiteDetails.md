@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **NumberOfLeafsPerSiteInMso** | Pointer to **int64** | Number of leafs per site in Multi-Site Orchestrator. | [optional] 
 **NumberOfPodsPerSiteInMso** | Pointer to **int64** | Number of pods per site in Multi-Site Orchestrator. | [optional] 
 **NumberOfSpinesPerSiteInMso** | Pointer to **int64** | Number of spines per site in Multi-Site Orchestrator. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **SiteId** | Pointer to **string** | ID of site in Multi-Site Orchestrator. | [optional] 
 **SiteName** | Pointer to **string** | Name of the site in Multi-Site Orchestrator. | [optional] 
 **SiteVersion** | Pointer to **string** | Version of the controller in the site. | [optional] 
@@ -173,6 +174,31 @@ SetNumberOfSpinesPerSiteInMso sets NumberOfSpinesPerSiteInMso field to given val
 `func (o *NiatelemetryMsoSiteDetails) HasNumberOfSpinesPerSiteInMso() bool`
 
 HasNumberOfSpinesPerSiteInMso returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryMsoSiteDetails) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryMsoSiteDetails) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryMsoSiteDetails) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryMsoSiteDetails) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
 
 ### GetSiteId
 

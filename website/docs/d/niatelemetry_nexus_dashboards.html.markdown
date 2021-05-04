@@ -16,6 +16,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cluster_name`:(string) Nexus Dashboard can onboard multiple APIC clusters/sites. 
 * `create_time`:(string) The time when this managed object was created. 
+* `dn`:(string) Dn of the objects present for Nexus Dashboard devices. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `is_cluster_healthy`:(string) Health of Nexus Dashboard cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 
@@ -28,6 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `number_of_sites_in_mso`:(int) Number of sites in Multi-Site Orchestrator. 
 * `number_of_sites_serviced`:(int) Number of sites serviced by ND. 
 * `number_of_tenants_in_mso`:(int) Number of total tenants in Multi-Site Orchestrator. 
+* `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `type_of_site_in_mso`:(string) Type of site added to Multi-Site Orchestrator. 
  

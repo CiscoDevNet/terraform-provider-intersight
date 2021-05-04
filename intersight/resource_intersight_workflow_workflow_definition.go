@@ -69,7 +69,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -110,7 +109,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -121,6 +119,46 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "workflow.WorkflowDefinition",
+			},
+			"cloned_from": {
+				Description: "A reference to a workflowWorkflowDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -581,7 +619,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -621,7 +658,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -645,6 +681,12 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "workflow.WorkflowProperties",
+						},
+						"enable_debug": {
+							Description: "Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
 						},
 						"external_meta": {
 							Description: "When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.",
@@ -945,7 +987,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -992,7 +1033,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 								},
 							},
@@ -1054,7 +1094,6 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -1169,6 +1208,49 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 	}
 
 	o.SetClassId("workflow.WorkflowDefinition")
+
+	if v, ok := d.GetOk("cloned_from"); ok {
+		p := make([]models.WorkflowWorkflowDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowWorkflowDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClonedFrom(x)
+		}
+	}
 
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -1719,6 +1801,12 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("workflow.WorkflowProperties")
+			if v, ok := l["enable_debug"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableDebug(x)
+				}
+			}
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -2230,6 +2318,10 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property ClassId in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("cloned_from", flattenMapWorkflowWorkflowDefinitionRelationship(s.GetClonedFrom(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClonedFrom in WorkflowWorkflowDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
@@ -2411,9 +2503,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
+		o.SetAncestors(x)
 	}
 
 	if d.HasChange("catalog") {
@@ -2461,6 +2551,50 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 	}
 
 	o.SetClassId("workflow.WorkflowDefinition")
+
+	if d.HasChange("cloned_from") {
+		v := d.Get("cloned_from")
+		p := make([]models.WorkflowWorkflowDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowWorkflowDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClonedFrom(x)
+		}
+	}
 
 	if d.HasChange("create_time") {
 		v := d.Get("create_time")
@@ -2636,9 +2770,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetInputDefinition(x)
-		}
+		o.SetInputDefinition(x)
 	}
 
 	if d.HasChange("input_parameter_set") {
@@ -2703,9 +2835,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetInputParameterSet(x)
-		}
+		o.SetInputParameterSet(x)
 	}
 
 	if d.HasChange("label") {
@@ -2902,9 +3032,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetOutputDefinition(x)
-		}
+		o.SetOutputDefinition(x)
 	}
 
 	if d.HasChange("output_parameters") {
@@ -2920,9 +3048,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
+		o.SetOwners(x)
 	}
 
 	if d.HasChange("parent") {
@@ -3007,9 +3133,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
+		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("properties") {
@@ -3030,6 +3154,12 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("workflow.WorkflowProperties")
+			if v, ok := l["enable_debug"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableDebug(x)
+				}
+			}
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -3099,9 +3229,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTags(x)
-		}
+		o.SetTags(x)
 	}
 
 	if d.HasChange("tasks") {
@@ -3148,9 +3276,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetTasks(x)
-		}
+		o.SetTasks(x)
 	}
 
 	if d.HasChange("ui_input_filters") {
@@ -3203,9 +3329,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			x = append(x, *o)
 		}
-		if len(x) > 0 {
-			o.SetUiInputFilters(x)
-		}
+		o.SetUiInputFilters(x)
 	}
 
 	if d.HasChange("ui_rendering_data") {
@@ -3518,6 +3642,10 @@ func resourceWorkflowWorkflowDefinitionDelete(c context.Context, d *schema.Resou
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {
 		errorType := fmt.Sprintf("%T", deleteErr)
+		if strings.Contains(deleteErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowWorkflowDefinitionDelete: WorkflowWorkflowDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			return de
+		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
 			deleteErr := deleteErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowWorkflowDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AggregateScriptName** | Pointer to **string** | Health check aggregate script that runs in the HyperFlex Leader Node. | It aggregates the output of all HyperFlex nodes and provides the health check result. | [optional] [readonly] 
 **HyperflexVersion** | Pointer to **string** | HyperFlex Data Platform version running on the target device. | [optional] [readonly] 
 **ScriptExecuteLocation** | Pointer to **string** | Location of the health check script&#39;s execution on the HyperFlex device. | [optional] [readonly] 
+**ScriptInput** | Pointer to **string** | Input for the health check script execution. | [optional] [readonly] 
 **ScriptName** | Pointer to **string** | Name of the health check script to be executed. | [optional] [readonly] 
 **Version** | Pointer to **string** | Version of the health check script associated with the health check definition. | [optional] [readonly] 
 
@@ -145,6 +146,31 @@ SetScriptExecuteLocation sets ScriptExecuteLocation field to given value.
 `func (o *HyperflexHealthCheckScriptInfoAllOf) HasScriptExecuteLocation() bool`
 
 HasScriptExecuteLocation returns a boolean if a field has been set.
+
+### GetScriptInput
+
+`func (o *HyperflexHealthCheckScriptInfoAllOf) GetScriptInput() string`
+
+GetScriptInput returns the ScriptInput field if non-nil, zero value otherwise.
+
+### GetScriptInputOk
+
+`func (o *HyperflexHealthCheckScriptInfoAllOf) GetScriptInputOk() (*string, bool)`
+
+GetScriptInputOk returns a tuple with the ScriptInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScriptInput
+
+`func (o *HyperflexHealthCheckScriptInfoAllOf) SetScriptInput(v string)`
+
+SetScriptInput sets ScriptInput field to given value.
+
+### HasScriptInput
+
+`func (o *HyperflexHealthCheckScriptInfoAllOf) HasScriptInput() bool`
+
+HasScriptInput returns a boolean if a field has been set.
 
 ### GetScriptName
 

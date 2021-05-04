@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NexusDashboards"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NexusDashboards"]
 **ClusterName** | Pointer to **string** | Nexus Dashboard can onboard multiple APIC clusters/sites. | [optional] 
+**Dn** | Pointer to **string** | Dn of the objects present for Nexus Dashboard devices. | [optional] 
 **IsClusterHealthy** | Pointer to **string** | Health of Nexus Dashboard cluster. | [optional] 
 **NdClusterSize** | Pointer to **int64** | Number of nodes in Nexus Dashboard cluster. | [optional] 
 **NdType** | Pointer to **string** | Node type in Nexus Dashboard cluster. | [optional] 
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 **NumberOfSitesInMso** | Pointer to **int64** | Number of sites in Multi-Site Orchestrator. | [optional] 
 **NumberOfSitesServiced** | Pointer to **int64** | Number of sites serviced by ND. | [optional] 
 **NumberOfTenantsInMso** | Pointer to **int64** | Number of total tenants in Multi-Site Orchestrator. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **TypeOfSiteInMso** | Pointer to **string** | Type of site added to Multi-Site Orchestrator. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -102,6 +104,31 @@ SetClusterName sets ClusterName field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasClusterName() bool`
 
 HasClusterName returns a boolean if a field has been set.
+
+### GetDn
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetDn() string`
+
+GetDn returns the Dn field if non-nil, zero value otherwise.
+
+### GetDnOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetDnOk() (*string, bool)`
+
+GetDnOk returns a tuple with the Dn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDn
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetDn(v string)`
+
+SetDn sets Dn field to given value.
+
+### HasDn
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasDn() bool`
+
+HasDn returns a boolean if a field has been set.
 
 ### GetIsClusterHealthy
 
@@ -327,6 +354,31 @@ SetNumberOfTenantsInMso sets NumberOfTenantsInMso field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfTenantsInMso() bool`
 
 HasNumberOfTenantsInMso returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
 
 ### GetTypeOfSiteInMso
 

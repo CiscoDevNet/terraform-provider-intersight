@@ -416,6 +416,8 @@ docs/AssetWorkloadOptimizerMicrosoftAzureEnterpriseAgreementOptions.md
 docs/AssetWorkloadOptimizerMicrosoftAzureEnterpriseAgreementOptionsAllOf.md
 docs/AssetWorkloadOptimizerMicrosoftAzureServicePrincipalOptions.md
 docs/AssetWorkloadOptimizerMicrosoftAzureServicePrincipalOptionsAllOf.md
+docs/AssetWorkloadOptimizerOpenStackOptions.md
+docs/AssetWorkloadOptimizerOpenStackOptionsAllOf.md
 docs/AssetWorkloadOptimizerRedHatOpenStackOptions.md
 docs/AssetWorkloadOptimizerRedHatOpenStackOptionsAllOf.md
 docs/AssetWorkloadOptimizerService.md
@@ -3215,6 +3217,8 @@ docs/NiatelemetryAppDetailsAllOf.md
 docs/NiatelemetryAppDetailsList.md
 docs/NiatelemetryAppDetailsListAllOf.md
 docs/NiatelemetryAppDetailsResponse.md
+docs/NiatelemetryBootflashDetails.md
+docs/NiatelemetryBootflashDetailsAllOf.md
 docs/NiatelemetryDcnmFanDetails.md
 docs/NiatelemetryDcnmFanDetailsAllOf.md
 docs/NiatelemetryDcnmFanDetailsList.md
@@ -4581,6 +4585,8 @@ docs/TelemetryDruidTopNRequestAllOf.md
 docs/TelemetryDruidTopNResult.md
 docs/TelemetryDruidUnionDataSource.md
 docs/TelemetryDruidUnionDataSourceAllOf.md
+docs/TemplateTransformationStage.md
+docs/TemplateTransformationStageAllOf.md
 docs/TerminalApi.md
 docs/TerminalAuditLog.md
 docs/TerminalAuditLogAllOf.md
@@ -4989,6 +4995,8 @@ docs/WorkflowCatalogRelationship.md
 docs/WorkflowCatalogResponse.md
 docs/WorkflowCliCommand.md
 docs/WorkflowCliCommandAllOf.md
+docs/WorkflowComments.md
+docs/WorkflowCommentsAllOf.md
 docs/WorkflowConstraints.md
 docs/WorkflowConstraintsAllOf.md
 docs/WorkflowControlTask.md
@@ -5097,6 +5105,11 @@ docs/WorkflowTargetProperty.md
 docs/WorkflowTargetPropertyAllOf.md
 docs/WorkflowTaskConstraints.md
 docs/WorkflowTaskConstraintsAllOf.md
+docs/WorkflowTaskDebugLog.md
+docs/WorkflowTaskDebugLogAllOf.md
+docs/WorkflowTaskDebugLogList.md
+docs/WorkflowTaskDebugLogListAllOf.md
+docs/WorkflowTaskDebugLogResponse.md
 docs/WorkflowTaskDefinition.md
 docs/WorkflowTaskDefinitionAllOf.md
 docs/WorkflowTaskDefinitionList.md
@@ -5117,6 +5130,13 @@ docs/WorkflowTaskMetadataRelationship.md
 docs/WorkflowTaskMetadataResponse.md
 docs/WorkflowTaskRetryInfo.md
 docs/WorkflowTaskRetryInfoAllOf.md
+docs/WorkflowTemplateEvaluation.md
+docs/WorkflowTemplateEvaluationAllOf.md
+docs/WorkflowTemplateFunctionMeta.md
+docs/WorkflowTemplateFunctionMetaAllOf.md
+docs/WorkflowTemplateFunctionMetaList.md
+docs/WorkflowTemplateFunctionMetaListAllOf.md
+docs/WorkflowTemplateFunctionMetaResponse.md
 docs/WorkflowUiInputFilter.md
 docs/WorkflowUiInputFilterAllOf.md
 docs/WorkflowValidationError.md
@@ -5486,6 +5506,8 @@ model_asset_workload_optimizer_microsoft_azure_enterprise_agreement_options.go
 model_asset_workload_optimizer_microsoft_azure_enterprise_agreement_options_all_of.go
 model_asset_workload_optimizer_microsoft_azure_service_principal_options.go
 model_asset_workload_optimizer_microsoft_azure_service_principal_options_all_of.go
+model_asset_workload_optimizer_open_stack_options.go
+model_asset_workload_optimizer_open_stack_options_all_of.go
 model_asset_workload_optimizer_red_hat_open_stack_options.go
 model_asset_workload_optimizer_red_hat_open_stack_options_all_of.go
 model_asset_workload_optimizer_service.go
@@ -8240,6 +8262,8 @@ model_niatelemetry_app_details_all_of.go
 model_niatelemetry_app_details_list.go
 model_niatelemetry_app_details_list_all_of.go
 model_niatelemetry_app_details_response.go
+model_niatelemetry_bootflash_details.go
+model_niatelemetry_bootflash_details_all_of.go
 model_niatelemetry_dcnm_fan_details.go
 model_niatelemetry_dcnm_fan_details_all_of.go
 model_niatelemetry_dcnm_fan_details_list.go
@@ -9578,6 +9602,8 @@ model_telemetry_druid_top_n_request_all_of.go
 model_telemetry_druid_top_n_result.go
 model_telemetry_druid_union_data_source.go
 model_telemetry_druid_union_data_source_all_of.go
+model_template_transformation_stage.go
+model_template_transformation_stage_all_of.go
 model_terminal_audit_log.go
 model_terminal_audit_log_all_of.go
 model_terminal_audit_log_list.go
@@ -9976,6 +10002,8 @@ model_workflow_catalog_relationship.go
 model_workflow_catalog_response.go
 model_workflow_cli_command.go
 model_workflow_cli_command_all_of.go
+model_workflow_comments.go
+model_workflow_comments_all_of.go
 model_workflow_constraints.go
 model_workflow_constraints_all_of.go
 model_workflow_control_task.go
@@ -10084,6 +10112,11 @@ model_workflow_target_property.go
 model_workflow_target_property_all_of.go
 model_workflow_task_constraints.go
 model_workflow_task_constraints_all_of.go
+model_workflow_task_debug_log.go
+model_workflow_task_debug_log_all_of.go
+model_workflow_task_debug_log_list.go
+model_workflow_task_debug_log_list_all_of.go
+model_workflow_task_debug_log_response.go
 model_workflow_task_definition.go
 model_workflow_task_definition_all_of.go
 model_workflow_task_definition_list.go
@@ -10104,6 +10137,13 @@ model_workflow_task_metadata_relationship.go
 model_workflow_task_metadata_response.go
 model_workflow_task_retry_info.go
 model_workflow_task_retry_info_all_of.go
+model_workflow_template_evaluation.go
+model_workflow_template_evaluation_all_of.go
+model_workflow_template_function_meta.go
+model_workflow_template_function_meta_all_of.go
+model_workflow_template_function_meta_list.go
+model_workflow_template_function_meta_list_all_of.go
+model_workflow_template_function_meta_response.go
 model_workflow_ui_input_filter.go
 model_workflow_ui_input_filter_all_of.go
 model_workflow_validation_error.go

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowProperties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowProperties"]
+**EnableDebug** | Pointer to **bool** | Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. | [optional] [default to false]
 **ExternalMeta** | Pointer to **bool** | When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. | [optional] [default to false]
 **Retryable** | Pointer to **bool** | When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. | [optional] [default to false]
 **SupportStatus** | Pointer to **string** | Supported status of the definition. * &#x60;Supported&#x60; - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * &#x60;Beta&#x60; - The definition is a Beta version and this version can under go changes until the version is marked supported. * &#x60;Deprecated&#x60; - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. | [optional] [default to "Supported"]
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEnableDebug
+
+`func (o *WorkflowWorkflowPropertiesAllOf) GetEnableDebug() bool`
+
+GetEnableDebug returns the EnableDebug field if non-nil, zero value otherwise.
+
+### GetEnableDebugOk
+
+`func (o *WorkflowWorkflowPropertiesAllOf) GetEnableDebugOk() (*bool, bool)`
+
+GetEnableDebugOk returns a tuple with the EnableDebug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableDebug
+
+`func (o *WorkflowWorkflowPropertiesAllOf) SetEnableDebug(v bool)`
+
+SetEnableDebug sets EnableDebug field to given value.
+
+### HasEnableDebug
+
+`func (o *WorkflowWorkflowPropertiesAllOf) HasEnableDebug() bool`
+
+HasEnableDebug returns a boolean if a field has been set.
 
 ### GetExternalMeta
 

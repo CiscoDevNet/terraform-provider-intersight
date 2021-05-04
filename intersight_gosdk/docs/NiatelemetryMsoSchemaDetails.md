@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.MsoSchemaDetails"]
 **NumberOfPolicyObjectsPerSchema** | Pointer to **int64** | Number of policy objects per schema. | [optional] 
 **NumberOfTemplatesPerSchema** | Pointer to **int64** | Number of tenants assigned per schema in Multi-Site Orchestrator. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **SchemaId** | Pointer to **string** | Schema ID in Multi-Site Orchestrator. | [optional] 
 **SchemaName** | Pointer to **string** | Schema name in Multi-Site Orchestrator. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -120,6 +121,31 @@ SetNumberOfTemplatesPerSchema sets NumberOfTemplatesPerSchema field to given val
 `func (o *NiatelemetryMsoSchemaDetails) HasNumberOfTemplatesPerSchema() bool`
 
 HasNumberOfTemplatesPerSchema returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryMsoSchemaDetails) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryMsoSchemaDetails) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryMsoSchemaDetails) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryMsoSchemaDetails) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
 
 ### GetSchemaId
 

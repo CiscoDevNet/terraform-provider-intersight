@@ -14,6 +14,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_virtualization_vmware_cluster.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cpu_over_commitment`:(int) CPU over commitment associated with this cluster. 
 * `create_time`:(string) The time when this managed object was created. 
 * `datastore_count`:(int) Count of all datastores associated with this cluster. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

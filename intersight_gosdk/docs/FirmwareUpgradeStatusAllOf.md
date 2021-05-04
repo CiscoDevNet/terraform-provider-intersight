@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **OverallPercentage** | Pointer to **int64** | The overall percentage of the operation. | [optional] 
 **Overallstatus** | Pointer to **string** | The overall status of the operation. * &#x60;none&#x60; - Upgrade stage is no upgrade stage. * &#x60;started&#x60; - Upgrade stage is started. * &#x60;prepare initiating&#x60; - Upgrade configuration is being prepared. * &#x60;prepare initiated&#x60; - Upgrade configuration is initiated. * &#x60;prepared&#x60; - Upgrade configuration is prepared. * &#x60;download initiating&#x60; - Upgrade stage is download initiating. * &#x60;download initiated&#x60; - Upgrade stage is download initiated. * &#x60;downloading&#x60; - Upgrade stage is downloading. * &#x60;downloaded&#x60; - Upgrade stage is downloaded. * &#x60;upgrade initiating on fabric A&#x60; - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * &#x60;upgrade initiated on fabric A&#x60; - Upgrade stage is in upgrade initiated when the upgrade has started in endpoint. * &#x60;upgrading fabric A&#x60; - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * &#x60;rebooting fabric A&#x60; - Upgrade is in rebooting when the endpoint is being rebooted. * &#x60;upgraded fabric A&#x60; - Upgrade stage is in upgraded when the corresponding endpoint has completed. * &#x60;upgrade initiating on fabric B&#x60; - Upgrade stage is in upgrade initiating when upgrade is being started in endopint. * &#x60;upgrade initiated on fabric B&#x60; - Upgrade stage is in upgrade initiated when upgrade has started in endpoint. * &#x60;upgrading fabric B&#x60; - Upgrade stage is in upgrading when the upgrade requires reboot to complete. * &#x60;rebooting fabric B&#x60; - Upgrade is in rebooting when the endpoint is being rebooted. * &#x60;upgraded fabric B&#x60; - Upgrade stage is in upgraded when the corresponding endpoint has completed. * &#x60;upgrade initiating&#x60; - Upgrade stage is upgrade initiating. * &#x60;upgrade initiated&#x60; - Upgrade stage is upgrade initiated. * &#x60;upgrading&#x60; - Upgrade stage is upgrading. * &#x60;oob images staging&#x60; - Out-of-band component images staging. * &#x60;oob images staged&#x60; - Out-of-band component images staged. * &#x60;rebooting&#x60; - Upgrade is rebooting the endpoint. * &#x60;upgraded&#x60; - Upgrade stage is upgraded. * &#x60;success&#x60; - Upgrade stage is success. * &#x60;failed&#x60; - Upgrade stage is upgrade failed. * &#x60;terminated&#x60; - Upgrade stage is terminated. * &#x60;pending&#x60; - Upgrade stage is pending. * &#x60;ReadyForCache&#x60; - The image is ready to be cached into the Intersight Appliance. * &#x60;Caching&#x60; - The image will be cached into Intersight Appliance or an endpoint cache. * &#x60;Cached&#x60; - The image has been cached into the Intersight Appliance or endpoint cache. * &#x60;CachingFailed&#x60; - The image caching into the Intersight Appliance failed or endpoint cache. | [optional] [default to "none"]
 **PendingType** | Pointer to **string** | Pending reason for the upgrade waiting. * &#x60;none&#x60; - Upgrade pending reason is none. * &#x60;pending for next reboot&#x60; - Upgrade pending reason is pending for next reboot. | [optional] [default to "none"]
+**SdCardDownloadError** | Pointer to **string** | The error message from the endpoint during the SD card download. | [optional] 
 **Upgrade** | Pointer to [**FirmwareUpgradeBaseRelationship**](firmware.UpgradeBase.Relationship.md) |  | [optional] 
 **Workflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
 
@@ -275,6 +276,31 @@ SetPendingType sets PendingType field to given value.
 `func (o *FirmwareUpgradeStatusAllOf) HasPendingType() bool`
 
 HasPendingType returns a boolean if a field has been set.
+
+### GetSdCardDownloadError
+
+`func (o *FirmwareUpgradeStatusAllOf) GetSdCardDownloadError() string`
+
+GetSdCardDownloadError returns the SdCardDownloadError field if non-nil, zero value otherwise.
+
+### GetSdCardDownloadErrorOk
+
+`func (o *FirmwareUpgradeStatusAllOf) GetSdCardDownloadErrorOk() (*string, bool)`
+
+GetSdCardDownloadErrorOk returns a tuple with the SdCardDownloadError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSdCardDownloadError
+
+`func (o *FirmwareUpgradeStatusAllOf) SetSdCardDownloadError(v string)`
+
+SetSdCardDownloadError sets SdCardDownloadError field to given value.
+
+### HasSdCardDownloadError
+
+`func (o *FirmwareUpgradeStatusAllOf) HasSdCardDownloadError() bool`
+
+HasSdCardDownloadError returns a boolean if a field has been set.
 
 ### GetUpgrade
 

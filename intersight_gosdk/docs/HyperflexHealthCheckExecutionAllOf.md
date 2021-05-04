@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **HealthCheckResult** | Pointer to **string** | Health check execution result. Valid only if HealthCheckExecutionStatus is SUCCEEDED. * &#x60;UNKNOWN&#x60; - Indicates that the health check results could not be determined. * &#x60;PASS&#x60; - Indicates that the health check passed. * &#x60;FAIL&#x60; - Indicates that the health check failed. * &#x60;WARN&#x60; - Indicates that the health check completed with a warning. * &#x60;NOT_APPLICABLE&#x60; - Indicates that the health check is either unsupported, or not applicable on the Cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **HealthCheckSummary** | Pointer to **string** | A brief summary of health check results. | [optional] [readonly] 
 **HxDeviceName** | Pointer to **string** | HyperFlex Device Name where the healthcheck is executed. | [optional] [readonly] 
+**SuggestedResolution** | Pointer to **string** | Information detailing a suggested resolution for the healthcheck failure, if the check fails. | [optional] 
 **Uuid** | Pointer to **string** | UUID of an instance of health check execution. | [optional] [readonly] 
 **HealthCheckDefinition** | Pointer to [**HyperflexHealthCheckDefinitionRelationship**](hyperflex.HealthCheckDefinition.Relationship.md) |  | [optional] 
 **HxCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
@@ -329,6 +330,31 @@ SetHxDeviceName sets HxDeviceName field to given value.
 `func (o *HyperflexHealthCheckExecutionAllOf) HasHxDeviceName() bool`
 
 HasHxDeviceName returns a boolean if a field has been set.
+
+### GetSuggestedResolution
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetSuggestedResolution() string`
+
+GetSuggestedResolution returns the SuggestedResolution field if non-nil, zero value otherwise.
+
+### GetSuggestedResolutionOk
+
+`func (o *HyperflexHealthCheckExecutionAllOf) GetSuggestedResolutionOk() (*string, bool)`
+
+GetSuggestedResolutionOk returns a tuple with the SuggestedResolution field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuggestedResolution
+
+`func (o *HyperflexHealthCheckExecutionAllOf) SetSuggestedResolution(v string)`
+
+SetSuggestedResolution sets SuggestedResolution field to given value.
+
+### HasSuggestedResolution
+
+`func (o *HyperflexHealthCheckExecutionAllOf) HasSuggestedResolution() bool`
+
+HasSuggestedResolution returns a boolean if a field has been set.
 
 ### GetUuid
 

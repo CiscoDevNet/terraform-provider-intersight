@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-15T06:27:08Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
  *
- * API version: 1.0.9-4247
+ * API version: 1.0.9-4267
  * Contact: intersight@cisco.com
  */
 
@@ -24,6 +24,8 @@ type WorkflowWorkflowProperties struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.
+	EnableDebug *bool `json:"EnableDebug,omitempty"`
 	// When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.
 	ExternalMeta *bool `json:"ExternalMeta,omitempty"`
 	// When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.
@@ -43,6 +45,8 @@ func NewWorkflowWorkflowProperties(classId string, objectType string) *WorkflowW
 	this := WorkflowWorkflowProperties{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enableDebug bool = false
+	this.EnableDebug = &enableDebug
 	var externalMeta bool = false
 	this.ExternalMeta = &externalMeta
 	var retryable bool = false
@@ -61,6 +65,8 @@ func NewWorkflowWorkflowPropertiesWithDefaults() *WorkflowWorkflowProperties {
 	this.ClassId = classId
 	var objectType string = "workflow.WorkflowProperties"
 	this.ObjectType = objectType
+	var enableDebug bool = false
+	this.EnableDebug = &enableDebug
 	var externalMeta bool = false
 	this.ExternalMeta = &externalMeta
 	var retryable bool = false
@@ -116,6 +122,38 @@ func (o *WorkflowWorkflowProperties) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *WorkflowWorkflowProperties) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetEnableDebug returns the EnableDebug field value if set, zero value otherwise.
+func (o *WorkflowWorkflowProperties) GetEnableDebug() bool {
+	if o == nil || o.EnableDebug == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableDebug
+}
+
+// GetEnableDebugOk returns a tuple with the EnableDebug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowProperties) GetEnableDebugOk() (*bool, bool) {
+	if o == nil || o.EnableDebug == nil {
+		return nil, false
+	}
+	return o.EnableDebug, true
+}
+
+// HasEnableDebug returns a boolean if a field has been set.
+func (o *WorkflowWorkflowProperties) HasEnableDebug() bool {
+	if o != nil && o.EnableDebug != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableDebug gets a reference to the given bool and assigns it to the EnableDebug field.
+func (o *WorkflowWorkflowProperties) SetEnableDebug(v bool) {
+	o.EnableDebug = &v
 }
 
 // GetExternalMeta returns the ExternalMeta field value if set, zero value otherwise.
@@ -230,6 +268,9 @@ func (o WorkflowWorkflowProperties) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.EnableDebug != nil {
+		toSerialize["EnableDebug"] = o.EnableDebug
+	}
 	if o.ExternalMeta != nil {
 		toSerialize["ExternalMeta"] = o.ExternalMeta
 	}
@@ -253,6 +294,8 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.
+		EnableDebug *bool `json:"EnableDebug,omitempty"`
 		// When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.
 		ExternalMeta *bool `json:"ExternalMeta,omitempty"`
 		// When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.
@@ -268,6 +311,7 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowProperties := _WorkflowWorkflowProperties{}
 		varWorkflowWorkflowProperties.ClassId = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.ClassId
 		varWorkflowWorkflowProperties.ObjectType = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.ObjectType
+		varWorkflowWorkflowProperties.EnableDebug = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.EnableDebug
 		varWorkflowWorkflowProperties.ExternalMeta = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.ExternalMeta
 		varWorkflowWorkflowProperties.Retryable = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.Retryable
 		varWorkflowWorkflowProperties.SupportStatus = varWorkflowWorkflowPropertiesWithoutEmbeddedStruct.SupportStatus
@@ -290,6 +334,7 @@ func (o *WorkflowWorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "EnableDebug")
 		delete(additionalProperties, "ExternalMeta")
 		delete(additionalProperties, "Retryable")
 		delete(additionalProperties, "SupportStatus")
