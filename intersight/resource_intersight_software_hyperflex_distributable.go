@@ -280,6 +280,11 @@ func resourceSoftwareHyperflexDistributable() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"image_type": {
+				Description: "The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"import_action": {
 				Description: "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'GeneratePreSignedUploadUrl' is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If 'CompleteImportProcess' is set, the ImportState is marked as 'Imported'. Applicable for local machine source. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
 				Type:        schema.TypeString,
@@ -1007,6 +1012,11 @@ func resourceSoftwareHyperflexDistributableCreate(c context.Context, d *schema.R
 		o.SetGuid(x)
 	}
 
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
+
 	if v, ok := d.GetOk("import_action"); ok {
 		x := (v.(string))
 		o.SetImportAction(x)
@@ -1559,6 +1569,10 @@ func resourceSoftwareHyperflexDistributableRead(c context.Context, d *schema.Res
 		return diag.Errorf("error occurred while setting property Guid in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwareHyperflexDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("import_action", (s.GetImportAction())); err != nil {
 		return diag.Errorf("error occurred while setting property ImportAction in SoftwareHyperflexDistributable object: %s", err.Error())
 	}
@@ -1973,6 +1987,12 @@ func resourceSoftwareHyperflexDistributableUpdate(c context.Context, d *schema.R
 		v := d.Get("guid")
 		x := (v.(string))
 		o.SetGuid(x)
+	}
+
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if d.HasChange("import_action") {

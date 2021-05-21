@@ -50,6 +50,11 @@ func dataSourceSoftwarerepositoryCategoryMapperModel() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"image_type": {
+				Description: "The type of image based on the endpoint it can upgrade. For example, ucs-bundle-6400-infra.4.1.2a.bin can upgrade ucs managed fabric interconnects, so the image type is UCS Managed Fabric Interconnect.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -127,6 +132,10 @@ func dataSourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *s
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -202,6 +211,7 @@ func dataSourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *s
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["dist_tag"] = (s.GetDistTag())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["image_type"] = (s.GetImageType())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

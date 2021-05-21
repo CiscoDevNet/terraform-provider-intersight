@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
  *
- * API version: 1.0.9-4267
+ * API version: 1.0.9-4289
  * Contact: intersight@cisco.com
  */
 
@@ -41,8 +41,9 @@ type MetaDefinition struct {
 	PermissionSupported *bool                `json:"PermissionSupported,omitempty"`
 	Properties          []MetaPropDefinition `json:"Properties,omitempty"`
 	// Boolean flag to specify whether instances of this class type can be assigned to resource groups that are part of an organization for access control. Inventoried physical/logical objects which needs access control should have rbacResource=true. These objects are not part of any organization by default like device registrations and should be assigned to organizations for access control. Profiles, policies, workflow definitions which are created by specifying organization need not have this flag set.
-	RbacResource  *bool                        `json:"RbacResource,omitempty"`
-	Relationships []MetaRelationshipDefinition `json:"Relationships,omitempty"`
+	RbacResource      *bool                        `json:"RbacResource,omitempty"`
+	Relationships     []MetaRelationshipDefinition `json:"Relationships,omitempty"`
+	ResourcePoolTypes []string                     `json:"ResourcePoolTypes,omitempty"`
 	// Restful URL path for the meta.
 	RestPath *string `json:"RestPath,omitempty"`
 	// The version of the service that defines the meta-data.
@@ -516,6 +517,39 @@ func (o *MetaDefinition) SetRelationships(v []MetaRelationshipDefinition) {
 	o.Relationships = v
 }
 
+// GetResourcePoolTypes returns the ResourcePoolTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MetaDefinition) GetResourcePoolTypes() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ResourcePoolTypes
+}
+
+// GetResourcePoolTypesOk returns a tuple with the ResourcePoolTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MetaDefinition) GetResourcePoolTypesOk() (*[]string, bool) {
+	if o == nil || o.ResourcePoolTypes == nil {
+		return nil, false
+	}
+	return &o.ResourcePoolTypes, true
+}
+
+// HasResourcePoolTypes returns a boolean if a field has been set.
+func (o *MetaDefinition) HasResourcePoolTypes() bool {
+	if o != nil && o.ResourcePoolTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourcePoolTypes gets a reference to the given []string and assigns it to the ResourcePoolTypes field.
+func (o *MetaDefinition) SetResourcePoolTypes(v []string) {
+	o.ResourcePoolTypes = v
+}
+
 // GetRestPath returns the RestPath field value if set, zero value otherwise.
 func (o *MetaDefinition) GetRestPath() string {
 	if o == nil || o.RestPath == nil {
@@ -632,6 +666,9 @@ func (o MetaDefinition) MarshalJSON() ([]byte, error) {
 	if o.Relationships != nil {
 		toSerialize["Relationships"] = o.Relationships
 	}
+	if o.ResourcePoolTypes != nil {
+		toSerialize["ResourcePoolTypes"] = o.ResourcePoolTypes
+	}
 	if o.RestPath != nil {
 		toSerialize["RestPath"] = o.RestPath
 	}
@@ -669,8 +706,9 @@ func (o *MetaDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		PermissionSupported *bool                `json:"PermissionSupported,omitempty"`
 		Properties          []MetaPropDefinition `json:"Properties,omitempty"`
 		// Boolean flag to specify whether instances of this class type can be assigned to resource groups that are part of an organization for access control. Inventoried physical/logical objects which needs access control should have rbacResource=true. These objects are not part of any organization by default like device registrations and should be assigned to organizations for access control. Profiles, policies, workflow definitions which are created by specifying organization need not have this flag set.
-		RbacResource  *bool                        `json:"RbacResource,omitempty"`
-		Relationships []MetaRelationshipDefinition `json:"Relationships,omitempty"`
+		RbacResource      *bool                        `json:"RbacResource,omitempty"`
+		Relationships     []MetaRelationshipDefinition `json:"Relationships,omitempty"`
+		ResourcePoolTypes []string                     `json:"ResourcePoolTypes,omitempty"`
 		// Restful URL path for the meta.
 		RestPath *string `json:"RestPath,omitempty"`
 		// The version of the service that defines the meta-data.
@@ -696,6 +734,7 @@ func (o *MetaDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		varMetaDefinition.Properties = varMetaDefinitionWithoutEmbeddedStruct.Properties
 		varMetaDefinition.RbacResource = varMetaDefinitionWithoutEmbeddedStruct.RbacResource
 		varMetaDefinition.Relationships = varMetaDefinitionWithoutEmbeddedStruct.Relationships
+		varMetaDefinition.ResourcePoolTypes = varMetaDefinitionWithoutEmbeddedStruct.ResourcePoolTypes
 		varMetaDefinition.RestPath = varMetaDefinitionWithoutEmbeddedStruct.RestPath
 		varMetaDefinition.Version = varMetaDefinitionWithoutEmbeddedStruct.Version
 		*o = MetaDefinition(varMetaDefinition)
@@ -729,6 +768,7 @@ func (o *MetaDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Properties")
 		delete(additionalProperties, "RbacResource")
 		delete(additionalProperties, "Relationships")
+		delete(additionalProperties, "ResourcePoolTypes")
 		delete(additionalProperties, "RestPath")
 		delete(additionalProperties, "Version")
 

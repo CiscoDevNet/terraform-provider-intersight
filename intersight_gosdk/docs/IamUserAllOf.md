@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **string** | First name of the user. This field is populated from the IdP attributes received after authentication. | [optional] [readonly] 
 **LastLoginTime** | Pointer to **time.Time** | Last successful login time for user. | [optional] [readonly] 
 **LastName** | Pointer to **string** | Last name of the user. This field is populated from the IdP attributes received after authentication. | [optional] [readonly] 
+**LastRoleModifiedTime** | Pointer to **time.Time** | Last role modification time for user. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name as configured in the IdP. | [optional] [readonly] 
 **UserIdOrEmail** | Pointer to **string** | UserID or email as configured in the IdP. | [optional] 
 **UserType** | Pointer to **string** | Type of the User. If a user is added manually by specifying the email address, or has logged in using groups, based on the IdP attributes received during authentication. If added manually, the user type will be static, otherwise dynamic. | [optional] [readonly] 
@@ -207,6 +208,31 @@ SetLastName sets LastName field to given value.
 `func (o *IamUserAllOf) HasLastName() bool`
 
 HasLastName returns a boolean if a field has been set.
+
+### GetLastRoleModifiedTime
+
+`func (o *IamUserAllOf) GetLastRoleModifiedTime() time.Time`
+
+GetLastRoleModifiedTime returns the LastRoleModifiedTime field if non-nil, zero value otherwise.
+
+### GetLastRoleModifiedTimeOk
+
+`func (o *IamUserAllOf) GetLastRoleModifiedTimeOk() (*time.Time, bool)`
+
+GetLastRoleModifiedTimeOk returns a tuple with the LastRoleModifiedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRoleModifiedTime
+
+`func (o *IamUserAllOf) SetLastRoleModifiedTime(v time.Time)`
+
+SetLastRoleModifiedTime sets LastRoleModifiedTime field to given value.
+
+### HasLastRoleModifiedTime
+
+`func (o *IamUserAllOf) HasLastRoleModifiedTime() bool`
+
+HasLastRoleModifiedTime returns a boolean if a field has been set.
 
 ### GetName
 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
  *
- * API version: 1.0.9-4267
+ * API version: 1.0.9-4289
  * Contact: intersight@cisco.com
  */
 
@@ -2978,6 +2978,780 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareDatastoreListExecute(r
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) Execute() (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareDistributedNetworkByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareDistributedNetworkByMoid Read a 'virtualization.VmwareDistributedNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest {
+	return ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedNetwork
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkByMoidExecute(r ApiGetVirtualizationVmwareDistributedNetworkByMoidRequest) (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareDistributedNetworkByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareDistributedNetworkListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Filter(filter string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Top(top int32) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Skip(skip int32) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Select_(select_ string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Expand(expand string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Apply(apply string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Count(count bool) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) At(at string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Tags(tags string) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareDistributedNetworkListRequest) Execute() (VirtualizationVmwareDistributedNetworkResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareDistributedNetworkListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareDistributedNetworkList Read a 'virtualization.VmwareDistributedNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareDistributedNetworkListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkList(ctx _context.Context) ApiGetVirtualizationVmwareDistributedNetworkListRequest {
+	return ApiGetVirtualizationVmwareDistributedNetworkListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedNetworkResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedNetworkListExecute(r ApiGetVirtualizationVmwareDistributedNetworkListRequest) (VirtualizationVmwareDistributedNetworkResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedNetworkResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareDistributedNetworkList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedNetworks"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) Execute() (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareDistributedSwitchByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareDistributedSwitchByMoid Read a 'virtualization.VmwareDistributedSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest {
+	return ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedSwitch
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchByMoidExecute(r ApiGetVirtualizationVmwareDistributedSwitchByMoidRequest) (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareDistributedSwitchByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareDistributedSwitchListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Filter(filter string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Top(top int32) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Skip(skip int32) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Select_(select_ string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Expand(expand string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Apply(apply string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Count(count bool) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) At(at string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Tags(tags string) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareDistributedSwitchListRequest) Execute() (VirtualizationVmwareDistributedSwitchResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareDistributedSwitchListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareDistributedSwitchList Read a 'virtualization.VmwareDistributedSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareDistributedSwitchListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchList(ctx _context.Context) ApiGetVirtualizationVmwareDistributedSwitchListRequest {
+	return ApiGetVirtualizationVmwareDistributedSwitchListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedSwitchResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareDistributedSwitchListExecute(r ApiGetVirtualizationVmwareDistributedSwitchListRequest) (VirtualizationVmwareDistributedSwitchResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedSwitchResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareDistributedSwitchList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedSwitches"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVirtualizationVmwareFolderByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *VirtualizationApiService
@@ -3613,6 +4387,1554 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareHostListExecute(r ApiG
 	}
 
 	localVarPath := localBasePath + "/api/v1/virtualization/VmwareHosts"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareKernelNetworkByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) Execute() (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareKernelNetworkByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareKernelNetworkByMoid Read a 'virtualization.VmwareKernelNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareKernelNetworkByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareKernelNetworkByMoidRequest {
+	return ApiGetVirtualizationVmwareKernelNetworkByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareKernelNetwork
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkByMoidExecute(r ApiGetVirtualizationVmwareKernelNetworkByMoidRequest) (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareKernelNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareKernelNetworkByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareKernelNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareKernelNetworkListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Filter(filter string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Top(top int32) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Skip(skip int32) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Select_(select_ string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Expand(expand string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Apply(apply string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Count(count bool) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) At(at string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Tags(tags string) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareKernelNetworkListRequest) Execute() (VirtualizationVmwareKernelNetworkResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareKernelNetworkListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareKernelNetworkList Read a 'virtualization.VmwareKernelNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareKernelNetworkListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkList(ctx _context.Context) ApiGetVirtualizationVmwareKernelNetworkListRequest {
+	return ApiGetVirtualizationVmwareKernelNetworkListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareKernelNetworkResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareKernelNetworkListExecute(r ApiGetVirtualizationVmwareKernelNetworkListRequest) (VirtualizationVmwareKernelNetworkResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareKernelNetworkResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareKernelNetworkList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareKernelNetworks"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareNetworkByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareNetworkByMoidRequest) Execute() (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareNetworkByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareNetworkByMoid Read a 'virtualization.VmwareNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareNetworkByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareNetworkByMoidRequest {
+	return ApiGetVirtualizationVmwareNetworkByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareNetwork
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkByMoidExecute(r ApiGetVirtualizationVmwareNetworkByMoidRequest) (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareNetworkByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareNetworkListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Filter(filter string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Top(top int32) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Skip(skip int32) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Select_(select_ string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Expand(expand string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Apply(apply string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Count(count bool) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) At(at string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Tags(tags string) ApiGetVirtualizationVmwareNetworkListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareNetworkListRequest) Execute() (VirtualizationVmwareNetworkResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareNetworkListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareNetworkList Read a 'virtualization.VmwareNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareNetworkListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkList(ctx _context.Context) ApiGetVirtualizationVmwareNetworkListRequest {
+	return ApiGetVirtualizationVmwareNetworkListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareNetworkResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareNetworkListExecute(r ApiGetVirtualizationVmwareNetworkListRequest) (VirtualizationVmwareNetworkResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareNetworkResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareNetworkList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareNetworks"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) Execute() (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwarePhysicalNetworkInterfaceByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwarePhysicalNetworkInterfaceByMoid Read a 'virtualization.VmwarePhysicalNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest {
+	return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwarePhysicalNetworkInterface
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceByMoidExecute(r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceByMoidRequest) (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwarePhysicalNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwarePhysicalNetworkInterfaceByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwarePhysicalNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Filter(filter string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Orderby(orderby string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Top(top int32) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Skip(skip int32) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Select_(select_ string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Expand(expand string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Apply(apply string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Count(count bool) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) At(at string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Tags(tags string) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) Execute() (VirtualizationVmwarePhysicalNetworkInterfaceResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwarePhysicalNetworkInterfaceListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwarePhysicalNetworkInterfaceList Read a 'virtualization.VmwarePhysicalNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceList(ctx _context.Context) ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest {
+	return ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwarePhysicalNetworkInterfaceResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwarePhysicalNetworkInterfaceListExecute(r ApiGetVirtualizationVmwarePhysicalNetworkInterfaceListRequest) (VirtualizationVmwarePhysicalNetworkInterfaceResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwarePhysicalNetworkInterfaceResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwarePhysicalNetworkInterfaceList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwarePhysicalNetworkInterfaces"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareUplinkPortByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) Execute() (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareUplinkPortByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareUplinkPortByMoid Read a 'virtualization.VmwareUplinkPort' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareUplinkPortByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareUplinkPortByMoidRequest {
+	return ApiGetVirtualizationVmwareUplinkPortByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareUplinkPort
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortByMoidExecute(r ApiGetVirtualizationVmwareUplinkPortByMoidRequest) (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareUplinkPort
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareUplinkPortByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareUplinkPorts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareUplinkPortListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Filter(filter string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Top(top int32) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Skip(skip int32) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Select_(select_ string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Expand(expand string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Apply(apply string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Count(count bool) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) At(at string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Tags(tags string) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareUplinkPortListRequest) Execute() (VirtualizationVmwareUplinkPortResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareUplinkPortListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareUplinkPortList Read a 'virtualization.VmwareUplinkPort' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareUplinkPortListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortList(ctx _context.Context) ApiGetVirtualizationVmwareUplinkPortListRequest {
+	return ApiGetVirtualizationVmwareUplinkPortListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareUplinkPortResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareUplinkPortListExecute(r ApiGetVirtualizationVmwareUplinkPortListRequest) (VirtualizationVmwareUplinkPortResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareUplinkPortResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareUplinkPortList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareUplinkPorts"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4913,6 +7235,780 @@ func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualMachineListExec
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) Execute() (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareVirtualNetworkInterfaceByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareVirtualNetworkInterfaceByMoid Read a 'virtualization.VmwareVirtualNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest {
+	return ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualNetworkInterface
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceByMoidExecute(r ApiGetVirtualizationVmwareVirtualNetworkInterfaceByMoidRequest) (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareVirtualNetworkInterfaceByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Filter(filter string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Top(top int32) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Skip(skip int32) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Apply(apply string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Count(count bool) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) At(at string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Tags(tags string) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) Execute() (VirtualizationVmwareVirtualNetworkInterfaceResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareVirtualNetworkInterfaceListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareVirtualNetworkInterfaceList Read a 'virtualization.VmwareVirtualNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceList(ctx _context.Context) ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest {
+	return ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualNetworkInterfaceResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualNetworkInterfaceListExecute(r ApiGetVirtualizationVmwareVirtualNetworkInterfaceListRequest) (VirtualizationVmwareVirtualNetworkInterfaceResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualNetworkInterfaceResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareVirtualNetworkInterfaceList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualNetworkInterfaces"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VirtualizationApiService
+	moid       string
+}
+
+func (r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) Execute() (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareVirtualSwitchByMoidExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareVirtualSwitchByMoid Read a 'virtualization.VmwareVirtualSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoid(ctx _context.Context, moid string) ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest {
+	return ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualSwitch
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchByMoidExecute(r ApiGetVirtualizationVmwareVirtualSwitchByMoidRequest) (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareVirtualSwitchByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVirtualizationVmwareVirtualSwitchListRequest struct {
+	ctx         _context.Context
+	ApiService  *VirtualizationApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Filter(filter string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Orderby(orderby string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Top(top int32) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Skip(skip int32) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Select_(select_ string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Expand(expand string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Apply(apply string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Count(count bool) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Inlinecount(inlinecount string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) At(at string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Tags(tags string) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVirtualizationVmwareVirtualSwitchListRequest) Execute() (VirtualizationVmwareVirtualSwitchResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVirtualizationVmwareVirtualSwitchListExecute(r)
+}
+
+/*
+ * GetVirtualizationVmwareVirtualSwitchList Read a 'virtualization.VmwareVirtualSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVirtualizationVmwareVirtualSwitchListRequest
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchList(ctx _context.Context) ApiGetVirtualizationVmwareVirtualSwitchListRequest {
+	return ApiGetVirtualizationVmwareVirtualSwitchListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualSwitchResponse
+ */
+func (a *VirtualizationApiService) GetVirtualizationVmwareVirtualSwitchListExecute(r ApiGetVirtualizationVmwareVirtualSwitchListRequest) (VirtualizationVmwareVirtualSwitchResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualSwitchResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.GetVirtualizationVmwareVirtualSwitchList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualSwitches"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchVirtualizationHostRequest struct {
 	ctx                _context.Context
 	ApiService         *VirtualizationApiService
@@ -5933,6 +9029,346 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareDatastoreExecute(r A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchVirtualizationVmwareDistributedNetworkRequest struct {
+	ctx                                    _context.Context
+	ApiService                             *VirtualizationApiService
+	moid                                   string
+	virtualizationVmwareDistributedNetwork *VirtualizationVmwareDistributedNetwork
+	ifMatch                                *string
+}
+
+func (r ApiPatchVirtualizationVmwareDistributedNetworkRequest) VirtualizationVmwareDistributedNetwork(virtualizationVmwareDistributedNetwork VirtualizationVmwareDistributedNetwork) ApiPatchVirtualizationVmwareDistributedNetworkRequest {
+	r.virtualizationVmwareDistributedNetwork = &virtualizationVmwareDistributedNetwork
+	return r
+}
+func (r ApiPatchVirtualizationVmwareDistributedNetworkRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareDistributedNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareDistributedNetworkRequest) Execute() (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareDistributedNetworkExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareDistributedNetwork Update a 'virtualization.VmwareDistributedNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareDistributedNetworkRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedNetwork(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareDistributedNetworkRequest {
+	return ApiPatchVirtualizationVmwareDistributedNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedNetwork
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedNetworkExecute(r ApiPatchVirtualizationVmwareDistributedNetworkRequest) (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareDistributedNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareDistributedNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareDistributedNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareDistributedNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwareDistributedSwitchRequest struct {
+	ctx                                   _context.Context
+	ApiService                            *VirtualizationApiService
+	moid                                  string
+	virtualizationVmwareDistributedSwitch *VirtualizationVmwareDistributedSwitch
+	ifMatch                               *string
+}
+
+func (r ApiPatchVirtualizationVmwareDistributedSwitchRequest) VirtualizationVmwareDistributedSwitch(virtualizationVmwareDistributedSwitch VirtualizationVmwareDistributedSwitch) ApiPatchVirtualizationVmwareDistributedSwitchRequest {
+	r.virtualizationVmwareDistributedSwitch = &virtualizationVmwareDistributedSwitch
+	return r
+}
+func (r ApiPatchVirtualizationVmwareDistributedSwitchRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareDistributedSwitchRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareDistributedSwitchRequest) Execute() (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareDistributedSwitchExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareDistributedSwitch Update a 'virtualization.VmwareDistributedSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareDistributedSwitchRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedSwitch(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareDistributedSwitchRequest {
+	return ApiPatchVirtualizationVmwareDistributedSwitchRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedSwitch
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareDistributedSwitchExecute(r ApiPatchVirtualizationVmwareDistributedSwitchRequest) (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareDistributedSwitch")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareDistributedSwitch == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareDistributedSwitch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareDistributedSwitch
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchVirtualizationVmwareFolderRequest struct {
 	ctx                        _context.Context
 	ApiService                 *VirtualizationApiService
@@ -6273,6 +9709,686 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareHostExecute(r ApiPat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPatchVirtualizationVmwareKernelNetworkRequest struct {
+	ctx                               _context.Context
+	ApiService                        *VirtualizationApiService
+	moid                              string
+	virtualizationVmwareKernelNetwork *VirtualizationVmwareKernelNetwork
+	ifMatch                           *string
+}
+
+func (r ApiPatchVirtualizationVmwareKernelNetworkRequest) VirtualizationVmwareKernelNetwork(virtualizationVmwareKernelNetwork VirtualizationVmwareKernelNetwork) ApiPatchVirtualizationVmwareKernelNetworkRequest {
+	r.virtualizationVmwareKernelNetwork = &virtualizationVmwareKernelNetwork
+	return r
+}
+func (r ApiPatchVirtualizationVmwareKernelNetworkRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareKernelNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareKernelNetworkRequest) Execute() (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareKernelNetworkExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareKernelNetwork Update a 'virtualization.VmwareKernelNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareKernelNetworkRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareKernelNetwork(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareKernelNetworkRequest {
+	return ApiPatchVirtualizationVmwareKernelNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareKernelNetwork
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareKernelNetworkExecute(r ApiPatchVirtualizationVmwareKernelNetworkRequest) (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareKernelNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareKernelNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareKernelNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareKernelNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareKernelNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareKernelNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwareNetworkRequest struct {
+	ctx                         _context.Context
+	ApiService                  *VirtualizationApiService
+	moid                        string
+	virtualizationVmwareNetwork *VirtualizationVmwareNetwork
+	ifMatch                     *string
+}
+
+func (r ApiPatchVirtualizationVmwareNetworkRequest) VirtualizationVmwareNetwork(virtualizationVmwareNetwork VirtualizationVmwareNetwork) ApiPatchVirtualizationVmwareNetworkRequest {
+	r.virtualizationVmwareNetwork = &virtualizationVmwareNetwork
+	return r
+}
+func (r ApiPatchVirtualizationVmwareNetworkRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareNetworkRequest) Execute() (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareNetworkExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareNetwork Update a 'virtualization.VmwareNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareNetworkRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareNetwork(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareNetworkRequest {
+	return ApiPatchVirtualizationVmwareNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareNetwork
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareNetworkExecute(r ApiPatchVirtualizationVmwareNetworkRequest) (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest struct {
+	ctx                                          _context.Context
+	ApiService                                   *VirtualizationApiService
+	moid                                         string
+	virtualizationVmwarePhysicalNetworkInterface *VirtualizationVmwarePhysicalNetworkInterface
+	ifMatch                                      *string
+}
+
+func (r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) VirtualizationVmwarePhysicalNetworkInterface(virtualizationVmwarePhysicalNetworkInterface VirtualizationVmwarePhysicalNetworkInterface) ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	r.virtualizationVmwarePhysicalNetworkInterface = &virtualizationVmwarePhysicalNetworkInterface
+	return r
+}
+func (r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) Execute() (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwarePhysicalNetworkInterfaceExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwarePhysicalNetworkInterface Update a 'virtualization.VmwarePhysicalNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwarePhysicalNetworkInterface(ctx _context.Context, moid string) ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	return ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwarePhysicalNetworkInterface
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwarePhysicalNetworkInterfaceExecute(r ApiPatchVirtualizationVmwarePhysicalNetworkInterfaceRequest) (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwarePhysicalNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwarePhysicalNetworkInterface")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwarePhysicalNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwarePhysicalNetworkInterface == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwarePhysicalNetworkInterface is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwarePhysicalNetworkInterface
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwareUplinkPortRequest struct {
+	ctx                            _context.Context
+	ApiService                     *VirtualizationApiService
+	moid                           string
+	virtualizationVmwareUplinkPort *VirtualizationVmwareUplinkPort
+	ifMatch                        *string
+}
+
+func (r ApiPatchVirtualizationVmwareUplinkPortRequest) VirtualizationVmwareUplinkPort(virtualizationVmwareUplinkPort VirtualizationVmwareUplinkPort) ApiPatchVirtualizationVmwareUplinkPortRequest {
+	r.virtualizationVmwareUplinkPort = &virtualizationVmwareUplinkPort
+	return r
+}
+func (r ApiPatchVirtualizationVmwareUplinkPortRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareUplinkPortRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareUplinkPortRequest) Execute() (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareUplinkPortExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareUplinkPort Update a 'virtualization.VmwareUplinkPort' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareUplinkPortRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareUplinkPort(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareUplinkPortRequest {
+	return ApiPatchVirtualizationVmwareUplinkPortRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareUplinkPort
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareUplinkPortExecute(r ApiPatchVirtualizationVmwareUplinkPortRequest) (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareUplinkPort
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareUplinkPort")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareUplinkPorts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareUplinkPort == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareUplinkPort is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareUplinkPort
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPatchVirtualizationVmwareVirtualDiskRequest struct {
 	ctx                             _context.Context
 	ApiService                      *VirtualizationApiService
@@ -6529,6 +10645,346 @@ func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualMachineExecut
 	}
 	// body params
 	localVarPostBody = r.virtualizationVmwareVirtualMachine
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest struct {
+	ctx                                         _context.Context
+	ApiService                                  *VirtualizationApiService
+	moid                                        string
+	virtualizationVmwareVirtualNetworkInterface *VirtualizationVmwareVirtualNetworkInterface
+	ifMatch                                     *string
+}
+
+func (r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) VirtualizationVmwareVirtualNetworkInterface(virtualizationVmwareVirtualNetworkInterface VirtualizationVmwareVirtualNetworkInterface) ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	r.virtualizationVmwareVirtualNetworkInterface = &virtualizationVmwareVirtualNetworkInterface
+	return r
+}
+func (r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) Execute() (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareVirtualNetworkInterfaceExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareVirtualNetworkInterface Update a 'virtualization.VmwareVirtualNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualNetworkInterface(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	return ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualNetworkInterface
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualNetworkInterfaceExecute(r ApiPatchVirtualizationVmwareVirtualNetworkInterfaceRequest) (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareVirtualNetworkInterface")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareVirtualNetworkInterface == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareVirtualNetworkInterface is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareVirtualNetworkInterface
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVirtualizationVmwareVirtualSwitchRequest struct {
+	ctx                               _context.Context
+	ApiService                        *VirtualizationApiService
+	moid                              string
+	virtualizationVmwareVirtualSwitch *VirtualizationVmwareVirtualSwitch
+	ifMatch                           *string
+}
+
+func (r ApiPatchVirtualizationVmwareVirtualSwitchRequest) VirtualizationVmwareVirtualSwitch(virtualizationVmwareVirtualSwitch VirtualizationVmwareVirtualSwitch) ApiPatchVirtualizationVmwareVirtualSwitchRequest {
+	r.virtualizationVmwareVirtualSwitch = &virtualizationVmwareVirtualSwitch
+	return r
+}
+func (r ApiPatchVirtualizationVmwareVirtualSwitchRequest) IfMatch(ifMatch string) ApiPatchVirtualizationVmwareVirtualSwitchRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVirtualizationVmwareVirtualSwitchRequest) Execute() (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	return r.ApiService.PatchVirtualizationVmwareVirtualSwitchExecute(r)
+}
+
+/*
+ * PatchVirtualizationVmwareVirtualSwitch Update a 'virtualization.VmwareVirtualSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVirtualizationVmwareVirtualSwitchRequest
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualSwitch(ctx _context.Context, moid string) ApiPatchVirtualizationVmwareVirtualSwitchRequest {
+	return ApiPatchVirtualizationVmwareVirtualSwitchRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualSwitch
+ */
+func (a *VirtualizationApiService) PatchVirtualizationVmwareVirtualSwitchExecute(r ApiPatchVirtualizationVmwareVirtualSwitchRequest) (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.PatchVirtualizationVmwareVirtualSwitch")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareVirtualSwitch == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareVirtualSwitch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareVirtualSwitch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -7633,6 +12089,346 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareDatastoreExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateVirtualizationVmwareDistributedNetworkRequest struct {
+	ctx                                    _context.Context
+	ApiService                             *VirtualizationApiService
+	moid                                   string
+	virtualizationVmwareDistributedNetwork *VirtualizationVmwareDistributedNetwork
+	ifMatch                                *string
+}
+
+func (r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) VirtualizationVmwareDistributedNetwork(virtualizationVmwareDistributedNetwork VirtualizationVmwareDistributedNetwork) ApiUpdateVirtualizationVmwareDistributedNetworkRequest {
+	r.virtualizationVmwareDistributedNetwork = &virtualizationVmwareDistributedNetwork
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareDistributedNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) Execute() (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareDistributedNetworkExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareDistributedNetwork Update a 'virtualization.VmwareDistributedNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareDistributedNetworkRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedNetwork(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareDistributedNetworkRequest {
+	return ApiUpdateVirtualizationVmwareDistributedNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedNetwork
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedNetworkExecute(r ApiUpdateVirtualizationVmwareDistributedNetworkRequest) (VirtualizationVmwareDistributedNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareDistributedNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareDistributedNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareDistributedNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareDistributedNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwareDistributedSwitchRequest struct {
+	ctx                                   _context.Context
+	ApiService                            *VirtualizationApiService
+	moid                                  string
+	virtualizationVmwareDistributedSwitch *VirtualizationVmwareDistributedSwitch
+	ifMatch                               *string
+}
+
+func (r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) VirtualizationVmwareDistributedSwitch(virtualizationVmwareDistributedSwitch VirtualizationVmwareDistributedSwitch) ApiUpdateVirtualizationVmwareDistributedSwitchRequest {
+	r.virtualizationVmwareDistributedSwitch = &virtualizationVmwareDistributedSwitch
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareDistributedSwitchRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) Execute() (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareDistributedSwitchExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareDistributedSwitch Update a 'virtualization.VmwareDistributedSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareDistributedSwitchRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedSwitch(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareDistributedSwitchRequest {
+	return ApiUpdateVirtualizationVmwareDistributedSwitchRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareDistributedSwitch
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareDistributedSwitchExecute(r ApiUpdateVirtualizationVmwareDistributedSwitchRequest) (VirtualizationVmwareDistributedSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareDistributedSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareDistributedSwitch")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareDistributedSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareDistributedSwitch == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareDistributedSwitch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareDistributedSwitch
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateVirtualizationVmwareFolderRequest struct {
 	ctx                        _context.Context
 	ApiService                 *VirtualizationApiService
@@ -7973,6 +12769,686 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareHostExecute(r ApiUp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiUpdateVirtualizationVmwareKernelNetworkRequest struct {
+	ctx                               _context.Context
+	ApiService                        *VirtualizationApiService
+	moid                              string
+	virtualizationVmwareKernelNetwork *VirtualizationVmwareKernelNetwork
+	ifMatch                           *string
+}
+
+func (r ApiUpdateVirtualizationVmwareKernelNetworkRequest) VirtualizationVmwareKernelNetwork(virtualizationVmwareKernelNetwork VirtualizationVmwareKernelNetwork) ApiUpdateVirtualizationVmwareKernelNetworkRequest {
+	r.virtualizationVmwareKernelNetwork = &virtualizationVmwareKernelNetwork
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareKernelNetworkRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareKernelNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareKernelNetworkRequest) Execute() (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareKernelNetworkExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareKernelNetwork Update a 'virtualization.VmwareKernelNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareKernelNetworkRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareKernelNetwork(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareKernelNetworkRequest {
+	return ApiUpdateVirtualizationVmwareKernelNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareKernelNetwork
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareKernelNetworkExecute(r ApiUpdateVirtualizationVmwareKernelNetworkRequest) (VirtualizationVmwareKernelNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareKernelNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareKernelNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareKernelNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareKernelNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareKernelNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareKernelNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwareNetworkRequest struct {
+	ctx                         _context.Context
+	ApiService                  *VirtualizationApiService
+	moid                        string
+	virtualizationVmwareNetwork *VirtualizationVmwareNetwork
+	ifMatch                     *string
+}
+
+func (r ApiUpdateVirtualizationVmwareNetworkRequest) VirtualizationVmwareNetwork(virtualizationVmwareNetwork VirtualizationVmwareNetwork) ApiUpdateVirtualizationVmwareNetworkRequest {
+	r.virtualizationVmwareNetwork = &virtualizationVmwareNetwork
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareNetworkRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareNetworkRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareNetworkRequest) Execute() (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareNetworkExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareNetwork Update a 'virtualization.VmwareNetwork' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareNetworkRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareNetwork(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareNetworkRequest {
+	return ApiUpdateVirtualizationVmwareNetworkRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareNetwork
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareNetworkExecute(r ApiUpdateVirtualizationVmwareNetworkRequest) (VirtualizationVmwareNetwork, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareNetwork")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareNetworks/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareNetwork == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareNetwork is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareNetwork
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest struct {
+	ctx                                          _context.Context
+	ApiService                                   *VirtualizationApiService
+	moid                                         string
+	virtualizationVmwarePhysicalNetworkInterface *VirtualizationVmwarePhysicalNetworkInterface
+	ifMatch                                      *string
+}
+
+func (r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) VirtualizationVmwarePhysicalNetworkInterface(virtualizationVmwarePhysicalNetworkInterface VirtualizationVmwarePhysicalNetworkInterface) ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	r.virtualizationVmwarePhysicalNetworkInterface = &virtualizationVmwarePhysicalNetworkInterface
+	return r
+}
+func (r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) Execute() (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwarePhysicalNetworkInterfaceExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwarePhysicalNetworkInterface Update a 'virtualization.VmwarePhysicalNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwarePhysicalNetworkInterface(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest {
+	return ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwarePhysicalNetworkInterface
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwarePhysicalNetworkInterfaceExecute(r ApiUpdateVirtualizationVmwarePhysicalNetworkInterfaceRequest) (VirtualizationVmwarePhysicalNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwarePhysicalNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwarePhysicalNetworkInterface")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwarePhysicalNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwarePhysicalNetworkInterface == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwarePhysicalNetworkInterface is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwarePhysicalNetworkInterface
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwareUplinkPortRequest struct {
+	ctx                            _context.Context
+	ApiService                     *VirtualizationApiService
+	moid                           string
+	virtualizationVmwareUplinkPort *VirtualizationVmwareUplinkPort
+	ifMatch                        *string
+}
+
+func (r ApiUpdateVirtualizationVmwareUplinkPortRequest) VirtualizationVmwareUplinkPort(virtualizationVmwareUplinkPort VirtualizationVmwareUplinkPort) ApiUpdateVirtualizationVmwareUplinkPortRequest {
+	r.virtualizationVmwareUplinkPort = &virtualizationVmwareUplinkPort
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareUplinkPortRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareUplinkPortRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareUplinkPortRequest) Execute() (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareUplinkPortExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareUplinkPort Update a 'virtualization.VmwareUplinkPort' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareUplinkPortRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareUplinkPort(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareUplinkPortRequest {
+	return ApiUpdateVirtualizationVmwareUplinkPortRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareUplinkPort
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareUplinkPortExecute(r ApiUpdateVirtualizationVmwareUplinkPortRequest) (VirtualizationVmwareUplinkPort, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareUplinkPort
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareUplinkPort")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareUplinkPorts/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareUplinkPort == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareUplinkPort is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareUplinkPort
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateVirtualizationVmwareVirtualDiskRequest struct {
 	ctx                             _context.Context
 	ApiService                      *VirtualizationApiService
@@ -8229,6 +13705,346 @@ func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualMachineExecu
 	}
 	// body params
 	localVarPostBody = r.virtualizationVmwareVirtualMachine
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest struct {
+	ctx                                         _context.Context
+	ApiService                                  *VirtualizationApiService
+	moid                                        string
+	virtualizationVmwareVirtualNetworkInterface *VirtualizationVmwareVirtualNetworkInterface
+	ifMatch                                     *string
+}
+
+func (r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) VirtualizationVmwareVirtualNetworkInterface(virtualizationVmwareVirtualNetworkInterface VirtualizationVmwareVirtualNetworkInterface) ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	r.virtualizationVmwareVirtualNetworkInterface = &virtualizationVmwareVirtualNetworkInterface
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) Execute() (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareVirtualNetworkInterfaceExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareVirtualNetworkInterface Update a 'virtualization.VmwareVirtualNetworkInterface' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualNetworkInterface(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest {
+	return ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualNetworkInterface
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualNetworkInterfaceExecute(r ApiUpdateVirtualizationVmwareVirtualNetworkInterfaceRequest) (VirtualizationVmwareVirtualNetworkInterface, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualNetworkInterface
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareVirtualNetworkInterface")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualNetworkInterfaces/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareVirtualNetworkInterface == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareVirtualNetworkInterface is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareVirtualNetworkInterface
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVirtualizationVmwareVirtualSwitchRequest struct {
+	ctx                               _context.Context
+	ApiService                        *VirtualizationApiService
+	moid                              string
+	virtualizationVmwareVirtualSwitch *VirtualizationVmwareVirtualSwitch
+	ifMatch                           *string
+}
+
+func (r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) VirtualizationVmwareVirtualSwitch(virtualizationVmwareVirtualSwitch VirtualizationVmwareVirtualSwitch) ApiUpdateVirtualizationVmwareVirtualSwitchRequest {
+	r.virtualizationVmwareVirtualSwitch = &virtualizationVmwareVirtualSwitch
+	return r
+}
+func (r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) IfMatch(ifMatch string) ApiUpdateVirtualizationVmwareVirtualSwitchRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) Execute() (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVirtualizationVmwareVirtualSwitchExecute(r)
+}
+
+/*
+ * UpdateVirtualizationVmwareVirtualSwitch Update a 'virtualization.VmwareVirtualSwitch' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVirtualizationVmwareVirtualSwitchRequest
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualSwitch(ctx _context.Context, moid string) ApiUpdateVirtualizationVmwareVirtualSwitchRequest {
+	return ApiUpdateVirtualizationVmwareVirtualSwitchRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VirtualizationVmwareVirtualSwitch
+ */
+func (a *VirtualizationApiService) UpdateVirtualizationVmwareVirtualSwitchExecute(r ApiUpdateVirtualizationVmwareVirtualSwitchRequest) (VirtualizationVmwareVirtualSwitch, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VirtualizationVmwareVirtualSwitch
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VirtualizationApiService.UpdateVirtualizationVmwareVirtualSwitch")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/virtualization/VmwareVirtualSwitches/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.virtualizationVmwareVirtualSwitch == nil {
+		return localVarReturnValue, nil, reportError("virtualizationVmwareVirtualSwitch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.virtualizationVmwareVirtualSwitch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

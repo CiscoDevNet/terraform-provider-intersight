@@ -69,6 +69,12 @@ func dataSourceIamUser() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"last_role_modified_time": {
+				Description: "Last role modification time for user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -166,6 +172,10 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 		x := (v.(string))
 		o.SetLastName(x)
 	}
+	if v, ok := d.GetOk("last_role_modified_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastRoleModifiedTime(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -257,6 +267,8 @@ func dataSourceIamUserRead(c context.Context, d *schema.ResourceData, meta inter
 
 				temp["last_login_time"] = (s.GetLastLoginTime()).String()
 				temp["last_name"] = (s.GetLastName())
+
+				temp["last_role_modified_time"] = (s.GetLastRoleModifiedTime()).String()
 
 				temp["local_user_password"] = flattenMapIamLocalUserPasswordRelationship(s.GetLocalUserPassword(), d)
 

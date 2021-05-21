@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
  *
- * API version: 1.0.9-4267
+ * API version: 1.0.9-4289
  * Contact: intersight@cisco.com
  */
 
@@ -82,10 +82,10 @@ type WorkflowWorkflowInfo struct {
 	WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
 	// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
 	WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
-	Var0RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_0_RollbackWorkflow,omitempty"`
+	Var0ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_0_ClusterProfile,omitempty"`
 	Var1SwitchProfile          *FabricSwitchProfileRelationship                `json:"_1_SwitchProfile,omitempty"`
 	Var2Profile                *ChassisProfileRelationship                     `json:"_2_Profile,omitempty"`
-	Var3ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_3_ClusterProfile,omitempty"`
+	Var3RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_3_RollbackWorkflow,omitempty"`
 	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -1188,36 +1188,36 @@ func (o *WorkflowWorkflowInfo) SetWorkflowWorkerTaskCount(v int64) {
 	o.WorkflowWorkerTaskCount = &v
 }
 
-// GetVar0RollbackWorkflow returns the Var0RollbackWorkflow field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetVar0RollbackWorkflow() WorkflowRollbackWorkflowRelationship {
-	if o == nil || o.Var0RollbackWorkflow == nil {
-		var ret WorkflowRollbackWorkflowRelationship
+// GetVar0ClusterProfile returns the Var0ClusterProfile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetVar0ClusterProfile() HyperflexClusterProfileRelationship {
+	if o == nil || o.Var0ClusterProfile == nil {
+		var ret HyperflexClusterProfileRelationship
 		return ret
 	}
-	return *o.Var0RollbackWorkflow
+	return *o.Var0ClusterProfile
 }
 
-// GetVar0RollbackWorkflowOk returns a tuple with the Var0RollbackWorkflow field value if set, nil otherwise
+// GetVar0ClusterProfileOk returns a tuple with the Var0ClusterProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetVar0RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool) {
-	if o == nil || o.Var0RollbackWorkflow == nil {
+func (o *WorkflowWorkflowInfo) GetVar0ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
+	if o == nil || o.Var0ClusterProfile == nil {
 		return nil, false
 	}
-	return o.Var0RollbackWorkflow, true
+	return o.Var0ClusterProfile, true
 }
 
-// HasVar0RollbackWorkflow returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasVar0RollbackWorkflow() bool {
-	if o != nil && o.Var0RollbackWorkflow != nil {
+// HasVar0ClusterProfile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasVar0ClusterProfile() bool {
+	if o != nil && o.Var0ClusterProfile != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVar0RollbackWorkflow gets a reference to the given WorkflowRollbackWorkflowRelationship and assigns it to the Var0RollbackWorkflow field.
-func (o *WorkflowWorkflowInfo) SetVar0RollbackWorkflow(v WorkflowRollbackWorkflowRelationship) {
-	o.Var0RollbackWorkflow = &v
+// SetVar0ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var0ClusterProfile field.
+func (o *WorkflowWorkflowInfo) SetVar0ClusterProfile(v HyperflexClusterProfileRelationship) {
+	o.Var0ClusterProfile = &v
 }
 
 // GetVar1SwitchProfile returns the Var1SwitchProfile field value if set, zero value otherwise.
@@ -1284,36 +1284,36 @@ func (o *WorkflowWorkflowInfo) SetVar2Profile(v ChassisProfileRelationship) {
 	o.Var2Profile = &v
 }
 
-// GetVar3ClusterProfile returns the Var3ClusterProfile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetVar3ClusterProfile() HyperflexClusterProfileRelationship {
-	if o == nil || o.Var3ClusterProfile == nil {
-		var ret HyperflexClusterProfileRelationship
+// GetVar3RollbackWorkflow returns the Var3RollbackWorkflow field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetVar3RollbackWorkflow() WorkflowRollbackWorkflowRelationship {
+	if o == nil || o.Var3RollbackWorkflow == nil {
+		var ret WorkflowRollbackWorkflowRelationship
 		return ret
 	}
-	return *o.Var3ClusterProfile
+	return *o.Var3RollbackWorkflow
 }
 
-// GetVar3ClusterProfileOk returns a tuple with the Var3ClusterProfile field value if set, nil otherwise
+// GetVar3RollbackWorkflowOk returns a tuple with the Var3RollbackWorkflow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetVar3ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.Var3ClusterProfile == nil {
+func (o *WorkflowWorkflowInfo) GetVar3RollbackWorkflowOk() (*WorkflowRollbackWorkflowRelationship, bool) {
+	if o == nil || o.Var3RollbackWorkflow == nil {
 		return nil, false
 	}
-	return o.Var3ClusterProfile, true
+	return o.Var3RollbackWorkflow, true
 }
 
-// HasVar3ClusterProfile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasVar3ClusterProfile() bool {
-	if o != nil && o.Var3ClusterProfile != nil {
+// HasVar3RollbackWorkflow returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasVar3RollbackWorkflow() bool {
+	if o != nil && o.Var3RollbackWorkflow != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVar3ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var3ClusterProfile field.
-func (o *WorkflowWorkflowInfo) SetVar3ClusterProfile(v HyperflexClusterProfileRelationship) {
-	o.Var3ClusterProfile = &v
+// SetVar3RollbackWorkflow gets a reference to the given WorkflowRollbackWorkflowRelationship and assigns it to the Var3RollbackWorkflow field.
+func (o *WorkflowWorkflowInfo) SetVar3RollbackWorkflow(v WorkflowRollbackWorkflowRelationship) {
+	o.Var3RollbackWorkflow = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -1679,8 +1679,8 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.WorkflowWorkerTaskCount != nil {
 		toSerialize["WorkflowWorkerTaskCount"] = o.WorkflowWorkerTaskCount
 	}
-	if o.Var0RollbackWorkflow != nil {
-		toSerialize["_0_RollbackWorkflow"] = o.Var0RollbackWorkflow
+	if o.Var0ClusterProfile != nil {
+		toSerialize["_0_ClusterProfile"] = o.Var0ClusterProfile
 	}
 	if o.Var1SwitchProfile != nil {
 		toSerialize["_1_SwitchProfile"] = o.Var1SwitchProfile
@@ -1688,8 +1688,8 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.Var2Profile != nil {
 		toSerialize["_2_Profile"] = o.Var2Profile
 	}
-	if o.Var3ClusterProfile != nil {
-		toSerialize["_3_ClusterProfile"] = o.Var3ClusterProfile
+	if o.Var3RollbackWorkflow != nil {
+		toSerialize["_3_RollbackWorkflow"] = o.Var3RollbackWorkflow
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -1786,10 +1786,10 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
 		// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
 		WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
-		Var0RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_0_RollbackWorkflow,omitempty"`
+		Var0ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_0_ClusterProfile,omitempty"`
 		Var1SwitchProfile          *FabricSwitchProfileRelationship                `json:"_1_SwitchProfile,omitempty"`
 		Var2Profile                *ChassisProfileRelationship                     `json:"_2_Profile,omitempty"`
-		Var3ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_3_ClusterProfile,omitempty"`
+		Var3RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_3_RollbackWorkflow,omitempty"`
 		Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 		AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 		Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -1838,10 +1838,10 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.WorkflowMetaType = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowMetaType
 		varWorkflowWorkflowInfo.WorkflowTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowTaskCount
 		varWorkflowWorkflowInfo.WorkflowWorkerTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowWorkerTaskCount
-		varWorkflowWorkflowInfo.Var0RollbackWorkflow = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var0RollbackWorkflow
+		varWorkflowWorkflowInfo.Var0ClusterProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var0ClusterProfile
 		varWorkflowWorkflowInfo.Var1SwitchProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var1SwitchProfile
 		varWorkflowWorkflowInfo.Var2Profile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var2Profile
-		varWorkflowWorkflowInfo.Var3ClusterProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var3ClusterProfile
+		varWorkflowWorkflowInfo.Var3RollbackWorkflow = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var3RollbackWorkflow
 		varWorkflowWorkflowInfo.Account = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Account
 		varWorkflowWorkflowInfo.AssociatedObject = varWorkflowWorkflowInfoWithoutEmbeddedStruct.AssociatedObject
 		varWorkflowWorkflowInfo.Organization = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Organization
@@ -1899,10 +1899,10 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "WorkflowMetaType")
 		delete(additionalProperties, "WorkflowTaskCount")
 		delete(additionalProperties, "WorkflowWorkerTaskCount")
-		delete(additionalProperties, "_0_RollbackWorkflow")
+		delete(additionalProperties, "_0_ClusterProfile")
 		delete(additionalProperties, "_1_SwitchProfile")
 		delete(additionalProperties, "_2_Profile")
-		delete(additionalProperties, "_3_ClusterProfile")
+		delete(additionalProperties, "_3_RollbackWorkflow")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

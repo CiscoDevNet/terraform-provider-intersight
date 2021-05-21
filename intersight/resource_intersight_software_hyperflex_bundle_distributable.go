@@ -280,6 +280,11 @@ func resourceSoftwareHyperflexBundleDistributable() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"image_type": {
+				Description: "The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"images": {
 				Description: "An array of relationships to softwareHyperflexDistributable resources.",
 				Type:        schema.TypeList,
@@ -1046,6 +1051,11 @@ func resourceSoftwareHyperflexBundleDistributableCreate(c context.Context, d *sc
 		o.SetGuid(x)
 	}
 
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
+
 	if v, ok := d.GetOk("images"); ok {
 		x := make([]models.SoftwareHyperflexDistributableRelationship, 0)
 		s := v.([]interface{})
@@ -1640,6 +1650,10 @@ func resourceSoftwareHyperflexBundleDistributableRead(c context.Context, d *sche
 		return diag.Errorf("error occurred while setting property Guid in SoftwareHyperflexBundleDistributable object: %s", err.Error())
 	}
 
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwareHyperflexBundleDistributable object: %s", err.Error())
+	}
+
 	if err := d.Set("images", flattenListSoftwareHyperflexDistributableRelationship(s.GetImages(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Images in SoftwareHyperflexBundleDistributable object: %s", err.Error())
 	}
@@ -2058,6 +2072,12 @@ func resourceSoftwareHyperflexBundleDistributableUpdate(c context.Context, d *sc
 		v := d.Get("guid")
 		x := (v.(string))
 		o.SetGuid(x)
+	}
+
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if d.HasChange("images") {

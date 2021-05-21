@@ -39,6 +39,13 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `authenticated_ntp_servers`:(Array)
+This complex property has following sub-properties:
+  + `key_type`:(string) Type of symmetric key to use for this server.* `SHA1` - Key type used by the authentication is SHA1. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `server_name`:(string) Server hostname or IP address. 
+  + `sym_key_id`:(int) The key ID is a positive integer that identifies a cryptographic key used to authenticate NTP messages. 
+  + `sym_key_value`:(string) The value of the symmetric key. 
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 

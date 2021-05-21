@@ -113,6 +113,12 @@ func resourceHyperflexCiscoHypervisorManager() *schema.Resource {
 					},
 				},
 			},
+			"build": {
+				Description: "The build number of the Hypervisor Manger (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -558,6 +564,11 @@ func resourceHyperflexCiscoHypervisorManagerCreate(c context.Context, d *schema.
 		}
 	}
 
+	if v, ok := d.GetOk("build"); ok {
+		x := (v.(string))
+		o.SetBuild(x)
+	}
+
 	o.SetClassId("hyperflex.CiscoHypervisorManager")
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -964,6 +975,10 @@ func resourceHyperflexCiscoHypervisorManagerRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property Ancestors in HyperflexCiscoHypervisorManager object: %s", err.Error())
 	}
 
+	if err := d.Set("build", (s.GetBuild())); err != nil {
+		return diag.Errorf("error occurred while setting property Build in HyperflexCiscoHypervisorManager object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in HyperflexCiscoHypervisorManager object: %s", err.Error())
 	}
@@ -1138,6 +1153,12 @@ func resourceHyperflexCiscoHypervisorManagerUpdate(c context.Context, d *schema.
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetAncestors(x)
+	}
+
+	if d.HasChange("build") {
+		v := d.Get("build")
+		x := (v.(string))
+		o.SetBuild(x)
 	}
 
 	o.SetClassId("hyperflex.CiscoHypervisorManager")

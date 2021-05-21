@@ -101,6 +101,11 @@ func resourceSoftwarerepositoryCategoryMapperModel() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"image_type": {
+				Description: "The type of image based on the endpoint it can upgrade. For example, ucs-bundle-6400-infra.4.1.2a.bin can upgrade ucs managed fabric interconnects, so the image type is UCS Managed Fabric Interconnect.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -470,6 +475,11 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -850,6 +860,10 @@ func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *sch
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in SoftwarerepositoryCategoryMapperModel object: %s", err.Error())
 	}
 
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwarerepositoryCategoryMapperModel object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in SoftwarerepositoryCategoryMapperModel object: %s", err.Error())
 	}
@@ -994,6 +1008,12 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 		v := d.Get("domain_group_moid")
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if d.HasChange("mod_time") {

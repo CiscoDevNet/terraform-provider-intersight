@@ -102,6 +102,11 @@ func resourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Optional:    true,
 				Default:     "Distributable",
 			},
+			"image_type": {
+				Description: "The type of image based on the endpoint it can upgrade. For example, ucs-c420m5-huu-3.2.1a.iso can upgrade standalone servers, so the image type is Standalone Server.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mdf_id": {
 				Description: "Cisco software repository image category identifier.",
 				Type:        schema.TypeString,
@@ -494,6 +499,11 @@ func resourceSoftwarerepositoryCategoryMapperCreate(c context.Context, d *schema
 	if v, ok := d.GetOk("file_type"); ok {
 		x := (v.(string))
 		o.SetFileType(x)
+	}
+
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if v, ok := d.GetOk("mdf_id"); ok {
@@ -900,6 +910,10 @@ func resourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while setting property FileType in SoftwarerepositoryCategoryMapper object: %s", err.Error())
 	}
 
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwarerepositoryCategoryMapper object: %s", err.Error())
+	}
+
 	if err := d.Set("mdf_id", (s.GetMdfId())); err != nil {
 		return diag.Errorf("error occurred while setting property MdfId in SoftwarerepositoryCategoryMapper object: %s", err.Error())
 	}
@@ -1060,6 +1074,12 @@ func resourceSoftwarerepositoryCategoryMapperUpdate(c context.Context, d *schema
 		v := d.Get("file_type")
 		x := (v.(string))
 		o.SetFileType(x)
+	}
+
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if d.HasChange("mdf_id") {

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Properties** | Pointer to [**[]MetaPropDefinition**](MetaPropDefinition.md) |  | [optional] 
 **RbacResource** | Pointer to **bool** | Boolean flag to specify whether instances of this class type can be assigned to resource groups that are part of an organization for access control. Inventoried physical/logical objects which needs access control should have rbacResource&#x3D;true. These objects are not part of any organization by default like device registrations and should be assigned to organizations for access control. Profiles, policies, workflow definitions which are created by specifying organization need not have this flag set. | [optional] [readonly] 
 **Relationships** | Pointer to [**[]MetaRelationshipDefinition**](MetaRelationshipDefinition.md) |  | [optional] 
+**ResourcePoolTypes** | Pointer to **[]string** |  | [optional] 
 **RestPath** | Pointer to **string** | Restful URL path for the meta. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the service that defines the meta-data. | [optional] [readonly] 
 
@@ -430,6 +431,41 @@ HasRelationships returns a boolean if a field has been set.
 `func (o *MetaDefinition) UnsetRelationships()`
 
 UnsetRelationships ensures that no value is present for Relationships, not even an explicit nil
+### GetResourcePoolTypes
+
+`func (o *MetaDefinition) GetResourcePoolTypes() []string`
+
+GetResourcePoolTypes returns the ResourcePoolTypes field if non-nil, zero value otherwise.
+
+### GetResourcePoolTypesOk
+
+`func (o *MetaDefinition) GetResourcePoolTypesOk() (*[]string, bool)`
+
+GetResourcePoolTypesOk returns a tuple with the ResourcePoolTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourcePoolTypes
+
+`func (o *MetaDefinition) SetResourcePoolTypes(v []string)`
+
+SetResourcePoolTypes sets ResourcePoolTypes field to given value.
+
+### HasResourcePoolTypes
+
+`func (o *MetaDefinition) HasResourcePoolTypes() bool`
+
+HasResourcePoolTypes returns a boolean if a field has been set.
+
+### SetResourcePoolTypesNil
+
+`func (o *MetaDefinition) SetResourcePoolTypesNil(b bool)`
+
+ SetResourcePoolTypesNil sets the value for ResourcePoolTypes to be an explicit nil
+
+### UnsetResourcePoolTypes
+`func (o *MetaDefinition) UnsetResourcePoolTypes()`
+
+UnsetResourcePoolTypes ensures that no value is present for ResourcePoolTypes, not even an explicit nil
 ### GetRestPath
 
 `func (o *MetaDefinition) GetRestPath() string`
