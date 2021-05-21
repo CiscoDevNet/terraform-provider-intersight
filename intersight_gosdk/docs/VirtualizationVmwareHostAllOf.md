@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](virtualization.VmwareCluster.Relationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
+**DistributedNetworks** | Pointer to [**[]VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) | An array of relationships to virtualizationVmwareDistributedNetwork resources. | [optional] [readonly] 
+**DistributedSwitches** | Pointer to [**[]VirtualizationVmwareDistributedSwitchRelationship**](VirtualizationVmwareDistributedSwitchRelationship.md) | An array of relationships to virtualizationVmwareDistributedSwitch resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -346,6 +348,76 @@ HasDatastores returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareHostAllOf) UnsetDatastores()`
 
 UnsetDatastores ensures that no value is present for Datastores, not even an explicit nil
+### GetDistributedNetworks
+
+`func (o *VirtualizationVmwareHostAllOf) GetDistributedNetworks() []VirtualizationVmwareDistributedNetworkRelationship`
+
+GetDistributedNetworks returns the DistributedNetworks field if non-nil, zero value otherwise.
+
+### GetDistributedNetworksOk
+
+`func (o *VirtualizationVmwareHostAllOf) GetDistributedNetworksOk() (*[]VirtualizationVmwareDistributedNetworkRelationship, bool)`
+
+GetDistributedNetworksOk returns a tuple with the DistributedNetworks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistributedNetworks
+
+`func (o *VirtualizationVmwareHostAllOf) SetDistributedNetworks(v []VirtualizationVmwareDistributedNetworkRelationship)`
+
+SetDistributedNetworks sets DistributedNetworks field to given value.
+
+### HasDistributedNetworks
+
+`func (o *VirtualizationVmwareHostAllOf) HasDistributedNetworks() bool`
+
+HasDistributedNetworks returns a boolean if a field has been set.
+
+### SetDistributedNetworksNil
+
+`func (o *VirtualizationVmwareHostAllOf) SetDistributedNetworksNil(b bool)`
+
+ SetDistributedNetworksNil sets the value for DistributedNetworks to be an explicit nil
+
+### UnsetDistributedNetworks
+`func (o *VirtualizationVmwareHostAllOf) UnsetDistributedNetworks()`
+
+UnsetDistributedNetworks ensures that no value is present for DistributedNetworks, not even an explicit nil
+### GetDistributedSwitches
+
+`func (o *VirtualizationVmwareHostAllOf) GetDistributedSwitches() []VirtualizationVmwareDistributedSwitchRelationship`
+
+GetDistributedSwitches returns the DistributedSwitches field if non-nil, zero value otherwise.
+
+### GetDistributedSwitchesOk
+
+`func (o *VirtualizationVmwareHostAllOf) GetDistributedSwitchesOk() (*[]VirtualizationVmwareDistributedSwitchRelationship, bool)`
+
+GetDistributedSwitchesOk returns a tuple with the DistributedSwitches field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDistributedSwitches
+
+`func (o *VirtualizationVmwareHostAllOf) SetDistributedSwitches(v []VirtualizationVmwareDistributedSwitchRelationship)`
+
+SetDistributedSwitches sets DistributedSwitches field to given value.
+
+### HasDistributedSwitches
+
+`func (o *VirtualizationVmwareHostAllOf) HasDistributedSwitches() bool`
+
+HasDistributedSwitches returns a boolean if a field has been set.
+
+### SetDistributedSwitchesNil
+
+`func (o *VirtualizationVmwareHostAllOf) SetDistributedSwitchesNil(b bool)`
+
+ SetDistributedSwitchesNil sets the value for DistributedSwitches to be an explicit nil
+
+### UnsetDistributedSwitches
+`func (o *VirtualizationVmwareHostAllOf) UnsetDistributedSwitches()`
+
+UnsetDistributedSwitches ensures that no value is present for DistributedSwitches, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

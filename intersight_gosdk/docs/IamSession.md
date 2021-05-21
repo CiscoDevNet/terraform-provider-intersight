@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AccountPermissions** | Pointer to [**[]IamAccountPermissions**](IamAccountPermissions.md) |  | [optional] 
 **ClientIpAddress** | Pointer to **string** | The user agent IP address from which the session is launched. | [optional] [readonly] 
 **Expiration** | Pointer to **time.Time** | Expiration time for the session. | [optional] [readonly] 
+**FailedLogins** | Pointer to **int64** | Failed logins since last login for admin user. | [optional] [readonly] 
 **IdleTimeExpiration** | Pointer to **time.Time** | Idle time expiration for the session. | [optional] [readonly] 
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
 **LastLoginTime** | Pointer to **time.Time** | The last login time for user. | [optional] [readonly] 
@@ -159,6 +160,31 @@ SetExpiration sets Expiration field to given value.
 `func (o *IamSession) HasExpiration() bool`
 
 HasExpiration returns a boolean if a field has been set.
+
+### GetFailedLogins
+
+`func (o *IamSession) GetFailedLogins() int64`
+
+GetFailedLogins returns the FailedLogins field if non-nil, zero value otherwise.
+
+### GetFailedLoginsOk
+
+`func (o *IamSession) GetFailedLoginsOk() (*int64, bool)`
+
+GetFailedLoginsOk returns a tuple with the FailedLogins field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailedLogins
+
+`func (o *IamSession) SetFailedLogins(v int64)`
+
+SetFailedLogins sets FailedLogins field to given value.
+
+### HasFailedLogins
+
+`func (o *IamSession) HasFailedLogins() bool`
+
+HasFailedLogins returns a boolean if a field has been set.
 
 ### GetIdleTimeExpiration
 

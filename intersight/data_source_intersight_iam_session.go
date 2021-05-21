@@ -52,6 +52,12 @@ func dataSourceIamSession() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"failed_logins": {
+				Description: "Failed logins since last login for admin user.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
 			"idle_time_expiration": {
 				Description: "Idle time expiration for the session.",
 				Type:        schema.TypeString,
@@ -255,6 +261,12 @@ func dataSourceIamSession() *schema.Resource {
 					"expiration": {
 						Description: "Expiration time for the session.",
 						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"failed_logins": {
+						Description: "Failed logins since last login for admin user.",
+						Type:        schema.TypeInt,
 						Optional:    true,
 						Computed:    true,
 					},
@@ -640,6 +652,10 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetExpiration(x)
 	}
+	if v, ok := d.GetOk("failed_logins"); ok {
+		x := int64(v.(int))
+		o.SetFailedLogins(x)
+	}
 	if v, ok := d.GetOk("idle_time_expiration"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetIdleTimeExpiration(x)
@@ -722,6 +738,7 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["expiration"] = (s.GetExpiration()).String()
+				temp["failed_logins"] = (s.GetFailedLogins())
 
 				temp["idle_time_expiration"] = (s.GetIdleTimeExpiration()).String()
 				temp["last_login_client"] = (s.GetLastLoginClient())

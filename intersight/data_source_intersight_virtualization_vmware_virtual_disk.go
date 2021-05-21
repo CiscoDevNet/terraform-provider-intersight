@@ -55,7 +55,7 @@ func dataSourceVirtualizationVmwareVirtualDisk() *schema.Resource {
 				Optional:    true,
 			},
 			"disk_type": {
-				Description: "Specifies whether the virtual disk is a RDM or a flat disk.\n* `flatDisk` - Specifies that it is a flat disk.\n* `rdmDisk` - Specifies that it is a raw device mapping disk.",
+				Description: "Specifies whether the virtual disk is a RDM or a Hard disk.\n* `flatDisk` - Specifies that it is a flat disk.\n* `rdmDisk` - Specifies that it is a raw device mapping disk.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -279,7 +279,7 @@ func dataSourceVirtualizationVmwareVirtualDisk() *schema.Resource {
 						Optional:    true,
 					},
 					"disk_type": {
-						Description: "Specifies whether the virtual disk is a RDM or a flat disk.\n* `flatDisk` - Specifies that it is a flat disk.\n* `rdmDisk` - Specifies that it is a raw device mapping disk.",
+						Description: "Specifies whether the virtual disk is a RDM or a Hard disk.\n* `flatDisk` - Specifies that it is a flat disk.\n* `rdmDisk` - Specifies that it is a raw device mapping disk.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

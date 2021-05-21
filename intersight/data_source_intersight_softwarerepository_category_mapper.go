@@ -50,6 +50,11 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"image_type": {
+				Description: "The type of image based on the endpoint it can upgrade. For example, ucs-c420m5-huu-3.2.1a.iso can upgrade standalone servers, so the image type is Standalone Server.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mdf_id": {
 				Description: "Cisco software repository image category identifier.",
 				Type:        schema.TypeString,
@@ -142,6 +147,10 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetFileType(x)
 	}
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
+	}
 	if v, ok := d.GetOk("mdf_id"); ok {
 		x := (v.(string))
 		o.SetMdfId(x)
@@ -229,6 +238,7 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["file_type"] = (s.GetFileType())
+				temp["image_type"] = (s.GetImageType())
 				temp["mdf_id"] = (s.GetMdfId())
 
 				temp["mod_time"] = (s.GetModTime()).String()

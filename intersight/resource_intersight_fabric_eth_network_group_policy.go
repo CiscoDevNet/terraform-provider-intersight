@@ -418,7 +418,7 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"allowed_vlans": {
-							Description: "Allowed VLAN IDs of the virtual interface.",
+							Description: "Allowed VLAN IDs of the virtual interface. A list of comma seperated VLAN ids and/or VLAN id ranges.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},

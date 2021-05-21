@@ -533,6 +533,11 @@ func dataSourceMetaDefinition() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"resource_pool_types": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"rest_path": {
 						Description: "Restful URL path for the meta.",
 						Type:        schema.TypeString,
@@ -843,6 +848,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 				temp["rbac_resource"] = (s.GetRbacResource())
 
 				temp["relationships"] = flattenListMetaRelationshipDefinition(s.GetRelationships(), d)
+				temp["resource_pool_types"] = (s.GetResourcePoolTypes())
 				temp["rest_path"] = (s.GetRestPath())
 				temp["shared_scope"] = (s.GetSharedScope())
 

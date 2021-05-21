@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **ToolRunningStatus** | Pointer to **string** | Indicates if guest tools are running on this VM. Could be set to guestToolNotRunning or guestToolsRunning. | [optional] 
 **ToolsVersion** | Pointer to **string** | The version of the guest tools, usually not specified. | [optional] 
 **VirtualDisks** | Pointer to **[]int64** |  | [optional] 
+**VirtualNetworkInterfaces** | Pointer to **[]int64** |  | [optional] 
 **VmDiskCount** | Pointer to **int64** | Shows the number of disks assigned to this VM. | [optional] 
 **VmOverallStatus** | Pointer to **string** | The operational state of the VM. Could be Available, Provisioned, Maintenance mode, Deleting, etc. | [optional] 
 **VmPath** | Pointer to **string** | Path to the vmx file of the VM. Example - [datastore3] VCSA-134/VCSA-134.vmx. | [optional] 
@@ -48,6 +49,7 @@ Name | Type | Description | Notes
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
 **Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
+**Networks** | Pointer to [**[]VirtualizationBaseNetworkRelationship**](VirtualizationBaseNetworkRelationship.md) | An array of relationships to virtualizationBaseNetwork resources. | [optional] [readonly] 
 **ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](virtualization.VmwareFolder.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -1019,6 +1021,41 @@ HasVirtualDisks returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareVirtualMachine) UnsetVirtualDisks()`
 
 UnsetVirtualDisks ensures that no value is present for VirtualDisks, not even an explicit nil
+### GetVirtualNetworkInterfaces
+
+`func (o *VirtualizationVmwareVirtualMachine) GetVirtualNetworkInterfaces() []int64`
+
+GetVirtualNetworkInterfaces returns the VirtualNetworkInterfaces field if non-nil, zero value otherwise.
+
+### GetVirtualNetworkInterfacesOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetVirtualNetworkInterfacesOk() (*[]int64, bool)`
+
+GetVirtualNetworkInterfacesOk returns a tuple with the VirtualNetworkInterfaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualNetworkInterfaces
+
+`func (o *VirtualizationVmwareVirtualMachine) SetVirtualNetworkInterfaces(v []int64)`
+
+SetVirtualNetworkInterfaces sets VirtualNetworkInterfaces field to given value.
+
+### HasVirtualNetworkInterfaces
+
+`func (o *VirtualizationVmwareVirtualMachine) HasVirtualNetworkInterfaces() bool`
+
+HasVirtualNetworkInterfaces returns a boolean if a field has been set.
+
+### SetVirtualNetworkInterfacesNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetVirtualNetworkInterfacesNil(b bool)`
+
+ SetVirtualNetworkInterfacesNil sets the value for VirtualNetworkInterfaces to be an explicit nil
+
+### UnsetVirtualNetworkInterfaces
+`func (o *VirtualizationVmwareVirtualMachine) UnsetVirtualNetworkInterfaces()`
+
+UnsetVirtualNetworkInterfaces ensures that no value is present for VirtualNetworkInterfaces, not even an explicit nil
 ### GetVmDiskCount
 
 `func (o *VirtualizationVmwareVirtualMachine) GetVmDiskCount() int64`
@@ -1279,6 +1316,41 @@ SetHost sets Host field to given value.
 
 HasHost returns a boolean if a field has been set.
 
+### GetNetworks
+
+`func (o *VirtualizationVmwareVirtualMachine) GetNetworks() []VirtualizationBaseNetworkRelationship`
+
+GetNetworks returns the Networks field if non-nil, zero value otherwise.
+
+### GetNetworksOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetNetworksOk() (*[]VirtualizationBaseNetworkRelationship, bool)`
+
+GetNetworksOk returns a tuple with the Networks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworks
+
+`func (o *VirtualizationVmwareVirtualMachine) SetNetworks(v []VirtualizationBaseNetworkRelationship)`
+
+SetNetworks sets Networks field to given value.
+
+### HasNetworks
+
+`func (o *VirtualizationVmwareVirtualMachine) HasNetworks() bool`
+
+HasNetworks returns a boolean if a field has been set.
+
+### SetNetworksNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetNetworksNil(b bool)`
+
+ SetNetworksNil sets the value for Networks to be an explicit nil
+
+### UnsetNetworks
+`func (o *VirtualizationVmwareVirtualMachine) UnsetNetworks()`
+
+UnsetNetworks ensures that no value is present for Networks, not even an explicit nil
 ### GetParentFolder
 
 `func (o *VirtualizationVmwareVirtualMachine) GetParentFolder() VirtualizationVmwareFolderRelationship`

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BundleType** | Pointer to **string** | The bundle type of the image, as published on cisco.com. | [optional] [readonly] 
 **ComponentMeta** | Pointer to [**[]FirmwareComponentMeta**](FirmwareComponentMeta.md) |  | [optional] 
 **Guid** | Pointer to **string** | The unique identifier for an image in a Cisco repository. | [optional] [readonly] 
+**ImageType** | Pointer to **string** | The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO. | [optional] 
 **Mdfid** | Pointer to **string** | The mdfid of the image provided by cisco.com. | [optional] 
 **Model** | Pointer to **string** | The endpoint model for which this firmware image is applicable. | [optional] 
 **PlatformType** | Pointer to **string** | The platform type of the image. | [optional] [readonly] 
@@ -163,6 +164,31 @@ SetGuid sets Guid field to given value.
 `func (o *FirmwareBaseDistributable) HasGuid() bool`
 
 HasGuid returns a boolean if a field has been set.
+
+### GetImageType
+
+`func (o *FirmwareBaseDistributable) GetImageType() string`
+
+GetImageType returns the ImageType field if non-nil, zero value otherwise.
+
+### GetImageTypeOk
+
+`func (o *FirmwareBaseDistributable) GetImageTypeOk() (*string, bool)`
+
+GetImageTypeOk returns a tuple with the ImageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageType
+
+`func (o *FirmwareBaseDistributable) SetImageType(v string)`
+
+SetImageType sets ImageType field to given value.
+
+### HasImageType
+
+`func (o *FirmwareBaseDistributable) HasImageType() bool`
+
+HasImageType returns a boolean if a field has been set.
 
 ### GetMdfid
 

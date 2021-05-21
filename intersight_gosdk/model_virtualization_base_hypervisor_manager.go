@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-04-28T13:03:38Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
  *
- * API version: 1.0.9-4267
+ * API version: 1.0.9-4289
  * Contact: intersight@cisco.com
  */
 
@@ -24,6 +24,8 @@ type VirtualizationBaseHypervisorManager struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
+	// The build number of the Hypervisor Manger (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer.
+	Build *string `json:"Build,omitempty"`
 	// Identity of the hypervisor (not manipulated by user). It could be a UUID too. For example, c917093f-5443-4748-bc09-eec72ded7608.
 	Identity *string `json:"Identity,omitempty"`
 	// The user provided name for the hypervisor manager. For example, vCenterIreland. Usually, this name is subject to manipulation by the user. It is not the identity of the hypervisor.
@@ -101,6 +103,38 @@ func (o *VirtualizationBaseHypervisorManager) GetObjectTypeOk() (*string, bool) 
 // SetObjectType sets field value
 func (o *VirtualizationBaseHypervisorManager) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetBuild returns the Build field value if set, zero value otherwise.
+func (o *VirtualizationBaseHypervisorManager) GetBuild() string {
+	if o == nil || o.Build == nil {
+		var ret string
+		return ret
+	}
+	return *o.Build
+}
+
+// GetBuildOk returns a tuple with the Build field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseHypervisorManager) GetBuildOk() (*string, bool) {
+	if o == nil || o.Build == nil {
+		return nil, false
+	}
+	return o.Build, true
+}
+
+// HasBuild returns a boolean if a field has been set.
+func (o *VirtualizationBaseHypervisorManager) HasBuild() bool {
+	if o != nil && o.Build != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBuild gets a reference to the given string and assigns it to the Build field.
+func (o *VirtualizationBaseHypervisorManager) SetBuild(v string) {
+	o.Build = &v
 }
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
@@ -247,6 +281,9 @@ func (o VirtualizationBaseHypervisorManager) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Build != nil {
+		toSerialize["Build"] = o.Build
+	}
 	if o.Identity != nil {
 		toSerialize["Identity"] = o.Identity
 	}
@@ -273,6 +310,8 @@ func (o *VirtualizationBaseHypervisorManager) UnmarshalJSON(bytes []byte) (err e
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
+		// The build number of the Hypervisor Manger (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer.
+		Build *string `json:"Build,omitempty"`
 		// Identity of the hypervisor (not manipulated by user). It could be a UUID too. For example, c917093f-5443-4748-bc09-eec72ded7608.
 		Identity *string `json:"Identity,omitempty"`
 		// The user provided name for the hypervisor manager. For example, vCenterIreland. Usually, this name is subject to manipulation by the user. It is not the identity of the hypervisor.
@@ -289,6 +328,7 @@ func (o *VirtualizationBaseHypervisorManager) UnmarshalJSON(bytes []byte) (err e
 		varVirtualizationBaseHypervisorManager := _VirtualizationBaseHypervisorManager{}
 		varVirtualizationBaseHypervisorManager.ClassId = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.ClassId
 		varVirtualizationBaseHypervisorManager.ObjectType = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.ObjectType
+		varVirtualizationBaseHypervisorManager.Build = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.Build
 		varVirtualizationBaseHypervisorManager.Identity = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.Identity
 		varVirtualizationBaseHypervisorManager.Name = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.Name
 		varVirtualizationBaseHypervisorManager.Version = varVirtualizationBaseHypervisorManagerWithoutEmbeddedStruct.Version
@@ -312,6 +352,7 @@ func (o *VirtualizationBaseHypervisorManager) UnmarshalJSON(bytes []byte) (err e
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Build")
 		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Version")

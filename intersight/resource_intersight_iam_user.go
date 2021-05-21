@@ -279,6 +279,12 @@ func resourceIamUser() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"last_role_modified_time": {
+				Description: "Last role modification time for user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"local_user_password": {
 				Description: "A reference to a iamLocalUserPassword resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -994,6 +1000,11 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 		o.SetLastName(x)
 	}
 
+	if v, ok := d.GetOk("last_role_modified_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastRoleModifiedTime(x)
+	}
+
 	if v, ok := d.GetOk("local_user_password"); ok {
 		p := make([]models.IamLocalUserPasswordRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1563,6 +1574,10 @@ func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interfa
 		return diag.Errorf("error occurred while setting property LastName in IamUser object: %s", err.Error())
 	}
 
+	if err := d.Set("last_role_modified_time", (s.GetLastRoleModifiedTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property LastRoleModifiedTime in IamUser object: %s", err.Error())
+	}
+
 	if err := d.Set("local_user_password", flattenMapIamLocalUserPasswordRelationship(s.GetLocalUserPassword(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property LocalUserPassword in IamUser object: %s", err.Error())
 	}
@@ -1911,6 +1926,12 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 		v := d.Get("last_name")
 		x := (v.(string))
 		o.SetLastName(x)
+	}
+
+	if d.HasChange("last_role_modified_time") {
+		v := d.Get("last_role_modified_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastRoleModifiedTime(x)
 	}
 
 	if d.HasChange("local_user_password") {

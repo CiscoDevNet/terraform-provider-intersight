@@ -23,6 +23,12 @@ func dataSourceHyperflexCiscoHypervisorManager() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"build": {
+				Description: "The build number of the Hypervisor Manger (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -98,6 +104,10 @@ func dataSourceHyperflexCiscoHypervisorManagerRead(c context.Context, d *schema.
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
+	}
+	if v, ok := d.GetOk("build"); ok {
+		x := (v.(string))
+		o.SetBuild(x)
 	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -182,6 +192,7 @@ func dataSourceHyperflexCiscoHypervisorManagerRead(c context.Context, d *schema.
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["build"] = (s.GetBuild())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Build** | Pointer to **string** | The build number of the Hypervisor Manger (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer. | [optional] [readonly] 
 **Identity** | Pointer to **string** | Identity of the hypervisor (not manipulated by user). It could be a UUID too. For example, c917093f-5443-4748-bc09-eec72ded7608. | [optional] [readonly] 
 **Name** | Pointer to **string** | The user provided name for the hypervisor manager. For example, vCenterIreland. Usually, this name is subject to manipulation by the user. It is not the identity of the hypervisor. | [optional] 
 **Version** | Pointer to **string** | Release version of the Hypervisor Manger (VMware vCenter Server 6.0.0 build-4541947). | [optional] [readonly] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBuild
+
+`func (o *VirtualizationBaseHypervisorManagerAllOf) GetBuild() string`
+
+GetBuild returns the Build field if non-nil, zero value otherwise.
+
+### GetBuildOk
+
+`func (o *VirtualizationBaseHypervisorManagerAllOf) GetBuildOk() (*string, bool)`
+
+GetBuildOk returns a tuple with the Build field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuild
+
+`func (o *VirtualizationBaseHypervisorManagerAllOf) SetBuild(v string)`
+
+SetBuild sets Build field to given value.
+
+### HasBuild
+
+`func (o *VirtualizationBaseHypervisorManagerAllOf) HasBuild() bool`
+
+HasBuild returns a boolean if a field has been set.
 
 ### GetIdentity
 

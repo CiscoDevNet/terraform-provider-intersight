@@ -30,6 +30,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `dist_tag`:(string) The distributable tag value of the model series. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `image_type`:(string) The type of image based on the endpoint it can upgrade. For example, ucs-bundle-6400-infra.4.1.2a.bin can upgrade ucs managed fabric interconnects, so the image type is UCS Managed Fabric Interconnect. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 

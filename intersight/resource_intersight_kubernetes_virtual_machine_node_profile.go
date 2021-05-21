@@ -300,8 +300,8 @@ func resourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				ConfigMode:  schema.SchemaConfigModeAttr,
 				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {

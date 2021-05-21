@@ -189,6 +189,8 @@ func dataSourceNtpPolicyRead(c context.Context, d *schema.ResourceData, meta int
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["appliance_account"] = flattenMapIamAccountRelationship(s.GetApplianceAccount(), d)
+
+				temp["authenticated_ntp_servers"] = flattenListNtpAuthNtpServer(s.GetAuthenticatedNtpServers(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

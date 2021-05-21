@@ -3904,6 +3904,24 @@ func flattenListNiatelemetryLogicalLink(p []models.NiatelemetryLogicalLink, d *s
 	}
 	return niatelemetrylogicallinks
 }
+func flattenListNtpAuthNtpServer(p []models.NtpAuthNtpServer, d *schema.ResourceData) []map[string]interface{} {
+	var ntpauthntpservers []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		ntpauthntpserver := make(map[string]interface{})
+		ntpauthntpserver["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		ntpauthntpserver["class_id"] = item.ClassId
+		ntpauthntpserver["key_type"] = item.KeyType
+		ntpauthntpserver["object_type"] = item.ObjectType
+		ntpauthntpserver["server_name"] = item.ServerName
+		ntpauthntpserver["sym_key_id"] = item.SymKeyId
+		ntpauthntpserver["sym_key_value"] = item.SymKeyValue
+		ntpauthntpservers = append(ntpauthntpservers, ntpauthntpserver)
+	}
+	return ntpauthntpservers
+}
 func flattenListOnpremImagePackage(p []models.OnpremImagePackage, d *schema.ResourceData) []map[string]interface{} {
 	var onpremimagepackages []map[string]interface{}
 	if len(p) == 0 {
@@ -5551,6 +5569,18 @@ func flattenListUuidpoolUuidBlock(p []models.UuidpoolUuidBlock, d *schema.Resour
 	}
 	return uuidpooluuidblocks
 }
+func flattenListVirtualizationBaseNetworkRelationship(p []models.VirtualizationBaseNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationbasenetworkrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		virtualizationbasenetworkrelationship := flattenMoMoRef(item)
+		virtualizationbasenetworkrelationships = append(virtualizationbasenetworkrelationships, virtualizationbasenetworkrelationship)
+	}
+	return virtualizationbasenetworkrelationships
+}
 func flattenListVirtualizationNetworkInterface(p []models.VirtualizationNetworkInterface, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationnetworkinterfaces []map[string]interface{}
 	if len(p) == 0 {
@@ -5622,6 +5652,30 @@ func flattenListVirtualizationVmwareDatastoreRelationship(p []models.Virtualizat
 	}
 	return virtualizationvmwaredatastorerelationships
 }
+func flattenListVirtualizationVmwareDistributedNetworkRelationship(p []models.VirtualizationVmwareDistributedNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwaredistributednetworkrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		virtualizationvmwaredistributednetworkrelationship := flattenMoMoRef(item)
+		virtualizationvmwaredistributednetworkrelationships = append(virtualizationvmwaredistributednetworkrelationships, virtualizationvmwaredistributednetworkrelationship)
+	}
+	return virtualizationvmwaredistributednetworkrelationships
+}
+func flattenListVirtualizationVmwareDistributedSwitchRelationship(p []models.VirtualizationVmwareDistributedSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwaredistributedswitchrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		virtualizationvmwaredistributedswitchrelationship := flattenMoMoRef(item)
+		virtualizationvmwaredistributedswitchrelationships = append(virtualizationvmwaredistributedswitchrelationships, virtualizationvmwaredistributedswitchrelationship)
+	}
+	return virtualizationvmwaredistributedswitchrelationships
+}
 func flattenListVirtualizationVmwareHostRelationship(p []models.VirtualizationVmwareHostRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwarehostrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -5633,6 +5687,22 @@ func flattenListVirtualizationVmwareHostRelationship(p []models.VirtualizationVm
 		virtualizationvmwarehostrelationships = append(virtualizationvmwarehostrelationships, virtualizationvmwarehostrelationship)
 	}
 	return virtualizationvmwarehostrelationships
+}
+func flattenListVirtualizationVmwareVlanRange(p []models.VirtualizationVmwareVlanRange, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwarevlanranges []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		virtualizationvmwarevlanrange := make(map[string]interface{})
+		virtualizationvmwarevlanrange["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		virtualizationvmwarevlanrange["class_id"] = item.ClassId
+		virtualizationvmwarevlanrange["object_type"] = item.ObjectType
+		virtualizationvmwarevlanrange["vlan_range_end"] = item.VlanRangeEnd
+		virtualizationvmwarevlanrange["vlan_range_start"] = item.VlanRangeStart
+		virtualizationvmwarevlanranges = append(virtualizationvmwarevlanranges, virtualizationvmwarevlanrange)
+	}
+	return virtualizationvmwarevlanranges
 }
 func flattenListVmediaMapping(p []models.VmediaMapping, d *schema.ResourceData) []map[string]interface{} {
 	var vmediamappings []map[string]interface{}
@@ -8085,6 +8155,24 @@ func flattenMapFcpoolUniverseRelationship(p models.FcpoolUniverseRelationship, d
 
 	fcpooluniverserelationships = append(fcpooluniverserelationships, fcpooluniverserelationship)
 	return fcpooluniverserelationships
+}
+func flattenMapFirmwareBaseDistributableRelationship(p models.FirmwareBaseDistributableRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var firmwarebasedistributablerelationships []map[string]interface{}
+	var ret models.FirmwareBaseDistributableRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	firmwarebasedistributablerelationship := make(map[string]interface{})
+	firmwarebasedistributablerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	firmwarebasedistributablerelationship["class_id"] = item.ClassId
+	firmwarebasedistributablerelationship["moid"] = item.Moid
+	firmwarebasedistributablerelationship["object_type"] = item.ObjectType
+	firmwarebasedistributablerelationship["selector"] = item.Selector
+
+	firmwarebasedistributablerelationships = append(firmwarebasedistributablerelationships, firmwarebasedistributablerelationship)
+	return firmwarebasedistributablerelationships
 }
 func flattenMapFirmwareDirectDownload(p models.FirmwareDirectDownload, d *schema.ResourceData) []map[string]interface{} {
 	var firmwaredirectdownloads []map[string]interface{}
@@ -12973,6 +13061,96 @@ func flattenMapResourceMembershipHolderRelationship(p models.ResourceMembershipH
 	resourcemembershipholderrelationships = append(resourcemembershipholderrelationships, resourcemembershipholderrelationship)
 	return resourcemembershipholderrelationships
 }
+func flattenMapResourcepoolLeaseRelationship(p models.ResourcepoolLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolleaserelationships []map[string]interface{}
+	var ret models.ResourcepoolLeaseRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	resourcepoolleaserelationship := make(map[string]interface{})
+	resourcepoolleaserelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolleaserelationship["class_id"] = item.ClassId
+	resourcepoolleaserelationship["moid"] = item.Moid
+	resourcepoolleaserelationship["object_type"] = item.ObjectType
+	resourcepoolleaserelationship["selector"] = item.Selector
+
+	resourcepoolleaserelationships = append(resourcepoolleaserelationships, resourcepoolleaserelationship)
+	return resourcepoolleaserelationships
+}
+func flattenMapResourcepoolLeaseResourceRelationship(p models.ResourcepoolLeaseResourceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolleaseresourcerelationships []map[string]interface{}
+	var ret models.ResourcepoolLeaseResourceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	resourcepoolleaseresourcerelationship := make(map[string]interface{})
+	resourcepoolleaseresourcerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolleaseresourcerelationship["class_id"] = item.ClassId
+	resourcepoolleaseresourcerelationship["moid"] = item.Moid
+	resourcepoolleaseresourcerelationship["object_type"] = item.ObjectType
+	resourcepoolleaseresourcerelationship["selector"] = item.Selector
+
+	resourcepoolleaseresourcerelationships = append(resourcepoolleaseresourcerelationships, resourcepoolleaseresourcerelationship)
+	return resourcepoolleaseresourcerelationships
+}
+func flattenMapResourcepoolPoolRelationship(p models.ResourcepoolPoolRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolpoolrelationships []map[string]interface{}
+	var ret models.ResourcepoolPoolRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	resourcepoolpoolrelationship := make(map[string]interface{})
+	resourcepoolpoolrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolpoolrelationship["class_id"] = item.ClassId
+	resourcepoolpoolrelationship["moid"] = item.Moid
+	resourcepoolpoolrelationship["object_type"] = item.ObjectType
+	resourcepoolpoolrelationship["selector"] = item.Selector
+
+	resourcepoolpoolrelationships = append(resourcepoolpoolrelationships, resourcepoolpoolrelationship)
+	return resourcepoolpoolrelationships
+}
+func flattenMapResourcepoolPoolMemberRelationship(p models.ResourcepoolPoolMemberRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepoolpoolmemberrelationships []map[string]interface{}
+	var ret models.ResourcepoolPoolMemberRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	resourcepoolpoolmemberrelationship := make(map[string]interface{})
+	resourcepoolpoolmemberrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepoolpoolmemberrelationship["class_id"] = item.ClassId
+	resourcepoolpoolmemberrelationship["moid"] = item.Moid
+	resourcepoolpoolmemberrelationship["object_type"] = item.ObjectType
+	resourcepoolpoolmemberrelationship["selector"] = item.Selector
+
+	resourcepoolpoolmemberrelationships = append(resourcepoolpoolmemberrelationships, resourcepoolpoolmemberrelationship)
+	return resourcepoolpoolmemberrelationships
+}
+func flattenMapResourcepoolUniverseRelationship(p models.ResourcepoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var resourcepooluniverserelationships []map[string]interface{}
+	var ret models.ResourcepoolUniverseRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	resourcepooluniverserelationship := make(map[string]interface{})
+	resourcepooluniverserelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	resourcepooluniverserelationship["class_id"] = item.ClassId
+	resourcepooluniverserelationship["moid"] = item.Moid
+	resourcepooluniverserelationship["object_type"] = item.ObjectType
+	resourcepooluniverserelationship["selector"] = item.Selector
+
+	resourcepooluniverserelationships = append(resourcepooluniverserelationships, resourcepooluniverserelationship)
+	return resourcepooluniverserelationships
+}
 func flattenMapSdwanProfileRelationship(p models.SdwanProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var sdwanprofilerelationships []map[string]interface{}
 	var ret models.SdwanProfileRelationship
@@ -14029,6 +14207,24 @@ func flattenMapVirtualizationBaseHostRelationship(p models.VirtualizationBaseHos
 	virtualizationbasehostrelationships = append(virtualizationbasehostrelationships, virtualizationbasehostrelationship)
 	return virtualizationbasehostrelationships
 }
+func flattenMapVirtualizationBaseNetworkRelationship(p models.VirtualizationBaseNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationbasenetworkrelationships []map[string]interface{}
+	var ret models.VirtualizationBaseNetworkRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationbasenetworkrelationship := make(map[string]interface{})
+	virtualizationbasenetworkrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationbasenetworkrelationship["class_id"] = item.ClassId
+	virtualizationbasenetworkrelationship["moid"] = item.Moid
+	virtualizationbasenetworkrelationship["object_type"] = item.ObjectType
+	virtualizationbasenetworkrelationship["selector"] = item.Selector
+
+	virtualizationbasenetworkrelationships = append(virtualizationbasenetworkrelationships, virtualizationbasenetworkrelationship)
+	return virtualizationbasenetworkrelationships
+}
 func flattenMapVirtualizationBaseVirtualDiskRelationship(p models.VirtualizationBaseVirtualDiskRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationbasevirtualdiskrelationships []map[string]interface{}
 	var ret models.VirtualizationBaseVirtualDiskRelationship
@@ -14222,6 +14418,7 @@ func flattenMapVirtualizationProductInfo(p models.VirtualizationProductInfo, d *
 	item := p
 	virtualizationproductinfo := make(map[string]interface{})
 	virtualizationproductinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationproductinfo["build"] = item.Build
 	virtualizationproductinfo["class_id"] = item.ClassId
 	virtualizationproductinfo["object_type"] = item.ObjectType
 	virtualizationproductinfo["product_name"] = item.ProductName
@@ -14322,6 +14519,42 @@ func flattenMapVirtualizationVmwareDatastoreRelationship(p models.Virtualization
 	virtualizationvmwaredatastorerelationships = append(virtualizationvmwaredatastorerelationships, virtualizationvmwaredatastorerelationship)
 	return virtualizationvmwaredatastorerelationships
 }
+func flattenMapVirtualizationVmwareDistributedNetworkRelationship(p models.VirtualizationVmwareDistributedNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwaredistributednetworkrelationships []map[string]interface{}
+	var ret models.VirtualizationVmwareDistributedNetworkRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwaredistributednetworkrelationship := make(map[string]interface{})
+	virtualizationvmwaredistributednetworkrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwaredistributednetworkrelationship["class_id"] = item.ClassId
+	virtualizationvmwaredistributednetworkrelationship["moid"] = item.Moid
+	virtualizationvmwaredistributednetworkrelationship["object_type"] = item.ObjectType
+	virtualizationvmwaredistributednetworkrelationship["selector"] = item.Selector
+
+	virtualizationvmwaredistributednetworkrelationships = append(virtualizationvmwaredistributednetworkrelationships, virtualizationvmwaredistributednetworkrelationship)
+	return virtualizationvmwaredistributednetworkrelationships
+}
+func flattenMapVirtualizationVmwareDistributedSwitchRelationship(p models.VirtualizationVmwareDistributedSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwaredistributedswitchrelationships []map[string]interface{}
+	var ret models.VirtualizationVmwareDistributedSwitchRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwaredistributedswitchrelationship := make(map[string]interface{})
+	virtualizationvmwaredistributedswitchrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwaredistributedswitchrelationship["class_id"] = item.ClassId
+	virtualizationvmwaredistributedswitchrelationship["moid"] = item.Moid
+	virtualizationvmwaredistributedswitchrelationship["object_type"] = item.ObjectType
+	virtualizationvmwaredistributedswitchrelationship["selector"] = item.Selector
+
+	virtualizationvmwaredistributedswitchrelationships = append(virtualizationvmwaredistributedswitchrelationships, virtualizationvmwaredistributedswitchrelationship)
+	return virtualizationvmwaredistributedswitchrelationships
+}
 func flattenMapVirtualizationVmwareFolderRelationship(p models.VirtualizationVmwareFolderRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwarefolderrelationships []map[string]interface{}
 	var ret models.VirtualizationVmwareFolderRelationship
@@ -14357,6 +14590,42 @@ func flattenMapVirtualizationVmwareHostRelationship(p models.VirtualizationVmwar
 
 	virtualizationvmwarehostrelationships = append(virtualizationvmwarehostrelationships, virtualizationvmwarehostrelationship)
 	return virtualizationvmwarehostrelationships
+}
+func flattenMapVirtualizationVmwareNetworkRelationship(p models.VirtualizationVmwareNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwarenetworkrelationships []map[string]interface{}
+	var ret models.VirtualizationVmwareNetworkRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwarenetworkrelationship := make(map[string]interface{})
+	virtualizationvmwarenetworkrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwarenetworkrelationship["class_id"] = item.ClassId
+	virtualizationvmwarenetworkrelationship["moid"] = item.Moid
+	virtualizationvmwarenetworkrelationship["object_type"] = item.ObjectType
+	virtualizationvmwarenetworkrelationship["selector"] = item.Selector
+
+	virtualizationvmwarenetworkrelationships = append(virtualizationvmwarenetworkrelationships, virtualizationvmwarenetworkrelationship)
+	return virtualizationvmwarenetworkrelationships
+}
+func flattenMapVirtualizationVmwarePhysicalNetworkInterfaceRelationship(p models.VirtualizationVmwarePhysicalNetworkInterfaceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwarephysicalnetworkinterfacerelationships []map[string]interface{}
+	var ret models.VirtualizationVmwarePhysicalNetworkInterfaceRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwarephysicalnetworkinterfacerelationship := make(map[string]interface{})
+	virtualizationvmwarephysicalnetworkinterfacerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwarephysicalnetworkinterfacerelationship["class_id"] = item.ClassId
+	virtualizationvmwarephysicalnetworkinterfacerelationship["moid"] = item.Moid
+	virtualizationvmwarephysicalnetworkinterfacerelationship["object_type"] = item.ObjectType
+	virtualizationvmwarephysicalnetworkinterfacerelationship["selector"] = item.Selector
+
+	virtualizationvmwarephysicalnetworkinterfacerelationships = append(virtualizationvmwarephysicalnetworkinterfacerelationships, virtualizationvmwarephysicalnetworkinterfacerelationship)
+	return virtualizationvmwarephysicalnetworkinterfacerelationships
 }
 func flattenMapVirtualizationVmwareRemoteDisplayInfo(p models.VirtualizationVmwareRemoteDisplayInfo, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwareremotedisplayinfos []map[string]interface{}
@@ -14410,6 +14679,28 @@ func flattenMapVirtualizationVmwareSharesInfo(p models.VirtualizationVmwareShare
 	virtualizationvmwaresharesinfos = append(virtualizationvmwaresharesinfos, virtualizationvmwaresharesinfo)
 	return virtualizationvmwaresharesinfos
 }
+func flattenMapVirtualizationVmwareTeamingAndFailover(p models.VirtualizationVmwareTeamingAndFailover, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwareteamingandfailovers []map[string]interface{}
+	var ret models.VirtualizationVmwareTeamingAndFailover
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	virtualizationvmwareteamingandfailover := make(map[string]interface{})
+	virtualizationvmwareteamingandfailover["active_adapters"] = item.ActiveAdapters
+	virtualizationvmwareteamingandfailover["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwareteamingandfailover["class_id"] = item.ClassId
+	virtualizationvmwareteamingandfailover["failback"] = item.Failback
+	virtualizationvmwareteamingandfailover["load_balancing"] = item.LoadBalancing
+	virtualizationvmwareteamingandfailover["name"] = item.Name
+	virtualizationvmwareteamingandfailover["network_failure_detection"] = item.NetworkFailureDetection
+	virtualizationvmwareteamingandfailover["notify_switches"] = item.NotifySwitches
+	virtualizationvmwareteamingandfailover["object_type"] = item.ObjectType
+	virtualizationvmwareteamingandfailover["standby_adapters"] = item.StandbyAdapters
+
+	virtualizationvmwareteamingandfailovers = append(virtualizationvmwareteamingandfailovers, virtualizationvmwareteamingandfailover)
+	return virtualizationvmwareteamingandfailovers
+}
 func flattenMapVirtualizationVmwareVcenterRelationship(p models.VirtualizationVmwareVcenterRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwarevcenterrelationships []map[string]interface{}
 	var ret models.VirtualizationVmwareVcenterRelationship
@@ -14445,6 +14736,24 @@ func flattenMapVirtualizationVmwareVirtualMachineRelationship(p models.Virtualiz
 
 	virtualizationvmwarevirtualmachinerelationships = append(virtualizationvmwarevirtualmachinerelationships, virtualizationvmwarevirtualmachinerelationship)
 	return virtualizationvmwarevirtualmachinerelationships
+}
+func flattenMapVirtualizationVmwareVirtualSwitchRelationship(p models.VirtualizationVmwareVirtualSwitchRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwarevirtualswitchrelationships []map[string]interface{}
+	var ret models.VirtualizationVmwareVirtualSwitchRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwarevirtualswitchrelationship := make(map[string]interface{})
+	virtualizationvmwarevirtualswitchrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwarevirtualswitchrelationship["class_id"] = item.ClassId
+	virtualizationvmwarevirtualswitchrelationship["moid"] = item.Moid
+	virtualizationvmwarevirtualswitchrelationship["object_type"] = item.ObjectType
+	virtualizationvmwarevirtualswitchrelationship["selector"] = item.Selector
+
+	virtualizationvmwarevirtualswitchrelationships = append(virtualizationvmwarevirtualswitchrelationships, virtualizationvmwarevirtualswitchrelationship)
+	return virtualizationvmwarevirtualswitchrelationships
 }
 func flattenMapVirtualizationVmwareVmCpuShareInfo(p models.VirtualizationVmwareVmCpuShareInfo, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwarevmcpushareinfos []map[string]interface{}

@@ -81,6 +81,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `download_count`:(int)(Computed) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
 * `guid`:(string)(Computed) The unique identifier for an image in a Cisco repository. 
+* `image_type`:(string) The type of image which the distributable falls into according to the component it can upgrade. For e.g.; Standalone server, Intersight managed server, UCS Managed Fabric Interconnect. The field is used in private appliance mode, where image does not have description populated from CCO. 
 * `images`:(Array)(Computed) An array of relationships to softwareUcsdDistributable resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

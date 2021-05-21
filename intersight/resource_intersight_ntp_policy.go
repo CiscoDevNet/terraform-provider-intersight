@@ -113,6 +113,54 @@ func resourceNtpPolicy() *schema.Resource {
 					},
 				},
 			},
+			"authenticated_ntp_servers": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ntp.AuthNtpServer",
+						},
+						"key_type": {
+							Description: "Type of symmetric key to use for this server.\n* `SHA1` - Key type used by the authentication is SHA1.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "SHA1",
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "ntp.AuthNtpServer",
+						},
+						"server_name": {
+							Description: "Server hostname or IP address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"sym_key_id": {
+							Description: "The key ID is a positive integer that identifies a cryptographic key used to authenticate NTP messages.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"sym_key_value": {
+							Description: "The value of the symmetric key.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -610,6 +658,60 @@ func resourceNtpPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOk("authenticated_ntp_servers"); ok {
+		x := make([]models.NtpAuthNtpServer, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewNtpAuthNtpServerWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ntp.AuthNtpServer")
+			if v, ok := l["key_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetKeyType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["server_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerName(x)
+				}
+			}
+			if v, ok := l["sym_key_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSymKeyId(x)
+				}
+			}
+			if v, ok := l["sym_key_value"]; ok {
+				{
+					x := (v.(string))
+					o.SetSymKeyValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetAuthenticatedNtpServers(x)
+		}
+	}
+
 	o.SetClassId("ntp.Policy")
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -1096,6 +1198,10 @@ func resourceNtpPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property ApplianceAccount in NtpPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("authenticated_ntp_servers", flattenListNtpAuthNtpServer(s.GetAuthenticatedNtpServers(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AuthenticatedNtpServers in NtpPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in NtpPolicy object: %s", err.Error())
 	}
@@ -1282,6 +1388,59 @@ func resourceNtpPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 			x := p[0]
 			o.SetApplianceAccount(x)
 		}
+	}
+
+	if d.HasChange("authenticated_ntp_servers") {
+		v := d.Get("authenticated_ntp_servers")
+		x := make([]models.NtpAuthNtpServer, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NtpAuthNtpServer{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ntp.AuthNtpServer")
+			if v, ok := l["key_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetKeyType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["server_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerName(x)
+				}
+			}
+			if v, ok := l["sym_key_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSymKeyId(x)
+				}
+			}
+			if v, ok := l["sym_key_value"]; ok {
+				{
+					x := (v.(string))
+					o.SetSymKeyValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetAuthenticatedNtpServers(x)
 	}
 
 	o.SetClassId("ntp.Policy")

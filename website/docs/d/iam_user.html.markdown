@@ -21,6 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `first_name`:(string) First name of the user. This field is populated from the IdP attributes received after authentication. 
 * `last_login_time`:(string) Last successful login time for user. 
 * `last_name`:(string) Last name of the user. This field is populated from the IdP attributes received after authentication. 
+* `last_role_modified_time`:(string) Last role modification time for user. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name as configured in the IdP. 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.CategoryMapperModel"]
 **Category** | Pointer to **string** | The category of the model series. | [optional] 
 **DistTag** | Pointer to **string** | The distributable tag value of the model series. | [optional] 
+**ImageType** | Pointer to **string** | The type of image based on the endpoint it can upgrade. For example, ucs-bundle-6400-infra.4.1.2a.bin can upgrade ucs managed fabric interconnects, so the image type is UCS Managed Fabric Interconnect. | [optional] 
 **RegexPattern** | Pointer to **string** | The regex that all images of this model follow. | [optional] 
 **SeriesId** | Pointer to **string** | Cisco hardware model series. | [optional] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
@@ -120,6 +121,31 @@ SetDistTag sets DistTag field to given value.
 `func (o *SoftwarerepositoryCategoryMapperModel) HasDistTag() bool`
 
 HasDistTag returns a boolean if a field has been set.
+
+### GetImageType
+
+`func (o *SoftwarerepositoryCategoryMapperModel) GetImageType() string`
+
+GetImageType returns the ImageType field if non-nil, zero value otherwise.
+
+### GetImageTypeOk
+
+`func (o *SoftwarerepositoryCategoryMapperModel) GetImageTypeOk() (*string, bool)`
+
+GetImageTypeOk returns a tuple with the ImageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageType
+
+`func (o *SoftwarerepositoryCategoryMapperModel) SetImageType(v string)`
+
+SetImageType sets ImageType field to given value.
+
+### HasImageType
+
+`func (o *SoftwarerepositoryCategoryMapperModel) HasImageType() bool`
+
+HasImageType returns a boolean if a field has been set.
 
 ### GetRegexPattern
 

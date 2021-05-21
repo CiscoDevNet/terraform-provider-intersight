@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.ProductInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.ProductInfo"]
+**Build** | Pointer to **string** | The build number of the hypervisor running on this host (e.g., 4541947, 6.3.9600.18692). The build number may indicate some feature support that applications might rely on. The build number may not always be an integer. | [optional] 
 **ProductName** | Pointer to **string** | Commercial product name. For example, VMware ESXi. | [optional] 
 **ProductType** | Pointer to **string** | Product name provided by the vendor. For example, embeddedEsx. | [optional] 
 **ProductVendor** | Pointer to **string** | Commercial vendor name. For example, VMware Inc. | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBuild
+
+`func (o *VirtualizationProductInfoAllOf) GetBuild() string`
+
+GetBuild returns the Build field if non-nil, zero value otherwise.
+
+### GetBuildOk
+
+`func (o *VirtualizationProductInfoAllOf) GetBuildOk() (*string, bool)`
+
+GetBuildOk returns a tuple with the Build field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuild
+
+`func (o *VirtualizationProductInfoAllOf) SetBuild(v string)`
+
+SetBuild sets Build field to given value.
+
+### HasBuild
+
+`func (o *VirtualizationProductInfoAllOf) HasBuild() bool`
+
+HasBuild returns a boolean if a field has been set.
 
 ### GetProductName
 
