@@ -3,7 +3,7 @@
 ```hcl
 resource "intersight_sdcard_policy" "sdcard1" {
   name        = "sdcard1"
-  description = "test policy"
+  description = "demo sd card policy"
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
@@ -19,11 +19,6 @@ resource "intersight_sdcard_policy" "sdcard1" {
         Name = "Hypervisor"
       })
     }
-  }
-
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
   }
 }
 ```
