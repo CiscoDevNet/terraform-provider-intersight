@@ -3,7 +3,7 @@
 ```hcl
 resource "intersight_fabric_system_qos_policy" "fabric_system_qos_policy1" {
   name        = "fabric_system_qos_policy1"
-  description = "fabric_system_qos_policy"
+  description = "demo fabric system qos policy"
   classes = [
     {
       admin_state        = "Enabled"
