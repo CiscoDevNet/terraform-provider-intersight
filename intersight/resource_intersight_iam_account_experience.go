@@ -150,7 +150,7 @@ func resourceIamAccountExperience() *schema.Resource {
 							Default:     "iam.FeatureDefinition",
 						},
 						"feature": {
-							Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `Kubernetes` - Enables ability to create and manage Kubernetes clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.",
+							Description: "The beta feature that will be enabled for specific account.\n* `IWO` - Intersight Workflow Optimizer.\n* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.\n* `Kubernetes` - Enables ability to create and manage Kubernetes clusters.\n* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.\n* `IvsPublicCloud` - Enables virtualization service for public clouds.\n* `TerraformCloud` - Enables an ability to create Terraform Cloud.\n* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "IWO",

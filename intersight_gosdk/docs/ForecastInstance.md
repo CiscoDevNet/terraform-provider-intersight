@@ -6,7 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "forecast.Instance"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "forecast.Instance"]
+**Action** | Pointer to **string** | Action to be triggered on forecast instance. Default value is None. * &#x60;None&#x60; - The Enum value None represents that no action is triggered on the forecast Instance managed object. * &#x60;Evaluate&#x60; - The Enum value Evaluate represents that a re-evaluation of the forecast needs to be triggered. | [optional] [default to "None"]
 **AltModel** | Pointer to **[]float32** |  | [optional] 
+**DataInterval** | Pointer to **int64** | The time interval (in days) for the data to be used for computing forecast model. | [optional] [default to 180]
+**DataStartDate** | Pointer to **time.Time** | The start date from when the data should be used for computing forecast model. | [optional] 
 **DeviceId** | Pointer to **string** | The Moid of the Intersight managed device instance for which regression model is derived. | [optional] [readonly] 
 **FullCapDays** | Pointer to **int64** | The number of days remaining before the device reaches its full functional capacity. | [optional] [readonly] 
 **LastModelUpdateTime** | Pointer to **time.Time** | The time when the forecast model was last updated. | [optional] [readonly] 
@@ -76,6 +79,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAction
+
+`func (o *ForecastInstance) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *ForecastInstance) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *ForecastInstance) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+### HasAction
+
+`func (o *ForecastInstance) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
+
 ### GetAltModel
 
 `func (o *ForecastInstance) GetAltModel() []float32`
@@ -111,6 +139,56 @@ HasAltModel returns a boolean if a field has been set.
 `func (o *ForecastInstance) UnsetAltModel()`
 
 UnsetAltModel ensures that no value is present for AltModel, not even an explicit nil
+### GetDataInterval
+
+`func (o *ForecastInstance) GetDataInterval() int64`
+
+GetDataInterval returns the DataInterval field if non-nil, zero value otherwise.
+
+### GetDataIntervalOk
+
+`func (o *ForecastInstance) GetDataIntervalOk() (*int64, bool)`
+
+GetDataIntervalOk returns a tuple with the DataInterval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataInterval
+
+`func (o *ForecastInstance) SetDataInterval(v int64)`
+
+SetDataInterval sets DataInterval field to given value.
+
+### HasDataInterval
+
+`func (o *ForecastInstance) HasDataInterval() bool`
+
+HasDataInterval returns a boolean if a field has been set.
+
+### GetDataStartDate
+
+`func (o *ForecastInstance) GetDataStartDate() time.Time`
+
+GetDataStartDate returns the DataStartDate field if non-nil, zero value otherwise.
+
+### GetDataStartDateOk
+
+`func (o *ForecastInstance) GetDataStartDateOk() (*time.Time, bool)`
+
+GetDataStartDateOk returns a tuple with the DataStartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataStartDate
+
+`func (o *ForecastInstance) SetDataStartDate(v time.Time)`
+
+SetDataStartDate sets DataStartDate field to given value.
+
+### HasDataStartDate
+
+`func (o *ForecastInstance) HasDataStartDate() bool`
+
+HasDataStartDate returns a boolean if a field has been set.
+
 ### GetDeviceId
 
 `func (o *ForecastInstance) GetDeviceId() string`

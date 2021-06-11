@@ -34,6 +34,11 @@ func dataSourceNiatelemetryMsoTenantDetails() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"deployed_sites": {
+				Description: "Site IDs to which this tenant is deployed to.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -144,6 +149,11 @@ func dataSourceNiatelemetryMsoTenantDetails() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"deployed_sites": {
+						Description: "Site IDs to which this tenant is deployed to.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
@@ -480,6 +490,10 @@ func dataSourceNiatelemetryMsoTenantDetailsRead(c context.Context, d *schema.Res
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
+	if v, ok := d.GetOk("deployed_sites"); ok {
+		x := (v.(string))
+		o.SetDeployedSites(x)
+	}
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -560,6 +574,7 @@ func dataSourceNiatelemetryMsoTenantDetailsRead(c context.Context, d *schema.Res
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["deployed_sites"] = (s.GetDeployedSites())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()

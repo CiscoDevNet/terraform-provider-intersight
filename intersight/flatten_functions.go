@@ -660,11 +660,8 @@ func flattenListCertificatemanagementCertificateBase(p []models.Certificatemanag
 		certificatemanagementcertificatebase["enabled"] = item.Enabled
 		certificatemanagementcertificatebase["is_privatekey_set"] = item.IsPrivatekeySet
 		certificatemanagementcertificatebase["object_type"] = item.ObjectType
-		privatekey_x := d.Get("certificates").([]interface{})
-		if len(privatekey_x) > 0 {
-			privatekey_y := privatekey_x[0].(map[string]interface{})
-			certificatemanagementcertificatebase["privatekey"] = privatekey_y["privatekey"]
-		}
+		privatekey_x := d.Get("certificates").([]interface{})[len(certificatemanagementcertificatebases)].(map[string]interface{})
+		certificatemanagementcertificatebase["privatekey"] = privatekey_x["privatekey"]
 		certificatemanagementcertificatebases = append(certificatemanagementcertificatebases, certificatemanagementcertificatebase)
 	}
 	return certificatemanagementcertificatebases
@@ -4326,9 +4323,9 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			item := p
 			osanswers := make(map[string]interface{})
 			osanswers["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			answer_file_x := d.Get("answers").([]interface{})
-			if len(answer_file_x) > 0 {
-				answer_file_y := answer_file_x[0].(map[string]interface{})
+			answer_file_x := d.Get("answers")
+			if answer_file_x != nil {
+				answer_file_y := answer_file_x.([]interface{})[0].(map[string]interface{})
 				osanswers["answer_file"] = answer_file_y["answer_file"]
 			}
 			osanswers["class_id"] = item.ClassId
@@ -4355,9 +4352,9 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			osanswers["nameserver"] = item.Nameserver
 			osanswers["object_type"] = item.ObjectType
 			osanswers["product_key"] = item.ProductKey
-			root_password_x := d.Get("answers").([]interface{})
-			if len(root_password_x) > 0 {
-				root_password_y := root_password_x[0].(map[string]interface{})
+			root_password_x := d.Get("answers")
+			if root_password_x != nil {
+				root_password_y := root_password_x.([]interface{})[0].(map[string]interface{})
 				osanswers["root_password"] = root_password_y["root_password"]
 			}
 			osanswers["nr_source"] = item.Source
@@ -4780,22 +4777,16 @@ func flattenListSnmpUser(p []models.SnmpUser, d *schema.ResourceData) []map[stri
 	for _, item := range p {
 		snmpuser := make(map[string]interface{})
 		snmpuser["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		auth_password_x := d.Get("snmp_users").([]interface{})
-		if len(auth_password_x) > 0 {
-			auth_password_y := auth_password_x[0].(map[string]interface{})
-			snmpuser["auth_password"] = auth_password_y["auth_password"]
-		}
+		auth_password_x := d.Get("snmp_users").([]interface{})[len(snmpusers)].(map[string]interface{})
+		snmpuser["auth_password"] = auth_password_x["auth_password"]
 		snmpuser["auth_type"] = item.AuthType
 		snmpuser["class_id"] = item.ClassId
 		snmpuser["is_auth_password_set"] = item.IsAuthPasswordSet
 		snmpuser["is_privacy_password_set"] = item.IsPrivacyPasswordSet
 		snmpuser["name"] = item.Name
 		snmpuser["object_type"] = item.ObjectType
-		privacy_password_x := d.Get("snmp_users").([]interface{})
-		if len(privacy_password_x) > 0 {
-			privacy_password_y := privacy_password_x[0].(map[string]interface{})
-			snmpuser["privacy_password"] = privacy_password_y["privacy_password"]
-		}
+		privacy_password_x := d.Get("snmp_users").([]interface{})[len(snmpusers)].(map[string]interface{})
+		snmpuser["privacy_password"] = privacy_password_x["privacy_password"]
 		snmpuser["privacy_type"] = item.PrivacyType
 		snmpuser["security_level"] = item.SecurityLevel
 		snmpusers = append(snmpusers, snmpuser)
@@ -5721,11 +5712,8 @@ func flattenListVmediaMapping(p []models.VmediaMapping, d *schema.ResourceData) 
 		vmediamapping["mount_options"] = item.MountOptions
 		vmediamapping["mount_protocol"] = item.MountProtocol
 		vmediamapping["object_type"] = item.ObjectType
-		password_x := d.Get("mappings").([]interface{})
-		if len(password_x) > 0 {
-			password_y := password_x[0].(map[string]interface{})
-			vmediamapping["password"] = password_y["password"]
-		}
+		password_x := d.Get("mappings").([]interface{})[len(vmediamappings)].(map[string]interface{})
+		vmediamapping["password"] = password_x["password"]
 		vmediamapping["remote_file"] = item.RemoteFile
 		vmediamapping["remote_path"] = item.RemotePath
 		vmediamapping["sanitized_file_location"] = item.SanitizedFileLocation
@@ -7144,9 +7132,9 @@ func flattenMapComputePersistentMemoryOperation(p models.ComputePersistentMemory
 		return computepersistentmemorymodules
 	})(item.GetModules(), d)
 	computepersistentmemoryoperation["object_type"] = item.ObjectType
-	secure_passphrase_x := d.Get("persistent_memory_operation").([]interface{})
-	if len(secure_passphrase_x) > 0 {
-		secure_passphrase_y := secure_passphrase_x[0].(map[string]interface{})
+	secure_passphrase_x := d.Get("persistent_memory_operation")
+	if secure_passphrase_x != nil {
+		secure_passphrase_y := secure_passphrase_x.([]interface{})[0].(map[string]interface{})
 		computepersistentmemoryoperation["secure_passphrase"] = secure_passphrase_y["secure_passphrase"]
 	}
 
@@ -8204,9 +8192,9 @@ func flattenMapFirmwareDirectDownload(p models.FirmwareDirectDownload, d *schema
 	firmwaredirectdownload["image_source"] = item.ImageSource
 	firmwaredirectdownload["is_password_set"] = item.IsPasswordSet
 	firmwaredirectdownload["object_type"] = item.ObjectType
-	password_x := d.Get("direct_download").([]interface{})
-	if len(password_x) > 0 {
-		password_y := password_x[0].(map[string]interface{})
+	password_x := d.Get("direct_download")
+	if password_x != nil {
+		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		firmwaredirectdownload["password"] = password_y["password"]
 	}
 	firmwaredirectdownload["upgradeoption"] = item.Upgradeoption
@@ -8303,9 +8291,9 @@ func flattenMapFirmwareNetworkShare(p models.FirmwareNetworkShare, d *schema.Res
 		return firmwarenfsservers
 	})(item.GetNfsServer(), d)
 	firmwarenetworkshare["object_type"] = item.ObjectType
-	password_x := d.Get("network_share").([]interface{})
-	if len(password_x) > 0 {
-		password_y := password_x[0].(map[string]interface{})
+	password_x := d.Get("network_share")
+	if password_x != nil {
+		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		firmwarenetworkshare["password"] = password_y["password"]
 	}
 	firmwarenetworkshare["upgradeoption"] = item.Upgradeoption
@@ -10284,9 +10272,9 @@ func flattenMapIamLdapBaseProperties(p models.IamLdapBaseProperties, d *schema.R
 	iamldapbaseproperties["is_password_set"] = item.IsPasswordSet
 	iamldapbaseproperties["nested_group_search_depth"] = item.NestedGroupSearchDepth
 	iamldapbaseproperties["object_type"] = item.ObjectType
-	password_x := d.Get("base_properties").([]interface{})
-	if len(password_x) > 0 {
-		password_y := password_x[0].(map[string]interface{})
+	password_x := d.Get("base_properties")
+	if password_x != nil {
+		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		iamldapbaseproperties["password"] = password_y["password"]
 	}
 	iamldapbaseproperties["timeout"] = item.Timeout
@@ -11115,29 +11103,29 @@ func flattenMapKubernetesClusterCertificateConfiguration(p models.KubernetesClus
 	kubernetesclustercertificateconfiguration := make(map[string]interface{})
 	kubernetesclustercertificateconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesclustercertificateconfiguration["ca_cert"] = item.CaCert
-	ca_key_x := d.Get("cert_config").([]interface{})
-	if len(ca_key_x) > 0 {
-		ca_key_y := ca_key_x[0].(map[string]interface{})
+	ca_key_x := d.Get("cert_config")
+	if ca_key_x != nil {
+		ca_key_y := ca_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["ca_key"] = ca_key_y["ca_key"]
 	}
 	kubernetesclustercertificateconfiguration["class_id"] = item.ClassId
 	kubernetesclustercertificateconfiguration["etcd_cert"] = item.EtcdCert
 	kubernetesclustercertificateconfiguration["etcd_encryption_key"] = item.EtcdEncryptionKey
-	etcd_key_x := d.Get("cert_config").([]interface{})
-	if len(etcd_key_x) > 0 {
-		etcd_key_y := etcd_key_x[0].(map[string]interface{})
+	etcd_key_x := d.Get("cert_config")
+	if etcd_key_x != nil {
+		etcd_key_y := etcd_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["etcd_key"] = etcd_key_y["etcd_key"]
 	}
 	kubernetesclustercertificateconfiguration["front_proxy_cert"] = item.FrontProxyCert
-	front_proxy_key_x := d.Get("cert_config").([]interface{})
-	if len(front_proxy_key_x) > 0 {
-		front_proxy_key_y := front_proxy_key_x[0].(map[string]interface{})
+	front_proxy_key_x := d.Get("cert_config")
+	if front_proxy_key_x != nil {
+		front_proxy_key_y := front_proxy_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["front_proxy_key"] = front_proxy_key_y["front_proxy_key"]
 	}
 	kubernetesclustercertificateconfiguration["object_type"] = item.ObjectType
-	sa_private_key_x := d.Get("cert_config").([]interface{})
-	if len(sa_private_key_x) > 0 {
-		sa_private_key_y := sa_private_key_x[0].(map[string]interface{})
+	sa_private_key_x := d.Get("cert_config")
+	if sa_private_key_x != nil {
+		sa_private_key_y := sa_private_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["sa_private_key"] = sa_private_key_y["sa_private_key"]
 	}
 	kubernetesclustercertificateconfiguration["sa_public_key"] = item.SaPublicKey
@@ -11475,9 +11463,9 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.Hostname
 	kubernetesproxyconfig["is_password_set"] = item.IsPasswordSet
 	kubernetesproxyconfig["object_type"] = item.ObjectType
-	password_x := d.Get("docker_http_proxy").([]interface{})
-	if len(password_x) > 0 {
-		password_y := password_x[0].(map[string]interface{})
+	password_x := d.Get("docker_http_proxy")
+	if password_x != nil {
+		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
 	}
 	kubernetesproxyconfig["port"] = item.Port
@@ -11968,9 +11956,9 @@ func flattenMapMemoryPersistentMemoryLocalSecurity(p models.MemoryPersistentMemo
 	memorypersistentmemorylocalsecurity["enabled"] = item.Enabled
 	memorypersistentmemorylocalsecurity["is_secure_passphrase_set"] = item.IsSecurePassphraseSet
 	memorypersistentmemorylocalsecurity["object_type"] = item.ObjectType
-	secure_passphrase_x := d.Get("local_security").([]interface{})
-	if len(secure_passphrase_x) > 0 {
-		secure_passphrase_y := secure_passphrase_x[0].(map[string]interface{})
+	secure_passphrase_x := d.Get("local_security")
+	if secure_passphrase_x != nil {
+		secure_passphrase_y := secure_passphrase_x.([]interface{})[0].(map[string]interface{})
 		memorypersistentmemorylocalsecurity["secure_passphrase"] = secure_passphrase_y["secure_passphrase"]
 	}
 
@@ -12487,9 +12475,9 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	item := p
 	osanswers := make(map[string]interface{})
 	osanswers["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	answer_file_x := d.Get("answers").([]interface{})
-	if len(answer_file_x) > 0 {
-		answer_file_y := answer_file_x[0].(map[string]interface{})
+	answer_file_x := d.Get("answers")
+	if answer_file_x != nil {
+		answer_file_y := answer_file_x.([]interface{})[0].(map[string]interface{})
 		osanswers["answer_file"] = answer_file_y["answer_file"]
 	}
 	osanswers["class_id"] = item.ClassId
@@ -12516,9 +12504,9 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	osanswers["nameserver"] = item.Nameserver
 	osanswers["object_type"] = item.ObjectType
 	osanswers["product_key"] = item.ProductKey
-	root_password_x := d.Get("answers").([]interface{})
-	if len(root_password_x) > 0 {
-		root_password_y := root_password_x[0].(map[string]interface{})
+	root_password_x := d.Get("answers")
+	if root_password_x != nil {
+		root_password_y := root_password_x.([]interface{})[0].(map[string]interface{})
 		osanswers["root_password"] = root_password_y["root_password"]
 	}
 	osanswers["nr_source"] = item.Source
@@ -13060,96 +13048,6 @@ func flattenMapResourceMembershipHolderRelationship(p models.ResourceMembershipH
 
 	resourcemembershipholderrelationships = append(resourcemembershipholderrelationships, resourcemembershipholderrelationship)
 	return resourcemembershipholderrelationships
-}
-func flattenMapResourcepoolLeaseRelationship(p models.ResourcepoolLeaseRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolleaserelationships []map[string]interface{}
-	var ret models.ResourcepoolLeaseRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	resourcepoolleaserelationship := make(map[string]interface{})
-	resourcepoolleaserelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolleaserelationship["class_id"] = item.ClassId
-	resourcepoolleaserelationship["moid"] = item.Moid
-	resourcepoolleaserelationship["object_type"] = item.ObjectType
-	resourcepoolleaserelationship["selector"] = item.Selector
-
-	resourcepoolleaserelationships = append(resourcepoolleaserelationships, resourcepoolleaserelationship)
-	return resourcepoolleaserelationships
-}
-func flattenMapResourcepoolLeaseResourceRelationship(p models.ResourcepoolLeaseResourceRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolleaseresourcerelationships []map[string]interface{}
-	var ret models.ResourcepoolLeaseResourceRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	resourcepoolleaseresourcerelationship := make(map[string]interface{})
-	resourcepoolleaseresourcerelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolleaseresourcerelationship["class_id"] = item.ClassId
-	resourcepoolleaseresourcerelationship["moid"] = item.Moid
-	resourcepoolleaseresourcerelationship["object_type"] = item.ObjectType
-	resourcepoolleaseresourcerelationship["selector"] = item.Selector
-
-	resourcepoolleaseresourcerelationships = append(resourcepoolleaseresourcerelationships, resourcepoolleaseresourcerelationship)
-	return resourcepoolleaseresourcerelationships
-}
-func flattenMapResourcepoolPoolRelationship(p models.ResourcepoolPoolRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolpoolrelationships []map[string]interface{}
-	var ret models.ResourcepoolPoolRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	resourcepoolpoolrelationship := make(map[string]interface{})
-	resourcepoolpoolrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolpoolrelationship["class_id"] = item.ClassId
-	resourcepoolpoolrelationship["moid"] = item.Moid
-	resourcepoolpoolrelationship["object_type"] = item.ObjectType
-	resourcepoolpoolrelationship["selector"] = item.Selector
-
-	resourcepoolpoolrelationships = append(resourcepoolpoolrelationships, resourcepoolpoolrelationship)
-	return resourcepoolpoolrelationships
-}
-func flattenMapResourcepoolPoolMemberRelationship(p models.ResourcepoolPoolMemberRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepoolpoolmemberrelationships []map[string]interface{}
-	var ret models.ResourcepoolPoolMemberRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	resourcepoolpoolmemberrelationship := make(map[string]interface{})
-	resourcepoolpoolmemberrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepoolpoolmemberrelationship["class_id"] = item.ClassId
-	resourcepoolpoolmemberrelationship["moid"] = item.Moid
-	resourcepoolpoolmemberrelationship["object_type"] = item.ObjectType
-	resourcepoolpoolmemberrelationship["selector"] = item.Selector
-
-	resourcepoolpoolmemberrelationships = append(resourcepoolpoolmemberrelationships, resourcepoolpoolmemberrelationship)
-	return resourcepoolpoolmemberrelationships
-}
-func flattenMapResourcepoolUniverseRelationship(p models.ResourcepoolUniverseRelationship, d *schema.ResourceData) []map[string]interface{} {
-	var resourcepooluniverserelationships []map[string]interface{}
-	var ret models.ResourcepoolUniverseRelationship
-	if reflect.DeepEqual(ret, p) {
-		return nil
-	}
-	x := p
-	item := x.MoMoRef
-	resourcepooluniverserelationship := make(map[string]interface{})
-	resourcepooluniverserelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	resourcepooluniverserelationship["class_id"] = item.ClassId
-	resourcepooluniverserelationship["moid"] = item.Moid
-	resourcepooluniverserelationship["object_type"] = item.ObjectType
-	resourcepooluniverserelationship["selector"] = item.Selector
-
-	resourcepooluniverserelationships = append(resourcepooluniverserelationships, resourcepooluniverserelationship)
-	return resourcepooluniverserelationships
 }
 func flattenMapSdwanProfileRelationship(p models.SdwanProfileRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var sdwanprofilerelationships []map[string]interface{}
@@ -15176,9 +15074,9 @@ func flattenMapVnicIscsiAuthProfile(p models.VnicIscsiAuthProfile, d *schema.Res
 	vniciscsiauthprofile["class_id"] = item.ClassId
 	vniciscsiauthprofile["is_password_set"] = item.IsPasswordSet
 	vniciscsiauthprofile["object_type"] = item.ObjectType
-	password_x := d.Get("chap").([]interface{})
-	if len(password_x) > 0 {
-		password_y := password_x[0].(map[string]interface{})
+	password_x := d.Get("chap")
+	if password_x != nil {
+		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		vniciscsiauthprofile["password"] = password_y["password"]
 	}
 	vniciscsiauthprofile["user_id"] = item.UserId

@@ -23,6 +23,11 @@ func dataSourceNiatelemetryFault() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"cause": {
+				Description: "Cause of the fault present.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -38,6 +43,11 @@ func dataSourceNiatelemetryFault() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"created_time": {
+				Description: "Created time of the fault present.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"description": {
 				Description: "Description of the fault present.",
@@ -154,6 +164,11 @@ func dataSourceNiatelemetryFault() *schema.Resource {
 							},
 						},
 					},
+					"cause": {
+						Description: "Cause of the fault present.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -169,6 +184,11 @@ func dataSourceNiatelemetryFault() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"created_time": {
+						Description: "Created time of the fault present.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"description": {
 						Description: "Description of the fault present.",
@@ -512,6 +532,10 @@ func dataSourceNiatelemetryFaultRead(c context.Context, d *schema.ResourceData, 
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
+	if v, ok := d.GetOk("cause"); ok {
+		x := (v.(string))
+		o.SetCause(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -523,6 +547,10 @@ func dataSourceNiatelemetryFaultRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("created_time"); ok {
+		x := (v.(string))
+		o.SetCreatedTime(x)
 	}
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
@@ -613,10 +641,12 @@ func dataSourceNiatelemetryFaultRead(c context.Context, d *schema.ResourceData, 
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["cause"] = (s.GetCause())
 				temp["class_id"] = (s.GetClassId())
 				temp["code"] = (s.GetCode())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["created_time"] = (s.GetCreatedTime())
 				temp["description"] = (s.GetDescription())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

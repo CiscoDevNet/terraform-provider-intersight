@@ -14,7 +14,10 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_forecast_instance.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `action`:(string) Action to be triggered on forecast instance. Default value is None.* `None` - The Enum value None represents that no action is triggered on the forecast Instance managed object.* `Evaluate` - The Enum value Evaluate represents that a re-evaluation of the forecast needs to be triggered. 
 * `create_time`:(string) The time when this managed object was created. 
+* `data_interval`:(int) The time interval (in days) for the data to be used for computing forecast model. 
+* `data_start_date`:(string) The start date from when the data should be used for computing forecast model. 
 * `device_id`:(string) The Moid of the Intersight managed device instance for which regression model is derived. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `full_cap_days`:(int) The number of days remaining before the device reaches its full functional capacity. 

@@ -307,7 +307,7 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 							Default:     "recovery.BackupSchedule",
 						},
 						"execution_time": {
-							Description: "The time at which the backup is to be run on a given day. This is used when the frequency unit is daily.",
+							Description: "The time at which the backup is to be run on a given day. Applicable when the frequency unit is daily.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -318,7 +318,7 @@ func resourceRecoveryScheduleConfigPolicy() *schema.Resource {
 							Default:     "Daily",
 						},
 						"hours": {
-							Description: "The frequency, in hours, at which the backup schedule runs.\n* `8` - \n* `4` - \n* `12` - \n* `16` - \n* `20` -",
+							Description: "The frequency, in hours, at which the backup schedule runs.\n* `8` - The backup interval is 8 hours.\n* `4` - The backup interval is 4 hours.\n* `12` - The backup interval is 12 hours.\n* `16` - The backup interval is 16 hours.\n* `20` - The backup interval is 20 hours.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Default:     8,

@@ -15,6 +15,7 @@ To access the ith object of the results obtained, use `data.intersight_niateleme
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
+* `deployed_sites`:(string) Site IDs to which this tenant is deployed to. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

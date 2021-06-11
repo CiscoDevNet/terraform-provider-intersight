@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **MetaVersion** | Pointer to **int64** | Version of the workflow metadata for which this workflow execution was started. | [optional] 
 **Name** | Pointer to **string** | A name of the workflow execution instance. | [optional] 
 **Output** | Pointer to **interface{}** | All the generated outputs for the workflow. | [optional] [readonly] 
-**PauseReason** | Pointer to **string** | Denotes the reason workflow is in paused status. * &#x60;None&#x60; - Pause reason is none, which indicates there is no reason for the pause state. * &#x60;TaskWithWarning&#x60; - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. | [optional] [default to "None"]
+**PauseReason** | Pointer to **string** | Denotes the reason workflow is in paused status. * &#x60;None&#x60; - Pause reason is none, which indicates there is no reason for the pause state. * &#x60;TaskWithWarning&#x60; - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings. * &#x60;SystemMaintenance&#x60; - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance. | [optional] [default to "None"]
 **Progress** | Pointer to **float32** | This field indicates percentage of workflow task execution. | [optional] [readonly] 
 **Properties** | Pointer to [**NullableWorkflowWorkflowInfoProperties**](workflow.WorkflowInfoProperties.md) |  | [optional] 
 **RetryFromTaskName** | Pointer to **string** | This field is applicable when Retry action is issued for a workflow which is in &#39;final&#39; state. When this field is not specified, the workflow will be retried from the start i.e., the first task. When this field is specified then the workflow will be retried from the specified task. This field should specify the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run. It is not possible to retry a workflow from a task which wasn&#39;t run in the previous iteration. | [optional] 
@@ -36,8 +36,8 @@ Name | Type | Description | Notes
 **WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
 **WorkflowTaskCount** | Pointer to **int64** | Total number of workflow tasks in this workflow. | [optional] [readonly] 
 **WorkflowWorkerTaskCount** | Pointer to **int64** | Total number of worker tasks in this workflow. This count doesn&#39;t include the control tasks in the workflow. | [optional] [readonly] 
-**Var0ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
-**Var1SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
+**Var0SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
+**Var1ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
 **Var2Profile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
 **Var3RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
@@ -908,55 +908,55 @@ SetWorkflowWorkerTaskCount sets WorkflowWorkerTaskCount field to given value.
 
 HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
 
-### GetVar0ClusterProfile
+### GetVar0SwitchProfile
 
-`func (o *WorkflowWorkflowInfo) GetVar0ClusterProfile() HyperflexClusterProfileRelationship`
+`func (o *WorkflowWorkflowInfo) GetVar0SwitchProfile() FabricSwitchProfileRelationship`
 
-GetVar0ClusterProfile returns the Var0ClusterProfile field if non-nil, zero value otherwise.
+GetVar0SwitchProfile returns the Var0SwitchProfile field if non-nil, zero value otherwise.
 
-### GetVar0ClusterProfileOk
+### GetVar0SwitchProfileOk
 
-`func (o *WorkflowWorkflowInfo) GetVar0ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfo) GetVar0SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
 
-GetVar0ClusterProfileOk returns a tuple with the Var0ClusterProfile field if it's non-nil, zero value otherwise
+GetVar0SwitchProfileOk returns a tuple with the Var0SwitchProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar0ClusterProfile
+### SetVar0SwitchProfile
 
-`func (o *WorkflowWorkflowInfo) SetVar0ClusterProfile(v HyperflexClusterProfileRelationship)`
+`func (o *WorkflowWorkflowInfo) SetVar0SwitchProfile(v FabricSwitchProfileRelationship)`
 
-SetVar0ClusterProfile sets Var0ClusterProfile field to given value.
+SetVar0SwitchProfile sets Var0SwitchProfile field to given value.
 
-### HasVar0ClusterProfile
+### HasVar0SwitchProfile
 
-`func (o *WorkflowWorkflowInfo) HasVar0ClusterProfile() bool`
+`func (o *WorkflowWorkflowInfo) HasVar0SwitchProfile() bool`
 
-HasVar0ClusterProfile returns a boolean if a field has been set.
+HasVar0SwitchProfile returns a boolean if a field has been set.
 
-### GetVar1SwitchProfile
+### GetVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfo) GetVar1SwitchProfile() FabricSwitchProfileRelationship`
+`func (o *WorkflowWorkflowInfo) GetVar1ClusterProfile() HyperflexClusterProfileRelationship`
 
-GetVar1SwitchProfile returns the Var1SwitchProfile field if non-nil, zero value otherwise.
+GetVar1ClusterProfile returns the Var1ClusterProfile field if non-nil, zero value otherwise.
 
-### GetVar1SwitchProfileOk
+### GetVar1ClusterProfileOk
 
-`func (o *WorkflowWorkflowInfo) GetVar1SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfo) GetVar1ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
 
-GetVar1SwitchProfileOk returns a tuple with the Var1SwitchProfile field if it's non-nil, zero value otherwise
+GetVar1ClusterProfileOk returns a tuple with the Var1ClusterProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar1SwitchProfile
+### SetVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfo) SetVar1SwitchProfile(v FabricSwitchProfileRelationship)`
+`func (o *WorkflowWorkflowInfo) SetVar1ClusterProfile(v HyperflexClusterProfileRelationship)`
 
-SetVar1SwitchProfile sets Var1SwitchProfile field to given value.
+SetVar1ClusterProfile sets Var1ClusterProfile field to given value.
 
-### HasVar1SwitchProfile
+### HasVar1ClusterProfile
 
-`func (o *WorkflowWorkflowInfo) HasVar1SwitchProfile() bool`
+`func (o *WorkflowWorkflowInfo) HasVar1ClusterProfile() bool`
 
-HasVar1SwitchProfile returns a boolean if a field has been set.
+HasVar1ClusterProfile returns a boolean if a field has been set.
 
 ### GetVar2Profile
 

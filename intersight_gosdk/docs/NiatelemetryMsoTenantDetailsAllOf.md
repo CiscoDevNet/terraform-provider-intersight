@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.MsoTenantDetails"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.MsoTenantDetails"]
+**DeployedSites** | Pointer to **string** | Site IDs to which this tenant is deployed to. | [optional] 
 **NumberOfSchemasAssignedPerTenantInMso** | Pointer to **int64** | Number of schemas assigned to each tenant in Multi-Site Orchestrator. | [optional] 
 **SitesEachTenantIsDeployedToInMso** | Pointer to **int64** | Number of sites each tenant is deployed to. | [optional] 
 **TenantId** | Pointer to **string** | ID of tenant in Multi-Site Orchestrator. | [optional] 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDeployedSites
+
+`func (o *NiatelemetryMsoTenantDetailsAllOf) GetDeployedSites() string`
+
+GetDeployedSites returns the DeployedSites field if non-nil, zero value otherwise.
+
+### GetDeployedSitesOk
+
+`func (o *NiatelemetryMsoTenantDetailsAllOf) GetDeployedSitesOk() (*string, bool)`
+
+GetDeployedSitesOk returns a tuple with the DeployedSites field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeployedSites
+
+`func (o *NiatelemetryMsoTenantDetailsAllOf) SetDeployedSites(v string)`
+
+SetDeployedSites sets DeployedSites field to given value.
+
+### HasDeployedSites
+
+`func (o *NiatelemetryMsoTenantDetailsAllOf) HasDeployedSites() bool`
+
+HasDeployedSites returns a boolean if a field has been set.
 
 ### GetNumberOfSchemasAssignedPerTenantInMso
 
