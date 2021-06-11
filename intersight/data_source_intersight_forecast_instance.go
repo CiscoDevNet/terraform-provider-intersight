@@ -23,6 +23,11 @@ func dataSourceForecastInstance() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"action": {
+				Description: "Action to be triggered on forecast instance. Default value is None.\n* `None` - The Enum value None represents that no action is triggered on the forecast Instance managed object.\n* `Evaluate` - The Enum value Evaluate represents that a re-evaluation of the forecast needs to be triggered.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -33,6 +38,16 @@ func dataSourceForecastInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"data_interval": {
+				Description: "The time interval (in days) for the data to be used for computing forecast model.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"data_start_date": {
+				Description: "The start date from when the data should be used for computing forecast model.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"device_id": {
 				Description: "The Moid of the Intersight managed device instance for which regression model is derived.",
@@ -108,6 +123,11 @@ func dataSourceForecastInstance() *schema.Resource {
 					Optional:    true,
 					Computed:    true,
 				},
+					"action": {
+						Description: "Action to be triggered on forecast instance. Default value is None.\n* `None` - The Enum value None represents that no action is triggered on the forecast Instance managed object.\n* `Evaluate` - The Enum value Evaluate represents that a re-evaluation of the forecast needs to be triggered.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
@@ -165,6 +185,16 @@ func dataSourceForecastInstance() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"data_interval": {
+						Description: "The time interval (in days) for the data to be used for computing forecast model.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"data_start_date": {
+						Description: "The start date from when the data should be used for computing forecast model.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"device_id": {
 						Description: "The Moid of the Intersight managed device instance for which regression model is derived.",
@@ -589,6 +619,10 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -596,6 +630,14 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("data_interval"); ok {
+		x := int64(v.(int))
+		o.SetDataInterval(x)
+	}
+	if v, ok := d.GetOk("data_start_date"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetDataStartDate(x)
 	}
 	if v, ok := d.GetOk("device_id"); ok {
 		x := (v.(string))
@@ -679,6 +721,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 				var s = results[i]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["alt_model"] = (s.GetAltModel())
 
@@ -686,6 +729,9 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["data_interval"] = (s.GetDataInterval())
+
+				temp["data_start_date"] = (s.GetDataStartDate()).String()
 				temp["device_id"] = (s.GetDeviceId())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 

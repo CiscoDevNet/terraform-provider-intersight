@@ -170,7 +170,7 @@ This complex property has following sub-properties:
   + `name`:(string) Name of the bootloader image. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `path`:(string) Path to the bootloader image. 
-* `slot`:(string) The slot id of the local disk device. Supported values are (1-255, \ M\ , \ HBA\ , \ SAS\ , \ RAID\ , \ MRAID\ , \ MSTOR-RAID\ ). 
+* `slot`:(string) The slot id of the local disk device. Supported values are (1-255, \ M\ , \ HBA\ , \ SAS\ , \ RAID\ , \ MRAID\ , \ MRAID1\ , \ MRAID2\ , \ MSTOR-RAID\ ). 
 
 ### [boot.Nvme](#argument-reference)
 Device type used when booting from a NVMe device.

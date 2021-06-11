@@ -115,6 +115,16 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"last_reboot_time": {
+				Description: "Returns the last reboot Time of the device.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"last_reset_reason": {
+				Description: "Returns the last reset reason of the device.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"license_type": {
 				Description: "Returns the License type of the device.",
 				Type:        schema.TypeString,
@@ -257,6 +267,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			"system_up_time": {
 				Description: "The amount of time that the device being inventoried been up.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"total_critical_faults": {
+				Description: "Returns the total number of critical faults.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"nr_version": {
@@ -450,6 +465,16 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 					},
 					"is_virtual_node": {
 						Description: "Flag to specify if the node is virtual.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"last_reboot_time": {
+						Description: "Returns the last reboot Time of the device.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"last_reset_reason": {
+						Description: "Returns the last reset reason of the device.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1084,6 +1109,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							},
 						},
 					},
+					"total_critical_faults": {
+						Description: "Returns the total number of critical faults.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"nr_version": {
 						Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
 						Type:        schema.TypeString,
@@ -1296,6 +1326,14 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetIsVirtualNode(x)
 	}
+	if v, ok := d.GetOk("last_reboot_time"); ok {
+		x := (v.(string))
+		o.SetLastRebootTime(x)
+	}
+	if v, ok := d.GetOk("last_reset_reason"); ok {
+		x := (v.(string))
+		o.SetLastResetReason(x)
+	}
 	if v, ok := d.GetOk("license_type"); ok {
 		x := (v.(string))
 		o.SetLicenseType(x)
@@ -1408,6 +1446,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetSystemUpTime(x)
 	}
+	if v, ok := d.GetOk("total_critical_faults"); ok {
+		x := int64(v.(int))
+		o.SetTotalCriticalFaults(x)
+	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
@@ -1474,6 +1516,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["infra_wi_node_count"] = (s.GetInfraWiNodeCount())
 				temp["ip_address"] = (s.GetIpAddress())
 				temp["is_virtual_node"] = (s.GetIsVirtualNode())
+				temp["last_reboot_time"] = (s.GetLastRebootTime())
+				temp["last_reset_reason"] = (s.GetLastResetReason())
 
 				temp["license_state"] = flattenMapNiatelemetryNiaLicenseStateRelationship(s.GetLicenseState(), d)
 				temp["license_type"] = (s.GetLicenseType())
@@ -1526,6 +1570,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_critical_faults"] = (s.GetTotalCriticalFaults())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

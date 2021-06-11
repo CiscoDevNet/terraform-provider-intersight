@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
  *
- * API version: 1.0.9-4289
+ * API version: 1.0.9-4305
  * Contact: intersight@cisco.com
  */
 
@@ -55,6 +55,10 @@ type NiatelemetryNiaInventory struct {
 	IpAddress *string `json:"IpAddress,omitempty"`
 	// Flag to specify if the node is virtual.
 	IsVirtualNode *string `json:"IsVirtualNode,omitempty"`
+	// Returns the last reboot Time of the device.
+	LastRebootTime *string `json:"LastRebootTime,omitempty"`
+	// Returns the last reset reason of the device.
+	LastResetReason *string `json:"LastResetReason,omitempty"`
 	// Returns the License type of the device.
 	LicenseType *string `json:"LicenseType,omitempty"`
 	// Last log in time device being inventoried. This determines the last login time on the device.
@@ -109,6 +113,8 @@ type NiatelemetryNiaInventory struct {
 	SoftwareDownload *string `json:"SoftwareDownload,omitempty"`
 	// The amount of time that the device being inventoried been up.
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
+	// Returns the total number of critical faults.
+	TotalCriticalFaults *int64 `json:"TotalCriticalFaults,omitempty"`
 	// Software version of device being inventoried. The various software version values for each device are available on cisco.com.
 	Version              *string                                  `json:"Version,omitempty"`
 	LicenseState         *NiatelemetryNiaLicenseStateRelationship `json:"LicenseState,omitempty"`
@@ -710,6 +716,70 @@ func (o *NiatelemetryNiaInventory) HasIsVirtualNode() bool {
 // SetIsVirtualNode gets a reference to the given string and assigns it to the IsVirtualNode field.
 func (o *NiatelemetryNiaInventory) SetIsVirtualNode(v string) {
 	o.IsVirtualNode = &v
+}
+
+// GetLastRebootTime returns the LastRebootTime field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetLastRebootTime() string {
+	if o == nil || o.LastRebootTime == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastRebootTime
+}
+
+// GetLastRebootTimeOk returns a tuple with the LastRebootTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetLastRebootTimeOk() (*string, bool) {
+	if o == nil || o.LastRebootTime == nil {
+		return nil, false
+	}
+	return o.LastRebootTime, true
+}
+
+// HasLastRebootTime returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasLastRebootTime() bool {
+	if o != nil && o.LastRebootTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastRebootTime gets a reference to the given string and assigns it to the LastRebootTime field.
+func (o *NiatelemetryNiaInventory) SetLastRebootTime(v string) {
+	o.LastRebootTime = &v
+}
+
+// GetLastResetReason returns the LastResetReason field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetLastResetReason() string {
+	if o == nil || o.LastResetReason == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastResetReason
+}
+
+// GetLastResetReasonOk returns a tuple with the LastResetReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetLastResetReasonOk() (*string, bool) {
+	if o == nil || o.LastResetReason == nil {
+		return nil, false
+	}
+	return o.LastResetReason, true
+}
+
+// HasLastResetReason returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasLastResetReason() bool {
+	if o != nil && o.LastResetReason != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastResetReason gets a reference to the given string and assigns it to the LastResetReason field.
+func (o *NiatelemetryNiaInventory) SetLastResetReason(v string) {
+	o.LastResetReason = &v
 }
 
 // GetLicenseType returns the LicenseType field value if set, zero value otherwise.
@@ -1738,6 +1808,38 @@ func (o *NiatelemetryNiaInventory) SetSystemUpTime(v string) {
 	o.SystemUpTime = &v
 }
 
+// GetTotalCriticalFaults returns the TotalCriticalFaults field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventory) GetTotalCriticalFaults() int64 {
+	if o == nil || o.TotalCriticalFaults == nil {
+		var ret int64
+		return ret
+	}
+	return *o.TotalCriticalFaults
+}
+
+// GetTotalCriticalFaultsOk returns a tuple with the TotalCriticalFaults field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventory) GetTotalCriticalFaultsOk() (*int64, bool) {
+	if o == nil || o.TotalCriticalFaults == nil {
+		return nil, false
+	}
+	return o.TotalCriticalFaults, true
+}
+
+// HasTotalCriticalFaults returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventory) HasTotalCriticalFaults() bool {
+	if o != nil && o.TotalCriticalFaults != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalCriticalFaults gets a reference to the given int64 and assigns it to the TotalCriticalFaults field.
+func (o *NiatelemetryNiaInventory) SetTotalCriticalFaults(v int64) {
+	o.TotalCriticalFaults = &v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventory) GetVersion() string {
 	if o == nil || o.Version == nil {
@@ -1898,6 +2000,12 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	if o.IsVirtualNode != nil {
 		toSerialize["IsVirtualNode"] = o.IsVirtualNode
 	}
+	if o.LastRebootTime != nil {
+		toSerialize["LastRebootTime"] = o.LastRebootTime
+	}
+	if o.LastResetReason != nil {
+		toSerialize["LastResetReason"] = o.LastResetReason
+	}
 	if o.LicenseType != nil {
 		toSerialize["LicenseType"] = o.LicenseType
 	}
@@ -1988,6 +2096,9 @@ func (o NiatelemetryNiaInventory) MarshalJSON() ([]byte, error) {
 	if o.SystemUpTime != nil {
 		toSerialize["SystemUpTime"] = o.SystemUpTime
 	}
+	if o.TotalCriticalFaults != nil {
+		toSerialize["TotalCriticalFaults"] = o.TotalCriticalFaults
+	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
 	}
@@ -2042,6 +2153,10 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		IpAddress *string `json:"IpAddress,omitempty"`
 		// Flag to specify if the node is virtual.
 		IsVirtualNode *string `json:"IsVirtualNode,omitempty"`
+		// Returns the last reboot Time of the device.
+		LastRebootTime *string `json:"LastRebootTime,omitempty"`
+		// Returns the last reset reason of the device.
+		LastResetReason *string `json:"LastResetReason,omitempty"`
 		// Returns the License type of the device.
 		LicenseType *string `json:"LicenseType,omitempty"`
 		// Last log in time device being inventoried. This determines the last login time on the device.
@@ -2096,6 +2211,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		SoftwareDownload *string `json:"SoftwareDownload,omitempty"`
 		// The amount of time that the device being inventoried been up.
 		SystemUpTime *string `json:"SystemUpTime,omitempty"`
+		// Returns the total number of critical faults.
+		TotalCriticalFaults *int64 `json:"TotalCriticalFaults,omitempty"`
 		// Software version of device being inventoried. The various software version values for each device are available on cisco.com.
 		Version          *string                                  `json:"Version,omitempty"`
 		LicenseState     *NiatelemetryNiaLicenseStateRelationship `json:"LicenseState,omitempty"`
@@ -2125,6 +2242,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.InfraWiNodeCount = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.InfraWiNodeCount
 		varNiatelemetryNiaInventory.IpAddress = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.IpAddress
 		varNiatelemetryNiaInventory.IsVirtualNode = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.IsVirtualNode
+		varNiatelemetryNiaInventory.LastRebootTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LastRebootTime
+		varNiatelemetryNiaInventory.LastResetReason = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LastResetReason
 		varNiatelemetryNiaInventory.LicenseType = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LicenseType
 		varNiatelemetryNiaInventory.LogInTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LogInTime
 		varNiatelemetryNiaInventory.LogOutTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LogOutTime
@@ -2155,6 +2274,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaInventory.SmartAccountId = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SmartAccountId
 		varNiatelemetryNiaInventory.SoftwareDownload = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SoftwareDownload
 		varNiatelemetryNiaInventory.SystemUpTime = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.SystemUpTime
+		varNiatelemetryNiaInventory.TotalCriticalFaults = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.TotalCriticalFaults
 		varNiatelemetryNiaInventory.Version = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.Version
 		varNiatelemetryNiaInventory.LicenseState = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.LicenseState
 		varNiatelemetryNiaInventory.RegisteredDevice = varNiatelemetryNiaInventoryWithoutEmbeddedStruct.RegisteredDevice
@@ -2193,6 +2313,8 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InfraWiNodeCount")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "IsVirtualNode")
+		delete(additionalProperties, "LastRebootTime")
+		delete(additionalProperties, "LastResetReason")
 		delete(additionalProperties, "LicenseType")
 		delete(additionalProperties, "LogInTime")
 		delete(additionalProperties, "LogOutTime")
@@ -2223,6 +2345,7 @@ func (o *NiatelemetryNiaInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SmartAccountId")
 		delete(additionalProperties, "SoftwareDownload")
 		delete(additionalProperties, "SystemUpTime")
+		delete(additionalProperties, "TotalCriticalFaults")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "LicenseState")
 		delete(additionalProperties, "RegisteredDevice")

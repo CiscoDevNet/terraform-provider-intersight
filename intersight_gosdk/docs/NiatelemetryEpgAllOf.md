@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | Dn value for the End Point Groups present. | [optional] 
 **EpgDelimiterCount** | Pointer to **int64** | Number of  objects with delimiter value present in EPG Delimiter attribute. | [optional] 
 **FcNpvCount** | Pointer to **int64** | Number of ports with FC path attribute of type FC. | [optional] 
-**FcoeCount** | Pointer to **string** | Number of FCoE per End Point Group. | [optional] 
+**FcoeCount** | Pointer to **int64** | Number of FCoE per End Point Group. | [optional] 
 **FvRsDomAttCount** | Pointer to **int64** | Number of FvRsDomAtt objects per End Point Group with VMware configuration. | [optional] 
 **IntraEpgDvsBmCount** | Pointer to **int64** | Intra End Point Group Contract for Distributed Virtual Switch and BM feature usage. | [optional] 
 **IntraEpgHyperv** | Pointer to **string** | Intra EPG Isolation for Hyper-V, enabled if pcEnfPref attribute is set to enforced. | [optional] 
@@ -187,20 +187,20 @@ HasFcNpvCount returns a boolean if a field has been set.
 
 ### GetFcoeCount
 
-`func (o *NiatelemetryEpgAllOf) GetFcoeCount() string`
+`func (o *NiatelemetryEpgAllOf) GetFcoeCount() int64`
 
 GetFcoeCount returns the FcoeCount field if non-nil, zero value otherwise.
 
 ### GetFcoeCountOk
 
-`func (o *NiatelemetryEpgAllOf) GetFcoeCountOk() (*string, bool)`
+`func (o *NiatelemetryEpgAllOf) GetFcoeCountOk() (*int64, bool)`
 
 GetFcoeCountOk returns a tuple with the FcoeCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFcoeCount
 
-`func (o *NiatelemetryEpgAllOf) SetFcoeCount(v string)`
+`func (o *NiatelemetryEpgAllOf) SetFcoeCount(v int64)`
 
 SetFcoeCount sets FcoeCount field to given value.
 

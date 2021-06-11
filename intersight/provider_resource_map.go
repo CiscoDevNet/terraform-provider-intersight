@@ -202,8 +202,6 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_recovery_restore":                                        resourceRecoveryRestore(),
 		"intersight_recovery_schedule_config_policy":                         resourceRecoveryScheduleConfigPolicy(),
 		"intersight_resource_group":                                          resourceResourceGroup(),
-		"intersight_resourcepool_lease":                                      resourceResourcepoolLease(),
-		"intersight_resourcepool_pool":                                       resourceResourcepoolPool(),
 		"intersight_sdcard_policy":                                           resourceSdcardPolicy(),
 		"intersight_sdwan_profile":                                           resourceSdwanProfile(),
 		"intersight_sdwan_router_node":                                       resourceSdwanRouterNode(),

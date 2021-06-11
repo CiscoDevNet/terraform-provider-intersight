@@ -31,6 +31,8 @@ The following arguments can be used to get data of already created objects in In
 * `infra_wi_node_count`:(int) Number of appliances as physical device that are wired into the cluster. 
 * `ip_address`:(string) The IP address of the device being inventoried. 
 * `is_virtual_node`:(string) Flag to specify if the node is virtual. 
+* `last_reboot_time`:(string) Returns the last reboot Time of the device. 
+* `last_reset_reason`:(string) Returns the last reset reason of the device. 
 * `license_type`:(string) Returns the License type of the device. 
 * `log_in_time`:(string) Last log in time device being inventoried. This determines the last login time on the device. 
 * `log_out_time`:(string) Last log out time of device being inventoried. This determines the last logout time on the device. 
@@ -58,5 +60,6 @@ The following arguments can be used to get data of already created objects in In
 * `smart_account_id`:(int) Returns the value of the smartAccountId/CustomerId field. 
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 
+* `total_critical_faults`:(int) Returns the total number of critical faults. 
 * `nr_version`:(string) Software version of device being inventoried. The various software version values for each device are available on cisco.com. 
  

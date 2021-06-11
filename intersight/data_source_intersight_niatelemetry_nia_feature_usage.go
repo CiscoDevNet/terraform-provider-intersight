@@ -17,6 +17,21 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 	return &schema.Resource{
 		ReadContext: dataSourceNiatelemetryNiaFeatureUsageRead,
 		Schema: map[string]*schema.Schema{
+			"aaa_ldap_provider_count": {
+				Description: "Returns the total number of AAA Ldap Providers.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"aaa_radius_provider_count": {
+				Description: "Returns the total number of AAA Radius Providers.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"aaa_tacacs_provider_count": {
+				Description: "Returns the total number of AAA Tacacs Providers.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"account_moid": {
 				Description: "The Account ID for this managed object.",
 				Type:        schema.TypeString,
@@ -25,6 +40,31 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"apic_count": {
 				Description: "Number of APIC controllers. This determines the value of controllers for the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"apic_is_telnet_enabled": {
+				Description: "Returns if telnet is enabled on APIC.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"apic_ntp_count": {
+				Description: "Count of NTP servers configured on APIC.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"apic_snmp_community_count": {
+				Description: "Number of SNMP communities configured on APIC.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"apic_sys_log_grp_count": {
+				Description: "Number of logging groups configured on APIC.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"apic_sys_log_src_count": {
+				Description: "Number of logging sources configured on APIC.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -69,7 +109,7 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Optional:    true,
 			},
 			"config_job_count": {
-				Description: "Number of system backup configure jobs on the fanric.",
+				Description: "Number of system backup configure jobs on the fabric.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -165,6 +205,21 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_common_local_user_name": {
+				Description: "Returns value of isCommonLocalUserName field.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_http_configured": {
+				Description: "Returns if HTTP is configured.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_https_configured": {
+				Description: "Returns if HTTPS is configured.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"is_tech_support_collected": {
 				Description: "Status of techsupport collection.",
 				Type:        schema.TypeString,
@@ -182,6 +237,26 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"leaf_count": {
 				Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"local_username_count": {
+				Description: "Returns count of local users.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"login_block_duration": {
+				Description: "Returns login block duration value.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"login_max_failed_attempts": {
+				Description: "Returns the maximum failed attempts on login.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"login_max_failed_attempts_window": {
+				Description: "Returns the maximum failed attempt windows on login.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -243,6 +318,21 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"password_history_count": {
+				Description: "Returns count of passwords.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"password_strength_check": {
+				Description: "Returns if the password is strong or not.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"password_strength_profile_count": {
+				Description: "Returns the number of password strength profile.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"poe_count": {
 				Description: "POE feature usage. This determines the total number of POE configurations across the fabric.",
 				Type:        schema.TypeInt,
@@ -265,6 +355,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"qos_pfc_pol_count": {
 				Description: "Number of Quality Of Service class.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"realm_count": {
+				Description: "Returns the value of count of realms.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -319,8 +414,23 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"snmp_community_access_count": {
+				Description: "Returns count of SNMP Community Access.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"snmp_group_count": {
 				Description: "Number of SNMP monitoring policies on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"snmp_trap_count": {
+				Description: "Returns count of SNMP trap.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"snmp_v3_count": {
+				Description: "Returns count of SNMP V3 on the fabric.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -346,6 +456,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"ssh_over_v6_count": {
 				Description: "Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"ssh_v2_count": {
+				Description: "Returns count of ssh V2 on the fabric.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -414,14 +529,34 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"webtoken_timeout_seconds": {
+				Description: "Timeout for web token in seconds.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"results": {
 				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
-					Description: "The Account ID for this managed object.",
-					Type:        schema.TypeString,
+				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"aaa_ldap_provider_count": {
+					Description: "Returns the total number of AAA Ldap Providers.",
+					Type:        schema.TypeInt,
 					Optional:    true,
-					Computed:    true,
 				},
+					"aaa_radius_provider_count": {
+						Description: "Returns the total number of AAA Radius Providers.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"aaa_tacacs_provider_count": {
+						Description: "Returns the total number of AAA Tacacs Providers.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"account_moid": {
+						Description: "The Account ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
@@ -469,6 +604,31 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"apic_is_telnet_enabled": {
+						Description: "Returns if telnet is enabled on APIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"apic_ntp_count": {
+						Description: "Count of NTP servers configured on APIC.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"apic_snmp_community_count": {
+						Description: "Number of SNMP communities configured on APIC.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"apic_sys_log_grp_count": {
+						Description: "Number of logging groups configured on APIC.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"apic_sys_log_src_count": {
+						Description: "Number of logging sources configured on APIC.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"app_center_count": {
 						Description: "ACI APPs feature usage scale.",
 						Type:        schema.TypeInt,
@@ -510,7 +670,7 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Optional:    true,
 					},
 					"config_job_count": {
-						Description: "Number of system backup configure jobs on the fanric.",
+						Description: "Number of system backup configure jobs on the fabric.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -606,6 +766,21 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"is_common_local_user_name": {
+						Description: "Returns value of isCommonLocalUserName field.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_http_configured": {
+						Description: "Returns if HTTP is configured.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_https_configured": {
+						Description: "Returns if HTTPS is configured.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"is_tech_support_collected": {
 						Description: "Status of techsupport collection.",
 						Type:        schema.TypeString,
@@ -623,6 +798,26 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 					},
 					"leaf_count": {
 						Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"local_username_count": {
+						Description: "Returns count of local users.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"login_block_duration": {
+						Description: "Returns login block duration value.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"login_max_failed_attempts": {
+						Description: "Returns the maximum failed attempts on login.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"login_max_failed_attempts_window": {
+						Description: "Returns the maximum failed attempt windows on login.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -728,6 +923,21 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 							},
 						},
 					},
+					"password_history_count": {
+						Description: "Returns count of passwords.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"password_strength_check": {
+						Description: "Returns if the password is strong or not.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"password_strength_profile_count": {
+						Description: "Returns the number of password strength profile.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"permission_resources": {
 						Description: "An array of relationships to moBaseMo resources.",
 						Type:        schema.TypeList,
@@ -787,6 +997,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 					},
 					"qos_pfc_pol_count": {
 						Description: "Number of Quality Of Service class.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"realm_count": {
+						Description: "Returns the value of count of realms.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -926,8 +1141,23 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"snmp_community_access_count": {
+						Description: "Returns count of SNMP Community Access.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"snmp_group_count": {
 						Description: "Number of SNMP monitoring policies on the fabric.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"snmp_trap_count": {
+						Description: "Returns count of SNMP trap.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"snmp_v3_count": {
+						Description: "Returns count of SNMP V3 on the fabric.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -953,6 +1183,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 					},
 					"ssh_over_v6_count": {
 						Description: "Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"ssh_v2_count": {
+						Description: "Returns count of ssh V2 on the fabric.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -1163,6 +1398,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"webtoken_timeout_seconds": {
+						Description: "Timeout for web token in seconds.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -1175,6 +1415,18 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaFeatureUsage{}
+	if v, ok := d.GetOk("aaa_ldap_provider_count"); ok {
+		x := int64(v.(int))
+		o.SetAaaLdapProviderCount(x)
+	}
+	if v, ok := d.GetOk("aaa_radius_provider_count"); ok {
+		x := int64(v.(int))
+		o.SetAaaRadiusProviderCount(x)
+	}
+	if v, ok := d.GetOk("aaa_tacacs_provider_count"); ok {
+		x := int64(v.(int))
+		o.SetAaaTacacsProviderCount(x)
+	}
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
@@ -1182,6 +1434,26 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("apic_count"); ok {
 		x := int64(v.(int))
 		o.SetApicCount(x)
+	}
+	if v, ok := d.GetOk("apic_is_telnet_enabled"); ok {
+		x := (v.(bool))
+		o.SetApicIsTelnetEnabled(x)
+	}
+	if v, ok := d.GetOk("apic_ntp_count"); ok {
+		x := int64(v.(int))
+		o.SetApicNtpCount(x)
+	}
+	if v, ok := d.GetOk("apic_snmp_community_count"); ok {
+		x := int64(v.(int))
+		o.SetApicSnmpCommunityCount(x)
+	}
+	if v, ok := d.GetOk("apic_sys_log_grp_count"); ok {
+		x := int64(v.(int))
+		o.SetApicSysLogGrpCount(x)
+	}
+	if v, ok := d.GetOk("apic_sys_log_src_count"); ok {
+		x := int64(v.(int))
+		o.SetApicSysLogSrcCount(x)
 	}
 	if v, ok := d.GetOk("app_center_count"); ok {
 		x := int64(v.(int))
@@ -1291,6 +1563,18 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetIpEpgCount(x)
 	}
+	if v, ok := d.GetOk("is_common_local_user_name"); ok {
+		x := (v.(bool))
+		o.SetIsCommonLocalUserName(x)
+	}
+	if v, ok := d.GetOk("is_http_configured"); ok {
+		x := (v.(bool))
+		o.SetIsHttpConfigured(x)
+	}
+	if v, ok := d.GetOk("is_https_configured"); ok {
+		x := (v.(bool))
+		o.SetIsHttpsConfigured(x)
+	}
 	if v, ok := d.GetOk("is_tech_support_collected"); ok {
 		x := (v.(string))
 		o.SetIsTechSupportCollected(x)
@@ -1306,6 +1590,22 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
+	}
+	if v, ok := d.GetOk("local_username_count"); ok {
+		x := int64(v.(int))
+		o.SetLocalUsernameCount(x)
+	}
+	if v, ok := d.GetOk("login_block_duration"); ok {
+		x := int64(v.(int))
+		o.SetLoginBlockDuration(x)
+	}
+	if v, ok := d.GetOk("login_max_failed_attempts"); ok {
+		x := int64(v.(int))
+		o.SetLoginMaxFailedAttempts(x)
+	}
+	if v, ok := d.GetOk("login_max_failed_attempts_window"); ok {
+		x := int64(v.(int))
+		o.SetLoginMaxFailedAttemptsWindow(x)
 	}
 	if v, ok := d.GetOk("maintenance_mode_count"); ok {
 		x := int64(v.(int))
@@ -1351,6 +1651,18 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetOspfCount(x)
 	}
+	if v, ok := d.GetOk("password_history_count"); ok {
+		x := int64(v.(int))
+		o.SetPasswordHistoryCount(x)
+	}
+	if v, ok := d.GetOk("password_strength_check"); ok {
+		x := (v.(string))
+		o.SetPasswordStrengthCheck(x)
+	}
+	if v, ok := d.GetOk("password_strength_profile_count"); ok {
+		x := int64(v.(int))
+		o.SetPasswordStrengthProfileCount(x)
+	}
 	if v, ok := d.GetOk("poe_count"); ok {
 		x := int64(v.(int))
 		o.SetPoeCount(x)
@@ -1370,6 +1682,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("qos_pfc_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetQosPfcPolCount(x)
+	}
+	if v, ok := d.GetOk("realm_count"); ok {
+		x := int64(v.(int))
+		o.SetRealmCount(x)
 	}
 	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
@@ -1411,9 +1727,21 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetSnmp(x)
 	}
+	if v, ok := d.GetOk("snmp_community_access_count"); ok {
+		x := int64(v.(int))
+		o.SetSnmpCommunityAccessCount(x)
+	}
 	if v, ok := d.GetOk("snmp_group_count"); ok {
 		x := int64(v.(int))
 		o.SetSnmpGroupCount(x)
+	}
+	if v, ok := d.GetOk("snmp_trap_count"); ok {
+		x := int64(v.(int))
+		o.SetSnmpTrapCount(x)
+	}
+	if v, ok := d.GetOk("snmp_v3_count"); ok {
+		x := int64(v.(int))
+		o.SetSnmpV3Count(x)
 	}
 	if v, ok := d.GetOk("span_count"); ok {
 		x := int64(v.(int))
@@ -1434,6 +1762,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("ssh_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetSshOverV6Count(x)
+	}
+	if v, ok := d.GetOk("ssh_v2_count"); ok {
+		x := int64(v.(int))
+		o.SetSshV2Count(x)
 	}
 	if v, ok := d.GetOk("syslog_group_count"); ok {
 		x := int64(v.(int))
@@ -1487,6 +1819,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetVpodCount(x)
 	}
+	if v, ok := d.GetOk("webtoken_timeout_seconds"); ok {
+		x := int64(v.(int))
+		o.SetWebtokenTimeoutSeconds(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -1524,11 +1860,19 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["aaa_ldap_provider_count"] = (s.GetAaaLdapProviderCount())
+				temp["aaa_radius_provider_count"] = (s.GetAaaRadiusProviderCount())
+				temp["aaa_tacacs_provider_count"] = (s.GetAaaTacacsProviderCount())
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["apic_count"] = (s.GetApicCount())
+				temp["apic_is_telnet_enabled"] = (s.GetApicIsTelnetEnabled())
+				temp["apic_ntp_count"] = (s.GetApicNtpCount())
+				temp["apic_snmp_community_count"] = (s.GetApicSnmpCommunityCount())
+				temp["apic_sys_log_grp_count"] = (s.GetApicSysLogGrpCount())
+				temp["apic_sys_log_src_count"] = (s.GetApicSysLogSrcCount())
 				temp["app_center_count"] = (s.GetAppCenterCount())
 				temp["ave"] = (s.GetAve())
 				temp["bd_count"] = (s.GetBdCount())
@@ -1557,10 +1901,17 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["igmp_access_list_count"] = (s.GetIgmpAccessListCount())
 				temp["igmp_snoop"] = (s.GetIgmpSnoop())
 				temp["ip_epg_count"] = (s.GetIpEpgCount())
+				temp["is_common_local_user_name"] = (s.GetIsCommonLocalUserName())
+				temp["is_http_configured"] = (s.GetIsHttpConfigured())
+				temp["is_https_configured"] = (s.GetIsHttpsConfigured())
 				temp["is_tech_support_collected"] = (s.GetIsTechSupportCollected())
 				temp["isis_count"] = (s.GetIsisCount())
 				temp["l2_multicast"] = (s.GetL2Multicast())
 				temp["leaf_count"] = (s.GetLeafCount())
+				temp["local_username_count"] = (s.GetLocalUsernameCount())
+				temp["login_block_duration"] = (s.GetLoginBlockDuration())
+				temp["login_max_failed_attempts"] = (s.GetLoginMaxFailedAttempts())
+				temp["login_max_failed_attempts_window"] = (s.GetLoginMaxFailedAttemptsWindow())
 				temp["maintenance_mode_count"] = (s.GetMaintenanceModeCount())
 				temp["management_over_v6_count"] = (s.GetManagementOverV6Count())
 				temp["microsoft_useg_vmm_ep_pd_count"] = (s.GetMicrosoftUsegVmmEpPdCount())
@@ -1576,6 +1927,9 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["password_history_count"] = (s.GetPasswordHistoryCount())
+				temp["password_strength_check"] = (s.GetPasswordStrengthCheck())
+				temp["password_strength_profile_count"] = (s.GetPasswordStrengthProfileCount())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["poe_count"] = (s.GetPoeCount())
@@ -1583,6 +1937,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["qin_vni_tunnel_count"] = (s.GetQinVniTunnelCount())
 				temp["qos_cong_count"] = (s.GetQosCongCount())
 				temp["qos_pfc_pol_count"] = (s.GetQosPfcPolCount())
+				temp["realm_count"] = (s.GetRealmCount())
 				temp["record_type"] = (s.GetRecordType())
 				temp["record_version"] = (s.GetRecordVersion())
 
@@ -1597,12 +1952,16 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["smart_license"] = flattenMapNiatelemetrySmartLicense(s.GetSmartLicense(), d)
 				temp["snapshot_count"] = (s.GetSnapshotCount())
 				temp["snmp"] = (s.GetSnmp())
+				temp["snmp_community_access_count"] = (s.GetSnmpCommunityAccessCount())
 				temp["snmp_group_count"] = (s.GetSnmpGroupCount())
+				temp["snmp_trap_count"] = (s.GetSnmpTrapCount())
+				temp["snmp_v3_count"] = (s.GetSnmpV3Count())
 				temp["span_count"] = (s.GetSpanCount())
 				temp["span_dst_count"] = (s.GetSpanDstCount())
 				temp["span_src_count"] = (s.GetSpanSrcCount())
 				temp["spine_count"] = (s.GetSpineCount())
 				temp["ssh_over_v6_count"] = (s.GetSshOverV6Count())
+				temp["ssh_v2_count"] = (s.GetSshV2Count())
 				temp["syslog_group_count"] = (s.GetSyslogGroupCount())
 				temp["syslog_over_v6_count"] = (s.GetSyslogOverV6Count())
 				temp["tacacs_group_count"] = (s.GetTacacsGroupCount())
@@ -1620,6 +1979,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["vmm_ep_pd_count"] = (s.GetVmmEpPdCount())
 				temp["vnsm_dev_count"] = (s.GetVnsmDevCount())
 				temp["vpod_count"] = (s.GetVpodCount())
+				temp["webtoken_timeout_seconds"] = (s.GetWebtokenTimeoutSeconds())
 				niatelemetryNiaFeatureUsageResults[j] = temp
 				j += 1
 			}

@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Fault"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Fault"]
+**Cause** | Pointer to **string** | Cause of the fault present. | [optional] 
 **Code** | Pointer to **string** | Code of the fault present. | [optional] 
+**CreatedTime** | Pointer to **string** | Created time of the fault present. | [optional] 
 **Description** | Pointer to **string** | Description of the fault present. | [optional] 
 **Dn** | Pointer to **string** | Dn value for the fault present. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
@@ -75,6 +77,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetCause
+
+`func (o *NiatelemetryFault) GetCause() string`
+
+GetCause returns the Cause field if non-nil, zero value otherwise.
+
+### GetCauseOk
+
+`func (o *NiatelemetryFault) GetCauseOk() (*string, bool)`
+
+GetCauseOk returns a tuple with the Cause field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCause
+
+`func (o *NiatelemetryFault) SetCause(v string)`
+
+SetCause sets Cause field to given value.
+
+### HasCause
+
+`func (o *NiatelemetryFault) HasCause() bool`
+
+HasCause returns a boolean if a field has been set.
+
 ### GetCode
 
 `func (o *NiatelemetryFault) GetCode() string`
@@ -99,6 +126,31 @@ SetCode sets Code field to given value.
 `func (o *NiatelemetryFault) HasCode() bool`
 
 HasCode returns a boolean if a field has been set.
+
+### GetCreatedTime
+
+`func (o *NiatelemetryFault) GetCreatedTime() string`
+
+GetCreatedTime returns the CreatedTime field if non-nil, zero value otherwise.
+
+### GetCreatedTimeOk
+
+`func (o *NiatelemetryFault) GetCreatedTimeOk() (*string, bool)`
+
+GetCreatedTimeOk returns a tuple with the CreatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedTime
+
+`func (o *NiatelemetryFault) SetCreatedTime(v string)`
+
+SetCreatedTime sets CreatedTime field to given value.
+
+### HasCreatedTime
+
+`func (o *NiatelemetryFault) HasCreatedTime() bool`
+
+HasCreatedTime returns a boolean if a field has been set.
 
 ### GetDescription
 

@@ -114,7 +114,7 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 				Computed:    true,
 			},
 			"pause_reason": {
-				Description: "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.",
+				Description: "Denotes the reason workflow is in paused status.\n* `None` - Pause reason is none, which indicates there is no reason for the pause state.\n* `TaskWithWarning` - Pause reason indicates the workflow is in this state due to a task that has a status as completed with warnings.\n* `SystemMaintenance` - Pause reason indicates the workflow is in this state based on actions of system admin for maintenance.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

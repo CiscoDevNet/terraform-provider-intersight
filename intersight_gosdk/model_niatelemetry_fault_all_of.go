@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
  *
- * API version: 1.0.9-4289
+ * API version: 1.0.9-4305
  * Contact: intersight@cisco.com
  */
 
@@ -21,8 +21,12 @@ type NiatelemetryFaultAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Cause of the fault present.
+	Cause *string `json:"Cause,omitempty"`
 	// Code of the fault present.
 	Code *string `json:"Code,omitempty"`
+	// Created time of the fault present.
+	CreatedTime *string `json:"CreatedTime,omitempty"`
 	// Description of the fault present.
 	Description *string `json:"Description,omitempty"`
 	// Dn value for the fault present.
@@ -114,6 +118,38 @@ func (o *NiatelemetryFaultAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetCause returns the Cause field value if set, zero value otherwise.
+func (o *NiatelemetryFaultAllOf) GetCause() string {
+	if o == nil || o.Cause == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cause
+}
+
+// GetCauseOk returns a tuple with the Cause field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryFaultAllOf) GetCauseOk() (*string, bool) {
+	if o == nil || o.Cause == nil {
+		return nil, false
+	}
+	return o.Cause, true
+}
+
+// HasCause returns a boolean if a field has been set.
+func (o *NiatelemetryFaultAllOf) HasCause() bool {
+	if o != nil && o.Cause != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCause gets a reference to the given string and assigns it to the Cause field.
+func (o *NiatelemetryFaultAllOf) SetCause(v string) {
+	o.Cause = &v
+}
+
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *NiatelemetryFaultAllOf) GetCode() string {
 	if o == nil || o.Code == nil {
@@ -144,6 +180,38 @@ func (o *NiatelemetryFaultAllOf) HasCode() bool {
 // SetCode gets a reference to the given string and assigns it to the Code field.
 func (o *NiatelemetryFaultAllOf) SetCode(v string) {
 	o.Code = &v
+}
+
+// GetCreatedTime returns the CreatedTime field value if set, zero value otherwise.
+func (o *NiatelemetryFaultAllOf) GetCreatedTime() string {
+	if o == nil || o.CreatedTime == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatedTime
+}
+
+// GetCreatedTimeOk returns a tuple with the CreatedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryFaultAllOf) GetCreatedTimeOk() (*string, bool) {
+	if o == nil || o.CreatedTime == nil {
+		return nil, false
+	}
+	return o.CreatedTime, true
+}
+
+// HasCreatedTime returns a boolean if a field has been set.
+func (o *NiatelemetryFaultAllOf) HasCreatedTime() bool {
+	if o != nil && o.CreatedTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedTime gets a reference to the given string and assigns it to the CreatedTime field.
+func (o *NiatelemetryFaultAllOf) SetCreatedTime(v string) {
+	o.CreatedTime = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -410,8 +478,14 @@ func (o NiatelemetryFaultAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Cause != nil {
+		toSerialize["Cause"] = o.Cause
+	}
 	if o.Code != nil {
 		toSerialize["Code"] = o.Code
+	}
+	if o.CreatedTime != nil {
+		toSerialize["CreatedTime"] = o.CreatedTime
 	}
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
@@ -457,7 +531,9 @@ func (o *NiatelemetryFaultAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Cause")
 		delete(additionalProperties, "Code")
+		delete(additionalProperties, "CreatedTime")
 		delete(additionalProperties, "Description")
 		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "RecordType")

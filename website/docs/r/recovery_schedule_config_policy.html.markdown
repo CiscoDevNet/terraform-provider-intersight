@@ -68,9 +68,9 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `schedule`:(HashMap) - Schedule to create a backup on the target device. Minimum is 4 hours and Max is 1440 hours (30 Days). 
 This complex property has following sub-properties:
-  + `execution_time`:(string) The time at which the backup is to be run on a given day. This is used when the frequency unit is daily. 
+  + `execution_time`:(string) The time at which the backup is to be run on a given day. Applicable when the frequency unit is daily. 
   + `frequency_unit`:(string) The frequency at which the backup schedule must run.* `Daily` - Allows the user to run the backup daily at a given time.* `Periodic` - Allows the user to run the backup after a certain number of hours. 
-  + `hours`:(int) The frequency, in hours, at which the backup schedule runs.* `8` - * `4` - * `12` - * `16` - * `20` - 
+  + `hours`:(int) The frequency, in hours, at which the backup schedule runs.* `8` - The backup interval is 8 hours.* `4` - The backup interval is 4 hours.* `12` - The backup interval is 12 hours.* `16` - The backup interval is 16 hours.* `20` - The backup interval is 20 hours. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)

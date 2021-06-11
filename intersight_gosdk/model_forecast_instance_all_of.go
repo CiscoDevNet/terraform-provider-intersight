@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-12T14:10:48Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
  *
- * API version: 1.0.9-4289
+ * API version: 1.0.9-4305
  * Contact: intersight@cisco.com
  */
 
@@ -21,8 +21,14 @@ type ForecastInstanceAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string    `json:"ObjectType"`
-	AltModel   []float32 `json:"AltModel,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// Action to be triggered on forecast instance. Default value is None. * `None` - The Enum value None represents that no action is triggered on the forecast Instance managed object. * `Evaluate` - The Enum value Evaluate represents that a re-evaluation of the forecast needs to be triggered.
+	Action   *string   `json:"Action,omitempty"`
+	AltModel []float32 `json:"AltModel,omitempty"`
+	// The time interval (in days) for the data to be used for computing forecast model.
+	DataInterval *int64 `json:"DataInterval,omitempty"`
+	// The start date from when the data should be used for computing forecast model.
+	DataStartDate *time.Time `json:"DataStartDate,omitempty"`
 	// The Moid of the Intersight managed device instance for which regression model is derived.
 	DeviceId *string `json:"DeviceId,omitempty"`
 	// The number of days remaining before the device reaches its full functional capacity.
@@ -51,6 +57,10 @@ func NewForecastInstanceAllOf(classId string, objectType string) *ForecastInstan
 	this := ForecastInstanceAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var action string = "None"
+	this.Action = &action
+	var dataInterval int64 = 180
+	this.DataInterval = &dataInterval
 	var thresholdDays int64 = 2147483647
 	this.ThresholdDays = &thresholdDays
 	return &this
@@ -65,6 +75,10 @@ func NewForecastInstanceAllOfWithDefaults() *ForecastInstanceAllOf {
 	this.ClassId = classId
 	var objectType string = "forecast.Instance"
 	this.ObjectType = objectType
+	var action string = "None"
+	this.Action = &action
+	var dataInterval int64 = 180
+	this.DataInterval = &dataInterval
 	var thresholdDays int64 = 2147483647
 	this.ThresholdDays = &thresholdDays
 	return &this
@@ -118,6 +132,38 @@ func (o *ForecastInstanceAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *ForecastInstanceAllOf) GetAction() string {
+	if o == nil || o.Action == nil {
+		var ret string
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastInstanceAllOf) GetActionOk() (*string, bool) {
+	if o == nil || o.Action == nil {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *ForecastInstanceAllOf) HasAction() bool {
+	if o != nil && o.Action != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given string and assigns it to the Action field.
+func (o *ForecastInstanceAllOf) SetAction(v string) {
+	o.Action = &v
+}
+
 // GetAltModel returns the AltModel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ForecastInstanceAllOf) GetAltModel() []float32 {
 	if o == nil {
@@ -149,6 +195,70 @@ func (o *ForecastInstanceAllOf) HasAltModel() bool {
 // SetAltModel gets a reference to the given []float32 and assigns it to the AltModel field.
 func (o *ForecastInstanceAllOf) SetAltModel(v []float32) {
 	o.AltModel = v
+}
+
+// GetDataInterval returns the DataInterval field value if set, zero value otherwise.
+func (o *ForecastInstanceAllOf) GetDataInterval() int64 {
+	if o == nil || o.DataInterval == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DataInterval
+}
+
+// GetDataIntervalOk returns a tuple with the DataInterval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastInstanceAllOf) GetDataIntervalOk() (*int64, bool) {
+	if o == nil || o.DataInterval == nil {
+		return nil, false
+	}
+	return o.DataInterval, true
+}
+
+// HasDataInterval returns a boolean if a field has been set.
+func (o *ForecastInstanceAllOf) HasDataInterval() bool {
+	if o != nil && o.DataInterval != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDataInterval gets a reference to the given int64 and assigns it to the DataInterval field.
+func (o *ForecastInstanceAllOf) SetDataInterval(v int64) {
+	o.DataInterval = &v
+}
+
+// GetDataStartDate returns the DataStartDate field value if set, zero value otherwise.
+func (o *ForecastInstanceAllOf) GetDataStartDate() time.Time {
+	if o == nil || o.DataStartDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.DataStartDate
+}
+
+// GetDataStartDateOk returns a tuple with the DataStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastInstanceAllOf) GetDataStartDateOk() (*time.Time, bool) {
+	if o == nil || o.DataStartDate == nil {
+		return nil, false
+	}
+	return o.DataStartDate, true
+}
+
+// HasDataStartDate returns a boolean if a field has been set.
+func (o *ForecastInstanceAllOf) HasDataStartDate() bool {
+	if o != nil && o.DataStartDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDataStartDate gets a reference to the given time.Time and assigns it to the DataStartDate field.
+func (o *ForecastInstanceAllOf) SetDataStartDate(v time.Time) {
+	o.DataStartDate = &v
 }
 
 // GetDeviceId returns the DeviceId field value if set, zero value otherwise.
@@ -458,8 +568,17 @@ func (o ForecastInstanceAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Action != nil {
+		toSerialize["Action"] = o.Action
+	}
 	if o.AltModel != nil {
 		toSerialize["AltModel"] = o.AltModel
+	}
+	if o.DataInterval != nil {
+		toSerialize["DataInterval"] = o.DataInterval
+	}
+	if o.DataStartDate != nil {
+		toSerialize["DataStartDate"] = o.DataStartDate
 	}
 	if o.DeviceId != nil {
 		toSerialize["DeviceId"] = o.DeviceId
@@ -508,7 +627,10 @@ func (o *ForecastInstanceAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Action")
 		delete(additionalProperties, "AltModel")
+		delete(additionalProperties, "DataInterval")
+		delete(additionalProperties, "DataStartDate")
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "FullCapDays")
 		delete(additionalProperties, "LastModelUpdateTime")

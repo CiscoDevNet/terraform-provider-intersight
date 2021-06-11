@@ -46,7 +46,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `features`:(Array)
 This complex property has following sub-properties:
-  + `feature`:(string) The beta feature that will be enabled for specific account.* `IWO` - Intersight Workflow Optimizer.* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.* `Kubernetes` - Enables ability to create and manage Kubernetes clusters.* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.* `IvsPublicCloud` - Enables virtualization service for public clouds.* `TerraformCloud` - Enables an ability to create Terraform Cloud. 
+  + `feature`:(string) The beta feature that will be enabled for specific account.* `IWO` - Intersight Workflow Optimizer.* `Hitachi` - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework.* `Kubernetes` - Enables ability to create and manage Kubernetes clusters.* `NetAppIO` - Support to claim NetApp Storage arrays as IO targets.* `IvsPublicCloud` - Enables virtualization service for public clouds.* `TerraformCloud` - Enables an ability to create Terraform Cloud.* `WashingtonEFT` - Support for EFT customers to use Washington firmware images for upgrades. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

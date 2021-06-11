@@ -14,8 +14,10 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_niatelemetry_fault.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cause`:(string) Cause of the fault present. 
 * `code`:(string) Code of the fault present. 
 * `create_time`:(string) The time when this managed object was created. 
+* `created_time`:(string) Created time of the fault present. 
 * `description`:(string) Description of the fault present. 
 * `dn`:(string) Dn value for the fault present. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

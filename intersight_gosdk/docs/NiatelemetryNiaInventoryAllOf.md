@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **InfraWiNodeCount** | Pointer to **int64** | Number of appliances as physical device that are wired into the cluster. | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the device being inventoried. | [optional] 
 **IsVirtualNode** | Pointer to **string** | Flag to specify if the node is virtual. | [optional] 
+**LastRebootTime** | Pointer to **string** | Returns the last reboot Time of the device. | [optional] 
+**LastResetReason** | Pointer to **string** | Returns the last reset reason of the device. | [optional] 
 **LicenseType** | Pointer to **string** | Returns the License type of the device. | [optional] 
 **LogInTime** | Pointer to **string** | Last log in time device being inventoried. This determines the last login time on the device. | [optional] 
 **LogOutTime** | Pointer to **string** | Last log out time of device being inventoried. This determines the last logout time on the device. | [optional] 
@@ -52,6 +54,7 @@ Name | Type | Description | Notes
 **SmartAccountId** | Pointer to **int64** | Returns the value of the smartAccountId/CustomerId field. | [optional] 
 **SoftwareDownload** | Pointer to **string** | Last software downloaded of device being inventoried. This determines if software download API was used. | [optional] 
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
+**TotalCriticalFaults** | Pointer to **int64** | Returns the total number of critical faults. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
 **LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](niatelemetry.NiaLicenseState.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -524,6 +527,56 @@ SetIsVirtualNode sets IsVirtualNode field to given value.
 `func (o *NiatelemetryNiaInventoryAllOf) HasIsVirtualNode() bool`
 
 HasIsVirtualNode returns a boolean if a field has been set.
+
+### GetLastRebootTime
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetLastRebootTime() string`
+
+GetLastRebootTime returns the LastRebootTime field if non-nil, zero value otherwise.
+
+### GetLastRebootTimeOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetLastRebootTimeOk() (*string, bool)`
+
+GetLastRebootTimeOk returns a tuple with the LastRebootTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRebootTime
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetLastRebootTime(v string)`
+
+SetLastRebootTime sets LastRebootTime field to given value.
+
+### HasLastRebootTime
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasLastRebootTime() bool`
+
+HasLastRebootTime returns a boolean if a field has been set.
+
+### GetLastResetReason
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetLastResetReason() string`
+
+GetLastResetReason returns the LastResetReason field if non-nil, zero value otherwise.
+
+### GetLastResetReasonOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetLastResetReasonOk() (*string, bool)`
+
+GetLastResetReasonOk returns a tuple with the LastResetReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastResetReason
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetLastResetReason(v string)`
+
+SetLastResetReason sets LastResetReason field to given value.
+
+### HasLastResetReason
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasLastResetReason() bool`
+
+HasLastResetReason returns a boolean if a field has been set.
 
 ### GetLicenseType
 
@@ -1334,6 +1387,31 @@ SetSystemUpTime sets SystemUpTime field to given value.
 `func (o *NiatelemetryNiaInventoryAllOf) HasSystemUpTime() bool`
 
 HasSystemUpTime returns a boolean if a field has been set.
+
+### GetTotalCriticalFaults
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetTotalCriticalFaults() int64`
+
+GetTotalCriticalFaults returns the TotalCriticalFaults field if non-nil, zero value otherwise.
+
+### GetTotalCriticalFaultsOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetTotalCriticalFaultsOk() (*int64, bool)`
+
+GetTotalCriticalFaultsOk returns a tuple with the TotalCriticalFaults field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalCriticalFaults
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetTotalCriticalFaults(v int64)`
+
+SetTotalCriticalFaults sets TotalCriticalFaults field to given value.
+
+### HasTotalCriticalFaults
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasTotalCriticalFaults() bool`
+
+HasTotalCriticalFaults returns a boolean if a field has been set.
 
 ### GetVersion
 

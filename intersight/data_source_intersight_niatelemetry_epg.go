@@ -62,7 +62,7 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 			},
 			"fcoe_count": {
 				Description: "Number of FCoE per End Point Group.",
-				Type:        schema.TypeString,
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"fv_rs_dom_att_count": {
@@ -243,7 +243,7 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 					},
 					"fcoe_count": {
 						Description: "Number of FCoE per End Point Group.",
-						Type:        schema.TypeString,
+						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 					"fv_rs_dom_att_count": {
@@ -641,7 +641,7 @@ func dataSourceNiatelemetryEpgRead(c context.Context, d *schema.ResourceData, me
 		o.SetFcNpvCount(x)
 	}
 	if v, ok := d.GetOk("fcoe_count"); ok {
-		x := (v.(string))
+		x := int64(v.(int))
 		o.SetFcoeCount(x)
 	}
 	if v, ok := d.GetOk("fv_rs_dom_att_count"); ok {

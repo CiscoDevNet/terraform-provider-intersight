@@ -6,7 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NiaFeatureUsage"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NiaFeatureUsage"]
+**AaaLdapProviderCount** | Pointer to **int64** | Returns the total number of AAA Ldap Providers. | [optional] 
+**AaaRadiusProviderCount** | Pointer to **int64** | Returns the total number of AAA Radius Providers. | [optional] 
+**AaaTacacsProviderCount** | Pointer to **int64** | Returns the total number of AAA Tacacs Providers. | [optional] 
 **ApicCount** | Pointer to **int64** | Number of APIC controllers. This determines the value of controllers for the fabric. | [optional] 
+**ApicIsTelnetEnabled** | Pointer to **bool** | Returns if telnet is enabled on APIC. | [optional] 
+**ApicNtpCount** | Pointer to **int64** | Count of NTP servers configured on APIC. | [optional] 
+**ApicSnmpCommunityCount** | Pointer to **int64** | Number of SNMP communities configured on APIC. | [optional] 
+**ApicSysLogGrpCount** | Pointer to **int64** | Number of logging groups configured on APIC. | [optional] 
+**ApicSysLogSrcCount** | Pointer to **int64** | Number of logging sources configured on APIC. | [optional] 
 **AppCenterCount** | Pointer to **int64** | ACI APPs feature usage scale. | [optional] 
 **Ave** | Pointer to **string** | AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled. | [optional] 
 **BdCount** | Pointer to **int64** | Number of BDs. This determines the total number of Broadcast Domains across the fabric. | [optional] 
@@ -14,7 +22,7 @@ Name | Type | Description | Notes
 **CloudSecPeerCount** | Pointer to **int64** | Number of Cloudsec SA peers. | [optional] 
 **CompHvCount** | Pointer to **int64** | Number of compute hypervisors on the fabric. | [optional] 
 **ConfigExportpCount** | Pointer to **int64** | Number of system backup configure export policies on the fabric. | [optional] 
-**ConfigJobCount** | Pointer to **int64** | Number of system backup configure jobs on the fanric. | [optional] 
+**ConfigJobCount** | Pointer to **int64** | Number of system backup configure jobs on the fabric. | [optional] 
 **ConsistencyCheckerApp** | Pointer to **string** | Consistency checker application usage. This determines if the fabric has Consistency checker application installed. | [optional] 
 **ContractCount** | Pointer to **int64** | Number of contracts. This determines the total number of Contracts configured across the fabric. | [optional] 
 **DnsCount** | Pointer to **int64** | DNS feature usage. This determines the total number of DNS configurations across the fabric. | [optional] 
@@ -31,10 +39,17 @@ Name | Type | Description | Notes
 **IgmpAccessListCount** | Pointer to **int64** | IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric. | [optional] 
 **IgmpSnoop** | Pointer to **string** | IGMP Snooping feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **IpEpgCount** | Pointer to **int64** | Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric. | [optional] 
+**IsCommonLocalUserName** | Pointer to **bool** | Returns value of isCommonLocalUserName field. | [optional] 
+**IsHttpConfigured** | Pointer to **bool** | Returns if HTTP is configured. | [optional] 
+**IsHttpsConfigured** | Pointer to **bool** | Returns if HTTPS is configured. | [optional] 
 **IsTechSupportCollected** | Pointer to **string** | Status of techsupport collection. | [optional] 
 **IsisCount** | Pointer to **int64** | Isis feature usage. This determines the total number of ISIS sessions across the fabric. | [optional] 
 **L2Multicast** | Pointer to **string** | L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. | [optional] 
 **LeafCount** | Pointer to **int64** | Number of Leafs. This determines the total number of Leaf switches in the fabric. | [optional] 
+**LocalUsernameCount** | Pointer to **int64** | Returns count of local users. | [optional] 
+**LoginBlockDuration** | Pointer to **int64** | Returns login block duration value. | [optional] 
+**LoginMaxFailedAttempts** | Pointer to **int64** | Returns the maximum failed attempts on login. | [optional] 
+**LoginMaxFailedAttemptsWindow** | Pointer to **int64** | Returns the maximum failed attempt windows on login. | [optional] 
 **MaintenanceModeCount** | Pointer to **int64** | Maintenance Mode feature usage. This determines the number of switches that are currently in maintenance mode. | [optional] 
 **ManagementOverV6Count** | Pointer to **int64** | Management over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
 **MicrosoftUsegVmmEpPdCount** | Pointer to **int64** | Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured. | [optional] 
@@ -43,11 +58,15 @@ Name | Type | Description | Notes
 **OpenStack** | Pointer to **string** | Open stack feature usage. | [optional] 
 **OpflexKubernetesCount** | Pointer to **int64** | Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes. | [optional] 
 **OspfCount** | Pointer to **int64** | Ospf feature usage. This determines the total number of OSPF sessions across the fabric. | [optional] 
+**PasswordHistoryCount** | Pointer to **int64** | Returns count of passwords. | [optional] 
+**PasswordStrengthCheck** | Pointer to **string** | Returns if the password is strong or not. | [optional] 
+**PasswordStrengthProfileCount** | Pointer to **int64** | Returns the number of password strength profile. | [optional] 
 **PoeCount** | Pointer to **int64** | POE feature usage. This determines the total number of POE configurations across the fabric. | [optional] 
 **PortSecurityCount** | Pointer to **int64** | Number of objects with Port Security enabled. Non-Zero value indicates the object as enabled. | [optional] 
 **QinVniTunnelCount** | Pointer to **int64** | QinVniTunnel feature usage. This determines if the qinVniTunnel feature is being used on the fabric and the scale of it. | [optional] 
 **QosCongCount** | Pointer to **int64** | Number of Quality Of Service congestion class. | [optional] 
 **QosPfcPolCount** | Pointer to **int64** | Number of Quality Of Service class. | [optional] 
+**RealmCount** | Pointer to **int64** | Returns the value of count of realms. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RemoteLeafCount** | Pointer to **int64** | Number of remote Leafs. This determines the total number of remote leaf switches in the fabric. | [optional] 
@@ -58,12 +77,16 @@ Name | Type | Description | Notes
 **SmartLicense** | Pointer to [**NullableNiatelemetrySmartLicense**](niatelemetry.SmartLicense.md) |  | [optional] 
 **SnapshotCount** | Pointer to **int64** | Returns count of snapshots. | [optional] 
 **Snmp** | Pointer to **string** | SNMP feature usage. This determines if this feature is enabled or disabled. | [optional] 
+**SnmpCommunityAccessCount** | Pointer to **int64** | Returns count of SNMP Community Access. | [optional] 
 **SnmpGroupCount** | Pointer to **int64** | Number of SNMP monitoring policies on the fabric. | [optional] 
+**SnmpTrapCount** | Pointer to **int64** | Returns count of SNMP trap. | [optional] 
+**SnmpV3Count** | Pointer to **int64** | Returns count of SNMP V3 on the fabric. | [optional] 
 **SpanCount** | Pointer to **int64** | Number of Span Sources and Destinations. | [optional] 
 **SpanDstCount** | Pointer to **int64** | Number of Span Destinations with valid state. | [optional] 
 **SpanSrcCount** | Pointer to **int64** | Number of Span Sources with valid state. | [optional] 
 **SpineCount** | Pointer to **int64** | Number of Spines. This determines the total number of spine switches in the fabric. | [optional] 
 **SshOverV6Count** | Pointer to **int64** | Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
+**SshV2Count** | Pointer to **int64** | Returns count of ssh V2 on the fabric. | [optional] 
 **SyslogGroupCount** | Pointer to **int64** | Number of syslog monitoring policies on the fabric. | [optional] 
 **SyslogOverV6Count** | Pointer to **int64** | Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
 **TacacsGroupCount** | Pointer to **int64** | Number of tacacs monitoring policies on the fabric. | [optional] 
@@ -77,6 +100,7 @@ Name | Type | Description | Notes
 **VmmEpPdCount** | Pointer to **int64** | Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter. | [optional] 
 **VnsmDevCount** | Pointer to **int64** | Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model. | [optional] 
 **VpodCount** | Pointer to **int64** | Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics. | [optional] 
+**WebtokenTimeoutSeconds** | Pointer to **int64** | Timeout for web token in seconds. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -138,6 +162,81 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAaaLdapProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaLdapProviderCount() int64`
+
+GetAaaLdapProviderCount returns the AaaLdapProviderCount field if non-nil, zero value otherwise.
+
+### GetAaaLdapProviderCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaLdapProviderCountOk() (*int64, bool)`
+
+GetAaaLdapProviderCountOk returns a tuple with the AaaLdapProviderCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAaaLdapProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetAaaLdapProviderCount(v int64)`
+
+SetAaaLdapProviderCount sets AaaLdapProviderCount field to given value.
+
+### HasAaaLdapProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasAaaLdapProviderCount() bool`
+
+HasAaaLdapProviderCount returns a boolean if a field has been set.
+
+### GetAaaRadiusProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaRadiusProviderCount() int64`
+
+GetAaaRadiusProviderCount returns the AaaRadiusProviderCount field if non-nil, zero value otherwise.
+
+### GetAaaRadiusProviderCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaRadiusProviderCountOk() (*int64, bool)`
+
+GetAaaRadiusProviderCountOk returns a tuple with the AaaRadiusProviderCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAaaRadiusProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetAaaRadiusProviderCount(v int64)`
+
+SetAaaRadiusProviderCount sets AaaRadiusProviderCount field to given value.
+
+### HasAaaRadiusProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasAaaRadiusProviderCount() bool`
+
+HasAaaRadiusProviderCount returns a boolean if a field has been set.
+
+### GetAaaTacacsProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaTacacsProviderCount() int64`
+
+GetAaaTacacsProviderCount returns the AaaTacacsProviderCount field if non-nil, zero value otherwise.
+
+### GetAaaTacacsProviderCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetAaaTacacsProviderCountOk() (*int64, bool)`
+
+GetAaaTacacsProviderCountOk returns a tuple with the AaaTacacsProviderCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAaaTacacsProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetAaaTacacsProviderCount(v int64)`
+
+SetAaaTacacsProviderCount sets AaaTacacsProviderCount field to given value.
+
+### HasAaaTacacsProviderCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasAaaTacacsProviderCount() bool`
+
+HasAaaTacacsProviderCount returns a boolean if a field has been set.
+
 ### GetApicCount
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicCount() int64`
@@ -162,6 +261,131 @@ SetApicCount sets ApicCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicCount() bool`
 
 HasApicCount returns a boolean if a field has been set.
+
+### GetApicIsTelnetEnabled
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicIsTelnetEnabled() bool`
+
+GetApicIsTelnetEnabled returns the ApicIsTelnetEnabled field if non-nil, zero value otherwise.
+
+### GetApicIsTelnetEnabledOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicIsTelnetEnabledOk() (*bool, bool)`
+
+GetApicIsTelnetEnabledOk returns a tuple with the ApicIsTelnetEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicIsTelnetEnabled
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetApicIsTelnetEnabled(v bool)`
+
+SetApicIsTelnetEnabled sets ApicIsTelnetEnabled field to given value.
+
+### HasApicIsTelnetEnabled
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicIsTelnetEnabled() bool`
+
+HasApicIsTelnetEnabled returns a boolean if a field has been set.
+
+### GetApicNtpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicNtpCount() int64`
+
+GetApicNtpCount returns the ApicNtpCount field if non-nil, zero value otherwise.
+
+### GetApicNtpCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicNtpCountOk() (*int64, bool)`
+
+GetApicNtpCountOk returns a tuple with the ApicNtpCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicNtpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetApicNtpCount(v int64)`
+
+SetApicNtpCount sets ApicNtpCount field to given value.
+
+### HasApicNtpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicNtpCount() bool`
+
+HasApicNtpCount returns a boolean if a field has been set.
+
+### GetApicSnmpCommunityCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSnmpCommunityCount() int64`
+
+GetApicSnmpCommunityCount returns the ApicSnmpCommunityCount field if non-nil, zero value otherwise.
+
+### GetApicSnmpCommunityCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSnmpCommunityCountOk() (*int64, bool)`
+
+GetApicSnmpCommunityCountOk returns a tuple with the ApicSnmpCommunityCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicSnmpCommunityCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetApicSnmpCommunityCount(v int64)`
+
+SetApicSnmpCommunityCount sets ApicSnmpCommunityCount field to given value.
+
+### HasApicSnmpCommunityCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicSnmpCommunityCount() bool`
+
+HasApicSnmpCommunityCount returns a boolean if a field has been set.
+
+### GetApicSysLogGrpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSysLogGrpCount() int64`
+
+GetApicSysLogGrpCount returns the ApicSysLogGrpCount field if non-nil, zero value otherwise.
+
+### GetApicSysLogGrpCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSysLogGrpCountOk() (*int64, bool)`
+
+GetApicSysLogGrpCountOk returns a tuple with the ApicSysLogGrpCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicSysLogGrpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetApicSysLogGrpCount(v int64)`
+
+SetApicSysLogGrpCount sets ApicSysLogGrpCount field to given value.
+
+### HasApicSysLogGrpCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicSysLogGrpCount() bool`
+
+HasApicSysLogGrpCount returns a boolean if a field has been set.
+
+### GetApicSysLogSrcCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSysLogSrcCount() int64`
+
+GetApicSysLogSrcCount returns the ApicSysLogSrcCount field if non-nil, zero value otherwise.
+
+### GetApicSysLogSrcCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetApicSysLogSrcCountOk() (*int64, bool)`
+
+GetApicSysLogSrcCountOk returns a tuple with the ApicSysLogSrcCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApicSysLogSrcCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetApicSysLogSrcCount(v int64)`
+
+SetApicSysLogSrcCount sets ApicSysLogSrcCount field to given value.
+
+### HasApicSysLogSrcCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasApicSysLogSrcCount() bool`
+
+HasApicSysLogSrcCount returns a boolean if a field has been set.
 
 ### GetAppCenterCount
 
@@ -763,6 +987,81 @@ SetIpEpgCount sets IpEpgCount field to given value.
 
 HasIpEpgCount returns a boolean if a field has been set.
 
+### GetIsCommonLocalUserName
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsCommonLocalUserName() bool`
+
+GetIsCommonLocalUserName returns the IsCommonLocalUserName field if non-nil, zero value otherwise.
+
+### GetIsCommonLocalUserNameOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsCommonLocalUserNameOk() (*bool, bool)`
+
+GetIsCommonLocalUserNameOk returns a tuple with the IsCommonLocalUserName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCommonLocalUserName
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsCommonLocalUserName(v bool)`
+
+SetIsCommonLocalUserName sets IsCommonLocalUserName field to given value.
+
+### HasIsCommonLocalUserName
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsCommonLocalUserName() bool`
+
+HasIsCommonLocalUserName returns a boolean if a field has been set.
+
+### GetIsHttpConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsHttpConfigured() bool`
+
+GetIsHttpConfigured returns the IsHttpConfigured field if non-nil, zero value otherwise.
+
+### GetIsHttpConfiguredOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsHttpConfiguredOk() (*bool, bool)`
+
+GetIsHttpConfiguredOk returns a tuple with the IsHttpConfigured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsHttpConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsHttpConfigured(v bool)`
+
+SetIsHttpConfigured sets IsHttpConfigured field to given value.
+
+### HasIsHttpConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsHttpConfigured() bool`
+
+HasIsHttpConfigured returns a boolean if a field has been set.
+
+### GetIsHttpsConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsHttpsConfigured() bool`
+
+GetIsHttpsConfigured returns the IsHttpsConfigured field if non-nil, zero value otherwise.
+
+### GetIsHttpsConfiguredOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsHttpsConfiguredOk() (*bool, bool)`
+
+GetIsHttpsConfiguredOk returns a tuple with the IsHttpsConfigured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsHttpsConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsHttpsConfigured(v bool)`
+
+SetIsHttpsConfigured sets IsHttpsConfigured field to given value.
+
+### HasIsHttpsConfigured
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsHttpsConfigured() bool`
+
+HasIsHttpsConfigured returns a boolean if a field has been set.
+
 ### GetIsTechSupportCollected
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTechSupportCollected() string`
@@ -862,6 +1161,106 @@ SetLeafCount sets LeafCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasLeafCount() bool`
 
 HasLeafCount returns a boolean if a field has been set.
+
+### GetLocalUsernameCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLocalUsernameCount() int64`
+
+GetLocalUsernameCount returns the LocalUsernameCount field if non-nil, zero value otherwise.
+
+### GetLocalUsernameCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLocalUsernameCountOk() (*int64, bool)`
+
+GetLocalUsernameCountOk returns a tuple with the LocalUsernameCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalUsernameCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetLocalUsernameCount(v int64)`
+
+SetLocalUsernameCount sets LocalUsernameCount field to given value.
+
+### HasLocalUsernameCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasLocalUsernameCount() bool`
+
+HasLocalUsernameCount returns a boolean if a field has been set.
+
+### GetLoginBlockDuration
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginBlockDuration() int64`
+
+GetLoginBlockDuration returns the LoginBlockDuration field if non-nil, zero value otherwise.
+
+### GetLoginBlockDurationOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginBlockDurationOk() (*int64, bool)`
+
+GetLoginBlockDurationOk returns a tuple with the LoginBlockDuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoginBlockDuration
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetLoginBlockDuration(v int64)`
+
+SetLoginBlockDuration sets LoginBlockDuration field to given value.
+
+### HasLoginBlockDuration
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasLoginBlockDuration() bool`
+
+HasLoginBlockDuration returns a boolean if a field has been set.
+
+### GetLoginMaxFailedAttempts
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginMaxFailedAttempts() int64`
+
+GetLoginMaxFailedAttempts returns the LoginMaxFailedAttempts field if non-nil, zero value otherwise.
+
+### GetLoginMaxFailedAttemptsOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginMaxFailedAttemptsOk() (*int64, bool)`
+
+GetLoginMaxFailedAttemptsOk returns a tuple with the LoginMaxFailedAttempts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoginMaxFailedAttempts
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetLoginMaxFailedAttempts(v int64)`
+
+SetLoginMaxFailedAttempts sets LoginMaxFailedAttempts field to given value.
+
+### HasLoginMaxFailedAttempts
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasLoginMaxFailedAttempts() bool`
+
+HasLoginMaxFailedAttempts returns a boolean if a field has been set.
+
+### GetLoginMaxFailedAttemptsWindow
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginMaxFailedAttemptsWindow() int64`
+
+GetLoginMaxFailedAttemptsWindow returns the LoginMaxFailedAttemptsWindow field if non-nil, zero value otherwise.
+
+### GetLoginMaxFailedAttemptsWindowOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetLoginMaxFailedAttemptsWindowOk() (*int64, bool)`
+
+GetLoginMaxFailedAttemptsWindowOk returns a tuple with the LoginMaxFailedAttemptsWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoginMaxFailedAttemptsWindow
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetLoginMaxFailedAttemptsWindow(v int64)`
+
+SetLoginMaxFailedAttemptsWindow sets LoginMaxFailedAttemptsWindow field to given value.
+
+### HasLoginMaxFailedAttemptsWindow
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasLoginMaxFailedAttemptsWindow() bool`
+
+HasLoginMaxFailedAttemptsWindow returns a boolean if a field has been set.
 
 ### GetMaintenanceModeCount
 
@@ -1063,6 +1462,81 @@ SetOspfCount sets OspfCount field to given value.
 
 HasOspfCount returns a boolean if a field has been set.
 
+### GetPasswordHistoryCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordHistoryCount() int64`
+
+GetPasswordHistoryCount returns the PasswordHistoryCount field if non-nil, zero value otherwise.
+
+### GetPasswordHistoryCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordHistoryCountOk() (*int64, bool)`
+
+GetPasswordHistoryCountOk returns a tuple with the PasswordHistoryCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPasswordHistoryCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetPasswordHistoryCount(v int64)`
+
+SetPasswordHistoryCount sets PasswordHistoryCount field to given value.
+
+### HasPasswordHistoryCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasPasswordHistoryCount() bool`
+
+HasPasswordHistoryCount returns a boolean if a field has been set.
+
+### GetPasswordStrengthCheck
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordStrengthCheck() string`
+
+GetPasswordStrengthCheck returns the PasswordStrengthCheck field if non-nil, zero value otherwise.
+
+### GetPasswordStrengthCheckOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordStrengthCheckOk() (*string, bool)`
+
+GetPasswordStrengthCheckOk returns a tuple with the PasswordStrengthCheck field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPasswordStrengthCheck
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetPasswordStrengthCheck(v string)`
+
+SetPasswordStrengthCheck sets PasswordStrengthCheck field to given value.
+
+### HasPasswordStrengthCheck
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasPasswordStrengthCheck() bool`
+
+HasPasswordStrengthCheck returns a boolean if a field has been set.
+
+### GetPasswordStrengthProfileCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordStrengthProfileCount() int64`
+
+GetPasswordStrengthProfileCount returns the PasswordStrengthProfileCount field if non-nil, zero value otherwise.
+
+### GetPasswordStrengthProfileCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetPasswordStrengthProfileCountOk() (*int64, bool)`
+
+GetPasswordStrengthProfileCountOk returns a tuple with the PasswordStrengthProfileCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPasswordStrengthProfileCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetPasswordStrengthProfileCount(v int64)`
+
+SetPasswordStrengthProfileCount sets PasswordStrengthProfileCount field to given value.
+
+### HasPasswordStrengthProfileCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasPasswordStrengthProfileCount() bool`
+
+HasPasswordStrengthProfileCount returns a boolean if a field has been set.
+
 ### GetPoeCount
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetPoeCount() int64`
@@ -1187,6 +1661,31 @@ SetQosPfcPolCount sets QosPfcPolCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasQosPfcPolCount() bool`
 
 HasQosPfcPolCount returns a boolean if a field has been set.
+
+### GetRealmCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetRealmCount() int64`
+
+GetRealmCount returns the RealmCount field if non-nil, zero value otherwise.
+
+### GetRealmCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetRealmCountOk() (*int64, bool)`
+
+GetRealmCountOk returns a tuple with the RealmCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRealmCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetRealmCount(v int64)`
+
+SetRealmCount sets RealmCount field to given value.
+
+### HasRealmCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasRealmCount() bool`
+
+HasRealmCount returns a boolean if a field has been set.
 
 ### GetRecordType
 
@@ -1448,6 +1947,31 @@ SetSnmp sets Snmp field to given value.
 
 HasSnmp returns a boolean if a field has been set.
 
+### GetSnmpCommunityAccessCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpCommunityAccessCount() int64`
+
+GetSnmpCommunityAccessCount returns the SnmpCommunityAccessCount field if non-nil, zero value otherwise.
+
+### GetSnmpCommunityAccessCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpCommunityAccessCountOk() (*int64, bool)`
+
+GetSnmpCommunityAccessCountOk returns a tuple with the SnmpCommunityAccessCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnmpCommunityAccessCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSnmpCommunityAccessCount(v int64)`
+
+SetSnmpCommunityAccessCount sets SnmpCommunityAccessCount field to given value.
+
+### HasSnmpCommunityAccessCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSnmpCommunityAccessCount() bool`
+
+HasSnmpCommunityAccessCount returns a boolean if a field has been set.
+
 ### GetSnmpGroupCount
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpGroupCount() int64`
@@ -1472,6 +1996,56 @@ SetSnmpGroupCount sets SnmpGroupCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasSnmpGroupCount() bool`
 
 HasSnmpGroupCount returns a boolean if a field has been set.
+
+### GetSnmpTrapCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpTrapCount() int64`
+
+GetSnmpTrapCount returns the SnmpTrapCount field if non-nil, zero value otherwise.
+
+### GetSnmpTrapCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpTrapCountOk() (*int64, bool)`
+
+GetSnmpTrapCountOk returns a tuple with the SnmpTrapCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnmpTrapCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSnmpTrapCount(v int64)`
+
+SetSnmpTrapCount sets SnmpTrapCount field to given value.
+
+### HasSnmpTrapCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSnmpTrapCount() bool`
+
+HasSnmpTrapCount returns a boolean if a field has been set.
+
+### GetSnmpV3Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpV3Count() int64`
+
+GetSnmpV3Count returns the SnmpV3Count field if non-nil, zero value otherwise.
+
+### GetSnmpV3CountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSnmpV3CountOk() (*int64, bool)`
+
+GetSnmpV3CountOk returns a tuple with the SnmpV3Count field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnmpV3Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSnmpV3Count(v int64)`
+
+SetSnmpV3Count sets SnmpV3Count field to given value.
+
+### HasSnmpV3Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSnmpV3Count() bool`
+
+HasSnmpV3Count returns a boolean if a field has been set.
 
 ### GetSpanCount
 
@@ -1597,6 +2171,31 @@ SetSshOverV6Count sets SshOverV6Count field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasSshOverV6Count() bool`
 
 HasSshOverV6Count returns a boolean if a field has been set.
+
+### GetSshV2Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSshV2Count() int64`
+
+GetSshV2Count returns the SshV2Count field if non-nil, zero value otherwise.
+
+### GetSshV2CountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSshV2CountOk() (*int64, bool)`
+
+GetSshV2CountOk returns a tuple with the SshV2Count field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshV2Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSshV2Count(v int64)`
+
+SetSshV2Count sets SshV2Count field to given value.
+
+### HasSshV2Count
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSshV2Count() bool`
+
+HasSshV2Count returns a boolean if a field has been set.
 
 ### GetSyslogGroupCount
 
@@ -1922,6 +2521,31 @@ SetVpodCount sets VpodCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasVpodCount() bool`
 
 HasVpodCount returns a boolean if a field has been set.
+
+### GetWebtokenTimeoutSeconds
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetWebtokenTimeoutSeconds() int64`
+
+GetWebtokenTimeoutSeconds returns the WebtokenTimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetWebtokenTimeoutSecondsOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetWebtokenTimeoutSecondsOk() (*int64, bool)`
+
+GetWebtokenTimeoutSecondsOk returns a tuple with the WebtokenTimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebtokenTimeoutSeconds
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetWebtokenTimeoutSeconds(v int64)`
+
+SetWebtokenTimeoutSeconds sets WebtokenTimeoutSeconds field to given value.
+
+### HasWebtokenTimeoutSeconds
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasWebtokenTimeoutSeconds() bool`
+
+HasWebtokenTimeoutSeconds returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

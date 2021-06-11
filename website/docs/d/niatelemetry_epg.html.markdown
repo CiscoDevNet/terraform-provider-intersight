@@ -20,7 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `epg_delimiter_count`:(int) Number of  objects with delimiter value present in EPG Delimiter attribute. 
 * `fc_npv_count`:(int) Number of ports with FC path attribute of type FC. 
-* `fcoe_count`:(string) Number of FCoE per End Point Group. 
+* `fcoe_count`:(int) Number of FCoE per End Point Group. 
 * `fv_rs_dom_att_count`:(int) Number of FvRsDomAtt objects per End Point Group with VMware configuration. 
 * `intra_epg_dvs_bm_count`:(int) Intra End Point Group Contract for Distributed Virtual Switch and BM feature usage. 
 * `intra_epg_hyperv`:(string) Intra EPG Isolation for Hyper-V, enabled if pcEnfPref attribute is set to enforced. 
