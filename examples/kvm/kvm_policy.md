@@ -13,9 +13,5 @@ resource "intersight_kvm_policy" "kvm1" {
     object_type = "organization.Organization"
     moid        = var.organization
   }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
 }
 ```

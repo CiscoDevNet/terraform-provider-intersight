@@ -46,9 +46,5 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
       }
     })
   }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
 }
 ```
