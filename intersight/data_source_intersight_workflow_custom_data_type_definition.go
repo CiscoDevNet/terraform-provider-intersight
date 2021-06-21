@@ -208,6 +208,8 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["properties"] = flattenMapWorkflowCustomDataTypeProperties(s.GetProperties(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

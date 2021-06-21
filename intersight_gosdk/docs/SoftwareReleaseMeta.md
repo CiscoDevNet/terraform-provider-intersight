@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "software.ReleaseMeta"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "software.ReleaseMeta"]
+**ImageType** | Pointer to **string** | The subtype of the distributable image. For e.g. the firmware distributable is categorized according to the component it can upgrade - Standalone server, Intersight managed server or UCS Managed Fabric Interconnect. | [optional] 
 **LatestFileName** | Pointer to **string** | The name of the latest image file uploaded for this software type. It is populated as part of the image import operation. | [optional] 
 **LatestVersion** | Pointer to **string** | Latest version of the image avaiable for a specific software. | [optional] [readonly] 
-**SoftwareTypeId** | Pointer to **string** | The software type id of the image. | [optional] 
+**SoftwareTypeId** | Pointer to **string** | The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable). | [optional] 
 **Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
 **Image** | Pointer to [**FirmwareBaseDistributableRelationship**](firmware.BaseDistributable.Relationship.md) |  | [optional] 
 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetImageType
+
+`func (o *SoftwareReleaseMeta) GetImageType() string`
+
+GetImageType returns the ImageType field if non-nil, zero value otherwise.
+
+### GetImageTypeOk
+
+`func (o *SoftwareReleaseMeta) GetImageTypeOk() (*string, bool)`
+
+GetImageTypeOk returns a tuple with the ImageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageType
+
+`func (o *SoftwareReleaseMeta) SetImageType(v string)`
+
+SetImageType sets ImageType field to given value.
+
+### HasImageType
+
+`func (o *SoftwareReleaseMeta) HasImageType() bool`
+
+HasImageType returns a boolean if a field has been set.
 
 ### GetLatestFileName
 

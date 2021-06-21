@@ -172,6 +172,11 @@ func resourceSoftwareReleaseMeta() *schema.Resource {
 					},
 				},
 			},
+			"image_type": {
+				Description: "The subtype of the distributable image. For e.g. the firmware distributable is categorized according to the component it can upgrade - Standalone server, Intersight managed server or UCS Managed Fabric Interconnect.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"latest_file_name": {
 				Description: "The name of the latest image file uploaded for this software type. It is populated as part of the image import operation.",
 				Type:        schema.TypeString,
@@ -295,7 +300,7 @@ func resourceSoftwareReleaseMeta() *schema.Resource {
 				Computed:    true,
 			},
 			"software_type_id": {
-				Description: "The software type id of the image.",
+				Description: "The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -611,6 +616,11 @@ func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetImage(x)
 		}
+	}
+
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if v, ok := d.GetOk("latest_file_name"); ok {
@@ -980,6 +990,10 @@ func resourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("error occurred while setting property Image in SoftwareReleaseMeta object: %s", err.Error())
 	}
 
+	if err := d.Set("image_type", (s.GetImageType())); err != nil {
+		return diag.Errorf("error occurred while setting property ImageType in SoftwareReleaseMeta object: %s", err.Error())
+	}
+
 	if err := d.Set("latest_file_name", (s.GetLatestFileName())); err != nil {
 		return diag.Errorf("error occurred while setting property LatestFileName in SoftwareReleaseMeta object: %s", err.Error())
 	}
@@ -1196,6 +1210,12 @@ func resourceSoftwareReleaseMetaUpdate(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetImage(x)
 		}
+	}
+
+	if d.HasChange("image_type") {
+		v := d.Get("image_type")
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 
 	if d.HasChange("latest_file_name") {

@@ -57,6 +57,8 @@ This complex property has following sub-properties:
 * `digest`:(string) Digest used to verify the integrity of an addon. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `icon_url`:(string) Icon used to represent the addon in UI. 
+* `labels`:
+                (Array of schema.TypeString) -
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of an addon component. 

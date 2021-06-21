@@ -218,6 +218,11 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
+						"secure": {
+							Description: "The flag indicates if the extracted value is secure.\nThis flag is applicable for parameters of type String only.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
 						"type": {
 							Description: "The type of the parameter. Accepted values are simple, complex,\ncollection.\n* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.\n* `string` - The parameter value to be extracted is of the string type.\n* `integer` - The parameter value to be extracted is of the number type.\n* `float` - The parameter value to be extracted is of the float number type.\n* `boolean` - The parameter value to be extracted is of the boolean type.\n* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.\n* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.\n* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type.",
 							Type:        schema.TypeString,
@@ -420,6 +425,11 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 									"path": {
 										Description: "The content specific path information that identifies the parameter\nvalue within the content. The value is usually a XPath or JSONPath or a\nregular expression in case of text content.",
 										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"secure": {
+										Description: "The flag indicates if the extracted value is secure.\nThis flag is applicable for parameters of type String only.",
+										Type:        schema.TypeBool,
 										Optional:    true,
 									},
 									"type": {
@@ -766,6 +776,12 @@ func resourceWorkflowErrorResponseHandlerCreate(c context.Context, d *schema.Res
 					o.SetPath(x)
 				}
 			}
+			if v, ok := l["secure"]; ok {
+				{
+					x := (v.(bool))
+					o.SetSecure(x)
+				}
+			}
 			if v, ok := l["type"]; ok {
 				{
 					x := (v.(string))
@@ -990,6 +1006,12 @@ func resourceWorkflowErrorResponseHandlerCreate(c context.Context, d *schema.Res
 							{
 								x := (v.(string))
 								o.SetPath(x)
+							}
+						}
+						if v, ok := l["secure"]; ok {
+							{
+								x := (v.(bool))
+								o.SetSecure(x)
 							}
 						}
 						if v, ok := l["type"]; ok {
@@ -1484,6 +1506,12 @@ func resourceWorkflowErrorResponseHandlerUpdate(c context.Context, d *schema.Res
 					o.SetPath(x)
 				}
 			}
+			if v, ok := l["secure"]; ok {
+				{
+					x := (v.(bool))
+					o.SetSecure(x)
+				}
+			}
 			if v, ok := l["type"]; ok {
 				{
 					x := (v.(string))
@@ -1708,6 +1736,12 @@ func resourceWorkflowErrorResponseHandlerUpdate(c context.Context, d *schema.Res
 							{
 								x := (v.(string))
 								o.SetPath(x)
+							}
+						}
+						if v, ok := l["secure"]; ok {
+							{
+								x := (v.(bool))
+								o.SetSecure(x)
 							}
 						}
 						if v, ok := l["type"]; ok {

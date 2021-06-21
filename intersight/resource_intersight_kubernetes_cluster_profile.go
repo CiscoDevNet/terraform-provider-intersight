@@ -699,11 +699,6 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Optional:    true,
 							Default:     "kubernetes.ClusterManagementConfig",
 						},
-						"encrypted_etcd": {
-							Description: "Encrypt ETCD data at rest using the etcdEncryptionKey specified in the cluster Kubernetes configuration.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
 						"load_balancer_count": {
 							Description: "Number of IP addresses to reserve for load balancer services.",
 							Type:        schema.TypeInt,
@@ -2125,12 +2120,6 @@ func resourceKubernetesClusterProfileCreate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("kubernetes.ClusterManagementConfig")
-			if v, ok := l["encrypted_etcd"]; ok {
-				{
-					x := (v.(bool))
-					o.SetEncryptedEtcd(x)
-				}
-			}
 			if v, ok := l["load_balancer_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3872,12 +3861,6 @@ func resourceKubernetesClusterProfileUpdate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("kubernetes.ClusterManagementConfig")
-			if v, ok := l["encrypted_etcd"]; ok {
-				{
-					x := (v.(bool))
-					o.SetEncryptedEtcd(x)
-				}
-			}
 			if v, ok := l["load_balancer_count"]; ok {
 				{
 					x := int64(v.(int))

@@ -28,6 +28,12 @@ func dataSourceEquipmentFex() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"connection_path": {
+				Description: "Switch Id to which the FEX is connected to. The value can be A or B or AB in case of active-active topology.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"connection_status": {
 				Description: "Connectivity Status of FEX/IOM to Switch - A or B or AB.",
 				Type:        schema.TypeString,
@@ -230,6 +236,12 @@ func dataSourceEquipmentFex() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"connection_path": {
+						Description: "Switch Id to which the FEX is connected to. The value can be A or B or AB in case of active-active topology.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"connection_status": {
 						Description: "Connectivity Status of FEX/IOM to Switch - A or B or AB.",
@@ -1040,6 +1052,10 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("connection_path"); ok {
+		x := (v.(string))
+		o.SetConnectionPath(x)
+	}
 	if v, ok := d.GetOk("connection_status"); ok {
 		x := (v.(string))
 		o.SetConnectionStatus(x)
@@ -1182,6 +1198,7 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["connection_path"] = (s.GetConnectionPath())
 				temp["connection_status"] = (s.GetConnectionStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

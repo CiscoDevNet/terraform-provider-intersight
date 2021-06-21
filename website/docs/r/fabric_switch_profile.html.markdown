@@ -14,13 +14,11 @@ This specifies configuration policies for a managed network switch.
 ```hcl
 resource "intersight_fabric_switch_profile" "fabric_switch_profile1" {
   name        = "fabric_switch_profile1"
-  description = "fabric switch profile"
+  description = "demo fabric switch profile"
   type        = "instance"
-  action      = "Deploy"
-  config_context {
-    object_type    = "policy.ConfigContext"
-    control_action = "deploy"
-    error_state    = "Config-error"
+  action      = "No-op"
+  switch_cluster_profile {
+    moid = intersight_fabric_switch_cluster_profile.fabric_switch_cluster_profile1.moid
   }
 }
 ```

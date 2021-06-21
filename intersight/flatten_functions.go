@@ -327,6 +327,30 @@ func flattenListAssetConnection(p []models.AssetConnection, d *schema.ResourceDa
 	}
 	return assetconnections
 }
+func flattenListAssetDeploymentRelationship(p []models.AssetDeploymentRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetdeploymentrelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		assetdeploymentrelationship := flattenMoMoRef(item)
+		assetdeploymentrelationships = append(assetdeploymentrelationships, assetdeploymentrelationship)
+	}
+	return assetdeploymentrelationships
+}
+func flattenListAssetDeploymentDeviceRelationship(p []models.AssetDeploymentDeviceRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetdeploymentdevicerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		assetdeploymentdevicerelationship := flattenMoMoRef(item)
+		assetdeploymentdevicerelationships = append(assetdeploymentdevicerelationships, assetdeploymentdevicerelationship)
+	}
+	return assetdeploymentdevicerelationships
+}
 func flattenListAssetDeviceRegistrationRelationship(p []models.AssetDeviceRegistrationRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var assetdeviceregistrationrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -338,6 +362,22 @@ func flattenListAssetDeviceRegistrationRelationship(p []models.AssetDeviceRegist
 		assetdeviceregistrationrelationships = append(assetdeviceregistrationrelationships, assetdeviceregistrationrelationship)
 	}
 	return assetdeviceregistrationrelationships
+}
+func flattenListAssetMeteringType(p []models.AssetMeteringType, d *schema.ResourceData) []map[string]interface{} {
+	var assetmeteringtypes []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		assetmeteringtype := make(map[string]interface{})
+		assetmeteringtype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		assetmeteringtype["class_id"] = item.ClassId
+		assetmeteringtype["name"] = item.Name
+		assetmeteringtype["object_type"] = item.ObjectType
+		assetmeteringtype["unit"] = item.Unit
+		assetmeteringtypes = append(assetmeteringtypes, assetmeteringtype)
+	}
+	return assetmeteringtypes
 }
 func flattenListAssetService(p []models.AssetService, d *schema.ResourceData) []map[string]interface{} {
 	var assetservices []map[string]interface{}
@@ -660,8 +700,10 @@ func flattenListCertificatemanagementCertificateBase(p []models.Certificatemanag
 		certificatemanagementcertificatebase["enabled"] = item.Enabled
 		certificatemanagementcertificatebase["is_privatekey_set"] = item.IsPrivatekeySet
 		certificatemanagementcertificatebase["object_type"] = item.ObjectType
-		privatekey_x := d.Get("certificates").([]interface{})[len(certificatemanagementcertificatebases)].(map[string]interface{})
-		certificatemanagementcertificatebase["privatekey"] = privatekey_x["privatekey"]
+		privatekey_x, exists := d.GetOk("certificates")
+		if exists && privatekey_x != nil {
+			certificatemanagementcertificatebase["privatekey"] = privatekey_x.([]interface{})[len(certificatemanagementcertificatebases)].(map[string]interface{})["privatekey"]
+		}
 		certificatemanagementcertificatebases = append(certificatemanagementcertificatebases, certificatemanagementcertificatebase)
 	}
 	return certificatemanagementcertificatebases
@@ -886,6 +928,7 @@ func flattenListContentComplexType(p []models.ContentComplexType, d *schema.Reso
 				contentbaseparameter["name"] = item.Name
 				contentbaseparameter["object_type"] = item.ObjectType
 				contentbaseparameter["path"] = item.Path
+				contentbaseparameter["secure"] = item.Secure
 				contentbaseparameter["type"] = item.Type
 				contentbaseparameters = append(contentbaseparameters, contentbaseparameter)
 			}
@@ -910,10 +953,27 @@ func flattenListContentParameter(p []models.ContentParameter, d *schema.Resource
 		contentparameter["name"] = item.Name
 		contentparameter["object_type"] = item.ObjectType
 		contentparameter["path"] = item.Path
+		contentparameter["secure"] = item.Secure
 		contentparameter["type"] = item.Type
 		contentparameters = append(contentparameters, contentparameter)
 	}
 	return contentparameters
+}
+func flattenListCrdCustomResourceConfigProperty(p []models.CrdCustomResourceConfigProperty, d *schema.ResourceData) []map[string]interface{} {
+	var crdcustomresourceconfigpropertys []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		crdcustomresourceconfigproperty := make(map[string]interface{})
+		crdcustomresourceconfigproperty["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		crdcustomresourceconfigproperty["class_id"] = item.ClassId
+		crdcustomresourceconfigproperty["key"] = item.Key
+		crdcustomresourceconfigproperty["object_type"] = item.ObjectType
+		crdcustomresourceconfigproperty["value"] = item.Value
+		crdcustomresourceconfigpropertys = append(crdcustomresourceconfigpropertys, crdcustomresourceconfigproperty)
+	}
+	return crdcustomresourceconfigpropertys
 }
 func flattenListEquipmentFanRelationship(p []models.EquipmentFanRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentfanrelationships []map[string]interface{}
@@ -2641,6 +2701,18 @@ func flattenListHyperflexVmInterface(p []models.HyperflexVmInterface, d *schema.
 	}
 	return hyperflexvminterfaces
 }
+func flattenListHyperflexVolumeRelationship(p []models.HyperflexVolumeRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexvolumerelationships []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		item := item.MoMoRef
+		hyperflexvolumerelationship := flattenMoMoRef(item)
+		hyperflexvolumerelationships = append(hyperflexvolumerelationships, hyperflexvolumerelationship)
+	}
+	return hyperflexvolumerelationships
+}
 func flattenListIaasConnectorPackRelationship(p []models.IaasConnectorPackRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var iaasconnectorpackrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -4323,8 +4395,8 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			item := p
 			osanswers := make(map[string]interface{})
 			osanswers["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-			answer_file_x := d.Get("answers")
-			if answer_file_x != nil {
+			answer_file_x, exists := d.GetOk("answers")
+			if exists && answer_file_x != nil {
 				answer_file_y := answer_file_x.([]interface{})[0].(map[string]interface{})
 				osanswers["answer_file"] = answer_file_y["answer_file"]
 			}
@@ -4352,8 +4424,8 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			osanswers["nameserver"] = item.Nameserver
 			osanswers["object_type"] = item.ObjectType
 			osanswers["product_key"] = item.ProductKey
-			root_password_x := d.Get("answers")
-			if root_password_x != nil {
+			root_password_x, exists := d.GetOk("answers")
+			if exists && root_password_x != nil {
 				root_password_y := root_password_x.([]interface{})[0].(map[string]interface{})
 				osanswers["root_password"] = root_password_y["root_password"]
 			}
@@ -4758,6 +4830,7 @@ func flattenListSnmpTrap(p []models.SnmpTrap, d *schema.ResourceData) []map[stri
 		snmptrap := make(map[string]interface{})
 		snmptrap["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 		snmptrap["class_id"] = item.ClassId
+		snmptrap["community"] = item.Community
 		snmptrap["destination"] = item.Destination
 		snmptrap["enabled"] = item.Enabled
 		snmptrap["object_type"] = item.ObjectType
@@ -4777,16 +4850,20 @@ func flattenListSnmpUser(p []models.SnmpUser, d *schema.ResourceData) []map[stri
 	for _, item := range p {
 		snmpuser := make(map[string]interface{})
 		snmpuser["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-		auth_password_x := d.Get("snmp_users").([]interface{})[len(snmpusers)].(map[string]interface{})
-		snmpuser["auth_password"] = auth_password_x["auth_password"]
+		auth_password_x, exists := d.GetOk("snmp_users")
+		if exists && auth_password_x != nil {
+			snmpuser["auth_password"] = auth_password_x.([]interface{})[len(snmpusers)].(map[string]interface{})["auth_password"]
+		}
 		snmpuser["auth_type"] = item.AuthType
 		snmpuser["class_id"] = item.ClassId
 		snmpuser["is_auth_password_set"] = item.IsAuthPasswordSet
 		snmpuser["is_privacy_password_set"] = item.IsPrivacyPasswordSet
 		snmpuser["name"] = item.Name
 		snmpuser["object_type"] = item.ObjectType
-		privacy_password_x := d.Get("snmp_users").([]interface{})[len(snmpusers)].(map[string]interface{})
-		snmpuser["privacy_password"] = privacy_password_x["privacy_password"]
+		privacy_password_x, exists := d.GetOk("snmp_users")
+		if exists && privacy_password_x != nil {
+			snmpuser["privacy_password"] = privacy_password_x.([]interface{})[len(snmpusers)].(map[string]interface{})["privacy_password"]
+		}
 		snmpuser["privacy_type"] = item.PrivacyType
 		snmpuser["security_level"] = item.SecurityLevel
 		snmpusers = append(snmpusers, snmpuser)
@@ -5712,8 +5789,10 @@ func flattenListVmediaMapping(p []models.VmediaMapping, d *schema.ResourceData) 
 		vmediamapping["mount_options"] = item.MountOptions
 		vmediamapping["mount_protocol"] = item.MountProtocol
 		vmediamapping["object_type"] = item.ObjectType
-		password_x := d.Get("mappings").([]interface{})[len(vmediamappings)].(map[string]interface{})
-		vmediamapping["password"] = password_x["password"]
+		password_x, exists := d.GetOk("mappings")
+		if exists && password_x != nil {
+			vmediamapping["password"] = password_x.([]interface{})[len(vmediamappings)].(map[string]interface{})["password"]
+		}
 		vmediamapping["remote_file"] = item.RemoteFile
 		vmediamapping["remote_path"] = item.RemotePath
 		vmediamapping["sanitized_file_location"] = item.SanitizedFileLocation
@@ -6432,6 +6511,69 @@ func flattenMapAssetCustomerInformation(p models.AssetCustomerInformation, d *sc
 	assetcustomerinformations = append(assetcustomerinformations, assetcustomerinformation)
 	return assetcustomerinformations
 }
+func flattenMapAssetDeploymentRelationship(p models.AssetDeploymentRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetdeploymentrelationships []map[string]interface{}
+	var ret models.AssetDeploymentRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	assetdeploymentrelationship := make(map[string]interface{})
+	assetdeploymentrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetdeploymentrelationship["class_id"] = item.ClassId
+	assetdeploymentrelationship["moid"] = item.Moid
+	assetdeploymentrelationship["object_type"] = item.ObjectType
+	assetdeploymentrelationship["selector"] = item.Selector
+
+	assetdeploymentrelationships = append(assetdeploymentrelationships, assetdeploymentrelationship)
+	return assetdeploymentrelationships
+}
+func flattenMapAssetDeploymentDeviceInformation(p models.AssetDeploymentDeviceInformation, d *schema.ResourceData) []map[string]interface{} {
+	var assetdeploymentdeviceinformations []map[string]interface{}
+	var ret models.AssetDeploymentDeviceInformation
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	assetdeploymentdeviceinformation := make(map[string]interface{})
+	assetdeploymentdeviceinformation["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetdeploymentdeviceinformation["application_name"] = item.ApplicationName
+	assetdeploymentdeviceinformation["class_id"] = item.ClassId
+	assetdeploymentdeviceinformation["device_transactions"] = (func(p []models.AssetDeviceTransaction, d *schema.ResourceData) []map[string]interface{} {
+		var assetdevicetransactions []map[string]interface{}
+		if len(p) == 0 {
+			return nil
+		}
+		for _, item := range p {
+			assetdevicetransaction := make(map[string]interface{})
+			assetdevicetransaction["action"] = item.Action
+			assetdevicetransaction["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			assetdevicetransaction["class_id"] = item.ClassId
+			assetdevicetransaction["object_type"] = item.ObjectType
+			assetdevicetransaction["status_description"] = item.StatusDescription
+			assetdevicetransaction["status_id"] = item.StatusId
+			assetdevicetransaction["timestamp"] = item.Timestamp
+			assetdevicetransaction["transaction_batch_id"] = item.TransactionBatchId
+			assetdevicetransaction["transaction_date"] = item.TransactionDate
+			assetdevicetransaction["transaction_sequence"] = item.TransactionSequence
+			assetdevicetransactions = append(assetdevicetransactions, assetdevicetransaction)
+		}
+		return assetdevicetransactions
+	})(item.GetDeviceTransactions(), d)
+	assetdeploymentdeviceinformation["instance_id"] = item.InstanceId
+	assetdeploymentdeviceinformation["item_type"] = item.ItemType
+	assetdeploymentdeviceinformation["mlb_product_id"] = item.MlbProductId
+	assetdeploymentdeviceinformation["mlb_product_name"] = item.MlbProductName
+	assetdeploymentdeviceinformation["object_type"] = item.ObjectType
+	assetdeploymentdeviceinformation["old_device_id"] = item.OldDeviceId
+	assetdeploymentdeviceinformation["old_device_status_description"] = item.OldDeviceStatusDescription
+	assetdeploymentdeviceinformation["old_device_status_id"] = item.OldDeviceStatusId
+	assetdeploymentdeviceinformation["old_instance_id"] = item.OldInstanceId
+
+	assetdeploymentdeviceinformations = append(assetdeploymentdeviceinformations, assetdeploymentdeviceinformation)
+	return assetdeploymentdeviceinformations
+}
 func flattenMapAssetDeviceClaimRelationship(p models.AssetDeviceClaimRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var assetdeviceclaimrelationships []map[string]interface{}
 	var ret models.AssetDeviceClaimRelationship
@@ -6614,6 +6756,43 @@ func flattenMapAssetDeviceRegistrationRelationship(p models.AssetDeviceRegistrat
 	assetdeviceregistrationrelationships = append(assetdeviceregistrationrelationships, assetdeviceregistrationrelationship)
 	return assetdeviceregistrationrelationships
 }
+func flattenMapAssetDeviceStatistics(p models.AssetDeviceStatistics, d *schema.ResourceData) []map[string]interface{} {
+	var assetdevicestatisticss []map[string]interface{}
+	var ret models.AssetDeviceStatistics
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	assetdevicestatistics := make(map[string]interface{})
+	assetdevicestatistics["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetdevicestatistics["class_id"] = item.ClassId
+	assetdevicestatistics["cluster_name"] = item.ClusterName
+	assetdevicestatistics["connected"] = item.Connected
+	assetdevicestatistics["membership_ratio"] = item.MembershipRatio
+	assetdevicestatistics["object_type"] = item.ObjectType
+	assetdevicestatistics["vm_host"] = (func(p models.AssetVmHost, d *schema.ResourceData) []map[string]interface{} {
+		var assetvmhosts []map[string]interface{}
+		var ret models.AssetVmHost
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		assetvmhost := make(map[string]interface{})
+		assetvmhost["account_moid"] = item.AccountMoid
+		assetvmhost["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		assetvmhost["class_id"] = item.ClassId
+		assetvmhost["cluster_identity"] = item.ClusterIdentity
+		assetvmhost["cluster_moid"] = item.ClusterMoid
+		assetvmhost["cluster_name"] = item.ClusterName
+		assetvmhost["object_type"] = item.ObjectType
+
+		assetvmhosts = append(assetvmhosts, assetvmhost)
+		return assetvmhosts
+	})(item.GetVmHost(), d)
+
+	assetdevicestatisticss = append(assetdevicestatisticss, assetdevicestatistics)
+	return assetdevicestatisticss
+}
 func flattenMapAssetGlobalUltimate(p models.AssetGlobalUltimate, d *schema.ResourceData) []map[string]interface{} {
 	var assetglobalultimates []map[string]interface{}
 	var ret models.AssetGlobalUltimate
@@ -6702,6 +6881,42 @@ func flattenMapAssetProductInformation(p models.AssetProductInformation, d *sche
 
 	assetproductinformations = append(assetproductinformations, assetproductinformation)
 	return assetproductinformations
+}
+func flattenMapAssetSubscriptionRelationship(p models.AssetSubscriptionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetsubscriptionrelationships []map[string]interface{}
+	var ret models.AssetSubscriptionRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	assetsubscriptionrelationship := make(map[string]interface{})
+	assetsubscriptionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetsubscriptionrelationship["class_id"] = item.ClassId
+	assetsubscriptionrelationship["moid"] = item.Moid
+	assetsubscriptionrelationship["object_type"] = item.ObjectType
+	assetsubscriptionrelationship["selector"] = item.Selector
+
+	assetsubscriptionrelationships = append(assetsubscriptionrelationships, assetsubscriptionrelationship)
+	return assetsubscriptionrelationships
+}
+func flattenMapAssetSubscriptionAccountRelationship(p models.AssetSubscriptionAccountRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var assetsubscriptionaccountrelationships []map[string]interface{}
+	var ret models.AssetSubscriptionAccountRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	assetsubscriptionaccountrelationship := make(map[string]interface{})
+	assetsubscriptionaccountrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	assetsubscriptionaccountrelationship["class_id"] = item.ClassId
+	assetsubscriptionaccountrelationship["moid"] = item.Moid
+	assetsubscriptionaccountrelationship["object_type"] = item.ObjectType
+	assetsubscriptionaccountrelationship["selector"] = item.Selector
+
+	assetsubscriptionaccountrelationships = append(assetsubscriptionaccountrelationships, assetsubscriptionaccountrelationship)
+	return assetsubscriptionaccountrelationships
 }
 func flattenMapAssetSudiInfo(p models.AssetSudiInfo, d *schema.ResourceData) []map[string]interface{} {
 	var assetsudiinfos []map[string]interface{}
@@ -6838,6 +7053,24 @@ func flattenMapBiosSystemBootOrderRelationship(p models.BiosSystemBootOrderRelat
 	biossystembootorderrelationships = append(biossystembootorderrelationships, biossystembootorderrelationship)
 	return biossystembootorderrelationships
 }
+func flattenMapBiosTokenSettingsRelationship(p models.BiosTokenSettingsRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var biostokensettingsrelationships []map[string]interface{}
+	var ret models.BiosTokenSettingsRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	biostokensettingsrelationship := make(map[string]interface{})
+	biostokensettingsrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	biostokensettingsrelationship["class_id"] = item.ClassId
+	biostokensettingsrelationship["moid"] = item.Moid
+	biostokensettingsrelationship["object_type"] = item.ObjectType
+	biostokensettingsrelationship["selector"] = item.Selector
+
+	biostokensettingsrelationships = append(biostokensettingsrelationships, biostokensettingsrelationship)
+	return biostokensettingsrelationships
+}
 func flattenMapBiosUnitRelationship(p models.BiosUnitRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var biosunitrelationships []map[string]interface{}
 	var ret models.BiosUnitRelationship
@@ -6855,6 +7088,24 @@ func flattenMapBiosUnitRelationship(p models.BiosUnitRelationship, d *schema.Res
 
 	biosunitrelationships = append(biosunitrelationships, biosunitrelationship)
 	return biosunitrelationships
+}
+func flattenMapBiosVfSelectMemoryRasConfigurationRelationship(p models.BiosVfSelectMemoryRasConfigurationRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var biosvfselectmemoryrasconfigurationrelationships []map[string]interface{}
+	var ret models.BiosVfSelectMemoryRasConfigurationRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	biosvfselectmemoryrasconfigurationrelationship := make(map[string]interface{})
+	biosvfselectmemoryrasconfigurationrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	biosvfselectmemoryrasconfigurationrelationship["class_id"] = item.ClassId
+	biosvfselectmemoryrasconfigurationrelationship["moid"] = item.Moid
+	biosvfselectmemoryrasconfigurationrelationship["object_type"] = item.ObjectType
+	biosvfselectmemoryrasconfigurationrelationship["selector"] = item.Selector
+
+	biosvfselectmemoryrasconfigurationrelationships = append(biosvfselectmemoryrasconfigurationrelationships, biosvfselectmemoryrasconfigurationrelationship)
+	return biosvfselectmemoryrasconfigurationrelationships
 }
 func flattenMapBootDeviceBootModeRelationship(p models.BootDeviceBootModeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var bootdevicebootmoderelationships []map[string]interface{}
@@ -7132,8 +7383,8 @@ func flattenMapComputePersistentMemoryOperation(p models.ComputePersistentMemory
 		return computepersistentmemorymodules
 	})(item.GetModules(), d)
 	computepersistentmemoryoperation["object_type"] = item.ObjectType
-	secure_passphrase_x := d.Get("persistent_memory_operation")
-	if secure_passphrase_x != nil {
+	secure_passphrase_x, exists := d.GetOk("persistent_memory_operation")
+	if exists && secure_passphrase_x != nil {
 		secure_passphrase_y := secure_passphrase_x.([]interface{})[0].(map[string]interface{})
 		computepersistentmemoryoperation["secure_passphrase"] = secure_passphrase_y["secure_passphrase"]
 	}
@@ -8192,8 +8443,8 @@ func flattenMapFirmwareDirectDownload(p models.FirmwareDirectDownload, d *schema
 	firmwaredirectdownload["image_source"] = item.ImageSource
 	firmwaredirectdownload["is_password_set"] = item.IsPasswordSet
 	firmwaredirectdownload["object_type"] = item.ObjectType
-	password_x := d.Get("direct_download")
-	if password_x != nil {
+	password_x, exists := d.GetOk("direct_download")
+	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		firmwaredirectdownload["password"] = password_y["password"]
 	}
@@ -8291,8 +8542,8 @@ func flattenMapFirmwareNetworkShare(p models.FirmwareNetworkShare, d *schema.Res
 		return firmwarenfsservers
 	})(item.GetNfsServer(), d)
 	firmwarenetworkshare["object_type"] = item.ObjectType
-	password_x := d.Get("network_share")
-	if password_x != nil {
+	password_x, exists := d.GetOk("network_share")
+	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		firmwarenetworkshare["password"] = password_y["password"]
 	}
@@ -9739,6 +9990,24 @@ func flattenMapHyperflexSoftwareVersionPolicyRelationship(p models.HyperflexSoft
 	hyperflexsoftwareversionpolicyrelationships = append(hyperflexsoftwareversionpolicyrelationships, hyperflexsoftwareversionpolicyrelationship)
 	return hyperflexsoftwareversionpolicyrelationships
 }
+func flattenMapHyperflexStorageContainerRelationship(p models.HyperflexStorageContainerRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexstoragecontainerrelationships []map[string]interface{}
+	var ret models.HyperflexStorageContainerRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hyperflexstoragecontainerrelationship := make(map[string]interface{})
+	hyperflexstoragecontainerrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexstoragecontainerrelationship["class_id"] = item.ClassId
+	hyperflexstoragecontainerrelationship["moid"] = item.Moid
+	hyperflexstoragecontainerrelationship["object_type"] = item.ObjectType
+	hyperflexstoragecontainerrelationship["selector"] = item.Selector
+
+	hyperflexstoragecontainerrelationships = append(hyperflexstoragecontainerrelationships, hyperflexstoragecontainerrelationship)
+	return hyperflexstoragecontainerrelationships
+}
 func flattenMapHyperflexSummary(p models.HyperflexSummary, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexsummarys []map[string]interface{}
 	var ret models.HyperflexSummary
@@ -10272,8 +10541,8 @@ func flattenMapIamLdapBaseProperties(p models.IamLdapBaseProperties, d *schema.R
 	iamldapbaseproperties["is_password_set"] = item.IsPasswordSet
 	iamldapbaseproperties["nested_group_search_depth"] = item.NestedGroupSearchDepth
 	iamldapbaseproperties["object_type"] = item.ObjectType
-	password_x := d.Get("base_properties")
-	if password_x != nil {
+	password_x, exists := d.GetOk("base_properties")
+	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		iamldapbaseproperties["password"] = password_y["password"]
 	}
@@ -11103,28 +11372,28 @@ func flattenMapKubernetesClusterCertificateConfiguration(p models.KubernetesClus
 	kubernetesclustercertificateconfiguration := make(map[string]interface{})
 	kubernetesclustercertificateconfiguration["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesclustercertificateconfiguration["ca_cert"] = item.CaCert
-	ca_key_x := d.Get("cert_config")
-	if ca_key_x != nil {
+	ca_key_x, exists := d.GetOk("cert_config")
+	if exists && ca_key_x != nil {
 		ca_key_y := ca_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["ca_key"] = ca_key_y["ca_key"]
 	}
 	kubernetesclustercertificateconfiguration["class_id"] = item.ClassId
 	kubernetesclustercertificateconfiguration["etcd_cert"] = item.EtcdCert
 	kubernetesclustercertificateconfiguration["etcd_encryption_key"] = item.EtcdEncryptionKey
-	etcd_key_x := d.Get("cert_config")
-	if etcd_key_x != nil {
+	etcd_key_x, exists := d.GetOk("cert_config")
+	if exists && etcd_key_x != nil {
 		etcd_key_y := etcd_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["etcd_key"] = etcd_key_y["etcd_key"]
 	}
 	kubernetesclustercertificateconfiguration["front_proxy_cert"] = item.FrontProxyCert
-	front_proxy_key_x := d.Get("cert_config")
-	if front_proxy_key_x != nil {
+	front_proxy_key_x, exists := d.GetOk("cert_config")
+	if exists && front_proxy_key_x != nil {
 		front_proxy_key_y := front_proxy_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["front_proxy_key"] = front_proxy_key_y["front_proxy_key"]
 	}
 	kubernetesclustercertificateconfiguration["object_type"] = item.ObjectType
-	sa_private_key_x := d.Get("cert_config")
-	if sa_private_key_x != nil {
+	sa_private_key_x, exists := d.GetOk("cert_config")
+	if exists && sa_private_key_x != nil {
 		sa_private_key_y := sa_private_key_x.([]interface{})[0].(map[string]interface{})
 		kubernetesclustercertificateconfiguration["sa_private_key"] = sa_private_key_y["sa_private_key"]
 	}
@@ -11143,7 +11412,6 @@ func flattenMapKubernetesClusterManagementConfig(p models.KubernetesClusterManag
 	kubernetesclustermanagementconfig := make(map[string]interface{})
 	kubernetesclustermanagementconfig["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	kubernetesclustermanagementconfig["class_id"] = item.ClassId
-	kubernetesclustermanagementconfig["encrypted_etcd"] = item.EncryptedEtcd
 	kubernetesclustermanagementconfig["load_balancer_count"] = item.LoadBalancerCount
 	kubernetesclustermanagementconfig["load_balancers"] = item.LoadBalancers
 	kubernetesclustermanagementconfig["master_vip"] = item.MasterVip
@@ -11463,8 +11731,8 @@ func flattenMapKubernetesProxyConfig(p models.KubernetesProxyConfig, d *schema.R
 	kubernetesproxyconfig["hostname"] = item.Hostname
 	kubernetesproxyconfig["is_password_set"] = item.IsPasswordSet
 	kubernetesproxyconfig["object_type"] = item.ObjectType
-	password_x := d.Get("docker_http_proxy")
-	if password_x != nil {
+	password_x, exists := d.GetOk("docker_http_proxy")
+	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		kubernetesproxyconfig["password"] = password_y["password"]
 	}
@@ -11956,8 +12224,8 @@ func flattenMapMemoryPersistentMemoryLocalSecurity(p models.MemoryPersistentMemo
 	memorypersistentmemorylocalsecurity["enabled"] = item.Enabled
 	memorypersistentmemorylocalsecurity["is_secure_passphrase_set"] = item.IsSecurePassphraseSet
 	memorypersistentmemorylocalsecurity["object_type"] = item.ObjectType
-	secure_passphrase_x := d.Get("local_security")
-	if secure_passphrase_x != nil {
+	secure_passphrase_x, exists := d.GetOk("local_security")
+	if exists && secure_passphrase_x != nil {
 		secure_passphrase_y := secure_passphrase_x.([]interface{})[0].(map[string]interface{})
 		memorypersistentmemorylocalsecurity["secure_passphrase"] = secure_passphrase_y["secure_passphrase"]
 	}
@@ -12475,8 +12743,8 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	item := p
 	osanswers := make(map[string]interface{})
 	osanswers["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
-	answer_file_x := d.Get("answers")
-	if answer_file_x != nil {
+	answer_file_x, exists := d.GetOk("answers")
+	if exists && answer_file_x != nil {
 		answer_file_y := answer_file_x.([]interface{})[0].(map[string]interface{})
 		osanswers["answer_file"] = answer_file_y["answer_file"]
 	}
@@ -12504,8 +12772,8 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	osanswers["nameserver"] = item.Nameserver
 	osanswers["object_type"] = item.ObjectType
 	osanswers["product_key"] = item.ProductKey
-	root_password_x := d.Get("answers")
-	if root_password_x != nil {
+	root_password_x, exists := d.GetOk("answers")
+	if exists && root_password_x != nil {
 		root_password_y := root_password_x.([]interface{})[0].(map[string]interface{})
 		osanswers["root_password"] = root_password_y["root_password"]
 	}
@@ -15074,8 +15342,8 @@ func flattenMapVnicIscsiAuthProfile(p models.VnicIscsiAuthProfile, d *schema.Res
 	vniciscsiauthprofile["class_id"] = item.ClassId
 	vniciscsiauthprofile["is_password_set"] = item.IsPasswordSet
 	vniciscsiauthprofile["object_type"] = item.ObjectType
-	password_x := d.Get("chap")
-	if password_x != nil {
+	password_x, exists := d.GetOk("chap")
+	if exists && password_x != nil {
 		password_y := password_x.([]interface{})[0].(map[string]interface{})
 		vniciscsiauthprofile["password"] = password_y["password"]
 	}
@@ -15447,6 +15715,22 @@ func flattenMapWorkflowComments(p models.WorkflowComments, d *schema.ResourceDat
 
 	workflowcommentss = append(workflowcommentss, workflowcomments)
 	return workflowcommentss
+}
+func flattenMapWorkflowCustomDataTypeProperties(p models.WorkflowCustomDataTypeProperties, d *schema.ResourceData) []map[string]interface{} {
+	var workflowcustomdatatypepropertiess []map[string]interface{}
+	var ret models.WorkflowCustomDataTypeProperties
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workflowcustomdatatypeproperties := make(map[string]interface{})
+	workflowcustomdatatypeproperties["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workflowcustomdatatypeproperties["class_id"] = item.ClassId
+	workflowcustomdatatypeproperties["external_meta"] = item.ExternalMeta
+	workflowcustomdatatypeproperties["object_type"] = item.ObjectType
+
+	workflowcustomdatatypepropertiess = append(workflowcustomdatatypepropertiess, workflowcustomdatatypeproperties)
+	return workflowcustomdatatypepropertiess
 }
 func flattenMapWorkflowErrorResponseHandlerRelationship(p models.WorkflowErrorResponseHandlerRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var workflowerrorresponsehandlerrelationships []map[string]interface{}

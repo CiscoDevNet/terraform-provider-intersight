@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCard"]
 **ConnectionPath** | Pointer to **string** | Switch Id to which the IOM is connected to. The value can be A or B. | [optional] [readonly] 
 **DcSupported** | Pointer to **bool** | IOM device connector support. | [optional] [readonly] 
+**InbandIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **Side** | Pointer to **string** | Location of IOM within a chassis. The value can be left or right. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
@@ -124,6 +125,41 @@ SetDcSupported sets DcSupported field to given value.
 
 HasDcSupported returns a boolean if a field has been set.
 
+### GetInbandIpAddresses
+
+`func (o *EquipmentIoCard) GetInbandIpAddresses() []ComputeIpAddress`
+
+GetInbandIpAddresses returns the InbandIpAddresses field if non-nil, zero value otherwise.
+
+### GetInbandIpAddressesOk
+
+`func (o *EquipmentIoCard) GetInbandIpAddressesOk() (*[]ComputeIpAddress, bool)`
+
+GetInbandIpAddressesOk returns a tuple with the InbandIpAddresses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInbandIpAddresses
+
+`func (o *EquipmentIoCard) SetInbandIpAddresses(v []ComputeIpAddress)`
+
+SetInbandIpAddresses sets InbandIpAddresses field to given value.
+
+### HasInbandIpAddresses
+
+`func (o *EquipmentIoCard) HasInbandIpAddresses() bool`
+
+HasInbandIpAddresses returns a boolean if a field has been set.
+
+### SetInbandIpAddressesNil
+
+`func (o *EquipmentIoCard) SetInbandIpAddressesNil(b bool)`
+
+ SetInbandIpAddressesNil sets the value for InbandIpAddresses to be an explicit nil
+
+### UnsetInbandIpAddresses
+`func (o *EquipmentIoCard) UnsetInbandIpAddresses()`
+
+UnsetInbandIpAddresses ensures that no value is present for InbandIpAddresses, not even an explicit nil
 ### GetSide
 
 `func (o *EquipmentIoCard) GetSide() string`

@@ -13,8 +13,9 @@ Policy to configure the NTP Servers.
 
 ```hcl
 resource "intersight_ntp_policy" "ntp1" {
-  name    = "ntp1"
-  enabled = true
+  name        = "ntp1"
+  description = "test policy"
+  enabled     = true
   ntp_servers = [
     "ntp.esl.cisco.com",
     "time-a-g.nist.gov",

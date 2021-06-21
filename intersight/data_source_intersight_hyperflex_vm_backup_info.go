@@ -64,6 +64,12 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"power_on": {
+				Description: "The power state of the Virtual Machine.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
 			"protection_status": {
 				Description: "Description of the protection status of this VmBackupInfo.\n* `PREPARE_FAILOVER_STARTED` - The protection status is prepare failover started.\n* `PREPARE_FAILOVER_FAILED` - The protection status is prepare failover failed.\n* `PREPARE_FAILOVER_COMPLETED` - The protection status is prepaire failover completed.\n* `FAILOVER_STARTED` - The protection status is failover started.\n* `FAILOVER_FAILED` - The protection status is failover failed.\n* `FAILOVER_COMPLETED` - The protection status is failover completed.\n* `PREPARE_REVERSEPROTECT_STARTED` - The protection status is prepare reverse protect started.\n* `PREPARE_REVERSEPROTECT_FAILED` - The protection status is prepare reverse protect failed.\n* `PREPARE_REVERSEPROTECT_COMPLETED` - The protection status is prepair reverse protect completed.\n* `REVERSEPROTECT_STARTED` - The protection status is reverse protect started.\n* `REVERSEPROTECT_FAILED` - The protection status is reverse protect failed.\n* `ACTIVE` - The protection status is active.\n* `CREATION_IN_PROGRESS` - The protection status is failover in progress.\n* `CREATION_FAILED` - The protection status is creation failed.\n* `LOCAL_RESTORE_STARTED` - The protection status is local restore started.\n* `LOCAL_RESTORE_FAILED` - The protection status is local restore failed.",
 				Type:        schema.TypeString,
@@ -1203,6 +1209,12 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 							},
 						},
 					},
+					"power_on": {
+						Description: "The power state of the Virtual Machine.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+						Computed:    true,
+					},
 					"protection_status": {
 						Description: "Description of the protection status of this VmBackupInfo.\n* `PREPARE_FAILOVER_STARTED` - The protection status is prepare failover started.\n* `PREPARE_FAILOVER_FAILED` - The protection status is prepare failover failed.\n* `PREPARE_FAILOVER_COMPLETED` - The protection status is prepaire failover completed.\n* `FAILOVER_STARTED` - The protection status is failover started.\n* `FAILOVER_FAILED` - The protection status is failover failed.\n* `FAILOVER_COMPLETED` - The protection status is failover completed.\n* `PREPARE_REVERSEPROTECT_STARTED` - The protection status is prepare reverse protect started.\n* `PREPARE_REVERSEPROTECT_FAILED` - The protection status is prepare reverse protect failed.\n* `PREPARE_REVERSEPROTECT_COMPLETED` - The protection status is prepair reverse protect completed.\n* `REVERSEPROTECT_STARTED` - The protection status is reverse protect started.\n* `REVERSEPROTECT_FAILED` - The protection status is reverse protect failed.\n* `ACTIVE` - The protection status is active.\n* `CREATION_IN_PROGRESS` - The protection status is failover in progress.\n* `CREATION_FAILED` - The protection status is creation failed.\n* `LOCAL_RESTORE_STARTED` - The protection status is local restore started.\n* `LOCAL_RESTORE_FAILED` - The protection status is local restore failed.",
 						Type:        schema.TypeString,
@@ -1883,6 +1895,10 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("power_on"); ok {
+		x := (v.(bool))
+		o.SetPowerOn(x)
+	}
 	if v, ok := d.GetOk("protection_status"); ok {
 		x := (v.(string))
 		o.SetProtectionStatus(x)
@@ -1952,6 +1968,7 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["power_on"] = (s.GetPowerOn())
 				temp["protection_status"] = (s.GetProtectionStatus())
 
 				temp["schedule"] = flattenListHyperflexReplicationClusterReferenceToSchedule(s.GetSchedule(), d)

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **MgmtIpAddress** | Pointer to **string** | The management IP address for the HyperFlex cluster. | [optional] 
 **MgmtPlatform** | Pointer to **string** | The management platform for the HyperFlex cluster. * &#x60;FI&#x60; - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * &#x60;EDGE&#x60; - The host servers used in the cluster deployment are standalone severs. | [optional] [default to "FI"]
 **Replication** | Pointer to **int64** | The number of copies of each data block written. | [optional] 
+**StorageClusterAuxiliaryIp** | Pointer to **string** | The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller. | [optional] 
 **StorageDataVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **StorageType** | Pointer to **string** | The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * &#x60;HyperFlexDp&#x60; - The type of storage is HyperFlex Data Platform. * &#x60;ThirdParty&#x60; - The type of storage is 3rd Party Storage (PureStorage, etc..). | [optional] [default to "HyperFlexDp"]
 **WwxnPrefix** | Pointer to **string** | The WWxN prefix in the form of 20:00:00:25:B5:XX. | [optional] 
@@ -295,6 +296,31 @@ SetReplication sets Replication field to given value.
 `func (o *HyperflexClusterProfileAllOf) HasReplication() bool`
 
 HasReplication returns a boolean if a field has been set.
+
+### GetStorageClusterAuxiliaryIp
+
+`func (o *HyperflexClusterProfileAllOf) GetStorageClusterAuxiliaryIp() string`
+
+GetStorageClusterAuxiliaryIp returns the StorageClusterAuxiliaryIp field if non-nil, zero value otherwise.
+
+### GetStorageClusterAuxiliaryIpOk
+
+`func (o *HyperflexClusterProfileAllOf) GetStorageClusterAuxiliaryIpOk() (*string, bool)`
+
+GetStorageClusterAuxiliaryIpOk returns a tuple with the StorageClusterAuxiliaryIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClusterAuxiliaryIp
+
+`func (o *HyperflexClusterProfileAllOf) SetStorageClusterAuxiliaryIp(v string)`
+
+SetStorageClusterAuxiliaryIp sets StorageClusterAuxiliaryIp field to given value.
+
+### HasStorageClusterAuxiliaryIp
+
+`func (o *HyperflexClusterProfileAllOf) HasStorageClusterAuxiliaryIp() bool`
+
+HasStorageClusterAuxiliaryIp returns a boolean if a field has been set.
 
 ### GetStorageDataVlan
 

@@ -169,6 +169,13 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"labels": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -637,6 +644,17 @@ func resourceKubernetesAddonDefinitionCreate(c context.Context, d *schema.Resour
 		o.SetIconUrl(x)
 	}
 
+	if v, ok := d.GetOk("labels"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		if len(x) > 0 {
+			o.SetLabels(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -1066,6 +1084,10 @@ func resourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property IconUrl in KubernetesAddonDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("labels", (s.GetLabels())); err != nil {
+		return diag.Errorf("error occurred while setting property Labels in KubernetesAddonDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in KubernetesAddonDefinition object: %s", err.Error())
 	}
@@ -1280,6 +1302,16 @@ func resourceKubernetesAddonDefinitionUpdate(c context.Context, d *schema.Resour
 		v := d.Get("icon_url")
 		x := (v.(string))
 		o.SetIconUrl(x)
+	}
+
+	if d.HasChange("labels") {
+		v := d.Get("labels")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetLabels(x)
 	}
 
 	if d.HasChange("mod_time") {

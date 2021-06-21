@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of the addon component. | [optional] 
 **Digest** | Pointer to **string** | Digest used to verify the integrity of an addon. | [optional] 
 **IconUrl** | Pointer to **string** | Icon used to represent the addon in UI. | [optional] 
+**Labels** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name of an addon component. | [optional] 
 **Version** | Pointer to **string** | Version of the addon component. | [optional] 
 **Catalog** | Pointer to [**KubernetesCatalogRelationship**](kubernetes.Catalog.Relationship.md) |  | [optional] 
@@ -252,6 +253,41 @@ SetIconUrl sets IconUrl field to given value.
 
 HasIconUrl returns a boolean if a field has been set.
 
+### GetLabels
+
+`func (o *KubernetesAddonDefinitionAllOf) GetLabels() []string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *KubernetesAddonDefinitionAllOf) GetLabelsOk() (*[]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *KubernetesAddonDefinitionAllOf) SetLabels(v []string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *KubernetesAddonDefinitionAllOf) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
+
+### SetLabelsNil
+
+`func (o *KubernetesAddonDefinitionAllOf) SetLabelsNil(b bool)`
+
+ SetLabelsNil sets the value for Labels to be an explicit nil
+
+### UnsetLabels
+`func (o *KubernetesAddonDefinitionAllOf) UnsetLabels()`
+
+UnsetLabels ensures that no value is present for Labels, not even an explicit nil
 ### GetName
 
 `func (o *KubernetesAddonDefinitionAllOf) GetName() string`

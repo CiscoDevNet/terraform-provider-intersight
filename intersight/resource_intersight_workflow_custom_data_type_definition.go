@@ -314,6 +314,41 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 					},
 				},
 			},
+			"properties": {
+				Description: "Type to capture all the properties for the custom data type definition.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.CustomDataTypeProperties",
+						},
+						"external_meta": {
+							Description: "When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "workflow.CustomDataTypeProperties",
+						},
+					},
+				},
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -927,6 +962,43 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 		}
 	}
 
+	if v, ok := d.GetOk("properties"); ok {
+		p := make([]models.WorkflowCustomDataTypeProperties, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewWorkflowCustomDataTypePropertiesWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.CustomDataTypeProperties")
+			if v, ok := l["external_meta"]; ok {
+				{
+					x := (v.(bool))
+					o.SetExternalMeta(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetProperties(x)
+		}
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1365,6 +1437,10 @@ func resourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while setting property PermissionResources in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("properties", flattenMapWorkflowCustomDataTypeProperties(s.GetProperties(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Properties in WorkflowCustomDataTypeDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
@@ -1703,6 +1779,44 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if d.HasChange("properties") {
+		v := d.Get("properties")
+		p := make([]models.WorkflowCustomDataTypeProperties, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowCustomDataTypeProperties{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.CustomDataTypeProperties")
+			if v, ok := l["external_meta"]; ok {
+				{
+					x := (v.(bool))
+					o.SetExternalMeta(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetProperties(x)
+		}
 	}
 
 	if d.HasChange("shared_scope") {

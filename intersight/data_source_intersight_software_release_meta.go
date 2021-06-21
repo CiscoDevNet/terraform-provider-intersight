@@ -40,6 +40,11 @@ func dataSourceSoftwareReleaseMeta() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"image_type": {
+				Description: "The subtype of the distributable image. For e.g. the firmware distributable is categorized according to the component it can upgrade - Standalone server, Intersight managed server or UCS Managed Fabric Interconnect.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"latest_file_name": {
 				Description: "The name of the latest image file uploaded for this software type. It is populated as part of the image import operation.",
 				Type:        schema.TypeString,
@@ -76,7 +81,7 @@ func dataSourceSoftwareReleaseMeta() *schema.Resource {
 				Computed:    true,
 			},
 			"software_type_id": {
-				Description: "The software type id of the image.",
+				Description: "The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -109,6 +114,10 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("image_type"); ok {
+		x := (v.(string))
+		o.SetImageType(x)
 	}
 	if v, ok := d.GetOk("latest_file_name"); ok {
 		x := (v.(string))
@@ -187,6 +196,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["image"] = flattenMapFirmwareBaseDistributableRelationship(s.GetImage(), d)
+				temp["image_type"] = (s.GetImageType())
 				temp["latest_file_name"] = (s.GetLatestFileName())
 				temp["latest_version"] = (s.GetLatestVersion())
 

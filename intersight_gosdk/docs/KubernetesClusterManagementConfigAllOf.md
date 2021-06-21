@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ClusterManagementConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterManagementConfig"]
-**EncryptedEtcd** | Pointer to **bool** | Encrypt ETCD data at rest using the etcdEncryptionKey specified in the cluster Kubernetes configuration. | [optional] 
 **LoadBalancerCount** | Pointer to **int64** | Number of IP addresses to reserve for load balancer services. | [optional] 
 **LoadBalancers** | Pointer to **[]string** |  | [optional] 
 **MasterVip** | Pointer to **string** | VIP for the cluster Kubernetes API server. If this is empty and a cluster IP pool is specified, it will be allocated from the IP pool. | [optional] 
@@ -71,31 +70,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetEncryptedEtcd
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetEncryptedEtcd() bool`
-
-GetEncryptedEtcd returns the EncryptedEtcd field if non-nil, zero value otherwise.
-
-### GetEncryptedEtcdOk
-
-`func (o *KubernetesClusterManagementConfigAllOf) GetEncryptedEtcdOk() (*bool, bool)`
-
-GetEncryptedEtcdOk returns a tuple with the EncryptedEtcd field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEncryptedEtcd
-
-`func (o *KubernetesClusterManagementConfigAllOf) SetEncryptedEtcd(v bool)`
-
-SetEncryptedEtcd sets EncryptedEtcd field to given value.
-
-### HasEncryptedEtcd
-
-`func (o *KubernetesClusterManagementConfigAllOf) HasEncryptedEtcd() bool`
-
-HasEncryptedEtcd returns a boolean if a field has been set.
 
 ### GetLoadBalancerCount
 

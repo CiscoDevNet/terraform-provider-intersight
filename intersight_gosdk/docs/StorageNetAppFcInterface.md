@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppFcInterface"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppFcInterface"]
 **Enabled** | Pointer to **string** | FC interface is enabled or not. | [optional] [readonly] 
-**State** | Pointer to **string** | State of FC interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
+**State** | Pointer to **string** | State of the FC interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Uuid** | Pointer to **string** | Uuid of  NetApp FC Interface. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](storage.NetAppNode.Relationship.md) |  | [optional] 
 **PhysicalPort** | Pointer to [**StorageNetAppFcPortRelationship**](storage.NetAppFcPort.Relationship.md) |  | [optional] 

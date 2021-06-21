@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "snmp.Trap"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "snmp.Trap"]
+**Community** | Pointer to **string** | SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c. | [optional] 
 **Destination** | Pointer to **string** | Address to which the SNMP trap information is sent. | [optional] 
 **Enabled** | Pointer to **bool** | Enables/disables the trap on the server If enabled, trap is active on the server. | [optional] [default to true]
 **Port** | Pointer to **int64** | Port used by the server to communicate with the trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). | [optional] [default to 162]
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCommunity
+
+`func (o *SnmpTrapAllOf) GetCommunity() string`
+
+GetCommunity returns the Community field if non-nil, zero value otherwise.
+
+### GetCommunityOk
+
+`func (o *SnmpTrapAllOf) GetCommunityOk() (*string, bool)`
+
+GetCommunityOk returns a tuple with the Community field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommunity
+
+`func (o *SnmpTrapAllOf) SetCommunity(v string)`
+
+SetCommunity sets Community field to given value.
+
+### HasCommunity
+
+`func (o *SnmpTrapAllOf) HasCommunity() bool`
+
+HasCommunity returns a boolean if a field has been set.
 
 ### GetDestination
 

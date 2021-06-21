@@ -18,11 +18,18 @@ resource "intersight_fabric_uplink_pc_role" "fabric_uplink_pc_role1" {
     {
       port_id           = 1
       aggregate_port_id = 0
-      slot_id           = 100
+      slot_id           = 1
+    },
+    {
+      port_id           = 2
+      aggregate_port_id = 0
+      slot_id           = 1
     }
   ]
   admin_speed       = "Auto"
-  ud_ld_admin_state = "Enabled"
+  port_policy {
+    moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+  }
 }
 ```
 ## Argument Reference

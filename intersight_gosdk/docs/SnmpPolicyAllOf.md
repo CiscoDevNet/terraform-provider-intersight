@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **SysContact** | Pointer to **string** | Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. | [optional] 
 **SysLocation** | Pointer to **string** | Location of host on which the SNMP agent (server) runs. | [optional] 
 **TrapCommunity** | Pointer to **string** | SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. | [optional] 
+**V2Enabled** | Pointer to **bool** | State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host. | [optional] [default to true]
+**V3Enabled** | Pointer to **bool** | State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host. | [optional] [default to true]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
@@ -347,6 +349,56 @@ SetTrapCommunity sets TrapCommunity field to given value.
 `func (o *SnmpPolicyAllOf) HasTrapCommunity() bool`
 
 HasTrapCommunity returns a boolean if a field has been set.
+
+### GetV2Enabled
+
+`func (o *SnmpPolicyAllOf) GetV2Enabled() bool`
+
+GetV2Enabled returns the V2Enabled field if non-nil, zero value otherwise.
+
+### GetV2EnabledOk
+
+`func (o *SnmpPolicyAllOf) GetV2EnabledOk() (*bool, bool)`
+
+GetV2EnabledOk returns a tuple with the V2Enabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetV2Enabled
+
+`func (o *SnmpPolicyAllOf) SetV2Enabled(v bool)`
+
+SetV2Enabled sets V2Enabled field to given value.
+
+### HasV2Enabled
+
+`func (o *SnmpPolicyAllOf) HasV2Enabled() bool`
+
+HasV2Enabled returns a boolean if a field has been set.
+
+### GetV3Enabled
+
+`func (o *SnmpPolicyAllOf) GetV3Enabled() bool`
+
+GetV3Enabled returns the V3Enabled field if non-nil, zero value otherwise.
+
+### GetV3EnabledOk
+
+`func (o *SnmpPolicyAllOf) GetV3EnabledOk() (*bool, bool)`
+
+GetV3EnabledOk returns a tuple with the V3Enabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetV3Enabled
+
+`func (o *SnmpPolicyAllOf) SetV3Enabled(v bool)`
+
+SetV3Enabled sets V3Enabled field to given value.
+
+### HasV3Enabled
+
+`func (o *SnmpPolicyAllOf) HasV3Enabled() bool`
+
+HasV3Enabled returns a boolean if a field has been set.
 
 ### GetOrganization
 

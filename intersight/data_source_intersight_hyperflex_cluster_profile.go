@@ -119,6 +119,11 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"storage_cluster_auxiliary_ip": {
+				Description: "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"storage_type": {
 				Description: "The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).\n* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.\n* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).",
 				Type:        schema.TypeString,
@@ -223,6 +228,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
+		x := (v.(string))
+		o.SetStorageClusterAuxiliaryIp(x)
 	}
 	if v, ok := d.GetOk("storage_type"); ok {
 		x := (v.(string))
@@ -340,6 +349,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["software_version"] = flattenMapHyperflexSoftwareVersionPolicyRelationship(s.GetSoftwareVersion(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
+				temp["storage_cluster_auxiliary_ip"] = (s.GetStorageClusterAuxiliaryIp())
 
 				temp["storage_data_vlan"] = flattenMapHyperflexNamedVlan(s.GetStorageDataVlan(), d)
 				temp["storage_type"] = (s.GetStorageType())

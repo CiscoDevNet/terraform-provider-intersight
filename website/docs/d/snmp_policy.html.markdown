@@ -29,4 +29,6 @@ The following arguments can be used to get data of already created objects in In
 * `sys_contact`:(string) Contact person responsible for the SNMP implementation. Enter a string up to 64 characters, such as an email address or a name and telephone number. 
 * `sys_location`:(string) Location of host on which the SNMP agent (server) runs. 
 * `trap_community`:(string) SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. 
+* `v2_enabled`:(bool) State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host. 
+* `v3_enabled`:(bool) State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host. 
  

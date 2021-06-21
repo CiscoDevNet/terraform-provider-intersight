@@ -35,6 +35,5 @@ The following arguments can be used to get data of already created objects in In
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. 
-* `static_path_attachment_count`:(int) Number of static path Attachments. 
 * `useg_hyperv_count`:(int) Logical Operators for attribute based microsegmentation in a hypervisor. 
  
