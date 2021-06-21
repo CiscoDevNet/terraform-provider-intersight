@@ -89,7 +89,7 @@ func dataSourceStorageNetAppFcInterface() *schema.Resource {
 				Computed:    true,
 			},
 			"state": {
-				Description: "State of FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+				Description: "State of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -403,7 +403,7 @@ func dataSourceStorageNetAppFcInterface() *schema.Resource {
 						Computed:    true,
 					},
 					"state": {
-						Description: "State of FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+						Description: "State of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

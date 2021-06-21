@@ -93,6 +93,7 @@ This complex property has following sub-properties:
 * `snmp_port`:(int) Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). 
 * `snmp_traps`:(Array)
 This complex property has following sub-properties:
+  + `community`:(string) SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c. 
   + `destination`:(string) Address to which the SNMP trap information is sent. 
   + `enabled`:(bool) Enables/disables the trap on the server If enabled, trap is active on the server. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -103,7 +104,7 @@ This complex property has following sub-properties:
 * `snmp_users`:(Array)
 This complex property has following sub-properties:
   + `auth_password`:(string) Authorization password for the user. 
-  + `auth_type`:(string) Authorization protocol for authenticating the user.* `NA` - Authentication protocol is not applicable.* `MD5` - MD5 protocol is used to authenticate SNMP user.* `SHA` - SHA protocol is used to authenticate SNMP user. 
+  + `auth_type`:(string) Authorization protocol for authenticating the user.* `NA` - Authentication protocol is not applicable.* `MD5` - MD5 protocol is used to authenticate SNMP user.* `SHA` - SHA protocol is used to authenticate SNMP user.* `SHA-224` - SHA-224 protocol is used to authenticate SNMP user.* `SHA-256` - SHA-256 protocol is used to authenticate SNMP user.* `SHA-384` - SHA-384 protocol is used to authenticate SNMP user.* `SHA-512` - SHA-512 protocol is used to authenticate SNMP user. 
   + `is_auth_password_set`:(bool)(Computed) Indicates whether the value of the 'authPassword' property has been set. 
   + `is_privacy_password_set`:(bool)(Computed) Indicates whether the value of the 'privacyPassword' property has been set. 
   + `name`:(string) SNMP username. Must have a minimum of 1 and and a maximum of 31 characters. 
@@ -118,6 +119,8 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `trap_community`:(string) SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. 
+* `v2_enabled`:(bool) State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host. 
+* `v3_enabled`:(bool) State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host. 
 * `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

@@ -13,14 +13,8 @@ The features that are applied on a vethernet that is connected to the vNIC.
 
 ```hcl
 resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_control_policy1" {
-  name        = "NCP"
-  description = "ethNwControlDes"
-  tags = [
-    {
-      key   = "policy"
-      value = "ethNwControlPOLICY"
-    }
-  ]
+  name        = "fabric_eth_network_control_policy1"
+  description = "demo eth network control policy"
   cdp_enabled = false
   forgeMac    = "allow"
   lldp_settings = {
@@ -28,8 +22,12 @@ resource "intersight_fabric_eth_network_control_policy" "fabric_eth_network_cont
     receive_enabled  = false
     transmit_enabled = false
   }
-  mac_registration_mode = "nativeVlanOnly"
+  mac_registration_mode = "allVlans"
   uplink_fail_action    = "linkDown"
+  organization {
+    object_type = "organization.Organization"
+    moid        = var.organization_organization
+  }
 }
 ```
 ## Argument Reference

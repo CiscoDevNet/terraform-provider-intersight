@@ -54,7 +54,6 @@ Name | Type | Description | Notes
 **SmartAccountId** | Pointer to **int64** | Returns the value of the smartAccountId/CustomerId field. | [optional] 
 **SoftwareDownload** | Pointer to **string** | Last software downloaded of device being inventoried. This determines if software download API was used. | [optional] 
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
-**TotalCriticalFaults** | Pointer to **int64** | Returns the total number of critical faults. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
 **LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](niatelemetry.NiaLicenseState.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -1387,31 +1386,6 @@ SetSystemUpTime sets SystemUpTime field to given value.
 `func (o *NiatelemetryNiaInventoryAllOf) HasSystemUpTime() bool`
 
 HasSystemUpTime returns a boolean if a field has been set.
-
-### GetTotalCriticalFaults
-
-`func (o *NiatelemetryNiaInventoryAllOf) GetTotalCriticalFaults() int64`
-
-GetTotalCriticalFaults returns the TotalCriticalFaults field if non-nil, zero value otherwise.
-
-### GetTotalCriticalFaultsOk
-
-`func (o *NiatelemetryNiaInventoryAllOf) GetTotalCriticalFaultsOk() (*int64, bool)`
-
-GetTotalCriticalFaultsOk returns a tuple with the TotalCriticalFaults field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTotalCriticalFaults
-
-`func (o *NiatelemetryNiaInventoryAllOf) SetTotalCriticalFaults(v int64)`
-
-SetTotalCriticalFaults sets TotalCriticalFaults field to given value.
-
-### HasTotalCriticalFaults
-
-`func (o *NiatelemetryNiaInventoryAllOf) HasTotalCriticalFaults() bool`
-
-HasTotalCriticalFaults returns a boolean if a field has been set.
 
 ### GetVersion
 

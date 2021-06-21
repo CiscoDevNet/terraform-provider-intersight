@@ -30,6 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the profile instance or profile template. 
 * `replication`:(int) The number of copies of each data block written. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `storage_cluster_auxiliary_ip`:(string) The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller. 
 * `storage_type`:(string) The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..). 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
 * `wwxn_prefix`:(string) The WWxN prefix in the form of 20:00:00:25:B5:XX. 

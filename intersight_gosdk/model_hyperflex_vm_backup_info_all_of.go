@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
  *
- * API version: 1.0.9-4305
+ * API version: 1.0.9-4334
  * Contact: intersight@cisco.com
  */
 
@@ -26,6 +26,8 @@ type HyperflexVmBackupInfoAllOf struct {
 	ClusterEntityReference     NullableHyperflexEntityReference        `json:"ClusterEntityReference,omitempty"`
 	ClusterIdProtectionInfoMap []HyperflexMapClusterIdToProtectionInfo `json:"ClusterIdProtectionInfoMap,omitempty"`
 	Error                      NullableHyperflexErrorStack             `json:"Error,omitempty"`
+	// The power state of the Virtual Machine.
+	PowerOn *bool `json:"PowerOn,omitempty"`
 	// Description of the protection status of this VmBackupInfo. * `PREPARE_FAILOVER_STARTED` - The protection status is prepare failover started. * `PREPARE_FAILOVER_FAILED` - The protection status is prepare failover failed. * `PREPARE_FAILOVER_COMPLETED` - The protection status is prepaire failover completed. * `FAILOVER_STARTED` - The protection status is failover started. * `FAILOVER_FAILED` - The protection status is failover failed. * `FAILOVER_COMPLETED` - The protection status is failover completed. * `PREPARE_REVERSEPROTECT_STARTED` - The protection status is prepare reverse protect started. * `PREPARE_REVERSEPROTECT_FAILED` - The protection status is prepare reverse protect failed. * `PREPARE_REVERSEPROTECT_COMPLETED` - The protection status is prepair reverse protect completed. * `REVERSEPROTECT_STARTED` - The protection status is reverse protect started. * `REVERSEPROTECT_FAILED` - The protection status is reverse protect failed. * `ACTIVE` - The protection status is active. * `CREATION_IN_PROGRESS` - The protection status is failover in progress. * `CREATION_FAILED` - The protection status is creation failed. * `LOCAL_RESTORE_STARTED` - The protection status is local restore started. * `LOCAL_RESTORE_FAILED` - The protection status is local restore failed.
 	ProtectionStatus     *string                                          `json:"ProtectionStatus,omitempty"`
 	Schedule             []HyperflexReplicationClusterReferenceToSchedule `json:"Schedule,omitempty"`
@@ -267,6 +269,38 @@ func (o *HyperflexVmBackupInfoAllOf) SetErrorNil() {
 // UnsetError ensures that no value is present for Error, not even an explicit nil
 func (o *HyperflexVmBackupInfoAllOf) UnsetError() {
 	o.Error.Unset()
+}
+
+// GetPowerOn returns the PowerOn field value if set, zero value otherwise.
+func (o *HyperflexVmBackupInfoAllOf) GetPowerOn() bool {
+	if o == nil || o.PowerOn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PowerOn
+}
+
+// GetPowerOnOk returns a tuple with the PowerOn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexVmBackupInfoAllOf) GetPowerOnOk() (*bool, bool) {
+	if o == nil || o.PowerOn == nil {
+		return nil, false
+	}
+	return o.PowerOn, true
+}
+
+// HasPowerOn returns a boolean if a field has been set.
+func (o *HyperflexVmBackupInfoAllOf) HasPowerOn() bool {
+	if o != nil && o.PowerOn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerOn gets a reference to the given bool and assigns it to the PowerOn field.
+func (o *HyperflexVmBackupInfoAllOf) SetPowerOn(v bool) {
+	o.PowerOn = &v
 }
 
 // GetProtectionStatus returns the ProtectionStatus field value if set, zero value otherwise.
@@ -536,6 +570,9 @@ func (o HyperflexVmBackupInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.Error.IsSet() {
 		toSerialize["Error"] = o.Error.Get()
 	}
+	if o.PowerOn != nil {
+		toSerialize["PowerOn"] = o.PowerOn
+	}
 	if o.ProtectionStatus != nil {
 		toSerialize["ProtectionStatus"] = o.ProtectionStatus
 	}
@@ -581,6 +618,7 @@ func (o *HyperflexVmBackupInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClusterEntityReference")
 		delete(additionalProperties, "ClusterIdProtectionInfoMap")
 		delete(additionalProperties, "Error")
+		delete(additionalProperties, "PowerOn")
 		delete(additionalProperties, "ProtectionStatus")
 		delete(additionalProperties, "Schedule")
 		delete(additionalProperties, "VmEntityReference")

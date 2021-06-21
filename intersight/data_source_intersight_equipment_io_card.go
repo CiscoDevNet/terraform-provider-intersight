@@ -404,6 +404,97 @@ func dataSourceEquipmentIoCard() *schema.Resource {
 						},
 						Computed: true,
 					},
+					"inband_ip_addresses": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"address": {
+									Description: "IP Address to be used for KVM.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"category": {
+									Description: "Category of the Kvm IP Address.\n* `Equipment` - Ip Address assigned to an equipment.\n* `ServiceProfile` - Ip Address assigned to a Service Profile.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"default_gateway": {
+									Description: "Default gateway property of KVM IP Address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"dn": {
+									Description: "The distinguished name for this managed object.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"http_port": {
+									Description: "HTTP port of an IP Address.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"https_port": {
+									Description: "Secured HTTP port of an IP Address.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"kvm_port": {
+									Description: "Port number on which the KVM is running and used for connecting to KVM console.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"kvm_vlan": {
+									Description: "VLAN Identifier of Inband IP Address.",
+									Type:        schema.TypeInt,
+									Optional:    true,
+									Computed:    true,
+								},
+								"name": {
+									Description: "Name to identify the KVM IP Address.\n* `Outband` - The user assigned Out of band IP Address.\n* `Inband` - The user assigned Inband IP Address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"subnet": {
+									Description: "Subnet detail of a KVM IP Address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"type": {
+									Description: "Type of the KVM IP Address.\n* `MgmtInterface` - Ip Address of a Management Interface.\n* `VnicIpV4StaticAddr` - Static Ipv4 Address of a Virtual Network Interface.\n* `VnicIpV4PooledAddr` - Ipv4 Address of a Virtual Network Interface from an address pool.\n* `VnicIpV4MgmtPooledAddr` - Ipv4 Address of a Virtual Network Interface from a Managed address pool.\n* `VnicIpV6StaticAddr` - Static Ipv6 Address of a Virtual Network Interface.\n* `VnicIpV6MgmtPooledAddr` - Ipv6 Address of a Virtual Network Interface from a Managed address pool.\n* `VnicIpV4ProfDerivedAddr` - Server Profile derived Ipv4 Address of a Virtual Network Interface.\n* `MgmtIpV6ProfDerivedAddr` - Server Profile derived Ipv6 Address used for accessing server management services.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"inventory_device_info": {
 						Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 						Type:        schema.TypeList,
@@ -1158,6 +1249,8 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 				temp["equipment_fex"] = flattenMapEquipmentFexRelationship(s.GetEquipmentFex(), d)
 
 				temp["host_ports"] = flattenListEtherHostPortRelationship(s.GetHostPorts(), d)
+
+				temp["inband_ip_addresses"] = flattenListComputeIpAddress(s.GetInbandIpAddresses(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 

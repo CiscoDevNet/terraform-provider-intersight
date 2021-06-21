@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](AdapterUnitRelationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
 **BiosBootmode** | Pointer to [**BiosBootModeRelationship**](bios.BootMode.Relationship.md) |  | [optional] 
+**BiosTokenSettings** | Pointer to [**BiosTokenSettingsRelationship**](bios.TokenSettings.Relationship.md) |  | [optional] 
+**BiosVfSelectMemoryRasConfiguration** | Pointer to [**BiosVfSelectMemoryRasConfigurationRelationship**](bios.VfSelectMemoryRasConfiguration.Relationship.md) |  | [optional] 
 **Biosunits** | Pointer to [**[]BiosUnitRelationship**](BiosUnitRelationship.md) | An array of relationships to biosUnit resources. | [optional] [readonly] 
 **Bmc** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
 **Board** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
@@ -224,6 +226,56 @@ SetBiosBootmode sets BiosBootmode field to given value.
 `func (o *ComputeRackUnit) HasBiosBootmode() bool`
 
 HasBiosBootmode returns a boolean if a field has been set.
+
+### GetBiosTokenSettings
+
+`func (o *ComputeRackUnit) GetBiosTokenSettings() BiosTokenSettingsRelationship`
+
+GetBiosTokenSettings returns the BiosTokenSettings field if non-nil, zero value otherwise.
+
+### GetBiosTokenSettingsOk
+
+`func (o *ComputeRackUnit) GetBiosTokenSettingsOk() (*BiosTokenSettingsRelationship, bool)`
+
+GetBiosTokenSettingsOk returns a tuple with the BiosTokenSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBiosTokenSettings
+
+`func (o *ComputeRackUnit) SetBiosTokenSettings(v BiosTokenSettingsRelationship)`
+
+SetBiosTokenSettings sets BiosTokenSettings field to given value.
+
+### HasBiosTokenSettings
+
+`func (o *ComputeRackUnit) HasBiosTokenSettings() bool`
+
+HasBiosTokenSettings returns a boolean if a field has been set.
+
+### GetBiosVfSelectMemoryRasConfiguration
+
+`func (o *ComputeRackUnit) GetBiosVfSelectMemoryRasConfiguration() BiosVfSelectMemoryRasConfigurationRelationship`
+
+GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field if non-nil, zero value otherwise.
+
+### GetBiosVfSelectMemoryRasConfigurationOk
+
+`func (o *ComputeRackUnit) GetBiosVfSelectMemoryRasConfigurationOk() (*BiosVfSelectMemoryRasConfigurationRelationship, bool)`
+
+GetBiosVfSelectMemoryRasConfigurationOk returns a tuple with the BiosVfSelectMemoryRasConfiguration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBiosVfSelectMemoryRasConfiguration
+
+`func (o *ComputeRackUnit) SetBiosVfSelectMemoryRasConfiguration(v BiosVfSelectMemoryRasConfigurationRelationship)`
+
+SetBiosVfSelectMemoryRasConfiguration sets BiosVfSelectMemoryRasConfiguration field to given value.
+
+### HasBiosVfSelectMemoryRasConfiguration
+
+`func (o *ComputeRackUnit) HasBiosVfSelectMemoryRasConfiguration() bool`
+
+HasBiosVfSelectMemoryRasConfiguration returns a boolean if a field has been set.
 
 ### GetBiosunits
 

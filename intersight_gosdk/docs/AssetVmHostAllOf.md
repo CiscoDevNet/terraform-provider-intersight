@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **ClusterIdentity** | Pointer to **string** | Reference to virtualization cluster identity. | [optional] [readonly] 
 **ClusterMoid** | Pointer to **string** | Reference to virtualization cluster ID. | [optional] [readonly] 
 **ClusterName** | Pointer to **string** | Reference to virtualization cluster name. | [optional] [readonly] 
-**Connected** | Pointer to **int64** | The connection status of the host. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
-**RegisteredDeviceMoid** | Pointer to **string** | Reference to virtualization target device ID. | [optional] [readonly] 
 
 ## Methods
 
@@ -171,56 +169,6 @@ SetClusterName sets ClusterName field to given value.
 `func (o *AssetVmHostAllOf) HasClusterName() bool`
 
 HasClusterName returns a boolean if a field has been set.
-
-### GetConnected
-
-`func (o *AssetVmHostAllOf) GetConnected() int64`
-
-GetConnected returns the Connected field if non-nil, zero value otherwise.
-
-### GetConnectedOk
-
-`func (o *AssetVmHostAllOf) GetConnectedOk() (*int64, bool)`
-
-GetConnectedOk returns a tuple with the Connected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConnected
-
-`func (o *AssetVmHostAllOf) SetConnected(v int64)`
-
-SetConnected sets Connected field to given value.
-
-### HasConnected
-
-`func (o *AssetVmHostAllOf) HasConnected() bool`
-
-HasConnected returns a boolean if a field has been set.
-
-### GetRegisteredDeviceMoid
-
-`func (o *AssetVmHostAllOf) GetRegisteredDeviceMoid() string`
-
-GetRegisteredDeviceMoid returns the RegisteredDeviceMoid field if non-nil, zero value otherwise.
-
-### GetRegisteredDeviceMoidOk
-
-`func (o *AssetVmHostAllOf) GetRegisteredDeviceMoidOk() (*string, bool)`
-
-GetRegisteredDeviceMoidOk returns a tuple with the RegisteredDeviceMoid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegisteredDeviceMoid
-
-`func (o *AssetVmHostAllOf) SetRegisteredDeviceMoid(v string)`
-
-SetRegisteredDeviceMoid sets RegisteredDeviceMoid field to given value.
-
-### HasRegisteredDeviceMoid
-
-`func (o *AssetVmHostAllOf) HasRegisteredDeviceMoid() bool`
-
-HasRegisteredDeviceMoid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

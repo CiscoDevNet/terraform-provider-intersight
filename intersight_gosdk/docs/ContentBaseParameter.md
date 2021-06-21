@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ItemType** | Pointer to **string** | The type of the collection item in case this is a collection parameter. * &#x60;simple&#x60; - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum. * &#x60;string&#x60; - The parameter value to be extracted is of the string type. * &#x60;integer&#x60; - The parameter value to be extracted is of the number type. * &#x60;float&#x60; - The parameter value to be extracted is of the float number type. * &#x60;boolean&#x60; - The parameter value to be extracted is of the boolean type. * &#x60;json&#x60; - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type. * &#x60;complex&#x60; - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters. * &#x60;collection&#x60; - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type. | [optional] [default to "simple"]
 **Name** | Pointer to **string** | The name of the parameter. | [optional] 
 **Path** | Pointer to **string** | The content specific path information that identifies the parameter value within the content. The value is usually a XPath or JSONPath or a regular expression in case of text content. | [optional] 
+**Secure** | Pointer to **bool** | The flag indicates if the extracted value is secure. This flag is applicable for parameters of type String only. | [optional] 
 **Type** | Pointer to **string** | The type of the parameter. Accepted values are simple, complex, collection. * &#x60;simple&#x60; - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum. * &#x60;string&#x60; - The parameter value to be extracted is of the string type. * &#x60;integer&#x60; - The parameter value to be extracted is of the number type. * &#x60;float&#x60; - The parameter value to be extracted is of the float number type. * &#x60;boolean&#x60; - The parameter value to be extracted is of the boolean type. * &#x60;json&#x60; - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type. * &#x60;complex&#x60; - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters. * &#x60;collection&#x60; - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type. | [optional] [default to "simple"]
 
 ## Methods
@@ -196,6 +197,31 @@ SetPath sets Path field to given value.
 `func (o *ContentBaseParameter) HasPath() bool`
 
 HasPath returns a boolean if a field has been set.
+
+### GetSecure
+
+`func (o *ContentBaseParameter) GetSecure() bool`
+
+GetSecure returns the Secure field if non-nil, zero value otherwise.
+
+### GetSecureOk
+
+`func (o *ContentBaseParameter) GetSecureOk() (*bool, bool)`
+
+GetSecureOk returns a tuple with the Secure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecure
+
+`func (o *ContentBaseParameter) SetSecure(v bool)`
+
+SetSecure sets Secure field to given value.
+
+### HasSecure
+
+`func (o *ContentBaseParameter) HasSecure() bool`
+
+HasSecure returns a boolean if a field has been set.
 
 ### GetType
 

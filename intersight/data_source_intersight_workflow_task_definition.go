@@ -51,7 +51,7 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"label": {
-				Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_).",
+				Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

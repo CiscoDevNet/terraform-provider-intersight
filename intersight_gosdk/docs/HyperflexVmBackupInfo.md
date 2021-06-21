@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ClusterEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
 **ClusterIdProtectionInfoMap** | Pointer to [**[]HyperflexMapClusterIdToProtectionInfo**](HyperflexMapClusterIdToProtectionInfo.md) |  | [optional] 
 **Error** | Pointer to [**NullableHyperflexErrorStack**](hyperflex.ErrorStack.md) |  | [optional] 
+**PowerOn** | Pointer to **bool** | The power state of the Virtual Machine. | [optional] [readonly] 
 **ProtectionStatus** | Pointer to **string** | Description of the protection status of this VmBackupInfo. * &#x60;PREPARE_FAILOVER_STARTED&#x60; - The protection status is prepare failover started. * &#x60;PREPARE_FAILOVER_FAILED&#x60; - The protection status is prepare failover failed. * &#x60;PREPARE_FAILOVER_COMPLETED&#x60; - The protection status is prepaire failover completed. * &#x60;FAILOVER_STARTED&#x60; - The protection status is failover started. * &#x60;FAILOVER_FAILED&#x60; - The protection status is failover failed. * &#x60;FAILOVER_COMPLETED&#x60; - The protection status is failover completed. * &#x60;PREPARE_REVERSEPROTECT_STARTED&#x60; - The protection status is prepare reverse protect started. * &#x60;PREPARE_REVERSEPROTECT_FAILED&#x60; - The protection status is prepare reverse protect failed. * &#x60;PREPARE_REVERSEPROTECT_COMPLETED&#x60; - The protection status is prepair reverse protect completed. * &#x60;REVERSEPROTECT_STARTED&#x60; - The protection status is reverse protect started. * &#x60;REVERSEPROTECT_FAILED&#x60; - The protection status is reverse protect failed. * &#x60;ACTIVE&#x60; - The protection status is active. * &#x60;CREATION_IN_PROGRESS&#x60; - The protection status is failover in progress. * &#x60;CREATION_FAILED&#x60; - The protection status is creation failed. * &#x60;LOCAL_RESTORE_STARTED&#x60; - The protection status is local restore started. * &#x60;LOCAL_RESTORE_FAILED&#x60; - The protection status is local restore failed. | [optional] [readonly] [default to "PREPARE_FAILOVER_STARTED"]
 **Schedule** | Pointer to [**[]HyperflexReplicationClusterReferenceToSchedule**](HyperflexReplicationClusterReferenceToSchedule.md) |  | [optional] 
 **VmEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
@@ -207,6 +208,31 @@ HasError returns a boolean if a field has been set.
 `func (o *HyperflexVmBackupInfo) UnsetError()`
 
 UnsetError ensures that no value is present for Error, not even an explicit nil
+### GetPowerOn
+
+`func (o *HyperflexVmBackupInfo) GetPowerOn() bool`
+
+GetPowerOn returns the PowerOn field if non-nil, zero value otherwise.
+
+### GetPowerOnOk
+
+`func (o *HyperflexVmBackupInfo) GetPowerOnOk() (*bool, bool)`
+
+GetPowerOnOk returns a tuple with the PowerOn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerOn
+
+`func (o *HyperflexVmBackupInfo) SetPowerOn(v bool)`
+
+SetPowerOn sets PowerOn field to given value.
+
+### HasPowerOn
+
+`func (o *HyperflexVmBackupInfo) HasPowerOn() bool`
+
+HasPowerOn returns a boolean if a field has been set.
+
 ### GetProtectionStatus
 
 `func (o *HyperflexVmBackupInfo) GetProtectionStatus() string`

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Fex"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Fex"]
+**ConnectionPath** | Pointer to **string** | Switch Id to which the FEX is connected to. The value can be A or B or AB in case of active-active topology. | [optional] [readonly] 
 **DiscoveryState** | Pointer to **string** | Discovery state of IO card or fabric extender. | [optional] 
 **Fans** | Pointer to [**[]EquipmentFanRelationship**](EquipmentFanRelationship.md) | An array of relationships to equipmentFan resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
@@ -73,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetConnectionPath
+
+`func (o *EquipmentFexAllOf) GetConnectionPath() string`
+
+GetConnectionPath returns the ConnectionPath field if non-nil, zero value otherwise.
+
+### GetConnectionPathOk
+
+`func (o *EquipmentFexAllOf) GetConnectionPathOk() (*string, bool)`
+
+GetConnectionPathOk returns a tuple with the ConnectionPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionPath
+
+`func (o *EquipmentFexAllOf) SetConnectionPath(v string)`
+
+SetConnectionPath sets ConnectionPath field to given value.
+
+### HasConnectionPath
+
+`func (o *EquipmentFexAllOf) HasConnectionPath() bool`
+
+HasConnectionPath returns a boolean if a field has been set.
 
 ### GetDiscoveryState
 

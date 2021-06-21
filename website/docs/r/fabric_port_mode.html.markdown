@@ -14,9 +14,12 @@ Object sent by user to configure range of unified ports as FC/Ethernet or ports 
 ```hcl
 resource "intersight_fabric_port_mode" "fabric_port_mode1" {
   custom_mode   = "FibreChannel"
-  port_id_end   = 5000
-  port_id_start = 1000
-  slot_id       = 100
+  port_id_end   = 8
+  port_id_start = 1
+  slot_id       = 1
+  port_policy {
+    moid = intersight_fabric_port_policy.fabric_port_policy1.moid
+  }
 }
 ```
 ## Argument Reference

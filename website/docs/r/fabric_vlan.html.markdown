@@ -20,6 +20,9 @@ resource "intersight_fabric_vlan" "fabric_vlan1" {
   eth_network_policy {
     moid = intersight_vnic_eth_network_policy.v_eth_network1.id
   }
+  multicast_policy {
+    moid = intersight_fabric_multicast_policy.fabric_multicast_policy1.moid
+  }
 }
 ```
 ## Argument Reference

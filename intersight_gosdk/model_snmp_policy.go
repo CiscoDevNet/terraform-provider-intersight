@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
  *
- * API version: 1.0.9-4305
+ * API version: 1.0.9-4334
  * Contact: intersight@cisco.com
  */
 
@@ -41,8 +41,12 @@ type SnmpPolicy struct {
 	// Location of host on which the SNMP agent (server) runs.
 	SysLocation *string `json:"SysLocation,omitempty"`
 	// SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.
-	TrapCommunity *string                               `json:"TrapCommunity,omitempty"`
-	Organization  *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	TrapCommunity *string `json:"TrapCommunity,omitempty"`
+	// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
+	V2Enabled *bool `json:"V2Enabled,omitempty"`
+	// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
+	V3Enabled    *bool                                 `json:"V3Enabled,omitempty"`
+	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -64,6 +68,10 @@ func NewSnmpPolicy(classId string, objectType string) *SnmpPolicy {
 	this.Enabled = &enabled
 	var snmpPort int64 = 161
 	this.SnmpPort = &snmpPort
+	var v2Enabled bool = true
+	this.V2Enabled = &v2Enabled
+	var v3Enabled bool = true
+	this.V3Enabled = &v3Enabled
 	return &this
 }
 
@@ -82,6 +90,10 @@ func NewSnmpPolicyWithDefaults() *SnmpPolicy {
 	this.Enabled = &enabled
 	var snmpPort int64 = 161
 	this.SnmpPort = &snmpPort
+	var v2Enabled bool = true
+	this.V2Enabled = &v2Enabled
+	var v3Enabled bool = true
+	this.V3Enabled = &v3Enabled
 	return &this
 }
 
@@ -455,6 +467,70 @@ func (o *SnmpPolicy) SetTrapCommunity(v string) {
 	o.TrapCommunity = &v
 }
 
+// GetV2Enabled returns the V2Enabled field value if set, zero value otherwise.
+func (o *SnmpPolicy) GetV2Enabled() bool {
+	if o == nil || o.V2Enabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.V2Enabled
+}
+
+// GetV2EnabledOk returns a tuple with the V2Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnmpPolicy) GetV2EnabledOk() (*bool, bool) {
+	if o == nil || o.V2Enabled == nil {
+		return nil, false
+	}
+	return o.V2Enabled, true
+}
+
+// HasV2Enabled returns a boolean if a field has been set.
+func (o *SnmpPolicy) HasV2Enabled() bool {
+	if o != nil && o.V2Enabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetV2Enabled gets a reference to the given bool and assigns it to the V2Enabled field.
+func (o *SnmpPolicy) SetV2Enabled(v bool) {
+	o.V2Enabled = &v
+}
+
+// GetV3Enabled returns the V3Enabled field value if set, zero value otherwise.
+func (o *SnmpPolicy) GetV3Enabled() bool {
+	if o == nil || o.V3Enabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.V3Enabled
+}
+
+// GetV3EnabledOk returns a tuple with the V3Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnmpPolicy) GetV3EnabledOk() (*bool, bool) {
+	if o == nil || o.V3Enabled == nil {
+		return nil, false
+	}
+	return o.V3Enabled, true
+}
+
+// HasV3Enabled returns a boolean if a field has been set.
+func (o *SnmpPolicy) HasV3Enabled() bool {
+	if o != nil && o.V3Enabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetV3Enabled gets a reference to the given bool and assigns it to the V3Enabled field.
+func (o *SnmpPolicy) SetV3Enabled(v bool) {
+	o.V3Enabled = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *SnmpPolicy) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || o.Organization == nil {
@@ -566,6 +642,12 @@ func (o SnmpPolicy) MarshalJSON() ([]byte, error) {
 	if o.TrapCommunity != nil {
 		toSerialize["TrapCommunity"] = o.TrapCommunity
 	}
+	if o.V2Enabled != nil {
+		toSerialize["V2Enabled"] = o.V2Enabled
+	}
+	if o.V3Enabled != nil {
+		toSerialize["V3Enabled"] = o.V3Enabled
+	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
 	}
@@ -603,8 +685,12 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Location of host on which the SNMP agent (server) runs.
 		SysLocation *string `json:"SysLocation,omitempty"`
 		// SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.
-		TrapCommunity *string                               `json:"TrapCommunity,omitempty"`
-		Organization  *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		TrapCommunity *string `json:"TrapCommunity,omitempty"`
+		// State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.
+		V2Enabled *bool `json:"V2Enabled,omitempty"`
+		// State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.
+		V3Enabled    *bool                                 `json:"V3Enabled,omitempty"`
+		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
@@ -626,6 +712,8 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varSnmpPolicy.SysContact = varSnmpPolicyWithoutEmbeddedStruct.SysContact
 		varSnmpPolicy.SysLocation = varSnmpPolicyWithoutEmbeddedStruct.SysLocation
 		varSnmpPolicy.TrapCommunity = varSnmpPolicyWithoutEmbeddedStruct.TrapCommunity
+		varSnmpPolicy.V2Enabled = varSnmpPolicyWithoutEmbeddedStruct.V2Enabled
+		varSnmpPolicy.V3Enabled = varSnmpPolicyWithoutEmbeddedStruct.V3Enabled
 		varSnmpPolicy.Organization = varSnmpPolicyWithoutEmbeddedStruct.Organization
 		varSnmpPolicy.Profiles = varSnmpPolicyWithoutEmbeddedStruct.Profiles
 		*o = SnmpPolicy(varSnmpPolicy)
@@ -657,6 +745,8 @@ func (o *SnmpPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SysContact")
 		delete(additionalProperties, "SysLocation")
 		delete(additionalProperties, "TrapCommunity")
+		delete(additionalProperties, "V2Enabled")
+		delete(additionalProperties, "V3Enabled")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 

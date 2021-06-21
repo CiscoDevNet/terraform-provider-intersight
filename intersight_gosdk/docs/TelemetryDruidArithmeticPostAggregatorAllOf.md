@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Output name for the minimum/maximum timestamp value. | [optional] 
 **Fn** | Pointer to **string** | null | [optional] 
-**Fields** | Pointer to **[]string** | null | [optional] 
 **Ordering** | Pointer to **string** | Arithmetic post-aggregators may specify an ordering, which defines the order of resulting values when sorting results. This can be useful for topN queries for instance. If no ordering (or null) is specified, the default floating point ordering is used. numericFirst ordering always returns finite values first, followed by NaN, and infinite values last. | [optional] 
 
 ## Methods
@@ -77,31 +76,6 @@ SetFn sets Fn field to given value.
 `func (o *TelemetryDruidArithmeticPostAggregatorAllOf) HasFn() bool`
 
 HasFn returns a boolean if a field has been set.
-
-### GetFields
-
-`func (o *TelemetryDruidArithmeticPostAggregatorAllOf) GetFields() []string`
-
-GetFields returns the Fields field if non-nil, zero value otherwise.
-
-### GetFieldsOk
-
-`func (o *TelemetryDruidArithmeticPostAggregatorAllOf) GetFieldsOk() (*[]string, bool)`
-
-GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFields
-
-`func (o *TelemetryDruidArithmeticPostAggregatorAllOf) SetFields(v []string)`
-
-SetFields sets Fields field to given value.
-
-### HasFields
-
-`func (o *TelemetryDruidArithmeticPostAggregatorAllOf) HasFields() bool`
-
-HasFields returns a boolean if a field has been set.
 
 ### GetOrdering
 

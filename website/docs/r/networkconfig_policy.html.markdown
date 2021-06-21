@@ -14,7 +14,7 @@ Enable or disable Dynamic DNS, add or update DNS settings for IPv4 and IPv6 on C
 ```hcl
 resource "intersight_networkconfig_policy" "network_config1" {
   name                     = "network_config1"
-  description              = "test policy"
+  description              = "demo network configuration policy"
   enable_dynamic_dns       = false
   preferred_ipv6dns_server = "::"
   enable_ipv6              = true

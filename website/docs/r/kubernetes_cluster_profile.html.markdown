@@ -125,7 +125,6 @@ This complex property has following sub-properties:
 * `managed_mode`:(string) Management mode for the cluster. In some cases Intersight kubernetes service is not requiredto provision and manage the management entities and endpoints (for e.g. EKS). In most other casesit will be required to provision and manage these entities and endpoints.* `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform.* `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service. 
 * `management_config`:(HashMap) - Configuration required for provisioning and management of cluster management entities. Required if'managedMode' is set to 'Managed'. 
 This complex property has following sub-properties:
-  + `encrypted_etcd`:(bool) Encrypt ETCD data at rest using the etcdEncryptionKey specified in the cluster Kubernetes configuration. 
   + `load_balancer_count`:(int) Number of IP addresses to reserve for load balancer services. 
   + `load_balancers`:
                 (Array of schema.TypeString) -

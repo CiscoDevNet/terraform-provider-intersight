@@ -1,5 +1,10 @@
 # Change Logs
 
+## v1.0.11
+Release Date: 21 June 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4334)
+* Fixes an issue with flatten functions that was causing some reads to panic
+
 ## v1.0.10
 Release Date: 11th June 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4305)

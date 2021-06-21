@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
  *
- * API version: 1.0.9-4305
+ * API version: 1.0.9-4334
  * Contact: intersight@cisco.com
  */
 
@@ -36,8 +36,10 @@ type HyperflexClusterProfileAllOf struct {
 	// The management platform for the HyperFlex cluster. * `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * `EDGE` - The host servers used in the cluster deployment are standalone severs.
 	MgmtPlatform *string `json:"MgmtPlatform,omitempty"`
 	// The number of copies of each data block written.
-	Replication     *int64                     `json:"Replication,omitempty"`
-	StorageDataVlan NullableHyperflexNamedVlan `json:"StorageDataVlan,omitempty"`
+	Replication *int64 `json:"Replication,omitempty"`
+	// The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.
+	StorageClusterAuxiliaryIp *string                    `json:"StorageClusterAuxiliaryIp,omitempty"`
+	StorageDataVlan           NullableHyperflexNamedVlan `json:"StorageDataVlan,omitempty"`
 	// The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * `HyperFlexDp` - The type of storage is HyperFlex Data Platform. * `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).
 	StorageType *string `json:"StorageType,omitempty"`
 	// The WWxN prefix in the form of 20:00:00:25:B5:XX.
@@ -405,6 +407,38 @@ func (o *HyperflexClusterProfileAllOf) HasReplication() bool {
 // SetReplication gets a reference to the given int64 and assigns it to the Replication field.
 func (o *HyperflexClusterProfileAllOf) SetReplication(v int64) {
 	o.Replication = &v
+}
+
+// GetStorageClusterAuxiliaryIp returns the StorageClusterAuxiliaryIp field value if set, zero value otherwise.
+func (o *HyperflexClusterProfileAllOf) GetStorageClusterAuxiliaryIp() string {
+	if o == nil || o.StorageClusterAuxiliaryIp == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageClusterAuxiliaryIp
+}
+
+// GetStorageClusterAuxiliaryIpOk returns a tuple with the StorageClusterAuxiliaryIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterProfileAllOf) GetStorageClusterAuxiliaryIpOk() (*string, bool) {
+	if o == nil || o.StorageClusterAuxiliaryIp == nil {
+		return nil, false
+	}
+	return o.StorageClusterAuxiliaryIp, true
+}
+
+// HasStorageClusterAuxiliaryIp returns a boolean if a field has been set.
+func (o *HyperflexClusterProfileAllOf) HasStorageClusterAuxiliaryIp() bool {
+	if o != nil && o.StorageClusterAuxiliaryIp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClusterAuxiliaryIp gets a reference to the given string and assigns it to the StorageClusterAuxiliaryIp field.
+func (o *HyperflexClusterProfileAllOf) SetStorageClusterAuxiliaryIp(v string) {
+	o.StorageClusterAuxiliaryIp = &v
 }
 
 // GetStorageDataVlan returns the StorageDataVlan field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1156,6 +1190,9 @@ func (o HyperflexClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	if o.Replication != nil {
 		toSerialize["Replication"] = o.Replication
 	}
+	if o.StorageClusterAuxiliaryIp != nil {
+		toSerialize["StorageClusterAuxiliaryIp"] = o.StorageClusterAuxiliaryIp
+	}
 	if o.StorageDataVlan.IsSet() {
 		toSerialize["StorageDataVlan"] = o.StorageDataVlan.Get()
 	}
@@ -1250,6 +1287,7 @@ func (o *HyperflexClusterProfileAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MgmtIpAddress")
 		delete(additionalProperties, "MgmtPlatform")
 		delete(additionalProperties, "Replication")
+		delete(additionalProperties, "StorageClusterAuxiliaryIp")
 		delete(additionalProperties, "StorageDataVlan")
 		delete(additionalProperties, "StorageType")
 		delete(additionalProperties, "WwxnPrefix")

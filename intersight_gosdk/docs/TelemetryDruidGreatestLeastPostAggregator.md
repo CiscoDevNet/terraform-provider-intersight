@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The post-aggregator type. | 
+**Fields** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Fields processed by post aggregator | [optional] 
 **Name** | Pointer to **string** | Output name for the post-aggregator. | [optional] 
-**Fields** | Pointer to **string** | the fields that are used to compute the greatest or least value. | [optional] 
 
 ## Methods
 
@@ -47,6 +47,31 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
+### GetFields
+
+`func (o *TelemetryDruidGreatestLeastPostAggregator) GetFields() []TelemetryDruidPostAggregator`
+
+GetFields returns the Fields field if non-nil, zero value otherwise.
+
+### GetFieldsOk
+
+`func (o *TelemetryDruidGreatestLeastPostAggregator) GetFieldsOk() (*[]TelemetryDruidPostAggregator, bool)`
+
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFields
+
+`func (o *TelemetryDruidGreatestLeastPostAggregator) SetFields(v []TelemetryDruidPostAggregator)`
+
+SetFields sets Fields field to given value.
+
+### HasFields
+
+`func (o *TelemetryDruidGreatestLeastPostAggregator) HasFields() bool`
+
+HasFields returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *TelemetryDruidGreatestLeastPostAggregator) GetName() string`
@@ -71,31 +96,6 @@ SetName sets Name field to given value.
 `func (o *TelemetryDruidGreatestLeastPostAggregator) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetFields
-
-`func (o *TelemetryDruidGreatestLeastPostAggregator) GetFields() string`
-
-GetFields returns the Fields field if non-nil, zero value otherwise.
-
-### GetFieldsOk
-
-`func (o *TelemetryDruidGreatestLeastPostAggregator) GetFieldsOk() (*string, bool)`
-
-GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFields
-
-`func (o *TelemetryDruidGreatestLeastPostAggregator) SetFields(v string)`
-
-SetFields sets Fields field to given value.
-
-### HasFields
-
-`func (o *TelemetryDruidGreatestLeastPostAggregator) HasFields() bool`
-
-HasFields returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

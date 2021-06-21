@@ -235,7 +235,7 @@ func resourceFirmwareSwitchUpgrade() *schema.Resource {
 							ForceNew:    true,
 						},
 						"upgradeoption": {
-							Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
+							Description: "Option to control the upgrade, e.g., sd_upgrade_mount_only - download the image into sd and upgrade wait for the server on-next boot.\n* `sd_upgrade_mount_only` - Direct upgrade SD upgrade mount only.\n* `sd_download_only` - Direct upgrade SD download only.\n* `sd_upgrade_only` - Direct upgrade SD upgrade only.\n* `sd_upgrade_full` - Direct upgrade SD upgrade full.\n* `download_only` - Direct upgrade image download only.\n* `upgrade_full` - The upgrade downloads or mounts the image, and reboots immediately for an upgrade.\n* `upgrade_mount_only` - The upgrade downloads or mounts the image. The upgrade happens in next reboot.\n* `chassis_upgrade_full` - Direct upgrade chassis upgrade full.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "sd_upgrade_mount_only",

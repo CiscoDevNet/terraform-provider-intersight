@@ -14,6 +14,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_equipment_fex.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `connection_path`:(string) Switch Id to which the FEX is connected to. The value can be A or B or AB in case of active-active topology. 
 * `connection_status`:(string) Connectivity Status of FEX/IOM to Switch - A or B or AB. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) This field is to provide description for the iocard module model. 

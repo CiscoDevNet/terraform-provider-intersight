@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-05-25T18:18:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
  *
- * API version: 1.0.9-4305
+ * API version: 1.0.9-4334
  * Contact: intersight@cisco.com
  */
 
@@ -28,14 +28,16 @@ type ComputeBladeAllOf struct {
 	// The slot number in the chassis that the blade is located in.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// An array of relationships to adapterUnit resources.
-	Adapters     []AdapterUnitRelationship `json:"Adapters,omitempty"`
-	BiosBootmode *BiosBootModeRelationship `json:"BiosBootmode,omitempty"`
+	Adapters          []AdapterUnitRelationship      `json:"Adapters,omitempty"`
+	BiosBootmode      *BiosBootModeRelationship      `json:"BiosBootmode,omitempty"`
+	BiosTokenSettings *BiosTokenSettingsRelationship `json:"BiosTokenSettings,omitempty"`
 	// An array of relationships to biosUnit resources.
-	BiosUnits          []BiosUnitRelationship            `json:"BiosUnits,omitempty"`
-	Bmc                *ManagementControllerRelationship `json:"Bmc,omitempty"`
-	Board              *ComputeBoardRelationship         `json:"Board,omitempty"`
-	BootDeviceBootmode *BootDeviceBootModeRelationship   `json:"BootDeviceBootmode,omitempty"`
-	EquipmentChassis   *EquipmentChassisRelationship     `json:"EquipmentChassis,omitempty"`
+	BiosUnits                          []BiosUnitRelationship                          `json:"BiosUnits,omitempty"`
+	BiosVfSelectMemoryRasConfiguration *BiosVfSelectMemoryRasConfigurationRelationship `json:"BiosVfSelectMemoryRasConfiguration,omitempty"`
+	Bmc                                *ManagementControllerRelationship               `json:"Bmc,omitempty"`
+	Board                              *ComputeBoardRelationship                       `json:"Board,omitempty"`
+	BootDeviceBootmode                 *BootDeviceBootModeRelationship                 `json:"BootDeviceBootmode,omitempty"`
+	EquipmentChassis                   *EquipmentChassisRelationship                   `json:"EquipmentChassis,omitempty"`
 	// An array of relationships to equipmentIoExpander resources.
 	EquipmentIoExpanders []EquipmentIoExpanderRelationship `json:"EquipmentIoExpanders,omitempty"`
 	// An array of relationships to inventoryGenericInventoryHolder resources.
@@ -293,6 +295,38 @@ func (o *ComputeBladeAllOf) SetBiosBootmode(v BiosBootModeRelationship) {
 	o.BiosBootmode = &v
 }
 
+// GetBiosTokenSettings returns the BiosTokenSettings field value if set, zero value otherwise.
+func (o *ComputeBladeAllOf) GetBiosTokenSettings() BiosTokenSettingsRelationship {
+	if o == nil || o.BiosTokenSettings == nil {
+		var ret BiosTokenSettingsRelationship
+		return ret
+	}
+	return *o.BiosTokenSettings
+}
+
+// GetBiosTokenSettingsOk returns a tuple with the BiosTokenSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeBladeAllOf) GetBiosTokenSettingsOk() (*BiosTokenSettingsRelationship, bool) {
+	if o == nil || o.BiosTokenSettings == nil {
+		return nil, false
+	}
+	return o.BiosTokenSettings, true
+}
+
+// HasBiosTokenSettings returns a boolean if a field has been set.
+func (o *ComputeBladeAllOf) HasBiosTokenSettings() bool {
+	if o != nil && o.BiosTokenSettings != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBiosTokenSettings gets a reference to the given BiosTokenSettingsRelationship and assigns it to the BiosTokenSettings field.
+func (o *ComputeBladeAllOf) SetBiosTokenSettings(v BiosTokenSettingsRelationship) {
+	o.BiosTokenSettings = &v
+}
+
 // GetBiosUnits returns the BiosUnits field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComputeBladeAllOf) GetBiosUnits() []BiosUnitRelationship {
 	if o == nil {
@@ -324,6 +358,38 @@ func (o *ComputeBladeAllOf) HasBiosUnits() bool {
 // SetBiosUnits gets a reference to the given []BiosUnitRelationship and assigns it to the BiosUnits field.
 func (o *ComputeBladeAllOf) SetBiosUnits(v []BiosUnitRelationship) {
 	o.BiosUnits = v
+}
+
+// GetBiosVfSelectMemoryRasConfiguration returns the BiosVfSelectMemoryRasConfiguration field value if set, zero value otherwise.
+func (o *ComputeBladeAllOf) GetBiosVfSelectMemoryRasConfiguration() BiosVfSelectMemoryRasConfigurationRelationship {
+	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+		var ret BiosVfSelectMemoryRasConfigurationRelationship
+		return ret
+	}
+	return *o.BiosVfSelectMemoryRasConfiguration
+}
+
+// GetBiosVfSelectMemoryRasConfigurationOk returns a tuple with the BiosVfSelectMemoryRasConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeBladeAllOf) GetBiosVfSelectMemoryRasConfigurationOk() (*BiosVfSelectMemoryRasConfigurationRelationship, bool) {
+	if o == nil || o.BiosVfSelectMemoryRasConfiguration == nil {
+		return nil, false
+	}
+	return o.BiosVfSelectMemoryRasConfiguration, true
+}
+
+// HasBiosVfSelectMemoryRasConfiguration returns a boolean if a field has been set.
+func (o *ComputeBladeAllOf) HasBiosVfSelectMemoryRasConfiguration() bool {
+	if o != nil && o.BiosVfSelectMemoryRasConfiguration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBiosVfSelectMemoryRasConfiguration gets a reference to the given BiosVfSelectMemoryRasConfigurationRelationship and assigns it to the BiosVfSelectMemoryRasConfiguration field.
+func (o *ComputeBladeAllOf) SetBiosVfSelectMemoryRasConfiguration(v BiosVfSelectMemoryRasConfigurationRelationship) {
+	o.BiosVfSelectMemoryRasConfiguration = &v
 }
 
 // GetBmc returns the Bmc field value if set, zero value otherwise.
@@ -869,8 +935,14 @@ func (o ComputeBladeAllOf) MarshalJSON() ([]byte, error) {
 	if o.BiosBootmode != nil {
 		toSerialize["BiosBootmode"] = o.BiosBootmode
 	}
+	if o.BiosTokenSettings != nil {
+		toSerialize["BiosTokenSettings"] = o.BiosTokenSettings
+	}
 	if o.BiosUnits != nil {
 		toSerialize["BiosUnits"] = o.BiosUnits
+	}
+	if o.BiosVfSelectMemoryRasConfiguration != nil {
+		toSerialize["BiosVfSelectMemoryRasConfiguration"] = o.BiosVfSelectMemoryRasConfiguration
 	}
 	if o.Bmc != nil {
 		toSerialize["Bmc"] = o.Bmc
@@ -945,7 +1017,9 @@ func (o *ComputeBladeAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "Adapters")
 		delete(additionalProperties, "BiosBootmode")
+		delete(additionalProperties, "BiosTokenSettings")
 		delete(additionalProperties, "BiosUnits")
+		delete(additionalProperties, "BiosVfSelectMemoryRasConfiguration")
 		delete(additionalProperties, "Bmc")
 		delete(additionalProperties, "Board")
 		delete(additionalProperties, "BootDeviceBootmode")

@@ -338,6 +338,11 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 							Default:     "snmp.Trap",
 						},
+						"community": {
+							Description: "SNMP community group used for sending SNMP trap to other devices. Applicable only for SNMP v2c.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
 						"destination": {
 							Description: "Address to which the SNMP trap information is sent.",
 							Type:        schema.TypeString,
@@ -399,7 +404,7 @@ func resourceSnmpPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"auth_type": {
-							Description: "Authorization protocol for authenticating the user.\n* `NA` - Authentication protocol is not applicable.\n* `MD5` - MD5 protocol is used to authenticate SNMP user.\n* `SHA` - SHA protocol is used to authenticate SNMP user.",
+							Description: "Authorization protocol for authenticating the user.\n* `NA` - Authentication protocol is not applicable.\n* `MD5` - MD5 protocol is used to authenticate SNMP user.\n* `SHA` - SHA protocol is used to authenticate SNMP user.\n* `SHA-224` - SHA-224 protocol is used to authenticate SNMP user.\n* `SHA-256` - SHA-256 protocol is used to authenticate SNMP user.\n* `SHA-384` - SHA-384 protocol is used to authenticate SNMP user.\n* `SHA-512` - SHA-512 protocol is used to authenticate SNMP user.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "NA",
@@ -492,6 +497,18 @@ func resourceSnmpPolicy() *schema.Resource {
 				Description: "SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"v2_enabled": {
+				Description: "State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
+			"v3_enabled": {
+				Description: "State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -946,6 +963,12 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("snmp.Trap")
+			if v, ok := l["community"]; ok {
+				{
+					x := (v.(string))
+					o.SetCommunity(x)
+				}
+			}
 			if v, ok := l["destination"]; ok {
 				{
 					x := (v.(string))
@@ -1121,6 +1144,16 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("trap_community"); ok {
 		x := (v.(string))
 		o.SetTrapCommunity(x)
+	}
+
+	if v, ok := d.GetOkExists("v2_enabled"); ok {
+		x := v.(bool)
+		o.SetV2Enabled(x)
+	}
+
+	if v, ok := d.GetOkExists("v3_enabled"); ok {
+		x := v.(bool)
+		o.SetV3Enabled(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1427,6 +1460,14 @@ func resourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("trap_community", (s.GetTrapCommunity())); err != nil {
 		return diag.Errorf("error occurred while setting property TrapCommunity in SnmpPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("v2_enabled", (s.GetV2Enabled())); err != nil {
+		return diag.Errorf("error occurred while setting property V2Enabled in SnmpPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("v3_enabled", (s.GetV3Enabled())); err != nil {
+		return diag.Errorf("error occurred while setting property V3Enabled in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1775,6 +1816,12 @@ func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("snmp.Trap")
+			if v, ok := l["community"]; ok {
+				{
+					x := (v.(string))
+					o.SetCommunity(x)
+				}
+			}
 			if v, ok := l["destination"]; ok {
 				{
 					x := (v.(string))
@@ -1949,6 +1996,18 @@ func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("trap_community")
 		x := (v.(string))
 		o.SetTrapCommunity(x)
+	}
+
+	if d.HasChange("v2_enabled") {
+		v := d.Get("v2_enabled")
+		x := (v.(bool))
+		o.SetV2Enabled(x)
+	}
+
+	if d.HasChange("v3_enabled") {
+		v := d.Get("v3_enabled")
+		x := (v.(bool))
+		o.SetV3Enabled(x)
 	}
 
 	if d.HasChange("version_context") {

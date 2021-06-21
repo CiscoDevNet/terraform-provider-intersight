@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Output name for the post-aggregator. | [optional] 
 **Func** | Pointer to **string** |  | [optional] 
-**Fields** | Pointer to **[]string** | array of fieldAccess type post aggregators to access the thetaSketch aggregators or thetaSketchSetOp type post aggregators to allow arbitrary combination of set operations. | [optional] 
 **Size** | Pointer to **int32** | must be max of size from sketches in fields input. | [optional] [default to 16384]
 
 ## Methods
@@ -77,31 +76,6 @@ SetFunc sets Func field to given value.
 `func (o *TelemetryDruidThetaSketchOperationsPostAggregatorAllOf) HasFunc() bool`
 
 HasFunc returns a boolean if a field has been set.
-
-### GetFields
-
-`func (o *TelemetryDruidThetaSketchOperationsPostAggregatorAllOf) GetFields() []string`
-
-GetFields returns the Fields field if non-nil, zero value otherwise.
-
-### GetFieldsOk
-
-`func (o *TelemetryDruidThetaSketchOperationsPostAggregatorAllOf) GetFieldsOk() (*[]string, bool)`
-
-GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFields
-
-`func (o *TelemetryDruidThetaSketchOperationsPostAggregatorAllOf) SetFields(v []string)`
-
-SetFields sets Fields field to given value.
-
-### HasFields
-
-`func (o *TelemetryDruidThetaSketchOperationsPostAggregatorAllOf) HasFields() bool`
-
-HasFields returns a boolean if a field has been set.
 
 ### GetSize
 

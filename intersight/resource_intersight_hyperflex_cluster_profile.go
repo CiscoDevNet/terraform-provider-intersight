@@ -1029,6 +1029,11 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"storage_cluster_auxiliary_ip": {
+				Description: "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"storage_data_vlan": {
 				Description: "The VLAN for the HyperFlex storage data traffic.",
 				Type:        schema.TypeList,
@@ -2432,6 +2437,11 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
+		x := (v.(string))
+		o.SetStorageClusterAuxiliaryIp(x)
+	}
+
 	if v, ok := d.GetOk("storage_data_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
@@ -3045,6 +3055,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property SrcTemplate in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("storage_cluster_auxiliary_ip", (s.GetStorageClusterAuxiliaryIp())); err != nil {
+		return diag.Errorf("error occurred while setting property StorageClusterAuxiliaryIp in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("storage_data_vlan", flattenMapHyperflexNamedVlan(s.GetStorageDataVlan(), d)); err != nil {
@@ -4183,6 +4197,12 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 			x := p[0]
 			o.SetSrcTemplate(x)
 		}
+	}
+
+	if d.HasChange("storage_cluster_auxiliary_ip") {
+		v := d.Get("storage_cluster_auxiliary_ip")
+		x := (v.(string))
+		o.SetStorageClusterAuxiliaryIp(x)
 	}
 
 	if d.HasChange("storage_data_vlan") {

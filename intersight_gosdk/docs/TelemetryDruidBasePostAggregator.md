@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The post-aggregator type. | 
+**Fields** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Fields processed by post aggregator | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+
+### GetFields
+
+`func (o *TelemetryDruidBasePostAggregator) GetFields() []TelemetryDruidPostAggregator`
+
+GetFields returns the Fields field if non-nil, zero value otherwise.
+
+### GetFieldsOk
+
+`func (o *TelemetryDruidBasePostAggregator) GetFieldsOk() (*[]TelemetryDruidPostAggregator, bool)`
+
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFields
+
+`func (o *TelemetryDruidBasePostAggregator) SetFields(v []TelemetryDruidPostAggregator)`
+
+SetFields sets Fields field to given value.
+
+### HasFields
+
+`func (o *TelemetryDruidBasePostAggregator) HasFields() bool`
+
+HasFields returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

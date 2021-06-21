@@ -245,6 +245,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 				temp["digest"] = (s.GetDigest())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["icon_url"] = (s.GetIconUrl())
+				temp["labels"] = (s.GetLabels())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

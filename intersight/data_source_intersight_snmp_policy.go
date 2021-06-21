@@ -114,6 +114,16 @@ func dataSourceSnmpPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"v2_enabled": {
+				Description: "State of the SNMP v2c on the endpoint. If enabled, the endpoint sends SNMP v2c properties to the designated host.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"v3_enabled": {
+				Description: "State of the SNMP v3 on the endpoint. If enabled, the endpoint sends SNMP v3 properties to the designated host.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"results": {
 				Type:     schema.TypeList,
 				Elem:     &schema.Resource{Schema: resourceSnmpPolicy().Schema},
@@ -200,6 +210,14 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetTrapCommunity(x)
 	}
+	if v, ok := d.GetOk("v2_enabled"); ok {
+		x := (v.(bool))
+		o.SetV2Enabled(x)
+	}
+	if v, ok := d.GetOk("v3_enabled"); ok {
+		x := (v.(bool))
+		o.SetV3Enabled(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -275,6 +293,8 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["trap_community"] = (s.GetTrapCommunity())
+				temp["v2_enabled"] = (s.GetV2Enabled())
+				temp["v3_enabled"] = (s.GetV3Enabled())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				snmpPolicyResults[j] = temp
