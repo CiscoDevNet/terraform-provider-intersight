@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Datacenter** | Pointer to **string** | Datacenter where virtual machine is deployed. | [optional] 
 **Folder** | Pointer to **string** | Folder where virtual machine is deployed. | [optional] 
 **Image** | Pointer to **string** | Image path of OVA (The image can be from any location). | [optional] 
+**InventoryPath** | Pointer to **string** | The full inventory path as reported by virtual center (vCenter). Used by some of the operations to uniquely identify the VM. Inventory path is set internally based on notifications from the inventory service or some other internal channels. | [optional] [readonly] 
 **Network** | Pointer to [**NullableVirtualizationEsxiVmNetworkConfiguration**](virtualization.EsxiVmNetworkConfiguration.md) |  | [optional] 
 **Storage** | Pointer to [**NullableVirtualizationEsxiVmStorageConfiguration**](virtualization.EsxiVmStorageConfiguration.md) |  | [optional] 
 **Template** | Pointer to **string** | Template to be used for clone. | [optional] 
@@ -244,6 +245,31 @@ SetImage sets Image field to given value.
 `func (o *VirtualizationEsxiVmConfiguration) HasImage() bool`
 
 HasImage returns a boolean if a field has been set.
+
+### GetInventoryPath
+
+`func (o *VirtualizationEsxiVmConfiguration) GetInventoryPath() string`
+
+GetInventoryPath returns the InventoryPath field if non-nil, zero value otherwise.
+
+### GetInventoryPathOk
+
+`func (o *VirtualizationEsxiVmConfiguration) GetInventoryPathOk() (*string, bool)`
+
+GetInventoryPathOk returns a tuple with the InventoryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryPath
+
+`func (o *VirtualizationEsxiVmConfiguration) SetInventoryPath(v string)`
+
+SetInventoryPath sets InventoryPath field to given value.
+
+### HasInventoryPath
+
+`func (o *VirtualizationEsxiVmConfiguration) HasInventoryPath() bool`
+
+HasInventoryPath returns a boolean if a field has been set.
 
 ### GetNetwork
 

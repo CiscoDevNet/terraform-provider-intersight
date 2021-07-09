@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -17,7 +17,7 @@ import (
 	"strings"
 )
 
-// CapabilityAdapterUnitDescriptor Descriptor that uniquely identifies an adaptor.
+// CapabilityAdapterUnitDescriptor Descriptor that uniquely identifies an adapter.
 type CapabilityAdapterUnitDescriptor struct {
 	CapabilityHardwareDescriptor
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
@@ -32,9 +32,13 @@ type CapabilityAdapterUnitDescriptor struct {
 	FibreChannelPortSpeed *int64 `json:"FibreChannelPortSpeed,omitempty"`
 	// The number of SCSI I/O Queue resources to allocate.
 	FibreChannelScsiIoqLimit *int64 `json:"FibreChannelScsiIoqLimit,omitempty"`
-	// Number of Dce Ports for the adaptor.
+	// Indicates that the Azure Stack Host QoS feature is supported by this adapter.
+	IsAzureQosSupported *bool `json:"IsAzureQosSupported,omitempty"`
+	// Indicates that the GENEVE offload feature is supported by this adapter.
+	IsGeneveSupported *bool `json:"IsGeneveSupported,omitempty"`
+	// Number of Dce Ports for the adapter.
 	NumDcePorts *int64 `json:"NumDcePorts,omitempty"`
-	// Prom card type for the adaptor.
+	// Prom card type for the adapter.
 	PromCardType         *string `json:"PromCardType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -49,6 +53,10 @@ func NewCapabilityAdapterUnitDescriptor(classId string, objectType string) *Capa
 	this := CapabilityAdapterUnitDescriptor{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var isAzureQosSupported bool = true
+	this.IsAzureQosSupported = &isAzureQosSupported
+	var isGeneveSupported bool = true
+	this.IsGeneveSupported = &isGeneveSupported
 	return &this
 }
 
@@ -61,6 +69,10 @@ func NewCapabilityAdapterUnitDescriptorWithDefaults() *CapabilityAdapterUnitDesc
 	this.ClassId = classId
 	var objectType string = "capability.AdapterUnitDescriptor"
 	this.ObjectType = objectType
+	var isAzureQosSupported bool = true
+	this.IsAzureQosSupported = &isAzureQosSupported
+	var isGeneveSupported bool = true
+	this.IsGeneveSupported = &isGeneveSupported
 	return &this
 }
 
@@ -240,6 +252,70 @@ func (o *CapabilityAdapterUnitDescriptor) SetFibreChannelScsiIoqLimit(v int64) {
 	o.FibreChannelScsiIoqLimit = &v
 }
 
+// GetIsAzureQosSupported returns the IsAzureQosSupported field value if set, zero value otherwise.
+func (o *CapabilityAdapterUnitDescriptor) GetIsAzureQosSupported() bool {
+	if o == nil || o.IsAzureQosSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsAzureQosSupported
+}
+
+// GetIsAzureQosSupportedOk returns a tuple with the IsAzureQosSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityAdapterUnitDescriptor) GetIsAzureQosSupportedOk() (*bool, bool) {
+	if o == nil || o.IsAzureQosSupported == nil {
+		return nil, false
+	}
+	return o.IsAzureQosSupported, true
+}
+
+// HasIsAzureQosSupported returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptor) HasIsAzureQosSupported() bool {
+	if o != nil && o.IsAzureQosSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAzureQosSupported gets a reference to the given bool and assigns it to the IsAzureQosSupported field.
+func (o *CapabilityAdapterUnitDescriptor) SetIsAzureQosSupported(v bool) {
+	o.IsAzureQosSupported = &v
+}
+
+// GetIsGeneveSupported returns the IsGeneveSupported field value if set, zero value otherwise.
+func (o *CapabilityAdapterUnitDescriptor) GetIsGeneveSupported() bool {
+	if o == nil || o.IsGeneveSupported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsGeneveSupported
+}
+
+// GetIsGeneveSupportedOk returns a tuple with the IsGeneveSupported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityAdapterUnitDescriptor) GetIsGeneveSupportedOk() (*bool, bool) {
+	if o == nil || o.IsGeneveSupported == nil {
+		return nil, false
+	}
+	return o.IsGeneveSupported, true
+}
+
+// HasIsGeneveSupported returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptor) HasIsGeneveSupported() bool {
+	if o != nil && o.IsGeneveSupported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsGeneveSupported gets a reference to the given bool and assigns it to the IsGeneveSupported field.
+func (o *CapabilityAdapterUnitDescriptor) SetIsGeneveSupported(v bool) {
+	o.IsGeneveSupported = &v
+}
+
 // GetNumDcePorts returns the NumDcePorts field value if set, zero value otherwise.
 func (o *CapabilityAdapterUnitDescriptor) GetNumDcePorts() int64 {
 	if o == nil || o.NumDcePorts == nil {
@@ -332,6 +408,12 @@ func (o CapabilityAdapterUnitDescriptor) MarshalJSON() ([]byte, error) {
 	if o.FibreChannelScsiIoqLimit != nil {
 		toSerialize["FibreChannelScsiIoqLimit"] = o.FibreChannelScsiIoqLimit
 	}
+	if o.IsAzureQosSupported != nil {
+		toSerialize["IsAzureQosSupported"] = o.IsAzureQosSupported
+	}
+	if o.IsGeneveSupported != nil {
+		toSerialize["IsGeneveSupported"] = o.IsGeneveSupported
+	}
 	if o.NumDcePorts != nil {
 		toSerialize["NumDcePorts"] = o.NumDcePorts
 	}
@@ -360,9 +442,13 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		FibreChannelPortSpeed *int64 `json:"FibreChannelPortSpeed,omitempty"`
 		// The number of SCSI I/O Queue resources to allocate.
 		FibreChannelScsiIoqLimit *int64 `json:"FibreChannelScsiIoqLimit,omitempty"`
-		// Number of Dce Ports for the adaptor.
+		// Indicates that the Azure Stack Host QoS feature is supported by this adapter.
+		IsAzureQosSupported *bool `json:"IsAzureQosSupported,omitempty"`
+		// Indicates that the GENEVE offload feature is supported by this adapter.
+		IsGeneveSupported *bool `json:"IsGeneveSupported,omitempty"`
+		// Number of Dce Ports for the adapter.
 		NumDcePorts *int64 `json:"NumDcePorts,omitempty"`
-		// Prom card type for the adaptor.
+		// Prom card type for the adapter.
 		PromCardType *string `json:"PromCardType,omitempty"`
 	}
 
@@ -377,6 +463,8 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		varCapabilityAdapterUnitDescriptor.EthernetPortSpeed = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.EthernetPortSpeed
 		varCapabilityAdapterUnitDescriptor.FibreChannelPortSpeed = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.FibreChannelPortSpeed
 		varCapabilityAdapterUnitDescriptor.FibreChannelScsiIoqLimit = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.FibreChannelScsiIoqLimit
+		varCapabilityAdapterUnitDescriptor.IsAzureQosSupported = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.IsAzureQosSupported
+		varCapabilityAdapterUnitDescriptor.IsGeneveSupported = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.IsGeneveSupported
 		varCapabilityAdapterUnitDescriptor.NumDcePorts = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.NumDcePorts
 		varCapabilityAdapterUnitDescriptor.PromCardType = varCapabilityAdapterUnitDescriptorWithoutEmbeddedStruct.PromCardType
 		*o = CapabilityAdapterUnitDescriptor(varCapabilityAdapterUnitDescriptor)
@@ -402,6 +490,8 @@ func (o *CapabilityAdapterUnitDescriptor) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "EthernetPortSpeed")
 		delete(additionalProperties, "FibreChannelPortSpeed")
 		delete(additionalProperties, "FibreChannelScsiIoqLimit")
+		delete(additionalProperties, "IsAzureQosSupported")
+		delete(additionalProperties, "IsGeneveSupported")
 		delete(additionalProperties, "NumDcePorts")
 		delete(additionalProperties, "PromCardType")
 

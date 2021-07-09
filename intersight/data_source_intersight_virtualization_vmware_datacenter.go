@@ -56,10 +56,9 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Optional:    true,
 			},
 			"identity": {
-				Description: "Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).",
+				Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"inventory_path": {
 				Description: "Inventory path of the DC.",
@@ -79,7 +78,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Computed:    true,
 			},
 			"name": {
-				Description: "User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.",
+				Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -99,6 +98,11 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"uuid": {
+				Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"vm_count": {
 				Description: "Count of all virtual machines (VMs) associated with this DC.",
@@ -226,10 +230,9 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 						},
 					},
 					"identity": {
-						Description: "Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).",
+						Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
 					"inventory_path": {
 						Description: "Inventory path of the DC.",
@@ -249,7 +252,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 						Computed:    true,
 					},
 					"name": {
-						Description: "User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.",
+						Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -450,6 +453,11 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 							},
 						},
 					},
+					"uuid": {
+						Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",
 						Type:        schema.TypeList,
@@ -646,6 +654,10 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
+	if v, ok := d.GetOk("uuid"); ok {
+		x := (v.(string))
+		o.SetUuid(x)
+	}
 	if v, ok := d.GetOk("vm_count"); ok {
 		x := int64(v.(int))
 		o.SetVmCount(x)
@@ -720,6 +732,7 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vm_count"] = (s.GetVmCount())

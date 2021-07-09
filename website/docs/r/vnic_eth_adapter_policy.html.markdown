@@ -79,6 +79,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `geneve_enabled`:(bool) GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. 
 * `interrupt_scaling`:(bool) Enables Interrupt Scaling on the interface. 
 * `interrupt_settings`:(HashMap) - Interrupt Settings for the virtual ethernet interface. 
 This complex property has following sub-properties:

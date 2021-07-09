@@ -28,6 +28,12 @@ func dataSourceKvmTunnel() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"client_ip_address": {
+				Description: "The user agent IP address from which the session is launched.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"client_url": {
 				Description: "The multiplexer URL for the client to connect on.",
 				Type:        schema.TypeString,
@@ -42,6 +48,12 @@ func dataSourceKvmTunnel() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"end_time": {
+				Description: "The time at which the session ended.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -64,8 +76,31 @@ func dataSourceKvmTunnel() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"role": {
+				Description: "Role of the user who launched the session.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"status": {
+				Description: "The status of the session.\n* `Active` - The session is currently active.\n* `Ended` - The session has ended normally.\n* `Terminated` - The session was terminated by an admin.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"target_name": {
+				Description: "Name of target on which session is initiated.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"user_id_or_email": {
+				Description: "User ID or E-mail Address of the user who launched the session.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -92,6 +127,10 @@ func dataSourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta int
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("client_ip_address"); ok {
+		x := (v.(string))
+		o.SetClientIpAddress(x)
+	}
 	if v, ok := d.GetOk("client_url"); ok {
 		x := (v.(string))
 		o.SetClientUrl(x)
@@ -103,6 +142,10 @@ func dataSourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("end_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndTime(x)
 	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -116,9 +159,25 @@ func dataSourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta int
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("role"); ok {
+		x := (v.(string))
+		o.SetRole(x)
+	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+	if v, ok := d.GetOk("target_name"); ok {
+		x := (v.(string))
+		o.SetTargetName(x)
+	}
+	if v, ok := d.GetOk("user_id_or_email"); ok {
+		x := (v.(string))
+		o.SetUserIdOrEmail(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -162,12 +221,17 @@ func dataSourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta int
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["client_ip_address"] = (s.GetClientIpAddress())
 				temp["client_url"] = (s.GetClientUrl())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetDevice(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["end_time"] = (s.GetEndTime()).String()
+
+				temp["kvm_session"] = flattenMapKvmSessionRelationship(s.GetKvmSession(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -177,11 +241,21 @@ func dataSourceKvmTunnelRead(c context.Context, d *schema.ResourceData, meta int
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["role"] = (s.GetRole())
 
 				temp["server"] = flattenMapComputePhysicalRelationship(s.GetServer(), d)
+
+				temp["session"] = flattenMapSessionAbstractSessionRelationship(s.GetSession(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["target"] = flattenMapMoBaseMoRelationship(s.GetTarget(), d)
+				temp["target_name"] = (s.GetTargetName())
+
+				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				kvmTunnelResults[j] = temp

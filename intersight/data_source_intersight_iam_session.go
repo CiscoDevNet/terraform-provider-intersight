@@ -46,6 +46,12 @@ func dataSourceIamSession() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"end_time": {
+				Description: "The time at which the session ended.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"expiration": {
 				Description: "Expiration time for the session.",
 				Type:        schema.TypeString,
@@ -94,6 +100,12 @@ func dataSourceIamSession() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"role": {
+				Description: "Role of the user who launched the session.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"session_id": {
 				Description: "Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.",
 				Type:        schema.TypeString,
@@ -101,6 +113,17 @@ func dataSourceIamSession() *schema.Resource {
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"status": {
+				Description: "The status of the session.\n* `Active` - The session is currently active.\n* `Ended` - The session has ended normally.\n* `Terminated` - The session was terminated by an admin.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"user_id_or_email": {
+				Description: "User ID or E-mail Address of the user who launched the session.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -254,6 +277,12 @@ func dataSourceIamSession() *schema.Resource {
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"end_time": {
+						Description: "The time at which the session ended.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -425,6 +454,12 @@ func dataSourceIamSession() *schema.Resource {
 							},
 						},
 					},
+					"role": {
+						Description: "Role of the user who launched the session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"session_id": {
 						Description: "Session token shared with the user agent which is used to identify the user session when API requests are received to perform authorization.",
 						Type:        schema.TypeString,
@@ -435,6 +470,11 @@ func dataSourceIamSession() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"status": {
+						Description: "The status of the session.\n* `Active` - The session is currently active.\n* `Ended` - The session has ended normally.\n* `Terminated` - The session was terminated by an admin.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"tags": {
 						Type:     schema.TypeList,
@@ -496,6 +536,12 @@ func dataSourceIamSession() *schema.Resource {
 								},
 							},
 						},
+					},
+					"user_id_or_email": {
+						Description: "User ID or E-mail Address of the user who launched the session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",
@@ -648,6 +694,10 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("end_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndTime(x)
+	}
 	if v, ok := d.GetOk("expiration"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetExpiration(x)
@@ -680,6 +730,10 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("role"); ok {
+		x := (v.(string))
+		o.SetRole(x)
+	}
 	if v, ok := d.GetOk("session_id"); ok {
 		x := (v.(string))
 		o.SetSessionId(x)
@@ -687,6 +741,14 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+	if v, ok := d.GetOk("user_id_or_email"); ok {
+		x := (v.(string))
+		o.SetUserIdOrEmail(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -737,6 +799,8 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["end_time"] = (s.GetEndTime()).String()
+
 				temp["expiration"] = (s.GetExpiration()).String()
 				temp["failed_logins"] = (s.GetFailedLogins())
 
@@ -755,12 +819,15 @@ func dataSourceIamSessionRead(c context.Context, d *schema.ResourceData, meta in
 				temp["permission"] = flattenMapIamPermissionRelationship(s.GetPermission(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["role"] = (s.GetRole())
 				temp["session_id"] = (s.GetSessionId())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				iamSessionResults[j] = temp

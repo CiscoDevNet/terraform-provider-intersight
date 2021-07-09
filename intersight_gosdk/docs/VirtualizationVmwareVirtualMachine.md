@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareVirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareVirtualMachine"]
 **Annotation** | Pointer to **string** | List of annotations provided to this VM by user. Can be long. | [optional] 
-**BootTime** | Pointer to **time.Time** | Time when this VM booted up. | [optional] 
 **ConfigName** | Pointer to **string** | The configuration name for this VM. This maybe the same as the guest hostname. | [optional] 
 **ConnectionState** | Pointer to **string** | Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid. | [optional] 
 **CpuHotAddEnabled** | Pointer to **bool** | Indicates if the capability to add CPUs to a running VM is enabled. | [optional] 
@@ -19,6 +18,7 @@ Name | Type | Description | Notes
 **DiskCommitInfo** | Pointer to [**NullableVirtualizationVmwareVmDiskCommitInfo**](virtualization.VmwareVmDiskCommitInfo.md) |  | [optional] 
 **DnsServerList** | Pointer to **[]string** |  | [optional] 
 **DnsSuffixList** | Pointer to **[]string** |  | [optional] 
+**ExtraConfig** | Pointer to **interface{}** | Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json. | [optional] 
 **Folder** | Pointer to **string** | The folder name associated with this VM. | [optional] 
 **GuestState** | Pointer to **string** | The state of the guest OS running on this VM. Could be running, not running etc. * &#x60;Unknown&#x60; - Indicates that the guest OS state cannot be determined. * &#x60;NotRunning&#x60; - Indicates that the guest OS is not running. * &#x60;Resetting&#x60; - Indicates that the guest OS is resetting. * &#x60;Running&#x60; - Indicates that the guest OS is running normally. * &#x60;ShuttingDown&#x60; - Indicates that the guest OS is shutting down. * &#x60;Standby&#x60; - Indicates that the guest OS is in standby mode. | [optional] [default to "Unknown"]
 **InstanceUuid** | Pointer to **string** | UUID assigned by vCenter to every VM. | [optional] 
@@ -135,31 +135,6 @@ SetAnnotation sets Annotation field to given value.
 `func (o *VirtualizationVmwareVirtualMachine) HasAnnotation() bool`
 
 HasAnnotation returns a boolean if a field has been set.
-
-### GetBootTime
-
-`func (o *VirtualizationVmwareVirtualMachine) GetBootTime() time.Time`
-
-GetBootTime returns the BootTime field if non-nil, zero value otherwise.
-
-### GetBootTimeOk
-
-`func (o *VirtualizationVmwareVirtualMachine) GetBootTimeOk() (*time.Time, bool)`
-
-GetBootTimeOk returns a tuple with the BootTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBootTime
-
-`func (o *VirtualizationVmwareVirtualMachine) SetBootTime(v time.Time)`
-
-SetBootTime sets BootTime field to given value.
-
-### HasBootTime
-
-`func (o *VirtualizationVmwareVirtualMachine) HasBootTime() bool`
-
-HasBootTime returns a boolean if a field has been set.
 
 ### GetConfigName
 
@@ -496,6 +471,41 @@ HasDnsSuffixList returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareVirtualMachine) UnsetDnsSuffixList()`
 
 UnsetDnsSuffixList ensures that no value is present for DnsSuffixList, not even an explicit nil
+### GetExtraConfig
+
+`func (o *VirtualizationVmwareVirtualMachine) GetExtraConfig() interface{}`
+
+GetExtraConfig returns the ExtraConfig field if non-nil, zero value otherwise.
+
+### GetExtraConfigOk
+
+`func (o *VirtualizationVmwareVirtualMachine) GetExtraConfigOk() (*interface{}, bool)`
+
+GetExtraConfigOk returns a tuple with the ExtraConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtraConfig
+
+`func (o *VirtualizationVmwareVirtualMachine) SetExtraConfig(v interface{})`
+
+SetExtraConfig sets ExtraConfig field to given value.
+
+### HasExtraConfig
+
+`func (o *VirtualizationVmwareVirtualMachine) HasExtraConfig() bool`
+
+HasExtraConfig returns a boolean if a field has been set.
+
+### SetExtraConfigNil
+
+`func (o *VirtualizationVmwareVirtualMachine) SetExtraConfigNil(b bool)`
+
+ SetExtraConfigNil sets the value for ExtraConfig to be an explicit nil
+
+### UnsetExtraConfig
+`func (o *VirtualizationVmwareVirtualMachine) UnsetExtraConfig()`
+
+UnsetExtraConfig ensures that no value is present for ExtraConfig, not even an explicit nil
 ### GetFolder
 
 `func (o *VirtualizationVmwareVirtualMachine) GetFolder() string`

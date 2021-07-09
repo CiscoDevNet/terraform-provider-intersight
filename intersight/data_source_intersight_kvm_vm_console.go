@@ -28,6 +28,12 @@ func dataSourceKvmVmConsole() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"client_ip_address": {
+				Description: "The user agent IP address from which the session is launched.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"client_url": {
 				Description: "The multiplexer URL for the client to connect on.",
 				Type:        schema.TypeString,
@@ -42,6 +48,12 @@ func dataSourceKvmVmConsole() *schema.Resource {
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"end_time": {
+				Description: "The time at which the session ended.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -70,8 +82,31 @@ func dataSourceKvmVmConsole() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"role": {
+				Description: "Role of the user who launched the session.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"status": {
+				Description: "The status of the session.\n* `Active` - The session is currently active.\n* `Ended` - The session has ended normally.\n* `Terminated` - The session was terminated by an admin.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"target_name": {
+				Description: "Name of target on which session is initiated.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"user_id_or_email": {
+				Description: "User ID or E-mail Address of the user who launched the session.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -131,6 +166,12 @@ func dataSourceKvmVmConsole() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"client_ip_address": {
+						Description: "The user agent IP address from which the session is launched.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"client_url": {
 						Description: "The multiplexer URL for the client to connect on.",
 						Type:        schema.TypeString,
@@ -145,6 +186,12 @@ func dataSourceKvmVmConsole() *schema.Resource {
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"end_time": {
+						Description: "The time at which the session ended.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -254,11 +301,60 @@ func dataSourceKvmVmConsole() *schema.Resource {
 							},
 						},
 					},
+					"role": {
+						Description: "Role of the user who launched the session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"session": {
+						Description: "A reference to a sessionAbstractSession resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"shared_scope": {
 						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"status": {
+						Description: "The status of the session.\n* `Active` - The session is currently active.\n* `Ended` - The session has ended normally.\n* `Terminated` - The session was terminated by an admin.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"tags": {
 						Type:     schema.TypeList,
@@ -282,6 +378,94 @@ func dataSourceKvmVmConsole() *schema.Resource {
 								},
 							},
 						},
+					},
+					"target": {
+						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"target_name": {
+						Description: "Name of target on which session is initiated.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"user": {
+						Description: "A reference to a iamUser resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"user_id_or_email": {
+						Description: "User ID or E-mail Address of the user who launched the session.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
 					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",
@@ -460,6 +644,10 @@ func dataSourceKvmVmConsoleRead(c context.Context, d *schema.ResourceData, meta 
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("client_ip_address"); ok {
+		x := (v.(string))
+		o.SetClientIpAddress(x)
+	}
 	if v, ok := d.GetOk("client_url"); ok {
 		x := (v.(string))
 		o.SetClientUrl(x)
@@ -471,6 +659,10 @@ func dataSourceKvmVmConsoleRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("end_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndTime(x)
 	}
 	if v, ok := d.GetOk("kvm_mux_url"); ok {
 		x := (v.(string))
@@ -488,9 +680,25 @@ func dataSourceKvmVmConsoleRead(c context.Context, d *schema.ResourceData, meta 
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("role"); ok {
+		x := (v.(string))
+		o.SetRole(x)
+	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+	if v, ok := d.GetOk("target_name"); ok {
+		x := (v.(string))
+		o.SetTargetName(x)
+	}
+	if v, ok := d.GetOk("user_id_or_email"); ok {
+		x := (v.(string))
+		o.SetUserIdOrEmail(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -534,10 +742,13 @@ func dataSourceKvmVmConsoleRead(c context.Context, d *schema.ResourceData, meta 
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["client_ip_address"] = (s.GetClientIpAddress())
 				temp["client_url"] = (s.GetClientUrl())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["end_time"] = (s.GetEndTime()).String()
 				temp["kvm_mux_url"] = (s.GetKvmMuxUrl())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -548,9 +759,19 @@ func dataSourceKvmVmConsoleRead(c context.Context, d *schema.ResourceData, meta 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["role"] = (s.GetRole())
+
+				temp["session"] = flattenMapSessionAbstractSessionRelationship(s.GetSession(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["target"] = flattenMapMoBaseMoRelationship(s.GetTarget(), d)
+				temp["target_name"] = (s.GetTargetName())
+
+				temp["user"] = flattenMapIamUserRelationship(s.GetUser(), d)
+				temp["user_id_or_email"] = (s.GetUserIdOrEmail())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

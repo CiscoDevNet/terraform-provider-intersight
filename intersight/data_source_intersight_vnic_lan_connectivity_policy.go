@@ -23,6 +23,11 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"azure_qos_enabled": {
+				Description: "Enabling AzureStack-Host QoS on an adapter allows the user to carve out traffic classes for RDMA traffic which ensures that a desired portion of the bandwidth is allocated to it.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -111,6 +116,10 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
+	}
+	if v, ok := d.GetOk("azure_qos_enabled"); ok {
+		x := (v.(bool))
+		o.SetAzureQosEnabled(x)
 	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -205,6 +214,7 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["azure_qos_enabled"] = (s.GetAzureQosEnabled())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

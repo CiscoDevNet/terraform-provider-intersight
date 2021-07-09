@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `device_up_time`:(int) Returns the device up time. 
 * `dn`:(string) Dn for the inventories present. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `fabric_name`:(string) Name of the fabric of the device being inventoried. 
 * `fex_count`:(int) Number of fabric extendors utilized. 
 * `infra_wi_node_count`:(int) Number of appliances as physical device that are wired into the cluster. 
 * `ip_address`:(string) The IP address of the device being inventoried. 
@@ -60,5 +61,6 @@ The following arguments can be used to get data of already created objects in In
 * `smart_account_id`:(int) Returns the value of the smartAccountId/CustomerId field. 
 * `software_download`:(string) Last software downloaded of device being inventoried. This determines if software download API was used. 
 * `system_up_time`:(string) The amount of time that the device being inventoried been up. 
+* `total_critical_faults`:(int) Returns the total number of critical faults. 
 * `nr_version`:(string) Software version of device being inventoried. The various software version values for each device are available on cisco.com. 
  

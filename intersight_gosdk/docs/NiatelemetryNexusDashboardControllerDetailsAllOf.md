@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **SiteHealth** | Pointer to **int64** | Health of the site serviced by ND. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **VersionOfController** | Pointer to **string** | Version of the controller serviced by ND. | [optional] 
+**NexusDashboard** | Pointer to [**NiatelemetryNexusDashboardsRelationship**](niatelemetry.NexusDashboards.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -144,6 +145,31 @@ SetVersionOfController sets VersionOfController field to given value.
 `func (o *NiatelemetryNexusDashboardControllerDetailsAllOf) HasVersionOfController() bool`
 
 HasVersionOfController returns a boolean if a field has been set.
+
+### GetNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardControllerDetailsAllOf) GetNexusDashboard() NiatelemetryNexusDashboardsRelationship`
+
+GetNexusDashboard returns the NexusDashboard field if non-nil, zero value otherwise.
+
+### GetNexusDashboardOk
+
+`func (o *NiatelemetryNexusDashboardControllerDetailsAllOf) GetNexusDashboardOk() (*NiatelemetryNexusDashboardsRelationship, bool)`
+
+GetNexusDashboardOk returns a tuple with the NexusDashboard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardControllerDetailsAllOf) SetNexusDashboard(v NiatelemetryNexusDashboardsRelationship)`
+
+SetNexusDashboard sets NexusDashboard field to given value.
+
+### HasNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardControllerDetailsAllOf) HasNexusDashboard() bool`
+
+HasNexusDashboard returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

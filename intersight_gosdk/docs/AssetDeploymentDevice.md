@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **DeviceInformation** | Pointer to [**NullableAssetDeploymentDeviceInformation**](asset.DeploymentDeviceInformation.md) |  | [optional] 
 **DevicePid** | Pointer to **string** | Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices. | [optional] [readonly] 
 **DeviceStatistics** | Pointer to [**NullableAssetDeviceStatistics**](asset.DeviceStatistics.md) |  | [optional] 
+**ProductSubgroup** | Pointer to **string** | Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \&quot;N9300 Series\&quot; in Product type \&quot;SWITCH\&quot;. | [optional] [readonly] 
 **ProductType** | Pointer to **string** | Product type helps to determine if device has to be billed using consumption metering. example \&quot;SERVER\&quot;. | [optional] [readonly] 
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
 **VirtualizationPlatform** | Pointer to **string** | Virtualization platform is used to identify the hypervisor type. example \&quot;ESXi\&quot;. | [optional] [readonly] 
+**Workload** | Pointer to **string** | Workload/Usecase running on the device. | [optional] [readonly] 
 **Deployment** | Pointer to [**AssetDeploymentRelationship**](asset.Deployment.Relationship.md) |  | [optional] 
 **DeviceContractInformation** | Pointer to [**AssetDeviceContractInformationRelationship**](asset.DeviceContractInformation.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -198,6 +200,31 @@ HasDeviceStatistics returns a boolean if a field has been set.
 `func (o *AssetDeploymentDevice) UnsetDeviceStatistics()`
 
 UnsetDeviceStatistics ensures that no value is present for DeviceStatistics, not even an explicit nil
+### GetProductSubgroup
+
+`func (o *AssetDeploymentDevice) GetProductSubgroup() string`
+
+GetProductSubgroup returns the ProductSubgroup field if non-nil, zero value otherwise.
+
+### GetProductSubgroupOk
+
+`func (o *AssetDeploymentDevice) GetProductSubgroupOk() (*string, bool)`
+
+GetProductSubgroupOk returns a tuple with the ProductSubgroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProductSubgroup
+
+`func (o *AssetDeploymentDevice) SetProductSubgroup(v string)`
+
+SetProductSubgroup sets ProductSubgroup field to given value.
+
+### HasProductSubgroup
+
+`func (o *AssetDeploymentDevice) HasProductSubgroup() bool`
+
+HasProductSubgroup returns a boolean if a field has been set.
+
 ### GetProductType
 
 `func (o *AssetDeploymentDevice) GetProductType() string`
@@ -282,6 +309,31 @@ SetVirtualizationPlatform sets VirtualizationPlatform field to given value.
 `func (o *AssetDeploymentDevice) HasVirtualizationPlatform() bool`
 
 HasVirtualizationPlatform returns a boolean if a field has been set.
+
+### GetWorkload
+
+`func (o *AssetDeploymentDevice) GetWorkload() string`
+
+GetWorkload returns the Workload field if non-nil, zero value otherwise.
+
+### GetWorkloadOk
+
+`func (o *AssetDeploymentDevice) GetWorkloadOk() (*string, bool)`
+
+GetWorkloadOk returns a tuple with the Workload field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkload
+
+`func (o *AssetDeploymentDevice) SetWorkload(v string)`
+
+SetWorkload sets Workload field to given value.
+
+### HasWorkload
+
+`func (o *AssetDeploymentDevice) HasWorkload() bool`
+
+HasWorkload returns a boolean if a field has been set.
 
 ### GetDeployment
 

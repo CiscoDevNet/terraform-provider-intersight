@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Tunnel"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Tunnel"]
-**Var0Session** | Pointer to [**KvmSessionRelationship**](kvm.Session.Relationship.md) |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**KvmSession** | Pointer to [**KvmSessionRelationship**](kvm.Session.Relationship.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -69,31 +69,6 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
-### GetVar0Session
-
-`func (o *KvmTunnelAllOf) GetVar0Session() KvmSessionRelationship`
-
-GetVar0Session returns the Var0Session field if non-nil, zero value otherwise.
-
-### GetVar0SessionOk
-
-`func (o *KvmTunnelAllOf) GetVar0SessionOk() (*KvmSessionRelationship, bool)`
-
-GetVar0SessionOk returns a tuple with the Var0Session field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0Session
-
-`func (o *KvmTunnelAllOf) SetVar0Session(v KvmSessionRelationship)`
-
-SetVar0Session sets Var0Session field to given value.
-
-### HasVar0Session
-
-`func (o *KvmTunnelAllOf) HasVar0Session() bool`
-
-HasVar0Session returns a boolean if a field has been set.
-
 ### GetDevice
 
 `func (o *KvmTunnelAllOf) GetDevice() AssetDeviceRegistrationRelationship`
@@ -118,6 +93,31 @@ SetDevice sets Device field to given value.
 `func (o *KvmTunnelAllOf) HasDevice() bool`
 
 HasDevice returns a boolean if a field has been set.
+
+### GetKvmSession
+
+`func (o *KvmTunnelAllOf) GetKvmSession() KvmSessionRelationship`
+
+GetKvmSession returns the KvmSession field if non-nil, zero value otherwise.
+
+### GetKvmSessionOk
+
+`func (o *KvmTunnelAllOf) GetKvmSessionOk() (*KvmSessionRelationship, bool)`
+
+GetKvmSessionOk returns a tuple with the KvmSession field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmSession
+
+`func (o *KvmTunnelAllOf) SetKvmSession(v KvmSessionRelationship)`
+
+SetKvmSession sets KvmSession field to given value.
+
+### HasKvmSession
+
+`func (o *KvmTunnelAllOf) HasKvmSession() bool`
+
+HasKvmSession returns a boolean if a field has been set.
 
 ### GetServer
 

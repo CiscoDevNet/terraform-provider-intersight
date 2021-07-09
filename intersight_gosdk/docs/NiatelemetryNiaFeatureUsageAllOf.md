@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **DnsCount** | Pointer to **int64** | DNS feature usage. This determines the total number of DNS configurations across the fabric. | [optional] 
 **EigrpCount** | Pointer to **int64** | Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric. | [optional] 
 **EpgCount** | Pointer to **int64** | Number of End Point Groups. This determines the total number of End Point Groups across the fabric. | [optional] 
+**FabricModuleCount** | Pointer to **int64** | Returns the total number of fabric module slots. | [optional] 
 **FabricSetuppCount** | Pointer to **int64** | Number of Multi-Pods per fabric. | [optional] 
 **FcoeNportCount** | Pointer to **int64** | Total number of FCoE N-Port for DOM, VSAn, and VLAN. | [optional] 
 **FcoeNportDomCount** | Pointer to **int64** | Number of FCoE N-Port DOM. | [optional] 
@@ -39,10 +40,20 @@ Name | Type | Description | Notes
 **IgmpAccessListCount** | Pointer to **int64** | IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric. | [optional] 
 **IgmpSnoop** | Pointer to **string** | IGMP Snooping feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **IpEpgCount** | Pointer to **int64** | Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric. | [optional] 
+**IsBgpRouteReflectorsFeatureUsed** | Pointer to **bool** | BGP route reflector usage on APIC. | [optional] 
+**IsBridgeDomainsFeatureUsed** | Pointer to **bool** | Brodge domains feature usage on APIC controller. | [optional] 
 **IsCommonLocalUserName** | Pointer to **bool** | Returns value of isCommonLocalUserName field. | [optional] 
+**IsContractsFeatureUsed** | Pointer to **bool** | Contracts feature usage on APIC controller. | [optional] 
+**IsEpgFeatureUsed** | Pointer to **bool** | EPG feature usage on APIC controller. | [optional] 
+**IsFiltersFeatureUsed** | Pointer to **bool** | Filters feature usage on APIC. | [optional] 
 **IsHttpConfigured** | Pointer to **bool** | Returns if HTTP is configured. | [optional] 
 **IsHttpsConfigured** | Pointer to **bool** | Returns if HTTPS is configured. | [optional] 
+**IsNtpFeatureUsed** | Pointer to **bool** | NTP feature usage on APIC controller. | [optional] 
+**IsPtpFeatureUsed** | Pointer to **bool** | Ptp feature usage on APIC. | [optional] 
+**IsSynceFeatureUsed** | Pointer to **bool** | Synce feature usage on APIC. | [optional] 
 **IsTechSupportCollected** | Pointer to **string** | Status of techsupport collection. | [optional] 
+**IsTenantsFeatureUsed** | Pointer to **bool** | Tenants feature usage on APIC. | [optional] 
+**IsVrfsFeatureUsed** | Pointer to **bool** | VRF feature usage on APIC controller. | [optional] 
 **IsisCount** | Pointer to **int64** | Isis feature usage. This determines the total number of ISIS sessions across the fabric. | [optional] 
 **L2Multicast** | Pointer to **string** | L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. | [optional] 
 **LeafCount** | Pointer to **int64** | Number of Leafs. This determines the total number of Leaf switches in the fabric. | [optional] 
@@ -87,8 +98,10 @@ Name | Type | Description | Notes
 **SpineCount** | Pointer to **int64** | Number of Spines. This determines the total number of spine switches in the fabric. | [optional] 
 **SshOverV6Count** | Pointer to **int64** | Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
 **SshV2Count** | Pointer to **int64** | Returns count of ssh V2 on the fabric. | [optional] 
+**SupervisorModuleCount** | Pointer to **int64** | Returns the total number of supervisor module slots. | [optional] 
 **SyslogGroupCount** | Pointer to **int64** | Number of syslog monitoring policies on the fabric. | [optional] 
 **SyslogOverV6Count** | Pointer to **int64** | Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. | [optional] 
+**SystemControllerCount** | Pointer to **int64** | Returns the total number of system controller slots. | [optional] 
 **TacacsGroupCount** | Pointer to **int64** | Number of tacacs monitoring policies on the fabric. | [optional] 
 **TenantCount** | Pointer to **int64** | Number of tenants. This determines the total number of tenants configured across the fabric. | [optional] 
 **TierTwoLeafCount** | Pointer to **int64** | Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric. | [optional] 
@@ -712,6 +725,31 @@ SetEpgCount sets EpgCount field to given value.
 
 HasEpgCount returns a boolean if a field has been set.
 
+### GetFabricModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricModuleCount() int64`
+
+GetFabricModuleCount returns the FabricModuleCount field if non-nil, zero value otherwise.
+
+### GetFabricModuleCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricModuleCountOk() (*int64, bool)`
+
+GetFabricModuleCountOk returns a tuple with the FabricModuleCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFabricModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetFabricModuleCount(v int64)`
+
+SetFabricModuleCount sets FabricModuleCount field to given value.
+
+### HasFabricModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasFabricModuleCount() bool`
+
+HasFabricModuleCount returns a boolean if a field has been set.
+
 ### GetFabricSetuppCount
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricSetuppCount() int64`
@@ -987,6 +1025,56 @@ SetIpEpgCount sets IpEpgCount field to given value.
 
 HasIpEpgCount returns a boolean if a field has been set.
 
+### GetIsBgpRouteReflectorsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBgpRouteReflectorsFeatureUsed() bool`
+
+GetIsBgpRouteReflectorsFeatureUsed returns the IsBgpRouteReflectorsFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsBgpRouteReflectorsFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBgpRouteReflectorsFeatureUsedOk() (*bool, bool)`
+
+GetIsBgpRouteReflectorsFeatureUsedOk returns a tuple with the IsBgpRouteReflectorsFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBgpRouteReflectorsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsBgpRouteReflectorsFeatureUsed(v bool)`
+
+SetIsBgpRouteReflectorsFeatureUsed sets IsBgpRouteReflectorsFeatureUsed field to given value.
+
+### HasIsBgpRouteReflectorsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsBgpRouteReflectorsFeatureUsed() bool`
+
+HasIsBgpRouteReflectorsFeatureUsed returns a boolean if a field has been set.
+
+### GetIsBridgeDomainsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBridgeDomainsFeatureUsed() bool`
+
+GetIsBridgeDomainsFeatureUsed returns the IsBridgeDomainsFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsBridgeDomainsFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBridgeDomainsFeatureUsedOk() (*bool, bool)`
+
+GetIsBridgeDomainsFeatureUsedOk returns a tuple with the IsBridgeDomainsFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsBridgeDomainsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsBridgeDomainsFeatureUsed(v bool)`
+
+SetIsBridgeDomainsFeatureUsed sets IsBridgeDomainsFeatureUsed field to given value.
+
+### HasIsBridgeDomainsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsBridgeDomainsFeatureUsed() bool`
+
+HasIsBridgeDomainsFeatureUsed returns a boolean if a field has been set.
+
 ### GetIsCommonLocalUserName
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsCommonLocalUserName() bool`
@@ -1011,6 +1099,81 @@ SetIsCommonLocalUserName sets IsCommonLocalUserName field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsCommonLocalUserName() bool`
 
 HasIsCommonLocalUserName returns a boolean if a field has been set.
+
+### GetIsContractsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsContractsFeatureUsed() bool`
+
+GetIsContractsFeatureUsed returns the IsContractsFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsContractsFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsContractsFeatureUsedOk() (*bool, bool)`
+
+GetIsContractsFeatureUsedOk returns a tuple with the IsContractsFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsContractsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsContractsFeatureUsed(v bool)`
+
+SetIsContractsFeatureUsed sets IsContractsFeatureUsed field to given value.
+
+### HasIsContractsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsContractsFeatureUsed() bool`
+
+HasIsContractsFeatureUsed returns a boolean if a field has been set.
+
+### GetIsEpgFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsEpgFeatureUsed() bool`
+
+GetIsEpgFeatureUsed returns the IsEpgFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsEpgFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsEpgFeatureUsedOk() (*bool, bool)`
+
+GetIsEpgFeatureUsedOk returns a tuple with the IsEpgFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEpgFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsEpgFeatureUsed(v bool)`
+
+SetIsEpgFeatureUsed sets IsEpgFeatureUsed field to given value.
+
+### HasIsEpgFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsEpgFeatureUsed() bool`
+
+HasIsEpgFeatureUsed returns a boolean if a field has been set.
+
+### GetIsFiltersFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsFiltersFeatureUsed() bool`
+
+GetIsFiltersFeatureUsed returns the IsFiltersFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsFiltersFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsFiltersFeatureUsedOk() (*bool, bool)`
+
+GetIsFiltersFeatureUsedOk returns a tuple with the IsFiltersFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsFiltersFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsFiltersFeatureUsed(v bool)`
+
+SetIsFiltersFeatureUsed sets IsFiltersFeatureUsed field to given value.
+
+### HasIsFiltersFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsFiltersFeatureUsed() bool`
+
+HasIsFiltersFeatureUsed returns a boolean if a field has been set.
 
 ### GetIsHttpConfigured
 
@@ -1062,6 +1225,81 @@ SetIsHttpsConfigured sets IsHttpsConfigured field to given value.
 
 HasIsHttpsConfigured returns a boolean if a field has been set.
 
+### GetIsNtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsNtpFeatureUsed() bool`
+
+GetIsNtpFeatureUsed returns the IsNtpFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsNtpFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsNtpFeatureUsedOk() (*bool, bool)`
+
+GetIsNtpFeatureUsedOk returns a tuple with the IsNtpFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsNtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsNtpFeatureUsed(v bool)`
+
+SetIsNtpFeatureUsed sets IsNtpFeatureUsed field to given value.
+
+### HasIsNtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsNtpFeatureUsed() bool`
+
+HasIsNtpFeatureUsed returns a boolean if a field has been set.
+
+### GetIsPtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsPtpFeatureUsed() bool`
+
+GetIsPtpFeatureUsed returns the IsPtpFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsPtpFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsPtpFeatureUsedOk() (*bool, bool)`
+
+GetIsPtpFeatureUsedOk returns a tuple with the IsPtpFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsPtpFeatureUsed(v bool)`
+
+SetIsPtpFeatureUsed sets IsPtpFeatureUsed field to given value.
+
+### HasIsPtpFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsPtpFeatureUsed() bool`
+
+HasIsPtpFeatureUsed returns a boolean if a field has been set.
+
+### GetIsSynceFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsSynceFeatureUsed() bool`
+
+GetIsSynceFeatureUsed returns the IsSynceFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsSynceFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsSynceFeatureUsedOk() (*bool, bool)`
+
+GetIsSynceFeatureUsedOk returns a tuple with the IsSynceFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSynceFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsSynceFeatureUsed(v bool)`
+
+SetIsSynceFeatureUsed sets IsSynceFeatureUsed field to given value.
+
+### HasIsSynceFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsSynceFeatureUsed() bool`
+
+HasIsSynceFeatureUsed returns a boolean if a field has been set.
+
 ### GetIsTechSupportCollected
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTechSupportCollected() string`
@@ -1086,6 +1324,56 @@ SetIsTechSupportCollected sets IsTechSupportCollected field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsTechSupportCollected() bool`
 
 HasIsTechSupportCollected returns a boolean if a field has been set.
+
+### GetIsTenantsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTenantsFeatureUsed() bool`
+
+GetIsTenantsFeatureUsed returns the IsTenantsFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsTenantsFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTenantsFeatureUsedOk() (*bool, bool)`
+
+GetIsTenantsFeatureUsedOk returns a tuple with the IsTenantsFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsTenantsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsTenantsFeatureUsed(v bool)`
+
+SetIsTenantsFeatureUsed sets IsTenantsFeatureUsed field to given value.
+
+### HasIsTenantsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsTenantsFeatureUsed() bool`
+
+HasIsTenantsFeatureUsed returns a boolean if a field has been set.
+
+### GetIsVrfsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsVrfsFeatureUsed() bool`
+
+GetIsVrfsFeatureUsed returns the IsVrfsFeatureUsed field if non-nil, zero value otherwise.
+
+### GetIsVrfsFeatureUsedOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsVrfsFeatureUsedOk() (*bool, bool)`
+
+GetIsVrfsFeatureUsedOk returns a tuple with the IsVrfsFeatureUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsVrfsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsVrfsFeatureUsed(v bool)`
+
+SetIsVrfsFeatureUsed sets IsVrfsFeatureUsed field to given value.
+
+### HasIsVrfsFeatureUsed
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsVrfsFeatureUsed() bool`
+
+HasIsVrfsFeatureUsed returns a boolean if a field has been set.
 
 ### GetIsisCount
 
@@ -2197,6 +2485,31 @@ SetSshV2Count sets SshV2Count field to given value.
 
 HasSshV2Count returns a boolean if a field has been set.
 
+### GetSupervisorModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSupervisorModuleCount() int64`
+
+GetSupervisorModuleCount returns the SupervisorModuleCount field if non-nil, zero value otherwise.
+
+### GetSupervisorModuleCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSupervisorModuleCountOk() (*int64, bool)`
+
+GetSupervisorModuleCountOk returns a tuple with the SupervisorModuleCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupervisorModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSupervisorModuleCount(v int64)`
+
+SetSupervisorModuleCount sets SupervisorModuleCount field to given value.
+
+### HasSupervisorModuleCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSupervisorModuleCount() bool`
+
+HasSupervisorModuleCount returns a boolean if a field has been set.
+
 ### GetSyslogGroupCount
 
 `func (o *NiatelemetryNiaFeatureUsageAllOf) GetSyslogGroupCount() int64`
@@ -2246,6 +2559,31 @@ SetSyslogOverV6Count sets SyslogOverV6Count field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasSyslogOverV6Count() bool`
 
 HasSyslogOverV6Count returns a boolean if a field has been set.
+
+### GetSystemControllerCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSystemControllerCount() int64`
+
+GetSystemControllerCount returns the SystemControllerCount field if non-nil, zero value otherwise.
+
+### GetSystemControllerCountOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetSystemControllerCountOk() (*int64, bool)`
+
+GetSystemControllerCountOk returns a tuple with the SystemControllerCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemControllerCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetSystemControllerCount(v int64)`
+
+SetSystemControllerCount sets SystemControllerCount field to given value.
+
+### HasSystemControllerCount
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasSystemControllerCount() bool`
+
+HasSystemControllerCount returns a boolean if a field has been set.
 
 ### GetTacacsGroupCount
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNode"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNode"]
-**Health** | Pointer to **bool** | Health of NetApp Node. | [optional] [readonly] 
+**Health** | Pointer to **bool** | Health of NetApp Node. The node is marked healthy when this is set. | [optional] [readonly] 
 **Systemid** | Pointer to **string** | System id of NetApp Node. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of NetApp Node. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](storage.NetAppCluster.Relationship.md) |  | [optional] 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -13,6 +13,7 @@ package intersight
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // VirtualizationBaseVirtualMachineAllOf Definition of the list of properties defined in 'virtualization.BaseVirtualMachine', excluding properties defined in parent classes.
@@ -20,9 +21,11 @@ type VirtualizationBaseVirtualMachineAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType string                          `json:"ObjectType"`
-	Capacity   NullableInfraHardwareInfo       `json:"Capacity,omitempty"`
-	GuestInfo  NullableVirtualizationGuestInfo `json:"GuestInfo,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// Time when this VM booted up.
+	BootTime  *time.Time                      `json:"BootTime,omitempty"`
+	Capacity  NullableInfraHardwareInfo       `json:"Capacity,omitempty"`
+	GuestInfo NullableVirtualizationGuestInfo `json:"GuestInfo,omitempty"`
 	// Type of hypervisor where the virtual machine is hosted for example ESXi. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
 	HypervisorType *string `json:"HypervisorType,omitempty"`
 	// The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference).
@@ -31,11 +34,17 @@ type VirtualizationBaseVirtualMachineAllOf struct {
 	MemoryCapacity NullableVirtualizationMemoryCapacity `json:"MemoryCapacity,omitempty"`
 	// User-provided name to identify the virtual machine.
 	Name *string `json:"Name,omitempty"`
-	// Power state of the virtual machine. * `Unknown` - The entity's power state is unknown. * `PoweredOn` - The entity is powered on. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `` - The entity's power state is not available.
+	// Power state of the virtual machine. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
 	PowerState        *string                               `json:"PowerState,omitempty"`
 	ProcessorCapacity NullableVirtualizationComputeCapacity `json:"ProcessorCapacity,omitempty"`
+	// Cloud platform, where the virtual machine is launched. * `Unknown` - Cloud provider is not known. * `VMwarevSphere` - Cloud provider named VMware vSphere. * `AmazonWebServices` - Cloud provider named Amazon Web Services. * `MicrosoftAzure` - Cloud provider named Microsoft Azure. * `GoogleCloudPlatform` - Cloud provider named Google Cloud Platform.
+	Provider *string `json:"Provider,omitempty"`
+	// The current state of the virtual machine. For example, starting, stopped, etc. * `None` - A place holder for the default value. * `Creating` - Virtual machine creation is in progress. * `Pending` - The virtual machine is preparing to enter the started state. * `Starting` - The virtual machine is starting. * `Started` - The virtual machine is running and ready for use. * `Stopping` - The virtual machine is preparing to be stopped. * `Stopped` - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time. * `Pausing` - The virtual machine is preparing to be paused. * `Paused` - The virtual machine enters into paused state due to low free disk space. * `Suspending` - The virtual machine is preparing to be suspended. * `Suspended` - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode. * `Deleting` - The virtual machine is preparing to be terminated. * `Terminated` - The virtual machine has been permanently deleted and cannot be started. * `Rebooting` - The virtual machine reboot is in progress. * `Error` - The deployment of virtual machine is failed.
+	State *string `json:"State,omitempty"`
 	// The uuid of this virtual machine. The uuid is internally generated and not user specified.
-	Uuid                 *string `json:"Uuid,omitempty"`
+	Uuid *string `json:"Uuid,omitempty"`
+	// Time when this virtualmachine is created.
+	VmCreationTime       *time.Time `json:"VmCreationTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -53,6 +62,10 @@ func NewVirtualizationBaseVirtualMachineAllOf(classId string, objectType string)
 	this.HypervisorType = &hypervisorType
 	var powerState string = "Unknown"
 	this.PowerState = &powerState
+	var provider string = "Unknown"
+	this.Provider = &provider
+	var state string = "None"
+	this.State = &state
 	return &this
 }
 
@@ -65,6 +78,10 @@ func NewVirtualizationBaseVirtualMachineAllOfWithDefaults() *VirtualizationBaseV
 	this.HypervisorType = &hypervisorType
 	var powerState string = "Unknown"
 	this.PowerState = &powerState
+	var provider string = "Unknown"
+	this.Provider = &provider
+	var state string = "None"
+	this.State = &state
 	return &this
 }
 
@@ -114,6 +131,38 @@ func (o *VirtualizationBaseVirtualMachineAllOf) GetObjectTypeOk() (*string, bool
 // SetObjectType sets field value
 func (o *VirtualizationBaseVirtualMachineAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetBootTime returns the BootTime field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetBootTime() time.Time {
+	if o == nil || o.BootTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.BootTime
+}
+
+// GetBootTimeOk returns a tuple with the BootTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetBootTimeOk() (*time.Time, bool) {
+	if o == nil || o.BootTime == nil {
+		return nil, false
+	}
+	return o.BootTime, true
+}
+
+// HasBootTime returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasBootTime() bool {
+	if o != nil && o.BootTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBootTime gets a reference to the given time.Time and assigns it to the BootTime field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetBootTime(v time.Time) {
+	o.BootTime = &v
 }
 
 // GetCapacity returns the Capacity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -449,6 +498,70 @@ func (o *VirtualizationBaseVirtualMachineAllOf) UnsetProcessorCapacity() {
 	o.ProcessorCapacity.Unset()
 }
 
+// GetProvider returns the Provider field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetProvider() string {
+	if o == nil || o.Provider == nil {
+		var ret string
+		return ret
+	}
+	return *o.Provider
+}
+
+// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetProviderOk() (*string, bool) {
+	if o == nil || o.Provider == nil {
+		return nil, false
+	}
+	return o.Provider, true
+}
+
+// HasProvider returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasProvider() bool {
+	if o != nil && o.Provider != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProvider gets a reference to the given string and assigns it to the Provider field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetProvider(v string) {
+	o.Provider = &v
+}
+
+// GetState returns the State field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetState() string {
+	if o == nil || o.State == nil {
+		var ret string
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetStateOk() (*string, bool) {
+	if o == nil || o.State == nil {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasState() bool {
+	if o != nil && o.State != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetState(v string) {
+	o.State = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *VirtualizationBaseVirtualMachineAllOf) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -481,6 +594,38 @@ func (o *VirtualizationBaseVirtualMachineAllOf) SetUuid(v string) {
 	o.Uuid = &v
 }
 
+// GetVmCreationTime returns the VmCreationTime field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetVmCreationTime() time.Time {
+	if o == nil || o.VmCreationTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.VmCreationTime
+}
+
+// GetVmCreationTimeOk returns a tuple with the VmCreationTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetVmCreationTimeOk() (*time.Time, bool) {
+	if o == nil || o.VmCreationTime == nil {
+		return nil, false
+	}
+	return o.VmCreationTime, true
+}
+
+// HasVmCreationTime returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasVmCreationTime() bool {
+	if o != nil && o.VmCreationTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVmCreationTime gets a reference to the given time.Time and assigns it to the VmCreationTime field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetVmCreationTime(v time.Time) {
+	o.VmCreationTime = &v
+}
+
 func (o VirtualizationBaseVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -488,6 +633,9 @@ func (o VirtualizationBaseVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
+	}
+	if o.BootTime != nil {
+		toSerialize["BootTime"] = o.BootTime
 	}
 	if o.Capacity.IsSet() {
 		toSerialize["Capacity"] = o.Capacity.Get()
@@ -516,8 +664,17 @@ func (o VirtualizationBaseVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.ProcessorCapacity.IsSet() {
 		toSerialize["ProcessorCapacity"] = o.ProcessorCapacity.Get()
 	}
+	if o.Provider != nil {
+		toSerialize["Provider"] = o.Provider
+	}
+	if o.State != nil {
+		toSerialize["State"] = o.State
+	}
 	if o.Uuid != nil {
 		toSerialize["Uuid"] = o.Uuid
+	}
+	if o.VmCreationTime != nil {
+		toSerialize["VmCreationTime"] = o.VmCreationTime
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -539,6 +696,7 @@ func (o *VirtualizationBaseVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (err
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BootTime")
 		delete(additionalProperties, "Capacity")
 		delete(additionalProperties, "GuestInfo")
 		delete(additionalProperties, "HypervisorType")
@@ -548,7 +706,10 @@ func (o *VirtualizationBaseVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (err
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PowerState")
 		delete(additionalProperties, "ProcessorCapacity")
+		delete(additionalProperties, "Provider")
+		delete(additionalProperties, "State")
 		delete(additionalProperties, "Uuid")
+		delete(additionalProperties, "VmCreationTime")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.EsxiOvaCustomSpec"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.EsxiOvaCustomSpec"]
+**ExtraConfig** | Pointer to **interface{}** | Specify the Extra Config specification which can be configured on virtual machine. | [optional] 
 **OvaEnvSpec** | Pointer to **interface{}** | Specify the OVA Environment specification which can be configured on the virtual machine. | [optional] 
 
 ## Methods
@@ -67,6 +68,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetExtraConfig
+
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) GetExtraConfig() interface{}`
+
+GetExtraConfig returns the ExtraConfig field if non-nil, zero value otherwise.
+
+### GetExtraConfigOk
+
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) GetExtraConfigOk() (*interface{}, bool)`
+
+GetExtraConfigOk returns a tuple with the ExtraConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtraConfig
+
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) SetExtraConfig(v interface{})`
+
+SetExtraConfig sets ExtraConfig field to given value.
+
+### HasExtraConfig
+
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) HasExtraConfig() bool`
+
+HasExtraConfig returns a boolean if a field has been set.
+
+### SetExtraConfigNil
+
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) SetExtraConfigNil(b bool)`
+
+ SetExtraConfigNil sets the value for ExtraConfig to be an explicit nil
+
+### UnsetExtraConfig
+`func (o *VirtualizationEsxiOvaCustomSpecAllOf) UnsetExtraConfig()`
+
+UnsetExtraConfig ensures that no value is present for ExtraConfig, not even an explicit nil
 ### GetOvaEnvSpec
 
 `func (o *VirtualizationEsxiOvaCustomSpecAllOf) GetOvaEnvSpec() interface{}`

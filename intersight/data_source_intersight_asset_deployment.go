@@ -100,12 +100,6 @@ func dataSourceAssetDeployment() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"workload": {
-				Description: "Workload/Usecase running on the deployment.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
 			"results": {
 				Type: schema.TypeList,
 				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
@@ -560,7 +554,7 @@ func dataSourceAssetDeployment() *schema.Resource {
 									Optional:    true,
 								},
 								"name": {
-									Description: "Metric type used to calculate metering for the device sent from the IB Contract. example  Node, vMemory, vCPU.\n* `None` - A default value to catch cases where metric type is not correctly detected.\n* `Node` - The metering of the device is on the basis of Power state.\n* `Storage` - The metering of the device is on the basis of used Storage.\n* `vMemory` - The metering of the device is on the basis of VM Memory.\n* `vCPU` - The metering of the device is on the basis of vCPU.\n* `vStorage` - The metering of the device is on the basis of used virtual Storage.",
+									Description: "Metric type used to calculate metering for the device sent from the IB Contract. example  Node, vMemory, vCPU.\n* `None` - A default value to catch cases where metric type is not correctly detected.\n* `Node` - The metering of the device is on the basis of Power state.\n* `Storage` - The metering of the device is on the basis of used Storage.\n* `vMemory` - The metering of the device is on the basis of VM Memory.\n* `vCPU` - The metering of the device is on the basis of vCPU.\n* `vStorage` - The metering of the device is on the basis of used virtual Storage.\n* `Switch` - The metering of the device is on the basis of Switch.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -572,7 +566,7 @@ func dataSourceAssetDeployment() *schema.Resource {
 									Computed:    true,
 								},
 								"unit": {
-									Description: "Metric unit used to calculate metering for the device sent from the IB Contract. example  Node, GiB, Cores.\n* `None` - A default value to catch cases where metric unit is not correctly detected.\n* `Node` - It is applicable for Node Metric type.\n* `GiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `TiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `Cores` - It is applicable for vCPU Metric type.",
+									Description: "Metric unit used to calculate metering for the device sent from the IB Contract. example  Node, GiB, Cores.\n* `None` - A default value to catch cases where metric unit is not correctly detected.\n* `Node` - It is applicable for Node Metric type.\n* `GiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `TiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `Cores` - It is applicable for vCPU Metric type.\n* `Switch` - It is applicable for Switch Metric type.\n* `Port` - It is applicable for Switch Metric type.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -700,12 +694,11 @@ func dataSourceAssetDeployment() *schema.Resource {
 							},
 						},
 					},
-					"workload": {
-						Description: "Workload/Usecase running on the deployment.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
+					"workloads": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 				}},
 				Computed: true,
 			}},
@@ -773,10 +766,6 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("subscription_ref_id"); ok {
 		x := (v.(string))
 		o.SetSubscriptionRefId(x)
-	}
-	if v, ok := d.GetOk("workload"); ok {
-		x := (v.(string))
-		o.SetWorkload(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -853,7 +842,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 				temp["unit_of_measure"] = flattenListAssetMeteringType(s.GetUnitOfMeasure(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-				temp["workload"] = (s.GetWorkload())
+				temp["workloads"] = (s.GetWorkloads())
 				assetDeploymentResults[j] = temp
 				j += 1
 			}

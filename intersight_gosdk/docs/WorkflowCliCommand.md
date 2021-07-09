@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Command** | Pointer to **string** | The command to run on the device connector. | [optional] 
 **EndPrompt** | Pointer to **string** | The regex string that identifies the end of the command response. | [optional] 
 **ExpectPrompts** | Pointer to [**[]WorkflowExpectPrompt**](WorkflowExpectPrompt.md) |  | [optional] 
+**ExpectedExitCodes** | Pointer to **[]int64** |  | [optional] 
 **SkipStatusCheck** | Pointer to **bool** | Skips the execution status check of the terminal command. One use case for this is while exiting the terminal session from esxi host. | [optional] 
 **TerminalEnd** | Pointer to **bool** | If this flag is set, it marks the end of the terminal session where the previous commands were executed. | [optional] 
 **TerminalStart** | Pointer to **bool** | If this flag is set, the execution of this command initiates a terminal session in which the subsequent CLI commands are executed until a command with terminalEnd flag is encountered or the end of the batch. | [optional] 
@@ -158,6 +159,41 @@ HasExpectPrompts returns a boolean if a field has been set.
 `func (o *WorkflowCliCommand) UnsetExpectPrompts()`
 
 UnsetExpectPrompts ensures that no value is present for ExpectPrompts, not even an explicit nil
+### GetExpectedExitCodes
+
+`func (o *WorkflowCliCommand) GetExpectedExitCodes() []int64`
+
+GetExpectedExitCodes returns the ExpectedExitCodes field if non-nil, zero value otherwise.
+
+### GetExpectedExitCodesOk
+
+`func (o *WorkflowCliCommand) GetExpectedExitCodesOk() (*[]int64, bool)`
+
+GetExpectedExitCodesOk returns a tuple with the ExpectedExitCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpectedExitCodes
+
+`func (o *WorkflowCliCommand) SetExpectedExitCodes(v []int64)`
+
+SetExpectedExitCodes sets ExpectedExitCodes field to given value.
+
+### HasExpectedExitCodes
+
+`func (o *WorkflowCliCommand) HasExpectedExitCodes() bool`
+
+HasExpectedExitCodes returns a boolean if a field has been set.
+
+### SetExpectedExitCodesNil
+
+`func (o *WorkflowCliCommand) SetExpectedExitCodesNil(b bool)`
+
+ SetExpectedExitCodesNil sets the value for ExpectedExitCodes to be an explicit nil
+
+### UnsetExpectedExitCodes
+`func (o *WorkflowCliCommand) UnsetExpectedExitCodes()`
+
+UnsetExpectedExitCodes ensures that no value is present for ExpectedExitCodes, not even an explicit nil
 ### GetSkipStatusCheck
 
 `func (o *WorkflowCliCommand) GetSkipStatusCheck() bool`

@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 **EthernetPortSpeed** | Pointer to **int64** | The port speed for ethernet ports in Mbps. | [optional] 
 **FibreChannelPortSpeed** | Pointer to **int64** | The port speed for fibre channel ports in Mbps. | [optional] 
 **FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
-**NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adaptor. | [optional] 
-**PromCardType** | Pointer to **string** | Prom card type for the adaptor. | [optional] 
+**IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
+**IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
+**NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adapter. | [optional] 
+**PromCardType** | Pointer to **string** | Prom card type for the adapter. | [optional] 
 
 ## Methods
 
@@ -171,6 +173,56 @@ SetFibreChannelScsiIoqLimit sets FibreChannelScsiIoqLimit field to given value.
 `func (o *CapabilityAdapterUnitDescriptor) HasFibreChannelScsiIoqLimit() bool`
 
 HasFibreChannelScsiIoqLimit returns a boolean if a field has been set.
+
+### GetIsAzureQosSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsAzureQosSupported() bool`
+
+GetIsAzureQosSupported returns the IsAzureQosSupported field if non-nil, zero value otherwise.
+
+### GetIsAzureQosSupportedOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsAzureQosSupportedOk() (*bool, bool)`
+
+GetIsAzureQosSupportedOk returns a tuple with the IsAzureQosSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsAzureQosSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) SetIsAzureQosSupported(v bool)`
+
+SetIsAzureQosSupported sets IsAzureQosSupported field to given value.
+
+### HasIsAzureQosSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) HasIsAzureQosSupported() bool`
+
+HasIsAzureQosSupported returns a boolean if a field has been set.
+
+### GetIsGeneveSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsGeneveSupported() bool`
+
+GetIsGeneveSupported returns the IsGeneveSupported field if non-nil, zero value otherwise.
+
+### GetIsGeneveSupportedOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetIsGeneveSupportedOk() (*bool, bool)`
+
+GetIsGeneveSupportedOk returns a tuple with the IsGeneveSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsGeneveSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) SetIsGeneveSupported(v bool)`
+
+SetIsGeneveSupported sets IsGeneveSupported field to given value.
+
+### HasIsGeneveSupported
+
+`func (o *CapabilityAdapterUnitDescriptor) HasIsGeneveSupported() bool`
+
+HasIsGeneveSupported returns a boolean if a field has been set.
 
 ### GetNumDcePorts
 

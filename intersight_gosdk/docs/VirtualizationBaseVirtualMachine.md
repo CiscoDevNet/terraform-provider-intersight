@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**BootTime** | Pointer to **time.Time** | Time when this VM booted up. | [optional] 
 **Capacity** | Pointer to [**NullableInfraHardwareInfo**](infra.HardwareInfo.md) |  | [optional] 
 **GuestInfo** | Pointer to [**NullableVirtualizationGuestInfo**](virtualization.GuestInfo.md) |  | [optional] 
 **HypervisorType** | Pointer to **string** | Type of hypervisor where the virtual machine is hosted for example ESXi. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
@@ -13,9 +14,12 @@ Name | Type | Description | Notes
 **IpAddress** | Pointer to **[]string** |  | [optional] 
 **MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
 **Name** | Pointer to **string** | User-provided name to identify the virtual machine. | [optional] 
-**PowerState** | Pointer to **string** | Power state of the virtual machine. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
+**PowerState** | Pointer to **string** | Power state of the virtual machine. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
+**Provider** | Pointer to **string** | Cloud platform, where the virtual machine is launched. * &#x60;Unknown&#x60; - Cloud provider is not known. * &#x60;VMwarevSphere&#x60; - Cloud provider named VMware vSphere. * &#x60;AmazonWebServices&#x60; - Cloud provider named Amazon Web Services. * &#x60;MicrosoftAzure&#x60; - Cloud provider named Microsoft Azure. * &#x60;GoogleCloudPlatform&#x60; - Cloud provider named Google Cloud Platform. | [optional] [default to "Unknown"]
+**State** | Pointer to **string** | The current state of the virtual machine. For example, starting, stopped, etc. * &#x60;None&#x60; - A place holder for the default value. * &#x60;Creating&#x60; - Virtual machine creation is in progress. * &#x60;Pending&#x60; - The virtual machine is preparing to enter the started state. * &#x60;Starting&#x60; - The virtual machine is starting. * &#x60;Started&#x60; - The virtual machine is running and ready for use. * &#x60;Stopping&#x60; - The virtual machine is preparing to be stopped. * &#x60;Stopped&#x60; - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time. * &#x60;Pausing&#x60; - The virtual machine is preparing to be paused. * &#x60;Paused&#x60; - The virtual machine enters into paused state due to low free disk space. * &#x60;Suspending&#x60; - The virtual machine is preparing to be suspended. * &#x60;Suspended&#x60; - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode. * &#x60;Deleting&#x60; - The virtual machine is preparing to be terminated. * &#x60;Terminated&#x60; - The virtual machine has been permanently deleted and cannot be started. * &#x60;Rebooting&#x60; - The virtual machine reboot is in progress. * &#x60;Error&#x60; - The deployment of virtual machine is failed. | [optional] [default to "None"]
 **Uuid** | Pointer to **string** | The uuid of this virtual machine. The uuid is internally generated and not user specified. | [optional] 
+**VmCreationTime** | Pointer to **time.Time** | Time when this virtualmachine is created. | [optional] 
 
 ## Methods
 
@@ -75,6 +79,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBootTime
+
+`func (o *VirtualizationBaseVirtualMachine) GetBootTime() time.Time`
+
+GetBootTime returns the BootTime field if non-nil, zero value otherwise.
+
+### GetBootTimeOk
+
+`func (o *VirtualizationBaseVirtualMachine) GetBootTimeOk() (*time.Time, bool)`
+
+GetBootTimeOk returns a tuple with the BootTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootTime
+
+`func (o *VirtualizationBaseVirtualMachine) SetBootTime(v time.Time)`
+
+SetBootTime sets BootTime field to given value.
+
+### HasBootTime
+
+`func (o *VirtualizationBaseVirtualMachine) HasBootTime() bool`
+
+HasBootTime returns a boolean if a field has been set.
 
 ### GetCapacity
 
@@ -351,6 +380,56 @@ HasProcessorCapacity returns a boolean if a field has been set.
 `func (o *VirtualizationBaseVirtualMachine) UnsetProcessorCapacity()`
 
 UnsetProcessorCapacity ensures that no value is present for ProcessorCapacity, not even an explicit nil
+### GetProvider
+
+`func (o *VirtualizationBaseVirtualMachine) GetProvider() string`
+
+GetProvider returns the Provider field if non-nil, zero value otherwise.
+
+### GetProviderOk
+
+`func (o *VirtualizationBaseVirtualMachine) GetProviderOk() (*string, bool)`
+
+GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvider
+
+`func (o *VirtualizationBaseVirtualMachine) SetProvider(v string)`
+
+SetProvider sets Provider field to given value.
+
+### HasProvider
+
+`func (o *VirtualizationBaseVirtualMachine) HasProvider() bool`
+
+HasProvider returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *VirtualizationBaseVirtualMachine) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *VirtualizationBaseVirtualMachine) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *VirtualizationBaseVirtualMachine) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *VirtualizationBaseVirtualMachine) HasState() bool`
+
+HasState returns a boolean if a field has been set.
+
 ### GetUuid
 
 `func (o *VirtualizationBaseVirtualMachine) GetUuid() string`
@@ -375,6 +454,31 @@ SetUuid sets Uuid field to given value.
 `func (o *VirtualizationBaseVirtualMachine) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
+
+### GetVmCreationTime
+
+`func (o *VirtualizationBaseVirtualMachine) GetVmCreationTime() time.Time`
+
+GetVmCreationTime returns the VmCreationTime field if non-nil, zero value otherwise.
+
+### GetVmCreationTimeOk
+
+`func (o *VirtualizationBaseVirtualMachine) GetVmCreationTimeOk() (*time.Time, bool)`
+
+GetVmCreationTimeOk returns a tuple with the VmCreationTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmCreationTime
+
+`func (o *VirtualizationBaseVirtualMachine) SetVmCreationTime(v time.Time)`
+
+SetVmCreationTime sets VmCreationTime field to given value.
+
+### HasVmCreationTime
+
+`func (o *VirtualizationBaseVirtualMachine) HasVmCreationTime() bool`
+
+HasVmCreationTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

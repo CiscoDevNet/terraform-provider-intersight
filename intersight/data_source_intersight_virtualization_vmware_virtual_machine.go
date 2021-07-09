@@ -144,13 +144,18 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Computed:    true,
 			},
 			"power_state": {
-				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
+				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"protected_vm": {
 				Description: "Shows if this is a protected VM. VMs can be in protection groups.",
 				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"nr_provider": {
+				Description: "Cloud platform, where the virtual machine is launched.\n* `Unknown` - Cloud provider is not known.\n* `VMwarevSphere` - Cloud provider named VMware vSphere.\n* `AmazonWebServices` - Cloud provider named Amazon Web Services.\n* `MicrosoftAzure` - Cloud provider named Microsoft Azure.\n* `GoogleCloudPlatform` - Cloud provider named Google Cloud Platform.",
+				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"remote_display_vnc_enabled": {
@@ -179,6 +184,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"state": {
+				Description: "The current state of the virtual machine. For example, starting, stopped, etc.\n* `None` - A place holder for the default value.\n* `Creating` - Virtual machine creation is in progress.\n* `Pending` - The virtual machine is preparing to enter the started state.\n* `Starting` - The virtual machine is starting.\n* `Started` - The virtual machine is running and ready for use.\n* `Stopping` - The virtual machine is preparing to be stopped.\n* `Stopped` - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time.\n* `Pausing` - The virtual machine is preparing to be paused.\n* `Paused` - The virtual machine enters into paused state due to low free disk space.\n* `Suspending` - The virtual machine is preparing to be suspended.\n* `Suspended` - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode.\n* `Deleting` - The virtual machine is preparing to be terminated.\n* `Terminated` - The virtual machine has been permanently deleted and cannot be started.\n* `Rebooting` - The virtual machine reboot is in progress.\n* `Error` - The deployment of virtual machine is failed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tool_running_status": {
 				Description: "Indicates if guest tools are running on this VM. Could be set to guestToolNotRunning or guestToolsRunning.",
 				Type:        schema.TypeString,
@@ -191,6 +201,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 			},
 			"uuid": {
 				Description: "The uuid of this virtual machine. The uuid is internally generated and not user specified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"vm_creation_time": {
+				Description: "Time when this virtualmachine is created.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -627,6 +642,13 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"extra_config": {
+						Description: "Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json.",
+						Type:        schema.TypeMap,
+						Elem: &schema.Schema{
+							Type: schema.TypeString,
+						}, Optional: true,
+					},
 					"folder": {
 						Description: "The folder name associated with this VM.",
 						Type:        schema.TypeString,
@@ -1041,7 +1063,7 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Elem: &schema.Schema{
 							Type: schema.TypeString}},
 					"power_state": {
-						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
+						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1090,6 +1112,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 					"protected_vm": {
 						Description: "Shows if this is a protected VM. VMs can be in protection groups.",
 						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"nr_provider": {
+						Description: "Cloud platform, where the virtual machine is launched.\n* `Unknown` - Cloud provider is not known.\n* `VMwarevSphere` - Cloud provider named VMware vSphere.\n* `AmazonWebServices` - Cloud provider named Amazon Web Services.\n* `MicrosoftAzure` - Cloud provider named Microsoft Azure.\n* `GoogleCloudPlatform` - Cloud provider named Google Cloud Platform.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"registered_device": {
@@ -1197,6 +1224,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"state": {
+						Description: "The current state of the virtual machine. For example, starting, stopped, etc.\n* `None` - A place holder for the default value.\n* `Creating` - Virtual machine creation is in progress.\n* `Pending` - The virtual machine is preparing to enter the started state.\n* `Starting` - The virtual machine is starting.\n* `Started` - The virtual machine is running and ready for use.\n* `Stopping` - The virtual machine is preparing to be stopped.\n* `Stopped` - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time.\n* `Pausing` - The virtual machine is preparing to be paused.\n* `Paused` - The virtual machine enters into paused state due to low free disk space.\n* `Suspending` - The virtual machine is preparing to be suspended.\n* `Suspended` - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode.\n* `Deleting` - The virtual machine is preparing to be terminated.\n* `Terminated` - The virtual machine has been permanently deleted and cannot be started.\n* `Rebooting` - The virtual machine reboot is in progress.\n* `Error` - The deployment of virtual machine is failed.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"tags": {
 						Type:     schema.TypeList,
@@ -1365,6 +1397,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 						Optional: true,
 						Elem: &schema.Schema{
 							Type: schema.TypeInt}},
+					"vm_creation_time": {
+						Description: "Time when this virtualmachine is created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"vm_disk_count": {
 						Description: "Shows the number of disks assigned to this VM.",
 						Type:        schema.TypeInt,
@@ -1511,6 +1548,10 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := (v.(bool))
 		o.SetProtectedVm(x)
 	}
+	if v, ok := d.GetOk("nr_provider"); ok {
+		x := (v.(string))
+		o.SetProvider(x)
+	}
 	if v, ok := d.GetOk("remote_display_vnc_enabled"); ok {
 		x := (v.(bool))
 		o.SetRemoteDisplayVncEnabled(x)
@@ -1531,6 +1572,10 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
+	if v, ok := d.GetOk("state"); ok {
+		x := (v.(string))
+		o.SetState(x)
+	}
 	if v, ok := d.GetOk("tool_running_status"); ok {
 		x := (v.(string))
 		o.SetToolRunningStatus(x)
@@ -1542,6 +1587,10 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
+	}
+	if v, ok := d.GetOk("vm_creation_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetVmCreationTime(x)
 	}
 	if v, ok := d.GetOk("vm_disk_count"); ok {
 		x := int64(v.(int))
@@ -1675,6 +1724,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 
 				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 				temp["protected_vm"] = (s.GetProtectedVm())
+				temp["nr_provider"] = (s.GetProvider())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 
@@ -1684,6 +1734,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["resource_pool_owner"] = (s.GetResourcePoolOwner())
 				temp["resource_pool_parent"] = (s.GetResourcePoolParent())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["state"] = (s.GetState())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["tool_running_status"] = (s.GetToolRunningStatus())
@@ -1693,6 +1744,8 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["virtual_disks"] = (s.GetVirtualDisks())
 				temp["virtual_network_interfaces"] = (s.GetVirtualNetworkInterfaces())
+
+				temp["vm_creation_time"] = (s.GetVmCreationTime()).String()
 				temp["vm_disk_count"] = (s.GetVmDiskCount())
 				temp["vm_overall_status"] = (s.GetVmOverallStatus())
 				temp["vm_path"] = (s.GetVmPath())

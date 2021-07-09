@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Session"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Session"]
 **AccountPermissions** | Pointer to [**[]IamAccountPermissions**](IamAccountPermissions.md) |  | [optional] 
-**ClientIpAddress** | Pointer to **string** | The user agent IP address from which the session is launched. | [optional] [readonly] 
 **Expiration** | Pointer to **time.Time** | Expiration time for the session. | [optional] [readonly] 
 **FailedLogins** | Pointer to **int64** | Failed logins since last login for admin user. | [optional] [readonly] 
 **IdleTimeExpiration** | Pointer to **time.Time** | Idle time expiration for the session. | [optional] [readonly] 
@@ -111,31 +110,6 @@ HasAccountPermissions returns a boolean if a field has been set.
 `func (o *IamSession) UnsetAccountPermissions()`
 
 UnsetAccountPermissions ensures that no value is present for AccountPermissions, not even an explicit nil
-### GetClientIpAddress
-
-`func (o *IamSession) GetClientIpAddress() string`
-
-GetClientIpAddress returns the ClientIpAddress field if non-nil, zero value otherwise.
-
-### GetClientIpAddressOk
-
-`func (o *IamSession) GetClientIpAddressOk() (*string, bool)`
-
-GetClientIpAddressOk returns a tuple with the ClientIpAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClientIpAddress
-
-`func (o *IamSession) SetClientIpAddress(v string)`
-
-SetClientIpAddress sets ClientIpAddress field to given value.
-
-### HasClientIpAddress
-
-`func (o *IamSession) HasClientIpAddress() bool`
-
-HasClientIpAddress returns a boolean if a field has been set.
-
 ### GetExpiration
 
 `func (o *IamSession) GetExpiration() time.Time`

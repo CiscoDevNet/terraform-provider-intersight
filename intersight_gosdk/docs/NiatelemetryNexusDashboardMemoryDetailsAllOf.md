@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NexusDashboardMemoryDetails"]
 **DeviceName** | Pointer to **string** | Name of the node in Nexus Dashboard cluster. | [optional] 
 **MemoryCapacity** | Pointer to **int64** | Memory capacity of a node in Nexus Dashboard. | [optional] 
+**NexusDashboard** | Pointer to [**NiatelemetryNexusDashboardsRelationship**](niatelemetry.NexusDashboards.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetMemoryCapacity sets MemoryCapacity field to given value.
 `func (o *NiatelemetryNexusDashboardMemoryDetailsAllOf) HasMemoryCapacity() bool`
 
 HasMemoryCapacity returns a boolean if a field has been set.
+
+### GetNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardMemoryDetailsAllOf) GetNexusDashboard() NiatelemetryNexusDashboardsRelationship`
+
+GetNexusDashboard returns the NexusDashboard field if non-nil, zero value otherwise.
+
+### GetNexusDashboardOk
+
+`func (o *NiatelemetryNexusDashboardMemoryDetailsAllOf) GetNexusDashboardOk() (*NiatelemetryNexusDashboardsRelationship, bool)`
+
+GetNexusDashboardOk returns a tuple with the NexusDashboard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardMemoryDetailsAllOf) SetNexusDashboard(v NiatelemetryNexusDashboardsRelationship)`
+
+SetNexusDashboard sets NexusDashboard field to given value.
+
+### HasNexusDashboard
+
+`func (o *NiatelemetryNexusDashboardMemoryDetailsAllOf) HasNexusDashboard() bool`
+
+HasNexusDashboard returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

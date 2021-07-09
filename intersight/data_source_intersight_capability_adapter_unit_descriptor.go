@@ -65,6 +65,16 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_azure_qos_supported": {
+				Description: "Indicates that the Azure Stack Host QoS feature is supported by this adapter.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_geneve_supported": {
+				Description: "Indicates that the GENEVE offload feature is supported by this adapter.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -83,7 +93,7 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Computed:    true,
 			},
 			"num_dce_ports": {
-				Description: "Number of Dce Ports for the adaptor.",
+				Description: "Number of Dce Ports for the adapter.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -94,7 +104,7 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Computed:    true,
 			},
 			"prom_card_type": {
-				Description: "Prom card type for the adaptor.",
+				Description: "Prom card type for the adapter.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -163,6 +173,14 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 	if v, ok := d.GetOk("fibre_channel_scsi_ioq_limit"); ok {
 		x := int64(v.(int))
 		o.SetFibreChannelScsiIoqLimit(x)
+	}
+	if v, ok := d.GetOk("is_azure_qos_supported"); ok {
+		x := (v.(bool))
+		o.SetIsAzureQosSupported(x)
+	}
+	if v, ok := d.GetOk("is_geneve_supported"); ok {
+		x := (v.(bool))
+		o.SetIsGeneveSupported(x)
 	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -252,6 +270,8 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["ethernet_port_speed"] = (s.GetEthernetPortSpeed())
 				temp["fibre_channel_port_speed"] = (s.GetFibreChannelPortSpeed())
 				temp["fibre_channel_scsi_ioq_limit"] = (s.GetFibreChannelScsiIoqLimit())
+				temp["is_azure_qos_supported"] = (s.GetIsAzureQosSupported())
+				temp["is_geneve_supported"] = (s.GetIsGeneveSupported())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -30,11 +30,15 @@ type AssetDeploymentDevice struct {
 	// Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices.
 	DevicePid        *string                       `json:"DevicePid,omitempty"`
 	DeviceStatistics NullableAssetDeviceStatistics `json:"DeviceStatistics,omitempty"`
+	// Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".
+	ProductSubgroup *string `json:"ProductSubgroup,omitempty"`
 	// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
 	ProductType   *string             `json:"ProductType,omitempty"`
 	UnitOfMeasure []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 	// Virtualization platform is used to identify the hypervisor type. example \"ESXi\".
-	VirtualizationPlatform    *string                                     `json:"VirtualizationPlatform,omitempty"`
+	VirtualizationPlatform *string `json:"VirtualizationPlatform,omitempty"`
+	// Workload/Usecase running on the device.
+	Workload                  *string                                     `json:"Workload,omitempty"`
 	Deployment                *AssetDeploymentRelationship                `json:"Deployment,omitempty"`
 	DeviceContractInformation *AssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
 	RegisteredDevice          *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
@@ -266,6 +270,38 @@ func (o *AssetDeploymentDevice) UnsetDeviceStatistics() {
 	o.DeviceStatistics.Unset()
 }
 
+// GetProductSubgroup returns the ProductSubgroup field value if set, zero value otherwise.
+func (o *AssetDeploymentDevice) GetProductSubgroup() string {
+	if o == nil || o.ProductSubgroup == nil {
+		var ret string
+		return ret
+	}
+	return *o.ProductSubgroup
+}
+
+// GetProductSubgroupOk returns a tuple with the ProductSubgroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeploymentDevice) GetProductSubgroupOk() (*string, bool) {
+	if o == nil || o.ProductSubgroup == nil {
+		return nil, false
+	}
+	return o.ProductSubgroup, true
+}
+
+// HasProductSubgroup returns a boolean if a field has been set.
+func (o *AssetDeploymentDevice) HasProductSubgroup() bool {
+	if o != nil && o.ProductSubgroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProductSubgroup gets a reference to the given string and assigns it to the ProductSubgroup field.
+func (o *AssetDeploymentDevice) SetProductSubgroup(v string) {
+	o.ProductSubgroup = &v
+}
+
 // GetProductType returns the ProductType field value if set, zero value otherwise.
 func (o *AssetDeploymentDevice) GetProductType() string {
 	if o == nil || o.ProductType == nil {
@@ -361,6 +397,38 @@ func (o *AssetDeploymentDevice) HasVirtualizationPlatform() bool {
 // SetVirtualizationPlatform gets a reference to the given string and assigns it to the VirtualizationPlatform field.
 func (o *AssetDeploymentDevice) SetVirtualizationPlatform(v string) {
 	o.VirtualizationPlatform = &v
+}
+
+// GetWorkload returns the Workload field value if set, zero value otherwise.
+func (o *AssetDeploymentDevice) GetWorkload() string {
+	if o == nil || o.Workload == nil {
+		var ret string
+		return ret
+	}
+	return *o.Workload
+}
+
+// GetWorkloadOk returns a tuple with the Workload field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeploymentDevice) GetWorkloadOk() (*string, bool) {
+	if o == nil || o.Workload == nil {
+		return nil, false
+	}
+	return o.Workload, true
+}
+
+// HasWorkload returns a boolean if a field has been set.
+func (o *AssetDeploymentDevice) HasWorkload() bool {
+	if o != nil && o.Workload != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkload gets a reference to the given string and assigns it to the Workload field.
+func (o *AssetDeploymentDevice) SetWorkload(v string) {
+	o.Workload = &v
 }
 
 // GetDeployment returns the Deployment field value if set, zero value otherwise.
@@ -551,6 +619,9 @@ func (o AssetDeploymentDevice) MarshalJSON() ([]byte, error) {
 	if o.DeviceStatistics.IsSet() {
 		toSerialize["DeviceStatistics"] = o.DeviceStatistics.Get()
 	}
+	if o.ProductSubgroup != nil {
+		toSerialize["ProductSubgroup"] = o.ProductSubgroup
+	}
 	if o.ProductType != nil {
 		toSerialize["ProductType"] = o.ProductType
 	}
@@ -559,6 +630,9 @@ func (o AssetDeploymentDevice) MarshalJSON() ([]byte, error) {
 	}
 	if o.VirtualizationPlatform != nil {
 		toSerialize["VirtualizationPlatform"] = o.VirtualizationPlatform
+	}
+	if o.Workload != nil {
+		toSerialize["Workload"] = o.Workload
 	}
 	if o.Deployment != nil {
 		toSerialize["Deployment"] = o.Deployment
@@ -595,11 +669,15 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		// Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices.
 		DevicePid        *string                       `json:"DevicePid,omitempty"`
 		DeviceStatistics NullableAssetDeviceStatistics `json:"DeviceStatistics,omitempty"`
+		// Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".
+		ProductSubgroup *string `json:"ProductSubgroup,omitempty"`
 		// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
 		ProductType   *string             `json:"ProductType,omitempty"`
 		UnitOfMeasure []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 		// Virtualization platform is used to identify the hypervisor type. example \"ESXi\".
-		VirtualizationPlatform    *string                                     `json:"VirtualizationPlatform,omitempty"`
+		VirtualizationPlatform *string `json:"VirtualizationPlatform,omitempty"`
+		// Workload/Usecase running on the device.
+		Workload                  *string                                     `json:"Workload,omitempty"`
 		Deployment                *AssetDeploymentRelationship                `json:"Deployment,omitempty"`
 		DeviceContractInformation *AssetDeviceContractInformationRelationship `json:"DeviceContractInformation,omitempty"`
 		RegisteredDevice          *AssetDeviceRegistrationRelationship        `json:"RegisteredDevice,omitempty"`
@@ -618,9 +696,11 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeploymentDevice.DeviceInformation = varAssetDeploymentDeviceWithoutEmbeddedStruct.DeviceInformation
 		varAssetDeploymentDevice.DevicePid = varAssetDeploymentDeviceWithoutEmbeddedStruct.DevicePid
 		varAssetDeploymentDevice.DeviceStatistics = varAssetDeploymentDeviceWithoutEmbeddedStruct.DeviceStatistics
+		varAssetDeploymentDevice.ProductSubgroup = varAssetDeploymentDeviceWithoutEmbeddedStruct.ProductSubgroup
 		varAssetDeploymentDevice.ProductType = varAssetDeploymentDeviceWithoutEmbeddedStruct.ProductType
 		varAssetDeploymentDevice.UnitOfMeasure = varAssetDeploymentDeviceWithoutEmbeddedStruct.UnitOfMeasure
 		varAssetDeploymentDevice.VirtualizationPlatform = varAssetDeploymentDeviceWithoutEmbeddedStruct.VirtualizationPlatform
+		varAssetDeploymentDevice.Workload = varAssetDeploymentDeviceWithoutEmbeddedStruct.Workload
 		varAssetDeploymentDevice.Deployment = varAssetDeploymentDeviceWithoutEmbeddedStruct.Deployment
 		varAssetDeploymentDevice.DeviceContractInformation = varAssetDeploymentDeviceWithoutEmbeddedStruct.DeviceContractInformation
 		varAssetDeploymentDevice.RegisteredDevice = varAssetDeploymentDeviceWithoutEmbeddedStruct.RegisteredDevice
@@ -649,9 +729,11 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DeviceInformation")
 		delete(additionalProperties, "DevicePid")
 		delete(additionalProperties, "DeviceStatistics")
+		delete(additionalProperties, "ProductSubgroup")
 		delete(additionalProperties, "ProductType")
 		delete(additionalProperties, "UnitOfMeasure")
 		delete(additionalProperties, "VirtualizationPlatform")
+		delete(additionalProperties, "Workload")
 		delete(additionalProperties, "Deployment")
 		delete(additionalProperties, "DeviceContractInformation")
 		delete(additionalProperties, "RegisteredDevice")

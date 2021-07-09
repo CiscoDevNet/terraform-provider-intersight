@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.LanConnectivityPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.LanConnectivityPolicy"]
+**AzureQosEnabled** | Pointer to **bool** | Enabling AzureStack-Host QoS on an adapter allows the user to carve out traffic classes for RDMA traffic which ensures that a desired portion of the bandwidth is allocated to it. | [optional] [default to false]
 **IqnAllocationType** | Pointer to **string** | Allocation Type of iSCSI Qualified Name - Static/Pool/None. * &#x60;None&#x60; - Type indicates that there is no IQN associated to an interface. * &#x60;Static&#x60; - Type represents that static IQN is associated to an interface. * &#x60;Pool&#x60; - Type indicates that IQN value is sourced from an associated pool. | [optional] [default to "None"]
 **PlacementMode** | Pointer to **string** | The mode used for placement of vNICs on network adapters. It can either be Auto or Custom. * &#x60;custom&#x60; - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user. * &#x60;auto&#x60; - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system. | [optional] [default to "custom"]
 **StaticIqnName** | Pointer to **string** | User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain. | [optional] 
@@ -73,6 +74,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAzureQosEnabled
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetAzureQosEnabled() bool`
+
+GetAzureQosEnabled returns the AzureQosEnabled field if non-nil, zero value otherwise.
+
+### GetAzureQosEnabledOk
+
+`func (o *VnicLanConnectivityPolicyAllOf) GetAzureQosEnabledOk() (*bool, bool)`
+
+GetAzureQosEnabledOk returns a tuple with the AzureQosEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzureQosEnabled
+
+`func (o *VnicLanConnectivityPolicyAllOf) SetAzureQosEnabled(v bool)`
+
+SetAzureQosEnabled sets AzureQosEnabled field to given value.
+
+### HasAzureQosEnabled
+
+`func (o *VnicLanConnectivityPolicyAllOf) HasAzureQosEnabled() bool`
+
+HasAzureQosEnabled returns a boolean if a field has been set.
 
 ### GetIqnAllocationType
 

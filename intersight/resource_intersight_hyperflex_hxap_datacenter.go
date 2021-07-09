@@ -172,10 +172,9 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 				},
 			},
 			"identity": {
-				Description: "Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).",
+				Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -191,7 +190,7 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.",
+				Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -357,6 +356,11 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 						},
 					},
 				},
+			},
+			"uuid": {
+				Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -848,6 +852,11 @@ func resourceHyperflexHxapDatacenterCreate(c context.Context, d *schema.Resource
 		}
 	}
 
+	if v, ok := d.GetOk("uuid"); ok {
+		x := (v.(string))
+		o.SetUuid(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1094,6 +1103,10 @@ func resourceHyperflexHxapDatacenterRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in HyperflexHxapDatacenter object: %s", err.Error())
+	}
+
+	if err := d.Set("uuid", (s.GetUuid())); err != nil {
+		return diag.Errorf("error occurred while setting property Uuid in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1473,6 +1486,12 @@ func resourceHyperflexHxapDatacenterUpdate(c context.Context, d *schema.Resource
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("uuid") {
+		v := d.Get("uuid")
+		x := (v.(string))
+		o.SetUuid(x)
 	}
 
 	if d.HasChange("version_context") {

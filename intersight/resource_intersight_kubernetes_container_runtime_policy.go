@@ -130,7 +130,7 @@ func resourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"docker_bridge_network_cidr": {
-				Description: "The DNS Search Domain Name.",
+				Description: "The CIDR for docker bridge network. This address space must not collide with other CIDRs on your networks, including the cluster's service CIDR, pod CIDR and IP Pools.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

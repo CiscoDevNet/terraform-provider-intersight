@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.ConfigResult"]
-**Var0OnDemandBackup** | Pointer to [**RecoveryOnDemandBackupRelationship**](recovery.OnDemandBackup.Relationship.md) |  | [optional] 
 **BackupProfile** | Pointer to [**RecoveryBackupProfileRelationship**](recovery.BackupProfile.Relationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]RecoveryConfigResultEntryRelationship**](RecoveryConfigResultEntryRelationship.md) | An array of relationships to recoveryConfigResultEntry resources. | [optional] 
 
@@ -68,31 +67,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetVar0OnDemandBackup
-
-`func (o *RecoveryConfigResult) GetVar0OnDemandBackup() RecoveryOnDemandBackupRelationship`
-
-GetVar0OnDemandBackup returns the Var0OnDemandBackup field if non-nil, zero value otherwise.
-
-### GetVar0OnDemandBackupOk
-
-`func (o *RecoveryConfigResult) GetVar0OnDemandBackupOk() (*RecoveryOnDemandBackupRelationship, bool)`
-
-GetVar0OnDemandBackupOk returns a tuple with the Var0OnDemandBackup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0OnDemandBackup
-
-`func (o *RecoveryConfigResult) SetVar0OnDemandBackup(v RecoveryOnDemandBackupRelationship)`
-
-SetVar0OnDemandBackup sets Var0OnDemandBackup field to given value.
-
-### HasVar0OnDemandBackup
-
-`func (o *RecoveryConfigResult) HasVar0OnDemandBackup() bool`
-
-HasVar0OnDemandBackup returns a boolean if a field has been set.
 
 ### GetBackupProfile
 

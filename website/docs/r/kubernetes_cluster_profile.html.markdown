@@ -42,12 +42,12 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
-* `action_info`:(HashMap) -(Computed) Action details such as name of the action performed, status, failure reason, etc. 
+* `action_info`:(HashMap) -(Computed) No longer updated, to see action details such as name of the actionperformed, status, failure reason, etc. look at the ConfigContext and at details of the related workflowInfo. 
 This complex property has following sub-properties:
-  + `failure_reason`:(string)(Computed) Description of failure i.e. derived from the workflow failure message. 
+  + `failure_reason`:(string)(Computed) No longer maintained and will be removed soon. 
   + `name`:(string)(Computed) Name of the Action performed on a resource like VM, Disk etc. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `status`:(string)(Computed) Status of the Action like InProgress, Success, Failure etc.* `None` - A place holder for the default value.* `InProgress` - Action triggered on the resource is still running.* `Success` - Action triggered on the resource is completed successfully.* `Failure` - Action triggered on the resource is failed. 
+  + `status`:(string) No longer maintained and will be removed soon.* `None` - A place holder for the default value.* `InProgress` - Action triggered on the resource is still running.* `Success` - Action triggered on the resource is completed successfully.* `Failure` - Action triggered on the resource is failed. 
 * `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

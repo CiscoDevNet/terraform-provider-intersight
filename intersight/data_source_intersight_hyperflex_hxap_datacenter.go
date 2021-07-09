@@ -41,10 +41,9 @@ func dataSourceHyperflexHxapDatacenter() *schema.Resource {
 				Computed:    true,
 			},
 			"identity": {
-				Description: "Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).",
+				Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -59,7 +58,7 @@ func dataSourceHyperflexHxapDatacenter() *schema.Resource {
 				Computed:    true,
 			},
 			"name": {
-				Description: "User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.",
+				Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -74,6 +73,11 @@ func dataSourceHyperflexHxapDatacenter() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"uuid": {
+				Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"results": {
 				Type:     schema.TypeList,
@@ -128,6 +132,10 @@ func dataSourceHyperflexHxapDatacenterRead(c context.Context, d *schema.Resource
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("uuid"); ok {
+		x := (v.(string))
+		o.SetUuid(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -194,6 +202,7 @@ func dataSourceHyperflexHxapDatacenterRead(c context.Context, d *schema.Resource
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				hyperflexHxapDatacenterResults[j] = temp

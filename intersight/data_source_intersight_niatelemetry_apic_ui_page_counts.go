@@ -34,6 +34,11 @@ func dataSourceNiatelemetryApicUiPageCounts() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"dn": {
+				Description: "Dn of the page opened by the user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -149,6 +154,11 @@ func dataSourceNiatelemetryApicUiPageCounts() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"dn": {
+						Description: "Dn of the page opened by the user.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
@@ -490,6 +500,10 @@ func dataSourceNiatelemetryApicUiPageCountsRead(c context.Context, d *schema.Res
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
+	if v, ok := d.GetOk("dn"); ok {
+		x := (v.(string))
+		o.SetDn(x)
+	}
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -574,6 +588,7 @@ func dataSourceNiatelemetryApicUiPageCountsRead(c context.Context, d *schema.Res
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()

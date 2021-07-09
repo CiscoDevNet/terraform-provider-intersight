@@ -74,7 +74,7 @@ This complex property has following sub-properties:
   + `constraints`:(HashMap) -(Computed) This field will hold any constraints a concrete task definition will specify in order to limit the environment where the task can execute. 
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `target_data_type`: List of property constraints that helps to narrow down task implementations based on target device input. 
+    + `target_data_type`:(JSON as string) List of property constraints that helps to narrow down task implementations based on target device input. 
   + `internal`:(bool)(Computed) Denotes this is an internal task. Internal tasks will be hidden from the UI when executing a workflow. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `owner`:(string)(Computed) The service that owns and is responsible for execution of the task. 
@@ -100,7 +100,7 @@ This complex property has following sub-properties:
   + `external_meta`:(bool) When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows. 
   + `input_definition`:(Array)
 This complex property has following sub-properties:
-    + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+    + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
@@ -110,14 +110,14 @@ This complex property has following sub-properties:
     + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
-    + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
   + `description`:(string) Provide a detailed description of the data type. 
   + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
-  + `input_parameters`: JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
@@ -125,7 +125,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `output_definition`:(Array)
 This complex property has following sub-properties:
-    + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+    + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
@@ -135,14 +135,14 @@ This complex property has following sub-properties:
     + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
-    + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
   + `description`:(string) Provide a detailed description of the data type. 
   + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
-  + `input_parameters`: JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
@@ -157,7 +157,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `catalog_moid`:(string) The catalog under which the task definition has been added. 
   + `description`:(string) Description of rollback task definition. 
-  + `input_parameters`: Input parameters mapping for rollback task from the input or output of the main task definition. 
+  + `input_parameters`:(JSON as string) Input parameters mapping for rollback task from the input or output of the main task definition. 
   + `name`:(string) Name of the task definition which is capable of doing rollback of this task. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `task_moid`:(string) The resolved referenced rollback task definition managed object. 

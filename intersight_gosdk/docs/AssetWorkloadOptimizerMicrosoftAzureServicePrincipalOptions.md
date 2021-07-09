@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.WorkloadOptimizerMicrosoftAzureServicePrincipalOptions"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.WorkloadOptimizerMicrosoftAzureServicePrincipalOptions"]
 **AzureCloudType** | Pointer to **string** | Azure has different endpoints for managing Germany subscriptions. Azure cloud type helps in differentiating between regular subscriptions and Germany subscriptions to manage the Azure services for workload optimization. Documentation for germany cloud [link](https://docs.microsoft.com/en-us/azure/germany/germany-manage-subscriptions). * &#x60;Global&#x60; - Global cloud type for Azure subscription. * &#x60;Germany&#x60; - Germany cloud type for Azure subscription. | [optional] [default to "Global"]
-**TenantId** | Pointer to **string** | Id of the tenant used while authenticating the managed target. | [optional] 
+**TenantId** | Pointer to **string** | ID of the tenant used while authenticating the managed target. | [optional] 
 
 ## Methods
 

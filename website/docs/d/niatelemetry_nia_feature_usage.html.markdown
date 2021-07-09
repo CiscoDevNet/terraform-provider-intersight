@@ -38,6 +38,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `eigrp_count`:(int) Eigrp feature usage. This determines the total number of EIGRP sessions across the fabric. 
 * `epg_count`:(int) Number of End Point Groups. This determines the total number of End Point Groups across the fabric. 
+* `fabric_module_count`:(int) Returns the total number of fabric module slots. 
 * `fabric_setupp_count`:(int) Number of Multi-Pods per fabric. 
 * `fcoe_nport_count`:(int) Total number of FCoE N-Port for DOM, VSAn, and VLAN. 
 * `fcoe_nport_dom_count`:(int) Number of FCoE N-Port DOM. 
@@ -49,10 +50,20 @@ The following arguments can be used to get data of already created objects in In
 * `igmp_access_list_count`:(int) IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric. 
 * `igmp_snoop`:(string) IGMP Snooping feature usage. This determines if this feature is enabled or disabled. 
 * `ip_epg_count`:(int) Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric. 
+* `is_bgp_route_reflectors_feature_used`:(bool) BGP route reflector usage on APIC. 
+* `is_bridge_domains_feature_used`:(bool) Brodge domains feature usage on APIC controller. 
 * `is_common_local_user_name`:(bool) Returns value of isCommonLocalUserName field. 
+* `is_contracts_feature_used`:(bool) Contracts feature usage on APIC controller. 
+* `is_epg_feature_used`:(bool) EPG feature usage on APIC controller. 
+* `is_filters_feature_used`:(bool) Filters feature usage on APIC. 
 * `is_http_configured`:(bool) Returns if HTTP is configured. 
 * `is_https_configured`:(bool) Returns if HTTPS is configured. 
+* `is_ntp_feature_used`:(bool) NTP feature usage on APIC controller. 
+* `is_ptp_feature_used`:(bool) Ptp feature usage on APIC. 
+* `is_synce_feature_used`:(bool) Synce feature usage on APIC. 
 * `is_tech_support_collected`:(string) Status of techsupport collection. 
+* `is_tenants_feature_used`:(bool) Tenants feature usage on APIC. 
+* `is_vrfs_feature_used`:(bool) VRF feature usage on APIC controller. 
 * `isis_count`:(int) Isis feature usage. This determines the total number of ISIS sessions across the fabric. 
 * `l2_multicast`:(string) L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. 
 * `leaf_count`:(int) Number of Leafs. This determines the total number of Leaf switches in the fabric. 
@@ -99,8 +110,10 @@ The following arguments can be used to get data of already created objects in In
 * `spine_count`:(int) Number of Spines. This determines the total number of spine switches in the fabric. 
 * `ssh_over_v6_count`:(int) Ssh over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. 
 * `ssh_v2_count`:(int) Returns count of ssh V2 on the fabric. 
+* `supervisor_module_count`:(int) Returns the total number of supervisor module slots. 
 * `syslog_group_count`:(int) Number of syslog monitoring policies on the fabric. 
 * `syslog_over_v6_count`:(int) Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric. 
+* `system_controller_count`:(int) Returns the total number of system controller slots. 
 * `tacacs_group_count`:(int) Number of tacacs monitoring policies on the fabric. 
 * `tenant_count`:(int) Number of tenants. This determines the total number of tenants configured across the fabric. 
 * `tier_two_leaf_count`:(int) Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric. 

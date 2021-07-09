@@ -53,7 +53,7 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 				Computed:    true,
 			},
 			"export_policy_name": {
-				Description: "Name of Export Policy.",
+				Description: "Name of the Export Policy associated with the volume.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -279,7 +279,7 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 						Computed:    true,
 					},
 					"export_policy_name": {
-						Description: "Name of Export Policy.",
+						Description: "Name of the Export Policy associated with the volume.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

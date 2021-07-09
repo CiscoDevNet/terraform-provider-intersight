@@ -1,7 +1,17 @@
 # Change Logs
 
+## v1.0.12
+Release Date: 9th July 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4375)
+* Unit tests for flatten functions
+* Fixes to flattenFunctions to handle nil parameters and empty user configs
+* Support for JSON type model properties
+* Support for Object type model properties
+* Adds "provider" as a reserved keyword.
+* Documentation updates to reflect the above changes
+
 ## v1.0.11
-Release Date: 21 June 2021
+Release Date: 21st June 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4334)
 * Fixes an issue with flatten functions that was causing some reads to panic
 

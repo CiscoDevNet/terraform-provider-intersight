@@ -155,6 +155,18 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_azure_qos_supported": {
+				Description: "Indicates that the Azure Stack Host QoS feature is supported by this adapter.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
+			"is_geneve_supported": {
+				Description: "Indicates that the GENEVE offload feature is supported by this adapter.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -174,7 +186,7 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				ForceNew:    true,
 			},
 			"num_dce_ports": {
-				Description: "Number of Dce Ports for the adaptor.",
+				Description: "Number of Dce Ports for the adapter.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -271,7 +283,7 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				},
 			},
 			"prom_card_type": {
-				Description: "Prom card type for the adaptor.",
+				Description: "Prom card type for the adapter.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -584,6 +596,16 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 	if v, ok := d.GetOk("fibre_channel_scsi_ioq_limit"); ok {
 		x := int64(v.(int))
 		o.SetFibreChannelScsiIoqLimit(x)
+	}
+
+	if v, ok := d.GetOkExists("is_azure_qos_supported"); ok {
+		x := v.(bool)
+		o.SetIsAzureQosSupported(x)
+	}
+
+	if v, ok := d.GetOkExists("is_geneve_supported"); ok {
+		x := v.(bool)
+		o.SetIsGeneveSupported(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -979,6 +1001,14 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property FibreChannelScsiIoqLimit in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("is_azure_qos_supported", (s.GetIsAzureQosSupported())); err != nil {
+		return diag.Errorf("error occurred while setting property IsAzureQosSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("is_geneve_supported", (s.GetIsGeneveSupported())); err != nil {
+		return diag.Errorf("error occurred while setting property IsGeneveSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
@@ -1186,6 +1216,18 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("fibre_channel_scsi_ioq_limit")
 		x := int64(v.(int))
 		o.SetFibreChannelScsiIoqLimit(x)
+	}
+
+	if d.HasChange("is_azure_qos_supported") {
+		v := d.Get("is_azure_qos_supported")
+		x := (v.(bool))
+		o.SetIsAzureQosSupported(x)
+	}
+
+	if d.HasChange("is_geneve_supported") {
+		v := d.Get("is_geneve_supported")
+		x := (v.(bool))
+		o.SetIsGeneveSupported(x)
 	}
 
 	if d.HasChange("mod_time") {

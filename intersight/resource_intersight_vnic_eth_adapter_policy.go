@@ -178,6 +178,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"geneve_enabled": {
+				Description: "GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"interrupt_scaling": {
 				Description: "Enables Interrupt Scaling on the interface.",
 				Type:        schema.TypeBool,
@@ -1070,6 +1076,11 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("geneve_enabled"); ok {
+		x := v.(bool)
+		o.SetGeneveEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("interrupt_scaling"); ok {
 		x := v.(bool)
 		o.SetInterruptScaling(x)
@@ -1909,6 +1920,10 @@ func resourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("geneve_enabled", (s.GetGeneveEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property GeneveEnabled in VnicEthAdapterPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("interrupt_scaling", (s.GetInterruptScaling())); err != nil {
 		return diag.Errorf("error occurred while setting property InterruptScaling in VnicEthAdapterPolicy object: %s", err.Error())
 	}
@@ -2171,6 +2186,12 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("domain_group_moid")
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if d.HasChange("geneve_enabled") {
+		v := d.Get("geneve_enabled")
+		x := (v.(bool))
+		o.SetGeneveEnabled(x)
 	}
 
 	if d.HasChange("interrupt_scaling") {

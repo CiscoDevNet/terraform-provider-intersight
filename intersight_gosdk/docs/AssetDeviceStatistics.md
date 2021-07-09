@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ClusterName** | Pointer to **string** | Name of the cluster. It is specified only for HyperFlex based devices. | [optional] [readonly] 
 **Connected** | Pointer to **int64** | The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **MembershipRatio** | Pointer to **float32** | Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices. | [optional] [readonly] 
+**MemoryMirroringFactor** | Pointer to **float32** | Memory Reliability, availability and serviceability (RAS) factor. | [optional] [readonly] 
 **VmHost** | Pointer to [**NullableAssetVmHost**](asset.VmHost.md) |  | [optional] 
 
 ## Methods
@@ -144,6 +145,31 @@ SetMembershipRatio sets MembershipRatio field to given value.
 `func (o *AssetDeviceStatistics) HasMembershipRatio() bool`
 
 HasMembershipRatio returns a boolean if a field has been set.
+
+### GetMemoryMirroringFactor
+
+`func (o *AssetDeviceStatistics) GetMemoryMirroringFactor() float32`
+
+GetMemoryMirroringFactor returns the MemoryMirroringFactor field if non-nil, zero value otherwise.
+
+### GetMemoryMirroringFactorOk
+
+`func (o *AssetDeviceStatistics) GetMemoryMirroringFactorOk() (*float32, bool)`
+
+GetMemoryMirroringFactorOk returns a tuple with the MemoryMirroringFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryMirroringFactor
+
+`func (o *AssetDeviceStatistics) SetMemoryMirroringFactor(v float32)`
+
+SetMemoryMirroringFactor sets MemoryMirroringFactor field to given value.
+
+### HasMemoryMirroringFactor
+
+`func (o *AssetDeviceStatistics) HasMemoryMirroringFactor() bool`
+
+HasMemoryMirroringFactor returns a boolean if a field has been set.
 
 ### GetVmHost
 

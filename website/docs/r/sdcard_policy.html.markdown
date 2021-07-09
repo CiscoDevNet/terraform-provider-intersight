@@ -65,7 +65,7 @@ This complex property has following sub-properties:
   + `type`:(string) This specifies the type of the partition. Allowed values are OS, Utility.* `OS` - This partition contains virtual drives where user can install operating system.* `Utility` - This partition contains virtual drives for utilities such as SCU, HUU, Drivers and Diagnostics. 
   + `virtual_drives`:(Array)
 This complex property has following sub-properties:
-    + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [sdcard.Diagnostics](#sdcardDiagnostics)
+    + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [sdcard.Diagnostics](#sdcardDiagnostics)
 [sdcard.Drivers](#sdcardDrivers)
 [sdcard.HostUpgradeUtility](#sdcardHostUpgradeUtility)
 [sdcard.OperatingSystem](#sdcardOperatingSystem)

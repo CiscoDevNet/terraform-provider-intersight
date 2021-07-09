@@ -6,12 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Session"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Session"]
-**OneTimePassword** | Pointer to **string** | Temporary one-time password for KVM access. | [optional] 
-**SsoSupported** | Pointer to **bool** | Indicates if KVM SSO is supported on the server. | [optional] [readonly] 
-**Username** | Pointer to **string** | Username used for KVM access. | [optional] 
+**OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
+**SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 
+**Username** | Pointer to **string** | Username used for vKVM access. | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
-**Session** | Pointer to [**IamSessionRelationship**](iam.Session.Relationship.md) |  | [optional] 
 **Tunnel** | Pointer to [**KvmTunnelRelationship**](kvm.Tunnel.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -197,31 +196,6 @@ SetServer sets Server field to given value.
 `func (o *KvmSession) HasServer() bool`
 
 HasServer returns a boolean if a field has been set.
-
-### GetSession
-
-`func (o *KvmSession) GetSession() IamSessionRelationship`
-
-GetSession returns the Session field if non-nil, zero value otherwise.
-
-### GetSessionOk
-
-`func (o *KvmSession) GetSessionOk() (*IamSessionRelationship, bool)`
-
-GetSessionOk returns a tuple with the Session field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSession
-
-`func (o *KvmSession) SetSession(v IamSessionRelationship)`
-
-SetSession sets Session field to given value.
-
-### HasSession
-
-`func (o *KvmSession) HasSession() bool`
-
-HasSession returns a boolean if a field has been set.
 
 ### GetTunnel
 

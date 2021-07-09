@@ -20,7 +20,9 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `product_subgroup`:(string) Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \ N9300 Series\  in Product type \ SWITCH\ . 
 * `product_type`:(string) Product type helps to determine if device has to be billed using consumption metering. example \ SERVER\ . 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `virtualization_platform`:(string) Virtualization platform is used to identify the hypervisor type. example \ ESXi\ . 
+* `workload`:(string) Workload/Usecase running on the device. 
  

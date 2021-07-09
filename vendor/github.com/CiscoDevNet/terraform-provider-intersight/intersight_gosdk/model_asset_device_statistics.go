@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -29,9 +29,11 @@ type AssetDeviceStatistics struct {
 	// The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected.
 	Connected *int64 `json:"Connected,omitempty"`
 	// Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices.
-	MembershipRatio      *float32            `json:"MembershipRatio,omitempty"`
-	VmHost               NullableAssetVmHost `json:"VmHost,omitempty"`
-	AdditionalProperties map[string]interface{}
+	MembershipRatio *float32 `json:"MembershipRatio,omitempty"`
+	// Memory Reliability, availability and serviceability (RAS) factor.
+	MemoryMirroringFactor *float32            `json:"MemoryMirroringFactor,omitempty"`
+	VmHost                NullableAssetVmHost `json:"VmHost,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _AssetDeviceStatistics AssetDeviceStatistics
@@ -203,6 +205,38 @@ func (o *AssetDeviceStatistics) SetMembershipRatio(v float32) {
 	o.MembershipRatio = &v
 }
 
+// GetMemoryMirroringFactor returns the MemoryMirroringFactor field value if set, zero value otherwise.
+func (o *AssetDeviceStatistics) GetMemoryMirroringFactor() float32 {
+	if o == nil || o.MemoryMirroringFactor == nil {
+		var ret float32
+		return ret
+	}
+	return *o.MemoryMirroringFactor
+}
+
+// GetMemoryMirroringFactorOk returns a tuple with the MemoryMirroringFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceStatistics) GetMemoryMirroringFactorOk() (*float32, bool) {
+	if o == nil || o.MemoryMirroringFactor == nil {
+		return nil, false
+	}
+	return o.MemoryMirroringFactor, true
+}
+
+// HasMemoryMirroringFactor returns a boolean if a field has been set.
+func (o *AssetDeviceStatistics) HasMemoryMirroringFactor() bool {
+	if o != nil && o.MemoryMirroringFactor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryMirroringFactor gets a reference to the given float32 and assigns it to the MemoryMirroringFactor field.
+func (o *AssetDeviceStatistics) SetMemoryMirroringFactor(v float32) {
+	o.MemoryMirroringFactor = &v
+}
+
 // GetVmHost returns the VmHost field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeviceStatistics) GetVmHost() AssetVmHost {
 	if o == nil || o.VmHost.Get() == nil {
@@ -271,6 +305,9 @@ func (o AssetDeviceStatistics) MarshalJSON() ([]byte, error) {
 	if o.MembershipRatio != nil {
 		toSerialize["MembershipRatio"] = o.MembershipRatio
 	}
+	if o.MemoryMirroringFactor != nil {
+		toSerialize["MemoryMirroringFactor"] = o.MemoryMirroringFactor
+	}
 	if o.VmHost.IsSet() {
 		toSerialize["VmHost"] = o.VmHost.Get()
 	}
@@ -293,8 +330,10 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 		// The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected.
 		Connected *int64 `json:"Connected,omitempty"`
 		// Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices.
-		MembershipRatio *float32            `json:"MembershipRatio,omitempty"`
-		VmHost          NullableAssetVmHost `json:"VmHost,omitempty"`
+		MembershipRatio *float32 `json:"MembershipRatio,omitempty"`
+		// Memory Reliability, availability and serviceability (RAS) factor.
+		MemoryMirroringFactor *float32            `json:"MemoryMirroringFactor,omitempty"`
+		VmHost                NullableAssetVmHost `json:"VmHost,omitempty"`
 	}
 
 	varAssetDeviceStatisticsWithoutEmbeddedStruct := AssetDeviceStatisticsWithoutEmbeddedStruct{}
@@ -307,6 +346,7 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeviceStatistics.ClusterName = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClusterName
 		varAssetDeviceStatistics.Connected = varAssetDeviceStatisticsWithoutEmbeddedStruct.Connected
 		varAssetDeviceStatistics.MembershipRatio = varAssetDeviceStatisticsWithoutEmbeddedStruct.MembershipRatio
+		varAssetDeviceStatistics.MemoryMirroringFactor = varAssetDeviceStatisticsWithoutEmbeddedStruct.MemoryMirroringFactor
 		varAssetDeviceStatistics.VmHost = varAssetDeviceStatisticsWithoutEmbeddedStruct.VmHost
 		*o = AssetDeviceStatistics(varAssetDeviceStatistics)
 	} else {
@@ -330,6 +370,7 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClusterName")
 		delete(additionalProperties, "Connected")
 		delete(additionalProperties, "MembershipRatio")
+		delete(additionalProperties, "MemoryMirroringFactor")
 		delete(additionalProperties, "VmHost")
 
 		// remove fields from embedded structs
