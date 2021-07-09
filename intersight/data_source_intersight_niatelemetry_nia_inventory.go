@@ -95,6 +95,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"fabric_name": {
+				Description: "Name of the fabric of the device being inventoried.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"fex_count": {
 				Description: "Number of fabric extendors utilized.",
 				Type:        schema.TypeInt,
@@ -267,6 +272,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			"system_up_time": {
 				Description: "The amount of time that the device being inventoried been up.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"total_critical_faults": {
+				Description: "Returns the total number of critical faults.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"nr_version": {
@@ -442,6 +452,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"fabric_name": {
+						Description: "Name of the fabric of the device being inventoried.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"fex_count": {
 						Description: "Number of fabric extendors utilized.",
@@ -1104,6 +1119,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							},
 						},
 					},
+					"total_critical_faults": {
+						Description: "Returns the total number of critical faults.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"nr_version": {
 						Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
 						Type:        schema.TypeString,
@@ -1300,6 +1320,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("fabric_name"); ok {
+		x := (v.(string))
+		o.SetFabricName(x)
+	}
 	if v, ok := d.GetOk("fex_count"); ok {
 		x := int64(v.(int))
 		o.SetFexCount(x)
@@ -1436,6 +1460,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetSystemUpTime(x)
 	}
+	if v, ok := d.GetOk("total_critical_faults"); ok {
+		x := int64(v.(int))
+		o.SetTotalCriticalFaults(x)
+	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
@@ -1498,6 +1526,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["disk"] = flattenMapNiatelemetryDiskinfo(s.GetDisk(), d)
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["fabric_name"] = (s.GetFabricName())
 				temp["fex_count"] = (s.GetFexCount())
 				temp["infra_wi_node_count"] = (s.GetInfraWiNodeCount())
 				temp["ip_address"] = (s.GetIpAddress())
@@ -1556,6 +1585,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_critical_faults"] = (s.GetTotalCriticalFaults())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

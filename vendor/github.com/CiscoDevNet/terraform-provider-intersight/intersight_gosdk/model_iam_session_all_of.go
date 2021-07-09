@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -23,8 +23,6 @@ type IamSessionAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType         string                  `json:"ObjectType"`
 	AccountPermissions []IamAccountPermissions `json:"AccountPermissions,omitempty"`
-	// The user agent IP address from which the session is launched.
-	ClientIpAddress *string `json:"ClientIpAddress,omitempty"`
 	// Expiration time for the session.
 	Expiration *time.Time `json:"Expiration,omitempty"`
 	// Failed logins since last login for admin user.
@@ -146,38 +144,6 @@ func (o *IamSessionAllOf) HasAccountPermissions() bool {
 // SetAccountPermissions gets a reference to the given []IamAccountPermissions and assigns it to the AccountPermissions field.
 func (o *IamSessionAllOf) SetAccountPermissions(v []IamAccountPermissions) {
 	o.AccountPermissions = v
-}
-
-// GetClientIpAddress returns the ClientIpAddress field value if set, zero value otherwise.
-func (o *IamSessionAllOf) GetClientIpAddress() string {
-	if o == nil || o.ClientIpAddress == nil {
-		var ret string
-		return ret
-	}
-	return *o.ClientIpAddress
-}
-
-// GetClientIpAddressOk returns a tuple with the ClientIpAddress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *IamSessionAllOf) GetClientIpAddressOk() (*string, bool) {
-	if o == nil || o.ClientIpAddress == nil {
-		return nil, false
-	}
-	return o.ClientIpAddress, true
-}
-
-// HasClientIpAddress returns a boolean if a field has been set.
-func (o *IamSessionAllOf) HasClientIpAddress() bool {
-	if o != nil && o.ClientIpAddress != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetClientIpAddress gets a reference to the given string and assigns it to the ClientIpAddress field.
-func (o *IamSessionAllOf) SetClientIpAddress(v string) {
-	o.ClientIpAddress = &v
 }
 
 // GetExpiration returns the Expiration field value if set, zero value otherwise.
@@ -447,9 +413,6 @@ func (o IamSessionAllOf) MarshalJSON() ([]byte, error) {
 	if o.AccountPermissions != nil {
 		toSerialize["AccountPermissions"] = o.AccountPermissions
 	}
-	if o.ClientIpAddress != nil {
-		toSerialize["ClientIpAddress"] = o.ClientIpAddress
-	}
 	if o.Expiration != nil {
 		toSerialize["Expiration"] = o.Expiration
 	}
@@ -495,7 +458,6 @@ func (o *IamSessionAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccountPermissions")
-		delete(additionalProperties, "ClientIpAddress")
 		delete(additionalProperties, "Expiration")
 		delete(additionalProperties, "FailedLogins")
 		delete(additionalProperties, "IdleTimeExpiration")

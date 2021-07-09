@@ -30,7 +30,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `infra_config`:(HashMap) - Virtual machine infrastucture provider allocation properties. 
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
 [kubernetes.HyperFlexApVirtualMachineInfraConfig](#kubernetesHyperFlexApVirtualMachineInfraConfig)
   + `interfaces`:
                 (Array of schema.TypeString) -

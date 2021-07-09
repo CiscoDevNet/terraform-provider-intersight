@@ -28,11 +28,21 @@ func dataSourceNiatelemetryNexusDashboardDetails() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"cluster_name": {
+				Description: "Name of the nexus dashboard cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"device_model": {
+				Description: "Model of the nexus dashboard cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
@@ -73,6 +83,11 @@ func dataSourceNiatelemetryNexusDashboardDetails() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"type": {
+				Description: "Node type of the nexus dashboard cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"results": {
 				Type: schema.TypeList,
@@ -129,11 +144,21 @@ func dataSourceNiatelemetryNexusDashboardDetails() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"cluster_name": {
+						Description: "Name of the nexus dashboard cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"create_time": {
 						Description: "The time when this managed object was created.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"device_model": {
+						Description: "Model of the nexus dashboard cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
@@ -317,6 +342,11 @@ func dataSourceNiatelemetryNexusDashboardDetails() *schema.Resource {
 							},
 						},
 					},
+					"type": {
+						Description: "Node type of the nexus dashboard cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",
 						Type:        schema.TypeList,
@@ -456,9 +486,17 @@ func dataSourceNiatelemetryNexusDashboardDetailsRead(c context.Context, d *schem
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("cluster_name"); ok {
+		x := (v.(string))
+		o.SetClusterName(x)
+	}
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
+	}
+	if v, ok := d.GetOk("device_model"); ok {
+		x := (v.(string))
+		o.SetDeviceModel(x)
 	}
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
@@ -487,6 +525,10 @@ func dataSourceNiatelemetryNexusDashboardDetailsRead(c context.Context, d *schem
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -530,8 +572,10 @@ func dataSourceNiatelemetryNexusDashboardDetailsRead(c context.Context, d *schem
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cluster_name"] = (s.GetClusterName())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["device_model"] = (s.GetDeviceModel())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -549,6 +593,7 @@ func dataSourceNiatelemetryNexusDashboardDetailsRead(c context.Context, d *schem
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["type"] = (s.GetType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				niatelemetryNexusDashboardDetailsResults[j] = temp

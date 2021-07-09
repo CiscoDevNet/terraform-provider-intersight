@@ -205,11 +205,9 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew:    true,
 			},
 			"input": {
-				Description: "All the given inputs for the workflow.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "All the given inputs for the workflow.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 			},
 			"inst_id": {
 				Description: "A workflow instance Id which is the unique identified for the workflow execution.",
@@ -340,11 +338,9 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew: true,
 			},
 			"output": {
-				Description: "All the generated outputs for the workflow.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "All the generated outputs for the workflow.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 				Computed: true,
 			},
 			"owners": {
@@ -1246,8 +1242,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("input"); ok {
-		x := v.(map[string]interface{})
-		o.SetInput(x)
+		o.SetInput(v)
 	}
 
 	if v, ok := d.GetOk("inst_id"); ok {
@@ -1373,8 +1368,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		x := v.(map[string]interface{})
-		o.SetOutput(x)
+		o.SetOutput(v)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -2217,7 +2211,7 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property FailedWorkflowCleanupDuration in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
-	if err := d.Set("input", (s.GetInput())); err != nil {
+	if err := d.Set("input", flattenAdditionalProperties(s.GetInput())); err != nil {
 		return diag.Errorf("error occurred while setting property Input in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
@@ -2261,7 +2255,7 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Organization in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
-	if err := d.Set("output", (s.GetOutput())); err != nil {
+	if err := d.Set("output", flattenAdditionalProperties(s.GetOutput())); err != nil {
 		return diag.Errorf("error occurred while setting property Output in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
@@ -2579,8 +2573,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("input") {
 		v := d.Get("input")
-		x := v.(map[string]interface{})
-		o.SetInput(x)
+		o.SetInput(v)
 	}
 
 	if d.HasChange("inst_id") {
@@ -2714,8 +2707,7 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 
 	if d.HasChange("output") {
 		v := d.Get("output")
-		x := v.(map[string]interface{})
-		o.SetOutput(x)
+		o.SetOutput(v)
 	}
 
 	if d.HasChange("owners") {

@@ -238,11 +238,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Optional:    true,
 									},
 									"value": {
-										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-										Type:        schema.TypeMap,
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										}, Optional: true,
+										Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+										Type:             schema.TypeString,
+										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 									},
 								},
 							},
@@ -294,11 +292,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							},
 						},
 						"input_parameters": {
-							Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
+							Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 						},
 						"label": {
 							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -483,11 +479,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Optional:    true,
 									},
 									"value": {
-										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-										Type:        schema.TypeMap,
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										}, Optional: true,
+										Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+										Type:             schema.TypeString,
+										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 									},
 								},
 							},
@@ -539,11 +533,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							},
 						},
 						"input_parameters": {
-							Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
+							Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 						},
 						"label": {
 							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -570,11 +562,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				},
 			},
 			"output_parameters": {
-				Description: "The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -681,6 +671,12 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "workflow.WorkflowProperties",
+						},
+						"cloneable": {
+							Description: "When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
 						},
 						"enable_debug": {
 							Description: "Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated.",
@@ -834,11 +830,9 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				},
 			},
 			"ui_rendering_data": {
-				Description: "This will hold the data needed for workflow to be rendered in the user interface.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "This will hold the data needed for workflow to be rendered in the user interface.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 			},
 			"validation_information": {
 				Description: "The current validation state and associated information for this workflow.",
@@ -1327,8 +1321,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								x := v.(map[string]interface{})
-								o.SetValue(x)
+								o.SetValue(v)
 							}
 						}
 						p = append(p, *o)
@@ -1391,8 +1384,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetInputParameters(x)
+					o.SetInputParameters(v)
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1584,8 +1576,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								x := v.(map[string]interface{})
-								o.SetValue(x)
+								o.SetValue(v)
 							}
 						}
 						p = append(p, *o)
@@ -1648,8 +1639,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetInputParameters(x)
+					o.SetInputParameters(v)
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -1684,8 +1674,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("output_parameters"); ok {
-		x := v.(map[string]interface{})
-		o.SetOutputParameters(x)
+		o.SetOutputParameters(v)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1801,6 +1790,12 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("workflow.WorkflowProperties")
+			if v, ok := l["cloneable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetCloneable(x)
+				}
+			}
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -1982,8 +1977,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("ui_rendering_data"); ok {
-		x := v.(map[string]interface{})
-		o.SetUiRenderingData(x)
+		o.SetUiRenderingData(v)
 	}
 
 	if v, ok := d.GetOk("validation_information"); ok {
@@ -2382,7 +2376,7 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property OutputDefinition in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
-	if err := d.Set("output_parameters", (s.GetOutputParameters())); err != nil {
+	if err := d.Set("output_parameters", flattenAdditionalProperties(s.GetOutputParameters())); err != nil {
 		return diag.Errorf("error occurred while setting property OutputParameters in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
@@ -2418,7 +2412,7 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("error occurred while setting property UiInputFilters in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
-	if err := d.Set("ui_rendering_data", (s.GetUiRenderingData())); err != nil {
+	if err := d.Set("ui_rendering_data", flattenAdditionalProperties(s.GetUiRenderingData())); err != nil {
 		return diag.Errorf("error occurred while setting property UiRenderingData in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
@@ -2676,8 +2670,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								x := v.(map[string]interface{})
-								o.SetValue(x)
+								o.SetValue(v)
 							}
 						}
 						p = append(p, *o)
@@ -2740,8 +2733,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetInputParameters(x)
+					o.SetInputParameters(v)
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2938,8 +2930,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								x := v.(map[string]interface{})
-								o.SetValue(x)
+								o.SetValue(v)
 							}
 						}
 						p = append(p, *o)
@@ -3002,8 +2993,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetInputParameters(x)
+					o.SetInputParameters(v)
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -3037,8 +3027,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 
 	if d.HasChange("output_parameters") {
 		v := d.Get("output_parameters")
-		x := v.(map[string]interface{})
-		o.SetOutputParameters(x)
+		o.SetOutputParameters(v)
 	}
 
 	if d.HasChange("owners") {
@@ -3154,6 +3143,12 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 				}
 			}
 			o.SetClassId("workflow.WorkflowProperties")
+			if v, ok := l["cloneable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetCloneable(x)
+				}
+			}
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -3334,8 +3329,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 
 	if d.HasChange("ui_rendering_data") {
 		v := d.Get("ui_rendering_data")
-		x := v.(map[string]interface{})
-		o.SetUiRenderingData(x)
+		o.SetUiRenderingData(v)
 	}
 
 	if d.HasChange("validation_information") {

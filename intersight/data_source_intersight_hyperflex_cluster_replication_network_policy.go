@@ -195,8 +195,6 @@ func dataSourceHyperflexClusterReplicationNetworkPolicyRead(c context.Context, d
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
-				temp["ip_pool_mo_reference"] = flattenMapMoBaseMoRelationship(s.GetIpPoolMoReference(), d)
-
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())

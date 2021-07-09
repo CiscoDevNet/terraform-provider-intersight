@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -65,6 +65,8 @@ type NiatelemetryNiaFeatureUsageAllOf struct {
 	EigrpCount *int64 `json:"EigrpCount,omitempty"`
 	// Number of End Point Groups. This determines the total number of End Point Groups across the fabric.
 	EpgCount *int64 `json:"EpgCount,omitempty"`
+	// Returns the total number of fabric module slots.
+	FabricModuleCount *int64 `json:"FabricModuleCount,omitempty"`
 	// Number of Multi-Pods per fabric.
 	FabricSetuppCount *int64 `json:"FabricSetuppCount,omitempty"`
 	// Total number of FCoE N-Port for DOM, VSAn, and VLAN.
@@ -87,14 +89,34 @@ type NiatelemetryNiaFeatureUsageAllOf struct {
 	IgmpSnoop *string `json:"IgmpSnoop,omitempty"`
 	// Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric.
 	IpEpgCount *int64 `json:"IpEpgCount,omitempty"`
+	// BGP route reflector usage on APIC.
+	IsBgpRouteReflectorsFeatureUsed *bool `json:"IsBgpRouteReflectorsFeatureUsed,omitempty"`
+	// Brodge domains feature usage on APIC controller.
+	IsBridgeDomainsFeatureUsed *bool `json:"IsBridgeDomainsFeatureUsed,omitempty"`
 	// Returns value of isCommonLocalUserName field.
 	IsCommonLocalUserName *bool `json:"IsCommonLocalUserName,omitempty"`
+	// Contracts feature usage on APIC controller.
+	IsContractsFeatureUsed *bool `json:"IsContractsFeatureUsed,omitempty"`
+	// EPG feature usage on APIC controller.
+	IsEpgFeatureUsed *bool `json:"IsEpgFeatureUsed,omitempty"`
+	// Filters feature usage on APIC.
+	IsFiltersFeatureUsed *bool `json:"IsFiltersFeatureUsed,omitempty"`
 	// Returns if HTTP is configured.
 	IsHttpConfigured *bool `json:"IsHttpConfigured,omitempty"`
 	// Returns if HTTPS is configured.
 	IsHttpsConfigured *bool `json:"IsHttpsConfigured,omitempty"`
+	// NTP feature usage on APIC controller.
+	IsNtpFeatureUsed *bool `json:"IsNtpFeatureUsed,omitempty"`
+	// Ptp feature usage on APIC.
+	IsPtpFeatureUsed *bool `json:"IsPtpFeatureUsed,omitempty"`
+	// Synce feature usage on APIC.
+	IsSynceFeatureUsed *bool `json:"IsSynceFeatureUsed,omitempty"`
 	// Status of techsupport collection.
 	IsTechSupportCollected *string `json:"IsTechSupportCollected,omitempty"`
+	// Tenants feature usage on APIC.
+	IsTenantsFeatureUsed *bool `json:"IsTenantsFeatureUsed,omitempty"`
+	// VRF feature usage on APIC controller.
+	IsVrfsFeatureUsed *bool `json:"IsVrfsFeatureUsed,omitempty"`
 	// Isis feature usage. This determines the total number of ISIS sessions across the fabric.
 	IsisCount *int64 `json:"IsisCount,omitempty"`
 	// L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.
@@ -182,10 +204,14 @@ type NiatelemetryNiaFeatureUsageAllOf struct {
 	SshOverV6Count *int64 `json:"SshOverV6Count,omitempty"`
 	// Returns count of ssh V2 on the fabric.
 	SshV2Count *int64 `json:"SshV2Count,omitempty"`
+	// Returns the total number of supervisor module slots.
+	SupervisorModuleCount *int64 `json:"SupervisorModuleCount,omitempty"`
 	// Number of syslog monitoring policies on the fabric.
 	SyslogGroupCount *int64 `json:"SyslogGroupCount,omitempty"`
 	// Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.
 	SyslogOverV6Count *int64 `json:"SyslogOverV6Count,omitempty"`
+	// Returns the total number of system controller slots.
+	SystemControllerCount *int64 `json:"SystemControllerCount,omitempty"`
 	// Number of tacacs monitoring policies on the fabric.
 	TacacsGroupCount *int64 `json:"TacacsGroupCount,omitempty"`
 	// Number of tenants. This determines the total number of tenants configured across the fabric.
@@ -991,6 +1017,38 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) SetEpgCount(v int64) {
 	o.EpgCount = &v
 }
 
+// GetFabricModuleCount returns the FabricModuleCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricModuleCount() int64 {
+	if o == nil || o.FabricModuleCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FabricModuleCount
+}
+
+// GetFabricModuleCountOk returns a tuple with the FabricModuleCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricModuleCountOk() (*int64, bool) {
+	if o == nil || o.FabricModuleCount == nil {
+		return nil, false
+	}
+	return o.FabricModuleCount, true
+}
+
+// HasFabricModuleCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasFabricModuleCount() bool {
+	if o != nil && o.FabricModuleCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFabricModuleCount gets a reference to the given int64 and assigns it to the FabricModuleCount field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetFabricModuleCount(v int64) {
+	o.FabricModuleCount = &v
+}
+
 // GetFabricSetuppCount returns the FabricSetuppCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaFeatureUsageAllOf) GetFabricSetuppCount() int64 {
 	if o == nil || o.FabricSetuppCount == nil {
@@ -1343,6 +1401,70 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) SetIpEpgCount(v int64) {
 	o.IpEpgCount = &v
 }
 
+// GetIsBgpRouteReflectorsFeatureUsed returns the IsBgpRouteReflectorsFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBgpRouteReflectorsFeatureUsed() bool {
+	if o == nil || o.IsBgpRouteReflectorsFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsBgpRouteReflectorsFeatureUsed
+}
+
+// GetIsBgpRouteReflectorsFeatureUsedOk returns a tuple with the IsBgpRouteReflectorsFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBgpRouteReflectorsFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsBgpRouteReflectorsFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsBgpRouteReflectorsFeatureUsed, true
+}
+
+// HasIsBgpRouteReflectorsFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsBgpRouteReflectorsFeatureUsed() bool {
+	if o != nil && o.IsBgpRouteReflectorsFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsBgpRouteReflectorsFeatureUsed gets a reference to the given bool and assigns it to the IsBgpRouteReflectorsFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsBgpRouteReflectorsFeatureUsed(v bool) {
+	o.IsBgpRouteReflectorsFeatureUsed = &v
+}
+
+// GetIsBridgeDomainsFeatureUsed returns the IsBridgeDomainsFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBridgeDomainsFeatureUsed() bool {
+	if o == nil || o.IsBridgeDomainsFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsBridgeDomainsFeatureUsed
+}
+
+// GetIsBridgeDomainsFeatureUsedOk returns a tuple with the IsBridgeDomainsFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsBridgeDomainsFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsBridgeDomainsFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsBridgeDomainsFeatureUsed, true
+}
+
+// HasIsBridgeDomainsFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsBridgeDomainsFeatureUsed() bool {
+	if o != nil && o.IsBridgeDomainsFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsBridgeDomainsFeatureUsed gets a reference to the given bool and assigns it to the IsBridgeDomainsFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsBridgeDomainsFeatureUsed(v bool) {
+	o.IsBridgeDomainsFeatureUsed = &v
+}
+
 // GetIsCommonLocalUserName returns the IsCommonLocalUserName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsCommonLocalUserName() bool {
 	if o == nil || o.IsCommonLocalUserName == nil {
@@ -1373,6 +1495,102 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsCommonLocalUserName() bool {
 // SetIsCommonLocalUserName gets a reference to the given bool and assigns it to the IsCommonLocalUserName field.
 func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsCommonLocalUserName(v bool) {
 	o.IsCommonLocalUserName = &v
+}
+
+// GetIsContractsFeatureUsed returns the IsContractsFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsContractsFeatureUsed() bool {
+	if o == nil || o.IsContractsFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsContractsFeatureUsed
+}
+
+// GetIsContractsFeatureUsedOk returns a tuple with the IsContractsFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsContractsFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsContractsFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsContractsFeatureUsed, true
+}
+
+// HasIsContractsFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsContractsFeatureUsed() bool {
+	if o != nil && o.IsContractsFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsContractsFeatureUsed gets a reference to the given bool and assigns it to the IsContractsFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsContractsFeatureUsed(v bool) {
+	o.IsContractsFeatureUsed = &v
+}
+
+// GetIsEpgFeatureUsed returns the IsEpgFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsEpgFeatureUsed() bool {
+	if o == nil || o.IsEpgFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsEpgFeatureUsed
+}
+
+// GetIsEpgFeatureUsedOk returns a tuple with the IsEpgFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsEpgFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsEpgFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsEpgFeatureUsed, true
+}
+
+// HasIsEpgFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsEpgFeatureUsed() bool {
+	if o != nil && o.IsEpgFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsEpgFeatureUsed gets a reference to the given bool and assigns it to the IsEpgFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsEpgFeatureUsed(v bool) {
+	o.IsEpgFeatureUsed = &v
+}
+
+// GetIsFiltersFeatureUsed returns the IsFiltersFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsFiltersFeatureUsed() bool {
+	if o == nil || o.IsFiltersFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsFiltersFeatureUsed
+}
+
+// GetIsFiltersFeatureUsedOk returns a tuple with the IsFiltersFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsFiltersFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsFiltersFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsFiltersFeatureUsed, true
+}
+
+// HasIsFiltersFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsFiltersFeatureUsed() bool {
+	if o != nil && o.IsFiltersFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsFiltersFeatureUsed gets a reference to the given bool and assigns it to the IsFiltersFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsFiltersFeatureUsed(v bool) {
+	o.IsFiltersFeatureUsed = &v
 }
 
 // GetIsHttpConfigured returns the IsHttpConfigured field value if set, zero value otherwise.
@@ -1439,6 +1657,102 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsHttpsConfigured(v bool) {
 	o.IsHttpsConfigured = &v
 }
 
+// GetIsNtpFeatureUsed returns the IsNtpFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsNtpFeatureUsed() bool {
+	if o == nil || o.IsNtpFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsNtpFeatureUsed
+}
+
+// GetIsNtpFeatureUsedOk returns a tuple with the IsNtpFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsNtpFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsNtpFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsNtpFeatureUsed, true
+}
+
+// HasIsNtpFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsNtpFeatureUsed() bool {
+	if o != nil && o.IsNtpFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNtpFeatureUsed gets a reference to the given bool and assigns it to the IsNtpFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsNtpFeatureUsed(v bool) {
+	o.IsNtpFeatureUsed = &v
+}
+
+// GetIsPtpFeatureUsed returns the IsPtpFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsPtpFeatureUsed() bool {
+	if o == nil || o.IsPtpFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsPtpFeatureUsed
+}
+
+// GetIsPtpFeatureUsedOk returns a tuple with the IsPtpFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsPtpFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsPtpFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsPtpFeatureUsed, true
+}
+
+// HasIsPtpFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsPtpFeatureUsed() bool {
+	if o != nil && o.IsPtpFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPtpFeatureUsed gets a reference to the given bool and assigns it to the IsPtpFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsPtpFeatureUsed(v bool) {
+	o.IsPtpFeatureUsed = &v
+}
+
+// GetIsSynceFeatureUsed returns the IsSynceFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsSynceFeatureUsed() bool {
+	if o == nil || o.IsSynceFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSynceFeatureUsed
+}
+
+// GetIsSynceFeatureUsedOk returns a tuple with the IsSynceFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsSynceFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsSynceFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsSynceFeatureUsed, true
+}
+
+// HasIsSynceFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsSynceFeatureUsed() bool {
+	if o != nil && o.IsSynceFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSynceFeatureUsed gets a reference to the given bool and assigns it to the IsSynceFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsSynceFeatureUsed(v bool) {
+	o.IsSynceFeatureUsed = &v
+}
+
 // GetIsTechSupportCollected returns the IsTechSupportCollected field value if set, zero value otherwise.
 func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTechSupportCollected() string {
 	if o == nil || o.IsTechSupportCollected == nil {
@@ -1469,6 +1783,70 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsTechSupportCollected() bool {
 // SetIsTechSupportCollected gets a reference to the given string and assigns it to the IsTechSupportCollected field.
 func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsTechSupportCollected(v string) {
 	o.IsTechSupportCollected = &v
+}
+
+// GetIsTenantsFeatureUsed returns the IsTenantsFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTenantsFeatureUsed() bool {
+	if o == nil || o.IsTenantsFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsTenantsFeatureUsed
+}
+
+// GetIsTenantsFeatureUsedOk returns a tuple with the IsTenantsFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsTenantsFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsTenantsFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsTenantsFeatureUsed, true
+}
+
+// HasIsTenantsFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsTenantsFeatureUsed() bool {
+	if o != nil && o.IsTenantsFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsTenantsFeatureUsed gets a reference to the given bool and assigns it to the IsTenantsFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsTenantsFeatureUsed(v bool) {
+	o.IsTenantsFeatureUsed = &v
+}
+
+// GetIsVrfsFeatureUsed returns the IsVrfsFeatureUsed field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsVrfsFeatureUsed() bool {
+	if o == nil || o.IsVrfsFeatureUsed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsVrfsFeatureUsed
+}
+
+// GetIsVrfsFeatureUsedOk returns a tuple with the IsVrfsFeatureUsed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetIsVrfsFeatureUsedOk() (*bool, bool) {
+	if o == nil || o.IsVrfsFeatureUsed == nil {
+		return nil, false
+	}
+	return o.IsVrfsFeatureUsed, true
+}
+
+// HasIsVrfsFeatureUsed returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasIsVrfsFeatureUsed() bool {
+	if o != nil && o.IsVrfsFeatureUsed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsVrfsFeatureUsed gets a reference to the given bool and assigns it to the IsVrfsFeatureUsed field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetIsVrfsFeatureUsed(v bool) {
+	o.IsVrfsFeatureUsed = &v
 }
 
 // GetIsisCount returns the IsisCount field value if set, zero value otherwise.
@@ -2890,6 +3268,38 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) SetSshV2Count(v int64) {
 	o.SshV2Count = &v
 }
 
+// GetSupervisorModuleCount returns the SupervisorModuleCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetSupervisorModuleCount() int64 {
+	if o == nil || o.SupervisorModuleCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SupervisorModuleCount
+}
+
+// GetSupervisorModuleCountOk returns a tuple with the SupervisorModuleCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetSupervisorModuleCountOk() (*int64, bool) {
+	if o == nil || o.SupervisorModuleCount == nil {
+		return nil, false
+	}
+	return o.SupervisorModuleCount, true
+}
+
+// HasSupervisorModuleCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasSupervisorModuleCount() bool {
+	if o != nil && o.SupervisorModuleCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupervisorModuleCount gets a reference to the given int64 and assigns it to the SupervisorModuleCount field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetSupervisorModuleCount(v int64) {
+	o.SupervisorModuleCount = &v
+}
+
 // GetSyslogGroupCount returns the SyslogGroupCount field value if set, zero value otherwise.
 func (o *NiatelemetryNiaFeatureUsageAllOf) GetSyslogGroupCount() int64 {
 	if o == nil || o.SyslogGroupCount == nil {
@@ -2952,6 +3362,38 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) HasSyslogOverV6Count() bool {
 // SetSyslogOverV6Count gets a reference to the given int64 and assigns it to the SyslogOverV6Count field.
 func (o *NiatelemetryNiaFeatureUsageAllOf) SetSyslogOverV6Count(v int64) {
 	o.SyslogOverV6Count = &v
+}
+
+// GetSystemControllerCount returns the SystemControllerCount field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetSystemControllerCount() int64 {
+	if o == nil || o.SystemControllerCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SystemControllerCount
+}
+
+// GetSystemControllerCountOk returns a tuple with the SystemControllerCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) GetSystemControllerCountOk() (*int64, bool) {
+	if o == nil || o.SystemControllerCount == nil {
+		return nil, false
+	}
+	return o.SystemControllerCount, true
+}
+
+// HasSystemControllerCount returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsageAllOf) HasSystemControllerCount() bool {
+	if o != nil && o.SystemControllerCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemControllerCount gets a reference to the given int64 and assigns it to the SystemControllerCount field.
+func (o *NiatelemetryNiaFeatureUsageAllOf) SetSystemControllerCount(v int64) {
+	o.SystemControllerCount = &v
 }
 
 // GetTacacsGroupCount returns the TacacsGroupCount field value if set, zero value otherwise.
@@ -3444,6 +3886,9 @@ func (o NiatelemetryNiaFeatureUsageAllOf) MarshalJSON() ([]byte, error) {
 	if o.EpgCount != nil {
 		toSerialize["EpgCount"] = o.EpgCount
 	}
+	if o.FabricModuleCount != nil {
+		toSerialize["FabricModuleCount"] = o.FabricModuleCount
+	}
 	if o.FabricSetuppCount != nil {
 		toSerialize["FabricSetuppCount"] = o.FabricSetuppCount
 	}
@@ -3477,8 +3922,23 @@ func (o NiatelemetryNiaFeatureUsageAllOf) MarshalJSON() ([]byte, error) {
 	if o.IpEpgCount != nil {
 		toSerialize["IpEpgCount"] = o.IpEpgCount
 	}
+	if o.IsBgpRouteReflectorsFeatureUsed != nil {
+		toSerialize["IsBgpRouteReflectorsFeatureUsed"] = o.IsBgpRouteReflectorsFeatureUsed
+	}
+	if o.IsBridgeDomainsFeatureUsed != nil {
+		toSerialize["IsBridgeDomainsFeatureUsed"] = o.IsBridgeDomainsFeatureUsed
+	}
 	if o.IsCommonLocalUserName != nil {
 		toSerialize["IsCommonLocalUserName"] = o.IsCommonLocalUserName
+	}
+	if o.IsContractsFeatureUsed != nil {
+		toSerialize["IsContractsFeatureUsed"] = o.IsContractsFeatureUsed
+	}
+	if o.IsEpgFeatureUsed != nil {
+		toSerialize["IsEpgFeatureUsed"] = o.IsEpgFeatureUsed
+	}
+	if o.IsFiltersFeatureUsed != nil {
+		toSerialize["IsFiltersFeatureUsed"] = o.IsFiltersFeatureUsed
 	}
 	if o.IsHttpConfigured != nil {
 		toSerialize["IsHttpConfigured"] = o.IsHttpConfigured
@@ -3486,8 +3946,23 @@ func (o NiatelemetryNiaFeatureUsageAllOf) MarshalJSON() ([]byte, error) {
 	if o.IsHttpsConfigured != nil {
 		toSerialize["IsHttpsConfigured"] = o.IsHttpsConfigured
 	}
+	if o.IsNtpFeatureUsed != nil {
+		toSerialize["IsNtpFeatureUsed"] = o.IsNtpFeatureUsed
+	}
+	if o.IsPtpFeatureUsed != nil {
+		toSerialize["IsPtpFeatureUsed"] = o.IsPtpFeatureUsed
+	}
+	if o.IsSynceFeatureUsed != nil {
+		toSerialize["IsSynceFeatureUsed"] = o.IsSynceFeatureUsed
+	}
 	if o.IsTechSupportCollected != nil {
 		toSerialize["IsTechSupportCollected"] = o.IsTechSupportCollected
+	}
+	if o.IsTenantsFeatureUsed != nil {
+		toSerialize["IsTenantsFeatureUsed"] = o.IsTenantsFeatureUsed
+	}
+	if o.IsVrfsFeatureUsed != nil {
+		toSerialize["IsVrfsFeatureUsed"] = o.IsVrfsFeatureUsed
 	}
 	if o.IsisCount != nil {
 		toSerialize["IsisCount"] = o.IsisCount
@@ -3621,11 +4096,17 @@ func (o NiatelemetryNiaFeatureUsageAllOf) MarshalJSON() ([]byte, error) {
 	if o.SshV2Count != nil {
 		toSerialize["SshV2Count"] = o.SshV2Count
 	}
+	if o.SupervisorModuleCount != nil {
+		toSerialize["SupervisorModuleCount"] = o.SupervisorModuleCount
+	}
 	if o.SyslogGroupCount != nil {
 		toSerialize["SyslogGroupCount"] = o.SyslogGroupCount
 	}
 	if o.SyslogOverV6Count != nil {
 		toSerialize["SyslogOverV6Count"] = o.SyslogOverV6Count
+	}
+	if o.SystemControllerCount != nil {
+		toSerialize["SystemControllerCount"] = o.SystemControllerCount
 	}
 	if o.TacacsGroupCount != nil {
 		toSerialize["TacacsGroupCount"] = o.TacacsGroupCount
@@ -3708,6 +4189,7 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "DnsCount")
 		delete(additionalProperties, "EigrpCount")
 		delete(additionalProperties, "EpgCount")
+		delete(additionalProperties, "FabricModuleCount")
 		delete(additionalProperties, "FabricSetuppCount")
 		delete(additionalProperties, "FcoeNportCount")
 		delete(additionalProperties, "FcoeNportDomCount")
@@ -3719,10 +4201,20 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "IgmpAccessListCount")
 		delete(additionalProperties, "IgmpSnoop")
 		delete(additionalProperties, "IpEpgCount")
+		delete(additionalProperties, "IsBgpRouteReflectorsFeatureUsed")
+		delete(additionalProperties, "IsBridgeDomainsFeatureUsed")
 		delete(additionalProperties, "IsCommonLocalUserName")
+		delete(additionalProperties, "IsContractsFeatureUsed")
+		delete(additionalProperties, "IsEpgFeatureUsed")
+		delete(additionalProperties, "IsFiltersFeatureUsed")
 		delete(additionalProperties, "IsHttpConfigured")
 		delete(additionalProperties, "IsHttpsConfigured")
+		delete(additionalProperties, "IsNtpFeatureUsed")
+		delete(additionalProperties, "IsPtpFeatureUsed")
+		delete(additionalProperties, "IsSynceFeatureUsed")
 		delete(additionalProperties, "IsTechSupportCollected")
+		delete(additionalProperties, "IsTenantsFeatureUsed")
+		delete(additionalProperties, "IsVrfsFeatureUsed")
 		delete(additionalProperties, "IsisCount")
 		delete(additionalProperties, "L2Multicast")
 		delete(additionalProperties, "LeafCount")
@@ -3767,8 +4259,10 @@ func (o *NiatelemetryNiaFeatureUsageAllOf) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "SpineCount")
 		delete(additionalProperties, "SshOverV6Count")
 		delete(additionalProperties, "SshV2Count")
+		delete(additionalProperties, "SupervisorModuleCount")
 		delete(additionalProperties, "SyslogGroupCount")
 		delete(additionalProperties, "SyslogOverV6Count")
+		delete(additionalProperties, "SystemControllerCount")
 		delete(additionalProperties, "TacacsGroupCount")
 		delete(additionalProperties, "TenantCount")
 		delete(additionalProperties, "TierTwoLeafCount")

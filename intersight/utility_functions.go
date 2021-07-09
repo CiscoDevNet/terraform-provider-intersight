@@ -113,7 +113,7 @@ func checkWorkflowStatus(conn *Config, w models.WorkflowWorkflowInfoRelationship
 			log.Printf("Workflow %s is %s ... %f percent \n", workflowInfo.GetName(), workflowInfo.GetStatus(), workflowInfo.GetProgress())
 		}
 	}
-	warning := fmt.Sprintf("Workflow moid: %d name: %s is in status %s", workflowInfo.GetMoid(), workflowInfo.GetName(), workflowInfo.GetStatus())
+	warning := fmt.Sprintf("Workflow moid: %s name: %s is in status %s", workflowInfo.GetMoid(), workflowInfo.GetName(), workflowInfo.GetStatus())
 	return warning, nil
 }
 

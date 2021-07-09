@@ -39,7 +39,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `batch`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.CliCommand](#workflowCliCommand)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.CliCommand](#workflowCliCommand)
 [workflow.FileOperations](#workflowFileOperations)
 [workflow.SshSession](#workflowSshSession)
 [workflow.WebApi](#workflowWebApi)
@@ -52,15 +52,15 @@ This complex property has following sub-properties:
   + `label`:(string) A user friendly label that task designers have given to the batch API request. 
   + `name`:(string) A reference name for this API request within the batch API request.This name shall be used to map the API output parameters to subsequentAPI input parameters within a batch API task. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `outcomes`: All the possible outcomes of this API are captured here. Outcomes propertyis a collection property of type workflow.Outcome objects.The outcomes can be mapped to the message to be shown. The outcomes areevaluated in the order they are given. At the end of the outcomes list,an catchall success/fail outcome can be added with condition as 'true'.This is an optionalproperty and if not specified the task will be marked as success. 
-  + `response_spec`: The optional grammar specification for parsing the response to extract therequired values.The specification should have extraction specification specified forall the API output parameters. 
+  + `outcomes`:(JSON as string) All the possible outcomes of this API are captured here. Outcomes propertyis a collection property of type workflow.Outcome objects.The outcomes can be mapped to the message to be shown. The outcomes areevaluated in the order they are given. At the end of the outcomes list,an catchall success/fail outcome can be added with condition as 'true'.This is an optionalproperty and if not specified the task will be marked as success. 
+  + `response_spec`:(JSON as string) The optional grammar specification for parsing the response to extract therequired values.The specification should have extraction specification specified forall the API output parameters. 
   + `skip_on_condition`:(string) The skip expression, if provided, allows the batch API executor to skip theapi execution when the given expression evaluates to true.The expression is given as such a golang template that has to beevaluated to a final content true/false. The expression is an optional and incase not provided, the API will always be executed. 
   + `start_delay`:(int) The delay in seconds after which the API needs to be executed.By default, the given API is executed immediately. Specifying a start delay adds to the delay to execution.Start Delay is not supported for the first API in the Batch and cumulative delay of all the APIs in the Batch should not exceed the task time out. 
   + `timeout`:(int) The duration in seconds by which the API response is expected from the API target.If the end point does not respond for the API request within this timeoutduration, the task will be marked as failed. 
 * `constraints`:(HashMap) - Enter the constraints on when this task should match against the task definition. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `target_data_type`: List of property constraints that helps to narrow down task implementations based on target device input. 
+  + `target_data_type`:(JSON as string) List of property constraints that helps to narrow down task implementations based on target device input. 
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `description`:(string) A detailed description about the batch APIs. 
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
@@ -72,8 +72,8 @@ This complex property has following sub-properties:
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name for the batch API task. 
-* `outcomes`: All the possible outcomes of this task are captured here. Outcomes propertyis a collection property of type workflow.Outcome objects.The outcomes can be mapped to the message to be shown. The outcomes areevaluated in the order they are given. At the end of the outcomes list,an catchall success/fail outcome can be added with condition as 'true'.This is an optionalproperty and if not specified the task will be marked as success. 
-* `output`: Intersight Orchestrator allows the extraction of required values from APIresponses using the API response grammar. These extracted values can be mappedto task output parameters defined in task definition.The mapping of API output parameters to the task output parameters is providedas JSON in this property. 
+* `outcomes`:(JSON as string) All the possible outcomes of this task are captured here. Outcomes propertyis a collection property of type workflow.Outcome objects.The outcomes can be mapped to the message to be shown. The outcomes areevaluated in the order they are given. At the end of the outcomes list,an catchall success/fail outcome can be added with condition as 'true'.This is an optionalproperty and if not specified the task will be marked as success. 
+* `output`:(JSON as string) Intersight Orchestrator allows the extraction of required values from APIresponses using the API response grammar. These extracted values can be mappedto task output parameters defined in task definition.The mapping of API output parameters to the task output parameters is providedas JSON in this property. 
 * `owners`:
                 (Array of schema.TypeString) -(Computed)
 * `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -132,6 +132,8 @@ This complex property has following sub-properties:
   + `expect`:(string) The regex of the expect prompt of the interactive command. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `send`:(string) The answer string to the expect prompt. 
+* `expected_exit_codes`:
+                (Array of schema.TypeInt) -
 * `skip_status_check`:(bool) Skips the execution status check of the terminal command. One use case for this is while exiting theterminal session from esxi host. 
 * `terminal_end`:(bool) If this flag is set, it marks the end of the terminal session where the previous commands were executed. 
 * `terminal_start`:(bool) If this flag is set, the execution of this command initiates a terminal session in which the subsequentCLI commands are executed until a command with terminalEnd flag is encountered or the end of the batch. 
@@ -150,7 +152,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `template_file_path`:(string) Path of the template file on the connected device. 
-  + `template_values`: Input values to render text output file from template file. 
+  + `template_values`:(JSON as string) Input values to render text output file from template file. 
 * `operation_type`:(string) File operation type to be executed on the connected endpoint.* `FileDownload` - The API is executed in a remote device connected to the Intersightthrough its device connector. This operation is to download the filefrom specified storage bucket to the specific path on the device.* `FileTemplatize` - Populates data driven template file with input values to generate textual output.Inputs - the path of the template file on the device and json values to populate.An error will be returned if the file does not exists or if there is an error whileexecuting the template. 
 
 ### [workflow.SshSession](#argument-reference)
@@ -163,7 +165,7 @@ This complex property has following sub-properties:
   + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `file_mode`:(int) File permission to set on the transferred file. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`: A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `source_file_path`:(string) Source file path on the Intersight connected device. 
 * `message_type`:(string) The type of SSH message to send to the remote server.* `ExecuteCommand` - Execute a SSH command on the remote server.* `NewSession` - Open a new SSH connection to the remote server.* `FileTransfer` - Transfer a file from Intersight connected device to the remote server.* `CloseSession` - Close the SSH connection to the remote server. 
 * `ssh_command`:(HashMap) - SSH command to execute on the remote server. 
@@ -179,7 +181,7 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `send`:(string) The answer string to the expect prompt. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`: A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `shell_prompt`:(string) Regex of the remote server's shell prompt. 
   + `shell_prompt_timeout`:(int) Expect timeout value in seconds for the shell prompt. 
 * `ssh_configuration`:(HashMap) - Carries the SSH session details for opening a new connection. 
@@ -188,16 +190,16 @@ This complex property has following sub-properties:
   + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `password`:(string) Password to use in the SSH connection credentials (If empty then private key will be used). 
-  + `secure_properties`: A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
+  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `target`:(string) The remote server to connect to. IPv4 address represented in dot decimal notation. 
   + `user`:(string) Username for the remote SSH connection. 
 
 ### [workflow.WebApi](#argument-reference)
 This models a single Web API request within a batch of requests that get
 executed within a single workflow task.
-* `cookies`: Collection of key value pairs to set in the request header as Cookie list. 
+* `cookies`:(JSON as string) Collection of key value pairs to set in the request header as Cookie list. 
 * `endpoint_request_type`:(string) If the target type is Endpoint, this property determines whether the request isto be handled as internal request or external request by the device connector.* `Internal` - The endpoint API executed is an internal request handled by the device connector plugin.* `External` - The endpoint API request is passed through by the device connector. 
-* `headers`: Collection of key value pairs to set in the request header. 
+* `headers`:(JSON as string) Collection of key value pairs to set in the request header. 
 * `method`:(string) The HTTP method to be executed in the given URL (GET, POST, PUT, etc).If the value is not specified, GET will be used as default.The supported values are GET, POST, PUT, DELETE, PATCH, HEAD. 
 * `mo_type`:(string) The type of the intersight object for which API request is to be made.The property is valid in case of Intersight API calls and the base url is automatically prepended based on the value. 
 * `protocol`:(string) The accepted web protocol values are http and https. 

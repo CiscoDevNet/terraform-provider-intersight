@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -24,8 +24,8 @@ type KvmTunnel struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType           string                               `json:"ObjectType"`
-	Var0Session          *KvmSessionRelationship              `json:"_0_Session,omitempty"`
 	Device               *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+	KvmSession           *KvmSessionRelationship              `json:"KvmSession,omitempty"`
 	Server               *ComputePhysicalRelationship         `json:"Server,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -103,38 +103,6 @@ func (o *KvmTunnel) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetVar0Session returns the Var0Session field value if set, zero value otherwise.
-func (o *KvmTunnel) GetVar0Session() KvmSessionRelationship {
-	if o == nil || o.Var0Session == nil {
-		var ret KvmSessionRelationship
-		return ret
-	}
-	return *o.Var0Session
-}
-
-// GetVar0SessionOk returns a tuple with the Var0Session field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KvmTunnel) GetVar0SessionOk() (*KvmSessionRelationship, bool) {
-	if o == nil || o.Var0Session == nil {
-		return nil, false
-	}
-	return o.Var0Session, true
-}
-
-// HasVar0Session returns a boolean if a field has been set.
-func (o *KvmTunnel) HasVar0Session() bool {
-	if o != nil && o.Var0Session != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar0Session gets a reference to the given KvmSessionRelationship and assigns it to the Var0Session field.
-func (o *KvmTunnel) SetVar0Session(v KvmSessionRelationship) {
-	o.Var0Session = &v
-}
-
 // GetDevice returns the Device field value if set, zero value otherwise.
 func (o *KvmTunnel) GetDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.Device == nil {
@@ -165,6 +133,38 @@ func (o *KvmTunnel) HasDevice() bool {
 // SetDevice gets a reference to the given AssetDeviceRegistrationRelationship and assigns it to the Device field.
 func (o *KvmTunnel) SetDevice(v AssetDeviceRegistrationRelationship) {
 	o.Device = &v
+}
+
+// GetKvmSession returns the KvmSession field value if set, zero value otherwise.
+func (o *KvmTunnel) GetKvmSession() KvmSessionRelationship {
+	if o == nil || o.KvmSession == nil {
+		var ret KvmSessionRelationship
+		return ret
+	}
+	return *o.KvmSession
+}
+
+// GetKvmSessionOk returns a tuple with the KvmSession field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KvmTunnel) GetKvmSessionOk() (*KvmSessionRelationship, bool) {
+	if o == nil || o.KvmSession == nil {
+		return nil, false
+	}
+	return o.KvmSession, true
+}
+
+// HasKvmSession returns a boolean if a field has been set.
+func (o *KvmTunnel) HasKvmSession() bool {
+	if o != nil && o.KvmSession != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKvmSession gets a reference to the given KvmSessionRelationship and assigns it to the KvmSession field.
+func (o *KvmTunnel) SetKvmSession(v KvmSessionRelationship) {
+	o.KvmSession = &v
 }
 
 // GetServer returns the Server field value if set, zero value otherwise.
@@ -215,11 +215,11 @@ func (o KvmTunnel) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.Var0Session != nil {
-		toSerialize["_0_Session"] = o.Var0Session
-	}
 	if o.Device != nil {
 		toSerialize["Device"] = o.Device
+	}
+	if o.KvmSession != nil {
+		toSerialize["KvmSession"] = o.KvmSession
 	}
 	if o.Server != nil {
 		toSerialize["Server"] = o.Server
@@ -237,10 +237,10 @@ func (o *KvmTunnel) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType  string                               `json:"ObjectType"`
-		Var0Session *KvmSessionRelationship              `json:"_0_Session,omitempty"`
-		Device      *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
-		Server      *ComputePhysicalRelationship         `json:"Server,omitempty"`
+		ObjectType string                               `json:"ObjectType"`
+		Device     *AssetDeviceRegistrationRelationship `json:"Device,omitempty"`
+		KvmSession *KvmSessionRelationship              `json:"KvmSession,omitempty"`
+		Server     *ComputePhysicalRelationship         `json:"Server,omitempty"`
 	}
 
 	varKvmTunnelWithoutEmbeddedStruct := KvmTunnelWithoutEmbeddedStruct{}
@@ -250,8 +250,8 @@ func (o *KvmTunnel) UnmarshalJSON(bytes []byte) (err error) {
 		varKvmTunnel := _KvmTunnel{}
 		varKvmTunnel.ClassId = varKvmTunnelWithoutEmbeddedStruct.ClassId
 		varKvmTunnel.ObjectType = varKvmTunnelWithoutEmbeddedStruct.ObjectType
-		varKvmTunnel.Var0Session = varKvmTunnelWithoutEmbeddedStruct.Var0Session
 		varKvmTunnel.Device = varKvmTunnelWithoutEmbeddedStruct.Device
+		varKvmTunnel.KvmSession = varKvmTunnelWithoutEmbeddedStruct.KvmSession
 		varKvmTunnel.Server = varKvmTunnelWithoutEmbeddedStruct.Server
 		*o = KvmTunnel(varKvmTunnel)
 	} else {
@@ -272,8 +272,8 @@ func (o *KvmTunnel) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "_0_Session")
 		delete(additionalProperties, "Device")
+		delete(additionalProperties, "KvmSession")
 		delete(additionalProperties, "Server")
 
 		// remove fields from embedded structs

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -21,12 +21,18 @@ type NiatelemetryNexusDashboardDetailsAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Name of the nexus dashboard cluster.
+	ClusterName *string `json:"ClusterName,omitempty"`
+	// Model of the nexus dashboard cluster.
+	DeviceModel *string `json:"DeviceModel,omitempty"`
 	// Name of the NexusDashboard.
 	NexusDashboardName *string `json:"NexusDashboardName,omitempty"`
 	// Serial number of NexusDashboard.
-	NexusDashboardSerialNumber *string                              `json:"NexusDashboardSerialNumber,omitempty"`
-	RegisteredDevice           *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
-	AdditionalProperties       map[string]interface{}
+	NexusDashboardSerialNumber *string `json:"NexusDashboardSerialNumber,omitempty"`
+	// Node type of the nexus dashboard cluster.
+	Type                 *string                              `json:"Type,omitempty"`
+	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NiatelemetryNexusDashboardDetailsAllOf NiatelemetryNexusDashboardDetailsAllOf
@@ -102,6 +108,70 @@ func (o *NiatelemetryNexusDashboardDetailsAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetClusterName returns the ClusterName field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetClusterName() string {
+	if o == nil || o.ClusterName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterName
+}
+
+// GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetClusterNameOk() (*string, bool) {
+	if o == nil || o.ClusterName == nil {
+		return nil, false
+	}
+	return o.ClusterName, true
+}
+
+// HasClusterName returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) HasClusterName() bool {
+	if o != nil && o.ClusterName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterName gets a reference to the given string and assigns it to the ClusterName field.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) SetClusterName(v string) {
+	o.ClusterName = &v
+}
+
+// GetDeviceModel returns the DeviceModel field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetDeviceModel() string {
+	if o == nil || o.DeviceModel == nil {
+		var ret string
+		return ret
+	}
+	return *o.DeviceModel
+}
+
+// GetDeviceModelOk returns a tuple with the DeviceModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetDeviceModelOk() (*string, bool) {
+	if o == nil || o.DeviceModel == nil {
+		return nil, false
+	}
+	return o.DeviceModel, true
+}
+
+// HasDeviceModel returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) HasDeviceModel() bool {
+	if o != nil && o.DeviceModel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceModel gets a reference to the given string and assigns it to the DeviceModel field.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) SetDeviceModel(v string) {
+	o.DeviceModel = &v
+}
+
 // GetNexusDashboardName returns the NexusDashboardName field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboardDetailsAllOf) GetNexusDashboardName() string {
 	if o == nil || o.NexusDashboardName == nil {
@@ -166,6 +236,38 @@ func (o *NiatelemetryNexusDashboardDetailsAllOf) SetNexusDashboardSerialNumber(v
 	o.NexusDashboardSerialNumber = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *NiatelemetryNexusDashboardDetailsAllOf) SetType(v string) {
+	o.Type = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *NiatelemetryNexusDashboardDetailsAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -206,11 +308,20 @@ func (o NiatelemetryNexusDashboardDetailsAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ClusterName != nil {
+		toSerialize["ClusterName"] = o.ClusterName
+	}
+	if o.DeviceModel != nil {
+		toSerialize["DeviceModel"] = o.DeviceModel
+	}
 	if o.NexusDashboardName != nil {
 		toSerialize["NexusDashboardName"] = o.NexusDashboardName
 	}
 	if o.NexusDashboardSerialNumber != nil {
 		toSerialize["NexusDashboardSerialNumber"] = o.NexusDashboardSerialNumber
+	}
+	if o.Type != nil {
+		toSerialize["Type"] = o.Type
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -235,8 +346,11 @@ func (o *NiatelemetryNexusDashboardDetailsAllOf) UnmarshalJSON(bytes []byte) (er
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ClusterName")
+		delete(additionalProperties, "DeviceModel")
 		delete(additionalProperties, "NexusDashboardName")
 		delete(additionalProperties, "NexusDashboardSerialNumber")
+		delete(additionalProperties, "Type")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
 	}

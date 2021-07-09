@@ -70,6 +70,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"product_subgroup": {
+				Description: "Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"product_type": {
 				Description: "Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".",
 				Type:        schema.TypeString,
@@ -84,6 +90,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 			},
 			"virtualization_platform": {
 				Description: "Virtualization platform is used to identify the hypervisor type. example \"ESXi\".",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"workload": {
+				Description: "Workload/Usecase running on the device.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -255,6 +267,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"description": {
+									Description: "Description of device reported by Cisco Install Base.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
 								"device_transactions": {
 									Type:     schema.TypeList,
 									Optional: true,
@@ -417,6 +435,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 								},
 								"membership_ratio": {
 									Description: "Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices.",
+									Type:        schema.TypeFloat,
+									Optional:    true,
+									Computed:    true,
+								},
+								"memory_mirroring_factor": {
+									Description: "Memory Reliability, availability and serviceability (RAS) factor.",
 									Type:        schema.TypeFloat,
 									Optional:    true,
 									Computed:    true,
@@ -586,6 +610,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 							},
 						},
 					},
+					"product_subgroup": {
+						Description: "Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"product_type": {
 						Description: "Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".",
 						Type:        schema.TypeString,
@@ -751,7 +781,7 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 									Optional:    true,
 								},
 								"name": {
-									Description: "Metric type used to calculate metering for the device sent from the IB Contract. example  Node, vMemory, vCPU.\n* `None` - A default value to catch cases where metric type is not correctly detected.\n* `Node` - The metering of the device is on the basis of Power state.\n* `Storage` - The metering of the device is on the basis of used Storage.\n* `vMemory` - The metering of the device is on the basis of VM Memory.\n* `vCPU` - The metering of the device is on the basis of vCPU.\n* `vStorage` - The metering of the device is on the basis of used virtual Storage.",
+									Description: "Metric type used to calculate metering for the device sent from the IB Contract. example  Node, vMemory, vCPU.\n* `None` - A default value to catch cases where metric type is not correctly detected.\n* `Node` - The metering of the device is on the basis of Power state.\n* `Storage` - The metering of the device is on the basis of used Storage.\n* `vMemory` - The metering of the device is on the basis of VM Memory.\n* `vCPU` - The metering of the device is on the basis of vCPU.\n* `vStorage` - The metering of the device is on the basis of used virtual Storage.\n* `Switch` - The metering of the device is on the basis of Switch.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -763,7 +793,7 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 									Computed:    true,
 								},
 								"unit": {
-									Description: "Metric unit used to calculate metering for the device sent from the IB Contract. example  Node, GiB, Cores.\n* `None` - A default value to catch cases where metric unit is not correctly detected.\n* `Node` - It is applicable for Node Metric type.\n* `GiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `TiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `Cores` - It is applicable for vCPU Metric type.",
+									Description: "Metric unit used to calculate metering for the device sent from the IB Contract. example  Node, GiB, Cores.\n* `None` - A default value to catch cases where metric unit is not correctly detected.\n* `Node` - It is applicable for Node Metric type.\n* `GiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `TiB` - It is applicable for VMemory, vStorage and Storage Metric types.\n* `Cores` - It is applicable for vCPU Metric type.\n* `Switch` - It is applicable for Switch Metric type.\n* `Port` - It is applicable for Switch Metric type.",
 									Type:        schema.TypeString,
 									Optional:    true,
 									Computed:    true,
@@ -897,6 +927,12 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"workload": {
+						Description: "Workload/Usecase running on the device.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -945,6 +981,10 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("product_subgroup"); ok {
+		x := (v.(string))
+		o.SetProductSubgroup(x)
+	}
 	if v, ok := d.GetOk("product_type"); ok {
 		x := (v.(string))
 		o.SetProductType(x)
@@ -956,6 +996,10 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 	if v, ok := d.GetOk("virtualization_platform"); ok {
 		x := (v.(string))
 		o.SetVirtualizationPlatform(x)
+	}
+	if v, ok := d.GetOk("workload"); ok {
+		x := (v.(string))
+		o.SetWorkload(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -1021,6 +1065,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["product_subgroup"] = (s.GetProductSubgroup())
 				temp["product_type"] = (s.GetProductType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
@@ -1036,6 +1081,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["virtualization_platform"] = (s.GetVirtualizationPlatform())
+				temp["workload"] = (s.GetWorkload())
 				assetDeploymentDeviceResults[j] = temp
 				j += 1
 			}

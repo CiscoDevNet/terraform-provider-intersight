@@ -150,6 +150,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"fabric_module_count": {
+				Description: "Returns the total number of fabric module slots.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"fabric_setupp_count": {
 				Description: "Number of Multi-Pods per fabric.",
 				Type:        schema.TypeInt,
@@ -205,8 +210,33 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"is_bgp_route_reflectors_feature_used": {
+				Description: "BGP route reflector usage on APIC.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_bridge_domains_feature_used": {
+				Description: "Brodge domains feature usage on APIC controller.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"is_common_local_user_name": {
 				Description: "Returns value of isCommonLocalUserName field.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_contracts_feature_used": {
+				Description: "Contracts feature usage on APIC controller.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_epg_feature_used": {
+				Description: "EPG feature usage on APIC controller.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_filters_feature_used": {
+				Description: "Filters feature usage on APIC.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -220,9 +250,34 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
+			"is_ntp_feature_used": {
+				Description: "NTP feature usage on APIC controller.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_ptp_feature_used": {
+				Description: "Ptp feature usage on APIC.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_synce_feature_used": {
+				Description: "Synce feature usage on APIC.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"is_tech_support_collected": {
 				Description: "Status of techsupport collection.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"is_tenants_feature_used": {
+				Description: "Tenants feature usage on APIC.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"is_vrfs_feature_used": {
+				Description: "VRF feature usage on APIC controller.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"isis_count": {
@@ -464,6 +519,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"supervisor_module_count": {
+				Description: "Returns the total number of supervisor module slots.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"syslog_group_count": {
 				Description: "Number of syslog monitoring policies on the fabric.",
 				Type:        schema.TypeInt,
@@ -471,6 +531,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"syslog_over_v6_count": {
 				Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"system_controller_count": {
+				Description: "Returns the total number of system controller slots.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -711,6 +776,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"fabric_module_count": {
+						Description: "Returns the total number of fabric module slots.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"fabric_setupp_count": {
 						Description: "Number of Multi-Pods per fabric.",
 						Type:        schema.TypeInt,
@@ -766,8 +836,33 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"is_bgp_route_reflectors_feature_used": {
+						Description: "BGP route reflector usage on APIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_bridge_domains_feature_used": {
+						Description: "Brodge domains feature usage on APIC controller.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"is_common_local_user_name": {
 						Description: "Returns value of isCommonLocalUserName field.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_contracts_feature_used": {
+						Description: "Contracts feature usage on APIC controller.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_epg_feature_used": {
+						Description: "EPG feature usage on APIC controller.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_filters_feature_used": {
+						Description: "Filters feature usage on APIC.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -781,9 +876,34 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"is_ntp_feature_used": {
+						Description: "NTP feature usage on APIC controller.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_ptp_feature_used": {
+						Description: "Ptp feature usage on APIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_synce_feature_used": {
+						Description: "Synce feature usage on APIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"is_tech_support_collected": {
 						Description: "Status of techsupport collection.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"is_tenants_feature_used": {
+						Description: "Tenants feature usage on APIC.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_vrfs_feature_used": {
+						Description: "VRF feature usage on APIC controller.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"isis_count": {
@@ -1191,6 +1311,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"supervisor_module_count": {
+						Description: "Returns the total number of supervisor module slots.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
 					"syslog_group_count": {
 						Description: "Number of syslog monitoring policies on the fabric.",
 						Type:        schema.TypeInt,
@@ -1198,6 +1323,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 					},
 					"syslog_over_v6_count": {
 						Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"system_controller_count": {
+						Description: "Returns the total number of system controller slots.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -1519,6 +1649,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetEpgCount(x)
 	}
+	if v, ok := d.GetOk("fabric_module_count"); ok {
+		x := int64(v.(int))
+		o.SetFabricModuleCount(x)
+	}
 	if v, ok := d.GetOk("fabric_setupp_count"); ok {
 		x := int64(v.(int))
 		o.SetFabricSetuppCount(x)
@@ -1563,9 +1697,29 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetIpEpgCount(x)
 	}
+	if v, ok := d.GetOk("is_bgp_route_reflectors_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsBgpRouteReflectorsFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_bridge_domains_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsBridgeDomainsFeatureUsed(x)
+	}
 	if v, ok := d.GetOk("is_common_local_user_name"); ok {
 		x := (v.(bool))
 		o.SetIsCommonLocalUserName(x)
+	}
+	if v, ok := d.GetOk("is_contracts_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsContractsFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_epg_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsEpgFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_filters_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsFiltersFeatureUsed(x)
 	}
 	if v, ok := d.GetOk("is_http_configured"); ok {
 		x := (v.(bool))
@@ -1575,9 +1729,29 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := (v.(bool))
 		o.SetIsHttpsConfigured(x)
 	}
+	if v, ok := d.GetOk("is_ntp_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsNtpFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_ptp_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsPtpFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_synce_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsSynceFeatureUsed(x)
+	}
 	if v, ok := d.GetOk("is_tech_support_collected"); ok {
 		x := (v.(string))
 		o.SetIsTechSupportCollected(x)
+	}
+	if v, ok := d.GetOk("is_tenants_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsTenantsFeatureUsed(x)
+	}
+	if v, ok := d.GetOk("is_vrfs_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsVrfsFeatureUsed(x)
 	}
 	if v, ok := d.GetOk("isis_count"); ok {
 		x := int64(v.(int))
@@ -1767,6 +1941,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetSshV2Count(x)
 	}
+	if v, ok := d.GetOk("supervisor_module_count"); ok {
+		x := int64(v.(int))
+		o.SetSupervisorModuleCount(x)
+	}
 	if v, ok := d.GetOk("syslog_group_count"); ok {
 		x := int64(v.(int))
 		o.SetSyslogGroupCount(x)
@@ -1774,6 +1952,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("syslog_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetSyslogOverV6Count(x)
+	}
+	if v, ok := d.GetOk("system_controller_count"); ok {
+		x := int64(v.(int))
+		o.SetSystemControllerCount(x)
 	}
 	if v, ok := d.GetOk("tacacs_group_count"); ok {
 		x := int64(v.(int))
@@ -1890,6 +2072,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["eigrp_count"] = (s.GetEigrpCount())
 				temp["epg_count"] = (s.GetEpgCount())
+				temp["fabric_module_count"] = (s.GetFabricModuleCount())
 				temp["fabric_setupp_count"] = (s.GetFabricSetuppCount())
 				temp["fcoe_nport_count"] = (s.GetFcoeNportCount())
 				temp["fcoe_nport_dom_count"] = (s.GetFcoeNportDomCount())
@@ -1901,10 +2084,20 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["igmp_access_list_count"] = (s.GetIgmpAccessListCount())
 				temp["igmp_snoop"] = (s.GetIgmpSnoop())
 				temp["ip_epg_count"] = (s.GetIpEpgCount())
+				temp["is_bgp_route_reflectors_feature_used"] = (s.GetIsBgpRouteReflectorsFeatureUsed())
+				temp["is_bridge_domains_feature_used"] = (s.GetIsBridgeDomainsFeatureUsed())
 				temp["is_common_local_user_name"] = (s.GetIsCommonLocalUserName())
+				temp["is_contracts_feature_used"] = (s.GetIsContractsFeatureUsed())
+				temp["is_epg_feature_used"] = (s.GetIsEpgFeatureUsed())
+				temp["is_filters_feature_used"] = (s.GetIsFiltersFeatureUsed())
 				temp["is_http_configured"] = (s.GetIsHttpConfigured())
 				temp["is_https_configured"] = (s.GetIsHttpsConfigured())
+				temp["is_ntp_feature_used"] = (s.GetIsNtpFeatureUsed())
+				temp["is_ptp_feature_used"] = (s.GetIsPtpFeatureUsed())
+				temp["is_synce_feature_used"] = (s.GetIsSynceFeatureUsed())
 				temp["is_tech_support_collected"] = (s.GetIsTechSupportCollected())
+				temp["is_tenants_feature_used"] = (s.GetIsTenantsFeatureUsed())
+				temp["is_vrfs_feature_used"] = (s.GetIsVrfsFeatureUsed())
 				temp["isis_count"] = (s.GetIsisCount())
 				temp["l2_multicast"] = (s.GetL2Multicast())
 				temp["leaf_count"] = (s.GetLeafCount())
@@ -1962,8 +2155,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["spine_count"] = (s.GetSpineCount())
 				temp["ssh_over_v6_count"] = (s.GetSshOverV6Count())
 				temp["ssh_v2_count"] = (s.GetSshV2Count())
+				temp["supervisor_module_count"] = (s.GetSupervisorModuleCount())
 				temp["syslog_group_count"] = (s.GetSyslogGroupCount())
 				temp["syslog_over_v6_count"] = (s.GetSyslogOverV6Count())
+				temp["system_controller_count"] = (s.GetSystemControllerCount())
 				temp["tacacs_group_count"] = (s.GetTacacsGroupCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

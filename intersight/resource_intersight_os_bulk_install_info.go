@@ -652,11 +652,9 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																ForceNew:    true,
 															},
 															"value": {
-																Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-																Type:        schema.TypeMap,
-																Elem: &schema.Schema{
-																	Type: schema.TypeString,
-																}, Optional: true,
+																Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+																Type:             schema.TypeString,
+																DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 																ForceNew: true,
 															},
 														},
@@ -717,11 +715,9 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 													ForceNew: true,
 												},
 												"input_parameters": {
-													Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-													Type:        schema.TypeMap,
-													Elem: &schema.Schema{
-														Type: schema.TypeString,
-													}, Optional: true,
+													Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+													Type:             schema.TypeString,
+													DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 													ForceNew: true,
 												},
 												"label": {
@@ -945,11 +941,9 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										ForceNew: true,
 									},
 									"value": {
-										Description: "Value for placeholder provided by user.",
-										Type:        schema.TypeMap,
-										Elem: &schema.Schema{
-											Type: schema.TypeString,
-										}, Optional: true,
+										Description:      "Value for placeholder provided by user.",
+										Type:             schema.TypeString,
+										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 										ForceNew: true,
 									},
 								},
@@ -2017,8 +2011,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 												}
 												if v, ok := l["value"]; ok {
 													{
-														x := v.(map[string]interface{})
-														o.SetValue(x)
+														o.SetValue(v)
 													}
 												}
 												p = append(p, *o)
@@ -2081,8 +2074,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 									}
 									if v, ok := l["input_parameters"]; ok {
 										{
-											x := v.(map[string]interface{})
-											o.SetInputParameters(x)
+											o.SetInputParameters(v)
 										}
 									}
 									if v, ok := l["label"]; ok {
@@ -2311,8 +2303,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 						}
 						if v, ok := l["value"]; ok {
 							{
-								x := v.(map[string]interface{})
-								o.SetValue(x)
+								o.SetValue(v)
 							}
 						}
 						x = append(x, *o)

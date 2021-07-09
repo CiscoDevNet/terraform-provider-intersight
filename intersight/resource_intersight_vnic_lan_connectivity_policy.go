@@ -73,6 +73,12 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 					},
 				},
 			},
+			"azure_qos_enabled": {
+				Description: "Enabling AzureStack-Host QoS on an adapter allows the user to carve out traffic classes for RDMA traffic which ensures that a desired portion of the bandwidth is allocated to it.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -608,6 +614,11 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 		if len(x) > 0 {
 			o.SetAncestors(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("azure_qos_enabled"); ok {
+		x := v.(bool)
+		o.SetAzureQosEnabled(x)
 	}
 
 	o.SetClassId("vnic.LanConnectivityPolicy")
@@ -1176,6 +1187,10 @@ func resourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property Ancestors in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("azure_qos_enabled", (s.GetAzureQosEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property AzureQosEnabled in VnicLanConnectivityPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
@@ -1330,6 +1345,12 @@ func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetAncestors(x)
+	}
+
+	if d.HasChange("azure_qos_enabled") {
+		v := d.Get("azure_qos_enabled")
+		x := (v.(bool))
+		o.SetAzureQosEnabled(x)
 	}
 
 	o.SetClassId("vnic.LanConnectivityPolicy")

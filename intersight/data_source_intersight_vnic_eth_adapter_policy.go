@@ -50,6 +50,11 @@ func dataSourceVnicEthAdapterPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"geneve_enabled": {
+				Description: "GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"interrupt_scaling": {
 				Description: "Enables Interrupt Scaling on the interface.",
 				Type:        schema.TypeBool,
@@ -131,6 +136,10 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("geneve_enabled"); ok {
+		x := (v.(bool))
+		o.SetGeneveEnabled(x)
 	}
 	if v, ok := d.GetOk("interrupt_scaling"); ok {
 		x := (v.(bool))
@@ -215,6 +224,7 @@ func dataSourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceDat
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["geneve_enabled"] = (s.GetGeneveEnabled())
 				temp["interrupt_scaling"] = (s.GetInterruptScaling())
 
 				temp["interrupt_settings"] = flattenMapVnicEthInterruptSettings(s.GetInterruptSettings(), d)

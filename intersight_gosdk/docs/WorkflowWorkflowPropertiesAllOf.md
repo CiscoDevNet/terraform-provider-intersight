@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowProperties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowProperties"]
+**Cloneable** | Pointer to **bool** | When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks. | [optional] [readonly] [default to true]
 **EnableDebug** | Pointer to **bool** | Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. | [optional] [default to false]
 **ExternalMeta** | Pointer to **bool** | When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. | [optional] [default to false]
 **Retryable** | Pointer to **bool** | When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. | [optional] [default to false]
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCloneable
+
+`func (o *WorkflowWorkflowPropertiesAllOf) GetCloneable() bool`
+
+GetCloneable returns the Cloneable field if non-nil, zero value otherwise.
+
+### GetCloneableOk
+
+`func (o *WorkflowWorkflowPropertiesAllOf) GetCloneableOk() (*bool, bool)`
+
+GetCloneableOk returns a tuple with the Cloneable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloneable
+
+`func (o *WorkflowWorkflowPropertiesAllOf) SetCloneable(v bool)`
+
+SetCloneable sets Cloneable field to given value.
+
+### HasCloneable
+
+`func (o *WorkflowWorkflowPropertiesAllOf) HasCloneable() bool`
+
+HasCloneable returns a boolean if a field has been set.
 
 ### GetEnableDebug
 

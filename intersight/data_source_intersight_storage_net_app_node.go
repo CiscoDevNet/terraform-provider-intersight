@@ -53,7 +53,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 				Computed:    true,
 			},
 			"health": {
-				Description: "Health of NetApp Node.",
+				Description: "Health of NetApp Node. The node is marked healthy when this is set.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
@@ -272,7 +272,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 						Computed:    true,
 					},
 					"health": {
-						Description: "Health of NetApp Node.",
+						Description: "Health of NetApp Node. The node is marked healthy when this is set.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 						Computed:    true,

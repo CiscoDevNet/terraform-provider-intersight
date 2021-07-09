@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **StartDate** | Pointer to **time.Time** | Start Date for the consumption-based subscription&#39;s deployment. | [optional] [readonly] 
 **SubscriptionRefId** | Pointer to **string** | Identifies the consumption-based subscription. | [optional] [readonly] 
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
-**Workload** | Pointer to **string** | Workload/Usecase running on the deployment. | [optional] [readonly] 
+**Workloads** | Pointer to **[]string** |  | [optional] 
 **Devices** | Pointer to [**[]AssetDeploymentDeviceRelationship**](AssetDeploymentDeviceRelationship.md) | An array of relationships to assetDeploymentDevice resources. | [optional] [readonly] 
 **Subscription** | Pointer to [**AssetSubscriptionRelationship**](asset.Subscription.Relationship.md) |  | [optional] 
 
@@ -297,31 +297,41 @@ HasUnitOfMeasure returns a boolean if a field has been set.
 `func (o *AssetDeployment) UnsetUnitOfMeasure()`
 
 UnsetUnitOfMeasure ensures that no value is present for UnitOfMeasure, not even an explicit nil
-### GetWorkload
+### GetWorkloads
 
-`func (o *AssetDeployment) GetWorkload() string`
+`func (o *AssetDeployment) GetWorkloads() []string`
 
-GetWorkload returns the Workload field if non-nil, zero value otherwise.
+GetWorkloads returns the Workloads field if non-nil, zero value otherwise.
 
-### GetWorkloadOk
+### GetWorkloadsOk
 
-`func (o *AssetDeployment) GetWorkloadOk() (*string, bool)`
+`func (o *AssetDeployment) GetWorkloadsOk() (*[]string, bool)`
 
-GetWorkloadOk returns a tuple with the Workload field if it's non-nil, zero value otherwise
+GetWorkloadsOk returns a tuple with the Workloads field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetWorkload
+### SetWorkloads
 
-`func (o *AssetDeployment) SetWorkload(v string)`
+`func (o *AssetDeployment) SetWorkloads(v []string)`
 
-SetWorkload sets Workload field to given value.
+SetWorkloads sets Workloads field to given value.
 
-### HasWorkload
+### HasWorkloads
 
-`func (o *AssetDeployment) HasWorkload() bool`
+`func (o *AssetDeployment) HasWorkloads() bool`
 
-HasWorkload returns a boolean if a field has been set.
+HasWorkloads returns a boolean if a field has been set.
 
+### SetWorkloadsNil
+
+`func (o *AssetDeployment) SetWorkloadsNil(b bool)`
+
+ SetWorkloadsNil sets the value for Workloads to be an explicit nil
+
+### UnsetWorkloads
+`func (o *AssetDeployment) UnsetWorkloads()`
+
+UnsetWorkloads ensures that no value is present for Workloads, not even an explicit nil
 ### GetDevices
 
 `func (o *AssetDeployment) GetDevices() []AssetDeploymentDeviceRelationship`

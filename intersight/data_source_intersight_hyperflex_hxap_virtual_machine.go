@@ -28,6 +28,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"boot_time": {
+				Description: "Time when this VM booted up.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -89,7 +94,12 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Computed:    true,
 			},
 			"power_state": {
-				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
+				Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"nr_provider": {
+				Description: "Cloud platform, where the virtual machine is launched.\n* `Unknown` - Cloud provider is not known.\n* `VMwarevSphere` - Cloud provider named VMware vSphere.\n* `AmazonWebServices` - Cloud provider named Amazon Web Services.\n* `MicrosoftAzure` - Cloud provider named Microsoft Azure.\n* `GoogleCloudPlatform` - Cloud provider named Google Cloud Platform.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -104,6 +114,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"state": {
+				Description: "The current state of the virtual machine. For example, starting, stopped, etc.\n* `None` - A place holder for the default value.\n* `Creating` - Virtual machine creation is in progress.\n* `Pending` - The virtual machine is preparing to enter the started state.\n* `Starting` - The virtual machine is starting.\n* `Started` - The virtual machine is running and ready for use.\n* `Stopping` - The virtual machine is preparing to be stopped.\n* `Stopped` - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time.\n* `Pausing` - The virtual machine is preparing to be paused.\n* `Paused` - The virtual machine enters into paused state due to low free disk space.\n* `Suspending` - The virtual machine is preparing to be suspended.\n* `Suspended` - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode.\n* `Deleting` - The virtual machine is preparing to be terminated.\n* `Terminated` - The virtual machine has been permanently deleted and cannot be started.\n* `Rebooting` - The virtual machine reboot is in progress.\n* `Error` - The deployment of virtual machine is failed.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"status": {
 				Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `` - Virtual machine status is not available.",
 				Type:        schema.TypeString,
@@ -111,6 +126,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 			},
 			"uuid": {
 				Description: "The uuid of this virtual machine. The uuid is internally generated and not user specified.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"vm_creation_time": {
+				Description: "Time when this virtualmachine is created.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -242,6 +262,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 							},
 						},
 						Computed: true,
+					},
+					"boot_time": {
+						Description: "Time when this VM booted up.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"capacity": {
 						Description: "Provisioned CPU and memory information for this virtual machine.",
@@ -862,7 +887,7 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 						},
 					},
 					"power_state": {
-						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweredOn` - The entity is powered on.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `` - The entity's power state is not available.",
+						Description: "Power state of the virtual machine.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -907,6 +932,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 							},
 						},
 						Computed: true,
+					},
+					"nr_provider": {
+						Description: "Cloud platform, where the virtual machine is launched.\n* `Unknown` - Cloud provider is not known.\n* `VMwarevSphere` - Cloud provider named VMware vSphere.\n* `AmazonWebServices` - Cloud provider named Amazon Web Services.\n* `MicrosoftAzure` - Cloud provider named Microsoft Azure.\n* `GoogleCloudPlatform` - Cloud provider named Google Cloud Platform.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"registered_device": {
 						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -954,6 +984,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 					},
 					"start_time": {
 						Description: "Denotes the VM start timestamp.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"state": {
+						Description: "The current state of the virtual machine. For example, starting, stopped, etc.\n* `None` - A place holder for the default value.\n* `Creating` - Virtual machine creation is in progress.\n* `Pending` - The virtual machine is preparing to enter the started state.\n* `Starting` - The virtual machine is starting.\n* `Started` - The virtual machine is running and ready for use.\n* `Stopping` - The virtual machine is preparing to be stopped.\n* `Stopped` - The virtual machine is shut down and cannot be used. The virtual machine can be started again at any time.\n* `Pausing` - The virtual machine is preparing to be paused.\n* `Paused` - The virtual machine enters into paused state due to low free disk space.\n* `Suspending` - The virtual machine is preparing to be suspended.\n* `Suspended` - Virtual machine is in sleep mode.When a virtual machine is suspended, the current state of theoperating system, and applications is saved, and the virtual machine put into a suspended mode.\n* `Deleting` - The virtual machine is preparing to be terminated.\n* `Terminated` - The virtual machine has been permanently deleted and cannot be started.\n* `Rebooting` - The virtual machine reboot is in progress.\n* `Error` - The deployment of virtual machine is failed.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1109,6 +1144,11 @@ func dataSourceHyperflexHxapVirtualMachine() *schema.Resource {
 							},
 						},
 					},
+					"vm_creation_time": {
+						Description: "Time when this virtualmachine is created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				}},
 				Computed: true,
 			}},
@@ -1128,6 +1168,10 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("age"); ok {
 		x := (v.(string))
 		o.SetAge(x)
+	}
+	if v, ok := d.GetOk("boot_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetBootTime(x)
 	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -1177,6 +1221,10 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetPowerState(x)
 	}
+	if v, ok := d.GetOk("nr_provider"); ok {
+		x := (v.(string))
+		o.SetProvider(x)
+	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1185,6 +1233,10 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 		x := (v.(string))
 		o.SetStartTime(x)
 	}
+	if v, ok := d.GetOk("state"); ok {
+		x := (v.(string))
+		o.SetState(x)
+	}
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
@@ -1192,6 +1244,10 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
+	}
+	if v, ok := d.GetOk("vm_creation_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetVmCreationTime(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -1240,6 +1296,8 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 
 				temp["anti_affinity_selectors"] = flattenListInfraMetaData(s.GetAntiAffinitySelectors(), d)
 
+				temp["boot_time"] = (s.GetBootTime()).String()
+
 				temp["capacity"] = flattenMapInfraHardwareInfo(s.GetCapacity(), d)
 				temp["class_id"] = (s.GetClassId())
 
@@ -1277,16 +1335,20 @@ func dataSourceHyperflexHxapVirtualMachineRead(c context.Context, d *schema.Reso
 				temp["power_state"] = (s.GetPowerState())
 
 				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
+				temp["nr_provider"] = (s.GetProvider())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["start_time"] = (s.GetStartTime())
+				temp["state"] = (s.GetState())
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uuid"] = (s.GetUuid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+
+				temp["vm_creation_time"] = (s.GetVmCreationTime()).String()
 				hyperflexHxapVirtualMachineResults[j] = temp
 				j += 1
 			}

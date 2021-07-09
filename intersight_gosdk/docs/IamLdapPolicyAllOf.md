@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **EnableDns** | Pointer to **bool** | Enables DNS to access LDAP servers. | [optional] 
 **Enabled** | Pointer to **bool** | LDAP server performs authentication. | [optional] [default to true]
 **UserSearchPrecedence** | Pointer to **string** | Search precedence between local user database and LDAP user database. * &#x60;LocalUserDb&#x60; - Precedence is given to local user database while searching. * &#x60;LDAPUserDb&#x60; - Precedence is given to LADP user database while searching. | [optional] [default to "LocalUserDb"]
-**Var0Idp** | Pointer to [**IamIdpRelationship**](iam.Idp.Relationship.md) |  | [optional] 
 **ApplianceAccount** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **Groups** | Pointer to [**[]IamLdapGroupRelationship**](IamLdapGroupRelationship.md) | An array of relationships to iamLdapGroup resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -221,31 +220,6 @@ SetUserSearchPrecedence sets UserSearchPrecedence field to given value.
 `func (o *IamLdapPolicyAllOf) HasUserSearchPrecedence() bool`
 
 HasUserSearchPrecedence returns a boolean if a field has been set.
-
-### GetVar0Idp
-
-`func (o *IamLdapPolicyAllOf) GetVar0Idp() IamIdpRelationship`
-
-GetVar0Idp returns the Var0Idp field if non-nil, zero value otherwise.
-
-### GetVar0IdpOk
-
-`func (o *IamLdapPolicyAllOf) GetVar0IdpOk() (*IamIdpRelationship, bool)`
-
-GetVar0IdpOk returns a tuple with the Var0Idp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0Idp
-
-`func (o *IamLdapPolicyAllOf) SetVar0Idp(v IamIdpRelationship)`
-
-SetVar0Idp sets Var0Idp field to given value.
-
-### HasVar0Idp
-
-`func (o *IamLdapPolicyAllOf) HasVar0Idp() bool`
-
-HasVar0Idp returns a boolean if a field has been set.
 
 ### GetApplianceAccount
 

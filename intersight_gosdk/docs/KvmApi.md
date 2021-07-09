@@ -8,8 +8,6 @@ Method | HTTP request | Description
 [**CreateKvmSession**](KvmApi.md#CreateKvmSession) | **Post** /api/v1/kvm/Sessions | Create a &#39;kvm.Session&#39; resource.
 [**CreateKvmTunnel**](KvmApi.md#CreateKvmTunnel) | **Post** /api/v1/kvm/Tunnels | Create a &#39;kvm.Tunnel&#39; resource.
 [**DeleteKvmPolicy**](KvmApi.md#DeleteKvmPolicy) | **Delete** /api/v1/kvm/Policies/{Moid} | Delete a &#39;kvm.Policy&#39; resource.
-[**DeleteKvmSession**](KvmApi.md#DeleteKvmSession) | **Delete** /api/v1/kvm/Sessions/{Moid} | Delete a &#39;kvm.Session&#39; resource.
-[**DeleteKvmTunnel**](KvmApi.md#DeleteKvmTunnel) | **Delete** /api/v1/kvm/Tunnels/{Moid} | Delete a &#39;kvm.Tunnel&#39; resource.
 [**GetKvmPolicyByMoid**](KvmApi.md#GetKvmPolicyByMoid) | **Get** /api/v1/kvm/Policies/{Moid} | Read a &#39;kvm.Policy&#39; resource.
 [**GetKvmPolicyList**](KvmApi.md#GetKvmPolicyList) | **Get** /api/v1/kvm/Policies | Read a &#39;kvm.Policy&#39; resource.
 [**GetKvmSessionByMoid**](KvmApi.md#GetKvmSessionByMoid) | **Get** /api/v1/kvm/Sessions/{Moid} | Read a &#39;kvm.Session&#39; resource.
@@ -19,7 +17,9 @@ Method | HTTP request | Description
 [**GetKvmVmConsoleByMoid**](KvmApi.md#GetKvmVmConsoleByMoid) | **Get** /api/v1/kvm/VmConsoles/{Moid} | Read a &#39;kvm.VmConsole&#39; resource.
 [**GetKvmVmConsoleList**](KvmApi.md#GetKvmVmConsoleList) | **Get** /api/v1/kvm/VmConsoles | Read a &#39;kvm.VmConsole&#39; resource.
 [**PatchKvmPolicy**](KvmApi.md#PatchKvmPolicy) | **Patch** /api/v1/kvm/Policies/{Moid} | Update a &#39;kvm.Policy&#39; resource.
+[**PatchKvmSession**](KvmApi.md#PatchKvmSession) | **Patch** /api/v1/kvm/Sessions/{Moid} | Update a &#39;kvm.Session&#39; resource.
 [**UpdateKvmPolicy**](KvmApi.md#UpdateKvmPolicy) | **Post** /api/v1/kvm/Policies/{Moid} | Update a &#39;kvm.Policy&#39; resource.
+[**UpdateKvmSession**](KvmApi.md#UpdateKvmSession) | **Post** /api/v1/kvm/Sessions/{Moid} | Update a &#39;kvm.Session&#39; resource.
 
 
 
@@ -269,138 +269,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteKvmPolicyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteKvmSession
-
-> DeleteKvmSession(ctx, moid).Execute()
-
-Delete a 'kvm.Session' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KvmApi.DeleteKvmSession(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KvmApi.DeleteKvmSession``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteKvmSessionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteKvmTunnel
-
-> DeleteKvmTunnel(ctx, moid).Execute()
-
-Delete a 'kvm.Tunnel' resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KvmApi.DeleteKvmTunnel(context.Background(), moid).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `KvmApi.DeleteKvmTunnel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**moid** | **string** | The unique Moid identifier of a resource instance. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteKvmTunnelRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1105,6 +973,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchKvmSession
+
+> KvmSession PatchKvmSession(ctx, moid).KvmSession(kvmSession).IfMatch(ifMatch).Execute()
+
+Update a 'kvm.Session' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kvmSession := *openapiclient.NewKvmSession("ClassId_example", "ObjectType_example") // KvmSession | The 'kvm.Session' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KvmApi.PatchKvmSession(context.Background(), moid).KvmSession(kvmSession).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KvmApi.PatchKvmSession``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchKvmSession`: KvmSession
+    fmt.Fprintf(os.Stdout, "Response from `KvmApi.PatchKvmSession`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchKvmSessionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kvmSession** | [**KvmSession**](KvmSession.md) | The &#39;kvm.Session&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KvmSession**](kvm.Session.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateKvmPolicy
 
 > KvmPolicy UpdateKvmPolicy(ctx, moid).KvmPolicy(kvmPolicy).IfMatch(ifMatch).Execute()
@@ -1162,6 +1102,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KvmPolicy**](kvm.Policy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateKvmSession
+
+> KvmSession UpdateKvmSession(ctx, moid).KvmSession(kvmSession).IfMatch(ifMatch).Execute()
+
+Update a 'kvm.Session' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    kvmSession := *openapiclient.NewKvmSession("ClassId_example", "ObjectType_example") // KvmSession | The 'kvm.Session' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.KvmApi.UpdateKvmSession(context.Background(), moid).KvmSession(kvmSession).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `KvmApi.UpdateKvmSession``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateKvmSession`: KvmSession
+    fmt.Fprintf(os.Stdout, "Response from `KvmApi.UpdateKvmSession`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateKvmSessionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **kvmSession** | [**KvmSession**](KvmSession.md) | The &#39;kvm.Session&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**KvmSession**](kvm.Session.md)
 
 ### Authorization
 

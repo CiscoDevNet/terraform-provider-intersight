@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -24,8 +24,9 @@ type WorkflowCliCommandAllOf struct {
 	// The command to run on the device connector.
 	Command *string `json:"Command,omitempty"`
 	// The regex string that identifies the end of the command response.
-	EndPrompt     *string                `json:"EndPrompt,omitempty"`
-	ExpectPrompts []WorkflowExpectPrompt `json:"ExpectPrompts,omitempty"`
+	EndPrompt         *string                `json:"EndPrompt,omitempty"`
+	ExpectPrompts     []WorkflowExpectPrompt `json:"ExpectPrompts,omitempty"`
+	ExpectedExitCodes []int64                `json:"ExpectedExitCodes,omitempty"`
 	// Skips the execution status check of the terminal command. One use case for this is while exiting the terminal session from esxi host.
 	SkipStatusCheck *bool `json:"SkipStatusCheck,omitempty"`
 	// If this flag is set, it marks the end of the terminal session where the previous commands were executed.
@@ -211,6 +212,39 @@ func (o *WorkflowCliCommandAllOf) SetExpectPrompts(v []WorkflowExpectPrompt) {
 	o.ExpectPrompts = v
 }
 
+// GetExpectedExitCodes returns the ExpectedExitCodes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowCliCommandAllOf) GetExpectedExitCodes() []int64 {
+	if o == nil {
+		var ret []int64
+		return ret
+	}
+	return o.ExpectedExitCodes
+}
+
+// GetExpectedExitCodesOk returns a tuple with the ExpectedExitCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowCliCommandAllOf) GetExpectedExitCodesOk() (*[]int64, bool) {
+	if o == nil || o.ExpectedExitCodes == nil {
+		return nil, false
+	}
+	return &o.ExpectedExitCodes, true
+}
+
+// HasExpectedExitCodes returns a boolean if a field has been set.
+func (o *WorkflowCliCommandAllOf) HasExpectedExitCodes() bool {
+	if o != nil && o.ExpectedExitCodes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpectedExitCodes gets a reference to the given []int64 and assigns it to the ExpectedExitCodes field.
+func (o *WorkflowCliCommandAllOf) SetExpectedExitCodes(v []int64) {
+	o.ExpectedExitCodes = v
+}
+
 // GetSkipStatusCheck returns the SkipStatusCheck field value if set, zero value otherwise.
 func (o *WorkflowCliCommandAllOf) GetSkipStatusCheck() bool {
 	if o == nil || o.SkipStatusCheck == nil {
@@ -356,6 +390,9 @@ func (o WorkflowCliCommandAllOf) MarshalJSON() ([]byte, error) {
 	if o.ExpectPrompts != nil {
 		toSerialize["ExpectPrompts"] = o.ExpectPrompts
 	}
+	if o.ExpectedExitCodes != nil {
+		toSerialize["ExpectedExitCodes"] = o.ExpectedExitCodes
+	}
 	if o.SkipStatusCheck != nil {
 		toSerialize["SkipStatusCheck"] = o.SkipStatusCheck
 	}
@@ -391,6 +428,7 @@ func (o *WorkflowCliCommandAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Command")
 		delete(additionalProperties, "EndPrompt")
 		delete(additionalProperties, "ExpectPrompts")
+		delete(additionalProperties, "ExpectedExitCodes")
 		delete(additionalProperties, "SkipStatusCheck")
 		delete(additionalProperties, "TerminalEnd")
 		delete(additionalProperties, "TerminalStart")

@@ -10,9 +10,8 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -175,31 +174,6 @@ SetSourceObjectType sets SourceObjectType field to given value.
 
 HasSourceObjectType returns a boolean if a field has been set.
 
-### GetComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeBlade() ComputeBladeRelationship`
-
-GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
-
-### GetComputeBladeOk
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
-
-GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) SetComputeBlade(v ComputeBladeRelationship)`
-
-SetComputeBlade sets ComputeBlade field to given value.
-
-### HasComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) HasComputeBlade() bool`
-
-HasComputeBlade returns a boolean if a field has been set.
-
 ### GetComputeRackUnit
 
 `func (o *EquipmentDeviceSummaryAllOf) GetComputeRackUnit() ComputeRackUnitRelationship`
@@ -225,30 +199,30 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
-### GetEquipmentChassis
+### GetEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassis() EquipmentChassisRelationship`
+`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentFex() EquipmentFexRelationship`
 
-GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
+GetEquipmentFex returns the EquipmentFex field if non-nil, zero value otherwise.
 
-### GetEquipmentChassisOk
+### GetEquipmentFexOk
 
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
+`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentFexOk() (*EquipmentFexRelationship, bool)`
 
-GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
+GetEquipmentFexOk returns a tuple with the EquipmentFex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEquipmentChassis
+### SetEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) SetEquipmentChassis(v EquipmentChassisRelationship)`
+`func (o *EquipmentDeviceSummaryAllOf) SetEquipmentFex(v EquipmentFexRelationship)`
 
-SetEquipmentChassis sets EquipmentChassis field to given value.
+SetEquipmentFex sets EquipmentFex field to given value.
 
-### HasEquipmentChassis
+### HasEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) HasEquipmentChassis() bool`
+`func (o *EquipmentDeviceSummaryAllOf) HasEquipmentFex() bool`
 
-HasEquipmentChassis returns a boolean if a field has been set.
+HasEquipmentFex returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

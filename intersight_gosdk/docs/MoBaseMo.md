@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **SharedScope** | Pointer to **string** | Intersight provides pre-built workflows, tasks and policies to end users through global catalogs. Objects that are made available through global catalogs are said to have a &#39;shared&#39; ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. | [optional] [readonly] 
 **Tags** | Pointer to [**[]MoTag**](MoTag.md) |  | [optional] 
 **VersionContext** | Pointer to [**NullableMoVersionContext**](mo.VersionContext.md) |  | [optional] 
-**Var0ClusterReplicationNetworkPolicy** | Pointer to [**HyperflexClusterReplicationNetworkPolicyRelationship**](hyperflex.ClusterReplicationNetworkPolicy.Relationship.md) |  | [optional] 
 **Ancestors** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Parent** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **PermissionResources** | Pointer to [**[]MoBaseMoRelationship**](MoBaseMoRelationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
@@ -335,31 +334,6 @@ HasVersionContext returns a boolean if a field has been set.
 `func (o *MoBaseMo) UnsetVersionContext()`
 
 UnsetVersionContext ensures that no value is present for VersionContext, not even an explicit nil
-### GetVar0ClusterReplicationNetworkPolicy
-
-`func (o *MoBaseMo) GetVar0ClusterReplicationNetworkPolicy() HyperflexClusterReplicationNetworkPolicyRelationship`
-
-GetVar0ClusterReplicationNetworkPolicy returns the Var0ClusterReplicationNetworkPolicy field if non-nil, zero value otherwise.
-
-### GetVar0ClusterReplicationNetworkPolicyOk
-
-`func (o *MoBaseMo) GetVar0ClusterReplicationNetworkPolicyOk() (*HyperflexClusterReplicationNetworkPolicyRelationship, bool)`
-
-GetVar0ClusterReplicationNetworkPolicyOk returns a tuple with the Var0ClusterReplicationNetworkPolicy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar0ClusterReplicationNetworkPolicy
-
-`func (o *MoBaseMo) SetVar0ClusterReplicationNetworkPolicy(v HyperflexClusterReplicationNetworkPolicyRelationship)`
-
-SetVar0ClusterReplicationNetworkPolicy sets Var0ClusterReplicationNetworkPolicy field to given value.
-
-### HasVar0ClusterReplicationNetworkPolicy
-
-`func (o *MoBaseMo) HasVar0ClusterReplicationNetworkPolicy() bool`
-
-HasVar0ClusterReplicationNetworkPolicy returns a boolean if a field has been set.
-
 ### GetAncestors
 
 `func (o *MoBaseMo) GetAncestors() []MoBaseMoRelationship`

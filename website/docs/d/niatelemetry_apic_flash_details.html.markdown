@@ -15,6 +15,7 @@ To access the ith object of the results obtained, use `data.intersight_niateleme
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
+* `dn`:(string) Dn for the flash in the inventory. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model_number`:(string) Model number of the flash in APIC. 

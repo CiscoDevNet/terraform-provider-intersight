@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -30,10 +30,6 @@ type SoftwareSolutionDistributable struct {
 	SolutionName *string `json:"SolutionName,omitempty"`
 	// The type of the file like OS image, Script etc. * `osimage` - The solution OS image for deployment. * `script` - The Python script for the solution VM configuration and deployment.
 	SubType              *string                                `json:"SubType,omitempty"`
-	Var0Version          *KubernetesVersionRelationship         `json:"_0_Version,omitempty"`
-	Var1Version          *KubernetesVersionRelationship         `json:"_1_Version,omitempty"`
-	Var2Version          *KubernetesVersionRelationship         `json:"_2_Version,omitempty"`
-	Var3Version          *KubernetesVersionRelationship         `json:"_3_Version,omitempty"`
 	Catalog              *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -211,134 +207,6 @@ func (o *SoftwareSolutionDistributable) SetSubType(v string) {
 	o.SubType = &v
 }
 
-// GetVar0Version returns the Var0Version field value if set, zero value otherwise.
-func (o *SoftwareSolutionDistributable) GetVar0Version() KubernetesVersionRelationship {
-	if o == nil || o.Var0Version == nil {
-		var ret KubernetesVersionRelationship
-		return ret
-	}
-	return *o.Var0Version
-}
-
-// GetVar0VersionOk returns a tuple with the Var0Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareSolutionDistributable) GetVar0VersionOk() (*KubernetesVersionRelationship, bool) {
-	if o == nil || o.Var0Version == nil {
-		return nil, false
-	}
-	return o.Var0Version, true
-}
-
-// HasVar0Version returns a boolean if a field has been set.
-func (o *SoftwareSolutionDistributable) HasVar0Version() bool {
-	if o != nil && o.Var0Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar0Version gets a reference to the given KubernetesVersionRelationship and assigns it to the Var0Version field.
-func (o *SoftwareSolutionDistributable) SetVar0Version(v KubernetesVersionRelationship) {
-	o.Var0Version = &v
-}
-
-// GetVar1Version returns the Var1Version field value if set, zero value otherwise.
-func (o *SoftwareSolutionDistributable) GetVar1Version() KubernetesVersionRelationship {
-	if o == nil || o.Var1Version == nil {
-		var ret KubernetesVersionRelationship
-		return ret
-	}
-	return *o.Var1Version
-}
-
-// GetVar1VersionOk returns a tuple with the Var1Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareSolutionDistributable) GetVar1VersionOk() (*KubernetesVersionRelationship, bool) {
-	if o == nil || o.Var1Version == nil {
-		return nil, false
-	}
-	return o.Var1Version, true
-}
-
-// HasVar1Version returns a boolean if a field has been set.
-func (o *SoftwareSolutionDistributable) HasVar1Version() bool {
-	if o != nil && o.Var1Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar1Version gets a reference to the given KubernetesVersionRelationship and assigns it to the Var1Version field.
-func (o *SoftwareSolutionDistributable) SetVar1Version(v KubernetesVersionRelationship) {
-	o.Var1Version = &v
-}
-
-// GetVar2Version returns the Var2Version field value if set, zero value otherwise.
-func (o *SoftwareSolutionDistributable) GetVar2Version() KubernetesVersionRelationship {
-	if o == nil || o.Var2Version == nil {
-		var ret KubernetesVersionRelationship
-		return ret
-	}
-	return *o.Var2Version
-}
-
-// GetVar2VersionOk returns a tuple with the Var2Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareSolutionDistributable) GetVar2VersionOk() (*KubernetesVersionRelationship, bool) {
-	if o == nil || o.Var2Version == nil {
-		return nil, false
-	}
-	return o.Var2Version, true
-}
-
-// HasVar2Version returns a boolean if a field has been set.
-func (o *SoftwareSolutionDistributable) HasVar2Version() bool {
-	if o != nil && o.Var2Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar2Version gets a reference to the given KubernetesVersionRelationship and assigns it to the Var2Version field.
-func (o *SoftwareSolutionDistributable) SetVar2Version(v KubernetesVersionRelationship) {
-	o.Var2Version = &v
-}
-
-// GetVar3Version returns the Var3Version field value if set, zero value otherwise.
-func (o *SoftwareSolutionDistributable) GetVar3Version() KubernetesVersionRelationship {
-	if o == nil || o.Var3Version == nil {
-		var ret KubernetesVersionRelationship
-		return ret
-	}
-	return *o.Var3Version
-}
-
-// GetVar3VersionOk returns a tuple with the Var3Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareSolutionDistributable) GetVar3VersionOk() (*KubernetesVersionRelationship, bool) {
-	if o == nil || o.Var3Version == nil {
-		return nil, false
-	}
-	return o.Var3Version, true
-}
-
-// HasVar3Version returns a boolean if a field has been set.
-func (o *SoftwareSolutionDistributable) HasVar3Version() bool {
-	if o != nil && o.Var3Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVar3Version gets a reference to the given KubernetesVersionRelationship and assigns it to the Var3Version field.
-func (o *SoftwareSolutionDistributable) SetVar3Version(v KubernetesVersionRelationship) {
-	o.Var3Version = &v
-}
-
 // GetCatalog returns the Catalog field value if set, zero value otherwise.
 func (o *SoftwareSolutionDistributable) GetCatalog() SoftwarerepositoryCatalogRelationship {
 	if o == nil || o.Catalog == nil {
@@ -396,18 +264,6 @@ func (o SoftwareSolutionDistributable) MarshalJSON() ([]byte, error) {
 	if o.SubType != nil {
 		toSerialize["SubType"] = o.SubType
 	}
-	if o.Var0Version != nil {
-		toSerialize["_0_Version"] = o.Var0Version
-	}
-	if o.Var1Version != nil {
-		toSerialize["_1_Version"] = o.Var1Version
-	}
-	if o.Var2Version != nil {
-		toSerialize["_2_Version"] = o.Var2Version
-	}
-	if o.Var3Version != nil {
-		toSerialize["_3_Version"] = o.Var3Version
-	}
 	if o.Catalog != nil {
 		toSerialize["Catalog"] = o.Catalog
 	}
@@ -430,12 +286,8 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 		// The name of the solution in which the image belongs.
 		SolutionName *string `json:"SolutionName,omitempty"`
 		// The type of the file like OS image, Script etc. * `osimage` - The solution OS image for deployment. * `script` - The Python script for the solution VM configuration and deployment.
-		SubType     *string                                `json:"SubType,omitempty"`
-		Var0Version *KubernetesVersionRelationship         `json:"_0_Version,omitempty"`
-		Var1Version *KubernetesVersionRelationship         `json:"_1_Version,omitempty"`
-		Var2Version *KubernetesVersionRelationship         `json:"_2_Version,omitempty"`
-		Var3Version *KubernetesVersionRelationship         `json:"_3_Version,omitempty"`
-		Catalog     *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
+		SubType *string                                `json:"SubType,omitempty"`
+		Catalog *SoftwarerepositoryCatalogRelationship `json:"Catalog,omitempty"`
 	}
 
 	varSoftwareSolutionDistributableWithoutEmbeddedStruct := SoftwareSolutionDistributableWithoutEmbeddedStruct{}
@@ -448,10 +300,6 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 		varSoftwareSolutionDistributable.FilePath = varSoftwareSolutionDistributableWithoutEmbeddedStruct.FilePath
 		varSoftwareSolutionDistributable.SolutionName = varSoftwareSolutionDistributableWithoutEmbeddedStruct.SolutionName
 		varSoftwareSolutionDistributable.SubType = varSoftwareSolutionDistributableWithoutEmbeddedStruct.SubType
-		varSoftwareSolutionDistributable.Var0Version = varSoftwareSolutionDistributableWithoutEmbeddedStruct.Var0Version
-		varSoftwareSolutionDistributable.Var1Version = varSoftwareSolutionDistributableWithoutEmbeddedStruct.Var1Version
-		varSoftwareSolutionDistributable.Var2Version = varSoftwareSolutionDistributableWithoutEmbeddedStruct.Var2Version
-		varSoftwareSolutionDistributable.Var3Version = varSoftwareSolutionDistributableWithoutEmbeddedStruct.Var3Version
 		varSoftwareSolutionDistributable.Catalog = varSoftwareSolutionDistributableWithoutEmbeddedStruct.Catalog
 		*o = SoftwareSolutionDistributable(varSoftwareSolutionDistributable)
 	} else {
@@ -475,10 +323,6 @@ func (o *SoftwareSolutionDistributable) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "FilePath")
 		delete(additionalProperties, "SolutionName")
 		delete(additionalProperties, "SubType")
-		delete(additionalProperties, "_0_Version")
-		delete(additionalProperties, "_1_Version")
-		delete(additionalProperties, "_2_Version")
-		delete(additionalProperties, "_3_Version")
 		delete(additionalProperties, "Catalog")
 
 		// remove fields from embedded structs

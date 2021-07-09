@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.ApicUiPageCounts"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.ApicUiPageCounts"]
+**Dn** | Pointer to **string** | Dn of the page opened by the user. | [optional] 
 **PageCount** | Pointer to **int64** | Number of times that the user has opened this page. | [optional] 
 **PageName** | Pointer to **string** | Name of the page for which page count is recorded. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDn
+
+`func (o *NiatelemetryApicUiPageCounts) GetDn() string`
+
+GetDn returns the Dn field if non-nil, zero value otherwise.
+
+### GetDnOk
+
+`func (o *NiatelemetryApicUiPageCounts) GetDnOk() (*string, bool)`
+
+GetDnOk returns a tuple with the Dn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDn
+
+`func (o *NiatelemetryApicUiPageCounts) SetDn(v string)`
+
+SetDn sets Dn field to given value.
+
+### HasDn
+
+`func (o *NiatelemetryApicUiPageCounts) HasDn() bool`
+
+HasDn returns a boolean if a field has been set.
 
 ### GetPageCount
 

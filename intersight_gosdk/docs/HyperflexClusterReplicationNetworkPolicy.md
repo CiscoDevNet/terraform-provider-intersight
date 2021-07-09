@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **ReplicationMtu** | Pointer to **int64** | MTU for the Replication network. | [optional] [default to 1500]
 **ReplicationVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**IpPoolMoReference** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -228,31 +227,6 @@ HasClusterProfiles returns a boolean if a field has been set.
 `func (o *HyperflexClusterReplicationNetworkPolicy) UnsetClusterProfiles()`
 
 UnsetClusterProfiles ensures that no value is present for ClusterProfiles, not even an explicit nil
-### GetIpPoolMoReference
-
-`func (o *HyperflexClusterReplicationNetworkPolicy) GetIpPoolMoReference() MoBaseMoRelationship`
-
-GetIpPoolMoReference returns the IpPoolMoReference field if non-nil, zero value otherwise.
-
-### GetIpPoolMoReferenceOk
-
-`func (o *HyperflexClusterReplicationNetworkPolicy) GetIpPoolMoReferenceOk() (*MoBaseMoRelationship, bool)`
-
-GetIpPoolMoReferenceOk returns a tuple with the IpPoolMoReference field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIpPoolMoReference
-
-`func (o *HyperflexClusterReplicationNetworkPolicy) SetIpPoolMoReference(v MoBaseMoRelationship)`
-
-SetIpPoolMoReference sets IpPoolMoReference field to given value.
-
-### HasIpPoolMoReference
-
-`func (o *HyperflexClusterReplicationNetworkPolicy) HasIpPoolMoReference() bool`
-
-HasIpPoolMoReference returns a boolean if a field has been set.
-
 ### GetOrganization
 
 `func (o *HyperflexClusterReplicationNetworkPolicy) GetOrganization() OrganizationOrganizationRelationship`

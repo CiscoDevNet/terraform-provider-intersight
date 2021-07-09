@@ -6,8 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NexusDashboardDetails"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NexusDashboardDetails"]
+**ClusterName** | Pointer to **string** | Name of the nexus dashboard cluster. | [optional] 
+**DeviceModel** | Pointer to **string** | Model of the nexus dashboard cluster. | [optional] 
 **NexusDashboardName** | Pointer to **string** | Name of the NexusDashboard. | [optional] 
 **NexusDashboardSerialNumber** | Pointer to **string** | Serial number of NexusDashboard. | [optional] 
+**Type** | Pointer to **string** | Node type of the nexus dashboard cluster. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -69,6 +72,56 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetClusterName
+
+`func (o *NiatelemetryNexusDashboardDetails) GetClusterName() string`
+
+GetClusterName returns the ClusterName field if non-nil, zero value otherwise.
+
+### GetClusterNameOk
+
+`func (o *NiatelemetryNexusDashboardDetails) GetClusterNameOk() (*string, bool)`
+
+GetClusterNameOk returns a tuple with the ClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterName
+
+`func (o *NiatelemetryNexusDashboardDetails) SetClusterName(v string)`
+
+SetClusterName sets ClusterName field to given value.
+
+### HasClusterName
+
+`func (o *NiatelemetryNexusDashboardDetails) HasClusterName() bool`
+
+HasClusterName returns a boolean if a field has been set.
+
+### GetDeviceModel
+
+`func (o *NiatelemetryNexusDashboardDetails) GetDeviceModel() string`
+
+GetDeviceModel returns the DeviceModel field if non-nil, zero value otherwise.
+
+### GetDeviceModelOk
+
+`func (o *NiatelemetryNexusDashboardDetails) GetDeviceModelOk() (*string, bool)`
+
+GetDeviceModelOk returns a tuple with the DeviceModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceModel
+
+`func (o *NiatelemetryNexusDashboardDetails) SetDeviceModel(v string)`
+
+SetDeviceModel sets DeviceModel field to given value.
+
+### HasDeviceModel
+
+`func (o *NiatelemetryNexusDashboardDetails) HasDeviceModel() bool`
+
+HasDeviceModel returns a boolean if a field has been set.
+
 ### GetNexusDashboardName
 
 `func (o *NiatelemetryNexusDashboardDetails) GetNexusDashboardName() string`
@@ -118,6 +171,31 @@ SetNexusDashboardSerialNumber sets NexusDashboardSerialNumber field to given val
 `func (o *NiatelemetryNexusDashboardDetails) HasNexusDashboardSerialNumber() bool`
 
 HasNexusDashboardSerialNumber returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *NiatelemetryNexusDashboardDetails) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *NiatelemetryNexusDashboardDetails) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *NiatelemetryNexusDashboardDetails) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *NiatelemetryNexusDashboardDetails) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

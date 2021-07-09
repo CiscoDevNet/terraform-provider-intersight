@@ -79,7 +79,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
 * `input_definition`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
@@ -89,14 +89,14 @@ This complex property has following sub-properties:
     + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
-    + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
   + `description`:(string) Provide a detailed description of the data type. 
   + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
-  + `input_parameters`: JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
@@ -119,7 +119,7 @@ This complex property has following sub-properties:
 * `name`:(string) The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). 
 * `output_definition`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
@@ -129,19 +129,19 @@ This complex property has following sub-properties:
     + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
-    + `value`: Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
+    + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
   + `description`:(string) Provide a detailed description of the data type. 
   + `display_meta`:(HashMap) - Captures the meta data needed for displaying workflow data types in Intersight User Interface. 
 This complex property has following sub-properties:
     + `inventory_selector`:(bool) Inventory selector specified for primitive data property should be used in Intersight User Interface. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `widget_type`:(string) Specify the widget type for data display.* `None` - Display none of the widget types.* `Radio` - Display the widget as a radio button.* `Dropdown` - Display the widget as a dropdown.* `GridSelector` - Display the widget as a selector.* `DrawerSelector` - Display the widget as a selector. 
-  + `input_parameters`: JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
+  + `input_parameters`:(JSON as string) JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'. 
   + `label`:(string) Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character. 
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
-* `output_parameters`: The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output. 
+* `output_parameters`:(JSON as string) The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output. 
 * `owners`:
                 (Array of schema.TypeString) -(Computed)
 * `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -156,6 +156,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `properties`:(HashMap) - Type to capture the properties of a workflow definition. Some of these properties are passed to workflow execution instance. 
 This complex property has following sub-properties:
+  + `cloneable`:(bool)(Computed) When set to false workflow is not cloneable. It is set to true only if Workflow is not internal and it does not have any internal tasks. 
   + `enable_debug`:(bool) Enabling this flag will capture request and response details as debug logs for tasks that are using workflow.BatchApi for implementation. For other tasks in the workflow which are not based on workflow.BatchApi logs will not be generated. 
   + `external_meta`:(bool) When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -168,7 +169,7 @@ This complex property has following sub-properties:
   + `value`:(string) The string representation of a tag value. 
 * `tasks`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.DecisionTask](#workflowDecisionTask)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.DecisionTask](#workflowDecisionTask)
 [workflow.FailureEndTask](#workflowFailureEndTask)
 [workflow.ForkTask](#workflowForkTask)
 [workflow.JoinTask](#workflowJoinTask)
@@ -189,7 +190,7 @@ This complex property has following sub-properties:
   + `name`:(string) Name for the input definition to which this filter applies. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. When defining the cascade filter for a sub property, use a period (.) to seperate each section of the name like \ StorageConfig.Volume\  where 'StorageConfig' is an input name and 'Volume' is a sub property defined through custom data type definition. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `user_help_message`:(string) Help message shown to the user about which prior input needs to be selected to enable the input mapped to this filter. 
-* `ui_rendering_data`: This will hold the data needed for workflow to be rendered in the user interface. 
+* `ui_rendering_data`:(JSON as string) This will hold the data needed for workflow to be rendered in the user interface. 
 * `validation_information`:(HashMap) -(Computed) The current validation state and associated information for this workflow. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -308,6 +309,87 @@ This complex property has following sub-properties:
   + `supported_objects`:
                 (Array of schema.TypeString) -
   
+### [workflow.DecisionTask](#argument-reference)
+A DecisionTask is a control task that executes a sequence of WorkflowTasks based off decision provided and evaluated by this task.
+* `condition`:(string) The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \ ${task1.output.var1} or ${workflow.input.var2}\  which evaluates to a value matching any of the decision case values. Example value for condition if it's an expression - \ if ( ${task1.output.var1} ! = null && ${task1.output.var1} > 0 ) 'true'; else 'false'; \  which evaluates to 'true' or 'false' and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. 
+* `decision_cases`:(Array)
+This complex property has following sub-properties:
+  + `description`:(string) Description of this decision case. 
+  + `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value`:(string) Value for the decision case. 
+* `default_task`:(string) The default next Task to execute if the decision cannot be evaluated to any of the DecisionCases. 
+* `input_parameters`:(JSON as string) This field is deprecated. Decision case conditions can be added using the workflow input or task output variables in the Condition field. Refer to Condition field for more details. 
+
+### [workflow.FailureEndTask](#argument-reference)
+A FailureEndTask denotes the failed completion of a workflow.
+
+### [workflow.ForkTask](#argument-reference)
+A ForkTask is a control task that forks tasks for parallel execution in a workflow.
+* `forked_tasks`:
+                (Array of schema.TypeString) -
+* `join_task`:(string) Task name for the join control task that must follow a fork control task. 
+
+### [workflow.JoinTask](#argument-reference)
+A JoinTask is a control task that must follow a fork task and specify all the fork tasks that must complete and join before the worfklow can proceed to the task specified in the OnSuccess transition.
+* `join_on_tasks`:
+                (Array of schema.TypeString) -
+* `on_success`:(string) Name of the next task to run if all fork path specified in the JoinOnTasks list succeeds which is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+
+### [workflow.LoopTask](#argument-reference)
+A LoopTask is a control task that runs one or more task multiple times based on a counter. The tasks can be run in serial or parallel.
+* `nr_count`:(string) Count value for the loop, this can be a constant or an expression which will evaluate to an integer value. Example, Use the length of the input A which is an array. Count must be less than or equal to 500. 
+* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count value. 
+* `number_of_batches`:(int) When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. 
+* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
+* `parallel`:(bool) When set to true the loop will run in parallel else it will run in a serial fashion. Only one task is supported inside the loop task when the loop is run in parallel. Subworkflow can be used inside the single loop task to build complex conditions. 
+
+### [workflow.StartTask](#argument-reference)
+A StartTask is the starting point for a workflow.  There can only be one StartTask in a workflow.
+* `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
+
+### [workflow.SubWorkflowTask](#argument-reference)
+A SubWorkflowTask is used to include another workflow as a task within this workflow.
+* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
+* `input_parameters`:(JSON as string) JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+* `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
+* `workflow_definition_id`:(string)(Computed) The resolved referenced workflow definition managed object. 
+* `workflow_definition_name`:(string) The qualified name of workflow that should be executed as a task. 
+
+### [workflow.SuccessEndTask](#argument-reference)
+A SuccessEndTask denotes the successful completion of a workflow.
+
+### [workflow.WaitTask](#argument-reference)
+A WaitTask will remain in progress until marked success or failed by an external trigger. The timeout for wait task is 180 days, so a workflow can wait for task status update for upto 180 days. Currently the only supported means to update the task status is through an API that provides the status of the task runtime instance. Once the wait task status has been set the workflow will continue with the execution based on the task status.
+* `input_parameters`:(JSON as string) JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `prompts`:(Array)
+This complex property has following sub-properties:
+  + `description`:(string) Description that give more details about what it means to pick this prompt option for the wait task. 
+  + `label`:(string) User friendly label for the prompt. This label will be shown to the user as one of available options for the wait task. 
+  + `name`:(string) Name for the wait prompt. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `task_status`:(string) Task status for the wait task when this prompt option is selected.* `Scheduled` - The enum represents the status when task is in scheduled state.* `InProgress` - The enum represents the status when task is in-progress state.* `NoOp` - The enum represents the status when task is a noop.* `Timeout` - The enum represents the status when task has timed out.* `Completed` - The enum represents the status when task has completed.* `Failed` - The enum represents the status when task has failed. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+
+### [workflow.WorkerTask](#argument-reference)
+A WorkerTask is a simple task and the smallest granularity of work that can be defined as a task.
+* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
+* `input_parameters`:(JSON as string) JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
+* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
+* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
+* `task_definition_id`:(string)(Computed) The resolved referenced task definition managed object. 
+* `task_definition_name`:(string) The qualified name of task that should be executed. 
+* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
+* `nr_version`:(int) The task definition version to use in this workflow. When no version is specified then the default version of the task at the time of creating or updating this workflow is used. 
+  
 ### [workflow.ArrayDataType](#argument-reference)
 This data type represents an array of a given type. It can be an array of primitive data or of custom data.
 * `array_item_type`:(HashMap) - Data item within the array data type. 
@@ -383,85 +465,4 @@ This complex property has following sub-properties:
   + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. 
   + `supported_objects`:
                 (Array of schema.TypeString) -
-  
-### [workflow.DecisionTask](#argument-reference)
-A DecisionTask is a control task that executes a sequence of WorkflowTasks based off decision provided and evaluated by this task.
-* `condition`:(string) The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \ ${task1.output.var1} or ${workflow.input.var2}\  which evaluates to a value matching any of the decision case values. Example value for condition if it's an expression - \ if ( ${task1.output.var1} ! = null && ${task1.output.var1} > 0 ) 'true'; else 'false'; \  which evaluates to 'true' or 'false' and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. 
-* `decision_cases`:(Array)
-This complex property has following sub-properties:
-  + `description`:(string) Description of this decision case. 
-  + `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `value`:(string) Value for the decision case. 
-* `default_task`:(string) The default next Task to execute if the decision cannot be evaluated to any of the DecisionCases. 
-* `input_parameters`: This field is deprecated. Decision case conditions can be added using the workflow input or task output variables in the Condition field. Refer to Condition field for more details. 
-
-### [workflow.FailureEndTask](#argument-reference)
-A FailureEndTask denotes the failed completion of a workflow.
-
-### [workflow.ForkTask](#argument-reference)
-A ForkTask is a control task that forks tasks for parallel execution in a workflow.
-* `forked_tasks`:
-                (Array of schema.TypeString) -
-* `join_task`:(string) Task name for the join control task that must follow a fork control task. 
-
-### [workflow.JoinTask](#argument-reference)
-A JoinTask is a control task that must follow a fork task and specify all the fork tasks that must complete and join before the worfklow can proceed to the task specified in the OnSuccess transition.
-* `join_on_tasks`:
-                (Array of schema.TypeString) -
-* `on_success`:(string) Name of the next task to run if all fork path specified in the JoinOnTasks list succeeds which is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-
-### [workflow.LoopTask](#argument-reference)
-A LoopTask is a control task that runs one or more task multiple times based on a counter. The tasks can be run in serial or parallel.
-* `nr_count`:(string) Count value for the loop, this can be a constant or an expression which will evaluate to an integer value. Example, Use the length of the input A which is an array. Count must be less than or equal to 500. 
-* `loop_start_task`:(string) Start task where the list of tasks will be executed multiple times based on the count value. 
-* `number_of_batches`:(int) When tasks are run in parallel and the count is large, the actual number of task run in parallel can be controlled by this property. If count is 100 and numberOfBatches is 5 then 20 tasks are run in parallel 5 times. Parallel batch size must be less than the count. In cases where count is dynamic and depends on input given during workflow execution, if that count is less than batch then empty batches might get created which do not have any tasks under them. 
-* `on_success`:(string) This specifies the name of the next task to run if all iterations of the loop task succeeds. The unique name given to the task instance within the workflow must be provided here. In a graph model, denotes an edge to another Task Node. 
-* `parallel`:(bool) When set to true the loop will run in parallel else it will run in a serial fashion. Only one task is supported inside the loop task when the loop is run in parallel. Subworkflow can be used inside the single loop task to build complex conditions. 
-
-### [workflow.StartTask](#argument-reference)
-A StartTask is the starting point for a workflow.  There can only be one StartTask in a workflow.
-* `next_task`:(string) The name of the next task (Task names unique within workflow) to run.  In a graph model, denotes an edge to another Task Node. 
-
-### [workflow.SubWorkflowTask](#argument-reference)
-A SubWorkflowTask is used to include another workflow as a task within this workflow.
-* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
-* `input_parameters`: JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-* `nr_version`:(int) The workflow definition version to use as subworkflow. When no version is specified then the default version of the workflow at the time of creating or updating this workflow is used. 
-* `workflow_definition_id`:(string)(Computed) The resolved referenced workflow definition managed object. 
-* `workflow_definition_name`:(string) The qualified name of workflow that should be executed as a task. 
-
-### [workflow.SuccessEndTask](#argument-reference)
-A SuccessEndTask denotes the successful completion of a workflow.
-
-### [workflow.WaitTask](#argument-reference)
-A WaitTask will remain in progress until marked success or failed by an external trigger. The timeout for wait task is 180 days, so a workflow can wait for task status update for upto 180 days. Currently the only supported means to update the task status is through an API that provides the status of the task runtime instance. Once the wait task status has been set the workflow will continue with the execution based on the task status.
-* `input_parameters`: JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `prompts`:(Array)
-This complex property has following sub-properties:
-  + `description`:(string) Description that give more details about what it means to pick this prompt option for the wait task. 
-  + `label`:(string) User friendly label for the prompt. This label will be shown to the user as one of available options for the wait task. 
-  + `name`:(string) Name for the wait prompt. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `task_status`:(string) Task status for the wait task when this prompt option is selected.* `Scheduled` - The enum represents the status when task is in scheduled state.* `InProgress` - The enum represents the status when task is in-progress state.* `NoOp` - The enum represents the status when task is a noop.* `Timeout` - The enum represents the status when task has timed out.* `Completed` - The enum represents the status when task has completed.* `Failed` - The enum represents the status when task has failed. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-
-### [workflow.WorkerTask](#argument-reference)
-A WorkerTask is a simple task and the smallest granularity of work that can be defined as a task.
-* `catalog_moid`:(string) Specify the catalog moid that this task belongs. 
-* `input_parameters`: JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output. 
-* `on_failure`:(string) This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `on_success`:(string) This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. 
-* `rollback_disabled`:(bool) The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. 
-* `task_definition_id`:(string)(Computed) The resolved referenced task definition managed object. 
-* `task_definition_name`:(string) The qualified name of task that should be executed. 
-* `use_default`:(bool) UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. 
-* `nr_version`:(int) The task definition version to use in this workflow. When no version is specified then the default version of the task at the time of creating or updating this workflow is used. 
   

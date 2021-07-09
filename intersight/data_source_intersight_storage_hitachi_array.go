@@ -143,7 +143,7 @@ func dataSourceStorageHitachiArray() *schema.Resource {
 				Computed:    true,
 			},
 			"svp_ip": {
-				Description: "IP address of the SVP.",
+				Description: "IP address of the SVP (Service Processor). The SVP provides out‑of‑band configuration and management of the storage system, and collects performance data for key components to enable diagnostic testing and analysis.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -556,7 +556,7 @@ func dataSourceStorageHitachiArray() *schema.Resource {
 						},
 					},
 					"svp_ip": {
-						Description: "IP address of the SVP.",
+						Description: "IP address of the SVP (Service Processor). The SVP provides out‑of‑band configuration and management of the storage system, and collects performance data for key components to enable diagnostic testing and analysis.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,

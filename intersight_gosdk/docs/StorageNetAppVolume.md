@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppVolume"]
 **AutosizeMode** | Pointer to **string** | The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink. * &#x60;off&#x60; - The volume will not grow or shrink in size in response to the amount of used space. * &#x60;grow&#x60; - The volume will automatically grow when used space in the volume is above the grow threshold. * &#x60;grow_shrink&#x60; - The volume will grow or shrink in size in response to the amount of used space. | [optional] [readonly] [default to "off"]
-**ExportPolicyName** | Pointer to **string** | Name of Export Policy. | [optional] [readonly] 
+**ExportPolicyName** | Pointer to **string** | Name of the Export Policy associated with the volume. | [optional] [readonly] 
 **SnapshotPolicyName** | Pointer to **string** | Name of the snapshot policy. | [optional] [readonly] 
 **SnapshotPolicyUuid** | Pointer to **string** | Uuid of the snapshot policy. | [optional] [readonly] 
 **SnapshotUtilizedCapacity** | Pointer to **int64** | The total space used by snapshot copies in the volume represented in bytes. | [optional] [readonly] 

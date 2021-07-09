@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -13,7 +13,6 @@ package intersight
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // VirtualizationVmwareVirtualMachineAllOf Definition of the list of properties defined in 'virtualization.VmwareVirtualMachine', excluding properties defined in parent classes.
@@ -24,8 +23,6 @@ type VirtualizationVmwareVirtualMachineAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// List of annotations provided to this VM by user. Can be long.
 	Annotation *string `json:"Annotation,omitempty"`
-	// Time when this VM booted up.
-	BootTime *time.Time `json:"BootTime,omitempty"`
 	// The configuration name for this VM. This maybe the same as the guest hostname.
 	ConfigName *string `json:"ConfigName,omitempty"`
 	// Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid.
@@ -42,6 +39,8 @@ type VirtualizationVmwareVirtualMachineAllOf struct {
 	DiskCommitInfo NullableVirtualizationVmwareVmDiskCommitInfo `json:"DiskCommitInfo,omitempty"`
 	DnsServerList  []string                                     `json:"DnsServerList,omitempty"`
 	DnsSuffixList  []string                                     `json:"DnsSuffixList,omitempty"`
+	// Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json.
+	ExtraConfig interface{} `json:"ExtraConfig,omitempty"`
 	// The folder name associated with this VM.
 	Folder *string `json:"Folder,omitempty"`
 	// The state of the guest OS running on this VM. Could be running, not running etc. * `Unknown` - Indicates that the guest OS state cannot be determined. * `NotRunning` - Indicates that the guest OS is not running. * `Resetting` - Indicates that the guest OS is resetting. * `Running` - Indicates that the guest OS is running normally. * `ShuttingDown` - Indicates that the guest OS is shutting down. * `Standby` - Indicates that the guest OS is in standby mode.
@@ -206,38 +205,6 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) HasAnnotation() bool {
 // SetAnnotation gets a reference to the given string and assigns it to the Annotation field.
 func (o *VirtualizationVmwareVirtualMachineAllOf) SetAnnotation(v string) {
 	o.Annotation = &v
-}
-
-// GetBootTime returns the BootTime field value if set, zero value otherwise.
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetBootTime() time.Time {
-	if o == nil || o.BootTime == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.BootTime
-}
-
-// GetBootTimeOk returns a tuple with the BootTime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetBootTimeOk() (*time.Time, bool) {
-	if o == nil || o.BootTime == nil {
-		return nil, false
-	}
-	return o.BootTime, true
-}
-
-// HasBootTime returns a boolean if a field has been set.
-func (o *VirtualizationVmwareVirtualMachineAllOf) HasBootTime() bool {
-	if o != nil && o.BootTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBootTime gets a reference to the given time.Time and assigns it to the BootTime field.
-func (o *VirtualizationVmwareVirtualMachineAllOf) SetBootTime(v time.Time) {
-	o.BootTime = &v
 }
 
 // GetConfigName returns the ConfigName field value if set, zero value otherwise.
@@ -626,6 +593,39 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) HasDnsSuffixList() bool {
 // SetDnsSuffixList gets a reference to the given []string and assigns it to the DnsSuffixList field.
 func (o *VirtualizationVmwareVirtualMachineAllOf) SetDnsSuffixList(v []string) {
 	o.DnsSuffixList = v
+}
+
+// GetExtraConfig returns the ExtraConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetExtraConfig() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.ExtraConfig
+}
+
+// GetExtraConfigOk returns a tuple with the ExtraConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetExtraConfigOk() (*interface{}, bool) {
+	if o == nil || o.ExtraConfig == nil {
+		return nil, false
+	}
+	return &o.ExtraConfig, true
+}
+
+// HasExtraConfig returns a boolean if a field has been set.
+func (o *VirtualizationVmwareVirtualMachineAllOf) HasExtraConfig() bool {
+	if o != nil && o.ExtraConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraConfig gets a reference to the given interface{} and assigns it to the ExtraConfig field.
+func (o *VirtualizationVmwareVirtualMachineAllOf) SetExtraConfig(v interface{}) {
+	o.ExtraConfig = v
 }
 
 // GetFolder returns the Folder field value if set, zero value otherwise.
@@ -1691,9 +1691,6 @@ func (o VirtualizationVmwareVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.Annotation != nil {
 		toSerialize["Annotation"] = o.Annotation
 	}
-	if o.BootTime != nil {
-		toSerialize["BootTime"] = o.BootTime
-	}
 	if o.ConfigName != nil {
 		toSerialize["ConfigName"] = o.ConfigName
 	}
@@ -1726,6 +1723,9 @@ func (o VirtualizationVmwareVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.DnsSuffixList != nil {
 		toSerialize["DnsSuffixList"] = o.DnsSuffixList
+	}
+	if o.ExtraConfig != nil {
+		toSerialize["ExtraConfig"] = o.ExtraConfig
 	}
 	if o.Folder != nil {
 		toSerialize["Folder"] = o.Folder
@@ -1844,7 +1844,6 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (e
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Annotation")
-		delete(additionalProperties, "BootTime")
 		delete(additionalProperties, "ConfigName")
 		delete(additionalProperties, "ConnectionState")
 		delete(additionalProperties, "CpuHotAddEnabled")
@@ -1856,6 +1855,7 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (e
 		delete(additionalProperties, "DiskCommitInfo")
 		delete(additionalProperties, "DnsServerList")
 		delete(additionalProperties, "DnsSuffixList")
+		delete(additionalProperties, "ExtraConfig")
 		delete(additionalProperties, "Folder")
 		delete(additionalProperties, "GuestState")
 		delete(additionalProperties, "InstanceUuid")

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AdvancedFilter** | Pointer to **bool** | Enables advanced filtering on the interface. | [optional] [default to false]
 **ArfsSettings** | Pointer to [**NullableVnicArfsSettings**](vnic.ArfsSettings.md) |  | [optional] 
 **CompletionQueueSettings** | Pointer to [**NullableVnicCompletionQueueSettings**](vnic.CompletionQueueSettings.md) |  | [optional] 
+**GeneveEnabled** | Pointer to **bool** | GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints. | [optional] [default to false]
 **InterruptScaling** | Pointer to **bool** | Enables Interrupt Scaling on the interface. | [optional] [default to false]
 **InterruptSettings** | Pointer to [**NullableVnicEthInterruptSettings**](vnic.EthInterruptSettings.md) |  | [optional] 
 **NvgreSettings** | Pointer to [**NullableVnicNvgreSettings**](vnic.NvgreSettings.md) |  | [optional] 
@@ -176,6 +177,31 @@ HasCompletionQueueSettings returns a boolean if a field has been set.
 `func (o *VnicEthAdapterPolicyAllOf) UnsetCompletionQueueSettings()`
 
 UnsetCompletionQueueSettings ensures that no value is present for CompletionQueueSettings, not even an explicit nil
+### GetGeneveEnabled
+
+`func (o *VnicEthAdapterPolicyAllOf) GetGeneveEnabled() bool`
+
+GetGeneveEnabled returns the GeneveEnabled field if non-nil, zero value otherwise.
+
+### GetGeneveEnabledOk
+
+`func (o *VnicEthAdapterPolicyAllOf) GetGeneveEnabledOk() (*bool, bool)`
+
+GetGeneveEnabledOk returns a tuple with the GeneveEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGeneveEnabled
+
+`func (o *VnicEthAdapterPolicyAllOf) SetGeneveEnabled(v bool)`
+
+SetGeneveEnabled sets GeneveEnabled field to given value.
+
+### HasGeneveEnabled
+
+`func (o *VnicEthAdapterPolicyAllOf) HasGeneveEnabled() bool`
+
+HasGeneveEnabled returns a boolean if a field has been set.
+
 ### GetInterruptScaling
 
 `func (o *VnicEthAdapterPolicyAllOf) GetInterruptScaling() bool`

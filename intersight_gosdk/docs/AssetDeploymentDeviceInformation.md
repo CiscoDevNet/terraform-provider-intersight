@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeploymentDeviceInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeploymentDeviceInformation"]
 **ApplicationName** | Pointer to **string** | Application name reported by Cisco Install Base. | [optional] [readonly] 
+**Description** | Pointer to **string** | Description of device reported by Cisco Install Base. | [optional] [readonly] 
 **DeviceTransactions** | Pointer to [**[]AssetDeviceTransaction**](AssetDeviceTransaction.md) |  | [optional] 
 **InstanceId** | Pointer to **string** | Instance number of the device. example \&quot;917280220\&quot;. | [optional] [readonly] 
 **ItemType** | Pointer to **string** | Item type flag. example ATO, Child, Standalone. ATO - refers to Cisco Block based major device. Child - refers to Child device part of an ATO block. Standalone - refers to a device that is managed and configured as an individual entity with limited capacity. | [optional] [readonly] 
@@ -100,6 +101,31 @@ SetApplicationName sets ApplicationName field to given value.
 `func (o *AssetDeploymentDeviceInformation) HasApplicationName() bool`
 
 HasApplicationName returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *AssetDeploymentDeviceInformation) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *AssetDeploymentDeviceInformation) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *AssetDeploymentDeviceInformation) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *AssetDeploymentDeviceInformation) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetDeviceTransactions
 

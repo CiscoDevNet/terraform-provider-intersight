@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vmrc.Console"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vmrc.Console"]
-**Session** | Pointer to [**IamSessionRelationship**](iam.Session.Relationship.md) |  | [optional] 
 **Vcenter** | Pointer to [**VirtualizationVmwareVcenterRelationship**](virtualization.VmwareVcenter.Relationship.md) |  | [optional] 
 **VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](virtualization.VmwareVirtualMachine.Relationship.md) |  | [optional] 
 
@@ -68,31 +67,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetSession
-
-`func (o *VmrcConsoleAllOf) GetSession() IamSessionRelationship`
-
-GetSession returns the Session field if non-nil, zero value otherwise.
-
-### GetSessionOk
-
-`func (o *VmrcConsoleAllOf) GetSessionOk() (*IamSessionRelationship, bool)`
-
-GetSessionOk returns a tuple with the Session field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSession
-
-`func (o *VmrcConsoleAllOf) SetSession(v IamSessionRelationship)`
-
-SetSession sets Session field to given value.
-
-### HasSession
-
-`func (o *VmrcConsoleAllOf) HasSession() bool`
-
-HasSession returns a boolean if a field has been set.
 
 ### GetVcenter
 

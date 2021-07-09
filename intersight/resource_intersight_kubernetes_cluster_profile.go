@@ -75,7 +75,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Optional:    true,
 			},
 			"action_info": {
-				Description: "Action details such as name of the action performed, status, failure reason, etc.",
+				Description: "No longer updated, to see action details such as name of the action\nperformed, status, failure reason, etc. look at the ConfigContext and at \ndetails of the related workflowInfo.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -95,7 +95,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Default:     "kubernetes.ActionInfo",
 						},
 						"failure_reason": {
-							Description: "Description of failure i.e. derived from the workflow failure message.",
+							Description: "No longer maintained and will be removed soon.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -113,10 +113,10 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 							Default:     "kubernetes.ActionInfo",
 						},
 						"status": {
-							Description: "Status of the Action like InProgress, Success, Failure etc.\n* `None` - A place holder for the default value.\n* `InProgress` - Action triggered on the resource is still running.\n* `Success` - Action triggered on the resource is completed successfully.\n* `Failure` - Action triggered on the resource is failed.",
+							Description: "No longer maintained and will be removed soon.\n* `None` - A place holder for the default value.\n* `InProgress` - Action triggered on the resource is still running.\n* `Success` - Action triggered on the resource is completed successfully.\n* `Failure` - Action triggered on the resource is failed.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
+							Default:     "None",
 						},
 					},
 				},

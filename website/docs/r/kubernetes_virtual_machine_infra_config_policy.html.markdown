@@ -72,7 +72,7 @@ This complex property has following sub-properties:
   + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `vm_config`:(HashMap) - Virtual machine infrastucture provider allocation properties. 
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
 [kubernetes.HyperFlexApVirtualMachineInfraConfig](#kubernetesHyperFlexApVirtualMachineInfraConfig)
   + `interfaces`:
                 (Array of schema.TypeString) -

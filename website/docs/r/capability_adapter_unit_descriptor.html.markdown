@@ -3,11 +3,11 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_unit_descriptor"
 description: |-
-  Descriptor that uniquely identifies an adaptor.
+  Descriptor that uniquely identifies an adapter.
 ---
 
 # Resource: intersight_capability_adapter_unit_descriptor
-Descriptor that uniquely identifies an adaptor.
+Descriptor that uniquely identifies an adapter.
 ## Usage Example
 ### Resource Creation
 
@@ -45,10 +45,12 @@ This complex property has following sub-properties:
 * `ethernet_port_speed`:(int) The port speed for ethernet ports in Mbps. 
 * `fibre_channel_port_speed`:(int) The port speed for fibre channel ports in Mbps. 
 * `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
+* `is_azure_qos_supported`:(bool) Indicates that the Azure Stack Host QoS feature is supported by this adapter. 
+* `is_geneve_supported`:(bool) Indicates that the GENEVE offload feature is supported by this adapter. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `num_dce_ports`:(int) Number of Dce Ports for the adaptor. 
+* `num_dce_ports`:(int) Number of Dce Ports for the adapter. 
 * `owners`:
                 (Array of schema.TypeString) -(Computed)
 * `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -61,7 +63,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `prom_card_type`:(string) Prom card type for the adaptor. 
+* `prom_card_type`:(string) Prom card type for the adapter. 
 * `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:

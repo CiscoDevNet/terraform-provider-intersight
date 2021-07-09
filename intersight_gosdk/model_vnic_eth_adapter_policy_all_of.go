@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -25,6 +25,8 @@ type VnicEthAdapterPolicyAllOf struct {
 	AdvancedFilter          *bool                               `json:"AdvancedFilter,omitempty"`
 	ArfsSettings            NullableVnicArfsSettings            `json:"ArfsSettings,omitempty"`
 	CompletionQueueSettings NullableVnicCompletionQueueSettings `json:"CompletionQueueSettings,omitempty"`
+	// GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.
+	GeneveEnabled *bool `json:"GeneveEnabled,omitempty"`
 	// Enables Interrupt Scaling on the interface.
 	InterruptScaling  *bool                            `json:"InterruptScaling,omitempty"`
 	InterruptSettings NullableVnicEthInterruptSettings `json:"InterruptSettings,omitempty"`
@@ -55,6 +57,8 @@ func NewVnicEthAdapterPolicyAllOf(classId string, objectType string) *VnicEthAda
 	this.ObjectType = objectType
 	var advancedFilter bool = false
 	this.AdvancedFilter = &advancedFilter
+	var geneveEnabled bool = false
+	this.GeneveEnabled = &geneveEnabled
 	var interruptScaling bool = false
 	this.InterruptScaling = &interruptScaling
 	var rssSettings bool = true
@@ -75,6 +79,8 @@ func NewVnicEthAdapterPolicyAllOfWithDefaults() *VnicEthAdapterPolicyAllOf {
 	this.ObjectType = objectType
 	var advancedFilter bool = false
 	this.AdvancedFilter = &advancedFilter
+	var geneveEnabled bool = false
+	this.GeneveEnabled = &geneveEnabled
 	var interruptScaling bool = false
 	this.InterruptScaling = &interruptScaling
 	var rssSettings bool = true
@@ -248,6 +254,38 @@ func (o *VnicEthAdapterPolicyAllOf) SetCompletionQueueSettingsNil() {
 // UnsetCompletionQueueSettings ensures that no value is present for CompletionQueueSettings, not even an explicit nil
 func (o *VnicEthAdapterPolicyAllOf) UnsetCompletionQueueSettings() {
 	o.CompletionQueueSettings.Unset()
+}
+
+// GetGeneveEnabled returns the GeneveEnabled field value if set, zero value otherwise.
+func (o *VnicEthAdapterPolicyAllOf) GetGeneveEnabled() bool {
+	if o == nil || o.GeneveEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.GeneveEnabled
+}
+
+// GetGeneveEnabledOk returns a tuple with the GeneveEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthAdapterPolicyAllOf) GetGeneveEnabledOk() (*bool, bool) {
+	if o == nil || o.GeneveEnabled == nil {
+		return nil, false
+	}
+	return o.GeneveEnabled, true
+}
+
+// HasGeneveEnabled returns a boolean if a field has been set.
+func (o *VnicEthAdapterPolicyAllOf) HasGeneveEnabled() bool {
+	if o != nil && o.GeneveEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGeneveEnabled gets a reference to the given bool and assigns it to the GeneveEnabled field.
+func (o *VnicEthAdapterPolicyAllOf) SetGeneveEnabled(v bool) {
+	o.GeneveEnabled = &v
 }
 
 // GetInterruptScaling returns the InterruptScaling field value if set, zero value otherwise.
@@ -739,6 +777,9 @@ func (o VnicEthAdapterPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.CompletionQueueSettings.IsSet() {
 		toSerialize["CompletionQueueSettings"] = o.CompletionQueueSettings.Get()
 	}
+	if o.GeneveEnabled != nil {
+		toSerialize["GeneveEnabled"] = o.GeneveEnabled
+	}
 	if o.InterruptScaling != nil {
 		toSerialize["InterruptScaling"] = o.InterruptScaling
 	}
@@ -798,6 +839,7 @@ func (o *VnicEthAdapterPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdvancedFilter")
 		delete(additionalProperties, "ArfsSettings")
 		delete(additionalProperties, "CompletionQueueSettings")
+		delete(additionalProperties, "GeneveEnabled")
 		delete(additionalProperties, "InterruptScaling")
 		delete(additionalProperties, "InterruptSettings")
 		delete(additionalProperties, "NvgreSettings")

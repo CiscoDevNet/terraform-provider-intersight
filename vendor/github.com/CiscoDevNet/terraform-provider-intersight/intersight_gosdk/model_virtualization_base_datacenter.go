@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-09T07:46:40Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
  *
- * API version: 1.0.9-4334
+ * API version: 1.0.9-4375
  * Contact: intersight@cisco.com
  */
 
@@ -19,15 +19,7 @@ import (
 
 // VirtualizationBaseDatacenter Common attributes of any datacenter. Serves as a base class for all concrete hypervisor types. Datacenter (DC) is the container that brings together all other elements (Host, Datastore, Virtual Machine) A typical DC has datastores for storage for Virtual Machines, and a handful of hosts to run the Virtual Machines. In addition, there could be virtual switches and portgroups in those switches.
 type VirtualizationBaseDatacenter struct {
-	VirtualizationBaseSourceDevice
-	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ClassId string `json:"ClassId"`
-	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType string `json:"ObjectType"`
-	// Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).
-	Identity *string `json:"Identity,omitempty"`
-	// User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.
-	Name                 *string `json:"Name,omitempty"`
+	VirtualizationBasePlacement
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,10 +29,8 @@ type _VirtualizationBaseDatacenter VirtualizationBaseDatacenter
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVirtualizationBaseDatacenter(classId string, objectType string) *VirtualizationBaseDatacenter {
+func NewVirtualizationBaseDatacenter() *VirtualizationBaseDatacenter {
 	this := VirtualizationBaseDatacenter{}
-	this.ClassId = classId
-	this.ObjectType = objectType
 	return &this
 }
 
@@ -52,139 +42,15 @@ func NewVirtualizationBaseDatacenterWithDefaults() *VirtualizationBaseDatacenter
 	return &this
 }
 
-// GetClassId returns the ClassId field value
-func (o *VirtualizationBaseDatacenter) GetClassId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ClassId
-}
-
-// GetClassIdOk returns a tuple with the ClassId field value
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseDatacenter) GetClassIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ClassId, true
-}
-
-// SetClassId sets field value
-func (o *VirtualizationBaseDatacenter) SetClassId(v string) {
-	o.ClassId = v
-}
-
-// GetObjectType returns the ObjectType field value
-func (o *VirtualizationBaseDatacenter) GetObjectType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ObjectType
-}
-
-// GetObjectTypeOk returns a tuple with the ObjectType field value
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseDatacenter) GetObjectTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ObjectType, true
-}
-
-// SetObjectType sets field value
-func (o *VirtualizationBaseDatacenter) SetObjectType(v string) {
-	o.ObjectType = v
-}
-
-// GetIdentity returns the Identity field value if set, zero value otherwise.
-func (o *VirtualizationBaseDatacenter) GetIdentity() string {
-	if o == nil || o.Identity == nil {
-		var ret string
-		return ret
-	}
-	return *o.Identity
-}
-
-// GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseDatacenter) GetIdentityOk() (*string, bool) {
-	if o == nil || o.Identity == nil {
-		return nil, false
-	}
-	return o.Identity, true
-}
-
-// HasIdentity returns a boolean if a field has been set.
-func (o *VirtualizationBaseDatacenter) HasIdentity() bool {
-	if o != nil && o.Identity != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIdentity gets a reference to the given string and assigns it to the Identity field.
-func (o *VirtualizationBaseDatacenter) SetIdentity(v string) {
-	o.Identity = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *VirtualizationBaseDatacenter) GetName() string {
-	if o == nil || o.Name == nil {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseDatacenter) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *VirtualizationBaseDatacenter) HasName() bool {
-	if o != nil && o.Name != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *VirtualizationBaseDatacenter) SetName(v string) {
-	o.Name = &v
-}
-
 func (o VirtualizationBaseDatacenter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedVirtualizationBaseSourceDevice, errVirtualizationBaseSourceDevice := json.Marshal(o.VirtualizationBaseSourceDevice)
-	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
+	serializedVirtualizationBasePlacement, errVirtualizationBasePlacement := json.Marshal(o.VirtualizationBasePlacement)
+	if errVirtualizationBasePlacement != nil {
+		return []byte{}, errVirtualizationBasePlacement
 	}
-	errVirtualizationBaseSourceDevice = json.Unmarshal([]byte(serializedVirtualizationBaseSourceDevice), &toSerialize)
-	if errVirtualizationBaseSourceDevice != nil {
-		return []byte{}, errVirtualizationBaseSourceDevice
-	}
-	if true {
-		toSerialize["ClassId"] = o.ClassId
-	}
-	if true {
-		toSerialize["ObjectType"] = o.ObjectType
-	}
-	if o.Identity != nil {
-		toSerialize["Identity"] = o.Identity
-	}
-	if o.Name != nil {
-		toSerialize["Name"] = o.Name
+	errVirtualizationBasePlacement = json.Unmarshal([]byte(serializedVirtualizationBasePlacement), &toSerialize)
+	if errVirtualizationBasePlacement != nil {
+		return []byte{}, errVirtualizationBasePlacement
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -196,14 +62,6 @@ func (o VirtualizationBaseDatacenter) MarshalJSON() ([]byte, error) {
 
 func (o *VirtualizationBaseDatacenter) UnmarshalJSON(bytes []byte) (err error) {
 	type VirtualizationBaseDatacenterWithoutEmbeddedStruct struct {
-		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ClassId string `json:"ClassId"`
-		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-		ObjectType string `json:"ObjectType"`
-		// Internally generated identity of this datacenter. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is a MOR (managed object reference).
-		Identity *string `json:"Identity,omitempty"`
-		// User provided name for the datacenter. Usually, this name is subject to manipulations by user. It is not the identity of the datacenter.
-		Name *string `json:"Name,omitempty"`
 	}
 
 	varVirtualizationBaseDatacenterWithoutEmbeddedStruct := VirtualizationBaseDatacenterWithoutEmbeddedStruct{}
@@ -211,10 +69,6 @@ func (o *VirtualizationBaseDatacenter) UnmarshalJSON(bytes []byte) (err error) {
 	err = json.Unmarshal(bytes, &varVirtualizationBaseDatacenterWithoutEmbeddedStruct)
 	if err == nil {
 		varVirtualizationBaseDatacenter := _VirtualizationBaseDatacenter{}
-		varVirtualizationBaseDatacenter.ClassId = varVirtualizationBaseDatacenterWithoutEmbeddedStruct.ClassId
-		varVirtualizationBaseDatacenter.ObjectType = varVirtualizationBaseDatacenterWithoutEmbeddedStruct.ObjectType
-		varVirtualizationBaseDatacenter.Identity = varVirtualizationBaseDatacenterWithoutEmbeddedStruct.Identity
-		varVirtualizationBaseDatacenter.Name = varVirtualizationBaseDatacenterWithoutEmbeddedStruct.Name
 		*o = VirtualizationBaseDatacenter(varVirtualizationBaseDatacenter)
 	} else {
 		return err
@@ -224,7 +78,7 @@ func (o *VirtualizationBaseDatacenter) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varVirtualizationBaseDatacenter)
 	if err == nil {
-		o.VirtualizationBaseSourceDevice = varVirtualizationBaseDatacenter.VirtualizationBaseSourceDevice
+		o.VirtualizationBasePlacement = varVirtualizationBaseDatacenter.VirtualizationBasePlacement
 	} else {
 		return err
 	}
@@ -232,15 +86,11 @@ func (o *VirtualizationBaseDatacenter) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "ClassId")
-		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "Identity")
-		delete(additionalProperties, "Name")
 
 		// remove fields from embedded structs
-		reflectVirtualizationBaseSourceDevice := reflect.ValueOf(o.VirtualizationBaseSourceDevice)
-		for i := 0; i < reflectVirtualizationBaseSourceDevice.Type().NumField(); i++ {
-			t := reflectVirtualizationBaseSourceDevice.Type().Field(i)
+		reflectVirtualizationBasePlacement := reflect.ValueOf(o.VirtualizationBasePlacement)
+		for i := 0; i < reflectVirtualizationBasePlacement.Type().NumField(); i++ {
+			t := reflectVirtualizationBasePlacement.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

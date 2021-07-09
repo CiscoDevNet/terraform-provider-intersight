@@ -134,18 +134,14 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 							Computed:    true,
 						},
 						"outcomes": {
-							Description: "All the possible outcomes of this API are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
+							Description:      "All the possible outcomes of this API are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 						},
 						"response_spec": {
-							Description: "The optional grammar specification for parsing the response to extract the\nrequired values.\nThe specification should have extraction specification specified for\nall the API output parameters.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
+							Description:      "The optional grammar specification for parsing the response to extract the\nrequired values.\nThe specification should have extraction specification specified for\nall the API output parameters.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 						},
 						"skip_on_condition": {
 							Description: "The skip expression, if provided, allows the batch API executor to skip the\napi execution when the given expression evaluates to true.\nThe expression is given as such a golang template that has to be\nevaluated to a final content true/false. The expression is an optional and in\ncase not provided, the API will always be executed.",
@@ -198,11 +194,9 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 							Default:     "workflow.TaskConstraints",
 						},
 						"target_data_type": {
-							Description: "List of property constraints that helps to narrow down task implementations based on target device input.",
-							Type:        schema.TypeMap,
-							Elem: &schema.Schema{
-								Type: schema.TypeString,
-							}, Optional: true,
+							Description:      "List of property constraints that helps to narrow down task implementations based on target device input.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 						},
 					},
 				},
@@ -289,18 +283,14 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 				Default:     "workflow.BatchApiExecutor",
 			},
 			"outcomes": {
-				Description: "All the possible outcomes of this task are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "All the possible outcomes of this task are captured here. Outcomes property\nis a collection property of type workflow.Outcome objects.\nThe outcomes can be mapped to the message to be shown. The outcomes are\nevaluated in the order they are given. At the end of the outcomes list,\nan catchall success/fail outcome can be added with condition as 'true'.\nThis is an optional\nproperty and if not specified the task will be marked as success.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 			},
 			"output": {
-				Description: "Intersight Orchestrator allows the extraction of required values from API\nresponses using the API response grammar. These extracted values can be mapped\nto task output parameters defined in task definition.\nThe mapping of API output parameters to the task output parameters is provided\nas JSON in this property.",
-				Type:        schema.TypeMap,
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				}, Optional: true,
+				Description:      "Intersight Orchestrator allows the extraction of required values from API\nresponses using the API response grammar. These extracted values can be mapped\nto task output parameters defined in task definition.\nThe mapping of API output parameters to the task output parameters is provided\nas JSON in this property.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -728,14 +718,12 @@ func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["outcomes"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetOutcomes(x)
+					o.SetOutcomes(v)
 				}
 			}
 			if v, ok := l["response_spec"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetResponseSpec(x)
+					o.SetResponseSpec(v)
 				}
 			}
 			if v, ok := l["skip_on_condition"]; ok {
@@ -790,8 +778,7 @@ func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["target_data_type"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetTargetDataType(x)
+					o.SetTargetDataType(v)
 				}
 			}
 			p = append(p, *o)
@@ -878,13 +865,11 @@ func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.Resourc
 	o.SetObjectType("workflow.BatchApiExecutor")
 
 	if v, ok := d.GetOk("outcomes"); ok {
-		x := v.(map[string]interface{})
-		o.SetOutcomes(x)
+		o.SetOutcomes(v)
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		x := v.(map[string]interface{})
-		o.SetOutput(x)
+		o.SetOutput(v)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1304,11 +1289,11 @@ func resourceWorkflowBatchApiExecutorRead(c context.Context, d *schema.ResourceD
 		return diag.Errorf("error occurred while setting property ObjectType in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
-	if err := d.Set("outcomes", (s.GetOutcomes())); err != nil {
+	if err := d.Set("outcomes", flattenAdditionalProperties(s.GetOutcomes())); err != nil {
 		return diag.Errorf("error occurred while setting property Outcomes in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
-	if err := d.Set("output", (s.GetOutput())); err != nil {
+	if err := d.Set("output", flattenAdditionalProperties(s.GetOutput())); err != nil {
 		return diag.Errorf("error occurred while setting property Output in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
@@ -1484,14 +1469,12 @@ func resourceWorkflowBatchApiExecutorUpdate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["outcomes"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetOutcomes(x)
+					o.SetOutcomes(v)
 				}
 			}
 			if v, ok := l["response_spec"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetResponseSpec(x)
+					o.SetResponseSpec(v)
 				}
 			}
 			if v, ok := l["skip_on_condition"]; ok {
@@ -1545,8 +1528,7 @@ func resourceWorkflowBatchApiExecutorUpdate(c context.Context, d *schema.Resourc
 			}
 			if v, ok := l["target_data_type"]; ok {
 				{
-					x := v.(map[string]interface{})
-					o.SetTargetDataType(x)
+					o.SetTargetDataType(v)
 				}
 			}
 			p = append(p, *o)
@@ -1641,14 +1623,12 @@ func resourceWorkflowBatchApiExecutorUpdate(c context.Context, d *schema.Resourc
 
 	if d.HasChange("outcomes") {
 		v := d.Get("outcomes")
-		x := v.(map[string]interface{})
-		o.SetOutcomes(x)
+		o.SetOutcomes(v)
 	}
 
 	if d.HasChange("output") {
 		v := d.Get("output")
-		x := v.(map[string]interface{})
-		o.SetOutput(x)
+		o.SetOutput(v)
 	}
 
 	if d.HasChange("owners") {
