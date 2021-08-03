@@ -120,6 +120,46 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				Optional:    true,
 				Default:     "workflow.CustomDataTypeDefinition",
 			},
+			"cloned_from": {
+				Description: "A reference to a workflowCustomDataTypeDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"composite_type": {
 				Description: "When true this data type definition is a collection of type definitions to represent composite data like JSON.",
 				Type:        schema.TypeBool,
@@ -333,6 +373,12 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "workflow.CustomDataTypeProperties",
+						},
+						"cloneable": {
+							Description: "When set to false custom data type is not cloneable. It is set to true only if data type is not internal and it is not using any internal custom data type.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
 						},
 						"external_meta": {
 							Description: "When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities.",
@@ -754,6 +800,49 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 
 	o.SetClassId("workflow.CustomDataTypeDefinition")
 
+	if v, ok := d.GetOk("cloned_from"); ok {
+		p := make([]models.WorkflowCustomDataTypeDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowCustomDataTypeDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClonedFrom(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("composite_type"); ok {
 		x := v.(bool)
 		o.SetCompositeType(x)
@@ -975,6 +1064,12 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 				}
 			}
 			o.SetClassId("workflow.CustomDataTypeProperties")
+			if v, ok := l["cloneable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetCloneable(x)
+				}
+			}
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -1379,6 +1474,10 @@ func resourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while setting property ClassId in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
+	if err := d.Set("cloned_from", flattenMapWorkflowCustomDataTypeDefinitionRelationship(s.GetClonedFrom(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClonedFrom in WorkflowCustomDataTypeDefinition object: %s", err.Error())
+	}
+
 	if err := d.Set("composite_type", (s.GetCompositeType())); err != nil {
 		return diag.Errorf("error occurred while setting property CompositeType in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
@@ -1564,6 +1663,50 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 	}
 
 	o.SetClassId("workflow.CustomDataTypeDefinition")
+
+	if d.HasChange("cloned_from") {
+		v := d.Get("cloned_from")
+		p := make([]models.WorkflowCustomDataTypeDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowCustomDataTypeDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClonedFrom(x)
+		}
+	}
 
 	if d.HasChange("composite_type") {
 		v := d.Get("composite_type")
@@ -1793,6 +1936,12 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema
 				}
 			}
 			o.SetClassId("workflow.CustomDataTypeProperties")
+			if v, ok := l["cloneable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetCloneable(x)
+				}
+			}
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))

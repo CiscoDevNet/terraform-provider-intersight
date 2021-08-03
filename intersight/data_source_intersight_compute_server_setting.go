@@ -38,6 +38,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"cmos_reset": {
+				Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"config_state": {
 				Description: "The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
 				Type:        schema.TypeString,
@@ -67,6 +72,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"front_panel_lock_state": {
+				Description: "The allowed actions on the Front Panel Lock.\n* `Unlock` - Front Panel of the server is set to Unlocked state.\n* `Lock` - Front Panel of the server is set to Locked state.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -169,8 +179,228 @@ func dataSourceComputeServerSetting() *schema.Resource {
 							},
 						},
 					},
+					"certificates_action": {
+						Description: "Certificates Action configures the Certificate and PrivateKey at the endpoint.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"certificate": {
+									Description: "Certificate that is used for verifying the authorization.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"issuer": {
+												Description: "The X.509 distinguished name of the issuer of this certificate.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Computed:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"common_name": {
+															Description: "A required component that identifies a person or an object.",
+															Type:        schema.TypeString,
+															Optional:    true,
+															Computed:    true,
+														},
+														"country": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"locality": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"object_type": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+															Type:        schema.TypeString,
+															Optional:    true,
+															Computed:    true,
+														},
+														"organization": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"organizational_unit": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"state": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+													},
+												},
+											},
+											"not_after": {
+												Description: "The date on which the certificate's validity period ends.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"not_before": {
+												Description: "The date on which the certificate's validity period begins.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"pem_certificate": {
+												Description: "The base64 encoded certificate in PEM format.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"sha256_fingerprint": {
+												Description: "The computed SHA-256 fingerprint of the certificate. Equivalent to 'openssl x509 -fingerprint -sha256'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"signature_algorithm": {
+												Description: "Signature algorithm, as specified in [RFC 5280](https://tools.ietf.org/html/rfc5280).",
+												Type:        schema.TypeString,
+												Optional:    true,
+												Computed:    true,
+											},
+											"subject": {
+												Description: "The X.509 distinguished name of the subject of this certificate.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Computed:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"common_name": {
+															Description: "A required component that identifies a person or an object.",
+															Type:        schema.TypeString,
+															Optional:    true,
+															Computed:    true,
+														},
+														"country": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"locality": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"object_type": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+															Type:        schema.TypeString,
+															Optional:    true,
+															Computed:    true,
+														},
+														"organization": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"organizational_unit": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+														"state": {
+															Type:     schema.TypeList,
+															Optional: true,
+															Elem: &schema.Schema{
+																Type: schema.TypeString}},
+													},
+												},
+											},
+										},
+									},
+									Computed: true,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"enabled": {
+									Description: "Enable/Disable the certificate in Certificate Management policy.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+								},
+								"is_privatekey_set": {
+									Description: "Indicates whether the value of the 'privatekey' property has been set.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"privatekey": {
+									Description: "Private Key which is used to validate the certificate.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cmos_reset": {
+						Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -203,6 +433,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"front_panel_lock_state": {
+						Description: "The allowed actions on the Front Panel Lock.\n* `Unlock` - Front Panel of the server is set to Unlocked state.\n* `Lock` - Front Panel of the server is set to Locked state.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"locator_led": {
 						Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -934,6 +1169,10 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("cmos_reset"); ok {
+		x := (v.(string))
+		o.SetCmosReset(x)
+	}
 	if v, ok := d.GetOk("config_state"); ok {
 		x := (v.(string))
 		o.SetConfigState(x)
@@ -953,6 +1192,10 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+	if v, ok := d.GetOk("front_panel_lock_state"); ok {
+		x := (v.(string))
+		o.SetFrontPanelLockState(x)
 	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -1025,13 +1268,17 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["admin_power_state"] = (s.GetAdminPowerState())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["certificates_action"] = flattenMapCertificatemanagementCertificateBase(s.GetCertificatesAction(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cmos_reset"] = (s.GetCmosReset())
 				temp["config_state"] = (s.GetConfigState())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["front_panel_lock_state"] = (s.GetFrontPanelLockState())
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 

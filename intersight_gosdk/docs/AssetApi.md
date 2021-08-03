@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**DeleteAssetDeployment**](AssetApi.md#DeleteAssetDeployment) | **Delete** /api/v1/asset/Deployments/{Moid} | Delete a &#39;asset.Deployment&#39; resource.
 [**DeleteAssetDeploymentDevice**](AssetApi.md#DeleteAssetDeploymentDevice) | **Delete** /api/v1/asset/DeploymentDevices/{Moid} | Delete a &#39;asset.DeploymentDevice&#39; resource.
 [**DeleteAssetDeviceClaim**](AssetApi.md#DeleteAssetDeviceClaim) | **Delete** /api/v1/asset/DeviceClaims/{Moid} | Delete a &#39;asset.DeviceClaim&#39; resource.
+[**DeleteAssetDeviceContractInformation**](AssetApi.md#DeleteAssetDeviceContractInformation) | **Delete** /api/v1/asset/DeviceContractInformations/{Moid} | Delete a &#39;asset.DeviceContractInformation&#39; resource.
 [**DeleteAssetDeviceRegistration**](AssetApi.md#DeleteAssetDeviceRegistration) | **Delete** /api/v1/asset/DeviceRegistrations/{Moid} | Deletes the resource representing the device connector. All associated REST resources will be deleted. In particular, inventory and operational data associated with this device will be deleted.
 [**DeleteAssetSubscription**](AssetApi.md#DeleteAssetSubscription) | **Delete** /api/v1/asset/Subscriptions/{Moid} | Delete a &#39;asset.Subscription&#39; resource.
 [**DeleteAssetSubscriptionAccount**](AssetApi.md#DeleteAssetSubscriptionAccount) | **Delete** /api/v1/asset/SubscriptionAccounts/{Moid} | Delete a &#39;asset.SubscriptionAccount&#39; resource.
@@ -356,6 +357,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAssetDeviceClaimRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAssetDeviceContractInformation
+
+> DeleteAssetDeviceContractInformation(ctx, moid).Execute()
+
+Delete a 'asset.DeviceContractInformation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AssetApi.DeleteAssetDeviceContractInformation(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AssetApi.DeleteAssetDeviceContractInformation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAssetDeviceContractInformationRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

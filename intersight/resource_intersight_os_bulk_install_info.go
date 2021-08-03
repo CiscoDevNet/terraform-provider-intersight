@@ -896,6 +896,52 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																			Optional:    true,
 																			ForceNew:    true,
 																		},
+																		"selector_property": {
+																			Description: "Selector properties to define HTTP method and 'body' in case of upsert operation.",
+																			Type:        schema.TypeList,
+																			MaxItems:    1,
+																			Optional:    true,
+																			ConfigMode:  schema.SchemaConfigModeAttr,
+																			Computed:    true,
+																			Elem: &schema.Resource{
+																				Schema: map[string]*schema.Schema{
+																					"additional_properties": {
+																						Type:             schema.TypeString,
+																						Optional:         true,
+																						DiffSuppressFunc: SuppressDiffAdditionProps,
+																						ForceNew:         true,
+																					},
+																					"body": {
+																						Description:      "Content of the request body to send for POST request.",
+																						Type:             schema.TypeString,
+																						DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+																						ForceNew: true,
+																					},
+																					"class_id": {
+																						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+																						Type:        schema.TypeString,
+																						Optional:    true,
+																						Default:     "workflow.SelectorProperty",
+																						ForceNew:    true,
+																					},
+																					"method": {
+																						Description: "The HTTP method to be used.\n* `GET` - The HTTP GET method requests a representation of the specified resource.\n* `POST` - The HTTP POST method sends data to the server.",
+																						Type:        schema.TypeString,
+																						Optional:    true,
+																						Default:     "GET",
+																						ForceNew:    true,
+																					},
+																					"object_type": {
+																						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+																						Type:        schema.TypeString,
+																						Optional:    true,
+																						Default:     "workflow.SelectorProperty",
+																						ForceNew:    true,
+																					},
+																				},
+																			},
+																			ForceNew: true,
+																		},
 																		"value_attribute": {
 																			Description: "A property from the Intersight object, value of which can be used as value for referenced input definition.",
 																			Type:        schema.TypeString,
@@ -2246,6 +2292,49 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 																{
 																	x := (v.(string))
 																	o.SetSelector(x)
+																}
+															}
+															if v, ok := l["selector_property"]; ok {
+																{
+																	p := make([]models.WorkflowSelectorProperty, 0, 1)
+																	s := v.([]interface{})
+																	for i := 0; i < len(s); i++ {
+																		l := s[i].(map[string]interface{})
+																		o := models.NewWorkflowSelectorPropertyWithDefaults()
+																		if v, ok := l["additional_properties"]; ok {
+																			{
+																				x := []byte(v.(string))
+																				var x1 interface{}
+																				err := json.Unmarshal(x, &x1)
+																				if err == nil && x1 != nil {
+																					o.AdditionalProperties = x1.(map[string]interface{})
+																				}
+																			}
+																		}
+																		if v, ok := l["body"]; ok {
+																			{
+																				o.SetBody(v)
+																			}
+																		}
+																		o.SetClassId("workflow.SelectorProperty")
+																		if v, ok := l["method"]; ok {
+																			{
+																				x := (v.(string))
+																				o.SetMethod(x)
+																			}
+																		}
+																		if v, ok := l["object_type"]; ok {
+																			{
+																				x := (v.(string))
+																				o.SetObjectType(x)
+																			}
+																		}
+																		p = append(p, *o)
+																	}
+																	if len(p) > 0 {
+																		x := p[0]
+																		o.SetSelectorProperty(x)
+																	}
 																}
 															}
 															if v, ok := l["value_attribute"]; ok {

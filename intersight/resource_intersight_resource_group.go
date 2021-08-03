@@ -359,7 +359,6 @@ func resourceResourceGroup() *schema.Resource {
 							Description: "ODATA filter to select resources. The group selector may include URLs of individual resource, or OData query with filters that match multiple queries. The URLs must be relative (i.e. do not include the host).",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 						},
 					},
 				},

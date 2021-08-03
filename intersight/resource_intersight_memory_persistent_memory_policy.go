@@ -136,7 +136,6 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "All Sockets",
-							ForceNew:    true,
 						},
 					},
 				},
@@ -220,7 +219,6 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Description: "Name of this Namespace to be created on the server.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",

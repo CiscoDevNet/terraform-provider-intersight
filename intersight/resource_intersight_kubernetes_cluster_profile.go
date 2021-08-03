@@ -73,6 +73,7 @@ func resourceKubernetesClusterProfile() *schema.Resource {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "No-op",
 			},
 			"action_info": {
 				Description: "No longer updated, to see action details such as name of the action\nperformed, status, failure reason, etc. look at the ConfigContext and at \ndetails of the related workflowInfo.",

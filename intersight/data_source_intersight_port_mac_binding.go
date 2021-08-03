@@ -33,6 +33,21 @@ func dataSourcePortMacBinding() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"chassis_model": {
+				Description: "Chassis/Rack Model that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"chassis_serial": {
+				Description: "Chassis/Rack Serial that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"chassis_vendor": {
+				Description: "Chassis/Rack Vendor that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -72,6 +87,41 @@ func dataSourcePortMacBinding() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"module_mode": {
+				Description: "IOM/SIOC/Adapter Mode that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"module_model": {
+				Description: "IOM/SIOC/Adapter Model that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"module_port_id": {
+				Description: "Uplink port identifier of the VIC that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"module_serial": {
+				Description: "IOM/SIOC/Adapter Serial that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"module_side": {
+				Description: "IOM/SIOC/Adapter Side that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"module_slot": {
+				Description: "IOM/SIOC/Adapter Slot that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"module_vendor": {
+				Description: "IOM/SIOC/Adapter Vendor that is associated with the Switch/FEX interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -177,6 +227,21 @@ func dataSourcePortMacBinding() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"chassis_model": {
+						Description: "Chassis/Rack Model that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"chassis_serial": {
+						Description: "Chassis/Rack Serial that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"chassis_vendor": {
+						Description: "Chassis/Rack Vendor that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -216,6 +281,41 @@ func dataSourcePortMacBinding() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"module_mode": {
+						Description: "IOM/SIOC/Adapter Mode that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"module_model": {
+						Description: "IOM/SIOC/Adapter Model that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"module_port_id": {
+						Description: "Uplink port identifier of the VIC that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"module_serial": {
+						Description: "IOM/SIOC/Adapter Serial that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"module_side": {
+						Description: "IOM/SIOC/Adapter Side that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"module_slot": {
+						Description: "IOM/SIOC/Adapter Slot that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"module_vendor": {
+						Description: "IOM/SIOC/Adapter Vendor that is associated with the Switch/FEX interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"moid": {
 						Description: "The unique identifier of this Managed Object instance.",
@@ -584,6 +684,18 @@ func dataSourcePortMacBindingRead(c context.Context, d *schema.ResourceData, met
 		x := int64(v.(int))
 		o.SetChassisId(x)
 	}
+	if v, ok := d.GetOk("chassis_model"); ok {
+		x := (v.(string))
+		o.SetChassisModel(x)
+	}
+	if v, ok := d.GetOk("chassis_serial"); ok {
+		x := (v.(string))
+		o.SetChassisSerial(x)
+	}
+	if v, ok := d.GetOk("chassis_vendor"); ok {
+		x := (v.(string))
+		o.SetChassisVendor(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -611,6 +723,34 @@ func dataSourcePortMacBindingRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
+	}
+	if v, ok := d.GetOk("module_mode"); ok {
+		x := int64(v.(int))
+		o.SetModuleMode(x)
+	}
+	if v, ok := d.GetOk("module_model"); ok {
+		x := (v.(string))
+		o.SetModuleModel(x)
+	}
+	if v, ok := d.GetOk("module_port_id"); ok {
+		x := int64(v.(int))
+		o.SetModulePortId(x)
+	}
+	if v, ok := d.GetOk("module_serial"); ok {
+		x := (v.(string))
+		o.SetModuleSerial(x)
+	}
+	if v, ok := d.GetOk("module_side"); ok {
+		x := int64(v.(int))
+		o.SetModuleSide(x)
+	}
+	if v, ok := d.GetOk("module_slot"); ok {
+		x := int64(v.(int))
+		o.SetModuleSlot(x)
+	}
+	if v, ok := d.GetOk("module_vendor"); ok {
+		x := (v.(string))
+		o.SetModuleVendor(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -687,6 +827,9 @@ func dataSourcePortMacBindingRead(c context.Context, d *schema.ResourceData, met
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["chassis_id"] = (s.GetChassisId())
+				temp["chassis_model"] = (s.GetChassisModel())
+				temp["chassis_serial"] = (s.GetChassisSerial())
+				temp["chassis_vendor"] = (s.GetChassisVendor())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -696,6 +839,13 @@ func dataSourcePortMacBindingRead(c context.Context, d *schema.ResourceData, met
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["mod_time"] = (s.GetModTime()).String()
+				temp["module_mode"] = (s.GetModuleMode())
+				temp["module_model"] = (s.GetModuleModel())
+				temp["module_port_id"] = (s.GetModulePortId())
+				temp["module_serial"] = (s.GetModuleSerial())
+				temp["module_side"] = (s.GetModuleSide())
+				temp["module_slot"] = (s.GetModuleSlot())
+				temp["module_vendor"] = (s.GetModuleVendor())
 				temp["moid"] = (s.GetMoid())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)

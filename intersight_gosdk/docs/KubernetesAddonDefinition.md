@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **IconUrl** | Pointer to **string** | Icon used to represent the addon in UI. | [optional] 
 **Labels** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name of an addon component. | [optional] 
+**Platforms** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Version of the addon component. | [optional] 
 **Catalog** | Pointer to [**KubernetesCatalogRelationship**](kubernetes.Catalog.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -313,6 +314,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetPlatforms
+
+`func (o *KubernetesAddonDefinition) GetPlatforms() []string`
+
+GetPlatforms returns the Platforms field if non-nil, zero value otherwise.
+
+### GetPlatformsOk
+
+`func (o *KubernetesAddonDefinition) GetPlatformsOk() (*[]string, bool)`
+
+GetPlatformsOk returns a tuple with the Platforms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatforms
+
+`func (o *KubernetesAddonDefinition) SetPlatforms(v []string)`
+
+SetPlatforms sets Platforms field to given value.
+
+### HasPlatforms
+
+`func (o *KubernetesAddonDefinition) HasPlatforms() bool`
+
+HasPlatforms returns a boolean if a field has been set.
+
+### SetPlatformsNil
+
+`func (o *KubernetesAddonDefinition) SetPlatformsNil(b bool)`
+
+ SetPlatformsNil sets the value for Platforms to be an explicit nil
+
+### UnsetPlatforms
+`func (o *KubernetesAddonDefinition) UnsetPlatforms()`
+
+UnsetPlatforms ensures that no value is present for Platforms, not even an explicit nil
 ### GetVersion
 
 `func (o *KubernetesAddonDefinition) GetVersion() string`

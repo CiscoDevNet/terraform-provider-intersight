@@ -3,11 +3,11 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_network_policy"
 description: |-
-  A policy specifying the CIDR for internal networks in a Kubernetes cluster like POD network, and Service network.
+  A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
 ---
 
 # Data Source: intersight_kubernetes_network_policy
-A policy specifying the CIDR for internal networks in a Kubernetes cluster like POD network, and Service network.
+A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
 ## Argument Reference
 The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `pod_network_cidr`:(string) CIDR block to allocate pod network IP addresses from. 
+* `pod_network_cidr`:(string) CIDR block to allocate Pod network IP addresses from. 
 * `service_cidr`:(string) CIDR block to allocate cluster service IP addresses from. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

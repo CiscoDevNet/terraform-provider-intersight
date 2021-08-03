@@ -258,6 +258,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["platforms"] = (s.GetPlatforms())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

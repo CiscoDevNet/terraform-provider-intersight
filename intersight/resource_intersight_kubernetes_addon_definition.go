@@ -327,6 +327,13 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 					},
 				},
 			},
+			"platforms": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -811,6 +818,17 @@ func resourceKubernetesAddonDefinitionCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("platforms"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		if len(x) > 0 {
+			o.SetPlatforms(x)
+		}
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1118,6 +1136,10 @@ func resourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resource
 
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in KubernetesAddonDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("platforms", (s.GetPlatforms())); err != nil {
+		return diag.Errorf("error occurred while setting property Platforms in KubernetesAddonDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1471,6 +1493,16 @@ func resourceKubernetesAddonDefinitionUpdate(c context.Context, d *schema.Resour
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if d.HasChange("platforms") {
+		v := d.Get("platforms")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetPlatforms(x)
 	}
 
 	if d.HasChange("shared_scope") {

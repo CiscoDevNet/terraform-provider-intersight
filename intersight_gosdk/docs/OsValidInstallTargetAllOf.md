@@ -7,10 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.ValidInstallTarget"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.ValidInstallTarget"]
 **Error** | Pointer to **string** | Error message if any errors are encountered while fetching and validating Install targets for the server. | [optional] [readonly] 
+**InstallTargets** | Pointer to [**[]OsInstallTargetResponse**](OsInstallTargetResponse.md) |  | [optional] 
 **M2Jbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **M2VirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
 **MraidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
 **MraidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
+**Src** | Pointer to **string** | Flag to denote the source of the request. If the call is from Orchestration UI, only the flat list of Install targets can be sent as response. | [optional] 
 **Servers** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
@@ -97,6 +99,41 @@ SetError sets Error field to given value.
 
 HasError returns a boolean if a field has been set.
 
+### GetInstallTargets
+
+`func (o *OsValidInstallTargetAllOf) GetInstallTargets() []OsInstallTargetResponse`
+
+GetInstallTargets returns the InstallTargets field if non-nil, zero value otherwise.
+
+### GetInstallTargetsOk
+
+`func (o *OsValidInstallTargetAllOf) GetInstallTargetsOk() (*[]OsInstallTargetResponse, bool)`
+
+GetInstallTargetsOk returns a tuple with the InstallTargets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallTargets
+
+`func (o *OsValidInstallTargetAllOf) SetInstallTargets(v []OsInstallTargetResponse)`
+
+SetInstallTargets sets InstallTargets field to given value.
+
+### HasInstallTargets
+
+`func (o *OsValidInstallTargetAllOf) HasInstallTargets() bool`
+
+HasInstallTargets returns a boolean if a field has been set.
+
+### SetInstallTargetsNil
+
+`func (o *OsValidInstallTargetAllOf) SetInstallTargetsNil(b bool)`
+
+ SetInstallTargetsNil sets the value for InstallTargets to be an explicit nil
+
+### UnsetInstallTargets
+`func (o *OsValidInstallTargetAllOf) UnsetInstallTargets()`
+
+UnsetInstallTargets ensures that no value is present for InstallTargets, not even an explicit nil
 ### GetM2Jbod
 
 `func (o *OsValidInstallTargetAllOf) GetM2Jbod() []OsPhysicalDiskResponse`
@@ -237,6 +274,31 @@ HasMraidVirtualDrives returns a boolean if a field has been set.
 `func (o *OsValidInstallTargetAllOf) UnsetMraidVirtualDrives()`
 
 UnsetMraidVirtualDrives ensures that no value is present for MraidVirtualDrives, not even an explicit nil
+### GetSrc
+
+`func (o *OsValidInstallTargetAllOf) GetSrc() string`
+
+GetSrc returns the Src field if non-nil, zero value otherwise.
+
+### GetSrcOk
+
+`func (o *OsValidInstallTargetAllOf) GetSrcOk() (*string, bool)`
+
+GetSrcOk returns a tuple with the Src field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrc
+
+`func (o *OsValidInstallTargetAllOf) SetSrc(v string)`
+
+SetSrc sets Src field to given value.
+
+### HasSrc
+
+`func (o *OsValidInstallTargetAllOf) HasSrc() bool`
+
+HasSrc returns a boolean if a field has been set.
+
 ### GetServers
 
 `func (o *OsValidInstallTargetAllOf) GetServers() []ComputePhysicalRelationship`

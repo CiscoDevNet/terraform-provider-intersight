@@ -3,11 +3,11 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_network_policy"
 description: |-
-  A policy specifying the CIDR for internal networks in a Kubernetes cluster like POD network, and Service network.
+  A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
 ---
 
 # Resource: intersight_kubernetes_network_policy
-A policy specifying the CIDR for internal networks in a Kubernetes cluster like POD network, and Service network.
+A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
 ## Usage Example
 ### Resource Creation
 
@@ -64,7 +64,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `pod_network_cidr`:(string) CIDR block to allocate pod network IP addresses from. 
+* `pod_network_cidr`:(string) CIDR block to allocate Pod network IP addresses from. 
 * `service_cidr`:(string) CIDR block to allocate cluster service IP addresses from. 
 * `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)

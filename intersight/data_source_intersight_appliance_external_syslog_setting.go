@@ -73,6 +73,11 @@ func dataSourceApplianceExternalSyslogSetting() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"protocol": {
+				Description: "Protocol used to connect to external syslog server.\n* `TCP` - External Syslog messages sent over TCP.\n* `UDP` - External Syslog messages sent over UDP.\n* `TLS` - Secure External Syslog messages sent over TLS.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"server": {
 				Description: "External Syslog Server Address, can be IP address or hostname.",
 				Type:        schema.TypeString,
@@ -303,6 +308,11 @@ func dataSourceApplianceExternalSyslogSetting() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"protocol": {
+						Description: "Protocol used to connect to external syslog server.\n* `TCP` - External Syslog messages sent over TCP.\n* `UDP` - External Syslog messages sent over UDP.\n* `TLS` - Secure External Syslog messages sent over TLS.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"server": {
 						Description: "External Syslog Server Address, can be IP address or hostname.",
 						Type:        schema.TypeString,
@@ -508,6 +518,10 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 		x := int64(v.(int))
 		o.SetPort(x)
 	}
+	if v, ok := d.GetOk("protocol"); ok {
+		x := (v.(string))
+		o.SetProtocol(x)
+	}
 	if v, ok := d.GetOk("server"); ok {
 		x := (v.(string))
 		o.SetServer(x)
@@ -575,6 +589,7 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["port"] = (s.GetPort())
+				temp["protocol"] = (s.GetProtocol())
 				temp["server"] = (s.GetServer())
 				temp["shared_scope"] = (s.GetSharedScope())
 

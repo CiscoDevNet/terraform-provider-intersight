@@ -44,10 +44,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `identity`:(string) The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object. 
+* `identity`:(string)(Computed) The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object. 
 * `mod_time`:(string)(Computed) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWSvirtual machine, and datacenter name in case of VMware virtual machine. 
+* `name`:(string)(Computed) Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWSvirtual machine, and datacenter name in case of VMware virtual machine. 
 * `owners`:
                 (Array of schema.TypeString) -(Computed)
 * `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -70,7 +70,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `uuid`:(string) The uuid of this placement. The uuid is internally generated and not user specified. 
+* `uuid`:(string)(Computed) The uuid of this placement. The uuid is internally generated and not user specified. 
 * `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

@@ -6,9 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**Identity** | Pointer to **string** | The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object. | [optional] 
-**Name** | Pointer to **string** | Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS virtual machine, and datacenter name in case of VMware virtual machine. | [optional] 
-**Uuid** | Pointer to **string** | The uuid of this placement. The uuid is internally generated and not user specified. | [optional] 
+**Name** | Pointer to **string** | Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS virtual machine, and datacenter name in case of VMware virtual machine. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | The uuid of this placement. The uuid is internally generated and not user specified. | [optional] [readonly] 
 
 ## Methods
 
@@ -68,31 +67,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetIdentity
-
-`func (o *VirtualizationBasePlacement) GetIdentity() string`
-
-GetIdentity returns the Identity field if non-nil, zero value otherwise.
-
-### GetIdentityOk
-
-`func (o *VirtualizationBasePlacement) GetIdentityOk() (*string, bool)`
-
-GetIdentityOk returns a tuple with the Identity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIdentity
-
-`func (o *VirtualizationBasePlacement) SetIdentity(v string)`
-
-SetIdentity sets Identity field to given value.
-
-### HasIdentity
-
-`func (o *VirtualizationBasePlacement) HasIdentity() bool`
-
-HasIdentity returns a boolean if a field has been set.
 
 ### GetName
 

@@ -33,6 +33,7 @@ func resourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "No-op",
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
  *
- * API version: 1.0.9-4375
+ * API version: 1.0.9-4403
  * Contact: intersight@cisco.com
  */
 
@@ -28,8 +28,28 @@ type PortMacBinding struct {
 	AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 	// Chassis/FEX device idetifier that is local to a cluster.
 	ChassisId *int64 `json:"ChassisId,omitempty"`
+	// Chassis/Rack Model that is associated with the Switch/FEX interface.
+	ChassisModel *string `json:"ChassisModel,omitempty"`
+	// Chassis/Rack Serial that is associated with the Switch/FEX interface.
+	ChassisSerial *string `json:"ChassisSerial,omitempty"`
+	// Chassis/Rack Vendor that is associated with the Switch/FEX interface.
+	ChassisVendor *string `json:"ChassisVendor,omitempty"`
 	// Device ID value that is advertised and available as a part of LLDP TLV.
 	DeviceMac *string `json:"DeviceMac,omitempty"`
+	// IOM/SIOC/Adapter Mode that is associated with the Switch/FEX interface.
+	ModuleMode *int64 `json:"ModuleMode,omitempty"`
+	// IOM/SIOC/Adapter Model that is associated with the Switch/FEX interface.
+	ModuleModel *string `json:"ModuleModel,omitempty"`
+	// Uplink port identifier of the VIC that is associated with the Switch/FEX interface.
+	ModulePortId *int64 `json:"ModulePortId,omitempty"`
+	// IOM/SIOC/Adapter Serial that is associated with the Switch/FEX interface.
+	ModuleSerial *string `json:"ModuleSerial,omitempty"`
+	// IOM/SIOC/Adapter Side that is associated with the Switch/FEX interface.
+	ModuleSide *int64 `json:"ModuleSide,omitempty"`
+	// IOM/SIOC/Adapter Slot that is associated with the Switch/FEX interface.
+	ModuleSlot *int64 `json:"ModuleSlot,omitempty"`
+	// IOM/SIOC/Adapter Vendor that is associated with the Switch/FEX interface.
+	ModuleVendor *string `json:"ModuleVendor,omitempty"`
 	// Port ID of the local Switch Interface.
 	PortId *int64 `json:"PortId,omitempty"`
 	// Port ID value that is advertised and available as a part of LLDP TLV.
@@ -180,6 +200,102 @@ func (o *PortMacBinding) SetChassisId(v int64) {
 	o.ChassisId = &v
 }
 
+// GetChassisModel returns the ChassisModel field value if set, zero value otherwise.
+func (o *PortMacBinding) GetChassisModel() string {
+	if o == nil || o.ChassisModel == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChassisModel
+}
+
+// GetChassisModelOk returns a tuple with the ChassisModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetChassisModelOk() (*string, bool) {
+	if o == nil || o.ChassisModel == nil {
+		return nil, false
+	}
+	return o.ChassisModel, true
+}
+
+// HasChassisModel returns a boolean if a field has been set.
+func (o *PortMacBinding) HasChassisModel() bool {
+	if o != nil && o.ChassisModel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisModel gets a reference to the given string and assigns it to the ChassisModel field.
+func (o *PortMacBinding) SetChassisModel(v string) {
+	o.ChassisModel = &v
+}
+
+// GetChassisSerial returns the ChassisSerial field value if set, zero value otherwise.
+func (o *PortMacBinding) GetChassisSerial() string {
+	if o == nil || o.ChassisSerial == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChassisSerial
+}
+
+// GetChassisSerialOk returns a tuple with the ChassisSerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetChassisSerialOk() (*string, bool) {
+	if o == nil || o.ChassisSerial == nil {
+		return nil, false
+	}
+	return o.ChassisSerial, true
+}
+
+// HasChassisSerial returns a boolean if a field has been set.
+func (o *PortMacBinding) HasChassisSerial() bool {
+	if o != nil && o.ChassisSerial != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisSerial gets a reference to the given string and assigns it to the ChassisSerial field.
+func (o *PortMacBinding) SetChassisSerial(v string) {
+	o.ChassisSerial = &v
+}
+
+// GetChassisVendor returns the ChassisVendor field value if set, zero value otherwise.
+func (o *PortMacBinding) GetChassisVendor() string {
+	if o == nil || o.ChassisVendor == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChassisVendor
+}
+
+// GetChassisVendorOk returns a tuple with the ChassisVendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetChassisVendorOk() (*string, bool) {
+	if o == nil || o.ChassisVendor == nil {
+		return nil, false
+	}
+	return o.ChassisVendor, true
+}
+
+// HasChassisVendor returns a boolean if a field has been set.
+func (o *PortMacBinding) HasChassisVendor() bool {
+	if o != nil && o.ChassisVendor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChassisVendor gets a reference to the given string and assigns it to the ChassisVendor field.
+func (o *PortMacBinding) SetChassisVendor(v string) {
+	o.ChassisVendor = &v
+}
+
 // GetDeviceMac returns the DeviceMac field value if set, zero value otherwise.
 func (o *PortMacBinding) GetDeviceMac() string {
 	if o == nil || o.DeviceMac == nil {
@@ -210,6 +326,230 @@ func (o *PortMacBinding) HasDeviceMac() bool {
 // SetDeviceMac gets a reference to the given string and assigns it to the DeviceMac field.
 func (o *PortMacBinding) SetDeviceMac(v string) {
 	o.DeviceMac = &v
+}
+
+// GetModuleMode returns the ModuleMode field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleMode() int64 {
+	if o == nil || o.ModuleMode == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ModuleMode
+}
+
+// GetModuleModeOk returns a tuple with the ModuleMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleModeOk() (*int64, bool) {
+	if o == nil || o.ModuleMode == nil {
+		return nil, false
+	}
+	return o.ModuleMode, true
+}
+
+// HasModuleMode returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleMode() bool {
+	if o != nil && o.ModuleMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleMode gets a reference to the given int64 and assigns it to the ModuleMode field.
+func (o *PortMacBinding) SetModuleMode(v int64) {
+	o.ModuleMode = &v
+}
+
+// GetModuleModel returns the ModuleModel field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleModel() string {
+	if o == nil || o.ModuleModel == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModuleModel
+}
+
+// GetModuleModelOk returns a tuple with the ModuleModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleModelOk() (*string, bool) {
+	if o == nil || o.ModuleModel == nil {
+		return nil, false
+	}
+	return o.ModuleModel, true
+}
+
+// HasModuleModel returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleModel() bool {
+	if o != nil && o.ModuleModel != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleModel gets a reference to the given string and assigns it to the ModuleModel field.
+func (o *PortMacBinding) SetModuleModel(v string) {
+	o.ModuleModel = &v
+}
+
+// GetModulePortId returns the ModulePortId field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModulePortId() int64 {
+	if o == nil || o.ModulePortId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ModulePortId
+}
+
+// GetModulePortIdOk returns a tuple with the ModulePortId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModulePortIdOk() (*int64, bool) {
+	if o == nil || o.ModulePortId == nil {
+		return nil, false
+	}
+	return o.ModulePortId, true
+}
+
+// HasModulePortId returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModulePortId() bool {
+	if o != nil && o.ModulePortId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModulePortId gets a reference to the given int64 and assigns it to the ModulePortId field.
+func (o *PortMacBinding) SetModulePortId(v int64) {
+	o.ModulePortId = &v
+}
+
+// GetModuleSerial returns the ModuleSerial field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleSerial() string {
+	if o == nil || o.ModuleSerial == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModuleSerial
+}
+
+// GetModuleSerialOk returns a tuple with the ModuleSerial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleSerialOk() (*string, bool) {
+	if o == nil || o.ModuleSerial == nil {
+		return nil, false
+	}
+	return o.ModuleSerial, true
+}
+
+// HasModuleSerial returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleSerial() bool {
+	if o != nil && o.ModuleSerial != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleSerial gets a reference to the given string and assigns it to the ModuleSerial field.
+func (o *PortMacBinding) SetModuleSerial(v string) {
+	o.ModuleSerial = &v
+}
+
+// GetModuleSide returns the ModuleSide field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleSide() int64 {
+	if o == nil || o.ModuleSide == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ModuleSide
+}
+
+// GetModuleSideOk returns a tuple with the ModuleSide field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleSideOk() (*int64, bool) {
+	if o == nil || o.ModuleSide == nil {
+		return nil, false
+	}
+	return o.ModuleSide, true
+}
+
+// HasModuleSide returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleSide() bool {
+	if o != nil && o.ModuleSide != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleSide gets a reference to the given int64 and assigns it to the ModuleSide field.
+func (o *PortMacBinding) SetModuleSide(v int64) {
+	o.ModuleSide = &v
+}
+
+// GetModuleSlot returns the ModuleSlot field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleSlot() int64 {
+	if o == nil || o.ModuleSlot == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ModuleSlot
+}
+
+// GetModuleSlotOk returns a tuple with the ModuleSlot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleSlotOk() (*int64, bool) {
+	if o == nil || o.ModuleSlot == nil {
+		return nil, false
+	}
+	return o.ModuleSlot, true
+}
+
+// HasModuleSlot returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleSlot() bool {
+	if o != nil && o.ModuleSlot != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleSlot gets a reference to the given int64 and assigns it to the ModuleSlot field.
+func (o *PortMacBinding) SetModuleSlot(v int64) {
+	o.ModuleSlot = &v
+}
+
+// GetModuleVendor returns the ModuleVendor field value if set, zero value otherwise.
+func (o *PortMacBinding) GetModuleVendor() string {
+	if o == nil || o.ModuleVendor == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModuleVendor
+}
+
+// GetModuleVendorOk returns a tuple with the ModuleVendor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PortMacBinding) GetModuleVendorOk() (*string, bool) {
+	if o == nil || o.ModuleVendor == nil {
+		return nil, false
+	}
+	return o.ModuleVendor, true
+}
+
+// HasModuleVendor returns a boolean if a field has been set.
+func (o *PortMacBinding) HasModuleVendor() bool {
+	if o != nil && o.ModuleVendor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModuleVendor gets a reference to the given string and assigns it to the ModuleVendor field.
+func (o *PortMacBinding) SetModuleVendor(v string) {
+	o.ModuleVendor = &v
 }
 
 // GetPortId returns the PortId field value if set, zero value otherwise.
@@ -426,8 +766,38 @@ func (o PortMacBinding) MarshalJSON() ([]byte, error) {
 	if o.ChassisId != nil {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
+	if o.ChassisModel != nil {
+		toSerialize["ChassisModel"] = o.ChassisModel
+	}
+	if o.ChassisSerial != nil {
+		toSerialize["ChassisSerial"] = o.ChassisSerial
+	}
+	if o.ChassisVendor != nil {
+		toSerialize["ChassisVendor"] = o.ChassisVendor
+	}
 	if o.DeviceMac != nil {
 		toSerialize["DeviceMac"] = o.DeviceMac
+	}
+	if o.ModuleMode != nil {
+		toSerialize["ModuleMode"] = o.ModuleMode
+	}
+	if o.ModuleModel != nil {
+		toSerialize["ModuleModel"] = o.ModuleModel
+	}
+	if o.ModulePortId != nil {
+		toSerialize["ModulePortId"] = o.ModulePortId
+	}
+	if o.ModuleSerial != nil {
+		toSerialize["ModuleSerial"] = o.ModuleSerial
+	}
+	if o.ModuleSide != nil {
+		toSerialize["ModuleSide"] = o.ModuleSide
+	}
+	if o.ModuleSlot != nil {
+		toSerialize["ModuleSlot"] = o.ModuleSlot
+	}
+	if o.ModuleVendor != nil {
+		toSerialize["ModuleVendor"] = o.ModuleVendor
 	}
 	if o.PortId != nil {
 		toSerialize["PortId"] = o.PortId
@@ -465,8 +835,28 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 		AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 		// Chassis/FEX device idetifier that is local to a cluster.
 		ChassisId *int64 `json:"ChassisId,omitempty"`
+		// Chassis/Rack Model that is associated with the Switch/FEX interface.
+		ChassisModel *string `json:"ChassisModel,omitempty"`
+		// Chassis/Rack Serial that is associated with the Switch/FEX interface.
+		ChassisSerial *string `json:"ChassisSerial,omitempty"`
+		// Chassis/Rack Vendor that is associated with the Switch/FEX interface.
+		ChassisVendor *string `json:"ChassisVendor,omitempty"`
 		// Device ID value that is advertised and available as a part of LLDP TLV.
 		DeviceMac *string `json:"DeviceMac,omitempty"`
+		// IOM/SIOC/Adapter Mode that is associated with the Switch/FEX interface.
+		ModuleMode *int64 `json:"ModuleMode,omitempty"`
+		// IOM/SIOC/Adapter Model that is associated with the Switch/FEX interface.
+		ModuleModel *string `json:"ModuleModel,omitempty"`
+		// Uplink port identifier of the VIC that is associated with the Switch/FEX interface.
+		ModulePortId *int64 `json:"ModulePortId,omitempty"`
+		// IOM/SIOC/Adapter Serial that is associated with the Switch/FEX interface.
+		ModuleSerial *string `json:"ModuleSerial,omitempty"`
+		// IOM/SIOC/Adapter Side that is associated with the Switch/FEX interface.
+		ModuleSide *int64 `json:"ModuleSide,omitempty"`
+		// IOM/SIOC/Adapter Slot that is associated with the Switch/FEX interface.
+		ModuleSlot *int64 `json:"ModuleSlot,omitempty"`
+		// IOM/SIOC/Adapter Vendor that is associated with the Switch/FEX interface.
+		ModuleVendor *string `json:"ModuleVendor,omitempty"`
 		// Port ID of the local Switch Interface.
 		PortId *int64 `json:"PortId,omitempty"`
 		// Port ID value that is advertised and available as a part of LLDP TLV.
@@ -488,7 +878,17 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 		varPortMacBinding.ObjectType = varPortMacBindingWithoutEmbeddedStruct.ObjectType
 		varPortMacBinding.AggregatePortId = varPortMacBindingWithoutEmbeddedStruct.AggregatePortId
 		varPortMacBinding.ChassisId = varPortMacBindingWithoutEmbeddedStruct.ChassisId
+		varPortMacBinding.ChassisModel = varPortMacBindingWithoutEmbeddedStruct.ChassisModel
+		varPortMacBinding.ChassisSerial = varPortMacBindingWithoutEmbeddedStruct.ChassisSerial
+		varPortMacBinding.ChassisVendor = varPortMacBindingWithoutEmbeddedStruct.ChassisVendor
 		varPortMacBinding.DeviceMac = varPortMacBindingWithoutEmbeddedStruct.DeviceMac
+		varPortMacBinding.ModuleMode = varPortMacBindingWithoutEmbeddedStruct.ModuleMode
+		varPortMacBinding.ModuleModel = varPortMacBindingWithoutEmbeddedStruct.ModuleModel
+		varPortMacBinding.ModulePortId = varPortMacBindingWithoutEmbeddedStruct.ModulePortId
+		varPortMacBinding.ModuleSerial = varPortMacBindingWithoutEmbeddedStruct.ModuleSerial
+		varPortMacBinding.ModuleSide = varPortMacBindingWithoutEmbeddedStruct.ModuleSide
+		varPortMacBinding.ModuleSlot = varPortMacBindingWithoutEmbeddedStruct.ModuleSlot
+		varPortMacBinding.ModuleVendor = varPortMacBindingWithoutEmbeddedStruct.ModuleVendor
 		varPortMacBinding.PortId = varPortMacBindingWithoutEmbeddedStruct.PortId
 		varPortMacBinding.PortMac = varPortMacBindingWithoutEmbeddedStruct.PortMac
 		varPortMacBinding.SlotId = varPortMacBindingWithoutEmbeddedStruct.SlotId
@@ -516,7 +916,17 @@ func (o *PortMacBinding) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "ChassisId")
+		delete(additionalProperties, "ChassisModel")
+		delete(additionalProperties, "ChassisSerial")
+		delete(additionalProperties, "ChassisVendor")
 		delete(additionalProperties, "DeviceMac")
+		delete(additionalProperties, "ModuleMode")
+		delete(additionalProperties, "ModuleModel")
+		delete(additionalProperties, "ModulePortId")
+		delete(additionalProperties, "ModuleSerial")
+		delete(additionalProperties, "ModuleSide")
+		delete(additionalProperties, "ModuleSlot")
+		delete(additionalProperties, "ModuleVendor")
 		delete(additionalProperties, "PortId")
 		delete(additionalProperties, "PortMac")
 		delete(additionalProperties, "SlotId")

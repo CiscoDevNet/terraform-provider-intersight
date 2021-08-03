@@ -114,7 +114,12 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
-    + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
+    + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `secure`:(bool) Intersight supports secure properties as task input/output. The values ofthese properties are encrypted and stored in Intersight.This flag marks the property to be secure when it is set to true. 
   + `type`:(string) Specify the enum type for primitive data type.* `string` - Enum to specify a string data type.* `integer` - Enum to specify an integer32 data type.* `float` - Enum to specify a float64 data type.* `boolean` - Enum to specify a boolean data type.* `json` - Enum to specify a json data type.* `enum` - Enum to specify a enum data type which is a list of pre-defined strings. 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Enabled** | Pointer to **bool** | Enable or disable External Syslog Server. | [optional] [default to false]
 **ExportNginx** | Pointer to **bool** | Enable or disable exporting of Web Server access logs. | [optional] [default to false]
 **Port** | Pointer to **int64** | External Syslog Server Port for connection establishment. | [optional] [default to 10514]
+**Protocol** | Pointer to **string** | Protocol used to connect to external syslog server. * &#x60;TCP&#x60; - External Syslog messages sent over TCP. * &#x60;UDP&#x60; - External Syslog messages sent over UDP. * &#x60;TLS&#x60; - Secure External Syslog messages sent over TLS. | [optional] [default to "TCP"]
 **Server** | Pointer to **string** | External Syslog Server Address, can be IP address or hostname. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 
@@ -145,6 +146,31 @@ SetPort sets Port field to given value.
 `func (o *ApplianceExternalSyslogSetting) HasPort() bool`
 
 HasPort returns a boolean if a field has been set.
+
+### GetProtocol
+
+`func (o *ApplianceExternalSyslogSetting) GetProtocol() string`
+
+GetProtocol returns the Protocol field if non-nil, zero value otherwise.
+
+### GetProtocolOk
+
+`func (o *ApplianceExternalSyslogSetting) GetProtocolOk() (*string, bool)`
+
+GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProtocol
+
+`func (o *ApplianceExternalSyslogSetting) SetProtocol(v string)`
+
+SetProtocol sets Protocol field to given value.
+
+### HasProtocol
+
+`func (o *ApplianceExternalSyslogSetting) HasProtocol() bool`
+
+HasProtocol returns a boolean if a field has been set.
 
 ### GetServer
 

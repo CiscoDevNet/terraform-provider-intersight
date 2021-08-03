@@ -46,10 +46,9 @@ func dataSourceIamSessionLimits() *schema.Resource {
 				Optional:    true,
 			},
 			"maximum_limit": {
-				Description: "The maximum number of sessions allowed in an account. The default value is 128.",
+				Description: "The maximum number of sessions allowed in an account or permission. The default value is 128.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Computed:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",

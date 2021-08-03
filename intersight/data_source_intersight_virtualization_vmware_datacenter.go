@@ -59,6 +59,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"inventory_path": {
 				Description: "Inventory path of the DC.",
@@ -81,6 +82,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"network_count": {
 				Description: "Count of all networks associated with this datacenter (DC).",
@@ -103,6 +105,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 				Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"vm_count": {
 				Description: "Count of all virtual machines (VMs) associated with this DC.",
@@ -233,6 +236,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 						Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 						Type:        schema.TypeString,
 						Optional:    true,
+						Computed:    true,
 					},
 					"inventory_path": {
 						Description: "Inventory path of the DC.",
@@ -255,6 +259,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 						Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 						Type:        schema.TypeString,
 						Optional:    true,
+						Computed:    true,
 					},
 					"network_count": {
 						Description: "Count of all networks associated with this datacenter (DC).",
@@ -457,6 +462,7 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 						Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
 						Type:        schema.TypeString,
 						Optional:    true,
+						Computed:    true,
 					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",

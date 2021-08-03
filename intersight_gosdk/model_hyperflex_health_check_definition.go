@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
  *
- * API version: 1.0.9-4375
+ * API version: 1.0.9-4403
  * Contact: intersight@cisco.com
  */
 
@@ -50,6 +50,8 @@ type HyperflexHealthCheckDefinition struct {
 	ScriptExecutionMode *string `json:"ScriptExecutionMode,omitempty"`
 	// Indicates if the script needs to be executed on HyperFlex compute nodes. | Typically, scripts are only executed on the storage Nodes.
 	ScriptExecutionOnComputeNodes *bool `json:"ScriptExecutionOnComputeNodes,omitempty"`
+	// Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic). * `All` - The Health Check is hypervisor-agnostic. * `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version. * `IWE` - The Health Check is supported only on Cisco IWE platform. * `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.
+	SupportedHypervisorType *string `json:"SupportedHypervisorType,omitempty"`
 	// Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster. * `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node. * `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results. * `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.
 	TargetExecutionType *string `json:"TargetExecutionType,omitempty"`
 	// Health check script execution timeout.
@@ -72,6 +74,8 @@ func NewHyperflexHealthCheckDefinition(classId string, objectType string) *Hyper
 	this.MinimumHyperFlexVersion = &minimumHyperFlexVersion
 	var scriptExecutionMode string = "ON_DEMAND"
 	this.ScriptExecutionMode = &scriptExecutionMode
+	var supportedHypervisorType string = "All"
+	this.SupportedHypervisorType = &supportedHypervisorType
 	var targetExecutionType string = "EXECUTE_ON_LEADER_NODE"
 	this.TargetExecutionType = &targetExecutionType
 	return &this
@@ -90,6 +94,8 @@ func NewHyperflexHealthCheckDefinitionWithDefaults() *HyperflexHealthCheckDefini
 	this.MinimumHyperFlexVersion = &minimumHyperFlexVersion
 	var scriptExecutionMode string = "ON_DEMAND"
 	this.ScriptExecutionMode = &scriptExecutionMode
+	var supportedHypervisorType string = "All"
+	this.SupportedHypervisorType = &supportedHypervisorType
 	var targetExecutionType string = "EXECUTE_ON_LEADER_NODE"
 	this.TargetExecutionType = &targetExecutionType
 	return &this
@@ -603,6 +609,38 @@ func (o *HyperflexHealthCheckDefinition) SetScriptExecutionOnComputeNodes(v bool
 	o.ScriptExecutionOnComputeNodes = &v
 }
 
+// GetSupportedHypervisorType returns the SupportedHypervisorType field value if set, zero value otherwise.
+func (o *HyperflexHealthCheckDefinition) GetSupportedHypervisorType() string {
+	if o == nil || o.SupportedHypervisorType == nil {
+		var ret string
+		return ret
+	}
+	return *o.SupportedHypervisorType
+}
+
+// GetSupportedHypervisorTypeOk returns a tuple with the SupportedHypervisorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHealthCheckDefinition) GetSupportedHypervisorTypeOk() (*string, bool) {
+	if o == nil || o.SupportedHypervisorType == nil {
+		return nil, false
+	}
+	return o.SupportedHypervisorType, true
+}
+
+// HasSupportedHypervisorType returns a boolean if a field has been set.
+func (o *HyperflexHealthCheckDefinition) HasSupportedHypervisorType() bool {
+	if o != nil && o.SupportedHypervisorType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedHypervisorType gets a reference to the given string and assigns it to the SupportedHypervisorType field.
+func (o *HyperflexHealthCheckDefinition) SetSupportedHypervisorType(v string) {
+	o.SupportedHypervisorType = &v
+}
+
 // GetTargetExecutionType returns the TargetExecutionType field value if set, zero value otherwise.
 func (o *HyperflexHealthCheckDefinition) GetTargetExecutionType() string {
 	if o == nil || o.TargetExecutionType == nil {
@@ -758,6 +796,9 @@ func (o HyperflexHealthCheckDefinition) MarshalJSON() ([]byte, error) {
 	if o.ScriptExecutionOnComputeNodes != nil {
 		toSerialize["ScriptExecutionOnComputeNodes"] = o.ScriptExecutionOnComputeNodes
 	}
+	if o.SupportedHypervisorType != nil {
+		toSerialize["SupportedHypervisorType"] = o.SupportedHypervisorType
+	}
 	if o.TargetExecutionType != nil {
 		toSerialize["TargetExecutionType"] = o.TargetExecutionType
 	}
@@ -807,6 +848,8 @@ func (o *HyperflexHealthCheckDefinition) UnmarshalJSON(bytes []byte) (err error)
 		ScriptExecutionMode *string `json:"ScriptExecutionMode,omitempty"`
 		// Indicates if the script needs to be executed on HyperFlex compute nodes. | Typically, scripts are only executed on the storage Nodes.
 		ScriptExecutionOnComputeNodes *bool `json:"ScriptExecutionOnComputeNodes,omitempty"`
+		// Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic). * `All` - The Health Check is hypervisor-agnostic. * `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version. * `IWE` - The Health Check is supported only on Cisco IWE platform. * `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.
+		SupportedHypervisorType *string `json:"SupportedHypervisorType,omitempty"`
 		// Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster. * `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node. * `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results. * `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.
 		TargetExecutionType *string `json:"TargetExecutionType,omitempty"`
 		// Health check script execution timeout.
@@ -835,6 +878,7 @@ func (o *HyperflexHealthCheckDefinition) UnmarshalJSON(bytes []byte) (err error)
 		varHyperflexHealthCheckDefinition.Resolution = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.Resolution
 		varHyperflexHealthCheckDefinition.ScriptExecutionMode = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.ScriptExecutionMode
 		varHyperflexHealthCheckDefinition.ScriptExecutionOnComputeNodes = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.ScriptExecutionOnComputeNodes
+		varHyperflexHealthCheckDefinition.SupportedHypervisorType = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.SupportedHypervisorType
 		varHyperflexHealthCheckDefinition.TargetExecutionType = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.TargetExecutionType
 		varHyperflexHealthCheckDefinition.Timeout = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.Timeout
 		varHyperflexHealthCheckDefinition.UnsupportedHyperFlexVersions = varHyperflexHealthCheckDefinitionWithoutEmbeddedStruct.UnsupportedHyperFlexVersions
@@ -871,6 +915,7 @@ func (o *HyperflexHealthCheckDefinition) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "Resolution")
 		delete(additionalProperties, "ScriptExecutionMode")
 		delete(additionalProperties, "ScriptExecutionOnComputeNodes")
+		delete(additionalProperties, "SupportedHypervisorType")
 		delete(additionalProperties, "TargetExecutionType")
 		delete(additionalProperties, "Timeout")
 		delete(additionalProperties, "UnsupportedHyperFlexVersions")

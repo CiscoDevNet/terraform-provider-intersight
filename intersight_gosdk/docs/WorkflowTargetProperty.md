@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ConstraintAttributes** | Pointer to **[]string** |  | [optional] 
 **DisplayAttributes** | Pointer to **[]string** |  | [optional] 
 **Selector** | Pointer to **string** | Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. | [optional] 
+**SelectorProperty** | Pointer to [**NullableWorkflowSelectorProperty**](workflow.SelectorProperty.md) |  | [optional] 
 **SupportedObjects** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -191,6 +192,41 @@ SetSelector sets Selector field to given value.
 
 HasSelector returns a boolean if a field has been set.
 
+### GetSelectorProperty
+
+`func (o *WorkflowTargetProperty) GetSelectorProperty() WorkflowSelectorProperty`
+
+GetSelectorProperty returns the SelectorProperty field if non-nil, zero value otherwise.
+
+### GetSelectorPropertyOk
+
+`func (o *WorkflowTargetProperty) GetSelectorPropertyOk() (*WorkflowSelectorProperty, bool)`
+
+GetSelectorPropertyOk returns a tuple with the SelectorProperty field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelectorProperty
+
+`func (o *WorkflowTargetProperty) SetSelectorProperty(v WorkflowSelectorProperty)`
+
+SetSelectorProperty sets SelectorProperty field to given value.
+
+### HasSelectorProperty
+
+`func (o *WorkflowTargetProperty) HasSelectorProperty() bool`
+
+HasSelectorProperty returns a boolean if a field has been set.
+
+### SetSelectorPropertyNil
+
+`func (o *WorkflowTargetProperty) SetSelectorPropertyNil(b bool)`
+
+ SetSelectorPropertyNil sets the value for SelectorProperty to be an explicit nil
+
+### UnsetSelectorProperty
+`func (o *WorkflowTargetProperty) UnsetSelectorProperty()`
+
+UnsetSelectorProperty ensures that no value is present for SelectorProperty, not even an explicit nil
 ### GetSupportedObjects
 
 `func (o *WorkflowTargetProperty) GetSupportedObjects() []string`

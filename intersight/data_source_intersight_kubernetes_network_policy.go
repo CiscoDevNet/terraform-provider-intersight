@@ -74,7 +74,7 @@ func dataSourceKubernetesNetworkPolicy() *schema.Resource {
 				Computed:    true,
 			},
 			"pod_network_cidr": {
-				Description: "CIDR block to allocate pod network IP addresses from.",
+				Description: "CIDR block to allocate Pod network IP addresses from.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
