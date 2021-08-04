@@ -1,9 +1,8 @@
-resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
-  name = "v_fc_adapter1"
+resource "intersight_vnic_fc_adapter_policy" "tf_fc_adapter" {
+  name = "tf_fc_adapter"
   error_detection_timeout = 100000
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   error_recovery_settings {
     enabled = false
@@ -49,41 +48,34 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
 
 }
 
-resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
-  name = "v_fc_network1"
+resource "intersight_vnic_fc_network_policy" "tf_fc_network" {
+  name = "tf_fc_network"
   vsan_settings {
     id = 100
   }
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_vnic_fc_qos_policy" "v_fc_qos1" {
-  name = "v_fc_qos1"
+resource "intersight_vnic_fc_qos_policy" "tf_fc_qos" {
+  name = "tf_fc_qos"
   rate_limit = 10000
   cos = 6
   max_data_field_size = 2112
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_vnic_san_connectivity_policy" "vnic_san1" {
-  name = "vnic_san1"
+resource "intersight_vnic_san_connectivity_policy" "tf_vnic_san" {
+  name = "tf_vnic_san"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid = intersight_server_profile.server1.id
-    object_type = "server.Profile"
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_vnic_fc_if" "fc1" {
+resource "intersight_vnic_fc_if" "tf_fc1" {
   name = "fc0"
   order = 1
   placement {
@@ -93,21 +85,20 @@ resource "intersight_vnic_fc_if" "fc1" {
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.vnic_san1.id
-    object_type = "vnic.SanConnectivityPolicy"
+    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
   }
   fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.v_fc_network1.id
+    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
   }
   fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.v_fc_adapter1.id
+    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
   }
   fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.v_fc_qos1.id
+    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
   }
 }
 
-resource "intersight_vnic_fc_if" "fc2" {
+resource "intersight_vnic_fc_if" "tf_fc2" {
   name = "fc0"
   order = 2
   placement {
@@ -117,21 +108,20 @@ resource "intersight_vnic_fc_if" "fc2" {
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.vnic_san1.id
-    object_type = "vnic.SanConnectivityPolicy"
+    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
   }
   fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.v_fc_network1.id
+    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
   }
   fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.v_fc_adapter1.id
+    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
   }
   fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.v_fc_qos1.id
+    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
   }
 }
 
-resource "intersight_vnic_fc_if" "fc3" {
+resource "intersight_vnic_fc_if" "tf_fc3" {
   name = "fc1"
   order = 3
   placement {
@@ -141,21 +131,21 @@ resource "intersight_vnic_fc_if" "fc3" {
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.vnic_san1.id
+    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.v_fc_network1.id
+    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
   }
   fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.v_fc_adapter1.id
+    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
   }
   fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.v_fc_qos1.id
+    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
   }
 }
 
-resource "intersight_vnic_fc_if" "fc4" {
+resource "intersight_vnic_fc_if" "tf_fc4" {
   name = "fc1"
   order = 1
   placement {
@@ -165,48 +155,15 @@ resource "intersight_vnic_fc_if" "fc4" {
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid = intersight_vnic_san_connectivity_policy.vnic_san1.id
-    object_type = "vnic.SanConnectivityPolicy"
+    moid = intersight_vnic_san_connectivity_policy.tf_vnic_san.id
   }
   fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.v_fc_network1.id
+    moid = intersight_vnic_fc_network_policy.tf_fc_network.id
   }
   fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.v_fc_adapter1.id
+    moid = intersight_vnic_fc_adapter_policy.tf_fc_adapter.id
   }
   fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.v_fc_qos1.id
+    moid = intersight_vnic_fc_qos_policy.tf_fc_qos.id
   }
 }
-
-/*
-SAMPLE PAYLOAD
------------------
-VnicFcIfApi: [{
-    "Name": "fc0",
-    "Order": 2,
-    "Placement": {
-        "Type": "virtual",
-        "Id": "1"
-    },
-    "PersistentBindings": True,
-    "SanConnectivityPolicy": "",
-    "FcNetworkPolicy": "",
-                       "FcQosPolicy": "",
-                       "FcAdapterPolicy": ""
-},
-    {
-    "Name": "fc1",
-    "Order": 3,
-    "Placement": {
-        "Type": "virtual",
-        "Id": "1"
-    },
-    "PersistentBindings": True,
-    "SanConnectivityPolicy":
-    "",
-    "FcNetworkPolicy": "",
-    "FcQosPolicy": "",
-    "FcAdapterPolicy": ""
-}]
-*/

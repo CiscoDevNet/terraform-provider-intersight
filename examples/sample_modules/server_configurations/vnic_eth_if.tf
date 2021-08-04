@@ -1,10 +1,9 @@
-resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
-  name = "v_eth_adapter1"
+resource "intersight_vnic_eth_adapter_policy" "tf_v_eth_adapter" {
+  name = "tf_v_eth_adapter"
   rss_settings = true
   uplink_failback_timeout = 5
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   vxlan_settings {
     enabled = false
@@ -44,11 +43,10 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
   }
 }
 
-resource "intersight_vnic_eth_network_policy" "v_eth_network1" {
-  name = "v_eth_network1"
+resource "intersight_vnic_eth_network_policy" "tf_v_eth_network" {
+  name = "tf_v_eth_network"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   vlan_settings {
     object_type = "vnic.VlanSettings"
@@ -57,31 +55,25 @@ resource "intersight_vnic_eth_network_policy" "v_eth_network1" {
   }
 }
 
-resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
-  name = "v_eth_qos1"
+resource "intersight_vnic_eth_qos_policy" "tf_v_eth_qos" {
+  name = "tf_v_eth_qos"
   mtu = 1500
   rate_limit = 0
   cos = 0
   trust_host_cos = false
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_vnic_lan_connectivity_policy" "vnic_lan1" {
-  name = "vnic_lan1"
+resource "intersight_vnic_lan_connectivity_policy" "tf_vnic_lan" {
+  name = "tf_vnic_lan"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid = intersight_server_profile.server1.id
-    object_type = "server.Profile"
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_vnic_eth_if" "eth1" {
+resource "intersight_vnic_eth_if" "tf_eth1" {
   name = "eth0"
   order = 0
   placement {
@@ -104,21 +96,21 @@ resource "intersight_vnic_eth_if" "eth1" {
     num_vmqs = 1
   }
   lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.v_eth_network1.id
+    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
   }
   eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
+    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
   }
   eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
+    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
   }
 }
 
-resource "intersight_vnic_eth_if" "eth2" {
+resource "intersight_vnic_eth_if" "tf_eth2" {
   name = "eth1"
   order = 0
   placement {
@@ -141,21 +133,21 @@ resource "intersight_vnic_eth_if" "eth2" {
     num_vmqs = 1
   }
   lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.v_eth_network1.id
+    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
   }
   eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
+    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
   }
   eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
+    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
   }
 }
 
-resource "intersight_vnic_eth_if" "eth3" {
+resource "intersight_vnic_eth_if" "tf_eth3" {
   name = "eth0"
   order = 0
   placement {
@@ -178,21 +170,21 @@ resource "intersight_vnic_eth_if" "eth3" {
     num_vmqs = 4
   }
   lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.v_eth_network1.id
+    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
   }
   eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
+    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
   }
   eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
+    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
   }
 }
 
-resource "intersight_vnic_eth_if" "eth4" {
+resource "intersight_vnic_eth_if" "tf_eth4" {
   name = "eth1"
   order = 1
   placement {
@@ -214,65 +206,16 @@ resource "intersight_vnic_eth_if" "eth4" {
     num_vmqs = 1
   }
   lan_connectivity_policy {
-    moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid = intersight_vnic_lan_connectivity_policy.tf_vnic_lan.id
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.v_eth_network1.id
+    moid = intersight_vnic_eth_network_policy.tf_v_eth_network.id
   }
   eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
+    moid = intersight_vnic_eth_adapter_policy.tf_v_eth_adapter.id
   }
   eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
+    moid = intersight_vnic_eth_qos_policy.tf_v_eth_qos.id
   }
 }
-
-/*
-SAMPLE PAYLOAD
------------------
-VnicEthIfApi: [{
-  "Name": "eth0",
-  "Cdn": {
-    "Source": "user",
-    "Value": "xyz0"
-  },
-  "Order": 0,
-  "Placement": {
-    "Type": "virtual",
-    "Id": "MLOM",
-    "Uplink": 1
-  },
-  "VmqSettings": {
-    "Enabled": True
-  },
-  "LanConnectivityPolicy": {
-    "ObjectType": "vnic.LanConnectivityPolicy",
-    "Moid": ""
-  },
-  "EthNetworkPolicy": "",
-  "EthQosPolicy": "",
-  "EthAdapterPolicy": ""},
-  {"Name": "eth1",
-    "Cdn": {
-      "Source": "user",
-      "Value": "xyz1"
-    },
-    "Order": 1,
-    "Placement": {
-      "Type": "virtual",
-      "Id": "MLOM",
-      "Uplink": 1
-    },
-    "VmqSettings": {
-      "Enabled": True
-    },
-    "LanConnectivityPolicy": {
-      "ObjectType": "vnic.LanConnectivityPolicy",
-      "Moid": ""
-    },
-    "EthNetworkPolicy": "",
-    "EthQosPolicy": "",
-    "EthAdapterPolicy": ""
-  }]
-*/

@@ -1,28 +1,10 @@
-resource "intersight_vmedia_policy" "vmedia1" {
-  name          = "vmedia1"
+resource "intersight_vmedia_policy" "tf_vmedia" {
+  name          = "tf_vmedia"
   description   = "test policy"
   enabled       = true
   encryption    = true
   low_power_usb = true
-
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
-
-/*
-SAMPLE PAYLOAD
------------------
-VmediaPolicyApi: {
-  "Name": "AUTO_VMEDIA_POLICY_CRR",
-  "Enabled": True,
-  "Encryption": True,
-  "LowPowerUsb": True,
-  "Description": "Automation vMedia Policy",
-  "Tags": [{"Key": "Policy", "Value": "VMEDIA"}]}
-*/

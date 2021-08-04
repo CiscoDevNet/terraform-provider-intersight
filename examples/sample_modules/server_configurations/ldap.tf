@@ -1,12 +1,11 @@
-resource "intersight_iam_ldap_policy" "ldap1" {
-  name                   = "ldap1"
+resource "intersight_iam_ldap_policy" "tf_ldap1" {
+  name                   = "tf_ldap1"
   description            = "test policy"
   enabled                = true
   enable_dns             = true
   user_search_precedence = "LocalUserDb"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   base_properties {
     attribute                  = "CiscoAvPair"
@@ -28,15 +27,14 @@ resource "intersight_iam_ldap_policy" "ldap1" {
   }
 }
 
-resource "intersight_iam_ldap_policy" "ldap2" {
-  name                   = "ldap2"
+resource "intersight_iam_ldap_policy" "tf_ldap2" {
+  name                   = "tf_ldap2"
   description            = "test policy"
   enabled                = true
   enable_dns             = true
   user_search_precedence = "LocalUserDb"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   base_properties {
     attribute                  = "CiscoAvPair"
@@ -56,10 +54,6 @@ resource "intersight_iam_ldap_policy" "ldap2" {
     nr_source        = "Extracted"
     search_forest = "xyz"
     search_domain = "abc"
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
   }
 }
 

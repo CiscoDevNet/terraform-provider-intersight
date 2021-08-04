@@ -1,9 +1,8 @@
-resource "intersight_adapter_config_policy" "adapter_config1" {
-  name        = "adapter_config1"
+resource "intersight_adapter_config_policy" "tf_adapter_config" {
+  name        = "tf_adapter_config"
   description = "test policy"
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   settings {
     object_type="adapter.AdapterConfig"
@@ -28,10 +27,6 @@ resource "intersight_adapter_config_policy" "adapter_config1" {
       object_type="adapter.FcSettings"
       fip_enabled = true
     }
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
   }
   tags {
     key = "source"

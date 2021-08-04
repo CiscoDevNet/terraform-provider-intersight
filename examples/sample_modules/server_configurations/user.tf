@@ -1,5 +1,5 @@
-resource "intersight_iam_end_point_user_policy" "user_policy1" {
-  name        = "user_policy1"
+resource "intersight_iam_end_point_user_policy" "tf_user_policy" {
+  name        = "tf_user_policy"
   description = "test policy"
 
   password_properties {
@@ -11,24 +11,6 @@ resource "intersight_iam_end_point_user_policy" "user_policy1" {
     grace_period             = 2
   }
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
-
-/*
-SAMPLE PAYLOAD
------------------
-IamEndPointUserPolicyApi: {
-  "Name": "Auto_User_Test_Policy_CRR",
-  "Description": "Test user policy",
-  "Tags": [{"Key": "user", "Value": "USER_POLICY"}],
-  "PasswordProperties": {
-    "EnforceStrongPassword": True,
-    "EnablePasswordExpiry": True,
-    "PasswordExpiryDuration": 50,
-    "PasswordHistory": 0,
-    "NotificationPeriod": 1,
-    "GracePeriod": 2}
-}
-*/

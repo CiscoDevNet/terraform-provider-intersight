@@ -1,16 +1,11 @@
-resource "intersight_ipmioverlan_policy" "ipmi1" {
-  name           = "ipmi1"
+resource "intersight_ipmioverlan_policy" "tf_ipmi" {
+  name           = "tf_ipmi"
   description    = "demo ipmi policy"
   enabled        = true
   privilege      = "admin"
   encryption_key = var.encryption_key
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
