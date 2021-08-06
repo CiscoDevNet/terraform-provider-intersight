@@ -17,7 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `idle_time_out`:(int) The idle timeout interval for the web session in seconds. When a session is not refreshed for this duration, the session is marked as idle and removed. The minimum value is 300 seconds and the maximum value is 18000 seconds (5 hours). The system default value is 1800 seconds. 
-* `maximum_limit`:(int) The maximum number of sessions allowed in an account. The default value is 128. 
+* `maximum_limit`:(int) The maximum number of sessions allowed in an account or permission. The default value is 128. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `per_user_limit`:(int) The maximum number of sessions allowed per user. Default value is 32. 

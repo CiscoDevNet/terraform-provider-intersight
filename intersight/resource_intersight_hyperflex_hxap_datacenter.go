@@ -175,6 +175,7 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 				Description: "The internally generated identity of this placement. This entity is not manipulated by users. It aids in uniquely identifying the placement object.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -193,6 +194,7 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 				Description: "Name of the virtual machine placement. It is the name of the VPC (Virtual Private Cloud) in case of AWS\nvirtual machine, and datacenter name in case of VMware virtual machine.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -361,6 +363,7 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 				Description: "The uuid of this placement. The uuid is internally generated and not user specified.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Computed:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",

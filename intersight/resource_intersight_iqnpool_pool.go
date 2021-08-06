@@ -187,7 +187,6 @@ func resourceIqnpoolPool() *schema.Resource {
 							Description: "The suffix for this bock of IQNs.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 						},
 						"to": {
 							Description: "The last suffix number in the block.",

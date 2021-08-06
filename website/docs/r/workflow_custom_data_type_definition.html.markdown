@@ -46,6 +46,11 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `cloned_from`:(HashMap) -(Computed) A reference to a workflowCustomDataTypeDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `composite_type`:(bool) When true this data type definition is a collection of type definitions to represent composite data like JSON. 
 * `create_time`:(string)(Computed) The time when this managed object was created. 
 * `description`:(string) A human-friendly description of this custom data type indicating it's domain and usage. 
@@ -77,6 +82,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `properties`:(HashMap) - Type to capture all the properties for the custom data type definition. 
 This complex property has following sub-properties:
+  + `cloneable`:(bool)(Computed) When set to false custom data type is not cloneable. It is set to true only if data type is not internal and it is not using any internal custom data type. 
   + `external_meta`:(bool)(Computed) When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
@@ -158,6 +164,11 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
+  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
 
 ### [workflow.PrimitiveDataType](#argument-reference)
@@ -181,7 +192,12 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
-    + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
+    + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `secure`:(bool) Intersight supports secure properties as task input/output. The values ofthese properties are encrypted and stored in Intersight.This flag marks the property to be secure when it is set to true. 
   + `type`:(string) Specify the enum type for primitive data type.* `string` - Enum to specify a string data type.* `integer` - Enum to specify an integer32 data type.* `float` - Enum to specify a float64 data type.* `boolean` - Enum to specify a boolean data type.* `json` - Enum to specify a json data type.* `enum` - Enum to specify a enum data type which is a list of pre-defined strings. 
@@ -206,6 +222,11 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. 
+  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `supported_objects`:
                 (Array of schema.TypeString) -
   

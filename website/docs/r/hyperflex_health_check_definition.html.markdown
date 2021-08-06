@@ -80,6 +80,7 @@ This complex property has following sub-properties:
 * `script_execution_mode`:(string) Execution mode of the health script on the HyperFlex cluster.* `ON_DEMAND` - Execute the health check on-demand.* `SCHEDULED` - Execute the health check on a scheduled interval. 
 * `script_execution_on_compute_nodes`:(bool) Indicates if the script needs to be executed on HyperFlex compute nodes. |Typically, scripts are only executed on the storage Nodes. 
 * `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `supported_hypervisor_type`:(string)(Computed) Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).* `All` - The Health Check is hypervisor-agnostic.* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.* `IWE` - The Health Check is supported only on Cisco IWE platform.* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 

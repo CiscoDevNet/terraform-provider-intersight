@@ -138,10 +138,10 @@ func resourceIamSessionLimits() *schema.Resource {
 				Default:     1800,
 			},
 			"maximum_limit": {
-				Description: "The maximum number of sessions allowed in an account. The default value is 128.",
+				Description: "The maximum number of sessions allowed in an account or permission. The default value is 128.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Computed:    true,
+				Default:     128,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",

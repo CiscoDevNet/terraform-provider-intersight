@@ -124,6 +124,12 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"supported_hypervisor_type": {
+				Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"target_execution_type": {
 				Description: "Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster.\n* `EXECUTE_ON_LEADER_NODE` - Execute the health check script only on the HyperFlex cluster's leader node.\n* `EXECUTE_ON_ALL_NODES` - Execute health check on all nodes and aggregate the results.\n* `EXECUTE_ON_ALL_NODES_AND_AGGREGATE` - Execute the health check on all Nodes and perform custom aggregation.",
 				Type:        schema.TypeString,
@@ -228,6 +234,10 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
+	if v, ok := d.GetOk("supported_hypervisor_type"); ok {
+		x := (v.(string))
+		o.SetSupportedHypervisorType(x)
+	}
 	if v, ok := d.GetOk("target_execution_type"); ok {
 		x := (v.(string))
 		o.SetTargetExecutionType(x)
@@ -307,6 +317,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 				temp["script_execution_mode"] = (s.GetScriptExecutionMode())
 				temp["script_execution_on_compute_nodes"] = (s.GetScriptExecutionOnComputeNodes())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["supported_hypervisor_type"] = (s.GetSupportedHypervisorType())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["target_execution_type"] = (s.GetTargetExecutionType())

@@ -392,6 +392,12 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"supported_hypervisor_type": {
+				Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -944,6 +950,11 @@ func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.R
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("supported_hypervisor_type"); ok {
+		x := (v.(string))
+		o.SetSupportedHypervisorType(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1278,6 +1289,10 @@ func resourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.Res
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in HyperflexHealthCheckDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("supported_hypervisor_type", (s.GetSupportedHypervisorType())); err != nil {
+		return diag.Errorf("error occurred while setting property SupportedHypervisorType in HyperflexHealthCheckDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
@@ -1700,6 +1715,12 @@ func resourceHyperflexHealthCheckDefinitionUpdate(c context.Context, d *schema.R
 		v := d.Get("shared_scope")
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if d.HasChange("supported_hypervisor_type") {
+		v := d.Get("supported_hypervisor_type")
+		x := (v.(string))
+		o.SetSupportedHypervisorType(x)
 	}
 
 	if d.HasChange("tags") {

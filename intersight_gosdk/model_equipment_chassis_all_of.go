@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
  *
- * API version: 1.0.9-4375
+ * API version: 1.0.9-4403
  * Contact: intersight@cisco.com
  */
 
@@ -52,14 +52,16 @@ type EquipmentChassisAllOf struct {
 	// This field identifies the Vendor ID for the chassis enclosure.
 	Vid *string `json:"Vid,omitempty"`
 	// An array of relationships to computeBlade resources.
-	Blades []ComputeBladeRelationship `json:"Blades,omitempty"`
+	Blades     []ComputeBladeRelationship       `json:"Blades,omitempty"`
+	FanControl *EquipmentFanControlRelationship `json:"FanControl,omitempty"`
 	// An array of relationships to equipmentFanModule resources.
 	Fanmodules          []EquipmentFanModuleRelationship `json:"Fanmodules,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to equipmentIoCard resources.
-	Ioms       []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
-	LocatorLed *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
-	PsuControl *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
+	Ioms              []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
+	LocatorLed        *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+	PowerControlState *PowerControlStateRelationship   `json:"PowerControlState,omitempty"`
+	PsuControl        *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
 	// An array of relationships to equipmentPsu resources.
 	Psus             []EquipmentPsuRelationship           `json:"Psus,omitempty"`
 	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -708,6 +710,38 @@ func (o *EquipmentChassisAllOf) SetBlades(v []ComputeBladeRelationship) {
 	o.Blades = v
 }
 
+// GetFanControl returns the FanControl field value if set, zero value otherwise.
+func (o *EquipmentChassisAllOf) GetFanControl() EquipmentFanControlRelationship {
+	if o == nil || o.FanControl == nil {
+		var ret EquipmentFanControlRelationship
+		return ret
+	}
+	return *o.FanControl
+}
+
+// GetFanControlOk returns a tuple with the FanControl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassisAllOf) GetFanControlOk() (*EquipmentFanControlRelationship, bool) {
+	if o == nil || o.FanControl == nil {
+		return nil, false
+	}
+	return o.FanControl, true
+}
+
+// HasFanControl returns a boolean if a field has been set.
+func (o *EquipmentChassisAllOf) HasFanControl() bool {
+	if o != nil && o.FanControl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFanControl gets a reference to the given EquipmentFanControlRelationship and assigns it to the FanControl field.
+func (o *EquipmentChassisAllOf) SetFanControl(v EquipmentFanControlRelationship) {
+	o.FanControl = &v
+}
+
 // GetFanmodules returns the Fanmodules field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EquipmentChassisAllOf) GetFanmodules() []EquipmentFanModuleRelationship {
 	if o == nil {
@@ -836,6 +870,38 @@ func (o *EquipmentChassisAllOf) HasLocatorLed() bool {
 // SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *EquipmentChassisAllOf) SetLocatorLed(v EquipmentLocatorLedRelationship) {
 	o.LocatorLed = &v
+}
+
+// GetPowerControlState returns the PowerControlState field value if set, zero value otherwise.
+func (o *EquipmentChassisAllOf) GetPowerControlState() PowerControlStateRelationship {
+	if o == nil || o.PowerControlState == nil {
+		var ret PowerControlStateRelationship
+		return ret
+	}
+	return *o.PowerControlState
+}
+
+// GetPowerControlStateOk returns a tuple with the PowerControlState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassisAllOf) GetPowerControlStateOk() (*PowerControlStateRelationship, bool) {
+	if o == nil || o.PowerControlState == nil {
+		return nil, false
+	}
+	return o.PowerControlState, true
+}
+
+// HasPowerControlState returns a boolean if a field has been set.
+func (o *EquipmentChassisAllOf) HasPowerControlState() bool {
+	if o != nil && o.PowerControlState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerControlState gets a reference to the given PowerControlStateRelationship and assigns it to the PowerControlState field.
+func (o *EquipmentChassisAllOf) SetPowerControlState(v PowerControlStateRelationship) {
+	o.PowerControlState = &v
 }
 
 // GetPsuControl returns the PsuControl field value if set, zero value otherwise.
@@ -1126,6 +1192,9 @@ func (o EquipmentChassisAllOf) MarshalJSON() ([]byte, error) {
 	if o.Blades != nil {
 		toSerialize["Blades"] = o.Blades
 	}
+	if o.FanControl != nil {
+		toSerialize["FanControl"] = o.FanControl
+	}
 	if o.Fanmodules != nil {
 		toSerialize["Fanmodules"] = o.Fanmodules
 	}
@@ -1137,6 +1206,9 @@ func (o EquipmentChassisAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.LocatorLed != nil {
 		toSerialize["LocatorLed"] = o.LocatorLed
+	}
+	if o.PowerControlState != nil {
+		toSerialize["PowerControlState"] = o.PowerControlState
 	}
 	if o.PsuControl != nil {
 		toSerialize["PsuControl"] = o.PsuControl
@@ -1196,10 +1268,12 @@ func (o *EquipmentChassisAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Sku")
 		delete(additionalProperties, "Vid")
 		delete(additionalProperties, "Blades")
+		delete(additionalProperties, "FanControl")
 		delete(additionalProperties, "Fanmodules")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "Ioms")
 		delete(additionalProperties, "LocatorLed")
+		delete(additionalProperties, "PowerControlState")
 		delete(additionalProperties, "PsuControl")
 		delete(additionalProperties, "Psus")
 		delete(additionalProperties, "RegisteredDevice")

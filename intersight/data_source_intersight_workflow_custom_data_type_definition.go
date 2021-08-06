@@ -190,6 +190,8 @@ func dataSourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema
 
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cloned_from"] = flattenMapWorkflowCustomDataTypeDefinitionRelationship(s.GetClonedFrom(), d)
 				temp["composite_type"] = (s.GetCompositeType())
 
 				temp["create_time"] = (s.GetCreateTime()).String()

@@ -762,6 +762,27 @@ func flattenListCloudCustomAttributes(p []models.CloudCustomAttributes, d *schem
 	}
 	return cloudcustomattributess
 }
+func flattenListCloudTfcWorkspaceVariables(p []models.CloudTfcWorkspaceVariables, d *schema.ResourceData) []map[string]interface{} {
+	var cloudtfcworkspacevariabless []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		cloudtfcworkspacevariables := make(map[string]interface{})
+		cloudtfcworkspacevariables["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		cloudtfcworkspacevariables["category"] = item.GetCategory()
+		cloudtfcworkspacevariables["class_id"] = item.GetClassId()
+		cloudtfcworkspacevariables["description"] = item.GetDescription()
+		cloudtfcworkspacevariables["hcl"] = item.GetHcl()
+		cloudtfcworkspacevariables["identity"] = item.GetIdentity()
+		cloudtfcworkspacevariables["key"] = item.GetKey()
+		cloudtfcworkspacevariables["object_type"] = item.GetObjectType()
+		cloudtfcworkspacevariables["sensitive"] = item.GetSensitive()
+		cloudtfcworkspacevariables["value"] = item.GetValue()
+		cloudtfcworkspacevariabless = append(cloudtfcworkspacevariabless, cloudtfcworkspacevariables)
+	}
+	return cloudtfcworkspacevariabless
+}
 func flattenListComputeBladeRelationship(p []models.ComputeBladeRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var computebladerelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -4246,6 +4267,23 @@ func flattenListOsPlaceHolder(p []models.OsPlaceHolder, d *schema.ResourceData) 
 						workflowmoreferenceproperty["display_attributes"] = item.GetDisplayAttributes()
 						workflowmoreferenceproperty["object_type"] = item.GetObjectType()
 						workflowmoreferenceproperty["selector"] = item.GetSelector()
+						workflowmoreferenceproperty["selector_property"] = (func(p models.WorkflowSelectorProperty, d *schema.ResourceData) []map[string]interface{} {
+							var workflowselectorpropertys []map[string]interface{}
+							var ret models.WorkflowSelectorProperty
+							if reflect.DeepEqual(ret, p) {
+								return nil
+							}
+							item := p
+							workflowselectorproperty := make(map[string]interface{})
+							workflowselectorproperty["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+							workflowselectorproperty["body"] = flattenAdditionalProperties(item.Body)
+							workflowselectorproperty["class_id"] = item.GetClassId()
+							workflowselectorproperty["method"] = item.GetMethod()
+							workflowselectorproperty["object_type"] = item.GetObjectType()
+
+							workflowselectorpropertys = append(workflowselectorpropertys, workflowselectorproperty)
+							return workflowselectorpropertys
+						})(item.GetSelectorProperty(), d)
 						workflowmoreferenceproperty["value_attribute"] = item.GetValueAttribute()
 						workflowmoreferencepropertys = append(workflowmoreferencepropertys, workflowmoreferenceproperty)
 					}
@@ -4392,6 +4430,23 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 								workflowmoreferenceproperty["display_attributes"] = item.GetDisplayAttributes()
 								workflowmoreferenceproperty["object_type"] = item.GetObjectType()
 								workflowmoreferenceproperty["selector"] = item.GetSelector()
+								workflowmoreferenceproperty["selector_property"] = (func(p models.WorkflowSelectorProperty, d *schema.ResourceData) []map[string]interface{} {
+									var workflowselectorpropertys []map[string]interface{}
+									var ret models.WorkflowSelectorProperty
+									if reflect.DeepEqual(ret, p) {
+										return nil
+									}
+									item := p
+									workflowselectorproperty := make(map[string]interface{})
+									workflowselectorproperty["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+									workflowselectorproperty["body"] = flattenAdditionalProperties(item.Body)
+									workflowselectorproperty["class_id"] = item.GetClassId()
+									workflowselectorproperty["method"] = item.GetMethod()
+									workflowselectorproperty["object_type"] = item.GetObjectType()
+
+									workflowselectorpropertys = append(workflowselectorpropertys, workflowselectorproperty)
+									return workflowselectorpropertys
+								})(item.GetSelectorProperty(), d)
 								workflowmoreferenceproperty["value_attribute"] = item.GetValueAttribute()
 								workflowmoreferencepropertys = append(workflowmoreferencepropertys, workflowmoreferenceproperty)
 							}
@@ -7242,6 +7297,90 @@ func flattenMapCapabilitySwitchSystemLimits(p models.CapabilitySwitchSystemLimit
 	capabilityswitchsystemlimitss = append(capabilityswitchsystemlimitss, capabilityswitchsystemlimits)
 	return capabilityswitchsystemlimitss
 }
+func flattenMapCertificatemanagementCertificateBase(p models.CertificatemanagementCertificateBase, d *schema.ResourceData) []map[string]interface{} {
+	var certificatemanagementcertificatebases []map[string]interface{}
+	var ret models.CertificatemanagementCertificateBase
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	certificatemanagementcertificatebase := make(map[string]interface{})
+	certificatemanagementcertificatebase["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	certificatemanagementcertificatebase["certificate"] = (func(p models.X509Certificate, d *schema.ResourceData) []map[string]interface{} {
+		var x509certificates []map[string]interface{}
+		var ret models.X509Certificate
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		x509certificate := make(map[string]interface{})
+		x509certificate["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		x509certificate["class_id"] = item.GetClassId()
+		x509certificate["issuer"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+			var pkixdistinguishednames []map[string]interface{}
+			var ret models.PkixDistinguishedName
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			pkixdistinguishedname := make(map[string]interface{})
+			pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			pkixdistinguishedname["class_id"] = item.GetClassId()
+			pkixdistinguishedname["common_name"] = item.GetCommonName()
+			pkixdistinguishedname["country"] = item.GetCountry()
+			pkixdistinguishedname["locality"] = item.GetLocality()
+			pkixdistinguishedname["object_type"] = item.GetObjectType()
+			pkixdistinguishedname["organization"] = item.GetOrganization()
+			pkixdistinguishedname["organizational_unit"] = item.GetOrganizationalUnit()
+			pkixdistinguishedname["state"] = item.GetState()
+
+			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+			return pkixdistinguishednames
+		})(item.GetIssuer(), d)
+		x509certificate["not_after"] = item.GetNotAfter()
+		x509certificate["not_before"] = item.GetNotBefore()
+		x509certificate["object_type"] = item.GetObjectType()
+		x509certificate["pem_certificate"] = item.GetPemCertificate()
+		x509certificate["sha256_fingerprint"] = item.GetSha256Fingerprint()
+		x509certificate["signature_algorithm"] = item.GetSignatureAlgorithm()
+		x509certificate["subject"] = (func(p models.PkixDistinguishedName, d *schema.ResourceData) []map[string]interface{} {
+			var pkixdistinguishednames []map[string]interface{}
+			var ret models.PkixDistinguishedName
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			pkixdistinguishedname := make(map[string]interface{})
+			pkixdistinguishedname["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			pkixdistinguishedname["class_id"] = item.GetClassId()
+			pkixdistinguishedname["common_name"] = item.GetCommonName()
+			pkixdistinguishedname["country"] = item.GetCountry()
+			pkixdistinguishedname["locality"] = item.GetLocality()
+			pkixdistinguishedname["object_type"] = item.GetObjectType()
+			pkixdistinguishedname["organization"] = item.GetOrganization()
+			pkixdistinguishedname["organizational_unit"] = item.GetOrganizationalUnit()
+			pkixdistinguishedname["state"] = item.GetState()
+
+			pkixdistinguishednames = append(pkixdistinguishednames, pkixdistinguishedname)
+			return pkixdistinguishednames
+		})(item.GetSubject(), d)
+
+		x509certificates = append(x509certificates, x509certificate)
+		return x509certificates
+	})(item.GetCertificate(), d)
+	certificatemanagementcertificatebase["class_id"] = item.GetClassId()
+	certificatemanagementcertificatebase["enabled"] = item.GetEnabled()
+	certificatemanagementcertificatebase["is_privatekey_set"] = item.GetIsPrivatekeySet()
+	certificatemanagementcertificatebase["object_type"] = item.GetObjectType()
+	privatekey_x, exists := d.GetOk("certificates_action")
+	if exists && privatekey_x != nil {
+		privatekey_y := privatekey_x.([]interface{})[0].(map[string]interface{})
+		certificatemanagementcertificatebase["privatekey"] = privatekey_y["privatekey"]
+	}
+
+	certificatemanagementcertificatebases = append(certificatemanagementcertificatebases, certificatemanagementcertificatebase)
+	return certificatemanagementcertificatebases
+}
 func flattenMapChassisConfigResultRelationship(p models.ChassisConfigResultRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var chassisconfigresultrelationships []map[string]interface{}
 	var ret models.ChassisConfigResultRelationship
@@ -7277,6 +7416,24 @@ func flattenMapChassisProfileRelationship(p models.ChassisProfileRelationship, d
 
 	chassisprofilerelationships = append(chassisprofilerelationships, chassisprofilerelationship)
 	return chassisprofilerelationships
+}
+func flattenMapCloudTfcOrganizationRelationship(p models.CloudTfcOrganizationRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var cloudtfcorganizationrelationships []map[string]interface{}
+	var ret models.CloudTfcOrganizationRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	cloudtfcorganizationrelationship := make(map[string]interface{})
+	cloudtfcorganizationrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	cloudtfcorganizationrelationship["class_id"] = item.GetClassId()
+	cloudtfcorganizationrelationship["moid"] = item.GetMoid()
+	cloudtfcorganizationrelationship["object_type"] = item.GetObjectType()
+	cloudtfcorganizationrelationship["selector"] = item.GetSelector()
+
+	cloudtfcorganizationrelationships = append(cloudtfcorganizationrelationships, cloudtfcorganizationrelationship)
+	return cloudtfcorganizationrelationships
 }
 func flattenMapCommHttpProxyPolicyRelationship(p models.CommHttpProxyPolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var commhttpproxypolicyrelationships []map[string]interface{}
@@ -7746,6 +7903,24 @@ func flattenMapEquipmentChassisRelationship(p models.EquipmentChassisRelationshi
 
 	equipmentchassisrelationships = append(equipmentchassisrelationships, equipmentchassisrelationship)
 	return equipmentchassisrelationships
+}
+func flattenMapEquipmentFanControlRelationship(p models.EquipmentFanControlRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var equipmentfancontrolrelationships []map[string]interface{}
+	var ret models.EquipmentFanControlRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	equipmentfancontrolrelationship := make(map[string]interface{})
+	equipmentfancontrolrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	equipmentfancontrolrelationship["class_id"] = item.GetClassId()
+	equipmentfancontrolrelationship["moid"] = item.GetMoid()
+	equipmentfancontrolrelationship["object_type"] = item.GetObjectType()
+	equipmentfancontrolrelationship["selector"] = item.GetSelector()
+
+	equipmentfancontrolrelationships = append(equipmentfancontrolrelationships, equipmentfancontrolrelationship)
+	return equipmentfancontrolrelationships
 }
 func flattenMapEquipmentFanModuleRelationship(p models.EquipmentFanModuleRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var equipmentfanmodulerelationships []map[string]interface{}
@@ -13207,6 +13382,24 @@ func flattenMapPortSubGroupRelationship(p models.PortSubGroupRelationship, d *sc
 	portsubgrouprelationships = append(portsubgrouprelationships, portsubgrouprelationship)
 	return portsubgrouprelationships
 }
+func flattenMapPowerControlStateRelationship(p models.PowerControlStateRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var powercontrolstaterelationships []map[string]interface{}
+	var ret models.PowerControlStateRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	powercontrolstaterelationship := make(map[string]interface{})
+	powercontrolstaterelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	powercontrolstaterelationship["class_id"] = item.GetClassId()
+	powercontrolstaterelationship["moid"] = item.GetMoid()
+	powercontrolstaterelationship["object_type"] = item.GetObjectType()
+	powercontrolstaterelationship["selector"] = item.GetSelector()
+
+	powercontrolstaterelationships = append(powercontrolstaterelationships, powercontrolstaterelationship)
+	return powercontrolstaterelationships
+}
 func flattenMapRecommendationCapacityRunwayRelationship(p models.RecommendationCapacityRunwayRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var recommendationcapacityrunwayrelationships []map[string]interface{}
 	var ret models.RecommendationCapacityRunwayRelationship
@@ -15801,6 +15994,24 @@ func flattenMapWorkflowComments(p models.WorkflowComments, d *schema.ResourceDat
 	workflowcommentss = append(workflowcommentss, workflowcomments)
 	return workflowcommentss
 }
+func flattenMapWorkflowCustomDataTypeDefinitionRelationship(p models.WorkflowCustomDataTypeDefinitionRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var workflowcustomdatatypedefinitionrelationships []map[string]interface{}
+	var ret models.WorkflowCustomDataTypeDefinitionRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	workflowcustomdatatypedefinitionrelationship := make(map[string]interface{})
+	workflowcustomdatatypedefinitionrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workflowcustomdatatypedefinitionrelationship["class_id"] = item.GetClassId()
+	workflowcustomdatatypedefinitionrelationship["moid"] = item.GetMoid()
+	workflowcustomdatatypedefinitionrelationship["object_type"] = item.GetObjectType()
+	workflowcustomdatatypedefinitionrelationship["selector"] = item.GetSelector()
+
+	workflowcustomdatatypedefinitionrelationships = append(workflowcustomdatatypedefinitionrelationships, workflowcustomdatatypedefinitionrelationship)
+	return workflowcustomdatatypedefinitionrelationships
+}
 func flattenMapWorkflowCustomDataTypeProperties(p models.WorkflowCustomDataTypeProperties, d *schema.ResourceData) []map[string]interface{} {
 	var workflowcustomdatatypepropertiess []map[string]interface{}
 	var ret models.WorkflowCustomDataTypeProperties
@@ -15811,6 +16022,7 @@ func flattenMapWorkflowCustomDataTypeProperties(p models.WorkflowCustomDataTypeP
 	workflowcustomdatatypeproperties := make(map[string]interface{})
 	workflowcustomdatatypeproperties["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
 	workflowcustomdatatypeproperties["class_id"] = item.GetClassId()
+	workflowcustomdatatypeproperties["cloneable"] = item.GetCloneable()
 	workflowcustomdatatypeproperties["external_meta"] = item.GetExternalMeta()
 	workflowcustomdatatypeproperties["object_type"] = item.GetObjectType()
 

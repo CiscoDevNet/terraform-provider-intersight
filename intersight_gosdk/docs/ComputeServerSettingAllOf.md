@@ -8,7 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.ServerSetting"]
 **AdminLocatorLedState** | Pointer to **string** | User configured state of the locator LED for the server. * &#x60;None&#x60; - No operation property for locator led. * &#x60;On&#x60; - The Locator Led is turned on. * &#x60;Off&#x60; - The Locator Led is turned off. | [optional] [default to "None"]
 **AdminPowerState** | Pointer to **string** | User configured power state of the server. * &#x60;Policy&#x60; - Power state is set to the default value in the policy. * &#x60;PowerOn&#x60; - Power state of the server is set to On. * &#x60;PowerOff&#x60; - Power state is the server set to Off. * &#x60;PowerCycle&#x60; - Power state the server is reset. * &#x60;HardReset&#x60; - Power state the server is hard reset. * &#x60;Shutdown&#x60; - Operating system on the server is shut down. * &#x60;Reboot&#x60; - Power state of IMC is rebooted. | [optional] [default to "Policy"]
+**CertificatesAction** | Pointer to [**NullableCertificatemanagementCertificateBase**](certificatemanagement.CertificateBase.md) |  | [optional] 
+**CmosReset** | Pointer to **string** | The allowed actions on the CMOS Reset. * &#x60;Ready&#x60; - CMOS Reset operation is allowed to be done on the server in this state. * &#x60;Pending&#x60; - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server. | [optional] [default to "Ready"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
+**FrontPanelLockState** | Pointer to **string** | The allowed actions on the Front Panel Lock. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. | [optional] [default to "Unlock"]
 **Name** | Pointer to **string** | The property used to identify the name of the server it is associated with. | [optional] [readonly] 
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](compute.PersistentMemoryOperation.md) |  | [optional] 
@@ -130,6 +133,66 @@ SetAdminPowerState sets AdminPowerState field to given value.
 
 HasAdminPowerState returns a boolean if a field has been set.
 
+### GetCertificatesAction
+
+`func (o *ComputeServerSettingAllOf) GetCertificatesAction() CertificatemanagementCertificateBase`
+
+GetCertificatesAction returns the CertificatesAction field if non-nil, zero value otherwise.
+
+### GetCertificatesActionOk
+
+`func (o *ComputeServerSettingAllOf) GetCertificatesActionOk() (*CertificatemanagementCertificateBase, bool)`
+
+GetCertificatesActionOk returns a tuple with the CertificatesAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificatesAction
+
+`func (o *ComputeServerSettingAllOf) SetCertificatesAction(v CertificatemanagementCertificateBase)`
+
+SetCertificatesAction sets CertificatesAction field to given value.
+
+### HasCertificatesAction
+
+`func (o *ComputeServerSettingAllOf) HasCertificatesAction() bool`
+
+HasCertificatesAction returns a boolean if a field has been set.
+
+### SetCertificatesActionNil
+
+`func (o *ComputeServerSettingAllOf) SetCertificatesActionNil(b bool)`
+
+ SetCertificatesActionNil sets the value for CertificatesAction to be an explicit nil
+
+### UnsetCertificatesAction
+`func (o *ComputeServerSettingAllOf) UnsetCertificatesAction()`
+
+UnsetCertificatesAction ensures that no value is present for CertificatesAction, not even an explicit nil
+### GetCmosReset
+
+`func (o *ComputeServerSettingAllOf) GetCmosReset() string`
+
+GetCmosReset returns the CmosReset field if non-nil, zero value otherwise.
+
+### GetCmosResetOk
+
+`func (o *ComputeServerSettingAllOf) GetCmosResetOk() (*string, bool)`
+
+GetCmosResetOk returns a tuple with the CmosReset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCmosReset
+
+`func (o *ComputeServerSettingAllOf) SetCmosReset(v string)`
+
+SetCmosReset sets CmosReset field to given value.
+
+### HasCmosReset
+
+`func (o *ComputeServerSettingAllOf) HasCmosReset() bool`
+
+HasCmosReset returns a boolean if a field has been set.
+
 ### GetConfigState
 
 `func (o *ComputeServerSettingAllOf) GetConfigState() string`
@@ -154,6 +217,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *ComputeServerSettingAllOf) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetFrontPanelLockState
+
+`func (o *ComputeServerSettingAllOf) GetFrontPanelLockState() string`
+
+GetFrontPanelLockState returns the FrontPanelLockState field if non-nil, zero value otherwise.
+
+### GetFrontPanelLockStateOk
+
+`func (o *ComputeServerSettingAllOf) GetFrontPanelLockStateOk() (*string, bool)`
+
+GetFrontPanelLockStateOk returns a tuple with the FrontPanelLockState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFrontPanelLockState
+
+`func (o *ComputeServerSettingAllOf) SetFrontPanelLockState(v string)`
+
+SetFrontPanelLockState sets FrontPanelLockState field to given value.
+
+### HasFrontPanelLockState
+
+`func (o *ComputeServerSettingAllOf) HasFrontPanelLockState() bool`
+
+HasFrontPanelLockState returns a boolean if a field has been set.
 
 ### GetName
 

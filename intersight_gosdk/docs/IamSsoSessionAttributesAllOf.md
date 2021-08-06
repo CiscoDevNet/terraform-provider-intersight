@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.SsoSessionAttributes"]
 **IdpSessionExpiration** | Pointer to **string** | SAML SessionNotOnOrAfter attribute sent by IdP in the assertion. IdP uses this to control for how long SP session maybe. SP does not issue SLO if the session is not valid. | [optional] [readonly] 
 **IdpSessionIndex** | Pointer to **string** | SAML SessionIndex attribute sent by IdP in the assertion. This has to be sent back to IdP in LogoutRequest. | [optional] [readonly] 
+**IsIdpInitiatedSso** | Pointer to **bool** | Sign-in is SP-Intitiated or IdP-Intitiated. | [optional] [readonly] 
 **SubjectName** | Pointer to **string** | SAML Subject NameID attribute sent by IdP in the assertion. This has to be sent back to IdP in LogoutRequest. | [optional] [readonly] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetIdpSessionIndex sets IdpSessionIndex field to given value.
 `func (o *IamSsoSessionAttributesAllOf) HasIdpSessionIndex() bool`
 
 HasIdpSessionIndex returns a boolean if a field has been set.
+
+### GetIsIdpInitiatedSso
+
+`func (o *IamSsoSessionAttributesAllOf) GetIsIdpInitiatedSso() bool`
+
+GetIsIdpInitiatedSso returns the IsIdpInitiatedSso field if non-nil, zero value otherwise.
+
+### GetIsIdpInitiatedSsoOk
+
+`func (o *IamSsoSessionAttributesAllOf) GetIsIdpInitiatedSsoOk() (*bool, bool)`
+
+GetIsIdpInitiatedSsoOk returns a tuple with the IsIdpInitiatedSso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsIdpInitiatedSso
+
+`func (o *IamSsoSessionAttributesAllOf) SetIsIdpInitiatedSso(v bool)`
+
+SetIsIdpInitiatedSso sets IsIdpInitiatedSso field to given value.
+
+### HasIsIdpInitiatedSso
+
+`func (o *IamSsoSessionAttributesAllOf) HasIsIdpInitiatedSso() bool`
+
+HasIsIdpInitiatedSso returns a boolean if a field has been set.
 
 ### GetSubjectName
 

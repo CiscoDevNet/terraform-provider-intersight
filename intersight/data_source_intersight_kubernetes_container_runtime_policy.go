@@ -40,7 +40,7 @@ func dataSourceKubernetesContainerRuntimePolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"docker_bridge_network_cidr": {
-				Description: "The CIDR for docker bridge network. This address space must not collide with other CIDRs on your networks, including the cluster's service CIDR, pod CIDR and IP Pools.",
+				Description: "Bridge IP (--bip) including Prefix (e.g., 172.17.0.5/24) that Docker will use for the default bridge network (docker0). Containers will connect to this if no other network is configured, not used by kubernetes pods because their network is managed by CNI. However this address space must not collide with other CIDRs on your networks, including the cluster's Service CIDR, Pod Network CIDR and IP Pools.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

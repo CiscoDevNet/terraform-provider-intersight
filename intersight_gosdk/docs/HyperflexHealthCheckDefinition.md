@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Resolution** | Pointer to **string** | Static information detailing the possible remediation actions that can be taken to remedy the health check failure. | [optional] 
 **ScriptExecutionMode** | Pointer to **string** | Execution mode of the health script on the HyperFlex cluster. * &#x60;ON_DEMAND&#x60; - Execute the health check on-demand. * &#x60;SCHEDULED&#x60; - Execute the health check on a scheduled interval. | [optional] [default to "ON_DEMAND"]
 **ScriptExecutionOnComputeNodes** | Pointer to **bool** | Indicates if the script needs to be executed on HyperFlex compute nodes. | Typically, scripts are only executed on the storage Nodes. | [optional] 
+**SupportedHypervisorType** | Pointer to **string** | Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic). * &#x60;All&#x60; - The Health Check is hypervisor-agnostic. * &#x60;ESXi&#x60; - The Health Check is supported only on Vmware ESXi hypervisor of any version. * &#x60;IWE&#x60; - The Health Check is supported only on Cisco IWE platform. * &#x60;HyperV&#x60; - The Health Check is supported only on Microsoft HyperV hypervisor. | [optional] [readonly] [default to "All"]
 **TargetExecutionType** | Pointer to **string** | Indicates whether the health check is executed only on the leader node, or on all nodes in the HyperFlex cluster. * &#x60;EXECUTE_ON_LEADER_NODE&#x60; - Execute the health check script only on the HyperFlex cluster&#39;s leader node. * &#x60;EXECUTE_ON_ALL_NODES&#x60; - Execute health check on all nodes and aggregate the results. * &#x60;EXECUTE_ON_ALL_NODES_AND_AGGREGATE&#x60; - Execute the health check on all Nodes and perform custom aggregation. | [optional] [default to "EXECUTE_ON_LEADER_NODE"]
 **Timeout** | Pointer to **int64** | Health check script execution timeout. | [optional] 
 **UnsupportedHyperFlexVersions** | Pointer to **[]string** |  | [optional] 
@@ -452,6 +453,31 @@ SetScriptExecutionOnComputeNodes sets ScriptExecutionOnComputeNodes field to giv
 `func (o *HyperflexHealthCheckDefinition) HasScriptExecutionOnComputeNodes() bool`
 
 HasScriptExecutionOnComputeNodes returns a boolean if a field has been set.
+
+### GetSupportedHypervisorType
+
+`func (o *HyperflexHealthCheckDefinition) GetSupportedHypervisorType() string`
+
+GetSupportedHypervisorType returns the SupportedHypervisorType field if non-nil, zero value otherwise.
+
+### GetSupportedHypervisorTypeOk
+
+`func (o *HyperflexHealthCheckDefinition) GetSupportedHypervisorTypeOk() (*string, bool)`
+
+GetSupportedHypervisorTypeOk returns a tuple with the SupportedHypervisorType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedHypervisorType
+
+`func (o *HyperflexHealthCheckDefinition) SetSupportedHypervisorType(v string)`
+
+SetSupportedHypervisorType sets SupportedHypervisorType field to given value.
+
+### HasSupportedHypervisorType
+
+`func (o *HyperflexHealthCheckDefinition) HasSupportedHypervisorType() bool`
+
+HasSupportedHypervisorType returns a boolean if a field has been set.
 
 ### GetTargetExecutionType
 

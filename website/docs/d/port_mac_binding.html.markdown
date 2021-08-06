@@ -16,12 +16,22 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `aggregate_port_id`:(int) Aggregate Port ID of the local Switch Interface. 
 * `chassis_id`:(int) Chassis/FEX device idetifier that is local to a cluster. 
+* `chassis_model`:(string) Chassis/Rack Model that is associated with the Switch/FEX interface. 
+* `chassis_serial`:(string) Chassis/Rack Serial that is associated with the Switch/FEX interface. 
+* `chassis_vendor`:(string) Chassis/Rack Vendor that is associated with the Switch/FEX interface. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mac`:(string) Device ID value that is advertised and available as a part of LLDP TLV. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
+* `module_mode`:(int) IOM/SIOC/Adapter Mode that is associated with the Switch/FEX interface. 
+* `module_model`:(string) IOM/SIOC/Adapter Model that is associated with the Switch/FEX interface. 
+* `module_port_id`:(int) Uplink port identifier of the VIC that is associated with the Switch/FEX interface. 
+* `module_serial`:(string) IOM/SIOC/Adapter Serial that is associated with the Switch/FEX interface. 
+* `module_side`:(int) IOM/SIOC/Adapter Side that is associated with the Switch/FEX interface. 
+* `module_slot`:(int) IOM/SIOC/Adapter Slot that is associated with the Switch/FEX interface. 
+* `module_vendor`:(string) IOM/SIOC/Adapter Vendor that is associated with the Switch/FEX interface. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `port_id`:(int) Port ID of the local Switch Interface. 
 * `port_mac`:(string) Port ID value that is advertised and available as a part of LLDP TLV. 

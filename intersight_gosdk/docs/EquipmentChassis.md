@@ -23,10 +23,12 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the chassis enclosure. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the chassis enclosure. | [optional] [readonly] 
 **Blades** | Pointer to [**[]ComputeBladeRelationship**](ComputeBladeRelationship.md) | An array of relationships to computeBlade resources. | [optional] [readonly] 
+**FanControl** | Pointer to [**EquipmentFanControlRelationship**](equipment.FanControl.Relationship.md) |  | [optional] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **Ioms** | Pointer to [**[]EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) | An array of relationships to equipmentIoCard resources. | [optional] [readonly] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](equipment.LocatorLed.Relationship.md) |  | [optional] 
+**PowerControlState** | Pointer to [**PowerControlStateRelationship**](power.ControlState.Relationship.md) |  | [optional] 
 **PsuControl** | Pointer to [**EquipmentPsuControlRelationship**](equipment.PsuControl.Relationship.md) |  | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -549,6 +551,31 @@ HasBlades returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetBlades()`
 
 UnsetBlades ensures that no value is present for Blades, not even an explicit nil
+### GetFanControl
+
+`func (o *EquipmentChassis) GetFanControl() EquipmentFanControlRelationship`
+
+GetFanControl returns the FanControl field if non-nil, zero value otherwise.
+
+### GetFanControlOk
+
+`func (o *EquipmentChassis) GetFanControlOk() (*EquipmentFanControlRelationship, bool)`
+
+GetFanControlOk returns a tuple with the FanControl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFanControl
+
+`func (o *EquipmentChassis) SetFanControl(v EquipmentFanControlRelationship)`
+
+SetFanControl sets FanControl field to given value.
+
+### HasFanControl
+
+`func (o *EquipmentChassis) HasFanControl() bool`
+
+HasFanControl returns a boolean if a field has been set.
+
 ### GetFanmodules
 
 `func (o *EquipmentChassis) GetFanmodules() []EquipmentFanModuleRelationship`
@@ -668,6 +695,31 @@ SetLocatorLed sets LocatorLed field to given value.
 `func (o *EquipmentChassis) HasLocatorLed() bool`
 
 HasLocatorLed returns a boolean if a field has been set.
+
+### GetPowerControlState
+
+`func (o *EquipmentChassis) GetPowerControlState() PowerControlStateRelationship`
+
+GetPowerControlState returns the PowerControlState field if non-nil, zero value otherwise.
+
+### GetPowerControlStateOk
+
+`func (o *EquipmentChassis) GetPowerControlStateOk() (*PowerControlStateRelationship, bool)`
+
+GetPowerControlStateOk returns a tuple with the PowerControlState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerControlState
+
+`func (o *EquipmentChassis) SetPowerControlState(v PowerControlStateRelationship)`
+
+SetPowerControlState sets PowerControlState field to given value.
+
+### HasPowerControlState
+
+`func (o *EquipmentChassis) HasPowerControlState() bool`
+
+HasPowerControlState returns a boolean if a field has been set.
 
 ### GetPsuControl
 

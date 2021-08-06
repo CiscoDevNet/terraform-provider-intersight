@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-06-30T12:14:04Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
  *
- * API version: 1.0.9-4375
+ * API version: 1.0.9-4403
  * Contact: intersight@cisco.com
  */
 
@@ -28,11 +28,12 @@ type WorkflowCustomDataTypeDefinitionAllOf struct {
 	// A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_).
 	Label *string `json:"Label,omitempty"`
 	// The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters '-' and '_'.
-	Name                 *string                                  `json:"Name,omitempty"`
-	ParameterSet         []WorkflowParameterSet                   `json:"ParameterSet,omitempty"`
-	Properties           NullableWorkflowCustomDataTypeProperties `json:"Properties,omitempty"`
-	TypeDefinition       []WorkflowBaseDataType                   `json:"TypeDefinition,omitempty"`
-	Catalog              *WorkflowCatalogRelationship             `json:"Catalog,omitempty"`
+	Name                 *string                                       `json:"Name,omitempty"`
+	ParameterSet         []WorkflowParameterSet                        `json:"ParameterSet,omitempty"`
+	Properties           NullableWorkflowCustomDataTypeProperties      `json:"Properties,omitempty"`
+	TypeDefinition       []WorkflowBaseDataType                        `json:"TypeDefinition,omitempty"`
+	Catalog              *WorkflowCatalogRelationship                  `json:"Catalog,omitempty"`
+	ClonedFrom           *WorkflowCustomDataTypeDefinitionRelationship `json:"ClonedFrom,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -382,6 +383,38 @@ func (o *WorkflowCustomDataTypeDefinitionAllOf) SetCatalog(v WorkflowCatalogRela
 	o.Catalog = &v
 }
 
+// GetClonedFrom returns the ClonedFrom field value if set, zero value otherwise.
+func (o *WorkflowCustomDataTypeDefinitionAllOf) GetClonedFrom() WorkflowCustomDataTypeDefinitionRelationship {
+	if o == nil || o.ClonedFrom == nil {
+		var ret WorkflowCustomDataTypeDefinitionRelationship
+		return ret
+	}
+	return *o.ClonedFrom
+}
+
+// GetClonedFromOk returns a tuple with the ClonedFrom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowCustomDataTypeDefinitionAllOf) GetClonedFromOk() (*WorkflowCustomDataTypeDefinitionRelationship, bool) {
+	if o == nil || o.ClonedFrom == nil {
+		return nil, false
+	}
+	return o.ClonedFrom, true
+}
+
+// HasClonedFrom returns a boolean if a field has been set.
+func (o *WorkflowCustomDataTypeDefinitionAllOf) HasClonedFrom() bool {
+	if o != nil && o.ClonedFrom != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClonedFrom gets a reference to the given WorkflowCustomDataTypeDefinitionRelationship and assigns it to the ClonedFrom field.
+func (o *WorkflowCustomDataTypeDefinitionAllOf) SetClonedFrom(v WorkflowCustomDataTypeDefinitionRelationship) {
+	o.ClonedFrom = &v
+}
+
 func (o WorkflowCustomDataTypeDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -414,6 +447,9 @@ func (o WorkflowCustomDataTypeDefinitionAllOf) MarshalJSON() ([]byte, error) {
 	if o.Catalog != nil {
 		toSerialize["Catalog"] = o.Catalog
 	}
+	if o.ClonedFrom != nil {
+		toSerialize["ClonedFrom"] = o.ClonedFrom
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -442,6 +478,7 @@ func (o *WorkflowCustomDataTypeDefinitionAllOf) UnmarshalJSON(bytes []byte) (err
 		delete(additionalProperties, "Properties")
 		delete(additionalProperties, "TypeDefinition")
 		delete(additionalProperties, "Catalog")
+		delete(additionalProperties, "ClonedFrom")
 		o.AdditionalProperties = additionalProperties
 	}
 
