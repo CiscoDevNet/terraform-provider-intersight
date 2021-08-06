@@ -1,5 +1,9 @@
 # Change Logs
 
+## v1.0.13
+Release Date: 6th August 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4403)
+
 ## v1.0.12
 Release Date: 9th July 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4375)
