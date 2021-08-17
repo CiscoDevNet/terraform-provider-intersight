@@ -1,5 +1,10 @@
 # Change Logs
 
+## v1.0.14
+Release Date: 17th August 2021
+* Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4430)
+* Prevent user from setting read-only properties in the user configuration
+
 ## v1.0.13
 Release Date: 6th August 2021
 * Refreshes the terraform module to be in sync with the latest Cisco Intersight model (build 4403)
