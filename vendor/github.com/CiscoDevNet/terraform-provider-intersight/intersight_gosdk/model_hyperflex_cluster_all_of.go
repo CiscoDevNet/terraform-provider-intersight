@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -26,12 +26,16 @@ type HyperflexClusterAllOf struct {
 	// The unique identifier for this HyperFlex cluster.
 	ClusterUuid *string `json:"ClusterUuid,omitempty"`
 	// The unique identifier of the device registration that represents this HyperFlex cluster's connection to Intersight.
-	DeviceId *string `json:"DeviceId,omitempty"`
+	DeviceId   *string  `json:"DeviceId,omitempty"`
+	DnsServers []string `json:"DnsServers,omitempty"`
 	// The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms.
 	FltAggr *int64 `json:"FltAggr,omitempty"`
 	// The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version.
 	HxdpBuildVersion *string                  `json:"HxdpBuildVersion,omitempty"`
+	NtpServers       []string                 `json:"NtpServers,omitempty"`
 	Summary          NullableHyperflexSummary `json:"Summary,omitempty"`
+	// The upgrade status of the HyperFlex cluster. * `Unknown` - The upgrade status of the HyperFlex cluster could not be determined. * `Ok` - The upgrade of the HyperFlex cluster is complete. * `InProgress` - The upgrade of the HyperFlex cluster is in-progress. * `Failed` - The upgrade of the HyperFlex cluster has failed. * `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.
+	UpgradeStatus *string `json:"UpgradeStatus,omitempty"`
 	// The number of virtual machines present on this cluster.
 	VmCount *int64 `json:"VmCount,omitempty"`
 	// An array of relationships to hyperflexAlarm resources.
@@ -58,6 +62,8 @@ func NewHyperflexClusterAllOf(classId string, objectType string) *HyperflexClust
 	this := HyperflexClusterAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var upgradeStatus string = "Unknown"
+	this.UpgradeStatus = &upgradeStatus
 	return &this
 }
 
@@ -70,6 +76,8 @@ func NewHyperflexClusterAllOfWithDefaults() *HyperflexClusterAllOf {
 	this.ClassId = classId
 	var objectType string = "hyperflex.Cluster"
 	this.ObjectType = objectType
+	var upgradeStatus string = "Unknown"
+	this.UpgradeStatus = &upgradeStatus
 	return &this
 }
 
@@ -217,6 +225,39 @@ func (o *HyperflexClusterAllOf) SetDeviceId(v string) {
 	o.DeviceId = &v
 }
 
+// GetDnsServers returns the DnsServers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexClusterAllOf) GetDnsServers() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DnsServers
+}
+
+// GetDnsServersOk returns a tuple with the DnsServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexClusterAllOf) GetDnsServersOk() (*[]string, bool) {
+	if o == nil || o.DnsServers == nil {
+		return nil, false
+	}
+	return &o.DnsServers, true
+}
+
+// HasDnsServers returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasDnsServers() bool {
+	if o != nil && o.DnsServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsServers gets a reference to the given []string and assigns it to the DnsServers field.
+func (o *HyperflexClusterAllOf) SetDnsServers(v []string) {
+	o.DnsServers = v
+}
+
 // GetFltAggr returns the FltAggr field value if set, zero value otherwise.
 func (o *HyperflexClusterAllOf) GetFltAggr() int64 {
 	if o == nil || o.FltAggr == nil {
@@ -281,6 +322,39 @@ func (o *HyperflexClusterAllOf) SetHxdpBuildVersion(v string) {
 	o.HxdpBuildVersion = &v
 }
 
+// GetNtpServers returns the NtpServers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexClusterAllOf) GetNtpServers() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.NtpServers
+}
+
+// GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexClusterAllOf) GetNtpServersOk() (*[]string, bool) {
+	if o == nil || o.NtpServers == nil {
+		return nil, false
+	}
+	return &o.NtpServers, true
+}
+
+// HasNtpServers returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasNtpServers() bool {
+	if o != nil && o.NtpServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
+func (o *HyperflexClusterAllOf) SetNtpServers(v []string) {
+	o.NtpServers = v
+}
+
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterAllOf) GetSummary() HyperflexSummary {
 	if o == nil || o.Summary.Get() == nil {
@@ -322,6 +396,38 @@ func (o *HyperflexClusterAllOf) SetSummaryNil() {
 // UnsetSummary ensures that no value is present for Summary, not even an explicit nil
 func (o *HyperflexClusterAllOf) UnsetSummary() {
 	o.Summary.Unset()
+}
+
+// GetUpgradeStatus returns the UpgradeStatus field value if set, zero value otherwise.
+func (o *HyperflexClusterAllOf) GetUpgradeStatus() string {
+	if o == nil || o.UpgradeStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpgradeStatus
+}
+
+// GetUpgradeStatusOk returns a tuple with the UpgradeStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterAllOf) GetUpgradeStatusOk() (*string, bool) {
+	if o == nil || o.UpgradeStatus == nil {
+		return nil, false
+	}
+	return o.UpgradeStatus, true
+}
+
+// HasUpgradeStatus returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasUpgradeStatus() bool {
+	if o != nil && o.UpgradeStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgradeStatus gets a reference to the given string and assigns it to the UpgradeStatus field.
+func (o *HyperflexClusterAllOf) SetUpgradeStatus(v string) {
+	o.UpgradeStatus = &v
 }
 
 // GetVmCount returns the VmCount field value if set, zero value otherwise.
@@ -601,14 +707,23 @@ func (o HyperflexClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.DeviceId != nil {
 		toSerialize["DeviceId"] = o.DeviceId
 	}
+	if o.DnsServers != nil {
+		toSerialize["DnsServers"] = o.DnsServers
+	}
 	if o.FltAggr != nil {
 		toSerialize["FltAggr"] = o.FltAggr
 	}
 	if o.HxdpBuildVersion != nil {
 		toSerialize["HxdpBuildVersion"] = o.HxdpBuildVersion
 	}
+	if o.NtpServers != nil {
+		toSerialize["NtpServers"] = o.NtpServers
+	}
 	if o.Summary.IsSet() {
 		toSerialize["Summary"] = o.Summary.Get()
+	}
+	if o.UpgradeStatus != nil {
+		toSerialize["UpgradeStatus"] = o.UpgradeStatus
 	}
 	if o.VmCount != nil {
 		toSerialize["VmCount"] = o.VmCount
@@ -657,9 +772,12 @@ func (o *HyperflexClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClusterType")
 		delete(additionalProperties, "ClusterUuid")
 		delete(additionalProperties, "DeviceId")
+		delete(additionalProperties, "DnsServers")
 		delete(additionalProperties, "FltAggr")
 		delete(additionalProperties, "HxdpBuildVersion")
+		delete(additionalProperties, "NtpServers")
 		delete(additionalProperties, "Summary")
+		delete(additionalProperties, "UpgradeStatus")
 		delete(additionalProperties, "VmCount")
 		delete(additionalProperties, "Alarm")
 		delete(additionalProperties, "Health")

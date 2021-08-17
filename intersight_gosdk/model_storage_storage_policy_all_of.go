@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -20,16 +20,18 @@ type StorageStoragePolicyAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType      string             `json:"ObjectType"`
-	GlobalHotSpares []StorageLocalDisk `json:"GlobalHotSpares,omitempty"`
-	// Retains the virtual drives defined in policy if they exist already. If this flag is false, the existing virtual drives are removed and created again based on virtual drives in the policy.
-	RetainPolicyVirtualDrives *bool `json:"RetainPolicyVirtualDrives,omitempty"`
-	// Unused Disks State is used to specify the state, unconfigured good or jbod, in which the disks that are not used in this policy should be moved. * `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group. * `Jbod` - JBOD state where the disks start showing up to host os.
-	UnusedDisksState *string                     `json:"UnusedDisksState,omitempty"`
-	VirtualDrives    []StorageVirtualDriveConfig `json:"VirtualDrives,omitempty"`
-	// An array of relationships to storageDiskGroupPolicy resources.
-	DiskGroupPolicies []StorageDiskGroupPolicyRelationship  `json:"DiskGroupPolicies,omitempty"`
-	Organization      *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.
+	GlobalHotSpares *string                             `json:"GlobalHotSpares,omitempty"`
+	M2VirtualDrive  NullableStorageM2VirtualDriveConfig `json:"M2VirtualDrive,omitempty"`
+	Raid0Drive      NullableStorageR0Drive              `json:"Raid0Drive,omitempty"`
+	// State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state. * `NoChange` - Drive state will not be modified by Storage Policy. * `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group. * `Jbod` - JBOD state where the disks start showing up to Host OS.
+	UnusedDisksState *string `json:"UnusedDisksState,omitempty"`
+	// Disks in JBOD State are used to create virtual drives.
+	UseJbodForVdCreation *bool `json:"UseJbodForVdCreation,omitempty"`
+	// An array of relationships to storageDriveGroup resources.
+	DriveGroup   []StorageDriveGroupRelationship       `json:"DriveGroup,omitempty"`
+	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,9 +47,7 @@ func NewStorageStoragePolicyAllOf(classId string, objectType string) *StorageSto
 	this := StorageStoragePolicyAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var retainPolicyVirtualDrives bool = true
-	this.RetainPolicyVirtualDrives = &retainPolicyVirtualDrives
-	var unusedDisksState string = "UnconfiguredGood"
+	var unusedDisksState string = "NoChange"
 	this.UnusedDisksState = &unusedDisksState
 	return &this
 }
@@ -61,9 +61,7 @@ func NewStorageStoragePolicyAllOfWithDefaults() *StorageStoragePolicyAllOf {
 	this.ClassId = classId
 	var objectType string = "storage.StoragePolicy"
 	this.ObjectType = objectType
-	var retainPolicyVirtualDrives bool = true
-	this.RetainPolicyVirtualDrives = &retainPolicyVirtualDrives
-	var unusedDisksState string = "UnconfiguredGood"
+	var unusedDisksState string = "NoChange"
 	this.UnusedDisksState = &unusedDisksState
 	return &this
 }
@@ -116,23 +114,22 @@ func (o *StorageStoragePolicyAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetGlobalHotSpares returns the GlobalHotSpares field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageStoragePolicyAllOf) GetGlobalHotSpares() []StorageLocalDisk {
-	if o == nil {
-		var ret []StorageLocalDisk
+// GetGlobalHotSpares returns the GlobalHotSpares field value if set, zero value otherwise.
+func (o *StorageStoragePolicyAllOf) GetGlobalHotSpares() string {
+	if o == nil || o.GlobalHotSpares == nil {
+		var ret string
 		return ret
 	}
-	return o.GlobalHotSpares
+	return *o.GlobalHotSpares
 }
 
 // GetGlobalHotSparesOk returns a tuple with the GlobalHotSpares field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageStoragePolicyAllOf) GetGlobalHotSparesOk() (*[]StorageLocalDisk, bool) {
+func (o *StorageStoragePolicyAllOf) GetGlobalHotSparesOk() (*string, bool) {
 	if o == nil || o.GlobalHotSpares == nil {
 		return nil, false
 	}
-	return &o.GlobalHotSpares, true
+	return o.GlobalHotSpares, true
 }
 
 // HasGlobalHotSpares returns a boolean if a field has been set.
@@ -144,41 +141,95 @@ func (o *StorageStoragePolicyAllOf) HasGlobalHotSpares() bool {
 	return false
 }
 
-// SetGlobalHotSpares gets a reference to the given []StorageLocalDisk and assigns it to the GlobalHotSpares field.
-func (o *StorageStoragePolicyAllOf) SetGlobalHotSpares(v []StorageLocalDisk) {
-	o.GlobalHotSpares = v
+// SetGlobalHotSpares gets a reference to the given string and assigns it to the GlobalHotSpares field.
+func (o *StorageStoragePolicyAllOf) SetGlobalHotSpares(v string) {
+	o.GlobalHotSpares = &v
 }
 
-// GetRetainPolicyVirtualDrives returns the RetainPolicyVirtualDrives field value if set, zero value otherwise.
-func (o *StorageStoragePolicyAllOf) GetRetainPolicyVirtualDrives() bool {
-	if o == nil || o.RetainPolicyVirtualDrives == nil {
-		var ret bool
+// GetM2VirtualDrive returns the M2VirtualDrive field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageStoragePolicyAllOf) GetM2VirtualDrive() StorageM2VirtualDriveConfig {
+	if o == nil || o.M2VirtualDrive.Get() == nil {
+		var ret StorageM2VirtualDriveConfig
 		return ret
 	}
-	return *o.RetainPolicyVirtualDrives
+	return *o.M2VirtualDrive.Get()
 }
 
-// GetRetainPolicyVirtualDrivesOk returns a tuple with the RetainPolicyVirtualDrives field value if set, nil otherwise
+// GetM2VirtualDriveOk returns a tuple with the M2VirtualDrive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageStoragePolicyAllOf) GetRetainPolicyVirtualDrivesOk() (*bool, bool) {
-	if o == nil || o.RetainPolicyVirtualDrives == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageStoragePolicyAllOf) GetM2VirtualDriveOk() (*StorageM2VirtualDriveConfig, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RetainPolicyVirtualDrives, true
+	return o.M2VirtualDrive.Get(), o.M2VirtualDrive.IsSet()
 }
 
-// HasRetainPolicyVirtualDrives returns a boolean if a field has been set.
-func (o *StorageStoragePolicyAllOf) HasRetainPolicyVirtualDrives() bool {
-	if o != nil && o.RetainPolicyVirtualDrives != nil {
+// HasM2VirtualDrive returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasM2VirtualDrive() bool {
+	if o != nil && o.M2VirtualDrive.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRetainPolicyVirtualDrives gets a reference to the given bool and assigns it to the RetainPolicyVirtualDrives field.
-func (o *StorageStoragePolicyAllOf) SetRetainPolicyVirtualDrives(v bool) {
-	o.RetainPolicyVirtualDrives = &v
+// SetM2VirtualDrive gets a reference to the given NullableStorageM2VirtualDriveConfig and assigns it to the M2VirtualDrive field.
+func (o *StorageStoragePolicyAllOf) SetM2VirtualDrive(v StorageM2VirtualDriveConfig) {
+	o.M2VirtualDrive.Set(&v)
+}
+
+// SetM2VirtualDriveNil sets the value for M2VirtualDrive to be an explicit nil
+func (o *StorageStoragePolicyAllOf) SetM2VirtualDriveNil() {
+	o.M2VirtualDrive.Set(nil)
+}
+
+// UnsetM2VirtualDrive ensures that no value is present for M2VirtualDrive, not even an explicit nil
+func (o *StorageStoragePolicyAllOf) UnsetM2VirtualDrive() {
+	o.M2VirtualDrive.Unset()
+}
+
+// GetRaid0Drive returns the Raid0Drive field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageStoragePolicyAllOf) GetRaid0Drive() StorageR0Drive {
+	if o == nil || o.Raid0Drive.Get() == nil {
+		var ret StorageR0Drive
+		return ret
+	}
+	return *o.Raid0Drive.Get()
+}
+
+// GetRaid0DriveOk returns a tuple with the Raid0Drive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageStoragePolicyAllOf) GetRaid0DriveOk() (*StorageR0Drive, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Raid0Drive.Get(), o.Raid0Drive.IsSet()
+}
+
+// HasRaid0Drive returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasRaid0Drive() bool {
+	if o != nil && o.Raid0Drive.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRaid0Drive gets a reference to the given NullableStorageR0Drive and assigns it to the Raid0Drive field.
+func (o *StorageStoragePolicyAllOf) SetRaid0Drive(v StorageR0Drive) {
+	o.Raid0Drive.Set(&v)
+}
+
+// SetRaid0DriveNil sets the value for Raid0Drive to be an explicit nil
+func (o *StorageStoragePolicyAllOf) SetRaid0DriveNil() {
+	o.Raid0Drive.Set(nil)
+}
+
+// UnsetRaid0Drive ensures that no value is present for Raid0Drive, not even an explicit nil
+func (o *StorageStoragePolicyAllOf) UnsetRaid0Drive() {
+	o.Raid0Drive.Unset()
 }
 
 // GetUnusedDisksState returns the UnusedDisksState field value if set, zero value otherwise.
@@ -213,70 +264,69 @@ func (o *StorageStoragePolicyAllOf) SetUnusedDisksState(v string) {
 	o.UnusedDisksState = &v
 }
 
-// GetVirtualDrives returns the VirtualDrives field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageStoragePolicyAllOf) GetVirtualDrives() []StorageVirtualDriveConfig {
-	if o == nil {
-		var ret []StorageVirtualDriveConfig
+// GetUseJbodForVdCreation returns the UseJbodForVdCreation field value if set, zero value otherwise.
+func (o *StorageStoragePolicyAllOf) GetUseJbodForVdCreation() bool {
+	if o == nil || o.UseJbodForVdCreation == nil {
+		var ret bool
 		return ret
 	}
-	return o.VirtualDrives
+	return *o.UseJbodForVdCreation
 }
 
-// GetVirtualDrivesOk returns a tuple with the VirtualDrives field value if set, nil otherwise
+// GetUseJbodForVdCreationOk returns a tuple with the UseJbodForVdCreation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageStoragePolicyAllOf) GetVirtualDrivesOk() (*[]StorageVirtualDriveConfig, bool) {
-	if o == nil || o.VirtualDrives == nil {
+func (o *StorageStoragePolicyAllOf) GetUseJbodForVdCreationOk() (*bool, bool) {
+	if o == nil || o.UseJbodForVdCreation == nil {
 		return nil, false
 	}
-	return &o.VirtualDrives, true
+	return o.UseJbodForVdCreation, true
 }
 
-// HasVirtualDrives returns a boolean if a field has been set.
-func (o *StorageStoragePolicyAllOf) HasVirtualDrives() bool {
-	if o != nil && o.VirtualDrives != nil {
+// HasUseJbodForVdCreation returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasUseJbodForVdCreation() bool {
+	if o != nil && o.UseJbodForVdCreation != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVirtualDrives gets a reference to the given []StorageVirtualDriveConfig and assigns it to the VirtualDrives field.
-func (o *StorageStoragePolicyAllOf) SetVirtualDrives(v []StorageVirtualDriveConfig) {
-	o.VirtualDrives = v
+// SetUseJbodForVdCreation gets a reference to the given bool and assigns it to the UseJbodForVdCreation field.
+func (o *StorageStoragePolicyAllOf) SetUseJbodForVdCreation(v bool) {
+	o.UseJbodForVdCreation = &v
 }
 
-// GetDiskGroupPolicies returns the DiskGroupPolicies field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageStoragePolicyAllOf) GetDiskGroupPolicies() []StorageDiskGroupPolicyRelationship {
+// GetDriveGroup returns the DriveGroup field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageStoragePolicyAllOf) GetDriveGroup() []StorageDriveGroupRelationship {
 	if o == nil {
-		var ret []StorageDiskGroupPolicyRelationship
+		var ret []StorageDriveGroupRelationship
 		return ret
 	}
-	return o.DiskGroupPolicies
+	return o.DriveGroup
 }
 
-// GetDiskGroupPoliciesOk returns a tuple with the DiskGroupPolicies field value if set, nil otherwise
+// GetDriveGroupOk returns a tuple with the DriveGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageStoragePolicyAllOf) GetDiskGroupPoliciesOk() (*[]StorageDiskGroupPolicyRelationship, bool) {
-	if o == nil || o.DiskGroupPolicies == nil {
+func (o *StorageStoragePolicyAllOf) GetDriveGroupOk() (*[]StorageDriveGroupRelationship, bool) {
+	if o == nil || o.DriveGroup == nil {
 		return nil, false
 	}
-	return &o.DiskGroupPolicies, true
+	return &o.DriveGroup, true
 }
 
-// HasDiskGroupPolicies returns a boolean if a field has been set.
-func (o *StorageStoragePolicyAllOf) HasDiskGroupPolicies() bool {
-	if o != nil && o.DiskGroupPolicies != nil {
+// HasDriveGroup returns a boolean if a field has been set.
+func (o *StorageStoragePolicyAllOf) HasDriveGroup() bool {
+	if o != nil && o.DriveGroup != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDiskGroupPolicies gets a reference to the given []StorageDiskGroupPolicyRelationship and assigns it to the DiskGroupPolicies field.
-func (o *StorageStoragePolicyAllOf) SetDiskGroupPolicies(v []StorageDiskGroupPolicyRelationship) {
-	o.DiskGroupPolicies = v
+// SetDriveGroup gets a reference to the given []StorageDriveGroupRelationship and assigns it to the DriveGroup field.
+func (o *StorageStoragePolicyAllOf) SetDriveGroup(v []StorageDriveGroupRelationship) {
+	o.DriveGroup = v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -355,17 +405,20 @@ func (o StorageStoragePolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.GlobalHotSpares != nil {
 		toSerialize["GlobalHotSpares"] = o.GlobalHotSpares
 	}
-	if o.RetainPolicyVirtualDrives != nil {
-		toSerialize["RetainPolicyVirtualDrives"] = o.RetainPolicyVirtualDrives
+	if o.M2VirtualDrive.IsSet() {
+		toSerialize["M2VirtualDrive"] = o.M2VirtualDrive.Get()
+	}
+	if o.Raid0Drive.IsSet() {
+		toSerialize["Raid0Drive"] = o.Raid0Drive.Get()
 	}
 	if o.UnusedDisksState != nil {
 		toSerialize["UnusedDisksState"] = o.UnusedDisksState
 	}
-	if o.VirtualDrives != nil {
-		toSerialize["VirtualDrives"] = o.VirtualDrives
+	if o.UseJbodForVdCreation != nil {
+		toSerialize["UseJbodForVdCreation"] = o.UseJbodForVdCreation
 	}
-	if o.DiskGroupPolicies != nil {
-		toSerialize["DiskGroupPolicies"] = o.DiskGroupPolicies
+	if o.DriveGroup != nil {
+		toSerialize["DriveGroup"] = o.DriveGroup
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -394,10 +447,11 @@ func (o *StorageStoragePolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "GlobalHotSpares")
-		delete(additionalProperties, "RetainPolicyVirtualDrives")
+		delete(additionalProperties, "M2VirtualDrive")
+		delete(additionalProperties, "Raid0Drive")
 		delete(additionalProperties, "UnusedDisksState")
-		delete(additionalProperties, "VirtualDrives")
-		delete(additionalProperties, "DiskGroupPolicies")
+		delete(additionalProperties, "UseJbodForVdCreation")
+		delete(additionalProperties, "DriveGroup")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 		o.AdditionalProperties = additionalProperties

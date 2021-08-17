@@ -80,7 +80,7 @@ func dataSourceIqnpoolPool() *schema.Resource {
 				Computed:    true,
 			},
 			"prefix": {
-				Description: "The prefix for IQN blocks created for this pool.",
+				Description: "The prefix for any IQN blocks created for this pool. IQN Prefix must have the following format \"iqn.yyyy-mm.naming-authority\", where naming-authority is usually the reverse syntax of the Internet domain name of the naming authority.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

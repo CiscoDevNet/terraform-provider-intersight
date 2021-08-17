@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **TriggeredTime** | Pointer to **int64** | The time when alarm was triggered as a Unix timestamp. | [optional] [readonly] 
 **TriggeredTimeAsUtc** | Pointer to **string** | The time when alarm was triggered in ISO 6801 UTC format. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The unique identifier for this alarm instance. | [optional] [readonly] 
+**AncestorMos** | Pointer to [**[]HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) | An array of relationships to hyperflexBaseCluster resources. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -457,6 +458,41 @@ SetUuid sets Uuid field to given value.
 
 HasUuid returns a boolean if a field has been set.
 
+### GetAncestorMos
+
+`func (o *HyperflexAlarmAllOf) GetAncestorMos() []HyperflexBaseClusterRelationship`
+
+GetAncestorMos returns the AncestorMos field if non-nil, zero value otherwise.
+
+### GetAncestorMosOk
+
+`func (o *HyperflexAlarmAllOf) GetAncestorMosOk() (*[]HyperflexBaseClusterRelationship, bool)`
+
+GetAncestorMosOk returns a tuple with the AncestorMos field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAncestorMos
+
+`func (o *HyperflexAlarmAllOf) SetAncestorMos(v []HyperflexBaseClusterRelationship)`
+
+SetAncestorMos sets AncestorMos field to given value.
+
+### HasAncestorMos
+
+`func (o *HyperflexAlarmAllOf) HasAncestorMos() bool`
+
+HasAncestorMos returns a boolean if a field has been set.
+
+### SetAncestorMosNil
+
+`func (o *HyperflexAlarmAllOf) SetAncestorMosNil(b bool)`
+
+ SetAncestorMosNil sets the value for AncestorMos to be an explicit nil
+
+### UnsetAncestorMos
+`func (o *HyperflexAlarmAllOf) UnsetAncestorMos()`
+
+UnsetAncestorMos ensures that no value is present for AncestorMos, not even an explicit nil
 ### GetCluster
 
 `func (o *HyperflexAlarmAllOf) GetCluster() HyperflexClusterRelationship`

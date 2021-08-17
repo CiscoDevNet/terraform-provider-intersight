@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | The version of the hypervisor running on the host. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 **ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](asset.ClusterMember.Relationship.md) |  | [optional] 
+**Drives** | Pointer to [**[]HyperflexDriveRelationship**](HyperflexDriveRelationship.md) | An array of relationships to hyperflexDrive resources. | [optional] [readonly] 
 **PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -451,6 +452,41 @@ SetClusterMember sets ClusterMember field to given value.
 
 HasClusterMember returns a boolean if a field has been set.
 
+### GetDrives
+
+`func (o *HyperflexNode) GetDrives() []HyperflexDriveRelationship`
+
+GetDrives returns the Drives field if non-nil, zero value otherwise.
+
+### GetDrivesOk
+
+`func (o *HyperflexNode) GetDrivesOk() (*[]HyperflexDriveRelationship, bool)`
+
+GetDrivesOk returns a tuple with the Drives field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDrives
+
+`func (o *HyperflexNode) SetDrives(v []HyperflexDriveRelationship)`
+
+SetDrives sets Drives field to given value.
+
+### HasDrives
+
+`func (o *HyperflexNode) HasDrives() bool`
+
+HasDrives returns a boolean if a field has been set.
+
+### SetDrivesNil
+
+`func (o *HyperflexNode) SetDrivesNil(b bool)`
+
+ SetDrivesNil sets the value for Drives to be an explicit nil
+
+### UnsetDrives
+`func (o *HyperflexNode) UnsetDrives()`
+
+UnsetDrives ensures that no value is present for Drives, not even an explicit nil
 ### GetPhysicalServer
 
 `func (o *HyperflexNode) GetPhysicalServer() ComputePhysicalRelationship`

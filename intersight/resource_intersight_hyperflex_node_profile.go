@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -28,6 +26,12 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"action": {
+				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "No-op",
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -159,6 +163,63 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 					},
 				},
 			},
+			"config_context": {
+				Description: "The configuration state and results of the last configuration operation.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigContext",
+						},
+						"config_state": {
+							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"config_type": {
+							Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"control_action": {
+							Description: "System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"error_state": {
+							Description: "Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "policy.ConfigContext",
+						},
+						"oper_state": {
+							Description: "Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -183,6 +244,11 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 			},
 			"hxdp_mgmt_ip": {
 				Description: "IP address for HyperFlex management network.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"hxdp_storage_client_ip": {
+				Description: "IP address for storage client network (Controller VM interface).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -218,6 +284,52 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Description: "Name of the profile instance or profile template.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"node": {
+				Description: "A reference to a hyperflexNode resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"node_role": {
+				Description: "The role that this node performs in the HyperFlex cluster.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -278,6 +390,45 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
+			"policy_bucket": {
+				Description: "An array of relationships to policyAbstractPolicy resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -523,9 +674,10 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexNodeProfileWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
+
+	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
-		o.SetAccountMoid(x)
+		o.SetAction(x)
 	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
@@ -534,48 +686,6 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -667,19 +777,52 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
+	if v, ok := d.GetOk("config_context"); ok {
+		p := make([]models.PolicyConfigContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewPolicyConfigContextWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigContext")
+			if v, ok := l["control_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetControlAction(x)
+				}
+			}
+			if v, ok := l["error_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorState(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConfigContext(x)
+		}
 	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if v, ok := d.GetOk("hxdp_data_ip"); ok {
@@ -690,6 +833,11 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("hxdp_mgmt_ip"); ok {
 		x := (v.(string))
 		o.SetHxdpMgmtIp(x)
+	}
+
+	if v, ok := d.GetOk("hxdp_storage_client_ip"); ok {
+		x := (v.(string))
+		o.SetHxdpStorageClientIp(x)
 	}
 
 	if v, ok := d.GetOk("hypervisor_control_ip"); ok {
@@ -707,11 +855,6 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 		o.SetHypervisorMgmtIp(x)
 	}
 
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -724,62 +867,8 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("hyperflex.NodeProfile")
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
+	if v, ok := d.GetOk("policy_bucket"); ok {
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := models.NewMoMoRefWithDefaults()
@@ -813,16 +902,11 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
 		if len(x) > 0 {
-			o.SetPermissionResources(x)
+			o.SetPolicyBucket(x)
 		}
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("src_template"); ok {
@@ -908,142 +992,6 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 		o.SetType(x)
 	}
 
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexNodeProfile(conn.ctx).HyperflexNodeProfile(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1084,6 +1032,10 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property AccountMoid in HyperflexNodeProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("action", (s.GetAction())); err != nil {
+		return diag.Errorf("error occurred while setting property Action in HyperflexNodeProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexNodeProfile object: %s", err.Error())
 	}
@@ -1104,6 +1056,10 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property ClusterProfile in HyperflexNodeProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("config_context", flattenMapPolicyConfigContext(s.GetConfigContext(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ConfigContext in HyperflexNodeProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in HyperflexNodeProfile object: %s", err.Error())
 	}
@@ -1122,6 +1078,10 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("hxdp_mgmt_ip", (s.GetHxdpMgmtIp())); err != nil {
 		return diag.Errorf("error occurred while setting property HxdpMgmtIp in HyperflexNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("hxdp_storage_client_ip", (s.GetHxdpStorageClientIp())); err != nil {
+		return diag.Errorf("error occurred while setting property HxdpStorageClientIp in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_control_ip", (s.GetHypervisorControlIp())); err != nil {
@@ -1148,6 +1108,14 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Name in HyperflexNodeProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("node", flattenMapHyperflexNodeRelationship(s.GetNode(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Node in HyperflexNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("node_role", (s.GetNodeRole())); err != nil {
+		return diag.Errorf("error occurred while setting property NodeRole in HyperflexNodeProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 		return diag.Errorf("error occurred while setting property ObjectType in HyperflexNodeProfile object: %s", err.Error())
 	}
@@ -1162,6 +1130,10 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in HyperflexNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("policy_bucket", flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PolicyBucket in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1195,10 +1167,11 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexNodeProfile{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
+
+	if d.HasChange("action") {
+		v := d.Get("action")
 		x := (v.(string))
-		o.SetAccountMoid(x)
+		o.SetAction(x)
 	}
 
 	if d.HasChange("additional_properties") {
@@ -1209,47 +1182,6 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("assigned_server") {
@@ -1342,22 +1274,54 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
+	if d.HasChange("config_context") {
+		v := d.Get("config_context")
+		p := make([]models.PolicyConfigContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.PolicyConfigContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ConfigContext")
+			if v, ok := l["control_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetControlAction(x)
+				}
+			}
+			if v, ok := l["error_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetErrorState(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetConfigContext(x)
+		}
 	}
 
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if d.HasChange("hxdp_data_ip") {
@@ -1370,6 +1334,12 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("hxdp_mgmt_ip")
 		x := (v.(string))
 		o.SetHxdpMgmtIp(x)
+	}
+
+	if d.HasChange("hxdp_storage_client_ip") {
+		v := d.Get("hxdp_storage_client_ip")
+		x := (v.(string))
+		o.SetHxdpStorageClientIp(x)
 	}
 
 	if d.HasChange("hypervisor_control_ip") {
@@ -1390,12 +1360,6 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		o.SetHypervisorMgmtIp(x)
 	}
 
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1410,63 +1374,9 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("hyperflex.NodeProfile")
 
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
+	if d.HasChange("policy_bucket") {
+		v := d.Get("policy_bucket")
+		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -1500,15 +1410,9 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+			x = append(x, models.MoMoRefAsPolicyAbstractPolicyRelationship(o))
 		}
-		o.SetPermissionResources(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
+		o.SetPolicyBucket(x)
 	}
 
 	if d.HasChange("src_template") {
@@ -1593,143 +1497,6 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("type")
 		x := (v.(string))
 		o.SetType(x)
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexNodeProfile(conn.ctx, d.Id()).HyperflexNodeProfile(*o)

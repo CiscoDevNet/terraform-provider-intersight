@@ -45,6 +45,11 @@ func dataSourceStorageStoragePolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"global_hot_spares": {
+				Description: "A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -68,11 +73,6 @@ func dataSourceStorageStoragePolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"retain_policy_virtual_drives": {
-				Description: "Retains the virtual drives defined in policy if they exist already. If this flag is false, the existing virtual drives are removed and created again based on virtual drives in the policy.",
-				Type:        schema.TypeBool,
-				Optional:    true,
-			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 				Type:        schema.TypeString,
@@ -80,8 +80,13 @@ func dataSourceStorageStoragePolicy() *schema.Resource {
 				Computed:    true,
 			},
 			"unused_disks_state": {
-				Description: "Unused Disks State is used to specify the state, unconfigured good or jbod, in which the disks that are not used in this policy should be moved.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to host os.",
+				Description: "State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"use_jbod_for_vd_creation": {
+				Description: "Disks in JBOD State are used to create virtual drives.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"results": {
@@ -118,6 +123,10 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("global_hot_spares"); ok {
+		x := (v.(string))
+		o.SetGlobalHotSpares(x)
+	}
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
@@ -134,10 +143,6 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
-	if v, ok := d.GetOk("retain_policy_virtual_drives"); ok {
-		x := (v.(bool))
-		o.SetRetainPolicyVirtualDrives(x)
-	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -145,6 +150,10 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("unused_disks_state"); ok {
 		x := (v.(string))
 		o.SetUnusedDisksState(x)
+	}
+	if v, ok := d.GetOk("use_jbod_for_vd_creation"); ok {
+		x := (v.(bool))
+		o.SetUseJbodForVdCreation(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -191,11 +200,12 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
-
-				temp["disk_group_policies"] = flattenListStorageDiskGroupPolicyRelationship(s.GetDiskGroupPolicies(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
-				temp["global_hot_spares"] = flattenListStorageLocalDisk(s.GetGlobalHotSpares(), d)
+				temp["drive_group"] = flattenListStorageDriveGroupRelationship(s.GetDriveGroup(), d)
+				temp["global_hot_spares"] = (s.GetGlobalHotSpares())
+
+				temp["m2_virtual_drive"] = flattenMapStorageM2VirtualDriveConfig(s.GetM2VirtualDrive(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -210,15 +220,15 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["profiles"] = flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)
-				temp["retain_policy_virtual_drives"] = (s.GetRetainPolicyVirtualDrives())
+
+				temp["raid0_drive"] = flattenMapStorageR0Drive(s.GetRaid0Drive(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["unused_disks_state"] = (s.GetUnusedDisksState())
+				temp["use_jbod_for_vd_creation"] = (s.GetUseJbodForVdCreation())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
-
-				temp["virtual_drives"] = flattenListStorageVirtualDriveConfig(s.GetVirtualDrives(), d)
 				storageStoragePolicyResults[j] = temp
 				j += 1
 			}

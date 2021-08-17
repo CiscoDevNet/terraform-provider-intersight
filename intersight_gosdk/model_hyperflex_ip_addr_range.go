@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -27,7 +27,8 @@ type HyperflexIpAddrRange struct {
 	// The end IPv4 address of the range.
 	EndAddr *string `json:"EndAddr,omitempty"`
 	// The default gateway for the start and end IPv4 addresses.
-	Gateway *string `json:"Gateway,omitempty"`
+	Gateway      *string                `json:"Gateway,omitempty"`
+	IpAddrBlocks []CommIpV4AddressBlock `json:"IpAddrBlocks,omitempty"`
 	// The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask.
 	Netmask *string `json:"Netmask,omitempty"`
 	// The start IPv4 address of the range.
@@ -172,6 +173,39 @@ func (o *HyperflexIpAddrRange) SetGateway(v string) {
 	o.Gateway = &v
 }
 
+// GetIpAddrBlocks returns the IpAddrBlocks field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexIpAddrRange) GetIpAddrBlocks() []CommIpV4AddressBlock {
+	if o == nil {
+		var ret []CommIpV4AddressBlock
+		return ret
+	}
+	return o.IpAddrBlocks
+}
+
+// GetIpAddrBlocksOk returns a tuple with the IpAddrBlocks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexIpAddrRange) GetIpAddrBlocksOk() (*[]CommIpV4AddressBlock, bool) {
+	if o == nil || o.IpAddrBlocks == nil {
+		return nil, false
+	}
+	return &o.IpAddrBlocks, true
+}
+
+// HasIpAddrBlocks returns a boolean if a field has been set.
+func (o *HyperflexIpAddrRange) HasIpAddrBlocks() bool {
+	if o != nil && o.IpAddrBlocks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIpAddrBlocks gets a reference to the given []CommIpV4AddressBlock and assigns it to the IpAddrBlocks field.
+func (o *HyperflexIpAddrRange) SetIpAddrBlocks(v []CommIpV4AddressBlock) {
+	o.IpAddrBlocks = v
+}
+
 // GetNetmask returns the Netmask field value if set, zero value otherwise.
 func (o *HyperflexIpAddrRange) GetNetmask() string {
 	if o == nil || o.Netmask == nil {
@@ -258,6 +292,9 @@ func (o HyperflexIpAddrRange) MarshalJSON() ([]byte, error) {
 	if o.Gateway != nil {
 		toSerialize["Gateway"] = o.Gateway
 	}
+	if o.IpAddrBlocks != nil {
+		toSerialize["IpAddrBlocks"] = o.IpAddrBlocks
+	}
 	if o.Netmask != nil {
 		toSerialize["Netmask"] = o.Netmask
 	}
@@ -281,7 +318,8 @@ func (o *HyperflexIpAddrRange) UnmarshalJSON(bytes []byte) (err error) {
 		// The end IPv4 address of the range.
 		EndAddr *string `json:"EndAddr,omitempty"`
 		// The default gateway for the start and end IPv4 addresses.
-		Gateway *string `json:"Gateway,omitempty"`
+		Gateway      *string                `json:"Gateway,omitempty"`
+		IpAddrBlocks []CommIpV4AddressBlock `json:"IpAddrBlocks,omitempty"`
 		// The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask.
 		Netmask *string `json:"Netmask,omitempty"`
 		// The start IPv4 address of the range.
@@ -297,6 +335,7 @@ func (o *HyperflexIpAddrRange) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexIpAddrRange.ObjectType = varHyperflexIpAddrRangeWithoutEmbeddedStruct.ObjectType
 		varHyperflexIpAddrRange.EndAddr = varHyperflexIpAddrRangeWithoutEmbeddedStruct.EndAddr
 		varHyperflexIpAddrRange.Gateway = varHyperflexIpAddrRangeWithoutEmbeddedStruct.Gateway
+		varHyperflexIpAddrRange.IpAddrBlocks = varHyperflexIpAddrRangeWithoutEmbeddedStruct.IpAddrBlocks
 		varHyperflexIpAddrRange.Netmask = varHyperflexIpAddrRangeWithoutEmbeddedStruct.Netmask
 		varHyperflexIpAddrRange.StartAddr = varHyperflexIpAddrRangeWithoutEmbeddedStruct.StartAddr
 		*o = HyperflexIpAddrRange(varHyperflexIpAddrRange)
@@ -320,6 +359,7 @@ func (o *HyperflexIpAddrRange) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "EndAddr")
 		delete(additionalProperties, "Gateway")
+		delete(additionalProperties, "IpAddrBlocks")
 		delete(additionalProperties, "Netmask")
 		delete(additionalProperties, "StartAddr")
 

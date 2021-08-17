@@ -67,6 +67,16 @@ func dataSourceNiatelemetryAppDetails() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"nexus_dashboard": {
+				Description: "Clustername on which apps are running on ND.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"numberof_sites_onboarded": {
+				Description: "Number of sites on which particular app installed on ND.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -78,6 +88,11 @@ func dataSourceNiatelemetryAppDetails() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"type": {
+				Description: "Type of apps running on ND.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"results": {
 				Type: schema.TypeList,
@@ -172,6 +187,16 @@ func dataSourceNiatelemetryAppDetails() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
+					},
+					"nexus_dashboard": {
+						Description: "Clustername on which apps are running on ND.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"numberof_sites_onboarded": {
+						Description: "Number of sites on which particular app installed on ND.",
+						Type:        schema.TypeInt,
+						Optional:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -326,6 +351,11 @@ func dataSourceNiatelemetryAppDetails() *schema.Resource {
 								},
 							},
 						},
+					},
+					"type": {
+						Description: "Type of apps running on ND.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"version_context": {
 						Description: "The versioning info for this managed object.",
@@ -494,6 +524,14 @@ func dataSourceNiatelemetryAppDetailsRead(c context.Context, d *schema.ResourceD
 		x := (v.(string))
 		o.SetMoid(x)
 	}
+	if v, ok := d.GetOk("nexus_dashboard"); ok {
+		x := (v.(string))
+		o.SetNexusDashboard(x)
+	}
+	if v, ok := d.GetOk("numberof_sites_onboarded"); ok {
+		x := int64(v.(int))
+		o.SetNumberofSitesOnboarded(x)
+	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -501,6 +539,10 @@ func dataSourceNiatelemetryAppDetailsRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -553,6 +595,8 @@ func dataSourceNiatelemetryAppDetailsRead(c context.Context, d *schema.ResourceD
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["nexus_dashboard"] = (s.GetNexusDashboard())
+				temp["numberof_sites_onboarded"] = (s.GetNumberofSitesOnboarded())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -564,6 +608,7 @@ func dataSourceNiatelemetryAppDetailsRead(c context.Context, d *schema.ResourceD
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["type"] = (s.GetType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				niatelemetryAppDetailsResults[j] = temp

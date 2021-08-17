@@ -193,6 +193,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"upgrade_status": {
+				Description: "The upgrade status of the HyperFlex cluster.\n* `Unknown` - The upgrade status of the HyperFlex cluster could not be determined.\n* `Ok` - The upgrade of the HyperFlex cluster is complete.\n* `InProgress` - The upgrade of the HyperFlex cluster is in-progress.\n* `Failed` - The upgrade of the HyperFlex cluster has failed.\n* `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"utilization_percentage": {
 				Description: "The storage utilization percentage is computed based on total capacity and current capacity utilization.",
 				Type:        schema.TypeFloat,
@@ -474,6 +480,11 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"dns_servers": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
 						Type:        schema.TypeString,
@@ -694,6 +705,11 @@ func dataSourceHyperflexCluster() *schema.Resource {
 							},
 						},
 					},
+					"ntp_servers": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
@@ -1271,6 +1287,12 @@ func dataSourceHyperflexCluster() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"upgrade_status": {
+						Description: "The upgrade status of the HyperFlex cluster.\n* `Unknown` - The upgrade status of the HyperFlex cluster could not be determined.\n* `Ok` - The upgrade of the HyperFlex cluster is complete.\n* `InProgress` - The upgrade of the HyperFlex cluster is in-progress.\n* `Failed` - The upgrade of the HyperFlex cluster has failed.\n* `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"utilization_percentage": {
 						Description: "The storage utilization percentage is computed based on total capacity and current capacity utilization.",
 						Type:        schema.TypeFloat,
@@ -1577,6 +1599,10 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		x := int64(v.(int))
 		o.SetTotalCores(x)
 	}
+	if v, ok := d.GetOk("upgrade_status"); ok {
+		x := (v.(string))
+		o.SetUpgradeStatus(x)
+	}
 	if v, ok := d.GetOk("utilization_percentage"); ok {
 		x := v.(float32)
 		o.SetUtilizationPercentage(x)
@@ -1650,6 +1676,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["deployment_type"] = (s.GetDeploymentType())
 				temp["device_id"] = (s.GetDeviceId())
+				temp["dns_servers"] = (s.GetDnsServers())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["drive_type"] = (s.GetDriveType())
 				temp["flt_aggr"] = (s.GetFltAggr())
@@ -1670,6 +1697,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["name"] = (s.GetName())
 
 				temp["nodes"] = flattenListHyperflexNodeRelationship(s.GetNodes(), d)
+				temp["ntp_servers"] = (s.GetNtpServers())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -1694,6 +1722,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["total_cores"] = (s.GetTotalCores())
+				temp["upgrade_status"] = (s.GetUpgradeStatus())
 				temp["utilization_percentage"] = (s.GetUtilizationPercentage())
 				temp["utilization_trend_percentage"] = (s.GetUtilizationTrendPercentage())
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterProfile"]
+**ClusterInternalSubnet** | Pointer to [**NullableCommIpV4Interface**](comm.IpV4Interface.md) |  | [optional] 
 **DataIpAddress** | Pointer to **string** | The storage data IP address for the HyperFlex cluster. | [optional] 
 **HostNamePrefix** | Pointer to **string** | The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character. | [optional] 
 **HypervisorControlIpAddress** | Pointer to **string** | The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management. | [optional] 
@@ -14,6 +15,9 @@ Name | Type | Description | Notes
 **MgmtIpAddress** | Pointer to **string** | The management IP address for the HyperFlex cluster. | [optional] 
 **MgmtPlatform** | Pointer to **string** | The management platform for the HyperFlex cluster. * &#x60;FI&#x60; - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * &#x60;EDGE&#x60; - The host servers used in the cluster deployment are standalone severs. | [optional] [default to "FI"]
 **Replication** | Pointer to **int64** | The number of copies of each data block written. | [optional] 
+**StorageClientIpAddress** | Pointer to **string** | The storage data IP address for the HyperFlex cluster. | [optional] 
+**StorageClientNetmask** | Pointer to **string** | The netmask for the Storage client network IP address. | [optional] 
+**StorageClientVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **StorageClusterAuxiliaryIp** | Pointer to **string** | The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller. | [optional] 
 **StorageDataVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **StorageType** | Pointer to **string** | The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * &#x60;HyperFlexDp&#x60; - The type of storage is HyperFlex Data Platform. * &#x60;ThirdParty&#x60; - The type of storage is 3rd Party Storage (PureStorage, etc..). | [optional] [default to "HyperFlexDp"]
@@ -97,6 +101,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetClusterInternalSubnet
+
+`func (o *HyperflexClusterProfile) GetClusterInternalSubnet() CommIpV4Interface`
+
+GetClusterInternalSubnet returns the ClusterInternalSubnet field if non-nil, zero value otherwise.
+
+### GetClusterInternalSubnetOk
+
+`func (o *HyperflexClusterProfile) GetClusterInternalSubnetOk() (*CommIpV4Interface, bool)`
+
+GetClusterInternalSubnetOk returns a tuple with the ClusterInternalSubnet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterInternalSubnet
+
+`func (o *HyperflexClusterProfile) SetClusterInternalSubnet(v CommIpV4Interface)`
+
+SetClusterInternalSubnet sets ClusterInternalSubnet field to given value.
+
+### HasClusterInternalSubnet
+
+`func (o *HyperflexClusterProfile) HasClusterInternalSubnet() bool`
+
+HasClusterInternalSubnet returns a boolean if a field has been set.
+
+### SetClusterInternalSubnetNil
+
+`func (o *HyperflexClusterProfile) SetClusterInternalSubnetNil(b bool)`
+
+ SetClusterInternalSubnetNil sets the value for ClusterInternalSubnet to be an explicit nil
+
+### UnsetClusterInternalSubnet
+`func (o *HyperflexClusterProfile) UnsetClusterInternalSubnet()`
+
+UnsetClusterInternalSubnet ensures that no value is present for ClusterInternalSubnet, not even an explicit nil
 ### GetDataIpAddress
 
 `func (o *HyperflexClusterProfile) GetDataIpAddress() string`
@@ -297,6 +336,91 @@ SetReplication sets Replication field to given value.
 
 HasReplication returns a boolean if a field has been set.
 
+### GetStorageClientIpAddress
+
+`func (o *HyperflexClusterProfile) GetStorageClientIpAddress() string`
+
+GetStorageClientIpAddress returns the StorageClientIpAddress field if non-nil, zero value otherwise.
+
+### GetStorageClientIpAddressOk
+
+`func (o *HyperflexClusterProfile) GetStorageClientIpAddressOk() (*string, bool)`
+
+GetStorageClientIpAddressOk returns a tuple with the StorageClientIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClientIpAddress
+
+`func (o *HyperflexClusterProfile) SetStorageClientIpAddress(v string)`
+
+SetStorageClientIpAddress sets StorageClientIpAddress field to given value.
+
+### HasStorageClientIpAddress
+
+`func (o *HyperflexClusterProfile) HasStorageClientIpAddress() bool`
+
+HasStorageClientIpAddress returns a boolean if a field has been set.
+
+### GetStorageClientNetmask
+
+`func (o *HyperflexClusterProfile) GetStorageClientNetmask() string`
+
+GetStorageClientNetmask returns the StorageClientNetmask field if non-nil, zero value otherwise.
+
+### GetStorageClientNetmaskOk
+
+`func (o *HyperflexClusterProfile) GetStorageClientNetmaskOk() (*string, bool)`
+
+GetStorageClientNetmaskOk returns a tuple with the StorageClientNetmask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClientNetmask
+
+`func (o *HyperflexClusterProfile) SetStorageClientNetmask(v string)`
+
+SetStorageClientNetmask sets StorageClientNetmask field to given value.
+
+### HasStorageClientNetmask
+
+`func (o *HyperflexClusterProfile) HasStorageClientNetmask() bool`
+
+HasStorageClientNetmask returns a boolean if a field has been set.
+
+### GetStorageClientVlan
+
+`func (o *HyperflexClusterProfile) GetStorageClientVlan() HyperflexNamedVlan`
+
+GetStorageClientVlan returns the StorageClientVlan field if non-nil, zero value otherwise.
+
+### GetStorageClientVlanOk
+
+`func (o *HyperflexClusterProfile) GetStorageClientVlanOk() (*HyperflexNamedVlan, bool)`
+
+GetStorageClientVlanOk returns a tuple with the StorageClientVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClientVlan
+
+`func (o *HyperflexClusterProfile) SetStorageClientVlan(v HyperflexNamedVlan)`
+
+SetStorageClientVlan sets StorageClientVlan field to given value.
+
+### HasStorageClientVlan
+
+`func (o *HyperflexClusterProfile) HasStorageClientVlan() bool`
+
+HasStorageClientVlan returns a boolean if a field has been set.
+
+### SetStorageClientVlanNil
+
+`func (o *HyperflexClusterProfile) SetStorageClientVlanNil(b bool)`
+
+ SetStorageClientVlanNil sets the value for StorageClientVlan to be an explicit nil
+
+### UnsetStorageClientVlan
+`func (o *HyperflexClusterProfile) UnsetStorageClientVlan()`
+
+UnsetStorageClientVlan ensures that no value is present for StorageClientVlan, not even an explicit nil
 ### GetStorageClusterAuxiliaryIp
 
 `func (o *HyperflexClusterProfile) GetStorageClusterAuxiliaryIp() string`

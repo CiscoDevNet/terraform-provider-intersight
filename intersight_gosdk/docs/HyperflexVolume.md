@@ -8,14 +8,17 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Volume"]
 **Capacity** | Pointer to **int64** | Provisioned Capacity of the volume in bytes. | [optional] [readonly] 
 **ClientId** | Pointer to **string** | Client (tenant) ID to which the volume belongs. | [optional] [readonly] 
+**KubernetesClusterName** | Pointer to **string** | The name of the kubernetes cluster to which the volume is associated. | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **time.Time** | Last modified time as UTC of the volume. | [optional] [readonly] 
 **LunUuid** | Pointer to **string** | UUID of LUN associated with the volume. | [optional] [readonly] 
 **SerialNumber** | Pointer to **string** | Serial number of the volume. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The unique identifier for this volume. | [optional] [readonly] 
 **VolumeAccessMode** | Pointer to **string** | Access Mode of the volume. * &#x60;ReadWriteOnce&#x60; - Read write permisisons to a Virtual disk by a single virtual machine. * &#x60;ReadWriteMany&#x60; - Read write permisisons to a Virtual disk by multiple virtual machines. * &#x60;ReadOnlyMany&#x60; - Read only permisisons to a Virtual disk by multiple virtual machines. * &#x60;&#x60; - Unknown disk access mode. | [optional] [readonly] [default to "ReadWriteOnce"]
+**VolumeCreateTime** | Pointer to **time.Time** | Volume creation time in UTC. | [optional] [readonly] 
 **VolumeMode** | Pointer to **string** | The mode of the HyperFlex volume. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [readonly] [default to "Block"]
 **VolumeType** | Pointer to **string** | The type of the HyperFlex volume. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
+**HxapVirtualDisk** | Pointer to [**HyperflexHxapVirtualDiskRelationship**](hyperflex.HxapVirtualDisk.Relationship.md) |  | [optional] 
 **StorageContainer** | Pointer to [**HyperflexStorageContainerRelationship**](hyperflex.StorageContainer.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -126,6 +129,31 @@ SetClientId sets ClientId field to given value.
 `func (o *HyperflexVolume) HasClientId() bool`
 
 HasClientId returns a boolean if a field has been set.
+
+### GetKubernetesClusterName
+
+`func (o *HyperflexVolume) GetKubernetesClusterName() string`
+
+GetKubernetesClusterName returns the KubernetesClusterName field if non-nil, zero value otherwise.
+
+### GetKubernetesClusterNameOk
+
+`func (o *HyperflexVolume) GetKubernetesClusterNameOk() (*string, bool)`
+
+GetKubernetesClusterNameOk returns a tuple with the KubernetesClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesClusterName
+
+`func (o *HyperflexVolume) SetKubernetesClusterName(v string)`
+
+SetKubernetesClusterName sets KubernetesClusterName field to given value.
+
+### HasKubernetesClusterName
+
+`func (o *HyperflexVolume) HasKubernetesClusterName() bool`
+
+HasKubernetesClusterName returns a boolean if a field has been set.
 
 ### GetLastModifiedTime
 
@@ -252,6 +280,31 @@ SetVolumeAccessMode sets VolumeAccessMode field to given value.
 
 HasVolumeAccessMode returns a boolean if a field has been set.
 
+### GetVolumeCreateTime
+
+`func (o *HyperflexVolume) GetVolumeCreateTime() time.Time`
+
+GetVolumeCreateTime returns the VolumeCreateTime field if non-nil, zero value otherwise.
+
+### GetVolumeCreateTimeOk
+
+`func (o *HyperflexVolume) GetVolumeCreateTimeOk() (*time.Time, bool)`
+
+GetVolumeCreateTimeOk returns a tuple with the VolumeCreateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeCreateTime
+
+`func (o *HyperflexVolume) SetVolumeCreateTime(v time.Time)`
+
+SetVolumeCreateTime sets VolumeCreateTime field to given value.
+
+### HasVolumeCreateTime
+
+`func (o *HyperflexVolume) HasVolumeCreateTime() bool`
+
+HasVolumeCreateTime returns a boolean if a field has been set.
+
 ### GetVolumeMode
 
 `func (o *HyperflexVolume) GetVolumeMode() string`
@@ -326,6 +379,31 @@ SetCluster sets Cluster field to given value.
 `func (o *HyperflexVolume) HasCluster() bool`
 
 HasCluster returns a boolean if a field has been set.
+
+### GetHxapVirtualDisk
+
+`func (o *HyperflexVolume) GetHxapVirtualDisk() HyperflexHxapVirtualDiskRelationship`
+
+GetHxapVirtualDisk returns the HxapVirtualDisk field if non-nil, zero value otherwise.
+
+### GetHxapVirtualDiskOk
+
+`func (o *HyperflexVolume) GetHxapVirtualDiskOk() (*HyperflexHxapVirtualDiskRelationship, bool)`
+
+GetHxapVirtualDiskOk returns a tuple with the HxapVirtualDisk field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHxapVirtualDisk
+
+`func (o *HyperflexVolume) SetHxapVirtualDisk(v HyperflexHxapVirtualDiskRelationship)`
+
+SetHxapVirtualDisk sets HxapVirtualDisk field to given value.
+
+### HasHxapVirtualDisk
+
+`func (o *HyperflexVolume) HasHxapVirtualDisk() bool`
+
+HasHxapVirtualDisk returns a boolean if a field has been set.
 
 ### GetStorageContainer
 

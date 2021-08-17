@@ -441,9 +441,8 @@ func dataSourceStorageController() *schema.Resource {
 						Computed: true,
 					},
 					"disk_slot": {
-						Description: "A reference to a storageDiskSlot resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Description: "An array of relationships to storageDiskSlot resources.",
 						Type:        schema.TypeList,
-						MaxItems:    1,
 						Optional:    true,
 						Computed:    true,
 						Elem: &schema.Resource{
@@ -1343,7 +1342,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 
 				temp["disk_group"] = flattenListStorageDiskGroupRelationship(s.GetDiskGroup(), d)
 
-				temp["disk_slot"] = flattenMapStorageDiskSlotRelationship(s.GetDiskSlot(), d)
+				temp["disk_slot"] = flattenListStorageDiskSlotRelationship(s.GetDiskSlot(), d)
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["foreign_config_present"] = (s.GetForeignConfigPresent())

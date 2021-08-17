@@ -9,9 +9,12 @@ Name | Type | Description | Notes
 **ClusterType** | Pointer to **int64** | The storage type of this cluster (All Flash or Hybrid). | [optional] [readonly] 
 **ClusterUuid** | Pointer to **string** | The unique identifier for this HyperFlex cluster. | [optional] [readonly] 
 **DeviceId** | Pointer to **string** | The unique identifier of the device registration that represents this HyperFlex cluster&#39;s connection to Intersight. | [optional] [readonly] 
+**DnsServers** | Pointer to **[]string** |  | [optional] 
 **FltAggr** | Pointer to **int64** | The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. | [optional] [readonly] 
 **HxdpBuildVersion** | Pointer to **string** | The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version. | [optional] [readonly] 
+**NtpServers** | Pointer to **[]string** |  | [optional] 
 **Summary** | Pointer to [**NullableHyperflexSummary**](hyperflex.Summary.md) |  | [optional] 
+**UpgradeStatus** | Pointer to **string** | The upgrade status of the HyperFlex cluster. * &#x60;Unknown&#x60; - The upgrade status of the HyperFlex cluster could not be determined. * &#x60;Ok&#x60; - The upgrade of the HyperFlex cluster is complete. * &#x60;InProgress&#x60; - The upgrade of the HyperFlex cluster is in-progress. * &#x60;Failed&#x60; - The upgrade of the HyperFlex cluster has failed. * &#x60;Waiting&#x60; - The upgrade of the HyperFlex cluster is waiting to continue execution. | [optional] [readonly] [default to "Unknown"]
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
 **Health** | Pointer to [**HyperflexHealthRelationship**](hyperflex.Health.Relationship.md) |  | [optional] 
@@ -155,6 +158,41 @@ SetDeviceId sets DeviceId field to given value.
 
 HasDeviceId returns a boolean if a field has been set.
 
+### GetDnsServers
+
+`func (o *HyperflexCluster) GetDnsServers() []string`
+
+GetDnsServers returns the DnsServers field if non-nil, zero value otherwise.
+
+### GetDnsServersOk
+
+`func (o *HyperflexCluster) GetDnsServersOk() (*[]string, bool)`
+
+GetDnsServersOk returns a tuple with the DnsServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsServers
+
+`func (o *HyperflexCluster) SetDnsServers(v []string)`
+
+SetDnsServers sets DnsServers field to given value.
+
+### HasDnsServers
+
+`func (o *HyperflexCluster) HasDnsServers() bool`
+
+HasDnsServers returns a boolean if a field has been set.
+
+### SetDnsServersNil
+
+`func (o *HyperflexCluster) SetDnsServersNil(b bool)`
+
+ SetDnsServersNil sets the value for DnsServers to be an explicit nil
+
+### UnsetDnsServers
+`func (o *HyperflexCluster) UnsetDnsServers()`
+
+UnsetDnsServers ensures that no value is present for DnsServers, not even an explicit nil
 ### GetFltAggr
 
 `func (o *HyperflexCluster) GetFltAggr() int64`
@@ -205,6 +243,41 @@ SetHxdpBuildVersion sets HxdpBuildVersion field to given value.
 
 HasHxdpBuildVersion returns a boolean if a field has been set.
 
+### GetNtpServers
+
+`func (o *HyperflexCluster) GetNtpServers() []string`
+
+GetNtpServers returns the NtpServers field if non-nil, zero value otherwise.
+
+### GetNtpServersOk
+
+`func (o *HyperflexCluster) GetNtpServersOk() (*[]string, bool)`
+
+GetNtpServersOk returns a tuple with the NtpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServers
+
+`func (o *HyperflexCluster) SetNtpServers(v []string)`
+
+SetNtpServers sets NtpServers field to given value.
+
+### HasNtpServers
+
+`func (o *HyperflexCluster) HasNtpServers() bool`
+
+HasNtpServers returns a boolean if a field has been set.
+
+### SetNtpServersNil
+
+`func (o *HyperflexCluster) SetNtpServersNil(b bool)`
+
+ SetNtpServersNil sets the value for NtpServers to be an explicit nil
+
+### UnsetNtpServers
+`func (o *HyperflexCluster) UnsetNtpServers()`
+
+UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
 ### GetSummary
 
 `func (o *HyperflexCluster) GetSummary() HyperflexSummary`
@@ -240,6 +313,31 @@ HasSummary returns a boolean if a field has been set.
 `func (o *HyperflexCluster) UnsetSummary()`
 
 UnsetSummary ensures that no value is present for Summary, not even an explicit nil
+### GetUpgradeStatus
+
+`func (o *HyperflexCluster) GetUpgradeStatus() string`
+
+GetUpgradeStatus returns the UpgradeStatus field if non-nil, zero value otherwise.
+
+### GetUpgradeStatusOk
+
+`func (o *HyperflexCluster) GetUpgradeStatusOk() (*string, bool)`
+
+GetUpgradeStatusOk returns a tuple with the UpgradeStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradeStatus
+
+`func (o *HyperflexCluster) SetUpgradeStatus(v string)`
+
+SetUpgradeStatus sets UpgradeStatus field to given value.
+
+### HasUpgradeStatus
+
+`func (o *HyperflexCluster) HasUpgradeStatus() bool`
+
+HasUpgradeStatus returns a boolean if a field has been set.
+
 ### GetVmCount
 
 `func (o *HyperflexCluster) GetVmCount() int64`

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.AppSettingConstraint"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.AppSettingConstraint"]
+**DeploymentType** | Pointer to **string** | The deployment type of the cluster. * &#x60;NA&#x60; - The deployment type of the HyperFlex cluster is not available. * &#x60;Datacenter&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * &#x60;Stretched Cluster&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * &#x60;Edge&#x60; - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes. | [optional] [default to "NA"]
 **HxdpVersion** | Pointer to **string** | The supported HyperFlex Data Platform version in regex format. | [optional] 
 **HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **MgmtPlatform** | Pointer to **string** | The supported management platform for the HyperFlex Cluster. * &#x60;FI&#x60; - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * &#x60;EDGE&#x60; - The host servers used in the cluster deployment are standalone severs. | [optional] [default to "FI"]
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDeploymentType
+
+`func (o *HyperflexAppSettingConstraintAllOf) GetDeploymentType() string`
+
+GetDeploymentType returns the DeploymentType field if non-nil, zero value otherwise.
+
+### GetDeploymentTypeOk
+
+`func (o *HyperflexAppSettingConstraintAllOf) GetDeploymentTypeOk() (*string, bool)`
+
+GetDeploymentTypeOk returns a tuple with the DeploymentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeploymentType
+
+`func (o *HyperflexAppSettingConstraintAllOf) SetDeploymentType(v string)`
+
+SetDeploymentType sets DeploymentType field to given value.
+
+### HasDeploymentType
+
+`func (o *HyperflexAppSettingConstraintAllOf) HasDeploymentType() bool`
+
+HasDeploymentType returns a boolean if a field has been set.
 
 ### GetHxdpVersion
 

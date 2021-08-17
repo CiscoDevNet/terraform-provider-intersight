@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -28,38 +28,38 @@ var (
 // StorageApiService StorageApi service
 type StorageApiService service
 
-type ApiCreateStorageDiskGroupPolicyRequest struct {
-	ctx                    _context.Context
-	ApiService             *StorageApiService
-	storageDiskGroupPolicy *StorageDiskGroupPolicy
-	ifMatch                *string
-	ifNoneMatch            *string
+type ApiCreateStorageDriveGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *StorageApiService
+	storageDriveGroup *StorageDriveGroup
+	ifMatch           *string
+	ifNoneMatch       *string
 }
 
-func (r ApiCreateStorageDiskGroupPolicyRequest) StorageDiskGroupPolicy(storageDiskGroupPolicy StorageDiskGroupPolicy) ApiCreateStorageDiskGroupPolicyRequest {
-	r.storageDiskGroupPolicy = &storageDiskGroupPolicy
+func (r ApiCreateStorageDriveGroupRequest) StorageDriveGroup(storageDriveGroup StorageDriveGroup) ApiCreateStorageDriveGroupRequest {
+	r.storageDriveGroup = &storageDriveGroup
 	return r
 }
-func (r ApiCreateStorageDiskGroupPolicyRequest) IfMatch(ifMatch string) ApiCreateStorageDiskGroupPolicyRequest {
+func (r ApiCreateStorageDriveGroupRequest) IfMatch(ifMatch string) ApiCreateStorageDriveGroupRequest {
 	r.ifMatch = &ifMatch
 	return r
 }
-func (r ApiCreateStorageDiskGroupPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateStorageDiskGroupPolicyRequest {
+func (r ApiCreateStorageDriveGroupRequest) IfNoneMatch(ifNoneMatch string) ApiCreateStorageDriveGroupRequest {
 	r.ifNoneMatch = &ifNoneMatch
 	return r
 }
 
-func (r ApiCreateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
-	return r.ApiService.CreateStorageDiskGroupPolicyExecute(r)
+func (r ApiCreateStorageDriveGroupRequest) Execute() (StorageDriveGroup, *_nethttp.Response, error) {
+	return r.ApiService.CreateStorageDriveGroupExecute(r)
 }
 
 /*
- * CreateStorageDiskGroupPolicy Create a 'storage.DiskGroupPolicy' resource.
+ * CreateStorageDriveGroup Create a 'storage.DriveGroup' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiCreateStorageDiskGroupPolicyRequest
+ * @return ApiCreateStorageDriveGroupRequest
  */
-func (a *StorageApiService) CreateStorageDiskGroupPolicy(ctx _context.Context) ApiCreateStorageDiskGroupPolicyRequest {
-	return ApiCreateStorageDiskGroupPolicyRequest{
+func (a *StorageApiService) CreateStorageDriveGroup(ctx _context.Context) ApiCreateStorageDriveGroupRequest {
+	return ApiCreateStorageDriveGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -67,30 +67,30 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicy(ctx _context.Context) A
 
 /*
  * Execute executes the request
- * @return StorageDiskGroupPolicy
+ * @return StorageDriveGroup
  */
-func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) CreateStorageDriveGroupExecute(r ApiCreateStorageDriveGroupRequest) (StorageDriveGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  StorageDiskGroupPolicy
+		localVarReturnValue  StorageDriveGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.CreateStorageDiskGroupPolicy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.CreateStorageDriveGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies"
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+	if r.storageDriveGroup == nil {
+		return localVarReturnValue, nil, reportError("storageDriveGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -117,7 +117,7 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStora
 		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
 	}
 	// body params
-	localVarPostBody = r.storageDiskGroupPolicy
+	localVarPostBody = r.storageDriveGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -376,24 +376,24 @@ func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorage
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteStorageDiskGroupPolicyRequest struct {
+type ApiDeleteStorageDriveGroupRequest struct {
 	ctx        _context.Context
 	ApiService *StorageApiService
 	moid       string
 }
 
-func (r ApiDeleteStorageDiskGroupPolicyRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteStorageDiskGroupPolicyExecute(r)
+func (r ApiDeleteStorageDriveGroupRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteStorageDriveGroupExecute(r)
 }
 
 /*
- * DeleteStorageDiskGroupPolicy Delete a 'storage.DiskGroupPolicy' resource.
+ * DeleteStorageDriveGroup Delete a 'storage.DriveGroup' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiDeleteStorageDiskGroupPolicyRequest
+ * @return ApiDeleteStorageDriveGroupRequest
  */
-func (a *StorageApiService) DeleteStorageDiskGroupPolicy(ctx _context.Context, moid string) ApiDeleteStorageDiskGroupPolicyRequest {
-	return ApiDeleteStorageDiskGroupPolicyRequest{
+func (a *StorageApiService) DeleteStorageDriveGroup(ctx _context.Context, moid string) ApiDeleteStorageDriveGroupRequest {
+	return ApiDeleteStorageDriveGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -403,7 +403,7 @@ func (a *StorageApiService) DeleteStorageDiskGroupPolicy(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStorageDiskGroupPolicyRequest) (*_nethttp.Response, error) {
+func (a *StorageApiService) DeleteStorageDriveGroupExecute(r ApiDeleteStorageDriveGroupRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -412,12 +412,12 @@ func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStora
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.DeleteStorageDiskGroupPolicy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.DeleteStorageDriveGroup")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1430,393 +1430,6 @@ func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetStorageDiskGroupPolicyByMoidRequest struct {
-	ctx        _context.Context
-	ApiService *StorageApiService
-	moid       string
-}
-
-func (r ApiGetStorageDiskGroupPolicyByMoidRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
-	return r.ApiService.GetStorageDiskGroupPolicyByMoidExecute(r)
-}
-
-/*
- * GetStorageDiskGroupPolicyByMoid Read a 'storage.DiskGroupPolicy' resource.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param moid The unique Moid identifier of a resource instance.
- * @return ApiGetStorageDiskGroupPolicyByMoidRequest
- */
-func (a *StorageApiService) GetStorageDiskGroupPolicyByMoid(ctx _context.Context, moid string) ApiGetStorageDiskGroupPolicyByMoidRequest {
-	return ApiGetStorageDiskGroupPolicyByMoidRequest{
-		ApiService: a,
-		ctx:        ctx,
-		moid:       moid,
-	}
-}
-
-/*
- * Execute executes the request
- * @return StorageDiskGroupPolicy
- */
-func (a *StorageApiService) GetStorageDiskGroupPolicyByMoidExecute(r ApiGetStorageDiskGroupPolicyByMoidRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  StorageDiskGroupPolicy
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupPolicyByMoid")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetStorageDiskGroupPolicyListRequest struct {
-	ctx         _context.Context
-	ApiService  *StorageApiService
-	filter      *string
-	orderby     *string
-	top         *int32
-	skip        *int32
-	select_     *string
-	expand      *string
-	apply       *string
-	count       *bool
-	inlinecount *string
-	at          *string
-	tags        *string
-}
-
-func (r ApiGetStorageDiskGroupPolicyListRequest) Filter(filter string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.filter = &filter
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Orderby(orderby string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.orderby = &orderby
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Top(top int32) ApiGetStorageDiskGroupPolicyListRequest {
-	r.top = &top
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Skip(skip int32) ApiGetStorageDiskGroupPolicyListRequest {
-	r.skip = &skip
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Select_(select_ string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.select_ = &select_
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Expand(expand string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.expand = &expand
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Apply(apply string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.apply = &apply
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Count(count bool) ApiGetStorageDiskGroupPolicyListRequest {
-	r.count = &count
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Inlinecount(inlinecount string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.inlinecount = &inlinecount
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) At(at string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.at = &at
-	return r
-}
-func (r ApiGetStorageDiskGroupPolicyListRequest) Tags(tags string) ApiGetStorageDiskGroupPolicyListRequest {
-	r.tags = &tags
-	return r
-}
-
-func (r ApiGetStorageDiskGroupPolicyListRequest) Execute() (StorageDiskGroupPolicyResponse, *_nethttp.Response, error) {
-	return r.ApiService.GetStorageDiskGroupPolicyListExecute(r)
-}
-
-/*
- * GetStorageDiskGroupPolicyList Read a 'storage.DiskGroupPolicy' resource.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetStorageDiskGroupPolicyListRequest
- */
-func (a *StorageApiService) GetStorageDiskGroupPolicyList(ctx _context.Context) ApiGetStorageDiskGroupPolicyListRequest {
-	return ApiGetStorageDiskGroupPolicyListRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return StorageDiskGroupPolicyResponse
- */
-func (a *StorageApiService) GetStorageDiskGroupPolicyListExecute(r ApiGetStorageDiskGroupPolicyListRequest) (StorageDiskGroupPolicyResponse, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  StorageDiskGroupPolicyResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupPolicyList")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.filter != nil {
-		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
-	}
-	if r.orderby != nil {
-		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
-	}
-	if r.top != nil {
-		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
-	}
-	if r.skip != nil {
-		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
-	}
-	if r.select_ != nil {
-		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
-	}
-	if r.expand != nil {
-		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
-	}
-	if r.apply != nil {
-		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
-	}
-	if r.count != nil {
-		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
-	}
-	if r.inlinecount != nil {
-		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
-	}
-	if r.at != nil {
-		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
-	}
-	if r.tags != nil {
-		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		var v Error
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetStorageDiskSlotByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *StorageApiService
@@ -2065,6 +1678,393 @@ func (a *StorageApiService) GetStorageDiskSlotListExecute(r ApiGetStorageDiskSlo
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskSlots"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetStorageDriveGroupByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *StorageApiService
+	moid       string
+}
+
+func (r ApiGetStorageDriveGroupByMoidRequest) Execute() (StorageDriveGroup, *_nethttp.Response, error) {
+	return r.ApiService.GetStorageDriveGroupByMoidExecute(r)
+}
+
+/*
+ * GetStorageDriveGroupByMoid Read a 'storage.DriveGroup' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetStorageDriveGroupByMoidRequest
+ */
+func (a *StorageApiService) GetStorageDriveGroupByMoid(ctx _context.Context, moid string) ApiGetStorageDriveGroupByMoidRequest {
+	return ApiGetStorageDriveGroupByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return StorageDriveGroup
+ */
+func (a *StorageApiService) GetStorageDriveGroupByMoidExecute(r ApiGetStorageDriveGroupByMoidRequest) (StorageDriveGroup, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  StorageDriveGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDriveGroupByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetStorageDriveGroupListRequest struct {
+	ctx         _context.Context
+	ApiService  *StorageApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetStorageDriveGroupListRequest) Filter(filter string) ApiGetStorageDriveGroupListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Orderby(orderby string) ApiGetStorageDriveGroupListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Top(top int32) ApiGetStorageDriveGroupListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Skip(skip int32) ApiGetStorageDriveGroupListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Select_(select_ string) ApiGetStorageDriveGroupListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Expand(expand string) ApiGetStorageDriveGroupListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Apply(apply string) ApiGetStorageDriveGroupListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Count(count bool) ApiGetStorageDriveGroupListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Inlinecount(inlinecount string) ApiGetStorageDriveGroupListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) At(at string) ApiGetStorageDriveGroupListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetStorageDriveGroupListRequest) Tags(tags string) ApiGetStorageDriveGroupListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetStorageDriveGroupListRequest) Execute() (StorageDriveGroupResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetStorageDriveGroupListExecute(r)
+}
+
+/*
+ * GetStorageDriveGroupList Read a 'storage.DriveGroup' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetStorageDriveGroupListRequest
+ */
+func (a *StorageApiService) GetStorageDriveGroupList(ctx _context.Context) ApiGetStorageDriveGroupListRequest {
+	return ApiGetStorageDriveGroupListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return StorageDriveGroupResponse
+ */
+func (a *StorageApiService) GetStorageDriveGroupListExecute(r ApiGetStorageDriveGroupListRequest) (StorageDriveGroupResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  StorageDriveGroupResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDriveGroupList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -25962,6 +25962,393 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetStorageVirtualDriveIdentityByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *StorageApiService
+	moid       string
+}
+
+func (r ApiGetStorageVirtualDriveIdentityByMoidRequest) Execute() (StorageVirtualDriveIdentity, *_nethttp.Response, error) {
+	return r.ApiService.GetStorageVirtualDriveIdentityByMoidExecute(r)
+}
+
+/*
+ * GetStorageVirtualDriveIdentityByMoid Read a 'storage.VirtualDriveIdentity' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetStorageVirtualDriveIdentityByMoidRequest
+ */
+func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoid(ctx _context.Context, moid string) ApiGetStorageVirtualDriveIdentityByMoidRequest {
+	return ApiGetStorageVirtualDriveIdentityByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return StorageVirtualDriveIdentity
+ */
+func (a *StorageApiService) GetStorageVirtualDriveIdentityByMoidExecute(r ApiGetStorageVirtualDriveIdentityByMoidRequest) (StorageVirtualDriveIdentity, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  StorageVirtualDriveIdentity
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveIdentityByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveIdentities/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetStorageVirtualDriveIdentityListRequest struct {
+	ctx         _context.Context
+	ApiService  *StorageApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Filter(filter string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Orderby(orderby string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Top(top int32) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Skip(skip int32) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Select_(select_ string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Expand(expand string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Apply(apply string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Count(count bool) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Inlinecount(inlinecount string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) At(at string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Tags(tags string) ApiGetStorageVirtualDriveIdentityListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetStorageVirtualDriveIdentityListRequest) Execute() (StorageVirtualDriveIdentityResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetStorageVirtualDriveIdentityListExecute(r)
+}
+
+/*
+ * GetStorageVirtualDriveIdentityList Read a 'storage.VirtualDriveIdentity' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetStorageVirtualDriveIdentityListRequest
+ */
+func (a *StorageApiService) GetStorageVirtualDriveIdentityList(ctx _context.Context) ApiGetStorageVirtualDriveIdentityListRequest {
+	return ApiGetStorageVirtualDriveIdentityListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return StorageVirtualDriveIdentityResponse
+ */
+func (a *StorageApiService) GetStorageVirtualDriveIdentityListExecute(r ApiGetStorageVirtualDriveIdentityListRequest) (StorageVirtualDriveIdentityResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  StorageVirtualDriveIdentityResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveIdentityList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveIdentities"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetStorageVirtualDriveListRequest struct {
 	ctx         _context.Context
 	ApiService  *StorageApiService
@@ -26538,35 +26925,35 @@ func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPatchStorageDiskGroupPolicyRequest struct {
-	ctx                    _context.Context
-	ApiService             *StorageApiService
-	moid                   string
-	storageDiskGroupPolicy *StorageDiskGroupPolicy
-	ifMatch                *string
+type ApiPatchStorageDriveGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *StorageApiService
+	moid              string
+	storageDriveGroup *StorageDriveGroup
+	ifMatch           *string
 }
 
-func (r ApiPatchStorageDiskGroupPolicyRequest) StorageDiskGroupPolicy(storageDiskGroupPolicy StorageDiskGroupPolicy) ApiPatchStorageDiskGroupPolicyRequest {
-	r.storageDiskGroupPolicy = &storageDiskGroupPolicy
+func (r ApiPatchStorageDriveGroupRequest) StorageDriveGroup(storageDriveGroup StorageDriveGroup) ApiPatchStorageDriveGroupRequest {
+	r.storageDriveGroup = &storageDriveGroup
 	return r
 }
-func (r ApiPatchStorageDiskGroupPolicyRequest) IfMatch(ifMatch string) ApiPatchStorageDiskGroupPolicyRequest {
+func (r ApiPatchStorageDriveGroupRequest) IfMatch(ifMatch string) ApiPatchStorageDriveGroupRequest {
 	r.ifMatch = &ifMatch
 	return r
 }
 
-func (r ApiPatchStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
-	return r.ApiService.PatchStorageDiskGroupPolicyExecute(r)
+func (r ApiPatchStorageDriveGroupRequest) Execute() (StorageDriveGroup, *_nethttp.Response, error) {
+	return r.ApiService.PatchStorageDriveGroupExecute(r)
 }
 
 /*
- * PatchStorageDiskGroupPolicy Update a 'storage.DiskGroupPolicy' resource.
+ * PatchStorageDriveGroup Update a 'storage.DriveGroup' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiPatchStorageDiskGroupPolicyRequest
+ * @return ApiPatchStorageDriveGroupRequest
  */
-func (a *StorageApiService) PatchStorageDiskGroupPolicy(ctx _context.Context, moid string) ApiPatchStorageDiskGroupPolicyRequest {
-	return ApiPatchStorageDiskGroupPolicyRequest{
+func (a *StorageApiService) PatchStorageDriveGroup(ctx _context.Context, moid string) ApiPatchStorageDriveGroupRequest {
+	return ApiPatchStorageDriveGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -26575,31 +26962,31 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicy(ctx _context.Context, mo
 
 /*
  * Execute executes the request
- * @return StorageDiskGroupPolicy
+ * @return StorageDriveGroup
  */
-func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageDriveGroupExecute(r ApiPatchStorageDriveGroupRequest) (StorageDriveGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  StorageDiskGroupPolicy
+		localVarReturnValue  StorageDriveGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageDiskGroupPolicy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageDriveGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+	if r.storageDriveGroup == nil {
+		return localVarReturnValue, nil, reportError("storageDriveGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -26623,7 +27010,7 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorage
 		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
 	}
 	// body params
-	localVarPostBody = r.storageDiskGroupPolicy
+	localVarPostBody = r.storageDriveGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -31128,35 +31515,35 @@ func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDisk
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateStorageDiskGroupPolicyRequest struct {
-	ctx                    _context.Context
-	ApiService             *StorageApiService
-	moid                   string
-	storageDiskGroupPolicy *StorageDiskGroupPolicy
-	ifMatch                *string
+type ApiUpdateStorageDriveGroupRequest struct {
+	ctx               _context.Context
+	ApiService        *StorageApiService
+	moid              string
+	storageDriveGroup *StorageDriveGroup
+	ifMatch           *string
 }
 
-func (r ApiUpdateStorageDiskGroupPolicyRequest) StorageDiskGroupPolicy(storageDiskGroupPolicy StorageDiskGroupPolicy) ApiUpdateStorageDiskGroupPolicyRequest {
-	r.storageDiskGroupPolicy = &storageDiskGroupPolicy
+func (r ApiUpdateStorageDriveGroupRequest) StorageDriveGroup(storageDriveGroup StorageDriveGroup) ApiUpdateStorageDriveGroupRequest {
+	r.storageDriveGroup = &storageDriveGroup
 	return r
 }
-func (r ApiUpdateStorageDiskGroupPolicyRequest) IfMatch(ifMatch string) ApiUpdateStorageDiskGroupPolicyRequest {
+func (r ApiUpdateStorageDriveGroupRequest) IfMatch(ifMatch string) ApiUpdateStorageDriveGroupRequest {
 	r.ifMatch = &ifMatch
 	return r
 }
 
-func (r ApiUpdateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
-	return r.ApiService.UpdateStorageDiskGroupPolicyExecute(r)
+func (r ApiUpdateStorageDriveGroupRequest) Execute() (StorageDriveGroup, *_nethttp.Response, error) {
+	return r.ApiService.UpdateStorageDriveGroupExecute(r)
 }
 
 /*
- * UpdateStorageDiskGroupPolicy Update a 'storage.DiskGroupPolicy' resource.
+ * UpdateStorageDriveGroup Update a 'storage.DriveGroup' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiUpdateStorageDiskGroupPolicyRequest
+ * @return ApiUpdateStorageDriveGroupRequest
  */
-func (a *StorageApiService) UpdateStorageDiskGroupPolicy(ctx _context.Context, moid string) ApiUpdateStorageDiskGroupPolicyRequest {
-	return ApiUpdateStorageDiskGroupPolicyRequest{
+func (a *StorageApiService) UpdateStorageDriveGroup(ctx _context.Context, moid string) ApiUpdateStorageDriveGroupRequest {
+	return ApiUpdateStorageDriveGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -31165,31 +31552,31 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicy(ctx _context.Context, m
 
 /*
  * Execute executes the request
- * @return StorageDiskGroupPolicy
+ * @return StorageDriveGroup
  */
-func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageDriveGroupExecute(r ApiUpdateStorageDriveGroupRequest) (StorageDriveGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  StorageDiskGroupPolicy
+		localVarReturnValue  StorageDriveGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageDiskGroupPolicy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageDriveGroup")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
+	localVarPath := localBasePath + "/api/v1/storage/DriveGroups/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+	if r.storageDriveGroup == nil {
+		return localVarReturnValue, nil, reportError("storageDriveGroup is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31213,7 +31600,7 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStora
 		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
 	}
 	// body params
-	localVarPostBody = r.storageDiskGroupPolicy
+	localVarPostBody = r.storageDriveGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

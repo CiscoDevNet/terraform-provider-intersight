@@ -23,12 +23,6 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"capacity_utilization": {
-				Description: "Capacity Utilization of Storage Container.",
-				Type:        schema.TypeFloat,
-				Optional:    true,
-				Computed:    true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -191,12 +185,6 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 								},
 							},
 						},
-					},
-					"capacity_utilization": {
-						Description: "Capacity Utilization of Storage Container.",
-						Type:        schema.TypeFloat,
-						Optional:    true,
-						Computed:    true,
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -683,10 +671,6 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
-	if v, ok := d.GetOk("capacity_utilization"); ok {
-		x := v.(float32)
-		o.SetCapacityUtilization(x)
-	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -804,7 +788,6 @@ func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
-				temp["capacity_utilization"] = (s.GetCapacityUtilization())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cluster"] = flattenMapHyperflexClusterRelationship(s.GetCluster(), d)

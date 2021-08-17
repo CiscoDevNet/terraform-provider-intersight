@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -20,7 +20,8 @@ type HyperflexClusterProfileAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType            string                    `json:"ObjectType"`
+	ClusterInternalSubnet NullableCommIpV4Interface `json:"ClusterInternalSubnet,omitempty"`
 	// The storage data IP address for the HyperFlex cluster.
 	DataIpAddress *string `json:"DataIpAddress,omitempty"`
 	// The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character.
@@ -37,6 +38,11 @@ type HyperflexClusterProfileAllOf struct {
 	MgmtPlatform *string `json:"MgmtPlatform,omitempty"`
 	// The number of copies of each data block written.
 	Replication *int64 `json:"Replication,omitempty"`
+	// The storage data IP address for the HyperFlex cluster.
+	StorageClientIpAddress *string `json:"StorageClientIpAddress,omitempty"`
+	// The netmask for the Storage client network IP address.
+	StorageClientNetmask *string                    `json:"StorageClientNetmask,omitempty"`
+	StorageClientVlan    NullableHyperflexNamedVlan `json:"StorageClientVlan,omitempty"`
 	// The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.
 	StorageClusterAuxiliaryIp *string                    `json:"StorageClusterAuxiliaryIp,omitempty"`
 	StorageDataVlan           NullableHyperflexNamedVlan `json:"StorageDataVlan,omitempty"`
@@ -151,6 +157,49 @@ func (o *HyperflexClusterProfileAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *HyperflexClusterProfileAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetClusterInternalSubnet returns the ClusterInternalSubnet field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexClusterProfileAllOf) GetClusterInternalSubnet() CommIpV4Interface {
+	if o == nil || o.ClusterInternalSubnet.Get() == nil {
+		var ret CommIpV4Interface
+		return ret
+	}
+	return *o.ClusterInternalSubnet.Get()
+}
+
+// GetClusterInternalSubnetOk returns a tuple with the ClusterInternalSubnet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexClusterProfileAllOf) GetClusterInternalSubnetOk() (*CommIpV4Interface, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ClusterInternalSubnet.Get(), o.ClusterInternalSubnet.IsSet()
+}
+
+// HasClusterInternalSubnet returns a boolean if a field has been set.
+func (o *HyperflexClusterProfileAllOf) HasClusterInternalSubnet() bool {
+	if o != nil && o.ClusterInternalSubnet.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterInternalSubnet gets a reference to the given NullableCommIpV4Interface and assigns it to the ClusterInternalSubnet field.
+func (o *HyperflexClusterProfileAllOf) SetClusterInternalSubnet(v CommIpV4Interface) {
+	o.ClusterInternalSubnet.Set(&v)
+}
+
+// SetClusterInternalSubnetNil sets the value for ClusterInternalSubnet to be an explicit nil
+func (o *HyperflexClusterProfileAllOf) SetClusterInternalSubnetNil() {
+	o.ClusterInternalSubnet.Set(nil)
+}
+
+// UnsetClusterInternalSubnet ensures that no value is present for ClusterInternalSubnet, not even an explicit nil
+func (o *HyperflexClusterProfileAllOf) UnsetClusterInternalSubnet() {
+	o.ClusterInternalSubnet.Unset()
 }
 
 // GetDataIpAddress returns the DataIpAddress field value if set, zero value otherwise.
@@ -407,6 +456,113 @@ func (o *HyperflexClusterProfileAllOf) HasReplication() bool {
 // SetReplication gets a reference to the given int64 and assigns it to the Replication field.
 func (o *HyperflexClusterProfileAllOf) SetReplication(v int64) {
 	o.Replication = &v
+}
+
+// GetStorageClientIpAddress returns the StorageClientIpAddress field value if set, zero value otherwise.
+func (o *HyperflexClusterProfileAllOf) GetStorageClientIpAddress() string {
+	if o == nil || o.StorageClientIpAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageClientIpAddress
+}
+
+// GetStorageClientIpAddressOk returns a tuple with the StorageClientIpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterProfileAllOf) GetStorageClientIpAddressOk() (*string, bool) {
+	if o == nil || o.StorageClientIpAddress == nil {
+		return nil, false
+	}
+	return o.StorageClientIpAddress, true
+}
+
+// HasStorageClientIpAddress returns a boolean if a field has been set.
+func (o *HyperflexClusterProfileAllOf) HasStorageClientIpAddress() bool {
+	if o != nil && o.StorageClientIpAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClientIpAddress gets a reference to the given string and assigns it to the StorageClientIpAddress field.
+func (o *HyperflexClusterProfileAllOf) SetStorageClientIpAddress(v string) {
+	o.StorageClientIpAddress = &v
+}
+
+// GetStorageClientNetmask returns the StorageClientNetmask field value if set, zero value otherwise.
+func (o *HyperflexClusterProfileAllOf) GetStorageClientNetmask() string {
+	if o == nil || o.StorageClientNetmask == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageClientNetmask
+}
+
+// GetStorageClientNetmaskOk returns a tuple with the StorageClientNetmask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterProfileAllOf) GetStorageClientNetmaskOk() (*string, bool) {
+	if o == nil || o.StorageClientNetmask == nil {
+		return nil, false
+	}
+	return o.StorageClientNetmask, true
+}
+
+// HasStorageClientNetmask returns a boolean if a field has been set.
+func (o *HyperflexClusterProfileAllOf) HasStorageClientNetmask() bool {
+	if o != nil && o.StorageClientNetmask != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClientNetmask gets a reference to the given string and assigns it to the StorageClientNetmask field.
+func (o *HyperflexClusterProfileAllOf) SetStorageClientNetmask(v string) {
+	o.StorageClientNetmask = &v
+}
+
+// GetStorageClientVlan returns the StorageClientVlan field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexClusterProfileAllOf) GetStorageClientVlan() HyperflexNamedVlan {
+	if o == nil || o.StorageClientVlan.Get() == nil {
+		var ret HyperflexNamedVlan
+		return ret
+	}
+	return *o.StorageClientVlan.Get()
+}
+
+// GetStorageClientVlanOk returns a tuple with the StorageClientVlan field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexClusterProfileAllOf) GetStorageClientVlanOk() (*HyperflexNamedVlan, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageClientVlan.Get(), o.StorageClientVlan.IsSet()
+}
+
+// HasStorageClientVlan returns a boolean if a field has been set.
+func (o *HyperflexClusterProfileAllOf) HasStorageClientVlan() bool {
+	if o != nil && o.StorageClientVlan.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClientVlan gets a reference to the given NullableHyperflexNamedVlan and assigns it to the StorageClientVlan field.
+func (o *HyperflexClusterProfileAllOf) SetStorageClientVlan(v HyperflexNamedVlan) {
+	o.StorageClientVlan.Set(&v)
+}
+
+// SetStorageClientVlanNil sets the value for StorageClientVlan to be an explicit nil
+func (o *HyperflexClusterProfileAllOf) SetStorageClientVlanNil() {
+	o.StorageClientVlan.Set(nil)
+}
+
+// UnsetStorageClientVlan ensures that no value is present for StorageClientVlan, not even an explicit nil
+func (o *HyperflexClusterProfileAllOf) UnsetStorageClientVlan() {
+	o.StorageClientVlan.Unset()
 }
 
 // GetStorageClusterAuxiliaryIp returns the StorageClusterAuxiliaryIp field value if set, zero value otherwise.
@@ -1166,6 +1322,9 @@ func (o HyperflexClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ClusterInternalSubnet.IsSet() {
+		toSerialize["ClusterInternalSubnet"] = o.ClusterInternalSubnet.Get()
+	}
 	if o.DataIpAddress != nil {
 		toSerialize["DataIpAddress"] = o.DataIpAddress
 	}
@@ -1189,6 +1348,15 @@ func (o HyperflexClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Replication != nil {
 		toSerialize["Replication"] = o.Replication
+	}
+	if o.StorageClientIpAddress != nil {
+		toSerialize["StorageClientIpAddress"] = o.StorageClientIpAddress
+	}
+	if o.StorageClientNetmask != nil {
+		toSerialize["StorageClientNetmask"] = o.StorageClientNetmask
+	}
+	if o.StorageClientVlan.IsSet() {
+		toSerialize["StorageClientVlan"] = o.StorageClientVlan.Get()
 	}
 	if o.StorageClusterAuxiliaryIp != nil {
 		toSerialize["StorageClusterAuxiliaryIp"] = o.StorageClusterAuxiliaryIp
@@ -1279,6 +1447,7 @@ func (o *HyperflexClusterProfileAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ClusterInternalSubnet")
 		delete(additionalProperties, "DataIpAddress")
 		delete(additionalProperties, "HostNamePrefix")
 		delete(additionalProperties, "HypervisorControlIpAddress")
@@ -1287,6 +1456,9 @@ func (o *HyperflexClusterProfileAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "MgmtIpAddress")
 		delete(additionalProperties, "MgmtPlatform")
 		delete(additionalProperties, "Replication")
+		delete(additionalProperties, "StorageClientIpAddress")
+		delete(additionalProperties, "StorageClientNetmask")
+		delete(additionalProperties, "StorageClientVlan")
 		delete(additionalProperties, "StorageClusterAuxiliaryIp")
 		delete(additionalProperties, "StorageDataVlan")
 		delete(additionalProperties, "StorageType")

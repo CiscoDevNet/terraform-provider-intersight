@@ -119,6 +119,16 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"storage_client_ip_address": {
+				Description: "The storage data IP address for the HyperFlex cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"storage_client_netmask": {
+				Description: "The netmask for the Storage client network IP address.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"storage_cluster_auxiliary_ip": {
 				Description: "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
 				Type:        schema.TypeString,
@@ -229,6 +239,14 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
+	if v, ok := d.GetOk("storage_client_ip_address"); ok {
+		x := (v.(string))
+		o.SetStorageClientIpAddress(x)
+	}
+	if v, ok := d.GetOk("storage_client_netmask"); ok {
+		x := (v.(string))
+		o.SetStorageClientNetmask(x)
+	}
 	if v, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
 		x := (v.(string))
 		o.SetStorageClusterAuxiliaryIp(x)
@@ -295,6 +313,8 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["auto_support"] = flattenMapHyperflexAutoSupportPolicyRelationship(s.GetAutoSupport(), d)
 				temp["class_id"] = (s.GetClassId())
 
+				temp["cluster_internal_subnet"] = flattenMapCommIpV4Interface(s.GetClusterInternalSubnet(), d)
+
 				temp["cluster_network"] = flattenMapHyperflexClusterNetworkPolicyRelationship(s.GetClusterNetwork(), d)
 
 				temp["cluster_storage"] = flattenMapHyperflexClusterStoragePolicyRelationship(s.GetClusterStorage(), d)
@@ -349,6 +369,10 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 				temp["software_version"] = flattenMapHyperflexSoftwareVersionPolicyRelationship(s.GetSoftwareVersion(), d)
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)
+				temp["storage_client_ip_address"] = (s.GetStorageClientIpAddress())
+				temp["storage_client_netmask"] = (s.GetStorageClientNetmask())
+
+				temp["storage_client_vlan"] = flattenMapHyperflexNamedVlan(s.GetStorageClientVlan(), d)
 				temp["storage_cluster_auxiliary_ip"] = (s.GetStorageClusterAuxiliaryIp())
 
 				temp["storage_data_vlan"] = flattenMapHyperflexNamedVlan(s.GetStorageDataVlan(), d)

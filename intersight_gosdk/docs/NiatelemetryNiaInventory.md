@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **FabricName** | Pointer to **string** | Name of the fabric of the device being inventoried. | [optional] 
 **FexCount** | Pointer to **int64** | Number of fabric extendors utilized. | [optional] 
 **InfraWiNodeCount** | Pointer to **int64** | Number of appliances as physical device that are wired into the cluster. | [optional] 
+**Interface** | Pointer to [**[]NiatelemetryInterfaceElement**](NiatelemetryInterfaceElement.md) |  | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the device being inventoried. | [optional] 
 **IsVirtualNode** | Pointer to **string** | Flag to specify if the node is virtual. | [optional] 
 **LastRebootTime** | Pointer to **string** | Returns the last reboot Time of the device. | [optional] 
@@ -504,6 +505,41 @@ SetInfraWiNodeCount sets InfraWiNodeCount field to given value.
 
 HasInfraWiNodeCount returns a boolean if a field has been set.
 
+### GetInterface
+
+`func (o *NiatelemetryNiaInventory) GetInterface() []NiatelemetryInterfaceElement`
+
+GetInterface returns the Interface field if non-nil, zero value otherwise.
+
+### GetInterfaceOk
+
+`func (o *NiatelemetryNiaInventory) GetInterfaceOk() (*[]NiatelemetryInterfaceElement, bool)`
+
+GetInterfaceOk returns a tuple with the Interface field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterface
+
+`func (o *NiatelemetryNiaInventory) SetInterface(v []NiatelemetryInterfaceElement)`
+
+SetInterface sets Interface field to given value.
+
+### HasInterface
+
+`func (o *NiatelemetryNiaInventory) HasInterface() bool`
+
+HasInterface returns a boolean if a field has been set.
+
+### SetInterfaceNil
+
+`func (o *NiatelemetryNiaInventory) SetInterfaceNil(b bool)`
+
+ SetInterfaceNil sets the value for Interface to be an explicit nil
+
+### UnsetInterface
+`func (o *NiatelemetryNiaInventory) UnsetInterface()`
+
+UnsetInterface ensures that no value is present for Interface, not even an explicit nil
 ### GetIpAddress
 
 `func (o *NiatelemetryNiaInventory) GetIpAddress() string`

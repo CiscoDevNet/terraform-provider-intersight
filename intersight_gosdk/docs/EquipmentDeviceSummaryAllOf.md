@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
@@ -174,6 +175,31 @@ SetSourceObjectType sets SourceObjectType field to given value.
 `func (o *EquipmentDeviceSummaryAllOf) HasSourceObjectType() bool`
 
 HasSourceObjectType returns a boolean if a field has been set.
+
+### GetComputeBlade
+
+`func (o *EquipmentDeviceSummaryAllOf) GetComputeBlade() ComputeBladeRelationship`
+
+GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
+
+### GetComputeBladeOk
+
+`func (o *EquipmentDeviceSummaryAllOf) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
+
+GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeBlade
+
+`func (o *EquipmentDeviceSummaryAllOf) SetComputeBlade(v ComputeBladeRelationship)`
+
+SetComputeBlade sets ComputeBlade field to given value.
+
+### HasComputeBlade
+
+`func (o *EquipmentDeviceSummaryAllOf) HasComputeBlade() bool`
+
+HasComputeBlade returns a boolean if a field has been set.
 
 ### GetComputeRackUnit
 

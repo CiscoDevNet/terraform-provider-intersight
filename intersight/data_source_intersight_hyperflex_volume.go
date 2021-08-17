@@ -58,6 +58,12 @@ func dataSourceHyperflexVolume() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"kubernetes_cluster_name": {
+				Description: "The name of the kubernetes cluster to which the volume is associated.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"last_modified_time": {
 				Description: "Last modified time as UTC of the volume.",
 				Type:        schema.TypeString,
@@ -126,6 +132,12 @@ func dataSourceHyperflexVolume() *schema.Resource {
 			},
 			"volume_access_mode": {
 				Description: "Access Mode of the volume.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.\n* `` - Unknown disk access mode.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"volume_create_time": {
+				Description: "Volume creation time in UTC.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -261,6 +273,50 @@ func dataSourceHyperflexVolume() *schema.Resource {
 					},
 					"domain_group_moid": {
 						Description: "The DomainGroup ID for this managed object.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
+					"hxap_virtual_disk": {
+						Description: "A reference to a hyperflexHxapVirtualDisk resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Computed:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"kubernetes_cluster_name": {
+						Description: "The name of the kubernetes cluster to which the volume is associated.",
 						Type:        schema.TypeString,
 						Optional:    true,
 						Computed:    true,
@@ -655,6 +711,12 @@ func dataSourceHyperflexVolume() *schema.Resource {
 						Optional:    true,
 						Computed:    true,
 					},
+					"volume_create_time": {
+						Description: "Volume creation time in UTC.",
+						Type:        schema.TypeString,
+						Optional:    true,
+						Computed:    true,
+					},
 					"volume_mode": {
 						Description: "The mode of the HyperFlex volume.\n* `Block` - It is a Block virtual disk.\n* `Filesystem` - It is a File system virtual disk.\n* `` - Disk mode is either unknown or not supported.",
 						Type:        schema.TypeString,
@@ -707,6 +769,10 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
+	if v, ok := d.GetOk("kubernetes_cluster_name"); ok {
+		x := (v.(string))
+		o.SetKubernetesClusterName(x)
+	}
 	if v, ok := d.GetOk("last_modified_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastModifiedTime(x)
@@ -754,6 +820,10 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("volume_access_mode"); ok {
 		x := (v.(string))
 		o.SetVolumeAccessMode(x)
+	}
+	if v, ok := d.GetOk("volume_create_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetVolumeCreateTime(x)
 	}
 	if v, ok := d.GetOk("volume_mode"); ok {
 		x := (v.(string))
@@ -814,6 +884,9 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["hxap_virtual_disk"] = flattenMapHyperflexHxapVirtualDiskRelationship(s.GetHxapVirtualDisk(), d)
+				temp["kubernetes_cluster_name"] = (s.GetKubernetesClusterName())
+
 				temp["last_modified_time"] = (s.GetLastModifiedTime()).String()
 				temp["lun_uuid"] = (s.GetLunUuid())
 
@@ -840,6 +913,8 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["volume_access_mode"] = (s.GetVolumeAccessMode())
+
+				temp["volume_create_time"] = (s.GetVolumeCreateTime()).String()
 				temp["volume_mode"] = (s.GetVolumeMode())
 				temp["volume_type"] = (s.GetVolumeType())
 				hyperflexVolumeResults[j] = temp

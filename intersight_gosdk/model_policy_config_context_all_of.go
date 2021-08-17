@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-07-21T16:37:30Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
  *
- * API version: 1.0.9-4403
+ * API version: 1.0.9-4430
  * Contact: intersight@cisco.com
  */
 
@@ -23,6 +23,8 @@ type PolicyConfigContextAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.
 	ConfigState *string `json:"ConfigState,omitempty"`
+	// The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.
+	ConfigType *string `json:"ConfigType,omitempty"`
 	// System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.
 	ControlAction *string `json:"ControlAction,omitempty"`
 	// Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error).
@@ -137,6 +139,38 @@ func (o *PolicyConfigContextAllOf) SetConfigState(v string) {
 	o.ConfigState = &v
 }
 
+// GetConfigType returns the ConfigType field value if set, zero value otherwise.
+func (o *PolicyConfigContextAllOf) GetConfigType() string {
+	if o == nil || o.ConfigType == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfigType
+}
+
+// GetConfigTypeOk returns a tuple with the ConfigType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyConfigContextAllOf) GetConfigTypeOk() (*string, bool) {
+	if o == nil || o.ConfigType == nil {
+		return nil, false
+	}
+	return o.ConfigType, true
+}
+
+// HasConfigType returns a boolean if a field has been set.
+func (o *PolicyConfigContextAllOf) HasConfigType() bool {
+	if o != nil && o.ConfigType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigType gets a reference to the given string and assigns it to the ConfigType field.
+func (o *PolicyConfigContextAllOf) SetConfigType(v string) {
+	o.ConfigType = &v
+}
+
 // GetControlAction returns the ControlAction field value if set, zero value otherwise.
 func (o *PolicyConfigContextAllOf) GetControlAction() string {
 	if o == nil || o.ControlAction == nil {
@@ -244,6 +278,9 @@ func (o PolicyConfigContextAllOf) MarshalJSON() ([]byte, error) {
 	if o.ConfigState != nil {
 		toSerialize["ConfigState"] = o.ConfigState
 	}
+	if o.ConfigType != nil {
+		toSerialize["ConfigType"] = o.ConfigType
+	}
 	if o.ControlAction != nil {
 		toSerialize["ControlAction"] = o.ControlAction
 	}
@@ -274,6 +311,7 @@ func (o *PolicyConfigContextAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ConfigState")
+		delete(additionalProperties, "ConfigType")
 		delete(additionalProperties, "ControlAction")
 		delete(additionalProperties, "ErrorState")
 		delete(additionalProperties, "OperState")

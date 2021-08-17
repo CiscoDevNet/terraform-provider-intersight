@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.HyperFlexStorageContainer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HyperFlexStorageContainer"]
-**CapacityUtilization** | Pointer to **float32** | Capacity Utilization of Storage Container. | [optional] [readonly] 
 **DataBlockSize** | Pointer to **int64** | Storage Container data block size | [optional] [readonly] 
 **InUse** | Pointer to **bool** | Indicates whether the Storage Container has Volumes. | [optional] [readonly] 
 **LastAccessTime** | Pointer to **time.Time** | Storage container&#39;s last access time. | [optional] [readonly] 
@@ -78,31 +77,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-
-### GetCapacityUtilization
-
-`func (o *StorageHyperFlexStorageContainer) GetCapacityUtilization() float32`
-
-GetCapacityUtilization returns the CapacityUtilization field if non-nil, zero value otherwise.
-
-### GetCapacityUtilizationOk
-
-`func (o *StorageHyperFlexStorageContainer) GetCapacityUtilizationOk() (*float32, bool)`
-
-GetCapacityUtilizationOk returns a tuple with the CapacityUtilization field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCapacityUtilization
-
-`func (o *StorageHyperFlexStorageContainer) SetCapacityUtilization(v float32)`
-
-SetCapacityUtilization sets CapacityUtilization field to given value.
-
-### HasCapacityUtilization
-
-`func (o *StorageHyperFlexStorageContainer) HasCapacityUtilization() bool`
-
-HasCapacityUtilization returns a boolean if a field has been set.
 
 ### GetDataBlockSize
 

@@ -468,6 +468,46 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
+					"interface": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Return value of name of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
+								"oper_state": {
+									Description: "Return value of operState attribute.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"xcvr_present": {
+									Description: "Return whether sfp is present or not.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+						Computed: true,
+					},
 					"ip_address": {
 						Description: "The IP address of the device being inventoried.",
 						Type:        schema.TypeString,
@@ -1529,6 +1569,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["fabric_name"] = (s.GetFabricName())
 				temp["fex_count"] = (s.GetFexCount())
 				temp["infra_wi_node_count"] = (s.GetInfraWiNodeCount())
+
+				temp["interface"] = flattenListNiatelemetryInterfaceElement(s.GetInterface(), d)
 				temp["ip_address"] = (s.GetIpAddress())
 				temp["is_virtual_node"] = (s.GetIsVirtualNode())
 				temp["last_reboot_time"] = (s.GetLastRebootTime())

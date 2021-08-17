@@ -23,6 +23,11 @@ func dataSourceHyperflexNodeProfile() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"action": {
+				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -52,6 +57,11 @@ func dataSourceHyperflexNodeProfile() *schema.Resource {
 			},
 			"hxdp_mgmt_ip": {
 				Description: "IP address for HyperFlex management network.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"hxdp_storage_client_ip": {
+				Description: "IP address for storage client network (Controller VM interface).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -86,6 +96,12 @@ func dataSourceHyperflexNodeProfile() *schema.Resource {
 				Description: "Name of the profile instance or profile template.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"node_role": {
+				Description: "The role that this node performs in the HyperFlex cluster.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -122,6 +138,10 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		o.SetAction(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -146,6 +166,10 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetHxdpMgmtIp(x)
 	}
+	if v, ok := d.GetOk("hxdp_storage_client_ip"); ok {
+		x := (v.(string))
+		o.SetHxdpStorageClientIp(x)
+	}
 	if v, ok := d.GetOk("hypervisor_control_ip"); ok {
 		x := (v.(string))
 		o.SetHypervisorControlIp(x)
@@ -169,6 +193,10 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+	if v, ok := d.GetOk("node_role"); ok {
+		x := (v.(string))
+		o.SetNodeRole(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
@@ -220,6 +248,7 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 				var s = results[i]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["action"] = (s.GetAction())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -229,11 +258,14 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 
 				temp["cluster_profile"] = flattenMapHyperflexClusterProfileRelationship(s.GetClusterProfile(), d)
 
+				temp["config_context"] = flattenMapPolicyConfigContext(s.GetConfigContext(), d)
+
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hxdp_data_ip"] = (s.GetHxdpDataIp())
 				temp["hxdp_mgmt_ip"] = (s.GetHxdpMgmtIp())
+				temp["hxdp_storage_client_ip"] = (s.GetHxdpStorageClientIp())
 				temp["hypervisor_control_ip"] = (s.GetHypervisorControlIp())
 				temp["hypervisor_data_ip"] = (s.GetHypervisorDataIp())
 				temp["hypervisor_mgmt_ip"] = (s.GetHypervisorMgmtIp())
@@ -241,12 +273,17 @@ func dataSourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceDat
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+
+				temp["node"] = flattenMapHyperflexNodeRelationship(s.GetNode(), d)
+				temp["node_role"] = (s.GetNodeRole())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+
+				temp["policy_bucket"] = flattenListPolicyAbstractPolicyRelationship(s.GetPolicyBucket(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_template"] = flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)

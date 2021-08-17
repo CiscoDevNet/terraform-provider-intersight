@@ -209,6 +209,12 @@ func dataSourceChassisIomProfile() *schema.Resource {
 									Optional:    true,
 									Computed:    true,
 								},
+								"config_type": {
+									Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
+									Type:        schema.TypeString,
+									Optional:    true,
+									Computed:    true,
+								},
 								"control_action": {
 									Description: "System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind.",
 									Type:        schema.TypeString,

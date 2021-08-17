@@ -7,7 +7,6 @@ import (
 	"log"
 	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1103,10 +1102,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareChassisUpgradeWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1114,48 +1109,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -1203,54 +1156,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 	}
 
 	o.SetClassId("firmware.ChassisUpgrade")
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("device"); ok {
-		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsAssetDeviceRegistrationRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetDevice(x)
-		}
-	}
 
 	if v, ok := d.GetOk("direct_download"); ok {
 		p := make([]models.FirmwareDirectDownload, 0, 1)
@@ -1317,12 +1222,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 				{
 					x := (v.(string))
 					o.SetImageSource(x)
-				}
-			}
-			if v, ok := l["is_password_set"]; ok {
-				{
-					x := (v.(bool))
-					o.SetIsPasswordSet(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1400,11 +1299,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
 	if v, ok := d.GetOk("exclude_component_list"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1445,11 +1339,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 			x := p[0]
 			o.SetFileServer(x)
 		}
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1509,24 +1398,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 								o.SetObjectType(x)
 							}
 						}
-						if v, ok := l["remote_file"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteFile(x)
-							}
-						}
-						if v, ok := l["remote_ip"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteIp(x)
-							}
-						}
-						if v, ok := l["remote_share"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteShare(x)
-							}
-						}
 						p = append(p, *o)
 					}
 					if len(p) > 0 {
@@ -1580,12 +1451,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			if v, ok := l["is_password_set"]; ok {
-				{
-					x := (v.(bool))
-					o.SetIsPasswordSet(x)
-				}
-			}
 			if v, ok := l["map_type"]; ok {
 				{
 					x := (v.(string))
@@ -1626,24 +1491,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["remote_file"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteFile(x)
-							}
-						}
-						if v, ok := l["remote_ip"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteIp(x)
-							}
-						}
-						if v, ok := l["remote_share"]; ok {
-							{
-								x := (v.(string))
-								o.SetRemoteShare(x)
 							}
 						}
 						p = append(p, *o)
@@ -1688,102 +1535,6 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 
 	o.SetObjectType("firmware.ChassisUpgrade")
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
-
 	if v, ok := d.GetOk("release"); ok {
 		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1827,15 +1578,7 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOkExists("skip_estimate_impact"); ok {
-		x := v.(bool)
-		o.SetSkipEstimateImpact(x)
-	}
+	o.SetSkipEstimateImpact(d.Get("skip_estimate_impact").(bool))
 
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
@@ -1877,231 +1620,9 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("upgrade_impact"); ok {
-		p := make([]models.FirmwareUpgradeImpactStatusRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsFirmwareUpgradeImpactStatusRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetUpgradeImpact(x)
-		}
-	}
-
-	if v, ok := d.GetOk("upgrade_status"); ok {
-		p := make([]models.FirmwareUpgradeStatusRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsFirmwareUpgradeStatusRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetUpgradeStatus(x)
-		}
-	}
-
 	if v, ok := d.GetOk("upgrade_type"); ok {
 		x := (v.(string))
 		o.SetUpgradeType(x)
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareChassisUpgrade(conn.ctx).FirmwareChassisUpgrade(*o)

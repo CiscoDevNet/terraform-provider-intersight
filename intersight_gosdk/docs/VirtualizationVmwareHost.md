@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
 **DistributedNetworks** | Pointer to [**[]VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) | An array of relationships to virtualizationVmwareDistributedNetwork resources. | [optional] [readonly] 
 **DistributedSwitches** | Pointer to [**[]VirtualizationVmwareDistributedSwitchRelationship**](VirtualizationVmwareDistributedSwitchRelationship.md) | An array of relationships to virtualizationVmwareDistributedSwitch resources. | [optional] [readonly] 
+**HyperFlexNode** | Pointer to [**HyperflexNodeRelationship**](hyperflex.Node.Relationship.md) |  | [optional] 
+**Server** | Pointer to [**ComputePhysicalSummaryRelationship**](compute.PhysicalSummary.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -418,6 +420,56 @@ HasDistributedSwitches returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareHost) UnsetDistributedSwitches()`
 
 UnsetDistributedSwitches ensures that no value is present for DistributedSwitches, not even an explicit nil
+### GetHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) GetHyperFlexNode() HyperflexNodeRelationship`
+
+GetHyperFlexNode returns the HyperFlexNode field if non-nil, zero value otherwise.
+
+### GetHyperFlexNodeOk
+
+`func (o *VirtualizationVmwareHost) GetHyperFlexNodeOk() (*HyperflexNodeRelationship, bool)`
+
+GetHyperFlexNodeOk returns a tuple with the HyperFlexNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) SetHyperFlexNode(v HyperflexNodeRelationship)`
+
+SetHyperFlexNode sets HyperFlexNode field to given value.
+
+### HasHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) HasHyperFlexNode() bool`
+
+HasHyperFlexNode returns a boolean if a field has been set.
+
+### GetServer
+
+`func (o *VirtualizationVmwareHost) GetServer() ComputePhysicalSummaryRelationship`
+
+GetServer returns the Server field if non-nil, zero value otherwise.
+
+### GetServerOk
+
+`func (o *VirtualizationVmwareHost) GetServerOk() (*ComputePhysicalSummaryRelationship, bool)`
+
+GetServerOk returns a tuple with the Server field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServer
+
+`func (o *VirtualizationVmwareHost) SetServer(v ComputePhysicalSummaryRelationship)`
+
+SetServer sets Server field to given value.
+
+### HasServer
+
+`func (o *VirtualizationVmwareHost) HasServer() bool`
+
+HasServer returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
