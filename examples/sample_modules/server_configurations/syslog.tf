@@ -1,5 +1,5 @@
-resource "intersight_syslog_policy" "syslog1" {
-  name        = "syslog1"
+resource "intersight_syslog_policy" "tf_syslog" {
+  name        = "tf_syslog"
   description = "demo syslog policy"
   local_clients {
     min_severity = "emergency"
@@ -21,13 +21,8 @@ resource "intersight_syslog_policy" "syslog1" {
     min_severity = "emergency"
     object_type  = "syslog.RemoteLoggingClient"
   }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 

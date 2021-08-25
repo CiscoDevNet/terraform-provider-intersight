@@ -1,5 +1,5 @@
-resource "intersight_kvm_policy" "kvm1" {
-  name                      = "kvm1"
+resource "intersight_kvm_policy" "tf_kvm" {
+  name                      = "tf_kvm"
   description               = "demo kvm policy"
   enabled                   = true
   maximum_sessions          = 3
@@ -7,12 +7,7 @@ resource "intersight_kvm_policy" "kvm1" {
   enable_video_encryption   = true
   enable_local_server_video = true
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   tags {
     key = "source"

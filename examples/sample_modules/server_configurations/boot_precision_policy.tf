@@ -1,11 +1,10 @@
-resource "intersight_boot_precision_policy" "boot_precision1" {
-  name                     = "boot_precision1"
+resource "intersight_boot_precision_policy" "tf_boot_precision" {
+  name                     = "tf_boot_precision"
   description              = "test policy"
   configured_boot_mode     = "Legacy"
   enforce_uefi_secure_boot = false
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   boot_devices {
     enabled     = true
@@ -42,10 +41,6 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
         Path        = ""
       }
     })
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
   }
   tags {
     key = "source"

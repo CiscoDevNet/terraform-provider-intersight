@@ -3,8 +3,7 @@ resource "intersight_deviceconnector_policy" "dcp1" {
   description     = "test policy"
   lockout_enabled = true
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 

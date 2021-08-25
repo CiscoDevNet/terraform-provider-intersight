@@ -1,5 +1,5 @@
-resource "intersight_ntp_policy" "ntp1" {
-  name    = "ntp1"
+resource "intersight_ntp_policy" "tf_ntp1" {
+  name    = "tf_ntp1"
   enabled = true
   ntp_servers = [
     "ntp.esl.cisco.com",
@@ -7,13 +7,12 @@ resource "intersight_ntp_policy" "ntp1" {
     "time-b-g.nist.gov"
   ]
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
-resource "intersight_ntp_policy" "ntp2" {
-  name    = "ntp2"
+resource "intersight_ntp_policy" "tf_ntp2" {
+  name    = "tf_ntp2"
   enabled = true
   ntp_servers = [
     "10.10.10.10",
@@ -22,12 +21,7 @@ resource "intersight_ntp_policy" "ntp2" {
     "10.10.10.13"
   ]
   organization {
-    object_type = "organization.Organization"
-    moid = var.organization
-  }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 
