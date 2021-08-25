@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1101,11 +1099,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
@@ -1117,48 +1110,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -1207,31 +1158,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetClassId("workflow.WorkflowInfo")
 
-	if v, ok := d.GetOk("cleanup_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCleanupTime(x)
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("email"); ok {
-		x := (v.(string))
-		o.SetEmail(x)
-	}
-
-	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndTime(x)
-	}
-
 	if v, ok := d.GetOk("failed_workflow_cleanup_duration"); ok {
 		x := int64(v.(int))
 		o.SetFailedWorkflowCleanupDuration(x)
@@ -1241,20 +1167,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		o.SetInput(v)
 	}
 
-	if v, ok := d.GetOk("inst_id"); ok {
-		x := (v.(string))
-		o.SetInstId(x)
-	}
-
-	if v, ok := d.GetOkExists("internal"); ok {
-		x := v.(bool)
-		o.SetInternal(x)
-	}
-
-	if v, ok := d.GetOk("last_action"); ok {
-		x := (v.(string))
-		o.SetLastAction(x)
-	}
+	o.SetInternal(d.Get("internal").(bool))
 
 	if v, ok := d.GetOk("message"); ok {
 		x := make([]models.WorkflowMessage, 0)
@@ -1301,11 +1214,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("meta_version"); ok {
 		x := int64(v.(int))
 		o.SetMetaVersion(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1363,153 +1271,9 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
-	}
-
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent_task_info"); ok {
-		p := make([]models.WorkflowTaskInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowTaskInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParentTaskInfo(x)
-		}
-	}
-
 	if v, ok := d.GetOk("pause_reason"); ok {
 		x := (v.(string))
 		o.SetPauseReason(x)
-	}
-
-	if v, ok := d.GetOk("pending_dynamic_workflow_info"); ok {
-		p := make([]models.WorkflowPendingDynamicWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowPendingDynamicWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetPendingDynamicWorkflowInfo(x)
-		}
 	}
 
 	if v, ok := d.GetOk("permission"); ok {
@@ -1555,119 +1319,9 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
-
-	if v, ok := d.GetOk("progress"); ok {
-		x := v.(float32)
-		o.SetProgress(x)
-	}
-
-	if v, ok := d.GetOk("properties"); ok {
-		p := make([]models.WorkflowWorkflowInfoProperties, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewWorkflowWorkflowInfoPropertiesWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("workflow.WorkflowInfoProperties")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["retryable"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRetryable(x)
-				}
-			}
-			if v, ok := l["rollback_action"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackAction(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetProperties(x)
-		}
-	}
-
 	if v, ok := d.GetOk("retry_from_task_name"); ok {
 		x := (v.(string))
 		o.SetRetryFromTaskName(x)
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOk("src"); ok {
-		x := (v.(string))
-		o.SetSrc(x)
-	}
-
-	if v, ok := d.GetOk("start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartTime(x)
-	}
-
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	if v, ok := d.GetOk("success_workflow_cleanup_duration"); ok {
@@ -1710,203 +1364,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("task_infos"); ok {
-		x := make([]models.WorkflowTaskInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowTaskInfoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetTaskInfos(x)
-		}
-	}
-
-	if v, ok := d.GetOk("trace_id"); ok {
-		x := (v.(string))
-		o.SetTraceId(x)
-	}
-
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-
-	if v, ok := d.GetOkExists("user_action_required"); ok {
-		x := v.(bool)
-		o.SetUserActionRequired(x)
-	}
-
-	if v, ok := d.GetOk("user_id"); ok {
-		x := (v.(string))
-		o.SetUserId(x)
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
+	o.SetUserActionRequired(d.Get("user_action_required").(bool))
 
 	if v, ok := d.GetOk("wait_reason"); ok {
 		x := (v.(string))
@@ -2107,16 +1565,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("workflow_meta_type"); ok {
 		x := (v.(string))
 		o.SetWorkflowMetaType(x)
-	}
-
-	if v, ok := d.GetOk("workflow_task_count"); ok {
-		x := int64(v.(int))
-		o.SetWorkflowTaskCount(x)
-	}
-
-	if v, ok := d.GetOk("workflow_worker_task_count"); ok {
-		x := int64(v.(int))
-		o.SetWorkflowWorkerTaskCount(x)
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowWorkflowInfo(conn.ctx).WorkflowWorkflowInfo(*o)
@@ -2422,12 +1870,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-
 	if d.HasChange("action") {
 		v := d.Get("action")
 		x := (v.(string))
@@ -2442,47 +1884,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("associated_object") {
@@ -2531,36 +1932,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 
 	o.SetClassId("workflow.WorkflowInfo")
 
-	if d.HasChange("cleanup_time") {
-		v := d.Get("cleanup_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCleanupTime(x)
-	}
-
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if d.HasChange("email") {
-		v := d.Get("email")
-		x := (v.(string))
-		o.SetEmail(x)
-	}
-
-	if d.HasChange("end_time") {
-		v := d.Get("end_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndTime(x)
-	}
-
 	if d.HasChange("failed_workflow_cleanup_duration") {
 		v := d.Get("failed_workflow_cleanup_duration")
 		x := int64(v.(int))
@@ -2572,22 +1943,10 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		o.SetInput(v)
 	}
 
-	if d.HasChange("inst_id") {
-		v := d.Get("inst_id")
-		x := (v.(string))
-		o.SetInstId(x)
-	}
-
 	if d.HasChange("internal") {
 		v := d.Get("internal")
 		x := (v.(bool))
 		o.SetInternal(x)
-	}
-
-	if d.HasChange("last_action") {
-		v := d.Get("last_action")
-		x := (v.(string))
-		o.SetLastAction(x)
 	}
 
 	if d.HasChange("message") {
@@ -2635,12 +1994,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("meta_version")
 		x := int64(v.(int))
 		o.SetMetaVersion(x)
-	}
-
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if d.HasChange("moid") {
@@ -2701,157 +2054,10 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("output") {
-		v := d.Get("output")
-		o.SetOutput(v)
-	}
-
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("parent_task_info") {
-		v := d.Get("parent_task_info")
-		p := make([]models.WorkflowTaskInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowTaskInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParentTaskInfo(x)
-		}
-	}
-
 	if d.HasChange("pause_reason") {
 		v := d.Get("pause_reason")
 		x := (v.(string))
 		o.SetPauseReason(x)
-	}
-
-	if d.HasChange("pending_dynamic_workflow_info") {
-		v := d.Get("pending_dynamic_workflow_info")
-		p := make([]models.WorkflowPendingDynamicWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowPendingDynamicWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetPendingDynamicWorkflowInfo(x)
-		}
 	}
 
 	if d.HasChange("permission") {
@@ -2898,125 +2104,10 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
-
-	if d.HasChange("progress") {
-		v := d.Get("progress")
-		x := v.(float32)
-		o.SetProgress(x)
-	}
-
-	if d.HasChange("properties") {
-		v := d.Get("properties")
-		p := make([]models.WorkflowWorkflowInfoProperties, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.WorkflowWorkflowInfoProperties{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("workflow.WorkflowInfoProperties")
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["retryable"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRetryable(x)
-				}
-			}
-			if v, ok := l["rollback_action"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackAction(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetProperties(x)
-		}
-	}
-
 	if d.HasChange("retry_from_task_name") {
 		v := d.Get("retry_from_task_name")
 		x := (v.(string))
 		o.SetRetryFromTaskName(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if d.HasChange("src") {
-		v := d.Get("src")
-		x := (v.(string))
-		o.SetSrc(x)
-	}
-
-	if d.HasChange("start_time") {
-		v := d.Get("start_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartTime(x)
-	}
-
-	if d.HasChange("status") {
-		v := d.Get("status")
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	if d.HasChange("success_workflow_cleanup_duration") {
@@ -3057,208 +2148,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if d.HasChange("task_infos") {
-		v := d.Get("task_infos")
-		x := make([]models.WorkflowTaskInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowTaskInfoRelationship(o))
-		}
-		o.SetTaskInfos(x)
-	}
-
-	if d.HasChange("trace_id") {
-		v := d.Get("trace_id")
-		x := (v.(string))
-		o.SetTraceId(x)
-	}
-
-	if d.HasChange("type") {
-		v := d.Get("type")
-		x := (v.(string))
-		o.SetType(x)
-	}
-
-	if d.HasChange("user_action_required") {
-		v := d.Get("user_action_required")
-		x := (v.(bool))
-		o.SetUserActionRequired(x)
-	}
-
-	if d.HasChange("user_id") {
-		v := d.Get("user_id")
-		x := (v.(string))
-		o.SetUserId(x)
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	if d.HasChange("wait_reason") {
@@ -3464,18 +2353,6 @@ func resourceWorkflowWorkflowInfoUpdate(c context.Context, d *schema.ResourceDat
 		v := d.Get("workflow_meta_type")
 		x := (v.(string))
 		o.SetWorkflowMetaType(x)
-	}
-
-	if d.HasChange("workflow_task_count") {
-		v := d.Get("workflow_task_count")
-		x := int64(v.(int))
-		o.SetWorkflowTaskCount(x)
-	}
-
-	if d.HasChange("workflow_worker_task_count") {
-		v := d.Get("workflow_worker_task_count")
-		x := int64(v.(int))
-		o.SetWorkflowWorkerTaskCount(x)
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, d.Id()).WorkflowWorkflowInfo(*o)

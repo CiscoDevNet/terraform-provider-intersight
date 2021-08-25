@@ -7,7 +7,6 @@ import (
 	"log"
 	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1492,10 +1491,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewOsBulkInstallInfoWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -1503,48 +1498,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -1593,135 +1546,12 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
 	if v, ok := d.GetOk("file_content"); ok {
 		x := (v.(string))
 		o.SetFileContent(x)
 	}
 
-	if v, ok := d.GetOk("global_config"); ok {
-		p := make([]models.OsGlobalConfig, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewOsGlobalConfigWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("os.GlobalConfig")
-			if v, ok := l["configuration_file_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetConfigurationFileName(x)
-				}
-			}
-			if v, ok := l["configuration_source"]; ok {
-				{
-					x := (v.(string))
-					o.SetConfigurationSource(x)
-				}
-			}
-			if v, ok := l["install_method"]; ok {
-				{
-					x := (v.(string))
-					o.SetInstallMethod(x)
-				}
-			}
-			if v, ok := l["install_target_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetInstallTargetType(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["operating_system_parameters"]; ok {
-				{
-					p := make([]models.OsOperatingSystemParameters, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewOsOperatingSystemParametersWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("os.OperatingSystemParameters")
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetOperatingSystemParameters(x)
-					}
-				}
-			}
-			if v, ok := l["os_image_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetOsImageName(x)
-				}
-			}
-			if v, ok := l["scu_image_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetScuImageName(x)
-				}
-			}
-			if v, ok := l["windows_edition"]; ok {
-				{
-					x := (v.(string))
-					o.SetWindowsEdition(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetGlobalConfig(x)
-		}
-	}
-
-	if v, ok := d.GetOkExists("is_file_content_set"); ok {
-		x := v.(bool)
-		o.SetIsFileContentSet(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
+	o.SetIsFileContentSet(d.Get("is_file_content_set").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -1734,11 +1564,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 	}
 
 	o.SetObjectType("os.BulkInstallInfo")
-
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
 
 	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
@@ -1823,102 +1648,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOsImage(x)
-		}
-	}
-
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
 		}
 	}
 
@@ -2037,12 +1766,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 													}
 												}
 												o.SetClassId("workflow.DefaultValue")
-												if v, ok := l["is_value_set"]; ok {
-													{
-														x := (v.(bool))
-														o.SetIsValueSet(x)
-													}
-												}
 												if v, ok := l["object_type"]; ok {
 													{
 														x := (v.(string))
@@ -2412,130 +2135,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			if v, ok := l["answers"]; ok {
-				{
-					p := make([]models.OsAnswers, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewOsAnswersWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						if v, ok := l["answer_file"]; ok {
-							{
-								x := (v.(string))
-								o.SetAnswerFile(x)
-							}
-						}
-						o.SetClassId("os.Answers")
-						if v, ok := l["hostname"]; ok {
-							{
-								x := (v.(string))
-								o.SetHostname(x)
-							}
-						}
-						if v, ok := l["ip_config_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetIpConfigType(x)
-							}
-						}
-						if v, ok := l["ip_configuration"]; ok {
-							{
-								p := make([]models.OsIpConfiguration, 0, 1)
-								s := v.([]interface{})
-								for i := 0; i < len(s); i++ {
-									l := s[i].(map[string]interface{})
-									o := models.NewOsIpConfigurationWithDefaults()
-									if v, ok := l["additional_properties"]; ok {
-										{
-											x := []byte(v.(string))
-											var x1 interface{}
-											err := json.Unmarshal(x, &x1)
-											if err == nil && x1 != nil {
-												o.AdditionalProperties = x1.(map[string]interface{})
-											}
-										}
-									}
-									o.SetClassId("os.IpConfiguration")
-									if v, ok := l["object_type"]; ok {
-										{
-											x := (v.(string))
-											o.SetObjectType(x)
-										}
-									}
-									p = append(p, *o)
-								}
-								if len(p) > 0 {
-									x := p[0]
-									o.SetIpConfiguration(x)
-								}
-							}
-						}
-						if v, ok := l["is_answer_file_set"]; ok {
-							{
-								x := (v.(bool))
-								o.SetIsAnswerFileSet(x)
-							}
-						}
-						if v, ok := l["is_root_password_crypted"]; ok {
-							{
-								x := (v.(bool))
-								o.SetIsRootPasswordCrypted(x)
-							}
-						}
-						if v, ok := l["is_root_password_set"]; ok {
-							{
-								x := (v.(bool))
-								o.SetIsRootPasswordSet(x)
-							}
-						}
-						if v, ok := l["nameserver"]; ok {
-							{
-								x := (v.(string))
-								o.SetNameserver(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["product_key"]; ok {
-							{
-								x := (v.(string))
-								o.SetProductKey(x)
-							}
-						}
-						if v, ok := l["root_password"]; ok {
-							{
-								x := (v.(string))
-								o.SetRootPassword(x)
-							}
-						}
-						if v, ok := l["nr_source"]; ok {
-							{
-								x := (v.(string))
-								o.SetSource(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetAnswers(x)
-					}
-				}
-			}
 			o.SetClassId("os.ServerConfig")
 			if v, ok := l["error_msgs"]; ok {
 				{
@@ -2549,54 +2148,10 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			if v, ok := l["install_target"]; ok {
-				{
-					x := (v.(string))
-					o.SetInstallTarget(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["processed_install_target"]; ok {
-				{
-					p := make([]models.OsInstallTarget, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewOsInstallTargetWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("os.InstallTarget")
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetProcessedInstallTarget(x)
-					}
-				}
-			}
-			if v, ok := l["serial_number"]; ok {
-				{
-					x := (v.(string))
-					o.SetSerialNumber(x)
 				}
 			}
 			x = append(x, *o)
@@ -2646,11 +2201,6 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 		if len(x) > 0 {
 			o.SetServers(x)
 		}
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -2705,170 +2255,16 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 				}
 			}
 			o.SetClassId("os.ValidationInformation")
-			if v, ok := l["error_msg"]; ok {
-				{
-					x := (v.(string))
-					o.SetErrorMsg(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			if v, ok := l["step_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetStepName(x)
 				}
 			}
 			x = append(x, *o)
 		}
 		if len(x) > 0 {
 			o.SetValidationInfos(x)
-		}
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
 		}
 	}
 

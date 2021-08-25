@@ -35,25 +35,25 @@ resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
 ```
 ## Argument Reference
 The following arguments are supported:
-* `account_moid`:(string)(Computed) The Account ID for this managed object. 
-* `aci_cni_profile`:(HashMap) -(Computed) A reference to a kubernetesAciCniProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `aci_cni_profile`:(HashMap) -(ReadOnly) A reference to a kubernetesAciCniProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `action`:(string) User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. 
-* `action_info`:(HashMap) -(Computed) No longer updated, to see action details such as name of the actionperformed, status, failure reason, etc. look at the ConfigContext and at details of the related workflowInfo. 
+* `action_info`:(HashMap) -(ReadOnly) No longer updated, to see action details such as name of the actionperformed, status, failure reason, etc. look at the ConfigContext and at details of the related workflowInfo. 
 This complex property has following sub-properties:
-  + `failure_reason`:(string)(Computed) No longer maintained and will be removed soon. 
-  + `name`:(string)(Computed) Name of the Action performed on a resource like VM, Disk etc. 
+  + `failure_reason`:(string)(ReadOnly) No longer maintained and will be removed soon. 
+  + `name`:(string)(ReadOnly) Name of the Action performed on a resource like VM, Disk etc. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `status`:(string) No longer maintained and will be removed soon.* `None` - A place holder for the default value.* `InProgress` - Action triggered on the resource is still running.* `Success` - Action triggered on the resource is completed successfully.* `Failure` - Action triggered on the resource is failed. 
-* `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `associated_cluster`:(HashMap) -(Computed) A reference to a kubernetesCluster resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `associated_cluster`:(HashMap) -(ReadOnly) A reference to a kubernetesCluster resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -78,19 +78,19 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `config_context`:(HashMap) - The configuration state and results of the last configuration operation. 
 This complex property has following sub-properties:
-  + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
+  + `config_state`:(string)(ReadOnly) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
   + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `oper_state`:(string)(Computed) Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. 
+  + `oper_state`:(string)(ReadOnly) Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. 
 * `container_runtime_config`:(HashMap) - A reference to a kubernetesContainerRuntimePolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `create_time`:(string)(Computed) The time when this managed object was created. 
+* `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the profile. 
-* `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `essential_addons`:(Array)
 This complex property has following sub-properties:
   + `addon_configuration`:(HashMap) - Addon configuration settings that are specific to a single cluster. 
@@ -113,9 +113,9 @@ This complex property has following sub-properties:
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `name`:(string) Name of addon to be installed on a Kubernetes cluster. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-* `kube_config`:(HashMap) -(Computed) Certificates and keys that are used to access a Kubernetescluster. 
+* `kube_config`:(HashMap) -(ReadOnly) Certificates and keys that are used to access a Kubernetescluster. 
 This complex property has following sub-properties:
-  + `kube_config`:(string)(Computed) Kubernetes configuration to connect to the cluster as an system administrator. 
+  + `kube_config`:(string)(ReadOnly) Kubernetes configuration to connect to the cluster as an system administrator. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `loadbalancer_ip_leases`:(Array) An array of relationships to ippoolIpLease resources. 
 This complex property has following sub-properties:
@@ -132,13 +132,13 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ssh_keys`:
                 (Array of schema.TypeString) -
-  + `ssh_user`:(string)(Computed) Name of the user to SSH to nodes in a cluster. 
+  + `ssh_user`:(string)(ReadOnly) Name of the user to SSH to nodes in a cluster. 
 * `master_vip_lease`:(HashMap) - A reference to a ippoolIpLease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `mod_time`:(string)(Computed) The time when this managed object was last modified. 
+* `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 
 * `net_config`:(HashMap) - A reference to a kubernetesNetworkPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -157,13 +157,13 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `owners`:
-                (Array of schema.TypeString) -(Computed)
-* `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+                (Array of schema.TypeString) -(ReadOnly)
+* `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `permission_resources`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -173,7 +173,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -195,7 +195,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `type`:(string) Defines the type of the profile. Accepted values are instance or template.* `instance` - The profile defines the configuration for a specific instance of a target. 
-* `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
+* `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)
 This complex property has following sub-properties:
@@ -203,15 +203,15 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ref_mo`:(HashMap) -(Computed) A reference to the original Managed Object. 
+  + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-  + `timestamp`:(string)(Computed) The time this versioned Managed Object was created. 
-  + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
-  + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
-* `workflow_info`:(HashMap) -(Computed) A reference to a workflowWorkflowInfo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+  + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
+  + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
+  + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `workflow_info`:(HashMap) -(ReadOnly) A reference to a workflowWorkflowInfo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
