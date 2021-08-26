@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The type of data source. | 
 **Name** | **string** | The name of a data source. | 
 **DataSources** | **[]string** | A list of data sources. | 
-**Query** | [**TelemetryDruidGroupByRequest**](telemetry.DruidGroupByRequest.md) |  | 
+**Query** | [**TelemetryDruidGroupByRequest**](TelemetryDruidGroupByRequest.md) |  | 
 **Lookup** | **string** | the name of the lookup object. | 
 **Left** | **string** | Left-hand datasource. Must be of type table, join, lookup, query, or inline. Placing another join as the left datasource allows you to join arbitrarily many datasources. | 
 **Right** | **string** | Right-hand datasource. Must be of type lookup, query, or inline. | 

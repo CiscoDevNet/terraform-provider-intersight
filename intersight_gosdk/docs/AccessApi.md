@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessPolicy**](access.Policy.md)
+[**AccessPolicy**](AccessPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessPolicy**](access.Policy.md)
+[**AccessPolicy**](AccessPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessPolicyResponse**](access.Policy.Response.md)
+[**AccessPolicyResponse**](AccessPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessPolicy**](access.Policy.md)
+[**AccessPolicy**](AccessPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessPolicy**](access.Policy.md)
+[**AccessPolicy**](AccessPolicy.md)
 
 ### Authorization
 

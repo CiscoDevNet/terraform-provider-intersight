@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclCompatibilityStatus**](hcl.CompatibilityStatus.md)
+[**HclCompatibilityStatus**](HclCompatibilityStatus.md)
 
 ### Authorization
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclHyperflexSoftwareCompatibilityInfo**](hcl.HyperflexSoftwareCompatibilityInfo.md)
+[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
 
 ### Authorization
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclSupportedDriverName**](hcl.SupportedDriverName.md)
+[**HclSupportedDriverName**](HclSupportedDriverName.md)
 
 ### Authorization
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclDriverImage**](hcl.DriverImage.md)
+[**HclDriverImage**](HclDriverImage.md)
 
 ### Authorization
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclDriverImageResponse**](hcl.DriverImage.Response.md)
+[**HclDriverImageResponse**](HclDriverImageResponse.md)
 
 ### Authorization
 
@@ -497,7 +497,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclExemptedCatalog**](hcl.ExemptedCatalog.md)
+[**HclExemptedCatalog**](HclExemptedCatalog.md)
 
 ### Authorization
 
@@ -581,7 +581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclExemptedCatalogResponse**](hcl.ExemptedCatalog.Response.md)
+[**HclExemptedCatalogResponse**](HclExemptedCatalogResponse.md)
 
 ### Authorization
 
@@ -649,7 +649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclHyperflexSoftwareCompatibilityInfo**](hcl.HyperflexSoftwareCompatibilityInfo.md)
+[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
 
 ### Authorization
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclHyperflexSoftwareCompatibilityInfoResponse**](hcl.HyperflexSoftwareCompatibilityInfo.Response.md)
+[**HclHyperflexSoftwareCompatibilityInfoResponse**](HclHyperflexSoftwareCompatibilityInfoResponse.md)
 
 ### Authorization
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclOperatingSystem**](hcl.OperatingSystem.md)
+[**HclOperatingSystem**](HclOperatingSystem.md)
 
 ### Authorization
 
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclOperatingSystemResponse**](hcl.OperatingSystem.Response.md)
+[**HclOperatingSystemResponse**](HclOperatingSystemResponse.md)
 
 ### Authorization
 
@@ -953,7 +953,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclOperatingSystemVendor**](hcl.OperatingSystemVendor.md)
+[**HclOperatingSystemVendor**](HclOperatingSystemVendor.md)
 
 ### Authorization
 
@@ -1037,7 +1037,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclOperatingSystemVendorResponse**](hcl.OperatingSystemVendor.Response.md)
+[**HclOperatingSystemVendorResponse**](HclOperatingSystemVendorResponse.md)
 
 ### Authorization
 
@@ -1109,7 +1109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclHyperflexSoftwareCompatibilityInfo**](hcl.HyperflexSoftwareCompatibilityInfo.md)
+[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
 
 ### Authorization
 
@@ -1181,7 +1181,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HclHyperflexSoftwareCompatibilityInfo**](hcl.HyperflexSoftwareCompatibilityInfo.md)
+[**HclHyperflexSoftwareCompatibilityInfo**](HclHyperflexSoftwareCompatibilityInfo.md)
 
 ### Authorization
 

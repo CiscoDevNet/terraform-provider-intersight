@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **Minsize** | Pointer to **int64** | Minimum number of nodes desired in this node group. | [optional] 
 **NodeType** | Pointer to **string** | The node type ControlPlane, Worker or ControlPlaneWorker. * &#x60;Worker&#x60; - Node will be marked as a worker node. * &#x60;ControlPlane&#x60; - Node will be marked as a control plane node. * &#x60;ControlPlaneWorker&#x60; - Node will be both a controle plane and a worker. | [optional] [default to "Worker"]
 **Taints** | Pointer to [**[]KubernetesNodeGroupTaint**](KubernetesNodeGroupTaint.md) |  | [optional] 
-**ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](kubernetes.ClusterProfile.Relationship.md) |  | [optional] 
-**InfraProvider** | Pointer to [**KubernetesBaseInfrastructureProviderRelationship**](kubernetes.BaseInfrastructureProvider.Relationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) |  | [optional] 
+**InfraProvider** | Pointer to [**KubernetesBaseInfrastructureProviderRelationship**](KubernetesBaseInfrastructureProviderRelationship.md) |  | [optional] 
 **IpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
-**KubernetesVersion** | Pointer to [**KubernetesVersionPolicyRelationship**](kubernetes.VersionPolicy.Relationship.md) |  | [optional] 
+**KubernetesVersion** | Pointer to [**KubernetesVersionPolicyRelationship**](KubernetesVersionPolicyRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]KubernetesNodeProfileRelationship**](KubernetesNodeProfileRelationship.md) | An array of relationships to kubernetesNodeProfile resources. | [optional] 
 
 ## Methods

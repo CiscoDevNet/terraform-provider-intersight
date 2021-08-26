@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationAccountSubscription**](notification.AccountSubscription.md)
+[**NotificationAccountSubscription**](NotificationAccountSubscription.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationAccountSubscription**](notification.AccountSubscription.md)
+[**NotificationAccountSubscription**](NotificationAccountSubscription.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationAccountSubscriptionResponse**](notification.AccountSubscription.Response.md)
+[**NotificationAccountSubscriptionResponse**](NotificationAccountSubscriptionResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationAccountSubscription**](notification.AccountSubscription.md)
+[**NotificationAccountSubscription**](NotificationAccountSubscription.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationAccountSubscription**](notification.AccountSubscription.md)
+[**NotificationAccountSubscription**](NotificationAccountSubscription.md)
 
 ### Authorization
 

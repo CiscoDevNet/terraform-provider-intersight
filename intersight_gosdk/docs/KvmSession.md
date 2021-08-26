@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
 **SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 
 **Username** | Pointer to **string** | Username used for vKVM access. | [optional] 
-**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
-**Tunnel** | Pointer to [**KvmTunnelRelationship**](kvm.Tunnel.Relationship.md) |  | [optional] 
+**Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**Tunnel** | Pointer to [**KvmTunnelRelationship**](KvmTunnelRelationship.md) |  | [optional] 
 
 ## Methods
 

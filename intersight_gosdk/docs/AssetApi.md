@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceClaim**](asset.DeviceClaim.md)
+[**AssetDeviceClaim**](AssetDeviceClaim.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetTarget**](asset.Target.md)
+[**AssetTarget**](AssetTarget.md)
 
 ### Authorization
 
@@ -763,7 +763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetClusterMember**](asset.ClusterMember.md)
+[**AssetClusterMember**](AssetClusterMember.md)
 
 ### Authorization
 
@@ -847,7 +847,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetClusterMemberResponse**](asset.ClusterMember.Response.md)
+[**AssetClusterMemberResponse**](AssetClusterMemberResponse.md)
 
 ### Authorization
 
@@ -915,7 +915,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeployment**](asset.Deployment.md)
+[**AssetDeployment**](AssetDeployment.md)
 
 ### Authorization
 
@@ -983,7 +983,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeploymentDevice**](asset.DeploymentDevice.md)
+[**AssetDeploymentDevice**](AssetDeploymentDevice.md)
 
 ### Authorization
 
@@ -1067,7 +1067,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeploymentDeviceResponse**](asset.DeploymentDevice.Response.md)
+[**AssetDeploymentDeviceResponse**](AssetDeploymentDeviceResponse.md)
 
 ### Authorization
 
@@ -1151,7 +1151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeploymentResponse**](asset.Deployment.Response.md)
+[**AssetDeploymentResponse**](AssetDeploymentResponse.md)
 
 ### Authorization
 
@@ -1219,7 +1219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConfiguration**](asset.DeviceConfiguration.md)
+[**AssetDeviceConfiguration**](AssetDeviceConfiguration.md)
 
 ### Authorization
 
@@ -1303,7 +1303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConfigurationResponse**](asset.DeviceConfiguration.Response.md)
+[**AssetDeviceConfigurationResponse**](AssetDeviceConfigurationResponse.md)
 
 ### Authorization
 
@@ -1371,7 +1371,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConnectorManager**](asset.DeviceConnectorManager.md)
+[**AssetDeviceConnectorManager**](AssetDeviceConnectorManager.md)
 
 ### Authorization
 
@@ -1455,7 +1455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConnectorManagerResponse**](asset.DeviceConnectorManager.Response.md)
+[**AssetDeviceConnectorManagerResponse**](AssetDeviceConnectorManagerResponse.md)
 
 ### Authorization
 
@@ -1523,7 +1523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceContractInformation**](asset.DeviceContractInformation.md)
+[**AssetDeviceContractInformation**](AssetDeviceContractInformation.md)
 
 ### Authorization
 
@@ -1607,7 +1607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceContractInformationResponse**](asset.DeviceContractInformation.Response.md)
+[**AssetDeviceContractInformationResponse**](AssetDeviceContractInformationResponse.md)
 
 ### Authorization
 
@@ -1675,7 +1675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceRegistration**](asset.DeviceRegistration.md)
+[**AssetDeviceRegistration**](AssetDeviceRegistration.md)
 
 ### Authorization
 
@@ -1759,7 +1759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceRegistrationResponse**](asset.DeviceRegistration.Response.md)
+[**AssetDeviceRegistrationResponse**](AssetDeviceRegistrationResponse.md)
 
 ### Authorization
 
@@ -1827,7 +1827,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscriptionAccount**](asset.SubscriptionAccount.md)
+[**AssetSubscriptionAccount**](AssetSubscriptionAccount.md)
 
 ### Authorization
 
@@ -1911,7 +1911,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscriptionAccountResponse**](asset.SubscriptionAccount.Response.md)
+[**AssetSubscriptionAccountResponse**](AssetSubscriptionAccountResponse.md)
 
 ### Authorization
 
@@ -1979,7 +1979,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscription**](asset.Subscription.md)
+[**AssetSubscription**](AssetSubscription.md)
 
 ### Authorization
 
@@ -2047,7 +2047,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscriptionDeviceContractInformation**](asset.SubscriptionDeviceContractInformation.md)
+[**AssetSubscriptionDeviceContractInformation**](AssetSubscriptionDeviceContractInformation.md)
 
 ### Authorization
 
@@ -2131,7 +2131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscriptionDeviceContractInformationResponse**](asset.SubscriptionDeviceContractInformation.Response.md)
+[**AssetSubscriptionDeviceContractInformationResponse**](AssetSubscriptionDeviceContractInformationResponse.md)
 
 ### Authorization
 
@@ -2215,7 +2215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetSubscriptionResponse**](asset.Subscription.Response.md)
+[**AssetSubscriptionResponse**](AssetSubscriptionResponse.md)
 
 ### Authorization
 
@@ -2283,7 +2283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetTarget**](asset.Target.md)
+[**AssetTarget**](AssetTarget.md)
 
 ### Authorization
 
@@ -2367,7 +2367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetTargetResponse**](asset.Target.Response.md)
+[**AssetTargetResponse**](AssetTargetResponse.md)
 
 ### Authorization
 
@@ -2439,7 +2439,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConfiguration**](asset.DeviceConfiguration.md)
+[**AssetDeviceConfiguration**](AssetDeviceConfiguration.md)
 
 ### Authorization
 
@@ -2511,7 +2511,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceContractInformation**](asset.DeviceContractInformation.md)
+[**AssetDeviceContractInformation**](AssetDeviceContractInformation.md)
 
 ### Authorization
 
@@ -2583,7 +2583,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceRegistration**](asset.DeviceRegistration.md)
+[**AssetDeviceRegistration**](AssetDeviceRegistration.md)
 
 ### Authorization
 
@@ -2655,7 +2655,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetTarget**](asset.Target.md)
+[**AssetTarget**](AssetTarget.md)
 
 ### Authorization
 
@@ -2727,7 +2727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceConfiguration**](asset.DeviceConfiguration.md)
+[**AssetDeviceConfiguration**](AssetDeviceConfiguration.md)
 
 ### Authorization
 
@@ -2799,7 +2799,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceContractInformation**](asset.DeviceContractInformation.md)
+[**AssetDeviceContractInformation**](AssetDeviceContractInformation.md)
 
 ### Authorization
 
@@ -2871,7 +2871,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetDeviceRegistration**](asset.DeviceRegistration.md)
+[**AssetDeviceRegistration**](AssetDeviceRegistration.md)
 
 ### Authorization
 
@@ -2943,7 +2943,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssetTarget**](asset.Target.md)
+[**AssetTarget**](AssetTarget.md)
 
 ### Authorization
 

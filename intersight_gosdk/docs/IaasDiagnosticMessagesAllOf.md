@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Recommendation** | Pointer to **string** | Recommended fix for the alert. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the given alert. | [optional] [readonly] 
 **StatusId** | Pointer to **string** | Status Id of the given alert. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

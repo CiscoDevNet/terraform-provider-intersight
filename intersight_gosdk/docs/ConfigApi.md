@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigExporter**](config.Exporter.md)
+[**ConfigExporter**](ConfigExporter.md)
 
 ### Authorization
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigImporter**](config.Importer.md)
+[**ConfigImporter**](ConfigImporter.md)
 
 ### Authorization
 
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigExportedItem**](config.ExportedItem.md)
+[**ConfigExportedItem**](ConfigExportedItem.md)
 
 ### Authorization
 
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigExportedItemResponse**](config.ExportedItem.Response.md)
+[**ConfigExportedItemResponse**](ConfigExportedItemResponse.md)
 
 ### Authorization
 
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigExporter**](config.Exporter.md)
+[**ConfigExporter**](ConfigExporter.md)
 
 ### Authorization
 
@@ -575,7 +575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigExporterResponse**](config.Exporter.Response.md)
+[**ConfigExporterResponse**](ConfigExporterResponse.md)
 
 ### Authorization
 
@@ -643,7 +643,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigImportedItem**](config.ImportedItem.md)
+[**ConfigImportedItem**](ConfigImportedItem.md)
 
 ### Authorization
 
@@ -727,7 +727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigImportedItemResponse**](config.ImportedItem.Response.md)
+[**ConfigImportedItemResponse**](ConfigImportedItemResponse.md)
 
 ### Authorization
 
@@ -795,7 +795,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigImporter**](config.Importer.md)
+[**ConfigImporter**](ConfigImporter.md)
 
 ### Authorization
 
@@ -879,7 +879,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConfigImporterResponse**](config.Importer.Response.md)
+[**ConfigImporterResponse**](ConfigImporterResponse.md)
 
 ### Authorization
 

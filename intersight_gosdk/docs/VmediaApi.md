@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmediaPolicy**](vmedia.Policy.md)
+[**VmediaPolicy**](VmediaPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmediaPolicy**](vmedia.Policy.md)
+[**VmediaPolicy**](VmediaPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmediaPolicyResponse**](vmedia.Policy.Response.md)
+[**VmediaPolicyResponse**](VmediaPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmediaPolicy**](vmedia.Policy.md)
+[**VmediaPolicy**](VmediaPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmediaPolicy**](vmedia.Policy.md)
+[**VmediaPolicy**](VmediaPolicy.md)
 
 ### Authorization
 

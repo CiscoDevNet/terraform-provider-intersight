@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.InternalProperties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.InternalProperties"]
 **BaseTaskType** | Pointer to **string** | This field will hold the base task type like HttpBaseTask or RemoteAnsibleBaseTask. | [optional] [readonly] 
-**Constraints** | Pointer to [**NullableWorkflowTaskConstraints**](workflow.TaskConstraints.md) |  | [optional] 
+**Constraints** | Pointer to [**NullableWorkflowTaskConstraints**](WorkflowTaskConstraints.md) |  | [optional] 
 **Internal** | Pointer to **bool** | Denotes this is an internal task. Internal tasks will be hidden from the UI when executing a workflow. | [optional] [readonly] 
 **Owner** | Pointer to **string** | The service that owns and is responsible for execution of the task. | [optional] [readonly] 
 

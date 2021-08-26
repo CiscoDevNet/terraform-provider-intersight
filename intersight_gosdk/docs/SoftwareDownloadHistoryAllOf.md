@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Product** | Pointer to **string** | The product type of the downloaded software. | [optional] 
 **Timestamp** | Pointer to **time.Time** | The download time of the software image. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of software which was downloaded. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Image** | Pointer to [**FirmwareBaseDistributableRelationship**](firmware.BaseDistributable.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Image** | Pointer to [**FirmwareBaseDistributableRelationship**](FirmwareBaseDistributableRelationship.md) |  | [optional] 
 
 ## Methods
 

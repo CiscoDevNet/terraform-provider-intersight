@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DeployStatus** | Pointer to **string** | The deployStatus provides the current status of this deployment. * &#x60;NotStarted&#x60; - The workflow to deploy the tenant cluster has not yet started. * &#x60;InProgress&#x60; - The workflow to deploy the tenant cluster in progress. All the tasks required for thesuccessful tenant creation are running. * &#x60;Completed&#x60; - The workflow to deploy the tenant cluster has completed and health checks have passed. * &#x60;Failed&#x60; - The workflow to deploy the tenant cluster has failed. Detailed reason for the failure isprovided from Tenant.deployStatus. | [optional] [readonly] [default to "NotStarted"]
 **IwoId** | Pointer to **string** | The iwoId uniquely identifies a IWO tenant. The iwoId is used as part of namespace, (logical) database names, policies in vault and many others. As of now, accountMoid has to be provided as the iwoId. | [optional] [readonly] 
 **ReferenceTime** | Pointer to **time.Time** | During IWO tenant upgrade (or reconfiguration), deployStatus is set to InProgress and referenceTime set to current time. When tenant upgrade (or reconfiguration) does not complete within a pre-defined time using this as reference, deployStatus is set as Failed. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

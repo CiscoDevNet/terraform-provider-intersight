@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniApic**](kubernetes.AciCniApic.md)
+[**KubernetesAciCniApic**](KubernetesAciCniApic.md)
 
 ### Authorization
 
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniProfile**](kubernetes.AciCniProfile.md)
+[**KubernetesAciCniProfile**](KubernetesAciCniProfile.md)
 
 ### Authorization
 
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniTenantClusterAllocation**](kubernetes.AciCniTenantClusterAllocation.md)
+[**KubernetesAciCniTenantClusterAllocation**](KubernetesAciCniTenantClusterAllocation.md)
 
 ### Authorization
 
@@ -409,7 +409,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonDefinition**](kubernetes.AddonDefinition.md)
+[**KubernetesAddonDefinition**](KubernetesAddonDefinition.md)
 
 ### Authorization
 
@@ -477,7 +477,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonPolicy**](kubernetes.AddonPolicy.md)
+[**KubernetesAddonPolicy**](KubernetesAddonPolicy.md)
 
 ### Authorization
 
@@ -545,7 +545,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonRepository**](kubernetes.AddonRepository.md)
+[**KubernetesAddonRepository**](KubernetesAddonRepository.md)
 
 ### Authorization
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCluster**](kubernetes.Cluster.md)
+[**KubernetesCluster**](KubernetesCluster.md)
 
 ### Authorization
 
@@ -681,7 +681,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
+[**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md)
 
 ### Authorization
 
@@ -749,7 +749,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterProfile**](kubernetes.ClusterProfile.md)
+[**KubernetesClusterProfile**](KubernetesClusterProfile.md)
 
 ### Authorization
 
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesContainerRuntimePolicy**](kubernetes.ContainerRuntimePolicy.md)
+[**KubernetesContainerRuntimePolicy**](KubernetesContainerRuntimePolicy.md)
 
 ### Authorization
 
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNetworkPolicy**](kubernetes.NetworkPolicy.md)
+[**KubernetesNetworkPolicy**](KubernetesNetworkPolicy.md)
 
 ### Authorization
 
@@ -953,7 +953,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeGroupProfile**](kubernetes.NodeGroupProfile.md)
+[**KubernetesNodeGroupProfile**](KubernetesNodeGroupProfile.md)
 
 ### Authorization
 
@@ -1021,7 +1021,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesSysConfigPolicy**](kubernetes.SysConfigPolicy.md)
+[**KubernetesSysConfigPolicy**](KubernetesSysConfigPolicy.md)
 
 ### Authorization
 
@@ -1089,7 +1089,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesTrustedRegistriesPolicy**](kubernetes.TrustedRegistriesPolicy.md)
+[**KubernetesTrustedRegistriesPolicy**](KubernetesTrustedRegistriesPolicy.md)
 
 ### Authorization
 
@@ -1157,7 +1157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersion**](kubernetes.Version.md)
+[**KubernetesVersion**](KubernetesVersion.md)
 
 ### Authorization
 
@@ -1225,7 +1225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionPolicy**](kubernetes.VersionPolicy.md)
+[**KubernetesVersionPolicy**](KubernetesVersionPolicy.md)
 
 ### Authorization
 
@@ -1293,7 +1293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+[**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md)
 
 ### Authorization
 
@@ -1361,7 +1361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfrastructureProvider**](kubernetes.VirtualMachineInfrastructureProvider.md)
+[**KubernetesVirtualMachineInfrastructureProvider**](KubernetesVirtualMachineInfrastructureProvider.md)
 
 ### Authorization
 
@@ -1429,7 +1429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInstanceType**](kubernetes.VirtualMachineInstanceType.md)
+[**KubernetesVirtualMachineInstanceType**](KubernetesVirtualMachineInstanceType.md)
 
 ### Authorization
 
@@ -1497,7 +1497,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineNodeProfile**](kubernetes.VirtualMachineNodeProfile.md)
+[**KubernetesVirtualMachineNodeProfile**](KubernetesVirtualMachineNodeProfile.md)
 
 ### Authorization
 
@@ -3281,7 +3281,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniApic**](kubernetes.AciCniApic.md)
+[**KubernetesAciCniApic**](KubernetesAciCniApic.md)
 
 ### Authorization
 
@@ -3365,7 +3365,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniApicResponse**](kubernetes.AciCniApic.Response.md)
+[**KubernetesAciCniApicResponse**](KubernetesAciCniApicResponse.md)
 
 ### Authorization
 
@@ -3433,7 +3433,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniProfile**](kubernetes.AciCniProfile.md)
+[**KubernetesAciCniProfile**](KubernetesAciCniProfile.md)
 
 ### Authorization
 
@@ -3517,7 +3517,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniProfileResponse**](kubernetes.AciCniProfile.Response.md)
+[**KubernetesAciCniProfileResponse**](KubernetesAciCniProfileResponse.md)
 
 ### Authorization
 
@@ -3585,7 +3585,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniTenantClusterAllocation**](kubernetes.AciCniTenantClusterAllocation.md)
+[**KubernetesAciCniTenantClusterAllocation**](KubernetesAciCniTenantClusterAllocation.md)
 
 ### Authorization
 
@@ -3669,7 +3669,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniTenantClusterAllocationResponse**](kubernetes.AciCniTenantClusterAllocation.Response.md)
+[**KubernetesAciCniTenantClusterAllocationResponse**](KubernetesAciCniTenantClusterAllocationResponse.md)
 
 ### Authorization
 
@@ -3737,7 +3737,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonDefinition**](kubernetes.AddonDefinition.md)
+[**KubernetesAddonDefinition**](KubernetesAddonDefinition.md)
 
 ### Authorization
 
@@ -3821,7 +3821,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonDefinitionResponse**](kubernetes.AddonDefinition.Response.md)
+[**KubernetesAddonDefinitionResponse**](KubernetesAddonDefinitionResponse.md)
 
 ### Authorization
 
@@ -3889,7 +3889,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonPolicy**](kubernetes.AddonPolicy.md)
+[**KubernetesAddonPolicy**](KubernetesAddonPolicy.md)
 
 ### Authorization
 
@@ -3973,7 +3973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonPolicyResponse**](kubernetes.AddonPolicy.Response.md)
+[**KubernetesAddonPolicyResponse**](KubernetesAddonPolicyResponse.md)
 
 ### Authorization
 
@@ -4041,7 +4041,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonRepository**](kubernetes.AddonRepository.md)
+[**KubernetesAddonRepository**](KubernetesAddonRepository.md)
 
 ### Authorization
 
@@ -4125,7 +4125,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonRepositoryResponse**](kubernetes.AddonRepository.Response.md)
+[**KubernetesAddonRepositoryResponse**](KubernetesAddonRepositoryResponse.md)
 
 ### Authorization
 
@@ -4193,7 +4193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCatalog**](kubernetes.Catalog.md)
+[**KubernetesCatalog**](KubernetesCatalog.md)
 
 ### Authorization
 
@@ -4277,7 +4277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCatalogResponse**](kubernetes.Catalog.Response.md)
+[**KubernetesCatalogResponse**](KubernetesCatalogResponse.md)
 
 ### Authorization
 
@@ -4345,7 +4345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
+[**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md)
 
 ### Authorization
 
@@ -4429,7 +4429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterAddonProfileResponse**](kubernetes.ClusterAddonProfile.Response.md)
+[**KubernetesClusterAddonProfileResponse**](KubernetesClusterAddonProfileResponse.md)
 
 ### Authorization
 
@@ -4497,7 +4497,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCluster**](kubernetes.Cluster.md)
+[**KubernetesCluster**](KubernetesCluster.md)
 
 ### Authorization
 
@@ -4581,7 +4581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterResponse**](kubernetes.Cluster.Response.md)
+[**KubernetesClusterResponse**](KubernetesClusterResponse.md)
 
 ### Authorization
 
@@ -4649,7 +4649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterProfile**](kubernetes.ClusterProfile.md)
+[**KubernetesClusterProfile**](KubernetesClusterProfile.md)
 
 ### Authorization
 
@@ -4733,7 +4733,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterProfileResponse**](kubernetes.ClusterProfile.Response.md)
+[**KubernetesClusterProfileResponse**](KubernetesClusterProfileResponse.md)
 
 ### Authorization
 
@@ -4801,7 +4801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesConfigResult**](kubernetes.ConfigResult.md)
+[**KubernetesConfigResult**](KubernetesConfigResult.md)
 
 ### Authorization
 
@@ -4869,7 +4869,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesConfigResultEntry**](kubernetes.ConfigResultEntry.md)
+[**KubernetesConfigResultEntry**](KubernetesConfigResultEntry.md)
 
 ### Authorization
 
@@ -4953,7 +4953,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesConfigResultEntryResponse**](kubernetes.ConfigResultEntry.Response.md)
+[**KubernetesConfigResultEntryResponse**](KubernetesConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -5037,7 +5037,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesConfigResultResponse**](kubernetes.ConfigResult.Response.md)
+[**KubernetesConfigResultResponse**](KubernetesConfigResultResponse.md)
 
 ### Authorization
 
@@ -5105,7 +5105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesContainerRuntimePolicy**](kubernetes.ContainerRuntimePolicy.md)
+[**KubernetesContainerRuntimePolicy**](KubernetesContainerRuntimePolicy.md)
 
 ### Authorization
 
@@ -5189,7 +5189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesContainerRuntimePolicyResponse**](kubernetes.ContainerRuntimePolicy.Response.md)
+[**KubernetesContainerRuntimePolicyResponse**](KubernetesContainerRuntimePolicyResponse.md)
 
 ### Authorization
 
@@ -5257,7 +5257,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesDaemonSet**](kubernetes.DaemonSet.md)
+[**KubernetesDaemonSet**](KubernetesDaemonSet.md)
 
 ### Authorization
 
@@ -5341,7 +5341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesDaemonSetResponse**](kubernetes.DaemonSet.Response.md)
+[**KubernetesDaemonSetResponse**](KubernetesDaemonSetResponse.md)
 
 ### Authorization
 
@@ -5409,7 +5409,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesDeployment**](kubernetes.Deployment.md)
+[**KubernetesDeployment**](KubernetesDeployment.md)
 
 ### Authorization
 
@@ -5493,7 +5493,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesDeploymentResponse**](kubernetes.Deployment.Response.md)
+[**KubernetesDeploymentResponse**](KubernetesDeploymentResponse.md)
 
 ### Authorization
 
@@ -5561,7 +5561,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesIngress**](kubernetes.Ingress.md)
+[**KubernetesIngress**](KubernetesIngress.md)
 
 ### Authorization
 
@@ -5645,7 +5645,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesIngressResponse**](kubernetes.Ingress.Response.md)
+[**KubernetesIngressResponse**](KubernetesIngressResponse.md)
 
 ### Authorization
 
@@ -5713,7 +5713,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNetworkPolicy**](kubernetes.NetworkPolicy.md)
+[**KubernetesNetworkPolicy**](KubernetesNetworkPolicy.md)
 
 ### Authorization
 
@@ -5797,7 +5797,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNetworkPolicyResponse**](kubernetes.NetworkPolicy.Response.md)
+[**KubernetesNetworkPolicyResponse**](KubernetesNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -5865,7 +5865,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNode**](kubernetes.Node.md)
+[**KubernetesNode**](KubernetesNode.md)
 
 ### Authorization
 
@@ -5933,7 +5933,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeGroupProfile**](kubernetes.NodeGroupProfile.md)
+[**KubernetesNodeGroupProfile**](KubernetesNodeGroupProfile.md)
 
 ### Authorization
 
@@ -6017,7 +6017,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeGroupProfileResponse**](kubernetes.NodeGroupProfile.Response.md)
+[**KubernetesNodeGroupProfileResponse**](KubernetesNodeGroupProfileResponse.md)
 
 ### Authorization
 
@@ -6101,7 +6101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeResponse**](kubernetes.Node.Response.md)
+[**KubernetesNodeResponse**](KubernetesNodeResponse.md)
 
 ### Authorization
 
@@ -6169,7 +6169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesPod**](kubernetes.Pod.md)
+[**KubernetesPod**](KubernetesPod.md)
 
 ### Authorization
 
@@ -6253,7 +6253,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesPodResponse**](kubernetes.Pod.Response.md)
+[**KubernetesPodResponse**](KubernetesPodResponse.md)
 
 ### Authorization
 
@@ -6321,7 +6321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesService**](kubernetes.Service.md)
+[**KubernetesService**](KubernetesService.md)
 
 ### Authorization
 
@@ -6405,7 +6405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesServiceResponse**](kubernetes.Service.Response.md)
+[**KubernetesServiceResponse**](KubernetesServiceResponse.md)
 
 ### Authorization
 
@@ -6473,7 +6473,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesStatefulSet**](kubernetes.StatefulSet.md)
+[**KubernetesStatefulSet**](KubernetesStatefulSet.md)
 
 ### Authorization
 
@@ -6557,7 +6557,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesStatefulSetResponse**](kubernetes.StatefulSet.Response.md)
+[**KubernetesStatefulSetResponse**](KubernetesStatefulSetResponse.md)
 
 ### Authorization
 
@@ -6625,7 +6625,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesSysConfigPolicy**](kubernetes.SysConfigPolicy.md)
+[**KubernetesSysConfigPolicy**](KubernetesSysConfigPolicy.md)
 
 ### Authorization
 
@@ -6709,7 +6709,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesSysConfigPolicyResponse**](kubernetes.SysConfigPolicy.Response.md)
+[**KubernetesSysConfigPolicyResponse**](KubernetesSysConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -6777,7 +6777,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesTrustedRegistriesPolicy**](kubernetes.TrustedRegistriesPolicy.md)
+[**KubernetesTrustedRegistriesPolicy**](KubernetesTrustedRegistriesPolicy.md)
 
 ### Authorization
 
@@ -6861,7 +6861,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesTrustedRegistriesPolicyResponse**](kubernetes.TrustedRegistriesPolicy.Response.md)
+[**KubernetesTrustedRegistriesPolicyResponse**](KubernetesTrustedRegistriesPolicyResponse.md)
 
 ### Authorization
 
@@ -6929,7 +6929,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersion**](kubernetes.Version.md)
+[**KubernetesVersion**](KubernetesVersion.md)
 
 ### Authorization
 
@@ -7013,7 +7013,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionResponse**](kubernetes.Version.Response.md)
+[**KubernetesVersionResponse**](KubernetesVersionResponse.md)
 
 ### Authorization
 
@@ -7081,7 +7081,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionPolicy**](kubernetes.VersionPolicy.md)
+[**KubernetesVersionPolicy**](KubernetesVersionPolicy.md)
 
 ### Authorization
 
@@ -7165,7 +7165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionPolicyResponse**](kubernetes.VersionPolicy.Response.md)
+[**KubernetesVersionPolicyResponse**](KubernetesVersionPolicyResponse.md)
 
 ### Authorization
 
@@ -7233,7 +7233,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+[**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md)
 
 ### Authorization
 
@@ -7317,7 +7317,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfraConfigPolicyResponse**](kubernetes.VirtualMachineInfraConfigPolicy.Response.md)
+[**KubernetesVirtualMachineInfraConfigPolicyResponse**](KubernetesVirtualMachineInfraConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -7385,7 +7385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfrastructureProvider**](kubernetes.VirtualMachineInfrastructureProvider.md)
+[**KubernetesVirtualMachineInfrastructureProvider**](KubernetesVirtualMachineInfrastructureProvider.md)
 
 ### Authorization
 
@@ -7469,7 +7469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfrastructureProviderResponse**](kubernetes.VirtualMachineInfrastructureProvider.Response.md)
+[**KubernetesVirtualMachineInfrastructureProviderResponse**](KubernetesVirtualMachineInfrastructureProviderResponse.md)
 
 ### Authorization
 
@@ -7537,7 +7537,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInstanceType**](kubernetes.VirtualMachineInstanceType.md)
+[**KubernetesVirtualMachineInstanceType**](KubernetesVirtualMachineInstanceType.md)
 
 ### Authorization
 
@@ -7621,7 +7621,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInstanceTypeResponse**](kubernetes.VirtualMachineInstanceType.Response.md)
+[**KubernetesVirtualMachineInstanceTypeResponse**](KubernetesVirtualMachineInstanceTypeResponse.md)
 
 ### Authorization
 
@@ -7689,7 +7689,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineNodeProfile**](kubernetes.VirtualMachineNodeProfile.md)
+[**KubernetesVirtualMachineNodeProfile**](KubernetesVirtualMachineNodeProfile.md)
 
 ### Authorization
 
@@ -7773,7 +7773,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineNodeProfileResponse**](kubernetes.VirtualMachineNodeProfile.Response.md)
+[**KubernetesVirtualMachineNodeProfileResponse**](KubernetesVirtualMachineNodeProfileResponse.md)
 
 ### Authorization
 
@@ -7845,7 +7845,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniApic**](kubernetes.AciCniApic.md)
+[**KubernetesAciCniApic**](KubernetesAciCniApic.md)
 
 ### Authorization
 
@@ -7917,7 +7917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniProfile**](kubernetes.AciCniProfile.md)
+[**KubernetesAciCniProfile**](KubernetesAciCniProfile.md)
 
 ### Authorization
 
@@ -7989,7 +7989,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniTenantClusterAllocation**](kubernetes.AciCniTenantClusterAllocation.md)
+[**KubernetesAciCniTenantClusterAllocation**](KubernetesAciCniTenantClusterAllocation.md)
 
 ### Authorization
 
@@ -8061,7 +8061,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonDefinition**](kubernetes.AddonDefinition.md)
+[**KubernetesAddonDefinition**](KubernetesAddonDefinition.md)
 
 ### Authorization
 
@@ -8133,7 +8133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonPolicy**](kubernetes.AddonPolicy.md)
+[**KubernetesAddonPolicy**](KubernetesAddonPolicy.md)
 
 ### Authorization
 
@@ -8205,7 +8205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonRepository**](kubernetes.AddonRepository.md)
+[**KubernetesAddonRepository**](KubernetesAddonRepository.md)
 
 ### Authorization
 
@@ -8277,7 +8277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCluster**](kubernetes.Cluster.md)
+[**KubernetesCluster**](KubernetesCluster.md)
 
 ### Authorization
 
@@ -8349,7 +8349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
+[**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md)
 
 ### Authorization
 
@@ -8421,7 +8421,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterProfile**](kubernetes.ClusterProfile.md)
+[**KubernetesClusterProfile**](KubernetesClusterProfile.md)
 
 ### Authorization
 
@@ -8493,7 +8493,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesContainerRuntimePolicy**](kubernetes.ContainerRuntimePolicy.md)
+[**KubernetesContainerRuntimePolicy**](KubernetesContainerRuntimePolicy.md)
 
 ### Authorization
 
@@ -8565,7 +8565,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNetworkPolicy**](kubernetes.NetworkPolicy.md)
+[**KubernetesNetworkPolicy**](KubernetesNetworkPolicy.md)
 
 ### Authorization
 
@@ -8637,7 +8637,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeGroupProfile**](kubernetes.NodeGroupProfile.md)
+[**KubernetesNodeGroupProfile**](KubernetesNodeGroupProfile.md)
 
 ### Authorization
 
@@ -8709,7 +8709,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesSysConfigPolicy**](kubernetes.SysConfigPolicy.md)
+[**KubernetesSysConfigPolicy**](KubernetesSysConfigPolicy.md)
 
 ### Authorization
 
@@ -8781,7 +8781,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesTrustedRegistriesPolicy**](kubernetes.TrustedRegistriesPolicy.md)
+[**KubernetesTrustedRegistriesPolicy**](KubernetesTrustedRegistriesPolicy.md)
 
 ### Authorization
 
@@ -8853,7 +8853,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersion**](kubernetes.Version.md)
+[**KubernetesVersion**](KubernetesVersion.md)
 
 ### Authorization
 
@@ -8925,7 +8925,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionPolicy**](kubernetes.VersionPolicy.md)
+[**KubernetesVersionPolicy**](KubernetesVersionPolicy.md)
 
 ### Authorization
 
@@ -8997,7 +8997,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+[**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md)
 
 ### Authorization
 
@@ -9069,7 +9069,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfrastructureProvider**](kubernetes.VirtualMachineInfrastructureProvider.md)
+[**KubernetesVirtualMachineInfrastructureProvider**](KubernetesVirtualMachineInfrastructureProvider.md)
 
 ### Authorization
 
@@ -9141,7 +9141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInstanceType**](kubernetes.VirtualMachineInstanceType.md)
+[**KubernetesVirtualMachineInstanceType**](KubernetesVirtualMachineInstanceType.md)
 
 ### Authorization
 
@@ -9213,7 +9213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineNodeProfile**](kubernetes.VirtualMachineNodeProfile.md)
+[**KubernetesVirtualMachineNodeProfile**](KubernetesVirtualMachineNodeProfile.md)
 
 ### Authorization
 
@@ -9285,7 +9285,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniApic**](kubernetes.AciCniApic.md)
+[**KubernetesAciCniApic**](KubernetesAciCniApic.md)
 
 ### Authorization
 
@@ -9357,7 +9357,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniProfile**](kubernetes.AciCniProfile.md)
+[**KubernetesAciCniProfile**](KubernetesAciCniProfile.md)
 
 ### Authorization
 
@@ -9429,7 +9429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAciCniTenantClusterAllocation**](kubernetes.AciCniTenantClusterAllocation.md)
+[**KubernetesAciCniTenantClusterAllocation**](KubernetesAciCniTenantClusterAllocation.md)
 
 ### Authorization
 
@@ -9501,7 +9501,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonDefinition**](kubernetes.AddonDefinition.md)
+[**KubernetesAddonDefinition**](KubernetesAddonDefinition.md)
 
 ### Authorization
 
@@ -9573,7 +9573,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonPolicy**](kubernetes.AddonPolicy.md)
+[**KubernetesAddonPolicy**](KubernetesAddonPolicy.md)
 
 ### Authorization
 
@@ -9645,7 +9645,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesAddonRepository**](kubernetes.AddonRepository.md)
+[**KubernetesAddonRepository**](KubernetesAddonRepository.md)
 
 ### Authorization
 
@@ -9717,7 +9717,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesCluster**](kubernetes.Cluster.md)
+[**KubernetesCluster**](KubernetesCluster.md)
 
 ### Authorization
 
@@ -9789,7 +9789,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterAddonProfile**](kubernetes.ClusterAddonProfile.md)
+[**KubernetesClusterAddonProfile**](KubernetesClusterAddonProfile.md)
 
 ### Authorization
 
@@ -9861,7 +9861,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesClusterProfile**](kubernetes.ClusterProfile.md)
+[**KubernetesClusterProfile**](KubernetesClusterProfile.md)
 
 ### Authorization
 
@@ -9933,7 +9933,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesContainerRuntimePolicy**](kubernetes.ContainerRuntimePolicy.md)
+[**KubernetesContainerRuntimePolicy**](KubernetesContainerRuntimePolicy.md)
 
 ### Authorization
 
@@ -10005,7 +10005,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNetworkPolicy**](kubernetes.NetworkPolicy.md)
+[**KubernetesNetworkPolicy**](KubernetesNetworkPolicy.md)
 
 ### Authorization
 
@@ -10077,7 +10077,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesNodeGroupProfile**](kubernetes.NodeGroupProfile.md)
+[**KubernetesNodeGroupProfile**](KubernetesNodeGroupProfile.md)
 
 ### Authorization
 
@@ -10149,7 +10149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesSysConfigPolicy**](kubernetes.SysConfigPolicy.md)
+[**KubernetesSysConfigPolicy**](KubernetesSysConfigPolicy.md)
 
 ### Authorization
 
@@ -10221,7 +10221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesTrustedRegistriesPolicy**](kubernetes.TrustedRegistriesPolicy.md)
+[**KubernetesTrustedRegistriesPolicy**](KubernetesTrustedRegistriesPolicy.md)
 
 ### Authorization
 
@@ -10293,7 +10293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersion**](kubernetes.Version.md)
+[**KubernetesVersion**](KubernetesVersion.md)
 
 ### Authorization
 
@@ -10365,7 +10365,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVersionPolicy**](kubernetes.VersionPolicy.md)
+[**KubernetesVersionPolicy**](KubernetesVersionPolicy.md)
 
 ### Authorization
 
@@ -10437,7 +10437,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfraConfigPolicy**](kubernetes.VirtualMachineInfraConfigPolicy.md)
+[**KubernetesVirtualMachineInfraConfigPolicy**](KubernetesVirtualMachineInfraConfigPolicy.md)
 
 ### Authorization
 
@@ -10509,7 +10509,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInfrastructureProvider**](kubernetes.VirtualMachineInfrastructureProvider.md)
+[**KubernetesVirtualMachineInfrastructureProvider**](KubernetesVirtualMachineInfrastructureProvider.md)
 
 ### Authorization
 
@@ -10581,7 +10581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineInstanceType**](kubernetes.VirtualMachineInstanceType.md)
+[**KubernetesVirtualMachineInstanceType**](KubernetesVirtualMachineInstanceType.md)
 
 ### Authorization
 
@@ -10653,7 +10653,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KubernetesVirtualMachineNodeProfile**](kubernetes.VirtualMachineNodeProfile.md)
+[**KubernetesVirtualMachineNodeProfile**](KubernetesVirtualMachineNodeProfile.md)
 
 ### Authorization
 

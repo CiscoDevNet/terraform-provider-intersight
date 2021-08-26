@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **CompletedTime** | Pointer to **string** | The completed time of the task in installer. | [optional] 
-**Context** | Pointer to [**NullablePolicyConfigResultContext**](policy.ConfigResultContext.md) |  | [optional] 
+**Context** | Pointer to [**NullablePolicyConfigResultContext**](PolicyConfigResultContext.md) |  | [optional] 
 **Message** | Pointer to **string** | Localized message based on the locale setting of the user&#39;s context. | [optional] 
 **OwnerId** | Pointer to **string** | The identifier of the object that owns the result message. The owner ID is used to correlate a given result entry to a task or entity. For example, a config result entry that describes the result of a workflow task may have the task&#39;s instance ID as the owner. | [optional] 
 **State** | Pointer to **string** | Values  -- Ok, Ok-with-warning, Errored. | [optional] 

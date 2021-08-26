@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RproxyReverseProxy**](rproxy.ReverseProxy.md)
+[**RproxyReverseProxy**](RproxyReverseProxy.md)
 
 ### Authorization
 

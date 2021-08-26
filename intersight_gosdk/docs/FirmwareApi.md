@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](firmware.BiosDescriptor.md)
+[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
 
 ### Authorization
 
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](firmware.BoardControllerDescriptor.md)
+[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
 
 ### Authorization
 
@@ -331,7 +331,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareChassisUpgrade**](firmware.ChassisUpgrade.md)
+[**FirmwareChassisUpgrade**](FirmwareChassisUpgrade.md)
 
 ### Authorization
 
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](firmware.CimcDescriptor.md)
+[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
 
 ### Authorization
 
@@ -467,7 +467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](firmware.DimmDescriptor.md)
+[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
 
 ### Authorization
 
@@ -535,7 +535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributable**](firmware.Distributable.md)
+[**FirmwareDistributable**](FirmwareDistributable.md)
 
 ### Authorization
 
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](firmware.DriveDescriptor.md)
+[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -671,7 +671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriverDistributable**](firmware.DriverDistributable.md)
+[**FirmwareDriverDistributable**](FirmwareDriverDistributable.md)
 
 ### Authorization
 
@@ -739,7 +739,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareEula**](firmware.Eula.md)
+[**FirmwareEula**](FirmwareEula.md)
 
 ### Authorization
 
@@ -807,7 +807,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](firmware.GpuDescriptor.md)
+[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
 
 ### Authorization
 
@@ -875,7 +875,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](firmware.HbaDescriptor.md)
+[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
 
 ### Authorization
 
@@ -943,7 +943,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](firmware.IomDescriptor.md)
+[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
 
 ### Authorization
 
@@ -1011,7 +1011,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](firmware.MswitchDescriptor.md)
+[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
 
 ### Authorization
 
@@ -1079,7 +1079,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](firmware.NxosDescriptor.md)
+[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
 
 ### Authorization
 
@@ -1147,7 +1147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](firmware.PcieDescriptor.md)
+[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
 
 ### Authorization
 
@@ -1215,7 +1215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](firmware.PsuDescriptor.md)
+[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
 
 ### Authorization
 
@@ -1283,7 +1283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](firmware.SasExpanderDescriptor.md)
+[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
 
 ### Authorization
 
@@ -1351,7 +1351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareServerConfigurationUtilityDistributable**](firmware.ServerConfigurationUtilityDistributable.md)
+[**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
 
 ### Authorization
 
@@ -1419,7 +1419,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](firmware.StorageControllerDescriptor.md)
+[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -1487,7 +1487,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSwitchUpgrade**](firmware.SwitchUpgrade.md)
+[**FirmwareSwitchUpgrade**](FirmwareSwitchUpgrade.md)
 
 ### Authorization
 
@@ -1555,7 +1555,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUnsupportedVersionUpgrade**](firmware.UnsupportedVersionUpgrade.md)
+[**FirmwareUnsupportedVersionUpgrade**](FirmwareUnsupportedVersionUpgrade.md)
 
 ### Authorization
 
@@ -1623,7 +1623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgrade**](firmware.Upgrade.md)
+[**FirmwareUpgrade**](FirmwareUpgrade.md)
 
 ### Authorization
 
@@ -1691,7 +1691,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeImpact**](firmware.UpgradeImpact.md)
+[**FirmwareUpgradeImpact**](FirmwareUpgradeImpact.md)
 
 ### Authorization
 
@@ -3145,7 +3145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](firmware.BiosDescriptor.md)
+[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
 
 ### Authorization
 
@@ -3229,7 +3229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptorResponse**](firmware.BiosDescriptor.Response.md)
+[**FirmwareBiosDescriptorResponse**](FirmwareBiosDescriptorResponse.md)
 
 ### Authorization
 
@@ -3297,7 +3297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](firmware.BoardControllerDescriptor.md)
+[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
 
 ### Authorization
 
@@ -3381,7 +3381,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptorResponse**](firmware.BoardControllerDescriptor.Response.md)
+[**FirmwareBoardControllerDescriptorResponse**](FirmwareBoardControllerDescriptorResponse.md)
 
 ### Authorization
 
@@ -3449,7 +3449,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareChassisUpgrade**](firmware.ChassisUpgrade.md)
+[**FirmwareChassisUpgrade**](FirmwareChassisUpgrade.md)
 
 ### Authorization
 
@@ -3533,7 +3533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareChassisUpgradeResponse**](firmware.ChassisUpgrade.Response.md)
+[**FirmwareChassisUpgradeResponse**](FirmwareChassisUpgradeResponse.md)
 
 ### Authorization
 
@@ -3601,7 +3601,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](firmware.CimcDescriptor.md)
+[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
 
 ### Authorization
 
@@ -3685,7 +3685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptorResponse**](firmware.CimcDescriptor.Response.md)
+[**FirmwareCimcDescriptorResponse**](FirmwareCimcDescriptorResponse.md)
 
 ### Authorization
 
@@ -3753,7 +3753,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](firmware.DimmDescriptor.md)
+[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
 
 ### Authorization
 
@@ -3837,7 +3837,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptorResponse**](firmware.DimmDescriptor.Response.md)
+[**FirmwareDimmDescriptorResponse**](FirmwareDimmDescriptorResponse.md)
 
 ### Authorization
 
@@ -3905,7 +3905,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributable**](firmware.Distributable.md)
+[**FirmwareDistributable**](FirmwareDistributable.md)
 
 ### Authorization
 
@@ -3989,7 +3989,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributableResponse**](firmware.Distributable.Response.md)
+[**FirmwareDistributableResponse**](FirmwareDistributableResponse.md)
 
 ### Authorization
 
@@ -4057,7 +4057,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributableMeta**](firmware.DistributableMeta.md)
+[**FirmwareDistributableMeta**](FirmwareDistributableMeta.md)
 
 ### Authorization
 
@@ -4141,7 +4141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributableMetaResponse**](firmware.DistributableMeta.Response.md)
+[**FirmwareDistributableMetaResponse**](FirmwareDistributableMetaResponse.md)
 
 ### Authorization
 
@@ -4209,7 +4209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](firmware.DriveDescriptor.md)
+[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -4293,7 +4293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptorResponse**](firmware.DriveDescriptor.Response.md)
+[**FirmwareDriveDescriptorResponse**](FirmwareDriveDescriptorResponse.md)
 
 ### Authorization
 
@@ -4361,7 +4361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriverDistributable**](firmware.DriverDistributable.md)
+[**FirmwareDriverDistributable**](FirmwareDriverDistributable.md)
 
 ### Authorization
 
@@ -4445,7 +4445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriverDistributableResponse**](firmware.DriverDistributable.Response.md)
+[**FirmwareDriverDistributableResponse**](FirmwareDriverDistributableResponse.md)
 
 ### Authorization
 
@@ -4513,7 +4513,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareEula**](firmware.Eula.md)
+[**FirmwareEula**](FirmwareEula.md)
 
 ### Authorization
 
@@ -4597,7 +4597,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareEulaResponse**](firmware.Eula.Response.md)
+[**FirmwareEulaResponse**](FirmwareEulaResponse.md)
 
 ### Authorization
 
@@ -4665,7 +4665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareFirmwareSummary**](firmware.FirmwareSummary.md)
+[**FirmwareFirmwareSummary**](FirmwareFirmwareSummary.md)
 
 ### Authorization
 
@@ -4749,7 +4749,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareFirmwareSummaryResponse**](firmware.FirmwareSummary.Response.md)
+[**FirmwareFirmwareSummaryResponse**](FirmwareFirmwareSummaryResponse.md)
 
 ### Authorization
 
@@ -4817,7 +4817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](firmware.GpuDescriptor.md)
+[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
 
 ### Authorization
 
@@ -4901,7 +4901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptorResponse**](firmware.GpuDescriptor.Response.md)
+[**FirmwareGpuDescriptorResponse**](FirmwareGpuDescriptorResponse.md)
 
 ### Authorization
 
@@ -4969,7 +4969,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](firmware.HbaDescriptor.md)
+[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
 
 ### Authorization
 
@@ -5053,7 +5053,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptorResponse**](firmware.HbaDescriptor.Response.md)
+[**FirmwareHbaDescriptorResponse**](FirmwareHbaDescriptorResponse.md)
 
 ### Authorization
 
@@ -5121,7 +5121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](firmware.IomDescriptor.md)
+[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
 
 ### Authorization
 
@@ -5205,7 +5205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptorResponse**](firmware.IomDescriptor.Response.md)
+[**FirmwareIomDescriptorResponse**](FirmwareIomDescriptorResponse.md)
 
 ### Authorization
 
@@ -5273,7 +5273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](firmware.MswitchDescriptor.md)
+[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
 
 ### Authorization
 
@@ -5357,7 +5357,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptorResponse**](firmware.MswitchDescriptor.Response.md)
+[**FirmwareMswitchDescriptorResponse**](FirmwareMswitchDescriptorResponse.md)
 
 ### Authorization
 
@@ -5425,7 +5425,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](firmware.NxosDescriptor.md)
+[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
 
 ### Authorization
 
@@ -5509,7 +5509,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptorResponse**](firmware.NxosDescriptor.Response.md)
+[**FirmwareNxosDescriptorResponse**](FirmwareNxosDescriptorResponse.md)
 
 ### Authorization
 
@@ -5577,7 +5577,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](firmware.PcieDescriptor.md)
+[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
 
 ### Authorization
 
@@ -5661,7 +5661,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptorResponse**](firmware.PcieDescriptor.Response.md)
+[**FirmwarePcieDescriptorResponse**](FirmwarePcieDescriptorResponse.md)
 
 ### Authorization
 
@@ -5729,7 +5729,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](firmware.PsuDescriptor.md)
+[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
 
 ### Authorization
 
@@ -5813,7 +5813,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptorResponse**](firmware.PsuDescriptor.Response.md)
+[**FirmwarePsuDescriptorResponse**](FirmwarePsuDescriptorResponse.md)
 
 ### Authorization
 
@@ -5881,7 +5881,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareRunningFirmware**](firmware.RunningFirmware.md)
+[**FirmwareRunningFirmware**](FirmwareRunningFirmware.md)
 
 ### Authorization
 
@@ -5965,7 +5965,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareRunningFirmwareResponse**](firmware.RunningFirmware.Response.md)
+[**FirmwareRunningFirmwareResponse**](FirmwareRunningFirmwareResponse.md)
 
 ### Authorization
 
@@ -6033,7 +6033,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](firmware.SasExpanderDescriptor.md)
+[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
 
 ### Authorization
 
@@ -6117,7 +6117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptorResponse**](firmware.SasExpanderDescriptor.Response.md)
+[**FirmwareSasExpanderDescriptorResponse**](FirmwareSasExpanderDescriptorResponse.md)
 
 ### Authorization
 
@@ -6185,7 +6185,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareServerConfigurationUtilityDistributable**](firmware.ServerConfigurationUtilityDistributable.md)
+[**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
 
 ### Authorization
 
@@ -6269,7 +6269,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareServerConfigurationUtilityDistributableResponse**](firmware.ServerConfigurationUtilityDistributable.Response.md)
+[**FirmwareServerConfigurationUtilityDistributableResponse**](FirmwareServerConfigurationUtilityDistributableResponse.md)
 
 ### Authorization
 
@@ -6337,7 +6337,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](firmware.StorageControllerDescriptor.md)
+[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -6421,7 +6421,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptorResponse**](firmware.StorageControllerDescriptor.Response.md)
+[**FirmwareStorageControllerDescriptorResponse**](FirmwareStorageControllerDescriptorResponse.md)
 
 ### Authorization
 
@@ -6489,7 +6489,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSwitchUpgrade**](firmware.SwitchUpgrade.md)
+[**FirmwareSwitchUpgrade**](FirmwareSwitchUpgrade.md)
 
 ### Authorization
 
@@ -6573,7 +6573,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSwitchUpgradeResponse**](firmware.SwitchUpgrade.Response.md)
+[**FirmwareSwitchUpgradeResponse**](FirmwareSwitchUpgradeResponse.md)
 
 ### Authorization
 
@@ -6641,7 +6641,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUnsupportedVersionUpgrade**](firmware.UnsupportedVersionUpgrade.md)
+[**FirmwareUnsupportedVersionUpgrade**](FirmwareUnsupportedVersionUpgrade.md)
 
 ### Authorization
 
@@ -6725,7 +6725,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUnsupportedVersionUpgradeResponse**](firmware.UnsupportedVersionUpgrade.Response.md)
+[**FirmwareUnsupportedVersionUpgradeResponse**](FirmwareUnsupportedVersionUpgradeResponse.md)
 
 ### Authorization
 
@@ -6793,7 +6793,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgrade**](firmware.Upgrade.md)
+[**FirmwareUpgrade**](FirmwareUpgrade.md)
 
 ### Authorization
 
@@ -6861,7 +6861,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeImpactStatus**](firmware.UpgradeImpactStatus.md)
+[**FirmwareUpgradeImpactStatus**](FirmwareUpgradeImpactStatus.md)
 
 ### Authorization
 
@@ -6945,7 +6945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeImpactStatusResponse**](firmware.UpgradeImpactStatus.Response.md)
+[**FirmwareUpgradeImpactStatusResponse**](FirmwareUpgradeImpactStatusResponse.md)
 
 ### Authorization
 
@@ -7029,7 +7029,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeResponse**](firmware.Upgrade.Response.md)
+[**FirmwareUpgradeResponse**](FirmwareUpgradeResponse.md)
 
 ### Authorization
 
@@ -7097,7 +7097,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeStatus**](firmware.UpgradeStatus.md)
+[**FirmwareUpgradeStatus**](FirmwareUpgradeStatus.md)
 
 ### Authorization
 
@@ -7181,7 +7181,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUpgradeStatusResponse**](firmware.UpgradeStatus.Response.md)
+[**FirmwareUpgradeStatusResponse**](FirmwareUpgradeStatusResponse.md)
 
 ### Authorization
 
@@ -7253,7 +7253,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](firmware.BiosDescriptor.md)
+[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
 
 ### Authorization
 
@@ -7325,7 +7325,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](firmware.BoardControllerDescriptor.md)
+[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
 
 ### Authorization
 
@@ -7397,7 +7397,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](firmware.CimcDescriptor.md)
+[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
 
 ### Authorization
 
@@ -7469,7 +7469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](firmware.DimmDescriptor.md)
+[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
 
 ### Authorization
 
@@ -7541,7 +7541,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributable**](firmware.Distributable.md)
+[**FirmwareDistributable**](FirmwareDistributable.md)
 
 ### Authorization
 
@@ -7613,7 +7613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](firmware.DriveDescriptor.md)
+[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -7685,7 +7685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriverDistributable**](firmware.DriverDistributable.md)
+[**FirmwareDriverDistributable**](FirmwareDriverDistributable.md)
 
 ### Authorization
 
@@ -7757,7 +7757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](firmware.GpuDescriptor.md)
+[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
 
 ### Authorization
 
@@ -7829,7 +7829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](firmware.HbaDescriptor.md)
+[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
 
 ### Authorization
 
@@ -7901,7 +7901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](firmware.IomDescriptor.md)
+[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
 
 ### Authorization
 
@@ -7973,7 +7973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](firmware.MswitchDescriptor.md)
+[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
 
 ### Authorization
 
@@ -8045,7 +8045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](firmware.NxosDescriptor.md)
+[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
 
 ### Authorization
 
@@ -8117,7 +8117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](firmware.PcieDescriptor.md)
+[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
 
 ### Authorization
 
@@ -8189,7 +8189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](firmware.PsuDescriptor.md)
+[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
 
 ### Authorization
 
@@ -8261,7 +8261,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareRunningFirmware**](firmware.RunningFirmware.md)
+[**FirmwareRunningFirmware**](FirmwareRunningFirmware.md)
 
 ### Authorization
 
@@ -8333,7 +8333,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](firmware.SasExpanderDescriptor.md)
+[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
 
 ### Authorization
 
@@ -8405,7 +8405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareServerConfigurationUtilityDistributable**](firmware.ServerConfigurationUtilityDistributable.md)
+[**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
 
 ### Authorization
 
@@ -8477,7 +8477,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](firmware.StorageControllerDescriptor.md)
+[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -8549,7 +8549,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUnsupportedVersionUpgrade**](firmware.UnsupportedVersionUpgrade.md)
+[**FirmwareUnsupportedVersionUpgrade**](FirmwareUnsupportedVersionUpgrade.md)
 
 ### Authorization
 
@@ -8621,7 +8621,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBiosDescriptor**](firmware.BiosDescriptor.md)
+[**FirmwareBiosDescriptor**](FirmwareBiosDescriptor.md)
 
 ### Authorization
 
@@ -8693,7 +8693,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareBoardControllerDescriptor**](firmware.BoardControllerDescriptor.md)
+[**FirmwareBoardControllerDescriptor**](FirmwareBoardControllerDescriptor.md)
 
 ### Authorization
 
@@ -8765,7 +8765,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareCimcDescriptor**](firmware.CimcDescriptor.md)
+[**FirmwareCimcDescriptor**](FirmwareCimcDescriptor.md)
 
 ### Authorization
 
@@ -8837,7 +8837,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDimmDescriptor**](firmware.DimmDescriptor.md)
+[**FirmwareDimmDescriptor**](FirmwareDimmDescriptor.md)
 
 ### Authorization
 
@@ -8909,7 +8909,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDistributable**](firmware.Distributable.md)
+[**FirmwareDistributable**](FirmwareDistributable.md)
 
 ### Authorization
 
@@ -8981,7 +8981,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriveDescriptor**](firmware.DriveDescriptor.md)
+[**FirmwareDriveDescriptor**](FirmwareDriveDescriptor.md)
 
 ### Authorization
 
@@ -9053,7 +9053,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareDriverDistributable**](firmware.DriverDistributable.md)
+[**FirmwareDriverDistributable**](FirmwareDriverDistributable.md)
 
 ### Authorization
 
@@ -9125,7 +9125,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareGpuDescriptor**](firmware.GpuDescriptor.md)
+[**FirmwareGpuDescriptor**](FirmwareGpuDescriptor.md)
 
 ### Authorization
 
@@ -9197,7 +9197,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareHbaDescriptor**](firmware.HbaDescriptor.md)
+[**FirmwareHbaDescriptor**](FirmwareHbaDescriptor.md)
 
 ### Authorization
 
@@ -9269,7 +9269,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareIomDescriptor**](firmware.IomDescriptor.md)
+[**FirmwareIomDescriptor**](FirmwareIomDescriptor.md)
 
 ### Authorization
 
@@ -9341,7 +9341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareMswitchDescriptor**](firmware.MswitchDescriptor.md)
+[**FirmwareMswitchDescriptor**](FirmwareMswitchDescriptor.md)
 
 ### Authorization
 
@@ -9413,7 +9413,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareNxosDescriptor**](firmware.NxosDescriptor.md)
+[**FirmwareNxosDescriptor**](FirmwareNxosDescriptor.md)
 
 ### Authorization
 
@@ -9485,7 +9485,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePcieDescriptor**](firmware.PcieDescriptor.md)
+[**FirmwarePcieDescriptor**](FirmwarePcieDescriptor.md)
 
 ### Authorization
 
@@ -9557,7 +9557,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwarePsuDescriptor**](firmware.PsuDescriptor.md)
+[**FirmwarePsuDescriptor**](FirmwarePsuDescriptor.md)
 
 ### Authorization
 
@@ -9629,7 +9629,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareRunningFirmware**](firmware.RunningFirmware.md)
+[**FirmwareRunningFirmware**](FirmwareRunningFirmware.md)
 
 ### Authorization
 
@@ -9701,7 +9701,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareSasExpanderDescriptor**](firmware.SasExpanderDescriptor.md)
+[**FirmwareSasExpanderDescriptor**](FirmwareSasExpanderDescriptor.md)
 
 ### Authorization
 
@@ -9773,7 +9773,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareServerConfigurationUtilityDistributable**](firmware.ServerConfigurationUtilityDistributable.md)
+[**FirmwareServerConfigurationUtilityDistributable**](FirmwareServerConfigurationUtilityDistributable.md)
 
 ### Authorization
 
@@ -9845,7 +9845,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareStorageControllerDescriptor**](firmware.StorageControllerDescriptor.md)
+[**FirmwareStorageControllerDescriptor**](FirmwareStorageControllerDescriptor.md)
 
 ### Authorization
 
@@ -9917,7 +9917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FirmwareUnsupportedVersionUpgrade**](firmware.UnsupportedVersionUpgrade.md)
+[**FirmwareUnsupportedVersionUpgrade**](FirmwareUnsupportedVersionUpgrade.md)
 
 ### Authorization
 

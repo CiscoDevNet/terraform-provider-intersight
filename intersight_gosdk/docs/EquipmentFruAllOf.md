@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Fru"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Fru"]
 **Action** | Pointer to **string** | This field identifies the action performed on a component. * &#x60;None&#x60; - No action performed on the FRU. * &#x60;Inserted&#x60; - A new FRU is inserted or added. * &#x60;Removed&#x60; - The previous FRU is removed. * &#x60;Replaced&#x60; - The previous FRU is replaced with a new FRU. * &#x60;ReplacedWithAlarm&#x60; - The previous FRU is replaced with a new FRU and a alarm is raised. | [optional] [default to "None"]
-**CurrentFru** | Pointer to [**EquipmentBaseRelationship**](equipment.Base.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**CurrentFru** | Pointer to [**EquipmentBaseRelationship**](EquipmentBaseRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

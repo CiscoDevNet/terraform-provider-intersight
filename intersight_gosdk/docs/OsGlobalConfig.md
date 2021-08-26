@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ConfigurationSource** | Pointer to **string** | Configuration source for the OS Installation. | [optional] [readonly] 
 **InstallMethod** | Pointer to **string** | The install method to be used for OS installation - vMedia, iPXE. Only vMedia is supported as of now. | [optional] [readonly] 
 **InstallTargetType** | Pointer to **string** | The Prefill install Target Name. | [optional] [readonly] 
-**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](os.OperatingSystemParameters.md) |  | [optional] 
+**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
 **OsImageName** | Pointer to **string** | The Operating System Image name. | [optional] [readonly] 
 **ScuImageName** | Pointer to **string** | The name of the Server Configuration Utilities Image. | [optional] [readonly] 
 **WindowsEdition** | Pointer to **string** | The Windows OS edition, this property required only for Windows server. | [optional] [readonly] 

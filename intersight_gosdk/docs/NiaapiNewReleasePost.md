@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **PostDate** | Pointer to **time.Time** | The date when this new release notice is posted. | [optional] 
-**PostDetail** | Pointer to [**NullableNiaapiNewReleaseDetail**](niaapi.NewReleaseDetail.md) |  | [optional] 
+**PostDetail** | Pointer to [**NullableNiaapiNewReleaseDetail**](NiaapiNewReleaseDetail.md) |  | [optional] 
 **PostType** | Pointer to **string** | The document type of this post. | [optional] 
 **Postid** | Pointer to **string** | Identificator of this inbox post. | [optional] 
 **Revision** | Pointer to **string** | Revision number of this notice. | [optional] 

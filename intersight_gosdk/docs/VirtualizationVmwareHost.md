@@ -10,14 +10,16 @@ Name | Type | Description | Notes
 **ConnectionState** | Pointer to **string** | Indicates if the host is connected to the vCenter. Values are connected, not connected. | [optional] 
 **HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **NetworkAdapterCount** | Pointer to **int64** | The count of all network adapters attached to this host. | [optional] 
-**ResourceConsumed** | Pointer to [**NullableVirtualizationVmwareResourceConsumption**](virtualization.VmwareResourceConsumption.md) |  | [optional] 
+**ResourceConsumed** | Pointer to [**NullableVirtualizationVmwareResourceConsumption**](VirtualizationVmwareResourceConsumption.md) |  | [optional] 
 **StorageAdapterCount** | Pointer to **int64** | The count of all storage adapters attached to this host. | [optional] 
 **VcenterHostId** | Pointer to **string** | The identity of this host within vCenter (optional). | [optional] 
-**Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](virtualization.VmwareCluster.Relationship.md) |  | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
 **DistributedNetworks** | Pointer to [**[]VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) | An array of relationships to virtualizationVmwareDistributedNetwork resources. | [optional] [readonly] 
 **DistributedSwitches** | Pointer to [**[]VirtualizationVmwareDistributedSwitchRelationship**](VirtualizationVmwareDistributedSwitchRelationship.md) | An array of relationships to virtualizationVmwareDistributedSwitch resources. | [optional] [readonly] 
+**HyperFlexNode** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
+**Server** | Pointer to [**ComputePhysicalSummaryRelationship**](ComputePhysicalSummaryRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -418,6 +420,56 @@ HasDistributedSwitches returns a boolean if a field has been set.
 `func (o *VirtualizationVmwareHost) UnsetDistributedSwitches()`
 
 UnsetDistributedSwitches ensures that no value is present for DistributedSwitches, not even an explicit nil
+### GetHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) GetHyperFlexNode() HyperflexNodeRelationship`
+
+GetHyperFlexNode returns the HyperFlexNode field if non-nil, zero value otherwise.
+
+### GetHyperFlexNodeOk
+
+`func (o *VirtualizationVmwareHost) GetHyperFlexNodeOk() (*HyperflexNodeRelationship, bool)`
+
+GetHyperFlexNodeOk returns a tuple with the HyperFlexNode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) SetHyperFlexNode(v HyperflexNodeRelationship)`
+
+SetHyperFlexNode sets HyperFlexNode field to given value.
+
+### HasHyperFlexNode
+
+`func (o *VirtualizationVmwareHost) HasHyperFlexNode() bool`
+
+HasHyperFlexNode returns a boolean if a field has been set.
+
+### GetServer
+
+`func (o *VirtualizationVmwareHost) GetServer() ComputePhysicalSummaryRelationship`
+
+GetServer returns the Server field if non-nil, zero value otherwise.
+
+### GetServerOk
+
+`func (o *VirtualizationVmwareHost) GetServerOk() (*ComputePhysicalSummaryRelationship, bool)`
+
+GetServerOk returns a tuple with the Server field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServer
+
+`func (o *VirtualizationVmwareHost) SetServer(v ComputePhysicalSummaryRelationship)`
+
+SetServer sets Server field to given value.
+
+### HasServer
+
+`func (o *VirtualizationVmwareHost) HasServer() bool`
+
+HasServer returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

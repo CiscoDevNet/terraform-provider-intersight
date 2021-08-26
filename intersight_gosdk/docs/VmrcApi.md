@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmrcConsole**](vmrc.Console.md)
+[**VmrcConsole**](VmrcConsole.md)
 
 ### Authorization
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmrcConsole**](vmrc.Console.md)
+[**VmrcConsole**](VmrcConsole.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmrcConsoleResponse**](vmrc.Console.Response.md)
+[**VmrcConsoleResponse**](VmrcConsoleResponse.md)
 
 ### Authorization
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmrcConsole**](vmrc.Console.md)
+[**VmrcConsole**](VmrcConsole.md)
 
 ### Authorization
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VmrcConsole**](vmrc.Console.md)
+[**VmrcConsole**](VmrcConsole.md)
 
 ### Authorization
 

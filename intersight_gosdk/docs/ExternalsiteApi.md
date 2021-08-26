@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExternalsiteAuthorization**](externalsite.Authorization.md)
+[**ExternalsiteAuthorization**](ExternalsiteAuthorization.md)
 
 ### Authorization
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExternalsiteAuthorization**](externalsite.Authorization.md)
+[**ExternalsiteAuthorization**](ExternalsiteAuthorization.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExternalsiteAuthorizationResponse**](externalsite.Authorization.Response.md)
+[**ExternalsiteAuthorizationResponse**](ExternalsiteAuthorizationResponse.md)
 
 ### Authorization
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExternalsiteAuthorization**](externalsite.Authorization.md)
+[**ExternalsiteAuthorization**](ExternalsiteAuthorization.md)
 
 ### Authorization
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ExternalsiteAuthorization**](externalsite.Authorization.md)
+[**ExternalsiteAuthorization**](ExternalsiteAuthorization.md)
 
 ### Authorization
 

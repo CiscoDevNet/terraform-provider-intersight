@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Bus** | Pointer to **string** | Virtual machine bridge name of interface. * &#x60;virtio&#x60; - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration. * &#x60;sata&#x60; - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives. * &#x60;scsi&#x60; - SCSI (Small Computer System Interface) bus used.. | [optional] [readonly] [default to "virtio"]
 **Name** | Pointer to **string** | Disk name associated with virtual machine. | [optional] [readonly] 
 **Type** | Pointer to **string** | Type of the Disk (hdd, cdrom). * &#x60;hdd&#x60; - Allows the virtual machine to mount disk from hard disk drive (hdd) image. * &#x60;cdrom&#x60; - Allows the virtual machine to mount disk from compact disk (cd) image. | [optional] [readonly] [default to "hdd"]
-**VirtualDisk** | Pointer to [**NullableHyperflexVdiskConfig**](hyperflex.VdiskConfig.md) |  | [optional] 
+**VirtualDisk** | Pointer to [**NullableHyperflexVdiskConfig**](HyperflexVdiskConfig.md) |  | [optional] 
 **VirtualDiskReference** | Pointer to **string** | Virtual disk reference name. | [optional] [readonly] 
 
 ## Methods

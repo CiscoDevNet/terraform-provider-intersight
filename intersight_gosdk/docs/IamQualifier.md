@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Qualifier"]
 **Name** | Pointer to **string** | The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion. | [optional] [readonly] 
 **Value** | Pointer to **[]string** |  | [optional] 
-**Usergroup** | Pointer to [**IamUserGroupRelationship**](iam.UserGroup.Relationship.md) |  | [optional] 
+**Usergroup** | Pointer to [**IamUserGroupRelationship**](IamUserGroupRelationship.md) |  | [optional] 
 
 ## Methods
 

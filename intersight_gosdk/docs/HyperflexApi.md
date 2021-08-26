@@ -115,6 +115,8 @@ Method | HTTP request | Description
 [**GetHyperflexDatastoreStatisticList**](HyperflexApi.md#GetHyperflexDatastoreStatisticList) | **Get** /api/v1/hyperflex/DatastoreStatistics | Read a &#39;hyperflex.DatastoreStatistic&#39; resource.
 [**GetHyperflexDevicePackageDownloadStateByMoid**](HyperflexApi.md#GetHyperflexDevicePackageDownloadStateByMoid) | **Get** /api/v1/hyperflex/DevicePackageDownloadStates/{Moid} | Read a &#39;hyperflex.DevicePackageDownloadState&#39; resource.
 [**GetHyperflexDevicePackageDownloadStateList**](HyperflexApi.md#GetHyperflexDevicePackageDownloadStateList) | **Get** /api/v1/hyperflex/DevicePackageDownloadStates | Read a &#39;hyperflex.DevicePackageDownloadState&#39; resource.
+[**GetHyperflexDriveByMoid**](HyperflexApi.md#GetHyperflexDriveByMoid) | **Get** /api/v1/hyperflex/Drives/{Moid} | Read a &#39;hyperflex.Drive&#39; resource.
+[**GetHyperflexDriveList**](HyperflexApi.md#GetHyperflexDriveList) | **Get** /api/v1/hyperflex/Drives | Read a &#39;hyperflex.Drive&#39; resource.
 [**GetHyperflexExtFcStoragePolicyByMoid**](HyperflexApi.md#GetHyperflexExtFcStoragePolicyByMoid) | **Get** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Read a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**GetHyperflexExtFcStoragePolicyList**](HyperflexApi.md#GetHyperflexExtFcStoragePolicyList) | **Get** /api/v1/hyperflex/ExtFcStoragePolicies | Read a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**GetHyperflexExtIscsiStoragePolicyByMoid**](HyperflexApi.md#GetHyperflexExtIscsiStoragePolicyByMoid) | **Get** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Read a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -334,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAppCatalog**](hyperflex.AppCatalog.md)
+[**HyperflexAppCatalog**](HyperflexAppCatalog.md)
 
 ### Authorization
 
@@ -402,7 +404,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAutoSupportPolicy**](hyperflex.AutoSupportPolicy.md)
+[**HyperflexAutoSupportPolicy**](HyperflexAutoSupportPolicy.md)
 
 ### Authorization
 
@@ -470,7 +472,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCapabilityInfo**](hyperflex.CapabilityInfo.md)
+[**HyperflexCapabilityInfo**](HyperflexCapabilityInfo.md)
 
 ### Authorization
 
@@ -538,7 +540,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCiscoHypervisorManager**](hyperflex.CiscoHypervisorManager.md)
+[**HyperflexCiscoHypervisorManager**](HyperflexCiscoHypervisorManager.md)
 
 ### Authorization
 
@@ -606,7 +608,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+[**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md)
 
 ### Authorization
 
@@ -674,7 +676,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+[**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md)
 
 ### Authorization
 
@@ -742,7 +744,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterNetworkPolicy**](hyperflex.ClusterNetworkPolicy.md)
+[**HyperflexClusterNetworkPolicy**](HyperflexClusterNetworkPolicy.md)
 
 ### Authorization
 
@@ -810,7 +812,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+[**HyperflexClusterProfile**](HyperflexClusterProfile.md)
 
 ### Authorization
 
@@ -878,7 +880,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+[**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md)
 
 ### Authorization
 
@@ -946,7 +948,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -1014,7 +1016,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterStoragePolicy**](hyperflex.ClusterStoragePolicy.md)
+[**HyperflexClusterStoragePolicy**](HyperflexClusterStoragePolicy.md)
 
 ### Authorization
 
@@ -1082,7 +1084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtFcStoragePolicy**](hyperflex.ExtFcStoragePolicy.md)
+[**HyperflexExtFcStoragePolicy**](HyperflexExtFcStoragePolicy.md)
 
 ### Authorization
 
@@ -1150,7 +1152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtIscsiStoragePolicy**](hyperflex.ExtIscsiStoragePolicy.md)
+[**HyperflexExtIscsiStoragePolicy**](HyperflexExtIscsiStoragePolicy.md)
 
 ### Authorization
 
@@ -1218,7 +1220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitExternal**](hyperflex.FeatureLimitExternal.md)
+[**HyperflexFeatureLimitExternal**](HyperflexFeatureLimitExternal.md)
 
 ### Authorization
 
@@ -1286,7 +1288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitInternal**](hyperflex.FeatureLimitInternal.md)
+[**HyperflexFeatureLimitInternal**](HyperflexFeatureLimitInternal.md)
 
 ### Authorization
 
@@ -1354,7 +1356,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+[**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -1422,7 +1424,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+[**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md)
 
 ### Authorization
 
@@ -1490,7 +1492,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDatacenter**](hyperflex.HxapDatacenter.md)
+[**HyperflexHxapDatacenter**](HyperflexHxapDatacenter.md)
 
 ### Authorization
 
@@ -1558,7 +1560,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxdpVersion**](hyperflex.HxdpVersion.md)
+[**HyperflexHxdpVersion**](HyperflexHxdpVersion.md)
 
 ### Authorization
 
@@ -1626,7 +1628,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLocalCredentialPolicy**](hyperflex.LocalCredentialPolicy.md)
+[**HyperflexLocalCredentialPolicy**](HyperflexLocalCredentialPolicy.md)
 
 ### Authorization
 
@@ -1694,7 +1696,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeConfigPolicy**](hyperflex.NodeConfigPolicy.md)
+[**HyperflexNodeConfigPolicy**](HyperflexNodeConfigPolicy.md)
 
 ### Authorization
 
@@ -1762,7 +1764,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeProfile**](hyperflex.NodeProfile.md)
+[**HyperflexNodeProfile**](HyperflexNodeProfile.md)
 
 ### Authorization
 
@@ -1830,7 +1832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexProxySettingPolicy**](hyperflex.ProxySettingPolicy.md)
+[**HyperflexProxySettingPolicy**](HyperflexProxySettingPolicy.md)
 
 ### Authorization
 
@@ -1898,7 +1900,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersion**](hyperflex.ServerFirmwareVersion.md)
+[**HyperflexServerFirmwareVersion**](HyperflexServerFirmwareVersion.md)
 
 ### Authorization
 
@@ -1966,7 +1968,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+[**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md)
 
 ### Authorization
 
@@ -2034,7 +2036,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerModel**](hyperflex.ServerModel.md)
+[**HyperflexServerModel**](HyperflexServerModel.md)
 
 ### Authorization
 
@@ -2102,7 +2104,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionComponent**](hyperflex.SoftwareDistributionComponent.md)
+[**HyperflexSoftwareDistributionComponent**](HyperflexSoftwareDistributionComponent.md)
 
 ### Authorization
 
@@ -2170,7 +2172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionEntry**](hyperflex.SoftwareDistributionEntry.md)
+[**HyperflexSoftwareDistributionEntry**](HyperflexSoftwareDistributionEntry.md)
 
 ### Authorization
 
@@ -2238,7 +2240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionVersion**](hyperflex.SoftwareDistributionVersion.md)
+[**HyperflexSoftwareDistributionVersion**](HyperflexSoftwareDistributionVersion.md)
 
 ### Authorization
 
@@ -2306,7 +2308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareVersionPolicy**](hyperflex.SoftwareVersionPolicy.md)
+[**HyperflexSoftwareVersionPolicy**](HyperflexSoftwareVersionPolicy.md)
 
 ### Authorization
 
@@ -2374,7 +2376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSysConfigPolicy**](hyperflex.SysConfigPolicy.md)
+[**HyperflexSysConfigPolicy**](HyperflexSysConfigPolicy.md)
 
 ### Authorization
 
@@ -2442,7 +2444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexUcsmConfigPolicy**](hyperflex.UcsmConfigPolicy.md)
+[**HyperflexUcsmConfigPolicy**](HyperflexUcsmConfigPolicy.md)
 
 ### Authorization
 
@@ -2510,7 +2512,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVcenterConfigPolicy**](hyperflex.VcenterConfigPolicy.md)
+[**HyperflexVcenterConfigPolicy**](HyperflexVcenterConfigPolicy.md)
 
 ### Authorization
 
@@ -2578,7 +2580,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmImportOperation**](hyperflex.VmImportOperation.md)
+[**HyperflexVmImportOperation**](HyperflexVmImportOperation.md)
 
 ### Authorization
 
@@ -2646,7 +2648,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmRestoreOperation**](hyperflex.VmRestoreOperation.md)
+[**HyperflexVmRestoreOperation**](HyperflexVmRestoreOperation.md)
 
 ### Authorization
 
@@ -5090,7 +5092,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAlarm**](hyperflex.Alarm.md)
+[**HyperflexAlarm**](HyperflexAlarm.md)
 
 ### Authorization
 
@@ -5174,7 +5176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAlarmResponse**](hyperflex.Alarm.Response.md)
+[**HyperflexAlarmResponse**](HyperflexAlarmResponse.md)
 
 ### Authorization
 
@@ -5242,7 +5244,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAppCatalog**](hyperflex.AppCatalog.md)
+[**HyperflexAppCatalog**](HyperflexAppCatalog.md)
 
 ### Authorization
 
@@ -5326,7 +5328,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAppCatalogResponse**](hyperflex.AppCatalog.Response.md)
+[**HyperflexAppCatalogResponse**](HyperflexAppCatalogResponse.md)
 
 ### Authorization
 
@@ -5394,7 +5396,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAutoSupportPolicy**](hyperflex.AutoSupportPolicy.md)
+[**HyperflexAutoSupportPolicy**](HyperflexAutoSupportPolicy.md)
 
 ### Authorization
 
@@ -5478,7 +5480,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAutoSupportPolicyResponse**](hyperflex.AutoSupportPolicy.Response.md)
+[**HyperflexAutoSupportPolicyResponse**](HyperflexAutoSupportPolicyResponse.md)
 
 ### Authorization
 
@@ -5546,7 +5548,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexBackupCluster**](hyperflex.BackupCluster.md)
+[**HyperflexBackupCluster**](HyperflexBackupCluster.md)
 
 ### Authorization
 
@@ -5630,7 +5632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexBackupClusterResponse**](hyperflex.BackupCluster.Response.md)
+[**HyperflexBackupClusterResponse**](HyperflexBackupClusterResponse.md)
 
 ### Authorization
 
@@ -5698,7 +5700,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCapabilityInfo**](hyperflex.CapabilityInfo.md)
+[**HyperflexCapabilityInfo**](HyperflexCapabilityInfo.md)
 
 ### Authorization
 
@@ -5782,7 +5784,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCapabilityInfoResponse**](hyperflex.CapabilityInfo.Response.md)
+[**HyperflexCapabilityInfoResponse**](HyperflexCapabilityInfoResponse.md)
 
 ### Authorization
 
@@ -5850,7 +5852,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCiscoHypervisorManager**](hyperflex.CiscoHypervisorManager.md)
+[**HyperflexCiscoHypervisorManager**](HyperflexCiscoHypervisorManager.md)
 
 ### Authorization
 
@@ -5934,7 +5936,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCiscoHypervisorManagerResponse**](hyperflex.CiscoHypervisorManager.Response.md)
+[**HyperflexCiscoHypervisorManagerResponse**](HyperflexCiscoHypervisorManagerResponse.md)
 
 ### Authorization
 
@@ -6002,7 +6004,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+[**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md)
 
 ### Authorization
 
@@ -6070,7 +6072,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+[**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md)
 
 ### Authorization
 
@@ -6154,7 +6156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyDeploymentResponse**](hyperflex.ClusterBackupPolicyDeployment.Response.md)
+[**HyperflexClusterBackupPolicyDeploymentResponse**](HyperflexClusterBackupPolicyDeploymentResponse.md)
 
 ### Authorization
 
@@ -6238,7 +6240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyResponse**](hyperflex.ClusterBackupPolicy.Response.md)
+[**HyperflexClusterBackupPolicyResponse**](HyperflexClusterBackupPolicyResponse.md)
 
 ### Authorization
 
@@ -6306,7 +6308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCluster**](hyperflex.Cluster.md)
+[**HyperflexCluster**](HyperflexCluster.md)
 
 ### Authorization
 
@@ -6374,7 +6376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterHealthCheckExecutionSnapshot**](hyperflex.ClusterHealthCheckExecutionSnapshot.md)
+[**HyperflexClusterHealthCheckExecutionSnapshot**](HyperflexClusterHealthCheckExecutionSnapshot.md)
 
 ### Authorization
 
@@ -6458,7 +6460,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterHealthCheckExecutionSnapshotResponse**](hyperflex.ClusterHealthCheckExecutionSnapshot.Response.md)
+[**HyperflexClusterHealthCheckExecutionSnapshotResponse**](HyperflexClusterHealthCheckExecutionSnapshotResponse.md)
 
 ### Authorization
 
@@ -6542,7 +6544,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterResponse**](hyperflex.Cluster.Response.md)
+[**HyperflexClusterResponse**](HyperflexClusterResponse.md)
 
 ### Authorization
 
@@ -6610,7 +6612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterNetworkPolicy**](hyperflex.ClusterNetworkPolicy.md)
+[**HyperflexClusterNetworkPolicy**](HyperflexClusterNetworkPolicy.md)
 
 ### Authorization
 
@@ -6694,7 +6696,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterNetworkPolicyResponse**](hyperflex.ClusterNetworkPolicy.Response.md)
+[**HyperflexClusterNetworkPolicyResponse**](HyperflexClusterNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -6762,7 +6764,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+[**HyperflexClusterProfile**](HyperflexClusterProfile.md)
 
 ### Authorization
 
@@ -6846,7 +6848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterProfileResponse**](hyperflex.ClusterProfile.Response.md)
+[**HyperflexClusterProfileResponse**](HyperflexClusterProfileResponse.md)
 
 ### Authorization
 
@@ -6914,7 +6916,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+[**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md)
 
 ### Authorization
 
@@ -6982,7 +6984,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -7066,7 +7068,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyDeploymentResponse**](hyperflex.ClusterReplicationNetworkPolicyDeployment.Response.md)
+[**HyperflexClusterReplicationNetworkPolicyDeploymentResponse**](HyperflexClusterReplicationNetworkPolicyDeploymentResponse.md)
 
 ### Authorization
 
@@ -7150,7 +7152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyResponse**](hyperflex.ClusterReplicationNetworkPolicy.Response.md)
+[**HyperflexClusterReplicationNetworkPolicyResponse**](HyperflexClusterReplicationNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -7218,7 +7220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterStoragePolicy**](hyperflex.ClusterStoragePolicy.md)
+[**HyperflexClusterStoragePolicy**](HyperflexClusterStoragePolicy.md)
 
 ### Authorization
 
@@ -7302,7 +7304,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterStoragePolicyResponse**](hyperflex.ClusterStoragePolicy.Response.md)
+[**HyperflexClusterStoragePolicyResponse**](HyperflexClusterStoragePolicyResponse.md)
 
 ### Authorization
 
@@ -7370,7 +7372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexConfigResult**](hyperflex.ConfigResult.md)
+[**HyperflexConfigResult**](HyperflexConfigResult.md)
 
 ### Authorization
 
@@ -7438,7 +7440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexConfigResultEntry**](hyperflex.ConfigResultEntry.md)
+[**HyperflexConfigResultEntry**](HyperflexConfigResultEntry.md)
 
 ### Authorization
 
@@ -7522,7 +7524,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexConfigResultEntryResponse**](hyperflex.ConfigResultEntry.Response.md)
+[**HyperflexConfigResultEntryResponse**](HyperflexConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -7606,7 +7608,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexConfigResultResponse**](hyperflex.ConfigResult.Response.md)
+[**HyperflexConfigResultResponse**](HyperflexConfigResultResponse.md)
 
 ### Authorization
 
@@ -7674,7 +7676,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDataProtectionPeer**](hyperflex.DataProtectionPeer.md)
+[**HyperflexDataProtectionPeer**](HyperflexDataProtectionPeer.md)
 
 ### Authorization
 
@@ -7758,7 +7760,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDataProtectionPeerResponse**](hyperflex.DataProtectionPeer.Response.md)
+[**HyperflexDataProtectionPeerResponse**](HyperflexDataProtectionPeerResponse.md)
 
 ### Authorization
 
@@ -7826,7 +7828,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDatastoreStatistic**](hyperflex.DatastoreStatistic.md)
+[**HyperflexDatastoreStatistic**](HyperflexDatastoreStatistic.md)
 
 ### Authorization
 
@@ -7910,7 +7912,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDatastoreStatisticResponse**](hyperflex.DatastoreStatistic.Response.md)
+[**HyperflexDatastoreStatisticResponse**](HyperflexDatastoreStatisticResponse.md)
 
 ### Authorization
 
@@ -7978,7 +7980,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDevicePackageDownloadState**](hyperflex.DevicePackageDownloadState.md)
+[**HyperflexDevicePackageDownloadState**](HyperflexDevicePackageDownloadState.md)
 
 ### Authorization
 
@@ -8062,7 +8064,159 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexDevicePackageDownloadStateResponse**](hyperflex.DevicePackageDownloadState.Response.md)
+[**HyperflexDevicePackageDownloadStateResponse**](HyperflexDevicePackageDownloadStateResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexDriveByMoid
+
+> HyperflexDrive GetHyperflexDriveByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.Drive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexDriveByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexDriveByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexDriveByMoid`: HyperflexDrive
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexDriveByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexDriveByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexDrive**](HyperflexDrive.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexDriveList
+
+> HyperflexDriveResponse GetHyperflexDriveList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.Drive' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexDriveList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexDriveList`: HyperflexDriveResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexDriveList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexDriveListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexDriveResponse**](HyperflexDriveResponse.md)
 
 ### Authorization
 
@@ -8130,7 +8284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtFcStoragePolicy**](hyperflex.ExtFcStoragePolicy.md)
+[**HyperflexExtFcStoragePolicy**](HyperflexExtFcStoragePolicy.md)
 
 ### Authorization
 
@@ -8214,7 +8368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtFcStoragePolicyResponse**](hyperflex.ExtFcStoragePolicy.Response.md)
+[**HyperflexExtFcStoragePolicyResponse**](HyperflexExtFcStoragePolicyResponse.md)
 
 ### Authorization
 
@@ -8282,7 +8436,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtIscsiStoragePolicy**](hyperflex.ExtIscsiStoragePolicy.md)
+[**HyperflexExtIscsiStoragePolicy**](HyperflexExtIscsiStoragePolicy.md)
 
 ### Authorization
 
@@ -8366,7 +8520,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtIscsiStoragePolicyResponse**](hyperflex.ExtIscsiStoragePolicy.Response.md)
+[**HyperflexExtIscsiStoragePolicyResponse**](HyperflexExtIscsiStoragePolicyResponse.md)
 
 ### Authorization
 
@@ -8434,7 +8588,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitExternal**](hyperflex.FeatureLimitExternal.md)
+[**HyperflexFeatureLimitExternal**](HyperflexFeatureLimitExternal.md)
 
 ### Authorization
 
@@ -8518,7 +8672,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitExternalResponse**](hyperflex.FeatureLimitExternal.Response.md)
+[**HyperflexFeatureLimitExternalResponse**](HyperflexFeatureLimitExternalResponse.md)
 
 ### Authorization
 
@@ -8586,7 +8740,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitInternal**](hyperflex.FeatureLimitInternal.md)
+[**HyperflexFeatureLimitInternal**](HyperflexFeatureLimitInternal.md)
 
 ### Authorization
 
@@ -8670,7 +8824,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitInternalResponse**](hyperflex.FeatureLimitInternal.Response.md)
+[**HyperflexFeatureLimitInternalResponse**](HyperflexFeatureLimitInternalResponse.md)
 
 ### Authorization
 
@@ -8738,7 +8892,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealth**](hyperflex.Health.md)
+[**HyperflexHealth**](HyperflexHealth.md)
 
 ### Authorization
 
@@ -8806,7 +8960,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+[**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -8890,7 +9044,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckDefinitionResponse**](hyperflex.HealthCheckDefinition.Response.md)
+[**HyperflexHealthCheckDefinitionResponse**](HyperflexHealthCheckDefinitionResponse.md)
 
 ### Authorization
 
@@ -8958,7 +9112,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckExecution**](hyperflex.HealthCheckExecution.md)
+[**HyperflexHealthCheckExecution**](HyperflexHealthCheckExecution.md)
 
 ### Authorization
 
@@ -9042,7 +9196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckExecutionResponse**](hyperflex.HealthCheckExecution.Response.md)
+[**HyperflexHealthCheckExecutionResponse**](HyperflexHealthCheckExecutionResponse.md)
 
 ### Authorization
 
@@ -9110,7 +9264,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckExecutionSnapshot**](hyperflex.HealthCheckExecutionSnapshot.md)
+[**HyperflexHealthCheckExecutionSnapshot**](HyperflexHealthCheckExecutionSnapshot.md)
 
 ### Authorization
 
@@ -9194,7 +9348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckExecutionSnapshotResponse**](hyperflex.HealthCheckExecutionSnapshot.Response.md)
+[**HyperflexHealthCheckExecutionSnapshotResponse**](HyperflexHealthCheckExecutionSnapshotResponse.md)
 
 ### Authorization
 
@@ -9262,7 +9416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+[**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md)
 
 ### Authorization
 
@@ -9346,7 +9500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckPackageChecksumResponse**](hyperflex.HealthCheckPackageChecksum.Response.md)
+[**HyperflexHealthCheckPackageChecksumResponse**](HyperflexHealthCheckPackageChecksumResponse.md)
 
 ### Authorization
 
@@ -9430,7 +9584,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthResponse**](hyperflex.Health.Response.md)
+[**HyperflexHealthResponse**](HyperflexHealthResponse.md)
 
 ### Authorization
 
@@ -9498,7 +9652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapCluster**](hyperflex.HxapCluster.md)
+[**HyperflexHxapCluster**](HyperflexHxapCluster.md)
 
 ### Authorization
 
@@ -9582,7 +9736,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapClusterResponse**](hyperflex.HxapCluster.Response.md)
+[**HyperflexHxapClusterResponse**](HyperflexHxapClusterResponse.md)
 
 ### Authorization
 
@@ -9650,7 +9804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDatacenter**](hyperflex.HxapDatacenter.md)
+[**HyperflexHxapDatacenter**](HyperflexHxapDatacenter.md)
 
 ### Authorization
 
@@ -9734,7 +9888,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDatacenterResponse**](hyperflex.HxapDatacenter.Response.md)
+[**HyperflexHxapDatacenterResponse**](HyperflexHxapDatacenterResponse.md)
 
 ### Authorization
 
@@ -9802,7 +9956,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDvUplink**](hyperflex.HxapDvUplink.md)
+[**HyperflexHxapDvUplink**](HyperflexHxapDvUplink.md)
 
 ### Authorization
 
@@ -9886,7 +10040,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDvUplinkResponse**](hyperflex.HxapDvUplink.Response.md)
+[**HyperflexHxapDvUplinkResponse**](HyperflexHxapDvUplinkResponse.md)
 
 ### Authorization
 
@@ -9954,7 +10108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDvswitch**](hyperflex.HxapDvswitch.md)
+[**HyperflexHxapDvswitch**](HyperflexHxapDvswitch.md)
 
 ### Authorization
 
@@ -10038,7 +10192,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDvswitchResponse**](hyperflex.HxapDvswitch.Response.md)
+[**HyperflexHxapDvswitchResponse**](HyperflexHxapDvswitchResponse.md)
 
 ### Authorization
 
@@ -10106,7 +10260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHost**](hyperflex.HxapHost.md)
+[**HyperflexHxapHost**](HyperflexHxapHost.md)
 
 ### Authorization
 
@@ -10174,7 +10328,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHostInterface**](hyperflex.HxapHostInterface.md)
+[**HyperflexHxapHostInterface**](HyperflexHxapHostInterface.md)
 
 ### Authorization
 
@@ -10258,7 +10412,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHostInterfaceResponse**](hyperflex.HxapHostInterface.Response.md)
+[**HyperflexHxapHostInterfaceResponse**](HyperflexHxapHostInterfaceResponse.md)
 
 ### Authorization
 
@@ -10342,7 +10496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHostResponse**](hyperflex.HxapHost.Response.md)
+[**HyperflexHxapHostResponse**](HyperflexHxapHostResponse.md)
 
 ### Authorization
 
@@ -10410,7 +10564,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHostVswitch**](hyperflex.HxapHostVswitch.md)
+[**HyperflexHxapHostVswitch**](HyperflexHxapHostVswitch.md)
 
 ### Authorization
 
@@ -10494,7 +10648,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHostVswitchResponse**](hyperflex.HxapHostVswitch.Response.md)
+[**HyperflexHxapHostVswitchResponse**](HyperflexHxapHostVswitchResponse.md)
 
 ### Authorization
 
@@ -10562,7 +10716,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapNetwork**](hyperflex.HxapNetwork.md)
+[**HyperflexHxapNetwork**](HyperflexHxapNetwork.md)
 
 ### Authorization
 
@@ -10646,7 +10800,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapNetworkResponse**](hyperflex.HxapNetwork.Response.md)
+[**HyperflexHxapNetworkResponse**](HyperflexHxapNetworkResponse.md)
 
 ### Authorization
 
@@ -10714,7 +10868,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualDisk**](hyperflex.HxapVirtualDisk.md)
+[**HyperflexHxapVirtualDisk**](HyperflexHxapVirtualDisk.md)
 
 ### Authorization
 
@@ -10798,7 +10952,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualDiskResponse**](hyperflex.HxapVirtualDisk.Response.md)
+[**HyperflexHxapVirtualDiskResponse**](HyperflexHxapVirtualDiskResponse.md)
 
 ### Authorization
 
@@ -10866,7 +11020,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachine**](hyperflex.HxapVirtualMachine.md)
+[**HyperflexHxapVirtualMachine**](HyperflexHxapVirtualMachine.md)
 
 ### Authorization
 
@@ -10950,7 +11104,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachineResponse**](hyperflex.HxapVirtualMachine.Response.md)
+[**HyperflexHxapVirtualMachineResponse**](HyperflexHxapVirtualMachineResponse.md)
 
 ### Authorization
 
@@ -11018,7 +11172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachineNetworkInterface**](hyperflex.HxapVirtualMachineNetworkInterface.md)
+[**HyperflexHxapVirtualMachineNetworkInterface**](HyperflexHxapVirtualMachineNetworkInterface.md)
 
 ### Authorization
 
@@ -11102,7 +11256,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachineNetworkInterfaceResponse**](hyperflex.HxapVirtualMachineNetworkInterface.Response.md)
+[**HyperflexHxapVirtualMachineNetworkInterfaceResponse**](HyperflexHxapVirtualMachineNetworkInterfaceResponse.md)
 
 ### Authorization
 
@@ -11170,7 +11324,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxdpVersion**](hyperflex.HxdpVersion.md)
+[**HyperflexHxdpVersion**](HyperflexHxdpVersion.md)
 
 ### Authorization
 
@@ -11254,7 +11408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxdpVersionResponse**](hyperflex.HxdpVersion.Response.md)
+[**HyperflexHxdpVersionResponse**](HyperflexHxdpVersionResponse.md)
 
 ### Authorization
 
@@ -11322,7 +11476,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLicense**](hyperflex.License.md)
+[**HyperflexLicense**](HyperflexLicense.md)
 
 ### Authorization
 
@@ -11406,7 +11560,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLicenseResponse**](hyperflex.License.Response.md)
+[**HyperflexLicenseResponse**](HyperflexLicenseResponse.md)
 
 ### Authorization
 
@@ -11474,7 +11628,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLocalCredentialPolicy**](hyperflex.LocalCredentialPolicy.md)
+[**HyperflexLocalCredentialPolicy**](HyperflexLocalCredentialPolicy.md)
 
 ### Authorization
 
@@ -11558,7 +11712,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLocalCredentialPolicyResponse**](hyperflex.LocalCredentialPolicy.Response.md)
+[**HyperflexLocalCredentialPolicyResponse**](HyperflexLocalCredentialPolicyResponse.md)
 
 ### Authorization
 
@@ -11626,7 +11780,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNode**](hyperflex.Node.md)
+[**HyperflexNode**](HyperflexNode.md)
 
 ### Authorization
 
@@ -11694,7 +11848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeConfigPolicy**](hyperflex.NodeConfigPolicy.md)
+[**HyperflexNodeConfigPolicy**](HyperflexNodeConfigPolicy.md)
 
 ### Authorization
 
@@ -11778,7 +11932,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeConfigPolicyResponse**](hyperflex.NodeConfigPolicy.Response.md)
+[**HyperflexNodeConfigPolicyResponse**](HyperflexNodeConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -11862,7 +12016,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeResponse**](hyperflex.Node.Response.md)
+[**HyperflexNodeResponse**](HyperflexNodeResponse.md)
 
 ### Authorization
 
@@ -11930,7 +12084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeProfile**](hyperflex.NodeProfile.md)
+[**HyperflexNodeProfile**](HyperflexNodeProfile.md)
 
 ### Authorization
 
@@ -12014,7 +12168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeProfileResponse**](hyperflex.NodeProfile.Response.md)
+[**HyperflexNodeProfileResponse**](HyperflexNodeProfileResponse.md)
 
 ### Authorization
 
@@ -12082,7 +12236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexProxySettingPolicy**](hyperflex.ProxySettingPolicy.md)
+[**HyperflexProxySettingPolicy**](HyperflexProxySettingPolicy.md)
 
 ### Authorization
 
@@ -12166,7 +12320,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexProxySettingPolicyResponse**](hyperflex.ProxySettingPolicy.Response.md)
+[**HyperflexProxySettingPolicyResponse**](HyperflexProxySettingPolicyResponse.md)
 
 ### Authorization
 
@@ -12234,7 +12388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersion**](hyperflex.ServerFirmwareVersion.md)
+[**HyperflexServerFirmwareVersion**](HyperflexServerFirmwareVersion.md)
 
 ### Authorization
 
@@ -12302,7 +12456,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+[**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md)
 
 ### Authorization
 
@@ -12386,7 +12540,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionEntryResponse**](hyperflex.ServerFirmwareVersionEntry.Response.md)
+[**HyperflexServerFirmwareVersionEntryResponse**](HyperflexServerFirmwareVersionEntryResponse.md)
 
 ### Authorization
 
@@ -12470,7 +12624,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionResponse**](hyperflex.ServerFirmwareVersion.Response.md)
+[**HyperflexServerFirmwareVersionResponse**](HyperflexServerFirmwareVersionResponse.md)
 
 ### Authorization
 
@@ -12538,7 +12692,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerModel**](hyperflex.ServerModel.md)
+[**HyperflexServerModel**](HyperflexServerModel.md)
 
 ### Authorization
 
@@ -12622,7 +12776,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerModelResponse**](hyperflex.ServerModel.Response.md)
+[**HyperflexServerModelResponse**](HyperflexServerModelResponse.md)
 
 ### Authorization
 
@@ -12690,7 +12844,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionComponent**](hyperflex.SoftwareDistributionComponent.md)
+[**HyperflexSoftwareDistributionComponent**](HyperflexSoftwareDistributionComponent.md)
 
 ### Authorization
 
@@ -12774,7 +12928,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionComponentResponse**](hyperflex.SoftwareDistributionComponent.Response.md)
+[**HyperflexSoftwareDistributionComponentResponse**](HyperflexSoftwareDistributionComponentResponse.md)
 
 ### Authorization
 
@@ -12842,7 +12996,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionEntry**](hyperflex.SoftwareDistributionEntry.md)
+[**HyperflexSoftwareDistributionEntry**](HyperflexSoftwareDistributionEntry.md)
 
 ### Authorization
 
@@ -12926,7 +13080,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionEntryResponse**](hyperflex.SoftwareDistributionEntry.Response.md)
+[**HyperflexSoftwareDistributionEntryResponse**](HyperflexSoftwareDistributionEntryResponse.md)
 
 ### Authorization
 
@@ -12994,7 +13148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionVersion**](hyperflex.SoftwareDistributionVersion.md)
+[**HyperflexSoftwareDistributionVersion**](HyperflexSoftwareDistributionVersion.md)
 
 ### Authorization
 
@@ -13078,7 +13232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionVersionResponse**](hyperflex.SoftwareDistributionVersion.Response.md)
+[**HyperflexSoftwareDistributionVersionResponse**](HyperflexSoftwareDistributionVersionResponse.md)
 
 ### Authorization
 
@@ -13146,7 +13300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareVersionPolicy**](hyperflex.SoftwareVersionPolicy.md)
+[**HyperflexSoftwareVersionPolicy**](HyperflexSoftwareVersionPolicy.md)
 
 ### Authorization
 
@@ -13230,7 +13384,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareVersionPolicyResponse**](hyperflex.SoftwareVersionPolicy.Response.md)
+[**HyperflexSoftwareVersionPolicyResponse**](HyperflexSoftwareVersionPolicyResponse.md)
 
 ### Authorization
 
@@ -13298,7 +13452,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexStorageContainer**](hyperflex.StorageContainer.md)
+[**HyperflexStorageContainer**](HyperflexStorageContainer.md)
 
 ### Authorization
 
@@ -13382,7 +13536,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexStorageContainerResponse**](hyperflex.StorageContainer.Response.md)
+[**HyperflexStorageContainerResponse**](HyperflexStorageContainerResponse.md)
 
 ### Authorization
 
@@ -13450,7 +13604,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSysConfigPolicy**](hyperflex.SysConfigPolicy.md)
+[**HyperflexSysConfigPolicy**](HyperflexSysConfigPolicy.md)
 
 ### Authorization
 
@@ -13534,7 +13688,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSysConfigPolicyResponse**](hyperflex.SysConfigPolicy.Response.md)
+[**HyperflexSysConfigPolicyResponse**](HyperflexSysConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -13602,7 +13756,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexUcsmConfigPolicy**](hyperflex.UcsmConfigPolicy.md)
+[**HyperflexUcsmConfigPolicy**](HyperflexUcsmConfigPolicy.md)
 
 ### Authorization
 
@@ -13686,7 +13840,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexUcsmConfigPolicyResponse**](hyperflex.UcsmConfigPolicy.Response.md)
+[**HyperflexUcsmConfigPolicyResponse**](HyperflexUcsmConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -13754,7 +13908,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVcenterConfigPolicy**](hyperflex.VcenterConfigPolicy.md)
+[**HyperflexVcenterConfigPolicy**](HyperflexVcenterConfigPolicy.md)
 
 ### Authorization
 
@@ -13838,7 +13992,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVcenterConfigPolicyResponse**](hyperflex.VcenterConfigPolicy.Response.md)
+[**HyperflexVcenterConfigPolicyResponse**](HyperflexVcenterConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -13906,7 +14060,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmBackupInfo**](hyperflex.VmBackupInfo.md)
+[**HyperflexVmBackupInfo**](HyperflexVmBackupInfo.md)
 
 ### Authorization
 
@@ -13990,7 +14144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmBackupInfoResponse**](hyperflex.VmBackupInfo.Response.md)
+[**HyperflexVmBackupInfoResponse**](HyperflexVmBackupInfoResponse.md)
 
 ### Authorization
 
@@ -14058,7 +14212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmImportOperation**](hyperflex.VmImportOperation.md)
+[**HyperflexVmImportOperation**](HyperflexVmImportOperation.md)
 
 ### Authorization
 
@@ -14142,7 +14296,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmImportOperationResponse**](hyperflex.VmImportOperation.Response.md)
+[**HyperflexVmImportOperationResponse**](HyperflexVmImportOperationResponse.md)
 
 ### Authorization
 
@@ -14210,7 +14364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmRestoreOperation**](hyperflex.VmRestoreOperation.md)
+[**HyperflexVmRestoreOperation**](HyperflexVmRestoreOperation.md)
 
 ### Authorization
 
@@ -14294,7 +14448,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmRestoreOperationResponse**](hyperflex.VmRestoreOperation.Response.md)
+[**HyperflexVmRestoreOperationResponse**](HyperflexVmRestoreOperationResponse.md)
 
 ### Authorization
 
@@ -14362,7 +14516,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmSnapshotInfo**](hyperflex.VmSnapshotInfo.md)
+[**HyperflexVmSnapshotInfo**](HyperflexVmSnapshotInfo.md)
 
 ### Authorization
 
@@ -14446,7 +14600,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVmSnapshotInfoResponse**](hyperflex.VmSnapshotInfo.Response.md)
+[**HyperflexVmSnapshotInfoResponse**](HyperflexVmSnapshotInfoResponse.md)
 
 ### Authorization
 
@@ -14514,7 +14668,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVolume**](hyperflex.Volume.md)
+[**HyperflexVolume**](HyperflexVolume.md)
 
 ### Authorization
 
@@ -14598,7 +14752,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVolumeResponse**](hyperflex.Volume.Response.md)
+[**HyperflexVolumeResponse**](HyperflexVolumeResponse.md)
 
 ### Authorization
 
@@ -14666,7 +14820,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexWitnessConfiguration**](hyperflex.WitnessConfiguration.md)
+[**HyperflexWitnessConfiguration**](HyperflexWitnessConfiguration.md)
 
 ### Authorization
 
@@ -14750,7 +14904,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexWitnessConfigurationResponse**](hyperflex.WitnessConfiguration.Response.md)
+[**HyperflexWitnessConfigurationResponse**](HyperflexWitnessConfigurationResponse.md)
 
 ### Authorization
 
@@ -14822,7 +14976,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAppCatalog**](hyperflex.AppCatalog.md)
+[**HyperflexAppCatalog**](HyperflexAppCatalog.md)
 
 ### Authorization
 
@@ -14894,7 +15048,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAutoSupportPolicy**](hyperflex.AutoSupportPolicy.md)
+[**HyperflexAutoSupportPolicy**](HyperflexAutoSupportPolicy.md)
 
 ### Authorization
 
@@ -14966,7 +15120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCapabilityInfo**](hyperflex.CapabilityInfo.md)
+[**HyperflexCapabilityInfo**](HyperflexCapabilityInfo.md)
 
 ### Authorization
 
@@ -15038,7 +15192,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCiscoHypervisorManager**](hyperflex.CiscoHypervisorManager.md)
+[**HyperflexCiscoHypervisorManager**](HyperflexCiscoHypervisorManager.md)
 
 ### Authorization
 
@@ -15110,7 +15264,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCluster**](hyperflex.Cluster.md)
+[**HyperflexCluster**](HyperflexCluster.md)
 
 ### Authorization
 
@@ -15182,7 +15336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+[**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md)
 
 ### Authorization
 
@@ -15254,7 +15408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+[**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md)
 
 ### Authorization
 
@@ -15326,7 +15480,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterNetworkPolicy**](hyperflex.ClusterNetworkPolicy.md)
+[**HyperflexClusterNetworkPolicy**](HyperflexClusterNetworkPolicy.md)
 
 ### Authorization
 
@@ -15398,7 +15552,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+[**HyperflexClusterProfile**](HyperflexClusterProfile.md)
 
 ### Authorization
 
@@ -15470,7 +15624,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+[**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md)
 
 ### Authorization
 
@@ -15542,7 +15696,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -15614,7 +15768,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterStoragePolicy**](hyperflex.ClusterStoragePolicy.md)
+[**HyperflexClusterStoragePolicy**](HyperflexClusterStoragePolicy.md)
 
 ### Authorization
 
@@ -15686,7 +15840,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtFcStoragePolicy**](hyperflex.ExtFcStoragePolicy.md)
+[**HyperflexExtFcStoragePolicy**](HyperflexExtFcStoragePolicy.md)
 
 ### Authorization
 
@@ -15758,7 +15912,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtIscsiStoragePolicy**](hyperflex.ExtIscsiStoragePolicy.md)
+[**HyperflexExtIscsiStoragePolicy**](HyperflexExtIscsiStoragePolicy.md)
 
 ### Authorization
 
@@ -15830,7 +15984,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitExternal**](hyperflex.FeatureLimitExternal.md)
+[**HyperflexFeatureLimitExternal**](HyperflexFeatureLimitExternal.md)
 
 ### Authorization
 
@@ -15902,7 +16056,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitInternal**](hyperflex.FeatureLimitInternal.md)
+[**HyperflexFeatureLimitInternal**](HyperflexFeatureLimitInternal.md)
 
 ### Authorization
 
@@ -15974,7 +16128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+[**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -16046,7 +16200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+[**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md)
 
 ### Authorization
 
@@ -16118,7 +16272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapCluster**](hyperflex.HxapCluster.md)
+[**HyperflexHxapCluster**](HyperflexHxapCluster.md)
 
 ### Authorization
 
@@ -16190,7 +16344,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDatacenter**](hyperflex.HxapDatacenter.md)
+[**HyperflexHxapDatacenter**](HyperflexHxapDatacenter.md)
 
 ### Authorization
 
@@ -16262,7 +16416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHost**](hyperflex.HxapHost.md)
+[**HyperflexHxapHost**](HyperflexHxapHost.md)
 
 ### Authorization
 
@@ -16334,7 +16488,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualDisk**](hyperflex.HxapVirtualDisk.md)
+[**HyperflexHxapVirtualDisk**](HyperflexHxapVirtualDisk.md)
 
 ### Authorization
 
@@ -16406,7 +16560,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachine**](hyperflex.HxapVirtualMachine.md)
+[**HyperflexHxapVirtualMachine**](HyperflexHxapVirtualMachine.md)
 
 ### Authorization
 
@@ -16478,7 +16632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxdpVersion**](hyperflex.HxdpVersion.md)
+[**HyperflexHxdpVersion**](HyperflexHxdpVersion.md)
 
 ### Authorization
 
@@ -16550,7 +16704,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLocalCredentialPolicy**](hyperflex.LocalCredentialPolicy.md)
+[**HyperflexLocalCredentialPolicy**](HyperflexLocalCredentialPolicy.md)
 
 ### Authorization
 
@@ -16622,7 +16776,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeConfigPolicy**](hyperflex.NodeConfigPolicy.md)
+[**HyperflexNodeConfigPolicy**](HyperflexNodeConfigPolicy.md)
 
 ### Authorization
 
@@ -16694,7 +16848,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeProfile**](hyperflex.NodeProfile.md)
+[**HyperflexNodeProfile**](HyperflexNodeProfile.md)
 
 ### Authorization
 
@@ -16766,7 +16920,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexProxySettingPolicy**](hyperflex.ProxySettingPolicy.md)
+[**HyperflexProxySettingPolicy**](HyperflexProxySettingPolicy.md)
 
 ### Authorization
 
@@ -16838,7 +16992,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersion**](hyperflex.ServerFirmwareVersion.md)
+[**HyperflexServerFirmwareVersion**](HyperflexServerFirmwareVersion.md)
 
 ### Authorization
 
@@ -16910,7 +17064,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+[**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md)
 
 ### Authorization
 
@@ -16982,7 +17136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerModel**](hyperflex.ServerModel.md)
+[**HyperflexServerModel**](HyperflexServerModel.md)
 
 ### Authorization
 
@@ -17054,7 +17208,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionComponent**](hyperflex.SoftwareDistributionComponent.md)
+[**HyperflexSoftwareDistributionComponent**](HyperflexSoftwareDistributionComponent.md)
 
 ### Authorization
 
@@ -17126,7 +17280,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionEntry**](hyperflex.SoftwareDistributionEntry.md)
+[**HyperflexSoftwareDistributionEntry**](HyperflexSoftwareDistributionEntry.md)
 
 ### Authorization
 
@@ -17198,7 +17352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionVersion**](hyperflex.SoftwareDistributionVersion.md)
+[**HyperflexSoftwareDistributionVersion**](HyperflexSoftwareDistributionVersion.md)
 
 ### Authorization
 
@@ -17270,7 +17424,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareVersionPolicy**](hyperflex.SoftwareVersionPolicy.md)
+[**HyperflexSoftwareVersionPolicy**](HyperflexSoftwareVersionPolicy.md)
 
 ### Authorization
 
@@ -17342,7 +17496,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSysConfigPolicy**](hyperflex.SysConfigPolicy.md)
+[**HyperflexSysConfigPolicy**](HyperflexSysConfigPolicy.md)
 
 ### Authorization
 
@@ -17414,7 +17568,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexUcsmConfigPolicy**](hyperflex.UcsmConfigPolicy.md)
+[**HyperflexUcsmConfigPolicy**](HyperflexUcsmConfigPolicy.md)
 
 ### Authorization
 
@@ -17486,7 +17640,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVcenterConfigPolicy**](hyperflex.VcenterConfigPolicy.md)
+[**HyperflexVcenterConfigPolicy**](HyperflexVcenterConfigPolicy.md)
 
 ### Authorization
 
@@ -17558,7 +17712,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAppCatalog**](hyperflex.AppCatalog.md)
+[**HyperflexAppCatalog**](HyperflexAppCatalog.md)
 
 ### Authorization
 
@@ -17630,7 +17784,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexAutoSupportPolicy**](hyperflex.AutoSupportPolicy.md)
+[**HyperflexAutoSupportPolicy**](HyperflexAutoSupportPolicy.md)
 
 ### Authorization
 
@@ -17702,7 +17856,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCapabilityInfo**](hyperflex.CapabilityInfo.md)
+[**HyperflexCapabilityInfo**](HyperflexCapabilityInfo.md)
 
 ### Authorization
 
@@ -17774,7 +17928,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCiscoHypervisorManager**](hyperflex.CiscoHypervisorManager.md)
+[**HyperflexCiscoHypervisorManager**](HyperflexCiscoHypervisorManager.md)
 
 ### Authorization
 
@@ -17846,7 +18000,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexCluster**](hyperflex.Cluster.md)
+[**HyperflexCluster**](HyperflexCluster.md)
 
 ### Authorization
 
@@ -17918,7 +18072,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+[**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md)
 
 ### Authorization
 
@@ -17990,7 +18144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+[**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md)
 
 ### Authorization
 
@@ -18062,7 +18216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterNetworkPolicy**](hyperflex.ClusterNetworkPolicy.md)
+[**HyperflexClusterNetworkPolicy**](HyperflexClusterNetworkPolicy.md)
 
 ### Authorization
 
@@ -18134,7 +18288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+[**HyperflexClusterProfile**](HyperflexClusterProfile.md)
 
 ### Authorization
 
@@ -18206,7 +18360,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+[**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md)
 
 ### Authorization
 
@@ -18278,7 +18432,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -18350,7 +18504,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexClusterStoragePolicy**](hyperflex.ClusterStoragePolicy.md)
+[**HyperflexClusterStoragePolicy**](HyperflexClusterStoragePolicy.md)
 
 ### Authorization
 
@@ -18422,7 +18576,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtFcStoragePolicy**](hyperflex.ExtFcStoragePolicy.md)
+[**HyperflexExtFcStoragePolicy**](HyperflexExtFcStoragePolicy.md)
 
 ### Authorization
 
@@ -18494,7 +18648,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexExtIscsiStoragePolicy**](hyperflex.ExtIscsiStoragePolicy.md)
+[**HyperflexExtIscsiStoragePolicy**](HyperflexExtIscsiStoragePolicy.md)
 
 ### Authorization
 
@@ -18566,7 +18720,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitExternal**](hyperflex.FeatureLimitExternal.md)
+[**HyperflexFeatureLimitExternal**](HyperflexFeatureLimitExternal.md)
 
 ### Authorization
 
@@ -18638,7 +18792,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexFeatureLimitInternal**](hyperflex.FeatureLimitInternal.md)
+[**HyperflexFeatureLimitInternal**](HyperflexFeatureLimitInternal.md)
 
 ### Authorization
 
@@ -18710,7 +18864,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+[**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md)
 
 ### Authorization
 
@@ -18782,7 +18936,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+[**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md)
 
 ### Authorization
 
@@ -18854,7 +19008,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapCluster**](hyperflex.HxapCluster.md)
+[**HyperflexHxapCluster**](HyperflexHxapCluster.md)
 
 ### Authorization
 
@@ -18926,7 +19080,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapDatacenter**](hyperflex.HxapDatacenter.md)
+[**HyperflexHxapDatacenter**](HyperflexHxapDatacenter.md)
 
 ### Authorization
 
@@ -18998,7 +19152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapHost**](hyperflex.HxapHost.md)
+[**HyperflexHxapHost**](HyperflexHxapHost.md)
 
 ### Authorization
 
@@ -19070,7 +19224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualDisk**](hyperflex.HxapVirtualDisk.md)
+[**HyperflexHxapVirtualDisk**](HyperflexHxapVirtualDisk.md)
 
 ### Authorization
 
@@ -19142,7 +19296,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxapVirtualMachine**](hyperflex.HxapVirtualMachine.md)
+[**HyperflexHxapVirtualMachine**](HyperflexHxapVirtualMachine.md)
 
 ### Authorization
 
@@ -19214,7 +19368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexHxdpVersion**](hyperflex.HxdpVersion.md)
+[**HyperflexHxdpVersion**](HyperflexHxdpVersion.md)
 
 ### Authorization
 
@@ -19286,7 +19440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexLocalCredentialPolicy**](hyperflex.LocalCredentialPolicy.md)
+[**HyperflexLocalCredentialPolicy**](HyperflexLocalCredentialPolicy.md)
 
 ### Authorization
 
@@ -19358,7 +19512,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeConfigPolicy**](hyperflex.NodeConfigPolicy.md)
+[**HyperflexNodeConfigPolicy**](HyperflexNodeConfigPolicy.md)
 
 ### Authorization
 
@@ -19430,7 +19584,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexNodeProfile**](hyperflex.NodeProfile.md)
+[**HyperflexNodeProfile**](HyperflexNodeProfile.md)
 
 ### Authorization
 
@@ -19502,7 +19656,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexProxySettingPolicy**](hyperflex.ProxySettingPolicy.md)
+[**HyperflexProxySettingPolicy**](HyperflexProxySettingPolicy.md)
 
 ### Authorization
 
@@ -19574,7 +19728,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersion**](hyperflex.ServerFirmwareVersion.md)
+[**HyperflexServerFirmwareVersion**](HyperflexServerFirmwareVersion.md)
 
 ### Authorization
 
@@ -19646,7 +19800,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+[**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md)
 
 ### Authorization
 
@@ -19718,7 +19872,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexServerModel**](hyperflex.ServerModel.md)
+[**HyperflexServerModel**](HyperflexServerModel.md)
 
 ### Authorization
 
@@ -19790,7 +19944,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionComponent**](hyperflex.SoftwareDistributionComponent.md)
+[**HyperflexSoftwareDistributionComponent**](HyperflexSoftwareDistributionComponent.md)
 
 ### Authorization
 
@@ -19862,7 +20016,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionEntry**](hyperflex.SoftwareDistributionEntry.md)
+[**HyperflexSoftwareDistributionEntry**](HyperflexSoftwareDistributionEntry.md)
 
 ### Authorization
 
@@ -19934,7 +20088,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareDistributionVersion**](hyperflex.SoftwareDistributionVersion.md)
+[**HyperflexSoftwareDistributionVersion**](HyperflexSoftwareDistributionVersion.md)
 
 ### Authorization
 
@@ -20006,7 +20160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSoftwareVersionPolicy**](hyperflex.SoftwareVersionPolicy.md)
+[**HyperflexSoftwareVersionPolicy**](HyperflexSoftwareVersionPolicy.md)
 
 ### Authorization
 
@@ -20078,7 +20232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexSysConfigPolicy**](hyperflex.SysConfigPolicy.md)
+[**HyperflexSysConfigPolicy**](HyperflexSysConfigPolicy.md)
 
 ### Authorization
 
@@ -20150,7 +20304,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexUcsmConfigPolicy**](hyperflex.UcsmConfigPolicy.md)
+[**HyperflexUcsmConfigPolicy**](HyperflexUcsmConfigPolicy.md)
 
 ### Authorization
 
@@ -20222,7 +20376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HyperflexVcenterConfigPolicy**](hyperflex.VcenterConfigPolicy.md)
+[**HyperflexVcenterConfigPolicy**](HyperflexVcenterConfigPolicy.md)
 
 ### Authorization
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowCtx"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowCtx"]
-**InitiatorCtx** | Pointer to [**NullableWorkflowInitiatorContext**](workflow.InitiatorContext.md) |  | [optional] 
+**InitiatorCtx** | Pointer to [**NullableWorkflowInitiatorContext**](WorkflowInitiatorContext.md) |  | [optional] 
 **TargetCtxList** | Pointer to [**[]WorkflowTargetContext**](WorkflowTargetContext.md) |  | [optional] 
 **WorkflowMetaName** | Pointer to **string** | The name of workflowMeta of the workflow running. | [optional] 
 **WorkflowSubtype** | Pointer to **string** | The subtype of the workflow. | [optional] 

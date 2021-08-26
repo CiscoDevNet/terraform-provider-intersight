@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificatemanagementPolicy**](certificatemanagement.Policy.md)
+[**CertificatemanagementPolicy**](CertificatemanagementPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificatemanagementPolicy**](certificatemanagement.Policy.md)
+[**CertificatemanagementPolicy**](CertificatemanagementPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificatemanagementPolicyResponse**](certificatemanagement.Policy.Response.md)
+[**CertificatemanagementPolicyResponse**](CertificatemanagementPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificatemanagementPolicy**](certificatemanagement.Policy.md)
+[**CertificatemanagementPolicy**](CertificatemanagementPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CertificatemanagementPolicy**](certificatemanagement.Policy.md)
+[**CertificatemanagementPolicy**](CertificatemanagementPolicy.md)
 
 ### Authorization
 

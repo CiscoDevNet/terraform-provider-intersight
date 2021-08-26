@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterConfigPolicy**](adapter.ConfigPolicy.md)
+[**AdapterConfigPolicy**](AdapterConfigPolicy.md)
 
 ### Authorization
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterConfigPolicy**](adapter.ConfigPolicy.md)
+[**AdapterConfigPolicy**](AdapterConfigPolicy.md)
 
 ### Authorization
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterConfigPolicyResponse**](adapter.ConfigPolicy.Response.md)
+[**AdapterConfigPolicyResponse**](AdapterConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterExtEthInterface**](adapter.ExtEthInterface.md)
+[**AdapterExtEthInterface**](AdapterExtEthInterface.md)
 
 ### Authorization
 
@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterExtEthInterfaceResponse**](adapter.ExtEthInterface.Response.md)
+[**AdapterExtEthInterfaceResponse**](AdapterExtEthInterfaceResponse.md)
 
 ### Authorization
 
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostEthInterface**](adapter.HostEthInterface.md)
+[**AdapterHostEthInterface**](AdapterHostEthInterface.md)
 
 ### Authorization
 
@@ -599,7 +599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostEthInterfaceResponse**](adapter.HostEthInterface.Response.md)
+[**AdapterHostEthInterfaceResponse**](AdapterHostEthInterfaceResponse.md)
 
 ### Authorization
 
@@ -667,7 +667,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostFcInterface**](adapter.HostFcInterface.md)
+[**AdapterHostFcInterface**](AdapterHostFcInterface.md)
 
 ### Authorization
 
@@ -751,7 +751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostFcInterfaceResponse**](adapter.HostFcInterface.Response.md)
+[**AdapterHostFcInterfaceResponse**](AdapterHostFcInterfaceResponse.md)
 
 ### Authorization
 
@@ -819,7 +819,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostIscsiInterface**](adapter.HostIscsiInterface.md)
+[**AdapterHostIscsiInterface**](AdapterHostIscsiInterface.md)
 
 ### Authorization
 
@@ -903,7 +903,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterHostIscsiInterfaceResponse**](adapter.HostIscsiInterface.Response.md)
+[**AdapterHostIscsiInterfaceResponse**](AdapterHostIscsiInterfaceResponse.md)
 
 ### Authorization
 
@@ -971,7 +971,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterUnit**](adapter.Unit.md)
+[**AdapterUnit**](AdapterUnit.md)
 
 ### Authorization
 
@@ -1039,7 +1039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterUnitExpander**](adapter.UnitExpander.md)
+[**AdapterUnitExpander**](AdapterUnitExpander.md)
 
 ### Authorization
 
@@ -1123,7 +1123,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterUnitExpanderResponse**](adapter.UnitExpander.Response.md)
+[**AdapterUnitExpanderResponse**](AdapterUnitExpanderResponse.md)
 
 ### Authorization
 
@@ -1207,7 +1207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterUnitResponse**](adapter.Unit.Response.md)
+[**AdapterUnitResponse**](AdapterUnitResponse.md)
 
 ### Authorization
 
@@ -1279,7 +1279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterConfigPolicy**](adapter.ConfigPolicy.md)
+[**AdapterConfigPolicy**](AdapterConfigPolicy.md)
 
 ### Authorization
 
@@ -1351,7 +1351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AdapterConfigPolicy**](adapter.ConfigPolicy.md)
+[**AdapterConfigPolicy**](AdapterConfigPolicy.md)
 
 ### Authorization
 

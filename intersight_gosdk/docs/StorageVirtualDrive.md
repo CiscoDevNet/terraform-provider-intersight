@@ -31,14 +31,14 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** | The uuid of the virtual drive. | [optional] [readonly] 
 **VendorUuid** | Pointer to **string** | The UUID value of the vendor. | [optional] [readonly] 
 **VirtualDriveId** | Pointer to **string** | The identifier for this Virtual drive. | [optional] [readonly] 
-**DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](storage.DiskGroup.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
+**DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDiskUsages** | Pointer to [**[]StoragePhysicalDiskUsageRelationship**](StoragePhysicalDiskUsageRelationship.md) | An array of relationships to storagePhysicalDiskUsage resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](storage.Controller.Relationship.md) |  | [optional] 
-**StorageVirtualDriveContainer** | Pointer to [**StorageVirtualDriveContainerRelationship**](storage.VirtualDriveContainer.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**StorageVirtualDriveContainer** | Pointer to [**StorageVirtualDriveContainerRelationship**](StorageVirtualDriveContainerRelationship.md) |  | [optional] 
 **VdMemberEps** | Pointer to [**[]StorageVdMemberEpRelationship**](StorageVdMemberEpRelationship.md) | An array of relationships to storageVdMemberEp resources. | [optional] [readonly] 
-**VirtualDriveExtension** | Pointer to [**StorageVirtualDriveExtensionRelationship**](storage.VirtualDriveExtension.Relationship.md) |  | [optional] 
+**VirtualDriveExtension** | Pointer to [**StorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) |  | [optional] 
 
 ## Methods
 

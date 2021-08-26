@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name to identity this disk group in the controller. | [optional] 
 **RaidType** | Pointer to **string** | Raid level of the virtual drives in this diskgroup. | [optional] 
 **DedicatedHotSpares** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Spans** | Pointer to [**[]StorageSpanRelationship**](StorageSpanRelationship.md) | An array of relationships to storageSpan resources. | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](storage.Controller.Relationship.md) |  | [optional] 
+**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] 
 
 ## Methods

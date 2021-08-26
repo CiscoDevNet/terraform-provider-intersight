@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **MergeAction** | Pointer to **string** | The type of merge action to be applied on the target MOs.  * &#x60;Merge&#x60; - The null properties/relationships of the source MO will be ignored for the target MO. The non-null properties/relationships of the source will override the target MO properties/relationships. * &#x60;Replace&#x60; - Merge action as described in RFC 7386. The null properties/relationships of the source MO will be deleted on the target MO.The non-null properties/relationships of the source will override the target MO properties/relationships.When source object type is different from target, only the properties common to both source and target  will be affected.Other properties on the target will be ignored. | [optional] [default to "Merge"]
 **Responses** | Pointer to [**[]BulkRestResult**](BulkRestResult.md) |  | [optional] 
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**TargetConfig** | Pointer to [**MoBaseMo**](mo.BaseMo.md) |  | [optional] 
+**TargetConfig** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPrecisionPolicy**](boot.PrecisionPolicy.md)
+[**BootPrecisionPolicy**](BootPrecisionPolicy.md)
 
 ### Authorization
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootCddDevice**](boot.CddDevice.md)
+[**BootCddDevice**](BootCddDevice.md)
 
 ### Authorization
 
@@ -335,7 +335,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootCddDeviceResponse**](boot.CddDevice.Response.md)
+[**BootCddDeviceResponse**](BootCddDeviceResponse.md)
 
 ### Authorization
 
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootMode**](boot.DeviceBootMode.md)
+[**BootDeviceBootMode**](BootDeviceBootMode.md)
 
 ### Authorization
 
@@ -487,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootModeResponse**](boot.DeviceBootMode.Response.md)
+[**BootDeviceBootModeResponse**](BootDeviceBootModeResponse.md)
 
 ### Authorization
 
@@ -555,7 +555,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootSecurity**](boot.DeviceBootSecurity.md)
+[**BootDeviceBootSecurity**](BootDeviceBootSecurity.md)
 
 ### Authorization
 
@@ -639,7 +639,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootSecurityResponse**](boot.DeviceBootSecurity.Response.md)
+[**BootDeviceBootSecurityResponse**](BootDeviceBootSecurityResponse.md)
 
 ### Authorization
 
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootHddDevice**](boot.HddDevice.md)
+[**BootHddDevice**](BootHddDevice.md)
 
 ### Authorization
 
@@ -791,7 +791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootHddDeviceResponse**](boot.HddDevice.Response.md)
+[**BootHddDeviceResponse**](BootHddDeviceResponse.md)
 
 ### Authorization
 
@@ -859,7 +859,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootIscsiDevice**](boot.IscsiDevice.md)
+[**BootIscsiDevice**](BootIscsiDevice.md)
 
 ### Authorization
 
@@ -943,7 +943,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootIscsiDeviceResponse**](boot.IscsiDevice.Response.md)
+[**BootIscsiDeviceResponse**](BootIscsiDeviceResponse.md)
 
 ### Authorization
 
@@ -1011,7 +1011,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootNvmeDevice**](boot.NvmeDevice.md)
+[**BootNvmeDevice**](BootNvmeDevice.md)
 
 ### Authorization
 
@@ -1095,7 +1095,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootNvmeDeviceResponse**](boot.NvmeDevice.Response.md)
+[**BootNvmeDeviceResponse**](BootNvmeDeviceResponse.md)
 
 ### Authorization
 
@@ -1163,7 +1163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+[**BootPchStorageDevice**](BootPchStorageDevice.md)
 
 ### Authorization
 
@@ -1247,7 +1247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPchStorageDeviceResponse**](boot.PchStorageDevice.Response.md)
+[**BootPchStorageDeviceResponse**](BootPchStorageDeviceResponse.md)
 
 ### Authorization
 
@@ -1315,7 +1315,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPrecisionPolicy**](boot.PrecisionPolicy.md)
+[**BootPrecisionPolicy**](BootPrecisionPolicy.md)
 
 ### Authorization
 
@@ -1399,7 +1399,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPrecisionPolicyResponse**](boot.PrecisionPolicy.Response.md)
+[**BootPrecisionPolicyResponse**](BootPrecisionPolicyResponse.md)
 
 ### Authorization
 
@@ -1467,7 +1467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPxeDevice**](boot.PxeDevice.md)
+[**BootPxeDevice**](BootPxeDevice.md)
 
 ### Authorization
 
@@ -1551,7 +1551,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPxeDeviceResponse**](boot.PxeDevice.Response.md)
+[**BootPxeDeviceResponse**](BootPxeDeviceResponse.md)
 
 ### Authorization
 
@@ -1619,7 +1619,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSanDevice**](boot.SanDevice.md)
+[**BootSanDevice**](BootSanDevice.md)
 
 ### Authorization
 
@@ -1703,7 +1703,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSanDeviceResponse**](boot.SanDevice.Response.md)
+[**BootSanDeviceResponse**](BootSanDeviceResponse.md)
 
 ### Authorization
 
@@ -1771,7 +1771,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSdDevice**](boot.SdDevice.md)
+[**BootSdDevice**](BootSdDevice.md)
 
 ### Authorization
 
@@ -1855,7 +1855,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSdDeviceResponse**](boot.SdDevice.Response.md)
+[**BootSdDeviceResponse**](BootSdDeviceResponse.md)
 
 ### Authorization
 
@@ -1923,7 +1923,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+[**BootUefiShellDevice**](BootUefiShellDevice.md)
 
 ### Authorization
 
@@ -2007,7 +2007,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUefiShellDeviceResponse**](boot.UefiShellDevice.Response.md)
+[**BootUefiShellDeviceResponse**](BootUefiShellDeviceResponse.md)
 
 ### Authorization
 
@@ -2075,7 +2075,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUsbDevice**](boot.UsbDevice.md)
+[**BootUsbDevice**](BootUsbDevice.md)
 
 ### Authorization
 
@@ -2159,7 +2159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUsbDeviceResponse**](boot.UsbDevice.Response.md)
+[**BootUsbDeviceResponse**](BootUsbDeviceResponse.md)
 
 ### Authorization
 
@@ -2227,7 +2227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootVmediaDevice**](boot.VmediaDevice.md)
+[**BootVmediaDevice**](BootVmediaDevice.md)
 
 ### Authorization
 
@@ -2311,7 +2311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootVmediaDeviceResponse**](boot.VmediaDevice.Response.md)
+[**BootVmediaDeviceResponse**](BootVmediaDeviceResponse.md)
 
 ### Authorization
 
@@ -2383,7 +2383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootCddDevice**](boot.CddDevice.md)
+[**BootCddDevice**](BootCddDevice.md)
 
 ### Authorization
 
@@ -2455,7 +2455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootMode**](boot.DeviceBootMode.md)
+[**BootDeviceBootMode**](BootDeviceBootMode.md)
 
 ### Authorization
 
@@ -2527,7 +2527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootSecurity**](boot.DeviceBootSecurity.md)
+[**BootDeviceBootSecurity**](BootDeviceBootSecurity.md)
 
 ### Authorization
 
@@ -2599,7 +2599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootHddDevice**](boot.HddDevice.md)
+[**BootHddDevice**](BootHddDevice.md)
 
 ### Authorization
 
@@ -2671,7 +2671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootIscsiDevice**](boot.IscsiDevice.md)
+[**BootIscsiDevice**](BootIscsiDevice.md)
 
 ### Authorization
 
@@ -2743,7 +2743,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootNvmeDevice**](boot.NvmeDevice.md)
+[**BootNvmeDevice**](BootNvmeDevice.md)
 
 ### Authorization
 
@@ -2815,7 +2815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+[**BootPchStorageDevice**](BootPchStorageDevice.md)
 
 ### Authorization
 
@@ -2887,7 +2887,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPrecisionPolicy**](boot.PrecisionPolicy.md)
+[**BootPrecisionPolicy**](BootPrecisionPolicy.md)
 
 ### Authorization
 
@@ -2959,7 +2959,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPxeDevice**](boot.PxeDevice.md)
+[**BootPxeDevice**](BootPxeDevice.md)
 
 ### Authorization
 
@@ -3031,7 +3031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSanDevice**](boot.SanDevice.md)
+[**BootSanDevice**](BootSanDevice.md)
 
 ### Authorization
 
@@ -3103,7 +3103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSdDevice**](boot.SdDevice.md)
+[**BootSdDevice**](BootSdDevice.md)
 
 ### Authorization
 
@@ -3175,7 +3175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+[**BootUefiShellDevice**](BootUefiShellDevice.md)
 
 ### Authorization
 
@@ -3247,7 +3247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUsbDevice**](boot.UsbDevice.md)
+[**BootUsbDevice**](BootUsbDevice.md)
 
 ### Authorization
 
@@ -3319,7 +3319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootVmediaDevice**](boot.VmediaDevice.md)
+[**BootVmediaDevice**](BootVmediaDevice.md)
 
 ### Authorization
 
@@ -3391,7 +3391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootCddDevice**](boot.CddDevice.md)
+[**BootCddDevice**](BootCddDevice.md)
 
 ### Authorization
 
@@ -3463,7 +3463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootMode**](boot.DeviceBootMode.md)
+[**BootDeviceBootMode**](BootDeviceBootMode.md)
 
 ### Authorization
 
@@ -3535,7 +3535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootDeviceBootSecurity**](boot.DeviceBootSecurity.md)
+[**BootDeviceBootSecurity**](BootDeviceBootSecurity.md)
 
 ### Authorization
 
@@ -3607,7 +3607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootHddDevice**](boot.HddDevice.md)
+[**BootHddDevice**](BootHddDevice.md)
 
 ### Authorization
 
@@ -3679,7 +3679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootIscsiDevice**](boot.IscsiDevice.md)
+[**BootIscsiDevice**](BootIscsiDevice.md)
 
 ### Authorization
 
@@ -3751,7 +3751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootNvmeDevice**](boot.NvmeDevice.md)
+[**BootNvmeDevice**](BootNvmeDevice.md)
 
 ### Authorization
 
@@ -3823,7 +3823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+[**BootPchStorageDevice**](BootPchStorageDevice.md)
 
 ### Authorization
 
@@ -3895,7 +3895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPrecisionPolicy**](boot.PrecisionPolicy.md)
+[**BootPrecisionPolicy**](BootPrecisionPolicy.md)
 
 ### Authorization
 
@@ -3967,7 +3967,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootPxeDevice**](boot.PxeDevice.md)
+[**BootPxeDevice**](BootPxeDevice.md)
 
 ### Authorization
 
@@ -4039,7 +4039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSanDevice**](boot.SanDevice.md)
+[**BootSanDevice**](BootSanDevice.md)
 
 ### Authorization
 
@@ -4111,7 +4111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootSdDevice**](boot.SdDevice.md)
+[**BootSdDevice**](BootSdDevice.md)
 
 ### Authorization
 
@@ -4183,7 +4183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+[**BootUefiShellDevice**](BootUefiShellDevice.md)
 
 ### Authorization
 
@@ -4255,7 +4255,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootUsbDevice**](boot.UsbDevice.md)
+[**BootUsbDevice**](BootUsbDevice.md)
 
 ### Authorization
 
@@ -4327,7 +4327,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BootVmediaDevice**](boot.VmediaDevice.md)
+[**BootVmediaDevice**](BootVmediaDevice.md)
 
 ### Authorization
 

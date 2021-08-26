@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The catalog name. There will be one for system and one for each user account. | [optional] 
 **ConfigurationFiles** | Pointer to [**[]OsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) | An array of relationships to osConfigurationFile resources. | [optional] 
 **Distributions** | Pointer to [**[]OsDistributionRelationship**](OsDistributionRelationship.md) | An array of relationships to osDistribution resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

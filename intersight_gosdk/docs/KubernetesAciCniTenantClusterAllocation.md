@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PodIpSubnet** | Pointer to **string** | CIDR allocated for pod IPs in this tenant cluster. | [optional] [readonly] 
 **VlanEnd** | Pointer to **string** | End of VLAN range allocated to this tenant cluster. | [optional] [readonly] 
 **VlanStart** | Pointer to **string** | Start of VLAN range allocated to this tenant cluster. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

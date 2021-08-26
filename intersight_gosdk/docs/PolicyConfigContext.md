@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policy.ConfigContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigContext"]
 **ConfigState** | Pointer to **string** | Indicates a profile&#39;s configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed. | [optional] [readonly] 
+**ConfigType** | Pointer to **string** | The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress. | [optional] [readonly] 
 **ControlAction** | Pointer to **string** | System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. | [optional] 
 **ErrorState** | Pointer to **string** | Indicates a profile&#39;s error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). | [optional] 
 **OperState** | Pointer to **string** | Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. | [optional] [readonly] 
@@ -94,6 +95,31 @@ SetConfigState sets ConfigState field to given value.
 `func (o *PolicyConfigContext) HasConfigState() bool`
 
 HasConfigState returns a boolean if a field has been set.
+
+### GetConfigType
+
+`func (o *PolicyConfigContext) GetConfigType() string`
+
+GetConfigType returns the ConfigType field if non-nil, zero value otherwise.
+
+### GetConfigTypeOk
+
+`func (o *PolicyConfigContext) GetConfigTypeOk() (*string, bool)`
+
+GetConfigTypeOk returns a tuple with the ConfigType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigType
+
+`func (o *PolicyConfigContext) SetConfigType(v string)`
+
+SetConfigType sets ConfigType field to given value.
+
+### HasConfigType
+
+`func (o *PolicyConfigContext) HasConfigType() bool`
+
+HasConfigType returns a boolean if a field has been set.
 
 ### GetControlAction
 

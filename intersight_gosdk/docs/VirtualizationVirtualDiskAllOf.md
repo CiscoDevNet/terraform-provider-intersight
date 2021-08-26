@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **SourceCerts** | Pointer to **string** | Base64 encoded CA certificates of the https source to check against. | [optional] 
 **SourceDiskToClone** | Pointer to **string** | Source disk from which the content is copied. | [optional] 
 **SourceFilePath** | Pointer to **string** | Image path used to import on the created disk. | [optional] 
-**Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](virtualization.BaseCluster.Relationship.md) |  | [optional] 
-**Inventory** | Pointer to [**VirtualizationBaseVirtualDiskRelationship**](virtualization.BaseVirtualDisk.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
+**Inventory** | Pointer to [**VirtualizationBaseVirtualDiskRelationship**](VirtualizationBaseVirtualDiskRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxapHostInterface"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapHostInterface"]
-**BondState** | Pointer to [**NullableHyperflexBondState**](hyperflex.BondState.md) |  | [optional] 
+**BondState** | Pointer to [**NullableHyperflexBondState**](HyperflexBondState.md) |  | [optional] 
 **HostName** | Pointer to **string** | The UUID of the host to which this interface belongs to. | [optional] 
 **HostUuid** | Pointer to **string** | The UUID of the host to which this interface belongs to. | [optional] 
 **IfType** | Pointer to **string** | A hint of the interface type, such as \&quot;ovs-bond\&quot;, \&quot;device\&quot;, \&quot;openvswitch\&quot;. | [optional] 
@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **Mtu** | Pointer to **int64** | The MTU size of the interface. | [optional] 
 **Name** | Pointer to **string** | The name of the host to which this interface belongs to. | [optional] 
 **Vlans** | Pointer to **string** | A list of vlans allowed on this interface. | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**DvUplink** | Pointer to [**HyperflexHxapDvUplinkRelationship**](hyperflex.HxapDvUplink.Relationship.md) |  | [optional] 
-**Host** | Pointer to [**HyperflexHxapHostRelationship**](hyperflex.HxapHost.Relationship.md) |  | [optional] 
-**Network** | Pointer to [**HyperflexHxapNetworkRelationship**](hyperflex.HxapNetwork.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**DvUplink** | Pointer to [**HyperflexHxapDvUplinkRelationship**](HyperflexHxapDvUplinkRelationship.md) |  | [optional] 
+**Host** | Pointer to [**HyperflexHxapHostRelationship**](HyperflexHxapHostRelationship.md) |  | [optional] 
+**Network** | Pointer to [**HyperflexHxapNetworkRelationship**](HyperflexHxapNetworkRelationship.md) |  | [optional] 
 
 ## Methods
 

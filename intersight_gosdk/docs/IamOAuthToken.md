@@ -14,10 +14,10 @@ Name | Type | Description | Notes
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
 **LastLoginTime** | Pointer to **time.Time** | The last login time for user. | [optional] [readonly] 
 **TokenId** | Pointer to **string** | Token identifier. Not the Access Token itself. | [optional] [readonly] 
-**UserMeta** | Pointer to [**NullableIamClientMeta**](iam.ClientMeta.md) |  | [optional] 
-**AppRegistration** | Pointer to [**IamAppRegistrationRelationship**](iam.AppRegistration.Relationship.md) |  | [optional] 
-**Permission** | Pointer to [**IamPermissionRelationship**](iam.Permission.Relationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](iam.User.Relationship.md) |  | [optional] 
+**UserMeta** | Pointer to [**NullableIamClientMeta**](IamClientMeta.md) |  | [optional] 
+**AppRegistration** | Pointer to [**IamAppRegistrationRelationship**](IamAppRegistrationRelationship.md) |  | [optional] 
+**Permission** | Pointer to [**IamPermissionRelationship**](IamPermissionRelationship.md) |  | [optional] 
+**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IpmioverlanPolicy**](ipmioverlan.Policy.md)
+[**IpmioverlanPolicy**](IpmioverlanPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IpmioverlanPolicy**](ipmioverlan.Policy.md)
+[**IpmioverlanPolicy**](IpmioverlanPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IpmioverlanPolicyResponse**](ipmioverlan.Policy.Response.md)
+[**IpmioverlanPolicyResponse**](IpmioverlanPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IpmioverlanPolicy**](ipmioverlan.Policy.md)
+[**IpmioverlanPolicy**](IpmioverlanPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IpmioverlanPolicy**](ipmioverlan.Policy.md)
+[**IpmioverlanPolicy**](IpmioverlanPolicy.md)
 
 ### Authorization
 

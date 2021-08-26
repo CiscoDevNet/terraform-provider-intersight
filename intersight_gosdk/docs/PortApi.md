@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortGroup**](port.Group.md)
+[**PortGroup**](PortGroup.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortGroupResponse**](port.Group.Response.md)
+[**PortGroupResponse**](PortGroupResponse.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortMacBinding**](port.MacBinding.md)
+[**PortMacBinding**](PortMacBinding.md)
 
 ### Authorization
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortMacBindingResponse**](port.MacBinding.Response.md)
+[**PortMacBindingResponse**](PortMacBindingResponse.md)
 
 ### Authorization
 
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortSubGroup**](port.SubGroup.md)
+[**PortSubGroup**](PortSubGroup.md)
 
 ### Authorization
 
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortSubGroupResponse**](port.SubGroup.Response.md)
+[**PortSubGroupResponse**](PortSubGroupResponse.md)
 
 ### Authorization
 
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortGroup**](port.Group.md)
+[**PortGroup**](PortGroup.md)
 
 ### Authorization
 
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortMacBinding**](port.MacBinding.md)
+[**PortMacBinding**](PortMacBinding.md)
 
 ### Authorization
 
@@ -675,7 +675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortSubGroup**](port.SubGroup.md)
+[**PortSubGroup**](PortSubGroup.md)
 
 ### Authorization
 
@@ -747,7 +747,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortGroup**](port.Group.md)
+[**PortGroup**](PortGroup.md)
 
 ### Authorization
 
@@ -819,7 +819,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortMacBinding**](port.MacBinding.md)
+[**PortMacBinding**](PortMacBinding.md)
 
 ### Authorization
 
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PortSubGroup**](port.SubGroup.md)
+[**PortSubGroup**](PortSubGroup.md)
 
 ### Authorization
 

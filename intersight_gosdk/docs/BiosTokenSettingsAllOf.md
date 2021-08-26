@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **IsAssigned** | Pointer to **string** | Value that represents if the BIOS configuration is active. Possible values are \&quot;yes\&quot; and \&quot;no\&quot;. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Parent server serial number. | [optional] 
 **SettingsMoRn** | Pointer to **string** | BIOS configuration name as found in dn. Possible values are \&quot;ADDDC-Sparing\&quot;, \&quot;Maximum-Performance\&quot;, \&quot;Partial-Mirror-mode-1LM\&quot;, \&quot;Mirror-Mode-1LM\&quot;, \&quot;Mirroring\&quot;, \&quot;Lockstep\&quot;, \&quot;Sparing\&quot;, \&quot;Platform-Default\&quot;. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policy.ConfigChangeContext"]
 **ConfigChangeError** | Pointer to **string** | Indicates reason for failure state of configChangeState. | [optional] [readonly] 
 **ConfigChangeState** | Pointer to **string** | Indicates a profile&#39;s configuration change state. Used for tracking pending-changes and out-of-synch states. * &#x60;Ok&#x60; - Config change state represents Validation for change/drift is successful or is not applicable. * &#x60;Validating-change&#x60; - Config change state represents policy changes are being validated. This state starts when policy is changed and becomes different from deployed changes (Pending-changes). * &#x60;Validating-drift&#x60; - Config change state represents endpoint configuration changes are being validated. This state starts when endpoint is changed and endpoint configuration becomes different from policy configured changes (Out-of-sync). * &#x60;Change-failed&#x60; - Config change state represents there is internal error in calculating policy change. * &#x60;Drift-failed&#x60; - Config change state represents there is internal error in calculating endpoint configuraion drift. | [optional] [readonly] [default to "Ok"]
-**InitialConfigContext** | Pointer to [**NullablePolicyConfigContext**](policy.ConfigContext.md) |  | [optional] 
+**InitialConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
 
 ## Methods
 

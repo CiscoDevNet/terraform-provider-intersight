@@ -1,5 +1,5 @@
 PKG_NAME=intersight
-VERSION=1.0.13
+VERSION=1.0.14
 TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
 WEBSITE_REPO=github.com/hashicorp/terraform-website

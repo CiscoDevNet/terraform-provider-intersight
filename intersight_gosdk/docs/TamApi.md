@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryCount**](tam.AdvisoryCount.md)
+[**TamAdvisoryCount**](TamAdvisoryCount.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryDefinition**](tam.AdvisoryDefinition.md)
+[**TamAdvisoryDefinition**](TamAdvisoryDefinition.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInfo**](tam.AdvisoryInfo.md)
+[**TamAdvisoryInfo**](TamAdvisoryInfo.md)
 
 ### Authorization
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInstance**](tam.AdvisoryInstance.md)
+[**TamAdvisoryInstance**](TamAdvisoryInstance.md)
 
 ### Authorization
 
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamSecurityAdvisory**](tam.SecurityAdvisory.md)
+[**TamSecurityAdvisory**](TamSecurityAdvisory.md)
 
 ### Authorization
 
@@ -759,7 +759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryCount**](tam.AdvisoryCount.md)
+[**TamAdvisoryCount**](TamAdvisoryCount.md)
 
 ### Authorization
 
@@ -843,7 +843,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryCountResponse**](tam.AdvisoryCount.Response.md)
+[**TamAdvisoryCountResponse**](TamAdvisoryCountResponse.md)
 
 ### Authorization
 
@@ -911,7 +911,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryDefinition**](tam.AdvisoryDefinition.md)
+[**TamAdvisoryDefinition**](TamAdvisoryDefinition.md)
 
 ### Authorization
 
@@ -995,7 +995,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryDefinitionResponse**](tam.AdvisoryDefinition.Response.md)
+[**TamAdvisoryDefinitionResponse**](TamAdvisoryDefinitionResponse.md)
 
 ### Authorization
 
@@ -1063,7 +1063,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInfo**](tam.AdvisoryInfo.md)
+[**TamAdvisoryInfo**](TamAdvisoryInfo.md)
 
 ### Authorization
 
@@ -1147,7 +1147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInfoResponse**](tam.AdvisoryInfo.Response.md)
+[**TamAdvisoryInfoResponse**](TamAdvisoryInfoResponse.md)
 
 ### Authorization
 
@@ -1215,7 +1215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInstance**](tam.AdvisoryInstance.md)
+[**TamAdvisoryInstance**](TamAdvisoryInstance.md)
 
 ### Authorization
 
@@ -1299,7 +1299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInstanceResponse**](tam.AdvisoryInstance.Response.md)
+[**TamAdvisoryInstanceResponse**](TamAdvisoryInstanceResponse.md)
 
 ### Authorization
 
@@ -1367,7 +1367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamSecurityAdvisory**](tam.SecurityAdvisory.md)
+[**TamSecurityAdvisory**](TamSecurityAdvisory.md)
 
 ### Authorization
 
@@ -1451,7 +1451,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamSecurityAdvisoryResponse**](tam.SecurityAdvisory.Response.md)
+[**TamSecurityAdvisoryResponse**](TamSecurityAdvisoryResponse.md)
 
 ### Authorization
 
@@ -1523,7 +1523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryCount**](tam.AdvisoryCount.md)
+[**TamAdvisoryCount**](TamAdvisoryCount.md)
 
 ### Authorization
 
@@ -1595,7 +1595,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryDefinition**](tam.AdvisoryDefinition.md)
+[**TamAdvisoryDefinition**](TamAdvisoryDefinition.md)
 
 ### Authorization
 
@@ -1667,7 +1667,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInfo**](tam.AdvisoryInfo.md)
+[**TamAdvisoryInfo**](TamAdvisoryInfo.md)
 
 ### Authorization
 
@@ -1739,7 +1739,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInstance**](tam.AdvisoryInstance.md)
+[**TamAdvisoryInstance**](TamAdvisoryInstance.md)
 
 ### Authorization
 
@@ -1811,7 +1811,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamSecurityAdvisory**](tam.SecurityAdvisory.md)
+[**TamSecurityAdvisory**](TamSecurityAdvisory.md)
 
 ### Authorization
 
@@ -1883,7 +1883,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryCount**](tam.AdvisoryCount.md)
+[**TamAdvisoryCount**](TamAdvisoryCount.md)
 
 ### Authorization
 
@@ -1955,7 +1955,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryDefinition**](tam.AdvisoryDefinition.md)
+[**TamAdvisoryDefinition**](TamAdvisoryDefinition.md)
 
 ### Authorization
 
@@ -2027,7 +2027,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInfo**](tam.AdvisoryInfo.md)
+[**TamAdvisoryInfo**](TamAdvisoryInfo.md)
 
 ### Authorization
 
@@ -2099,7 +2099,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamAdvisoryInstance**](tam.AdvisoryInstance.md)
+[**TamAdvisoryInstance**](TamAdvisoryInstance.md)
 
 ### Authorization
 
@@ -2171,7 +2171,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TamSecurityAdvisory**](tam.SecurityAdvisory.md)
+[**TamSecurityAdvisory**](TamSecurityAdvisory.md)
 
 ### Authorization
 

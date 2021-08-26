@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerPolicy**](power.Policy.md)
+[**PowerPolicy**](PowerPolicy.md)
 
 ### Authorization
 
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerControlState**](power.ControlState.md)
+[**PowerControlState**](PowerControlState.md)
 
 ### Authorization
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerControlStateResponse**](power.ControlState.Response.md)
+[**PowerControlStateResponse**](PowerControlStateResponse.md)
 
 ### Authorization
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerPolicy**](power.Policy.md)
+[**PowerPolicy**](PowerPolicy.md)
 
 ### Authorization
 
@@ -437,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerPolicyResponse**](power.Policy.Response.md)
+[**PowerPolicyResponse**](PowerPolicyResponse.md)
 
 ### Authorization
 
@@ -509,7 +509,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerPolicy**](power.Policy.md)
+[**PowerPolicy**](PowerPolicy.md)
 
 ### Authorization
 
@@ -581,7 +581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PowerPolicy**](power.Policy.md)
+[**PowerPolicy**](PowerPolicy.md)
 
 ### Authorization
 

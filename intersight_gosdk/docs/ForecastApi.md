@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastCatalog**](forecast.Catalog.md)
+[**ForecastCatalog**](ForecastCatalog.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastCatalogResponse**](forecast.Catalog.Response.md)
+[**ForecastCatalogResponse**](ForecastCatalogResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastDefinition**](forecast.Definition.md)
+[**ForecastDefinition**](ForecastDefinition.md)
 
 ### Authorization
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastDefinitionResponse**](forecast.Definition.Response.md)
+[**ForecastDefinitionResponse**](ForecastDefinitionResponse.md)
 
 ### Authorization
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastInstance**](forecast.Instance.md)
+[**ForecastInstance**](ForecastInstance.md)
 
 ### Authorization
 
@@ -455,7 +455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastInstanceResponse**](forecast.Instance.Response.md)
+[**ForecastInstanceResponse**](ForecastInstanceResponse.md)
 
 ### Authorization
 
@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastInstance**](forecast.Instance.md)
+[**ForecastInstance**](ForecastInstance.md)
 
 ### Authorization
 
@@ -599,7 +599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ForecastInstance**](forecast.Instance.md)
+[**ForecastInstance**](ForecastInstance.md)
 
 ### Authorization
 

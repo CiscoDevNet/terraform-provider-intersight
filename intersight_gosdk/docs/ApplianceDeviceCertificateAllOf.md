@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **CertificateRenewalExpiryTime** | Pointer to **time.Time** | The date time allocated till cert renewal will be executed. This time used here will be based on cert renewal plan. | [optional] [readonly] 
 **CompletedPhases** | Pointer to [**[]ApplianceCertRenewalPhase**](ApplianceCertRenewalPhase.md) |  | [optional] 
 **ConfigurationMoId** | Pointer to **string** | The operation configuration MOId. | [optional] 
-**CurrentPhase** | Pointer to [**NullableApplianceCertRenewalPhase**](appliance.CertRenewalPhase.md) |  | [optional] 
+**CurrentPhase** | Pointer to [**NullableApplianceCertRenewalPhase**](ApplianceCertRenewalPhase.md) |  | [optional] 
 **EndTime** | Pointer to **time.Time** | End date of the certificate renewal. | [optional] [readonly] 
 **LastSuccessPollTime** | Pointer to **time.Time** | The last poll time when data collection was successfull. This time is used to collect data after this time in next cycle. | [optional] [readonly] 
 **Messages** | Pointer to **[]string** |  | [optional] 

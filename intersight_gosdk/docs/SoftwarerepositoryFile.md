@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **Sha512sum** | Pointer to **string** | The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **Size** | Pointer to **int64** | The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **SoftwareAdvisoryUrl** | Pointer to **string** | The software advisory, if any, provided by the vendor for this file. | [optional] 
-**Source** | Pointer to [**NullableSoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
+**Source** | Pointer to [**NullableSoftwarerepositoryFileServer**](SoftwarerepositoryFileServer.md) |  | [optional] 
 **Version** | Pointer to **string** | Vendor provided version for the file. | [optional] 
 
 ## Methods

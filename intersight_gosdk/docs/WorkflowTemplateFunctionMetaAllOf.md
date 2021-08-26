@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TemplateFunctionMeta"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TemplateFunctionMeta"]
-**Comments** | Pointer to [**NullableWorkflowComments**](workflow.Comments.md) |  | [optional] 
+**Comments** | Pointer to [**NullableWorkflowComments**](WorkflowComments.md) |  | [optional] 
 **Inputs** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **IsGuidedModeSupported** | Pointer to **bool** | The flag indicates whether a guided mode template is supported for it or not. | [optional] [readonly] 
 **Name** | Pointer to **string** | The template function name. | [optional] [readonly] 

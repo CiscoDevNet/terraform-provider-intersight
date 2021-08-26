@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niaapi.VersionRegexPlatform"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niaapi.VersionRegexPlatform"]
 **Anyllregex** | Pointer to **string** | All long live version Regex pattern. | [optional] 
-**Currentlltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
-**Latestsltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Currentlltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](NiaapiSoftwareRegex.md) |  | [optional] 
+**Latestsltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](NiaapiSoftwareRegex.md) |  | [optional] 
 **Sltrain** | Pointer to [**[]NiaapiSoftwareRegex**](NiaapiSoftwareRegex.md) |  | [optional] 
-**Upcominglltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Upcominglltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](NiaapiSoftwareRegex.md) |  | [optional] 
 
 ## Methods
 

@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ProductInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ProductInformation"]
-**BillTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
+**BillTo** | Pointer to [**NullableAssetAddressInformation**](AssetAddressInformation.md) |  | [optional] 
 **Description** | Pointer to **string** | Short description of the Cisco product that helps identify the product easily. example \&quot;DISTI:UCS 6248UP 1RU Fabric Int/No PSU/32 UP/ 12p LIC\&quot;. | [optional] [readonly] 
 **Family** | Pointer to **string** | Family that the product belongs to. Example \&quot;UCSB\&quot;. | [optional] [readonly] 
 **Group** | Pointer to **string** | Group that the product belongs to. It is one higher level categorization above family. example \&quot;Switch\&quot;. | [optional] [readonly] 
 **Number** | Pointer to **string** | Product number that identifies the product. example PID. example \&quot;UCS-FI-6248UP-CH2\&quot;. | [optional] [readonly] 
-**ShipTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
+**ShipTo** | Pointer to [**NullableAssetAddressInformation**](AssetAddressInformation.md) |  | [optional] 
 **SubType** | Pointer to **string** | Sub type of the product being specified. example \&quot;UCS 6200 SER\&quot;. | [optional] [readonly] 
 
 ## Methods

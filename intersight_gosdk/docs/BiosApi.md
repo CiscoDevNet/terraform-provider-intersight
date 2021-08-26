@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosPolicy**](bios.Policy.md)
+[**BiosPolicy**](BiosPolicy.md)
 
 ### Authorization
 
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootDevice**](bios.BootDevice.md)
+[**BiosBootDevice**](BiosBootDevice.md)
 
 ### Authorization
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootDeviceResponse**](bios.BootDevice.Response.md)
+[**BiosBootDeviceResponse**](BiosBootDeviceResponse.md)
 
 ### Authorization
 
@@ -367,7 +367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootMode**](bios.BootMode.md)
+[**BiosBootMode**](BiosBootMode.md)
 
 ### Authorization
 
@@ -451,7 +451,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootModeResponse**](bios.BootMode.Response.md)
+[**BiosBootModeResponse**](BiosBootModeResponse.md)
 
 ### Authorization
 
@@ -519,7 +519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosPolicy**](bios.Policy.md)
+[**BiosPolicy**](BiosPolicy.md)
 
 ### Authorization
 
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosPolicyResponse**](bios.Policy.Response.md)
+[**BiosPolicyResponse**](BiosPolicyResponse.md)
 
 ### Authorization
 
@@ -671,7 +671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosSystemBootOrder**](bios.SystemBootOrder.md)
+[**BiosSystemBootOrder**](BiosSystemBootOrder.md)
 
 ### Authorization
 
@@ -755,7 +755,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosSystemBootOrderResponse**](bios.SystemBootOrder.Response.md)
+[**BiosSystemBootOrderResponse**](BiosSystemBootOrderResponse.md)
 
 ### Authorization
 
@@ -823,7 +823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosTokenSettings**](bios.TokenSettings.md)
+[**BiosTokenSettings**](BiosTokenSettings.md)
 
 ### Authorization
 
@@ -907,7 +907,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosTokenSettingsResponse**](bios.TokenSettings.Response.md)
+[**BiosTokenSettingsResponse**](BiosTokenSettingsResponse.md)
 
 ### Authorization
 
@@ -975,7 +975,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosUnit**](bios.Unit.md)
+[**BiosUnit**](BiosUnit.md)
 
 ### Authorization
 
@@ -1059,7 +1059,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosUnitResponse**](bios.Unit.Response.md)
+[**BiosUnitResponse**](BiosUnitResponse.md)
 
 ### Authorization
 
@@ -1127,7 +1127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosVfSelectMemoryRasConfiguration**](bios.VfSelectMemoryRasConfiguration.md)
+[**BiosVfSelectMemoryRasConfiguration**](BiosVfSelectMemoryRasConfiguration.md)
 
 ### Authorization
 
@@ -1211,7 +1211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosVfSelectMemoryRasConfigurationResponse**](bios.VfSelectMemoryRasConfiguration.Response.md)
+[**BiosVfSelectMemoryRasConfigurationResponse**](BiosVfSelectMemoryRasConfigurationResponse.md)
 
 ### Authorization
 
@@ -1283,7 +1283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootMode**](bios.BootMode.md)
+[**BiosBootMode**](BiosBootMode.md)
 
 ### Authorization
 
@@ -1355,7 +1355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosPolicy**](bios.Policy.md)
+[**BiosPolicy**](BiosPolicy.md)
 
 ### Authorization
 
@@ -1427,7 +1427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosUnit**](bios.Unit.md)
+[**BiosUnit**](BiosUnit.md)
 
 ### Authorization
 
@@ -1499,7 +1499,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosBootMode**](bios.BootMode.md)
+[**BiosBootMode**](BiosBootMode.md)
 
 ### Authorization
 
@@ -1571,7 +1571,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosPolicy**](bios.Policy.md)
+[**BiosPolicy**](BiosPolicy.md)
 
 ### Authorization
 
@@ -1643,7 +1643,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BiosUnit**](bios.Unit.md)
+[**BiosUnit**](BiosUnit.md)
 
 ### Authorization
 

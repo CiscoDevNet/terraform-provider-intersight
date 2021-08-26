@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the connector pack running on the UCSD. | [optional] [readonly] 
 **State** | Pointer to **string** | State of the connector pack whether it is enabled or disabled. | [optional] [readonly] 
 **Version** | Pointer to **string** | Version of the connector pack. | [optional] [readonly] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 
+**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 
