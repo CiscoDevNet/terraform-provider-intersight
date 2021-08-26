@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **SitesEachTenantIsDeployedToInMso** | Pointer to **int64** | Number of sites each tenant is deployed to. | [optional] 
 **TenantId** | Pointer to **string** | ID of tenant in Multi-Site Orchestrator. | [optional] 
 **TenantName** | Pointer to **string** | Name of the tenant in Multi-Site Orchestrator. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

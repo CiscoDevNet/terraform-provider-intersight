@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.ServerConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.ServerConfig"]
 **AdditionalParameters** | Pointer to [**[]OsPlaceHolder**](OsPlaceHolder.md) |  | [optional] 
-**Answers** | Pointer to [**NullableOsAnswers**](os.Answers.md) |  | [optional] 
+**Answers** | Pointer to [**NullableOsAnswers**](OsAnswers.md) |  | [optional] 
 **ErrorMsgs** | Pointer to **[]string** |  | [optional] 
 **InstallTarget** | Pointer to **string** | The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. | [optional] [readonly] 
-**ProcessedInstallTarget** | Pointer to [**NullableOsInstallTarget**](os.InstallTarget.md) |  | [optional] 
+**ProcessedInstallTarget** | Pointer to [**NullableOsInstallTarget**](OsInstallTarget.md) |  | [optional] 
 **SerialNumber** | Pointer to **string** | The Serial Number of the server. | [optional] [readonly] 
 
 ## Methods

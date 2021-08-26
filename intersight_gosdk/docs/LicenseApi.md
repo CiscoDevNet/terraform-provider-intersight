@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoLicenseCount**](license.IwoLicenseCount.md)
+[**LicenseIwoLicenseCount**](LicenseIwoLicenseCount.md)
 
 ### Authorization
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseInfo**](license.LicenseInfo.md)
+[**LicenseLicenseInfo**](LicenseLicenseInfo.md)
 
 ### Authorization
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseReservationOp**](license.LicenseReservationOp.md)
+[**LicenseLicenseReservationOp**](LicenseLicenseReservationOp.md)
 
 ### Authorization
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseAccountLicenseData**](license.AccountLicenseData.md)
+[**LicenseAccountLicenseData**](LicenseAccountLicenseData.md)
 
 ### Authorization
 
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseAccountLicenseDataResponse**](license.AccountLicenseData.Response.md)
+[**LicenseAccountLicenseDataResponse**](LicenseAccountLicenseDataResponse.md)
 
 ### Authorization
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseCustomerOp**](license.CustomerOp.md)
+[**LicenseCustomerOp**](LicenseCustomerOp.md)
 
 ### Authorization
 
@@ -530,7 +530,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseCustomerOpResponse**](license.CustomerOp.Response.md)
+[**LicenseCustomerOpResponse**](LicenseCustomerOpResponse.md)
 
 ### Authorization
 
@@ -598,7 +598,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoCustomerOp**](license.IwoCustomerOp.md)
+[**LicenseIwoCustomerOp**](LicenseIwoCustomerOp.md)
 
 ### Authorization
 
@@ -682,7 +682,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoCustomerOpResponse**](license.IwoCustomerOp.Response.md)
+[**LicenseIwoCustomerOpResponse**](LicenseIwoCustomerOpResponse.md)
 
 ### Authorization
 
@@ -750,7 +750,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoLicenseCount**](license.IwoLicenseCount.md)
+[**LicenseIwoLicenseCount**](LicenseIwoLicenseCount.md)
 
 ### Authorization
 
@@ -834,7 +834,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoLicenseCountResponse**](license.IwoLicenseCount.Response.md)
+[**LicenseIwoLicenseCountResponse**](LicenseIwoLicenseCountResponse.md)
 
 ### Authorization
 
@@ -902,7 +902,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseInfo**](license.LicenseInfo.md)
+[**LicenseLicenseInfo**](LicenseLicenseInfo.md)
 
 ### Authorization
 
@@ -986,7 +986,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseInfoResponse**](license.LicenseInfo.Response.md)
+[**LicenseLicenseInfoResponse**](LicenseLicenseInfoResponse.md)
 
 ### Authorization
 
@@ -1054,7 +1054,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseReservationOp**](license.LicenseReservationOp.md)
+[**LicenseLicenseReservationOp**](LicenseLicenseReservationOp.md)
 
 ### Authorization
 
@@ -1138,7 +1138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseReservationOpResponse**](license.LicenseReservationOp.Response.md)
+[**LicenseLicenseReservationOpResponse**](LicenseLicenseReservationOpResponse.md)
 
 ### Authorization
 
@@ -1206,7 +1206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseSmartlicenseToken**](license.SmartlicenseToken.md)
+[**LicenseSmartlicenseToken**](LicenseSmartlicenseToken.md)
 
 ### Authorization
 
@@ -1290,7 +1290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseSmartlicenseTokenResponse**](license.SmartlicenseToken.Response.md)
+[**LicenseSmartlicenseTokenResponse**](LicenseSmartlicenseTokenResponse.md)
 
 ### Authorization
 
@@ -1362,7 +1362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseAccountLicenseData**](license.AccountLicenseData.md)
+[**LicenseAccountLicenseData**](LicenseAccountLicenseData.md)
 
 ### Authorization
 
@@ -1434,7 +1434,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseCustomerOp**](license.CustomerOp.md)
+[**LicenseCustomerOp**](LicenseCustomerOp.md)
 
 ### Authorization
 
@@ -1506,7 +1506,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoCustomerOp**](license.IwoCustomerOp.md)
+[**LicenseIwoCustomerOp**](LicenseIwoCustomerOp.md)
 
 ### Authorization
 
@@ -1578,7 +1578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoLicenseCount**](license.IwoLicenseCount.md)
+[**LicenseIwoLicenseCount**](LicenseIwoLicenseCount.md)
 
 ### Authorization
 
@@ -1650,7 +1650,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseInfo**](license.LicenseInfo.md)
+[**LicenseLicenseInfo**](LicenseLicenseInfo.md)
 
 ### Authorization
 
@@ -1722,7 +1722,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseReservationOp**](license.LicenseReservationOp.md)
+[**LicenseLicenseReservationOp**](LicenseLicenseReservationOp.md)
 
 ### Authorization
 
@@ -1794,7 +1794,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseSmartlicenseToken**](license.SmartlicenseToken.md)
+[**LicenseSmartlicenseToken**](LicenseSmartlicenseToken.md)
 
 ### Authorization
 
@@ -1866,7 +1866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseAccountLicenseData**](license.AccountLicenseData.md)
+[**LicenseAccountLicenseData**](LicenseAccountLicenseData.md)
 
 ### Authorization
 
@@ -1938,7 +1938,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseCustomerOp**](license.CustomerOp.md)
+[**LicenseCustomerOp**](LicenseCustomerOp.md)
 
 ### Authorization
 
@@ -2010,7 +2010,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoCustomerOp**](license.IwoCustomerOp.md)
+[**LicenseIwoCustomerOp**](LicenseIwoCustomerOp.md)
 
 ### Authorization
 
@@ -2082,7 +2082,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseIwoLicenseCount**](license.IwoLicenseCount.md)
+[**LicenseIwoLicenseCount**](LicenseIwoLicenseCount.md)
 
 ### Authorization
 
@@ -2154,7 +2154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseInfo**](license.LicenseInfo.md)
+[**LicenseLicenseInfo**](LicenseLicenseInfo.md)
 
 ### Authorization
 
@@ -2226,7 +2226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseLicenseReservationOp**](license.LicenseReservationOp.md)
+[**LicenseLicenseReservationOp**](LicenseLicenseReservationOp.md)
 
 ### Authorization
 
@@ -2298,7 +2298,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LicenseSmartlicenseToken**](license.SmartlicenseToken.md)
+[**LicenseSmartlicenseToken**](LicenseSmartlicenseToken.md)
 
 ### Authorization
 

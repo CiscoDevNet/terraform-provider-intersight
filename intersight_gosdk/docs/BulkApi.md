@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BulkMoCloner**](bulk.MoCloner.md)
+[**BulkMoCloner**](BulkMoCloner.md)
 
 ### Authorization
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BulkMoMerger**](bulk.MoMerger.md)
+[**BulkMoMerger**](BulkMoMerger.md)
 
 ### Authorization
 
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BulkRequest**](bulk.Request.md)
+[**BulkRequest**](BulkRequest.md)
 
 ### Authorization
 

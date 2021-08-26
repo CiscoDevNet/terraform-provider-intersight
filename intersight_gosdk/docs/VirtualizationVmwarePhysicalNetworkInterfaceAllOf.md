@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | Standard MAC address assigned to physical network interface. | [optional] 
 **Pci** | Pointer to **string** | PCI info for physical network interface. | [optional] 
 **SwitchName** | Pointer to **string** | Switch associated with the physical network interface. | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
+**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthAdapterPolicy**](vnic.EthAdapterPolicy.md)
+[**VnicEthAdapterPolicy**](VnicEthAdapterPolicy.md)
 
 ### Authorization
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthIf**](vnic.EthIf.md)
+[**VnicEthIf**](VnicEthIf.md)
 
 ### Authorization
 
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthNetworkPolicy**](vnic.EthNetworkPolicy.md)
+[**VnicEthNetworkPolicy**](VnicEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthQosPolicy**](vnic.EthQosPolicy.md)
+[**VnicEthQosPolicy**](VnicEthQosPolicy.md)
 
 ### Authorization
 
@@ -413,7 +413,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcAdapterPolicy**](vnic.FcAdapterPolicy.md)
+[**VnicFcAdapterPolicy**](VnicFcAdapterPolicy.md)
 
 ### Authorization
 
@@ -481,7 +481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcIf**](vnic.FcIf.md)
+[**VnicFcIf**](VnicFcIf.md)
 
 ### Authorization
 
@@ -549,7 +549,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcNetworkPolicy**](vnic.FcNetworkPolicy.md)
+[**VnicFcNetworkPolicy**](VnicFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -617,7 +617,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcQosPolicy**](vnic.FcQosPolicy.md)
+[**VnicFcQosPolicy**](VnicFcQosPolicy.md)
 
 ### Authorization
 
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiAdapterPolicy**](vnic.IscsiAdapterPolicy.md)
+[**VnicIscsiAdapterPolicy**](VnicIscsiAdapterPolicy.md)
 
 ### Authorization
 
@@ -753,7 +753,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiBootPolicy**](vnic.IscsiBootPolicy.md)
+[**VnicIscsiBootPolicy**](VnicIscsiBootPolicy.md)
 
 ### Authorization
 
@@ -821,7 +821,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiStaticTargetPolicy**](vnic.IscsiStaticTargetPolicy.md)
+[**VnicIscsiStaticTargetPolicy**](VnicIscsiStaticTargetPolicy.md)
 
 ### Authorization
 
@@ -889,7 +889,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLanConnectivityPolicy**](vnic.LanConnectivityPolicy.md)
+[**VnicLanConnectivityPolicy**](VnicLanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -957,7 +957,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicSanConnectivityPolicy**](vnic.SanConnectivityPolicy.md)
+[**VnicSanConnectivityPolicy**](VnicSanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -1883,7 +1883,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthAdapterPolicy**](vnic.EthAdapterPolicy.md)
+[**VnicEthAdapterPolicy**](VnicEthAdapterPolicy.md)
 
 ### Authorization
 
@@ -1967,7 +1967,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthAdapterPolicyResponse**](vnic.EthAdapterPolicy.Response.md)
+[**VnicEthAdapterPolicyResponse**](VnicEthAdapterPolicyResponse.md)
 
 ### Authorization
 
@@ -2035,7 +2035,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthIf**](vnic.EthIf.md)
+[**VnicEthIf**](VnicEthIf.md)
 
 ### Authorization
 
@@ -2119,7 +2119,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthIfResponse**](vnic.EthIf.Response.md)
+[**VnicEthIfResponse**](VnicEthIfResponse.md)
 
 ### Authorization
 
@@ -2187,7 +2187,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthNetworkPolicy**](vnic.EthNetworkPolicy.md)
+[**VnicEthNetworkPolicy**](VnicEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -2271,7 +2271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthNetworkPolicyResponse**](vnic.EthNetworkPolicy.Response.md)
+[**VnicEthNetworkPolicyResponse**](VnicEthNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -2339,7 +2339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthQosPolicy**](vnic.EthQosPolicy.md)
+[**VnicEthQosPolicy**](VnicEthQosPolicy.md)
 
 ### Authorization
 
@@ -2423,7 +2423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthQosPolicyResponse**](vnic.EthQosPolicy.Response.md)
+[**VnicEthQosPolicyResponse**](VnicEthQosPolicyResponse.md)
 
 ### Authorization
 
@@ -2491,7 +2491,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcAdapterPolicy**](vnic.FcAdapterPolicy.md)
+[**VnicFcAdapterPolicy**](VnicFcAdapterPolicy.md)
 
 ### Authorization
 
@@ -2575,7 +2575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcAdapterPolicyResponse**](vnic.FcAdapterPolicy.Response.md)
+[**VnicFcAdapterPolicyResponse**](VnicFcAdapterPolicyResponse.md)
 
 ### Authorization
 
@@ -2643,7 +2643,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcIf**](vnic.FcIf.md)
+[**VnicFcIf**](VnicFcIf.md)
 
 ### Authorization
 
@@ -2727,7 +2727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcIfResponse**](vnic.FcIf.Response.md)
+[**VnicFcIfResponse**](VnicFcIfResponse.md)
 
 ### Authorization
 
@@ -2795,7 +2795,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcNetworkPolicy**](vnic.FcNetworkPolicy.md)
+[**VnicFcNetworkPolicy**](VnicFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -2879,7 +2879,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcNetworkPolicyResponse**](vnic.FcNetworkPolicy.Response.md)
+[**VnicFcNetworkPolicyResponse**](VnicFcNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -2947,7 +2947,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcQosPolicy**](vnic.FcQosPolicy.md)
+[**VnicFcQosPolicy**](VnicFcQosPolicy.md)
 
 ### Authorization
 
@@ -3031,7 +3031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcQosPolicyResponse**](vnic.FcQosPolicy.Response.md)
+[**VnicFcQosPolicyResponse**](VnicFcQosPolicyResponse.md)
 
 ### Authorization
 
@@ -3099,7 +3099,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiAdapterPolicy**](vnic.IscsiAdapterPolicy.md)
+[**VnicIscsiAdapterPolicy**](VnicIscsiAdapterPolicy.md)
 
 ### Authorization
 
@@ -3183,7 +3183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiAdapterPolicyResponse**](vnic.IscsiAdapterPolicy.Response.md)
+[**VnicIscsiAdapterPolicyResponse**](VnicIscsiAdapterPolicyResponse.md)
 
 ### Authorization
 
@@ -3251,7 +3251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiBootPolicy**](vnic.IscsiBootPolicy.md)
+[**VnicIscsiBootPolicy**](VnicIscsiBootPolicy.md)
 
 ### Authorization
 
@@ -3335,7 +3335,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiBootPolicyResponse**](vnic.IscsiBootPolicy.Response.md)
+[**VnicIscsiBootPolicyResponse**](VnicIscsiBootPolicyResponse.md)
 
 ### Authorization
 
@@ -3403,7 +3403,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiStaticTargetPolicy**](vnic.IscsiStaticTargetPolicy.md)
+[**VnicIscsiStaticTargetPolicy**](VnicIscsiStaticTargetPolicy.md)
 
 ### Authorization
 
@@ -3487,7 +3487,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiStaticTargetPolicyResponse**](vnic.IscsiStaticTargetPolicy.Response.md)
+[**VnicIscsiStaticTargetPolicyResponse**](VnicIscsiStaticTargetPolicyResponse.md)
 
 ### Authorization
 
@@ -3555,7 +3555,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLanConnectivityPolicy**](vnic.LanConnectivityPolicy.md)
+[**VnicLanConnectivityPolicy**](VnicLanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -3639,7 +3639,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLanConnectivityPolicyResponse**](vnic.LanConnectivityPolicy.Response.md)
+[**VnicLanConnectivityPolicyResponse**](VnicLanConnectivityPolicyResponse.md)
 
 ### Authorization
 
@@ -3707,7 +3707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLcpStatus**](vnic.LcpStatus.md)
+[**VnicLcpStatus**](VnicLcpStatus.md)
 
 ### Authorization
 
@@ -3791,7 +3791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLcpStatusResponse**](vnic.LcpStatus.Response.md)
+[**VnicLcpStatusResponse**](VnicLcpStatusResponse.md)
 
 ### Authorization
 
@@ -3859,7 +3859,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicSanConnectivityPolicy**](vnic.SanConnectivityPolicy.md)
+[**VnicSanConnectivityPolicy**](VnicSanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -3943,7 +3943,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicSanConnectivityPolicyResponse**](vnic.SanConnectivityPolicy.Response.md)
+[**VnicSanConnectivityPolicyResponse**](VnicSanConnectivityPolicyResponse.md)
 
 ### Authorization
 
@@ -4011,7 +4011,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicScpStatus**](vnic.ScpStatus.md)
+[**VnicScpStatus**](VnicScpStatus.md)
 
 ### Authorization
 
@@ -4095,7 +4095,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicScpStatusResponse**](vnic.ScpStatus.Response.md)
+[**VnicScpStatusResponse**](VnicScpStatusResponse.md)
 
 ### Authorization
 
@@ -4167,7 +4167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthAdapterPolicy**](vnic.EthAdapterPolicy.md)
+[**VnicEthAdapterPolicy**](VnicEthAdapterPolicy.md)
 
 ### Authorization
 
@@ -4239,7 +4239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthIf**](vnic.EthIf.md)
+[**VnicEthIf**](VnicEthIf.md)
 
 ### Authorization
 
@@ -4311,7 +4311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthNetworkPolicy**](vnic.EthNetworkPolicy.md)
+[**VnicEthNetworkPolicy**](VnicEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -4383,7 +4383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthQosPolicy**](vnic.EthQosPolicy.md)
+[**VnicEthQosPolicy**](VnicEthQosPolicy.md)
 
 ### Authorization
 
@@ -4455,7 +4455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcAdapterPolicy**](vnic.FcAdapterPolicy.md)
+[**VnicFcAdapterPolicy**](VnicFcAdapterPolicy.md)
 
 ### Authorization
 
@@ -4527,7 +4527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcIf**](vnic.FcIf.md)
+[**VnicFcIf**](VnicFcIf.md)
 
 ### Authorization
 
@@ -4599,7 +4599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcNetworkPolicy**](vnic.FcNetworkPolicy.md)
+[**VnicFcNetworkPolicy**](VnicFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -4671,7 +4671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcQosPolicy**](vnic.FcQosPolicy.md)
+[**VnicFcQosPolicy**](VnicFcQosPolicy.md)
 
 ### Authorization
 
@@ -4743,7 +4743,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiAdapterPolicy**](vnic.IscsiAdapterPolicy.md)
+[**VnicIscsiAdapterPolicy**](VnicIscsiAdapterPolicy.md)
 
 ### Authorization
 
@@ -4815,7 +4815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiBootPolicy**](vnic.IscsiBootPolicy.md)
+[**VnicIscsiBootPolicy**](VnicIscsiBootPolicy.md)
 
 ### Authorization
 
@@ -4887,7 +4887,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiStaticTargetPolicy**](vnic.IscsiStaticTargetPolicy.md)
+[**VnicIscsiStaticTargetPolicy**](VnicIscsiStaticTargetPolicy.md)
 
 ### Authorization
 
@@ -4959,7 +4959,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLanConnectivityPolicy**](vnic.LanConnectivityPolicy.md)
+[**VnicLanConnectivityPolicy**](VnicLanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -5031,7 +5031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicSanConnectivityPolicy**](vnic.SanConnectivityPolicy.md)
+[**VnicSanConnectivityPolicy**](VnicSanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -5103,7 +5103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthAdapterPolicy**](vnic.EthAdapterPolicy.md)
+[**VnicEthAdapterPolicy**](VnicEthAdapterPolicy.md)
 
 ### Authorization
 
@@ -5175,7 +5175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthIf**](vnic.EthIf.md)
+[**VnicEthIf**](VnicEthIf.md)
 
 ### Authorization
 
@@ -5247,7 +5247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthNetworkPolicy**](vnic.EthNetworkPolicy.md)
+[**VnicEthNetworkPolicy**](VnicEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -5319,7 +5319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicEthQosPolicy**](vnic.EthQosPolicy.md)
+[**VnicEthQosPolicy**](VnicEthQosPolicy.md)
 
 ### Authorization
 
@@ -5391,7 +5391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcAdapterPolicy**](vnic.FcAdapterPolicy.md)
+[**VnicFcAdapterPolicy**](VnicFcAdapterPolicy.md)
 
 ### Authorization
 
@@ -5463,7 +5463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcIf**](vnic.FcIf.md)
+[**VnicFcIf**](VnicFcIf.md)
 
 ### Authorization
 
@@ -5535,7 +5535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcNetworkPolicy**](vnic.FcNetworkPolicy.md)
+[**VnicFcNetworkPolicy**](VnicFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -5607,7 +5607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicFcQosPolicy**](vnic.FcQosPolicy.md)
+[**VnicFcQosPolicy**](VnicFcQosPolicy.md)
 
 ### Authorization
 
@@ -5679,7 +5679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiAdapterPolicy**](vnic.IscsiAdapterPolicy.md)
+[**VnicIscsiAdapterPolicy**](VnicIscsiAdapterPolicy.md)
 
 ### Authorization
 
@@ -5751,7 +5751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiBootPolicy**](vnic.IscsiBootPolicy.md)
+[**VnicIscsiBootPolicy**](VnicIscsiBootPolicy.md)
 
 ### Authorization
 
@@ -5823,7 +5823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicIscsiStaticTargetPolicy**](vnic.IscsiStaticTargetPolicy.md)
+[**VnicIscsiStaticTargetPolicy**](VnicIscsiStaticTargetPolicy.md)
 
 ### Authorization
 
@@ -5895,7 +5895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicLanConnectivityPolicy**](vnic.LanConnectivityPolicy.md)
+[**VnicLanConnectivityPolicy**](VnicLanConnectivityPolicy.md)
 
 ### Authorization
 
@@ -5967,7 +5967,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VnicSanConnectivityPolicy**](vnic.SanConnectivityPolicy.md)
+[**VnicSanConnectivityPolicy**](VnicSanConnectivityPolicy.md)
 
 ### Authorization
 

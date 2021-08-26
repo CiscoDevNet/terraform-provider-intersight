@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SnmpPolicy**](snmp.Policy.md)
+[**SnmpPolicy**](SnmpPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SnmpPolicy**](snmp.Policy.md)
+[**SnmpPolicy**](SnmpPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SnmpPolicyResponse**](snmp.Policy.Response.md)
+[**SnmpPolicyResponse**](SnmpPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SnmpPolicy**](snmp.Policy.md)
+[**SnmpPolicy**](SnmpPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SnmpPolicy**](snmp.Policy.md)
+[**SnmpPolicy**](SnmpPolicy.md)
 
 ### Authorization
 

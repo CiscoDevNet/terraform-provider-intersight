@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarmAggregation**](cond.AlarmAggregation.md)
+[**CondAlarmAggregation**](CondAlarmAggregation.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarmAggregationResponse**](cond.AlarmAggregation.Response.md)
+[**CondAlarmAggregationResponse**](CondAlarmAggregationResponse.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarm**](cond.Alarm.md)
+[**CondAlarm**](CondAlarm.md)
 
 ### Authorization
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarmResponse**](cond.Alarm.Response.md)
+[**CondAlarmResponse**](CondAlarmResponse.md)
 
 ### Authorization
 
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatus**](cond.HclStatus.md)
+[**CondHclStatus**](CondHclStatus.md)
 
 ### Authorization
 
@@ -443,7 +443,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatusDetail**](cond.HclStatusDetail.md)
+[**CondHclStatusDetail**](CondHclStatusDetail.md)
 
 ### Authorization
 
@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatusDetailResponse**](cond.HclStatusDetail.Response.md)
+[**CondHclStatusDetailResponse**](CondHclStatusDetailResponse.md)
 
 ### Authorization
 
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatusJob**](cond.HclStatusJob.md)
+[**CondHclStatusJob**](CondHclStatusJob.md)
 
 ### Authorization
 
@@ -679,7 +679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatusJobResponse**](cond.HclStatusJob.Response.md)
+[**CondHclStatusJobResponse**](CondHclStatusJobResponse.md)
 
 ### Authorization
 
@@ -763,7 +763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondHclStatusResponse**](cond.HclStatus.Response.md)
+[**CondHclStatusResponse**](CondHclStatusResponse.md)
 
 ### Authorization
 
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarm**](cond.Alarm.md)
+[**CondAlarm**](CondAlarm.md)
 
 ### Authorization
 
@@ -907,7 +907,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondAlarm**](cond.Alarm.md)
+[**CondAlarm**](CondAlarm.md)
 
 ### Authorization
 

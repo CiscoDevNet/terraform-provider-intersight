@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PortIdEnd** | Pointer to **int64** | Ending range of the Port Identifier. | [optional] 
 **PortIdStart** | Pointer to **int64** | Starting range of the Port Identifier. | [optional] 
 **SlotId** | Pointer to **int64** | Slot Identifier of the switch. | [optional] 
-**PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](fabric.PortPolicy.Relationship.md) |  | [optional] 
+**PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](FabricPortPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **TaskExecutionCount** | Pointer to **int64** | Number of times this task has executed. | [optional] [readonly] 
 **TaskName** | Pointer to **string** | Name of the task executed in UCSD. | [optional] [readonly] 
 **TaskType** | Pointer to **string** | Type of the task whether it is system task or custom task. | [optional] [readonly] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 
+**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

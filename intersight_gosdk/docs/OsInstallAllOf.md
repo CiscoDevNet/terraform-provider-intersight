@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.Install"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.Install"]
 **Name** | Pointer to **string** | The name of the OS install configuration. | [optional] 
-**ConfigurationFile** | Pointer to [**OsConfigurationFileRelationship**](os.ConfigurationFile.Relationship.md) |  | [optional] 
-**Image** | Pointer to [**SoftwarerepositoryOperatingSystemFileRelationship**](softwarerepository.OperatingSystemFile.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**OsduImage** | Pointer to [**FirmwareServerConfigurationUtilityDistributableRelationship**](firmware.ServerConfigurationUtilityDistributable.Relationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
+**ConfigurationFile** | Pointer to [**OsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) |  | [optional] 
+**Image** | Pointer to [**SoftwarerepositoryOperatingSystemFileRelationship**](SoftwarerepositoryOperatingSystemFileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**OsduImage** | Pointer to [**FirmwareServerConfigurationUtilityDistributableRelationship**](FirmwareServerConfigurationUtilityDistributableRelationship.md) |  | [optional] 
+**Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

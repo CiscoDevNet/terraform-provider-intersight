@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the virtual disk. | [optional] [readonly] 
 **SourceFilePath** | Pointer to **string** | Source file path associated with virtual machine disk. | [optional] [readonly] 
 **SourceVirtualDisk** | Pointer to **string** | Source disk name from where the clone is done. | [optional] [readonly] 
-**Status** | Pointer to [**NullableHyperflexDiskStatus**](hyperflex.DiskStatus.md) |  | [optional] 
+**Status** | Pointer to [**NullableHyperflexDiskStatus**](HyperflexDiskStatus.md) |  | [optional] 
 **Uuid** | Pointer to **string** | UUID of the virtual disk. | [optional] [readonly] 
 
 ## Methods

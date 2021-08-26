@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SnapshotInfoBrief"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SnapshotInfoBrief"]
-**ReplicationStatus** | Pointer to [**NullableHyperflexReplicationStatus**](hyperflex.ReplicationStatus.md) |  | [optional] 
+**ReplicationStatus** | Pointer to [**NullableHyperflexReplicationStatus**](HyperflexReplicationStatus.md) |  | [optional] 
 **Site** | Pointer to **string** | Cluster site for this snapshot. * &#x60;PRIMARY&#x60; - The cluster site for this backup is primary. * &#x60;SECONDARY&#x60; - The cluster site for this backup is secondary. | [optional] [readonly] [default to "PRIMARY"]
-**SnapshotStatus** | Pointer to [**NullableHyperflexSnapshotStatus**](hyperflex.SnapshotStatus.md) |  | [optional] 
-**VmSnapshotEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
+**SnapshotStatus** | Pointer to [**NullableHyperflexSnapshotStatus**](HyperflexSnapshotStatus.md) |  | [optional] 
+**VmSnapshotEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 
 ## Methods
 

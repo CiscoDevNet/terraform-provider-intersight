@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Revision** | Pointer to **string** | Revision of the flash Mo in APIC. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the flash in APIC. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

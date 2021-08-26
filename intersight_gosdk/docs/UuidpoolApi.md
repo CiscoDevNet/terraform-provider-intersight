@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPool**](uuidpool.Pool.md)
+[**UuidpoolPool**](UuidpoolPool.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolBlock**](uuidpool.Block.md)
+[**UuidpoolBlock**](UuidpoolBlock.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolBlockResponse**](uuidpool.Block.Response.md)
+[**UuidpoolBlockResponse**](UuidpoolBlockResponse.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPool**](uuidpool.Pool.md)
+[**UuidpoolPool**](UuidpoolPool.md)
 
 ### Authorization
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPoolResponse**](uuidpool.Pool.Response.md)
+[**UuidpoolPoolResponse**](UuidpoolPoolResponse.md)
 
 ### Authorization
 
@@ -578,7 +578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPoolMember**](uuidpool.PoolMember.md)
+[**UuidpoolPoolMember**](UuidpoolPoolMember.md)
 
 ### Authorization
 
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPoolMemberResponse**](uuidpool.PoolMember.Response.md)
+[**UuidpoolPoolMemberResponse**](UuidpoolPoolMemberResponse.md)
 
 ### Authorization
 
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolUniverse**](uuidpool.Universe.md)
+[**UuidpoolUniverse**](UuidpoolUniverse.md)
 
 ### Authorization
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolUniverseResponse**](uuidpool.Universe.Response.md)
+[**UuidpoolUniverseResponse**](UuidpoolUniverseResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolUuidLease**](uuidpool.UuidLease.md)
+[**UuidpoolUuidLease**](UuidpoolUuidLease.md)
 
 ### Authorization
 
@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolUuidLeaseResponse**](uuidpool.UuidLease.Response.md)
+[**UuidpoolUuidLeaseResponse**](UuidpoolUuidLeaseResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPool**](uuidpool.Pool.md)
+[**UuidpoolPool**](UuidpoolPool.md)
 
 ### Authorization
 
@@ -1110,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UuidpoolPool**](uuidpool.Pool.md)
+[**UuidpoolPool**](UuidpoolPool.md)
 
 ### Authorization
 

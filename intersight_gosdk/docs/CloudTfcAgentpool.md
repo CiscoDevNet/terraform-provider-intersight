@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the agent pool. | [optional] [readonly] 
 **NumActiveAgents** | Pointer to **int64** | The number of active agents used by this pool. The total active agent are sum of idle, busy and unknown agent counts. | [optional] [readonly] 
 **NumTokens** | Pointer to **int64** | The number of Tokens in this agent Pool. | [optional] [readonly] 
-**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](cloud.TfcOrganization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

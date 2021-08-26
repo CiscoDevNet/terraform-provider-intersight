@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmPolicy**](kvm.Policy.md)
+[**KvmPolicy**](KvmPolicy.md)
 
 ### Authorization
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmSession**](kvm.Session.md)
+[**KvmSession**](KvmSession.md)
 
 ### Authorization
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmTunnel**](kvm.Tunnel.md)
+[**KvmTunnel**](KvmTunnel.md)
 
 ### Authorization
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmPolicy**](kvm.Policy.md)
+[**KvmPolicy**](KvmPolicy.md)
 
 ### Authorization
 
@@ -429,7 +429,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmPolicyResponse**](kvm.Policy.Response.md)
+[**KvmPolicyResponse**](KvmPolicyResponse.md)
 
 ### Authorization
 
@@ -497,7 +497,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmSession**](kvm.Session.md)
+[**KvmSession**](KvmSession.md)
 
 ### Authorization
 
@@ -581,7 +581,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmSessionResponse**](kvm.Session.Response.md)
+[**KvmSessionResponse**](KvmSessionResponse.md)
 
 ### Authorization
 
@@ -649,7 +649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmTunnel**](kvm.Tunnel.md)
+[**KvmTunnel**](KvmTunnel.md)
 
 ### Authorization
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmTunnelResponse**](kvm.Tunnel.Response.md)
+[**KvmTunnelResponse**](KvmTunnelResponse.md)
 
 ### Authorization
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmVmConsole**](kvm.VmConsole.md)
+[**KvmVmConsole**](KvmVmConsole.md)
 
 ### Authorization
 
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmVmConsoleResponse**](kvm.VmConsole.Response.md)
+[**KvmVmConsoleResponse**](KvmVmConsoleResponse.md)
 
 ### Authorization
 
@@ -957,7 +957,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmPolicy**](kvm.Policy.md)
+[**KvmPolicy**](KvmPolicy.md)
 
 ### Authorization
 
@@ -1029,7 +1029,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmSession**](kvm.Session.md)
+[**KvmSession**](KvmSession.md)
 
 ### Authorization
 
@@ -1101,7 +1101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmPolicy**](kvm.Policy.md)
+[**KvmPolicy**](KvmPolicy.md)
 
 ### Authorization
 
@@ -1173,7 +1173,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**KvmSession**](kvm.Session.md)
+[**KvmSession**](KvmSession.md)
 
 ### Authorization
 

@@ -6,16 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**DirectDownload** | Pointer to [**NullableFirmwareDirectDownload**](firmware.DirectDownload.md) |  | [optional] 
-**FileServer** | Pointer to [**NullableSoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
-**NetworkShare** | Pointer to [**NullableFirmwareNetworkShare**](firmware.NetworkShare.md) |  | [optional] 
+**DirectDownload** | Pointer to [**NullableFirmwareDirectDownload**](FirmwareDirectDownload.md) |  | [optional] 
+**FileServer** | Pointer to [**NullableSoftwarerepositoryFileServer**](SoftwarerepositoryFileServer.md) |  | [optional] 
+**NetworkShare** | Pointer to [**NullableFirmwareNetworkShare**](FirmwareNetworkShare.md) |  | [optional] 
 **SkipEstimateImpact** | Pointer to **bool** | User has the option to skip the estimate impact calculation. | [optional] 
 **Status** | Pointer to **string** | Status of the upgrade operation. * &#x60;NONE&#x60; - Upgrade status is not populated. * &#x60;IN_PROGRESS&#x60; - The upgrade is in progress. * &#x60;SUCCESSFUL&#x60; - The upgrade successfully completed. * &#x60;FAILED&#x60; - The upgrade shows failed status. * &#x60;TERMINATED&#x60; - The upgrade has been terminated. | [optional] [default to "NONE"]
 **UpgradeType** | Pointer to **string** | Desired upgrade mode to choose either direct download based upgrade or network share upgrade. * &#x60;direct_upgrade&#x60; - Upgrade mode is direct download. * &#x60;network_upgrade&#x60; - Upgrade mode is network upgrade. | [optional] [default to "direct_upgrade"]
-**Distributable** | Pointer to [**FirmwareDistributableRelationship**](firmware.Distributable.Relationship.md) |  | [optional] 
-**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](softwarerepository.Release.Relationship.md) |  | [optional] 
-**UpgradeImpact** | Pointer to [**FirmwareUpgradeImpactStatusRelationship**](firmware.UpgradeImpactStatus.Relationship.md) |  | [optional] 
-**UpgradeStatus** | Pointer to [**FirmwareUpgradeStatusRelationship**](firmware.UpgradeStatus.Relationship.md) |  | [optional] 
+**Distributable** | Pointer to [**FirmwareDistributableRelationship**](FirmwareDistributableRelationship.md) |  | [optional] 
+**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
+**UpgradeImpact** | Pointer to [**FirmwareUpgradeImpactStatusRelationship**](FirmwareUpgradeImpactStatusRelationship.md) |  | [optional] 
+**UpgradeStatus** | Pointer to [**FirmwareUpgradeStatusRelationship**](FirmwareUpgradeStatusRelationship.md) |  | [optional] 
 
 ## Methods
 

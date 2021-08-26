@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | Password for authenticating with the file server. | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date and time of the restore process. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the restore managed object. * &#x60;Started&#x60; - Backup or restore process has started. * &#x60;Created&#x60; - Backup or restore is in created state. * &#x60;Failed&#x60; - Backup or restore process has failed. * &#x60;Completed&#x60; - Backup or restore process has completed. * &#x60;Copied&#x60; - Backup file has been copied. | [optional] [readonly] [default to "Started"]
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

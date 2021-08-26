@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **SrcFromPort** | Pointer to **string** | Source From Port HTTPS ACL EPGs filter MO for APIC. | [optional] 
 **SrcToPort** | Pointer to **string** | Source To Port HTTPS ACL EPGs filter MO for APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **PolicyPrefix** | Pointer to **string** | Policy prefix for the policies of the imported server profile. | [optional] 
 **PolicyTypes** | Pointer to **[]string** |  | [optional] 
 **ProfileName** | Pointer to **string** | Profile name for the imported server profile. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Server** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**ServerProfile** | Pointer to [**ServerProfileRelationship**](server.Profile.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Server** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**ServerProfile** | Pointer to [**ServerProfileRelationship**](ServerProfileRelationship.md) |  | [optional] 
 
 ## Methods
 

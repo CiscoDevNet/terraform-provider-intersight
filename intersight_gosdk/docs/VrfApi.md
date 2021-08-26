@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VrfVrf**](vrf.Vrf.md)
+[**VrfVrf**](VrfVrf.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VrfVrf**](vrf.Vrf.md)
+[**VrfVrf**](VrfVrf.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VrfVrfResponse**](vrf.Vrf.Response.md)
+[**VrfVrfResponse**](VrfVrfResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VrfVrf**](vrf.Vrf.md)
+[**VrfVrf**](VrfVrf.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VrfVrf**](vrf.Vrf.md)
+[**VrfVrf**](VrfVrf.md)
 
 ### Authorization
 

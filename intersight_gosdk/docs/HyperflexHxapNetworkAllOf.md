@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **NetworkType** | Pointer to **string** | Network attachment type, only \&quot;L2\&quot; is available now. * &#x60;unknown&#x60; - This network is of an unknown network type. * &#x60;L2&#x60; - A Layer 2 switching network type. | [optional] [default to "unknown"]
 **Trunk** | Pointer to **[]string** |  | [optional] 
 **Vlan** | Pointer to **int64** | A vlan id set on the network attachment point. | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**Dvswitch** | Pointer to [**HyperflexHxapDvswitchRelationship**](hyperflex.HxapDvswitch.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**Dvswitch** | Pointer to [**HyperflexHxapDvswitchRelationship**](HyperflexHxapDvswitchRelationship.md) |  | [optional] 
 
 ## Methods
 

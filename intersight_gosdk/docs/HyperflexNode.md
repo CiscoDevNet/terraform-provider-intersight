@@ -10,17 +10,18 @@ Name | Type | Description | Notes
 **DisplayVersion** | Pointer to **string** | The user-friendly string representation of the hypervisor version of the host. | [optional] [readonly] 
 **HostName** | Pointer to **string** | The hostname configured for the hypervisor running on the host. | [optional] [readonly] 
 **Hypervisor** | Pointer to **string** | The type of hypervisor running on the host. | [optional] [readonly] 
-**Identity** | Pointer to [**NullableHyperflexHxUuIdDt**](hyperflex.HxUuIdDt.md) |  | [optional] 
-**Ip** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](hyperflex.HxNetworkAddressDt.md) |  | [optional] 
+**Identity** | Pointer to [**NullableHyperflexHxUuIdDt**](HyperflexHxUuIdDt.md) |  | [optional] 
+**Ip** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
 **Lockdown** | Pointer to **bool** | The admin state of lockdown mode on the host. If &#39;true&#39;, lockdown mode is enabled. | [optional] [readonly] 
 **ModelNumber** | Pointer to **string** | The model of the host server. | [optional] [readonly] 
 **Role** | Pointer to **string** | The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * &#x60;UNKNOWN&#x60; - The role of the HyperFlex cluster node is not known. * &#x60;STORAGE&#x60; - The HyperFlex cluster node provides both storage and compute resources for the cluster. * &#x60;COMPUTE&#x60; - The HyperFlex cluster node provides compute resources for the cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **SerialNumber** | Pointer to **string** | The serial of the host server. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the host. Indicates whether the hypervisor is online. * &#x60;UNKNOWN&#x60; - The host status cannot be determined. * &#x60;ONLINE&#x60; - The host is online and operational. * &#x60;OFFLINE&#x60; - The host is offline and is currently not participating in the HyperFlex cluster. * &#x60;INMAINTENANCE&#x60; - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * &#x60;DEGRADED&#x60; - The host is degraded and may not be performing in its full operational capacity. | [optional] [readonly] [default to "UNKNOWN"]
 **Version** | Pointer to **string** | The version of the hypervisor running on the host. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
-**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](asset.ClusterMember.Relationship.md) |  | [optional] 
-**PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
+**Drives** | Pointer to [**[]HyperflexDriveRelationship**](HyperflexDriveRelationship.md) | An array of relationships to hyperflexDrive resources. | [optional] [readonly] 
+**PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -451,6 +452,41 @@ SetClusterMember sets ClusterMember field to given value.
 
 HasClusterMember returns a boolean if a field has been set.
 
+### GetDrives
+
+`func (o *HyperflexNode) GetDrives() []HyperflexDriveRelationship`
+
+GetDrives returns the Drives field if non-nil, zero value otherwise.
+
+### GetDrivesOk
+
+`func (o *HyperflexNode) GetDrivesOk() (*[]HyperflexDriveRelationship, bool)`
+
+GetDrivesOk returns a tuple with the Drives field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDrives
+
+`func (o *HyperflexNode) SetDrives(v []HyperflexDriveRelationship)`
+
+SetDrives sets Drives field to given value.
+
+### HasDrives
+
+`func (o *HyperflexNode) HasDrives() bool`
+
+HasDrives returns a boolean if a field has been set.
+
+### SetDrivesNil
+
+`func (o *HyperflexNode) SetDrivesNil(b bool)`
+
+ SetDrivesNil sets the value for Drives to be an explicit nil
+
+### UnsetDrives
+`func (o *HyperflexNode) UnsetDrives()`
+
+UnsetDrives ensures that no value is present for Drives, not even an explicit nil
 ### GetPhysicalServer
 
 `func (o *HyperflexNode) GetPhysicalServer() ComputePhysicalRelationship`

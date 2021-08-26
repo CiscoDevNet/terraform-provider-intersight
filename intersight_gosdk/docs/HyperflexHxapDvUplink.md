@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxapDvUplink"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapDvUplink"]
-**BondState** | Pointer to [**NullableHyperflexBondState**](hyperflex.BondState.md) |  | [optional] 
+**BondState** | Pointer to [**NullableHyperflexBondState**](HyperflexBondState.md) |  | [optional] 
 **NetInterfaces** | Pointer to **[]string** |  | [optional] 
 **Vlans** | Pointer to **string** | The vlans associated with this this cluster wide uplink. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
 **MemberHosts** | Pointer to [**[]HyperflexHxapHostRelationship**](HyperflexHxapHostRelationship.md) | An array of relationships to hyperflexHxapHost resources. | [optional] [readonly] 
 **MemberUplinks** | Pointer to [**[]HyperflexHxapHostInterfaceRelationship**](HyperflexHxapHostInterfaceRelationship.md) | An array of relationships to hyperflexHxapHostInterface resources. | [optional] [readonly] 
 

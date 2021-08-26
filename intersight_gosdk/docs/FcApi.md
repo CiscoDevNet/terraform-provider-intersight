@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPhysicalPort**](fc.PhysicalPort.md)
+[**FcPhysicalPort**](FcPhysicalPort.md)
 
 ### Authorization
 
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPhysicalPortResponse**](fc.PhysicalPort.Response.md)
+[**FcPhysicalPortResponse**](FcPhysicalPortResponse.md)
 
 ### Authorization
 
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPortChannel**](fc.PortChannel.md)
+[**FcPortChannel**](FcPortChannel.md)
 
 ### Authorization
 
@@ -301,7 +301,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPortChannelResponse**](fc.PortChannel.Response.md)
+[**FcPortChannelResponse**](FcPortChannelResponse.md)
 
 ### Authorization
 
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPhysicalPort**](fc.PhysicalPort.md)
+[**FcPhysicalPort**](FcPhysicalPort.md)
 
 ### Authorization
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcPhysicalPort**](fc.PhysicalPort.md)
+[**FcPhysicalPort**](FcPhysicalPort.md)
 
 ### Authorization
 

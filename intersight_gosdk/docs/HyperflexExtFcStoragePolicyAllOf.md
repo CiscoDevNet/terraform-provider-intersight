@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ExtFcStoragePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ExtFcStoragePolicy"]
 **AdminState** | Pointer to **bool** | Enables or disables external FC storage configuration. | [optional] 
-**ExtaTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
-**ExtbTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
-**WwxnPrefixRange** | Pointer to [**NullableHyperflexWwxnPrefixRange**](hyperflex.WwxnPrefixRange.md) |  | [optional] 
+**ExtaTraffic** | Pointer to [**NullableHyperflexNamedVsan**](HyperflexNamedVsan.md) |  | [optional] 
+**ExtbTraffic** | Pointer to [**NullableHyperflexNamedVsan**](HyperflexNamedVsan.md) |  | [optional] 
+**WwxnPrefixRange** | Pointer to [**NullableHyperflexWwxnPrefixRange**](HyperflexWwxnPrefixRange.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

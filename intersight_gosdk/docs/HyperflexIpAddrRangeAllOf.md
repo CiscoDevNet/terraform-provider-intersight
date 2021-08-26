@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.IpAddrRange"]
 **EndAddr** | Pointer to **string** | The end IPv4 address of the range. | [optional] 
 **Gateway** | Pointer to **string** | The default gateway for the start and end IPv4 addresses. | [optional] 
+**IpAddrBlocks** | Pointer to [**[]CommIpV4AddressBlock**](CommIpV4AddressBlock.md) |  | [optional] 
 **Netmask** | Pointer to **string** | The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask. | [optional] 
 **StartAddr** | Pointer to **string** | The start IPv4 address of the range. | [optional] 
 
@@ -120,6 +121,41 @@ SetGateway sets Gateway field to given value.
 
 HasGateway returns a boolean if a field has been set.
 
+### GetIpAddrBlocks
+
+`func (o *HyperflexIpAddrRangeAllOf) GetIpAddrBlocks() []CommIpV4AddressBlock`
+
+GetIpAddrBlocks returns the IpAddrBlocks field if non-nil, zero value otherwise.
+
+### GetIpAddrBlocksOk
+
+`func (o *HyperflexIpAddrRangeAllOf) GetIpAddrBlocksOk() (*[]CommIpV4AddressBlock, bool)`
+
+GetIpAddrBlocksOk returns a tuple with the IpAddrBlocks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddrBlocks
+
+`func (o *HyperflexIpAddrRangeAllOf) SetIpAddrBlocks(v []CommIpV4AddressBlock)`
+
+SetIpAddrBlocks sets IpAddrBlocks field to given value.
+
+### HasIpAddrBlocks
+
+`func (o *HyperflexIpAddrRangeAllOf) HasIpAddrBlocks() bool`
+
+HasIpAddrBlocks returns a boolean if a field has been set.
+
+### SetIpAddrBlocksNil
+
+`func (o *HyperflexIpAddrRangeAllOf) SetIpAddrBlocksNil(b bool)`
+
+ SetIpAddrBlocksNil sets the value for IpAddrBlocks to be an explicit nil
+
+### UnsetIpAddrBlocks
+`func (o *HyperflexIpAddrRangeAllOf) UnsetIpAddrBlocks()`
+
+UnsetIpAddrBlocks ensures that no value is present for IpAddrBlocks, not even an explicit nil
 ### GetNetmask
 
 `func (o *HyperflexIpAddrRangeAllOf) GetNetmask() string`

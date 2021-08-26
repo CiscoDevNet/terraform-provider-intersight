@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "mo.VersionContext"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "mo.VersionContext"]
 **InterestedMos** | Pointer to [**[]MoMoRef**](MoMoRef.md) |  | [optional] 
-**RefMo** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
+**RefMo** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Timestamp** | Pointer to **time.Time** | The time this versioned Managed Object was created. | [optional] [readonly] 
 **Version** | Pointer to **string** | The version of the Managed Object, e.g. an incrementing number or a hash id. | [optional] [readonly] 
 **VersionType** | Pointer to **string** | Specifies type of version. Currently the only supported value is \&quot;Configured\&quot; that is used to keep track of snapshots of policies and profiles that are intended to be configured to target endpoints. * &#x60;Modified&#x60; - Version created every time an object is modified. * &#x60;Configured&#x60; - Version created every time an object is configured to the service profile. * &#x60;Deployed&#x60; - Version created for objects related to a service profile when it is deployed. | [optional] [readonly] [default to "Modified"]

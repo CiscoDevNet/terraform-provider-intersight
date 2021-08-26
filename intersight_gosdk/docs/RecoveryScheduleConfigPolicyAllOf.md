@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.ScheduleConfigPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.ScheduleConfigPolicy"]
-**Schedule** | Pointer to [**NullableRecoveryBackupSchedule**](recovery.BackupSchedule.md) |  | [optional] 
+**Schedule** | Pointer to [**NullableRecoveryBackupSchedule**](RecoveryBackupSchedule.md) |  | [optional] 
 **BackupProfiles** | Pointer to [**[]RecoveryBackupProfileRelationship**](RecoveryBackupProfileRelationship.md) | An array of relationships to recoveryBackupProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

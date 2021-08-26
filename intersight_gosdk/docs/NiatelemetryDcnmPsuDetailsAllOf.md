@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of the power supply unit. | [optional] 
 **VendorId** | Pointer to **string** | Vendor Id of the power supply unit. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

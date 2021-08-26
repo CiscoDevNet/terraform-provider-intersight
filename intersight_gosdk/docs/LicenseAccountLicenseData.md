@@ -28,12 +28,12 @@ Name | Type | Description | Notes
 **SmartAccount** | Pointer to **string** | Name of the smart account. | [optional] [readonly] 
 **SyncStatus** | Pointer to **string** | Current sync status for the account. | [optional] [readonly] 
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](license.CustomerOp.Relationship.md) |  | [optional] 
-**IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](license.IwoCustomerOp.Relationship.md) |  | [optional] 
-**IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](license.IwoLicenseCount.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](LicenseCustomerOpRelationship.md) |  | [optional] 
+**IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](LicenseIwoCustomerOpRelationship.md) |  | [optional] 
+**IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](LicenseIwoLicenseCountRelationship.md) |  | [optional] 
 **Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](LicenseLicenseInfoRelationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
-**SmartlicenseToken** | Pointer to [**LicenseSmartlicenseTokenRelationship**](license.SmartlicenseToken.Relationship.md) |  | [optional] 
+**SmartlicenseToken** | Pointer to [**LicenseSmartlicenseTokenRelationship**](LicenseSmartlicenseTokenRelationship.md) |  | [optional] 
 
 ## Methods
 

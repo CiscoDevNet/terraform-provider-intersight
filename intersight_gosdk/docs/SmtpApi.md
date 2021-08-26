@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SmtpPolicy**](smtp.Policy.md)
+[**SmtpPolicy**](SmtpPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SmtpPolicy**](smtp.Policy.md)
+[**SmtpPolicy**](SmtpPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SmtpPolicyResponse**](smtp.Policy.Response.md)
+[**SmtpPolicyResponse**](SmtpPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SmtpPolicy**](smtp.Policy.md)
+[**SmtpPolicy**](SmtpPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SmtpPolicy**](smtp.Policy.md)
+[**SmtpPolicy**](SmtpPolicy.md)
 
 ### Authorization
 

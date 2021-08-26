@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **UserCount** | Pointer to **int64** | Total user accounts in UCSD. | [optional] [readonly] 
 **VdcCount** | Pointer to **int64** | Total virtual datacenters in UCSD. | [optional] [readonly] 
 **VmCount** | Pointer to **int64** | Total Virtual machines in UCSD. | [optional] [readonly] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 
+**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

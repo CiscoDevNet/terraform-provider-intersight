@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **JobInfo** | Pointer to [**[]PolicyinventoryJobInfo**](PolicyinventoryJobInfo.md) |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of server profile config context. | [optional] [readonly] 
 **ProfileMoId** | Pointer to **string** | Server profile MO ID of the server. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

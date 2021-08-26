@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.VirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VirtualMachine"]
-**RunTimeInfo** | Pointer to [**NullableHyperflexVirtualMachineRuntimeInfo**](hyperflex.VirtualMachineRuntimeInfo.md) |  | [optional] 
+**RunTimeInfo** | Pointer to [**NullableHyperflexVirtualMachineRuntimeInfo**](HyperflexVirtualMachineRuntimeInfo.md) |  | [optional] 
 **StatusCode** | Pointer to **string** | Virtual Machine Status Code. * &#x60;VM_ACCESSIBLE&#x60; - This virtual machine is accessible. * &#x60;VM_INACCESSIBLE&#x60; - This virtual machine is not accessible. * &#x60;VM_NOT_SUPPORTED&#x60; - This virtual machine is not supported. * &#x60;NONE&#x60; - This virtual machine does not have a status code. | [optional] [readonly] [default to "VM_ACCESSIBLE"]
 **Uuid** | Pointer to **string** | Virtual machine unique UUID. | [optional] [readonly] 
 

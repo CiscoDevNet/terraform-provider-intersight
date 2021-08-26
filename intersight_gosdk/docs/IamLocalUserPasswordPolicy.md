@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **MinSpecialChar** | Pointer to **int64** | Minimum number of required special characters. | [optional] [default to 0]
 **MinUpperCase** | Pointer to **int64** | Minimum number of required upper case characters. | [optional] [default to 1]
 **NumPreviousPasswordsDisallowed** | Pointer to **int64** | Number of previous passwords disallowed. | [optional] [default to 0]
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

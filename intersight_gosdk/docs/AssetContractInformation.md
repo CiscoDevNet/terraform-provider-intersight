@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ContractInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ContractInformation"]
-**BillTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
-**BillToGlobalUltimate** | Pointer to [**NullableAssetGlobalUltimate**](asset.GlobalUltimate.md) |  | [optional] 
+**BillTo** | Pointer to [**NullableAssetAddressInformation**](AssetAddressInformation.md) |  | [optional] 
+**BillToGlobalUltimate** | Pointer to [**NullableAssetGlobalUltimate**](AssetGlobalUltimate.md) |  | [optional] 
 **ContractNumber** | Pointer to **string** | Contract number for the Cisco support contract purchased for the Cisco device. | [optional] [readonly] 
 **LineStatus** | Pointer to **string** | Contract status as per the Cisco Contract APIx. | [optional] [readonly] 
 

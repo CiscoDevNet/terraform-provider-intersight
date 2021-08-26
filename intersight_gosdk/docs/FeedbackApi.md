@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FeedbackFeedbackPost**](feedback.FeedbackPost.md)
+[**FeedbackFeedbackPost**](FeedbackFeedbackPost.md)
 
 ### Authorization
 

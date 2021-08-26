@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualDisk**](virtualization.VirtualDisk.md)
+[**VirtualizationVirtualDisk**](VirtualizationVirtualDisk.md)
 
 ### Authorization
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualMachine**](virtualization.VirtualMachine.md)
+[**VirtualizationVirtualMachine**](VirtualizationVirtualMachine.md)
 
 ### Authorization
 
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationHost**](virtualization.Host.md)
+[**VirtualizationHost**](VirtualizationHost.md)
 
 ### Authorization
 
@@ -489,7 +489,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationHostResponse**](virtualization.Host.Response.md)
+[**VirtualizationHostResponse**](VirtualizationHostResponse.md)
 
 ### Authorization
 
@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualDisk**](virtualization.VirtualDisk.md)
+[**VirtualizationVirtualDisk**](VirtualizationVirtualDisk.md)
 
 ### Authorization
 
@@ -641,7 +641,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualDiskResponse**](virtualization.VirtualDisk.Response.md)
+[**VirtualizationVirtualDiskResponse**](VirtualizationVirtualDiskResponse.md)
 
 ### Authorization
 
@@ -709,7 +709,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualMachine**](virtualization.VirtualMachine.md)
+[**VirtualizationVirtualMachine**](VirtualizationVirtualMachine.md)
 
 ### Authorization
 
@@ -793,7 +793,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualMachineResponse**](virtualization.VirtualMachine.Response.md)
+[**VirtualizationVirtualMachineResponse**](VirtualizationVirtualMachineResponse.md)
 
 ### Authorization
 
@@ -861,7 +861,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareCluster**](virtualization.VmwareCluster.md)
+[**VirtualizationVmwareCluster**](VirtualizationVmwareCluster.md)
 
 ### Authorization
 
@@ -945,7 +945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareClusterResponse**](virtualization.VmwareCluster.Response.md)
+[**VirtualizationVmwareClusterResponse**](VirtualizationVmwareClusterResponse.md)
 
 ### Authorization
 
@@ -1013,7 +1013,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatacenter**](virtualization.VmwareDatacenter.md)
+[**VirtualizationVmwareDatacenter**](VirtualizationVmwareDatacenter.md)
 
 ### Authorization
 
@@ -1097,7 +1097,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatacenterResponse**](virtualization.VmwareDatacenter.Response.md)
+[**VirtualizationVmwareDatacenterResponse**](VirtualizationVmwareDatacenterResponse.md)
 
 ### Authorization
 
@@ -1165,7 +1165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatastore**](virtualization.VmwareDatastore.md)
+[**VirtualizationVmwareDatastore**](VirtualizationVmwareDatastore.md)
 
 ### Authorization
 
@@ -1249,7 +1249,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatastoreResponse**](virtualization.VmwareDatastore.Response.md)
+[**VirtualizationVmwareDatastoreResponse**](VirtualizationVmwareDatastoreResponse.md)
 
 ### Authorization
 
@@ -1317,7 +1317,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedNetwork**](virtualization.VmwareDistributedNetwork.md)
+[**VirtualizationVmwareDistributedNetwork**](VirtualizationVmwareDistributedNetwork.md)
 
 ### Authorization
 
@@ -1401,7 +1401,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedNetworkResponse**](virtualization.VmwareDistributedNetwork.Response.md)
+[**VirtualizationVmwareDistributedNetworkResponse**](VirtualizationVmwareDistributedNetworkResponse.md)
 
 ### Authorization
 
@@ -1469,7 +1469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedSwitch**](virtualization.VmwareDistributedSwitch.md)
+[**VirtualizationVmwareDistributedSwitch**](VirtualizationVmwareDistributedSwitch.md)
 
 ### Authorization
 
@@ -1553,7 +1553,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedSwitchResponse**](virtualization.VmwareDistributedSwitch.Response.md)
+[**VirtualizationVmwareDistributedSwitchResponse**](VirtualizationVmwareDistributedSwitchResponse.md)
 
 ### Authorization
 
@@ -1621,7 +1621,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareFolder**](virtualization.VmwareFolder.md)
+[**VirtualizationVmwareFolder**](VirtualizationVmwareFolder.md)
 
 ### Authorization
 
@@ -1705,7 +1705,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareFolderResponse**](virtualization.VmwareFolder.Response.md)
+[**VirtualizationVmwareFolderResponse**](VirtualizationVmwareFolderResponse.md)
 
 ### Authorization
 
@@ -1773,7 +1773,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareHost**](virtualization.VmwareHost.md)
+[**VirtualizationVmwareHost**](VirtualizationVmwareHost.md)
 
 ### Authorization
 
@@ -1857,7 +1857,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareHostResponse**](virtualization.VmwareHost.Response.md)
+[**VirtualizationVmwareHostResponse**](VirtualizationVmwareHostResponse.md)
 
 ### Authorization
 
@@ -1925,7 +1925,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareKernelNetwork**](virtualization.VmwareKernelNetwork.md)
+[**VirtualizationVmwareKernelNetwork**](VirtualizationVmwareKernelNetwork.md)
 
 ### Authorization
 
@@ -2009,7 +2009,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareKernelNetworkResponse**](virtualization.VmwareKernelNetwork.Response.md)
+[**VirtualizationVmwareKernelNetworkResponse**](VirtualizationVmwareKernelNetworkResponse.md)
 
 ### Authorization
 
@@ -2077,7 +2077,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareNetwork**](virtualization.VmwareNetwork.md)
+[**VirtualizationVmwareNetwork**](VirtualizationVmwareNetwork.md)
 
 ### Authorization
 
@@ -2161,7 +2161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareNetworkResponse**](virtualization.VmwareNetwork.Response.md)
+[**VirtualizationVmwareNetworkResponse**](VirtualizationVmwareNetworkResponse.md)
 
 ### Authorization
 
@@ -2229,7 +2229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwarePhysicalNetworkInterface**](virtualization.VmwarePhysicalNetworkInterface.md)
+[**VirtualizationVmwarePhysicalNetworkInterface**](VirtualizationVmwarePhysicalNetworkInterface.md)
 
 ### Authorization
 
@@ -2313,7 +2313,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwarePhysicalNetworkInterfaceResponse**](virtualization.VmwarePhysicalNetworkInterface.Response.md)
+[**VirtualizationVmwarePhysicalNetworkInterfaceResponse**](VirtualizationVmwarePhysicalNetworkInterfaceResponse.md)
 
 ### Authorization
 
@@ -2381,7 +2381,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareUplinkPort**](virtualization.VmwareUplinkPort.md)
+[**VirtualizationVmwareUplinkPort**](VirtualizationVmwareUplinkPort.md)
 
 ### Authorization
 
@@ -2465,7 +2465,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareUplinkPortResponse**](virtualization.VmwareUplinkPort.Response.md)
+[**VirtualizationVmwareUplinkPortResponse**](VirtualizationVmwareUplinkPortResponse.md)
 
 ### Authorization
 
@@ -2533,7 +2533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVcenter**](virtualization.VmwareVcenter.md)
+[**VirtualizationVmwareVcenter**](VirtualizationVmwareVcenter.md)
 
 ### Authorization
 
@@ -2617,7 +2617,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVcenterResponse**](virtualization.VmwareVcenter.Response.md)
+[**VirtualizationVmwareVcenterResponse**](VirtualizationVmwareVcenterResponse.md)
 
 ### Authorization
 
@@ -2685,7 +2685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualDisk**](virtualization.VmwareVirtualDisk.md)
+[**VirtualizationVmwareVirtualDisk**](VirtualizationVmwareVirtualDisk.md)
 
 ### Authorization
 
@@ -2769,7 +2769,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualDiskResponse**](virtualization.VmwareVirtualDisk.Response.md)
+[**VirtualizationVmwareVirtualDiskResponse**](VirtualizationVmwareVirtualDiskResponse.md)
 
 ### Authorization
 
@@ -2837,7 +2837,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualMachine**](virtualization.VmwareVirtualMachine.md)
+[**VirtualizationVmwareVirtualMachine**](VirtualizationVmwareVirtualMachine.md)
 
 ### Authorization
 
@@ -2921,7 +2921,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualMachineResponse**](virtualization.VmwareVirtualMachine.Response.md)
+[**VirtualizationVmwareVirtualMachineResponse**](VirtualizationVmwareVirtualMachineResponse.md)
 
 ### Authorization
 
@@ -2989,7 +2989,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualNetworkInterface**](virtualization.VmwareVirtualNetworkInterface.md)
+[**VirtualizationVmwareVirtualNetworkInterface**](VirtualizationVmwareVirtualNetworkInterface.md)
 
 ### Authorization
 
@@ -3073,7 +3073,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualNetworkInterfaceResponse**](virtualization.VmwareVirtualNetworkInterface.Response.md)
+[**VirtualizationVmwareVirtualNetworkInterfaceResponse**](VirtualizationVmwareVirtualNetworkInterfaceResponse.md)
 
 ### Authorization
 
@@ -3141,7 +3141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualSwitch**](virtualization.VmwareVirtualSwitch.md)
+[**VirtualizationVmwareVirtualSwitch**](VirtualizationVmwareVirtualSwitch.md)
 
 ### Authorization
 
@@ -3225,7 +3225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualSwitchResponse**](virtualization.VmwareVirtualSwitch.Response.md)
+[**VirtualizationVmwareVirtualSwitchResponse**](VirtualizationVmwareVirtualSwitchResponse.md)
 
 ### Authorization
 
@@ -3297,7 +3297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationHost**](virtualization.Host.md)
+[**VirtualizationHost**](VirtualizationHost.md)
 
 ### Authorization
 
@@ -3369,7 +3369,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualDisk**](virtualization.VirtualDisk.md)
+[**VirtualizationVirtualDisk**](VirtualizationVirtualDisk.md)
 
 ### Authorization
 
@@ -3441,7 +3441,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualMachine**](virtualization.VirtualMachine.md)
+[**VirtualizationVirtualMachine**](VirtualizationVirtualMachine.md)
 
 ### Authorization
 
@@ -3513,7 +3513,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareCluster**](virtualization.VmwareCluster.md)
+[**VirtualizationVmwareCluster**](VirtualizationVmwareCluster.md)
 
 ### Authorization
 
@@ -3585,7 +3585,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatacenter**](virtualization.VmwareDatacenter.md)
+[**VirtualizationVmwareDatacenter**](VirtualizationVmwareDatacenter.md)
 
 ### Authorization
 
@@ -3657,7 +3657,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatastore**](virtualization.VmwareDatastore.md)
+[**VirtualizationVmwareDatastore**](VirtualizationVmwareDatastore.md)
 
 ### Authorization
 
@@ -3729,7 +3729,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedNetwork**](virtualization.VmwareDistributedNetwork.md)
+[**VirtualizationVmwareDistributedNetwork**](VirtualizationVmwareDistributedNetwork.md)
 
 ### Authorization
 
@@ -3801,7 +3801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedSwitch**](virtualization.VmwareDistributedSwitch.md)
+[**VirtualizationVmwareDistributedSwitch**](VirtualizationVmwareDistributedSwitch.md)
 
 ### Authorization
 
@@ -3873,7 +3873,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareFolder**](virtualization.VmwareFolder.md)
+[**VirtualizationVmwareFolder**](VirtualizationVmwareFolder.md)
 
 ### Authorization
 
@@ -3945,7 +3945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareHost**](virtualization.VmwareHost.md)
+[**VirtualizationVmwareHost**](VirtualizationVmwareHost.md)
 
 ### Authorization
 
@@ -4017,7 +4017,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareKernelNetwork**](virtualization.VmwareKernelNetwork.md)
+[**VirtualizationVmwareKernelNetwork**](VirtualizationVmwareKernelNetwork.md)
 
 ### Authorization
 
@@ -4089,7 +4089,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareNetwork**](virtualization.VmwareNetwork.md)
+[**VirtualizationVmwareNetwork**](VirtualizationVmwareNetwork.md)
 
 ### Authorization
 
@@ -4161,7 +4161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwarePhysicalNetworkInterface**](virtualization.VmwarePhysicalNetworkInterface.md)
+[**VirtualizationVmwarePhysicalNetworkInterface**](VirtualizationVmwarePhysicalNetworkInterface.md)
 
 ### Authorization
 
@@ -4233,7 +4233,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareUplinkPort**](virtualization.VmwareUplinkPort.md)
+[**VirtualizationVmwareUplinkPort**](VirtualizationVmwareUplinkPort.md)
 
 ### Authorization
 
@@ -4305,7 +4305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualDisk**](virtualization.VmwareVirtualDisk.md)
+[**VirtualizationVmwareVirtualDisk**](VirtualizationVmwareVirtualDisk.md)
 
 ### Authorization
 
@@ -4377,7 +4377,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualMachine**](virtualization.VmwareVirtualMachine.md)
+[**VirtualizationVmwareVirtualMachine**](VirtualizationVmwareVirtualMachine.md)
 
 ### Authorization
 
@@ -4449,7 +4449,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualNetworkInterface**](virtualization.VmwareVirtualNetworkInterface.md)
+[**VirtualizationVmwareVirtualNetworkInterface**](VirtualizationVmwareVirtualNetworkInterface.md)
 
 ### Authorization
 
@@ -4521,7 +4521,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualSwitch**](virtualization.VmwareVirtualSwitch.md)
+[**VirtualizationVmwareVirtualSwitch**](VirtualizationVmwareVirtualSwitch.md)
 
 ### Authorization
 
@@ -4593,7 +4593,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationHost**](virtualization.Host.md)
+[**VirtualizationHost**](VirtualizationHost.md)
 
 ### Authorization
 
@@ -4665,7 +4665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualDisk**](virtualization.VirtualDisk.md)
+[**VirtualizationVirtualDisk**](VirtualizationVirtualDisk.md)
 
 ### Authorization
 
@@ -4737,7 +4737,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVirtualMachine**](virtualization.VirtualMachine.md)
+[**VirtualizationVirtualMachine**](VirtualizationVirtualMachine.md)
 
 ### Authorization
 
@@ -4809,7 +4809,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareCluster**](virtualization.VmwareCluster.md)
+[**VirtualizationVmwareCluster**](VirtualizationVmwareCluster.md)
 
 ### Authorization
 
@@ -4881,7 +4881,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatacenter**](virtualization.VmwareDatacenter.md)
+[**VirtualizationVmwareDatacenter**](VirtualizationVmwareDatacenter.md)
 
 ### Authorization
 
@@ -4953,7 +4953,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDatastore**](virtualization.VmwareDatastore.md)
+[**VirtualizationVmwareDatastore**](VirtualizationVmwareDatastore.md)
 
 ### Authorization
 
@@ -5025,7 +5025,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedNetwork**](virtualization.VmwareDistributedNetwork.md)
+[**VirtualizationVmwareDistributedNetwork**](VirtualizationVmwareDistributedNetwork.md)
 
 ### Authorization
 
@@ -5097,7 +5097,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareDistributedSwitch**](virtualization.VmwareDistributedSwitch.md)
+[**VirtualizationVmwareDistributedSwitch**](VirtualizationVmwareDistributedSwitch.md)
 
 ### Authorization
 
@@ -5169,7 +5169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareFolder**](virtualization.VmwareFolder.md)
+[**VirtualizationVmwareFolder**](VirtualizationVmwareFolder.md)
 
 ### Authorization
 
@@ -5241,7 +5241,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareHost**](virtualization.VmwareHost.md)
+[**VirtualizationVmwareHost**](VirtualizationVmwareHost.md)
 
 ### Authorization
 
@@ -5313,7 +5313,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareKernelNetwork**](virtualization.VmwareKernelNetwork.md)
+[**VirtualizationVmwareKernelNetwork**](VirtualizationVmwareKernelNetwork.md)
 
 ### Authorization
 
@@ -5385,7 +5385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareNetwork**](virtualization.VmwareNetwork.md)
+[**VirtualizationVmwareNetwork**](VirtualizationVmwareNetwork.md)
 
 ### Authorization
 
@@ -5457,7 +5457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwarePhysicalNetworkInterface**](virtualization.VmwarePhysicalNetworkInterface.md)
+[**VirtualizationVmwarePhysicalNetworkInterface**](VirtualizationVmwarePhysicalNetworkInterface.md)
 
 ### Authorization
 
@@ -5529,7 +5529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareUplinkPort**](virtualization.VmwareUplinkPort.md)
+[**VirtualizationVmwareUplinkPort**](VirtualizationVmwareUplinkPort.md)
 
 ### Authorization
 
@@ -5601,7 +5601,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualDisk**](virtualization.VmwareVirtualDisk.md)
+[**VirtualizationVmwareVirtualDisk**](VirtualizationVmwareVirtualDisk.md)
 
 ### Authorization
 
@@ -5673,7 +5673,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualMachine**](virtualization.VmwareVirtualMachine.md)
+[**VirtualizationVmwareVirtualMachine**](VirtualizationVmwareVirtualMachine.md)
 
 ### Authorization
 
@@ -5745,7 +5745,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualNetworkInterface**](virtualization.VmwareVirtualNetworkInterface.md)
+[**VirtualizationVmwareVirtualNetworkInterface**](VirtualizationVmwareVirtualNetworkInterface.md)
 
 ### Authorization
 
@@ -5817,7 +5817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VirtualizationVmwareVirtualSwitch**](virtualization.VmwareVirtualSwitch.md)
+[**VirtualizationVmwareVirtualSwitch**](VirtualizationVmwareVirtualSwitch.md)
 
 ### Authorization
 

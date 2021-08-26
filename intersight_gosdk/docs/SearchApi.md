@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchSuggestItemResponse**](search.SuggestItem.Response.md)
+[**SearchSuggestItemResponse**](SearchSuggestItemResponse.md)
 
 ### Authorization
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchSearchItem**](search.SearchItem.md)
+[**SearchSearchItem**](SearchSearchItem.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchSearchItemResponse**](search.SearchItem.Response.md)
+[**SearchSearchItemResponse**](SearchSearchItemResponse.md)
 
 ### Authorization
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchTagItem**](search.TagItem.md)
+[**SearchTagItem**](SearchTagItem.md)
 
 ### Authorization
 
@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SearchTagItemResponse**](search.TagItem.Response.md)
+[**SearchTagItemResponse**](SearchTagItemResponse.md)
 
 ### Authorization
 

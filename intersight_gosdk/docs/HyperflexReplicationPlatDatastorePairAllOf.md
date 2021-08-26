@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ReplicationPlatDatastorePair"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ReplicationPlatDatastorePair"]
-**Ads** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](hyperflex.ReplicationPlatDatastore.md) |  | [optional] 
+**Ads** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](HyperflexReplicationPlatDatastore.md) |  | [optional] 
 **BackupOnly** | Pointer to **bool** | Boolean representing if this is a backup only pair. | [optional] [readonly] 
-**Bds** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](hyperflex.ReplicationPlatDatastore.md) |  | [optional] 
+**Bds** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](HyperflexReplicationPlatDatastore.md) |  | [optional] 
 **Quiesce** | Pointer to **bool** | Boolean representing if this datastore pairing has quiesce snapshots enabled. | [optional] [readonly] 
 **ReplicationIntervalInMinutes** | Pointer to **int64** | The replication interval for this pair in minutes. | [optional] [readonly] 
-**Sourceds** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](hyperflex.ReplicationPlatDatastore.md) |  | [optional] 
+**Sourceds** | Pointer to [**NullableHyperflexReplicationPlatDatastore**](HyperflexReplicationPlatDatastore.md) |  | [optional] 
 **StorageOnly** | Pointer to **bool** | HyperFlex datastore pair is used for storage only. | [optional] [readonly] 
 
 ## Methods

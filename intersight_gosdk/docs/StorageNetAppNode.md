@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Health** | Pointer to **bool** | Health of NetApp Node. The node is marked healthy when this is set. | [optional] [readonly] 
 **Systemid** | Pointer to **string** | System id of NetApp Node. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of NetApp Node. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](storage.NetAppCluster.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
 ## Methods
 

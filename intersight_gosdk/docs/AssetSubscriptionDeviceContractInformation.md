@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.SubscriptionDeviceContractInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.SubscriptionDeviceContractInformation"]
 **DeviceId** | Pointer to **string** | Unique identifier of the Cisco device. | [optional] [readonly] 
-**DeviceInformation** | Pointer to [**NullableAssetDeviceInformation**](asset.DeviceInformation.md) |  | [optional] 
+**DeviceInformation** | Pointer to [**NullableAssetDeviceInformation**](AssetDeviceInformation.md) |  | [optional] 
 **DevicePid** | Pointer to **string** | Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices. | [optional] [readonly] 
 **SubscriptionRefId** | Pointer to **string** | Identifies the consumption-based subscription. | [optional] [readonly] 
-**DeviceContractInformation** | Pointer to [**AssetDeviceContractInformationRelationship**](asset.DeviceContractInformation.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**DeviceContractInformation** | Pointer to [**AssetDeviceContractInformationRelationship**](AssetDeviceContractInformationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

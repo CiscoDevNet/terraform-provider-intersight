@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPool**](ippool.Pool.md)
+[**IppoolPool**](IppoolPool.md)
 
 ### Authorization
 
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolBlockLease**](ippool.BlockLease.md)
+[**IppoolBlockLease**](IppoolBlockLease.md)
 
 ### Authorization
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolBlockLeaseResponse**](ippool.BlockLease.Response.md)
+[**IppoolBlockLeaseResponse**](IppoolBlockLeaseResponse.md)
 
 ### Authorization
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolIpLease**](ippool.IpLease.md)
+[**IppoolIpLease**](IppoolIpLease.md)
 
 ### Authorization
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolIpLeaseResponse**](ippool.IpLease.Response.md)
+[**IppoolIpLeaseResponse**](IppoolIpLeaseResponse.md)
 
 ### Authorization
 
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPool**](ippool.Pool.md)
+[**IppoolPool**](IppoolPool.md)
 
 ### Authorization
 
@@ -666,7 +666,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPoolResponse**](ippool.Pool.Response.md)
+[**IppoolPoolResponse**](IppoolPoolResponse.md)
 
 ### Authorization
 
@@ -734,7 +734,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPoolMember**](ippool.PoolMember.md)
+[**IppoolPoolMember**](IppoolPoolMember.md)
 
 ### Authorization
 
@@ -818,7 +818,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPoolMemberResponse**](ippool.PoolMember.Response.md)
+[**IppoolPoolMemberResponse**](IppoolPoolMemberResponse.md)
 
 ### Authorization
 
@@ -886,7 +886,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolShadowBlock**](ippool.ShadowBlock.md)
+[**IppoolShadowBlock**](IppoolShadowBlock.md)
 
 ### Authorization
 
@@ -970,7 +970,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolShadowBlockResponse**](ippool.ShadowBlock.Response.md)
+[**IppoolShadowBlockResponse**](IppoolShadowBlockResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolShadowPool**](ippool.ShadowPool.md)
+[**IppoolShadowPool**](IppoolShadowPool.md)
 
 ### Authorization
 
@@ -1122,7 +1122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolShadowPoolResponse**](ippool.ShadowPool.Response.md)
+[**IppoolShadowPoolResponse**](IppoolShadowPoolResponse.md)
 
 ### Authorization
 
@@ -1190,7 +1190,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolUniverse**](ippool.Universe.md)
+[**IppoolUniverse**](IppoolUniverse.md)
 
 ### Authorization
 
@@ -1274,7 +1274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolUniverseResponse**](ippool.Universe.Response.md)
+[**IppoolUniverseResponse**](IppoolUniverseResponse.md)
 
 ### Authorization
 
@@ -1346,7 +1346,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPool**](ippool.Pool.md)
+[**IppoolPool**](IppoolPool.md)
 
 ### Authorization
 
@@ -1418,7 +1418,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IppoolPool**](ippool.Pool.md)
+[**IppoolPool**](IppoolPool.md)
 
 ### Authorization
 

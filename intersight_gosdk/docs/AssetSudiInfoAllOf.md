@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **SerialNumber** | Pointer to **string** | The device SerialNumber extracted from the X.509 SUDI Leaf Certiicate. | [optional] 
 **Signature** | Pointer to **string** | The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certifiate. | [optional] 
 **Status** | Pointer to **string** | The validation status of the device. * &#x60;DeviceStatusUnknown&#x60; - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * &#x60;Verified&#x60; - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated. * &#x60;CertificateValidationFailed&#x60; - Validation of the certificate signing chain failed. * &#x60;UnsupportedFirmware&#x60; - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * &#x60;UnsupportedHardware&#x60; - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * &#x60;DeviceNotResponding&#x60; - An request was sent to the device, but no response was received. | [optional] [default to "DeviceStatusUnknown"]
-**SudiCertificate** | Pointer to [**NullableX509Certificate**](x509.Certificate.md) |  | [optional] 
+**SudiCertificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 
 ## Methods
 

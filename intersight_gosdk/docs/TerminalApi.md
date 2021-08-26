@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TerminalAuditLog**](terminal.AuditLog.md)
+[**TerminalAuditLog**](TerminalAuditLog.md)
 
 ### Authorization
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TerminalAuditLogResponse**](terminal.AuditLog.Response.md)
+[**TerminalAuditLogResponse**](TerminalAuditLogResponse.md)
 
 ### Authorization
 

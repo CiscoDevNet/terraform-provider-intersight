@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementCollectionControlPolicy**](techsupportmanagement.CollectionControlPolicy.md)
+[**TechsupportmanagementCollectionControlPolicy**](TechsupportmanagementCollectionControlPolicy.md)
 
 ### Authorization
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementTechSupportBundle**](techsupportmanagement.TechSupportBundle.md)
+[**TechsupportmanagementTechSupportBundle**](TechsupportmanagementTechSupportBundle.md)
 
 ### Authorization
 
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementCollectionControlPolicy**](techsupportmanagement.CollectionControlPolicy.md)
+[**TechsupportmanagementCollectionControlPolicy**](TechsupportmanagementCollectionControlPolicy.md)
 
 ### Authorization
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementCollectionControlPolicyResponse**](techsupportmanagement.CollectionControlPolicy.Response.md)
+[**TechsupportmanagementCollectionControlPolicyResponse**](TechsupportmanagementCollectionControlPolicyResponse.md)
 
 ### Authorization
 
@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementDownload**](techsupportmanagement.Download.md)
+[**TechsupportmanagementDownload**](TechsupportmanagementDownload.md)
 
 ### Authorization
 
@@ -577,7 +577,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementDownloadResponse**](techsupportmanagement.Download.Response.md)
+[**TechsupportmanagementDownloadResponse**](TechsupportmanagementDownloadResponse.md)
 
 ### Authorization
 
@@ -645,7 +645,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementTechSupportBundle**](techsupportmanagement.TechSupportBundle.md)
+[**TechsupportmanagementTechSupportBundle**](TechsupportmanagementTechSupportBundle.md)
 
 ### Authorization
 
@@ -729,7 +729,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementTechSupportBundleResponse**](techsupportmanagement.TechSupportBundle.Response.md)
+[**TechsupportmanagementTechSupportBundleResponse**](TechsupportmanagementTechSupportBundleResponse.md)
 
 ### Authorization
 
@@ -797,7 +797,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementTechSupportStatus**](techsupportmanagement.TechSupportStatus.md)
+[**TechsupportmanagementTechSupportStatus**](TechsupportmanagementTechSupportStatus.md)
 
 ### Authorization
 
@@ -881,7 +881,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementTechSupportStatusResponse**](techsupportmanagement.TechSupportStatus.Response.md)
+[**TechsupportmanagementTechSupportStatusResponse**](TechsupportmanagementTechSupportStatusResponse.md)
 
 ### Authorization
 
@@ -953,7 +953,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementCollectionControlPolicy**](techsupportmanagement.CollectionControlPolicy.md)
+[**TechsupportmanagementCollectionControlPolicy**](TechsupportmanagementCollectionControlPolicy.md)
 
 ### Authorization
 
@@ -1025,7 +1025,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TechsupportmanagementCollectionControlPolicy**](techsupportmanagement.CollectionControlPolicy.md)
+[**TechsupportmanagementCollectionControlPolicy**](TechsupportmanagementCollectionControlPolicy.md)
 
 ### Authorization
 

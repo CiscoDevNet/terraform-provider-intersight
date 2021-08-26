@@ -21,8 +21,10 @@ Name | Type | Description | Notes
 **PreviousSeverity** | Pointer to **string** | The Severity of the fault prior to user update. | [optional] [readonly] 
 **Rule** | Pointer to **string** | The rule that is responsible for generation of the fault. | [optional] [readonly] 
 **Severity** | Pointer to **string** | Severity of the fault found. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**AffectedMo** | Pointer to [**InventoryBaseRelationship**](InventoryBaseRelationship.md) |  | [optional] 
+**AncestorMo** | Pointer to [**InventoryBaseRelationship**](InventoryBaseRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -457,6 +459,56 @@ SetSeverity sets Severity field to given value.
 `func (o *FaultInstanceAllOf) HasSeverity() bool`
 
 HasSeverity returns a boolean if a field has been set.
+
+### GetAffectedMo
+
+`func (o *FaultInstanceAllOf) GetAffectedMo() InventoryBaseRelationship`
+
+GetAffectedMo returns the AffectedMo field if non-nil, zero value otherwise.
+
+### GetAffectedMoOk
+
+`func (o *FaultInstanceAllOf) GetAffectedMoOk() (*InventoryBaseRelationship, bool)`
+
+GetAffectedMoOk returns a tuple with the AffectedMo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAffectedMo
+
+`func (o *FaultInstanceAllOf) SetAffectedMo(v InventoryBaseRelationship)`
+
+SetAffectedMo sets AffectedMo field to given value.
+
+### HasAffectedMo
+
+`func (o *FaultInstanceAllOf) HasAffectedMo() bool`
+
+HasAffectedMo returns a boolean if a field has been set.
+
+### GetAncestorMo
+
+`func (o *FaultInstanceAllOf) GetAncestorMo() InventoryBaseRelationship`
+
+GetAncestorMo returns the AncestorMo field if non-nil, zero value otherwise.
+
+### GetAncestorMoOk
+
+`func (o *FaultInstanceAllOf) GetAncestorMoOk() (*InventoryBaseRelationship, bool)`
+
+GetAncestorMoOk returns a tuple with the AncestorMo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAncestorMo
+
+`func (o *FaultInstanceAllOf) SetAncestorMo(v InventoryBaseRelationship)`
+
+SetAncestorMo sets AncestorMo field to given value.
+
+### HasAncestorMo
+
+`func (o *FaultInstanceAllOf) HasAncestorMo() bool`
+
+HasAncestorMo returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

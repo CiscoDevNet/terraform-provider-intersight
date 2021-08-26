@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LsServiceProfile**](ls.ServiceProfile.md)
+[**LsServiceProfile**](LsServiceProfile.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LsServiceProfileResponse**](ls.ServiceProfile.Response.md)
+[**LsServiceProfileResponse**](LsServiceProfileResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LsServiceProfile**](ls.ServiceProfile.md)
+[**LsServiceProfile**](LsServiceProfile.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LsServiceProfile**](ls.ServiceProfile.md)
+[**LsServiceProfile**](LsServiceProfile.md)
 
 ### Authorization
 

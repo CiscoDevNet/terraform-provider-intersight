@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryRequest**](inventory.Request.md)
+[**InventoryRequest**](InventoryRequest.md)
 
 ### Authorization
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryDeviceInfo**](inventory.DeviceInfo.md)
+[**InventoryDeviceInfo**](InventoryDeviceInfo.md)
 
 ### Authorization
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryDeviceInfoResponse**](inventory.DeviceInfo.Response.md)
+[**InventoryDeviceInfoResponse**](InventoryDeviceInfoResponse.md)
 
 ### Authorization
 
@@ -292,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryDnMoBinding**](inventory.DnMoBinding.md)
+[**InventoryDnMoBinding**](InventoryDnMoBinding.md)
 
 ### Authorization
 
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryDnMoBindingResponse**](inventory.DnMoBinding.Response.md)
+[**InventoryDnMoBindingResponse**](InventoryDnMoBindingResponse.md)
 
 ### Authorization
 
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventory**](inventory.GenericInventory.md)
+[**InventoryGenericInventory**](InventoryGenericInventory.md)
 
 ### Authorization
 
@@ -512,7 +512,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventoryHolder**](inventory.GenericInventoryHolder.md)
+[**InventoryGenericInventoryHolder**](InventoryGenericInventoryHolder.md)
 
 ### Authorization
 
@@ -596,7 +596,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventoryHolderResponse**](inventory.GenericInventoryHolder.Response.md)
+[**InventoryGenericInventoryHolderResponse**](InventoryGenericInventoryHolderResponse.md)
 
 ### Authorization
 
@@ -680,7 +680,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventoryResponse**](inventory.GenericInventory.Response.md)
+[**InventoryGenericInventoryResponse**](InventoryGenericInventoryResponse.md)
 
 ### Authorization
 
@@ -752,7 +752,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventory**](inventory.GenericInventory.md)
+[**InventoryGenericInventory**](InventoryGenericInventory.md)
 
 ### Authorization
 
@@ -824,7 +824,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventoryHolder**](inventory.GenericInventoryHolder.md)
+[**InventoryGenericInventoryHolder**](InventoryGenericInventoryHolder.md)
 
 ### Authorization
 
@@ -896,7 +896,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventory**](inventory.GenericInventory.md)
+[**InventoryGenericInventory**](InventoryGenericInventory.md)
 
 ### Authorization
 
@@ -968,7 +968,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InventoryGenericInventoryHolder**](inventory.GenericInventoryHolder.md)
+[**InventoryGenericInventoryHolder**](InventoryGenericInventoryHolder.md)
 
 ### Authorization
 

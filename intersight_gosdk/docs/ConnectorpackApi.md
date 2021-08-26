@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorpackConnectorPackUpgrade**](connectorpack.ConnectorPackUpgrade.md)
+[**ConnectorpackConnectorPackUpgrade**](ConnectorpackConnectorPackUpgrade.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorpackConnectorPackUpgrade**](connectorpack.ConnectorPackUpgrade.md)
+[**ConnectorpackConnectorPackUpgrade**](ConnectorpackConnectorPackUpgrade.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorpackConnectorPackUpgradeResponse**](connectorpack.ConnectorPackUpgrade.Response.md)
+[**ConnectorpackConnectorPackUpgradeResponse**](ConnectorpackConnectorPackUpgradeResponse.md)
 
 ### Authorization
 
@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorpackUpgradeImpact**](connectorpack.UpgradeImpact.md)
+[**ConnectorpackUpgradeImpact**](ConnectorpackUpgradeImpact.md)
 
 ### Authorization
 
@@ -435,7 +435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConnectorpackUpgradeImpactResponse**](connectorpack.UpgradeImpact.Response.md)
+[**ConnectorpackUpgradeImpactResponse**](ConnectorpackUpgradeImpactResponse.md)
 
 ### Authorization
 

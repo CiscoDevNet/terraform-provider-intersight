@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **VsphereProvisioning** | Pointer to **bool** | Indicates that vsphere provisioning traffic is enabled on this kernel network. | [optional] 
 **VsphereReplication** | Pointer to **bool** | Indicates that vsphere replication is enabled on this kernel network. | [optional] 
 **VsphereReplicationNfc** | Pointer to **bool** | Indicates that vsphere replication nfc is enabled on this kernel network. | [optional] 
-**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](virtualization.VmwareDistributedNetwork.Relationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
-**Network** | Pointer to [**VirtualizationVmwareNetworkRelationship**](virtualization.VmwareNetwork.Relationship.md) |  | [optional] 
+**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
+**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**Network** | Pointer to [**VirtualizationVmwareNetworkRelationship**](VirtualizationVmwareNetworkRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigImport**](chassis.ConfigImport.md)
+[**ChassisConfigImport**](ChassisConfigImport.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisProfile**](chassis.Profile.md)
+[**ChassisProfile**](ChassisProfile.md)
 
 ### Authorization
 
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigChangeDetail**](chassis.ConfigChangeDetail.md)
+[**ChassisConfigChangeDetail**](ChassisConfigChangeDetail.md)
 
 ### Authorization
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigChangeDetailResponse**](chassis.ConfigChangeDetail.Response.md)
+[**ChassisConfigChangeDetailResponse**](ChassisConfigChangeDetailResponse.md)
 
 ### Authorization
 
@@ -430,7 +430,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigImport**](chassis.ConfigImport.md)
+[**ChassisConfigImport**](ChassisConfigImport.md)
 
 ### Authorization
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigImportResponse**](chassis.ConfigImport.Response.md)
+[**ChassisConfigImportResponse**](ChassisConfigImportResponse.md)
 
 ### Authorization
 
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigResult**](chassis.ConfigResult.md)
+[**ChassisConfigResult**](ChassisConfigResult.md)
 
 ### Authorization
 
@@ -650,7 +650,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigResultEntry**](chassis.ConfigResultEntry.md)
+[**ChassisConfigResultEntry**](ChassisConfigResultEntry.md)
 
 ### Authorization
 
@@ -734,7 +734,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigResultEntryResponse**](chassis.ConfigResultEntry.Response.md)
+[**ChassisConfigResultEntryResponse**](ChassisConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -818,7 +818,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisConfigResultResponse**](chassis.ConfigResult.Response.md)
+[**ChassisConfigResultResponse**](ChassisConfigResultResponse.md)
 
 ### Authorization
 
@@ -886,7 +886,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisIomProfile**](chassis.IomProfile.md)
+[**ChassisIomProfile**](ChassisIomProfile.md)
 
 ### Authorization
 
@@ -970,7 +970,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisIomProfileResponse**](chassis.IomProfile.Response.md)
+[**ChassisIomProfileResponse**](ChassisIomProfileResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisProfile**](chassis.Profile.md)
+[**ChassisProfile**](ChassisProfile.md)
 
 ### Authorization
 
@@ -1122,7 +1122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisProfileResponse**](chassis.Profile.Response.md)
+[**ChassisProfileResponse**](ChassisProfileResponse.md)
 
 ### Authorization
 
@@ -1194,7 +1194,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisProfile**](chassis.Profile.md)
+[**ChassisProfile**](ChassisProfile.md)
 
 ### Authorization
 
@@ -1266,7 +1266,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChassisProfile**](chassis.Profile.md)
+[**ChassisProfile**](ChassisProfile.md)
 
 ### Authorization
 

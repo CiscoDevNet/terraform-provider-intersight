@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **NetworkConfiguration** | Pointer to [**[]SdwanNetworkConfigurationType**](SdwanNetworkConfigurationType.md) |  | [optional] 
 **TemplateInputs** | Pointer to [**[]SdwanTemplateInputsType**](SdwanTemplateInputsType.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Uniquely identifies the router by its chassis number. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Profile** | Pointer to [**SdwanProfileRelationship**](sdwan.Profile.Relationship.md) |  | [optional] 
-**ServerNode** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**Profile** | Pointer to [**SdwanProfileRelationship**](SdwanProfileRelationship.md) |  | [optional] 
+**ServerNode** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareApplianceDistributable**](software.ApplianceDistributable.md)
+[**SoftwareApplianceDistributable**](SoftwareApplianceDistributable.md)
 
 ### Authorization
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHclMeta**](software.HclMeta.md)
+[**SoftwareHclMeta**](SoftwareHclMeta.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexBundleDistributable**](software.HyperflexBundleDistributable.md)
+[**SoftwareHyperflexBundleDistributable**](SoftwareHyperflexBundleDistributable.md)
 
 ### Authorization
 
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexDistributable**](software.HyperflexDistributable.md)
+[**SoftwareHyperflexDistributable**](SoftwareHyperflexDistributable.md)
 
 ### Authorization
 
@@ -381,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareReleaseMeta**](software.ReleaseMeta.md)
+[**SoftwareReleaseMeta**](SoftwareReleaseMeta.md)
 
 ### Authorization
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareSolutionDistributable**](software.SolutionDistributable.md)
+[**SoftwareSolutionDistributable**](SoftwareSolutionDistributable.md)
 
 ### Authorization
 
@@ -517,7 +517,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdBundleDistributable**](software.UcsdBundleDistributable.md)
+[**SoftwareUcsdBundleDistributable**](SoftwareUcsdBundleDistributable.md)
 
 ### Authorization
 
@@ -585,7 +585,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdDistributable**](software.UcsdDistributable.md)
+[**SoftwareUcsdDistributable**](SoftwareUcsdDistributable.md)
 
 ### Authorization
 
@@ -1181,7 +1181,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareApplianceDistributable**](software.ApplianceDistributable.md)
+[**SoftwareApplianceDistributable**](SoftwareApplianceDistributable.md)
 
 ### Authorization
 
@@ -1265,7 +1265,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareApplianceDistributableResponse**](software.ApplianceDistributable.Response.md)
+[**SoftwareApplianceDistributableResponse**](SoftwareApplianceDistributableResponse.md)
 
 ### Authorization
 
@@ -1333,7 +1333,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareDownloadHistory**](software.DownloadHistory.md)
+[**SoftwareDownloadHistory**](SoftwareDownloadHistory.md)
 
 ### Authorization
 
@@ -1417,7 +1417,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareDownloadHistoryResponse**](software.DownloadHistory.Response.md)
+[**SoftwareDownloadHistoryResponse**](SoftwareDownloadHistoryResponse.md)
 
 ### Authorization
 
@@ -1485,7 +1485,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHclMeta**](software.HclMeta.md)
+[**SoftwareHclMeta**](SoftwareHclMeta.md)
 
 ### Authorization
 
@@ -1569,7 +1569,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHclMetaResponse**](software.HclMeta.Response.md)
+[**SoftwareHclMetaResponse**](SoftwareHclMetaResponse.md)
 
 ### Authorization
 
@@ -1637,7 +1637,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexBundleDistributable**](software.HyperflexBundleDistributable.md)
+[**SoftwareHyperflexBundleDistributable**](SoftwareHyperflexBundleDistributable.md)
 
 ### Authorization
 
@@ -1721,7 +1721,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexBundleDistributableResponse**](software.HyperflexBundleDistributable.Response.md)
+[**SoftwareHyperflexBundleDistributableResponse**](SoftwareHyperflexBundleDistributableResponse.md)
 
 ### Authorization
 
@@ -1789,7 +1789,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexDistributable**](software.HyperflexDistributable.md)
+[**SoftwareHyperflexDistributable**](SoftwareHyperflexDistributable.md)
 
 ### Authorization
 
@@ -1873,7 +1873,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexDistributableResponse**](software.HyperflexDistributable.Response.md)
+[**SoftwareHyperflexDistributableResponse**](SoftwareHyperflexDistributableResponse.md)
 
 ### Authorization
 
@@ -1941,7 +1941,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareReleaseMeta**](software.ReleaseMeta.md)
+[**SoftwareReleaseMeta**](SoftwareReleaseMeta.md)
 
 ### Authorization
 
@@ -2025,7 +2025,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareReleaseMetaResponse**](software.ReleaseMeta.Response.md)
+[**SoftwareReleaseMetaResponse**](SoftwareReleaseMetaResponse.md)
 
 ### Authorization
 
@@ -2093,7 +2093,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareSolutionDistributable**](software.SolutionDistributable.md)
+[**SoftwareSolutionDistributable**](SoftwareSolutionDistributable.md)
 
 ### Authorization
 
@@ -2177,7 +2177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareSolutionDistributableResponse**](software.SolutionDistributable.Response.md)
+[**SoftwareSolutionDistributableResponse**](SoftwareSolutionDistributableResponse.md)
 
 ### Authorization
 
@@ -2245,7 +2245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdBundleDistributable**](software.UcsdBundleDistributable.md)
+[**SoftwareUcsdBundleDistributable**](SoftwareUcsdBundleDistributable.md)
 
 ### Authorization
 
@@ -2329,7 +2329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdBundleDistributableResponse**](software.UcsdBundleDistributable.Response.md)
+[**SoftwareUcsdBundleDistributableResponse**](SoftwareUcsdBundleDistributableResponse.md)
 
 ### Authorization
 
@@ -2397,7 +2397,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdDistributable**](software.UcsdDistributable.md)
+[**SoftwareUcsdDistributable**](SoftwareUcsdDistributable.md)
 
 ### Authorization
 
@@ -2481,7 +2481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdDistributableResponse**](software.UcsdDistributable.Response.md)
+[**SoftwareUcsdDistributableResponse**](SoftwareUcsdDistributableResponse.md)
 
 ### Authorization
 
@@ -2553,7 +2553,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareApplianceDistributable**](software.ApplianceDistributable.md)
+[**SoftwareApplianceDistributable**](SoftwareApplianceDistributable.md)
 
 ### Authorization
 
@@ -2625,7 +2625,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHclMeta**](software.HclMeta.md)
+[**SoftwareHclMeta**](SoftwareHclMeta.md)
 
 ### Authorization
 
@@ -2697,7 +2697,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexBundleDistributable**](software.HyperflexBundleDistributable.md)
+[**SoftwareHyperflexBundleDistributable**](SoftwareHyperflexBundleDistributable.md)
 
 ### Authorization
 
@@ -2769,7 +2769,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexDistributable**](software.HyperflexDistributable.md)
+[**SoftwareHyperflexDistributable**](SoftwareHyperflexDistributable.md)
 
 ### Authorization
 
@@ -2841,7 +2841,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareReleaseMeta**](software.ReleaseMeta.md)
+[**SoftwareReleaseMeta**](SoftwareReleaseMeta.md)
 
 ### Authorization
 
@@ -2913,7 +2913,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareSolutionDistributable**](software.SolutionDistributable.md)
+[**SoftwareSolutionDistributable**](SoftwareSolutionDistributable.md)
 
 ### Authorization
 
@@ -2985,7 +2985,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdBundleDistributable**](software.UcsdBundleDistributable.md)
+[**SoftwareUcsdBundleDistributable**](SoftwareUcsdBundleDistributable.md)
 
 ### Authorization
 
@@ -3057,7 +3057,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdDistributable**](software.UcsdDistributable.md)
+[**SoftwareUcsdDistributable**](SoftwareUcsdDistributable.md)
 
 ### Authorization
 
@@ -3129,7 +3129,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareApplianceDistributable**](software.ApplianceDistributable.md)
+[**SoftwareApplianceDistributable**](SoftwareApplianceDistributable.md)
 
 ### Authorization
 
@@ -3201,7 +3201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHclMeta**](software.HclMeta.md)
+[**SoftwareHclMeta**](SoftwareHclMeta.md)
 
 ### Authorization
 
@@ -3273,7 +3273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexBundleDistributable**](software.HyperflexBundleDistributable.md)
+[**SoftwareHyperflexBundleDistributable**](SoftwareHyperflexBundleDistributable.md)
 
 ### Authorization
 
@@ -3345,7 +3345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareHyperflexDistributable**](software.HyperflexDistributable.md)
+[**SoftwareHyperflexDistributable**](SoftwareHyperflexDistributable.md)
 
 ### Authorization
 
@@ -3417,7 +3417,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareReleaseMeta**](software.ReleaseMeta.md)
+[**SoftwareReleaseMeta**](SoftwareReleaseMeta.md)
 
 ### Authorization
 
@@ -3489,7 +3489,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareSolutionDistributable**](software.SolutionDistributable.md)
+[**SoftwareSolutionDistributable**](SoftwareSolutionDistributable.md)
 
 ### Authorization
 
@@ -3561,7 +3561,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdBundleDistributable**](software.UcsdBundleDistributable.md)
+[**SoftwareUcsdBundleDistributable**](SoftwareUcsdBundleDistributable.md)
 
 ### Authorization
 
@@ -3633,7 +3633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwareUcsdDistributable**](software.UcsdDistributable.md)
+[**SoftwareUcsdDistributable**](SoftwareUcsdDistributable.md)
 
 ### Authorization
 

@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **UpgJobCount** | Pointer to **int64** | Number of upgrade jobs configured on DCNM. | [optional] 
 **UpgStatus** | Pointer to **string** | Upgrade status of jobs created on DCNM. | [optional] 
 **Version** | Pointer to **string** | Returns the value of the version field. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

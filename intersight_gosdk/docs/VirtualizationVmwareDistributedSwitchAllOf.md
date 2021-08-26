@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Switch description (user provided), if any. | [optional] 
 **MaxPort** | Pointer to **int64** | Maximum number of ports allowed on this distributed virtual switch. | [optional] 
 **Mtu** | Pointer to **int64** | Maximum transmission unit configured on a distributed virtual switch. | [optional] 
-**NicTeamingAndFailover** | Pointer to [**NullableVirtualizationVmwareTeamingAndFailover**](virtualization.VmwareTeamingAndFailover.md) |  | [optional] 
+**NicTeamingAndFailover** | Pointer to [**NullableVirtualizationVmwareTeamingAndFailover**](VirtualizationVmwareTeamingAndFailover.md) |  | [optional] 
 **NumHosts** | Pointer to **int64** | The total number of hosts attached to the distributed virtual switch. | [optional] 
 **NumNetworks** | Pointer to **int64** | The total number of distributed networks in the distributed virtual switch. | [optional] 
 **NumStandAlonePorts** | Pointer to **int64** | Number of stand-alone ports in use. | [optional] 
 **NumUplinks** | Pointer to **int64** | Number of uplinks configured in this distributed virtual switch. | [optional] 
-**SwitchCapacity** | Pointer to [**NullableVirtualizationStorageCapacity**](virtualization.StorageCapacity.md) |  | [optional] 
+**SwitchCapacity** | Pointer to [**NullableVirtualizationStorageCapacity**](VirtualizationStorageCapacity.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Universally Unique Id of this distributed virtual switch. | [optional] 
 **Version** | Pointer to **string** | The running config&#39;s version details are represented. | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods

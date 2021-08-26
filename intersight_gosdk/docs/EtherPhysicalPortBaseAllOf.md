@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **PortChannelId** | Pointer to **int64** | Port channel id for port channel created on FI switch. | [optional] [readonly] 
 **PortType** | Pointer to **string** | Defines the transport type for this port (ethernet OR fc). | [optional] [readonly] 
 **TransceiverType** | Pointer to **string** | Transceiver model attached to a port in the Fabric Interconnect. | [optional] [readonly] 
-**AcknowledgedPeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](port.InterfaceBase.Relationship.md) |  | [optional] 
-**PeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](port.InterfaceBase.Relationship.md) |  | [optional] 
+**AcknowledgedPeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
+**PeerInterface** | Pointer to [**PortInterfaceBaseRelationship**](PortInterfaceBaseRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Limit** | Pointer to **int64** | The utilization of a virtual machine will not exceed this limit, even if there are available resources. Used to ensure a consistent performance of virtual machines independent of available resources. If set to -1, then there is no fixed limit on resource usage (only bounded by available resources and shares). The unit is number of I/O per second. | [optional] 
 **LunUuid** | Pointer to **string** | Unique identifier of the LUN accessed by the raw disk mapping (RDM). | [optional] 
 **Serial** | Pointer to **string** | Serial ID of the storage device. | [optional] 
-**Shares** | Pointer to [**NullableVirtualizationVmwareSharesInfo**](virtualization.VmwareSharesInfo.md) |  | [optional] 
+**Shares** | Pointer to [**NullableVirtualizationVmwareSharesInfo**](VirtualizationVmwareSharesInfo.md) |  | [optional] 
 **Sharing** | Pointer to **string** | Sharing mode of the virtual disk. * &#x60;sharingNone&#x60; - The virtual disk is not shared. * &#x60;sharingMultiWriter&#x60; - The virtual disk is shared between multiple virtual machines. | [optional] [default to "sharingNone"]
 **StorageAllocationType** | Pointer to **string** | Allocation type for the virtual disk. * &#x60;notApplicable&#x60; - Value specified for a disk for which storage allocation type is not applicable. * &#x60;thin&#x60; - A thin provisioned disk consumes only the space that it needs for its initial operrations, and grows with time according to demand. It is the fastest method to create a virtual disk because it creates a disk with just the header information. * &#x60;lazyZeroedThick&#x60; - A lazy zeroed thick disk has all space allocated at the time of its creation. Data remaining on the physical device is not erased during creation, but is zeroed out on demand later on first write from the virtual machine. * &#x60;eagerZeroedThick&#x60; - An eager zeroed thick disk has all space allocated and wiped clean of any previous contents on the physical media at creation time. Such disks may take longer time during creation compared to other disk formats. | [optional] [default to "notApplicable"]
 **UnitNumber** | Pointer to **int64** | Unit number of the disk on its controller. | [optional] 
@@ -24,8 +24,8 @@ Name | Type | Description | Notes
 **Vendor** | Pointer to **string** | Vendor of the storage device. | [optional] 
 **VirtualDiskPath** | Pointer to **string** | Path of the virtual disk. | [optional] 
 **VmIdentity** | Pointer to **string** | Identity of the virtual machine where the virtual disk is created. | [optional] 
-**Datastore** | Pointer to [**VirtualizationVmwareDatastoreRelationship**](virtualization.VmwareDatastore.Relationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](virtualization.VmwareVirtualMachine.Relationship.md) |  | [optional] 
+**Datastore** | Pointer to [**VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 

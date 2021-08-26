@@ -9,19 +9,19 @@ Name | Type | Description | Notes
 **AccessibilitySummary** | Pointer to **string** | HyperFlex datastore accessibility summary. * &#x60;ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Not Accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Partially Accessible. | [optional] [readonly] [default to "ACCESSIBLE"]
 **CreationTime** | Pointer to **string** | Timestamp the datastore object was created. | [optional] [readonly] 
 **DatastoreStatus** | Pointer to **string** | HyperFlex datastore status. * &#x60;NORMAL&#x60; - The HyperFlex datastore status is normal. * &#x60;ALERT&#x60; - The HyperFlex datastore status is alert. * &#x60;FAILED&#x60; - The HyperFlex datastore status is failed. | [optional] [readonly] [default to "NORMAL"]
-**Dsconfig** | Pointer to [**NullableHyperflexHxPlatformDatastoreConfigDt**](hyperflex.HxPlatformDatastoreConfigDt.md) |  | [optional] 
+**Dsconfig** | Pointer to [**NullableHyperflexHxPlatformDatastoreConfigDt**](HyperflexHxPlatformDatastoreConfigDt.md) |  | [optional] 
 **FreeCapacityInBytes** | Pointer to **int64** | Free capacity of the datastore in bytes. | [optional] [readonly] 
 **HostMountStatus** | Pointer to [**[]HyperflexHxHostMountStatusDt**](HyperflexHxHostMountStatusDt.md) |  | [optional] 
 **LastAccessTime** | Pointer to **string** | Timestamp the datastore object was last accessed. | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **string** | Timestamp the datastore object was last modified. | [optional] [readonly] 
 **MountSummary** | Pointer to **string** | HyperFlex datastore mount summary. * &#x60;MOUNTED&#x60; - The HyperFlex mount summary is mounted. * &#x60;UNMOUNTED&#x60; - The HyperFlex mount summary is unmounted. * &#x60;MOUNT_FAILURE&#x60; - The HyperFlex mount summary is mount failure. * &#x60;UNMOUNT_FAILURE&#x60; - The HyperFlex mount summary is unmount failure. | [optional] [readonly] [default to "MOUNTED"]
 **ParentUuid** | Pointer to **string** | UUID of the parent datastore object. | [optional] [readonly] 
-**Site** | Pointer to [**NullableHyperflexHxSiteDt**](hyperflex.HxSiteDt.md) |  | [optional] 
+**Site** | Pointer to [**NullableHyperflexHxSiteDt**](HyperflexHxSiteDt.md) |  | [optional] 
 **TotalCapacityInBytes** | Pointer to **int64** | Total capacity of the datastore object. | [optional] [readonly] 
 **UnCompressedUsedBytes** | Pointer to **int64** | Number of uncompressed used bytes in the datastore. | [optional] [readonly] 
 **UnsharedUsedBytes** | Pointer to **int64** | Unshared used capacity of the datastore in bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID for the datastore object. | [optional] [readonly] 
-**DataProtectionPeer** | Pointer to [**HyperflexDataProtectionPeerRelationship**](hyperflex.DataProtectionPeer.Relationship.md) |  | [optional] 
+**DataProtectionPeer** | Pointer to [**HyperflexDataProtectionPeerRelationship**](HyperflexDataProtectionPeerRelationship.md) |  | [optional] 
 
 ## Methods
 

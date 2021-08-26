@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanProfile**](sdwan.Profile.md)
+[**SdwanProfile**](SdwanProfile.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterNode**](sdwan.RouterNode.md)
+[**SdwanRouterNode**](SdwanRouterNode.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterPolicy**](sdwan.RouterPolicy.md)
+[**SdwanRouterPolicy**](SdwanRouterPolicy.md)
 
 ### Authorization
 
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanVmanageAccountPolicy**](sdwan.VmanageAccountPolicy.md)
+[**SdwanVmanageAccountPolicy**](SdwanVmanageAccountPolicy.md)
 
 ### Authorization
 
@@ -619,7 +619,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanProfile**](sdwan.Profile.md)
+[**SdwanProfile**](SdwanProfile.md)
 
 ### Authorization
 
@@ -703,7 +703,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanProfileResponse**](sdwan.Profile.Response.md)
+[**SdwanProfileResponse**](SdwanProfileResponse.md)
 
 ### Authorization
 
@@ -771,7 +771,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterNode**](sdwan.RouterNode.md)
+[**SdwanRouterNode**](SdwanRouterNode.md)
 
 ### Authorization
 
@@ -855,7 +855,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterNodeResponse**](sdwan.RouterNode.Response.md)
+[**SdwanRouterNodeResponse**](SdwanRouterNodeResponse.md)
 
 ### Authorization
 
@@ -923,7 +923,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterPolicy**](sdwan.RouterPolicy.md)
+[**SdwanRouterPolicy**](SdwanRouterPolicy.md)
 
 ### Authorization
 
@@ -1007,7 +1007,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterPolicyResponse**](sdwan.RouterPolicy.Response.md)
+[**SdwanRouterPolicyResponse**](SdwanRouterPolicyResponse.md)
 
 ### Authorization
 
@@ -1075,7 +1075,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanVmanageAccountPolicy**](sdwan.VmanageAccountPolicy.md)
+[**SdwanVmanageAccountPolicy**](SdwanVmanageAccountPolicy.md)
 
 ### Authorization
 
@@ -1159,7 +1159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanVmanageAccountPolicyResponse**](sdwan.VmanageAccountPolicy.Response.md)
+[**SdwanVmanageAccountPolicyResponse**](SdwanVmanageAccountPolicyResponse.md)
 
 ### Authorization
 
@@ -1231,7 +1231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanProfile**](sdwan.Profile.md)
+[**SdwanProfile**](SdwanProfile.md)
 
 ### Authorization
 
@@ -1303,7 +1303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterNode**](sdwan.RouterNode.md)
+[**SdwanRouterNode**](SdwanRouterNode.md)
 
 ### Authorization
 
@@ -1375,7 +1375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterPolicy**](sdwan.RouterPolicy.md)
+[**SdwanRouterPolicy**](SdwanRouterPolicy.md)
 
 ### Authorization
 
@@ -1447,7 +1447,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanVmanageAccountPolicy**](sdwan.VmanageAccountPolicy.md)
+[**SdwanVmanageAccountPolicy**](SdwanVmanageAccountPolicy.md)
 
 ### Authorization
 
@@ -1519,7 +1519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanProfile**](sdwan.Profile.md)
+[**SdwanProfile**](SdwanProfile.md)
 
 ### Authorization
 
@@ -1591,7 +1591,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterNode**](sdwan.RouterNode.md)
+[**SdwanRouterNode**](SdwanRouterNode.md)
 
 ### Authorization
 
@@ -1663,7 +1663,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanRouterPolicy**](sdwan.RouterPolicy.md)
+[**SdwanRouterPolicy**](SdwanRouterPolicy.md)
 
 ### Authorization
 
@@ -1735,7 +1735,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdwanVmanageAccountPolicy**](sdwan.VmanageAccountPolicy.md)
+[**SdwanVmanageAccountPolicy**](SdwanVmanageAccountPolicy.md)
 
 ### Authorization
 

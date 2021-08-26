@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Connected** | Pointer to **int64** | The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **MembershipRatio** | Pointer to **float32** | Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices. | [optional] [readonly] 
 **MemoryMirroringFactor** | Pointer to **float32** | Memory Reliability, availability and serviceability (RAS) factor. | [optional] [readonly] 
-**VmHost** | Pointer to [**NullableAssetVmHost**](asset.VmHost.md) |  | [optional] 
+**VmHost** | Pointer to [**NullableAssetVmHost**](AssetVmHost.md) |  | [optional] 
 
 ## Methods
 

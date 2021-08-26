@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessorUnit**](processor.Unit.md)
+[**ProcessorUnit**](ProcessorUnit.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessorUnitResponse**](processor.Unit.Response.md)
+[**ProcessorUnitResponse**](ProcessorUnitResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessorUnit**](processor.Unit.md)
+[**ProcessorUnit**](ProcessorUnit.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProcessorUnit**](processor.Unit.md)
+[**ProcessorUnit**](ProcessorUnit.md)
 
 ### Authorization
 

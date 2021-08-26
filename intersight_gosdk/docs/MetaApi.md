@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MetaDefinition**](meta.Definition.md)
+[**MetaDefinition**](MetaDefinition.md)
 
 ### Authorization
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MetaDefinitionResponse**](meta.Definition.Response.md)
+[**MetaDefinitionResponse**](MetaDefinitionResponse.md)
 
 ### Authorization
 

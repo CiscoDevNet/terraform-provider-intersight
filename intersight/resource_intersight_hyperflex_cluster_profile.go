@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -205,6 +203,50 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Optional:    true,
 				Default:     "hyperflex.ClusterProfile",
 			},
+			"cluster_internal_subnet": {
+				Description: "A CIDR subnet for the cluster internal network. This applies to Intersight Workload Engine clusters only.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "comm.IpV4Interface",
+						},
+						"gateway": {
+							Description: "The IPv4 address of the default gateway.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"ip_address": {
+							Description: "The IPv4 Address, represented in the standard dot-decimal notation, e.g. 192.168.1.3.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"netmask": {
+							Description: "The IPv4 Netmask, represented in the standard dot-decimal notation, e.g. 255.255.255.0.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "comm.IpV4Interface",
+						},
+					},
+				},
+			},
 			"cluster_network": {
 				Description: "A reference to a hyperflexClusterNetworkPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -307,6 +349,12 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 						},
 						"config_state": {
 							Description: "Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Out-of-sync, Validating, Configuring, Failed.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"config_type": {
+							Description: "The type of configuration running on the profile. Since profile deployments can configure multiple different settings, configType indicates which type of configuration is currently in progress.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1030,6 +1078,55 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 					},
 				},
 			},
+			"storage_client_ip_address": {
+				Description: "The storage data IP address for the HyperFlex cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"storage_client_netmask": {
+				Description: "The netmask for the Storage client network IP address.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"storage_client_vlan": {
+				Description: "The named VLAN associated with this cluster's storage client network. This applies to Intersight Workload Engine clusters only.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "hyperflex.NamedVlan",
+						},
+						"name": {
+							Description: "The name of the VLAN.\nThe name can be from 1 to 32 characters long and can contain a combination of alphanumeric characters, underscores, and hyphens.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "hyperflex.NamedVlan",
+						},
+						"vlan_id": {
+							Description: "The ID of the named VLAN. An ID of 0 means the traffic is untagged.\nThe ID can be any number between 0 and 4095, inclusive.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"storage_cluster_auxiliary_ip": {
 				Description: "The auxiliary storage IP address for the HyperFlex cluster. For two node clusters, this is the IP address of the auxiliary ZK controller.",
 				Type:        schema.TypeString,
@@ -1376,10 +1473,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterProfileWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -1392,48 +1485,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -1477,49 +1528,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssociatedCluster(x)
-		}
-	}
-
-	if v, ok := d.GetOk("associated_compute_cluster"); ok {
-		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAssociatedComputeCluster(x)
 		}
 	}
 
@@ -1567,6 +1575,55 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	}
 
 	o.SetClassId("hyperflex.ClusterProfile")
+
+	if v, ok := d.GetOk("cluster_internal_subnet"); ok {
+		p := make([]models.CommIpV4Interface, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewCommIpV4InterfaceWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("comm.IpV4Interface")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["ip_address"]; ok {
+				{
+					x := (v.(string))
+					o.SetIpAddress(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterInternalSubnet(x)
+		}
+	}
 
 	if v, ok := d.GetOk("cluster_network"); ok {
 		p := make([]models.HyperflexClusterNetworkPolicyRelationship, 0, 1)
@@ -1671,12 +1728,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 				}
 			}
 			o.SetClassId("policy.ConfigContext")
-			if v, ok := l["config_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetConfigState(x)
-				}
-			}
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1695,66 +1746,12 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["oper_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetOperState(x)
-				}
-			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
 			x := p[0]
 			o.SetConfigContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("config_result"); ok {
-		p := make([]models.HyperflexConfigResultRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsHyperflexConfigResultRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetConfigResult(x)
-		}
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("data_ip_address"); ok {
@@ -1765,11 +1762,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if v, ok := d.GetOk("ext_fc_storage"); ok {
@@ -1974,11 +1966,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		o.SetMgmtPlatform(x)
 	}
 
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -2119,102 +2106,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		}
 	}
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
-
 	if v, ok := d.GetOk("policy_bucket"); ok {
 		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
@@ -2305,53 +2196,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		o.SetReplication(x)
 	}
 
-	if v, ok := d.GetOk("running_workflows"); ok {
-		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetRunningWorkflows(x)
-		}
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if v, ok := d.GetOk("software_version"); ok {
 		p := make([]models.HyperflexSoftwareVersionPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2435,6 +2279,59 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetSrcTemplate(x)
+		}
+	}
+
+	if v, ok := d.GetOk("storage_client_ip_address"); ok {
+		x := (v.(string))
+		o.SetStorageClientIpAddress(x)
+	}
+
+	if v, ok := d.GetOk("storage_client_netmask"); ok {
+		x := (v.(string))
+		o.SetStorageClientNetmask(x)
+	}
+
+	if v, ok := d.GetOk("storage_client_vlan"); ok {
+		p := make([]models.HyperflexNamedVlan, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewHyperflexNamedVlanWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.NamedVlan")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVlanId(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageClientVlan(x)
 		}
 	}
 
@@ -2660,142 +2557,6 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 		}
 	}
 
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
 	if v, ok := d.GetOk("wwxn_prefix"); ok {
 		x := (v.(string))
 		o.SetWwxnPrefix(x)
@@ -2916,6 +2677,10 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("cluster_internal_subnet", flattenMapCommIpV4Interface(s.GetClusterInternalSubnet(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClusterInternalSubnet in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_network", flattenMapHyperflexClusterNetworkPolicyRelationship(s.GetClusterNetwork(), d)); err != nil {
@@ -3058,6 +2823,18 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while setting property SrcTemplate in HyperflexClusterProfile object: %s", err.Error())
 	}
 
+	if err := d.Set("storage_client_ip_address", (s.GetStorageClientIpAddress())); err != nil {
+		return diag.Errorf("error occurred while setting property StorageClientIpAddress in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("storage_client_netmask", (s.GetStorageClientNetmask())); err != nil {
+		return diag.Errorf("error occurred while setting property StorageClientNetmask in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("storage_client_vlan", flattenMapHyperflexNamedVlan(s.GetStorageClientVlan(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property StorageClientVlan in HyperflexClusterProfile object: %s", err.Error())
+	}
+
 	if err := d.Set("storage_cluster_auxiliary_ip", (s.GetStorageClusterAuxiliaryIp())); err != nil {
 		return diag.Errorf("error occurred while setting property StorageClusterAuxiliaryIp in HyperflexClusterProfile object: %s", err.Error())
 	}
@@ -3109,11 +2886,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterProfile{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -3129,47 +2901,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("associated_cluster") {
@@ -3213,50 +2944,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssociatedCluster(x)
-		}
-	}
-
-	if d.HasChange("associated_compute_cluster") {
-		v := d.Get("associated_compute_cluster")
-		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetAssociatedComputeCluster(x)
 		}
 	}
 
@@ -3305,6 +2992,56 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 	}
 
 	o.SetClassId("hyperflex.ClusterProfile")
+
+	if d.HasChange("cluster_internal_subnet") {
+		v := d.Get("cluster_internal_subnet")
+		p := make([]models.CommIpV4Interface, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CommIpV4Interface{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("comm.IpV4Interface")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["ip_address"]; ok {
+				{
+					x := (v.(string))
+					o.SetIpAddress(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterInternalSubnet(x)
+		}
+	}
 
 	if d.HasChange("cluster_network") {
 		v := d.Get("cluster_network")
@@ -3412,12 +3149,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 				}
 			}
 			o.SetClassId("policy.ConfigContext")
-			if v, ok := l["config_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetConfigState(x)
-				}
-			}
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3436,68 +3167,12 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["oper_state"]; ok {
-				{
-					x := (v.(string))
-					o.SetOperState(x)
-				}
-			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
 			x := p[0]
 			o.SetConfigContext(x)
 		}
-	}
-
-	if d.HasChange("config_result") {
-		v := d.Get("config_result")
-		p := make([]models.HyperflexConfigResultRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsHyperflexConfigResultRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetConfigResult(x)
-		}
-	}
-
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
 	}
 
 	if d.HasChange("data_ip_address") {
@@ -3510,12 +3185,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if d.HasChange("ext_fc_storage") {
@@ -3730,12 +3399,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		o.SetMgmtPlatform(x)
 	}
 
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -3879,101 +3542,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		}
 	}
 
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
-
 	if d.HasChange("policy_bucket") {
 		v := d.Get("policy_bucket")
 		x := make([]models.PolicyAbstractPolicyRelationship, 0)
@@ -4065,53 +3633,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		o.SetReplication(x)
 	}
 
-	if d.HasChange("running_workflows") {
-		v := d.Get("running_workflows")
-		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		o.SetRunningWorkflows(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if d.HasChange("software_version") {
 		v := d.Get("software_version")
 		p := make([]models.HyperflexSoftwareVersionPolicyRelationship, 0, 1)
@@ -4197,6 +3718,62 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetSrcTemplate(x)
+		}
+	}
+
+	if d.HasChange("storage_client_ip_address") {
+		v := d.Get("storage_client_ip_address")
+		x := (v.(string))
+		o.SetStorageClientIpAddress(x)
+	}
+
+	if d.HasChange("storage_client_netmask") {
+		v := d.Get("storage_client_netmask")
+		x := (v.(string))
+		o.SetStorageClientNetmask(x)
+	}
+
+	if d.HasChange("storage_client_vlan") {
+		v := d.Get("storage_client_vlan")
+		p := make([]models.HyperflexNamedVlan, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexNamedVlan{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.NamedVlan")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vlan_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetVlanId(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageClientVlan(x)
 		}
 	}
 
@@ -4425,143 +4002,6 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 		if len(p) > 0 {
 			x := p[0]
 			o.SetVcenterConfig(x)
-		}
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
 		}
 	}
 
