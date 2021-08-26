@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.IscsiStaticTargetPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.IscsiStaticTargetPolicy"]
 **IpAddress** | Pointer to **string** | The IPv4 address assigned to the iSCSI target. | [optional] 
-**Lun** | Pointer to [**NullableVnicLun**](vnic.Lun.md) |  | [optional] 
+**Lun** | Pointer to [**NullableVnicLun**](VnicLun.md) |  | [optional] 
 **Port** | Pointer to **int64** | The port associated with the iSCSI target. | [optional] 
 **TargetName** | Pointer to **string** | Qualified Name (IQN) or Extended Unique Identifier (EUI) name of the iSCSI target. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

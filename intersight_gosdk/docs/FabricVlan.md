@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
 **VlanId** | Pointer to **int64** | The identifier for this Virtual LAN. | [optional] 
-**EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](fabric.EthNetworkPolicy.Relationship.md) |  | [optional] 
-**MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](fabric.MulticastPolicy.Relationship.md) |  | [optional] 
+**EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](FabricEthNetworkPolicyRelationship.md) |  | [optional] 
+**MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](FabricMulticastPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 

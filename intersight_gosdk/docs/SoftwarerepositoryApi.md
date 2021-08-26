@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryAuthorization**](softwarerepository.Authorization.md)
+[**SoftwarerepositoryAuthorization**](SoftwarerepositoryAuthorization.md)
 
 ### Authorization
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapper**](softwarerepository.CategoryMapper.md)
+[**SoftwarerepositoryCategoryMapper**](SoftwarerepositoryCategoryMapper.md)
 
 ### Authorization
 
@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperModel**](softwarerepository.CategoryMapperModel.md)
+[**SoftwarerepositoryCategoryMapperModel**](SoftwarerepositoryCategoryMapperModel.md)
 
 ### Authorization
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategorySupportConstraint**](softwarerepository.CategorySupportConstraint.md)
+[**SoftwarerepositoryCategorySupportConstraint**](SoftwarerepositoryCategorySupportConstraint.md)
 
 ### Authorization
 
@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryOperatingSystemFile**](softwarerepository.OperatingSystemFile.md)
+[**SoftwarerepositoryOperatingSystemFile**](SoftwarerepositoryOperatingSystemFile.md)
 
 ### Authorization
 
@@ -440,7 +440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryRelease**](softwarerepository.Release.md)
+[**SoftwarerepositoryRelease**](SoftwarerepositoryRelease.md)
 
 ### Authorization
 
@@ -838,7 +838,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryAuthorization**](softwarerepository.Authorization.md)
+[**SoftwarerepositoryAuthorization**](SoftwarerepositoryAuthorization.md)
 
 ### Authorization
 
@@ -922,7 +922,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryAuthorizationResponse**](softwarerepository.Authorization.Response.md)
+[**SoftwarerepositoryAuthorizationResponse**](SoftwarerepositoryAuthorizationResponse.md)
 
 ### Authorization
 
@@ -990,7 +990,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCachedImage**](softwarerepository.CachedImage.md)
+[**SoftwarerepositoryCachedImage**](SoftwarerepositoryCachedImage.md)
 
 ### Authorization
 
@@ -1074,7 +1074,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCachedImageResponse**](softwarerepository.CachedImage.Response.md)
+[**SoftwarerepositoryCachedImageResponse**](SoftwarerepositoryCachedImageResponse.md)
 
 ### Authorization
 
@@ -1142,7 +1142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCatalog**](softwarerepository.Catalog.md)
+[**SoftwarerepositoryCatalog**](SoftwarerepositoryCatalog.md)
 
 ### Authorization
 
@@ -1226,7 +1226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCatalogResponse**](softwarerepository.Catalog.Response.md)
+[**SoftwarerepositoryCatalogResponse**](SoftwarerepositoryCatalogResponse.md)
 
 ### Authorization
 
@@ -1294,7 +1294,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapper**](softwarerepository.CategoryMapper.md)
+[**SoftwarerepositoryCategoryMapper**](SoftwarerepositoryCategoryMapper.md)
 
 ### Authorization
 
@@ -1378,7 +1378,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperResponse**](softwarerepository.CategoryMapper.Response.md)
+[**SoftwarerepositoryCategoryMapperResponse**](SoftwarerepositoryCategoryMapperResponse.md)
 
 ### Authorization
 
@@ -1446,7 +1446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperModel**](softwarerepository.CategoryMapperModel.md)
+[**SoftwarerepositoryCategoryMapperModel**](SoftwarerepositoryCategoryMapperModel.md)
 
 ### Authorization
 
@@ -1530,7 +1530,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperModelResponse**](softwarerepository.CategoryMapperModel.Response.md)
+[**SoftwarerepositoryCategoryMapperModelResponse**](SoftwarerepositoryCategoryMapperModelResponse.md)
 
 ### Authorization
 
@@ -1598,7 +1598,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategorySupportConstraint**](softwarerepository.CategorySupportConstraint.md)
+[**SoftwarerepositoryCategorySupportConstraint**](SoftwarerepositoryCategorySupportConstraint.md)
 
 ### Authorization
 
@@ -1682,7 +1682,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategorySupportConstraintResponse**](softwarerepository.CategorySupportConstraint.Response.md)
+[**SoftwarerepositoryCategorySupportConstraintResponse**](SoftwarerepositoryCategorySupportConstraintResponse.md)
 
 ### Authorization
 
@@ -1750,7 +1750,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryDownloadSpec**](softwarerepository.DownloadSpec.md)
+[**SoftwarerepositoryDownloadSpec**](SoftwarerepositoryDownloadSpec.md)
 
 ### Authorization
 
@@ -1834,7 +1834,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryDownloadSpecResponse**](softwarerepository.DownloadSpec.Response.md)
+[**SoftwarerepositoryDownloadSpecResponse**](SoftwarerepositoryDownloadSpecResponse.md)
 
 ### Authorization
 
@@ -1902,7 +1902,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryOperatingSystemFile**](softwarerepository.OperatingSystemFile.md)
+[**SoftwarerepositoryOperatingSystemFile**](SoftwarerepositoryOperatingSystemFile.md)
 
 ### Authorization
 
@@ -1986,7 +1986,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryOperatingSystemFileResponse**](softwarerepository.OperatingSystemFile.Response.md)
+[**SoftwarerepositoryOperatingSystemFileResponse**](SoftwarerepositoryOperatingSystemFileResponse.md)
 
 ### Authorization
 
@@ -2054,7 +2054,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryRelease**](softwarerepository.Release.md)
+[**SoftwarerepositoryRelease**](SoftwarerepositoryRelease.md)
 
 ### Authorization
 
@@ -2138,7 +2138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryReleaseResponse**](softwarerepository.Release.Response.md)
+[**SoftwarerepositoryReleaseResponse**](SoftwarerepositoryReleaseResponse.md)
 
 ### Authorization
 
@@ -2210,7 +2210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryAuthorization**](softwarerepository.Authorization.md)
+[**SoftwarerepositoryAuthorization**](SoftwarerepositoryAuthorization.md)
 
 ### Authorization
 
@@ -2282,7 +2282,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapper**](softwarerepository.CategoryMapper.md)
+[**SoftwarerepositoryCategoryMapper**](SoftwarerepositoryCategoryMapper.md)
 
 ### Authorization
 
@@ -2354,7 +2354,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperModel**](softwarerepository.CategoryMapperModel.md)
+[**SoftwarerepositoryCategoryMapperModel**](SoftwarerepositoryCategoryMapperModel.md)
 
 ### Authorization
 
@@ -2426,7 +2426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategorySupportConstraint**](softwarerepository.CategorySupportConstraint.md)
+[**SoftwarerepositoryCategorySupportConstraint**](SoftwarerepositoryCategorySupportConstraint.md)
 
 ### Authorization
 
@@ -2498,7 +2498,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryOperatingSystemFile**](softwarerepository.OperatingSystemFile.md)
+[**SoftwarerepositoryOperatingSystemFile**](SoftwarerepositoryOperatingSystemFile.md)
 
 ### Authorization
 
@@ -2570,7 +2570,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryRelease**](softwarerepository.Release.md)
+[**SoftwarerepositoryRelease**](SoftwarerepositoryRelease.md)
 
 ### Authorization
 
@@ -2642,7 +2642,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryAuthorization**](softwarerepository.Authorization.md)
+[**SoftwarerepositoryAuthorization**](SoftwarerepositoryAuthorization.md)
 
 ### Authorization
 
@@ -2714,7 +2714,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapper**](softwarerepository.CategoryMapper.md)
+[**SoftwarerepositoryCategoryMapper**](SoftwarerepositoryCategoryMapper.md)
 
 ### Authorization
 
@@ -2786,7 +2786,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategoryMapperModel**](softwarerepository.CategoryMapperModel.md)
+[**SoftwarerepositoryCategoryMapperModel**](SoftwarerepositoryCategoryMapperModel.md)
 
 ### Authorization
 
@@ -2858,7 +2858,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryCategorySupportConstraint**](softwarerepository.CategorySupportConstraint.md)
+[**SoftwarerepositoryCategorySupportConstraint**](SoftwarerepositoryCategorySupportConstraint.md)
 
 ### Authorization
 
@@ -2930,7 +2930,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryOperatingSystemFile**](softwarerepository.OperatingSystemFile.md)
+[**SoftwarerepositoryOperatingSystemFile**](SoftwarerepositoryOperatingSystemFile.md)
 
 ### Authorization
 
@@ -3002,7 +3002,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SoftwarerepositoryRelease**](softwarerepository.Release.md)
+[**SoftwarerepositoryRelease**](SoftwarerepositoryRelease.md)
 
 ### Authorization
 

@@ -44,7 +44,7 @@ Name | Type | Description | Notes
 **VzBrCpCount** | Pointer to **int64** | Number of Zoning Policy per tenant. | [optional] 
 **VzRtConsCount** | Pointer to **int64** | Number of Client Contract between End Point Groups per tenant. | [optional] 
 **VzRtProvCount** | Pointer to **int64** | Number of Client Contract between End Point Groups per tenant. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

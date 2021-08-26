@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **NexusDashboardName** | Pointer to **string** | Name of the NexusDashboard. | [optional] 
 **NexusDashboardSerialNumber** | Pointer to **string** | Serial number of NexusDashboard. | [optional] 
 **Type** | Pointer to **string** | Node type of the nexus dashboard cluster. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

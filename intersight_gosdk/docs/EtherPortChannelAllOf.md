@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **PortChannelId** | Pointer to **int64** | Unique identifier for this port-channel on the FI. | [optional] 
 **Role** | Pointer to **string** | This port-channel&#39;s configured role (uplink, server, etc.). | [optional] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
-**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](equipment.SwitchCard.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

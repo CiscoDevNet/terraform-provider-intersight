@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
 **Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] [default to "Cisco"]
 **DistributableMetas** | Pointer to [**[]FirmwareDistributableMetaRelationship**](FirmwareDistributableMetaRelationship.md) | An array of relationships to firmwareDistributableMeta resources. | [optional] 
-**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](softwarerepository.Release.Relationship.md) |  | [optional] 
+**Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](SoftwarerepositoryReleaseRelationship.md) |  | [optional] 
 
 ## Methods
 

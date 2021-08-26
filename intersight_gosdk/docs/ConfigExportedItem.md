@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "config.ExportedItem"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "config.ExportedItem"]
 **FileName** | Pointer to **string** | Name of the file corresponding to item MO. | [optional] [readonly] 
-**Item** | Pointer to [**NullableConfigMoRef**](config.MoRef.md) |  | [optional] 
+**Item** | Pointer to [**NullableConfigMoRef**](ConfigMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
 **ServiceVersion** | Pointer to **string** | Version of the service that owns the item MO. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the item&#39;s export operation. * &#x60;&#x60; - The operation has not started. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been inititiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. | [optional] [readonly] [default to ""]
 **StatusMessage** | Pointer to **string** | Progress or error message for the MO&#39;s export operation. | [optional] [readonly] 
-**Exporter** | Pointer to [**ConfigExporterRelationship**](config.Exporter.Relationship.md) |  | [optional] 
-**ParentItem** | Pointer to [**ConfigExportedItemRelationship**](config.ExportedItem.Relationship.md) |  | [optional] 
+**Exporter** | Pointer to [**ConfigExporterRelationship**](ConfigExporterRelationship.md) |  | [optional] 
+**ParentItem** | Pointer to [**ConfigExportedItemRelationship**](ConfigExportedItemRelationship.md) |  | [optional] 
 **RelatedItems** | Pointer to [**[]ConfigExportedItemRelationship**](ConfigExportedItemRelationship.md) | An array of relationships to configExportedItem resources. | [optional] [readonly] 
 
 ## Methods

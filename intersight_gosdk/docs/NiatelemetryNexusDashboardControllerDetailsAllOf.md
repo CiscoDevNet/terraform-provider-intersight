@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **SiteHealth** | Pointer to **int64** | Health of the site serviced by ND. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **VersionOfController** | Pointer to **string** | Version of the controller serviced by ND. | [optional] 
-**NexusDashboard** | Pointer to [**NiatelemetryNexusDashboardsRelationship**](niatelemetry.NexusDashboards.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**NexusDashboard** | Pointer to [**NiatelemetryNexusDashboardsRelationship**](NiatelemetryNexusDashboardsRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

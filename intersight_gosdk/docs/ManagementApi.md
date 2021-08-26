@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementController**](management.Controller.md)
+[**ManagementController**](ManagementController.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementControllerResponse**](management.Controller.Response.md)
+[**ManagementControllerResponse**](ManagementControllerResponse.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementEntity**](management.Entity.md)
+[**ManagementEntity**](ManagementEntity.md)
 
 ### Authorization
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementEntityResponse**](management.Entity.Response.md)
+[**ManagementEntityResponse**](ManagementEntityResponse.md)
 
 ### Authorization
 
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementInterface**](management.Interface.md)
+[**ManagementInterface**](ManagementInterface.md)
 
 ### Authorization
 
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementInterfaceResponse**](management.Interface.Response.md)
+[**ManagementInterfaceResponse**](ManagementInterfaceResponse.md)
 
 ### Authorization
 
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementController**](management.Controller.md)
+[**ManagementController**](ManagementController.md)
 
 ### Authorization
 
@@ -603,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementEntity**](management.Entity.md)
+[**ManagementEntity**](ManagementEntity.md)
 
 ### Authorization
 
@@ -675,7 +675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementInterface**](management.Interface.md)
+[**ManagementInterface**](ManagementInterface.md)
 
 ### Authorization
 
@@ -747,7 +747,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementController**](management.Controller.md)
+[**ManagementController**](ManagementController.md)
 
 ### Authorization
 
@@ -819,7 +819,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementEntity**](management.Entity.md)
+[**ManagementEntity**](ManagementEntity.md)
 
 ### Authorization
 
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ManagementInterface**](management.Interface.md)
+[**ManagementInterface**](ManagementInterface.md)
 
 ### Authorization
 

@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPool**](iqnpool.Pool.md)
+[**IqnpoolPool**](IqnpoolPool.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolBlock**](iqnpool.Block.md)
+[**IqnpoolBlock**](IqnpoolBlock.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolBlockResponse**](iqnpool.Block.Response.md)
+[**IqnpoolBlockResponse**](IqnpoolBlockResponse.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolLease**](iqnpool.Lease.md)
+[**IqnpoolLease**](IqnpoolLease.md)
 
 ### Authorization
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolLeaseResponse**](iqnpool.Lease.Response.md)
+[**IqnpoolLeaseResponse**](IqnpoolLeaseResponse.md)
 
 ### Authorization
 
@@ -578,7 +578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPool**](iqnpool.Pool.md)
+[**IqnpoolPool**](IqnpoolPool.md)
 
 ### Authorization
 
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPoolResponse**](iqnpool.Pool.Response.md)
+[**IqnpoolPoolResponse**](IqnpoolPoolResponse.md)
 
 ### Authorization
 
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPoolMember**](iqnpool.PoolMember.md)
+[**IqnpoolPoolMember**](IqnpoolPoolMember.md)
 
 ### Authorization
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPoolMemberResponse**](iqnpool.PoolMember.Response.md)
+[**IqnpoolPoolMemberResponse**](IqnpoolPoolMemberResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolUniverse**](iqnpool.Universe.md)
+[**IqnpoolUniverse**](IqnpoolUniverse.md)
 
 ### Authorization
 
@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolUniverseResponse**](iqnpool.Universe.Response.md)
+[**IqnpoolUniverseResponse**](IqnpoolUniverseResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPool**](iqnpool.Pool.md)
+[**IqnpoolPool**](IqnpoolPool.md)
 
 ### Authorization
 
@@ -1110,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IqnpoolPool**](iqnpool.Pool.md)
+[**IqnpoolPool**](IqnpoolPool.md)
 
 ### Authorization
 

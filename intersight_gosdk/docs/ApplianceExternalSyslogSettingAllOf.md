@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Port** | Pointer to **int64** | External Syslog Server Port for connection establishment. | [optional] [default to 10514]
 **Protocol** | Pointer to **string** | Protocol used to connect to external syslog server. * &#x60;TCP&#x60; - External Syslog messages sent over TCP. * &#x60;UDP&#x60; - External Syslog messages sent over UDP. * &#x60;TLS&#x60; - Secure External Syslog messages sent over TLS. | [optional] [default to "TCP"]
 **Server** | Pointer to **string** | External Syslog Server Address, can be IP address or hostname. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

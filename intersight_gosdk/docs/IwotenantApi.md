@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IwotenantTenantStatus**](iwotenant.TenantStatus.md)
+[**IwotenantTenantStatus**](IwotenantTenantStatus.md)
 
 ### Authorization
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IwotenantTenantStatusResponse**](iwotenant.TenantStatus.Response.md)
+[**IwotenantTenantStatusResponse**](IwotenantTenantStatusResponse.md)
 
 ### Authorization
 

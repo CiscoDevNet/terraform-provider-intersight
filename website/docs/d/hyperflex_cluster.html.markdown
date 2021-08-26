@@ -43,6 +43,7 @@ The following arguments can be used to get data of already created objects in In
 * `storage_node_count`:(int) The number of storage nodes that belong to this cluster. 
 * `storage_utilization`:(float) The storage utilization is computed based on total capacity and current capacity utilization. 
 * `total_cores`:(int) Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. 
+* `upgrade_status`:(string) The upgrade status of the HyperFlex cluster.* `Unknown` - The upgrade status of the HyperFlex cluster could not be determined.* `Ok` - The upgrade of the HyperFlex cluster is complete.* `InProgress` - The upgrade of the HyperFlex cluster is in-progress.* `Failed` - The upgrade of the HyperFlex cluster has failed.* `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution. 
 * `utilization_percentage`:(float) The storage utilization percentage is computed based on total capacity and current capacity utilization. 
 * `utilization_trend_percentage`:(float) The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. 
 * `vm_count`:(int) The number of virtual machines present on this cluster. 

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **IsNewPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;newPassword&#39; property has been set. | [optional] [readonly] [default to false]
 **NewPassword** | Pointer to **string** | New password that the user&#39;s password should be changed to. | [optional] 
 **Password** | Pointer to **string** | User&#39;s current valid passsord. | [optional] 
-**User** | Pointer to [**IamUserRelationship**](iam.User.Relationship.md) |  | [optional] 
+**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 

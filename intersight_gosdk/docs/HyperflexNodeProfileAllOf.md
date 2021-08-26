@@ -8,11 +8,14 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.NodeProfile"]
 **HxdpDataIp** | Pointer to **string** | IP address for storage data network (Controller VM interface). | [optional] 
 **HxdpMgmtIp** | Pointer to **string** | IP address for HyperFlex management network. | [optional] 
+**HxdpStorageClientIp** | Pointer to **string** | IP address for storage client network (Controller VM interface). | [optional] 
 **HypervisorControlIp** | Pointer to **string** | IP address for hypervisor control such as VM migration or pod management. | [optional] 
 **HypervisorDataIp** | Pointer to **string** | IP address for storage data network (Hypervisor interface). | [optional] 
 **HypervisorMgmtIp** | Pointer to **string** | IP address for Hypervisor management network. | [optional] 
-**AssignedServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
-**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
+**NodeRole** | Pointer to **string** | The role that this node performs in the HyperFlex cluster. * &#x60;Storage&#x60; - Cluster of storage nodes used to persist data. * &#x60;Compute&#x60; - Cluster of compute nodes used to execute business logic. * &#x60;Unknown&#x60; - This cluster type is Unknown. Expect Compute or Storage as valid values. | [optional] [readonly] [default to "Storage"]
+**AssignedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
+**Node** | Pointer to [**HyperflexNodeRelationship**](HyperflexNodeRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -123,6 +126,31 @@ SetHxdpMgmtIp sets HxdpMgmtIp field to given value.
 
 HasHxdpMgmtIp returns a boolean if a field has been set.
 
+### GetHxdpStorageClientIp
+
+`func (o *HyperflexNodeProfileAllOf) GetHxdpStorageClientIp() string`
+
+GetHxdpStorageClientIp returns the HxdpStorageClientIp field if non-nil, zero value otherwise.
+
+### GetHxdpStorageClientIpOk
+
+`func (o *HyperflexNodeProfileAllOf) GetHxdpStorageClientIpOk() (*string, bool)`
+
+GetHxdpStorageClientIpOk returns a tuple with the HxdpStorageClientIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHxdpStorageClientIp
+
+`func (o *HyperflexNodeProfileAllOf) SetHxdpStorageClientIp(v string)`
+
+SetHxdpStorageClientIp sets HxdpStorageClientIp field to given value.
+
+### HasHxdpStorageClientIp
+
+`func (o *HyperflexNodeProfileAllOf) HasHxdpStorageClientIp() bool`
+
+HasHxdpStorageClientIp returns a boolean if a field has been set.
+
 ### GetHypervisorControlIp
 
 `func (o *HyperflexNodeProfileAllOf) GetHypervisorControlIp() string`
@@ -198,6 +226,31 @@ SetHypervisorMgmtIp sets HypervisorMgmtIp field to given value.
 
 HasHypervisorMgmtIp returns a boolean if a field has been set.
 
+### GetNodeRole
+
+`func (o *HyperflexNodeProfileAllOf) GetNodeRole() string`
+
+GetNodeRole returns the NodeRole field if non-nil, zero value otherwise.
+
+### GetNodeRoleOk
+
+`func (o *HyperflexNodeProfileAllOf) GetNodeRoleOk() (*string, bool)`
+
+GetNodeRoleOk returns a tuple with the NodeRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeRole
+
+`func (o *HyperflexNodeProfileAllOf) SetNodeRole(v string)`
+
+SetNodeRole sets NodeRole field to given value.
+
+### HasNodeRole
+
+`func (o *HyperflexNodeProfileAllOf) HasNodeRole() bool`
+
+HasNodeRole returns a boolean if a field has been set.
+
 ### GetAssignedServer
 
 `func (o *HyperflexNodeProfileAllOf) GetAssignedServer() ComputePhysicalRelationship`
@@ -247,6 +300,31 @@ SetClusterProfile sets ClusterProfile field to given value.
 `func (o *HyperflexNodeProfileAllOf) HasClusterProfile() bool`
 
 HasClusterProfile returns a boolean if a field has been set.
+
+### GetNode
+
+`func (o *HyperflexNodeProfileAllOf) GetNode() HyperflexNodeRelationship`
+
+GetNode returns the Node field if non-nil, zero value otherwise.
+
+### GetNodeOk
+
+`func (o *HyperflexNodeProfileAllOf) GetNodeOk() (*HyperflexNodeRelationship, bool)`
+
+GetNodeOk returns a tuple with the Node field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNode
+
+`func (o *HyperflexNodeProfileAllOf) SetNode(v HyperflexNodeRelationship)`
+
+SetNode sets Node field to given value.
+
+### HasNode
+
+`func (o *HyperflexNodeProfileAllOf) HasNode() bool`
+
+HasNode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

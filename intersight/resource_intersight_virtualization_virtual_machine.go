@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -1051,63 +1049,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationVirtualMachineWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
-	}
-
-	if v, ok := d.GetOk("action_info"); ok {
-		p := make([]models.VirtualizationActionInfo, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewVirtualizationActionInfoWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("virtualization.ActionInfo")
-			if v, ok := l["failure_reason"]; ok {
-				{
-					x := (v.(string))
-					o.SetFailureReason(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetActionInfo(x)
-		}
 	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
@@ -1136,70 +1081,16 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
 		}
 		if len(x) > 0 {
 			o.SetAffinitySelectors(x)
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -1220,22 +1111,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
@@ -1361,15 +1240,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetCpu(x)
 	}
 
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOkExists("discovered"); ok {
-		x := v.(bool)
-		o.SetDiscovered(x)
-	}
+	o.SetDiscovered(d.Get("discovered").(bool))
 
 	if v, ok := d.GetOk("disk"); ok {
 		x := make([]models.VirtualizationVirtualMachineDisk, 0)
@@ -1493,15 +1364,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOkExists("force_delete"); ok {
-		x := v.(bool)
-		o.SetForceDelete(x)
-	}
+	o.SetForceDelete(d.Get("force_delete").(bool))
 
 	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
@@ -1554,11 +1417,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("host_esxi"); ok {
 		x := (v.(string))
 		o.SetHostEsxi(x)
-	}
-
-	if v, ok := d.GetOk("hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetHypervisorType(x)
 	}
 
 	if v, ok := d.GetOk("interfaces"); ok {
@@ -1627,49 +1485,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("inventory"); ok {
-		p := make([]models.VirtualizationBaseVirtualMachineRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsVirtualizationBaseVirtualMachineRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetInventory(x)
-		}
-	}
-
 	if v, ok := d.GetOk("labels"); ok {
 		x := make([]models.InfraMetaData, 0)
 		s := v.([]interface{})
@@ -1687,22 +1502,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
@@ -1717,11 +1520,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetMemory(x)
 	}
 
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -1733,102 +1531,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 	}
 
 	o.SetObjectType("virtualization.VirtualMachine")
-
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
 
 	if v, ok := d.GetOk("power_state"); ok {
 		x := (v.(string))
@@ -1883,11 +1585,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1923,142 +1620,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
 	if v, ok := d.GetOk("vm_config"); ok {
 		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
 		s := v.([]interface{})
@@ -2087,49 +1648,6 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		if len(p) > 0 {
 			x := p[0]
 			o.SetVmConfig(x)
-		}
-	}
-
-	if v, ok := d.GetOk("workflow_info"); ok {
-		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetWorkflowInfo(x)
 		}
 	}
 
@@ -2389,66 +1907,11 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualMachine{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("action") {
 		v := d.Get("action")
 		x := (v.(string))
 		o.SetAction(x)
-	}
-
-	if d.HasChange("action_info") {
-		v := d.Get("action_info")
-		p := make([]models.VirtualizationActionInfo, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.VirtualizationActionInfo{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("virtualization.ActionInfo")
-			if v, ok := l["failure_reason"]; ok {
-				{
-					x := (v.(string))
-					o.SetFailureReason(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetActionInfo(x)
-		}
 	}
 
 	if d.HasChange("additional_properties") {
@@ -2479,68 +1942,15 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
 		}
 		o.SetAffinitySelectors(x)
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("anti_affinity_selectors") {
@@ -2561,22 +1971,10 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
@@ -2704,18 +2102,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		o.SetCpu(x)
 	}
 
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if d.HasChange("discovered") {
-		v := d.Get("discovered")
-		x := (v.(bool))
-		o.SetDiscovered(x)
-	}
-
 	if d.HasChange("disk") {
 		v := d.Get("disk")
 		x := make([]models.VirtualizationVirtualMachineDisk, 0)
@@ -2837,12 +2223,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		o.SetDisk(x)
 	}
 
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
 	if d.HasChange("force_delete") {
 		v := d.Get("force_delete")
 		x := (v.(bool))
@@ -2903,12 +2283,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		v := d.Get("host_esxi")
 		x := (v.(string))
 		o.SetHostEsxi(x)
-	}
-
-	if d.HasChange("hypervisor_type") {
-		v := d.Get("hypervisor_type")
-		x := (v.(string))
-		o.SetHypervisorType(x)
 	}
 
 	if d.HasChange("interfaces") {
@@ -2976,50 +2350,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		o.SetInterfaces(x)
 	}
 
-	if d.HasChange("inventory") {
-		v := d.Get("inventory")
-		p := make([]models.VirtualizationBaseVirtualMachineRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsVirtualizationBaseVirtualMachineRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetInventory(x)
-		}
-	}
-
 	if d.HasChange("labels") {
 		v := d.Get("labels")
 		x := make([]models.InfraMetaData, 0)
@@ -3038,22 +2368,10 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 				}
 			}
 			o.SetClassId("infra.MetaData")
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["value"]; ok {
-				{
-					x := (v.(string))
-					o.SetValue(x)
 				}
 			}
 			x = append(x, *o)
@@ -3065,12 +2383,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		v := d.Get("memory")
 		x := int64(v.(int))
 		o.SetMemory(x)
-	}
-
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if d.HasChange("moid") {
@@ -3086,101 +2398,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 	}
 
 	o.SetObjectType("virtualization.VirtualMachine")
-
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
 
 	if d.HasChange("power_state") {
 		v := d.Get("power_state")
@@ -3238,12 +2455,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		}
 	}
 
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -3278,143 +2489,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		o.SetTags(x)
 	}
 
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
 	if d.HasChange("vm_config") {
 		v := d.Get("vm_config")
 		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
@@ -3444,50 +2518,6 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 		if len(p) > 0 {
 			x := p[0]
 			o.SetVmConfig(x)
-		}
-	}
-
-	if d.HasChange("workflow_info") {
-		v := d.Get("workflow_info")
-		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetWorkflowInfo(x)
 		}
 	}
 

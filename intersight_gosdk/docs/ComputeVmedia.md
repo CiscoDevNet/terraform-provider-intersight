@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Enabled** | Pointer to **bool** | State of the Virtual Media service on the server. | [optional] [readonly] [default to true]
 **Encryption** | Pointer to **bool** | If enabled, allows encryption of all Virtual Media communications. | [optional] [readonly] 
 **LowPowerUsb** | Pointer to **bool** | If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. | [optional] [readonly] [default to true]
-**ComputePhysicalUnit** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
+**ComputePhysicalUnit** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **Mappings** | Pointer to [**[]ComputeMappingRelationship**](ComputeMappingRelationship.md) | An array of relationships to computeMapping resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

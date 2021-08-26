@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassis**](equipment.Chassis.md)
+[**EquipmentChassis**](EquipmentChassis.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisIdentity**](equipment.ChassisIdentity.md)
+[**EquipmentChassisIdentity**](EquipmentChassisIdentity.md)
 
 ### Authorization
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisIdentityResponse**](equipment.ChassisIdentity.Response.md)
+[**EquipmentChassisIdentityResponse**](EquipmentChassisIdentityResponse.md)
 
 ### Authorization
 
@@ -391,7 +391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisResponse**](equipment.Chassis.Response.md)
+[**EquipmentChassisResponse**](EquipmentChassisResponse.md)
 
 ### Authorization
 
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisOperation**](equipment.ChassisOperation.md)
+[**EquipmentChassisOperation**](EquipmentChassisOperation.md)
 
 ### Authorization
 
@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisOperationResponse**](equipment.ChassisOperation.Response.md)
+[**EquipmentChassisOperationResponse**](EquipmentChassisOperationResponse.md)
 
 ### Authorization
 
@@ -611,7 +611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentDeviceSummary**](equipment.DeviceSummary.md)
+[**EquipmentDeviceSummary**](EquipmentDeviceSummary.md)
 
 ### Authorization
 
@@ -695,7 +695,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentDeviceSummaryResponse**](equipment.DeviceSummary.Response.md)
+[**EquipmentDeviceSummaryResponse**](EquipmentDeviceSummaryResponse.md)
 
 ### Authorization
 
@@ -763,7 +763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFan**](equipment.Fan.md)
+[**EquipmentFan**](EquipmentFan.md)
 
 ### Authorization
 
@@ -831,7 +831,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanControl**](equipment.FanControl.md)
+[**EquipmentFanControl**](EquipmentFanControl.md)
 
 ### Authorization
 
@@ -915,7 +915,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanControlResponse**](equipment.FanControl.Response.md)
+[**EquipmentFanControlResponse**](EquipmentFanControlResponse.md)
 
 ### Authorization
 
@@ -999,7 +999,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanResponse**](equipment.Fan.Response.md)
+[**EquipmentFanResponse**](EquipmentFanResponse.md)
 
 ### Authorization
 
@@ -1067,7 +1067,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanModule**](equipment.FanModule.md)
+[**EquipmentFanModule**](EquipmentFanModule.md)
 
 ### Authorization
 
@@ -1151,7 +1151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanModuleResponse**](equipment.FanModule.Response.md)
+[**EquipmentFanModuleResponse**](EquipmentFanModuleResponse.md)
 
 ### Authorization
 
@@ -1219,7 +1219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFex**](equipment.Fex.md)
+[**EquipmentFex**](EquipmentFex.md)
 
 ### Authorization
 
@@ -1287,7 +1287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexIdentity**](equipment.FexIdentity.md)
+[**EquipmentFexIdentity**](EquipmentFexIdentity.md)
 
 ### Authorization
 
@@ -1371,7 +1371,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexIdentityResponse**](equipment.FexIdentity.Response.md)
+[**EquipmentFexIdentityResponse**](EquipmentFexIdentityResponse.md)
 
 ### Authorization
 
@@ -1455,7 +1455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexResponse**](equipment.Fex.Response.md)
+[**EquipmentFexResponse**](EquipmentFexResponse.md)
 
 ### Authorization
 
@@ -1523,7 +1523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexOperation**](equipment.FexOperation.md)
+[**EquipmentFexOperation**](EquipmentFexOperation.md)
 
 ### Authorization
 
@@ -1607,7 +1607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexOperationResponse**](equipment.FexOperation.Response.md)
+[**EquipmentFexOperationResponse**](EquipmentFexOperationResponse.md)
 
 ### Authorization
 
@@ -1675,7 +1675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFru**](equipment.Fru.md)
+[**EquipmentFru**](EquipmentFru.md)
 
 ### Authorization
 
@@ -1759,7 +1759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFruResponse**](equipment.Fru.Response.md)
+[**EquipmentFruResponse**](EquipmentFruResponse.md)
 
 ### Authorization
 
@@ -1827,7 +1827,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIdentitySummary**](equipment.IdentitySummary.md)
+[**EquipmentIdentitySummary**](EquipmentIdentitySummary.md)
 
 ### Authorization
 
@@ -1911,7 +1911,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIdentitySummaryResponse**](equipment.IdentitySummary.Response.md)
+[**EquipmentIdentitySummaryResponse**](EquipmentIdentitySummaryResponse.md)
 
 ### Authorization
 
@@ -1979,7 +1979,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCard**](equipment.IoCard.md)
+[**EquipmentIoCard**](EquipmentIoCard.md)
 
 ### Authorization
 
@@ -2063,7 +2063,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCardResponse**](equipment.IoCard.Response.md)
+[**EquipmentIoCardResponse**](EquipmentIoCardResponse.md)
 
 ### Authorization
 
@@ -2131,7 +2131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCardOperation**](equipment.IoCardOperation.md)
+[**EquipmentIoCardOperation**](EquipmentIoCardOperation.md)
 
 ### Authorization
 
@@ -2215,7 +2215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCardOperationResponse**](equipment.IoCardOperation.Response.md)
+[**EquipmentIoCardOperationResponse**](EquipmentIoCardOperationResponse.md)
 
 ### Authorization
 
@@ -2283,7 +2283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoExpander**](equipment.IoExpander.md)
+[**EquipmentIoExpander**](EquipmentIoExpander.md)
 
 ### Authorization
 
@@ -2367,7 +2367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoExpanderResponse**](equipment.IoExpander.Response.md)
+[**EquipmentIoExpanderResponse**](EquipmentIoExpanderResponse.md)
 
 ### Authorization
 
@@ -2435,7 +2435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentLocatorLed**](equipment.LocatorLed.md)
+[**EquipmentLocatorLed**](EquipmentLocatorLed.md)
 
 ### Authorization
 
@@ -2519,7 +2519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentLocatorLedResponse**](equipment.LocatorLed.Response.md)
+[**EquipmentLocatorLedResponse**](EquipmentLocatorLedResponse.md)
 
 ### Authorization
 
@@ -2587,7 +2587,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsu**](equipment.Psu.md)
+[**EquipmentPsu**](EquipmentPsu.md)
 
 ### Authorization
 
@@ -2655,7 +2655,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsuControl**](equipment.PsuControl.md)
+[**EquipmentPsuControl**](EquipmentPsuControl.md)
 
 ### Authorization
 
@@ -2739,7 +2739,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsuControlResponse**](equipment.PsuControl.Response.md)
+[**EquipmentPsuControlResponse**](EquipmentPsuControlResponse.md)
 
 ### Authorization
 
@@ -2823,7 +2823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsuResponse**](equipment.Psu.Response.md)
+[**EquipmentPsuResponse**](EquipmentPsuResponse.md)
 
 ### Authorization
 
@@ -2891,7 +2891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosure**](equipment.RackEnclosure.md)
+[**EquipmentRackEnclosure**](EquipmentRackEnclosure.md)
 
 ### Authorization
 
@@ -2975,7 +2975,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosureResponse**](equipment.RackEnclosure.Response.md)
+[**EquipmentRackEnclosureResponse**](EquipmentRackEnclosureResponse.md)
 
 ### Authorization
 
@@ -3043,7 +3043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosureSlot**](equipment.RackEnclosureSlot.md)
+[**EquipmentRackEnclosureSlot**](EquipmentRackEnclosureSlot.md)
 
 ### Authorization
 
@@ -3127,7 +3127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosureSlotResponse**](equipment.RackEnclosureSlot.Response.md)
+[**EquipmentRackEnclosureSlotResponse**](EquipmentRackEnclosureSlotResponse.md)
 
 ### Authorization
 
@@ -3195,7 +3195,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSharedIoModule**](equipment.SharedIoModule.md)
+[**EquipmentSharedIoModule**](EquipmentSharedIoModule.md)
 
 ### Authorization
 
@@ -3279,7 +3279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSharedIoModuleResponse**](equipment.SharedIoModule.Response.md)
+[**EquipmentSharedIoModuleResponse**](EquipmentSharedIoModuleResponse.md)
 
 ### Authorization
 
@@ -3347,7 +3347,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSwitchCard**](equipment.SwitchCard.md)
+[**EquipmentSwitchCard**](EquipmentSwitchCard.md)
 
 ### Authorization
 
@@ -3431,7 +3431,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSwitchCardResponse**](equipment.SwitchCard.Response.md)
+[**EquipmentSwitchCardResponse**](EquipmentSwitchCardResponse.md)
 
 ### Authorization
 
@@ -3499,7 +3499,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSystemIoController**](equipment.SystemIoController.md)
+[**EquipmentSystemIoController**](EquipmentSystemIoController.md)
 
 ### Authorization
 
@@ -3583,7 +3583,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSystemIoControllerResponse**](equipment.SystemIoController.Response.md)
+[**EquipmentSystemIoControllerResponse**](EquipmentSystemIoControllerResponse.md)
 
 ### Authorization
 
@@ -3651,7 +3651,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTpm**](equipment.Tpm.md)
+[**EquipmentTpm**](EquipmentTpm.md)
 
 ### Authorization
 
@@ -3735,7 +3735,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTpmResponse**](equipment.Tpm.Response.md)
+[**EquipmentTpmResponse**](EquipmentTpmResponse.md)
 
 ### Authorization
 
@@ -3803,7 +3803,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTransceiver**](equipment.Transceiver.md)
+[**EquipmentTransceiver**](EquipmentTransceiver.md)
 
 ### Authorization
 
@@ -3887,7 +3887,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTransceiverResponse**](equipment.Transceiver.Response.md)
+[**EquipmentTransceiverResponse**](EquipmentTransceiverResponse.md)
 
 ### Authorization
 
@@ -3959,7 +3959,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassis**](equipment.Chassis.md)
+[**EquipmentChassis**](EquipmentChassis.md)
 
 ### Authorization
 
@@ -4031,7 +4031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisIdentity**](equipment.ChassisIdentity.md)
+[**EquipmentChassisIdentity**](EquipmentChassisIdentity.md)
 
 ### Authorization
 
@@ -4103,7 +4103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisOperation**](equipment.ChassisOperation.md)
+[**EquipmentChassisOperation**](EquipmentChassisOperation.md)
 
 ### Authorization
 
@@ -4175,7 +4175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFan**](equipment.Fan.md)
+[**EquipmentFan**](EquipmentFan.md)
 
 ### Authorization
 
@@ -4247,7 +4247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanControl**](equipment.FanControl.md)
+[**EquipmentFanControl**](EquipmentFanControl.md)
 
 ### Authorization
 
@@ -4319,7 +4319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanModule**](equipment.FanModule.md)
+[**EquipmentFanModule**](EquipmentFanModule.md)
 
 ### Authorization
 
@@ -4391,7 +4391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFex**](equipment.Fex.md)
+[**EquipmentFex**](EquipmentFex.md)
 
 ### Authorization
 
@@ -4463,7 +4463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexIdentity**](equipment.FexIdentity.md)
+[**EquipmentFexIdentity**](EquipmentFexIdentity.md)
 
 ### Authorization
 
@@ -4535,7 +4535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexOperation**](equipment.FexOperation.md)
+[**EquipmentFexOperation**](EquipmentFexOperation.md)
 
 ### Authorization
 
@@ -4607,7 +4607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFru**](equipment.Fru.md)
+[**EquipmentFru**](EquipmentFru.md)
 
 ### Authorization
 
@@ -4679,7 +4679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCard**](equipment.IoCard.md)
+[**EquipmentIoCard**](EquipmentIoCard.md)
 
 ### Authorization
 
@@ -4751,7 +4751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCardOperation**](equipment.IoCardOperation.md)
+[**EquipmentIoCardOperation**](EquipmentIoCardOperation.md)
 
 ### Authorization
 
@@ -4823,7 +4823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoExpander**](equipment.IoExpander.md)
+[**EquipmentIoExpander**](EquipmentIoExpander.md)
 
 ### Authorization
 
@@ -4895,7 +4895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentLocatorLed**](equipment.LocatorLed.md)
+[**EquipmentLocatorLed**](EquipmentLocatorLed.md)
 
 ### Authorization
 
@@ -4967,7 +4967,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsu**](equipment.Psu.md)
+[**EquipmentPsu**](EquipmentPsu.md)
 
 ### Authorization
 
@@ -5039,7 +5039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsuControl**](equipment.PsuControl.md)
+[**EquipmentPsuControl**](EquipmentPsuControl.md)
 
 ### Authorization
 
@@ -5111,7 +5111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosure**](equipment.RackEnclosure.md)
+[**EquipmentRackEnclosure**](EquipmentRackEnclosure.md)
 
 ### Authorization
 
@@ -5183,7 +5183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosureSlot**](equipment.RackEnclosureSlot.md)
+[**EquipmentRackEnclosureSlot**](EquipmentRackEnclosureSlot.md)
 
 ### Authorization
 
@@ -5255,7 +5255,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSharedIoModule**](equipment.SharedIoModule.md)
+[**EquipmentSharedIoModule**](EquipmentSharedIoModule.md)
 
 ### Authorization
 
@@ -5327,7 +5327,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSwitchCard**](equipment.SwitchCard.md)
+[**EquipmentSwitchCard**](EquipmentSwitchCard.md)
 
 ### Authorization
 
@@ -5399,7 +5399,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSystemIoController**](equipment.SystemIoController.md)
+[**EquipmentSystemIoController**](EquipmentSystemIoController.md)
 
 ### Authorization
 
@@ -5471,7 +5471,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTpm**](equipment.Tpm.md)
+[**EquipmentTpm**](EquipmentTpm.md)
 
 ### Authorization
 
@@ -5543,7 +5543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTransceiver**](equipment.Transceiver.md)
+[**EquipmentTransceiver**](EquipmentTransceiver.md)
 
 ### Authorization
 
@@ -5615,7 +5615,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassis**](equipment.Chassis.md)
+[**EquipmentChassis**](EquipmentChassis.md)
 
 ### Authorization
 
@@ -5687,7 +5687,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisIdentity**](equipment.ChassisIdentity.md)
+[**EquipmentChassisIdentity**](EquipmentChassisIdentity.md)
 
 ### Authorization
 
@@ -5759,7 +5759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentChassisOperation**](equipment.ChassisOperation.md)
+[**EquipmentChassisOperation**](EquipmentChassisOperation.md)
 
 ### Authorization
 
@@ -5831,7 +5831,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFan**](equipment.Fan.md)
+[**EquipmentFan**](EquipmentFan.md)
 
 ### Authorization
 
@@ -5903,7 +5903,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanControl**](equipment.FanControl.md)
+[**EquipmentFanControl**](EquipmentFanControl.md)
 
 ### Authorization
 
@@ -5975,7 +5975,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFanModule**](equipment.FanModule.md)
+[**EquipmentFanModule**](EquipmentFanModule.md)
 
 ### Authorization
 
@@ -6047,7 +6047,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFex**](equipment.Fex.md)
+[**EquipmentFex**](EquipmentFex.md)
 
 ### Authorization
 
@@ -6119,7 +6119,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexIdentity**](equipment.FexIdentity.md)
+[**EquipmentFexIdentity**](EquipmentFexIdentity.md)
 
 ### Authorization
 
@@ -6191,7 +6191,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFexOperation**](equipment.FexOperation.md)
+[**EquipmentFexOperation**](EquipmentFexOperation.md)
 
 ### Authorization
 
@@ -6263,7 +6263,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentFru**](equipment.Fru.md)
+[**EquipmentFru**](EquipmentFru.md)
 
 ### Authorization
 
@@ -6335,7 +6335,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCard**](equipment.IoCard.md)
+[**EquipmentIoCard**](EquipmentIoCard.md)
 
 ### Authorization
 
@@ -6407,7 +6407,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoCardOperation**](equipment.IoCardOperation.md)
+[**EquipmentIoCardOperation**](EquipmentIoCardOperation.md)
 
 ### Authorization
 
@@ -6479,7 +6479,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentIoExpander**](equipment.IoExpander.md)
+[**EquipmentIoExpander**](EquipmentIoExpander.md)
 
 ### Authorization
 
@@ -6551,7 +6551,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentLocatorLed**](equipment.LocatorLed.md)
+[**EquipmentLocatorLed**](EquipmentLocatorLed.md)
 
 ### Authorization
 
@@ -6623,7 +6623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsu**](equipment.Psu.md)
+[**EquipmentPsu**](EquipmentPsu.md)
 
 ### Authorization
 
@@ -6695,7 +6695,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentPsuControl**](equipment.PsuControl.md)
+[**EquipmentPsuControl**](EquipmentPsuControl.md)
 
 ### Authorization
 
@@ -6767,7 +6767,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosure**](equipment.RackEnclosure.md)
+[**EquipmentRackEnclosure**](EquipmentRackEnclosure.md)
 
 ### Authorization
 
@@ -6839,7 +6839,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentRackEnclosureSlot**](equipment.RackEnclosureSlot.md)
+[**EquipmentRackEnclosureSlot**](EquipmentRackEnclosureSlot.md)
 
 ### Authorization
 
@@ -6911,7 +6911,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSharedIoModule**](equipment.SharedIoModule.md)
+[**EquipmentSharedIoModule**](EquipmentSharedIoModule.md)
 
 ### Authorization
 
@@ -6983,7 +6983,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSwitchCard**](equipment.SwitchCard.md)
+[**EquipmentSwitchCard**](EquipmentSwitchCard.md)
 
 ### Authorization
 
@@ -7055,7 +7055,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentSystemIoController**](equipment.SystemIoController.md)
+[**EquipmentSystemIoController**](EquipmentSystemIoController.md)
 
 ### Authorization
 
@@ -7127,7 +7127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTpm**](equipment.Tpm.md)
+[**EquipmentTpm**](EquipmentTpm.md)
 
 ### Authorization
 
@@ -7199,7 +7199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EquipmentTransceiver**](equipment.Transceiver.md)
+[**EquipmentTransceiver**](EquipmentTransceiver.md)
 
 ### Authorization
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **CreatedTime** | Pointer to **time.Time** | Storage container&#39;s creation time. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the storage container. | [optional] [readonly] 
-**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](storage.BaseCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) |  | [optional] 
 
 ## Methods
 

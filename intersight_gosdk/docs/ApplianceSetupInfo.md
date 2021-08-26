@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **EndTime** | Pointer to **time.Time** | End date of the Intersight Appliance&#39;s initial setup. | [optional] [readonly] 
 **SetupStates** | Pointer to **[]string** |  | [optional] 
 **StartTime** | Pointer to **time.Time** | Start date of the Intersight Appliance&#39;s initial setup. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

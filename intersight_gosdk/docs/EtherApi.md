@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherHostPort**](ether.HostPort.md)
+[**EtherHostPort**](EtherHostPort.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherHostPortResponse**](ether.HostPort.Response.md)
+[**EtherHostPortResponse**](EtherHostPortResponse.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherNetworkPort**](ether.NetworkPort.md)
+[**EtherNetworkPort**](EtherNetworkPort.md)
 
 ### Authorization
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherNetworkPortResponse**](ether.NetworkPort.Response.md)
+[**EtherNetworkPortResponse**](EtherNetworkPortResponse.md)
 
 ### Authorization
 
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPhysicalPort**](ether.PhysicalPort.md)
+[**EtherPhysicalPort**](EtherPhysicalPort.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPhysicalPortResponse**](ether.PhysicalPort.Response.md)
+[**EtherPhysicalPortResponse**](EtherPhysicalPortResponse.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPortChannel**](ether.PortChannel.md)
+[**EtherPortChannel**](EtherPortChannel.md)
 
 ### Authorization
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPortChannelResponse**](ether.PortChannel.Response.md)
+[**EtherPortChannelResponse**](EtherPortChannelResponse.md)
 
 ### Authorization
 
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherHostPort**](ether.HostPort.md)
+[**EtherHostPort**](EtherHostPort.md)
 
 ### Authorization
 
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherNetworkPort**](ether.NetworkPort.md)
+[**EtherNetworkPort**](EtherNetworkPort.md)
 
 ### Authorization
 
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPhysicalPort**](ether.PhysicalPort.md)
+[**EtherPhysicalPort**](EtherPhysicalPort.md)
 
 ### Authorization
 
@@ -901,7 +901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherHostPort**](ether.HostPort.md)
+[**EtherHostPort**](EtherHostPort.md)
 
 ### Authorization
 
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherNetworkPort**](ether.NetworkPort.md)
+[**EtherNetworkPort**](EtherNetworkPort.md)
 
 ### Authorization
 
@@ -1045,7 +1045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EtherPhysicalPort**](ether.PhysicalPort.md)
+[**EtherPhysicalPort**](EtherPhysicalPort.md)
 
 ### Authorization
 

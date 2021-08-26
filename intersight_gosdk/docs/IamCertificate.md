@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Certificate"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Certificate"]
-**Certificate** | Pointer to [**NullableX509Certificate**](x509.Certificate.md) |  | [optional] 
+**Certificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the certificate. * &#x60;PendingValidation&#x60; - The certificate has not been validated. * &#x60;Valid&#x60; - The certificate is valid. * &#x60;Invalid&#x60; - Ther certificate is invalid. | [optional] [readonly] [default to "PendingValidation"]
-**CertificateRequest** | Pointer to [**IamCertificateRequestRelationship**](iam.CertificateRequest.Relationship.md) |  | [optional] 
+**CertificateRequest** | Pointer to [**IamCertificateRequestRelationship**](IamCertificateRequestRelationship.md) |  | [optional] 
 
 ## Methods
 

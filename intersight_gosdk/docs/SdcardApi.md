@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdcardPolicy**](sdcard.Policy.md)
+[**SdcardPolicy**](SdcardPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdcardPolicy**](sdcard.Policy.md)
+[**SdcardPolicy**](SdcardPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdcardPolicyResponse**](sdcard.Policy.Response.md)
+[**SdcardPolicyResponse**](SdcardPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdcardPolicy**](sdcard.Policy.md)
+[**SdcardPolicy**](SdcardPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SdcardPolicy**](sdcard.Policy.md)
+[**SdcardPolicy**](SdcardPolicy.md)
 
 ### Authorization
 

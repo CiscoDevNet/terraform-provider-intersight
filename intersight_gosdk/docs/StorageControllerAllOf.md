@@ -22,15 +22,15 @@ Name | Type | Description | Notes
 **RebuildRate** | Pointer to **string** | Logical volume or RAID rebuild rate of Storage Controller. | [optional] [readonly] 
 **SelfEncryptEnabled** | Pointer to **string** | Storage controller disk self encryption state. | [optional] 
 **Type** | Pointer to **string** | Controller types are Raid, FlexFlash. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
-**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **DiskGroup** | Pointer to [**[]StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) | An array of relationships to storageDiskGroup resources. | [optional] 
-**DiskSlot** | Pointer to [**StorageDiskSlotRelationship**](storage.DiskSlot.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
+**DiskSlot** | Pointer to [**[]StorageDiskSlotRelationship**](StorageDiskSlotRelationship.md) | An array of relationships to storageDiskSlot resources. | [optional] [readonly] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] [readonly] 
 **PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 **VirtualDriveExtensions** | Pointer to [**[]StorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) | An array of relationships to storageVirtualDriveExtension resources. | [optional] [readonly] 
 **VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] [readonly] 
@@ -606,20 +606,20 @@ HasDiskGroup returns a boolean if a field has been set.
 UnsetDiskGroup ensures that no value is present for DiskGroup, not even an explicit nil
 ### GetDiskSlot
 
-`func (o *StorageControllerAllOf) GetDiskSlot() StorageDiskSlotRelationship`
+`func (o *StorageControllerAllOf) GetDiskSlot() []StorageDiskSlotRelationship`
 
 GetDiskSlot returns the DiskSlot field if non-nil, zero value otherwise.
 
 ### GetDiskSlotOk
 
-`func (o *StorageControllerAllOf) GetDiskSlotOk() (*StorageDiskSlotRelationship, bool)`
+`func (o *StorageControllerAllOf) GetDiskSlotOk() (*[]StorageDiskSlotRelationship, bool)`
 
 GetDiskSlotOk returns a tuple with the DiskSlot field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDiskSlot
 
-`func (o *StorageControllerAllOf) SetDiskSlot(v StorageDiskSlotRelationship)`
+`func (o *StorageControllerAllOf) SetDiskSlot(v []StorageDiskSlotRelationship)`
 
 SetDiskSlot sets DiskSlot field to given value.
 
@@ -629,6 +629,16 @@ SetDiskSlot sets DiskSlot field to given value.
 
 HasDiskSlot returns a boolean if a field has been set.
 
+### SetDiskSlotNil
+
+`func (o *StorageControllerAllOf) SetDiskSlotNil(b bool)`
+
+ SetDiskSlotNil sets the value for DiskSlot to be an explicit nil
+
+### UnsetDiskSlot
+`func (o *StorageControllerAllOf) UnsetDiskSlot()`
+
+UnsetDiskSlot ensures that no value is present for DiskSlot, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *StorageControllerAllOf) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

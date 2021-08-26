@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Prefix** | Pointer to **string** | The UUID prefix must be in hexadecimal format xxxxxxxx-xxxx-xxxx. | [optional] 
 **UuidSuffixBlocks** | Pointer to [**[]UuidpoolUuidBlock**](UuidpoolUuidBlock.md) |  | [optional] 
 **BlockHeads** | Pointer to [**[]UuidpoolBlockRelationship**](UuidpoolBlockRelationship.md) | An array of relationships to uuidpoolBlock resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

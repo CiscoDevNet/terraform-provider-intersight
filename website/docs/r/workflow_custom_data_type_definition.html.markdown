@@ -35,8 +35,8 @@ resource "intersight_workflow_custom_data_type_definition" "workflow_custom_data
 ```
 ## Argument Reference
 The following arguments are supported:
-* `account_moid`:(string)(Computed) The Account ID for this managed object. 
-* `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -46,21 +46,21 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `cloned_from`:(HashMap) -(Computed) A reference to a workflowCustomDataTypeDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `cloned_from`:(HashMap) -(ReadOnly) A reference to a workflowCustomDataTypeDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `composite_type`:(bool) When true this data type definition is a collection of type definitions to represent composite data like JSON. 
-* `create_time`:(string)(Computed) The time when this managed object was created. 
+* `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) A human-friendly description of this custom data type indicating it's domain and usage. 
-* `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `label`:(string) A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_). 
-* `mod_time`:(string)(Computed) The time when this managed object was last modified. 
+* `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters '-' and '_'. 
 * `owners`:
-                (Array of schema.TypeString) -(Computed)
+                (Array of schema.TypeString) -(ReadOnly)
 * `parameter_set`:(Array)
 This complex property has following sub-properties:
   + `condition`:(string) The condition to be evaluated.* `eq` - Checks if the values of the two parameters are equal.* `ne` - Checks if the values of the two parameters are not equal.* `contains` - Checks if the second parameter string value is a substring of the first parameter string value.* `matchesPattern` - Checks if a string matches a regular expression. 
@@ -70,22 +70,22 @@ This complex property has following sub-properties:
   + `name`:(string) Name for the parameter set.  Limited to 64 alphanumeric characters (upper and lower case), and special characters '-' and '_'. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string) The controlling parameter will be evaluated against this 'value'. 
-* `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `permission_resources`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `properties`:(HashMap) - Type to capture all the properties for the custom data type definition. 
 This complex property has following sub-properties:
-  + `cloneable`:(bool)(Computed) When set to false custom data type is not cloneable. It is set to true only if data type is not internal and it is not using any internal custom data type. 
-  + `external_meta`:(bool)(Computed) When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities. 
+  + `cloneable`:(bool)(ReadOnly) When set to false custom data type is not cloneable. It is set to true only if data type is not internal and it is not using any internal custom data type. 
+  + `external_meta`:(bool)(ReadOnly) When set to false the custom data type is owned by the system and used for internal services. Such custom data type cannot be directly used by external entities. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-* `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
@@ -99,7 +99,7 @@ This complex property has following sub-properties:
 [workflow.TargetDataType](#workflowTargetDataType)
   + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
 This complex property has following sub-properties:
-    + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
+    + `is_value_set`:(bool)(ReadOnly) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
     + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
@@ -114,7 +114,7 @@ This complex property has following sub-properties:
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
-* `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
+* `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)
 This complex property has following sub-properties:
@@ -122,14 +122,14 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ref_mo`:(HashMap) -(Computed) A reference to the original Managed Object. 
+  + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-  + `timestamp`:(string)(Computed) The time this versioned Managed Object was created. 
-  + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
-  + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+  + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
+  + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
+  + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
 
 ## Import
@@ -152,7 +152,7 @@ This data type represents a custom data object.
 * `properties`:(HashMap) - Captures the custom data type properties. 
 This complex property has following sub-properties:
   + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
-  + `custom_data_type_id`:(string)(Computed) The resolved custom data type definition managed object. 
+  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 
@@ -182,8 +182,8 @@ This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_). 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
-  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
-  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
+  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
+  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
   + `inventory_selector`:(Array)
@@ -207,7 +207,7 @@ Data type to capture a target endpoint or device.
 * `custom_data_type_properties`:(HashMap) - Reference to custom data type definition. 
 This complex property has following sub-properties:
   + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
-  + `custom_data_type_id`:(string)(Computed) The resolved custom data type definition managed object. 
+  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `is_array`:(bool) When this property is true then an array of targets can be passed as input. 

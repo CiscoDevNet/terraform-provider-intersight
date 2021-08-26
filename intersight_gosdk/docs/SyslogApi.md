@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyslogPolicy**](syslog.Policy.md)
+[**SyslogPolicy**](SyslogPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyslogPolicy**](syslog.Policy.md)
+[**SyslogPolicy**](SyslogPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyslogPolicyResponse**](syslog.Policy.Response.md)
+[**SyslogPolicyResponse**](SyslogPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyslogPolicy**](syslog.Policy.md)
+[**SyslogPolicy**](SyslogPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SyslogPolicy**](syslog.Policy.md)
+[**SyslogPolicy**](SyslogPolicy.md)
 
 ### Authorization
 

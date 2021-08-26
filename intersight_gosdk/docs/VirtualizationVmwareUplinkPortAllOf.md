@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Identity** | Pointer to **string** | The VMware managed object reference as a string. | [optional] 
 **Key** | Pointer to **string** | The internally assigned key of this uplink port object. This entity is not manipulated by users. | [optional] 
 **Name** | Pointer to **string** | User-provided name to identify the uplink port object. | [optional] 
-**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](virtualization.VmwareDistributedNetwork.Relationship.md) |  | [optional] 
-**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
-**PhysicalNetworkInterface** | Pointer to [**VirtualizationVmwarePhysicalNetworkInterfaceRelationship**](virtualization.VmwarePhysicalNetworkInterface.Relationship.md) |  | [optional] 
+**DistributedNetwork** | Pointer to [**VirtualizationVmwareDistributedNetworkRelationship**](VirtualizationVmwareDistributedNetworkRelationship.md) |  | [optional] 
+**Host** | Pointer to [**VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) |  | [optional] 
+**PhysicalNetworkInterface** | Pointer to [**VirtualizationVmwarePhysicalNetworkInterfaceRelationship**](VirtualizationVmwarePhysicalNetworkInterfaceRelationship.md) |  | [optional] 
 
 ## Methods
 

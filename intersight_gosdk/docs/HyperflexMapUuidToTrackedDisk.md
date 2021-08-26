@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.MapUuidToTrackedDisk"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.MapUuidToTrackedDisk"]
-**TrackedDisk** | Pointer to [**NullableHyperflexTrackedDisk**](hyperflex.TrackedDisk.md) |  | [optional] 
+**TrackedDisk** | Pointer to [**NullableHyperflexTrackedDisk**](HyperflexTrackedDisk.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Disk unique id for a snapshot. | [optional] [readonly] 
 
 ## Methods

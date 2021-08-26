@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.SupportedVersion"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.SupportedVersion"]
 **VersionName** | Pointer to **string** | The OsInstall Supported Operating System Version Name. | [optional] [readonly] 
-**Vendor** | Pointer to [**HclOperatingSystemVendorRelationship**](hcl.OperatingSystemVendor.Relationship.md) |  | [optional] 
-**Version** | Pointer to [**HclOperatingSystemRelationship**](hcl.OperatingSystem.Relationship.md) |  | [optional] 
+**Vendor** | Pointer to [**HclOperatingSystemVendorRelationship**](HclOperatingSystemVendorRelationship.md) |  | [optional] 
+**Version** | Pointer to [**HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) |  | [optional] 
 
 ## Methods
 

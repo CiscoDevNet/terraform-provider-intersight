@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metric** | [**TelemetryDruidTopNMetricSpec**](telemetry.DruidTopNMetricSpec.md) |  | 
+**Metric** | [**TelemetryDruidTopNMetricSpec**](TelemetryDruidTopNMetricSpec.md) |  | 
 
 ## Methods
 

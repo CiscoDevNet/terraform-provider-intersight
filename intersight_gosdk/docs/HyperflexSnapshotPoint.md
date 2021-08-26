@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SnapshotPoint"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SnapshotPoint"]
-**ClusterEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
-**ReplicationStatus** | Pointer to [**NullableHyperflexReplicationStatus**](hyperflex.ReplicationStatus.md) |  | [optional] 
-**SnapshotFiles** | Pointer to [**NullableHyperflexSnapshotFiles**](hyperflex.SnapshotFiles.md) |  | [optional] 
-**SnapshotPointEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
-**SnapshotStatus** | Pointer to [**NullableHyperflexSnapshotStatus**](hyperflex.SnapshotStatus.md) |  | [optional] 
-**VmRuntimeInfo** | Pointer to [**NullableHyperflexVirtualMachine**](hyperflex.VirtualMachine.md) |  | [optional] 
+**ClusterEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
+**ReplicationStatus** | Pointer to [**NullableHyperflexReplicationStatus**](HyperflexReplicationStatus.md) |  | [optional] 
+**SnapshotFiles** | Pointer to [**NullableHyperflexSnapshotFiles**](HyperflexSnapshotFiles.md) |  | [optional] 
+**SnapshotPointEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
+**SnapshotStatus** | Pointer to [**NullableHyperflexSnapshotStatus**](HyperflexSnapshotStatus.md) |  | [optional] 
+**VmRuntimeInfo** | Pointer to [**NullableHyperflexVirtualMachine**](HyperflexVirtualMachine.md) |  | [optional] 
 
 ## Methods
 

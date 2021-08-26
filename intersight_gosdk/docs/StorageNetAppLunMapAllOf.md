@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLunMap"]
 **Uuid** | Pointer to **string** | UUID of the LUN. | [optional] [readonly] 
 **Host** | Pointer to [**[]StorageNetAppInitiatorGroupRelationship**](StorageNetAppInitiatorGroupRelationship.md) | An array of relationships to storageNetAppInitiatorGroup resources. | [optional] [readonly] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](storage.NetAppStorageVm.Relationship.md) |  | [optional] 
-**Volume** | Pointer to [**StorageNetAppLunRelationship**](storage.NetAppLun.Relationship.md) |  | [optional] 
+**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**StorageNetAppLunRelationship**](StorageNetAppLunRelationship.md) |  | [optional] 
 
 ## Methods
 

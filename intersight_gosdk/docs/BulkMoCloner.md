@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Responses** | Pointer to [**[]BulkRestResult**](BulkRestResult.md) |  | [optional] 
 **Sources** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **Targets** | Pointer to [**[]MoBaseMo**](MoBaseMo.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

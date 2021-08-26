@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.AppCatalog"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.AppCatalog"]
 **Version** | Pointer to **string** | The catalog version used in HyperFlex cluster configuration service. | [optional] 
-**FeatureLimitExternal** | Pointer to [**HyperflexFeatureLimitExternalRelationship**](hyperflex.FeatureLimitExternal.Relationship.md) |  | [optional] 
-**FeatureLimitInternal** | Pointer to [**HyperflexFeatureLimitInternalRelationship**](hyperflex.FeatureLimitInternal.Relationship.md) |  | [optional] 
+**FeatureLimitExternal** | Pointer to [**HyperflexFeatureLimitExternalRelationship**](HyperflexFeatureLimitExternalRelationship.md) |  | [optional] 
+**FeatureLimitInternal** | Pointer to [**HyperflexFeatureLimitInternalRelationship**](HyperflexFeatureLimitInternalRelationship.md) |  | [optional] 
 **HxdpVersions** | Pointer to [**[]HyperflexHxdpVersionRelationship**](HyperflexHxdpVersionRelationship.md) | An array of relationships to hyperflexHxdpVersion resources. | [optional] 
 **HyperflexCapabilityInfos** | Pointer to [**[]HyperflexCapabilityInfoRelationship**](HyperflexCapabilityInfoRelationship.md) | An array of relationships to hyperflexCapabilityInfo resources. | [optional] 
 **HyperflexSoftwareCompatibilityInfos** | Pointer to [**[]HclHyperflexSoftwareCompatibilityInfoRelationship**](HclHyperflexSoftwareCompatibilityInfoRelationship.md) | An array of relationships to hclHyperflexSoftwareCompatibilityInfo resources. | [optional] 
-**ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](hyperflex.ServerFirmwareVersion.Relationship.md) |  | [optional] 
-**ServerModel** | Pointer to [**HyperflexServerModelRelationship**](hyperflex.ServerModel.Relationship.md) |  | [optional] 
+**ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](HyperflexServerFirmwareVersionRelationship.md) |  | [optional] 
+**ServerModel** | Pointer to [**HyperflexServerModelRelationship**](HyperflexServerModelRelationship.md) |  | [optional] 
 **SoftwareDistributions** | Pointer to [**[]HyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) | An array of relationships to hyperflexSoftwareDistributionEntry resources. | [optional] 
 
 ## Methods

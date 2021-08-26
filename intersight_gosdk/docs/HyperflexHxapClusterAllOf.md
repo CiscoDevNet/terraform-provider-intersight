@@ -7,15 +7,15 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxapCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapCluster"]
 **ConfiguredCpuOverSubFactor** | Pointer to **float64** | CPU oversubscription factor configured on the cluster. | [optional] 
-**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](virtualization.CpuAllocation.md) |  | [optional] 
+**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](VirtualizationCpuAllocation.md) |  | [optional] 
 **CurrentCpuOverSubFactor** | Pointer to **float64** | Current oversubscription factor of the cluster. | [optional] 
 **DatacenterName** | Pointer to **string** | Datacenter to which the cluster belongs. | [optional] 
 **FailureReason** | Pointer to **string** | Reason for the failure when cluster is in failed state. | [optional] 
 **HypervisorBuild** | Pointer to **string** | Hypervisor version of HyperFlex compute cluster along with build number. | [optional] 
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the cluster. | [optional] 
-**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](virtualization.MemoryAllocation.md) |  | [optional] 
-**HxCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](VirtualizationMemoryAllocation.md) |  | [optional] 
+**HxCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

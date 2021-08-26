@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **V3SecLevel** | Pointer to **string** | V3SecLevel of SNMP Trap in APIC. | [optional] 
 **Ver** | Pointer to **string** | Version of SNMP Trap in APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ConstraintAttributes** | Pointer to **[]string** |  | [optional] 
 **DisplayAttributes** | Pointer to **[]string** |  | [optional] 
 **Selector** | Pointer to **string** | Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. | [optional] 
-**SelectorProperty** | Pointer to [**NullableWorkflowSelectorProperty**](workflow.SelectorProperty.md) |  | [optional] 
+**SelectorProperty** | Pointer to [**NullableWorkflowSelectorProperty**](WorkflowSelectorProperty.md) |  | [optional] 
 **SupportedObjects** | Pointer to **[]string** |  | [optional] 
 
 ## Methods

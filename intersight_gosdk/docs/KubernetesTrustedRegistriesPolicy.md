@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **RootCaRegistries** | Pointer to **[]string** |  | [optional] 
 **UnsignedRegistries** | Pointer to **[]string** |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) | An array of relationships to kubernetesClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

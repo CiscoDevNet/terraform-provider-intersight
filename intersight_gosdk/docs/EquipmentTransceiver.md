@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **Type** | Pointer to **string** | The type of the transceiver. | [optional] [readonly] 
-**EtherPhysicalPort** | Pointer to [**EtherPhysicalPortRelationship**](ether.PhysicalPort.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**EtherPhysicalPort** | Pointer to [**EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

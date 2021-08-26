@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicCcoPost**](niaapi.ApicCcoPost.md)
+[**NiaapiApicCcoPost**](NiaapiApicCcoPost.md)
 
 ### Authorization
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicCcoPostResponse**](niaapi.ApicCcoPost.Response.md)
+[**NiaapiApicCcoPostResponse**](NiaapiApicCcoPostResponse.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicFieldNotice**](niaapi.ApicFieldNotice.md)
+[**NiaapiApicFieldNotice**](NiaapiApicFieldNotice.md)
 
 ### Authorization
 
@@ -329,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicFieldNoticeResponse**](niaapi.ApicFieldNotice.Response.md)
+[**NiaapiApicFieldNoticeResponse**](NiaapiApicFieldNoticeResponse.md)
 
 ### Authorization
 
@@ -397,7 +397,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicHweol**](niaapi.ApicHweol.md)
+[**NiaapiApicHweol**](NiaapiApicHweol.md)
 
 ### Authorization
 
@@ -481,7 +481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicHweolResponse**](niaapi.ApicHweol.Response.md)
+[**NiaapiApicHweolResponse**](NiaapiApicHweolResponse.md)
 
 ### Authorization
 
@@ -549,7 +549,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicLatestMaintainedRelease**](niaapi.ApicLatestMaintainedRelease.md)
+[**NiaapiApicLatestMaintainedRelease**](NiaapiApicLatestMaintainedRelease.md)
 
 ### Authorization
 
@@ -633,7 +633,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicLatestMaintainedReleaseResponse**](niaapi.ApicLatestMaintainedRelease.Response.md)
+[**NiaapiApicLatestMaintainedReleaseResponse**](NiaapiApicLatestMaintainedReleaseResponse.md)
 
 ### Authorization
 
@@ -701,7 +701,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicReleaseRecommend**](niaapi.ApicReleaseRecommend.md)
+[**NiaapiApicReleaseRecommend**](NiaapiApicReleaseRecommend.md)
 
 ### Authorization
 
@@ -785,7 +785,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicReleaseRecommendResponse**](niaapi.ApicReleaseRecommend.Response.md)
+[**NiaapiApicReleaseRecommendResponse**](NiaapiApicReleaseRecommendResponse.md)
 
 ### Authorization
 
@@ -853,7 +853,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicSweol**](niaapi.ApicSweol.md)
+[**NiaapiApicSweol**](NiaapiApicSweol.md)
 
 ### Authorization
 
@@ -937,7 +937,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiApicSweolResponse**](niaapi.ApicSweol.Response.md)
+[**NiaapiApicSweolResponse**](NiaapiApicSweolResponse.md)
 
 ### Authorization
 
@@ -1005,7 +1005,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmCcoPost**](niaapi.DcnmCcoPost.md)
+[**NiaapiDcnmCcoPost**](NiaapiDcnmCcoPost.md)
 
 ### Authorization
 
@@ -1089,7 +1089,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmCcoPostResponse**](niaapi.DcnmCcoPost.Response.md)
+[**NiaapiDcnmCcoPostResponse**](NiaapiDcnmCcoPostResponse.md)
 
 ### Authorization
 
@@ -1157,7 +1157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmFieldNotice**](niaapi.DcnmFieldNotice.md)
+[**NiaapiDcnmFieldNotice**](NiaapiDcnmFieldNotice.md)
 
 ### Authorization
 
@@ -1241,7 +1241,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmFieldNoticeResponse**](niaapi.DcnmFieldNotice.Response.md)
+[**NiaapiDcnmFieldNoticeResponse**](NiaapiDcnmFieldNoticeResponse.md)
 
 ### Authorization
 
@@ -1309,7 +1309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmHweol**](niaapi.DcnmHweol.md)
+[**NiaapiDcnmHweol**](NiaapiDcnmHweol.md)
 
 ### Authorization
 
@@ -1393,7 +1393,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmHweolResponse**](niaapi.DcnmHweol.Response.md)
+[**NiaapiDcnmHweolResponse**](NiaapiDcnmHweolResponse.md)
 
 ### Authorization
 
@@ -1461,7 +1461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmLatestMaintainedRelease**](niaapi.DcnmLatestMaintainedRelease.md)
+[**NiaapiDcnmLatestMaintainedRelease**](NiaapiDcnmLatestMaintainedRelease.md)
 
 ### Authorization
 
@@ -1545,7 +1545,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmLatestMaintainedReleaseResponse**](niaapi.DcnmLatestMaintainedRelease.Response.md)
+[**NiaapiDcnmLatestMaintainedReleaseResponse**](NiaapiDcnmLatestMaintainedReleaseResponse.md)
 
 ### Authorization
 
@@ -1613,7 +1613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmReleaseRecommend**](niaapi.DcnmReleaseRecommend.md)
+[**NiaapiDcnmReleaseRecommend**](NiaapiDcnmReleaseRecommend.md)
 
 ### Authorization
 
@@ -1697,7 +1697,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmReleaseRecommendResponse**](niaapi.DcnmReleaseRecommend.Response.md)
+[**NiaapiDcnmReleaseRecommendResponse**](NiaapiDcnmReleaseRecommendResponse.md)
 
 ### Authorization
 
@@ -1765,7 +1765,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmSweol**](niaapi.DcnmSweol.md)
+[**NiaapiDcnmSweol**](NiaapiDcnmSweol.md)
 
 ### Authorization
 
@@ -1849,7 +1849,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiDcnmSweolResponse**](niaapi.DcnmSweol.Response.md)
+[**NiaapiDcnmSweolResponse**](NiaapiDcnmSweolResponse.md)
 
 ### Authorization
 
@@ -1917,7 +1917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiFileDownloader**](niaapi.FileDownloader.md)
+[**NiaapiFileDownloader**](NiaapiFileDownloader.md)
 
 ### Authorization
 
@@ -2001,7 +2001,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiFileDownloaderResponse**](niaapi.FileDownloader.Response.md)
+[**NiaapiFileDownloaderResponse**](NiaapiFileDownloaderResponse.md)
 
 ### Authorization
 
@@ -2069,7 +2069,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNiaMetadata**](niaapi.NiaMetadata.md)
+[**NiaapiNiaMetadata**](NiaapiNiaMetadata.md)
 
 ### Authorization
 
@@ -2153,7 +2153,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNiaMetadataResponse**](niaapi.NiaMetadata.Response.md)
+[**NiaapiNiaMetadataResponse**](NiaapiNiaMetadataResponse.md)
 
 ### Authorization
 
@@ -2221,7 +2221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNibFileDownloader**](niaapi.NibFileDownloader.md)
+[**NiaapiNibFileDownloader**](NiaapiNibFileDownloader.md)
 
 ### Authorization
 
@@ -2305,7 +2305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNibFileDownloaderResponse**](niaapi.NibFileDownloader.Response.md)
+[**NiaapiNibFileDownloaderResponse**](NiaapiNibFileDownloaderResponse.md)
 
 ### Authorization
 
@@ -2373,7 +2373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNibMetadata**](niaapi.NibMetadata.md)
+[**NiaapiNibMetadata**](NiaapiNibMetadata.md)
 
 ### Authorization
 
@@ -2457,7 +2457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiNibMetadataResponse**](niaapi.NibMetadata.Response.md)
+[**NiaapiNibMetadataResponse**](NiaapiNibMetadataResponse.md)
 
 ### Authorization
 
@@ -2525,7 +2525,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiVersionRegex**](niaapi.VersionRegex.md)
+[**NiaapiVersionRegex**](NiaapiVersionRegex.md)
 
 ### Authorization
 
@@ -2609,7 +2609,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NiaapiVersionRegexResponse**](niaapi.VersionRegex.Response.md)
+[**NiaapiVersionRegexResponse**](NiaapiVersionRegexResponse.md)
 
 ### Authorization
 

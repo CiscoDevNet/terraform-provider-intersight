@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RootDn** | Pointer to **string** | Root dn of the AAA ldap provider in APIC. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPool**](macpool.Pool.md)
+[**MacpoolPool**](MacpoolPool.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolIdBlock**](macpool.IdBlock.md)
+[**MacpoolIdBlock**](MacpoolIdBlock.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolIdBlockResponse**](macpool.IdBlock.Response.md)
+[**MacpoolIdBlockResponse**](MacpoolIdBlockResponse.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolLease**](macpool.Lease.md)
+[**MacpoolLease**](MacpoolLease.md)
 
 ### Authorization
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolLeaseResponse**](macpool.Lease.Response.md)
+[**MacpoolLeaseResponse**](MacpoolLeaseResponse.md)
 
 ### Authorization
 
@@ -578,7 +578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPool**](macpool.Pool.md)
+[**MacpoolPool**](MacpoolPool.md)
 
 ### Authorization
 
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPoolResponse**](macpool.Pool.Response.md)
+[**MacpoolPoolResponse**](MacpoolPoolResponse.md)
 
 ### Authorization
 
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPoolMember**](macpool.PoolMember.md)
+[**MacpoolPoolMember**](MacpoolPoolMember.md)
 
 ### Authorization
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPoolMemberResponse**](macpool.PoolMember.Response.md)
+[**MacpoolPoolMemberResponse**](MacpoolPoolMemberResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolUniverse**](macpool.Universe.md)
+[**MacpoolUniverse**](MacpoolUniverse.md)
 
 ### Authorization
 
@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolUniverseResponse**](macpool.Universe.Response.md)
+[**MacpoolUniverseResponse**](MacpoolUniverseResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPool**](macpool.Pool.md)
+[**MacpoolPool**](MacpoolPool.md)
 
 ### Authorization
 
@@ -1110,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MacpoolPool**](macpool.Pool.md)
+[**MacpoolPool**](MacpoolPool.md)
 
 ### Authorization
 

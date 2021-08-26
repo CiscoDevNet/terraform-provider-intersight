@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.Lease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.Lease"]
 **IqnAddress** | Pointer to **string** | IQN address allocated for pool-based allocation \&quot;prefix+suffix+number\&quot;. | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**Pool** | Pointer to [**IqnpoolPoolRelationship**](iqnpool.Pool.Relationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**IqnpoolPoolMemberRelationship**](iqnpool.PoolMember.Relationship.md) |  | [optional] 
-**Universe** | Pointer to [**IqnpoolUniverseRelationship**](iqnpool.Universe.Relationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**IqnpoolPoolRelationship**](IqnpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**IqnpoolPoolMemberRelationship**](IqnpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**IqnpoolUniverseRelationship**](IqnpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the certificate request. | [optional] 
 **Request** | Pointer to **string** | Generated certificate signing request (CSR) in PEM format. | [optional] [readonly] 
 **SelfSigned** | Pointer to **bool** | Whether the user wants the generated CSR to be self-signed by the appliance. | [optional] 
-**Subject** | Pointer to [**NullablePkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
-**SubjectAlternateName** | Pointer to [**NullablePkixSubjectAlternateName**](pkix.SubjectAlternateName.md) |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Certificate** | Pointer to [**IamCertificateRelationship**](iam.Certificate.Relationship.md) |  | [optional] 
-**PrivateKeySpec** | Pointer to [**IamPrivateKeySpecRelationship**](iam.PrivateKeySpec.Relationship.md) |  | [optional] 
+**Subject** | Pointer to [**NullablePkixDistinguishedName**](PkixDistinguishedName.md) |  | [optional] 
+**SubjectAlternateName** | Pointer to [**NullablePkixSubjectAlternateName**](PkixSubjectAlternateName.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Certificate** | Pointer to [**IamCertificateRelationship**](IamCertificateRelationship.md) |  | [optional] 
+**PrivateKeySpec** | Pointer to [**IamPrivateKeySpecRelationship**](IamPrivateKeySpecRelationship.md) |  | [optional] 
 
 ## Methods
 

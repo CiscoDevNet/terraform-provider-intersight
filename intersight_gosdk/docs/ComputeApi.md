@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBlade**](compute.Blade.md)
+[**ComputeBlade**](ComputeBlade.md)
 
 ### Authorization
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBladeIdentity**](compute.BladeIdentity.md)
+[**ComputeBladeIdentity**](ComputeBladeIdentity.md)
 
 ### Authorization
 
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBladeIdentityResponse**](compute.BladeIdentity.Response.md)
+[**ComputeBladeIdentityResponse**](ComputeBladeIdentityResponse.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBladeResponse**](compute.Blade.Response.md)
+[**ComputeBladeResponse**](ComputeBladeResponse.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBoard**](compute.Board.md)
+[**ComputeBoard**](ComputeBoard.md)
 
 ### Authorization
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBoardResponse**](compute.Board.Response.md)
+[**ComputeBoardResponse**](ComputeBoardResponse.md)
 
 ### Authorization
 
@@ -681,7 +681,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeMapping**](compute.Mapping.md)
+[**ComputeMapping**](ComputeMapping.md)
 
 ### Authorization
 
@@ -765,7 +765,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeMappingResponse**](compute.Mapping.Response.md)
+[**ComputeMappingResponse**](ComputeMappingResponse.md)
 
 ### Authorization
 
@@ -833,7 +833,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputePhysicalSummary**](compute.PhysicalSummary.md)
+[**ComputePhysicalSummary**](ComputePhysicalSummary.md)
 
 ### Authorization
 
@@ -917,7 +917,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputePhysicalSummaryResponse**](compute.PhysicalSummary.Response.md)
+[**ComputePhysicalSummaryResponse**](ComputePhysicalSummaryResponse.md)
 
 ### Authorization
 
@@ -985,7 +985,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnit**](compute.RackUnit.md)
+[**ComputeRackUnit**](ComputeRackUnit.md)
 
 ### Authorization
 
@@ -1053,7 +1053,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnitIdentity**](compute.RackUnitIdentity.md)
+[**ComputeRackUnitIdentity**](ComputeRackUnitIdentity.md)
 
 ### Authorization
 
@@ -1137,7 +1137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnitIdentityResponse**](compute.RackUnitIdentity.Response.md)
+[**ComputeRackUnitIdentityResponse**](ComputeRackUnitIdentityResponse.md)
 
 ### Authorization
 
@@ -1221,7 +1221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnitResponse**](compute.RackUnit.Response.md)
+[**ComputeRackUnitResponse**](ComputeRackUnitResponse.md)
 
 ### Authorization
 
@@ -1289,7 +1289,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeServerSetting**](compute.ServerSetting.md)
+[**ComputeServerSetting**](ComputeServerSetting.md)
 
 ### Authorization
 
@@ -1373,7 +1373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeServerSettingResponse**](compute.ServerSetting.Response.md)
+[**ComputeServerSettingResponse**](ComputeServerSettingResponse.md)
 
 ### Authorization
 
@@ -1441,7 +1441,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeVmedia**](compute.Vmedia.md)
+[**ComputeVmedia**](ComputeVmedia.md)
 
 ### Authorization
 
@@ -1525,7 +1525,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeVmediaResponse**](compute.Vmedia.Response.md)
+[**ComputeVmediaResponse**](ComputeVmediaResponse.md)
 
 ### Authorization
 
@@ -1597,7 +1597,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBlade**](compute.Blade.md)
+[**ComputeBlade**](ComputeBlade.md)
 
 ### Authorization
 
@@ -1669,7 +1669,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBladeIdentity**](compute.BladeIdentity.md)
+[**ComputeBladeIdentity**](ComputeBladeIdentity.md)
 
 ### Authorization
 
@@ -1741,7 +1741,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBoard**](compute.Board.md)
+[**ComputeBoard**](ComputeBoard.md)
 
 ### Authorization
 
@@ -1813,7 +1813,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeMapping**](compute.Mapping.md)
+[**ComputeMapping**](ComputeMapping.md)
 
 ### Authorization
 
@@ -1885,7 +1885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnit**](compute.RackUnit.md)
+[**ComputeRackUnit**](ComputeRackUnit.md)
 
 ### Authorization
 
@@ -1957,7 +1957,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnitIdentity**](compute.RackUnitIdentity.md)
+[**ComputeRackUnitIdentity**](ComputeRackUnitIdentity.md)
 
 ### Authorization
 
@@ -2029,7 +2029,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeServerSetting**](compute.ServerSetting.md)
+[**ComputeServerSetting**](ComputeServerSetting.md)
 
 ### Authorization
 
@@ -2101,7 +2101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBlade**](compute.Blade.md)
+[**ComputeBlade**](ComputeBlade.md)
 
 ### Authorization
 
@@ -2173,7 +2173,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBladeIdentity**](compute.BladeIdentity.md)
+[**ComputeBladeIdentity**](ComputeBladeIdentity.md)
 
 ### Authorization
 
@@ -2245,7 +2245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeBoard**](compute.Board.md)
+[**ComputeBoard**](ComputeBoard.md)
 
 ### Authorization
 
@@ -2317,7 +2317,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeMapping**](compute.Mapping.md)
+[**ComputeMapping**](ComputeMapping.md)
 
 ### Authorization
 
@@ -2389,7 +2389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnit**](compute.RackUnit.md)
+[**ComputeRackUnit**](ComputeRackUnit.md)
 
 ### Authorization
 
@@ -2461,7 +2461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeRackUnitIdentity**](compute.RackUnitIdentity.md)
+[**ComputeRackUnitIdentity**](ComputeRackUnitIdentity.md)
 
 ### Authorization
 
@@ -2533,7 +2533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComputeServerSetting**](compute.ServerSetting.md)
+[**ComputeServerSetting**](ComputeServerSetting.md)
 
 ### Authorization
 

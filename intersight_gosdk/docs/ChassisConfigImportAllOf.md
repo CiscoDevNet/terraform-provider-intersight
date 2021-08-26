@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **PolicyPrefix** | Pointer to **string** | Policy prefix for the policies of the imported chassis profile. | [optional] 
 **PolicyTypes** | Pointer to **[]string** |  | [optional] 
 **ProfileName** | Pointer to **string** | Profile name for the imported chassis profile. | [optional] 
-**Chassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
-**ChassisProfile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Chassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**ChassisProfile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

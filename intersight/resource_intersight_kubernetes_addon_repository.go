@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -673,10 +671,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesAddonRepositoryWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -684,48 +678,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -746,116 +698,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 				}
 			}
 			o.SetClassId("x509.Certificate")
-			if v, ok := l["issuer"]; ok {
-				{
-					p := make([]models.PkixDistinguishedName, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewPkixDistinguishedNameWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("pkix.DistinguishedName")
-						if v, ok := l["common_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetCommonName(x)
-							}
-						}
-						if v, ok := l["country"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetCountry(x)
-								}
-							}
-						}
-						if v, ok := l["locality"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetLocality(x)
-								}
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["organization"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganization(x)
-								}
-							}
-						}
-						if v, ok := l["organizational_unit"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganizationalUnit(x)
-								}
-							}
-						}
-						if v, ok := l["state"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetState(x)
-								}
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetIssuer(x)
-					}
-				}
-			}
-			if v, ok := l["not_after"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetNotAfter(x)
-				}
-			}
-			if v, ok := l["not_before"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetNotBefore(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -866,116 +708,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 				{
 					x := (v.(string))
 					o.SetPemCertificate(x)
-				}
-			}
-			if v, ok := l["sha256_fingerprint"]; ok {
-				{
-					x := (v.(string))
-					o.SetSha256Fingerprint(x)
-				}
-			}
-			if v, ok := l["signature_algorithm"]; ok {
-				{
-					x := (v.(string))
-					o.SetSignatureAlgorithm(x)
-				}
-			}
-			if v, ok := l["subject"]; ok {
-				{
-					p := make([]models.PkixDistinguishedName, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewPkixDistinguishedNameWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("pkix.DistinguishedName")
-						if v, ok := l["common_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetCommonName(x)
-							}
-						}
-						if v, ok := l["country"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetCountry(x)
-								}
-							}
-						}
-						if v, ok := l["locality"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetLocality(x)
-								}
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["organization"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganization(x)
-								}
-							}
-						}
-						if v, ok := l["organizational_unit"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganizationalUnit(x)
-								}
-							}
-						}
-						if v, ok := l["state"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetState(x)
-								}
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetSubject(x)
-					}
 				}
 			}
 			p = append(p, *o)
@@ -1031,35 +763,11 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 
 	o.SetClassId("kubernetes.AddonRepository")
 
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
+	o.SetInsecureSkipVerification(d.Get("insecure_skip_verification").(bool))
 
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
+	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
 
-	if v, ok := d.GetOkExists("insecure_skip_verification"); ok {
-		x := v.(bool)
-		o.SetInsecureSkipVerification(x)
-	}
-
-	if v, ok := d.GetOkExists("is_password_set"); ok {
-		x := v.(bool)
-		o.SetIsPasswordSet(x)
-	}
-
-	if v, ok := d.GetOkExists("is_token_set"); ok {
-		x := v.(bool)
-		o.SetIsTokenSet(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
+	o.SetIsTokenSet(d.Get("is_token_set").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -1072,102 +780,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 	}
 
 	o.SetObjectType("kubernetes.AddonRepository")
-
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
@@ -1217,11 +829,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 		o.SetRepositoryUrl(x)
 	}
 
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1260,142 +867,6 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("username"); ok {
 		x := (v.(string))
 		o.SetUsername(x)
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesAddonRepository(conn.ctx).KubernetesAddonRepository(*o)
@@ -1541,11 +1012,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAddonRepository{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1555,47 +1021,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("ca_cert") {
@@ -1616,116 +1041,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 				}
 			}
 			o.SetClassId("x509.Certificate")
-			if v, ok := l["issuer"]; ok {
-				{
-					p := make([]models.PkixDistinguishedName, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewPkixDistinguishedNameWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("pkix.DistinguishedName")
-						if v, ok := l["common_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetCommonName(x)
-							}
-						}
-						if v, ok := l["country"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetCountry(x)
-								}
-							}
-						}
-						if v, ok := l["locality"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetLocality(x)
-								}
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["organization"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganization(x)
-								}
-							}
-						}
-						if v, ok := l["organizational_unit"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganizationalUnit(x)
-								}
-							}
-						}
-						if v, ok := l["state"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetState(x)
-								}
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetIssuer(x)
-					}
-				}
-			}
-			if v, ok := l["not_after"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetNotAfter(x)
-				}
-			}
-			if v, ok := l["not_before"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetNotBefore(x)
-				}
-			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1736,116 +1051,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 				{
 					x := (v.(string))
 					o.SetPemCertificate(x)
-				}
-			}
-			if v, ok := l["sha256_fingerprint"]; ok {
-				{
-					x := (v.(string))
-					o.SetSha256Fingerprint(x)
-				}
-			}
-			if v, ok := l["signature_algorithm"]; ok {
-				{
-					x := (v.(string))
-					o.SetSignatureAlgorithm(x)
-				}
-			}
-			if v, ok := l["subject"]; ok {
-				{
-					p := make([]models.PkixDistinguishedName, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewPkixDistinguishedNameWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("pkix.DistinguishedName")
-						if v, ok := l["common_name"]; ok {
-							{
-								x := (v.(string))
-								o.SetCommonName(x)
-							}
-						}
-						if v, ok := l["country"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetCountry(x)
-								}
-							}
-						}
-						if v, ok := l["locality"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetLocality(x)
-								}
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["organization"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganization(x)
-								}
-							}
-						}
-						if v, ok := l["organizational_unit"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetOrganizationalUnit(x)
-								}
-							}
-						}
-						if v, ok := l["state"]; ok {
-							{
-								x := make([]string, 0)
-								y := reflect.ValueOf(v)
-								for i := 0; i < y.Len(); i++ {
-									x = append(x, y.Index(i).Interface().(string))
-								}
-								if len(x) > 0 {
-									o.SetState(x)
-								}
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetSubject(x)
-					}
 				}
 			}
 			p = append(p, *o)
@@ -1902,40 +1107,10 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 
 	o.SetClassId("kubernetes.AddonRepository")
 
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
 	if d.HasChange("insecure_skip_verification") {
 		v := d.Get("insecure_skip_verification")
 		x := (v.(bool))
 		o.SetInsecureSkipVerification(x)
-	}
-
-	if d.HasChange("is_password_set") {
-		v := d.Get("is_password_set")
-		x := (v.(bool))
-		o.SetIsPasswordSet(x)
-	}
-
-	if d.HasChange("is_token_set") {
-		v := d.Get("is_token_set")
-		x := (v.(bool))
-		o.SetIsTokenSet(x)
-	}
-
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if d.HasChange("moid") {
@@ -1951,101 +1126,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 	}
 
 	o.SetObjectType("kubernetes.AddonRepository")
-
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
 
 	if d.HasChange("registered_device") {
 		v := d.Get("registered_device")
@@ -2097,12 +1177,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 		o.SetRepositoryUrl(x)
 	}
 
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -2141,143 +1215,6 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 		v := d.Get("username")
 		x := (v.(string))
 		o.SetUsername(x)
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesAddonRepository(conn.ctx, d.Id()).KubernetesAddonRepository(*o)

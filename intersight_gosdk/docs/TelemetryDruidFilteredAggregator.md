@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The aggregator type. | 
-**Filter** | [**TelemetryDruidFilter**](telemetry.DruidFilter.md) |  | 
-**Aggregator** | [**TelemetryDruidAggregator**](telemetry.DruidAggregator.md) |  | 
+**Filter** | [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
+**Aggregator** | [**TelemetryDruidAggregator**](TelemetryDruidAggregator.md) |  | 
 
 ## Methods
 

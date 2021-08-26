@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.AdvisoryDefinition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.AdvisoryDefinition"]
 **Actions** | Pointer to [**[]TamAction**](TamAction.md) |  | [optional] 
-**AdvisoryDetails** | Pointer to [**NullableTamBaseAdvisoryDetails**](tam.BaseAdvisoryDetails.md) |  | [optional] 
+**AdvisoryDetails** | Pointer to [**NullableTamBaseAdvisoryDetails**](TamBaseAdvisoryDetails.md) |  | [optional] 
 **AdvisoryId** | Pointer to **string** | Cisco generated identifier for the published security advisory. | [optional] 
 **ApiDataSources** | Pointer to [**[]TamApiDataSource**](TamApiDataSource.md) |  | [optional] 
 **DatePublished** | Pointer to **time.Time** | Date when the security advisory was first published by Cisco. | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type (field notice, security advisory etc.) of Intersight advisory. * &#x60;securityAdvisory&#x60; - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * &#x60;fieldNotice&#x60; - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). | [optional] [default to "securityAdvisory"]
 **Version** | Pointer to **string** | Cisco assigned advisory version after latest revision. | [optional] 
 **Workaround** | Pointer to **string** | Workarounds available for the advisory. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

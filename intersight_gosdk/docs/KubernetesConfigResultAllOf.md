@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ConfigResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ConfigResult"]
-**Profile** | Pointer to [**KubernetesNodeProfileRelationship**](kubernetes.NodeProfile.Relationship.md) |  | [optional] 
+**Profile** | Pointer to [**KubernetesNodeProfileRelationship**](KubernetesNodeProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]KubernetesConfigResultEntryRelationship**](KubernetesConfigResultEntryRelationship.md) | An array of relationships to kubernetesConfigResultEntry resources. | [optional] 
 
 ## Methods

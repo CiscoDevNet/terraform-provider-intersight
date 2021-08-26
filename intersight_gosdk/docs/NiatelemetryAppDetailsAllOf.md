@@ -9,7 +9,10 @@ Name | Type | Description | Notes
 **AppName** | Pointer to **string** | Names of apps running on ND. | [optional] 
 **AppStatus** | Pointer to **string** | Status of apps running on ND. | [optional] 
 **AppVersion** | Pointer to **string** | Versions of apps running on ND. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**NexusDashboard** | Pointer to **string** | Clustername on which apps are running on ND. | [optional] 
+**NumberofSitesOnboarded** | Pointer to **int64** | Number of sites on which particular app installed on ND. | [optional] 
+**Type** | Pointer to **string** | Type of apps running on ND. | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -144,6 +147,81 @@ SetAppVersion sets AppVersion field to given value.
 `func (o *NiatelemetryAppDetailsAllOf) HasAppVersion() bool`
 
 HasAppVersion returns a boolean if a field has been set.
+
+### GetNexusDashboard
+
+`func (o *NiatelemetryAppDetailsAllOf) GetNexusDashboard() string`
+
+GetNexusDashboard returns the NexusDashboard field if non-nil, zero value otherwise.
+
+### GetNexusDashboardOk
+
+`func (o *NiatelemetryAppDetailsAllOf) GetNexusDashboardOk() (*string, bool)`
+
+GetNexusDashboardOk returns a tuple with the NexusDashboard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNexusDashboard
+
+`func (o *NiatelemetryAppDetailsAllOf) SetNexusDashboard(v string)`
+
+SetNexusDashboard sets NexusDashboard field to given value.
+
+### HasNexusDashboard
+
+`func (o *NiatelemetryAppDetailsAllOf) HasNexusDashboard() bool`
+
+HasNexusDashboard returns a boolean if a field has been set.
+
+### GetNumberofSitesOnboarded
+
+`func (o *NiatelemetryAppDetailsAllOf) GetNumberofSitesOnboarded() int64`
+
+GetNumberofSitesOnboarded returns the NumberofSitesOnboarded field if non-nil, zero value otherwise.
+
+### GetNumberofSitesOnboardedOk
+
+`func (o *NiatelemetryAppDetailsAllOf) GetNumberofSitesOnboardedOk() (*int64, bool)`
+
+GetNumberofSitesOnboardedOk returns a tuple with the NumberofSitesOnboarded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberofSitesOnboarded
+
+`func (o *NiatelemetryAppDetailsAllOf) SetNumberofSitesOnboarded(v int64)`
+
+SetNumberofSitesOnboarded sets NumberofSitesOnboarded field to given value.
+
+### HasNumberofSitesOnboarded
+
+`func (o *NiatelemetryAppDetailsAllOf) HasNumberofSitesOnboarded() bool`
+
+HasNumberofSitesOnboarded returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *NiatelemetryAppDetailsAllOf) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *NiatelemetryAppDetailsAllOf) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *NiatelemetryAppDetailsAllOf) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *NiatelemetryAppDetailsAllOf) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

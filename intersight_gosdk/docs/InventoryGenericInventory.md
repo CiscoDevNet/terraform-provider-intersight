@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Key** | Pointer to **string** | Key of inventory data for Generic Inventory data set. | [optional] [readonly] 
 **Type** | Pointer to **string** | Type of inventory data for Generic Inventory data set. | [optional] [readonly] 
 **Value** | Pointer to **string** | Value of inventory data for Generic Inventory data set. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**InventoryGenericInventoryHolder** | Pointer to [**InventoryGenericInventoryHolderRelationship**](inventory.GenericInventoryHolder.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**InventoryGenericInventoryHolder** | Pointer to [**InventoryGenericInventoryHolderRelationship**](InventoryGenericInventoryHolderRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

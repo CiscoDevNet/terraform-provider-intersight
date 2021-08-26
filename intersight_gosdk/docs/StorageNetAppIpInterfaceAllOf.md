@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **Services** | Pointer to **[]string** |  | [optional] 
 **State** | Pointer to **string** | State of IP interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Uuid** | Pointer to **string** | Uuid of  NetApp IP Interface. | [optional] [readonly] 
-**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](storage.NetAppNode.Relationship.md) |  | [optional] 
-**NetAppEthernetPort** | Pointer to [**StorageNetAppEthernetPortRelationship**](storage.NetAppEthernetPort.Relationship.md) |  | [optional] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](storage.NetAppStorageVm.Relationship.md) |  | [optional] 
+**ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**NetAppEthernetPort** | Pointer to [**StorageNetAppEthernetPortRelationship**](StorageNetAppEthernetPortRelationship.md) |  | [optional] 
+**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
 

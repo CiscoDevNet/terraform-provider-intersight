@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Catalog"]
 **IsImagePullFailure** | Pointer to **bool** | The status of the image catalog synchronization operation. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the catalog. The names are populated and predefined during MO creation. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**System** | Pointer to [**IamSystemRelationship**](iam.System.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
 ## Methods
 

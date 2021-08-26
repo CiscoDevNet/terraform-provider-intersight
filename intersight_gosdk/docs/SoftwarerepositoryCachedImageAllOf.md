@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **Path** | Pointer to **string** | The absolute path of the imported file in the endpoint. | [optional] [readonly] 
 **RegisteredWorkflows** | Pointer to **[]string** |  | [optional] 
 **UsedCount** | Pointer to **int64** | The number of times this file has been used to copy or upgrade or install actions. Used by the cache monitoring process to determine the files to be evicted from the cache. | [optional] [readonly] 
-**File** | Pointer to [**SoftwarerepositoryFileRelationship**](softwarerepository.File.Relationship.md) |  | [optional] 
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
+**File** | Pointer to [**SoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
 

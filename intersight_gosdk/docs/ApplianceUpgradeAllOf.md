@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Active** | Pointer to **bool** | Indicates if the software upgrade is active or not. | [optional] [readonly] 
 **AutoCreated** | Pointer to **bool** | Indicates that the request was automatically created by the system. | [optional] [readonly] 
 **CompletedPhases** | Pointer to [**[]OnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
-**CurrentPhase** | Pointer to [**NullableOnpremUpgradePhase**](onprem.UpgradePhase.md) |  | [optional] 
+**CurrentPhase** | Pointer to [**NullableOnpremUpgradePhase**](OnpremUpgradePhase.md) |  | [optional] 
 **Description** | Pointer to **string** | Description of the software upgrade. | [optional] [readonly] 
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds during the software upgrade. | [optional] [readonly] 
 **EndTime** | Pointer to **time.Time** | End date of the software upgrade. | [optional] [readonly] 
@@ -27,8 +27,8 @@ Name | Type | Description | Notes
 **TotalPhases** | Pointer to **int64** | TotalPhase represents the total number of the upgradePhases for one upgrade. | [optional] [readonly] 
 **UiPackages** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Software upgrade manifest&#39;s version. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**ImageBundle** | Pointer to [**ApplianceImageBundleRelationship**](appliance.ImageBundle.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**ImageBundle** | Pointer to [**ApplianceImageBundleRelationship**](ApplianceImageBundleRelationship.md) |  | [optional] 
 
 ## Methods
 

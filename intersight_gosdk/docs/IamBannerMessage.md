@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **BannerContents** | Pointer to **string** | Contents of the banner message. | [optional] 
 **BannerDisplay** | Pointer to **bool** | Whether or not to display the banner message. | [optional] 
 **BannerTitle** | Pointer to **string** | Title of the banner message. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Human readable name of the pool, limited to 64 characters. | [optional] [readonly] 
 **PoolId** | Pointer to **string** | Object ID for the pool. Platforms that use a number should convert it to string. | [optional] [readonly] 
 **Status** | Pointer to **string** | Human readable status of the pool, indicating the current health. * &#x60;Unknown&#x60; - Entity status is unknown. * &#x60;Degraded&#x60; - State is degraded, and might impact normal operation of the entity. * &#x60;Critical&#x60; - Entity is in a critical state, impacting operations. * &#x60;Ok&#x60; - Entity status is in a stable state, operating normally. | [optional] [readonly] [default to "Unknown"]
-**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](storage.BaseCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) |  | [optional] 
 **Type** | Pointer to **string** | Human readable type of the pool, such as thin, tiered, active-flash, etc. | [optional] [readonly] 
 
 ## Methods

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SerialNumber** | Pointer to **string** | Serial number of the Transceiver in APIC. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **Vendor** | Pointer to **string** | Vendor of the Transceiver in APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

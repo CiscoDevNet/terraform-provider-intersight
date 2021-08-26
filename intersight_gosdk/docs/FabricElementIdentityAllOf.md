@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** | Name of the Fabric Interconnect domain. | [optional] [readonly] 
 **ReplacementType** | Pointer to **string** | Replacement type specifies whether it is single FI or domain replacement. * &#x60;None&#x60; - The default action is none. * &#x60;Individual&#x60; - Replacement of single network element. * &#x60;Domain&#x60; - Domain indicates the replacement of Fabric Interconnect domain. | [optional] [default to "None"]
 **SwitchId** | Pointer to **string** | Switch Identifier that uniquely represents the fabric object. * &#x60;A&#x60; - Switch Identifier of Fabric Interconnect A. * &#x60;B&#x60; - Switch Identifier of Fabric Interconnect B. | [optional] [readonly] [default to "A"]
-**NetworkElement** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
-**ReplacementTarget** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
+**ReplacementTarget** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 
 ## Methods
 

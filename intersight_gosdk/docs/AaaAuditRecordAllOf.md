@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **SourceIp** | Pointer to **string** | The source IP of the client. | [optional] 
 **Timestamp** | Pointer to **time.Time** | The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. | [optional] [readonly] 
 **UserIdOrEmail** | Pointer to **string** | The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Sessions** | Pointer to [**IamSessionRelationship**](iam.Session.Relationship.md) |  | [optional] 
-**User** | Pointer to [**IamUserRelationship**](iam.User.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
+**Sessions** | Pointer to [**IamSessionRelationship**](IamSessionRelationship.md) |  | [optional] 
+**User** | Pointer to [**IamUserRelationship**](IamUserRelationship.md) |  | [optional] 
 
 ## Methods
 

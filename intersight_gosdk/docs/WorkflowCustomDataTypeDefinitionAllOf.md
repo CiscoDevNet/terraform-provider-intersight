@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **Label** | Pointer to **string** | A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote (&#39;), or an underscore (_). | [optional] 
 **Name** | Pointer to **string** | The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters &#39;-&#39; and &#39;_&#39;. | [optional] 
 **ParameterSet** | Pointer to [**[]WorkflowParameterSet**](WorkflowParameterSet.md) |  | [optional] 
-**Properties** | Pointer to [**NullableWorkflowCustomDataTypeProperties**](workflow.CustomDataTypeProperties.md) |  | [optional] 
+**Properties** | Pointer to [**NullableWorkflowCustomDataTypeProperties**](WorkflowCustomDataTypeProperties.md) |  | [optional] 
 **TypeDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
-**ClonedFrom** | Pointer to [**WorkflowCustomDataTypeDefinitionRelationship**](workflow.CustomDataTypeDefinition.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**WorkflowCustomDataTypeDefinitionRelationship**](WorkflowCustomDataTypeDefinitionRelationship.md) |  | [optional] 
 
 ## Methods
 

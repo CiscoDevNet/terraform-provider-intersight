@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecommendationCapacityRunway**](recommendation.CapacityRunway.md)
+[**RecommendationCapacityRunway**](RecommendationCapacityRunway.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecommendationCapacityRunwayResponse**](recommendation.CapacityRunway.Response.md)
+[**RecommendationCapacityRunwayResponse**](RecommendationCapacityRunwayResponse.md)
 
 ### Authorization
 
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecommendationPhysicalItem**](recommendation.PhysicalItem.md)
+[**RecommendationPhysicalItem**](RecommendationPhysicalItem.md)
 
 ### Authorization
 
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecommendationPhysicalItemResponse**](recommendation.PhysicalItem.Response.md)
+[**RecommendationPhysicalItemResponse**](RecommendationPhysicalItemResponse.md)
 
 ### Authorization
 
