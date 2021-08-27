@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.NetworkPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.NetworkPolicy"]
-**CniConfig** | Pointer to [**NullableKubernetesCniConfig**](kubernetes.CniConfig.md) |  | [optional] 
+**CniConfig** | Pointer to [**NullableKubernetesCniConfig**](KubernetesCniConfig.md) |  | [optional] 
 **CniType** | Pointer to **string** | Supported CNI type. Currently we only support Calico. * &#x60;Calico&#x60; - Calico CNI plugin as described in https://github.com/projectcalico/cni-plugin. * &#x60;Aci&#x60; - Cisco ACI Container Network Interface plugin. | [optional] [default to "Calico"]
 **PodNetworkCidr** | Pointer to **string** | CIDR block to allocate Pod network IP addresses from. | [optional] 
 **ServiceCidr** | Pointer to **string** | CIDR block to allocate cluster service IP addresses from. | [optional] 
 **ClusterProfiles** | Pointer to [**[]KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) | An array of relationships to kubernetesClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

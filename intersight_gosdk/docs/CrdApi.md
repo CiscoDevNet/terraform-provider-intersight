@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrdCustomResource**](crd.CustomResource.md)
+[**CrdCustomResource**](CrdCustomResource.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrdCustomResource**](crd.CustomResource.md)
+[**CrdCustomResource**](CrdCustomResource.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrdCustomResourceResponse**](crd.CustomResource.Response.md)
+[**CrdCustomResourceResponse**](CrdCustomResourceResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrdCustomResource**](crd.CustomResource.md)
+[**CrdCustomResource**](CrdCustomResource.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrdCustomResource**](crd.CustomResource.md)
+[**CrdCustomResource**](CrdCustomResource.md)
 
 ### Authorization
 

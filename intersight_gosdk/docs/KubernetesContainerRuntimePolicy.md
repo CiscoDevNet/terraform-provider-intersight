@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ContainerRuntimePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ContainerRuntimePolicy"]
 **DockerBridgeNetworkCidr** | Pointer to **string** | Bridge IP (--bip) including Prefix (e.g., 172.17.0.5/24) that Docker will use for the default bridge network (docker0). Containers will connect to this if no other network is configured, not used by kubernetes pods because their network is managed by CNI. However this address space must not collide with other CIDRs on your networks, including the cluster&#39;s Service CIDR, Pod Network CIDR and IP Pools. | [optional] 
-**DockerHttpProxy** | Pointer to [**NullableKubernetesProxyConfig**](kubernetes.ProxyConfig.md) |  | [optional] 
-**DockerHttpsProxy** | Pointer to [**NullableKubernetesProxyConfig**](kubernetes.ProxyConfig.md) |  | [optional] 
+**DockerHttpProxy** | Pointer to [**NullableKubernetesProxyConfig**](KubernetesProxyConfig.md) |  | [optional] 
+**DockerHttpsProxy** | Pointer to [**NullableKubernetesProxyConfig**](KubernetesProxyConfig.md) |  | [optional] 
 **DockerNoProxy** | Pointer to **[]string** |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]KubernetesClusterProfileRelationship**](KubernetesClusterProfileRelationship.md) | An array of relationships to kubernetesClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

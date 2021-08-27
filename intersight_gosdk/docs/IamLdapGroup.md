@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** | LDAP server domain the Group resides in. | [optional] 
 **Name** | Pointer to **string** | LDAP Group name in the LDAP server database. | [optional] 
 **EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
-**LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](iam.LdapPolicy.Relationship.md) |  | [optional] 
+**LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](IamLdapPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 

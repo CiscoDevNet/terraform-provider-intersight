@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **ManualBackup** | Pointer to **bool** | Backup mode of the appliance. Automatic backups of the appliance are not initiated if this property is set to &#39;true&#39; and the backup schedule field is ignored. | [optional] 
 **Password** | Pointer to **string** | Password to authenticate the file server. | [optional] 
-**Schedule** | Pointer to [**NullableOnpremSchedule**](onprem.Schedule.md) |  | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

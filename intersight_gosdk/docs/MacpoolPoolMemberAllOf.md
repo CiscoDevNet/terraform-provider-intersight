@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.PoolMember"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.PoolMember"]
 **MacAddress** | Pointer to **string** | MAC Address of this pool member. | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**BlockHead** | Pointer to [**MacpoolIdBlockRelationship**](macpool.IdBlock.Relationship.md) |  | [optional] 
-**Peer** | Pointer to [**MacpoolLeaseRelationship**](macpool.Lease.Relationship.md) |  | [optional] 
-**Pool** | Pointer to [**MacpoolPoolRelationship**](macpool.Pool.Relationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**BlockHead** | Pointer to [**MacpoolIdBlockRelationship**](MacpoolIdBlockRelationship.md) |  | [optional] 
+**Peer** | Pointer to [**MacpoolLeaseRelationship**](MacpoolLeaseRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**MacpoolPoolRelationship**](MacpoolPoolRelationship.md) |  | [optional] 
 
 ## Methods
 

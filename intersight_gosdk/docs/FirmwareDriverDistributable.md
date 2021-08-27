@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Directory** | Pointer to **string** | Indicates in which directory path this driver will be added. | [optional] 
 **Osname** | Pointer to **string** | The operating system name to which this driver is compatible. | [optional] 
 **Osversion** | Pointer to **string** | OS Version. It is populated as part of the image import operation. | [optional] 
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 

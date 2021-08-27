@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceInformation"]
 **ApplicationName** | Pointer to **string** | Application name reported by Cisco Install Base. | [optional] [readonly] 
 **DeviceTransactions** | Pointer to [**[]AssetDeviceTransaction**](AssetDeviceTransaction.md) |  | [optional] 
-**EndCustomer** | Pointer to [**NullableAssetCustomerInformation**](asset.CustomerInformation.md) |  | [optional] 
+**EndCustomer** | Pointer to [**NullableAssetCustomerInformation**](AssetCustomerInformation.md) |  | [optional] 
 **InstanceId** | Pointer to **string** | Instance number of the device. example \&quot;917280220\&quot;. | [optional] [readonly] 
 **ItemType** | Pointer to **string** | Item type flag. example ATO, Child, Standalone. ATO - refers to Cisco Block based major device. Child - refers to Child device part of an ATO block. Standalone - refers to a device that is managed and configured as an individual entity with limited capacity. | [optional] [readonly] 
 **MlbOfferType** | Pointer to **string** | Identifier for consumption based pricing. MLB refers to MultiLine Bundle. | [optional] [readonly] 

@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Status of the Core file in APIC. | [optional] 
 **Uid** | Pointer to **string** | UId of the Core file in the APIC. | [optional] 
 **Userdom** | Pointer to **string** | User dom of the Core file in APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

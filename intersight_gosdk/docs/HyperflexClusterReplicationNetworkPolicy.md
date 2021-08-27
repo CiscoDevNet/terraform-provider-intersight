@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ReplicationBandwidthMbps** | Pointer to **int64** | Bandwidth for the Replication network in Mbps. | [optional] [default to 0]
 **ReplicationIpranges** | Pointer to [**[]HyperflexIpAddrRange**](HyperflexIpAddrRange.md) |  | [optional] 
 **ReplicationMtu** | Pointer to **int64** | MTU for the Replication network. | [optional] [default to 1500]
-**ReplicationVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**ReplicationVlan** | Pointer to [**NullableHyperflexNamedVlan**](HyperflexNamedVlan.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

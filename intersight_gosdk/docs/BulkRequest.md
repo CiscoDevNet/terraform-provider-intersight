@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Results** | Pointer to [**[]BulkApiResult**](BulkApiResult.md) |  | [optional] 
 **Uri** | Pointer to **string** | The URI on which this bulk action is to be performed. | [optional] 
 **Verb** | Pointer to **string** | The type of operation to be performed. One of - Post (Create), Patch (Update) or Delete (Remove). * &#x60;POST&#x60; - Used to create a REST resource. * &#x60;PATCH&#x60; - Used to update a REST resource. * &#x60;DELETE&#x60; - Used to delete a REST resource. | [optional] [default to "POST"]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

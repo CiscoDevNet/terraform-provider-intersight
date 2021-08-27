@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **SecurityToken** | Pointer to **string** | Device security token of the endpoint device. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the device claim process. * &#x60;started&#x60; - Device claim operation has started. * &#x60;failed&#x60; - Device claim operation has failed. * &#x60;completed&#x60; - Device claim operation has completed. | [optional] [readonly] [default to "started"]
 **Username** | Pointer to **string** | Username to log in to the endpoint device. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

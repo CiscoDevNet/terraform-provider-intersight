@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.ResourcePermission"]
 **PermissionRoles** | Pointer to [**[]IamPermissionToRoles**](IamPermissionToRoles.md) |  | [optional] 
 **TargetApp** | Pointer to **string** | Name of the service owning the resource. | [optional] [readonly] 
-**Holder** | Pointer to [**IamSecurityHolderRelationship**](iam.SecurityHolder.Relationship.md) |  | [optional] 
-**Resource** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
+**Holder** | Pointer to [**IamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
+**Resource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 

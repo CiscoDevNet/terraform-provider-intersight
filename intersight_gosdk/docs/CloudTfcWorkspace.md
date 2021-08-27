@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **LastRunStatus** | Pointer to **string** | The status of the last executed run in this workspace. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the workspace. | [optional] [readonly] 
 **WorkspaceVariables** | Pointer to [**[]CloudTfcWorkspaceVariables**](CloudTfcWorkspaceVariables.md) |  | [optional] 
-**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](cloud.TfcOrganization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**CloudTfcOrganizationRelationship**](CloudTfcOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**AlarmSummary** | Pointer to [**NullableHyperflexAlarmSummary**](hyperflex.AlarmSummary.md) |  | [optional] 
+**AlarmSummary** | Pointer to [**NullableHyperflexAlarmSummary**](HyperflexAlarmSummary.md) |  | [optional] 
 **CapacityRunway** | Pointer to **int64** | The number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit of 76%. Default value is math.MaxInt32 to indicate that the capacity runway is \&quot;Unknown\&quot; for a cluster that is not connected or with not sufficient data. | [optional] [readonly] [default to 2147483647]
 **ClusterName** | Pointer to **string** | The name of this HyperFlex cluster. | [optional] [readonly] 
 **ClusterPurpose** | Pointer to **string** | This can be a Storage or Compute cluster. A storage cluster contains storage nodes that are used to persist data. A compute cluster contains compute nodes that are used for executing business logic. * &#x60;Storage&#x60; - Cluster of storage nodes used to persist data. * &#x60;Compute&#x60; - Cluster of compute nodes used to execute business logic. * &#x60;Unknown&#x60; - This cluster type is Unknown. Expect Compute or Storage as valid values. | [optional] [default to "Storage"]
@@ -21,9 +21,9 @@ Name | Type | Description | Notes
 **StorageUtilization** | Pointer to **float32** | The storage utilization is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationPercentage** | Pointer to **float32** | The storage utilization percentage is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationTrendPercentage** | Pointer to **float32** | The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. | [optional] [readonly] 
-**AssociatedProfile** | Pointer to [**PolicyAbstractProfileRelationship**](policy.AbstractProfile.Relationship.md) |  | [optional] 
+**AssociatedProfile** | Pointer to [**PolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
 **ChildClusters** | Pointer to [**[]HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) | An array of relationships to hyperflexBaseCluster resources. | [optional] 
-**ParentCluster** | Pointer to [**HyperflexBaseClusterRelationship**](hyperflex.BaseCluster.Relationship.md) |  | [optional] 
+**ParentCluster** | Pointer to [**HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) |  | [optional] 
 
 ## Methods
 

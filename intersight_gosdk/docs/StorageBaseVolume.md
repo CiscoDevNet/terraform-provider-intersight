@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **NaaId** | Pointer to **string** | NAA id of volume. It is a significant number to identify corresponding lun path in hypervisor. | [optional] [readonly] 
 **Name** | Pointer to **string** | Named entity of the volume. | [optional] [readonly] 
 **Size** | Pointer to **int64** | User provisioned volume size. It is the size exposed to host. | [optional] [readonly] 
-**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](storage.BaseCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) |  | [optional] 
 
 ## Methods
 

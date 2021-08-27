@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.Addon"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.Addon"]
-**AddonConfiguration** | Pointer to [**NullableKubernetesAddonConfiguration**](kubernetes.AddonConfiguration.md) |  | [optional] 
-**AddonPolicy** | Pointer to [**MoMoRef**](mo.MoRef.md) |  | [optional] 
+**AddonConfiguration** | Pointer to [**NullableKubernetesAddonConfiguration**](KubernetesAddonConfiguration.md) |  | [optional] 
+**AddonPolicy** | Pointer to [**MoMoRef**](MoMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of addon to be installed on a Kubernetes cluster. | [optional] 
 
 ## Methods

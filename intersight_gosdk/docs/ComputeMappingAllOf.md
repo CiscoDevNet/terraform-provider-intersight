@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **ImageName** | Pointer to **string** | Image name of uploaded Virtual Media Image. | [optional] [readonly] 
 **MediaTypes** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name of Virtual Media mapping assigne by server. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**Vmedia** | Pointer to [**ComputeVmediaRelationship**](compute.Vmedia.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Vmedia** | Pointer to [**ComputeVmediaRelationship**](ComputeVmediaRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "adapter.AdapterConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "adapter.AdapterConfig"]
 **DceInterfaceSettings** | Pointer to [**[]AdapterDceInterfaceSettings**](AdapterDceInterfaceSettings.md) |  | [optional] 
-**EthSettings** | Pointer to [**NullableAdapterEthSettings**](adapter.EthSettings.md) |  | [optional] 
-**FcSettings** | Pointer to [**NullableAdapterFcSettings**](adapter.FcSettings.md) |  | [optional] 
-**PortChannelSettings** | Pointer to [**NullableAdapterPortChannelSettings**](adapter.PortChannelSettings.md) |  | [optional] 
+**EthSettings** | Pointer to [**NullableAdapterEthSettings**](AdapterEthSettings.md) |  | [optional] 
+**FcSettings** | Pointer to [**NullableAdapterFcSettings**](AdapterFcSettings.md) |  | [optional] 
+**PortChannelSettings** | Pointer to [**NullableAdapterPortChannelSettings**](AdapterPortChannelSettings.md) |  | [optional] 
 **SlotId** | Pointer to **string** | PCIe slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. | [optional] 
 
 ## Methods

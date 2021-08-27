@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ApplicationName** | Pointer to **string** | Application name reported by Cisco Install Base. | [optional] [readonly] 
 **SubscriptionRefId** | Pointer to **string** | Identifies the consumption-based subscription. | [optional] [readonly] 
 **Deployments** | Pointer to [**[]AssetDeploymentRelationship**](AssetDeploymentRelationship.md) | An array of relationships to assetDeployment resources. | [optional] [readonly] 
-**SubscriptionAccount** | Pointer to [**AssetSubscriptionAccountRelationship**](asset.SubscriptionAccount.Relationship.md) |  | [optional] 
+**SubscriptionAccount** | Pointer to [**AssetSubscriptionAccountRelationship**](AssetSubscriptionAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

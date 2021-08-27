@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | This field identifies the version of the IO card module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the IO card module. | [optional] [readonly] 
 **HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
-**MgmtController** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
+**MgmtController** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **NetworkPorts** | Pointer to [**[]EtherNetworkPortRelationship**](EtherNetworkPortRelationship.md) | An array of relationships to etherNetworkPort resources. | [optional] 
 
 ## Methods

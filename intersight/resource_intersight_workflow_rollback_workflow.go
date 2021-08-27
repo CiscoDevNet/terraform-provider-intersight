@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -609,10 +607,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowRollbackWorkflowWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -628,69 +622,9 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
-	}
-
 	o.SetClassId("workflow.RollbackWorkflow")
 
-	if v, ok := d.GetOkExists("continue_on_task_failure"); ok {
-		x := v.(bool)
-		o.SetContinueOnTaskFailure(x)
-	}
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
+	o.SetContinueOnTaskFailure(d.Get("continue_on_task_failure").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -698,102 +632,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	}
 
 	o.SetObjectType("workflow.RollbackWorkflow")
-
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
 
 	if v, ok := d.GetOk("primary_workflow"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
@@ -855,12 +693,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("workflow.RollbackWorkflowTask")
-			if v, ok := l["description"]; ok {
-				{
-					x := (v.(string))
-					o.SetDescription(x)
-				}
-			}
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -879,82 +711,16 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 					o.SetRefName(x)
 				}
 			}
-			if v, ok := l["rollback_completed"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRollbackCompleted(x)
-				}
-			}
-			if v, ok := l["rollback_task_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackTaskName(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
 			if v, ok := l["task_info_moid"]; ok {
 				{
 					x := (v.(string))
 					o.SetTaskInfoMoid(x)
 				}
 			}
-			if v, ok := l["task_path"]; ok {
-				{
-					x := (v.(string))
-					o.SetTaskPath(x)
-				}
-			}
 			x = append(x, *o)
 		}
 		if len(x) > 0 {
 			o.SetRollbackTasks(x)
-		}
-	}
-
-	if v, ok := d.GetOk("rollback_workflows"); ok {
-		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetRollbackWorkflows(x)
 		}
 	}
 
@@ -975,12 +741,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("workflow.RollbackWorkflowTask")
-			if v, ok := l["description"]; ok {
-				{
-					x := (v.(string))
-					o.SetDescription(x)
-				}
-			}
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -999,34 +759,10 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 					o.SetRefName(x)
 				}
 			}
-			if v, ok := l["rollback_completed"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRollbackCompleted(x)
-				}
-			}
-			if v, ok := l["rollback_task_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackTaskName(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
 			if v, ok := l["task_info_moid"]; ok {
 				{
 					x := (v.(string))
 					o.SetTaskInfoMoid(x)
-				}
-			}
-			if v, ok := l["task_path"]; ok {
-				{
-					x := (v.(string))
-					o.SetTaskPath(x)
 				}
 			}
 			x = append(x, *o)
@@ -1034,16 +770,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 		if len(x) > 0 {
 			o.SetSelectedTasks(x)
 		}
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1078,142 +804,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 		}
 		if len(x) > 0 {
 			o.SetTags(x)
-		}
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
 		}
 	}
 
@@ -1404,11 +994,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowRollbackWorkflow{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("action") {
 		v := d.Get("action")
@@ -1426,71 +1011,12 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
-	}
-
 	o.SetClassId("workflow.RollbackWorkflow")
 
 	if d.HasChange("continue_on_task_failure") {
 		v := d.Get("continue_on_task_failure")
 		x := (v.(bool))
 		o.SetContinueOnTaskFailure(x)
-	}
-
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if d.HasChange("moid") {
@@ -1500,101 +1026,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 	}
 
 	o.SetObjectType("workflow.RollbackWorkflow")
-
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
 
 	if d.HasChange("primary_workflow") {
 		v := d.Get("primary_workflow")
@@ -1658,12 +1089,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("workflow.RollbackWorkflowTask")
-			if v, ok := l["description"]; ok {
-				{
-					x := (v.(string))
-					o.SetDescription(x)
-				}
-			}
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1682,80 +1107,15 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 					o.SetRefName(x)
 				}
 			}
-			if v, ok := l["rollback_completed"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRollbackCompleted(x)
-				}
-			}
-			if v, ok := l["rollback_task_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackTaskName(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
 			if v, ok := l["task_info_moid"]; ok {
 				{
 					x := (v.(string))
 					o.SetTaskInfoMoid(x)
 				}
 			}
-			if v, ok := l["task_path"]; ok {
-				{
-					x := (v.(string))
-					o.SetTaskPath(x)
-				}
-			}
 			x = append(x, *o)
 		}
 		o.SetRollbackTasks(x)
-	}
-
-	if d.HasChange("rollback_workflows") {
-		v := d.Get("rollback_workflows")
-		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
-		}
-		o.SetRollbackWorkflows(x)
 	}
 
 	if d.HasChange("selected_tasks") {
@@ -1776,12 +1136,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 				}
 			}
 			o.SetClassId("workflow.RollbackWorkflowTask")
-			if v, ok := l["description"]; ok {
-				{
-					x := (v.(string))
-					o.SetDescription(x)
-				}
-			}
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1800,51 +1154,15 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 					o.SetRefName(x)
 				}
 			}
-			if v, ok := l["rollback_completed"]; ok {
-				{
-					x := (v.(bool))
-					o.SetRollbackCompleted(x)
-				}
-			}
-			if v, ok := l["rollback_task_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetRollbackTaskName(x)
-				}
-			}
-			if v, ok := l["status"]; ok {
-				{
-					x := (v.(string))
-					o.SetStatus(x)
-				}
-			}
 			if v, ok := l["task_info_moid"]; ok {
 				{
 					x := (v.(string))
 					o.SetTaskInfoMoid(x)
 				}
 			}
-			if v, ok := l["task_path"]; ok {
-				{
-					x := (v.(string))
-					o.SetTaskPath(x)
-				}
-			}
 			x = append(x, *o)
 		}
 		o.SetSelectedTasks(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if d.HasChange("status") {
-		v := d.Get("status")
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	if d.HasChange("tags") {
@@ -1879,143 +1197,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowRollbackWorkflow(conn.ctx, d.Id()).WorkflowRollbackWorkflow(*o)

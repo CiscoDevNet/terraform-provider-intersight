@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **MinNumOfDaysOfData** | Pointer to **int64** | Minimum number of days of data required for computing forecast model. | [optional] [readonly] 
 **NumOfDaysOfHistoricalData** | Pointer to **int64** | Number of days of data queried from the data source (example Druid ) which is used as input data for computing forecast model. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type for which we want to compute forecast. For example HyperFlex, NetworkElement. | [optional] [readonly] 
-**Catalog** | Pointer to [**ForecastCatalogRelationship**](forecast.Catalog.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**ForecastCatalogRelationship**](ForecastCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 

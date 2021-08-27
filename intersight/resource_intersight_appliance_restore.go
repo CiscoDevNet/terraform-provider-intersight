@@ -7,7 +7,6 @@ import (
 	"log"
 	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -586,11 +585,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -600,79 +594,14 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
-	}
-
 	o.SetClassId("appliance.Restore")
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("elapsed_time"); ok {
-		x := int64(v.(int))
-		o.SetElapsedTime(x)
-	}
-
-	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndTime(x)
-	}
 
 	if v, ok := d.GetOk("filename"); ok {
 		x := (v.(string))
 		o.SetFilename(x)
 	}
 
-	if v, ok := d.GetOkExists("is_password_set"); ok {
-		x := v.(bool)
-		o.SetIsPasswordSet(x)
-	}
+	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
 
 	if v, ok := d.GetOk("messages"); ok {
 		x := make([]string, 0)
@@ -685,11 +614,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -697,105 +621,9 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetObjectType("appliance.Restore")
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
 	if v, ok := d.GetOk("password"); ok {
 		x := (v.(string))
 		o.SetPassword(x)
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
 	}
 
 	if v, ok := d.GetOk("protocol"); ok {
@@ -816,21 +644,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("remote_port"); ok {
 		x := int64(v.(int))
 		o.SetRemotePort(x)
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOk("start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartTime(x)
-	}
-
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -871,142 +684,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("username"); ok {
 		x := (v.(string))
 		o.SetUsername(x)
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	r := conn.ApiClient.ApplianceApi.CreateApplianceRestore(conn.ctx).ApplianceRestore(*o)

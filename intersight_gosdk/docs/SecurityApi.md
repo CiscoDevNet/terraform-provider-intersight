@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SecurityUnit**](security.Unit.md)
+[**SecurityUnit**](SecurityUnit.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SecurityUnitResponse**](security.Unit.Response.md)
+[**SecurityUnitResponse**](SecurityUnitResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SecurityUnit**](security.Unit.md)
+[**SecurityUnit**](SecurityUnit.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SecurityUnit**](security.Unit.md)
+[**SecurityUnit**](SecurityUnit.md)
 
 ### Authorization
 

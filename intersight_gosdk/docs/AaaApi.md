@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AaaAuditRecord**](aaa.AuditRecord.md)
+[**AaaAuditRecord**](AaaAuditRecord.md)
 
 ### Authorization
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AaaAuditRecordResponse**](aaa.AuditRecord.Response.md)
+[**AaaAuditRecordResponse**](AaaAuditRecordResponse.md)
 
 ### Authorization
 

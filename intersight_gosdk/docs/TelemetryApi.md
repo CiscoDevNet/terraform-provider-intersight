@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidDataSourceMetadataResult**](telemetry.DruidDataSourceMetadataResult.md)
+[**[]TelemetryDruidDataSourceMetadataResult**](TelemetryDruidDataSourceMetadataResult.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidGroupByResult**](telemetry.DruidGroupByResult.md)
+[**[]TelemetryDruidGroupByResult**](TelemetryDruidGroupByResult.md)
 
 ### Authorization
 
@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidScanResult**](telemetry.DruidScanResult.md)
+[**[]TelemetryDruidScanResult**](TelemetryDruidScanResult.md)
 
 ### Authorization
 
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidSearchResult**](telemetry.DruidSearchResult.md)
+[**[]TelemetryDruidSearchResult**](TelemetryDruidSearchResult.md)
 
 ### Authorization
 
@@ -329,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidSegmentMetadataResult**](telemetry.DruidSegmentMetadataResult.md)
+[**[]TelemetryDruidSegmentMetadataResult**](TelemetryDruidSegmentMetadataResult.md)
 
 ### Authorization
 
@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidTimeBoundaryResult**](telemetry.DruidTimeBoundaryResult.md)
+[**[]TelemetryDruidTimeBoundaryResult**](TelemetryDruidTimeBoundaryResult.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidIntervalResult**](telemetry.DruidIntervalResult.md)
+[**[]TelemetryDruidIntervalResult**](TelemetryDruidIntervalResult.md)
 
 ### Authorization
 
@@ -527,7 +527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]TelemetryDruidTopNResult**](telemetry.DruidTopNResult.md)
+[**[]TelemetryDruidTopNResult**](TelemetryDruidTopNResult.md)
 
 ### Authorization
 

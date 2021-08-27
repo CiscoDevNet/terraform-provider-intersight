@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SolPolicy**](sol.Policy.md)
+[**SolPolicy**](SolPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SolPolicy**](sol.Policy.md)
+[**SolPolicy**](SolPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SolPolicyResponse**](sol.Policy.Response.md)
+[**SolPolicyResponse**](SolPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SolPolicy**](sol.Policy.md)
+[**SolPolicy**](SolPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SolPolicy**](sol.Policy.md)
+[**SolPolicy**](SolPolicy.md)
 
 ### Authorization
 

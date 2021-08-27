@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPool**](fcpool.Pool.md)
+[**FcpoolPool**](FcpoolPool.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolFcBlock**](fcpool.FcBlock.md)
+[**FcpoolFcBlock**](FcpoolFcBlock.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolFcBlockResponse**](fcpool.FcBlock.Response.md)
+[**FcpoolFcBlockResponse**](FcpoolFcBlockResponse.md)
 
 ### Authorization
 
@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolLease**](fcpool.Lease.md)
+[**FcpoolLease**](FcpoolLease.md)
 
 ### Authorization
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolLeaseResponse**](fcpool.Lease.Response.md)
+[**FcpoolLeaseResponse**](FcpoolLeaseResponse.md)
 
 ### Authorization
 
@@ -578,7 +578,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPool**](fcpool.Pool.md)
+[**FcpoolPool**](FcpoolPool.md)
 
 ### Authorization
 
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPoolResponse**](fcpool.Pool.Response.md)
+[**FcpoolPoolResponse**](FcpoolPoolResponse.md)
 
 ### Authorization
 
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPoolMember**](fcpool.PoolMember.md)
+[**FcpoolPoolMember**](FcpoolPoolMember.md)
 
 ### Authorization
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPoolMemberResponse**](fcpool.PoolMember.Response.md)
+[**FcpoolPoolMemberResponse**](FcpoolPoolMemberResponse.md)
 
 ### Authorization
 
@@ -882,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolUniverse**](fcpool.Universe.md)
+[**FcpoolUniverse**](FcpoolUniverse.md)
 
 ### Authorization
 
@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolUniverseResponse**](fcpool.Universe.Response.md)
+[**FcpoolUniverseResponse**](FcpoolUniverseResponse.md)
 
 ### Authorization
 
@@ -1038,7 +1038,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPool**](fcpool.Pool.md)
+[**FcpoolPool**](FcpoolPool.md)
 
 ### Authorization
 
@@ -1110,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FcpoolPool**](fcpool.Pool.md)
+[**FcpoolPool**](FcpoolPool.md)
 
 ### Authorization
 

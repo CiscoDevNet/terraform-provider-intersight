@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkconfigPolicy**](networkconfig.Policy.md)
+[**NetworkconfigPolicy**](NetworkconfigPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkconfigPolicy**](networkconfig.Policy.md)
+[**NetworkconfigPolicy**](NetworkconfigPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkconfigPolicyResponse**](networkconfig.Policy.Response.md)
+[**NetworkconfigPolicyResponse**](NetworkconfigPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkconfigPolicy**](networkconfig.Policy.md)
+[**NetworkconfigPolicy**](NetworkconfigPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkconfigPolicy**](networkconfig.Policy.md)
+[**NetworkconfigPolicy**](NetworkconfigPolicy.md)
 
 ### Authorization
 

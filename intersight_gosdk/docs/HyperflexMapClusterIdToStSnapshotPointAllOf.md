@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.MapClusterIdToStSnapshotPoint"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.MapClusterIdToStSnapshotPoint"]
 **ClusterId** | Pointer to **string** | ClusterId of the snapshot point. | [optional] [readonly] 
-**SnapshotPoint** | Pointer to [**NullableHyperflexSnapshotPoint**](hyperflex.SnapshotPoint.md) |  | [optional] 
+**SnapshotPoint** | Pointer to [**NullableHyperflexSnapshotPoint**](HyperflexSnapshotPoint.md) |  | [optional] 
 
 ## Methods
 

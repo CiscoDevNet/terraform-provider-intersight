@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SshPolicy**](ssh.Policy.md)
+[**SshPolicy**](SshPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SshPolicy**](ssh.Policy.md)
+[**SshPolicy**](SshPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SshPolicyResponse**](ssh.Policy.Response.md)
+[**SshPolicyResponse**](SshPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SshPolicy**](ssh.Policy.md)
+[**SshPolicy**](SshPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SshPolicy**](ssh.Policy.md)
+[**SshPolicy**](SshPolicy.md)
 
 ### Authorization
 

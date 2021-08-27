@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -2726,10 +2724,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewBiosPolicyWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
 		x := (v.(string))
@@ -2818,48 +2812,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("altitude"); ok {
 		x := (v.(string))
 		o.SetAltitude(x)
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
 	}
 
 	if v, ok := d.GetOk("aspm_support"); ok {
@@ -3154,11 +3106,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCrQos(x)
 	}
 
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
 	if v, ok := d.GetOk("crfastgo_config"); ok {
 		x := (v.(string))
 		o.SetCrfastgoConfig(x)
@@ -3182,11 +3129,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("direct_cache_access"); ok {
 		x := (v.(string))
 		o.SetDirectCacheAccess(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if v, ok := d.GetOk("dram_clock_throttling"); ok {
@@ -3479,11 +3421,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetMmcfgBase(x)
 	}
 
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -3599,17 +3536,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOutOfBandMgmtPort(x)
 	}
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
 	if v, ok := d.GetOk("package_cstate_limit"); ok {
 		x := (v.(string))
 		o.SetPackageCstateLimit(x)
@@ -3618,49 +3544,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("panic_high_watermark"); ok {
 		x := (v.(string))
 		o.SetPanicHighWatermark(x)
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
 	}
 
 	if v, ok := d.GetOk("partial_cache_line_sparing"); ok {
@@ -3831,48 +3714,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("pcie_slot_nvme6option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme6optionRom(x)
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
 	}
 
 	if v, ok := d.GetOk("pop_support"); ok {
@@ -4075,11 +3916,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("sgx_qos"); ok {
 		x := (v.(string))
 		o.SetSgxQos(x)
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("single_pctl_enable"); ok {
@@ -4905,142 +4741,6 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("usb_xhci_support"); ok {
 		x := (v.(string))
 		o.SetUsbXhciSupport(x)
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	if v, ok := d.GetOk("vga_priority"); ok {
@@ -6729,11 +6429,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("acs_control_gpu1state") {
 		v := d.Get("acs_control_gpu1state")
@@ -6839,47 +6534,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("altitude")
 		x := (v.(string))
 		o.SetAltitude(x)
-	}
-
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
 	}
 
 	if d.HasChange("aspm_support") {
@@ -7232,12 +6886,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetCrQos(x)
 	}
 
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-
 	if d.HasChange("crfastgo_config") {
 		v := d.Get("crfastgo_config")
 		x := (v.(string))
@@ -7266,12 +6914,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("direct_cache_access")
 		x := (v.(string))
 		o.SetDirectCacheAccess(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if d.HasChange("dram_clock_throttling") {
@@ -7622,12 +7264,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetMmcfgBase(x)
 	}
 
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -7758,16 +7394,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetOutOfBandMgmtPort(x)
 	}
 
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
 	if d.HasChange("package_cstate_limit") {
 		v := d.Get("package_cstate_limit")
 		x := (v.(string))
@@ -7778,50 +7404,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("panic_high_watermark")
 		x := (v.(string))
 		o.SetPanicHighWatermark(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
 	}
 
 	if d.HasChange("partial_cache_line_sparing") {
@@ -8026,47 +7608,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("pcie_slot_nvme6option_rom")
 		x := (v.(string))
 		o.SetPcieSlotNvme6optionRom(x)
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
 	}
 
 	if d.HasChange("pop_support") {
@@ -8300,12 +7841,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("sgx_qos")
 		x := (v.(string))
 		o.SetSgxQos(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	if d.HasChange("single_pctl_enable") {
@@ -9288,143 +8823,6 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("usb_xhci_support")
 		x := (v.(string))
 		o.SetUsbXhciSupport(x)
-	}
-
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
 	}
 
 	if d.HasChange("vga_priority") {

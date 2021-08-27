@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **LicenseKeysInfo** | Pointer to [**[]IaasLicenseKeysInfo**](IaasLicenseKeysInfo.md) |  | [optional] 
 **LicenseType** | Pointer to **string** | License type of UCSD whether it is EVAL/Permanent/Subscription.. | [optional] [readonly] 
 **LicenseUtilizationInfo** | Pointer to [**[]IaasLicenseUtilizationInfo**](IaasLicenseUtilizationInfo.md) |  | [optional] 
-**Guid** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 
+**Guid** | Pointer to [**IaasUcsdInfoRelationship**](IaasUcsdInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

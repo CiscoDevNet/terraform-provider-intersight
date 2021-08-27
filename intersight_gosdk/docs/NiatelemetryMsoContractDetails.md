@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **SchemaId** | Pointer to **string** | Schema ID in Multi-Site Orchestrator. | [optional] 
 **SchemaName** | Pointer to **string** | Schema name this contract belongs to in Multi-Site Orchestrator. | [optional] 
 **TemplateName** | Pointer to **string** | Template name this contract belongs to in Multi-Site Orchestrator. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **LatestFileName** | Pointer to **string** | The name of the latest image file uploaded for this software type. It is populated as part of the image import operation. | [optional] 
 **LatestVersion** | Pointer to **string** | Latest version of the image avaiable for a specific software. | [optional] [readonly] 
 **SoftwareTypeId** | Pointer to **string** | The software type id of the image (For e.g. firmware.Distributable, software.ApplianceDistributable, software.HyperflexBundleDistributable, software.UcsdBundleDistributable). | [optional] 
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
-**Image** | Pointer to [**FirmwareBaseDistributableRelationship**](firmware.BaseDistributable.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
+**Image** | Pointer to [**FirmwareBaseDistributableRelationship**](FirmwareBaseDistributableRelationship.md) |  | [optional] 
 
 ## Methods
 

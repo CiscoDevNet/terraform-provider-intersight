@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsDeployment**](oprs.Deployment.md)
+[**OprsDeployment**](OprsDeployment.md)
 
 ### Authorization
 
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsSyncTargetListMessage**](oprs.SyncTargetListMessage.md)
+[**OprsSyncTargetListMessage**](OprsSyncTargetListMessage.md)
 
 ### Authorization
 
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsDeployment**](oprs.Deployment.md)
+[**OprsDeployment**](OprsDeployment.md)
 
 ### Authorization
 
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsDeploymentResponse**](oprs.Deployment.Response.md)
+[**OprsDeploymentResponse**](OprsDeploymentResponse.md)
 
 ### Authorization
 
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsSyncTargetListMessage**](oprs.SyncTargetListMessage.md)
+[**OprsSyncTargetListMessage**](OprsSyncTargetListMessage.md)
 
 ### Authorization
 
@@ -575,7 +575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsSyncTargetListMessageResponse**](oprs.SyncTargetListMessage.Response.md)
+[**OprsSyncTargetListMessageResponse**](OprsSyncTargetListMessageResponse.md)
 
 ### Authorization
 
@@ -647,7 +647,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsDeployment**](oprs.Deployment.md)
+[**OprsDeployment**](OprsDeployment.md)
 
 ### Authorization
 
@@ -719,7 +719,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsSyncTargetListMessage**](oprs.SyncTargetListMessage.md)
+[**OprsSyncTargetListMessage**](OprsSyncTargetListMessage.md)
 
 ### Authorization
 
@@ -791,7 +791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsDeployment**](oprs.Deployment.md)
+[**OprsDeployment**](OprsDeployment.md)
 
 ### Authorization
 
@@ -863,7 +863,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OprsSyncTargetListMessage**](oprs.SyncTargetListMessage.md)
+[**OprsSyncTargetListMessage**](OprsSyncTargetListMessage.md)
 
 ### Authorization
 

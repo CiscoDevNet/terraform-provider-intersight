@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **EntityId** | Pointer to **string** | Entity ID of the Intersight Service Provider. In SAML, the entity ID uniquely identifies the IdP/Service Provider. | [optional] [readonly] 
 **Metadata** | Pointer to **string** | Metadata of the Intersight Service Provider. User downloads the Intersight Service Provider metadata and integrates it with their IdP for authentication. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the Intersight Service Provider. | [optional] [readonly] 
-**System** | Pointer to [**IamSystemRelationship**](iam.System.Relationship.md) |  | [optional] 
+**System** | Pointer to [**IamSystemRelationship**](IamSystemRelationship.md) |  | [optional] 
 
 ## Methods
 

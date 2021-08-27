@@ -2,6 +2,7 @@ package intersight
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"reflect"
@@ -14,99 +15,229 @@ import (
 )
 
 func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
-	return &schema.Resource{
-		ReadContext: dataSourceWorkflowPendingDynamicWorkflowInfoRead,
-		Schema: map[string]*schema.Schema{
-			"account_moid": {
-				Description: "The Account ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"create_time": {
-				Description: "The time when this managed object was created.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"domain_group_moid": {
-				Description: "The DomainGroup ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"mod_time": {
-				Description: "The time when this managed object was last modified.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"moid": {
-				Description: "The unique identifier of this Managed Object instance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"name": {
-				Description: "A name for the pending dynamic workflow.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"shared_scope": {
-				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"src": {
-				Description: "The src is workflow owner service.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"status": {
-				Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"wait_on_duplicate": {
-				Description: "When set to true workflow engine will wait for a duplicate to finish before starting a new one.",
-				Type:        schema.TypeBool,
-				Optional:    true,
-			},
-			"workflow_key": {
-				Description: "This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"results": {
-				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
-					Description: "The Account ID for this managed object.",
-					Type:        schema.TypeString,
-					Optional:    true,
-					Computed:    true,
-				},
+	var subSchema = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
-					"ancestors": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"input": {
+			Description: "The inputs of the workflow.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "A name for the pending dynamic workflow.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"pending_services": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"src": {
+			Description: "The src is workflow owner service.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"status": {
+			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
 								"additional_properties": {
@@ -123,13 +254,11 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -139,44 +268,86 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 							},
 						},
 					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"wait_on_duplicate": {
+			Description: "When set to true workflow engine will wait for a duplicate to finish before starting a new one.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"workflow_action_task_lists": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "The action of the Dynamic Workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"create_time": {
-						Description: "The time when this managed object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"domain_group_moid": {
-						Description: "The DomainGroup ID for this managed object.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"input": {
-						Description: "The inputs of the workflow.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
-					},
-					"mod_time": {
-						Description: "The time when this managed object was last modified.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"moid": {
-						Description: "The unique identifier of this Managed Object instance.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"name": {
-						Description: "A name for the pending dynamic workflow.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -184,472 +355,708 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"owners": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Computed: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"parent": {
-						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"pending_services": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"permission_resources": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"shared_scope": {
-						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"src": {
-						Description: "The src is workflow owner service.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"status": {
-						Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"tags": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"key": {
-									Description: "The string representation of a tag key.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"value": {
-									Description: "The string representation of a tag value.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"version_context": {
-						Description: "The versioning info for this managed object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"interested_mos": {
-									Type:     schema.TypeList,
-									Optional: true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"ref_mo": {
-									Description: "A reference to the original Managed Object.",
-									Type:        schema.TypeList,
-									MaxItems:    1,
-									Optional:    true,
-									Computed:    true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-								},
-								"timestamp": {
-									Description: "The time this versioned Managed Object was created.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"nr_version": {
-									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"version_type": {
-									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-							},
-						},
-					},
-					"wait_on_duplicate": {
-						Description: "When set to true workflow engine will wait for a duplicate to finish before starting a new one.",
-						Type:        schema.TypeBool,
-						Optional:    true,
-					},
-					"workflow_action_task_lists": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"action": {
-									Description: "The action of the Dynamic Workflow.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"tasks": {
-									Description: "The task list that has precedence which dictates how the workflow should be constructed.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
-								},
-							},
-						},
-						Computed: true,
-					},
-					"workflow_ctx": {
-						Description: "The workflow's workflow context which contains initiator and target information.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"initiator_ctx": {
-									Description: "Details about initiator of the workflow.",
-									Type:        schema.TypeList,
-									MaxItems:    1,
-									Optional:    true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"initiator_moid": {
-												Description: "The moid of the Intersight managed object that initiated the workflow.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"initiator_name": {
-												Description: "Name of the initiator who started the workflow. The initiator can be Intersight managed object that triggered the workflow.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"initiator_type": {
-												Description: "Type of Intersight managed object that initiated the workflow.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"target_ctx_list": {
-									Type:     schema.TypeList,
-									Optional: true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"target_moid": {
-												Description: "Moid of the target Intersight managed object.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"target_name": {
-												Description: "Name of the target instance.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"target_type": {
-												Description: "Object type of the target Intersight managed object.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"workflow_meta_name": {
-									Description: "The name of workflowMeta of the workflow running.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"workflow_subtype": {
-									Description: "The subtype of the workflow.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"workflow_type": {
-									Description: "Type of the workflow being started. This can be any string for client services to distinguish workflow by type.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-						Computed: true,
-					},
-					"workflow_info": {
-						Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"workflow_key": {
-						Description: "This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"workflow_meta": {
-						Description: "The metadata of the workflow.",
+					"tasks": {
+						Description: "The task list that has precedence which dictates how the workflow should be constructed.",
 						Type:        schema.TypeMap,
 						Elem: &schema.Schema{
 							Type: schema.TypeString,
 						}, Optional: true,
 					},
-				}},
-				Computed: true,
-			}},
+				},
+			},
+		},
+		"workflow_ctx": {
+			Description: "The workflow's workflow context which contains initiator and target information.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"initiator_ctx": {
+						Description: "Details about initiator of the workflow.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_moid": {
+									Description: "The moid of the Intersight managed object that initiated the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_name": {
+									Description: "Name of the initiator who started the workflow. The initiator can be Intersight managed object that triggered the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_type": {
+									Description: "Type of Intersight managed object that initiated the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"target_ctx_list": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_moid": {
+									Description: "Moid of the target Intersight managed object.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_name": {
+									Description: "Name of the target instance.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_type": {
+									Description: "Object type of the target Intersight managed object.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"workflow_meta_name": {
+						Description: "The name of workflowMeta of the workflow running.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_subtype": {
+						Description: "The subtype of the workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "Type of the workflow being started. This can be any string for client services to distinguish workflow by type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"workflow_info": {
+			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"workflow_key": {
+			Description: "This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"workflow_meta": {
+			Description: "The metadata of the workflow.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
 	}
+	var model = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"input": {
+			Description: "The inputs of the workflow.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "A name for the pending dynamic workflow.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"pending_services": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"src": {
+			Description: "The src is workflow owner service.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"status": {
+			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"wait_on_duplicate": {
+			Description: "When set to true workflow engine will wait for a duplicate to finish before starting a new one.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"workflow_action_task_lists": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"action": {
+						Description: "The action of the Dynamic Workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tasks": {
+						Description: "The task list that has precedence which dictates how the workflow should be constructed.",
+						Type:        schema.TypeMap,
+						Elem: &schema.Schema{
+							Type: schema.TypeString,
+						}, Optional: true,
+					},
+				},
+			},
+		},
+		"workflow_ctx": {
+			Description: "The workflow's workflow context which contains initiator and target information.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"initiator_ctx": {
+						Description: "Details about initiator of the workflow.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_moid": {
+									Description: "The moid of the Intersight managed object that initiated the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_name": {
+									Description: "Name of the initiator who started the workflow. The initiator can be Intersight managed object that triggered the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"initiator_type": {
+									Description: "Type of Intersight managed object that initiated the workflow.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"target_ctx_list": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_moid": {
+									Description: "Moid of the target Intersight managed object.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_name": {
+									Description: "Name of the target instance.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"target_type": {
+									Description: "Object type of the target Intersight managed object.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"workflow_meta_name": {
+						Description: "The name of workflowMeta of the workflow running.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_subtype": {
+						Description: "The subtype of the workflow.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "Type of the workflow being started. This can be any string for client services to distinguish workflow by type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"workflow_info": {
+			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"workflow_key": {
+			Description: "This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"workflow_meta": {
+			Description: "The metadata of the workflow.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
+	}
+	model["results"] = &schema.Schema{
+		Type:     schema.TypeList,
+		Elem:     &schema.Resource{Schema: subSchema},
+		Computed: true,
+	}
+	return &schema.Resource{
+		ReadContext: dataSourceWorkflowPendingDynamicWorkflowInfoRead,
+		Schema:      model}
 }
 
 func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -658,6 +1065,588 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowPendingDynamicWorkflowInfo{}
+	if _, ok := d.GetOk("account_moid"); ok {
+		v := d.Get("account_moid")
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
+	if _, ok := d.GetOk("additional_properties"); ok {
+		v := d.Get("additional_properties")
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if _, ok := d.GetOk("ancestors"); ok {
+		v := d.Get("ancestors")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetAncestors(x)
+	}
+
+	if _, ok := d.GetOk("class_id"); ok {
+		v := d.Get("class_id")
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if _, ok := d.GetOk("create_time"); ok {
+		v := d.Get("create_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
+	if _, ok := d.GetOk("domain_group_moid"); ok {
+		v := d.Get("domain_group_moid")
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
+	if _, ok := d.GetOk("input"); ok {
+		v := d.Get("input")
+		o.SetInput(v)
+	}
+
+	if _, ok := d.GetOk("mod_time"); ok {
+		v := d.Get("mod_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
+
+	if _, ok := d.GetOk("moid"); ok {
+		v := d.Get("moid")
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if _, ok := d.GetOk("name"); ok {
+		v := d.Get("name")
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	if _, ok := d.GetOk("object_type"); ok {
+		v := d.Get("object_type")
+		x := (v.(string))
+		o.SetObjectType(x)
+	}
+
+	if _, ok := d.GetOk("owners"); ok {
+		v := d.Get("owners")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetOwners(x)
+	}
+
+	if _, ok := d.GetOk("parent"); ok {
+		v := d.Get("parent")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if _, ok := d.GetOk("pending_services"); ok {
+		v := d.Get("pending_services")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetPendingServices(x)
+	}
+
+	if _, ok := d.GetOk("permission_resources"); ok {
+		v := d.Get("permission_resources")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetPermissionResources(x)
+	}
+
+	if _, ok := d.GetOk("shared_scope"); ok {
+		v := d.Get("shared_scope")
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
+
+	if _, ok := d.GetOk("src"); ok {
+		v := d.Get("src")
+		x := (v.(string))
+		o.SetSrc(x)
+	}
+
+	if _, ok := d.GetOk("status"); ok {
+		v := d.Get("status")
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
+	if _, ok := d.GetOk("tags"); ok {
+		v := d.Get("tags")
+		x := make([]models.MoTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["key"]; ok {
+				{
+					x := (v.(string))
+					o.SetKey(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTags(x)
+	}
+
+	if _, ok := d.GetOk("version_context"); ok {
+		v := d.Get("version_context")
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoVersionContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
+	o.SetWaitOnDuplicate(d.Get("wait_on_duplicate").(bool))
+
+	if _, ok := d.GetOk("workflow_action_task_lists"); ok {
+		v := d.Get("workflow_action_task_lists")
+		x := make([]models.WorkflowDynamicWorkflowActionTaskList, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.WorkflowDynamicWorkflowActionTaskList{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["action"]; ok {
+				{
+					x := (v.(string))
+					o.SetAction(x)
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.DynamicWorkflowActionTaskList")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["tasks"]; ok {
+				{
+					o.SetTasks(v)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetWorkflowActionTaskLists(x)
+	}
+
+	if _, ok := d.GetOk("workflow_ctx"); ok {
+		v := d.Get("workflow_ctx")
+		p := make([]models.WorkflowWorkflowCtx, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowWorkflowCtx{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.WorkflowCtx")
+			if v, ok := l["initiator_ctx"]; ok {
+				{
+					p := make([]models.WorkflowInitiatorContext, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowInitiatorContextWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.InitiatorContext")
+						if v, ok := l["initiator_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetInitiatorMoid(x)
+							}
+						}
+						if v, ok := l["initiator_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetInitiatorName(x)
+							}
+						}
+						if v, ok := l["initiator_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetInitiatorType(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetInitiatorCtx(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["target_ctx_list"]; ok {
+				{
+					x := make([]models.WorkflowTargetContext, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewWorkflowTargetContextWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.TargetContext")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["target_moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetTargetMoid(x)
+							}
+						}
+						if v, ok := l["target_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetTargetName(x)
+							}
+						}
+						if v, ok := l["target_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetTargetType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetTargetCtxList(x)
+					}
+				}
+			}
+			if v, ok := l["workflow_meta_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowMetaName(x)
+				}
+			}
+			if v, ok := l["workflow_subtype"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowSubtype(x)
+				}
+			}
+			if v, ok := l["workflow_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetWorkflowCtx(x)
+		}
+	}
+
+	if _, ok := d.GetOk("workflow_info"); ok {
+		v := d.Get("workflow_info")
+		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowWorkflowInfoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetWorkflowInfo(x)
+		}
+	}
+
+	if _, ok := d.GetOk("workflow_key"); ok {
+		v := d.Get("workflow_key")
+		x := (v.(string))
+		o.SetWorkflowKey(x)
+	}
+
+	if _, ok := d.GetOk("workflow_meta"); ok {
+		v := d.Get("workflow_meta")
+		o.SetWorkflowMeta(v)
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)

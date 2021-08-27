@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **SasAddress1** | Pointer to **string** | This field identifies the SAS address assigned to the disk SAS port-1. | [optional] 
 **SasAddress2** | Pointer to **string** | This field identifies the SAS address assigned to the disk SAS port-2. | [optional] 
 **Size** | Pointer to **string** | The size of the physical disk in MB. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](storage.PhysicalDisk.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**StorageEnclosure** | Pointer to [**StorageEnclosureRelationship**](storage.Enclosure.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PhysicalDisk** | Pointer to [**StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageEnclosure** | Pointer to [**StorageEnclosureRelationship**](StorageEnclosureRelationship.md) |  | [optional] 
 
 ## Methods
 

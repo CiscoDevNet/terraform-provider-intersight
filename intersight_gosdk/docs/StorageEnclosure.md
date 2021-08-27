@@ -12,14 +12,14 @@ Name | Type | Description | Notes
 **NumSlots** | Pointer to **int64** | This represent the number of slots present in storage enclosure. | [optional] [readonly] 
 **ServerId** | Pointer to **int64** | This represent the server-ID that houses the storage enclosure. | [optional] [readonly] 
 **Type** | Pointer to **string** | This represent the type of storage enclosure. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **EnclosureDiskSlots** | Pointer to [**[]StorageEnclosureDiskSlotEpRelationship**](StorageEnclosureDiskSlotEpRelationship.md) | An array of relationships to storageEnclosureDiskSlotEp resources. | [optional] [readonly] 
 **EnclosureDisks** | Pointer to [**[]StorageEnclosureDiskRelationship**](StorageEnclosureDiskRelationship.md) | An array of relationships to storageEnclosureDisk resources. | [optional] [readonly] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

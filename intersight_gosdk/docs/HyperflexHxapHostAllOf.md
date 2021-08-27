@@ -9,17 +9,17 @@ Name | Type | Description | Notes
 **Age** | Pointer to **string** | Denotes age or life time of the Host in nano seconds. | [optional] 
 **ChassisVersion** | Pointer to **string** | Chassis version of the Host. | [optional] 
 **ClusterUuid** | Pointer to **string** | The UUID of the cluster to which this Host belongs to. | [optional] 
-**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](virtualization.CpuAllocation.md) |  | [optional] 
+**CpuAllocation** | Pointer to [**NullableVirtualizationCpuAllocation**](VirtualizationCpuAllocation.md) |  | [optional] 
 **FailureReason** | Pointer to **string** | Reason of the failure when host is in failed state. | [optional] 
 **HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **InternalIpAddress** | Pointer to **string** | Internal IP Address of the Host. | [optional] 
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the Host. | [optional] 
 **MasterRole** | Pointer to **bool** | Is the role of this host is master in the cluster? true or false. | [optional] 
-**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](virtualization.MemoryAllocation.md) |  | [optional] 
+**MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](VirtualizationMemoryAllocation.md) |  | [optional] 
 **Version** | Pointer to **string** | Product version of the Host. | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](asset.ClusterMember.Relationship.md) |  | [optional] 
-**PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
+**PhysicalServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
 ## Methods
 

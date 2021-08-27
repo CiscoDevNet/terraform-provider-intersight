@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapDvswitch"]
 **DvUplink** | Pointer to **string** | The name of the dvUplink referenced by this dvswitch. | [optional] 
 **LastHostname** | Pointer to **string** | The last host that update this object. | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
 **MemberHosts** | Pointer to [**[]HyperflexHxapHostRelationship**](HyperflexHxapHostRelationship.md) | An array of relationships to hyperflexHxapHost resources. | [optional] [readonly] 
 **MemberVswitches** | Pointer to [**[]HyperflexHxapHostVswitchRelationship**](HyperflexHxapHostVswitchRelationship.md) | An array of relationships to hyperflexHxapHostVswitch resources. | [optional] [readonly] 
 

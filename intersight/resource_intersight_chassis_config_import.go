@@ -7,7 +7,6 @@ import (
 	"log"
 	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -575,10 +574,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewChassisConfigImportWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -586,48 +581,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
-		}
-	}
-
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
 		}
 	}
 
@@ -674,69 +627,11 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("chassis_profile"); ok {
-		p := make([]models.ChassisProfileRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsChassisProfileRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetChassisProfile(x)
-		}
-	}
-
 	o.SetClassId("chassis.ConfigImport")
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -789,102 +684,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
-
 	if v, ok := d.GetOk("policy_prefix"); ok {
 		x := (v.(string))
 		o.SetPolicyPrefix(x)
@@ -904,11 +703,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("profile_name"); ok {
 		x := (v.(string))
 		o.SetProfileName(x)
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -943,142 +737,6 @@ func resourceChassisConfigImportCreate(c context.Context, d *schema.ResourceData
 		}
 		if len(x) > 0 {
 			o.SetTags(x)
-		}
-	}
-
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
 		}
 	}
 

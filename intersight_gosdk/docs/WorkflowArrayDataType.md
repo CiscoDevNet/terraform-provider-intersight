@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ArrayDataType"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ArrayDataType"]
-**ArrayItemType** | Pointer to [**NullableWorkflowArrayItem**](workflow.ArrayItem.md) |  | [optional] 
+**ArrayItemType** | Pointer to [**NullableWorkflowArrayItem**](WorkflowArrayItem.md) |  | [optional] 
 **Max** | Pointer to **int64** | Specify the maximum value of the array. | [optional] 
 **Min** | Pointer to **int64** | Specify the minimum value of the array. | [optional] 
 

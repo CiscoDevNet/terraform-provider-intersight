@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ReplicationStatus"]
 **BytesReplicated** | Pointer to **int64** | Number of bytes currently replicated. | [optional] [readonly] 
 **EndTime** | Pointer to **int64** | Replication end time for this snapshot. | [optional] [readonly] 
-**Error** | Pointer to [**NullableHyperflexErrorStack**](hyperflex.ErrorStack.md) |  | [optional] 
-**PackEntityReference** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
+**Error** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
+**PackEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **PctComplete** | Pointer to **int64** | Completion percentage for the replication job. | [optional] [readonly] 
-**RpoStatus** | Pointer to [**NullableHyperflexRpoStatus**](hyperflex.RpoStatus.md) |  | [optional] 
+**RpoStatus** | Pointer to [**NullableHyperflexRpoStatus**](HyperflexRpoStatus.md) |  | [optional] 
 **StartTime** | Pointer to **int64** | Replication start time for this snapshot. | [optional] [readonly] 
 **Status** | Pointer to **string** | Current replication state for a particular snapshot. * &#x60;NONE&#x60; - Snapshot replication state is none. * &#x60;SUCCESS&#x60; - Snapshot completed successfully. * &#x60;FAILED&#x60; - Snapshot failed replication status code. * &#x60;PAUSED&#x60; - Snapshot replication paused status code. * &#x60;IN_USE&#x60; - Snapshot replica in use status code. * &#x60;STARTING&#x60; - Snapshot replication starting. * &#x60;REPLICATING&#x60; - Snapshot replication in progress. | [optional] [readonly] [default to "NONE"]
 

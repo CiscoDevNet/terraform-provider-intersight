@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SiteId** | Pointer to **string** | ID of site in Multi-Site Orchestrator. | [optional] 
 **SiteName** | Pointer to **string** | Name of the site in Multi-Site Orchestrator. | [optional] 
 **SiteVersion** | Pointer to **string** | Version of the controller in the site. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **LinkWidth** | Pointer to **string** | The upstream link width of the PCI device. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The slot name of the PCI device. | [optional] [readonly] 
 **SlotStatus** | Pointer to **string** | The health information of the PCI device. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PciSwitch** | Pointer to [**PciSwitchRelationship**](pci.Switch.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PciSwitch** | Pointer to [**PciSwitchRelationship**](PciSwitchRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of the profile. | [optional] 
 **Name** | Pointer to **string** | Name of the profile instance or profile template. | [optional] 
 **Type** | Pointer to **string** | Defines the type of the profile. Accepted values are instance or template. * &#x60;instance&#x60; - The profile defines the configuration for a specific instance of a target. | [optional] [default to "instance"]
-**SrcTemplate** | Pointer to [**PolicyAbstractProfileRelationship**](policy.AbstractProfile.Relationship.md) |  | [optional] 
+**SrcTemplate** | Pointer to [**PolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
 
 ## Methods
 

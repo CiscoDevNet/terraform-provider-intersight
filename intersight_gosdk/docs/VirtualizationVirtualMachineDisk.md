@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Virtual machine network bridge name. | [optional] 
 **Order** | Pointer to **int64** | Priority order of the disk. | [optional] 
 **Type** | Pointer to **string** | Disk type hdd or cdrom for a virtual machine. * &#x60;hdd&#x60; - Allows the virtual machine to mount disk from hard disk drive (hdd) image. * &#x60;cdrom&#x60; - Allows the virtual machine to mount disk from compact disk (cd) image. | [optional] [default to "hdd"]
-**VirtualDisk** | Pointer to [**NullableVirtualizationVirtualDiskConfig**](virtualization.VirtualDiskConfig.md) |  | [optional] 
+**VirtualDisk** | Pointer to [**NullableVirtualizationVirtualDiskConfig**](VirtualizationVirtualDiskConfig.md) |  | [optional] 
 **VirtualDiskReference** | Pointer to **string** | Name of the existing virtual disk to be attached to the Virtual Machine. | [optional] 
 
 ## Methods

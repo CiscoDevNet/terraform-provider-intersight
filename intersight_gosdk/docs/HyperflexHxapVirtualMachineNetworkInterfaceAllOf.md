@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **PrimaryIpAddress** | Pointer to **string** | Primary IP address of the network interface. | [optional] 
 **Status** | Pointer to **string** | Current status of virtual network interface status. * &#x60;Up&#x60; - Virtual network interface is up and running. * &#x60;Down&#x60; - Virtual network interface is down and not running. | [optional] [default to "Up"]
 **VirtualMachineName** | Pointer to **string** | A reference to the virtual machine where this network object is attached to. | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**Network** | Pointer to [**HyperflexHxapNetworkRelationship**](hyperflex.HxapNetwork.Relationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**HyperflexHxapVirtualMachineRelationship**](hyperflex.HxapVirtualMachine.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**Network** | Pointer to [**HyperflexHxapNetworkRelationship**](HyperflexHxapNetworkRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**HyperflexHxapVirtualMachineRelationship**](HyperflexHxapVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 

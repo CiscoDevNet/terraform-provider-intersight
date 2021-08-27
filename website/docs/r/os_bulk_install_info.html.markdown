@@ -12,8 +12,8 @@ This MO models the CSV file content which the user uploaded for OS installation.
 in the model can be populated along with respective validation.
 ## Argument Reference
 The following arguments are supported:
-* `account_moid`:(string)(Computed) The Account ID for this managed object. 
-* `ancestors`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -23,27 +23,27 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `create_time`:(string)(Computed) The time when this managed object was created. 
-* `domain_group_moid`:(string)(Computed) The DomainGroup ID for this managed object. 
+* `create_time`:(string)(ReadOnly) The time when this managed object was created. 
+* `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `file_content`:(string) The content of the entire CSV file is stored as value. The content can hold complete OS install parameters in two sections.The first section holds generic information about the OS Install like OS Image, SCU Image etc. The second section holdsparameters which are specific to each server level data. 
-* `global_config`:(HashMap) -(Computed) The global parameter of the CSV file. 
+* `global_config`:(HashMap) -(ReadOnly) The global parameter of the CSV file. 
 This complex property has following sub-properties:
-  + `configuration_file_name`:(string)(Computed) Name of the Configuration file. 
-  + `configuration_source`:(string)(Computed) Configuration source for the OS Installation. 
-  + `install_method`:(string)(Computed) The install method to be used for OS installation - vMedia, iPXE.Only vMedia is supported as of now. 
-  + `install_target_type`:(string)(Computed) The Prefill install Target Name. 
+  + `configuration_file_name`:(string)(ReadOnly) Name of the Configuration file. 
+  + `configuration_source`:(string)(ReadOnly) Configuration source for the OS Installation. 
+  + `install_method`:(string)(ReadOnly) The install method to be used for OS installation - vMedia, iPXE.Only vMedia is supported as of now. 
+  + `install_target_type`:(string)(ReadOnly) The Prefill install Target Name. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `operating_system_parameters`:(HashMap) -(Computed) Parameters specific to selected OS. 
+  + `operating_system_parameters`:(HashMap) -(ReadOnly) Parameters specific to selected OS. 
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `os_image_name`:(string)(Computed) The Operating System Image name. 
-  + `scu_image_name`:(string)(Computed) The name of the Server Configuration Utilities Image. 
-  + `windows_edition`:(string)(Computed) The Windows OS edition, this property required only for Windows server. 
-* `is_file_content_set`:(bool)(Computed) Indicates whether the value of the 'fileContent' property has been set. 
-* `mod_time`:(string)(Computed) The time when this managed object was last modified. 
+  + `os_image_name`:(string)(ReadOnly) The Operating System Image name. 
+  + `scu_image_name`:(string)(ReadOnly) The name of the Server Configuration Utilities Image. 
+  + `windows_edition`:(string)(ReadOnly) The Windows OS edition, this property required only for Windows server. 
+* `is_file_content_set`:(bool)(ReadOnly) Indicates whether the value of the 'fileContent' property has been set. 
+* `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the CSV file, which holds the OS install parameters. 
-* `oper_state`:(string)(Computed) Denotes if the operating is pending, in_progress, completed_ok, completed_error.* `Pending` - The initial value of the OperStatus.* `InProgress` - The OperStatus value will be InProgress during execution.* `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk.* `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError.* `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning. 
+* `oper_state`:(string)(ReadOnly) Denotes if the operating is pending, in_progress, completed_ok, completed_error.* `Pending` - The initial value of the OperStatus.* `InProgress` - The OperStatus value will be InProgress during execution.* `CompletedOk` - The API is successful with operation then OperStatus will be marked as CompletedOk.* `CompletedError` - The API is failed with operation then OperStatus will be marked as CompletedError.* `CompletedWarning` - The API is completed with some warning then OperStatus will be CompletedWarning. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -55,13 +55,13 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `owners`:
-                (Array of schema.TypeString) -(Computed)
-* `parent`:(HashMap) -(Computed) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+                (Array of schema.TypeString) -(ReadOnly)
+* `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `permission_resources`:(Array)(Computed) An array of relationships to moBaseMo resources. 
+* `permission_resources`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
@@ -81,7 +81,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `default`:(HashMap) - Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
 This complex property has following sub-properties:
-    + `is_value_set`:(bool)(Computed) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
+    + `is_value_set`:(bool)(ReadOnly) A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `override`:(bool) Override the default value provided for the data type. When true, allow the user to enter value for the data type. 
     + `value`:(JSON as string) Default value for the data type. If default value was provided and the input was required the default value will be used as the input. 
@@ -104,8 +104,8 @@ This complex property has following sub-properties:
     + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_). 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
-  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
-  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
+  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
+  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
   + `inventory_selector`:(Array)
@@ -125,7 +125,7 @@ This complex property has following sub-properties:
   + `type`:(string) Specify the enum type for primitive data type.* `string` - Enum to specify a string data type.* `integer` - Enum to specify an integer32 data type.* `float` - Enum to specify a float64 data type.* `boolean` - Enum to specify a boolean data type.* `json` - Enum to specify a json data type.* `enum` - Enum to specify a enum data type which is a list of pre-defined strings. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
   + `value`:(JSON as string) Value for placeholder provided by user. 
-  + `answers`:(HashMap) -(Computed) Answers provided by user for the unattended OS installation. 
+  + `answers`:(HashMap) -(ReadOnly) Answers provided by user for the unattended OS installation. 
 This complex property has following sub-properties:
     + `answer_file`:(string) If the source of the answers is a static file, the content of the file is stored as valuein this property.The value is mandatory only when the 'Source' property has been set to 'File'. 
     + `hostname`:(string) Hostname to be configured for the server in the OS. 
@@ -133,9 +133,9 @@ This complex property has following sub-properties:
     + `ip_configuration`:(HashMap) - In case of static IP configuration, IP address, netmask and gateway details areprovided. 
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `is_answer_file_set`:(bool)(Computed) Indicates whether the value of the 'answerFile' property has been set. 
+  + `is_answer_file_set`:(bool)(ReadOnly) Indicates whether the value of the 'answerFile' property has been set. 
   + `is_root_password_crypted`:(bool) Enable to indicate Root Password provided is encrypted. 
-  + `is_root_password_set`:(bool)(Computed) Indicates whether the value of the 'rootPassword' property has been set. 
+  + `is_root_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'rootPassword' property has been set. 
   + `nameserver`:(string) IP address of the name server to be configured in the OS. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `product_key`:(string) The product key to be used for a specific version of Windows installation. 
@@ -143,29 +143,29 @@ This complex property has following sub-properties:
   + `nr_source`:(string) Answer values can be provided from three sources - Embedded in OS image, static file,or as placeholder values for an answer file template.Source of the answers is given as value, Embedded/File/Template.'Embedded' option indicates that the answer file is embedded within the OS Image. 'File'option indicates that the answers are provided as a file. 'Template' indicates that theplaceholders in the selected os.ConfigurationFile MO are replaced with values providedas os.Answers MO.* `None` - Indicates that answers is not sent and values must be populated from Install Template.  * `Embedded` - Indicates that the answer file is embedded within OS image.* `File` - Indicates that the answer file is a static content that has all thevalues populated.* `Template` - Indicates that the given answers are used to populate the answer filetemplate. The template allows the users to refer some server specificanswers as fields/placeholders and replace these placeholders with theactual values for each Server during OS installation using 'Answers' and'AdditionalParameters' properties in os.Install MO.The answer file templates can be created by users as os.ConfigurationFile objects. 
   + `error_msgs`:
                 (Array of schema.TypeString) -
-  + `install_target`:(string)(Computed) The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. 
+  + `install_target`:(string)(ReadOnly) The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `processed_install_target`:(HashMap) -(Computed) The target in which OS installation triggered, this is populated after processing the given data. 
+  + `processed_install_target`:(HashMap) -(ReadOnly) The target in which OS installation triggered, this is populated after processing the given data. 
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `serial_number`:(string)(Computed) The Serial Number of the server. 
+  + `serial_number`:(string)(ReadOnly) The Serial Number of the server. 
 * `servers`:(Array) An array of relationships to computePhysical resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `shared_scope`:(string)(Computed) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `validation_infos`:(Array)
 This complex property has following sub-properties:
-  + `error_msg`:(string)(Computed) Validation error message. 
+  + `error_msg`:(string)(ReadOnly) Validation error message. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `status`:(string)(Computed) The status of the validation step.* `NotValidated` - The validation not started.* `Valid` - The step status marked as valid when respective step validation condition is successful.* `Invalid` - The step status marked as invalid when respective step validation condition is failed.* `InProgress` - The validation is in progress. 
-  + `step_name`:(string)(Computed) The validation step name.* `OS Install Schema Validation` - The step to validate the CSV file schema.* `OS Image Validation` - The Operating System Image parameter validation step.* `SCU Image Validation` - The SCU Image parameter validation step.* `Configuration source and file validation` - The Configuration Source and Configuration file validation step.* `Server level data validation` - The server level parameters validation. 
-* `version_context`:(HashMap) -(Computed) The versioning info for this managed object. 
+  + `status`:(string)(ReadOnly) The status of the validation step.* `NotValidated` - The validation not started.* `Valid` - The step status marked as valid when respective step validation condition is successful.* `Invalid` - The step status marked as invalid when respective step validation condition is failed.* `InProgress` - The validation is in progress. 
+  + `step_name`:(string)(ReadOnly) The validation step name.* `OS Install Schema Validation` - The step to validate the CSV file schema.* `OS Image Validation` - The Operating System Image parameter validation step.* `SCU Image Validation` - The SCU Image parameter validation step.* `Configuration source and file validation` - The Configuration Source and Configuration file validation step.* `Server level data validation` - The server level parameters validation. 
+* `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)
 This complex property has following sub-properties:
@@ -173,14 +173,14 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `ref_mo`:(HashMap) -(Computed) A reference to the original Managed Object. 
+  + `ref_mo`:(HashMap) -(ReadOnly) A reference to the original Managed Object. 
 This complex property has following sub-properties:
     + `moid`:(string) The Moid of the referenced REST resource. 
     + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
     + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-  + `timestamp`:(string)(Computed) The time this versioned Managed Object was created. 
-  + `nr_version`:(string)(Computed) The version of the Managed Object, e.g. an incrementing number or a hash id. 
-  + `version_type`:(string)(Computed) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+  + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
+  + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
+  + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 
 
 ## Import

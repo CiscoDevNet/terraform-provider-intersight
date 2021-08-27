@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Cpu** | Pointer to **int64** | Number of CPUs allocated to virtual machine. | [optional] [default to 4]
 **DiskSize** | Pointer to **int64** | Ephemeral disk capacity to be provided with units example - 10Gi. | [optional] 
 **Memory** | Pointer to **int64** | Virtual machine memory defined in mebibytes (MiB). | [optional] [default to 16384]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]KubernetesVirtualMachineInfrastructureProviderRelationship**](KubernetesVirtualMachineInfrastructureProviderRelationship.md) | An array of relationships to kubernetesVirtualMachineInfrastructureProvider resources. | [optional] 
 
 ## Methods

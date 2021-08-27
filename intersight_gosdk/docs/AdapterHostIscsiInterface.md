@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **OperState** | Pointer to **string** | Operational State of Host ISCSI Interface. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability status of Host ISCSI Interface. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerPort Dn of Host ISCSI Interface. | [optional] [readonly] 
-**AdapterUnit** | Pointer to [**AdapterUnitRelationship**](adapter.Unit.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

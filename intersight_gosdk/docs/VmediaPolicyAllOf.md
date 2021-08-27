@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vmedia.Policy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vmedia.Policy"]
 **Enabled** | Pointer to **bool** | State of the Virtual Media service on the endpoint. | [optional] [default to true]
-**Encryption** | Pointer to **bool** | If enabled, allows encryption of all Virtual Media communications. | [optional] 
+**Encryption** | Pointer to **bool** | If enabled, allows encryption of all Virtual Media communications. | [optional] [default to true]
 **LowPowerUsb** | Pointer to **bool** | If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. | [optional] [default to true]
 **Mappings** | Pointer to [**[]VmediaMapping**](VmediaMapping.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods

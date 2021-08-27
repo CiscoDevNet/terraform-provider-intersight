@@ -146,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasConnectorPack**](iaas.ConnectorPack.md)
+[**IaasConnectorPack**](IaasConnectorPack.md)
 
 ### Authorization
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasConnectorPackResponse**](iaas.ConnectorPack.Response.md)
+[**IaasConnectorPackResponse**](IaasConnectorPackResponse.md)
 
 ### Authorization
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasDeviceStatus**](iaas.DeviceStatus.md)
+[**IaasDeviceStatus**](IaasDeviceStatus.md)
 
 ### Authorization
 
@@ -382,7 +382,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasDeviceStatusResponse**](iaas.DeviceStatus.Response.md)
+[**IaasDeviceStatusResponse**](IaasDeviceStatusResponse.md)
 
 ### Authorization
 
@@ -450,7 +450,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasDiagnosticMessages**](iaas.DiagnosticMessages.md)
+[**IaasDiagnosticMessages**](IaasDiagnosticMessages.md)
 
 ### Authorization
 
@@ -534,7 +534,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasDiagnosticMessagesResponse**](iaas.DiagnosticMessages.Response.md)
+[**IaasDiagnosticMessagesResponse**](IaasDiagnosticMessagesResponse.md)
 
 ### Authorization
 
@@ -602,7 +602,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasLicenseInfo**](iaas.LicenseInfo.md)
+[**IaasLicenseInfo**](IaasLicenseInfo.md)
 
 ### Authorization
 
@@ -686,7 +686,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasLicenseInfoResponse**](iaas.LicenseInfo.Response.md)
+[**IaasLicenseInfoResponse**](IaasLicenseInfoResponse.md)
 
 ### Authorization
 
@@ -754,7 +754,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasMostRunTasks**](iaas.MostRunTasks.md)
+[**IaasMostRunTasks**](IaasMostRunTasks.md)
 
 ### Authorization
 
@@ -838,7 +838,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasMostRunTasksResponse**](iaas.MostRunTasks.Response.md)
+[**IaasMostRunTasksResponse**](IaasMostRunTasksResponse.md)
 
 ### Authorization
 
@@ -906,7 +906,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasServiceRequest**](iaas.ServiceRequest.md)
+[**IaasServiceRequest**](IaasServiceRequest.md)
 
 ### Authorization
 
@@ -990,7 +990,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasServiceRequestResponse**](iaas.ServiceRequest.Response.md)
+[**IaasServiceRequestResponse**](IaasServiceRequestResponse.md)
 
 ### Authorization
 
@@ -1058,7 +1058,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdInfo**](iaas.UcsdInfo.md)
+[**IaasUcsdInfo**](IaasUcsdInfo.md)
 
 ### Authorization
 
@@ -1142,7 +1142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdInfoResponse**](iaas.UcsdInfo.Response.md)
+[**IaasUcsdInfoResponse**](IaasUcsdInfoResponse.md)
 
 ### Authorization
 
@@ -1210,7 +1210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdManagedInfra**](iaas.UcsdManagedInfra.md)
+[**IaasUcsdManagedInfra**](IaasUcsdManagedInfra.md)
 
 ### Authorization
 
@@ -1294,7 +1294,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdManagedInfraResponse**](iaas.UcsdManagedInfra.Response.md)
+[**IaasUcsdManagedInfraResponse**](IaasUcsdManagedInfraResponse.md)
 
 ### Authorization
 
@@ -1362,7 +1362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdMessages**](iaas.UcsdMessages.md)
+[**IaasUcsdMessages**](IaasUcsdMessages.md)
 
 ### Authorization
 
@@ -1446,7 +1446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdMessagesResponse**](iaas.UcsdMessages.Response.md)
+[**IaasUcsdMessagesResponse**](IaasUcsdMessagesResponse.md)
 
 ### Authorization
 
@@ -1518,7 +1518,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdInfo**](iaas.UcsdInfo.md)
+[**IaasUcsdInfo**](IaasUcsdInfo.md)
 
 ### Authorization
 
@@ -1590,7 +1590,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**IaasUcsdInfo**](iaas.UcsdInfo.md)
+[**IaasUcsdInfo**](IaasUcsdInfo.md)
 
 ### Authorization
 

@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.DataProtectionPeer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.DataProtectionPeer"]
-**Er** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
-**PeerInfo** | Pointer to [**NullableHyperflexReplicationPeerInfo**](hyperflex.ReplicationPeerInfo.md) |  | [optional] 
-**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
+**Er** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
+**PeerInfo** | Pointer to [**NullableHyperflexReplicationPeerInfo**](HyperflexReplicationPeerInfo.md) |  | [optional] 
+**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.Deployment"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.Deployment"]
 **DeploymentRefId** | Pointer to **string** | Identifies the consumption-based subscription&#39;s deployment. | [optional] [readonly] 
-**EndCustomer** | Pointer to [**NullableAssetCustomerInformation**](asset.CustomerInformation.md) |  | [optional] 
+**EndCustomer** | Pointer to [**NullableAssetCustomerInformation**](AssetCustomerInformation.md) |  | [optional] 
 **EndDate** | Pointer to **time.Time** | End Date for the consumption-based subscription&#39;s deployment. | [optional] [readonly] 
 **LicenseType** | Pointer to **string** | Active license tier for the purchased Cisco device&#39;s deployment. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
 **MlbOfferType** | Pointer to **string** | Identifier for consumption based pricing. MLB refers to MultiLine Bundle. | [optional] [readonly] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
 **Workloads** | Pointer to **[]string** |  | [optional] 
 **Devices** | Pointer to [**[]AssetDeploymentDeviceRelationship**](AssetDeploymentDeviceRelationship.md) | An array of relationships to assetDeploymentDevice resources. | [optional] [readonly] 
-**Subscription** | Pointer to [**AssetSubscriptionRelationship**](asset.Subscription.Relationship.md) |  | [optional] 
+**Subscription** | Pointer to [**AssetSubscriptionRelationship**](AssetSubscriptionRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ControllerId** | Pointer to **int64** | The id of the graphics controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The PCI address of the graphics controller. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The PCI slot information of the graphics controller. | [optional] [readonly] 
-**GraphicsCard** | Pointer to [**GraphicsCardRelationship**](graphics.Card.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**GraphicsCard** | Pointer to [**GraphicsCardRelationship**](GraphicsCardRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

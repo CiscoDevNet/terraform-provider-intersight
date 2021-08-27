@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.LocalDisk"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.LocalDisk"]
-**Bootloader** | Pointer to [**NullableBootBootloader**](boot.Bootloader.md) |  | [optional] 
-**Slot** | Pointer to **string** | The slot id of the local disk device. Supported values are (1-255, \&quot;M\&quot;, \&quot;HBA\&quot;, \&quot;SAS\&quot;, \&quot;RAID\&quot;, \&quot;MRAID\&quot;, \&quot;MRAID1\&quot;, \&quot;MRAID2\&quot;, \&quot;MSTOR-RAID\&quot;). | [optional] 
+**Bootloader** | Pointer to [**NullableBootBootloader**](BootBootloader.md) |  | [optional] 
+**Slot** | Pointer to **string** | The slot id of the local disk device. Supported values for Standalone Rack servers are (1-205, \&quot;M\&quot;, \&quot;HBA\&quot;, \&quot;SAS\&quot;, \&quot;RAID\&quot;, \&quot;MRAID\&quot;, \&quot;MRAID1\&quot;, \&quot;MRAID2\&quot;, \&quot;MSTOR-RAID\&quot;). Supported values for FI-attached servers are (1-205, \&quot;MRAID\&quot;, \&quot;FMEZZ1-SAS\&quot;, \&quot;MRAID1\&quot;, \&quot;MRAID2\&quot;, \&quot;MSTOR-RAID\&quot;, \&quot;MSTOR-RAID-1\&quot;, \&quot;MSTOR-RAID-2\&quot;). | [optional] 
 
 ## Methods
 

@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
 **AppStatuses** | Pointer to [**[]ApplianceAppStatusRelationship**](ApplianceAppStatusRelationship.md) | An array of relationships to applianceAppStatus resources. | [optional] [readonly] 
 **GroupStatuses** | Pointer to [**[]ApplianceGroupStatusRelationship**](ApplianceGroupStatusRelationship.md) | An array of relationships to applianceGroupStatus resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**SystemInfo** | Pointer to [**ApplianceSystemInfoRelationship**](appliance.SystemInfo.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**SystemInfo** | Pointer to [**ApplianceSystemInfoRelationship**](ApplianceSystemInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

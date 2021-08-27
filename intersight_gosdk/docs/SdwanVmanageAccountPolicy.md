@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Password** | Pointer to **string** | Local password for authenticating with the vManage server. | [optional] 
 **Port** | Pointer to **int64** | VManage Port number on which the application is running. | [optional] [default to 8443]
 **Username** | Pointer to **string** | Local username for authenticating with the vManage server. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]SdwanProfileRelationship**](SdwanProfileRelationship.md) | An array of relationships to sdwanProfile resources. | [optional] 
 
 ## Methods

@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **Mode** | Pointer to **string** | File mode of the disk  example - Filesystem, Block. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [readonly] [default to "Block"]
 **SourceFilePath** | Pointer to **string** | Source file path associated with virtual machine disk. | [optional] [readonly] 
 **SourceVirtualDisk** | Pointer to **string** | Virtual disk used for cloning new disk. | [optional] 
-**Status** | Pointer to [**NullableHyperflexDiskStatus**](hyperflex.DiskStatus.md) |  | [optional] 
+**Status** | Pointer to [**NullableHyperflexDiskStatus**](HyperflexDiskStatus.md) |  | [optional] 
 **Uuid** | Pointer to **string** | UUID of the virtual disk. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**HyperflexHxapVirtualMachineRelationship**](hyperflex.HxapVirtualMachine.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**HyperflexHxapVirtualMachineRelationship**](HyperflexHxapVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 

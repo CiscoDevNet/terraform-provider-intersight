@@ -18,10 +18,10 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The UCS Director status. Possible values are Active, Inactive, Unknown. | [optional] [readonly] 
 **ConnectorPack** | Pointer to [**[]IaasConnectorPackRelationship**](IaasConnectorPackRelationship.md) | An array of relationships to iaasConnectorPack resources. | [optional] [readonly] 
 **DeviceStatus** | Pointer to [**[]IaasDeviceStatusRelationship**](IaasDeviceStatusRelationship.md) | An array of relationships to iaasDeviceStatus resources. | [optional] [readonly] 
-**LicenseInfo** | Pointer to [**IaasLicenseInfoRelationship**](iaas.LicenseInfo.Relationship.md) |  | [optional] 
+**LicenseInfo** | Pointer to [**IaasLicenseInfoRelationship**](IaasLicenseInfoRelationship.md) |  | [optional] 
 **MostRunTasks** | Pointer to [**[]IaasMostRunTasksRelationship**](IaasMostRunTasksRelationship.md) | An array of relationships to iaasMostRunTasks resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**UcsdManagedInfra** | Pointer to [**IaasUcsdManagedInfraRelationship**](iaas.UcsdManagedInfra.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**UcsdManagedInfra** | Pointer to [**IaasUcsdManagedInfraRelationship**](IaasUcsdManagedInfraRelationship.md) |  | [optional] 
 
 ## Methods
 

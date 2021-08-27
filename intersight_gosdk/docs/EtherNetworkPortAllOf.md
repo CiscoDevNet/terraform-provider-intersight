@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] 
 **Speed** | Pointer to **string** | Network Port Speed of IO card or fabric extender. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
-**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](equipment.IoCardBase.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**EquipmentIoCardBase** | Pointer to [**EquipmentIoCardBaseRelationship**](EquipmentIoCardBaseRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

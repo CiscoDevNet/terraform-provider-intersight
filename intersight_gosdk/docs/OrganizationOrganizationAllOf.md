@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "organization.Organization"]
 **Description** | Pointer to **string** | The informative description about the usage of this organization. | [optional] 
 **Name** | Pointer to **string** | The name of the organization. There can be multiple organizations under an account. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **ResourceGroups** | Pointer to [**[]ResourceGroupRelationship**](ResourceGroupRelationship.md) | An array of relationships to resourceGroup resources. | [optional] 
 
 ## Methods

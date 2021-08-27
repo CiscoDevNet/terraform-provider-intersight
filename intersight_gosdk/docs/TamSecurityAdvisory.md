@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **TemporalScore** | Pointer to **float32** | CVSS version 3 temporal score for the security Advisory. | [optional] 
 **Version** | Pointer to **string** | Cisco assigned advisory version after latest revision. | [optional] 
 **Workaround** | Pointer to **string** | Workarounds available for the advisory. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

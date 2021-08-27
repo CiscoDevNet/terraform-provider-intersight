@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **GroupName** | Pointer to **string** | The name of group, which includes Identity Management, Device Connector Service, Core Service, Analytics, Internal and Appliance. | [optional] [readonly] 
 **OverallStatus** | Pointer to **string** | The overall API status from this group&#39;s applications. | [optional] [readonly] 
 **Apps** | Pointer to [**[]ApplianceAppStatusRelationship**](ApplianceAppStatusRelationship.md) | An array of relationships to applianceAppStatus resources. | [optional] [readonly] 
-**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](appliance.SystemStatus.Relationship.md) |  | [optional] 
+**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
 
 ## Methods
 

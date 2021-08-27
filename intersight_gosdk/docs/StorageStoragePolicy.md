@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.StoragePolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.StoragePolicy"]
-**GlobalHotSpares** | Pointer to [**[]StorageLocalDisk**](StorageLocalDisk.md) |  | [optional] 
-**RetainPolicyVirtualDrives** | Pointer to **bool** | Retains the virtual drives defined in policy if they exist already. If this flag is false, the existing virtual drives are removed and created again based on virtual drives in the policy. | [optional] [default to true]
-**UnusedDisksState** | Pointer to **string** | Unused Disks State is used to specify the state, unconfigured good or jbod, in which the disks that are not used in this policy should be moved. * &#x60;UnconfiguredGood&#x60; - Unconfigured good state -ready to be added in a RAID group. * &#x60;Jbod&#x60; - JBOD state where the disks start showing up to host os. | [optional] [default to "UnconfiguredGood"]
-**VirtualDrives** | Pointer to [**[]StorageVirtualDriveConfig**](StorageVirtualDriveConfig.md) |  | [optional] 
-**DiskGroupPolicies** | Pointer to [**[]StorageDiskGroupPolicyRelationship**](StorageDiskGroupPolicyRelationship.md) | An array of relationships to storageDiskGroupPolicy resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**GlobalHotSpares** | Pointer to **string** | A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen. | [optional] 
+**M2VirtualDrive** | Pointer to [**NullableStorageM2VirtualDriveConfig**](StorageM2VirtualDriveConfig.md) |  | [optional] 
+**Raid0Drive** | Pointer to [**NullableStorageR0Drive**](StorageR0Drive.md) |  | [optional] 
+**UnusedDisksState** | Pointer to **string** | State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state. * &#x60;NoChange&#x60; - Drive state will not be modified by Storage Policy. * &#x60;UnconfiguredGood&#x60; - Unconfigured good state -ready to be added in a RAID group. * &#x60;Jbod&#x60; - JBOD state where the disks start showing up to Host OS. | [optional] [default to "NoChange"]
+**UseJbodForVdCreation** | Pointer to **bool** | Disks in JBOD State are used to create virtual drives. | [optional] 
+**DriveGroup** | Pointer to [**[]StorageDriveGroupRelationship**](StorageDriveGroupRelationship.md) | An array of relationships to storageDriveGroup resources. | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -75,20 +76,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetGlobalHotSpares
 
-`func (o *StorageStoragePolicy) GetGlobalHotSpares() []StorageLocalDisk`
+`func (o *StorageStoragePolicy) GetGlobalHotSpares() string`
 
 GetGlobalHotSpares returns the GlobalHotSpares field if non-nil, zero value otherwise.
 
 ### GetGlobalHotSparesOk
 
-`func (o *StorageStoragePolicy) GetGlobalHotSparesOk() (*[]StorageLocalDisk, bool)`
+`func (o *StorageStoragePolicy) GetGlobalHotSparesOk() (*string, bool)`
 
 GetGlobalHotSparesOk returns a tuple with the GlobalHotSpares field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGlobalHotSpares
 
-`func (o *StorageStoragePolicy) SetGlobalHotSpares(v []StorageLocalDisk)`
+`func (o *StorageStoragePolicy) SetGlobalHotSpares(v string)`
 
 SetGlobalHotSpares sets GlobalHotSpares field to given value.
 
@@ -98,41 +99,76 @@ SetGlobalHotSpares sets GlobalHotSpares field to given value.
 
 HasGlobalHotSpares returns a boolean if a field has been set.
 
-### SetGlobalHotSparesNil
+### GetM2VirtualDrive
 
-`func (o *StorageStoragePolicy) SetGlobalHotSparesNil(b bool)`
+`func (o *StorageStoragePolicy) GetM2VirtualDrive() StorageM2VirtualDriveConfig`
 
- SetGlobalHotSparesNil sets the value for GlobalHotSpares to be an explicit nil
+GetM2VirtualDrive returns the M2VirtualDrive field if non-nil, zero value otherwise.
 
-### UnsetGlobalHotSpares
-`func (o *StorageStoragePolicy) UnsetGlobalHotSpares()`
+### GetM2VirtualDriveOk
 
-UnsetGlobalHotSpares ensures that no value is present for GlobalHotSpares, not even an explicit nil
-### GetRetainPolicyVirtualDrives
+`func (o *StorageStoragePolicy) GetM2VirtualDriveOk() (*StorageM2VirtualDriveConfig, bool)`
 
-`func (o *StorageStoragePolicy) GetRetainPolicyVirtualDrives() bool`
-
-GetRetainPolicyVirtualDrives returns the RetainPolicyVirtualDrives field if non-nil, zero value otherwise.
-
-### GetRetainPolicyVirtualDrivesOk
-
-`func (o *StorageStoragePolicy) GetRetainPolicyVirtualDrivesOk() (*bool, bool)`
-
-GetRetainPolicyVirtualDrivesOk returns a tuple with the RetainPolicyVirtualDrives field if it's non-nil, zero value otherwise
+GetM2VirtualDriveOk returns a tuple with the M2VirtualDrive field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRetainPolicyVirtualDrives
+### SetM2VirtualDrive
 
-`func (o *StorageStoragePolicy) SetRetainPolicyVirtualDrives(v bool)`
+`func (o *StorageStoragePolicy) SetM2VirtualDrive(v StorageM2VirtualDriveConfig)`
 
-SetRetainPolicyVirtualDrives sets RetainPolicyVirtualDrives field to given value.
+SetM2VirtualDrive sets M2VirtualDrive field to given value.
 
-### HasRetainPolicyVirtualDrives
+### HasM2VirtualDrive
 
-`func (o *StorageStoragePolicy) HasRetainPolicyVirtualDrives() bool`
+`func (o *StorageStoragePolicy) HasM2VirtualDrive() bool`
 
-HasRetainPolicyVirtualDrives returns a boolean if a field has been set.
+HasM2VirtualDrive returns a boolean if a field has been set.
 
+### SetM2VirtualDriveNil
+
+`func (o *StorageStoragePolicy) SetM2VirtualDriveNil(b bool)`
+
+ SetM2VirtualDriveNil sets the value for M2VirtualDrive to be an explicit nil
+
+### UnsetM2VirtualDrive
+`func (o *StorageStoragePolicy) UnsetM2VirtualDrive()`
+
+UnsetM2VirtualDrive ensures that no value is present for M2VirtualDrive, not even an explicit nil
+### GetRaid0Drive
+
+`func (o *StorageStoragePolicy) GetRaid0Drive() StorageR0Drive`
+
+GetRaid0Drive returns the Raid0Drive field if non-nil, zero value otherwise.
+
+### GetRaid0DriveOk
+
+`func (o *StorageStoragePolicy) GetRaid0DriveOk() (*StorageR0Drive, bool)`
+
+GetRaid0DriveOk returns a tuple with the Raid0Drive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRaid0Drive
+
+`func (o *StorageStoragePolicy) SetRaid0Drive(v StorageR0Drive)`
+
+SetRaid0Drive sets Raid0Drive field to given value.
+
+### HasRaid0Drive
+
+`func (o *StorageStoragePolicy) HasRaid0Drive() bool`
+
+HasRaid0Drive returns a boolean if a field has been set.
+
+### SetRaid0DriveNil
+
+`func (o *StorageStoragePolicy) SetRaid0DriveNil(b bool)`
+
+ SetRaid0DriveNil sets the value for Raid0Drive to be an explicit nil
+
+### UnsetRaid0Drive
+`func (o *StorageStoragePolicy) UnsetRaid0Drive()`
+
+UnsetRaid0Drive ensures that no value is present for Raid0Drive, not even an explicit nil
 ### GetUnusedDisksState
 
 `func (o *StorageStoragePolicy) GetUnusedDisksState() string`
@@ -158,76 +194,66 @@ SetUnusedDisksState sets UnusedDisksState field to given value.
 
 HasUnusedDisksState returns a boolean if a field has been set.
 
-### GetVirtualDrives
+### GetUseJbodForVdCreation
 
-`func (o *StorageStoragePolicy) GetVirtualDrives() []StorageVirtualDriveConfig`
+`func (o *StorageStoragePolicy) GetUseJbodForVdCreation() bool`
 
-GetVirtualDrives returns the VirtualDrives field if non-nil, zero value otherwise.
+GetUseJbodForVdCreation returns the UseJbodForVdCreation field if non-nil, zero value otherwise.
 
-### GetVirtualDrivesOk
+### GetUseJbodForVdCreationOk
 
-`func (o *StorageStoragePolicy) GetVirtualDrivesOk() (*[]StorageVirtualDriveConfig, bool)`
+`func (o *StorageStoragePolicy) GetUseJbodForVdCreationOk() (*bool, bool)`
 
-GetVirtualDrivesOk returns a tuple with the VirtualDrives field if it's non-nil, zero value otherwise
+GetUseJbodForVdCreationOk returns a tuple with the UseJbodForVdCreation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVirtualDrives
+### SetUseJbodForVdCreation
 
-`func (o *StorageStoragePolicy) SetVirtualDrives(v []StorageVirtualDriveConfig)`
+`func (o *StorageStoragePolicy) SetUseJbodForVdCreation(v bool)`
 
-SetVirtualDrives sets VirtualDrives field to given value.
+SetUseJbodForVdCreation sets UseJbodForVdCreation field to given value.
 
-### HasVirtualDrives
+### HasUseJbodForVdCreation
 
-`func (o *StorageStoragePolicy) HasVirtualDrives() bool`
+`func (o *StorageStoragePolicy) HasUseJbodForVdCreation() bool`
 
-HasVirtualDrives returns a boolean if a field has been set.
+HasUseJbodForVdCreation returns a boolean if a field has been set.
 
-### SetVirtualDrivesNil
+### GetDriveGroup
 
-`func (o *StorageStoragePolicy) SetVirtualDrivesNil(b bool)`
+`func (o *StorageStoragePolicy) GetDriveGroup() []StorageDriveGroupRelationship`
 
- SetVirtualDrivesNil sets the value for VirtualDrives to be an explicit nil
+GetDriveGroup returns the DriveGroup field if non-nil, zero value otherwise.
 
-### UnsetVirtualDrives
-`func (o *StorageStoragePolicy) UnsetVirtualDrives()`
+### GetDriveGroupOk
 
-UnsetVirtualDrives ensures that no value is present for VirtualDrives, not even an explicit nil
-### GetDiskGroupPolicies
+`func (o *StorageStoragePolicy) GetDriveGroupOk() (*[]StorageDriveGroupRelationship, bool)`
 
-`func (o *StorageStoragePolicy) GetDiskGroupPolicies() []StorageDiskGroupPolicyRelationship`
-
-GetDiskGroupPolicies returns the DiskGroupPolicies field if non-nil, zero value otherwise.
-
-### GetDiskGroupPoliciesOk
-
-`func (o *StorageStoragePolicy) GetDiskGroupPoliciesOk() (*[]StorageDiskGroupPolicyRelationship, bool)`
-
-GetDiskGroupPoliciesOk returns a tuple with the DiskGroupPolicies field if it's non-nil, zero value otherwise
+GetDriveGroupOk returns a tuple with the DriveGroup field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDiskGroupPolicies
+### SetDriveGroup
 
-`func (o *StorageStoragePolicy) SetDiskGroupPolicies(v []StorageDiskGroupPolicyRelationship)`
+`func (o *StorageStoragePolicy) SetDriveGroup(v []StorageDriveGroupRelationship)`
 
-SetDiskGroupPolicies sets DiskGroupPolicies field to given value.
+SetDriveGroup sets DriveGroup field to given value.
 
-### HasDiskGroupPolicies
+### HasDriveGroup
 
-`func (o *StorageStoragePolicy) HasDiskGroupPolicies() bool`
+`func (o *StorageStoragePolicy) HasDriveGroup() bool`
 
-HasDiskGroupPolicies returns a boolean if a field has been set.
+HasDriveGroup returns a boolean if a field has been set.
 
-### SetDiskGroupPoliciesNil
+### SetDriveGroupNil
 
-`func (o *StorageStoragePolicy) SetDiskGroupPoliciesNil(b bool)`
+`func (o *StorageStoragePolicy) SetDriveGroupNil(b bool)`
 
- SetDiskGroupPoliciesNil sets the value for DiskGroupPolicies to be an explicit nil
+ SetDriveGroupNil sets the value for DriveGroup to be an explicit nil
 
-### UnsetDiskGroupPolicies
-`func (o *StorageStoragePolicy) UnsetDiskGroupPolicies()`
+### UnsetDriveGroup
+`func (o *StorageStoragePolicy) UnsetDriveGroup()`
 
-UnsetDiskGroupPolicies ensures that no value is present for DiskGroupPolicies, not even an explicit nil
+UnsetDriveGroup ensures that no value is present for DriveGroup, not even an explicit nil
 ### GetOrganization
 
 `func (o *StorageStoragePolicy) GetOrganization() OrganizationOrganizationRelationship`

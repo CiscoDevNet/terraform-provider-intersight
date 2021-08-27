@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VmRestoreOperation"]
 **NewName** | Pointer to **string** | New name for the Virtual Machine after recovery. | [optional] 
 **PowerOn** | Pointer to **bool** | Power on the Virtual Machine after recovery. | [optional] [default to true]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**RestoreEdgeClusterMoid** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
-**VmBackupInfoMoid** | Pointer to [**HyperflexVmBackupInfoRelationship**](hyperflex.VmBackupInfo.Relationship.md) |  | [optional] 
-**VmSnapshotInfoMoid** | Pointer to [**HyperflexVmSnapshotInfoRelationship**](hyperflex.VmSnapshotInfo.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**RestoreEdgeClusterMoid** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**VmBackupInfoMoid** | Pointer to [**HyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
+**VmSnapshotInfoMoid** | Pointer to [**HyperflexVmSnapshotInfoRelationship**](HyperflexVmSnapshotInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

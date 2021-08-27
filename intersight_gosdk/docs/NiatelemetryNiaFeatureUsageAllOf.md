@@ -85,7 +85,7 @@ Name | Type | Description | Notes
 **SharedL3OutCount** | Pointer to **int64** | SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made. | [optional] 
 **SmartCallHome** | Pointer to **string** | Smart callhome feature usage. This determines if this feature is being enabled or disabled. | [optional] 
-**SmartLicense** | Pointer to [**NullableNiatelemetrySmartLicense**](niatelemetry.SmartLicense.md) |  | [optional] 
+**SmartLicense** | Pointer to [**NullableNiatelemetrySmartLicense**](NiatelemetrySmartLicense.md) |  | [optional] 
 **SnapshotCount** | Pointer to **int64** | Returns count of snapshots. | [optional] 
 **Snmp** | Pointer to **string** | SNMP feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **SnmpCommunityAccessCount** | Pointer to **int64** | Returns count of SNMP Community Access. | [optional] 
@@ -114,7 +114,7 @@ Name | Type | Description | Notes
 **VnsmDevCount** | Pointer to **int64** | Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model. | [optional] 
 **VpodCount** | Pointer to **int64** | Virtual pod feature usage. This determines the total number of virtual POD configurations in the fabrics. | [optional] 
 **WebtokenTimeoutSeconds** | Pointer to **int64** | Timeout for web token in seconds. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

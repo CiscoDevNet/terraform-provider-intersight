@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Changes** | Pointer to **[]string** |  | [optional] 
-**ConfigChangeContext** | Pointer to [**NullablePolicyConfigResultContext**](policy.ConfigResultContext.md) |  | [optional] 
+**ConfigChangeContext** | Pointer to [**NullablePolicyConfigResultContext**](PolicyConfigResultContext.md) |  | [optional] 
 **ConfigChangeFlag** | Pointer to **string** | Config change flag to differentiate Pending-changes and Config-drift. * &#x60;Pending-changes&#x60; - Config change flag represents changes are due to not deployed changes from Intersight. * &#x60;Drift-changes&#x60; - Config change flag represents changes are due to endpoint configuration changes. | [optional] [default to "Pending-changes"]
 **Disruptions** | Pointer to **[]string** |  | [optional] 
 **Message** | Pointer to **string** | Detailed description of the config change. | [optional] 

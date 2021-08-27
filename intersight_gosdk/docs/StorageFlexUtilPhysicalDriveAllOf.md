@@ -24,9 +24,9 @@ Name | Type | Description | Notes
 **WriteEnabled** | Pointer to **string** | Write access state of the FlexUtil Physical Drive. | [optional] 
 **WriteErrorCount** | Pointer to **string** | Write error count of the FlexUtil Physical Drive. | [optional] 
 **WriteErrorThreshold** | Pointer to **string** | Write error threshold for FlexUtil Physical Drive. | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**StorageFlexUtilController** | Pointer to [**StorageFlexUtilControllerRelationship**](storage.FlexUtilController.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageFlexUtilController** | Pointer to [**StorageFlexUtilControllerRelationship**](StorageFlexUtilControllerRelationship.md) |  | [optional] 
 
 ## Methods
 

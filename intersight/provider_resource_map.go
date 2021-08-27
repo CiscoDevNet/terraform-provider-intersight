@@ -232,7 +232,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_softwarerepository_release":                              resourceSoftwarerepositoryRelease(),
 		"intersight_sol_policy":                                              resourceSolPolicy(),
 		"intersight_ssh_policy":                                              resourceSshPolicy(),
-		"intersight_storage_disk_group_policy":                               resourceStorageDiskGroupPolicy(),
+		"intersight_storage_drive_group":                                     resourceStorageDriveGroup(),
 		"intersight_storage_storage_policy":                                  resourceStorageStoragePolicy(),
 		"intersight_syslog_policy":                                           resourceSyslogPolicy(),
 		"intersight_tam_advisory_count":                                      resourceTamAdvisoryCount(),

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **NumUsers** | Pointer to **int64** | The number of users in this organization. | [optional] [readonly] 
 **RunCeiling** | Pointer to **int64** | The max number of simultaneous runs allowed in this organization. | [optional] [readonly] 
 **VcsProviders** | Pointer to **int64** | Total number of VCS providers in the organization. | [optional] [readonly] 
-**Target** | Pointer to [**AssetTargetRelationship**](asset.Target.Relationship.md) |  | [optional] 
+**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 

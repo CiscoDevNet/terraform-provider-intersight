@@ -19,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the volume. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `kubernetes_cluster_name`:(string) The name of the kubernetes cluster to which the volume is associated. 
 * `last_modified_time`:(string) Last modified time as UTC of the volume. 
 * `lun_uuid`:(string) UUID of LUN associated with the volume. 
 * `mod_time`:(string) The time when this managed object was last modified. 
@@ -30,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
 * `uuid`:(string) The unique identifier for this volume. 
 * `volume_access_mode`:(string) Access Mode of the volume.* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.* `` - Unknown disk access mode. 
+* `volume_create_time`:(string) Volume creation time in UTC. 
 * `volume_mode`:(string) The mode of the HyperFlex volume.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk.* `` - Disk mode is either unknown or not supported. 
 * `volume_type`:(string) The type of the HyperFlex volume. 
  

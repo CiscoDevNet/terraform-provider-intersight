@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | The current state of a NetApp volume. * &#x60;offline&#x60; - Read and write access to the volume is not allowed. * &#x60;online&#x60; - Read and write access to the volume is allowed. * &#x60;error&#x60; - Storage volume state of error type. * &#x60;mixed&#x60; - The constituents of a FlexGroup volume are not all in the same state. | [optional] [readonly] [default to "offline"]
 **Type** | Pointer to **string** | NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache. * &#x60;data-protection&#x60; - Prevents modification of the data on the Volume. * &#x60;read-write&#x60; - Data on the Volume can be modified. * &#x60;load-sharing&#x60; - Load Sharing. | [optional] [readonly] [default to "data-protection"]
 **Uuid** | Pointer to **string** | UUID of NetApp Volume. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](storage.NetAppCluster.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
-**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](storage.NetAppStorageVm.Relationship.md) |  | [optional] 
+**Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
 

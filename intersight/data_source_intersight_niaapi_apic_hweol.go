@@ -2,6 +2,7 @@ package intersight
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"reflect"
@@ -14,393 +15,322 @@ import (
 )
 
 func dataSourceNiaapiApicHweol() *schema.Resource {
-	return &schema.Resource{
-		ReadContext: dataSourceNiaapiApicHweolRead,
-		Schema: map[string]*schema.Schema{
-			"account_moid": {
-				Description: "The Account ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"affected_pids": {
-				Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"announcement_date": {
-				Description: "When this notice is announced.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"announcement_date_epoch": {
-				Description: "Epoch time of Announcement Date.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"bulletin_no": {
-				Description: "The bulletinno of this hardware end of life notice.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"create_time": {
-				Description: "The time when this managed object was created.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"description": {
-				Description: "The description of this hardware end of life notice.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"domain_group_moid": {
-				Description: "The DomainGroup ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"endof_new_service_attachment_date": {
-				Description: "Date time of end of new services attachment  .",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_new_service_attachment_date_epoch": {
-				Description: "Epoch time of New service attachment Date .",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"endof_routine_failure_analysis_date": {
-				Description: "Date time of end of routinefailure analysis.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_routine_failure_analysis_date_epoch": {
-				Description: "Epoch time of End of Routine Failure Analysis Date.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"endof_sale_date": {
-				Description: "When this hardware will end sale.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_sale_date_epoch": {
-				Description: "Epoch time of End of Sale Date.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"endof_security_support": {
-				Description: "Date time of end of security support .",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_security_support_epoch": {
-				Description: "Epoch time of End of Security Support Date .",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"endof_service_contract_renewal_date": {
-				Description: "Date time of end of service contract renew .",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_service_contract_renewal_date_epoch": {
-				Description: "Epoch time of End of Renewal service contract.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"endof_sw_maintenance_date": {
-				Description: "The date of end of maintainance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"endof_sw_maintenance_date_epoch": {
-				Description: "Epoch time of End of maintenance Date.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"hardware_eol_url": {
-				Description: "Hardware end of sale URL link to the notice webpage.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"headline": {
-				Description: "The title of this hardware end of life notice.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"last_dateof_support": {
-				Description: "Date time of end of support .",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"last_dateof_support_epoch": {
-				Description: "Epoch time of last date of support .",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"last_ship_date": {
-				Description: "Date time of Lastship Date.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"last_ship_date_epoch": {
-				Description: "Epoch time of last ship Date.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"migration_url": {
-				Description: "The URL of this migration notice.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"mod_time": {
-				Description: "The time when this managed object was last modified.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"moid": {
-				Description: "The unique identifier of this Managed Object instance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"shared_scope": {
-				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"results": {
-				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
-					Description: "The Account ID for this managed object.",
-					Type:        schema.TypeString,
-					Optional:    true,
-					Computed:    true,
-				},
+	var subSchema = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"affected_pids": {
+			Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
-					"affected_pids": {
-						Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"ancestors": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"announcement_date": {
-						Description: "When this notice is announced.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"announcement_date_epoch": {
-						Description: "Epoch time of Announcement Date.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"bulletin_no": {
-						Description: "The bulletinno of this hardware end of life notice.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
 					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
-					},
-					"create_time": {
-						Description: "The time when this managed object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"description": {
-						Description: "The description of this hardware end of life notice.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"domain_group_moid": {
-						Description: "The DomainGroup ID for this managed object.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"endof_new_service_attachment_date": {
-						Description: "Date time of end of new services attachment  .",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_new_service_attachment_date_epoch": {
-						Description: "Epoch time of New service attachment Date .",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"endof_routine_failure_analysis_date": {
-						Description: "Date time of end of routinefailure analysis.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_routine_failure_analysis_date_epoch": {
-						Description: "Epoch time of End of Routine Failure Analysis Date.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"endof_sale_date": {
-						Description: "When this hardware will end sale.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_sale_date_epoch": {
-						Description: "Epoch time of End of Sale Date.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"endof_security_support": {
-						Description: "Date time of end of security support .",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_security_support_epoch": {
-						Description: "Epoch time of End of Security Support Date .",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"endof_service_contract_renewal_date": {
-						Description: "Date time of end of service contract renew .",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_service_contract_renewal_date_epoch": {
-						Description: "Epoch time of End of Renewal service contract.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"endof_sw_maintenance_date": {
-						Description: "The date of end of maintainance.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"endof_sw_maintenance_date_epoch": {
-						Description: "Epoch time of End of maintenance Date.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"hardware_eol_url": {
-						Description: "Hardware end of sale URL link to the notice webpage.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"headline": {
-						Description: "The title of this hardware end of life notice.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"last_dateof_support": {
-						Description: "Date time of end of support .",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"last_dateof_support_epoch": {
-						Description: "Epoch time of last date of support .",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"last_ship_date": {
-						Description: "Date time of Lastship Date.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"last_ship_date_epoch": {
-						Description: "Epoch time of last ship Date.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"migration_url": {
-						Description: "The URL of this migration notice.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"mod_time": {
-						Description: "The time when this managed object was last modified.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
 					},
 					"moid": {
-						Description: "The unique identifier of this Managed Object instance.",
+						Description: "The Moid of the referenced REST resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
 					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"owners": {
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"announcement_date": {
+			Description: "When this notice is announced.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"announcement_date_epoch": {
+			Description: "Epoch time of Announcement Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"bulletin_no": {
+			Description: "The bulletinno of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "The description of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_new_service_attachment_date": {
+			Description: "Date time of end of new services attachment  .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_new_service_attachment_date_epoch": {
+			Description: "Epoch time of New service attachment Date .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_routine_failure_analysis_date": {
+			Description: "Date time of end of routinefailure analysis.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_routine_failure_analysis_date_epoch": {
+			Description: "Epoch time of End of Routine Failure Analysis Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_sale_date": {
+			Description: "When this hardware will end sale.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_sale_date_epoch": {
+			Description: "Epoch time of End of Sale Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_security_support": {
+			Description: "Date time of end of security support .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_security_support_epoch": {
+			Description: "Epoch time of End of Security Support Date .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_service_contract_renewal_date": {
+			Description: "Date time of end of service contract renew .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_service_contract_renewal_date_epoch": {
+			Description: "Epoch time of End of Renewal service contract.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_sw_maintenance_date": {
+			Description: "The date of end of maintainance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_sw_maintenance_date_epoch": {
+			Description: "Epoch time of End of maintenance Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"hardware_eol_url": {
+			Description: "Hardware end of sale URL link to the notice webpage.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"headline": {
+			Description: "The title of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_dateof_support": {
+			Description: "Date time of end of support .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_dateof_support_epoch": {
+			Description: "Epoch time of last date of support .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"last_ship_date": {
+			Description: "Date time of Lastship Date.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_ship_date_epoch": {
+			Description: "Epoch time of last ship Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"migration_url": {
+			Description: "The URL of this migration notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
 						Type:     schema.TypeList,
 						Optional: true,
-						Computed: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"parent": {
-						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
 								"additional_properties": {
@@ -417,13 +347,11 @@ func dataSourceNiaapiApicHweol() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -433,11 +361,16 @@ func dataSourceNiaapiApicHweol() *schema.Resource {
 							},
 						},
 					},
-					"permission_resources": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
 								"additional_properties": {
@@ -454,13 +387,11 @@ func dataSourceNiaapiApicHweol() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -470,158 +401,438 @@ func dataSourceNiaapiApicHweol() *schema.Resource {
 							},
 						},
 					},
-					"shared_scope": {
-						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"tags": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"key": {
-									Description: "The string representation of a tag key.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"value": {
-									Description: "The string representation of a tag value.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"version_context": {
-						Description: "The versioning info for this managed object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"interested_mos": {
-									Type:     schema.TypeList,
-									Optional: true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"ref_mo": {
-									Description: "A reference to the original Managed Object.",
-									Type:        schema.TypeList,
-									MaxItems:    1,
-									Optional:    true,
-									Computed:    true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-								},
-								"timestamp": {
-									Description: "The time this versioned Managed Object was created.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"nr_version": {
-									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"version_type": {
-									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-							},
-						},
 					},
-				}},
-				Computed: true,
-			}},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 	}
+	var model = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"affected_pids": {
+			Description: "String contains the PID of hardwares affected by this notice, seperated by comma.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"announcement_date": {
+			Description: "When this notice is announced.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"announcement_date_epoch": {
+			Description: "Epoch time of Announcement Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"bulletin_no": {
+			Description: "The bulletinno of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "The description of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_new_service_attachment_date": {
+			Description: "Date time of end of new services attachment  .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_new_service_attachment_date_epoch": {
+			Description: "Epoch time of New service attachment Date .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_routine_failure_analysis_date": {
+			Description: "Date time of end of routinefailure analysis.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_routine_failure_analysis_date_epoch": {
+			Description: "Epoch time of End of Routine Failure Analysis Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_sale_date": {
+			Description: "When this hardware will end sale.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_sale_date_epoch": {
+			Description: "Epoch time of End of Sale Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_security_support": {
+			Description: "Date time of end of security support .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_security_support_epoch": {
+			Description: "Epoch time of End of Security Support Date .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_service_contract_renewal_date": {
+			Description: "Date time of end of service contract renew .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_service_contract_renewal_date_epoch": {
+			Description: "Epoch time of End of Renewal service contract.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"endof_sw_maintenance_date": {
+			Description: "The date of end of maintainance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"endof_sw_maintenance_date_epoch": {
+			Description: "Epoch time of End of maintenance Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"hardware_eol_url": {
+			Description: "Hardware end of sale URL link to the notice webpage.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"headline": {
+			Description: "The title of this hardware end of life notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_dateof_support": {
+			Description: "Date time of end of support .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_dateof_support_epoch": {
+			Description: "Epoch time of last date of support .",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"last_ship_date": {
+			Description: "Date time of Lastship Date.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"last_ship_date_epoch": {
+			Description: "Epoch time of last ship Date.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"migration_url": {
+			Description: "The URL of this migration notice.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+	}
+	model["results"] = &schema.Schema{
+		Type:     schema.TypeList,
+		Elem:     &schema.Resource{Schema: subSchema},
+		Computed: true,
+	}
+	return &schema.Resource{
+		ReadContext: dataSourceNiaapiApicHweolRead,
+		Schema:      model}
 }
 
 func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -630,6 +841,453 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiaapiApicHweol{}
+	if _, ok := d.GetOk("account_moid"); ok {
+		v := d.Get("account_moid")
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
+	if _, ok := d.GetOk("additional_properties"); ok {
+		v := d.Get("additional_properties")
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if _, ok := d.GetOk("affected_pids"); ok {
+		v := d.Get("affected_pids")
+		x := (v.(string))
+		o.SetAffectedPids(x)
+	}
+
+	if _, ok := d.GetOk("ancestors"); ok {
+		v := d.Get("ancestors")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetAncestors(x)
+	}
+
+	if _, ok := d.GetOk("announcement_date"); ok {
+		v := d.Get("announcement_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetAnnouncementDate(x)
+	}
+
+	if _, ok := d.GetOk("announcement_date_epoch"); ok {
+		v := d.Get("announcement_date_epoch")
+		x := int64(v.(int))
+		o.SetAnnouncementDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("bulletin_no"); ok {
+		v := d.Get("bulletin_no")
+		x := (v.(string))
+		o.SetBulletinNo(x)
+	}
+
+	if _, ok := d.GetOk("class_id"); ok {
+		v := d.Get("class_id")
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if _, ok := d.GetOk("create_time"); ok {
+		v := d.Get("create_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
+	if _, ok := d.GetOk("description"); ok {
+		v := d.Get("description")
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
+	if _, ok := d.GetOk("domain_group_moid"); ok {
+		v := d.Get("domain_group_moid")
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
+	if _, ok := d.GetOk("endof_new_service_attachment_date"); ok {
+		v := d.Get("endof_new_service_attachment_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofNewServiceAttachmentDate(x)
+	}
+
+	if _, ok := d.GetOk("endof_new_service_attachment_date_epoch"); ok {
+		v := d.Get("endof_new_service_attachment_date_epoch")
+		x := int64(v.(int))
+		o.SetEndofNewServiceAttachmentDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("endof_routine_failure_analysis_date"); ok {
+		v := d.Get("endof_routine_failure_analysis_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofRoutineFailureAnalysisDate(x)
+	}
+
+	if _, ok := d.GetOk("endof_routine_failure_analysis_date_epoch"); ok {
+		v := d.Get("endof_routine_failure_analysis_date_epoch")
+		x := int64(v.(int))
+		o.SetEndofRoutineFailureAnalysisDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("endof_sale_date"); ok {
+		v := d.Get("endof_sale_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofSaleDate(x)
+	}
+
+	if _, ok := d.GetOk("endof_sale_date_epoch"); ok {
+		v := d.Get("endof_sale_date_epoch")
+		x := int64(v.(int))
+		o.SetEndofSaleDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("endof_security_support"); ok {
+		v := d.Get("endof_security_support")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofSecuritySupport(x)
+	}
+
+	if _, ok := d.GetOk("endof_security_support_epoch"); ok {
+		v := d.Get("endof_security_support_epoch")
+		x := int64(v.(int))
+		o.SetEndofSecuritySupportEpoch(x)
+	}
+
+	if _, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
+		v := d.Get("endof_service_contract_renewal_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofServiceContractRenewalDate(x)
+	}
+
+	if _, ok := d.GetOk("endof_service_contract_renewal_date_epoch"); ok {
+		v := d.Get("endof_service_contract_renewal_date_epoch")
+		x := int64(v.(int))
+		o.SetEndofServiceContractRenewalDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("endof_sw_maintenance_date"); ok {
+		v := d.Get("endof_sw_maintenance_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetEndofSwMaintenanceDate(x)
+	}
+
+	if _, ok := d.GetOk("endof_sw_maintenance_date_epoch"); ok {
+		v := d.Get("endof_sw_maintenance_date_epoch")
+		x := int64(v.(int))
+		o.SetEndofSwMaintenanceDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("hardware_eol_url"); ok {
+		v := d.Get("hardware_eol_url")
+		x := (v.(string))
+		o.SetHardwareEolUrl(x)
+	}
+
+	if _, ok := d.GetOk("headline"); ok {
+		v := d.Get("headline")
+		x := (v.(string))
+		o.SetHeadline(x)
+	}
+
+	if _, ok := d.GetOk("last_dateof_support"); ok {
+		v := d.Get("last_dateof_support")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastDateofSupport(x)
+	}
+
+	if _, ok := d.GetOk("last_dateof_support_epoch"); ok {
+		v := d.Get("last_dateof_support_epoch")
+		x := int64(v.(int))
+		o.SetLastDateofSupportEpoch(x)
+	}
+
+	if _, ok := d.GetOk("last_ship_date"); ok {
+		v := d.Get("last_ship_date")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastShipDate(x)
+	}
+
+	if _, ok := d.GetOk("last_ship_date_epoch"); ok {
+		v := d.Get("last_ship_date_epoch")
+		x := int64(v.(int))
+		o.SetLastShipDateEpoch(x)
+	}
+
+	if _, ok := d.GetOk("migration_url"); ok {
+		v := d.Get("migration_url")
+		x := (v.(string))
+		o.SetMigrationUrl(x)
+	}
+
+	if _, ok := d.GetOk("mod_time"); ok {
+		v := d.Get("mod_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
+
+	if _, ok := d.GetOk("moid"); ok {
+		v := d.Get("moid")
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if _, ok := d.GetOk("object_type"); ok {
+		v := d.Get("object_type")
+		x := (v.(string))
+		o.SetObjectType(x)
+	}
+
+	if _, ok := d.GetOk("owners"); ok {
+		v := d.Get("owners")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetOwners(x)
+	}
+
+	if _, ok := d.GetOk("parent"); ok {
+		v := d.Get("parent")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if _, ok := d.GetOk("permission_resources"); ok {
+		v := d.Get("permission_resources")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetPermissionResources(x)
+	}
+
+	if _, ok := d.GetOk("shared_scope"); ok {
+		v := d.Get("shared_scope")
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
+
+	if _, ok := d.GetOk("tags"); ok {
+		v := d.Get("tags")
+		x := make([]models.MoTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["key"]; ok {
+				{
+					x := (v.(string))
+					o.SetKey(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTags(x)
+	}
+
+	if _, ok := d.GetOk("version_context"); ok {
+		v := d.Get("version_context")
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoVersionContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The having filter type. | 
-**Filter** | [**TelemetryDruidFilter**](telemetry.DruidFilter.md) |  | 
+**Filter** | [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 
 ## Methods
 

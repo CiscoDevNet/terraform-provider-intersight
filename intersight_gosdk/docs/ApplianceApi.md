@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAutoRmaPolicy**](appliance.AutoRmaPolicy.md)
+[**ApplianceAutoRmaPolicy**](ApplianceAutoRmaPolicy.md)
 
 ### Authorization
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackup**](appliance.Backup.md)
+[**ApplianceBackup**](ApplianceBackup.md)
 
 ### Authorization
 
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupPolicy**](appliance.BackupPolicy.md)
+[**ApplianceBackupPolicy**](ApplianceBackupPolicy.md)
 
 ### Authorization
 
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDataExportPolicy**](appliance.DataExportPolicy.md)
+[**ApplianceDataExportPolicy**](ApplianceDataExportPolicy.md)
 
 ### Authorization
 
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceClaim**](appliance.DeviceClaim.md)
+[**ApplianceDeviceClaim**](ApplianceDeviceClaim.md)
 
 ### Authorization
 
@@ -475,7 +475,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDiagSetting**](appliance.DiagSetting.md)
+[**ApplianceDiagSetting**](ApplianceDiagSetting.md)
 
 ### Authorization
 
@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRemoteFileImport**](appliance.RemoteFileImport.md)
+[**ApplianceRemoteFileImport**](ApplianceRemoteFileImport.md)
 
 ### Authorization
 
@@ -611,7 +611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRestore**](appliance.Restore.md)
+[**ApplianceRestore**](ApplianceRestore.md)
 
 ### Authorization
 
@@ -811,7 +811,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAppStatus**](appliance.AppStatus.md)
+[**ApplianceAppStatus**](ApplianceAppStatus.md)
 
 ### Authorization
 
@@ -895,7 +895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAppStatusResponse**](appliance.AppStatus.Response.md)
+[**ApplianceAppStatusResponse**](ApplianceAppStatusResponse.md)
 
 ### Authorization
 
@@ -963,7 +963,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAutoRmaPolicy**](appliance.AutoRmaPolicy.md)
+[**ApplianceAutoRmaPolicy**](ApplianceAutoRmaPolicy.md)
 
 ### Authorization
 
@@ -1047,7 +1047,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAutoRmaPolicyResponse**](appliance.AutoRmaPolicy.Response.md)
+[**ApplianceAutoRmaPolicyResponse**](ApplianceAutoRmaPolicyResponse.md)
 
 ### Authorization
 
@@ -1115,7 +1115,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackup**](appliance.Backup.md)
+[**ApplianceBackup**](ApplianceBackup.md)
 
 ### Authorization
 
@@ -1199,7 +1199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupResponse**](appliance.Backup.Response.md)
+[**ApplianceBackupResponse**](ApplianceBackupResponse.md)
 
 ### Authorization
 
@@ -1267,7 +1267,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupPolicy**](appliance.BackupPolicy.md)
+[**ApplianceBackupPolicy**](ApplianceBackupPolicy.md)
 
 ### Authorization
 
@@ -1351,7 +1351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupPolicyResponse**](appliance.BackupPolicy.Response.md)
+[**ApplianceBackupPolicyResponse**](ApplianceBackupPolicyResponse.md)
 
 ### Authorization
 
@@ -1419,7 +1419,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceCertificateSetting**](appliance.CertificateSetting.md)
+[**ApplianceCertificateSetting**](ApplianceCertificateSetting.md)
 
 ### Authorization
 
@@ -1503,7 +1503,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceCertificateSettingResponse**](appliance.CertificateSetting.Response.md)
+[**ApplianceCertificateSettingResponse**](ApplianceCertificateSettingResponse.md)
 
 ### Authorization
 
@@ -1571,7 +1571,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDataExportPolicy**](appliance.DataExportPolicy.md)
+[**ApplianceDataExportPolicy**](ApplianceDataExportPolicy.md)
 
 ### Authorization
 
@@ -1655,7 +1655,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDataExportPolicyResponse**](appliance.DataExportPolicy.Response.md)
+[**ApplianceDataExportPolicyResponse**](ApplianceDataExportPolicyResponse.md)
 
 ### Authorization
 
@@ -1723,7 +1723,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceCertificate**](appliance.DeviceCertificate.md)
+[**ApplianceDeviceCertificate**](ApplianceDeviceCertificate.md)
 
 ### Authorization
 
@@ -1807,7 +1807,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceCertificateResponse**](appliance.DeviceCertificate.Response.md)
+[**ApplianceDeviceCertificateResponse**](ApplianceDeviceCertificateResponse.md)
 
 ### Authorization
 
@@ -1875,7 +1875,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceClaim**](appliance.DeviceClaim.md)
+[**ApplianceDeviceClaim**](ApplianceDeviceClaim.md)
 
 ### Authorization
 
@@ -1959,7 +1959,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceClaimResponse**](appliance.DeviceClaim.Response.md)
+[**ApplianceDeviceClaimResponse**](ApplianceDeviceClaimResponse.md)
 
 ### Authorization
 
@@ -2027,7 +2027,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDiagSetting**](appliance.DiagSetting.md)
+[**ApplianceDiagSetting**](ApplianceDiagSetting.md)
 
 ### Authorization
 
@@ -2111,7 +2111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDiagSettingResponse**](appliance.DiagSetting.Response.md)
+[**ApplianceDiagSettingResponse**](ApplianceDiagSettingResponse.md)
 
 ### Authorization
 
@@ -2179,7 +2179,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceExternalSyslogSetting**](appliance.ExternalSyslogSetting.md)
+[**ApplianceExternalSyslogSetting**](ApplianceExternalSyslogSetting.md)
 
 ### Authorization
 
@@ -2263,7 +2263,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceExternalSyslogSettingResponse**](appliance.ExternalSyslogSetting.Response.md)
+[**ApplianceExternalSyslogSettingResponse**](ApplianceExternalSyslogSettingResponse.md)
 
 ### Authorization
 
@@ -2331,7 +2331,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceFileSystemStatus**](appliance.FileSystemStatus.md)
+[**ApplianceFileSystemStatus**](ApplianceFileSystemStatus.md)
 
 ### Authorization
 
@@ -2415,7 +2415,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceFileSystemStatusResponse**](appliance.FileSystemStatus.Response.md)
+[**ApplianceFileSystemStatusResponse**](ApplianceFileSystemStatusResponse.md)
 
 ### Authorization
 
@@ -2483,7 +2483,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceGroupStatus**](appliance.GroupStatus.md)
+[**ApplianceGroupStatus**](ApplianceGroupStatus.md)
 
 ### Authorization
 
@@ -2567,7 +2567,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceGroupStatusResponse**](appliance.GroupStatus.Response.md)
+[**ApplianceGroupStatusResponse**](ApplianceGroupStatusResponse.md)
 
 ### Authorization
 
@@ -2635,7 +2635,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceImageBundle**](appliance.ImageBundle.md)
+[**ApplianceImageBundle**](ApplianceImageBundle.md)
 
 ### Authorization
 
@@ -2719,7 +2719,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceImageBundleResponse**](appliance.ImageBundle.Response.md)
+[**ApplianceImageBundleResponse**](ApplianceImageBundleResponse.md)
 
 ### Authorization
 
@@ -2787,7 +2787,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceNodeInfo**](appliance.NodeInfo.md)
+[**ApplianceNodeInfo**](ApplianceNodeInfo.md)
 
 ### Authorization
 
@@ -2871,7 +2871,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceNodeInfoResponse**](appliance.NodeInfo.Response.md)
+[**ApplianceNodeInfoResponse**](ApplianceNodeInfoResponse.md)
 
 ### Authorization
 
@@ -2939,7 +2939,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceNodeStatus**](appliance.NodeStatus.md)
+[**ApplianceNodeStatus**](ApplianceNodeStatus.md)
 
 ### Authorization
 
@@ -3023,7 +3023,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceNodeStatusResponse**](appliance.NodeStatus.Response.md)
+[**ApplianceNodeStatusResponse**](ApplianceNodeStatusResponse.md)
 
 ### Authorization
 
@@ -3091,7 +3091,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceReleaseNote**](appliance.ReleaseNote.md)
+[**ApplianceReleaseNote**](ApplianceReleaseNote.md)
 
 ### Authorization
 
@@ -3175,7 +3175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceReleaseNoteResponse**](appliance.ReleaseNote.Response.md)
+[**ApplianceReleaseNoteResponse**](ApplianceReleaseNoteResponse.md)
 
 ### Authorization
 
@@ -3243,7 +3243,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRemoteFileImport**](appliance.RemoteFileImport.md)
+[**ApplianceRemoteFileImport**](ApplianceRemoteFileImport.md)
 
 ### Authorization
 
@@ -3327,7 +3327,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRemoteFileImportResponse**](appliance.RemoteFileImport.Response.md)
+[**ApplianceRemoteFileImportResponse**](ApplianceRemoteFileImportResponse.md)
 
 ### Authorization
 
@@ -3395,7 +3395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRestore**](appliance.Restore.md)
+[**ApplianceRestore**](ApplianceRestore.md)
 
 ### Authorization
 
@@ -3479,7 +3479,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceRestoreResponse**](appliance.Restore.Response.md)
+[**ApplianceRestoreResponse**](ApplianceRestoreResponse.md)
 
 ### Authorization
 
@@ -3547,7 +3547,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSetupInfo**](appliance.SetupInfo.md)
+[**ApplianceSetupInfo**](ApplianceSetupInfo.md)
 
 ### Authorization
 
@@ -3631,7 +3631,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSetupInfoResponse**](appliance.SetupInfo.Response.md)
+[**ApplianceSetupInfoResponse**](ApplianceSetupInfoResponse.md)
 
 ### Authorization
 
@@ -3699,7 +3699,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSystemInfo**](appliance.SystemInfo.md)
+[**ApplianceSystemInfo**](ApplianceSystemInfo.md)
 
 ### Authorization
 
@@ -3783,7 +3783,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSystemInfoResponse**](appliance.SystemInfo.Response.md)
+[**ApplianceSystemInfoResponse**](ApplianceSystemInfoResponse.md)
 
 ### Authorization
 
@@ -3851,7 +3851,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSystemStatus**](appliance.SystemStatus.md)
+[**ApplianceSystemStatus**](ApplianceSystemStatus.md)
 
 ### Authorization
 
@@ -3935,7 +3935,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSystemStatusResponse**](appliance.SystemStatus.Response.md)
+[**ApplianceSystemStatusResponse**](ApplianceSystemStatusResponse.md)
 
 ### Authorization
 
@@ -4003,7 +4003,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgrade**](appliance.Upgrade.md)
+[**ApplianceUpgrade**](ApplianceUpgrade.md)
 
 ### Authorization
 
@@ -4087,7 +4087,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgradeResponse**](appliance.Upgrade.Response.md)
+[**ApplianceUpgradeResponse**](ApplianceUpgradeResponse.md)
 
 ### Authorization
 
@@ -4155,7 +4155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgradePolicy**](appliance.UpgradePolicy.md)
+[**ApplianceUpgradePolicy**](ApplianceUpgradePolicy.md)
 
 ### Authorization
 
@@ -4239,7 +4239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgradePolicyResponse**](appliance.UpgradePolicy.Response.md)
+[**ApplianceUpgradePolicyResponse**](ApplianceUpgradePolicyResponse.md)
 
 ### Authorization
 
@@ -4311,7 +4311,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAutoRmaPolicy**](appliance.AutoRmaPolicy.md)
+[**ApplianceAutoRmaPolicy**](ApplianceAutoRmaPolicy.md)
 
 ### Authorization
 
@@ -4383,7 +4383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupPolicy**](appliance.BackupPolicy.md)
+[**ApplianceBackupPolicy**](ApplianceBackupPolicy.md)
 
 ### Authorization
 
@@ -4455,7 +4455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceCertificateSetting**](appliance.CertificateSetting.md)
+[**ApplianceCertificateSetting**](ApplianceCertificateSetting.md)
 
 ### Authorization
 
@@ -4527,7 +4527,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDataExportPolicy**](appliance.DataExportPolicy.md)
+[**ApplianceDataExportPolicy**](ApplianceDataExportPolicy.md)
 
 ### Authorization
 
@@ -4599,7 +4599,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceClaim**](appliance.DeviceClaim.md)
+[**ApplianceDeviceClaim**](ApplianceDeviceClaim.md)
 
 ### Authorization
 
@@ -4671,7 +4671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDiagSetting**](appliance.DiagSetting.md)
+[**ApplianceDiagSetting**](ApplianceDiagSetting.md)
 
 ### Authorization
 
@@ -4743,7 +4743,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceExternalSyslogSetting**](appliance.ExternalSyslogSetting.md)
+[**ApplianceExternalSyslogSetting**](ApplianceExternalSyslogSetting.md)
 
 ### Authorization
 
@@ -4815,7 +4815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSetupInfo**](appliance.SetupInfo.md)
+[**ApplianceSetupInfo**](ApplianceSetupInfo.md)
 
 ### Authorization
 
@@ -4887,7 +4887,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgrade**](appliance.Upgrade.md)
+[**ApplianceUpgrade**](ApplianceUpgrade.md)
 
 ### Authorization
 
@@ -4959,7 +4959,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgradePolicy**](appliance.UpgradePolicy.md)
+[**ApplianceUpgradePolicy**](ApplianceUpgradePolicy.md)
 
 ### Authorization
 
@@ -5031,7 +5031,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceAutoRmaPolicy**](appliance.AutoRmaPolicy.md)
+[**ApplianceAutoRmaPolicy**](ApplianceAutoRmaPolicy.md)
 
 ### Authorization
 
@@ -5103,7 +5103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceBackupPolicy**](appliance.BackupPolicy.md)
+[**ApplianceBackupPolicy**](ApplianceBackupPolicy.md)
 
 ### Authorization
 
@@ -5175,7 +5175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceCertificateSetting**](appliance.CertificateSetting.md)
+[**ApplianceCertificateSetting**](ApplianceCertificateSetting.md)
 
 ### Authorization
 
@@ -5247,7 +5247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDataExportPolicy**](appliance.DataExportPolicy.md)
+[**ApplianceDataExportPolicy**](ApplianceDataExportPolicy.md)
 
 ### Authorization
 
@@ -5319,7 +5319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDeviceClaim**](appliance.DeviceClaim.md)
+[**ApplianceDeviceClaim**](ApplianceDeviceClaim.md)
 
 ### Authorization
 
@@ -5391,7 +5391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceDiagSetting**](appliance.DiagSetting.md)
+[**ApplianceDiagSetting**](ApplianceDiagSetting.md)
 
 ### Authorization
 
@@ -5463,7 +5463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceExternalSyslogSetting**](appliance.ExternalSyslogSetting.md)
+[**ApplianceExternalSyslogSetting**](ApplianceExternalSyslogSetting.md)
 
 ### Authorization
 
@@ -5535,7 +5535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceSetupInfo**](appliance.SetupInfo.md)
+[**ApplianceSetupInfo**](ApplianceSetupInfo.md)
 
 ### Authorization
 
@@ -5607,7 +5607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgrade**](appliance.Upgrade.md)
+[**ApplianceUpgrade**](ApplianceUpgrade.md)
 
 ### Authorization
 
@@ -5679,7 +5679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApplianceUpgradePolicy**](appliance.UpgradePolicy.md)
+[**ApplianceUpgradePolicy**](ApplianceUpgradePolicy.md)
 
 ### Authorization
 

@@ -2,6 +2,7 @@ package intersight
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"reflect"
@@ -14,160 +15,353 @@ import (
 )
 
 func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
-	return &schema.Resource{
-		ReadContext: dataSourceStorageNetAppInitiatorGroupRead,
-		Schema: map[string]*schema.Schema{
-			"account_moid": {
-				Description: "The Account ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"create_time": {
-				Description: "The time when this managed object was created.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"description": {
-				Description: "Short description about the host.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"domain_group_moid": {
-				Description: "The DomainGroup ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"mod_time": {
-				Description: "The time when this managed object was last modified.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"moid": {
-				Description: "The unique identifier of this Managed Object instance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"name": {
-				Description: "Name of the host in storage array.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"os_type": {
-				Description: "Operating system running on the host.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"protocol": {
-				Description: "Initiator group protocol.\n* `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type used by the host.\n* `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"shared_scope": {
-				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"uuid": {
-				Description: "UUID of the LUN.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"results": {
-				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
-					Description: "The Account ID for this managed object.",
-					Type:        schema.TypeString,
-					Optional:    true,
-					Computed:    true,
-				},
+	var subSchema = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"ancestors": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"create_time": {
-						Description: "The time when this managed object was created.",
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"description": {
-						Description: "Short description about the host.",
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"domain_group_moid": {
-						Description: "The DomainGroup ID for this managed object.",
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"initiators": {
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "Short description about the host.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"initiators": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iqn": {
+						Description: "IQN (iSCSI qualified name). Can be up to 255 characters long and has the format iqn.yyyy-mm.naming-authority:unique name.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the initiator represented in the storage array.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"type": {
+						Description: "Initiator type, it can be FC or iSCSI.\n* `FC` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host.\n* `Mixed` - Initiator type for systems using both FC and iSCSI connections.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"wwn": {
+						Description: "World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the host in storage array.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"os_type": {
+			Description: "Operating system running on the host.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"protocol": {
+			Description: "Initiator group protocol.\n* `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type used by the host.\n* `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"storage_utilization": {
+			Description: "Storage utilization of host entity in storage array.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"available": {
+						Description: "Total consumable storage capacity represented in bytes. System may reserve some space for internal purposes which is excluded from total capacity.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"capacity_utilization": {
+						Description: "Percentage of used capacity.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"free": {
+						Description: "Unused space available for applications to consume, represented in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total": {
+						Description: "Total storage capacity, represented in bytes. It is set by the component manufacturer.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"used": {
+						Description: "Used or consumed storage capacity, represented in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tenant": {
+			Description: "A reference to a storageNetAppStorageVm resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"uuid": {
+			Description: "UUID of the LUN.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
 						Type:     schema.TypeList,
 						Optional: true,
 						Elem: &schema.Resource{
@@ -178,86 +372,38 @@ func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
 									DiffSuppressFunc: SuppressDiffAdditionProps,
 								},
 								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
-								"iqn": {
-									Description: "IQN (iSCSI qualified name). Can be up to 255 characters long and has the format iqn.yyyy-mm.naming-authority:unique name.",
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
-								},
-								"name": {
-									Description: "Name of the initiator represented in the storage array.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
-								"type": {
-									Description: "Initiator type, it can be FC or iSCSI.\n* `FC` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host.\n* `Mixed` - Initiator type for systems using both FC and iSCSI connections.",
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
-								},
-								"wwn": {
-									Description: "World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
 								},
 							},
 						},
-						Computed: true,
-					},
-					"mod_time": {
-						Description: "The time when this managed object was last modified.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"moid": {
-						Description: "The unique identifier of this Managed Object instance.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"name": {
-						Description: "Name of the host in storage array.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"os_type": {
-						Description: "Operating system running on the host.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"owners": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Computed: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"parent": {
-						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
 						Type:        schema.TypeList,
 						MaxItems:    1,
 						Optional:    true,
-						Computed:    true,
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
 								"additional_properties": {
@@ -274,13 +420,11 @@ func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -290,302 +434,471 @@ func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
 							},
 						},
 					},
-					"permission_resources": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"protocol": {
-						Description: "Initiator group protocol.\n* `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type used by the host.\n* `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.",
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"shared_scope": {
-						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"storage_utilization": {
-						Description: "Storage utilization of host entity in storage array.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"available": {
-									Description: "Total consumable storage capacity represented in bytes. System may reserve some space for internal purposes which is excluded from total capacity.",
-									Type:        schema.TypeInt,
-									Optional:    true,
-									Computed:    true,
-								},
-								"capacity_utilization": {
-									Description: "Percentage of used capacity.",
-									Type:        schema.TypeFloat,
-									Optional:    true,
-									Computed:    true,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"free": {
-									Description: "Unused space available for applications to consume, represented in bytes.",
-									Type:        schema.TypeInt,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"total": {
-									Description: "Total storage capacity, represented in bytes. It is set by the component manufacturer.",
-									Type:        schema.TypeInt,
-									Optional:    true,
-									Computed:    true,
-								},
-								"used": {
-									Description: "Used or consumed storage capacity, represented in bytes.",
-									Type:        schema.TypeInt,
-									Optional:    true,
-									Computed:    true,
-								},
-							},
-						},
-					},
-					"tags": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"key": {
-									Description: "The string representation of a tag key.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"value": {
-									Description: "The string representation of a tag value.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"tenant": {
-						Description: "A reference to a storageNetAppStorageVm resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"uuid": {
-						Description: "UUID of the LUN.",
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"version_context": {
-						Description: "The versioning info for this managed object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"interested_mos": {
-									Type:     schema.TypeList,
-									Optional: true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"ref_mo": {
-									Description: "A reference to the original Managed Object.",
-									Type:        schema.TypeList,
-									MaxItems:    1,
-									Optional:    true,
-									Computed:    true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-								},
-								"timestamp": {
-									Description: "The time this versioned Managed Object was created.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"nr_version": {
-									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"version_type": {
-									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-							},
-						},
-					},
-				}},
-				Computed: true,
-			}},
+				},
+			},
+		},
 	}
+	var model = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"description": {
+			Description: "Short description about the host.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"initiators": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iqn": {
+						Description: "IQN (iSCSI qualified name). Can be up to 255 characters long and has the format iqn.yyyy-mm.naming-authority:unique name.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name of the initiator represented in the storage array.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"type": {
+						Description: "Initiator type, it can be FC or iSCSI.\n* `FC` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type which contains the IQN (iSCSI Qualified Name) used by the host.\n* `Mixed` - Initiator type for systems using both FC and iSCSI connections.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"wwn": {
+						Description: "World wide name, 128 bit address represented in hexadecimal notation. For example, 51:4f:0c:50:14:1f:af:01:51:4f:0c:51:14:1f:af:01.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the host in storage array.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"os_type": {
+			Description: "Operating system running on the host.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"protocol": {
+			Description: "Initiator group protocol.\n* `FCP` - Fibre channel initiator type which contains WWN of an HBA on the host.\n* `iSCSI` - An iSCSI initiator type used by the host.\n* `mixed` - For systems using both FC and iSCSI connections to the same LUN, create two igroups, one for FC and one for iSCSI. Then map the LUN to both igroups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"storage_utilization": {
+			Description: "Storage utilization of host entity in storage array.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"available": {
+						Description: "Total consumable storage capacity represented in bytes. System may reserve some space for internal purposes which is excluded from total capacity.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"capacity_utilization": {
+						Description: "Percentage of used capacity.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"free": {
+						Description: "Unused space available for applications to consume, represented in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total": {
+						Description: "Total storage capacity, represented in bytes. It is set by the component manufacturer.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"used": {
+						Description: "Used or consumed storage capacity, represented in bytes.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tenant": {
+			Description: "A reference to a storageNetAppStorageVm resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"uuid": {
+			Description: "UUID of the LUN.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+	}
+	model["results"] = &schema.Schema{
+		Type:     schema.TypeList,
+		Elem:     &schema.Resource{Schema: subSchema},
+		Computed: true,
+	}
+	return &schema.Resource{
+		ReadContext: dataSourceStorageNetAppInitiatorGroupRead,
+		Schema:      model}
 }
 
 func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -594,6 +907,444 @@ func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StorageNetAppInitiatorGroup{}
+	if _, ok := d.GetOk("account_moid"); ok {
+		v := d.Get("account_moid")
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
+	if _, ok := d.GetOk("additional_properties"); ok {
+		v := d.Get("additional_properties")
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if _, ok := d.GetOk("ancestors"); ok {
+		v := d.Get("ancestors")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetAncestors(x)
+	}
+
+	if _, ok := d.GetOk("class_id"); ok {
+		v := d.Get("class_id")
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if _, ok := d.GetOk("create_time"); ok {
+		v := d.Get("create_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
+	if _, ok := d.GetOk("description"); ok {
+		v := d.Get("description")
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
+	if _, ok := d.GetOk("domain_group_moid"); ok {
+		v := d.Get("domain_group_moid")
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
+	if _, ok := d.GetOk("initiators"); ok {
+		v := d.Get("initiators")
+		x := make([]models.StorageBaseInitiator, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.StorageBaseInitiator{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.BaseInitiator")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetInitiators(x)
+	}
+
+	if _, ok := d.GetOk("mod_time"); ok {
+		v := d.Get("mod_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
+
+	if _, ok := d.GetOk("moid"); ok {
+		v := d.Get("moid")
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if _, ok := d.GetOk("name"); ok {
+		v := d.Get("name")
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	if _, ok := d.GetOk("object_type"); ok {
+		v := d.Get("object_type")
+		x := (v.(string))
+		o.SetObjectType(x)
+	}
+
+	if _, ok := d.GetOk("os_type"); ok {
+		v := d.Get("os_type")
+		x := (v.(string))
+		o.SetOsType(x)
+	}
+
+	if _, ok := d.GetOk("owners"); ok {
+		v := d.Get("owners")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetOwners(x)
+	}
+
+	if _, ok := d.GetOk("parent"); ok {
+		v := d.Get("parent")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if _, ok := d.GetOk("permission_resources"); ok {
+		v := d.Get("permission_resources")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetPermissionResources(x)
+	}
+
+	if _, ok := d.GetOk("protocol"); ok {
+		v := d.Get("protocol")
+		x := (v.(string))
+		o.SetProtocol(x)
+	}
+
+	if _, ok := d.GetOk("shared_scope"); ok {
+		v := d.Get("shared_scope")
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
+
+	if _, ok := d.GetOk("storage_utilization"); ok {
+		v := d.Get("storage_utilization")
+		p := make([]models.StorageBaseCapacity, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageBaseCapacity{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.BaseCapacity")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageUtilization(x)
+		}
+	}
+
+	if _, ok := d.GetOk("tags"); ok {
+		v := d.Get("tags")
+		x := make([]models.MoTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["key"]; ok {
+				{
+					x := (v.(string))
+					o.SetKey(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTags(x)
+	}
+
+	if _, ok := d.GetOk("tenant"); ok {
+		v := d.Get("tenant")
+		p := make([]models.StorageNetAppStorageVmRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsStorageNetAppStorageVmRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetTenant(x)
+		}
+	}
+
+	if _, ok := d.GetOk("uuid"); ok {
+		v := d.Get("uuid")
+		x := (v.(string))
+		o.SetUuid(x)
+	}
+
+	if _, ok := d.GetOk("version_context"); ok {
+		v := d.Get("version_context")
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoVersionContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)

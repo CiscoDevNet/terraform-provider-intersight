@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ReplicationPeerInfo"]
 **Datastores** | Pointer to [**[]HyperflexReplicationPlatDatastorePair**](HyperflexReplicationPlatDatastorePair.md) |  | [optional] 
 **Dcip** | Pointer to **string** | Data Cluster IP for the replication peer. | [optional] [readonly] 
-**Er** | Pointer to [**NullableHyperflexEntityReference**](hyperflex.EntityReference.md) |  | [optional] 
+**Er** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **Mcip** | Pointer to **string** | Management Cluster IP for the replication peer. | [optional] [readonly] 
 **Ports** | Pointer to [**[]HyperflexPortTypeToPortNumberMap**](HyperflexPortTypeToPortNumberMap.md) |  | [optional] 
 **ReplCip** | Pointer to **string** | Replication Cluster IP for the replication peer. | [optional] [readonly] 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
 **SshCiphers** | Pointer to **string** | SSH Ciphers for SSH V2 in APIC. | [optional] 
 **SshMacs** | Pointer to **string** | SSH MACS for SSH V2 in APIC. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

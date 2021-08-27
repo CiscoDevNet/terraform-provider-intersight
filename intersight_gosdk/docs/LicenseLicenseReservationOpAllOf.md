@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **GenerateReturnCode** | Pointer to **bool** | Trigger the generation of return code for specific license reservation. | [optional] 
 **RequestCode** | Pointer to **string** | Revervation code used to generate authorization code from CSSM. | [optional] [readonly] 
 **ReturnCode** | Pointer to **string** | Return code used to return the reserved license to smart license account. | [optional] [readonly] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -2,6 +2,7 @@ package intersight
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"reflect"
@@ -14,239 +15,342 @@ import (
 )
 
 func dataSourceHyperflexHxapVirtualMachineNetworkInterface() *schema.Resource {
-	return &schema.Resource{
-		ReadContext: dataSourceHyperflexHxapVirtualMachineNetworkInterfaceRead,
-		Schema: map[string]*schema.Schema{
-			"account_moid": {
-				Description: "The Account ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"adapter_type": {
-				Description: "Type or model of the virtual network interface card.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"create_time": {
-				Description: "The time when this managed object was created.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"domain_group_moid": {
-				Description: "The DomainGroup ID for this managed object.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"interface_name": {
-				Description: "Operating system assigned name for network interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"mac_address": {
-				Description: "MAC address assigned to the virtual network interface card.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"mod_time": {
-				Description: "The time when this managed object was last modified.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"moid": {
-				Description: "The unique identifier of this Managed Object instance.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"name": {
-				Description: "Name of the virtual network interface card.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"primary_ip_address": {
-				Description: "Primary IP address of the network interface.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"shared_scope": {
-				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"status": {
-				Description: "Current status of virtual network interface status.\n* `Up` - Virtual network interface is up and running.\n* `Down` - Virtual network interface is down and not running.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"virtual_machine_name": {
-				Description: "A reference to the virtual machine where this network object is attached to.",
-				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"results": {
-				Type: schema.TypeList,
-				Elem: &schema.Resource{Schema: map[string]*schema.Schema{"account_moid": {
-					Description: "The Account ID for this managed object.",
-					Type:        schema.TypeString,
-					Optional:    true,
-					Computed:    true,
-				},
-					"adapter_type": {
-						Description: "Type or model of the virtual network interface card.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
+	var subSchema = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"adapter_type": {
+			Description: "Type or model of the virtual network interface card.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
 					"additional_properties": {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"ancestors": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"cluster": {
-						Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"create_time": {
-						Description: "The time when this managed object was created.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"domain_group_moid": {
-						Description: "The DomainGroup ID for this managed object.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"interface_name": {
-						Description: "Operating system assigned name for network interface.",
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"ip_address": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"mac_address": {
-						Description: "MAC address assigned to the virtual network interface card.",
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"mod_time": {
-						Description: "The time when this managed object was last modified.",
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster": {
+			Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"moid": {
-						Description: "The unique identifier of this Managed Object instance.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"name": {
-						Description: "Name of the virtual network interface card.",
+						Description: "The Moid of the referenced REST resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-					"network": {
-						Description: "A reference to a hyperflexHxapNetwork resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"interface_name": {
+			Description: "Operating system assigned name for network interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ip_address": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"mac_address": {
+			Description: "MAC address assigned to the virtual network interface card.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the virtual network interface card.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"network": {
+			Description: "A reference to a hyperflexHxapNetwork resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"primary_ip_address": {
+			Description: "Primary IP address of the network interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"registered_device": {
+			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"status": {
+			Description: "Current status of virtual network interface status.\n* `Up` - Virtual network interface is up and running.\n* `Down` - Virtual network interface is down and not running.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
 								"additional_properties": {
@@ -263,13 +367,11 @@ func dataSourceHyperflexHxapVirtualMachineNetworkInterface() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -283,96 +385,9 @@ func dataSourceHyperflexHxapVirtualMachineNetworkInterface() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
-						Computed:    true,
 					},
-					"owners": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Computed: true,
-						Elem: &schema.Schema{
-							Type: schema.TypeString}},
-					"parent": {
-						Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"permission_resources": {
-						Description: "An array of relationships to moBaseMo resources.",
-						Type:        schema.TypeList,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"primary_ip_address": {
-						Description: "Primary IP address of the network interface.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"registered_device": {
-						Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
 						Type:        schema.TypeList,
 						MaxItems:    1,
 						Optional:    true,
@@ -392,205 +407,11 @@ func dataSourceHyperflexHxapVirtualMachineNetworkInterface() *schema.Resource {
 									Description: "The Moid of the referenced REST resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
 								},
 								"object_type": {
 									Description: "The fully-qualified name of the remote type referred by this relationship.",
 									Type:        schema.TypeString,
 									Optional:    true,
-									Computed:    true,
-								},
-								"selector": {
-									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-						Computed: true,
-					},
-					"shared_scope": {
-						Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-						Type:        schema.TypeString,
-						Optional:    true,
-						Computed:    true,
-					},
-					"status": {
-						Description: "Current status of virtual network interface status.\n* `Up` - Virtual network interface is up and running.\n* `Down` - Virtual network interface is down and not running.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"tags": {
-						Type:     schema.TypeList,
-						Optional: true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"key": {
-									Description: "The string representation of a tag key.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"value": {
-									Description: "The string representation of a tag value.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-							},
-						},
-					},
-					"version_context": {
-						Description: "The versioning info for this managed object.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"interested_mos": {
-									Type:     schema.TypeList,
-									Optional: true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-									Computed: true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"ref_mo": {
-									Description: "A reference to the original Managed Object.",
-									Type:        schema.TypeList,
-									MaxItems:    1,
-									Optional:    true,
-									Computed:    true,
-									Elem: &schema.Resource{
-										Schema: map[string]*schema.Schema{
-											"additional_properties": {
-												Type:             schema.TypeString,
-												Optional:         true,
-												DiffSuppressFunc: SuppressDiffAdditionProps,
-											},
-											"class_id": {
-												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-											"moid": {
-												Description: "The Moid of the referenced REST resource.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"object_type": {
-												Description: "The fully-qualified name of the remote type referred by this relationship.",
-												Type:        schema.TypeString,
-												Optional:    true,
-												Computed:    true,
-											},
-											"selector": {
-												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-												Type:        schema.TypeString,
-												Optional:    true,
-											},
-										},
-									},
-								},
-								"timestamp": {
-									Description: "The time this versioned Managed Object was created.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"nr_version": {
-									Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"version_type": {
-									Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-							},
-						},
-					},
-					"virtual_machine": {
-						Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-						Type:        schema.TypeList,
-						MaxItems:    1,
-						Optional:    true,
-						Computed:    true,
-						Elem: &schema.Resource{
-							Schema: map[string]*schema.Schema{
-								"additional_properties": {
-									Type:             schema.TypeString,
-									Optional:         true,
-									DiffSuppressFunc: SuppressDiffAdditionProps,
-								},
-								"class_id": {
-									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-									Type:        schema.TypeString,
-									Optional:    true,
-								},
-								"moid": {
-									Description: "The Moid of the referenced REST resource.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
-								},
-								"object_type": {
-									Description: "The fully-qualified name of the remote type referred by this relationship.",
-									Type:        schema.TypeString,
-									Optional:    true,
-									Computed:    true,
 								},
 								"selector": {
 									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
@@ -600,15 +421,538 @@ func dataSourceHyperflexHxapVirtualMachineNetworkInterface() *schema.Resource {
 							},
 						},
 					},
-					"virtual_machine_name": {
-						Description: "A reference to the virtual machine where this network object is attached to.",
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
-				}},
-				Computed: true,
-			}},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"virtual_machine": {
+			Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"virtual_machine_name": {
+			Description: "A reference to the virtual machine where this network object is attached to.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
+	var model = map[string]*schema.Schema{"account_moid": {
+		Description: "The Account ID for this managed object.",
+		Type:        schema.TypeString,
+		Optional:    true,
+	},
+		"adapter_type": {
+			Description: "Type or model of the virtual network interface card.\n* `Unknown` - The type of the network adaptor type is unknown.\n* `E1000` - Emulated version of the Intel 82545EM Gigabit Ethernet NIC.\n* `SRIOV` - Representation of a virtual function (VF) on a physical NIC with SR-IOV support.\n* `VMXNET2` - VMXNET 2 (Enhanced) is available only for some guest operating systems on ESX/ESXi 3.5 and later.\n* `VMXNET3` - VMXNET 3 offers all the features available in VMXNET 2 and adds several new features.\n* `E1000E` - E1000E – emulates a newer real network adapter, the 1 Gbit Intel 82574, and is available for Windows 2012 and later. The E1000E needs virtual machine hardware version 8 or later.\n* `NE2K_PCI` - The Ne2000 network card uses two ring buffers for packet handling. These are circular buffers made of 256-byte pages that the chip's DMA logic will use to store received packets or to get received packets.\n* `PCnet` - The PCnet-PCI II is a PCI network adapter. It has built-in support for CRC checks and can automatically pad short packets to the minimum Ethernet length.\n* `RTL8139` - The RTL8139 is a fast Ethernet card that operates at 10/100 Mbps. It is compliant with PCI version 2.0/2.1 and it is known for reliability and superior performance.\n* `VirtIO` - VirtIO is a standardized interface which allows virtual machines access to simplified \"virtual\" devices, such as block devices, network adapters and consoles. Accessing devices through VirtIO on a guest VM improves performance over more traditional \"emulated\" devices, as VirtIO devices require only the bare minimum setup and configuration needed to send and receive data, while the host machine handles the majority of the setup and maintenance of the actual physical hardware.\n* `` - Default network adaptor type supported by the hypervisor.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"additional_properties": {
+			Type:             schema.TypeString,
+			Optional:         true,
+			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"ancestors": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"class_id": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster": {
+			Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"create_time": {
+			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"domain_group_moid": {
+			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"interface_name": {
+			Description: "Operating system assigned name for network interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ip_address": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"mac_address": {
+			Description: "MAC address assigned to the virtual network interface card.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mod_time": {
+			Description: "The time when this managed object was last modified.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"moid": {
+			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the virtual network interface card.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"network": {
+			Description: "A reference to a hyperflexHxapNetwork resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"object_type": {
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"owners": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"permission_resources": {
+			Description: "An array of relationships to moBaseMo resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"primary_ip_address": {
+			Description: "Primary IP address of the network interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"registered_device": {
+			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"status": {
+			Description: "Current status of virtual network interface status.\n* `Up` - Virtual network interface is up and running.\n* `Down` - Virtual network interface is down and not running.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"tags": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"key": {
+						Description: "The string representation of a tag key.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"version_context": {
+			Description: "The versioning info for this managed object.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"interested_mos": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ref_mo": {
+						Description: "A reference to the original Managed Object.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"moid": {
+									Description: "The Moid of the referenced REST resource.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the remote type referred by this relationship.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"selector": {
+									Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"timestamp": {
+						Description: "The time this versioned Managed Object was created.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"version_type": {
+						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"virtual_machine": {
+			Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"virtual_machine_name": {
+			Description: "A reference to the virtual machine where this network object is attached to.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+	}
+	model["results"] = &schema.Schema{
+		Type:     schema.TypeList,
+		Elem:     &schema.Resource{Schema: subSchema},
+		Computed: true,
+	}
+	return &schema.Resource{
+		ReadContext: dataSourceHyperflexHxapVirtualMachineNetworkInterfaceRead,
+		Schema:      model}
 }
 
 func dataSourceHyperflexHxapVirtualMachineNetworkInterfaceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
@@ -617,6 +961,537 @@ func dataSourceHyperflexHxapVirtualMachineNetworkInterfaceRead(c context.Context
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHxapVirtualMachineNetworkInterface{}
+	if _, ok := d.GetOk("account_moid"); ok {
+		v := d.Get("account_moid")
+		x := (v.(string))
+		o.SetAccountMoid(x)
+	}
+
+	if _, ok := d.GetOk("adapter_type"); ok {
+		v := d.Get("adapter_type")
+		x := (v.(string))
+		o.SetAdapterType(x)
+	}
+
+	if _, ok := d.GetOk("additional_properties"); ok {
+		v := d.Get("additional_properties")
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if _, ok := d.GetOk("ancestors"); ok {
+		v := d.Get("ancestors")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetAncestors(x)
+	}
+
+	if _, ok := d.GetOk("class_id"); ok {
+		v := d.Get("class_id")
+		x := (v.(string))
+		o.SetClassId(x)
+	}
+
+	if _, ok := d.GetOk("cluster"); ok {
+		v := d.Get("cluster")
+		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCluster(x)
+		}
+	}
+
+	if _, ok := d.GetOk("create_time"); ok {
+		v := d.Get("create_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetCreateTime(x)
+	}
+
+	if _, ok := d.GetOk("domain_group_moid"); ok {
+		v := d.Get("domain_group_moid")
+		x := (v.(string))
+		o.SetDomainGroupMoid(x)
+	}
+
+	if _, ok := d.GetOk("interface_name"); ok {
+		v := d.Get("interface_name")
+		x := (v.(string))
+		o.SetInterfaceName(x)
+	}
+
+	if _, ok := d.GetOk("ip_address"); ok {
+		v := d.Get("ip_address")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetIpAddress(x)
+	}
+
+	if _, ok := d.GetOk("mac_address"); ok {
+		v := d.Get("mac_address")
+		x := (v.(string))
+		o.SetMacAddress(x)
+	}
+
+	if _, ok := d.GetOk("mod_time"); ok {
+		v := d.Get("mod_time")
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetModTime(x)
+	}
+
+	if _, ok := d.GetOk("moid"); ok {
+		v := d.Get("moid")
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if _, ok := d.GetOk("name"); ok {
+		v := d.Get("name")
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	if _, ok := d.GetOk("network"); ok {
+		v := d.Get("network")
+		p := make([]models.HyperflexHxapNetworkRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexHxapNetworkRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetwork(x)
+		}
+	}
+
+	if _, ok := d.GetOk("object_type"); ok {
+		v := d.Get("object_type")
+		x := (v.(string))
+		o.SetObjectType(x)
+	}
+
+	if _, ok := d.GetOk("owners"); ok {
+		v := d.Get("owners")
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetOwners(x)
+	}
+
+	if _, ok := d.GetOk("parent"); ok {
+		v := d.Get("parent")
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParent(x)
+		}
+	}
+
+	if _, ok := d.GetOk("permission_resources"); ok {
+		v := d.Get("permission_resources")
+		x := make([]models.MoBaseMoRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		o.SetPermissionResources(x)
+	}
+
+	if _, ok := d.GetOk("primary_ip_address"); ok {
+		v := d.Get("primary_ip_address")
+		x := (v.(string))
+		o.SetPrimaryIpAddress(x)
+	}
+
+	if _, ok := d.GetOk("registered_device"); ok {
+		v := d.Get("registered_device")
+		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsAssetDeviceRegistrationRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRegisteredDevice(x)
+		}
+	}
+
+	if _, ok := d.GetOk("shared_scope"); ok {
+		v := d.Get("shared_scope")
+		x := (v.(string))
+		o.SetSharedScope(x)
+	}
+
+	if _, ok := d.GetOk("status"); ok {
+		v := d.Get("status")
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
+	if _, ok := d.GetOk("tags"); ok {
+		v := d.Get("tags")
+		x := make([]models.MoTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["key"]; ok {
+				{
+					x := (v.(string))
+					o.SetKey(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetTags(x)
+	}
+
+	if _, ok := d.GetOk("version_context"); ok {
+		v := d.Get("version_context")
+		p := make([]models.MoVersionContext, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoVersionContext{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.VersionContext")
+			if v, ok := l["interested_mos"]; ok {
+				{
+					x := make([]models.MoMoRef, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewMoMoRefWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("mo.MoRef")
+						if v, ok := l["moid"]; ok {
+							{
+								x := (v.(string))
+								o.SetMoid(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["selector"]; ok {
+							{
+								x := (v.(string))
+								o.SetSelector(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetInterestedMos(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersionContext(x)
+		}
+	}
+
+	if _, ok := d.GetOk("virtual_machine"); ok {
+		v := d.Get("virtual_machine")
+		p := make([]models.HyperflexHxapVirtualMachineRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexHxapVirtualMachineRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVirtualMachine(x)
+		}
+	}
+
+	if _, ok := d.GetOk("virtual_machine_name"); ok {
+		v := d.Get("virtual_machine_name")
+		x := (v.(string))
+		o.SetVirtualMachineName(x)
+	}
+
 	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)

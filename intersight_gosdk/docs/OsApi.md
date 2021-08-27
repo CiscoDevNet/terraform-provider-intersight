@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsBulkInstallInfo**](os.BulkInstallInfo.md)
+[**OsBulkInstallInfo**](OsBulkInstallInfo.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsConfigurationFile**](os.ConfigurationFile.md)
+[**OsConfigurationFile**](OsConfigurationFile.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsInstall**](os.Install.md)
+[**OsInstall**](OsInstall.md)
 
 ### Authorization
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsOsSupport**](os.OsSupport.md)
+[**OsOsSupport**](OsOsSupport.md)
 
 ### Authorization
 
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsTemplateFile**](os.TemplateFile.md)
+[**OsTemplateFile**](OsTemplateFile.md)
 
 ### Authorization
 
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsValidInstallTarget**](os.ValidInstallTarget.md)
+[**OsValidInstallTarget**](OsValidInstallTarget.md)
 
 ### Authorization
 
@@ -554,7 +554,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsBulkInstallInfo**](os.BulkInstallInfo.md)
+[**OsBulkInstallInfo**](OsBulkInstallInfo.md)
 
 ### Authorization
 
@@ -638,7 +638,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsBulkInstallInfoResponse**](os.BulkInstallInfo.Response.md)
+[**OsBulkInstallInfoResponse**](OsBulkInstallInfoResponse.md)
 
 ### Authorization
 
@@ -706,7 +706,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsCatalog**](os.Catalog.md)
+[**OsCatalog**](OsCatalog.md)
 
 ### Authorization
 
@@ -790,7 +790,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsCatalogResponse**](os.Catalog.Response.md)
+[**OsCatalogResponse**](OsCatalogResponse.md)
 
 ### Authorization
 
@@ -858,7 +858,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsConfigurationFile**](os.ConfigurationFile.md)
+[**OsConfigurationFile**](OsConfigurationFile.md)
 
 ### Authorization
 
@@ -942,7 +942,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsConfigurationFileResponse**](os.ConfigurationFile.Response.md)
+[**OsConfigurationFileResponse**](OsConfigurationFileResponse.md)
 
 ### Authorization
 
@@ -1010,7 +1010,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsDistribution**](os.Distribution.md)
+[**OsDistribution**](OsDistribution.md)
 
 ### Authorization
 
@@ -1094,7 +1094,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsDistributionResponse**](os.Distribution.Response.md)
+[**OsDistributionResponse**](OsDistributionResponse.md)
 
 ### Authorization
 
@@ -1162,7 +1162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsInstall**](os.Install.md)
+[**OsInstall**](OsInstall.md)
 
 ### Authorization
 
@@ -1246,7 +1246,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsInstallResponse**](os.Install.Response.md)
+[**OsInstallResponse**](OsInstallResponse.md)
 
 ### Authorization
 
@@ -1314,7 +1314,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsSupportedVersion**](os.SupportedVersion.md)
+[**OsSupportedVersion**](OsSupportedVersion.md)
 
 ### Authorization
 
@@ -1398,7 +1398,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsSupportedVersionResponse**](os.SupportedVersion.Response.md)
+[**OsSupportedVersionResponse**](OsSupportedVersionResponse.md)
 
 ### Authorization
 
@@ -1470,7 +1470,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsConfigurationFile**](os.ConfigurationFile.md)
+[**OsConfigurationFile**](OsConfigurationFile.md)
 
 ### Authorization
 
@@ -1542,7 +1542,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OsConfigurationFile**](os.ConfigurationFile.md)
+[**OsConfigurationFile**](OsConfigurationFile.md)
 
 ### Authorization
 

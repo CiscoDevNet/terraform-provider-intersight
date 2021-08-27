@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **InventoryPath** | Pointer to **string** | Inventory path of the DC. | [optional] 
 **NetworkCount** | Pointer to **int64** | Count of all networks associated with this datacenter (DC). | [optional] 
 **VmCount** | Pointer to **int64** | Count of all virtual machines (VMs) associated with this DC. | [optional] 
-**HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](virtualization.VmwareVcenter.Relationship.md) |  | [optional] 
-**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](virtualization.VmwareFolder.Relationship.md) |  | [optional] 
+**HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
+**ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
 ## Methods
 

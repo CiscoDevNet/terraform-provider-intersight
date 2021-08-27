@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxapHostVswitch"]
 **HostName** | Pointer to **string** | The name of the host to which this vSwitch belongs to. | [optional] 
 **Ports** | Pointer to [**[]HyperflexNetworkPort**](HyperflexNetworkPort.md) |  | [optional] 
-**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](hyperflex.HxapCluster.Relationship.md) |  | [optional] 
-**DvSwitch** | Pointer to [**HyperflexHxapDvswitchRelationship**](hyperflex.HxapDvswitch.Relationship.md) |  | [optional] 
-**Host** | Pointer to [**HyperflexHxapHostRelationship**](hyperflex.HxapHost.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**DvSwitch** | Pointer to [**HyperflexHxapDvswitchRelationship**](HyperflexHxapDvswitchRelationship.md) |  | [optional] 
+**Host** | Pointer to [**HyperflexHxapHostRelationship**](HyperflexHxapHostRelationship.md) |  | [optional] 
 
 ## Methods
 

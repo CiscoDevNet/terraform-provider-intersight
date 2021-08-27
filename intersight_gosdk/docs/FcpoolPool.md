@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **IdBlocks** | Pointer to [**[]FcpoolBlock**](FcpoolBlock.md) |  | [optional] 
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
 **BlockHeads** | Pointer to [**[]FcpoolFcBlockRelationship**](FcpoolFcBlockRelationship.md) | An array of relationships to fcpoolFcBlock resources. | [optional] [readonly] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

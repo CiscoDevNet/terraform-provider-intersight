@@ -16,11 +16,12 @@ Name | Type | Description | Notes
 **DeviceName** | Pointer to **string** | Name of device being inventoried. The name the user assigns to the device is inventoried here. | [optional] 
 **DeviceType** | Pointer to **string** | Type of device being inventoried. This determines whether the device is a controller, leaf or spine. | [optional] 
 **DeviceUpTime** | Pointer to **int64** | Returns the device up time. | [optional] 
-**Disk** | Pointer to [**NullableNiatelemetryDiskinfo**](niatelemetry.Diskinfo.md) |  | [optional] 
+**Disk** | Pointer to [**NullableNiatelemetryDiskinfo**](NiatelemetryDiskinfo.md) |  | [optional] 
 **Dn** | Pointer to **string** | Dn for the inventories present. | [optional] 
 **FabricName** | Pointer to **string** | Name of the fabric of the device being inventoried. | [optional] 
 **FexCount** | Pointer to **int64** | Number of fabric extendors utilized. | [optional] 
 **InfraWiNodeCount** | Pointer to **int64** | Number of appliances as physical device that are wired into the cluster. | [optional] 
+**Interface** | Pointer to [**[]NiatelemetryInterfaceElement**](NiatelemetryInterfaceElement.md) |  | [optional] 
 **IpAddress** | Pointer to **string** | The IP address of the device being inventoried. | [optional] 
 **IsVirtualNode** | Pointer to **string** | Flag to specify if the node is virtual. | [optional] 
 **LastRebootTime** | Pointer to **string** | Returns the last reboot Time of the device. | [optional] 
@@ -33,18 +34,18 @@ Name | Type | Description | Notes
 **MacsecTotalCount** | Pointer to **int64** | Number of total Macsec configured interfaces for all nodes. | [optional] 
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
-**NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](niatelemetry.NxosBgpMvpn.md) |  | [optional] 
-**NxosBootflashDetails** | Pointer to [**NullableNiatelemetryBootflashDetails**](niatelemetry.BootflashDetails.md) |  | [optional] 
+**NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](NiatelemetryNxosBgpMvpn.md) |  | [optional] 
+**NxosBootflashDetails** | Pointer to [**NullableNiatelemetryBootflashDetails**](NiatelemetryBootflashDetails.md) |  | [optional] 
 **NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
-**NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](niatelemetry.Interface.md) |  | [optional] 
+**NxosInterfaceBrief** | Pointer to [**NullableNiatelemetryInterface**](NiatelemetryInterface.md) |  | [optional] 
 **NxosNveInterfaceStatus** | Pointer to **string** | Returns the value of the nxosNveInterface field. | [optional] 
-**NxosNvePacketCounters** | Pointer to [**NullableNiatelemetryNvePacketCounters**](niatelemetry.NvePacketCounters.md) |  | [optional] 
-**NxosNveVni** | Pointer to [**NullableNiatelemetryNveVni**](niatelemetry.NveVni.md) |  | [optional] 
+**NxosNvePacketCounters** | Pointer to [**NullableNiatelemetryNvePacketCounters**](NiatelemetryNvePacketCounters.md) |  | [optional] 
+**NxosNveVni** | Pointer to [**NullableNiatelemetryNveVni**](NiatelemetryNveVni.md) |  | [optional] 
 **NxosOspfNeighbors** | Pointer to **int64** | Total number of ospf neighbors per switch in DCNM. | [optional] 
 **NxosPimNeighbors** | Pointer to **string** | Total number of pim neighbors per switch in DCNM. | [optional] 
 **NxosTelnet** | Pointer to **string** | Returns the value of the nxosTelnet field. | [optional] 
 **NxosTotalRoutes** | Pointer to **int64** | Total number of routes configured in the DCNM. | [optional] 
-**NxosVtp** | Pointer to [**NullableNiatelemetryNxosVtp**](niatelemetry.NxosVtp.md) |  | [optional] 
+**NxosVtp** | Pointer to [**NullableNiatelemetryNxosVtp**](NiatelemetryNxosVtp.md) |  | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RoutePrefixCount** | Pointer to **int64** | Total nuumber of v4 and v6 routes per node. | [optional] 
@@ -57,8 +58,8 @@ Name | Type | Description | Notes
 **SystemUpTime** | Pointer to **string** | The amount of time that the device being inventoried been up. | [optional] 
 **TotalCriticalFaults** | Pointer to **int64** | Returns the total number of critical faults. | [optional] 
 **Version** | Pointer to **string** | Software version of device being inventoried. The various software version values for each device are available on cisco.com. | [optional] 
-**LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](niatelemetry.NiaLicenseState.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**LicenseState** | Pointer to [**NiatelemetryNiaLicenseStateRelationship**](NiatelemetryNiaLicenseStateRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -504,6 +505,41 @@ SetInfraWiNodeCount sets InfraWiNodeCount field to given value.
 
 HasInfraWiNodeCount returns a boolean if a field has been set.
 
+### GetInterface
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetInterface() []NiatelemetryInterfaceElement`
+
+GetInterface returns the Interface field if non-nil, zero value otherwise.
+
+### GetInterfaceOk
+
+`func (o *NiatelemetryNiaInventoryAllOf) GetInterfaceOk() (*[]NiatelemetryInterfaceElement, bool)`
+
+GetInterfaceOk returns a tuple with the Interface field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterface
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetInterface(v []NiatelemetryInterfaceElement)`
+
+SetInterface sets Interface field to given value.
+
+### HasInterface
+
+`func (o *NiatelemetryNiaInventoryAllOf) HasInterface() bool`
+
+HasInterface returns a boolean if a field has been set.
+
+### SetInterfaceNil
+
+`func (o *NiatelemetryNiaInventoryAllOf) SetInterfaceNil(b bool)`
+
+ SetInterfaceNil sets the value for Interface to be an explicit nil
+
+### UnsetInterface
+`func (o *NiatelemetryNiaInventoryAllOf) UnsetInterface()`
+
+UnsetInterface ensures that no value is present for Interface, not even an explicit nil
 ### GetIpAddress
 
 `func (o *NiatelemetryNiaInventoryAllOf) GetIpAddress() string`

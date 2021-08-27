@@ -42,6 +42,38 @@ func SuppressDiffAdditionProps(k, old, new string, d *schema.ResourceData) bool 
 	}
 	return different
 }
+
+func parseFilterMap(m map[string]interface{}) ([]string, []string) {
+	var keyArray []string
+	var valArray []string
+	for k, v := range m {
+		if k == "ClassId" || k == "ObjectType" {
+			continue
+		}
+		switch reflect.TypeOf(v).Kind() {
+		case reflect.Map:
+			temp_k, temp_v := parseFilterMap(v.(map[string]interface{}))
+			for i := range temp_k {
+				keyArray = append(keyArray, k+"."+temp_k[i])
+				valArray = append(valArray, temp_v[i])
+			}
+		case reflect.String:
+			keyArray = append(keyArray, k)
+			valArray = append(valArray, "'"+v.(string)+"'")
+		case reflect.Bool:
+			keyArray = append(keyArray, k)
+			valArray = append(valArray, strconv.FormatBool(v.(bool)))
+		case reflect.Int:
+			keyArray = append(keyArray, k)
+			valArray = append(valArray, strconv.FormatInt(v.(int64), 10))
+		case reflect.Float64:
+			keyArray = append(keyArray, k)
+			valArray = append(valArray, fmt.Sprintf("%f", v.(float64)))
+		}
+	}
+	return keyArray, valArray
+}
+
 func getRequestParams(in []byte) string {
 	var o string
 	var s map[string]interface{}
@@ -49,26 +81,14 @@ func getRequestParams(in []byte) string {
 	if err != nil {
 		return ""
 	}
-	for k, v := range s {
-		if k == "ClassId" || k == "ObjectType" {
-			continue
-		}
-		log.Printf("Type: %+v", reflect.TypeOf(v).Kind())
-		switch reflect.TypeOf(v).Kind() {
-		case reflect.String:
-			o += k + " eq '" + v.(string) + "'"
-		case reflect.Bool:
-			o += k + " eq " + strconv.FormatBool(v.(bool))
-		case reflect.Int:
-			o += k + " eq " + strconv.FormatInt(v.(int64), 10)
-		case reflect.Float64:
-			o += k + " eq " + fmt.Sprintf("%f", v.(float64))
-		}
-		o += " and "
+	keyArr, valArr := parseFilterMap(s)
+	for i := range keyArr {
+		o += fmt.Sprintf("(%s eq %s) and ", keyArr[i], valArr[i])
 	}
 	o = strings.TrimSuffix(o, " and ")
 	return o
 }
+
 func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) bool {
 	if k == "Password" {
 		return true
