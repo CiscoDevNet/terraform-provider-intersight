@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **DeviceId** | Pointer to **string** | ID of the Storage device. | [optional] [readonly] 
 **SvpIp** | Pointer to **string** | IP address of the SVP (Service Processor). The SVP provides out‑of‑band configuration and management of the storage system, and collects performance data for key components to enable diagnostic testing and analysis. | [optional] [readonly] 
 **TargetCtl** | Pointer to **string** | Controller operated by the REST API. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
 **Pattern** | **string** | null | 
 **Fields** | [**[]TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
-**Field** | [**TelemetryDruidFilter**](telemetry.DruidFilter.md) |  | 
+**Field** | [**TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 
 ## Methods
 

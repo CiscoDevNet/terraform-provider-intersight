@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **PriorityFlowControlMode** | Pointer to **string** | Configure PFC on a per-port basis to enable the no-drop behavior for the CoS as defined by the active network qos policy. * &#x60;auto&#x60; - Enables the no-drop CoS values to be advertised by the DCBXP and negotiated with the peer.A successful negotiation enables PFC on the no-drop CoS.Any failures because of a mismatch in the capability of peers causes the PFC not to be enabled. * &#x60;on&#x60; - Enables PFC on the local port regardless of the capability of the peers. | [optional] [default to "auto"]
 **ReceiveDirection** | Pointer to **string** | Link-level Flow Control configured in the receive direction. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
 **SendDirection** | Pointer to **string** | Link-level Flow Control configured in the send direction. * &#x60;Disabled&#x60; - Admin configured Disabled State. * &#x60;Enabled&#x60; - Admin configured Enabled State. | [optional] [default to "Disabled"]
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

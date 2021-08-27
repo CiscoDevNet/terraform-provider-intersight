@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **SourceMoid** | Pointer to **string** | Moid of the managed object which represents the existing physical entity. | [optional] [readonly] 
 **Unit** | Pointer to **string** | Unit of the new capacity. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. | [optional] [readonly] [default to "TB"]
 **Uuid** | Pointer to **string** | Uuid of the recommended physical device. | [optional] [readonly] 
-**CapacityRunway** | Pointer to [**RecommendationCapacityRunwayRelationship**](recommendation.CapacityRunway.Relationship.md) |  | [optional] 
+**CapacityRunway** | Pointer to [**RecommendationCapacityRunwayRelationship**](RecommendationCapacityRunwayRelationship.md) |  | [optional] 
 **PhysicalItem** | Pointer to [**[]RecommendationPhysicalItemRelationship**](RecommendationPhysicalItemRelationship.md) | An array of relationships to recommendationPhysicalItem resources. | [optional] [readonly] 
 
 ## Methods

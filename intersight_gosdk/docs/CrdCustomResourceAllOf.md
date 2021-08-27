@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **TargetId** | Pointer to **string** | Target ID for public cloud DC. | [optional] 
 **TargetMoid** | Pointer to **string** | Target Moid for public cloud DC. | [optional] 
 **TargetType** | Pointer to **string** | Target type for public cloud DC. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

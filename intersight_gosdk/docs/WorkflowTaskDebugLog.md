@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **RetryCount** | Pointer to **int64** | A counter for number of retries. | [optional] [readonly] 
 **TaskDebugLogEntries** | Pointer to **interface{}** | Holds information helpful in isolating task failures. | [optional] [readonly] 
 **TaskInstId** | Pointer to **string** | The unique identifier for task instance. | [optional] [readonly] 
-**TaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](workflow.TaskInfo.Relationship.md) |  | [optional] 
-**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
+**TaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) |  | [optional] 
+**WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "config.ImportedItem"]
 **IsShared** | Pointer to **bool** | Specifies whether this item MO was in shared scope or user scope when exported. | [optional] [readonly] 
 **IsUpdated** | Pointer to **bool** | Specifies whether this item MO was updated or created while importing in desired service. | [optional] [readonly] 
-**Item** | Pointer to [**NullableConfigMoRef**](config.MoRef.md) |  | [optional] 
+**Item** | Pointer to [**NullableConfigMoRef**](ConfigMoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
 **NewMoid** | Pointer to **string** | Moid of the MO created/updated during import for the item. | [optional] [readonly] 
 **ServiceVersion** | Pointer to **string** | Version of the service that owned the item MO when the item was exported. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the item&#39;s import operation. * &#x60;&#x60; - The operation has not started. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been inititiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. | [optional] [readonly] [default to ""]
 **StatusMessage** | Pointer to **string** | Progress or error message for the MO&#39;s import operation. | [optional] [readonly] 
-**Importer** | Pointer to [**ConfigImporterRelationship**](config.Importer.Relationship.md) |  | [optional] 
+**Importer** | Pointer to [**ConfigImporterRelationship**](ConfigImporterRelationship.md) |  | [optional] 
 
 ## Methods
 

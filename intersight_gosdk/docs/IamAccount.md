@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **Permissions** | Pointer to [**[]IamPermissionRelationship**](IamPermissionRelationship.md) | An array of relationships to iamPermission resources. | [optional] [readonly] 
 **PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **Privileges** | Pointer to [**[]IamPrivilegeRelationship**](IamPrivilegeRelationship.md) | An array of relationships to iamPrivilege resources. | [optional] [readonly] 
-**ResourceLimits** | Pointer to [**IamResourceLimitsRelationship**](iam.ResourceLimits.Relationship.md) |  | [optional] 
+**ResourceLimits** | Pointer to [**IamResourceLimitsRelationship**](IamResourceLimitsRelationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](IamRoleRelationship.md) | An array of relationships to iamRole resources. | [optional] [readonly] 
-**SecurityHolder** | Pointer to [**IamSecurityHolderRelationship**](iam.SecurityHolder.Relationship.md) |  | [optional] 
-**SessionLimits** | Pointer to [**IamSessionLimitsRelationship**](iam.SessionLimits.Relationship.md) |  | [optional] 
+**SecurityHolder** | Pointer to [**IamSecurityHolderRelationship**](IamSecurityHolderRelationship.md) |  | [optional] 
+**SessionLimits** | Pointer to [**IamSessionLimitsRelationship**](IamSessionLimitsRelationship.md) |  | [optional] 
 
 ## Methods
 

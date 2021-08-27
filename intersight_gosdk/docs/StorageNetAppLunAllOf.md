@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **Serial** | Pointer to **string** | Serial number for the provisioned LUN. | [optional] [readonly] 
 **State** | Pointer to **string** | The administrative state of a LUN. * &#x60;offline&#x60; - The LUN is administratively offline, or a more detailed offline reason is not available. * &#x60;online&#x60; - The LUN is online. | [optional] [readonly] [default to "offline"]
 **Uuid** | Pointer to **string** | UUID of the LUN. | [optional] [readonly] 
-**Array** | Pointer to [**StorageNetAppClusterRelationship**](storage.NetAppCluster.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **Host** | Pointer to [**[]StorageNetAppInitiatorGroupRelationship**](StorageNetAppInitiatorGroupRelationship.md) | An array of relationships to storageNetAppInitiatorGroup resources. | [optional] [readonly] 
-**StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](storage.NetAppVolume.Relationship.md) |  | [optional] 
+**StorageContainer** | Pointer to [**StorageNetAppVolumeRelationship**](StorageNetAppVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 

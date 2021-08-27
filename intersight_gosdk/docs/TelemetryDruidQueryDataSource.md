@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | The type of data source. | 
-**Query** | [**TelemetryDruidGroupByRequest**](telemetry.DruidGroupByRequest.md) |  | 
+**Query** | [**TelemetryDruidGroupByRequest**](TelemetryDruidGroupByRequest.md) |  | 
 
 ## Methods
 

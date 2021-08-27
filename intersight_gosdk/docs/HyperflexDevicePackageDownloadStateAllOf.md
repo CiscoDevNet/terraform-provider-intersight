@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **HxDeviceName** | Pointer to **string** | HyperFlex Device Name for which the package download state is tracked. | [optional] [readonly] 
 **HxNodes** | Pointer to **[]string** |  | [optional] 
 **Timestamp** | Pointer to **time.Time** | Timestamp of the last health check Debian package installation on the HyperFlex Device. | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

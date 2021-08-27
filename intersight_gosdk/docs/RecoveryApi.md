@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupConfigPolicy**](recovery.BackupConfigPolicy.md)
+[**RecoveryBackupConfigPolicy**](RecoveryBackupConfigPolicy.md)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupProfile**](recovery.BackupProfile.md)
+[**RecoveryBackupProfile**](RecoveryBackupProfile.md)
 
 ### Authorization
 
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryOnDemandBackup**](recovery.OnDemandBackup.md)
+[**RecoveryOnDemandBackup**](RecoveryOnDemandBackup.md)
 
 ### Authorization
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryRestore**](recovery.Restore.md)
+[**RecoveryRestore**](RecoveryRestore.md)
 
 ### Authorization
 
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryScheduleConfigPolicy**](recovery.ScheduleConfigPolicy.md)
+[**RecoveryScheduleConfigPolicy**](RecoveryScheduleConfigPolicy.md)
 
 ### Authorization
 
@@ -761,7 +761,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupConfigPolicy**](recovery.BackupConfigPolicy.md)
+[**RecoveryBackupConfigPolicy**](RecoveryBackupConfigPolicy.md)
 
 ### Authorization
 
@@ -845,7 +845,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupConfigPolicyResponse**](recovery.BackupConfigPolicy.Response.md)
+[**RecoveryBackupConfigPolicyResponse**](RecoveryBackupConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -913,7 +913,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupProfile**](recovery.BackupProfile.md)
+[**RecoveryBackupProfile**](RecoveryBackupProfile.md)
 
 ### Authorization
 
@@ -997,7 +997,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupProfileResponse**](recovery.BackupProfile.Response.md)
+[**RecoveryBackupProfileResponse**](RecoveryBackupProfileResponse.md)
 
 ### Authorization
 
@@ -1065,7 +1065,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryConfigResult**](recovery.ConfigResult.md)
+[**RecoveryConfigResult**](RecoveryConfigResult.md)
 
 ### Authorization
 
@@ -1133,7 +1133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryConfigResultEntry**](recovery.ConfigResultEntry.md)
+[**RecoveryConfigResultEntry**](RecoveryConfigResultEntry.md)
 
 ### Authorization
 
@@ -1217,7 +1217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryConfigResultEntryResponse**](recovery.ConfigResultEntry.Response.md)
+[**RecoveryConfigResultEntryResponse**](RecoveryConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -1301,7 +1301,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryConfigResultResponse**](recovery.ConfigResult.Response.md)
+[**RecoveryConfigResultResponse**](RecoveryConfigResultResponse.md)
 
 ### Authorization
 
@@ -1369,7 +1369,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryOnDemandBackup**](recovery.OnDemandBackup.md)
+[**RecoveryOnDemandBackup**](RecoveryOnDemandBackup.md)
 
 ### Authorization
 
@@ -1453,7 +1453,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryOnDemandBackupResponse**](recovery.OnDemandBackup.Response.md)
+[**RecoveryOnDemandBackupResponse**](RecoveryOnDemandBackupResponse.md)
 
 ### Authorization
 
@@ -1521,7 +1521,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryRestore**](recovery.Restore.md)
+[**RecoveryRestore**](RecoveryRestore.md)
 
 ### Authorization
 
@@ -1605,7 +1605,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryRestoreResponse**](recovery.Restore.Response.md)
+[**RecoveryRestoreResponse**](RecoveryRestoreResponse.md)
 
 ### Authorization
 
@@ -1673,7 +1673,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryScheduleConfigPolicy**](recovery.ScheduleConfigPolicy.md)
+[**RecoveryScheduleConfigPolicy**](RecoveryScheduleConfigPolicy.md)
 
 ### Authorization
 
@@ -1757,7 +1757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryScheduleConfigPolicyResponse**](recovery.ScheduleConfigPolicy.Response.md)
+[**RecoveryScheduleConfigPolicyResponse**](RecoveryScheduleConfigPolicyResponse.md)
 
 ### Authorization
 
@@ -1829,7 +1829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupConfigPolicy**](recovery.BackupConfigPolicy.md)
+[**RecoveryBackupConfigPolicy**](RecoveryBackupConfigPolicy.md)
 
 ### Authorization
 
@@ -1901,7 +1901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupProfile**](recovery.BackupProfile.md)
+[**RecoveryBackupProfile**](RecoveryBackupProfile.md)
 
 ### Authorization
 
@@ -1973,7 +1973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryOnDemandBackup**](recovery.OnDemandBackup.md)
+[**RecoveryOnDemandBackup**](RecoveryOnDemandBackup.md)
 
 ### Authorization
 
@@ -2045,7 +2045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryScheduleConfigPolicy**](recovery.ScheduleConfigPolicy.md)
+[**RecoveryScheduleConfigPolicy**](RecoveryScheduleConfigPolicy.md)
 
 ### Authorization
 
@@ -2117,7 +2117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupConfigPolicy**](recovery.BackupConfigPolicy.md)
+[**RecoveryBackupConfigPolicy**](RecoveryBackupConfigPolicy.md)
 
 ### Authorization
 
@@ -2189,7 +2189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryBackupProfile**](recovery.BackupProfile.md)
+[**RecoveryBackupProfile**](RecoveryBackupProfile.md)
 
 ### Authorization
 
@@ -2261,7 +2261,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryOnDemandBackup**](recovery.OnDemandBackup.md)
+[**RecoveryOnDemandBackup**](RecoveryOnDemandBackup.md)
 
 ### Authorization
 
@@ -2333,7 +2333,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RecoveryScheduleConfigPolicy**](recovery.ScheduleConfigPolicy.md)
+[**RecoveryScheduleConfigPolicy**](RecoveryScheduleConfigPolicy.md)
 
 ### Authorization
 

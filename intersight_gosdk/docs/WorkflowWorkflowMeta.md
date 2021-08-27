@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type of workflow definition. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
 **Version** | Pointer to **int64** | The version for the workflow so we can support multiple versions for the same workflow name. | [optional] [default to 1]
 **WaitOnDuplicate** | Pointer to **bool** | Parameter decides if workflows will wait for a duplicate to finish before starting a new one. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

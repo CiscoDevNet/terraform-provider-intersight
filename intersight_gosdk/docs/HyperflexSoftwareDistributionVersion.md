@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SoftwareDistributionVersion"]
 **Version** | Pointer to **string** | The HyperFlex Software Distribution version. | [optional] 
 **DistributionComponents** | Pointer to [**[]HyperflexSoftwareDistributionComponentRelationship**](HyperflexSoftwareDistributionComponentRelationship.md) | An array of relationships to hyperflexSoftwareDistributionComponent resources. | [optional] 
-**SoftwareDistributionEntry** | Pointer to [**HyperflexSoftwareDistributionEntryRelationship**](hyperflex.SoftwareDistributionEntry.Relationship.md) |  | [optional] 
+**SoftwareDistributionEntry** | Pointer to [**HyperflexSoftwareDistributionEntryRelationship**](HyperflexSoftwareDistributionEntryRelationship.md) |  | [optional] 
 
 ## Methods
 

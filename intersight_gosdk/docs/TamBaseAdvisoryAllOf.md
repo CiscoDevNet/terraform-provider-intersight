@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Description** | Pointer to **string** | Brief description of the advisory details. | [optional] 
 **Name** | Pointer to **string** | A user defined name for the Intersight Advisory. | [optional] 
-**Severity** | Pointer to [**NullableTamSeverity**](tam.Severity.md) |  | [optional] 
+**Severity** | Pointer to [**NullableTamSeverity**](TamSeverity.md) |  | [optional] 
 **State** | Pointer to **string** | Current state of the advisory. * &#x60;ready&#x60; - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created. * &#x60;evaluating&#x60; - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation. | [optional] [default to "ready"]
 
 ## Methods

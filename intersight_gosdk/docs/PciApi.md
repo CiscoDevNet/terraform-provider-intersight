@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciCoprocessorCard**](pci.CoprocessorCard.md)
+[**PciCoprocessorCard**](PciCoprocessorCard.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciCoprocessorCardResponse**](pci.CoprocessorCard.Response.md)
+[**PciCoprocessorCardResponse**](PciCoprocessorCardResponse.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciDevice**](pci.Device.md)
+[**PciDevice**](PciDevice.md)
 
 ### Authorization
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciDeviceResponse**](pci.Device.Response.md)
+[**PciDeviceResponse**](PciDeviceResponse.md)
 
 ### Authorization
 
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciLink**](pci.Link.md)
+[**PciLink**](PciLink.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciLinkResponse**](pci.Link.Response.md)
+[**PciLinkResponse**](PciLinkResponse.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciSwitch**](pci.Switch.md)
+[**PciSwitch**](PciSwitch.md)
 
 ### Authorization
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciSwitchResponse**](pci.Switch.Response.md)
+[**PciSwitchResponse**](PciSwitchResponse.md)
 
 ### Authorization
 
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciDevice**](pci.Device.md)
+[**PciDevice**](PciDevice.md)
 
 ### Authorization
 
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciLink**](pci.Link.md)
+[**PciLink**](PciLink.md)
 
 ### Authorization
 
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciSwitch**](pci.Switch.md)
+[**PciSwitch**](PciSwitch.md)
 
 ### Authorization
 
@@ -901,7 +901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciDevice**](pci.Device.md)
+[**PciDevice**](PciDevice.md)
 
 ### Authorization
 
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciLink**](pci.Link.md)
+[**PciLink**](PciLink.md)
 
 ### Authorization
 
@@ -1045,7 +1045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PciSwitch**](pci.Switch.md)
+[**PciSwitch**](PciSwitch.md)
 
 ### Authorization
 

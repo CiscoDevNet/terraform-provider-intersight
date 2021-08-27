@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Initiators** | Pointer to [**[]StorageBaseInitiator**](StorageBaseInitiator.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the host in storage array. | [optional] [readonly] 
 **OsType** | Pointer to **string** | Operating system running on the host. | [optional] [readonly] 
-**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](storage.BaseCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) |  | [optional] 
 
 ## Methods
 

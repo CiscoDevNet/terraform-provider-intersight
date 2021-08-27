@@ -8,11 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureHostLun"]
 **HostGroupName** | Pointer to **string** | Name of the host group associated with LUN. | [optional] [readonly] 
 **Shared** | Pointer to **bool** | Kind of volume connection to host. True if it is connected through host group. False in case of direct host connection. | [optional] [readonly] 
-**Array** | Pointer to [**StoragePureArrayRelationship**](storage.PureArray.Relationship.md) |  | [optional] 
-**Host** | Pointer to [**StoragePureHostRelationship**](storage.PureHost.Relationship.md) |  | [optional] 
-**HostGroup** | Pointer to [**StoragePureHostGroupRelationship**](storage.PureHostGroup.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**Volume** | Pointer to [**StoragePureVolumeRelationship**](storage.PureVolume.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StoragePureArrayRelationship**](StoragePureArrayRelationship.md) |  | [optional] 
+**Host** | Pointer to [**StoragePureHostRelationship**](StoragePureHostRelationship.md) |  | [optional] 
+**HostGroup** | Pointer to [**StoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Volume** | Pointer to [**StoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) |  | [optional] 
 
 ## Methods
 

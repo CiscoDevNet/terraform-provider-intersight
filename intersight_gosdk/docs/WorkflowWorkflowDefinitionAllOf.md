@@ -17,15 +17,15 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **OutputParameters** | Pointer to **interface{}** | The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is &#39;${Source.output.JsonPath}&#39;, where &#39;Source&#39; is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It&#39;s followed by a JSON path expression to extract JSON fragment from source&#39;s output. | [optional] 
-**Properties** | Pointer to [**NullableWorkflowWorkflowProperties**](workflow.WorkflowProperties.md) |  | [optional] 
+**Properties** | Pointer to [**NullableWorkflowWorkflowProperties**](WorkflowWorkflowProperties.md) |  | [optional] 
 **Tasks** | Pointer to [**[]WorkflowWorkflowTask**](WorkflowWorkflowTask.md) |  | [optional] 
 **UiInputFilters** | Pointer to [**[]WorkflowUiInputFilter**](WorkflowUiInputFilter.md) |  | [optional] 
 **UiRenderingData** | Pointer to **interface{}** | This will hold the data needed for workflow to be rendered in the user interface. | [optional] 
-**ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](workflow.ValidationInformation.md) |  | [optional] 
+**ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workflow to support multiple versions. | [optional] [default to 1]
-**Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
-**ClonedFrom** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](workflow.WorkflowDefinition.Relationship.md) |  | [optional] 
-**WorkflowMetadata** | Pointer to [**WorkflowWorkflowMetadataRelationship**](workflow.WorkflowMetadata.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
+**ClonedFrom** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
+**WorkflowMetadata** | Pointer to [**WorkflowWorkflowMetadataRelationship**](WorkflowWorkflowMetadataRelationship.md) |  | [optional] 
 
 ## Methods
 

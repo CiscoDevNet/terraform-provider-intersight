@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **ConfigState** | Pointer to **string** | Configuration state of the service profile. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the UCS Manager service profile. | [optional] [readonly] 
 **OperState** | Pointer to **string** | Operational state of the service profile. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

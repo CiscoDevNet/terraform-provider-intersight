@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.UuidLease"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.UuidLease"]
 **Uuid** | Pointer to **string** | UUID Prefix+Suffix numbers. | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**Pool** | Pointer to [**UuidpoolPoolRelationship**](uuidpool.Pool.Relationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**UuidpoolPoolMemberRelationship**](uuidpool.PoolMember.Relationship.md) |  | [optional] 
-**Universe** | Pointer to [**UuidpoolUniverseRelationship**](uuidpool.Universe.Relationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**UuidpoolPoolRelationship**](UuidpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**UuidpoolPoolMemberRelationship**](UuidpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**UuidpoolUniverseRelationship**](UuidpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 

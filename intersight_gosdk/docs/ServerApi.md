@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigImport**](server.ConfigImport.md)
+[**ServerConfigImport**](ServerConfigImport.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfile**](server.Profile.md)
+[**ServerProfile**](ServerProfile.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileTemplate**](server.ProfileTemplate.md)
+[**ServerProfileTemplate**](ServerProfileTemplate.md)
 
 ### Authorization
 
@@ -416,7 +416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigChangeDetail**](server.ConfigChangeDetail.md)
+[**ServerConfigChangeDetail**](ServerConfigChangeDetail.md)
 
 ### Authorization
 
@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigChangeDetailResponse**](server.ConfigChangeDetail.Response.md)
+[**ServerConfigChangeDetailResponse**](ServerConfigChangeDetailResponse.md)
 
 ### Authorization
 
@@ -568,7 +568,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigImport**](server.ConfigImport.md)
+[**ServerConfigImport**](ServerConfigImport.md)
 
 ### Authorization
 
@@ -652,7 +652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigImportResponse**](server.ConfigImport.Response.md)
+[**ServerConfigImportResponse**](ServerConfigImportResponse.md)
 
 ### Authorization
 
@@ -720,7 +720,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigResult**](server.ConfigResult.md)
+[**ServerConfigResult**](ServerConfigResult.md)
 
 ### Authorization
 
@@ -788,7 +788,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigResultEntry**](server.ConfigResultEntry.md)
+[**ServerConfigResultEntry**](ServerConfigResultEntry.md)
 
 ### Authorization
 
@@ -872,7 +872,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigResultEntryResponse**](server.ConfigResultEntry.Response.md)
+[**ServerConfigResultEntryResponse**](ServerConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -956,7 +956,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerConfigResultResponse**](server.ConfigResult.Response.md)
+[**ServerConfigResultResponse**](ServerConfigResultResponse.md)
 
 ### Authorization
 
@@ -1024,7 +1024,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfile**](server.Profile.md)
+[**ServerProfile**](ServerProfile.md)
 
 ### Authorization
 
@@ -1108,7 +1108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileResponse**](server.Profile.Response.md)
+[**ServerProfileResponse**](ServerProfileResponse.md)
 
 ### Authorization
 
@@ -1176,7 +1176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileTemplate**](server.ProfileTemplate.md)
+[**ServerProfileTemplate**](ServerProfileTemplate.md)
 
 ### Authorization
 
@@ -1260,7 +1260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileTemplateResponse**](server.ProfileTemplate.Response.md)
+[**ServerProfileTemplateResponse**](ServerProfileTemplateResponse.md)
 
 ### Authorization
 
@@ -1332,7 +1332,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfile**](server.Profile.md)
+[**ServerProfile**](ServerProfile.md)
 
 ### Authorization
 
@@ -1404,7 +1404,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileTemplate**](server.ProfileTemplate.md)
+[**ServerProfileTemplate**](ServerProfileTemplate.md)
 
 ### Authorization
 
@@ -1476,7 +1476,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfile**](server.Profile.md)
+[**ServerProfile**](ServerProfile.md)
 
 ### Authorization
 
@@ -1548,7 +1548,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerProfileTemplate**](server.ProfileTemplate.md)
+[**ServerProfileTemplate**](ServerProfileTemplate.md)
 
 ### Authorization
 

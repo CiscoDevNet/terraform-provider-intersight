@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElement**](network.Element.md)
+[**NetworkElement**](NetworkElement.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElementResponse**](network.Element.Response.md)
+[**NetworkElementResponse**](NetworkElementResponse.md)
 
 ### Authorization
 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElementSummary**](network.ElementSummary.md)
+[**NetworkElementSummary**](NetworkElementSummary.md)
 
 ### Authorization
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElementSummaryResponse**](network.ElementSummary.Response.md)
+[**NetworkElementSummaryResponse**](NetworkElementSummaryResponse.md)
 
 ### Authorization
 
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkFcZoneInfo**](network.FcZoneInfo.md)
+[**NetworkFcZoneInfo**](NetworkFcZoneInfo.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkFcZoneInfoResponse**](network.FcZoneInfo.Response.md)
+[**NetworkFcZoneInfoResponse**](NetworkFcZoneInfoResponse.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkVlanPortInfo**](network.VlanPortInfo.md)
+[**NetworkVlanPortInfo**](NetworkVlanPortInfo.md)
 
 ### Authorization
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkVlanPortInfoResponse**](network.VlanPortInfo.Response.md)
+[**NetworkVlanPortInfoResponse**](NetworkVlanPortInfoResponse.md)
 
 ### Authorization
 
@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElement**](network.Element.md)
+[**NetworkElement**](NetworkElement.md)
 
 ### Authorization
 
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkFcZoneInfo**](network.FcZoneInfo.md)
+[**NetworkFcZoneInfo**](NetworkFcZoneInfo.md)
 
 ### Authorization
 
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkVlanPortInfo**](network.VlanPortInfo.md)
+[**NetworkVlanPortInfo**](NetworkVlanPortInfo.md)
 
 ### Authorization
 
@@ -901,7 +901,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkElement**](network.Element.md)
+[**NetworkElement**](NetworkElement.md)
 
 ### Authorization
 
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkFcZoneInfo**](network.FcZoneInfo.md)
+[**NetworkFcZoneInfo**](NetworkFcZoneInfo.md)
 
 ### Authorization
 
@@ -1045,7 +1045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NetworkVlanPortInfo**](network.VlanPortInfo.md)
+[**NetworkVlanPortInfo**](NetworkVlanPortInfo.md)
 
 ### Authorization
 

@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaultInstance**](fault.Instance.md)
+[**FaultInstance**](FaultInstance.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaultInstanceResponse**](fault.Instance.Response.md)
+[**FaultInstanceResponse**](FaultInstanceResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaultInstance**](fault.Instance.md)
+[**FaultInstance**](FaultInstance.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaultInstance**](fault.Instance.md)
+[**FaultInstance**](FaultInstance.md)
 
 ### Authorization
 

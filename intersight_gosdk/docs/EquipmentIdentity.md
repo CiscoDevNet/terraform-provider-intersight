@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The vendor provided model name for the equipment. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number of the equipment. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | The manufacturer of the equipment. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.Lease"]
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
 **WwnId** | Pointer to **string** | WWN ID allocated for pool based allocation. | [optional] 
-**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**Pool** | Pointer to [**FcpoolPoolRelationship**](fcpool.Pool.Relationship.md) |  | [optional] 
-**PoolMember** | Pointer to [**FcpoolPoolMemberRelationship**](fcpool.PoolMember.Relationship.md) |  | [optional] 
-**Universe** | Pointer to [**FcpoolUniverseRelationship**](fcpool.Universe.Relationship.md) |  | [optional] 
+**AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
+**Pool** | Pointer to [**FcpoolPoolRelationship**](FcpoolPoolRelationship.md) |  | [optional] 
+**PoolMember** | Pointer to [**FcpoolPoolMemberRelationship**](FcpoolPoolMemberRelationship.md) |  | [optional] 
+**Universe** | Pointer to [**FcpoolUniverseRelationship**](FcpoolUniverseRelationship.md) |  | [optional] 
 
 ## Methods
 

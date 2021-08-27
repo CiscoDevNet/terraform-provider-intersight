@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **ProgressOfReplacing** | Pointer to **string** | Displays the status of the tier relocation processing. | [optional] [readonly] 
 **TotalReservedCapacity** | Pointer to **int64** | Total capacity of the reserved page (bytes) of the DP volume that is related to the DP pool. | [optional] [readonly] 
 **WarningThreshold** | Pointer to **int64** | The warning threshold set for the pool (%). | [optional] [readonly] 
-**Array** | Pointer to [**StorageHitachiArrayRelationship**](storage.HitachiArray.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

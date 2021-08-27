@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **CpuOverCommitment** | Pointer to **int64** | CPU over commitment associated with this cluster. | [optional] 
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this cluster. | [optional] 
 **InventoryPath** | Pointer to **string** | Inventory path of the cluster. | [optional] 
-**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

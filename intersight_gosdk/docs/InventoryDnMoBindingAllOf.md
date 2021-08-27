@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | The Distinguished Name for this object, used to uniquely identify this object. | [optional] [readonly] 
 **TargetMoId** | Pointer to **string** | The MO ID of the target MO for this particular Distinguished Name (dn). | [optional] [readonly] 
 **TargetMoType** | Pointer to **string** | The type of the target MO for this particular Distinguished Name (dn). | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

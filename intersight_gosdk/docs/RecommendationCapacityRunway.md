@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Runway** | Pointer to **int64** | This represents the new runway, that is the number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit after the recommended hardware is added. | [optional] [readonly] 
 **TotalCapacity** | Pointer to **int64** | Total capacity of the cluster after the recommended hardware is added. | [optional] [readonly] 
 **Unit** | Pointer to **string** | Unit for the new capacity. * &#x60;TB&#x60; - The Enum value TB represents that the measurement unit is in terabytes. * &#x60;MB&#x60; - The Enum value MB represents that the measurement unit is in megabytes. | [optional] [readonly] [default to "TB"]
-**ForecastInstance** | Pointer to [**ForecastInstanceRelationship**](forecast.Instance.Relationship.md) |  | [optional] 
+**ForecastInstance** | Pointer to [**ForecastInstanceRelationship**](ForecastInstanceRelationship.md) |  | [optional] 
 **PhysicalItem** | Pointer to [**[]RecommendationPhysicalItemRelationship**](RecommendationPhysicalItemRelationship.md) | An array of relationships to recommendationPhysicalItem resources. | [optional] [readonly] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

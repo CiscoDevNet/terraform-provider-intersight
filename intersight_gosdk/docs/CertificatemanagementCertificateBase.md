@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "certificatemanagement.Imc"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "certificatemanagement.Imc"]
-**Certificate** | Pointer to [**NullableX509Certificate**](x509.Certificate.md) |  | [optional] 
+**Certificate** | Pointer to [**NullableX509Certificate**](X509Certificate.md) |  | [optional] 
 **Enabled** | Pointer to **bool** | Enable/Disable the certificate in Certificate Management policy. | [optional] [default to true]
 **IsPrivatekeySet** | Pointer to **bool** | Indicates whether the value of the &#39;privatekey&#39; property has been set. | [optional] [readonly] [default to false]
 **Privatekey** | Pointer to **string** | Private Key which is used to validate the certificate. | [optional] 

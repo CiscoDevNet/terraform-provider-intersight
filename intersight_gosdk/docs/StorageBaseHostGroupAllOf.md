@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "storage.PureHostGroup"]
 **Description** | Pointer to **string** | Short description about the host group. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the host group in storage array. | [optional] [readonly] 
-**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](storage.BaseCapacity.md) |  | [optional] 
+**StorageUtilization** | Pointer to [**NullableStorageBaseCapacity**](StorageBaseCapacity.md) |  | [optional] 
 
 ## Methods
 

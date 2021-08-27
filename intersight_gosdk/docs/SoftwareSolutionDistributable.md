@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | The path of the file in S3/minio bucket. | [optional] [readonly] 
 **SolutionName** | Pointer to **string** | The name of the solution in which the image belongs. | [optional] 
 **SubType** | Pointer to **string** | The type of the file like OS image, Script etc. * &#x60;osimage&#x60; - The solution OS image for deployment. * &#x60;script&#x60; - The Python script for the solution VM configuration and deployment. | [optional] [default to "osimage"]
-**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](SoftwarerepositoryCatalogRelationship.md) |  | [optional] 
 
 ## Methods
 

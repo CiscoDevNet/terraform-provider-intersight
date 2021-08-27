@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.Iscsi"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.Iscsi"]
-**Bootloader** | Pointer to [**NullableBootBootloader**](boot.Bootloader.md) |  | [optional] 
+**Bootloader** | Pointer to [**NullableBootBootloader**](BootBootloader.md) |  | [optional] 
 **InterfaceName** | Pointer to **string** | The name of the underlying virtual ethernet interface used by the iSCSI boot device. | [optional] 
 **Port** | Pointer to **int64** | Port ID of the ISCSI boot device. | [optional] [default to 0]
 **Slot** | Pointer to **string** | The slot id of the device. Supported values are (1 - 255, \&quot;MLOM\&quot;, \&quot;L\&quot;, \&quot;L1\&quot;, \&quot;L2\&quot;, \&quot;OCP\&quot;). | [optional] 

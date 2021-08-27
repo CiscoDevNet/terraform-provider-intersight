@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ServiceCategory** | Pointer to **string** | Indicates if this sku belongs to Compute, Storage, Database or Network category. * &#x60;Compute&#x60; - Compute service offered by cloud provider. * &#x60;Storage&#x60; - Storage service offered by cloud provider. * &#x60;Database&#x60; - Database service offered by cloud provider. * &#x60;Network&#x60; - Network service offered by cloud provider. | [optional] [default to "Compute"]
 **ServiceFamily** | Pointer to **string** | Property to identify the family of service that the sku belongs to. | [optional] 
 **ServiceName** | Pointer to **string** | Any display name for the ServiceCategory if available. | [optional] 
-**Target** | Pointer to [**AssetTargetRelationship**](asset.Target.Relationship.md) |  | [optional] 
+**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the OS ConfigurationFile that uniquely identifies the configuration file. | [optional] 
 **Placeholders** | Pointer to [**[]OsPlaceHolder**](OsPlaceHolder.md) |  | [optional] 
 **Supported** | Pointer to **bool** | An internal property that is used to distinguish between the pre-canned OS configuration file entries and user provided entries. | [optional] [readonly] 
-**Catalog** | Pointer to [**OsCatalogRelationship**](os.Catalog.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**OsCatalogRelationship**](OsCatalogRelationship.md) |  | [optional] 
 **Distributions** | Pointer to [**[]HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) | An array of relationships to hclOperatingSystem resources. | [optional] 
 
 ## Methods

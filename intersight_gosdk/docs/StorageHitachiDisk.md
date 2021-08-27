@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **ParityGroupId** | Pointer to **string** | Parity group number. When the drive does not belong to any parity group, an empty character string is output. | [optional] [readonly] 
 **TypeDetail** | Pointer to **string** | Drive type. * &#x60;N/A&#x60; - Drive Type is not available. * &#x60;SAS&#x60; - SAS. * &#x60;SSD(MLC)&#x60; - SSD (MLC). * &#x60;SSD(FMC)&#x60; - SSD (FMC). * &#x60;SSD(FMD)&#x60; - SSD (FMD). * &#x60;SSD(SLC)&#x60; - SSD (SLC). * &#x60;SSD&#x60; - SSD. * &#x60;SSD(RI)&#x60; - SSD (RI). | [optional] [readonly] [default to "N/A"]
 **Usage** | Pointer to **string** | Purpose for which the drive is used. | [optional] [readonly] 
-**Array** | Pointer to [**StorageHitachiArrayRelationship**](storage.HitachiArray.Relationship.md) |  | [optional] 
-**ParityGroup** | Pointer to [**StorageHitachiParityGroupRelationship**](storage.HitachiParityGroup.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
+**ParityGroup** | Pointer to [**StorageHitachiParityGroupRelationship**](StorageHitachiParityGroupRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

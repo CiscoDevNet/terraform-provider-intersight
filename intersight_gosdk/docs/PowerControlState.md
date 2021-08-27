@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **N1MaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in N+1 mode in Watts. | [optional] [readonly] 
 **N2MaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in N+2 mode in Watts. | [optional] [readonly] 
 **NonRedundantMaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in non-redundant mode in Watts. | [optional] [readonly] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

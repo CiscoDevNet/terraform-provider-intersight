@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Md5sum** | Pointer to **string** | MD5 sum of the firmware image that will be used by the endpoint to validate the integrity of the image, post download. | [optional] 
 **Size** | Pointer to **int64** | The size (in bytes) of the firmware image. | [optional] 
 **Url** | Pointer to **string** | The URL of this file in file server. The endpoint uses this URL to download the file from the file server. | [optional] 
-**File** | Pointer to [**SoftwarerepositoryFileRelationship**](softwarerepository.File.Relationship.md) |  | [optional] 
+**File** | Pointer to [**SoftwarerepositoryFileRelationship**](SoftwarerepositoryFileRelationship.md) |  | [optional] 
 
 ## Methods
 

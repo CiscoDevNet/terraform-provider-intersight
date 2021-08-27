@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TopSystem**](top.System.md)
+[**TopSystem**](TopSystem.md)
 
 ### Authorization
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TopSystemResponse**](top.System.Response.md)
+[**TopSystemResponse**](TopSystemResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TopSystem**](top.System.md)
+[**TopSystem**](TopSystem.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TopSystem**](top.System.md)
+[**TopSystem**](TopSystem.md)
 
 ### Authorization
 

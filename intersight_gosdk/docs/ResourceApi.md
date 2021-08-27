@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroup**](resource.Group.md)
+[**ResourceGroup**](ResourceGroup.md)
 
 ### Authorization
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroup**](resource.Group.md)
+[**ResourceGroup**](ResourceGroup.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroupResponse**](resource.Group.Response.md)
+[**ResourceGroupResponse**](ResourceGroupResponse.md)
 
 ### Authorization
 
@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroupMember**](resource.GroupMember.md)
+[**ResourceGroupMember**](ResourceGroupMember.md)
 
 ### Authorization
 
@@ -443,7 +443,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroupMemberResponse**](resource.GroupMember.Response.md)
+[**ResourceGroupMemberResponse**](ResourceGroupMemberResponse.md)
 
 ### Authorization
 
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceLicenseResourceCount**](resource.LicenseResourceCount.md)
+[**ResourceLicenseResourceCount**](ResourceLicenseResourceCount.md)
 
 ### Authorization
 
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceLicenseResourceCountResponse**](resource.LicenseResourceCount.Response.md)
+[**ResourceLicenseResourceCountResponse**](ResourceLicenseResourceCountResponse.md)
 
 ### Authorization
 
@@ -663,7 +663,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceMembership**](resource.Membership.md)
+[**ResourceMembership**](ResourceMembership.md)
 
 ### Authorization
 
@@ -731,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceMembershipHolder**](resource.MembershipHolder.md)
+[**ResourceMembershipHolder**](ResourceMembershipHolder.md)
 
 ### Authorization
 
@@ -815,7 +815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceMembershipHolderResponse**](resource.MembershipHolder.Response.md)
+[**ResourceMembershipHolderResponse**](ResourceMembershipHolderResponse.md)
 
 ### Authorization
 
@@ -899,7 +899,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceMembershipResponse**](resource.Membership.Response.md)
+[**ResourceMembershipResponse**](ResourceMembershipResponse.md)
 
 ### Authorization
 
@@ -971,7 +971,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroup**](resource.Group.md)
+[**ResourceGroup**](ResourceGroup.md)
 
 ### Authorization
 
@@ -1043,7 +1043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceGroup**](resource.Group.md)
+[**ResourceGroup**](ResourceGroup.md)
 
 ### Authorization
 

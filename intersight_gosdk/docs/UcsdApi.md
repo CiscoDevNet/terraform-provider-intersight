@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UcsdBackupInfo**](ucsd.BackupInfo.md)
+[**UcsdBackupInfo**](UcsdBackupInfo.md)
 
 ### Authorization
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UcsdBackupInfoResponse**](ucsd.BackupInfo.Response.md)
+[**UcsdBackupInfoResponse**](UcsdBackupInfoResponse.md)
 
 ### Authorization
 

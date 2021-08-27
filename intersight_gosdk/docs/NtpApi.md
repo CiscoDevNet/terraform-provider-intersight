@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NtpPolicy**](ntp.Policy.md)
+[**NtpPolicy**](NtpPolicy.md)
 
 ### Authorization
 
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NtpPolicy**](ntp.Policy.md)
+[**NtpPolicy**](NtpPolicy.md)
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NtpPolicyResponse**](ntp.Policy.Response.md)
+[**NtpPolicyResponse**](NtpPolicyResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NtpPolicy**](ntp.Policy.md)
+[**NtpPolicy**](NtpPolicy.md)
 
 ### Authorization
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NtpPolicy**](ntp.Policy.md)
+[**NtpPolicy**](NtpPolicy.md)
 
 ### Authorization
 

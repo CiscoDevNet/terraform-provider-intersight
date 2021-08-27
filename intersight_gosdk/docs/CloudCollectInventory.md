@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cloud.CollectInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cloud.CollectInventory"]
 **TargetId** | Pointer to **string** | The id of the new Terraform cloud asset which was created. | [optional] 
-**Target** | Pointer to [**AssetTargetRelationship**](asset.Target.Relationship.md) |  | [optional] 
+**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 

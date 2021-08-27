@@ -17,10 +17,10 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stockkeeping Unit for this Fan Unit. | [optional] [readonly] 
 **TrayId** | Pointer to **int64** | Tray identifier for the fan module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Unit. | [optional] [readonly] 
-**EquipmentFanModule** | Pointer to [**EquipmentFanModuleRelationship**](equipment.FanModule.Relationship.md) |  | [optional] 
-**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**EquipmentFanModule** | Pointer to [**EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **VendorUuid** | Pointer to **string** | The UUID value of the vendor assigned to the virtual drive. | [optional] [readonly] 
 **VirtualDriveDn** | Pointer to **string** | The distinguished name of the virtual drive for which the extended data is provided. | [optional] [readonly] 
 **VirtualDriveId** | Pointer to **string** | The Id of the virtual drive. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**StorageController** | Pointer to [**StorageControllerRelationship**](storage.Controller.Relationship.md) |  | [optional] 
-**VirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](storage.VirtualDrive.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageController** | Pointer to [**StorageControllerRelationship**](StorageControllerRelationship.md) |  | [optional] 
+**VirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ConfigProgress** | Pointer to **string** | The progress percentage of the running configuration or workflow. | [optional] 
 **Duration** | Pointer to **string** | The duration of the running configuration or workflow. | [optional] 
 **StartTime** | Pointer to **string** | The start time of the configuration or workflow. | [optional] 
-**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
+**ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]HyperflexConfigResultEntryRelationship**](HyperflexConfigResultEntryRelationship.md) | An array of relationships to hyperflexConfigResultEntry resources. | [optional] 
 
 ## Methods

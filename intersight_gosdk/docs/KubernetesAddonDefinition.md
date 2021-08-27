@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of an addon component. | [optional] 
 **Platforms** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Version of the addon component. | [optional] 
-**Catalog** | Pointer to [**KubernetesCatalogRelationship**](kubernetes.Catalog.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Catalog** | Pointer to [**KubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

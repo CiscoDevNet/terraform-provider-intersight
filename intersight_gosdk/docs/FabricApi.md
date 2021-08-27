@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAppliancePcRole**](fabric.AppliancePcRole.md)
+[**FabricAppliancePcRole**](FabricAppliancePcRole.md)
 
 ### Authorization
 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricApplianceRole**](fabric.ApplianceRole.md)
+[**FabricApplianceRole**](FabricApplianceRole.md)
 
 ### Authorization
 
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEstimateImpact**](fabric.EstimateImpact.md)
+[**FabricEstimateImpact**](FabricEstimateImpact.md)
 
 ### Authorization
 
@@ -438,7 +438,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkControlPolicy**](fabric.EthNetworkControlPolicy.md)
+[**FabricEthNetworkControlPolicy**](FabricEthNetworkControlPolicy.md)
 
 ### Authorization
 
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkGroupPolicy**](fabric.EthNetworkGroupPolicy.md)
+[**FabricEthNetworkGroupPolicy**](FabricEthNetworkGroupPolicy.md)
 
 ### Authorization
 
@@ -574,7 +574,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkPolicy**](fabric.EthNetworkPolicy.md)
+[**FabricEthNetworkPolicy**](FabricEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -642,7 +642,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcNetworkPolicy**](fabric.FcNetworkPolicy.md)
+[**FabricFcNetworkPolicy**](FabricFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -710,7 +710,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkPcRole**](fabric.FcUplinkPcRole.md)
+[**FabricFcUplinkPcRole**](FabricFcUplinkPcRole.md)
 
 ### Authorization
 
@@ -778,7 +778,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkRole**](fabric.FcUplinkRole.md)
+[**FabricFcUplinkRole**](FabricFcUplinkRole.md)
 
 ### Authorization
 
@@ -846,7 +846,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkPcRole**](fabric.FcoeUplinkPcRole.md)
+[**FabricFcoeUplinkPcRole**](FabricFcoeUplinkPcRole.md)
 
 ### Authorization
 
@@ -914,7 +914,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkRole**](fabric.FcoeUplinkRole.md)
+[**FabricFcoeUplinkRole**](FabricFcoeUplinkRole.md)
 
 ### Authorization
 
@@ -982,7 +982,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFlowControlPolicy**](fabric.FlowControlPolicy.md)
+[**FabricFlowControlPolicy**](FabricFlowControlPolicy.md)
 
 ### Authorization
 
@@ -1050,7 +1050,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkAggregationPolicy**](fabric.LinkAggregationPolicy.md)
+[**FabricLinkAggregationPolicy**](FabricLinkAggregationPolicy.md)
 
 ### Authorization
 
@@ -1118,7 +1118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkControlPolicy**](fabric.LinkControlPolicy.md)
+[**FabricLinkControlPolicy**](FabricLinkControlPolicy.md)
 
 ### Authorization
 
@@ -1186,7 +1186,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricMulticastPolicy**](fabric.MulticastPolicy.md)
+[**FabricMulticastPolicy**](FabricMulticastPolicy.md)
 
 ### Authorization
 
@@ -1254,7 +1254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcOperation**](fabric.PcOperation.md)
+[**FabricPcOperation**](FabricPcOperation.md)
 
 ### Authorization
 
@@ -1322,7 +1322,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortMode**](fabric.PortMode.md)
+[**FabricPortMode**](FabricPortMode.md)
 
 ### Authorization
 
@@ -1390,7 +1390,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortOperation**](fabric.PortOperation.md)
+[**FabricPortOperation**](FabricPortOperation.md)
 
 ### Authorization
 
@@ -1458,7 +1458,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortPolicy**](fabric.PortPolicy.md)
+[**FabricPortPolicy**](FabricPortPolicy.md)
 
 ### Authorization
 
@@ -1526,7 +1526,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricServerRole**](fabric.ServerRole.md)
+[**FabricServerRole**](FabricServerRole.md)
 
 ### Authorization
 
@@ -1594,7 +1594,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchClusterProfile**](fabric.SwitchClusterProfile.md)
+[**FabricSwitchClusterProfile**](FabricSwitchClusterProfile.md)
 
 ### Authorization
 
@@ -1662,7 +1662,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchControlPolicy**](fabric.SwitchControlPolicy.md)
+[**FabricSwitchControlPolicy**](FabricSwitchControlPolicy.md)
 
 ### Authorization
 
@@ -1730,7 +1730,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchProfile**](fabric.SwitchProfile.md)
+[**FabricSwitchProfile**](FabricSwitchProfile.md)
 
 ### Authorization
 
@@ -1798,7 +1798,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSystemQosPolicy**](fabric.SystemQosPolicy.md)
+[**FabricSystemQosPolicy**](FabricSystemQosPolicy.md)
 
 ### Authorization
 
@@ -1866,7 +1866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkPcRole**](fabric.UplinkPcRole.md)
+[**FabricUplinkPcRole**](FabricUplinkPcRole.md)
 
 ### Authorization
 
@@ -1934,7 +1934,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkRole**](fabric.UplinkRole.md)
+[**FabricUplinkRole**](FabricUplinkRole.md)
 
 ### Authorization
 
@@ -2002,7 +2002,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVlan**](fabric.Vlan.md)
+[**FabricVlan**](FabricVlan.md)
 
 ### Authorization
 
@@ -2070,7 +2070,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVsan**](fabric.Vsan.md)
+[**FabricVsan**](FabricVsan.md)
 
 ### Authorization
 
@@ -3920,7 +3920,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAppliancePcRole**](fabric.AppliancePcRole.md)
+[**FabricAppliancePcRole**](FabricAppliancePcRole.md)
 
 ### Authorization
 
@@ -4004,7 +4004,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAppliancePcRoleResponse**](fabric.AppliancePcRole.Response.md)
+[**FabricAppliancePcRoleResponse**](FabricAppliancePcRoleResponse.md)
 
 ### Authorization
 
@@ -4072,7 +4072,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricApplianceRole**](fabric.ApplianceRole.md)
+[**FabricApplianceRole**](FabricApplianceRole.md)
 
 ### Authorization
 
@@ -4156,7 +4156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricApplianceRoleResponse**](fabric.ApplianceRole.Response.md)
+[**FabricApplianceRoleResponse**](FabricApplianceRoleResponse.md)
 
 ### Authorization
 
@@ -4224,7 +4224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigChangeDetail**](fabric.ConfigChangeDetail.md)
+[**FabricConfigChangeDetail**](FabricConfigChangeDetail.md)
 
 ### Authorization
 
@@ -4308,7 +4308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigChangeDetailResponse**](fabric.ConfigChangeDetail.Response.md)
+[**FabricConfigChangeDetailResponse**](FabricConfigChangeDetailResponse.md)
 
 ### Authorization
 
@@ -4376,7 +4376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigResult**](fabric.ConfigResult.md)
+[**FabricConfigResult**](FabricConfigResult.md)
 
 ### Authorization
 
@@ -4444,7 +4444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigResultEntry**](fabric.ConfigResultEntry.md)
+[**FabricConfigResultEntry**](FabricConfigResultEntry.md)
 
 ### Authorization
 
@@ -4528,7 +4528,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigResultEntryResponse**](fabric.ConfigResultEntry.Response.md)
+[**FabricConfigResultEntryResponse**](FabricConfigResultEntryResponse.md)
 
 ### Authorization
 
@@ -4612,7 +4612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricConfigResultResponse**](fabric.ConfigResult.Response.md)
+[**FabricConfigResultResponse**](FabricConfigResultResponse.md)
 
 ### Authorization
 
@@ -4680,7 +4680,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricElementIdentity**](fabric.ElementIdentity.md)
+[**FabricElementIdentity**](FabricElementIdentity.md)
 
 ### Authorization
 
@@ -4764,7 +4764,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricElementIdentityResponse**](fabric.ElementIdentity.Response.md)
+[**FabricElementIdentityResponse**](FabricElementIdentityResponse.md)
 
 ### Authorization
 
@@ -4832,7 +4832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkControlPolicy**](fabric.EthNetworkControlPolicy.md)
+[**FabricEthNetworkControlPolicy**](FabricEthNetworkControlPolicy.md)
 
 ### Authorization
 
@@ -4916,7 +4916,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkControlPolicyResponse**](fabric.EthNetworkControlPolicy.Response.md)
+[**FabricEthNetworkControlPolicyResponse**](FabricEthNetworkControlPolicyResponse.md)
 
 ### Authorization
 
@@ -4984,7 +4984,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkGroupPolicy**](fabric.EthNetworkGroupPolicy.md)
+[**FabricEthNetworkGroupPolicy**](FabricEthNetworkGroupPolicy.md)
 
 ### Authorization
 
@@ -5068,7 +5068,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkGroupPolicyResponse**](fabric.EthNetworkGroupPolicy.Response.md)
+[**FabricEthNetworkGroupPolicyResponse**](FabricEthNetworkGroupPolicyResponse.md)
 
 ### Authorization
 
@@ -5136,7 +5136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkPolicy**](fabric.EthNetworkPolicy.md)
+[**FabricEthNetworkPolicy**](FabricEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -5220,7 +5220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkPolicyResponse**](fabric.EthNetworkPolicy.Response.md)
+[**FabricEthNetworkPolicyResponse**](FabricEthNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -5288,7 +5288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcNetworkPolicy**](fabric.FcNetworkPolicy.md)
+[**FabricFcNetworkPolicy**](FabricFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -5372,7 +5372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcNetworkPolicyResponse**](fabric.FcNetworkPolicy.Response.md)
+[**FabricFcNetworkPolicyResponse**](FabricFcNetworkPolicyResponse.md)
 
 ### Authorization
 
@@ -5440,7 +5440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkPcRole**](fabric.FcUplinkPcRole.md)
+[**FabricFcUplinkPcRole**](FabricFcUplinkPcRole.md)
 
 ### Authorization
 
@@ -5524,7 +5524,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkPcRoleResponse**](fabric.FcUplinkPcRole.Response.md)
+[**FabricFcUplinkPcRoleResponse**](FabricFcUplinkPcRoleResponse.md)
 
 ### Authorization
 
@@ -5592,7 +5592,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkRole**](fabric.FcUplinkRole.md)
+[**FabricFcUplinkRole**](FabricFcUplinkRole.md)
 
 ### Authorization
 
@@ -5676,7 +5676,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkRoleResponse**](fabric.FcUplinkRole.Response.md)
+[**FabricFcUplinkRoleResponse**](FabricFcUplinkRoleResponse.md)
 
 ### Authorization
 
@@ -5744,7 +5744,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkPcRole**](fabric.FcoeUplinkPcRole.md)
+[**FabricFcoeUplinkPcRole**](FabricFcoeUplinkPcRole.md)
 
 ### Authorization
 
@@ -5828,7 +5828,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkPcRoleResponse**](fabric.FcoeUplinkPcRole.Response.md)
+[**FabricFcoeUplinkPcRoleResponse**](FabricFcoeUplinkPcRoleResponse.md)
 
 ### Authorization
 
@@ -5896,7 +5896,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkRole**](fabric.FcoeUplinkRole.md)
+[**FabricFcoeUplinkRole**](FabricFcoeUplinkRole.md)
 
 ### Authorization
 
@@ -5980,7 +5980,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkRoleResponse**](fabric.FcoeUplinkRole.Response.md)
+[**FabricFcoeUplinkRoleResponse**](FabricFcoeUplinkRoleResponse.md)
 
 ### Authorization
 
@@ -6048,7 +6048,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFlowControlPolicy**](fabric.FlowControlPolicy.md)
+[**FabricFlowControlPolicy**](FabricFlowControlPolicy.md)
 
 ### Authorization
 
@@ -6132,7 +6132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFlowControlPolicyResponse**](fabric.FlowControlPolicy.Response.md)
+[**FabricFlowControlPolicyResponse**](FabricFlowControlPolicyResponse.md)
 
 ### Authorization
 
@@ -6200,7 +6200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkAggregationPolicy**](fabric.LinkAggregationPolicy.md)
+[**FabricLinkAggregationPolicy**](FabricLinkAggregationPolicy.md)
 
 ### Authorization
 
@@ -6284,7 +6284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkAggregationPolicyResponse**](fabric.LinkAggregationPolicy.Response.md)
+[**FabricLinkAggregationPolicyResponse**](FabricLinkAggregationPolicyResponse.md)
 
 ### Authorization
 
@@ -6352,7 +6352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkControlPolicy**](fabric.LinkControlPolicy.md)
+[**FabricLinkControlPolicy**](FabricLinkControlPolicy.md)
 
 ### Authorization
 
@@ -6436,7 +6436,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkControlPolicyResponse**](fabric.LinkControlPolicy.Response.md)
+[**FabricLinkControlPolicyResponse**](FabricLinkControlPolicyResponse.md)
 
 ### Authorization
 
@@ -6504,7 +6504,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricMulticastPolicy**](fabric.MulticastPolicy.md)
+[**FabricMulticastPolicy**](FabricMulticastPolicy.md)
 
 ### Authorization
 
@@ -6588,7 +6588,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricMulticastPolicyResponse**](fabric.MulticastPolicy.Response.md)
+[**FabricMulticastPolicyResponse**](FabricMulticastPolicyResponse.md)
 
 ### Authorization
 
@@ -6656,7 +6656,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcMember**](fabric.PcMember.md)
+[**FabricPcMember**](FabricPcMember.md)
 
 ### Authorization
 
@@ -6740,7 +6740,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcMemberResponse**](fabric.PcMember.Response.md)
+[**FabricPcMemberResponse**](FabricPcMemberResponse.md)
 
 ### Authorization
 
@@ -6808,7 +6808,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcOperation**](fabric.PcOperation.md)
+[**FabricPcOperation**](FabricPcOperation.md)
 
 ### Authorization
 
@@ -6892,7 +6892,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcOperationResponse**](fabric.PcOperation.Response.md)
+[**FabricPcOperationResponse**](FabricPcOperationResponse.md)
 
 ### Authorization
 
@@ -6960,7 +6960,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortMode**](fabric.PortMode.md)
+[**FabricPortMode**](FabricPortMode.md)
 
 ### Authorization
 
@@ -7044,7 +7044,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortModeResponse**](fabric.PortMode.Response.md)
+[**FabricPortModeResponse**](FabricPortModeResponse.md)
 
 ### Authorization
 
@@ -7112,7 +7112,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortOperation**](fabric.PortOperation.md)
+[**FabricPortOperation**](FabricPortOperation.md)
 
 ### Authorization
 
@@ -7196,7 +7196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortOperationResponse**](fabric.PortOperation.Response.md)
+[**FabricPortOperationResponse**](FabricPortOperationResponse.md)
 
 ### Authorization
 
@@ -7264,7 +7264,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortPolicy**](fabric.PortPolicy.md)
+[**FabricPortPolicy**](FabricPortPolicy.md)
 
 ### Authorization
 
@@ -7348,7 +7348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortPolicyResponse**](fabric.PortPolicy.Response.md)
+[**FabricPortPolicyResponse**](FabricPortPolicyResponse.md)
 
 ### Authorization
 
@@ -7416,7 +7416,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricServerRole**](fabric.ServerRole.md)
+[**FabricServerRole**](FabricServerRole.md)
 
 ### Authorization
 
@@ -7500,7 +7500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricServerRoleResponse**](fabric.ServerRole.Response.md)
+[**FabricServerRoleResponse**](FabricServerRoleResponse.md)
 
 ### Authorization
 
@@ -7568,7 +7568,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchClusterProfile**](fabric.SwitchClusterProfile.md)
+[**FabricSwitchClusterProfile**](FabricSwitchClusterProfile.md)
 
 ### Authorization
 
@@ -7652,7 +7652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchClusterProfileResponse**](fabric.SwitchClusterProfile.Response.md)
+[**FabricSwitchClusterProfileResponse**](FabricSwitchClusterProfileResponse.md)
 
 ### Authorization
 
@@ -7720,7 +7720,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchControlPolicy**](fabric.SwitchControlPolicy.md)
+[**FabricSwitchControlPolicy**](FabricSwitchControlPolicy.md)
 
 ### Authorization
 
@@ -7804,7 +7804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchControlPolicyResponse**](fabric.SwitchControlPolicy.Response.md)
+[**FabricSwitchControlPolicyResponse**](FabricSwitchControlPolicyResponse.md)
 
 ### Authorization
 
@@ -7872,7 +7872,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchProfile**](fabric.SwitchProfile.md)
+[**FabricSwitchProfile**](FabricSwitchProfile.md)
 
 ### Authorization
 
@@ -7956,7 +7956,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchProfileResponse**](fabric.SwitchProfile.Response.md)
+[**FabricSwitchProfileResponse**](FabricSwitchProfileResponse.md)
 
 ### Authorization
 
@@ -8024,7 +8024,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSystemQosPolicy**](fabric.SystemQosPolicy.md)
+[**FabricSystemQosPolicy**](FabricSystemQosPolicy.md)
 
 ### Authorization
 
@@ -8108,7 +8108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSystemQosPolicyResponse**](fabric.SystemQosPolicy.Response.md)
+[**FabricSystemQosPolicyResponse**](FabricSystemQosPolicyResponse.md)
 
 ### Authorization
 
@@ -8176,7 +8176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkPcRole**](fabric.UplinkPcRole.md)
+[**FabricUplinkPcRole**](FabricUplinkPcRole.md)
 
 ### Authorization
 
@@ -8260,7 +8260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkPcRoleResponse**](fabric.UplinkPcRole.Response.md)
+[**FabricUplinkPcRoleResponse**](FabricUplinkPcRoleResponse.md)
 
 ### Authorization
 
@@ -8328,7 +8328,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkRole**](fabric.UplinkRole.md)
+[**FabricUplinkRole**](FabricUplinkRole.md)
 
 ### Authorization
 
@@ -8412,7 +8412,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkRoleResponse**](fabric.UplinkRole.Response.md)
+[**FabricUplinkRoleResponse**](FabricUplinkRoleResponse.md)
 
 ### Authorization
 
@@ -8480,7 +8480,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVlan**](fabric.Vlan.md)
+[**FabricVlan**](FabricVlan.md)
 
 ### Authorization
 
@@ -8564,7 +8564,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVlanResponse**](fabric.Vlan.Response.md)
+[**FabricVlanResponse**](FabricVlanResponse.md)
 
 ### Authorization
 
@@ -8632,7 +8632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVsan**](fabric.Vsan.md)
+[**FabricVsan**](FabricVsan.md)
 
 ### Authorization
 
@@ -8716,7 +8716,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVsanResponse**](fabric.Vsan.Response.md)
+[**FabricVsanResponse**](FabricVsanResponse.md)
 
 ### Authorization
 
@@ -8788,7 +8788,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAppliancePcRole**](fabric.AppliancePcRole.md)
+[**FabricAppliancePcRole**](FabricAppliancePcRole.md)
 
 ### Authorization
 
@@ -8860,7 +8860,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricApplianceRole**](fabric.ApplianceRole.md)
+[**FabricApplianceRole**](FabricApplianceRole.md)
 
 ### Authorization
 
@@ -8932,7 +8932,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricElementIdentity**](fabric.ElementIdentity.md)
+[**FabricElementIdentity**](FabricElementIdentity.md)
 
 ### Authorization
 
@@ -9004,7 +9004,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkControlPolicy**](fabric.EthNetworkControlPolicy.md)
+[**FabricEthNetworkControlPolicy**](FabricEthNetworkControlPolicy.md)
 
 ### Authorization
 
@@ -9076,7 +9076,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkGroupPolicy**](fabric.EthNetworkGroupPolicy.md)
+[**FabricEthNetworkGroupPolicy**](FabricEthNetworkGroupPolicy.md)
 
 ### Authorization
 
@@ -9148,7 +9148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkPolicy**](fabric.EthNetworkPolicy.md)
+[**FabricEthNetworkPolicy**](FabricEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -9220,7 +9220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcNetworkPolicy**](fabric.FcNetworkPolicy.md)
+[**FabricFcNetworkPolicy**](FabricFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -9292,7 +9292,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkPcRole**](fabric.FcUplinkPcRole.md)
+[**FabricFcUplinkPcRole**](FabricFcUplinkPcRole.md)
 
 ### Authorization
 
@@ -9364,7 +9364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkRole**](fabric.FcUplinkRole.md)
+[**FabricFcUplinkRole**](FabricFcUplinkRole.md)
 
 ### Authorization
 
@@ -9436,7 +9436,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkPcRole**](fabric.FcoeUplinkPcRole.md)
+[**FabricFcoeUplinkPcRole**](FabricFcoeUplinkPcRole.md)
 
 ### Authorization
 
@@ -9508,7 +9508,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkRole**](fabric.FcoeUplinkRole.md)
+[**FabricFcoeUplinkRole**](FabricFcoeUplinkRole.md)
 
 ### Authorization
 
@@ -9580,7 +9580,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFlowControlPolicy**](fabric.FlowControlPolicy.md)
+[**FabricFlowControlPolicy**](FabricFlowControlPolicy.md)
 
 ### Authorization
 
@@ -9652,7 +9652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkAggregationPolicy**](fabric.LinkAggregationPolicy.md)
+[**FabricLinkAggregationPolicy**](FabricLinkAggregationPolicy.md)
 
 ### Authorization
 
@@ -9724,7 +9724,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkControlPolicy**](fabric.LinkControlPolicy.md)
+[**FabricLinkControlPolicy**](FabricLinkControlPolicy.md)
 
 ### Authorization
 
@@ -9796,7 +9796,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricMulticastPolicy**](fabric.MulticastPolicy.md)
+[**FabricMulticastPolicy**](FabricMulticastPolicy.md)
 
 ### Authorization
 
@@ -9868,7 +9868,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcOperation**](fabric.PcOperation.md)
+[**FabricPcOperation**](FabricPcOperation.md)
 
 ### Authorization
 
@@ -9940,7 +9940,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortMode**](fabric.PortMode.md)
+[**FabricPortMode**](FabricPortMode.md)
 
 ### Authorization
 
@@ -10012,7 +10012,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortOperation**](fabric.PortOperation.md)
+[**FabricPortOperation**](FabricPortOperation.md)
 
 ### Authorization
 
@@ -10084,7 +10084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortPolicy**](fabric.PortPolicy.md)
+[**FabricPortPolicy**](FabricPortPolicy.md)
 
 ### Authorization
 
@@ -10156,7 +10156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricServerRole**](fabric.ServerRole.md)
+[**FabricServerRole**](FabricServerRole.md)
 
 ### Authorization
 
@@ -10228,7 +10228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchClusterProfile**](fabric.SwitchClusterProfile.md)
+[**FabricSwitchClusterProfile**](FabricSwitchClusterProfile.md)
 
 ### Authorization
 
@@ -10300,7 +10300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchControlPolicy**](fabric.SwitchControlPolicy.md)
+[**FabricSwitchControlPolicy**](FabricSwitchControlPolicy.md)
 
 ### Authorization
 
@@ -10372,7 +10372,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchProfile**](fabric.SwitchProfile.md)
+[**FabricSwitchProfile**](FabricSwitchProfile.md)
 
 ### Authorization
 
@@ -10444,7 +10444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSystemQosPolicy**](fabric.SystemQosPolicy.md)
+[**FabricSystemQosPolicy**](FabricSystemQosPolicy.md)
 
 ### Authorization
 
@@ -10516,7 +10516,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkPcRole**](fabric.UplinkPcRole.md)
+[**FabricUplinkPcRole**](FabricUplinkPcRole.md)
 
 ### Authorization
 
@@ -10588,7 +10588,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkRole**](fabric.UplinkRole.md)
+[**FabricUplinkRole**](FabricUplinkRole.md)
 
 ### Authorization
 
@@ -10660,7 +10660,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVlan**](fabric.Vlan.md)
+[**FabricVlan**](FabricVlan.md)
 
 ### Authorization
 
@@ -10732,7 +10732,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVsan**](fabric.Vsan.md)
+[**FabricVsan**](FabricVsan.md)
 
 ### Authorization
 
@@ -10804,7 +10804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricAppliancePcRole**](fabric.AppliancePcRole.md)
+[**FabricAppliancePcRole**](FabricAppliancePcRole.md)
 
 ### Authorization
 
@@ -10876,7 +10876,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricApplianceRole**](fabric.ApplianceRole.md)
+[**FabricApplianceRole**](FabricApplianceRole.md)
 
 ### Authorization
 
@@ -10948,7 +10948,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricElementIdentity**](fabric.ElementIdentity.md)
+[**FabricElementIdentity**](FabricElementIdentity.md)
 
 ### Authorization
 
@@ -11020,7 +11020,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkControlPolicy**](fabric.EthNetworkControlPolicy.md)
+[**FabricEthNetworkControlPolicy**](FabricEthNetworkControlPolicy.md)
 
 ### Authorization
 
@@ -11092,7 +11092,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkGroupPolicy**](fabric.EthNetworkGroupPolicy.md)
+[**FabricEthNetworkGroupPolicy**](FabricEthNetworkGroupPolicy.md)
 
 ### Authorization
 
@@ -11164,7 +11164,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricEthNetworkPolicy**](fabric.EthNetworkPolicy.md)
+[**FabricEthNetworkPolicy**](FabricEthNetworkPolicy.md)
 
 ### Authorization
 
@@ -11236,7 +11236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcNetworkPolicy**](fabric.FcNetworkPolicy.md)
+[**FabricFcNetworkPolicy**](FabricFcNetworkPolicy.md)
 
 ### Authorization
 
@@ -11308,7 +11308,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkPcRole**](fabric.FcUplinkPcRole.md)
+[**FabricFcUplinkPcRole**](FabricFcUplinkPcRole.md)
 
 ### Authorization
 
@@ -11380,7 +11380,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcUplinkRole**](fabric.FcUplinkRole.md)
+[**FabricFcUplinkRole**](FabricFcUplinkRole.md)
 
 ### Authorization
 
@@ -11452,7 +11452,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkPcRole**](fabric.FcoeUplinkPcRole.md)
+[**FabricFcoeUplinkPcRole**](FabricFcoeUplinkPcRole.md)
 
 ### Authorization
 
@@ -11524,7 +11524,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFcoeUplinkRole**](fabric.FcoeUplinkRole.md)
+[**FabricFcoeUplinkRole**](FabricFcoeUplinkRole.md)
 
 ### Authorization
 
@@ -11596,7 +11596,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricFlowControlPolicy**](fabric.FlowControlPolicy.md)
+[**FabricFlowControlPolicy**](FabricFlowControlPolicy.md)
 
 ### Authorization
 
@@ -11668,7 +11668,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkAggregationPolicy**](fabric.LinkAggregationPolicy.md)
+[**FabricLinkAggregationPolicy**](FabricLinkAggregationPolicy.md)
 
 ### Authorization
 
@@ -11740,7 +11740,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricLinkControlPolicy**](fabric.LinkControlPolicy.md)
+[**FabricLinkControlPolicy**](FabricLinkControlPolicy.md)
 
 ### Authorization
 
@@ -11812,7 +11812,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricMulticastPolicy**](fabric.MulticastPolicy.md)
+[**FabricMulticastPolicy**](FabricMulticastPolicy.md)
 
 ### Authorization
 
@@ -11884,7 +11884,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPcOperation**](fabric.PcOperation.md)
+[**FabricPcOperation**](FabricPcOperation.md)
 
 ### Authorization
 
@@ -11956,7 +11956,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortMode**](fabric.PortMode.md)
+[**FabricPortMode**](FabricPortMode.md)
 
 ### Authorization
 
@@ -12028,7 +12028,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortOperation**](fabric.PortOperation.md)
+[**FabricPortOperation**](FabricPortOperation.md)
 
 ### Authorization
 
@@ -12100,7 +12100,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricPortPolicy**](fabric.PortPolicy.md)
+[**FabricPortPolicy**](FabricPortPolicy.md)
 
 ### Authorization
 
@@ -12172,7 +12172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricServerRole**](fabric.ServerRole.md)
+[**FabricServerRole**](FabricServerRole.md)
 
 ### Authorization
 
@@ -12244,7 +12244,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchClusterProfile**](fabric.SwitchClusterProfile.md)
+[**FabricSwitchClusterProfile**](FabricSwitchClusterProfile.md)
 
 ### Authorization
 
@@ -12316,7 +12316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchControlPolicy**](fabric.SwitchControlPolicy.md)
+[**FabricSwitchControlPolicy**](FabricSwitchControlPolicy.md)
 
 ### Authorization
 
@@ -12388,7 +12388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSwitchProfile**](fabric.SwitchProfile.md)
+[**FabricSwitchProfile**](FabricSwitchProfile.md)
 
 ### Authorization
 
@@ -12460,7 +12460,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricSystemQosPolicy**](fabric.SystemQosPolicy.md)
+[**FabricSystemQosPolicy**](FabricSystemQosPolicy.md)
 
 ### Authorization
 
@@ -12532,7 +12532,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkPcRole**](fabric.UplinkPcRole.md)
+[**FabricUplinkPcRole**](FabricUplinkPcRole.md)
 
 ### Authorization
 
@@ -12604,7 +12604,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricUplinkRole**](fabric.UplinkRole.md)
+[**FabricUplinkRole**](FabricUplinkRole.md)
 
 ### Authorization
 
@@ -12676,7 +12676,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVlan**](fabric.Vlan.md)
+[**FabricVlan**](FabricVlan.md)
 
 ### Authorization
 
@@ -12748,7 +12748,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FabricVsan**](fabric.Vsan.md)
+[**FabricVsan**](FabricVsan.md)
 
 ### Authorization
 

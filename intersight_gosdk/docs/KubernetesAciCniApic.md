@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **AssetApicMoid** | Pointer to **string** | The Moid of the apic device under the asset service. | [optional] 
 **NumAciCniProfiles** | Pointer to **int64** | The number of ACI CNI profiles configured for this APIC. | [optional] 
 **AciCniProfiles** | Pointer to [**[]KubernetesAciCniProfileRelationship**](KubernetesAciCniProfileRelationship.md) | An array of relationships to kubernetesAciCniProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

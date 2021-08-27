@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | File location on the cloud storage. | [optional] 
 **FilesToDownload** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | The HyperFlex Software Distribution Component Version. | [optional] 
-**SoftwareDistributionVersion** | Pointer to [**HyperflexSoftwareDistributionVersionRelationship**](hyperflex.SoftwareDistributionVersion.Relationship.md) |  | [optional] 
+**SoftwareDistributionVersion** | Pointer to [**HyperflexSoftwareDistributionVersionRelationship**](HyperflexSoftwareDistributionVersionRelationship.md) |  | [optional] 
 
 ## Methods
 

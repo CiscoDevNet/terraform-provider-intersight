@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **HxDeviceName** | Pointer to **string** | HyperFlex Device Name where the healthcheck is executed. | [optional] [readonly] 
 **SuggestedResolution** | Pointer to **string** | Information detailing a suggested resolution for the healthcheck failure, if the check fails. | [optional] 
 **Uuid** | Pointer to **string** | UUID of an instance of health check execution. | [optional] [readonly] 
-**HealthCheckDefinition** | Pointer to [**HyperflexHealthCheckDefinitionRelationship**](hyperflex.HealthCheckDefinition.Relationship.md) |  | [optional] 
-**HxCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**HealthCheckDefinition** | Pointer to [**HyperflexHealthCheckDefinitionRelationship**](HyperflexHealthCheckDefinitionRelationship.md) |  | [optional] 
+**HxCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

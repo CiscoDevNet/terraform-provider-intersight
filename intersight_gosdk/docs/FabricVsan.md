@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **FcoeVlan** | Pointer to **int64** | FCOE Vlan associated to the VSAN configuration. | [optional] 
 **Name** | Pointer to **string** | User given name for the VSAN configuration. | [optional] 
 **VsanId** | Pointer to **int64** | Virtual San Identifier in the switch. | [optional] 
-**FcNetworkPolicy** | Pointer to [**FabricFcNetworkPolicyRelationship**](fabric.FcNetworkPolicy.Relationship.md) |  | [optional] 
+**FcNetworkPolicy** | Pointer to [**FabricFcNetworkPolicyRelationship**](FabricFcNetworkPolicyRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -189,7 +189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityAdapterUnitDescriptor**](capability.AdapterUnitDescriptor.md)
+[**CapabilityAdapterUnitDescriptor**](CapabilityAdapterUnitDescriptor.md)
 
 ### Authorization
 
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisDescriptor**](capability.ChassisDescriptor.md)
+[**CapabilityChassisDescriptor**](CapabilityChassisDescriptor.md)
 
 ### Authorization
 
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisManufacturingDef**](capability.ChassisManufacturingDef.md)
+[**CapabilityChassisManufacturingDef**](CapabilityChassisManufacturingDef.md)
 
 ### Authorization
 
@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCimcFirmwareDescriptor**](capability.CimcFirmwareDescriptor.md)
+[**CapabilityCimcFirmwareDescriptor**](CapabilityCimcFirmwareDescriptor.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentPhysicalDef**](capability.EquipmentPhysicalDef.md)
+[**CapabilityEquipmentPhysicalDef**](CapabilityEquipmentPhysicalDef.md)
 
 ### Authorization
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentSlotArray**](capability.EquipmentSlotArray.md)
+[**CapabilityEquipmentSlotArray**](CapabilityEquipmentSlotArray.md)
 
 ### Authorization
 
@@ -597,7 +597,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleDescriptor**](capability.FanModuleDescriptor.md)
+[**CapabilityFanModuleDescriptor**](CapabilityFanModuleDescriptor.md)
 
 ### Authorization
 
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleManufacturingDef**](capability.FanModuleManufacturingDef.md)
+[**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardCapabilityDef**](capability.IoCardCapabilityDef.md)
+[**CapabilityIoCardCapabilityDef**](CapabilityIoCardCapabilityDef.md)
 
 ### Authorization
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardDescriptor**](capability.IoCardDescriptor.md)
+[**CapabilityIoCardDescriptor**](CapabilityIoCardDescriptor.md)
 
 ### Authorization
 
@@ -869,7 +869,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardManufacturingDef**](capability.IoCardManufacturingDef.md)
+[**CapabilityIoCardManufacturingDef**](CapabilityIoCardManufacturingDef.md)
 
 ### Authorization
 
@@ -937,7 +937,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPortGroupAggregationDef**](capability.PortGroupAggregationDef.md)
+[**CapabilityPortGroupAggregationDef**](CapabilityPortGroupAggregationDef.md)
 
 ### Authorization
 
@@ -1005,7 +1005,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuDescriptor**](capability.PsuDescriptor.md)
+[**CapabilityPsuDescriptor**](CapabilityPsuDescriptor.md)
 
 ### Authorization
 
@@ -1073,7 +1073,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuManufacturingDef**](capability.PsuManufacturingDef.md)
+[**CapabilityPsuManufacturingDef**](CapabilityPsuManufacturingDef.md)
 
 ### Authorization
 
@@ -1141,7 +1141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityServerSchemaDescriptor**](capability.ServerSchemaDescriptor.md)
+[**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
 
 ### Authorization
 
@@ -1209,7 +1209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleCapabilityDef**](capability.SiocModuleCapabilityDef.md)
+[**CapabilitySiocModuleCapabilityDef**](CapabilitySiocModuleCapabilityDef.md)
 
 ### Authorization
 
@@ -1277,7 +1277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleDescriptor**](capability.SiocModuleDescriptor.md)
+[**CapabilitySiocModuleDescriptor**](CapabilitySiocModuleDescriptor.md)
 
 ### Authorization
 
@@ -1345,7 +1345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleManufacturingDef**](capability.SiocModuleManufacturingDef.md)
+[**CapabilitySiocModuleManufacturingDef**](CapabilitySiocModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -1413,7 +1413,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchCapability**](capability.SwitchCapability.md)
+[**CapabilitySwitchCapability**](CapabilitySwitchCapability.md)
 
 ### Authorization
 
@@ -1481,7 +1481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchDescriptor**](capability.SwitchDescriptor.md)
+[**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
 
 ### Authorization
 
@@ -1549,7 +1549,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchManufacturingDef**](capability.SwitchManufacturingDef.md)
+[**CapabilitySwitchManufacturingDef**](CapabilitySwitchManufacturingDef.md)
 
 ### Authorization
 
@@ -3003,7 +3003,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityAdapterUnitDescriptor**](capability.AdapterUnitDescriptor.md)
+[**CapabilityAdapterUnitDescriptor**](CapabilityAdapterUnitDescriptor.md)
 
 ### Authorization
 
@@ -3087,7 +3087,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityAdapterUnitDescriptorResponse**](capability.AdapterUnitDescriptor.Response.md)
+[**CapabilityAdapterUnitDescriptorResponse**](CapabilityAdapterUnitDescriptorResponse.md)
 
 ### Authorization
 
@@ -3155,7 +3155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCatalog**](capability.Catalog.md)
+[**CapabilityCatalog**](CapabilityCatalog.md)
 
 ### Authorization
 
@@ -3239,7 +3239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCatalogResponse**](capability.Catalog.Response.md)
+[**CapabilityCatalogResponse**](CapabilityCatalogResponse.md)
 
 ### Authorization
 
@@ -3307,7 +3307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisDescriptor**](capability.ChassisDescriptor.md)
+[**CapabilityChassisDescriptor**](CapabilityChassisDescriptor.md)
 
 ### Authorization
 
@@ -3391,7 +3391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisDescriptorResponse**](capability.ChassisDescriptor.Response.md)
+[**CapabilityChassisDescriptorResponse**](CapabilityChassisDescriptorResponse.md)
 
 ### Authorization
 
@@ -3459,7 +3459,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisManufacturingDef**](capability.ChassisManufacturingDef.md)
+[**CapabilityChassisManufacturingDef**](CapabilityChassisManufacturingDef.md)
 
 ### Authorization
 
@@ -3543,7 +3543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisManufacturingDefResponse**](capability.ChassisManufacturingDef.Response.md)
+[**CapabilityChassisManufacturingDefResponse**](CapabilityChassisManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -3611,7 +3611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCimcFirmwareDescriptor**](capability.CimcFirmwareDescriptor.md)
+[**CapabilityCimcFirmwareDescriptor**](CapabilityCimcFirmwareDescriptor.md)
 
 ### Authorization
 
@@ -3695,7 +3695,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCimcFirmwareDescriptorResponse**](capability.CimcFirmwareDescriptor.Response.md)
+[**CapabilityCimcFirmwareDescriptorResponse**](CapabilityCimcFirmwareDescriptorResponse.md)
 
 ### Authorization
 
@@ -3763,7 +3763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentPhysicalDef**](capability.EquipmentPhysicalDef.md)
+[**CapabilityEquipmentPhysicalDef**](CapabilityEquipmentPhysicalDef.md)
 
 ### Authorization
 
@@ -3847,7 +3847,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentPhysicalDefResponse**](capability.EquipmentPhysicalDef.Response.md)
+[**CapabilityEquipmentPhysicalDefResponse**](CapabilityEquipmentPhysicalDefResponse.md)
 
 ### Authorization
 
@@ -3915,7 +3915,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentSlotArray**](capability.EquipmentSlotArray.md)
+[**CapabilityEquipmentSlotArray**](CapabilityEquipmentSlotArray.md)
 
 ### Authorization
 
@@ -3999,7 +3999,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentSlotArrayResponse**](capability.EquipmentSlotArray.Response.md)
+[**CapabilityEquipmentSlotArrayResponse**](CapabilityEquipmentSlotArrayResponse.md)
 
 ### Authorization
 
@@ -4067,7 +4067,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleDescriptor**](capability.FanModuleDescriptor.md)
+[**CapabilityFanModuleDescriptor**](CapabilityFanModuleDescriptor.md)
 
 ### Authorization
 
@@ -4151,7 +4151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleDescriptorResponse**](capability.FanModuleDescriptor.Response.md)
+[**CapabilityFanModuleDescriptorResponse**](CapabilityFanModuleDescriptorResponse.md)
 
 ### Authorization
 
@@ -4219,7 +4219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleManufacturingDef**](capability.FanModuleManufacturingDef.md)
+[**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -4303,7 +4303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleManufacturingDefResponse**](capability.FanModuleManufacturingDef.Response.md)
+[**CapabilityFanModuleManufacturingDefResponse**](CapabilityFanModuleManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -4371,7 +4371,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardCapabilityDef**](capability.IoCardCapabilityDef.md)
+[**CapabilityIoCardCapabilityDef**](CapabilityIoCardCapabilityDef.md)
 
 ### Authorization
 
@@ -4455,7 +4455,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardCapabilityDefResponse**](capability.IoCardCapabilityDef.Response.md)
+[**CapabilityIoCardCapabilityDefResponse**](CapabilityIoCardCapabilityDefResponse.md)
 
 ### Authorization
 
@@ -4523,7 +4523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardDescriptor**](capability.IoCardDescriptor.md)
+[**CapabilityIoCardDescriptor**](CapabilityIoCardDescriptor.md)
 
 ### Authorization
 
@@ -4607,7 +4607,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardDescriptorResponse**](capability.IoCardDescriptor.Response.md)
+[**CapabilityIoCardDescriptorResponse**](CapabilityIoCardDescriptorResponse.md)
 
 ### Authorization
 
@@ -4675,7 +4675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardManufacturingDef**](capability.IoCardManufacturingDef.md)
+[**CapabilityIoCardManufacturingDef**](CapabilityIoCardManufacturingDef.md)
 
 ### Authorization
 
@@ -4759,7 +4759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardManufacturingDefResponse**](capability.IoCardManufacturingDef.Response.md)
+[**CapabilityIoCardManufacturingDefResponse**](CapabilityIoCardManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -4827,7 +4827,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPortGroupAggregationDef**](capability.PortGroupAggregationDef.md)
+[**CapabilityPortGroupAggregationDef**](CapabilityPortGroupAggregationDef.md)
 
 ### Authorization
 
@@ -4911,7 +4911,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPortGroupAggregationDefResponse**](capability.PortGroupAggregationDef.Response.md)
+[**CapabilityPortGroupAggregationDefResponse**](CapabilityPortGroupAggregationDefResponse.md)
 
 ### Authorization
 
@@ -4979,7 +4979,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuDescriptor**](capability.PsuDescriptor.md)
+[**CapabilityPsuDescriptor**](CapabilityPsuDescriptor.md)
 
 ### Authorization
 
@@ -5063,7 +5063,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuDescriptorResponse**](capability.PsuDescriptor.Response.md)
+[**CapabilityPsuDescriptorResponse**](CapabilityPsuDescriptorResponse.md)
 
 ### Authorization
 
@@ -5131,7 +5131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuManufacturingDef**](capability.PsuManufacturingDef.md)
+[**CapabilityPsuManufacturingDef**](CapabilityPsuManufacturingDef.md)
 
 ### Authorization
 
@@ -5215,7 +5215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuManufacturingDefResponse**](capability.PsuManufacturingDef.Response.md)
+[**CapabilityPsuManufacturingDefResponse**](CapabilityPsuManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -5283,7 +5283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityServerSchemaDescriptor**](capability.ServerSchemaDescriptor.md)
+[**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
 
 ### Authorization
 
@@ -5367,7 +5367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityServerSchemaDescriptorResponse**](capability.ServerSchemaDescriptor.Response.md)
+[**CapabilityServerSchemaDescriptorResponse**](CapabilityServerSchemaDescriptorResponse.md)
 
 ### Authorization
 
@@ -5435,7 +5435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleCapabilityDef**](capability.SiocModuleCapabilityDef.md)
+[**CapabilitySiocModuleCapabilityDef**](CapabilitySiocModuleCapabilityDef.md)
 
 ### Authorization
 
@@ -5519,7 +5519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleCapabilityDefResponse**](capability.SiocModuleCapabilityDef.Response.md)
+[**CapabilitySiocModuleCapabilityDefResponse**](CapabilitySiocModuleCapabilityDefResponse.md)
 
 ### Authorization
 
@@ -5587,7 +5587,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleDescriptor**](capability.SiocModuleDescriptor.md)
+[**CapabilitySiocModuleDescriptor**](CapabilitySiocModuleDescriptor.md)
 
 ### Authorization
 
@@ -5671,7 +5671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleDescriptorResponse**](capability.SiocModuleDescriptor.Response.md)
+[**CapabilitySiocModuleDescriptorResponse**](CapabilitySiocModuleDescriptorResponse.md)
 
 ### Authorization
 
@@ -5739,7 +5739,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleManufacturingDef**](capability.SiocModuleManufacturingDef.md)
+[**CapabilitySiocModuleManufacturingDef**](CapabilitySiocModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -5823,7 +5823,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleManufacturingDefResponse**](capability.SiocModuleManufacturingDef.Response.md)
+[**CapabilitySiocModuleManufacturingDefResponse**](CapabilitySiocModuleManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -5891,7 +5891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchCapability**](capability.SwitchCapability.md)
+[**CapabilitySwitchCapability**](CapabilitySwitchCapability.md)
 
 ### Authorization
 
@@ -5975,7 +5975,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchCapabilityResponse**](capability.SwitchCapability.Response.md)
+[**CapabilitySwitchCapabilityResponse**](CapabilitySwitchCapabilityResponse.md)
 
 ### Authorization
 
@@ -6043,7 +6043,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchDescriptor**](capability.SwitchDescriptor.md)
+[**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
 
 ### Authorization
 
@@ -6127,7 +6127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchDescriptorResponse**](capability.SwitchDescriptor.Response.md)
+[**CapabilitySwitchDescriptorResponse**](CapabilitySwitchDescriptorResponse.md)
 
 ### Authorization
 
@@ -6195,7 +6195,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchManufacturingDef**](capability.SwitchManufacturingDef.md)
+[**CapabilitySwitchManufacturingDef**](CapabilitySwitchManufacturingDef.md)
 
 ### Authorization
 
@@ -6279,7 +6279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchManufacturingDefResponse**](capability.SwitchManufacturingDef.Response.md)
+[**CapabilitySwitchManufacturingDefResponse**](CapabilitySwitchManufacturingDefResponse.md)
 
 ### Authorization
 
@@ -6351,7 +6351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityAdapterUnitDescriptor**](capability.AdapterUnitDescriptor.md)
+[**CapabilityAdapterUnitDescriptor**](CapabilityAdapterUnitDescriptor.md)
 
 ### Authorization
 
@@ -6423,7 +6423,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCatalog**](capability.Catalog.md)
+[**CapabilityCatalog**](CapabilityCatalog.md)
 
 ### Authorization
 
@@ -6495,7 +6495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisDescriptor**](capability.ChassisDescriptor.md)
+[**CapabilityChassisDescriptor**](CapabilityChassisDescriptor.md)
 
 ### Authorization
 
@@ -6567,7 +6567,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisManufacturingDef**](capability.ChassisManufacturingDef.md)
+[**CapabilityChassisManufacturingDef**](CapabilityChassisManufacturingDef.md)
 
 ### Authorization
 
@@ -6639,7 +6639,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCimcFirmwareDescriptor**](capability.CimcFirmwareDescriptor.md)
+[**CapabilityCimcFirmwareDescriptor**](CapabilityCimcFirmwareDescriptor.md)
 
 ### Authorization
 
@@ -6711,7 +6711,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentPhysicalDef**](capability.EquipmentPhysicalDef.md)
+[**CapabilityEquipmentPhysicalDef**](CapabilityEquipmentPhysicalDef.md)
 
 ### Authorization
 
@@ -6783,7 +6783,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentSlotArray**](capability.EquipmentSlotArray.md)
+[**CapabilityEquipmentSlotArray**](CapabilityEquipmentSlotArray.md)
 
 ### Authorization
 
@@ -6855,7 +6855,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleDescriptor**](capability.FanModuleDescriptor.md)
+[**CapabilityFanModuleDescriptor**](CapabilityFanModuleDescriptor.md)
 
 ### Authorization
 
@@ -6927,7 +6927,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleManufacturingDef**](capability.FanModuleManufacturingDef.md)
+[**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -6999,7 +6999,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardCapabilityDef**](capability.IoCardCapabilityDef.md)
+[**CapabilityIoCardCapabilityDef**](CapabilityIoCardCapabilityDef.md)
 
 ### Authorization
 
@@ -7071,7 +7071,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardDescriptor**](capability.IoCardDescriptor.md)
+[**CapabilityIoCardDescriptor**](CapabilityIoCardDescriptor.md)
 
 ### Authorization
 
@@ -7143,7 +7143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardManufacturingDef**](capability.IoCardManufacturingDef.md)
+[**CapabilityIoCardManufacturingDef**](CapabilityIoCardManufacturingDef.md)
 
 ### Authorization
 
@@ -7215,7 +7215,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPortGroupAggregationDef**](capability.PortGroupAggregationDef.md)
+[**CapabilityPortGroupAggregationDef**](CapabilityPortGroupAggregationDef.md)
 
 ### Authorization
 
@@ -7287,7 +7287,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuDescriptor**](capability.PsuDescriptor.md)
+[**CapabilityPsuDescriptor**](CapabilityPsuDescriptor.md)
 
 ### Authorization
 
@@ -7359,7 +7359,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuManufacturingDef**](capability.PsuManufacturingDef.md)
+[**CapabilityPsuManufacturingDef**](CapabilityPsuManufacturingDef.md)
 
 ### Authorization
 
@@ -7431,7 +7431,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityServerSchemaDescriptor**](capability.ServerSchemaDescriptor.md)
+[**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
 
 ### Authorization
 
@@ -7503,7 +7503,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleCapabilityDef**](capability.SiocModuleCapabilityDef.md)
+[**CapabilitySiocModuleCapabilityDef**](CapabilitySiocModuleCapabilityDef.md)
 
 ### Authorization
 
@@ -7575,7 +7575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleDescriptor**](capability.SiocModuleDescriptor.md)
+[**CapabilitySiocModuleDescriptor**](CapabilitySiocModuleDescriptor.md)
 
 ### Authorization
 
@@ -7647,7 +7647,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleManufacturingDef**](capability.SiocModuleManufacturingDef.md)
+[**CapabilitySiocModuleManufacturingDef**](CapabilitySiocModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -7719,7 +7719,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchCapability**](capability.SwitchCapability.md)
+[**CapabilitySwitchCapability**](CapabilitySwitchCapability.md)
 
 ### Authorization
 
@@ -7791,7 +7791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchDescriptor**](capability.SwitchDescriptor.md)
+[**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
 
 ### Authorization
 
@@ -7863,7 +7863,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchManufacturingDef**](capability.SwitchManufacturingDef.md)
+[**CapabilitySwitchManufacturingDef**](CapabilitySwitchManufacturingDef.md)
 
 ### Authorization
 
@@ -7935,7 +7935,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityAdapterUnitDescriptor**](capability.AdapterUnitDescriptor.md)
+[**CapabilityAdapterUnitDescriptor**](CapabilityAdapterUnitDescriptor.md)
 
 ### Authorization
 
@@ -8007,7 +8007,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCatalog**](capability.Catalog.md)
+[**CapabilityCatalog**](CapabilityCatalog.md)
 
 ### Authorization
 
@@ -8079,7 +8079,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisDescriptor**](capability.ChassisDescriptor.md)
+[**CapabilityChassisDescriptor**](CapabilityChassisDescriptor.md)
 
 ### Authorization
 
@@ -8151,7 +8151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityChassisManufacturingDef**](capability.ChassisManufacturingDef.md)
+[**CapabilityChassisManufacturingDef**](CapabilityChassisManufacturingDef.md)
 
 ### Authorization
 
@@ -8223,7 +8223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityCimcFirmwareDescriptor**](capability.CimcFirmwareDescriptor.md)
+[**CapabilityCimcFirmwareDescriptor**](CapabilityCimcFirmwareDescriptor.md)
 
 ### Authorization
 
@@ -8295,7 +8295,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentPhysicalDef**](capability.EquipmentPhysicalDef.md)
+[**CapabilityEquipmentPhysicalDef**](CapabilityEquipmentPhysicalDef.md)
 
 ### Authorization
 
@@ -8367,7 +8367,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityEquipmentSlotArray**](capability.EquipmentSlotArray.md)
+[**CapabilityEquipmentSlotArray**](CapabilityEquipmentSlotArray.md)
 
 ### Authorization
 
@@ -8439,7 +8439,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleDescriptor**](capability.FanModuleDescriptor.md)
+[**CapabilityFanModuleDescriptor**](CapabilityFanModuleDescriptor.md)
 
 ### Authorization
 
@@ -8511,7 +8511,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityFanModuleManufacturingDef**](capability.FanModuleManufacturingDef.md)
+[**CapabilityFanModuleManufacturingDef**](CapabilityFanModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -8583,7 +8583,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardCapabilityDef**](capability.IoCardCapabilityDef.md)
+[**CapabilityIoCardCapabilityDef**](CapabilityIoCardCapabilityDef.md)
 
 ### Authorization
 
@@ -8655,7 +8655,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardDescriptor**](capability.IoCardDescriptor.md)
+[**CapabilityIoCardDescriptor**](CapabilityIoCardDescriptor.md)
 
 ### Authorization
 
@@ -8727,7 +8727,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityIoCardManufacturingDef**](capability.IoCardManufacturingDef.md)
+[**CapabilityIoCardManufacturingDef**](CapabilityIoCardManufacturingDef.md)
 
 ### Authorization
 
@@ -8799,7 +8799,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPortGroupAggregationDef**](capability.PortGroupAggregationDef.md)
+[**CapabilityPortGroupAggregationDef**](CapabilityPortGroupAggregationDef.md)
 
 ### Authorization
 
@@ -8871,7 +8871,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuDescriptor**](capability.PsuDescriptor.md)
+[**CapabilityPsuDescriptor**](CapabilityPsuDescriptor.md)
 
 ### Authorization
 
@@ -8943,7 +8943,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityPsuManufacturingDef**](capability.PsuManufacturingDef.md)
+[**CapabilityPsuManufacturingDef**](CapabilityPsuManufacturingDef.md)
 
 ### Authorization
 
@@ -9015,7 +9015,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilityServerSchemaDescriptor**](capability.ServerSchemaDescriptor.md)
+[**CapabilityServerSchemaDescriptor**](CapabilityServerSchemaDescriptor.md)
 
 ### Authorization
 
@@ -9087,7 +9087,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleCapabilityDef**](capability.SiocModuleCapabilityDef.md)
+[**CapabilitySiocModuleCapabilityDef**](CapabilitySiocModuleCapabilityDef.md)
 
 ### Authorization
 
@@ -9159,7 +9159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleDescriptor**](capability.SiocModuleDescriptor.md)
+[**CapabilitySiocModuleDescriptor**](CapabilitySiocModuleDescriptor.md)
 
 ### Authorization
 
@@ -9231,7 +9231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySiocModuleManufacturingDef**](capability.SiocModuleManufacturingDef.md)
+[**CapabilitySiocModuleManufacturingDef**](CapabilitySiocModuleManufacturingDef.md)
 
 ### Authorization
 
@@ -9303,7 +9303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchCapability**](capability.SwitchCapability.md)
+[**CapabilitySwitchCapability**](CapabilitySwitchCapability.md)
 
 ### Authorization
 
@@ -9375,7 +9375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchDescriptor**](capability.SwitchDescriptor.md)
+[**CapabilitySwitchDescriptor**](CapabilitySwitchDescriptor.md)
 
 ### Authorization
 
@@ -9447,7 +9447,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CapabilitySwitchManufacturingDef**](capability.SwitchManufacturingDef.md)
+[**CapabilitySwitchManufacturingDef**](CapabilitySwitchManufacturingDef.md)
 
 ### Authorization
 

@@ -17,8 +17,8 @@ Name | Type | Description | Notes
 **RestartCountTotal** | Pointer to **int64** | Total number of restarts since last deployment. | [optional] [readonly] 
 **RunningCount** | Pointer to **int64** | Number of replicas running. The number of instances of the application currently running. | [optional] [readonly] 
 **StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
-**GroupStatus** | Pointer to [**ApplianceGroupStatusRelationship**](appliance.GroupStatus.Relationship.md) |  | [optional] 
-**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](appliance.SystemStatus.Relationship.md) |  | [optional] 
+**GroupStatus** | Pointer to [**ApplianceGroupStatusRelationship**](ApplianceGroupStatusRelationship.md) |  | [optional] 
+**SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](ApplianceSystemStatusRelationship.md) |  | [optional] 
 
 ## Methods
 

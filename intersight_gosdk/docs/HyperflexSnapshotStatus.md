@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SnapshotStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SnapshotStatus"]
 **Description** | Pointer to **string** | Description of this Snapshot Point. | [optional] [readonly] 
-**Error** | Pointer to [**NullableHyperflexErrorStack**](hyperflex.ErrorStack.md) |  | [optional] 
+**Error** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
 **PctComplete** | Pointer to **int64** | Completion percentage for this snapshot. | [optional] [readonly] 
 **Status** | Pointer to **string** | Current snapshot state for this snapshot. * &#x60;SUCCESS&#x60; - This snapshot status code is success. * &#x60;FAILED&#x60; - This snapshot status code is failed. * &#x60;IN_PROGRESS&#x60; - This snapshot status code is in progress. * &#x60;DELETING&#x60; - This snapshot status code is deleting. * &#x60;DELETED&#x60; - This snapshot status code is deleted. * &#x60;NONE&#x60; - This snapshot status code is none. | [optional] [readonly] [default to "SUCCESS"]
 **Timestamp** | Pointer to **int64** | Timestamp at which the Snapshot is taken. | [optional] [readonly] 

@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsCard**](graphics.Card.md)
+[**GraphicsCard**](GraphicsCard.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsCardResponse**](graphics.Card.Response.md)
+[**GraphicsCardResponse**](GraphicsCardResponse.md)
 
 ### Authorization
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsController**](graphics.Controller.md)
+[**GraphicsController**](GraphicsController.md)
 
 ### Authorization
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsControllerResponse**](graphics.Controller.Response.md)
+[**GraphicsControllerResponse**](GraphicsControllerResponse.md)
 
 ### Authorization
 
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsCard**](graphics.Card.md)
+[**GraphicsCard**](GraphicsCard.md)
 
 ### Authorization
 
@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsController**](graphics.Controller.md)
+[**GraphicsController**](GraphicsController.md)
 
 ### Authorization
 
@@ -519,7 +519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsCard**](graphics.Card.md)
+[**GraphicsCard**](GraphicsCard.md)
 
 ### Authorization
 
@@ -591,7 +591,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GraphicsController**](graphics.Controller.md)
+[**GraphicsController**](GraphicsController.md)
 
 ### Authorization
 

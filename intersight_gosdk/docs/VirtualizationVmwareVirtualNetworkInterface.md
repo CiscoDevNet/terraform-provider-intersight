@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **MacAddressType** | Pointer to **string** | MAC address type for the mac address assigned to virtual network interface. * &#x60;manual&#x60; - Statically assigned MAC address. * &#x60;generated&#x60; - Automatically generated MAC address. * &#x60;assigned&#x60; - MAC address assigned by VCenter to the virtual network interface card. | [optional] [default to "manual"]
 **NetworkType** | Pointer to **string** | Type of network for virtual network interface. It can be either standard or distributed. | [optional] 
 **VmIdentity** | Pointer to **string** | Identity of the virtual machine where the virtual network interface is created. | [optional] 
-**Network** | Pointer to [**VirtualizationBaseNetworkRelationship**](virtualization.BaseNetwork.Relationship.md) |  | [optional] 
-**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](virtualization.VmwareVirtualMachine.Relationship.md) |  | [optional] 
+**Network** | Pointer to [**VirtualizationBaseNetworkRelationship**](VirtualizationBaseNetworkRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**VirtualizationVmwareVirtualMachineRelationship**](VirtualizationVmwareVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 

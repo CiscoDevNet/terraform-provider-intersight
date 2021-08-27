@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "techsupportmanagement.CollectionControlPolicy"]
 **DeploymentType** | Pointer to **string** | Deployment type defines whether the policy is associated with a SaaS or Appliance account. * &#x60;None&#x60; - Service deployment type None. * &#x60;SaaS&#x60; - Service deployment type SaaS. * &#x60;Appliance&#x60; - Service deployment type Appliance. | [optional] [readonly] [default to "None"]
 **TechSupportCollection** | Pointer to **string** | Enable or Disable techsupport collection for a specific account. * &#x60;Enable&#x60; - Enable techsupport collection. * &#x60;Disable&#x60; - Disable techsupport collection. | [optional] [default to "Enable"]
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **ComplianceState** | Pointer to **string** | Is the cluster complaint with the license entitlements? | [optional] [readonly] 
 **GetOutOfComplianceStartAt** | Pointer to **string** | Out of compliance date of the cluster | [optional] [readonly] 
 **InEvaluation** | Pointer to **bool** | Is the cluster in evalution period? | [optional] [readonly] 
-**LicenseAuthorization** | Pointer to [**NullableHyperflexHxLicenseAuthorizationDetailsDt**](hyperflex.HxLicenseAuthorizationDetailsDt.md) |  | [optional] 
-**LicenseRegistration** | Pointer to [**NullableHyperflexHxRegistrationDetailsDt**](hyperflex.HxRegistrationDetailsDt.md) |  | [optional] 
+**LicenseAuthorization** | Pointer to [**NullableHyperflexHxLicenseAuthorizationDetailsDt**](HyperflexHxLicenseAuthorizationDetailsDt.md) |  | [optional] 
+**LicenseRegistration** | Pointer to [**NullableHyperflexHxRegistrationDetailsDt**](HyperflexHxRegistrationDetailsDt.md) |  | [optional] 
 **LicenseType** | Pointer to **string** | The type of license applied on the cluster | [optional] [readonly] 
 **PlrEnabled** | Pointer to **bool** | Is reservation enabled for the cluster? | [optional] [readonly] 
 **SmartLicensingEnabled** | Pointer to **bool** | Is Smart Licensing Enabled for this cluster? | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

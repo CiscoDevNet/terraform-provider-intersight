@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmAggregation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmAggregation"]
-**AlarmSummary** | Pointer to [**NullableCondAlarmSummary**](cond.AlarmSummary.md) |  | [optional] 
+**AlarmSummary** | Pointer to [**NullableCondAlarmSummary**](CondAlarmSummary.md) |  | [optional] 
 **CriticalAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Critical, irrespective of acknowledgement status. | [optional] 
 **Health** | Pointer to **string** | Health of the managed end point. The highest severity computed from alarmSummary property is set as the health. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [default to "None"]
 **InfoAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Info, irrespective of acknowledgement status. | [optional] 
 **MoType** | Pointer to **string** | Managed object type. For example, FI managed object type will be network.Element. | [optional] 
 **WarningAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Warning, irrespective of acknowledgement status. | [optional] 
-**AlarmAggregationSource** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
+**AlarmAggregationSource** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 
 ## Methods
 

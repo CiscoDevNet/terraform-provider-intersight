@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"reflect"
 	"strings"
-	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -90,8 +88,14 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"disk_group_policies": {
-				Description: "An array of relationships to storageDiskGroupPolicy resources.",
+			"domain_group_moid": {
+				Description: "The DomainGroup ID for this managed object.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"drive_group": {
+				Description: "An array of relationships to storageDriveGroup resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
 				ConfigMode:  schema.SchemaConfigModeAttr,
@@ -129,17 +133,18 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					},
 				},
 			},
-			"domain_group_moid": {
-				Description: "The DomainGroup ID for this managed object.",
+			"global_hot_spares": {
+				Description: "A collection of disks that is to be used as hot spares, globally, for all the RAID groups. Allowed value is a number range separated by a comma or a hyphen.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
-			"global_hot_spares": {
-				Type:       schema.TypeList,
-				Optional:   true,
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
+			"m2_virtual_drive": {
+				Description: "Virtual Drive configuration for M.2 RAID controller.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -151,18 +156,25 @@ func resourceStorageStoragePolicy() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "storage.LocalDisk",
+							Default:     "storage.M2VirtualDriveConfig",
+						},
+						"controller_slot": {
+							Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. For example, MSTOR-RAID-1 means that the virtual drive is to be created on the M.2 RAID controller in the first slot. Select MSTOR-RAID-2 only when there is a M.2 RAID controller in the second slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "MSTOR-RAID-1",
+						},
+						"enable": {
+							Description: "If enabled, this will create a virtual drive on the M.2 RAID controller.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "storage.LocalDisk",
-						},
-						"slot_number": {
-							Description: "The slot number of the disk to be referenced. As this is a policy, this slot number may or may not be valid depending on the number of disks in the associated server.",
-							Type:        schema.TypeInt,
-							Optional:    true,
+							Default:     "storage.M2VirtualDriveConfig",
 						},
 					},
 				},
@@ -357,11 +369,110 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					},
 				},
 			},
-			"retain_policy_virtual_drives": {
-				Description: "Retains the virtual drives defined in policy if they exist already. If this flag is false, the existing virtual drives are removed and created again based on virtual drives in the policy.",
-				Type:        schema.TypeBool,
+			"raid0_drive": {
+				Description: "The list of disks where RAID0 virtual drives must be created on each individual drive.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
-				Default:     true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "storage.R0Drive",
+						},
+						"drive_slots": {
+							Description: "The set of drive slots where RAID0 virtual drives must be created.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"drive_slots_list": {
+							Description: "The list of drive slots where RAID0 virtual drives must be created (comma seperated).",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"enable": {
+							Description: "If enabled, this will create a RAID0 virtual drive per disk and encompassing the whole disk.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "storage.R0Drive",
+						},
+						"virtual_drive_policy": {
+							Description: "This defines the characteristics of a specific virtual drive.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"access_policy": {
+										Description: "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "Default",
+									},
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "storage.VirtualDrivePolicy",
+									},
+									"drive_cache": {
+										Description: "Disk cache policy for the virtual drive.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "Default",
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "storage.VirtualDrivePolicy",
+									},
+									"read_policy": {
+										Description: "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "Default",
+									},
+									"strip_size": {
+										Description: "Desired strip size - Allowed values are 64KiB, 128KiB, 256KiB, 512KiB, 1024KiB.\n* `64` - Number of bytes in a strip is 64 Kibibytes.\n* `128` - Number of bytes in a strip is 128 Kibibytes.\n* `256` - Number of bytes in a strip is 256 Kibibytes.\n* `512` - Number of bytes in a strip is 512 Kibibytes.\n* `1024` - Number of bytes in a strip is 1024 Kibibytes or 1 Mebibyte.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Default:     64,
+									},
+									"write_policy": {
+										Description: "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "Default",
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -395,10 +506,15 @@ func resourceStorageStoragePolicy() *schema.Resource {
 				},
 			},
 			"unused_disks_state": {
-				Description: "Unused Disks State is used to specify the state, unconfigured good or jbod, in which the disks that are not used in this policy should be moved.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to host os.",
+				Description: "State to which disks, not used in this policy, are to be moved. NoChange will not change the drive state.\n* `NoChange` - Drive state will not be modified by Storage Policy.\n* `UnconfiguredGood` - Unconfigured good state -ready to be added in a RAID group.\n* `Jbod` - JBOD state where the disks start showing up to Host OS.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Default:     "UnconfiguredGood",
+				Default:     "NoChange",
+			},
+			"use_jbod_for_vd_creation": {
+				Description: "Disks in JBOD State are used to create virtual drives.",
+				Type:        schema.TypeBool,
+				Optional:    true,
 			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
@@ -525,106 +641,6 @@ func resourceStorageStoragePolicy() *schema.Resource {
 					},
 				},
 			},
-			"virtual_drives": {
-				Type:       schema.TypeList,
-				Optional:   true,
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"access_policy": {
-							Description: "Access policy that host has on this virtual drive.\n* `Default` - Use platform default access mode.\n* `ReadWrite` - Enables host to perform read-write on the VD.\n* `ReadOnly` - Host can only read from the VD.\n* `Blocked` - Host can neither read nor write to the VD.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"boot_drive": {
-							Description: "The flag enables the use of this virtual drive as a boot drive.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "storage.VirtualDriveConfig",
-						},
-						"disk_group_name": {
-							Description: "Disk group policy that has the disk group in which this virtual drive needs to be created.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"disk_group_policy": {
-							Description: "Disk group policy that has the disk group in which this virtual drive needs to be created.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"drive_cache": {
-							Description: "Drive Cache property expect disk cache policy.\n* `Default` - Use platform default drive cache mode.\n* `NoChange` - Drive cache policy is unchanged.\n* `Enable` - Enables IO caching on the drive.\n* `Disable` - Disables IO caching on the drive.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-						"expand_to_available": {
-							Description: "The flag enables this virtual drive to use all the available space in the disk group. When this flag is configured, the size property is ignored.",
-							Type:        schema.TypeBool,
-							Optional:    true,
-						},
-						"io_policy": {
-							Description: "Desired IO mode - direct IO or cached IO.\n* `Default` - Use platform default IO mode.\n* `Direct` - Use direct IO for writing directly into the disk.\n* `Cached` - Use cached IO for writing into cache and then to disk.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-						"name": {
-							Description: "The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "storage.VirtualDriveConfig",
-						},
-						"read_policy": {
-							Description: "Read ahead mode to be used to read data from this virtual drive.\n* `Default` - Use platform default read ahead mode.\n* `ReadAhead` - Use read ahead mode for the policy.\n* `NoReadAhead` - Do not use read ahead mode for the policy.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-						"size": {
-							Description: "Virtual drive size in MB. Size is mandatory field unless the 'Expand to Available' option is enabled.",
-							Type:        schema.TypeInt,
-							Optional:    true,
-						},
-						"strip_size": {
-							Description: "The strip size is the portion of a stripe that resides on a single drive in the drive group. The stripe consists of the data segments that the RAID controller writes across multiple drives, not including parity drives.\n* `Default` - Use platform default strip size for a virtual drive.\n* `32k` - Enables a strip size of 32k for a virtual drive.\n* `64k` - Enables a strip size of 64k for a virtual drive.\n* `128k` - Enables a strip size of 128k for a virtual drive.\n* `256k` - Enables a strip size of 256k for a virtual drive.\n* `512k` - Enables a strip size of 512k for a virtual drive.\n* `1024k` - Enables a strip size of 1024k for a virtual drive.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-						"vdid": {
-							Description: "Unique Id of the Virtual Drive to be used to identify Virtual Drive when name is empty.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"write_policy": {
-							Description: "Write mode to be used to write data to this virtual drive.\n* `Default` - Use platform default write mode.\n* `WriteThrough` - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache.\n* `WriteBackGoodBbu` - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure.\n* `AlwaysWriteBack` - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Default:     "Default",
-						},
-					},
-				},
-			},
 		},
 	}
 }
@@ -635,10 +651,6 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewStorageStoragePolicyWithDefaults()
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
@@ -649,62 +661,15 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("ancestors"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetAncestors(x)
-		}
-	}
-
 	o.SetClassId("storage.StoragePolicy")
-
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("disk_group_policies"); ok {
-		x := make([]models.StorageDiskGroupPolicyRelationship, 0)
+	if v, ok := d.GetOk("drive_group"); ok {
+		x := make([]models.StorageDriveGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := models.NewMoMoRefWithDefaults()
@@ -738,24 +703,24 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsStorageDiskGroupPolicyRelationship(o))
+			x = append(x, models.MoMoRefAsStorageDriveGroupRelationship(o))
 		}
 		if len(x) > 0 {
-			o.SetDiskGroupPolicies(x)
+			o.SetDriveGroup(x)
 		}
-	}
-
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
 	}
 
 	if v, ok := d.GetOk("global_hot_spares"); ok {
-		x := make([]models.StorageLocalDisk, 0)
+		x := (v.(string))
+		o.SetGlobalHotSpares(x)
+	}
+
+	if v, ok := d.GetOk("m2_virtual_drive"); ok {
+		p := make([]models.StorageM2VirtualDriveConfig, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewStorageLocalDiskWithDefaults()
 			l := s[i].(map[string]interface{})
+			o := models.NewStorageM2VirtualDriveConfigWithDefaults()
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -766,29 +731,31 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.LocalDisk")
+			o.SetClassId("storage.M2VirtualDriveConfig")
+			if v, ok := l["controller_slot"]; ok {
+				{
+					x := (v.(string))
+					o.SetControllerSlot(x)
+				}
+			}
+			if v, ok := l["enable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnable(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["slot_number"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetSlotNumber(x)
-				}
-			}
-			x = append(x, *o)
+			p = append(p, *o)
 		}
-		if len(x) > 0 {
-			o.SetGlobalHotSpares(x)
+		if len(p) > 0 {
+			x := p[0]
+			o.SetM2VirtualDrive(x)
 		}
-	}
-
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -846,102 +813,6 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("owners"); ok {
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		if len(x) > 0 {
-			o.SetOwners(x)
-		}
-	}
-
-	if v, ok := d.GetOk("parent"); ok {
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if v, ok := d.GetOk("permission_resources"); ok {
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(x) > 0 {
-			o.SetPermissionResources(x)
-		}
-	}
-
 	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
@@ -984,14 +855,109 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOkExists("retain_policy_virtual_drives"); ok {
-		x := v.(bool)
-		o.SetRetainPolicyVirtualDrives(x)
-	}
-
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
+	if v, ok := d.GetOk("raid0_drive"); ok {
+		p := make([]models.StorageR0Drive, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewStorageR0DriveWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.R0Drive")
+			if v, ok := l["drive_slots"]; ok {
+				{
+					x := (v.(string))
+					o.SetDriveSlots(x)
+				}
+			}
+			if v, ok := l["enable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnable(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["virtual_drive_policy"]; ok {
+				{
+					p := make([]models.StorageVirtualDrivePolicy, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewStorageVirtualDrivePolicyWithDefaults()
+						if v, ok := l["access_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetAccessPolicy(x)
+							}
+						}
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.VirtualDrivePolicy")
+						if v, ok := l["drive_cache"]; ok {
+							{
+								x := (v.(string))
+								o.SetDriveCache(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["read_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetReadPolicy(x)
+							}
+						}
+						if v, ok := l["strip_size"]; ok {
+							{
+								x := int32(v.(int))
+								o.SetStripSize(x)
+							}
+						}
+						if v, ok := l["write_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetWritePolicy(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetVirtualDrivePolicy(x)
+					}
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRaid0Drive(x)
+		}
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1034,249 +1000,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetUnusedDisksState(x)
 	}
 
-	if v, ok := d.GetOk("version_context"); ok {
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoVersionContextWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
-	if v, ok := d.GetOk("virtual_drives"); ok {
-		x := make([]models.StorageVirtualDriveConfig, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := models.NewStorageVirtualDriveConfigWithDefaults()
-			l := s[i].(map[string]interface{})
-			if v, ok := l["access_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetAccessPolicy(x)
-				}
-			}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			if v, ok := l["boot_drive"]; ok {
-				{
-					x := (v.(bool))
-					o.SetBootDrive(x)
-				}
-			}
-			o.SetClassId("storage.VirtualDriveConfig")
-			if v, ok := l["disk_group_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetDiskGroupName(x)
-				}
-			}
-			if v, ok := l["disk_group_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetDiskGroupPolicy(x)
-				}
-			}
-			if v, ok := l["drive_cache"]; ok {
-				{
-					x := (v.(string))
-					o.SetDriveCache(x)
-				}
-			}
-			if v, ok := l["expand_to_available"]; ok {
-				{
-					x := (v.(bool))
-					o.SetExpandToAvailable(x)
-				}
-			}
-			if v, ok := l["io_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetIoPolicy(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["read_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetReadPolicy(x)
-				}
-			}
-			if v, ok := l["size"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetSize(x)
-				}
-			}
-			if v, ok := l["strip_size"]; ok {
-				{
-					x := (v.(string))
-					o.SetStripSize(x)
-				}
-			}
-			if v, ok := l["vdid"]; ok {
-				{
-					x := (v.(string))
-					o.SetVdid(x)
-				}
-			}
-			if v, ok := l["write_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetWritePolicy(x)
-				}
-			}
-			x = append(x, *o)
-		}
-		if len(x) > 0 {
-			o.SetVirtualDrives(x)
-		}
-	}
+	o.SetUseJbodForVdCreation(d.Get("use_jbod_for_vd_creation").(bool))
 
 	r := conn.ApiClient.StorageApi.CreateStorageStoragePolicy(conn.ctx).StorageStoragePolicy(*o)
 	resultMo, _, responseErr := r.Execute()
@@ -1360,16 +1084,20 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Description in StorageStoragePolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("disk_group_policies", flattenListStorageDiskGroupPolicyRelationship(s.GetDiskGroupPolicies(), d)); err != nil {
-		return diag.Errorf("error occurred while setting property DiskGroupPolicies in StorageStoragePolicy object: %s", err.Error())
-	}
-
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in StorageStoragePolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("global_hot_spares", flattenListStorageLocalDisk(s.GetGlobalHotSpares(), d)); err != nil {
+	if err := d.Set("drive_group", flattenListStorageDriveGroupRelationship(s.GetDriveGroup(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property DriveGroup in StorageStoragePolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("global_hot_spares", (s.GetGlobalHotSpares())); err != nil {
 		return diag.Errorf("error occurred while setting property GlobalHotSpares in StorageStoragePolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("m2_virtual_drive", flattenMapStorageM2VirtualDriveConfig(s.GetM2VirtualDrive(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property M2VirtualDrive in StorageStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1408,8 +1136,8 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property Profiles in StorageStoragePolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("retain_policy_virtual_drives", (s.GetRetainPolicyVirtualDrives())); err != nil {
-		return diag.Errorf("error occurred while setting property RetainPolicyVirtualDrives in StorageStoragePolicy object: %s", err.Error())
+	if err := d.Set("raid0_drive", flattenMapStorageR0Drive(s.GetRaid0Drive(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Raid0Drive in StorageStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -1424,12 +1152,12 @@ func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property UnusedDisksState in StorageStoragePolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
-		return diag.Errorf("error occurred while setting property VersionContext in StorageStoragePolicy object: %s", err.Error())
+	if err := d.Set("use_jbod_for_vd_creation", (s.GetUseJbodForVdCreation())); err != nil {
+		return diag.Errorf("error occurred while setting property UseJbodForVdCreation in StorageStoragePolicy object: %s", err.Error())
 	}
 
-	if err := d.Set("virtual_drives", flattenListStorageVirtualDriveConfig(s.GetVirtualDrives(), d)); err != nil {
-		return diag.Errorf("error occurred while setting property VirtualDrives in StorageStoragePolicy object: %s", err.Error())
+	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property VersionContext in StorageStoragePolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -1443,11 +1171,6 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StorageStoragePolicy{}
-	if d.HasChange("account_moid") {
-		v := d.Get("account_moid")
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
 
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
@@ -1459,54 +1182,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("ancestors") {
-		v := d.Get("ancestors")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetAncestors(x)
-	}
-
 	o.SetClassId("storage.StoragePolicy")
-
-	if d.HasChange("create_time") {
-		v := d.Get("create_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
 
 	if d.HasChange("description") {
 		v := d.Get("description")
@@ -1514,9 +1190,9 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		o.SetDescription(x)
 	}
 
-	if d.HasChange("disk_group_policies") {
-		v := d.Get("disk_group_policies")
-		x := make([]models.StorageDiskGroupPolicyRelationship, 0)
+	if d.HasChange("drive_group") {
+		v := d.Get("drive_group")
+		x := make([]models.StorageDriveGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -1550,24 +1226,24 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsStorageDiskGroupPolicyRelationship(o))
+			x = append(x, models.MoMoRefAsStorageDriveGroupRelationship(o))
 		}
-		o.SetDiskGroupPolicies(x)
-	}
-
-	if d.HasChange("domain_group_moid") {
-		v := d.Get("domain_group_moid")
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
+		o.SetDriveGroup(x)
 	}
 
 	if d.HasChange("global_hot_spares") {
 		v := d.Get("global_hot_spares")
-		x := make([]models.StorageLocalDisk, 0)
+		x := (v.(string))
+		o.SetGlobalHotSpares(x)
+	}
+
+	if d.HasChange("m2_virtual_drive") {
+		v := d.Get("m2_virtual_drive")
+		p := make([]models.StorageM2VirtualDriveConfig, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := &models.StorageLocalDisk{}
 			l := s[i].(map[string]interface{})
+			o := &models.StorageM2VirtualDriveConfig{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1578,28 +1254,31 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.LocalDisk")
+			o.SetClassId("storage.M2VirtualDriveConfig")
+			if v, ok := l["controller_slot"]; ok {
+				{
+					x := (v.(string))
+					o.SetControllerSlot(x)
+				}
+			}
+			if v, ok := l["enable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnable(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["slot_number"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetSlotNumber(x)
-				}
-			}
-			x = append(x, *o)
+			p = append(p, *o)
 		}
-		o.SetGlobalHotSpares(x)
-	}
-
-	if d.HasChange("mod_time") {
-		v := d.Get("mod_time")
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
+		if len(p) > 0 {
+			x := p[0]
+			o.SetM2VirtualDrive(x)
+		}
 	}
 
 	if d.HasChange("moid") {
@@ -1660,101 +1339,6 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if d.HasChange("owners") {
-		v := d.Get("owners")
-		x := make([]string, 0)
-		y := reflect.ValueOf(v)
-		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
-		}
-		o.SetOwners(x)
-	}
-
-	if d.HasChange("parent") {
-		v := d.Get("parent")
-		p := make([]models.MoBaseMoRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetParent(x)
-		}
-	}
-
-	if d.HasChange("permission_resources") {
-		v := d.Get("permission_resources")
-		x := make([]models.MoBaseMoRelationship, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.MoMoRef{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
-		}
-		o.SetPermissionResources(x)
-	}
-
 	if d.HasChange("profiles") {
 		v := d.Get("profiles")
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
@@ -1796,16 +1380,110 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		o.SetProfiles(x)
 	}
 
-	if d.HasChange("retain_policy_virtual_drives") {
-		v := d.Get("retain_policy_virtual_drives")
-		x := (v.(bool))
-		o.SetRetainPolicyVirtualDrives(x)
-	}
-
-	if d.HasChange("shared_scope") {
-		v := d.Get("shared_scope")
-		x := (v.(string))
-		o.SetSharedScope(x)
+	if d.HasChange("raid0_drive") {
+		v := d.Get("raid0_drive")
+		p := make([]models.StorageR0Drive, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageR0Drive{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.R0Drive")
+			if v, ok := l["drive_slots"]; ok {
+				{
+					x := (v.(string))
+					o.SetDriveSlots(x)
+				}
+			}
+			if v, ok := l["enable"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnable(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["virtual_drive_policy"]; ok {
+				{
+					p := make([]models.StorageVirtualDrivePolicy, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewStorageVirtualDrivePolicyWithDefaults()
+						if v, ok := l["access_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetAccessPolicy(x)
+							}
+						}
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.VirtualDrivePolicy")
+						if v, ok := l["drive_cache"]; ok {
+							{
+								x := (v.(string))
+								o.SetDriveCache(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["read_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetReadPolicy(x)
+							}
+						}
+						if v, ok := l["strip_size"]; ok {
+							{
+								x := int32(v.(int))
+								o.SetStripSize(x)
+							}
+						}
+						if v, ok := l["write_policy"]; ok {
+							{
+								x := (v.(string))
+								o.SetWritePolicy(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetVirtualDrivePolicy(x)
+					}
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetRaid0Drive(x)
+		}
 	}
 
 	if d.HasChange("tags") {
@@ -1848,248 +1526,10 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 		o.SetUnusedDisksState(x)
 	}
 
-	if d.HasChange("version_context") {
-		v := d.Get("version_context")
-		p := make([]models.MoVersionContext, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoVersionContext{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.VersionContext")
-			if v, ok := l["interested_mos"]; ok {
-				{
-					x := make([]models.MoMoRef, 0)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						o := models.NewMoMoRefWithDefaults()
-						l := s[i].(map[string]interface{})
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						x = append(x, *o)
-					}
-					if len(x) > 0 {
-						o.SetInterestedMos(x)
-					}
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["ref_mo"]; ok {
-				{
-					p := make([]models.MoMoRef, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewMoMoRefWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("mo.MoRef")
-						if v, ok := l["moid"]; ok {
-							{
-								x := (v.(string))
-								o.SetMoid(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["selector"]; ok {
-							{
-								x := (v.(string))
-								o.SetSelector(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetRefMo(x)
-					}
-				}
-			}
-			if v, ok := l["timestamp"]; ok {
-				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
-					o.SetTimestamp(x)
-				}
-			}
-			if v, ok := l["nr_version"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersion(x)
-				}
-			}
-			if v, ok := l["version_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetVersionType(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetVersionContext(x)
-		}
-	}
-
-	if d.HasChange("virtual_drives") {
-		v := d.Get("virtual_drives")
-		x := make([]models.StorageVirtualDriveConfig, 0)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			o := &models.StorageVirtualDriveConfig{}
-			l := s[i].(map[string]interface{})
-			if v, ok := l["access_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetAccessPolicy(x)
-				}
-			}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			if v, ok := l["boot_drive"]; ok {
-				{
-					x := (v.(bool))
-					o.SetBootDrive(x)
-				}
-			}
-			o.SetClassId("storage.VirtualDriveConfig")
-			if v, ok := l["disk_group_name"]; ok {
-				{
-					x := (v.(string))
-					o.SetDiskGroupName(x)
-				}
-			}
-			if v, ok := l["disk_group_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetDiskGroupPolicy(x)
-				}
-			}
-			if v, ok := l["drive_cache"]; ok {
-				{
-					x := (v.(string))
-					o.SetDriveCache(x)
-				}
-			}
-			if v, ok := l["expand_to_available"]; ok {
-				{
-					x := (v.(bool))
-					o.SetExpandToAvailable(x)
-				}
-			}
-			if v, ok := l["io_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetIoPolicy(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["read_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetReadPolicy(x)
-				}
-			}
-			if v, ok := l["size"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetSize(x)
-				}
-			}
-			if v, ok := l["strip_size"]; ok {
-				{
-					x := (v.(string))
-					o.SetStripSize(x)
-				}
-			}
-			if v, ok := l["vdid"]; ok {
-				{
-					x := (v.(string))
-					o.SetVdid(x)
-				}
-			}
-			if v, ok := l["write_policy"]; ok {
-				{
-					x := (v.(string))
-					o.SetWritePolicy(x)
-				}
-			}
-			x = append(x, *o)
-		}
-		o.SetVirtualDrives(x)
+	if d.HasChange("use_jbod_for_vd_creation") {
+		v := d.Get("use_jbod_for_vd_creation")
+		x := (v.(bool))
+		o.SetUseJbodForVdCreation(x)
 	}
 
 	r := conn.ApiClient.StorageApi.UpdateStorageStoragePolicy(conn.ctx, d.Id()).StorageStoragePolicy(*o)

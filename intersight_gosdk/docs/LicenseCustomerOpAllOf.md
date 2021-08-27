@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **RenewAuthorization** | Pointer to **bool** | Trigger renew authorization. | [optional] 
 **RenewIdCertificate** | Pointer to **bool** | Trigger renew registration. | [optional] 
 **ShowAgentTechSupport** | Pointer to **bool** | Trigger show tech support feature. | [optional] 
-**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](license.AccountLicenseData.Relationship.md) |  | [optional] 
+**AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
 
 ## Methods
 

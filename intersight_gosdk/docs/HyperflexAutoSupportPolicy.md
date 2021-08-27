@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **AdminState** | Pointer to **bool** | Enable or disable Auto-Support. | [optional] [default to true]
 **ServiceTicketReceipient** | Pointer to **string** | The recipient email address for support tickets. | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

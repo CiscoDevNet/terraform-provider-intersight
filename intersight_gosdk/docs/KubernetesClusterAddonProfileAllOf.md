@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterAddonProfile"]
 **Addons** | Pointer to [**[]KubernetesAddon**](KubernetesAddon.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the cluster addon profile. | [optional] 
-**AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](kubernetes.Cluster.Relationship.md) |  | [optional] 
-**Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
+**AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 
 ## Methods
 

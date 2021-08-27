@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **UnCompressedUsedBytes** | Pointer to **int64** | Uncompressed bytes on storage container. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID of the datastore/storage container. | [optional] [readonly] 
 **VolumeCount** | Pointer to **int64** | Number of volumes associated with the storage container. | [optional] [readonly] 
-**Cluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
+**Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **Volumes** | Pointer to [**[]HyperflexVolumeRelationship**](HyperflexVolumeRelationship.md) | An array of relationships to hyperflexVolume resources. | [optional] [readonly] 
 
 ## Methods

@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.EsxiVmConfiguration"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.EsxiVmConfiguration"]
 **Annotation** | Pointer to **string** | Specify annotation (optional) for the virtual machine. | [optional] 
-**Compute** | Pointer to [**NullableVirtualizationEsxiVmComputeConfiguration**](virtualization.EsxiVmComputeConfiguration.md) |  | [optional] 
-**Customspec** | Pointer to [**NullableVirtualizationBaseCustomSpec**](virtualization.BaseCustomSpec.md) |  | [optional] 
+**Compute** | Pointer to [**NullableVirtualizationEsxiVmComputeConfiguration**](VirtualizationEsxiVmComputeConfiguration.md) |  | [optional] 
+**Customspec** | Pointer to [**NullableVirtualizationBaseCustomSpec**](VirtualizationBaseCustomSpec.md) |  | [optional] 
 **Datacenter** | Pointer to **string** | Datacenter where virtual machine is deployed. | [optional] 
 **Folder** | Pointer to **string** | Folder where virtual machine is deployed. | [optional] 
 **Image** | Pointer to **string** | Image path of OVA (The image can be from any location). | [optional] 
 **InventoryPath** | Pointer to **string** | The full inventory path as reported by virtual center (vCenter). Used by some of the operations to uniquely identify the VM. Inventory path is set internally based on notifications from the inventory service or some other internal channels. | [optional] [readonly] 
-**Network** | Pointer to [**NullableVirtualizationEsxiVmNetworkConfiguration**](virtualization.EsxiVmNetworkConfiguration.md) |  | [optional] 
-**Storage** | Pointer to [**NullableVirtualizationEsxiVmStorageConfiguration**](virtualization.EsxiVmStorageConfiguration.md) |  | [optional] 
+**Network** | Pointer to [**NullableVirtualizationEsxiVmNetworkConfiguration**](VirtualizationEsxiVmNetworkConfiguration.md) |  | [optional] 
+**Storage** | Pointer to [**NullableVirtualizationEsxiVmStorageConfiguration**](VirtualizationEsxiVmStorageConfiguration.md) |  | [optional] 
 **Template** | Pointer to **string** | Template to be used for clone. | [optional] 
 
 ## Methods

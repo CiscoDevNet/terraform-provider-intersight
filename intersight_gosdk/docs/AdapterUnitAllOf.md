@@ -17,16 +17,16 @@ Name | Type | Description | Notes
 **Power** | Pointer to **string** | Power state of an adapter unit. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | Thermal state of an adapter unit. | [optional] [readonly] 
 **Vid** | Pointer to **string** | Virtual Id of the adapter in the server. | [optional] [readonly] 
-**AdapterUnitExpander** | Pointer to [**AdapterUnitExpanderRelationship**](adapter.UnitExpander.Relationship.md) |  | [optional] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**Controller** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
+**AdapterUnitExpander** | Pointer to [**AdapterUnitExpanderRelationship**](AdapterUnitExpanderRelationship.md) |  | [optional] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**Controller** | Pointer to [**ManagementControllerRelationship**](ManagementControllerRelationship.md) |  | [optional] 
 **ExtEthIfs** | Pointer to [**[]AdapterExtEthInterfaceRelationship**](AdapterExtEthInterfaceRelationship.md) | An array of relationships to adapterExtEthInterface resources. | [optional] [readonly] 
 **HostEthIfs** | Pointer to [**[]AdapterHostEthInterfaceRelationship**](AdapterHostEthInterfaceRelationship.md) | An array of relationships to adapterHostEthInterface resources. | [optional] [readonly] 
 **HostFcIfs** | Pointer to [**[]AdapterHostFcInterfaceRelationship**](AdapterHostFcInterfaceRelationship.md) | An array of relationships to adapterHostFcInterface resources. | [optional] [readonly] 
 **HostIscsiIfs** | Pointer to [**[]AdapterHostIscsiInterfaceRelationship**](AdapterHostIscsiInterfaceRelationship.md) | An array of relationships to adapterHostIscsiInterface resources. | [optional] [readonly] 
-**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
 

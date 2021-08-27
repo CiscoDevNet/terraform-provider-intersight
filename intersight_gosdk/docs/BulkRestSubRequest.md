@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.RestSubRequest"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.RestSubRequest"]
-**Body** | Pointer to [**MoBaseMo**](mo.BaseMo.md) |  | [optional] 
+**Body** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
 **TargetMoid** | Pointer to **string** | Used with PATCH &amp; DELETE actions. The moid of an existing object instance. | [optional] 
 
 ## Methods

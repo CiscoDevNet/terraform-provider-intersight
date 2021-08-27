@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryPolicy**](memory.PersistentMemoryPolicy.md)
+[**MemoryPersistentMemoryPolicy**](MemoryPersistentMemoryPolicy.md)
 
 ### Authorization
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryArray**](memory.Array.md)
+[**MemoryArray**](MemoryArray.md)
 
 ### Authorization
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryArrayResponse**](memory.Array.Response.md)
+[**MemoryArrayResponse**](MemoryArrayResponse.md)
 
 ### Authorization
 
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfigResult**](memory.PersistentMemoryConfigResult.md)
+[**MemoryPersistentMemoryConfigResult**](MemoryPersistentMemoryConfigResult.md)
 
 ### Authorization
 
@@ -467,7 +467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfigResultResponse**](memory.PersistentMemoryConfigResult.Response.md)
+[**MemoryPersistentMemoryConfigResultResponse**](MemoryPersistentMemoryConfigResultResponse.md)
 
 ### Authorization
 
@@ -535,7 +535,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfiguration**](memory.PersistentMemoryConfiguration.md)
+[**MemoryPersistentMemoryConfiguration**](MemoryPersistentMemoryConfiguration.md)
 
 ### Authorization
 
@@ -619,7 +619,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfigurationResponse**](memory.PersistentMemoryConfiguration.Response.md)
+[**MemoryPersistentMemoryConfigurationResponse**](MemoryPersistentMemoryConfigurationResponse.md)
 
 ### Authorization
 
@@ -687,7 +687,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespace**](memory.PersistentMemoryNamespace.md)
+[**MemoryPersistentMemoryNamespace**](MemoryPersistentMemoryNamespace.md)
 
 ### Authorization
 
@@ -755,7 +755,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespaceConfigResult**](memory.PersistentMemoryNamespaceConfigResult.md)
+[**MemoryPersistentMemoryNamespaceConfigResult**](MemoryPersistentMemoryNamespaceConfigResult.md)
 
 ### Authorization
 
@@ -839,7 +839,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespaceConfigResultResponse**](memory.PersistentMemoryNamespaceConfigResult.Response.md)
+[**MemoryPersistentMemoryNamespaceConfigResultResponse**](MemoryPersistentMemoryNamespaceConfigResultResponse.md)
 
 ### Authorization
 
@@ -923,7 +923,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespaceResponse**](memory.PersistentMemoryNamespace.Response.md)
+[**MemoryPersistentMemoryNamespaceResponse**](MemoryPersistentMemoryNamespaceResponse.md)
 
 ### Authorization
 
@@ -991,7 +991,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryPolicy**](memory.PersistentMemoryPolicy.md)
+[**MemoryPersistentMemoryPolicy**](MemoryPersistentMemoryPolicy.md)
 
 ### Authorization
 
@@ -1075,7 +1075,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryPolicyResponse**](memory.PersistentMemoryPolicy.Response.md)
+[**MemoryPersistentMemoryPolicyResponse**](MemoryPersistentMemoryPolicyResponse.md)
 
 ### Authorization
 
@@ -1143,7 +1143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryRegion**](memory.PersistentMemoryRegion.md)
+[**MemoryPersistentMemoryRegion**](MemoryPersistentMemoryRegion.md)
 
 ### Authorization
 
@@ -1227,7 +1227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryRegionResponse**](memory.PersistentMemoryRegion.Response.md)
+[**MemoryPersistentMemoryRegionResponse**](MemoryPersistentMemoryRegionResponse.md)
 
 ### Authorization
 
@@ -1295,7 +1295,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryUnit**](memory.PersistentMemoryUnit.md)
+[**MemoryPersistentMemoryUnit**](MemoryPersistentMemoryUnit.md)
 
 ### Authorization
 
@@ -1379,7 +1379,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryUnitResponse**](memory.PersistentMemoryUnit.Response.md)
+[**MemoryPersistentMemoryUnitResponse**](MemoryPersistentMemoryUnitResponse.md)
 
 ### Authorization
 
@@ -1447,7 +1447,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryUnit**](memory.Unit.md)
+[**MemoryUnit**](MemoryUnit.md)
 
 ### Authorization
 
@@ -1531,7 +1531,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryUnitResponse**](memory.Unit.Response.md)
+[**MemoryUnitResponse**](MemoryUnitResponse.md)
 
 ### Authorization
 
@@ -1603,7 +1603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryArray**](memory.Array.md)
+[**MemoryArray**](MemoryArray.md)
 
 ### Authorization
 
@@ -1675,7 +1675,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfigResult**](memory.PersistentMemoryConfigResult.md)
+[**MemoryPersistentMemoryConfigResult**](MemoryPersistentMemoryConfigResult.md)
 
 ### Authorization
 
@@ -1747,7 +1747,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfiguration**](memory.PersistentMemoryConfiguration.md)
+[**MemoryPersistentMemoryConfiguration**](MemoryPersistentMemoryConfiguration.md)
 
 ### Authorization
 
@@ -1819,7 +1819,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespace**](memory.PersistentMemoryNamespace.md)
+[**MemoryPersistentMemoryNamespace**](MemoryPersistentMemoryNamespace.md)
 
 ### Authorization
 
@@ -1891,7 +1891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespaceConfigResult**](memory.PersistentMemoryNamespaceConfigResult.md)
+[**MemoryPersistentMemoryNamespaceConfigResult**](MemoryPersistentMemoryNamespaceConfigResult.md)
 
 ### Authorization
 
@@ -1963,7 +1963,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryPolicy**](memory.PersistentMemoryPolicy.md)
+[**MemoryPersistentMemoryPolicy**](MemoryPersistentMemoryPolicy.md)
 
 ### Authorization
 
@@ -2035,7 +2035,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryRegion**](memory.PersistentMemoryRegion.md)
+[**MemoryPersistentMemoryRegion**](MemoryPersistentMemoryRegion.md)
 
 ### Authorization
 
@@ -2107,7 +2107,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryUnit**](memory.PersistentMemoryUnit.md)
+[**MemoryPersistentMemoryUnit**](MemoryPersistentMemoryUnit.md)
 
 ### Authorization
 
@@ -2179,7 +2179,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryUnit**](memory.Unit.md)
+[**MemoryUnit**](MemoryUnit.md)
 
 ### Authorization
 
@@ -2251,7 +2251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryArray**](memory.Array.md)
+[**MemoryArray**](MemoryArray.md)
 
 ### Authorization
 
@@ -2323,7 +2323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfigResult**](memory.PersistentMemoryConfigResult.md)
+[**MemoryPersistentMemoryConfigResult**](MemoryPersistentMemoryConfigResult.md)
 
 ### Authorization
 
@@ -2395,7 +2395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryConfiguration**](memory.PersistentMemoryConfiguration.md)
+[**MemoryPersistentMemoryConfiguration**](MemoryPersistentMemoryConfiguration.md)
 
 ### Authorization
 
@@ -2467,7 +2467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespace**](memory.PersistentMemoryNamespace.md)
+[**MemoryPersistentMemoryNamespace**](MemoryPersistentMemoryNamespace.md)
 
 ### Authorization
 
@@ -2539,7 +2539,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryNamespaceConfigResult**](memory.PersistentMemoryNamespaceConfigResult.md)
+[**MemoryPersistentMemoryNamespaceConfigResult**](MemoryPersistentMemoryNamespaceConfigResult.md)
 
 ### Authorization
 
@@ -2611,7 +2611,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryPolicy**](memory.PersistentMemoryPolicy.md)
+[**MemoryPersistentMemoryPolicy**](MemoryPersistentMemoryPolicy.md)
 
 ### Authorization
 
@@ -2683,7 +2683,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryRegion**](memory.PersistentMemoryRegion.md)
+[**MemoryPersistentMemoryRegion**](MemoryPersistentMemoryRegion.md)
 
 ### Authorization
 
@@ -2755,7 +2755,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryPersistentMemoryUnit**](memory.PersistentMemoryUnit.md)
+[**MemoryPersistentMemoryUnit**](MemoryPersistentMemoryUnit.md)
 
 ### Authorization
 
@@ -2827,7 +2827,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryUnit**](memory.Unit.md)
+[**MemoryUnit**](MemoryUnit.md)
 
 ### Authorization
 

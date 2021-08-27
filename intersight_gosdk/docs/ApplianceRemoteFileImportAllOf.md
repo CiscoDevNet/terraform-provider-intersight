@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Port** | Pointer to **int64** | The port that should be used for the remote request. | [optional] 
 **Protocol** | Pointer to **string** | Protocol for the remote request. * &#x60;scp&#x60; - Secure Copy Protocol (SCP) to access the file server. * &#x60;sftp&#x60; - SSH File Transfer Protocol (SFTP) to access file server. | [optional] [default to "scp"]
 **Username** | Pointer to **string** | The username for the remote request. | [optional] 
-**Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
+**Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
 

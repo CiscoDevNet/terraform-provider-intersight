@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **RegionEndPoint** | Pointer to **string** | HTTP endpoint of the region. For example https://ec2.us-east-2.amazonaws.com. | [optional] 
 **RegionId** | Pointer to **string** | The region Id which is assigned by the cloud provider. For e.g. us-east-1. | [optional] 
 **Zones** | Pointer to **[]string** |  | [optional] 
-**Target** | Pointer to [**AssetTargetRelationship**](asset.Target.Relationship.md) |  | [optional] 
+**Target** | Pointer to [**AssetTargetRelationship**](AssetTargetRelationship.md) |  | [optional] 
 
 ## Methods
 
