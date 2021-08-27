@@ -1,0 +1,15 @@
+api_key = "changeMe"
+secret_key = "changeMe"
+endpoint = "changeMe"
+
+// ipmi over lay policy props
+encryption_key = "changeMe"
+
+// snmp policy props
+auth_password = "changeMe"
+privacy_password = "changeMe"
+
+// ldap policy base properties
+base_properties_password_1 = "changeMe"
+
+organization = "changeMe"
