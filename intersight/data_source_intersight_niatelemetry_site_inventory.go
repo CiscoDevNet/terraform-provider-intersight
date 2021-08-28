@@ -198,6 +198,11 @@ func dataSourceNiatelemetrySiteInventory() *schema.Resource {
 				},
 			},
 		},
+		"record_type": {
+			Description: "Specifies whether Site object is DCNM or APIC or ND.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -557,6 +562,11 @@ func dataSourceNiatelemetrySiteInventory() *schema.Resource {
 					},
 				},
 			},
+		},
+		"record_type": {
+			Description: "Specifies whether Site object is DCNM or APIC or ND.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -989,6 +999,12 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
+	if _, ok := d.GetOk("record_type"); ok {
+		v := d.Get("record_type")
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
+
 	if _, ok := d.GetOk("registered_device"); ok {
 		v := d.Get("registered_device")
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
@@ -1202,6 +1218,10 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("record_type"); ok {
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -1271,6 +1291,7 @@ func dataSourceNiatelemetrySiteInventoryRead(c context.Context, d *schema.Resour
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["record_type"] = (s.GetRecordType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

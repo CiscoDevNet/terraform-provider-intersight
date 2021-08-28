@@ -679,6 +679,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_virtualization_vmware_cluster":                           dataSourceVirtualizationVmwareCluster(),
 		"intersight_virtualization_vmware_datacenter":                        dataSourceVirtualizationVmwareDatacenter(),
 		"intersight_virtualization_vmware_datastore":                         dataSourceVirtualizationVmwareDatastore(),
+		"intersight_virtualization_vmware_datastore_cluster":                 dataSourceVirtualizationVmwareDatastoreCluster(),
 		"intersight_virtualization_vmware_distributed_network":               dataSourceVirtualizationVmwareDistributedNetwork(),
 		"intersight_virtualization_vmware_distributed_switch":                dataSourceVirtualizationVmwareDistributedSwitch(),
 		"intersight_virtualization_vmware_folder":                            dataSourceVirtualizationVmwareFolder(),

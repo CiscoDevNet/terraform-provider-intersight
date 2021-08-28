@@ -1,9 +1,9 @@
 /*
 Cisco Intersight
 
-Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
+Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4430
+API version: 1.0.9-4437
 Contact: intersight@cisco.com
 */
 
@@ -36,9 +36,10 @@ type VirtualizationVmwareDatastoreAllOf struct {
 	// Space uncommitted in this datastore in bytes.
 	UnCommitted *int64 `json:"UnCommitted,omitempty"`
 	// The URL to access this datastore (example - 'ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/').
-	Url        *string                                     `json:"Url,omitempty"`
-	Cluster    *VirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
-	Datacenter *VirtualizationVmwareDatacenterRelationship `json:"Datacenter,omitempty"`
+	Url              *string                                           `json:"Url,omitempty"`
+	Cluster          *VirtualizationVmwareClusterRelationship          `json:"Cluster,omitempty"`
+	Datacenter       *VirtualizationVmwareDatacenterRelationship       `json:"Datacenter,omitempty"`
+	DatastoreCluster *VirtualizationVmwareDatastoreClusterRelationship `json:"DatastoreCluster,omitempty"`
 	// An array of relationships to virtualizationVmwareHost resources.
 	Hosts                []VirtualizationVmwareHostRelationship `json:"Hosts,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -441,6 +442,38 @@ func (o *VirtualizationVmwareDatastoreAllOf) SetDatacenter(v VirtualizationVmwar
 	o.Datacenter = &v
 }
 
+// GetDatastoreCluster returns the DatastoreCluster field value if set, zero value otherwise.
+func (o *VirtualizationVmwareDatastoreAllOf) GetDatastoreCluster() VirtualizationVmwareDatastoreClusterRelationship {
+	if o == nil || o.DatastoreCluster == nil {
+		var ret VirtualizationVmwareDatastoreClusterRelationship
+		return ret
+	}
+	return *o.DatastoreCluster
+}
+
+// GetDatastoreClusterOk returns a tuple with the DatastoreCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareDatastoreAllOf) GetDatastoreClusterOk() (*VirtualizationVmwareDatastoreClusterRelationship, bool) {
+	if o == nil || o.DatastoreCluster == nil {
+		return nil, false
+	}
+	return o.DatastoreCluster, true
+}
+
+// HasDatastoreCluster returns a boolean if a field has been set.
+func (o *VirtualizationVmwareDatastoreAllOf) HasDatastoreCluster() bool {
+	if o != nil && o.DatastoreCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDatastoreCluster gets a reference to the given VirtualizationVmwareDatastoreClusterRelationship and assigns it to the DatastoreCluster field.
+func (o *VirtualizationVmwareDatastoreAllOf) SetDatastoreCluster(v VirtualizationVmwareDatastoreClusterRelationship) {
+	o.DatastoreCluster = &v
+}
+
 // GetHosts returns the Hosts field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationVmwareDatastoreAllOf) GetHosts() []VirtualizationVmwareHostRelationship {
 	if o == nil {
@@ -512,6 +545,9 @@ func (o VirtualizationVmwareDatastoreAllOf) MarshalJSON() ([]byte, error) {
 	if o.Datacenter != nil {
 		toSerialize["Datacenter"] = o.Datacenter
 	}
+	if o.DatastoreCluster != nil {
+		toSerialize["DatastoreCluster"] = o.DatastoreCluster
+	}
 	if o.Hosts != nil {
 		toSerialize["Hosts"] = o.Hosts
 	}
@@ -545,6 +581,7 @@ func (o *VirtualizationVmwareDatastoreAllOf) UnmarshalJSON(bytes []byte) (err er
 		delete(additionalProperties, "Url")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "Datacenter")
+		delete(additionalProperties, "DatastoreCluster")
 		delete(additionalProperties, "Hosts")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -117,6 +117,7 @@ The following arguments can be used to get data of already created objects in In
 * `tacacs_group_count`:(int) Number of tacacs monitoring policies on the fabric. 
 * `tenant_count`:(int) Number of tenants. This determines the total number of tenants configured across the fabric. 
 * `tier_two_leaf_count`:(int) Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric. 
+* `total_critical_faults`:(int) Returns the total number of critical faults. 
 * `twamp`:(string) TWAMP feature usage. This determines if this feature is enabled or disabled. 
 * `useg`:(string) VMM uSegmentation feature usage. This determines if microsegmentation feature is enabled or disabled. 
 * `vm_ware_vds_count`:(int) Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value. 

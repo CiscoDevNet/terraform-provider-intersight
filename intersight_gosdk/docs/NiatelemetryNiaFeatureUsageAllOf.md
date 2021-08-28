@@ -105,6 +105,7 @@ Name | Type | Description | Notes
 **TacacsGroupCount** | Pointer to **int64** | Number of tacacs monitoring policies on the fabric. | [optional] 
 **TenantCount** | Pointer to **int64** | Number of tenants. This determines the total number of tenants configured across the fabric. | [optional] 
 **TierTwoLeafCount** | Pointer to **int64** | Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric. | [optional] 
+**TotalCriticalFaults** | Pointer to **int64** | Returns the total number of critical faults. | [optional] 
 **Twamp** | Pointer to **string** | TWAMP feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **Useg** | Pointer to **string** | VMM uSegmentation feature usage. This determines if microsegmentation feature is enabled or disabled. | [optional] 
 **VmWareVdsCount** | Pointer to **int64** | Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value. | [optional] 
@@ -2659,6 +2660,31 @@ SetTierTwoLeafCount sets TierTwoLeafCount field to given value.
 `func (o *NiatelemetryNiaFeatureUsageAllOf) HasTierTwoLeafCount() bool`
 
 HasTierTwoLeafCount returns a boolean if a field has been set.
+
+### GetTotalCriticalFaults
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetTotalCriticalFaults() int64`
+
+GetTotalCriticalFaults returns the TotalCriticalFaults field if non-nil, zero value otherwise.
+
+### GetTotalCriticalFaultsOk
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) GetTotalCriticalFaultsOk() (*int64, bool)`
+
+GetTotalCriticalFaultsOk returns a tuple with the TotalCriticalFaults field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalCriticalFaults
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) SetTotalCriticalFaults(v int64)`
+
+SetTotalCriticalFaults sets TotalCriticalFaults field to given value.
+
+### HasTotalCriticalFaults
+
+`func (o *NiatelemetryNiaFeatureUsageAllOf) HasTotalCriticalFaults() bool`
+
+HasTotalCriticalFaults returns a boolean if a field has been set.
 
 ### GetTwamp
 

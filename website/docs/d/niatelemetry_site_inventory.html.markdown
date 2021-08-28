@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the APIC / DCNM site onboarded. 
 * `nexus_dashboard`:(string) Name of ND on which site has been onboarded. 
 * `nodes`:(int) Number of nodes the site contains. 
+* `record_type`:(string) Specifies whether Site object is DCNM or APIC or ND. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `type`:(string) Type of site onboarded either APIC or DCNM. 
  
