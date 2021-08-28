@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Url** | Pointer to **string** | The URL to access this datastore (example - &#39;ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/&#39;). | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
+**DatastoreCluster** | Pointer to [**VirtualizationVmwareDatastoreClusterRelationship**](VirtualizationVmwareDatastoreClusterRelationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods
@@ -326,6 +327,31 @@ SetDatacenter sets Datacenter field to given value.
 `func (o *VirtualizationVmwareDatastore) HasDatacenter() bool`
 
 HasDatacenter returns a boolean if a field has been set.
+
+### GetDatastoreCluster
+
+`func (o *VirtualizationVmwareDatastore) GetDatastoreCluster() VirtualizationVmwareDatastoreClusterRelationship`
+
+GetDatastoreCluster returns the DatastoreCluster field if non-nil, zero value otherwise.
+
+### GetDatastoreClusterOk
+
+`func (o *VirtualizationVmwareDatastore) GetDatastoreClusterOk() (*VirtualizationVmwareDatastoreClusterRelationship, bool)`
+
+GetDatastoreClusterOk returns a tuple with the DatastoreCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatastoreCluster
+
+`func (o *VirtualizationVmwareDatastore) SetDatastoreCluster(v VirtualizationVmwareDatastoreClusterRelationship)`
+
+SetDatastoreCluster sets DatastoreCluster field to given value.
+
+### HasDatastoreCluster
+
+`func (o *VirtualizationVmwareDatastore) HasDatastoreCluster() bool`
+
+HasDatastoreCluster returns a boolean if a field has been set.
 
 ### GetHosts
 

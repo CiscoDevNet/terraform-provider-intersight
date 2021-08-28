@@ -3871,6 +3871,23 @@ func flattenListKubernetesNodeStatus(p []models.KubernetesNodeStatus, d *schema.
 	}
 	return kubernetesnodestatuss
 }
+func flattenListKubernetesTaint(p []models.KubernetesTaint, d *schema.ResourceData) []map[string]interface{} {
+	var kubernetestaints []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		kubernetestaint := make(map[string]interface{})
+		kubernetestaint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		kubernetestaint["class_id"] = item.GetClassId()
+		kubernetestaint["effect"] = item.GetEffect()
+		kubernetestaint["key"] = item.GetKey()
+		kubernetestaint["object_type"] = item.GetObjectType()
+		kubernetestaint["value"] = item.GetValue()
+		kubernetestaints = append(kubernetestaints, kubernetestaint)
+	}
+	return kubernetestaints
+}
 func flattenListKubernetesVirtualMachineInfrastructureProviderRelationship(p []models.KubernetesVirtualMachineInfrastructureProviderRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var kubernetesvirtualmachineinfrastructureproviderrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -15577,6 +15594,24 @@ func flattenMapVirtualizationVmwareDatastoreRelationship(p models.Virtualization
 
 	virtualizationvmwaredatastorerelationships = append(virtualizationvmwaredatastorerelationships, virtualizationvmwaredatastorerelationship)
 	return virtualizationvmwaredatastorerelationships
+}
+func flattenMapVirtualizationVmwareDatastoreClusterRelationship(p models.VirtualizationVmwareDatastoreClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var virtualizationvmwaredatastoreclusterrelationships []map[string]interface{}
+	var ret models.VirtualizationVmwareDatastoreClusterRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	virtualizationvmwaredatastoreclusterrelationship := make(map[string]interface{})
+	virtualizationvmwaredatastoreclusterrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	virtualizationvmwaredatastoreclusterrelationship["class_id"] = item.GetClassId()
+	virtualizationvmwaredatastoreclusterrelationship["moid"] = item.GetMoid()
+	virtualizationvmwaredatastoreclusterrelationship["object_type"] = item.GetObjectType()
+	virtualizationvmwaredatastoreclusterrelationship["selector"] = item.GetSelector()
+
+	virtualizationvmwaredatastoreclusterrelationships = append(virtualizationvmwaredatastoreclusterrelationships, virtualizationvmwaredatastoreclusterrelationship)
+	return virtualizationvmwaredatastoreclusterrelationships
 }
 func flattenMapVirtualizationVmwareDistributedNetworkRelationship(p models.VirtualizationVmwareDistributedNetworkRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var virtualizationvmwaredistributednetworkrelationships []map[string]interface{}

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the APIC / DCNM site onboarded. | [optional] 
 **NexusDashboard** | Pointer to **string** | Name of ND on which site has been onboarded. | [optional] 
 **Nodes** | Pointer to **int64** | Number of nodes the site contains. | [optional] 
+**RecordType** | Pointer to **string** | Specifies whether Site object is DCNM or APIC or ND. | [optional] 
 **Type** | Pointer to **string** | Type of site onboarded either APIC or DCNM. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -269,6 +270,31 @@ SetNodes sets Nodes field to given value.
 `func (o *NiatelemetrySiteInventoryAllOf) HasNodes() bool`
 
 HasNodes returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetrySiteInventoryAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetrySiteInventoryAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetrySiteInventoryAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetrySiteInventoryAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
 
 ### GetType
 

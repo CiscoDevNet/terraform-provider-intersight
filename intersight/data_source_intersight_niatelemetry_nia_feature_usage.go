@@ -761,6 +761,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"total_critical_faults": {
+			Description: "Returns the total number of critical faults.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"twamp": {
 			Description: "TWAMP feature usage. This determines if this feature is enabled or disabled.",
 			Type:        schema.TypeString,
@@ -1658,6 +1663,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 		},
 		"tier_two_leaf_count": {
 			Description: "Number of tier 2 Leafs. This determines the total number of tier 2 Leaf switches in the fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"total_critical_faults": {
+			Description: "Returns the total number of critical faults.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -2691,6 +2701,12 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetTierTwoLeafCount(x)
 	}
 
+	if _, ok := d.GetOk("total_critical_faults"); ok {
+		v := d.Get("total_critical_faults")
+		x := int64(v.(int))
+		o.SetTotalCriticalFaults(x)
+	}
+
 	if _, ok := d.GetOk("twamp"); ok {
 		v := d.Get("twamp")
 		x := (v.(string))
@@ -3244,6 +3260,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		x := int64(v.(int))
 		o.SetTierTwoLeafCount(x)
 	}
+	if v, ok := d.GetOk("total_critical_faults"); ok {
+		x := int64(v.(int))
+		o.SetTotalCriticalFaults(x)
+	}
 	if v, ok := d.GetOk("twamp"); ok {
 		x := (v.(string))
 		o.SetTwamp(x)
@@ -3439,6 +3459,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["tenant_count"] = (s.GetTenantCount())
 				temp["tier_two_leaf_count"] = (s.GetTierTwoLeafCount())
+				temp["total_critical_faults"] = (s.GetTotalCriticalFaults())
 				temp["twamp"] = (s.GetTwamp())
 				temp["useg"] = (s.GetUseg())
 

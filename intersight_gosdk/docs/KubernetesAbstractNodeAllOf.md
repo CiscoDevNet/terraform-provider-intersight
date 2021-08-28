@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "kubernetes.Node"]
 **Annotations** | Pointer to **interface{}** | Kubernetes metadata annotations for a Node. | [optional] 
 **Labels** | Pointer to **interface{}** | Kubernetes metadata labels for a Node. | [optional] 
+**Taints** | Pointer to [**[]KubernetesTaint**](KubernetesTaint.md) |  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,41 @@ HasLabels returns a boolean if a field has been set.
 `func (o *KubernetesAbstractNodeAllOf) UnsetLabels()`
 
 UnsetLabels ensures that no value is present for Labels, not even an explicit nil
+### GetTaints
+
+`func (o *KubernetesAbstractNodeAllOf) GetTaints() []KubernetesTaint`
+
+GetTaints returns the Taints field if non-nil, zero value otherwise.
+
+### GetTaintsOk
+
+`func (o *KubernetesAbstractNodeAllOf) GetTaintsOk() (*[]KubernetesTaint, bool)`
+
+GetTaintsOk returns a tuple with the Taints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaints
+
+`func (o *KubernetesAbstractNodeAllOf) SetTaints(v []KubernetesTaint)`
+
+SetTaints sets Taints field to given value.
+
+### HasTaints
+
+`func (o *KubernetesAbstractNodeAllOf) HasTaints() bool`
+
+HasTaints returns a boolean if a field has been set.
+
+### SetTaintsNil
+
+`func (o *KubernetesAbstractNodeAllOf) SetTaintsNil(b bool)`
+
+ SetTaintsNil sets the value for Taints to be an explicit nil
+
+### UnsetTaints
+`func (o *KubernetesAbstractNodeAllOf) UnsetTaints()`
+
+UnsetTaints ensures that no value is present for Taints, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

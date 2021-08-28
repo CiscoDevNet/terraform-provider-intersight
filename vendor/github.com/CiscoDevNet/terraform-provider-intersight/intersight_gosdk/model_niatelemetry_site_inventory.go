@@ -1,9 +1,9 @@
 /*
 Cisco Intersight
 
-Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-08-10T21:48:06Z.
+Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4430
+API version: 1.0.9-4437
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type NiatelemetrySiteInventory struct {
 	NexusDashboard *string `json:"NexusDashboard,omitempty"`
 	// Number of nodes the site contains.
 	Nodes *int64 `json:"Nodes,omitempty"`
+	// Specifies whether Site object is DCNM or APIC or ND.
+	RecordType *string `json:"RecordType,omitempty"`
 	// Type of site onboarded either APIC or DCNM.
 	Type                 *string                              `json:"Type,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -341,6 +343,38 @@ func (o *NiatelemetrySiteInventory) SetNodes(v int64) {
 	o.Nodes = &v
 }
 
+// GetRecordType returns the RecordType field value if set, zero value otherwise.
+func (o *NiatelemetrySiteInventory) GetRecordType() string {
+	if o == nil || o.RecordType == nil {
+		var ret string
+		return ret
+	}
+	return *o.RecordType
+}
+
+// GetRecordTypeOk returns a tuple with the RecordType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetrySiteInventory) GetRecordTypeOk() (*string, bool) {
+	if o == nil || o.RecordType == nil {
+		return nil, false
+	}
+	return o.RecordType, true
+}
+
+// HasRecordType returns a boolean if a field has been set.
+func (o *NiatelemetrySiteInventory) HasRecordType() bool {
+	if o != nil && o.RecordType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecordType gets a reference to the given string and assigns it to the RecordType field.
+func (o *NiatelemetrySiteInventory) SetRecordType(v string) {
+	o.RecordType = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *NiatelemetrySiteInventory) GetType() string {
 	if o == nil || o.Type == nil {
@@ -442,6 +476,9 @@ func (o NiatelemetrySiteInventory) MarshalJSON() ([]byte, error) {
 	if o.Nodes != nil {
 		toSerialize["Nodes"] = o.Nodes
 	}
+	if o.RecordType != nil {
+		toSerialize["RecordType"] = o.RecordType
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -474,6 +511,8 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 		NexusDashboard *string `json:"NexusDashboard,omitempty"`
 		// Number of nodes the site contains.
 		Nodes *int64 `json:"Nodes,omitempty"`
+		// Specifies whether Site object is DCNM or APIC or ND.
+		RecordType *string `json:"RecordType,omitempty"`
 		// Type of site onboarded either APIC or DCNM.
 		Type             *string                              `json:"Type,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -493,6 +532,7 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetrySiteInventory.Name = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.Name
 		varNiatelemetrySiteInventory.NexusDashboard = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.NexusDashboard
 		varNiatelemetrySiteInventory.Nodes = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.Nodes
+		varNiatelemetrySiteInventory.RecordType = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.RecordType
 		varNiatelemetrySiteInventory.Type = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.Type
 		varNiatelemetrySiteInventory.RegisteredDevice = varNiatelemetrySiteInventoryWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetrySiteInventory(varNiatelemetrySiteInventory)
@@ -521,6 +561,7 @@ func (o *NiatelemetrySiteInventory) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "NexusDashboard")
 		delete(additionalProperties, "Nodes")
+		delete(additionalProperties, "RecordType")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "RegisteredDevice")
 

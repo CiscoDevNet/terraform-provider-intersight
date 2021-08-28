@@ -849,11 +849,6 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				},
 			},
 		},
-		"total_critical_faults": {
-			Description: "Returns the total number of critical faults.",
-			Type:        schema.TypeInt,
-			Optional:    true,
-		},
 		"nr_version": {
 			Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
 			Type:        schema.TypeString,
@@ -1801,11 +1796,6 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 					},
 				},
 			},
-		},
-		"total_critical_faults": {
-			Description: "Returns the total number of critical faults.",
-			Type:        schema.TypeInt,
-			Optional:    true,
 		},
 		"nr_version": {
 			Description: "Software version of device being inventoried. The various software version values for each device are available on cisco.com.",
@@ -2974,12 +2964,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("total_critical_faults"); ok {
-		v := d.Get("total_critical_faults")
-		x := int64(v.(int))
-		o.SetTotalCriticalFaults(x)
-	}
-
 	if _, ok := d.GetOk("nr_version"); ok {
 		v := d.Get("nr_version")
 		x := (v.(string))
@@ -3261,10 +3245,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetSystemUpTime(x)
 	}
-	if v, ok := d.GetOk("total_critical_faults"); ok {
-		x := int64(v.(int))
-		o.SetTotalCriticalFaults(x)
-	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
@@ -3388,7 +3368,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["total_critical_faults"] = (s.GetTotalCriticalFaults())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
