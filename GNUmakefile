@@ -12,16 +12,20 @@ export GO_RUN=env go run
 export GO_VET=env go vet
 export GO_TEST=env go test
 export GO111MODULE=on
-
+export OPERATING_SYSTEM := $(shell uname -s)
 
 default: build
 
-build: fmtcheck
+build:
 	go mod vendor
 	go install
-	GOOS=linux GOARCH=amd64 $(GO_BUILD) -o .build/linux_amd64/terraform-provider-intersight_v$(VERSION)
-	#GOOS=windows GOARCH=amd64 $(GO_BUILD) -o .build/windows/terraform-provider-intersight_v$(VERSION).exe
-	#GOOS=darwin GOARCH=amd64 $(GO_BUILD) -o .build/darwin_amd64/terraform-provider-intersight_v$(VERSION)
+	if [ "$(OS)" == "Windows_NT" ]; then \
+      GOOS=windows GOARCH=amd64 $(GO_BUILD) -o .build/windows/terraform-provider-intersight_v$(VERSION).exe; \
+    elif [ "$(OPERATING_SYSTEM)" == "Darwin" ]; then \
+      GOOS=darwin GOARCH=amd64 $(GO_BUILD) -o .build/darwin_amd64/terraform-provider-intersight_v$(VERSION); \
+    elif [ "$(OPERATING_SYSTEM)" == "Linux" ]; then \
+      GOOS=linux GOARCH=amd64 $(GO_BUILD) -o .build/linux_amd64/terraform-provider-intersight_v$(VERSION); \
+ 	fi
 
 fmt:
 	@echo "==> Fixing source code with gofmt..."
