@@ -1,27 +1,27 @@
 ### Resource Creation
 
 ```hcl
-resource "intersight_storage_storage_policy" "storage_storage1" {
-  name                         = "storage_storage_policy1"
-  description                  = "storage policy test"
-  retain_policy_virtual_drives = true
-  unused_disks_state           = "UnconfiguredGood"
-  virtual_drives {
-    object_type         = "storage.VirtualDriveConfig"
-    boot_drive          = true
-    drive_cache         = "NoChange"
-    expand_to_available = false
-    io_policy           = "Direct"
-    name                = "RAID0_1"
-    access_policy       = "ReadWrite"
-    disk_group_policy   = intersight_storage_disk_group_policy.storage_disk_group1.id
-    read_policy         = "NoReadAhead"
-    size                = 285148
-    write_policy        = "WriteThrough"
+resource "intersight_storage_storage_policy" "tf_storage_policy" {
+  name = "tf_storage_policy"
+  use_jbod_for_vd_creation = true
+  unused_disks_state = "UnconfiguredGood"
+  m2_virtual_drive {
+    enable = false
+  }
+  global_hot_spares = "3"
+  raid0_drive {
+    enable = true
+    virtual_drive_policy {
+      strip_size = 64
+      write_policy = "Default"
+      read_policy = "Default"
+      access_policy = "Default"
+      drive_cache = "Default"
+    }
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
 }
 ```

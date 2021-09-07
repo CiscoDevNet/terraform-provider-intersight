@@ -8,7 +8,7 @@ resource "intersight_storage_drive_group" "tf_drive_gp" {
     }
   }
   virtual_drives {
-    name = "aanimish-vd"
+    name = "tf_drive_gp-vd"
     size = 100
     expand_to_available = false
     boot_drive = false
@@ -21,7 +21,7 @@ resource "intersight_storage_drive_group" "tf_drive_gp" {
     }
   }
   virtual_drives {
-    name = "aanimish-vd-01"
+    name = "tf_drive_gp-vd-01"
     size = 100
     expand_to_available = false
     boot_drive = false
