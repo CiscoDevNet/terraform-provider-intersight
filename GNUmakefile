@@ -16,7 +16,7 @@ export OPERATING_SYSTEM := $(shell uname -s)
 
 default: build
 
-build:
+build: fmtcheck
 	go mod vendor
 	go install
 	if [ "$(OS)" == "Windows_NT" ]; then \
