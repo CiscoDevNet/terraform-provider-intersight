@@ -2,26 +2,30 @@
 
 ```hcl
 resource "intersight_storage_storage_policy" "storage_storage1" {
-  name                         = "storage_storage_policy1"
-  description                  = "storage policy test"
-  retain_policy_virtual_drives = true
-  unused_disks_state           = "UnconfiguredGood"
-  virtual_drives {
-    object_type         = "storage.VirtualDriveConfig"
-    boot_drive          = true
-    drive_cache         = "NoChange"
-    expand_to_available = false
-    io_policy           = "Direct"
-    name                = "RAID0_1"
-    access_policy       = "ReadWrite"
-    disk_group_policy   = intersight_storage_disk_group_policy.storage_disk_group1.id
-    read_policy         = "NoReadAhead"
-    size                = 285148
-    write_policy        = "WriteThrough"
-  }
+  name               = "storage_storage_policy1"
+  description        = "storage policy test"
+  unused_disks_state = "UnconfiguredGood"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization
+    moid        = data.intersight_organization_organization.org.results[0].moid
+  }
+  use_jbod_for_vd_creation = true
+  m2_virtual_drive {
+    enable      = false
+    object_type = "storage.M2VirtualDriveConfig"
+  }
+  raid0_drive {
+    enable      = true
+    drive_slots = "2"
+    object_type = "storage.R0Drive"
+    virtual_drive_policy {
+      strip_size    = 64
+      access_policy = "Default"
+      read_policy   = "Default"
+      write_policy  = "Default"
+      drive_cache   = "Default"
+      object_type   = "storage.VirtualDrivePolicy"
+    }
   }
 }
 ```
