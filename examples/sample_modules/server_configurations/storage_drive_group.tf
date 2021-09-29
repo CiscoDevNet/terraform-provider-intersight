@@ -1,6 +1,3 @@
-### Resource Creation
-
-```hcl
 resource "intersight_storage_drive_group" "tf_drive_gp" {
   type = 0
   name = "tf_drive_gp"
@@ -40,4 +37,3 @@ resource "intersight_storage_drive_group" "tf_drive_gp" {
     moid = intersight_storage_storage_policy.tf_storage_policy.moid
   }
 }
-```
