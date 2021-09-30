@@ -1,6 +1,3 @@
-### Resource Creation
-
-```hcl
 resource "intersight_storage_storage_policy" "tf_storage_policy" {
   name               = "tf_storage_policy"
   use_jbod_for_vd_creation = true
@@ -29,4 +26,3 @@ resource "intersight_storage_storage_policy" "tf_storage_policy" {
     }
   }
 }
-```
