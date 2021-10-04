@@ -24,25 +24,25 @@ resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
     moid        = var.hyperflex_node_config_policy
     object_type = "hyperflex.NodeConfigPolicy"
   }
-  cluster_network = {
+  cluster_network {
     moid        = var.hyperflex_cluster_network_policy
     object_type = "hyperflex.ClusterNetworkPolicy"
   }
-  cluster_storage = {
+  cluster_storage {
     moid        = var.hyperflex_cluster_storage_policy
     object_type = "hyperflex.ClusterStoragePolicy"
   }
-  vcenter_config = {
+  vcenter_config {
     moid        = var.hyperflex_vcenter_config_policy
     object_type = "hyperflex.VcenterConfigPolicy"
   }
   hypervisor_type = "ESXi"
   storage_type    = "HyperFlexDp"
-  auto_support = {
+  auto_support {
     moid        = var.hyperflex_auto_support_policy
     object_type = "hyperflex.AutoSupportPolicy"
   }
-  proxy_setting = {
+  proxy_setting {
     moid        = var.hyperflex_proxy_setting_policy
     object_type = "hyperflex.ProxySettingPolicy"
   }
