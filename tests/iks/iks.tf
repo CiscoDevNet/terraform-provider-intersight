@@ -34,13 +34,11 @@ resource "intersight_kubernetes_cluster_addon_profile" "iks-terra-addons" {
   addons {
     addon_policy {
       moid = intersight_kubernetes_addon_policy.kap1.moid
-      object_type = "cmrf.Cmrf"
     }
   }
   addons {
     addon_policy {
       moid = intersight_kubernetes_addon_policy.kap2.moid
-      object_type = "cmrf.Cmrf"
     }
   }
   organization {
