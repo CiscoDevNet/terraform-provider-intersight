@@ -12,17 +12,4 @@ resource "intersight_storage_storage_policy" "tf_storage_policy" {
     enable      = false
     object_type = "storage.M2VirtualDriveConfig"
   }
-  raid0_drive {
-    enable      = true
-    drive_slots = "2"
-    object_type = "storage.R0Drive"
-    virtual_drive_policy {
-      strip_size    = 64
-      access_policy = "Default"
-      read_policy   = "Default"
-      write_policy  = "Default"
-      drive_cache   = "Default"
-      object_type   = "storage.VirtualDrivePolicy"
-    }
-  }
 }
