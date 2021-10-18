@@ -925,14 +925,12 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceNodeStatus{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -941,8 +939,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -982,32 +979,27 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cpu_usage"); ok {
-		v := d.Get("cpu_usage")
+	if v, ok := d.GetOk("cpu_usage"); ok {
 		x := v.(float32)
 		o.SetCpuUsage(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("file_system_statuses"); ok {
-		v := d.Get("file_system_statuses")
+	if v, ok := d.GetOk("file_system_statuses"); ok {
 		x := make([]models.ApplianceFileSystemStatusRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1047,32 +1039,27 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetFileSystemStatuses(x)
 	}
 
-	if _, ok := d.GetOk("mem_usage"); ok {
-		v := d.Get("mem_usage")
+	if v, ok := d.GetOk("mem_usage"); ok {
 		x := v.(float32)
 		o.SetMemUsage(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("node_id"); ok {
-		v := d.Get("node_id")
+	if v, ok := d.GetOkExists("node_id"); ok {
 		x := int64(v.(int))
 		o.SetNodeId(x)
 	}
 
-	if _, ok := d.GetOk("node_info"); ok {
-		v := d.Get("node_info")
+	if v, ok := d.GetOk("node_info"); ok {
 		p := make([]models.ApplianceNodeInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1115,26 +1102,22 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("node_state"); ok {
-		v := d.Get("node_state")
+	if v, ok := d.GetOk("node_state"); ok {
 		x := (v.(string))
 		o.SetNodeState(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("operational_status"); ok {
-		v := d.Get("operational_status")
+	if v, ok := d.GetOk("operational_status"); ok {
 		x := (v.(string))
 		o.SetOperationalStatus(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1143,8 +1126,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1187,8 +1169,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1228,14 +1209,12 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status_checks"); ok {
-		v := d.Get("status_checks")
+	if v, ok := d.GetOk("status_checks"); ok {
 		x := make([]models.ApplianceStatusCheck, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1275,8 +1254,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetStatusChecks(x)
 	}
 
-	if _, ok := d.GetOk("system_status"); ok {
-		v := d.Get("system_status")
+	if v, ok := d.GetOk("system_status"); ok {
 		p := make([]models.ApplianceSystemStatusRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1319,8 +1297,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1353,8 +1330,7 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1426,59 +1402,6 @@ func dataSourceApplianceNodeStatusRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cpu_usage"); ok {
-		x := v.(float32)
-		o.SetCpuUsage(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mem_usage"); ok {
-		x := v.(float32)
-		o.SetMemUsage(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("node_id"); ok {
-		x := int64(v.(int))
-		o.SetNodeId(x)
-	}
-	if v, ok := d.GetOk("node_state"); ok {
-		x := (v.(string))
-		o.SetNodeState(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("operational_status"); ok {
-		x := (v.(string))
-		o.SetOperationalStatus(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

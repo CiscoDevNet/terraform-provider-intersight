@@ -79,7 +79,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `from`:(string) Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `size`:(int)(ReadOnly) Number of identifiers this block can hold. 
+  + `size`:(int) Number of identifiers this block can hold. 
   + `to`:(string) Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:

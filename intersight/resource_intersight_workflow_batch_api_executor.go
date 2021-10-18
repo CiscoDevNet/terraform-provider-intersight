@@ -803,7 +803,10 @@ func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.Resourc
 		o.SetOutput(v)
 	}
 
-	o.SetRetryFromFailedApi(d.Get("retry_from_failed_api").(bool))
+	if v, ok := d.GetOkExists("retry_from_failed_api"); ok {
+		x := (v.(bool))
+		o.SetRetryFromFailedApi(x)
+	}
 
 	if v, ok := d.GetOk("skip_on_condition"); ok {
 		x := (v.(string))

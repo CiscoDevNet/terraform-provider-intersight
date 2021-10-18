@@ -503,7 +503,10 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("min_severity"); ok {
 		x := (v.(string))
@@ -612,7 +615,7 @@ func resourceSmtpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetSenderEmail(x)
 	}
 
-	if v, ok := d.GetOk("smtp_port"); ok {
+	if v, ok := d.GetOkExists("smtp_port"); ok {
 		x := int64(v.(int))
 		o.SetSmtpPort(x)
 	}

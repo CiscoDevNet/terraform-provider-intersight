@@ -415,7 +415,7 @@ func resourceTamAdvisoryCountCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("advisory_count"); ok {
+	if v, ok := d.GetOkExists("advisory_count"); ok {
 		x := int64(v.(int))
 		o.SetAdvisoryCount(x)
 	}

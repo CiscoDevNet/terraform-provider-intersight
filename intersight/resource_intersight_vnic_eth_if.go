@@ -1453,7 +1453,10 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	o.SetFailoverEnabled(d.Get("failover_enabled").(bool))
+	if v, ok := d.GetOkExists("failover_enabled"); ok {
+		x := (v.(bool))
+		o.SetFailoverEnabled(x)
+	}
 
 	if v, ok := d.GetOk("ip_lease"); ok {
 		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
@@ -1687,7 +1690,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 
 	o.SetObjectType("vnic.EthIf")
 
-	if v, ok := d.GetOk("order"); ok {
+	if v, ok := d.GetOkExists("order"); ok {
 		x := int64(v.(int))
 		o.SetOrder(x)
 	}

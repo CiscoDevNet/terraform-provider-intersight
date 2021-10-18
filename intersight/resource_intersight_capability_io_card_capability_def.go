@@ -382,7 +382,10 @@ func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.Re
 
 	o.SetClassId("capability.IoCardCapabilityDef")
 
-	o.SetDcSupported(d.Get("dc_supported").(bool))
+	if v, ok := d.GetOkExists("dc_supported"); ok {
+		x := (v.(bool))
+		o.SetDcSupported(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

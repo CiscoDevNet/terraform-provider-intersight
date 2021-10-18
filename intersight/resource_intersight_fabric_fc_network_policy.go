@@ -472,7 +472,10 @@ func resourceFabricFcNetworkPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
-	o.SetEnableTrunking(d.Get("enable_trunking").(bool))
+	if v, ok := d.GetOkExists("enable_trunking"); ok {
+		x := (v.(bool))
+		o.SetEnableTrunking(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

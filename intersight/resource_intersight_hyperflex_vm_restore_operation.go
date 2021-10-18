@@ -673,7 +673,10 @@ func resourceHyperflexVmRestoreOperationCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	o.SetPowerOn(d.Get("power_on").(bool))
+	if v, ok := d.GetOkExists("power_on"); ok {
+		x := (v.(bool))
+		o.SetPowerOn(x)
+	}
 
 	if v, ok := d.GetOk("restore_edge_cluster_moid"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)

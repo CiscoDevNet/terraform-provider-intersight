@@ -392,7 +392,7 @@ func resourceHyperflexHealthCheckDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"supported_hypervisor_type": {
-				Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+				Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `` - The Health Check is supported only on Cisco HyperFlexAp platform.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -679,7 +679,10 @@ func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.R
 		o.SetScriptExecutionMode(x)
 	}
 
-	o.SetScriptExecutionOnComputeNodes(d.Get("script_execution_on_compute_nodes").(bool))
+	if v, ok := d.GetOkExists("script_execution_on_compute_nodes"); ok {
+		x := (v.(bool))
+		o.SetScriptExecutionOnComputeNodes(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
@@ -721,7 +724,7 @@ func resourceHyperflexHealthCheckDefinitionCreate(c context.Context, d *schema.R
 		o.SetTargetExecutionType(x)
 	}
 
-	if v, ok := d.GetOk("timeout"); ok {
+	if v, ok := d.GetOkExists("timeout"); ok {
 		x := int64(v.(int))
 		o.SetTimeout(x)
 	}

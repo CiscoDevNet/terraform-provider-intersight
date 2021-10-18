@@ -9,9 +9,11 @@ Method | HTTP request | Description
 [**CreateWorkflowErrorResponseHandler**](WorkflowApi.md#CreateWorkflowErrorResponseHandler) | **Post** /api/v1/workflow/ErrorResponseHandlers | Create a &#39;workflow.ErrorResponseHandler&#39; resource.
 [**CreateWorkflowRollbackWorkflow**](WorkflowApi.md#CreateWorkflowRollbackWorkflow) | **Post** /api/v1/workflow/RollbackWorkflows | Create a &#39;workflow.RollbackWorkflow&#39; resource.
 [**CreateWorkflowTaskDefinition**](WorkflowApi.md#CreateWorkflowTaskDefinition) | **Post** /api/v1/workflow/TaskDefinitions | Create a &#39;workflow.TaskDefinition&#39; resource.
+[**CreateWorkflowTaskNotification**](WorkflowApi.md#CreateWorkflowTaskNotification) | **Post** /api/v1/workflow/TaskNotifications | Create a &#39;workflow.TaskNotification&#39; resource.
 [**CreateWorkflowTemplateEvaluation**](WorkflowApi.md#CreateWorkflowTemplateEvaluation) | **Post** /api/v1/workflow/TemplateEvaluations | Create a &#39;workflow.TemplateEvaluation&#39; resource.
 [**CreateWorkflowWorkflowDefinition**](WorkflowApi.md#CreateWorkflowWorkflowDefinition) | **Post** /api/v1/workflow/WorkflowDefinitions | Create a &#39;workflow.WorkflowDefinition&#39; resource.
 [**CreateWorkflowWorkflowInfo**](WorkflowApi.md#CreateWorkflowWorkflowInfo) | **Post** /api/v1/workflow/WorkflowInfos | Create a &#39;workflow.WorkflowInfo&#39; resource.
+[**CreateWorkflowWorkflowNotification**](WorkflowApi.md#CreateWorkflowWorkflowNotification) | **Post** /api/v1/workflow/WorkflowNotifications | Create a &#39;workflow.WorkflowNotification&#39; resource.
 [**DeleteWorkflowBatchApiExecutor**](WorkflowApi.md#DeleteWorkflowBatchApiExecutor) | **Delete** /api/v1/workflow/BatchApiExecutors/{Moid} | Delete a &#39;workflow.BatchApiExecutor&#39; resource.
 [**DeleteWorkflowCustomDataTypeDefinition**](WorkflowApi.md#DeleteWorkflowCustomDataTypeDefinition) | **Delete** /api/v1/workflow/CustomDataTypeDefinitions/{Moid} | Delete a &#39;workflow.CustomDataTypeDefinition&#39; resource.
 [**DeleteWorkflowErrorResponseHandler**](WorkflowApi.md#DeleteWorkflowErrorResponseHandler) | **Delete** /api/v1/workflow/ErrorResponseHandlers/{Moid} | Delete a &#39;workflow.ErrorResponseHandler&#39; resource.
@@ -412,6 +414,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateWorkflowTaskNotification
+
+> WorkflowTaskNotification CreateWorkflowTaskNotification(ctx).WorkflowTaskNotification(workflowTaskNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.TaskNotification' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowTaskNotification := *openapiclient.NewWorkflowTaskNotification("ClassId_example", "ObjectType_example") // WorkflowTaskNotification | The 'workflow.TaskNotification' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.WorkflowApi.CreateWorkflowTaskNotification(context.Background()).WorkflowTaskNotification(workflowTaskNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowTaskNotification``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowTaskNotification`: WorkflowTaskNotification
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowTaskNotification`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowTaskNotificationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowTaskNotification** | [**WorkflowTaskNotification**](WorkflowTaskNotification.md) | The &#39;workflow.TaskNotification&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowTaskNotification**](WorkflowTaskNotification.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateWorkflowTemplateEvaluation
 
 > WorkflowTemplateEvaluation CreateWorkflowTemplateEvaluation(ctx).WorkflowTemplateEvaluation(workflowTemplateEvaluation).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -601,6 +671,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowWorkflowInfo**](WorkflowWorkflowInfo.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateWorkflowWorkflowNotification
+
+> WorkflowWorkflowNotification CreateWorkflowWorkflowNotification(ctx).WorkflowWorkflowNotification(workflowWorkflowNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'workflow.WorkflowNotification' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    workflowWorkflowNotification := *openapiclient.NewWorkflowWorkflowNotification("ClassId_example", "ObjectType_example") // WorkflowWorkflowNotification | The 'workflow.WorkflowNotification' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.WorkflowApi.CreateWorkflowWorkflowNotification(context.Background()).WorkflowWorkflowNotification(workflowWorkflowNotification).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowApi.CreateWorkflowWorkflowNotification``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateWorkflowWorkflowNotification`: WorkflowWorkflowNotification
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowApi.CreateWorkflowWorkflowNotification`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWorkflowWorkflowNotificationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflowWorkflowNotification** | [**WorkflowWorkflowNotification**](WorkflowWorkflowNotification.md) | The &#39;workflow.WorkflowNotification&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**WorkflowWorkflowNotification**](WorkflowWorkflowNotification.md)
 
 ### Authorization
 

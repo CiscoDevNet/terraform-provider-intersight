@@ -438,7 +438,7 @@ func resourceVnicIscsiAdapterPolicyCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("vnic.IscsiAdapterPolicy")
 
-	if v, ok := d.GetOk("connection_time_out"); ok {
+	if v, ok := d.GetOkExists("connection_time_out"); ok {
 		x := int64(v.(int))
 		o.SetConnectionTimeOut(x)
 	}
@@ -448,12 +448,12 @@ func resourceVnicIscsiAdapterPolicyCreate(c context.Context, d *schema.ResourceD
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("dhcp_timeout"); ok {
+	if v, ok := d.GetOkExists("dhcp_timeout"); ok {
 		x := int64(v.(int))
 		o.SetDhcpTimeout(x)
 	}
 
-	if v, ok := d.GetOk("lun_busy_retry_count"); ok {
+	if v, ok := d.GetOkExists("lun_busy_retry_count"); ok {
 		x := int64(v.(int))
 		o.SetLunBusyRetryCount(x)
 	}

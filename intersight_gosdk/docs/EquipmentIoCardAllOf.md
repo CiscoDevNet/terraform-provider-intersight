@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Side** | Pointer to **string** | Location of IOM within a chassis. The value can be left or right. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
+**FanModules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -235,6 +236,41 @@ SetEquipmentFex sets EquipmentFex field to given value.
 
 HasEquipmentFex returns a boolean if a field has been set.
 
+### GetFanModules
+
+`func (o *EquipmentIoCardAllOf) GetFanModules() []EquipmentFanModuleRelationship`
+
+GetFanModules returns the FanModules field if non-nil, zero value otherwise.
+
+### GetFanModulesOk
+
+`func (o *EquipmentIoCardAllOf) GetFanModulesOk() (*[]EquipmentFanModuleRelationship, bool)`
+
+GetFanModulesOk returns a tuple with the FanModules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFanModules
+
+`func (o *EquipmentIoCardAllOf) SetFanModules(v []EquipmentFanModuleRelationship)`
+
+SetFanModules sets FanModules field to given value.
+
+### HasFanModules
+
+`func (o *EquipmentIoCardAllOf) HasFanModules() bool`
+
+HasFanModules returns a boolean if a field has been set.
+
+### SetFanModulesNil
+
+`func (o *EquipmentIoCardAllOf) SetFanModulesNil(b bool)`
+
+ SetFanModulesNil sets the value for FanModules to be an explicit nil
+
+### UnsetFanModules
+`func (o *EquipmentIoCardAllOf) UnsetFanModules()`
+
+UnsetFanModules ensures that no value is present for FanModules, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *EquipmentIoCardAllOf) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

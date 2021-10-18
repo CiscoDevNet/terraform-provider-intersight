@@ -144,6 +144,11 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cpu_utilization": {
+			Description: "Average CPU utilization percentage derived as a ratio of CPU used to CPU allocated. The value is calculated whenever inventory is performed.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -200,7 +205,7 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 			},
 		},
 		"hypervisor_type": {
-			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -418,6 +423,11 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 					},
 				},
 			},
+		},
+		"memory_utilization": {
+			Description: "Average memory utilization percentage derived as a ratio of memory used to available memory. The value is calculated whenever inventory is performed.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -1311,6 +1321,11 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cpu_utilization": {
+			Description: "Average CPU utilization percentage derived as a ratio of CPU used to CPU allocated. The value is calculated whenever inventory is performed.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -1367,7 +1382,7 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 			},
 		},
 		"hypervisor_type": {
-			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1585,6 +1600,11 @@ func dataSourceCloudAwsVirtualMachine() *schema.Resource {
 					},
 				},
 			},
+		},
+		"memory_utilization": {
+			Description: "Average memory utilization percentage derived as a ratio of memory used to available memory. The value is calculated whenever inventory is performed.",
+			Type:        schema.TypeFloat,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -2365,14 +2385,12 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CloudAwsVirtualMachine{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -2381,8 +2399,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2422,8 +2439,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("billing_unit"); ok {
-		v := d.Get("billing_unit")
+	if v, ok := d.GetOk("billing_unit"); ok {
 		p := make([]models.CloudBillingUnit, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2454,14 +2470,12 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("boot_time"); ok {
-		v := d.Get("boot_time")
+	if v, ok := d.GetOk("boot_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetBootTime(x)
 	}
 
-	if _, ok := d.GetOk("capacity"); ok {
-		v := d.Get("capacity")
+	if v, ok := d.GetOk("capacity"); ok {
 		p := make([]models.InfraHardwareInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2510,26 +2524,27 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("cpu_utilization"); ok {
+		x := v.(float32)
+		o.SetCpuUtilization(x)
+	}
+
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("guest_info"); ok {
-		v := d.Get("guest_info")
+	if v, ok := d.GetOk("guest_info"); ok {
 		p := make([]models.VirtualizationGuestInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2584,20 +2599,17 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("hypervisor_type"); ok {
-		v := d.Get("hypervisor_type")
+	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
 	}
 
-	if _, ok := d.GetOk("identity"); ok {
-		v := d.Get("identity")
+	if v, ok := d.GetOk("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
 
-	if _, ok := d.GetOk("image_info"); ok {
-		v := d.Get("image_info")
+	if v, ok := d.GetOk("image_info"); ok {
 		p := make([]models.CloudImageReference, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2628,8 +2640,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("instance_type"); ok {
-		v := d.Get("instance_type")
+	if v, ok := d.GetOk("instance_type"); ok {
 		p := make([]models.CloudInstanceType, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2660,8 +2671,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ip_address"); ok {
-		v := d.Get("ip_address")
+	if v, ok := d.GetOk("ip_address"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2670,8 +2680,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("key_pair"); ok {
-		v := d.Get("key_pair")
+	if v, ok := d.GetOk("key_pair"); ok {
 		p := make([]models.CloudAwsKeyPairRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2714,8 +2723,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("location"); ok {
-		v := d.Get("location")
+	if v, ok := d.GetOk("location"); ok {
 		p := make([]models.CloudAwsVpcRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2758,8 +2766,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("memory_capacity"); ok {
-		v := d.Get("memory_capacity")
+	if v, ok := d.GetOk("memory_capacity"); ok {
 		p := make([]models.VirtualizationMemoryCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2808,26 +2815,27 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("memory_utilization"); ok {
+		x := v.(float32)
+		o.SetMemoryUtilization(x)
+	}
+
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("network_interface_attachments"); ok {
-		v := d.Get("network_interface_attachments")
+	if v, ok := d.GetOk("network_interface_attachments"); ok {
 		x := make([]models.CloudNetworkInterfaceAttachment, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2929,14 +2937,12 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetNetworkInterfaceAttachments(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2945,8 +2951,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2989,8 +2994,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3030,20 +3034,17 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("power_state"); ok {
-		v := d.Get("power_state")
+	if v, ok := d.GetOk("power_state"); ok {
 		x := (v.(string))
 		o.SetPowerState(x)
 	}
 
-	if _, ok := d.GetOk("private_dns"); ok {
-		v := d.Get("private_dns")
+	if v, ok := d.GetOk("private_dns"); ok {
 		x := (v.(string))
 		o.SetPrivateDns(x)
 	}
 
-	if _, ok := d.GetOk("processor_capacity"); ok {
-		v := d.Get("processor_capacity")
+	if v, ok := d.GetOk("processor_capacity"); ok {
 		p := make([]models.VirtualizationComputeCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3092,20 +3093,17 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("nr_provider"); ok {
-		v := d.Get("nr_provider")
+	if v, ok := d.GetOk("nr_provider"); ok {
 		x := (v.(string))
 		o.SetProvider(x)
 	}
 
-	if _, ok := d.GetOk("public_dns"); ok {
-		v := d.Get("public_dns")
+	if v, ok := d.GetOk("public_dns"); ok {
 		x := (v.(string))
 		o.SetPublicDns(x)
 	}
 
-	if _, ok := d.GetOk("region"); ok {
-		v := d.Get("region")
+	if v, ok := d.GetOk("region"); ok {
 		p := make([]models.CloudCloudRegion, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3136,8 +3134,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3180,8 +3177,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("security_groups"); ok {
-		v := d.Get("security_groups")
+	if v, ok := d.GetOk("security_groups"); ok {
 		x := make([]models.CloudAwsSecurityGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3221,20 +3217,17 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetSecurityGroups(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("state"); ok {
-		v := d.Get("state")
+	if v, ok := d.GetOk("state"); ok {
 		x := (v.(string))
 		o.SetState(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3267,26 +3260,22 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("tenancy"); ok {
-		v := d.Get("tenancy")
+	if v, ok := d.GetOk("tenancy"); ok {
 		x := (v.(string))
 		o.SetTenancy(x)
 	}
 
-	if _, ok := d.GetOk("termination_time"); ok {
-		v := d.Get("termination_time")
+	if v, ok := d.GetOk("termination_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetTerminationTime(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3360,8 +3349,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("virtual_machine_tags"); ok {
-		v := d.Get("virtual_machine_tags")
+	if v, ok := d.GetOk("virtual_machine_tags"); ok {
 		x := make([]models.CloudCloudTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3389,14 +3377,12 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetVirtualMachineTags(x)
 	}
 
-	if _, ok := d.GetOk("vm_creation_time"); ok {
-		v := d.Get("vm_creation_time")
+	if v, ok := d.GetOk("vm_creation_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetVmCreationTime(x)
 	}
 
-	if _, ok := d.GetOk("volume_attachments"); ok {
-		v := d.Get("volume_attachments")
+	if v, ok := d.GetOk("volume_attachments"); ok {
 		x := make([]models.CloudVolumeAttachment, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3430,8 +3416,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 		o.SetVolumeAttachments(x)
 	}
 
-	if _, ok := d.GetOk("zone"); ok {
-		v := d.Get("zone")
+	if v, ok := d.GetOk("zone"); ok {
 		p := make([]models.CloudAvailabilityZone, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3460,91 +3445,6 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 			x := p[0]
 			o.SetZone(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("boot_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetBootTime(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetHypervisorType(x)
-	}
-	if v, ok := d.GetOk("identity"); ok {
-		x := (v.(string))
-		o.SetIdentity(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("power_state"); ok {
-		x := (v.(string))
-		o.SetPowerState(x)
-	}
-	if v, ok := d.GetOk("private_dns"); ok {
-		x := (v.(string))
-		o.SetPrivateDns(x)
-	}
-	if v, ok := d.GetOk("nr_provider"); ok {
-		x := (v.(string))
-		o.SetProvider(x)
-	}
-	if v, ok := d.GetOk("public_dns"); ok {
-		x := (v.(string))
-		o.SetPublicDns(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("state"); ok {
-		x := (v.(string))
-		o.SetState(x)
-	}
-	if v, ok := d.GetOk("tenancy"); ok {
-		x := (v.(string))
-		o.SetTenancy(x)
-	}
-	if v, ok := d.GetOk("termination_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetTerminationTime(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("vm_creation_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetVmCreationTime(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -3594,6 +3494,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 
 				temp["capacity"] = flattenMapInfraHardwareInfo(s.GetCapacity(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cpu_utilization"] = (s.GetCpuUtilization())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
@@ -3612,6 +3513,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 				temp["location"] = flattenMapCloudAwsVpcRelationship(s.GetLocation(), d)
 
 				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
+				temp["memory_utilization"] = (s.GetMemoryUtilization())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -397,7 +397,10 @@ func resourceCapabilityPortGroupAggregationDefCreate(c context.Context, d *schem
 
 	o.SetClassId("capability.PortGroupAggregationDef")
 
-	o.SetHw40GPortGroupCap(d.Get("hw40_g_port_group_cap").(bool))
+	if v, ok := d.GetOkExists("hw40_g_port_group_cap"); ok {
+		x := (v.(bool))
+		o.SetHw40GPortGroupCap(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

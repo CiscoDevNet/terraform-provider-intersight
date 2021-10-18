@@ -646,7 +646,10 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 		o.SetDomainName(x)
 	}
 
-	o.SetEnableSingleLogout(d.Get("enable_single_logout").(bool))
+	if v, ok := d.GetOkExists("enable_single_logout"); ok {
+		x := (v.(bool))
+		o.SetEnableSingleLogout(x)
+	}
 
 	if v, ok := d.GetOk("metadata"); ok {
 		x := (v.(string))

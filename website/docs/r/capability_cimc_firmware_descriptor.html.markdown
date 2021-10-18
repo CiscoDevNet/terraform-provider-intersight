@@ -29,6 +29,7 @@ resource "intersight_capability_cimc_firmware_descriptor" "capability_cimc_firmw
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `adapter_ep_proxy_enabled`:(bool)(ReadOnly) Indicates whether the server uses ep proxy to communicate with the adapter. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -63,6 +64,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `uuid_supported_ver`:(string)(ReadOnly) Minimum server firmware version for UUID feature support. 
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 

@@ -185,7 +185,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Default:     "vnic.FlogiSettings",
 						},
 						"retries": {
-							Description: "The number of times that the system tries to log in to the fabric after the first failure.",
+							Description: "The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Default:     8,
@@ -756,7 +756,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("error_detection_timeout"); ok {
+	if v, ok := d.GetOkExists("error_detection_timeout"); ok {
 		x := int64(v.(int))
 		o.SetErrorDetectionTimeout(x)
 	}
@@ -902,17 +902,17 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("io_throttle_count"); ok {
+	if v, ok := d.GetOkExists("io_throttle_count"); ok {
 		x := int64(v.(int))
 		o.SetIoThrottleCount(x)
 	}
 
-	if v, ok := d.GetOk("lun_count"); ok {
+	if v, ok := d.GetOkExists("lun_count"); ok {
 		x := int64(v.(int))
 		o.SetLunCount(x)
 	}
 
-	if v, ok := d.GetOk("lun_queue_depth"); ok {
+	if v, ok := d.GetOkExists("lun_queue_depth"); ok {
 		x := int64(v.(int))
 		o.SetLunQueueDepth(x)
 	}
@@ -1015,7 +1015,7 @@ func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if v, ok := d.GetOk("resource_allocation_timeout"); ok {
+	if v, ok := d.GetOkExists("resource_allocation_timeout"); ok {
 		x := int64(v.(int))
 		o.SetResourceAllocationTimeout(x)
 	}

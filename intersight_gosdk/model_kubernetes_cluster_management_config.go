@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type KubernetesClusterManagementConfig struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Indicates whether the value of the 'tacPasswd' property has been set.
+	IsTacPasswdSet *bool `json:"IsTacPasswdSet,omitempty"`
 	// Number of IP addresses to reserve for load balancer services.
 	LoadBalancerCount *int64   `json:"LoadBalancerCount,omitempty"`
 	LoadBalancers     []string `json:"LoadBalancers,omitempty"`
@@ -31,7 +33,9 @@ type KubernetesClusterManagementConfig struct {
 	MasterVip *string  `json:"MasterVip,omitempty"`
 	SshKeys   []string `json:"SshKeys,omitempty"`
 	// Name of the user to SSH to nodes in a cluster.
-	SshUser              *string `json:"SshUser,omitempty"`
+	SshUser *string `json:"SshUser,omitempty"`
+	// Hashed password of the TAC user.
+	TacPasswd            *string `json:"TacPasswd,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -106,6 +110,38 @@ func (o *KubernetesClusterManagementConfig) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *KubernetesClusterManagementConfig) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetIsTacPasswdSet returns the IsTacPasswdSet field value if set, zero value otherwise.
+func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSet() bool {
+	if o == nil || o.IsTacPasswdSet == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsTacPasswdSet
+}
+
+// GetIsTacPasswdSetOk returns a tuple with the IsTacPasswdSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesClusterManagementConfig) GetIsTacPasswdSetOk() (*bool, bool) {
+	if o == nil || o.IsTacPasswdSet == nil {
+		return nil, false
+	}
+	return o.IsTacPasswdSet, true
+}
+
+// HasIsTacPasswdSet returns a boolean if a field has been set.
+func (o *KubernetesClusterManagementConfig) HasIsTacPasswdSet() bool {
+	if o != nil && o.IsTacPasswdSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsTacPasswdSet gets a reference to the given bool and assigns it to the IsTacPasswdSet field.
+func (o *KubernetesClusterManagementConfig) SetIsTacPasswdSet(v bool) {
+	o.IsTacPasswdSet = &v
 }
 
 // GetLoadBalancerCount returns the LoadBalancerCount field value if set, zero value otherwise.
@@ -270,6 +306,38 @@ func (o *KubernetesClusterManagementConfig) SetSshUser(v string) {
 	o.SshUser = &v
 }
 
+// GetTacPasswd returns the TacPasswd field value if set, zero value otherwise.
+func (o *KubernetesClusterManagementConfig) GetTacPasswd() string {
+	if o == nil || o.TacPasswd == nil {
+		var ret string
+		return ret
+	}
+	return *o.TacPasswd
+}
+
+// GetTacPasswdOk returns a tuple with the TacPasswd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesClusterManagementConfig) GetTacPasswdOk() (*string, bool) {
+	if o == nil || o.TacPasswd == nil {
+		return nil, false
+	}
+	return o.TacPasswd, true
+}
+
+// HasTacPasswd returns a boolean if a field has been set.
+func (o *KubernetesClusterManagementConfig) HasTacPasswd() bool {
+	if o != nil && o.TacPasswd != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTacPasswd gets a reference to the given string and assigns it to the TacPasswd field.
+func (o *KubernetesClusterManagementConfig) SetTacPasswd(v string) {
+	o.TacPasswd = &v
+}
+
 func (o KubernetesClusterManagementConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -286,6 +354,9 @@ func (o KubernetesClusterManagementConfig) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.IsTacPasswdSet != nil {
+		toSerialize["IsTacPasswdSet"] = o.IsTacPasswdSet
+	}
 	if o.LoadBalancerCount != nil {
 		toSerialize["LoadBalancerCount"] = o.LoadBalancerCount
 	}
@@ -301,6 +372,9 @@ func (o KubernetesClusterManagementConfig) MarshalJSON() ([]byte, error) {
 	if o.SshUser != nil {
 		toSerialize["SshUser"] = o.SshUser
 	}
+	if o.TacPasswd != nil {
+		toSerialize["TacPasswd"] = o.TacPasswd
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -315,6 +389,8 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Indicates whether the value of the 'tacPasswd' property has been set.
+		IsTacPasswdSet *bool `json:"IsTacPasswdSet,omitempty"`
 		// Number of IP addresses to reserve for load balancer services.
 		LoadBalancerCount *int64   `json:"LoadBalancerCount,omitempty"`
 		LoadBalancers     []string `json:"LoadBalancers,omitempty"`
@@ -323,6 +399,8 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 		SshKeys   []string `json:"SshKeys,omitempty"`
 		// Name of the user to SSH to nodes in a cluster.
 		SshUser *string `json:"SshUser,omitempty"`
+		// Hashed password of the TAC user.
+		TacPasswd *string `json:"TacPasswd,omitempty"`
 	}
 
 	varKubernetesClusterManagementConfigWithoutEmbeddedStruct := KubernetesClusterManagementConfigWithoutEmbeddedStruct{}
@@ -332,11 +410,13 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 		varKubernetesClusterManagementConfig := _KubernetesClusterManagementConfig{}
 		varKubernetesClusterManagementConfig.ClassId = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.ClassId
 		varKubernetesClusterManagementConfig.ObjectType = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.ObjectType
+		varKubernetesClusterManagementConfig.IsTacPasswdSet = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.IsTacPasswdSet
 		varKubernetesClusterManagementConfig.LoadBalancerCount = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.LoadBalancerCount
 		varKubernetesClusterManagementConfig.LoadBalancers = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.LoadBalancers
 		varKubernetesClusterManagementConfig.MasterVip = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.MasterVip
 		varKubernetesClusterManagementConfig.SshKeys = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.SshKeys
 		varKubernetesClusterManagementConfig.SshUser = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.SshUser
+		varKubernetesClusterManagementConfig.TacPasswd = varKubernetesClusterManagementConfigWithoutEmbeddedStruct.TacPasswd
 		*o = KubernetesClusterManagementConfig(varKubernetesClusterManagementConfig)
 	} else {
 		return err
@@ -356,11 +436,13 @@ func (o *KubernetesClusterManagementConfig) UnmarshalJSON(bytes []byte) (err err
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "IsTacPasswdSet")
 		delete(additionalProperties, "LoadBalancerCount")
 		delete(additionalProperties, "LoadBalancers")
 		delete(additionalProperties, "MasterVip")
 		delete(additionalProperties, "SshKeys")
 		delete(additionalProperties, "SshUser")
+		delete(additionalProperties, "TacPasswd")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

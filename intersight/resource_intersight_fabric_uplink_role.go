@@ -522,7 +522,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 		o.SetAdminSpeed(x)
 	}
 
-	if v, ok := d.GetOk("aggregate_port_id"); ok {
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
 		x := int64(v.(int))
 		o.SetAggregatePortId(x)
 	}
@@ -627,7 +627,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetObjectType("fabric.UplinkRole")
 
-	if v, ok := d.GetOk("port_id"); ok {
+	if v, ok := d.GetOkExists("port_id"); ok {
 		x := int64(v.(int))
 		o.SetPortId(x)
 	}
@@ -675,7 +675,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("slot_id"); ok {
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}

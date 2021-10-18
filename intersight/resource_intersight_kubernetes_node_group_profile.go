@@ -932,7 +932,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("desiredsize"); ok {
+	if v, ok := d.GetOkExists("desiredsize"); ok {
 		x := int64(v.(int))
 		o.SetDesiredsize(x)
 	}
@@ -1107,12 +1107,12 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	if v, ok := d.GetOk("maxsize"); ok {
+	if v, ok := d.GetOkExists("maxsize"); ok {
 		x := int64(v.(int))
 		o.SetMaxsize(x)
 	}
 
-	if v, ok := d.GetOk("minsize"); ok {
+	if v, ok := d.GetOkExists("minsize"); ok {
 		x := int64(v.(int))
 		o.SetMinsize(x)
 	}

@@ -26,6 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `error_desc`:(string) The detailed error message when there is any error related to license sync of this account. 
 * `group`:(string) Account license data group name. 
 * `highest_compliant_license_tier`:(string) The highest license tier which is in compliant of this account.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `last_renew`:(string) Specifies last certificate renew time with SA. 
 * `last_sync`:(string) Specifies last sync time with SA. 
 * `last_updated_time`:(string) Record's last update datetime. 
 * `license_state`:(string) Aggregrated mode for the agent. 

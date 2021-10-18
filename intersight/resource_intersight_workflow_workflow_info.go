@@ -1158,7 +1158,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetClassId("workflow.WorkflowInfo")
 
-	if v, ok := d.GetOk("failed_workflow_cleanup_duration"); ok {
+	if v, ok := d.GetOkExists("failed_workflow_cleanup_duration"); ok {
 		x := int64(v.(int))
 		o.SetFailedWorkflowCleanupDuration(x)
 	}
@@ -1167,7 +1167,10 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		o.SetInput(v)
 	}
 
-	o.SetInternal(d.Get("internal").(bool))
+	if v, ok := d.GetOkExists("internal"); ok {
+		x := (v.(bool))
+		o.SetInternal(x)
+	}
 
 	if v, ok := d.GetOk("message"); ok {
 		x := make([]models.WorkflowMessage, 0)
@@ -1211,7 +1214,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("meta_version"); ok {
+	if v, ok := d.GetOkExists("meta_version"); ok {
 		x := int64(v.(int))
 		o.SetMetaVersion(x)
 	}
@@ -1324,7 +1327,7 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 		o.SetRetryFromTaskName(x)
 	}
 
-	if v, ok := d.GetOk("success_workflow_cleanup_duration"); ok {
+	if v, ok := d.GetOkExists("success_workflow_cleanup_duration"); ok {
 		x := int64(v.(int))
 		o.SetSuccessWorkflowCleanupDuration(x)
 	}
@@ -1363,8 +1366,6 @@ func resourceWorkflowWorkflowInfoCreate(c context.Context, d *schema.ResourceDat
 			o.SetTags(x)
 		}
 	}
-
-	o.SetUserActionRequired(d.Get("user_action_required").(bool))
 
 	if v, ok := d.GetOk("wait_reason"); ok {
 		x := (v.(string))

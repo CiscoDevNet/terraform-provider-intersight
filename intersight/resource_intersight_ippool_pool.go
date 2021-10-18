@@ -128,7 +128,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "First IPv4 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -140,13 +139,11 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"to": {
 							Description: "Last IPv4 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -222,7 +219,6 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "First IPv6 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -234,13 +230,11 @@ func resourceIppoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"to": {
 							Description: "Last IPv6 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -719,10 +713,28 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("ippool.IpV4Block")
+			if v, ok := l["from"]; ok {
+				{
+					x := (v.(string))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := (v.(string))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)
@@ -804,10 +816,28 @@ func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("ippool.IpV6Block")
+			if v, ok := l["from"]; ok {
+				{
+					x := (v.(string))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := (v.(string))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)
@@ -1172,10 +1202,28 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("ippool.IpV4Block")
+			if v, ok := l["from"]; ok {
+				{
+					x := (v.(string))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := (v.(string))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)
@@ -1257,10 +1305,28 @@ func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				}
 			}
 			o.SetClassId("ippool.IpV6Block")
+			if v, ok := l["from"]; ok {
+				{
+					x := (v.(string))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := (v.(string))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)

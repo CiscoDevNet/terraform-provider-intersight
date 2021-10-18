@@ -470,8 +470,6 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetClassId("appliance.DiagSetting")
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
 	if v, ok := d.GetOk("message"); ok {
 		x := (v.(string))
 		o.SetMessage(x)

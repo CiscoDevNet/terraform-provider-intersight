@@ -45,10 +45,10 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `ip_v4_blocks`:(Array)
 This complex property has following sub-properties:
-  + `from`:(string)(ReadOnly) First IPv4 address of the block. 
+  + `from`:(string) First IPv4 address of the block. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `size`:(int)(ReadOnly) Number of identifiers this block can hold. 
-  + `to`:(string)(ReadOnly) Last IPv4 address of the block. 
+  + `size`:(int) Number of identifiers this block can hold. 
+  + `to`:(string) Last IPv4 address of the block. 
 * `ip_v4_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv4 addresses. 
 This complex property has following sub-properties:
   + `gateway`:(string) IP address of the default IPv4 gateway. 
@@ -58,10 +58,10 @@ This complex property has following sub-properties:
   + `secondary_dns`:(string) IP Address of the secondary Domain Name System (DNS) server. 
 * `ip_v6_blocks`:(Array)
 This complex property has following sub-properties:
-  + `from`:(string)(ReadOnly) First IPv6 address of the block. 
+  + `from`:(string) First IPv6 address of the block. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `size`:(int)(ReadOnly) Number of identifiers this block can hold. 
-  + `to`:(string)(ReadOnly) Last IPv6 address of the block. 
+  + `size`:(int) Number of identifiers this block can hold. 
+  + `to`:(string) Last IPv6 address of the block. 
 * `ip_v6_config`:(HashMap) - Netmask, Gateway and DNS settings for IPv6 addresses. 
 This complex property has following sub-properties:
   + `gateway`:(string) IP address of the default IPv6 gateway. 

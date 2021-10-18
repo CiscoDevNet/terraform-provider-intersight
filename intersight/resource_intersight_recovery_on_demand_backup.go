@@ -600,8 +600,6 @@ func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceD
 		o.SetFileNamePrefix(x)
 	}
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
 	if v, ok := d.GetOk("location_type"); ok {
 		x := (v.(string))
 		o.SetLocationType(x)
@@ -677,7 +675,7 @@ func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceD
 		o.SetProtocol(x)
 	}
 
-	if v, ok := d.GetOk("retention_count"); ok {
+	if v, ok := d.GetOkExists("retention_count"); ok {
 		x := int64(v.(int))
 		o.SetRetentionCount(x)
 	}

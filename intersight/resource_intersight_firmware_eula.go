@@ -469,7 +469,6 @@ func resourceFirmwareEulaCreate(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareEulaWithDefaults()
-	o.SetAccepted(d.Get("accepted").(bool))
 
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))

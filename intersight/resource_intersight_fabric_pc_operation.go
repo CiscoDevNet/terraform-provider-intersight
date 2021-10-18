@@ -489,7 +489,7 @@ func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("fabric.PcOperation")
 
-	if v, ok := d.GetOk("pc_id"); ok {
+	if v, ok := d.GetOkExists("pc_id"); ok {
 		x := int64(v.(int))
 		o.SetPcId(x)
 	}

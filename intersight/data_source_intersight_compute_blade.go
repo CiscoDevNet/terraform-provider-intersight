@@ -973,6 +973,11 @@ func dataSourceComputeBlade() *schema.Resource {
 				},
 			},
 		},
+		"hardware_uuid": {
+			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -2785,6 +2790,11 @@ func dataSourceComputeBlade() *schema.Resource {
 				},
 			},
 		},
+		"hardware_uuid": {
+			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -3655,14 +3665,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ComputeBlade{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("adapters"); ok {
-		v := d.Get("adapters")
+	if v, ok := d.GetOk("adapters"); ok {
 		x := make([]models.AdapterUnitRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3702,8 +3710,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetAdapters(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -3712,14 +3719,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("admin_power_state"); ok {
-		v := d.Get("admin_power_state")
+	if v, ok := d.GetOk("admin_power_state"); ok {
 		x := (v.(string))
 		o.SetAdminPowerState(x)
 	}
 
-	if _, ok := d.GetOk("alarm_summary"); ok {
-		v := d.Get("alarm_summary")
+	if v, ok := d.GetOk("alarm_summary"); ok {
 		p := make([]models.ComputeAlarmSummary, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3762,8 +3767,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3803,20 +3807,17 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("asset_tag"); ok {
-		v := d.Get("asset_tag")
+	if v, ok := d.GetOk("asset_tag"); ok {
 		x := (v.(string))
 		o.SetAssetTag(x)
 	}
 
-	if _, ok := d.GetOk("available_memory"); ok {
-		v := d.Get("available_memory")
+	if v, ok := d.GetOkExists("available_memory"); ok {
 		x := int64(v.(int))
 		o.SetAvailableMemory(x)
 	}
 
-	if _, ok := d.GetOk("bios_bootmode"); ok {
-		v := d.Get("bios_bootmode")
+	if v, ok := d.GetOk("bios_bootmode"); ok {
 		p := make([]models.BiosBootModeRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3859,10 +3860,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	o.SetBiosPostComplete(d.Get("bios_post_complete").(bool))
+	if v, ok := d.GetOkExists("bios_post_complete"); ok {
+		x := (v.(bool))
+		o.SetBiosPostComplete(x)
+	}
 
-	if _, ok := d.GetOk("bios_token_settings"); ok {
-		v := d.Get("bios_token_settings")
+	if v, ok := d.GetOk("bios_token_settings"); ok {
 		p := make([]models.BiosTokenSettingsRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3905,8 +3908,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("bios_units"); ok {
-		v := d.Get("bios_units")
+	if v, ok := d.GetOk("bios_units"); ok {
 		x := make([]models.BiosUnitRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3946,8 +3948,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBiosUnits(x)
 	}
 
-	if _, ok := d.GetOk("bios_vf_select_memory_ras_configuration"); ok {
-		v := d.Get("bios_vf_select_memory_ras_configuration")
+	if v, ok := d.GetOk("bios_vf_select_memory_ras_configuration"); ok {
 		p := make([]models.BiosVfSelectMemoryRasConfigurationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3990,8 +3991,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("bmc"); ok {
-		v := d.Get("bmc")
+	if v, ok := d.GetOk("bmc"); ok {
 		p := make([]models.ManagementControllerRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4034,8 +4034,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("board"); ok {
-		v := d.Get("board")
+	if v, ok := d.GetOk("board"); ok {
 		p := make([]models.ComputeBoardRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4078,8 +4077,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("boot_cdd_devices"); ok {
-		v := d.Get("boot_cdd_devices")
+	if v, ok := d.GetOk("boot_cdd_devices"); ok {
 		x := make([]models.BootCddDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4119,8 +4117,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootCddDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_device_boot_security"); ok {
-		v := d.Get("boot_device_boot_security")
+	if v, ok := d.GetOk("boot_device_boot_security"); ok {
 		p := make([]models.BootDeviceBootSecurityRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4163,8 +4160,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("boot_device_bootmode"); ok {
-		v := d.Get("boot_device_bootmode")
+	if v, ok := d.GetOk("boot_device_bootmode"); ok {
 		p := make([]models.BootDeviceBootModeRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4207,8 +4203,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("boot_hdd_devices"); ok {
-		v := d.Get("boot_hdd_devices")
+	if v, ok := d.GetOk("boot_hdd_devices"); ok {
 		x := make([]models.BootHddDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4248,8 +4243,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootHddDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_iscsi_devices"); ok {
-		v := d.Get("boot_iscsi_devices")
+	if v, ok := d.GetOk("boot_iscsi_devices"); ok {
 		x := make([]models.BootIscsiDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4289,8 +4283,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootIscsiDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_nvme_devices"); ok {
-		v := d.Get("boot_nvme_devices")
+	if v, ok := d.GetOk("boot_nvme_devices"); ok {
 		x := make([]models.BootNvmeDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4330,8 +4323,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootNvmeDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_pch_storage_devices"); ok {
-		v := d.Get("boot_pch_storage_devices")
+	if v, ok := d.GetOk("boot_pch_storage_devices"); ok {
 		x := make([]models.BootPchStorageDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4371,8 +4363,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootPchStorageDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_pxe_devices"); ok {
-		v := d.Get("boot_pxe_devices")
+	if v, ok := d.GetOk("boot_pxe_devices"); ok {
 		x := make([]models.BootPxeDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4412,8 +4403,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootPxeDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_san_devices"); ok {
-		v := d.Get("boot_san_devices")
+	if v, ok := d.GetOk("boot_san_devices"); ok {
 		x := make([]models.BootSanDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4453,8 +4443,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootSanDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_sd_devices"); ok {
-		v := d.Get("boot_sd_devices")
+	if v, ok := d.GetOk("boot_sd_devices"); ok {
 		x := make([]models.BootSdDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4494,8 +4483,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootSdDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_uefi_shell_devices"); ok {
-		v := d.Get("boot_uefi_shell_devices")
+	if v, ok := d.GetOk("boot_uefi_shell_devices"); ok {
 		x := make([]models.BootUefiShellDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4535,8 +4523,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootUefiShellDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_usb_devices"); ok {
-		v := d.Get("boot_usb_devices")
+	if v, ok := d.GetOk("boot_usb_devices"); ok {
 		x := make([]models.BootUsbDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4576,8 +4563,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootUsbDevices(x)
 	}
 
-	if _, ok := d.GetOk("boot_vmedia_devices"); ok {
-		v := d.Get("boot_vmedia_devices")
+	if v, ok := d.GetOk("boot_vmedia_devices"); ok {
 		x := make([]models.BootVmediaDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4617,44 +4603,37 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetBootVmediaDevices(x)
 	}
 
-	if _, ok := d.GetOk("chassis_id"); ok {
-		v := d.Get("chassis_id")
+	if v, ok := d.GetOk("chassis_id"); ok {
 		x := (v.(string))
 		o.SetChassisId(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("equipment_chassis"); ok {
-		v := d.Get("equipment_chassis")
+	if v, ok := d.GetOk("equipment_chassis"); ok {
 		p := make([]models.EquipmentChassisRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4697,8 +4676,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("equipment_io_expanders"); ok {
-		v := d.Get("equipment_io_expanders")
+	if v, ok := d.GetOk("equipment_io_expanders"); ok {
 		x := make([]models.EquipmentIoExpanderRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4738,14 +4716,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetEquipmentIoExpanders(x)
 	}
 
-	if _, ok := d.GetOk("fault_summary"); ok {
-		v := d.Get("fault_summary")
+	if v, ok := d.GetOkExists("fault_summary"); ok {
 		x := int64(v.(int))
 		o.SetFaultSummary(x)
 	}
 
-	if _, ok := d.GetOk("generic_inventory_holders"); ok {
-		v := d.Get("generic_inventory_holders")
+	if v, ok := d.GetOk("generic_inventory_holders"); ok {
 		x := make([]models.InventoryGenericInventoryHolderRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4785,8 +4761,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetGenericInventoryHolders(x)
 	}
 
-	if _, ok := d.GetOk("graphics_cards"); ok {
-		v := d.Get("graphics_cards")
+	if v, ok := d.GetOk("graphics_cards"); ok {
 		x := make([]models.GraphicsCardRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4826,8 +4801,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetGraphicsCards(x)
 	}
 
-	if _, ok := d.GetOk("inventory_device_info"); ok {
-		v := d.Get("inventory_device_info")
+	if v, ok := d.GetOk("hardware_uuid"); ok {
+		x := (v.(string))
+		o.SetHardwareUuid(x)
+	}
+
+	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4870,8 +4849,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("kvm_ip_addresses"); ok {
-		v := d.Get("kvm_ip_addresses")
+	if v, ok := d.GetOk("kvm_ip_addresses"); ok {
 		x := make([]models.ComputeIpAddress, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4899,8 +4877,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetKvmIpAddresses(x)
 	}
 
-	if _, ok := d.GetOk("locator_led"); ok {
-		v := d.Get("locator_led")
+	if v, ok := d.GetOk("locator_led"); ok {
 		p := make([]models.EquipmentLocatorLedRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4943,14 +4920,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("management_mode"); ok {
-		v := d.Get("management_mode")
+	if v, ok := d.GetOk("management_mode"); ok {
 		x := (v.(string))
 		o.SetManagementMode(x)
 	}
 
-	if _, ok := d.GetOk("memory_arrays"); ok {
-		v := d.Get("memory_arrays")
+	if v, ok := d.GetOk("memory_arrays"); ok {
 		x := make([]models.MemoryArrayRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4990,14 +4965,12 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetMemoryArrays(x)
 	}
 
-	if _, ok := d.GetOk("memory_speed"); ok {
-		v := d.Get("memory_speed")
+	if v, ok := d.GetOk("memory_speed"); ok {
 		x := (v.(string))
 		o.SetMemorySpeed(x)
 	}
 
-	if _, ok := d.GetOk("mgmt_identity"); ok {
-		v := d.Get("mgmt_identity")
+	if v, ok := d.GetOk("mgmt_identity"); ok {
 		p := make([]models.EquipmentPhysicalIdentityRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5040,86 +5013,72 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("mgmt_ip_address"); ok {
-		v := d.Get("mgmt_ip_address")
+	if v, ok := d.GetOk("mgmt_ip_address"); ok {
 		x := (v.(string))
 		o.SetMgmtIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("num_adaptors"); ok {
-		v := d.Get("num_adaptors")
+	if v, ok := d.GetOkExists("num_adaptors"); ok {
 		x := int64(v.(int))
 		o.SetNumAdaptors(x)
 	}
 
-	if _, ok := d.GetOk("num_cpu_cores"); ok {
-		v := d.Get("num_cpu_cores")
+	if v, ok := d.GetOkExists("num_cpu_cores"); ok {
 		x := int64(v.(int))
 		o.SetNumCpuCores(x)
 	}
 
-	if _, ok := d.GetOk("num_cpu_cores_enabled"); ok {
-		v := d.Get("num_cpu_cores_enabled")
+	if v, ok := d.GetOkExists("num_cpu_cores_enabled"); ok {
 		x := int64(v.(int))
 		o.SetNumCpuCoresEnabled(x)
 	}
 
-	if _, ok := d.GetOk("num_cpus"); ok {
-		v := d.Get("num_cpus")
+	if v, ok := d.GetOkExists("num_cpus"); ok {
 		x := int64(v.(int))
 		o.SetNumCpus(x)
 	}
 
-	if _, ok := d.GetOk("num_eth_host_interfaces"); ok {
-		v := d.Get("num_eth_host_interfaces")
+	if v, ok := d.GetOkExists("num_eth_host_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetNumEthHostInterfaces(x)
 	}
 
-	if _, ok := d.GetOk("num_fc_host_interfaces"); ok {
-		v := d.Get("num_fc_host_interfaces")
+	if v, ok := d.GetOkExists("num_fc_host_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetNumFcHostInterfaces(x)
 	}
 
-	if _, ok := d.GetOk("num_threads"); ok {
-		v := d.Get("num_threads")
+	if v, ok := d.GetOkExists("num_threads"); ok {
 		x := int64(v.(int))
 		o.SetNumThreads(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_power_state"); ok {
-		v := d.Get("oper_power_state")
+	if v, ok := d.GetOk("oper_power_state"); ok {
 		x := (v.(string))
 		o.SetOperPowerState(x)
 	}
 
-	if _, ok := d.GetOk("oper_reason"); ok {
-		v := d.Get("oper_reason")
+	if v, ok := d.GetOk("oper_reason"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -5128,20 +5087,17 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetOperReason(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("operability"); ok {
-		v := d.Get("operability")
+	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -5150,8 +5106,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5194,8 +5149,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("pci_devices"); ok {
-		v := d.Get("pci_devices")
+	if v, ok := d.GetOk("pci_devices"); ok {
 		x := make([]models.PciDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5235,8 +5189,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetPciDevices(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5276,20 +5229,17 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("platform_type"); ok {
-		v := d.Get("platform_type")
+	if v, ok := d.GetOk("platform_type"); ok {
 		x := (v.(string))
 		o.SetPlatformType(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("previous_fru"); ok {
-		v := d.Get("previous_fru")
+	if v, ok := d.GetOk("previous_fru"); ok {
 		p := make([]models.EquipmentFruRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5332,8 +5282,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("processors"); ok {
-		v := d.Get("processors")
+	if v, ok := d.GetOk("processors"); ok {
 		x := make([]models.ProcessorUnitRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5373,8 +5322,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetProcessors(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5417,50 +5365,42 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("scaled_mode"); ok {
-		v := d.Get("scaled_mode")
+	if v, ok := d.GetOk("scaled_mode"); ok {
 		x := (v.(string))
 		o.SetScaledMode(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("service_profile"); ok {
-		v := d.Get("service_profile")
+	if v, ok := d.GetOk("service_profile"); ok {
 		x := (v.(string))
 		o.SetServiceProfile(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("slot_id"); ok {
-		v := d.Get("slot_id")
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}
 
-	if _, ok := d.GetOk("storage_controllers"); ok {
-		v := d.Get("storage_controllers")
+	if v, ok := d.GetOk("storage_controllers"); ok {
 		x := make([]models.StorageControllerRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5500,8 +5440,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetStorageControllers(x)
 	}
 
-	if _, ok := d.GetOk("storage_enclosures"); ok {
-		v := d.Get("storage_enclosures")
+	if v, ok := d.GetOk("storage_enclosures"); ok {
 		x := make([]models.StorageEnclosureRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5541,8 +5480,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetStorageEnclosures(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5575,8 +5513,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("top_system"); ok {
-		v := d.Get("top_system")
+	if v, ok := d.GetOk("top_system"); ok {
 		p := make([]models.TopSystemRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5619,32 +5556,27 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("total_memory"); ok {
-		v := d.Get("total_memory")
+	if v, ok := d.GetOkExists("total_memory"); ok {
 		x := int64(v.(int))
 		o.SetTotalMemory(x)
 	}
 
-	if _, ok := d.GetOk("user_label"); ok {
-		v := d.Get("user_label")
+	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5718,8 +5650,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("vmedia"); ok {
-		v := d.Get("vmedia")
+	if v, ok := d.GetOk("vmedia"); ok {
 		p := make([]models.ComputeVmediaRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5760,175 +5691,6 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 			x := p[0]
 			o.SetVmedia(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("admin_power_state"); ok {
-		x := (v.(string))
-		o.SetAdminPowerState(x)
-	}
-	if v, ok := d.GetOk("asset_tag"); ok {
-		x := (v.(string))
-		o.SetAssetTag(x)
-	}
-	if v, ok := d.GetOk("available_memory"); ok {
-		x := int64(v.(int))
-		o.SetAvailableMemory(x)
-	}
-	if v, ok := d.GetOk("bios_post_complete"); ok {
-		x := (v.(bool))
-		o.SetBiosPostComplete(x)
-	}
-	if v, ok := d.GetOk("chassis_id"); ok {
-		x := (v.(string))
-		o.SetChassisId(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("fault_summary"); ok {
-		x := int64(v.(int))
-		o.SetFaultSummary(x)
-	}
-	if v, ok := d.GetOk("management_mode"); ok {
-		x := (v.(string))
-		o.SetManagementMode(x)
-	}
-	if v, ok := d.GetOk("memory_speed"); ok {
-		x := (v.(string))
-		o.SetMemorySpeed(x)
-	}
-	if v, ok := d.GetOk("mgmt_ip_address"); ok {
-		x := (v.(string))
-		o.SetMgmtIpAddress(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("num_adaptors"); ok {
-		x := int64(v.(int))
-		o.SetNumAdaptors(x)
-	}
-	if v, ok := d.GetOk("num_cpu_cores"); ok {
-		x := int64(v.(int))
-		o.SetNumCpuCores(x)
-	}
-	if v, ok := d.GetOk("num_cpu_cores_enabled"); ok {
-		x := int64(v.(int))
-		o.SetNumCpuCoresEnabled(x)
-	}
-	if v, ok := d.GetOk("num_cpus"); ok {
-		x := int64(v.(int))
-		o.SetNumCpus(x)
-	}
-	if v, ok := d.GetOk("num_eth_host_interfaces"); ok {
-		x := int64(v.(int))
-		o.SetNumEthHostInterfaces(x)
-	}
-	if v, ok := d.GetOk("num_fc_host_interfaces"); ok {
-		x := int64(v.(int))
-		o.SetNumFcHostInterfaces(x)
-	}
-	if v, ok := d.GetOk("num_threads"); ok {
-		x := int64(v.(int))
-		o.SetNumThreads(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_power_state"); ok {
-		x := (v.(string))
-		o.SetOperPowerState(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("operability"); ok {
-		x := (v.(string))
-		o.SetOperability(x)
-	}
-	if v, ok := d.GetOk("platform_type"); ok {
-		x := (v.(string))
-		o.SetPlatformType(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("scaled_mode"); ok {
-		x := (v.(string))
-		o.SetScaledMode(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("service_profile"); ok {
-		x := (v.(string))
-		o.SetServiceProfile(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("slot_id"); ok {
-		x := int64(v.(int))
-		o.SetSlotId(x)
-	}
-	if v, ok := d.GetOk("total_memory"); ok {
-		x := int64(v.(int))
-		o.SetTotalMemory(x)
-	}
-	if v, ok := d.GetOk("user_label"); ok {
-		x := (v.(string))
-		o.SetUserLabel(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -6033,6 +5795,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 				temp["generic_inventory_holders"] = flattenListInventoryGenericInventoryHolderRelationship(s.GetGenericInventoryHolders(), d)
 
 				temp["graphics_cards"] = flattenListGraphicsCardRelationship(s.GetGraphicsCards(), d)
+				temp["hardware_uuid"] = (s.GetHardwareUuid())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 

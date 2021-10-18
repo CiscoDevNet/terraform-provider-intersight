@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
+**HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
@@ -265,6 +266,31 @@ SetFaultSummary sets FaultSummary field to given value.
 `func (o *ComputePhysical) HasFaultSummary() bool`
 
 HasFaultSummary returns a boolean if a field has been set.
+
+### GetHardwareUuid
+
+`func (o *ComputePhysical) GetHardwareUuid() string`
+
+GetHardwareUuid returns the HardwareUuid field if non-nil, zero value otherwise.
+
+### GetHardwareUuidOk
+
+`func (o *ComputePhysical) GetHardwareUuidOk() (*string, bool)`
+
+GetHardwareUuidOk returns a tuple with the HardwareUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHardwareUuid
+
+`func (o *ComputePhysical) SetHardwareUuid(v string)`
+
+SetHardwareUuid sets HardwareUuid field to given value.
+
+### HasHardwareUuid
+
+`func (o *ComputePhysical) HasHardwareUuid() bool`
+
+HasHardwareUuid returns a boolean if a field has been set.
 
 ### GetKvmIpAddresses
 

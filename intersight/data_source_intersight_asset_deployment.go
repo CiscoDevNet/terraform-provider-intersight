@@ -1105,14 +1105,12 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AssetDeployment{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1121,8 +1119,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1162,26 +1159,22 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("deployment_ref_id"); ok {
-		v := d.Get("deployment_ref_id")
+	if v, ok := d.GetOk("deployment_ref_id"); ok {
 		x := (v.(string))
 		o.SetDeploymentRefId(x)
 	}
 
-	if _, ok := d.GetOk("devices"); ok {
-		v := d.Get("devices")
+	if v, ok := d.GetOk("devices"); ok {
 		x := make([]models.AssetDeploymentDeviceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1221,14 +1214,12 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetDevices(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("end_customer"); ok {
-		v := d.Get("end_customer")
+	if v, ok := d.GetOk("end_customer"); ok {
 		p := make([]models.AssetCustomerInformation, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1259,44 +1250,37 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("end_date"); ok {
-		v := d.Get("end_date")
+	if v, ok := d.GetOk("end_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndDate(x)
 	}
 
-	if _, ok := d.GetOk("license_type"); ok {
-		v := d.Get("license_type")
+	if v, ok := d.GetOk("license_type"); ok {
 		x := (v.(string))
 		o.SetLicenseType(x)
 	}
 
-	if _, ok := d.GetOk("mlb_offer_type"); ok {
-		v := d.Get("mlb_offer_type")
+	if v, ok := d.GetOk("mlb_offer_type"); ok {
 		x := (v.(string))
 		o.SetMlbOfferType(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1305,8 +1289,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1349,8 +1332,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1390,20 +1372,17 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("start_date"); ok {
-		v := d.Get("start_date")
+	if v, ok := d.GetOk("start_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetStartDate(x)
 	}
 
-	if _, ok := d.GetOk("subscription"); ok {
-		v := d.Get("subscription")
+	if v, ok := d.GetOk("subscription"); ok {
 		p := make([]models.AssetSubscriptionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1446,14 +1425,12 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("subscription_ref_id"); ok {
-		v := d.Get("subscription_ref_id")
+	if v, ok := d.GetOk("subscription_ref_id"); ok {
 		x := (v.(string))
 		o.SetSubscriptionRefId(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1486,8 +1463,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("unit_of_measure"); ok {
-		v := d.Get("unit_of_measure")
+	if v, ok := d.GetOk("unit_of_measure"); ok {
 		x := make([]models.AssetMeteringType, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1515,8 +1491,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		o.SetUnitOfMeasure(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1590,71 +1565,13 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("workloads"); ok {
-		v := d.Get("workloads")
+	if v, ok := d.GetOk("workloads"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
 			x = append(x, y.Index(i).Interface().(string))
 		}
 		o.SetWorkloads(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("deployment_ref_id"); ok {
-		x := (v.(string))
-		o.SetDeploymentRefId(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("end_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndDate(x)
-	}
-	if v, ok := d.GetOk("license_type"); ok {
-		x := (v.(string))
-		o.SetLicenseType(x)
-	}
-	if v, ok := d.GetOk("mlb_offer_type"); ok {
-		x := (v.(string))
-		o.SetMlbOfferType(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("start_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartDate(x)
-	}
-	if v, ok := d.GetOk("subscription_ref_id"); ok {
-		x := (v.(string))
-		o.SetSubscriptionRefId(x)
 	}
 
 	data, err := o.MarshalJSON()

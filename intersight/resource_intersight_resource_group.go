@@ -123,6 +123,11 @@ func resourceResourceGroup() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"description": {
+				Description: "The informative description about the usage of this Resource Group.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
@@ -539,6 +544,11 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 
 	o.SetClassId("resource.Group")
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -759,6 +769,10 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while setting property CreateTime in ResourceGroup object: %s", err.Error())
 	}
 
+	if err := d.Set("description", (s.GetDescription())); err != nil {
+		return diag.Errorf("error occurred while setting property Description in ResourceGroup object: %s", err.Error())
+	}
+
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in ResourceGroup object: %s", err.Error())
 	}
@@ -842,6 +856,12 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 	}
 
 	o.SetClassId("resource.Group")
+
+	if d.HasChange("description") {
+		v := d.Get("description")
+		x := (v.(string))
+		o.SetDescription(x)
+	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

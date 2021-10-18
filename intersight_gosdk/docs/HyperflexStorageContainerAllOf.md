@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.StorageContainer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StorageContainer"]
+**AccessibilitySummary** | Pointer to **string** | Storage container accessibility summary. * &#x60;NOT_APPLICABLE&#x60; - The HyperFlex storage container accessibility summary is not applicable. * &#x60;ACCESSIBLE&#x60; - The HyperFlex storage container is accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex storage container is not accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex storage container is partially accessible. | [optional] [readonly] [default to "NOT_APPLICABLE"]
 **DataBlockSize** | Pointer to **int64** | Storage container data block size in bytes. | [optional] [readonly] 
+**HostMountStatus** | Pointer to [**[]StorageStorageContainerHostMountStatus**](StorageStorageContainerHostMountStatus.md) |  | [optional] 
 **InUse** | Pointer to **bool** | Indicates whether the storage container has volumes. | [optional] [readonly] 
 **Kind** | Pointer to **string** | Indicates whether the storage container was user-created, or system-created. * &#x60;UNKNOWN&#x60; - The storage container creator is unknown. * &#x60;USER_CREATED&#x60; - The storage container was created by a user action. * &#x60;INTERNAL&#x60; - The storage container was created by the system. | [optional] [readonly] [default to "UNKNOWN"]
 **LastAccessTime** | Pointer to **time.Time** | Storage container&#39;s last access time. | [optional] [readonly] 
@@ -81,6 +83,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAccessibilitySummary
+
+`func (o *HyperflexStorageContainerAllOf) GetAccessibilitySummary() string`
+
+GetAccessibilitySummary returns the AccessibilitySummary field if non-nil, zero value otherwise.
+
+### GetAccessibilitySummaryOk
+
+`func (o *HyperflexStorageContainerAllOf) GetAccessibilitySummaryOk() (*string, bool)`
+
+GetAccessibilitySummaryOk returns a tuple with the AccessibilitySummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessibilitySummary
+
+`func (o *HyperflexStorageContainerAllOf) SetAccessibilitySummary(v string)`
+
+SetAccessibilitySummary sets AccessibilitySummary field to given value.
+
+### HasAccessibilitySummary
+
+`func (o *HyperflexStorageContainerAllOf) HasAccessibilitySummary() bool`
+
+HasAccessibilitySummary returns a boolean if a field has been set.
+
 ### GetDataBlockSize
 
 `func (o *HyperflexStorageContainerAllOf) GetDataBlockSize() int64`
@@ -106,6 +133,41 @@ SetDataBlockSize sets DataBlockSize field to given value.
 
 HasDataBlockSize returns a boolean if a field has been set.
 
+### GetHostMountStatus
+
+`func (o *HyperflexStorageContainerAllOf) GetHostMountStatus() []StorageStorageContainerHostMountStatus`
+
+GetHostMountStatus returns the HostMountStatus field if non-nil, zero value otherwise.
+
+### GetHostMountStatusOk
+
+`func (o *HyperflexStorageContainerAllOf) GetHostMountStatusOk() (*[]StorageStorageContainerHostMountStatus, bool)`
+
+GetHostMountStatusOk returns a tuple with the HostMountStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostMountStatus
+
+`func (o *HyperflexStorageContainerAllOf) SetHostMountStatus(v []StorageStorageContainerHostMountStatus)`
+
+SetHostMountStatus sets HostMountStatus field to given value.
+
+### HasHostMountStatus
+
+`func (o *HyperflexStorageContainerAllOf) HasHostMountStatus() bool`
+
+HasHostMountStatus returns a boolean if a field has been set.
+
+### SetHostMountStatusNil
+
+`func (o *HyperflexStorageContainerAllOf) SetHostMountStatusNil(b bool)`
+
+ SetHostMountStatusNil sets the value for HostMountStatus to be an explicit nil
+
+### UnsetHostMountStatus
+`func (o *HyperflexStorageContainerAllOf) UnsetHostMountStatus()`
+
+UnsetHostMountStatus ensures that no value is present for HostMountStatus, not even an explicit nil
 ### GetInUse
 
 `func (o *HyperflexStorageContainerAllOf) GetInUse() bool`

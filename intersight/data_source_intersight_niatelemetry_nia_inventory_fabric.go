@@ -1017,14 +1017,12 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaInventoryFabric{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1033,8 +1031,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1074,100 +1071,97 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("anycast_gw_mac"); ok {
-		v := d.Get("anycast_gw_mac")
+	if v, ok := d.GetOk("anycast_gw_mac"); ok {
 		x := (v.(string))
 		o.SetAnycastGwMac(x)
 	}
 
-	if _, ok := d.GetOk("bgp_established_interface_count"); ok {
-		v := d.Get("bgp_established_interface_count")
+	if v, ok := d.GetOkExists("bgp_established_interface_count"); ok {
 		x := int64(v.(int))
 		o.SetBgpEstablishedInterfaceCount(x)
 	}
 
-	if _, ok := d.GetOk("bgw_interface_up_count"); ok {
-		v := d.Get("bgw_interface_up_count")
+	if v, ok := d.GetOkExists("bgw_interface_up_count"); ok {
 		x := int64(v.(int))
 		o.SetBgwInterfaceUpCount(x)
 	}
 
-	if _, ok := d.GetOk("border_gateway_spine_count"); ok {
-		v := d.Get("border_gateway_spine_count")
+	if v, ok := d.GetOkExists("border_gateway_spine_count"); ok {
 		x := int64(v.(int))
 		o.SetBorderGatewaySpineCount(x)
 	}
 
-	if _, ok := d.GetOk("border_leaf_count"); ok {
-		v := d.Get("border_leaf_count")
+	if v, ok := d.GetOkExists("border_leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetBorderLeafCount(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("dci_subnet_range"); ok {
-		v := d.Get("dci_subnet_range")
+	if v, ok := d.GetOk("dci_subnet_range"); ok {
 		x := (v.(string))
 		o.SetDciSubnetRange(x)
 	}
 
-	if _, ok := d.GetOk("dci_subnet_target_mask"); ok {
-		v := d.Get("dci_subnet_target_mask")
+	if v, ok := d.GetOk("dci_subnet_target_mask"); ok {
 		x := (v.(string))
 		o.SetDciSubnetTargetMask(x)
 	}
 
-	o.SetDcnmtrackerEnabled(d.Get("dcnmtracker_enabled").(bool))
+	if v, ok := d.GetOkExists("dcnmtracker_enabled"); ok {
+		x := (v.(bool))
+		o.SetDcnmtrackerEnabled(x)
+	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("ebgp_evpn_link_up_count"); ok {
-		v := d.Get("ebgp_evpn_link_up_count")
+	if v, ok := d.GetOkExists("ebgp_evpn_link_up_count"); ok {
 		x := int64(v.(int))
 		o.SetEbgpEvpnLinkUpCount(x)
 	}
 
-	if _, ok := d.GetOk("fabric_id"); ok {
-		v := d.Get("fabric_id")
+	if v, ok := d.GetOk("fabric_id"); ok {
 		x := (v.(string))
 		o.SetFabricId(x)
 	}
 
-	if _, ok := d.GetOk("fabric_name"); ok {
-		v := d.Get("fabric_name")
+	if v, ok := d.GetOk("fabric_name"); ok {
 		x := (v.(string))
 		o.SetFabricName(x)
 	}
 
-	o.SetIsBgwPresent(d.Get("is_bgw_present").(bool))
+	if v, ok := d.GetOkExists("is_bgw_present"); ok {
+		x := (v.(bool))
+		o.SetIsBgwPresent(x)
+	}
 
-	o.SetIsNgoamEnabled(d.Get("is_ngoam_enabled").(bool))
+	if v, ok := d.GetOkExists("is_ngoam_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsNgoamEnabled(x)
+	}
 
-	o.SetIsScheduledBackUpEnabled(d.Get("is_scheduled_back_up_enabled").(bool))
+	if v, ok := d.GetOkExists("is_scheduled_back_up_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsScheduledBackUpEnabled(x)
+	}
 
-	if _, ok := d.GetOk("leaf_count"); ok {
-		v := d.Get("leaf_count")
+	if v, ok := d.GetOkExists("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
 	}
 
-	if _, ok := d.GetOk("logical_links"); ok {
-		v := d.Get("logical_links")
+	if v, ok := d.GetOk("logical_links"); ok {
 		x := make([]models.NiatelemetryLogicalLink, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1237,44 +1231,37 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetLogicalLinks(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("nxos_vni_bw_sites_count"); ok {
-		v := d.Get("nxos_vni_bw_sites_count")
+	if v, ok := d.GetOkExists("nxos_vni_bw_sites_count"); ok {
 		x := int64(v.(int))
 		o.SetNxosVniBwSitesCount(x)
 	}
 
-	if _, ok := d.GetOk("nxos_vrf_bw_sites_count"); ok {
-		v := d.Get("nxos_vrf_bw_sites_count")
+	if v, ok := d.GetOkExists("nxos_vrf_bw_sites_count"); ok {
 		x := int64(v.(int))
 		o.SetNxosVrfBwSitesCount(x)
 	}
 
-	if _, ok := d.GetOk("nxos_vrf_count"); ok {
-		v := d.Get("nxos_vrf_count")
+	if v, ok := d.GetOkExists("nxos_vrf_count"); ok {
 		x := int64(v.(int))
 		o.SetNxosVrfCount(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1283,8 +1270,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1327,8 +1313,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1368,8 +1353,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1412,32 +1396,27 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("spine_count"); ok {
-		v := d.Get("spine_count")
+	if v, ok := d.GetOkExists("spine_count"); ok {
 		x := int64(v.(int))
 		o.SetSpineCount(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1470,8 +1449,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1545,139 +1523,12 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("vlan_vni_mappings"); ok {
-		v := d.Get("vlan_vni_mappings")
-		x := (v.(string))
-		o.SetVlanVniMappings(x)
-	}
-
-	if _, ok := d.GetOk("vni_ip_count"); ok {
-		v := d.Get("vni_ip_count")
-		x := int64(v.(int))
-		o.SetVniIpCount(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("anycast_gw_mac"); ok {
-		x := (v.(string))
-		o.SetAnycastGwMac(x)
-	}
-	if v, ok := d.GetOk("bgp_established_interface_count"); ok {
-		x := int64(v.(int))
-		o.SetBgpEstablishedInterfaceCount(x)
-	}
-	if v, ok := d.GetOk("bgw_interface_up_count"); ok {
-		x := int64(v.(int))
-		o.SetBgwInterfaceUpCount(x)
-	}
-	if v, ok := d.GetOk("border_gateway_spine_count"); ok {
-		x := int64(v.(int))
-		o.SetBorderGatewaySpineCount(x)
-	}
-	if v, ok := d.GetOk("border_leaf_count"); ok {
-		x := int64(v.(int))
-		o.SetBorderLeafCount(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("dci_subnet_range"); ok {
-		x := (v.(string))
-		o.SetDciSubnetRange(x)
-	}
-	if v, ok := d.GetOk("dci_subnet_target_mask"); ok {
-		x := (v.(string))
-		o.SetDciSubnetTargetMask(x)
-	}
-	if v, ok := d.GetOk("dcnmtracker_enabled"); ok {
-		x := (v.(bool))
-		o.SetDcnmtrackerEnabled(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("ebgp_evpn_link_up_count"); ok {
-		x := int64(v.(int))
-		o.SetEbgpEvpnLinkUpCount(x)
-	}
-	if v, ok := d.GetOk("fabric_id"); ok {
-		x := (v.(string))
-		o.SetFabricId(x)
-	}
-	if v, ok := d.GetOk("fabric_name"); ok {
-		x := (v.(string))
-		o.SetFabricName(x)
-	}
-	if v, ok := d.GetOk("is_bgw_present"); ok {
-		x := (v.(bool))
-		o.SetIsBgwPresent(x)
-	}
-	if v, ok := d.GetOk("is_ngoam_enabled"); ok {
-		x := (v.(bool))
-		o.SetIsNgoamEnabled(x)
-	}
-	if v, ok := d.GetOk("is_scheduled_back_up_enabled"); ok {
-		x := (v.(bool))
-		o.SetIsScheduledBackUpEnabled(x)
-	}
-	if v, ok := d.GetOk("leaf_count"); ok {
-		x := int64(v.(int))
-		o.SetLeafCount(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("nxos_vni_bw_sites_count"); ok {
-		x := int64(v.(int))
-		o.SetNxosVniBwSitesCount(x)
-	}
-	if v, ok := d.GetOk("nxos_vrf_bw_sites_count"); ok {
-		x := int64(v.(int))
-		o.SetNxosVrfBwSitesCount(x)
-	}
-	if v, ok := d.GetOk("nxos_vrf_count"); ok {
-		x := int64(v.(int))
-		o.SetNxosVrfCount(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("spine_count"); ok {
-		x := int64(v.(int))
-		o.SetSpineCount(x)
-	}
 	if v, ok := d.GetOk("vlan_vni_mappings"); ok {
 		x := (v.(string))
 		o.SetVlanVniMappings(x)
 	}
-	if v, ok := d.GetOk("vni_ip_count"); ok {
+
+	if v, ok := d.GetOkExists("vni_ip_count"); ok {
 		x := int64(v.(int))
 		o.SetVniIpCount(x)
 	}

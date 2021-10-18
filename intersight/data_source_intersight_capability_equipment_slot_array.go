@@ -801,14 +801,12 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentSlotArray{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -817,8 +815,7 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -858,104 +855,87 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("first_index"); ok {
-		v := d.Get("first_index")
+	if v, ok := d.GetOk("first_index"); ok {
 		x := v.(float32)
 		o.SetFirstIndex(x)
 	}
 
-	if _, ok := d.GetOk("height"); ok {
-		v := d.Get("height")
+	if v, ok := d.GetOk("height"); ok {
 		x := v.(float32)
 		o.SetHeight(x)
 	}
 
-	if _, ok := d.GetOk("horizontal_start_offset"); ok {
-		v := d.Get("horizontal_start_offset")
+	if v, ok := d.GetOk("horizontal_start_offset"); ok {
 		x := v.(float32)
 		o.SetHorizontalStartOffset(x)
 	}
 
-	if _, ok := d.GetOk("inline_group_separation"); ok {
-		v := d.Get("inline_group_separation")
+	if v, ok := d.GetOk("inline_group_separation"); ok {
 		x := v.(float32)
 		o.SetInlineGroupSeparation(x)
 	}
 
-	if _, ok := d.GetOk("inline_group_size"); ok {
-		v := d.Get("inline_group_size")
+	if v, ok := d.GetOk("inline_group_size"); ok {
 		x := v.(float32)
 		o.SetInlineGroupSize(x)
 	}
 
-	if _, ok := d.GetOk("inline_offset"); ok {
-		v := d.Get("inline_offset")
+	if v, ok := d.GetOk("inline_offset"); ok {
 		x := v.(float32)
 		o.SetInlineOffset(x)
 	}
 
-	if _, ok := d.GetOk("location"); ok {
-		v := d.Get("location")
+	if v, ok := d.GetOk("location"); ok {
 		x := (v.(string))
 		o.SetLocation(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("number_of_slots"); ok {
-		v := d.Get("number_of_slots")
+	if v, ok := d.GetOkExists("number_of_slots"); ok {
 		x := int64(v.(int))
 		o.SetNumberOfSlots(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("orientation"); ok {
-		v := d.Get("orientation")
+	if v, ok := d.GetOk("orientation"); ok {
 		x := (v.(string))
 		o.SetOrientation(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -964,8 +944,7 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1008,8 +987,7 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1049,38 +1027,32 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("pid"); ok {
-		v := d.Get("pid")
+	if v, ok := d.GetOk("pid"); ok {
 		x := (v.(string))
 		o.SetPid(x)
 	}
 
-	if _, ok := d.GetOk("selector"); ok {
-		v := d.Get("selector")
+	if v, ok := d.GetOk("selector"); ok {
 		x := (v.(string))
 		o.SetSelector(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("sku"); ok {
-		v := d.Get("sku")
+	if v, ok := d.GetOk("sku"); ok {
 		x := (v.(string))
 		o.SetSku(x)
 	}
 
-	if _, ok := d.GetOk("slots_per_line"); ok {
-		v := d.Get("slots_per_line")
+	if v, ok := d.GetOkExists("slots_per_line"); ok {
 		x := int64(v.(int))
 		o.SetSlotsPerLine(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1113,26 +1085,22 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("transverse_group_separation"); ok {
-		v := d.Get("transverse_group_separation")
+	if v, ok := d.GetOk("transverse_group_separation"); ok {
 		x := v.(float32)
 		o.SetTransverseGroupSeparation(x)
 	}
 
-	if _, ok := d.GetOk("transverse_group_size"); ok {
-		v := d.Get("transverse_group_size")
+	if v, ok := d.GetOk("transverse_group_size"); ok {
 		x := v.(float32)
 		o.SetTransverseGroupSize(x)
 	}
 
-	if _, ok := d.GetOk("transverse_offset"); ok {
-		v := d.Get("transverse_offset")
+	if v, ok := d.GetOk("transverse_offset"); ok {
 		x := v.(float32)
 		o.SetTransverseOffset(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1206,132 +1174,16 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("vertical_start_offset"); ok {
-		v := d.Get("vertical_start_offset")
-		x := v.(float32)
-		o.SetVerticalStartOffset(x)
-	}
-
-	if _, ok := d.GetOk("vid"); ok {
-		v := d.Get("vid")
-		x := (v.(string))
-		o.SetVid(x)
-	}
-
-	if _, ok := d.GetOk("width"); ok {
-		v := d.Get("width")
-		x := v.(float32)
-		o.SetWidth(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("first_index"); ok {
-		x := v.(float32)
-		o.SetFirstIndex(x)
-	}
-	if v, ok := d.GetOk("height"); ok {
-		x := v.(float32)
-		o.SetHeight(x)
-	}
-	if v, ok := d.GetOk("horizontal_start_offset"); ok {
-		x := v.(float32)
-		o.SetHorizontalStartOffset(x)
-	}
-	if v, ok := d.GetOk("inline_group_separation"); ok {
-		x := v.(float32)
-		o.SetInlineGroupSeparation(x)
-	}
-	if v, ok := d.GetOk("inline_group_size"); ok {
-		x := v.(float32)
-		o.SetInlineGroupSize(x)
-	}
-	if v, ok := d.GetOk("inline_offset"); ok {
-		x := v.(float32)
-		o.SetInlineOffset(x)
-	}
-	if v, ok := d.GetOk("location"); ok {
-		x := (v.(string))
-		o.SetLocation(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("number_of_slots"); ok {
-		x := int64(v.(int))
-		o.SetNumberOfSlots(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("orientation"); ok {
-		x := (v.(string))
-		o.SetOrientation(x)
-	}
-	if v, ok := d.GetOk("pid"); ok {
-		x := (v.(string))
-		o.SetPid(x)
-	}
-	if v, ok := d.GetOk("selector"); ok {
-		x := (v.(string))
-		o.SetSelector(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("sku"); ok {
-		x := (v.(string))
-		o.SetSku(x)
-	}
-	if v, ok := d.GetOk("slots_per_line"); ok {
-		x := int64(v.(int))
-		o.SetSlotsPerLine(x)
-	}
-	if v, ok := d.GetOk("transverse_group_separation"); ok {
-		x := v.(float32)
-		o.SetTransverseGroupSeparation(x)
-	}
-	if v, ok := d.GetOk("transverse_group_size"); ok {
-		x := v.(float32)
-		o.SetTransverseGroupSize(x)
-	}
-	if v, ok := d.GetOk("transverse_offset"); ok {
-		x := v.(float32)
-		o.SetTransverseOffset(x)
-	}
 	if v, ok := d.GetOk("vertical_start_offset"); ok {
 		x := v.(float32)
 		o.SetVerticalStartOffset(x)
 	}
+
 	if v, ok := d.GetOk("vid"); ok {
 		x := (v.(string))
 		o.SetVid(x)
 	}
+
 	if v, ok := d.GetOk("width"); ok {
 		x := v.(float32)
 		o.SetWidth(x)

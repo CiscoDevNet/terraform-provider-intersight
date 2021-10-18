@@ -926,7 +926,10 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	o.SetAdvancedFilter(d.Get("advanced_filter").(bool))
+	if v, ok := d.GetOkExists("advanced_filter"); ok {
+		x := (v.(bool))
+		o.SetAdvancedFilter(x)
+	}
 
 	if v, ok := d.GetOk("arfs_settings"); ok {
 		p := make([]models.VnicArfsSettings, 0, 1)
@@ -1009,9 +1012,15 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetDescription(x)
 	}
 
-	o.SetGeneveEnabled(d.Get("geneve_enabled").(bool))
+	if v, ok := d.GetOkExists("geneve_enabled"); ok {
+		x := (v.(bool))
+		o.SetGeneveEnabled(x)
+	}
 
-	o.SetInterruptScaling(d.Get("interrupt_scaling").(bool))
+	if v, ok := d.GetOkExists("interrupt_scaling"); ok {
+		x := (v.(bool))
+		o.SetInterruptScaling(x)
+	}
 
 	if v, ok := d.GetOk("interrupt_settings"); ok {
 		p := make([]models.VnicEthInterruptSettings, 0, 1)
@@ -1306,7 +1315,10 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	o.SetRssSettings(d.Get("rss_settings").(bool))
+	if v, ok := d.GetOkExists("rss_settings"); ok {
+		x := (v.(bool))
+		o.SetRssSettings(x)
+	}
 
 	if v, ok := d.GetOk("rx_queue_settings"); ok {
 		p := make([]models.VnicEthRxQueueSettings, 0, 1)
@@ -1484,7 +1496,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("uplink_failback_timeout"); ok {
+	if v, ok := d.GetOkExists("uplink_failback_timeout"); ok {
 		x := int64(v.(int))
 		o.SetUplinkFailbackTimeout(x)
 	}

@@ -99,6 +99,41 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cloned_from": {
+			Description: "A reference to a workflowTaskDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -261,7 +296,7 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 			},
 		},
 		"label": {
-			Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+			Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -379,6 +414,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cloneable": {
+						Description: "When set to false task is not cloneable. It is set to true only if task is of ApiTask type and it is not system defined.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"external_meta": {
@@ -717,6 +757,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"skip_condition": {
+						Description: "The rollback task will not be executed if the given condition evaluates to \"true\".",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -999,6 +1044,41 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cloned_from": {
+			Description: "A reference to a workflowTaskDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -1161,7 +1241,7 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 			},
 		},
 		"label": {
-			Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+			Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1279,6 +1359,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"cloneable": {
+						Description: "When set to false task is not cloneable. It is set to true only if task is of ApiTask type and it is not system defined.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"external_meta": {
@@ -1620,6 +1705,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"skip_condition": {
+						Description: "The rollback task will not be executed if the given condition evaluates to \"true\".",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"task_moid": {
 						Description: "The resolved referenced rollback task definition managed object.",
 						Type:        schema.TypeString,
@@ -1831,14 +1921,12 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowTaskDefinition{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1847,8 +1935,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1888,8 +1975,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("catalog"); ok {
-		v := d.Get("catalog")
+	if v, ok := d.GetOk("catalog"); ok {
 		p := make([]models.WorkflowCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1932,34 +2018,75 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("cloned_from"); ok {
+		p := make([]models.WorkflowTaskDefinitionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsWorkflowTaskDefinitionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClonedFrom(x)
+		}
+	}
+
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	o.SetDefaultVersion(d.Get("default_version").(bool))
+	if v, ok := d.GetOkExists("default_version"); ok {
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
+	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("implemented_tasks"); ok {
-		v := d.Get("implemented_tasks")
+	if v, ok := d.GetOk("implemented_tasks"); ok {
 		x := make([]models.WorkflowTaskDefinitionRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1999,8 +2126,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetImplementedTasks(x)
 	}
 
-	if _, ok := d.GetOk("interface_task"); ok {
-		v := d.Get("interface_task")
+	if v, ok := d.GetOk("interface_task"); ok {
 		p := make([]models.WorkflowTaskDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2043,8 +2169,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("internal_properties"); ok {
-		v := d.Get("internal_properties")
+	if v, ok := d.GetOk("internal_properties"); ok {
 		p := make([]models.WorkflowInternalProperties, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2075,44 +2200,37 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("label"); ok {
-		v := d.Get("label")
+	if v, ok := d.GetOk("label"); ok {
 		x := (v.(string))
 		o.SetLabel(x)
 	}
 
-	if _, ok := d.GetOk("license_entitlement"); ok {
-		v := d.Get("license_entitlement")
+	if v, ok := d.GetOk("license_entitlement"); ok {
 		x := (v.(string))
 		o.SetLicenseEntitlement(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2121,8 +2239,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2165,8 +2282,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2206,8 +2322,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("properties"); ok {
-		v := d.Get("properties")
+	if v, ok := d.GetOk("properties"); ok {
 		p := make([]models.WorkflowProperties, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2574,8 +2689,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("rollback_tasks"); ok {
-		v := d.Get("rollback_tasks")
+	if v, ok := d.GetOk("rollback_tasks"); ok {
 		x := make([]models.WorkflowRollbackTask, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2638,16 +2752,17 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetRollbackTasks(x)
 	}
 
-	o.SetSecurePropAccess(d.Get("secure_prop_access").(bool))
+	if v, ok := d.GetOkExists("secure_prop_access"); ok {
+		x := (v.(bool))
+		o.SetSecurePropAccess(x)
+	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2680,8 +2795,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("task_metadata"); ok {
-		v := d.Get("task_metadata")
+	if v, ok := d.GetOk("task_metadata"); ok {
 		p := make([]models.WorkflowTaskMetadataRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2724,14 +2838,12 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2805,67 +2917,6 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("default_version"); ok {
-		x := (v.(bool))
-		o.SetDefaultVersion(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("label"); ok {
-		x := (v.(string))
-		o.SetLabel(x)
-	}
-	if v, ok := d.GetOk("license_entitlement"); ok {
-		x := (v.(string))
-		o.SetLicenseEntitlement(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("secure_prop_access"); ok {
-		x := (v.(bool))
-		o.SetSecurePropAccess(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := int64(v.(int))
-		o.SetVersion(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of WorkflowTaskDefinition object failed with error : %s", err.Error())
@@ -2909,6 +2960,8 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 
 				temp["catalog"] = flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cloned_from"] = flattenMapWorkflowTaskDefinitionRelationship(s.GetClonedFrom(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["default_version"] = (s.GetDefaultVersion())

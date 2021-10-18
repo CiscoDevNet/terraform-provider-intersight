@@ -876,7 +876,10 @@ func resourceRecoveryBackupProfileCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

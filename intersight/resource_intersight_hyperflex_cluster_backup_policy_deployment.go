@@ -664,7 +664,10 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 
 	o.SetClassId("hyperflex.ClusterBackupPolicyDeployment")
 
-	o.SetDiscovered(d.Get("discovered").(bool))
+	if v, ok := d.GetOkExists("discovered"); ok {
+		x := (v.(bool))
+		o.SetDiscovered(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -759,7 +762,10 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 		}
 	}
 
-	o.SetSourceDetached(d.Get("source_detached").(bool))
+	if v, ok := d.GetOkExists("source_detached"); ok {
+		x := (v.(bool))
+		o.SetSourceDetached(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
@@ -796,7 +802,10 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 		}
 	}
 
-	o.SetTargetDetached(d.Get("target_detached").(bool))
+	if v, ok := d.GetOkExists("target_detached"); ok {
+		x := (v.(bool))
+		o.SetTargetDetached(x)
+	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexClusterBackupPolicyDeployment(conn.ctx).HyperflexClusterBackupPolicyDeployment(*o)
 	resultMo, _, responseErr := r.Execute()

@@ -585,7 +585,7 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	if v, ok := d.GetOk("port"); ok {
+	if v, ok := d.GetOkExists("port"); ok {
 		x := int64(v.(int))
 		o.SetPort(x)
 	}

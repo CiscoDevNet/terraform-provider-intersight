@@ -525,7 +525,10 @@ func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.Re
 		}
 	}
 
-	o.SetCdpEnabled(d.Get("cdp_enabled").(bool))
+	if v, ok := d.GetOkExists("cdp_enabled"); ok {
+		x := (v.(bool))
+		o.SetCdpEnabled(x)
+	}
 
 	o.SetClassId("fabric.EthNetworkControlPolicy")
 

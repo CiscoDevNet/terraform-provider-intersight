@@ -877,7 +877,10 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	o.SetRetainNamespaces(d.Get("retain_namespaces").(bool))
+	if v, ok := d.GetOkExists("retain_namespaces"); ok {
+		x := (v.(bool))
+		o.SetRetainNamespaces(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)

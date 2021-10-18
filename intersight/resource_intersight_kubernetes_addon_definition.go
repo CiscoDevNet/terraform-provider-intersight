@@ -240,6 +240,11 @@ func resourceKubernetesAddonDefinition() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"overrides": {
+				Description: "Properties that can be overridden for an addon.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"owners": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -660,6 +665,11 @@ func resourceKubernetesAddonDefinitionCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("overrides"); ok {
+		x := (v.(string))
+		o.SetOverrides(x)
+	}
+
 	if v, ok := d.GetOk("platforms"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -825,6 +835,10 @@ func resourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resource
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Organization in KubernetesAddonDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("overrides", (s.GetOverrides())); err != nil {
+		return diag.Errorf("error occurred while setting property Overrides in KubernetesAddonDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("owners", (s.GetOwners())); err != nil {
@@ -1035,6 +1049,12 @@ func resourceKubernetesAddonDefinitionUpdate(c context.Context, d *schema.Resour
 			x := p[0]
 			o.SetOrganization(x)
 		}
+	}
+
+	if d.HasChange("overrides") {
+		v := d.Get("overrides")
+		x := (v.(string))
+		o.SetOverrides(x)
 	}
 
 	if d.HasChange("platforms") {

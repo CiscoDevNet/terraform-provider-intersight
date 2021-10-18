@@ -157,7 +157,7 @@ func dataSourceVnicFcAdapterPolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"retries": {
-						Description: "The number of times that the system tries to log in to the fabric after the first failure.",
+						Description: "The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -767,7 +767,7 @@ func dataSourceVnicFcAdapterPolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"retries": {
-						Description: "The number of times that the system tries to log in to the fabric after the first failure.",
+						Description: "The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -1251,14 +1251,12 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicFcAdapterPolicy{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1267,8 +1265,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1308,38 +1305,32 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("error_detection_timeout"); ok {
-		v := d.Get("error_detection_timeout")
+	if v, ok := d.GetOkExists("error_detection_timeout"); ok {
 		x := int64(v.(int))
 		o.SetErrorDetectionTimeout(x)
 	}
 
-	if _, ok := d.GetOk("error_recovery_settings"); ok {
-		v := d.Get("error_recovery_settings")
+	if v, ok := d.GetOk("error_recovery_settings"); ok {
 		p := make([]models.VnicFcErrorRecoverySettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1400,8 +1391,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("flogi_settings"); ok {
-		v := d.Get("flogi_settings")
+	if v, ok := d.GetOk("flogi_settings"); ok {
 		p := make([]models.VnicFlogiSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1444,8 +1434,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("interrupt_settings"); ok {
-		v := d.Get("interrupt_settings")
+	if v, ok := d.GetOk("interrupt_settings"); ok {
 		p := make([]models.VnicFcInterruptSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1482,50 +1471,42 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("io_throttle_count"); ok {
-		v := d.Get("io_throttle_count")
+	if v, ok := d.GetOkExists("io_throttle_count"); ok {
 		x := int64(v.(int))
 		o.SetIoThrottleCount(x)
 	}
 
-	if _, ok := d.GetOk("lun_count"); ok {
-		v := d.Get("lun_count")
+	if v, ok := d.GetOkExists("lun_count"); ok {
 		x := int64(v.(int))
 		o.SetLunCount(x)
 	}
 
-	if _, ok := d.GetOk("lun_queue_depth"); ok {
-		v := d.Get("lun_queue_depth")
+	if v, ok := d.GetOkExists("lun_queue_depth"); ok {
 		x := int64(v.(int))
 		o.SetLunQueueDepth(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1568,8 +1549,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1578,8 +1558,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1622,8 +1601,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1663,8 +1641,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("plogi_settings"); ok {
-		v := d.Get("plogi_settings")
+	if v, ok := d.GetOk("plogi_settings"); ok {
 		p := make([]models.VnicPlogiSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1707,14 +1684,12 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("resource_allocation_timeout"); ok {
-		v := d.Get("resource_allocation_timeout")
+	if v, ok := d.GetOkExists("resource_allocation_timeout"); ok {
 		x := int64(v.(int))
 		o.SetResourceAllocationTimeout(x)
 	}
 
-	if _, ok := d.GetOk("rx_queue_settings"); ok {
-		v := d.Get("rx_queue_settings")
+	if v, ok := d.GetOk("rx_queue_settings"); ok {
 		p := make([]models.VnicFcQueueSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1751,8 +1726,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("scsi_queue_settings"); ok {
-		v := d.Get("scsi_queue_settings")
+	if v, ok := d.GetOk("scsi_queue_settings"); ok {
 		p := make([]models.VnicScsiQueueSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1795,14 +1769,12 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1835,8 +1807,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("tx_queue_settings"); ok {
-		v := d.Get("tx_queue_settings")
+	if v, ok := d.GetOk("tx_queue_settings"); ok {
 		p := make([]models.VnicFcQueueSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1873,8 +1844,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1946,67 +1916,6 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("error_detection_timeout"); ok {
-		x := int64(v.(int))
-		o.SetErrorDetectionTimeout(x)
-	}
-	if v, ok := d.GetOk("io_throttle_count"); ok {
-		x := int64(v.(int))
-		o.SetIoThrottleCount(x)
-	}
-	if v, ok := d.GetOk("lun_count"); ok {
-		x := int64(v.(int))
-		o.SetLunCount(x)
-	}
-	if v, ok := d.GetOk("lun_queue_depth"); ok {
-		x := int64(v.(int))
-		o.SetLunQueueDepth(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("resource_allocation_timeout"); ok {
-		x := int64(v.(int))
-		o.SetResourceAllocationTimeout(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

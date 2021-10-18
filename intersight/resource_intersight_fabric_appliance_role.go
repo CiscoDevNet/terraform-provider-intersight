@@ -614,7 +614,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 		o.SetAdminSpeed(x)
 	}
 
-	if v, ok := d.GetOk("aggregate_port_id"); ok {
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
 		x := int64(v.(int))
 		o.SetAggregatePortId(x)
 	}
@@ -810,7 +810,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 
 	o.SetObjectType("fabric.ApplianceRole")
 
-	if v, ok := d.GetOk("port_id"); ok {
+	if v, ok := d.GetOkExists("port_id"); ok {
 		x := int64(v.(int))
 		o.SetPortId(x)
 	}
@@ -863,7 +863,7 @@ func resourceFabricApplianceRoleCreate(c context.Context, d *schema.ResourceData
 		o.SetPriority(x)
 	}
 
-	if v, ok := d.GetOk("slot_id"); ok {
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}

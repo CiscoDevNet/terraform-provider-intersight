@@ -541,7 +541,10 @@ func resourceSoftwarerepositoryCategorySupportConstraintCreate(c context.Context
 
 	o.SetObjectType("softwarerepository.CategorySupportConstraint")
 
-	o.SetParseFromImageName(d.Get("parse_from_image_name").(bool))
+	if v, ok := d.GetOkExists("parse_from_image_name"); ok {
+		x := (v.(bool))
+		o.SetParseFromImageName(x)
+	}
 
 	if v, ok := d.GetOk("supported_models"); ok {
 		x := make([]string, 0)

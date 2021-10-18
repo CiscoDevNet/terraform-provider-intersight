@@ -1051,14 +1051,12 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareDatastoreCluster{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1067,8 +1065,7 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1108,14 +1105,12 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("automation_level"); ok {
-		v := d.Get("automation_level")
+	if v, ok := d.GetOk("automation_level"); ok {
 		x := (v.(string))
 		o.SetAutomationLevel(x)
 	}
 
-	if _, ok := d.GetOk("capacity"); ok {
-		v := d.Get("capacity")
+	if v, ok := d.GetOk("capacity"); ok {
 		p := make([]models.VirtualizationStorageCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1164,20 +1159,17 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("datacenter"); ok {
-		v := d.Get("datacenter")
+	if v, ok := d.GetOk("datacenter"); ok {
 		p := make([]models.VirtualizationVmwareDatacenterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1220,94 +1212,82 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("datastore_count"); ok {
-		v := d.Get("datastore_count")
+	if v, ok := d.GetOkExists("datastore_count"); ok {
 		x := int64(v.(int))
 		o.SetDatastoreCount(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("free_space_threshold"); ok {
-		v := d.Get("free_space_threshold")
+	if v, ok := d.GetOkExists("free_space_threshold"); ok {
 		x := int64(v.(int))
 		o.SetFreeSpaceThreshold(x)
 	}
 
-	if _, ok := d.GetOk("host_count"); ok {
-		v := d.Get("host_count")
+	if v, ok := d.GetOkExists("host_count"); ok {
 		x := int64(v.(int))
 		o.SetHostCount(x)
 	}
 
-	if _, ok := d.GetOk("identity"); ok {
-		v := d.Get("identity")
+	if v, ok := d.GetOk("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
 
-	if _, ok := d.GetOk("inventory_path"); ok {
-		v := d.Get("inventory_path")
+	if v, ok := d.GetOk("inventory_path"); ok {
 		x := (v.(string))
 		o.SetInventoryPath(x)
 	}
 
-	if _, ok := d.GetOk("io_latency_threshold"); ok {
-		v := d.Get("io_latency_threshold")
+	if v, ok := d.GetOkExists("io_latency_threshold"); ok {
 		x := int32(v.(int))
 		o.SetIoLatencyThreshold(x)
 	}
 
-	if _, ok := d.GetOk("io_load_balance_automation_mode"); ok {
-		v := d.Get("io_load_balance_automation_mode")
+	if v, ok := d.GetOk("io_load_balance_automation_mode"); ok {
 		x := (v.(string))
 		o.SetIoLoadBalanceAutomationMode(x)
 	}
 
-	if _, ok := d.GetOk("io_load_imbalance_threshold"); ok {
-		v := d.Get("io_load_imbalance_threshold")
+	if v, ok := d.GetOkExists("io_load_imbalance_threshold"); ok {
 		x := int32(v.(int))
 		o.SetIoLoadImbalanceThreshold(x)
 	}
 
-	o.SetIoMetricsEnabled(d.Get("io_metrics_enabled").(bool))
+	if v, ok := d.GetOkExists("io_metrics_enabled"); ok {
+		x := (v.(bool))
+		o.SetIoMetricsEnabled(x)
+	}
 
-	if _, ok := d.GetOk("min_space_utilization_difference"); ok {
-		v := d.Get("min_space_utilization_difference")
+	if v, ok := d.GetOkExists("min_space_utilization_difference"); ok {
 		x := int32(v.(int))
 		o.SetMinSpaceUtilizationDifference(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1316,8 +1296,7 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1360,8 +1339,7 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1401,14 +1379,12 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("policy_enforcement_automation_mode"); ok {
-		v := d.Get("policy_enforcement_automation_mode")
+	if v, ok := d.GetOk("policy_enforcement_automation_mode"); ok {
 		x := (v.(string))
 		o.SetPolicyEnforcementAutomationMode(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1451,46 +1427,42 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("reservable_percent_threshold"); ok {
-		v := d.Get("reservable_percent_threshold")
+	if v, ok := d.GetOkExists("reservable_percent_threshold"); ok {
 		x := int32(v.(int))
 		o.SetReservablePercentThreshold(x)
 	}
 
-	if _, ok := d.GetOk("rule_enforcement_automation_mode"); ok {
-		v := d.Get("rule_enforcement_automation_mode")
+	if v, ok := d.GetOk("rule_enforcement_automation_mode"); ok {
 		x := (v.(string))
 		o.SetRuleEnforcementAutomationMode(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("space_load_balance_automation_mode"); ok {
-		v := d.Get("space_load_balance_automation_mode")
+	if v, ok := d.GetOk("space_load_balance_automation_mode"); ok {
 		x := (v.(string))
 		o.SetSpaceLoadBalanceAutomationMode(x)
 	}
 
-	if _, ok := d.GetOk("space_threshold_mode"); ok {
-		v := d.Get("space_threshold_mode")
+	if v, ok := d.GetOk("space_threshold_mode"); ok {
 		x := (v.(string))
 		o.SetSpaceThresholdMode(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	o.SetStorageDrsEnabled(d.Get("storage_drs_enabled").(bool))
+	if v, ok := d.GetOkExists("storage_drs_enabled"); ok {
+		x := (v.(bool))
+		o.SetStorageDrsEnabled(x)
+	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1523,20 +1495,17 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("utilized_space_threshold"); ok {
-		v := d.Get("utilized_space_threshold")
+	if v, ok := d.GetOkExists("utilized_space_threshold"); ok {
 		x := int32(v.(int))
 		o.SetUtilizedSpaceThreshold(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1610,138 +1579,11 @@ func dataSourceVirtualizationVmwareDatastoreClusterRead(c context.Context, d *sc
 		}
 	}
 
-	if _, ok := d.GetOk("vm_count"); ok {
-		v := d.Get("vm_count")
+	if v, ok := d.GetOkExists("vm_count"); ok {
 		x := int64(v.(int))
 		o.SetVmCount(x)
 	}
 
-	if _, ok := d.GetOk("vm_evacuation_automation_mode"); ok {
-		v := d.Get("vm_evacuation_automation_mode")
-		x := (v.(string))
-		o.SetVmEvacuationAutomationMode(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("automation_level"); ok {
-		x := (v.(string))
-		o.SetAutomationLevel(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("datastore_count"); ok {
-		x := int64(v.(int))
-		o.SetDatastoreCount(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("free_space_threshold"); ok {
-		x := int64(v.(int))
-		o.SetFreeSpaceThreshold(x)
-	}
-	if v, ok := d.GetOk("host_count"); ok {
-		x := int64(v.(int))
-		o.SetHostCount(x)
-	}
-	if v, ok := d.GetOk("identity"); ok {
-		x := (v.(string))
-		o.SetIdentity(x)
-	}
-	if v, ok := d.GetOk("inventory_path"); ok {
-		x := (v.(string))
-		o.SetInventoryPath(x)
-	}
-	if v, ok := d.GetOk("io_latency_threshold"); ok {
-		x := int32(v.(int))
-		o.SetIoLatencyThreshold(x)
-	}
-	if v, ok := d.GetOk("io_load_balance_automation_mode"); ok {
-		x := (v.(string))
-		o.SetIoLoadBalanceAutomationMode(x)
-	}
-	if v, ok := d.GetOk("io_load_imbalance_threshold"); ok {
-		x := int32(v.(int))
-		o.SetIoLoadImbalanceThreshold(x)
-	}
-	if v, ok := d.GetOk("io_metrics_enabled"); ok {
-		x := (v.(bool))
-		o.SetIoMetricsEnabled(x)
-	}
-	if v, ok := d.GetOk("min_space_utilization_difference"); ok {
-		x := int32(v.(int))
-		o.SetMinSpaceUtilizationDifference(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("policy_enforcement_automation_mode"); ok {
-		x := (v.(string))
-		o.SetPolicyEnforcementAutomationMode(x)
-	}
-	if v, ok := d.GetOk("reservable_percent_threshold"); ok {
-		x := int32(v.(int))
-		o.SetReservablePercentThreshold(x)
-	}
-	if v, ok := d.GetOk("rule_enforcement_automation_mode"); ok {
-		x := (v.(string))
-		o.SetRuleEnforcementAutomationMode(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("space_load_balance_automation_mode"); ok {
-		x := (v.(string))
-		o.SetSpaceLoadBalanceAutomationMode(x)
-	}
-	if v, ok := d.GetOk("space_threshold_mode"); ok {
-		x := (v.(string))
-		o.SetSpaceThresholdMode(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("storage_drs_enabled"); ok {
-		x := (v.(bool))
-		o.SetStorageDrsEnabled(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-	if v, ok := d.GetOk("utilized_space_threshold"); ok {
-		x := int32(v.(int))
-		o.SetUtilizedSpaceThreshold(x)
-	}
-	if v, ok := d.GetOk("vm_count"); ok {
-		x := int64(v.(int))
-		o.SetVmCount(x)
-	}
 	if v, ok := d.GetOk("vm_evacuation_automation_mode"); ok {
 		x := (v.(string))
 		o.SetVmEvacuationAutomationMode(x)

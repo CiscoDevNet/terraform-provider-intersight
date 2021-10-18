@@ -499,7 +499,10 @@ func resourceFabricLinkAggregationPolicyCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	o.SetSuspendIndividual(d.Get("suspend_individual").(bool))
+	if v, ok := d.GetOkExists("suspend_individual"); ok {
+		x := (v.(bool))
+		o.SetSuspendIndividual(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)

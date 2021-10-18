@@ -967,12 +967,15 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 
 	o.SetObjectType("vnic.FcIf")
 
-	if v, ok := d.GetOk("order"); ok {
+	if v, ok := d.GetOkExists("order"); ok {
 		x := int64(v.(int))
 		o.SetOrder(x)
 	}
 
-	o.SetPersistentBindings(d.Get("persistent_bindings").(bool))
+	if v, ok := d.GetOkExists("persistent_bindings"); ok {
+		x := (v.(bool))
+		o.SetPersistentBindings(x)
+	}
 
 	if v, ok := d.GetOk("placement"); ok {
 		p := make([]models.VnicPlacementSettings, 0, 1)

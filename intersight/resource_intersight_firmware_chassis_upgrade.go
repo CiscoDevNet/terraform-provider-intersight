@@ -1578,7 +1578,10 @@ func resourceFirmwareChassisUpgradeCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	o.SetSkipEstimateImpact(d.Get("skip_estimate_impact").(bool))
+	if v, ok := d.GetOkExists("skip_estimate_impact"); ok {
+		x := (v.(bool))
+		o.SetSkipEstimateImpact(x)
+	}
 
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))

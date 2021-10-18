@@ -1927,14 +1927,12 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaInventory{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1943,8 +1941,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1984,80 +1981,67 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cpu"); ok {
-		v := d.Get("cpu")
+	if v, ok := d.GetOk("cpu"); ok {
 		x := v.(float32)
 		o.SetCpu(x)
 	}
 
-	if _, ok := d.GetOk("crash_reset_logs"); ok {
-		v := d.Get("crash_reset_logs")
+	if v, ok := d.GetOk("crash_reset_logs"); ok {
 		x := (v.(string))
 		o.SetCrashResetLogs(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("customer_device_connector"); ok {
-		v := d.Get("customer_device_connector")
+	if v, ok := d.GetOk("customer_device_connector"); ok {
 		x := (v.(string))
 		o.SetCustomerDeviceConnector(x)
 	}
 
-	if _, ok := d.GetOk("dcnm_license_state"); ok {
-		v := d.Get("dcnm_license_state")
+	if v, ok := d.GetOk("dcnm_license_state"); ok {
 		x := (v.(string))
 		o.SetDcnmLicenseState(x)
 	}
 
-	if _, ok := d.GetOk("device_discovery"); ok {
-		v := d.Get("device_discovery")
+	if v, ok := d.GetOk("device_discovery"); ok {
 		x := (v.(string))
 		o.SetDeviceDiscovery(x)
 	}
 
-	if _, ok := d.GetOk("device_health"); ok {
-		v := d.Get("device_health")
+	if v, ok := d.GetOkExists("device_health"); ok {
 		x := int64(v.(int))
 		o.SetDeviceHealth(x)
 	}
 
-	if _, ok := d.GetOk("device_id"); ok {
-		v := d.Get("device_id")
+	if v, ok := d.GetOk("device_id"); ok {
 		x := (v.(string))
 		o.SetDeviceId(x)
 	}
 
-	if _, ok := d.GetOk("device_name"); ok {
-		v := d.Get("device_name")
+	if v, ok := d.GetOk("device_name"); ok {
 		x := (v.(string))
 		o.SetDeviceName(x)
 	}
 
-	if _, ok := d.GetOk("device_type"); ok {
-		v := d.Get("device_type")
+	if v, ok := d.GetOk("device_type"); ok {
 		x := (v.(string))
 		o.SetDeviceType(x)
 	}
 
-	if _, ok := d.GetOk("device_up_time"); ok {
-		v := d.Get("device_up_time")
+	if v, ok := d.GetOkExists("device_up_time"); ok {
 		x := int64(v.(int))
 		o.SetDeviceUpTime(x)
 	}
 
-	if _, ok := d.GetOk("disk"); ok {
-		v := d.Get("disk")
+	if v, ok := d.GetOk("disk"); ok {
 		p := make([]models.NiatelemetryDiskinfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2112,38 +2096,32 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("fabric_name"); ok {
-		v := d.Get("fabric_name")
+	if v, ok := d.GetOk("fabric_name"); ok {
 		x := (v.(string))
 		o.SetFabricName(x)
 	}
 
-	if _, ok := d.GetOk("fex_count"); ok {
-		v := d.Get("fex_count")
+	if v, ok := d.GetOkExists("fex_count"); ok {
 		x := int64(v.(int))
 		o.SetFexCount(x)
 	}
 
-	if _, ok := d.GetOk("infra_wi_node_count"); ok {
-		v := d.Get("infra_wi_node_count")
+	if v, ok := d.GetOkExists("infra_wi_node_count"); ok {
 		x := int64(v.(int))
 		o.SetInfraWiNodeCount(x)
 	}
 
-	if _, ok := d.GetOk("interface"); ok {
-		v := d.Get("interface")
+	if v, ok := d.GetOk("interface"); ok {
 		x := make([]models.NiatelemetryInterfaceElement, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2189,32 +2167,27 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetInterface(x)
 	}
 
-	if _, ok := d.GetOk("ip_address"); ok {
-		v := d.Get("ip_address")
+	if v, ok := d.GetOk("ip_address"); ok {
 		x := (v.(string))
 		o.SetIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("is_virtual_node"); ok {
-		v := d.Get("is_virtual_node")
+	if v, ok := d.GetOk("is_virtual_node"); ok {
 		x := (v.(string))
 		o.SetIsVirtualNode(x)
 	}
 
-	if _, ok := d.GetOk("last_reboot_time"); ok {
-		v := d.Get("last_reboot_time")
+	if v, ok := d.GetOk("last_reboot_time"); ok {
 		x := (v.(string))
 		o.SetLastRebootTime(x)
 	}
 
-	if _, ok := d.GetOk("last_reset_reason"); ok {
-		v := d.Get("last_reset_reason")
+	if v, ok := d.GetOk("last_reset_reason"); ok {
 		x := (v.(string))
 		o.SetLastResetReason(x)
 	}
 
-	if _, ok := d.GetOk("license_state"); ok {
-		v := d.Get("license_state")
+	if v, ok := d.GetOk("license_state"); ok {
 		p := make([]models.NiatelemetryNiaLicenseStateRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2257,68 +2230,57 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("license_type"); ok {
-		v := d.Get("license_type")
+	if v, ok := d.GetOk("license_type"); ok {
 		x := (v.(string))
 		o.SetLicenseType(x)
 	}
 
-	if _, ok := d.GetOk("log_in_time"); ok {
-		v := d.Get("log_in_time")
+	if v, ok := d.GetOk("log_in_time"); ok {
 		x := (v.(string))
 		o.SetLogInTime(x)
 	}
 
-	if _, ok := d.GetOk("log_out_time"); ok {
-		v := d.Get("log_out_time")
+	if v, ok := d.GetOk("log_out_time"); ok {
 		x := (v.(string))
 		o.SetLogOutTime(x)
 	}
 
-	if _, ok := d.GetOk("mac_sec_count"); ok {
-		v := d.Get("mac_sec_count")
+	if v, ok := d.GetOkExists("mac_sec_count"); ok {
 		x := int64(v.(int))
 		o.SetMacSecCount(x)
 	}
 
-	if _, ok := d.GetOk("mac_sec_fab_count"); ok {
-		v := d.Get("mac_sec_fab_count")
+	if v, ok := d.GetOkExists("mac_sec_fab_count"); ok {
 		x := int64(v.(int))
 		o.SetMacSecFabCount(x)
 	}
 
-	if _, ok := d.GetOk("macsec_total_count"); ok {
-		v := d.Get("macsec_total_count")
+	if v, ok := d.GetOkExists("macsec_total_count"); ok {
 		x := int64(v.(int))
 		o.SetMacsecTotalCount(x)
 	}
 
-	if _, ok := d.GetOk("memory"); ok {
-		v := d.Get("memory")
+	if v, ok := d.GetOkExists("memory"); ok {
 		x := int64(v.(int))
 		o.SetMemory(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("node_id"); ok {
-		v := d.Get("node_id")
+	if v, ok := d.GetOk("node_id"); ok {
 		x := (v.(string))
 		o.SetNodeId(x)
 	}
 
-	if _, ok := d.GetOk("nxos_bgp_mvpn"); ok {
-		v := d.Get("nxos_bgp_mvpn")
+	if v, ok := d.GetOk("nxos_bgp_mvpn"); ok {
 		p := make([]models.NiatelemetryNxosBgpMvpn, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2397,8 +2359,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("nxos_bootflash_details"); ok {
-		v := d.Get("nxos_bootflash_details")
+	if v, ok := d.GetOk("nxos_bootflash_details"); ok {
 		p := make([]models.NiatelemetryBootflashDetails, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2447,14 +2408,12 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("nxos_dci_interface_status"); ok {
-		v := d.Get("nxos_dci_interface_status")
+	if v, ok := d.GetOk("nxos_dci_interface_status"); ok {
 		x := (v.(string))
 		o.SetNxosDciInterfaceStatus(x)
 	}
 
-	if _, ok := d.GetOk("nxos_interface_brief"); ok {
-		v := d.Get("nxos_interface_brief")
+	if v, ok := d.GetOk("nxos_interface_brief"); ok {
 		p := make([]models.NiatelemetryInterface, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2497,14 +2456,12 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("nxos_nve_interface_status"); ok {
-		v := d.Get("nxos_nve_interface_status")
+	if v, ok := d.GetOk("nxos_nve_interface_status"); ok {
 		x := (v.(string))
 		o.SetNxosNveInterfaceStatus(x)
 	}
 
-	if _, ok := d.GetOk("nxos_nve_packet_counters"); ok {
-		v := d.Get("nxos_nve_packet_counters")
+	if v, ok := d.GetOk("nxos_nve_packet_counters"); ok {
 		p := make([]models.NiatelemetryNvePacketCounters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2559,8 +2516,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("nxos_nve_vni"); ok {
-		v := d.Get("nxos_nve_vni")
+	if v, ok := d.GetOk("nxos_nve_vni"); ok {
 		p := make([]models.NiatelemetryNveVni, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2627,32 +2583,27 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("nxos_ospf_neighbors"); ok {
-		v := d.Get("nxos_ospf_neighbors")
+	if v, ok := d.GetOkExists("nxos_ospf_neighbors"); ok {
 		x := int64(v.(int))
 		o.SetNxosOspfNeighbors(x)
 	}
 
-	if _, ok := d.GetOk("nxos_pim_neighbors"); ok {
-		v := d.Get("nxos_pim_neighbors")
+	if v, ok := d.GetOk("nxos_pim_neighbors"); ok {
 		x := (v.(string))
 		o.SetNxosPimNeighbors(x)
 	}
 
-	if _, ok := d.GetOk("nxos_telnet"); ok {
-		v := d.Get("nxos_telnet")
+	if v, ok := d.GetOk("nxos_telnet"); ok {
 		x := (v.(string))
 		o.SetNxosTelnet(x)
 	}
 
-	if _, ok := d.GetOk("nxos_total_routes"); ok {
-		v := d.Get("nxos_total_routes")
+	if v, ok := d.GetOkExists("nxos_total_routes"); ok {
 		x := int64(v.(int))
 		o.SetNxosTotalRoutes(x)
 	}
 
-	if _, ok := d.GetOk("nxos_vtp"); ok {
-		v := d.Get("nxos_vtp")
+	if v, ok := d.GetOk("nxos_vtp"); ok {
 		p := make([]models.NiatelemetryNxosVtp, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2719,14 +2670,12 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2735,8 +2684,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2779,8 +2727,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2820,20 +2767,17 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("record_type"); ok {
-		v := d.Get("record_type")
+	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
 		o.SetRecordType(x)
 	}
 
-	if _, ok := d.GetOk("record_version"); ok {
-		v := d.Get("record_version")
+	if v, ok := d.GetOk("record_version"); ok {
 		x := (v.(string))
 		o.SetRecordVersion(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2876,62 +2820,52 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("route_prefix_count"); ok {
-		v := d.Get("route_prefix_count")
+	if v, ok := d.GetOkExists("route_prefix_count"); ok {
 		x := int64(v.(int))
 		o.SetRoutePrefixCount(x)
 	}
 
-	if _, ok := d.GetOk("route_prefix_v4_count"); ok {
-		v := d.Get("route_prefix_v4_count")
+	if v, ok := d.GetOkExists("route_prefix_v4_count"); ok {
 		x := int64(v.(int))
 		o.SetRoutePrefixV4Count(x)
 	}
 
-	if _, ok := d.GetOk("route_prefix_v6_count"); ok {
-		v := d.Get("route_prefix_v6_count")
+	if v, ok := d.GetOkExists("route_prefix_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetRoutePrefixV6Count(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("smart_account_id"); ok {
-		v := d.Get("smart_account_id")
+	if v, ok := d.GetOkExists("smart_account_id"); ok {
 		x := int64(v.(int))
 		o.SetSmartAccountId(x)
 	}
 
-	if _, ok := d.GetOk("software_download"); ok {
-		v := d.Get("software_download")
+	if v, ok := d.GetOk("software_download"); ok {
 		x := (v.(string))
 		o.SetSoftwareDownload(x)
 	}
 
-	if _, ok := d.GetOk("system_up_time"); ok {
-		v := d.Get("system_up_time")
+	if v, ok := d.GetOk("system_up_time"); ok {
 		x := (v.(string))
 		o.SetSystemUpTime(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2964,14 +2898,12 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3043,211 +2975,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cpu"); ok {
-		x := v.(float32)
-		o.SetCpu(x)
-	}
-	if v, ok := d.GetOk("crash_reset_logs"); ok {
-		x := (v.(string))
-		o.SetCrashResetLogs(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("customer_device_connector"); ok {
-		x := (v.(string))
-		o.SetCustomerDeviceConnector(x)
-	}
-	if v, ok := d.GetOk("dcnm_license_state"); ok {
-		x := (v.(string))
-		o.SetDcnmLicenseState(x)
-	}
-	if v, ok := d.GetOk("device_discovery"); ok {
-		x := (v.(string))
-		o.SetDeviceDiscovery(x)
-	}
-	if v, ok := d.GetOk("device_health"); ok {
-		x := int64(v.(int))
-		o.SetDeviceHealth(x)
-	}
-	if v, ok := d.GetOk("device_id"); ok {
-		x := (v.(string))
-		o.SetDeviceId(x)
-	}
-	if v, ok := d.GetOk("device_name"); ok {
-		x := (v.(string))
-		o.SetDeviceName(x)
-	}
-	if v, ok := d.GetOk("device_type"); ok {
-		x := (v.(string))
-		o.SetDeviceType(x)
-	}
-	if v, ok := d.GetOk("device_up_time"); ok {
-		x := int64(v.(int))
-		o.SetDeviceUpTime(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("fabric_name"); ok {
-		x := (v.(string))
-		o.SetFabricName(x)
-	}
-	if v, ok := d.GetOk("fex_count"); ok {
-		x := int64(v.(int))
-		o.SetFexCount(x)
-	}
-	if v, ok := d.GetOk("infra_wi_node_count"); ok {
-		x := int64(v.(int))
-		o.SetInfraWiNodeCount(x)
-	}
-	if v, ok := d.GetOk("ip_address"); ok {
-		x := (v.(string))
-		o.SetIpAddress(x)
-	}
-	if v, ok := d.GetOk("is_virtual_node"); ok {
-		x := (v.(string))
-		o.SetIsVirtualNode(x)
-	}
-	if v, ok := d.GetOk("last_reboot_time"); ok {
-		x := (v.(string))
-		o.SetLastRebootTime(x)
-	}
-	if v, ok := d.GetOk("last_reset_reason"); ok {
-		x := (v.(string))
-		o.SetLastResetReason(x)
-	}
-	if v, ok := d.GetOk("license_type"); ok {
-		x := (v.(string))
-		o.SetLicenseType(x)
-	}
-	if v, ok := d.GetOk("log_in_time"); ok {
-		x := (v.(string))
-		o.SetLogInTime(x)
-	}
-	if v, ok := d.GetOk("log_out_time"); ok {
-		x := (v.(string))
-		o.SetLogOutTime(x)
-	}
-	if v, ok := d.GetOk("mac_sec_count"); ok {
-		x := int64(v.(int))
-		o.SetMacSecCount(x)
-	}
-	if v, ok := d.GetOk("mac_sec_fab_count"); ok {
-		x := int64(v.(int))
-		o.SetMacSecFabCount(x)
-	}
-	if v, ok := d.GetOk("macsec_total_count"); ok {
-		x := int64(v.(int))
-		o.SetMacsecTotalCount(x)
-	}
-	if v, ok := d.GetOk("memory"); ok {
-		x := int64(v.(int))
-		o.SetMemory(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("node_id"); ok {
-		x := (v.(string))
-		o.SetNodeId(x)
-	}
-	if v, ok := d.GetOk("nxos_dci_interface_status"); ok {
-		x := (v.(string))
-		o.SetNxosDciInterfaceStatus(x)
-	}
-	if v, ok := d.GetOk("nxos_nve_interface_status"); ok {
-		x := (v.(string))
-		o.SetNxosNveInterfaceStatus(x)
-	}
-	if v, ok := d.GetOk("nxos_ospf_neighbors"); ok {
-		x := int64(v.(int))
-		o.SetNxosOspfNeighbors(x)
-	}
-	if v, ok := d.GetOk("nxos_pim_neighbors"); ok {
-		x := (v.(string))
-		o.SetNxosPimNeighbors(x)
-	}
-	if v, ok := d.GetOk("nxos_telnet"); ok {
-		x := (v.(string))
-		o.SetNxosTelnet(x)
-	}
-	if v, ok := d.GetOk("nxos_total_routes"); ok {
-		x := int64(v.(int))
-		o.SetNxosTotalRoutes(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("record_type"); ok {
-		x := (v.(string))
-		o.SetRecordType(x)
-	}
-	if v, ok := d.GetOk("record_version"); ok {
-		x := (v.(string))
-		o.SetRecordVersion(x)
-	}
-	if v, ok := d.GetOk("route_prefix_count"); ok {
-		x := int64(v.(int))
-		o.SetRoutePrefixCount(x)
-	}
-	if v, ok := d.GetOk("route_prefix_v4_count"); ok {
-		x := int64(v.(int))
-		o.SetRoutePrefixV4Count(x)
-	}
-	if v, ok := d.GetOk("route_prefix_v6_count"); ok {
-		x := int64(v.(int))
-		o.SetRoutePrefixV6Count(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("smart_account_id"); ok {
-		x := int64(v.(int))
-		o.SetSmartAccountId(x)
-	}
-	if v, ok := d.GetOk("software_download"); ok {
-		x := (v.(string))
-		o.SetSoftwareDownload(x)
-	}
-	if v, ok := d.GetOk("system_up_time"); ok {
-		x := (v.(string))
-		o.SetSystemUpTime(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

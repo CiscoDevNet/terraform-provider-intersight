@@ -705,7 +705,7 @@ func resourceSdwanRouterPolicyCreate(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("wan_count"); ok {
+	if v, ok := d.GetOkExists("wan_count"); ok {
 		x := int64(v.(int))
 		o.SetWanCount(x)
 	}

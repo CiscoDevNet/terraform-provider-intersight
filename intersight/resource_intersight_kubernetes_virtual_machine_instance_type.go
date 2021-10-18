@@ -479,7 +479,7 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 
 	o.SetClassId("kubernetes.VirtualMachineInstanceType")
 
-	if v, ok := d.GetOk("cpu"); ok {
+	if v, ok := d.GetOkExists("cpu"); ok {
 		x := int64(v.(int))
 		o.SetCpu(x)
 	}
@@ -489,12 +489,12 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("disk_size"); ok {
+	if v, ok := d.GetOkExists("disk_size"); ok {
 		x := int64(v.(int))
 		o.SetDiskSize(x)
 	}
 
-	if v, ok := d.GetOk("memory"); ok {
+	if v, ok := d.GetOkExists("memory"); ok {
 		x := int64(v.(int))
 		o.SetMemory(x)
 	}

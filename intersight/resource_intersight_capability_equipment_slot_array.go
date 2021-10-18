@@ -518,7 +518,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 		o.SetName(x)
 	}
 
-	if v, ok := d.GetOk("number_of_slots"); ok {
+	if v, ok := d.GetOkExists("number_of_slots"); ok {
 		x := int64(v.(int))
 		o.SetNumberOfSlots(x)
 	}
@@ -545,7 +545,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 		o.SetSku(x)
 	}
 
-	if v, ok := d.GetOk("slots_per_line"); ok {
+	if v, ok := d.GetOkExists("slots_per_line"); ok {
 		x := int64(v.(int))
 		o.SetSlotsPerLine(x)
 	}

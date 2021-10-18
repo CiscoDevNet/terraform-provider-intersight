@@ -1000,7 +1000,10 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 		o.SetUnusedDisksState(x)
 	}
 
-	o.SetUseJbodForVdCreation(d.Get("use_jbod_for_vd_creation").(bool))
+	if v, ok := d.GetOkExists("use_jbod_for_vd_creation"); ok {
+		x := (v.(bool))
+		o.SetUseJbodForVdCreation(x)
+	}
 
 	r := conn.ApiClient.StorageApi.CreateStorageStoragePolicy(conn.ctx).StorageStoragePolicy(*o)
 	resultMo, _, responseErr := r.Execute()

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the chassis enclosure. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the chassis enclosure. | [optional] [readonly] 
 **Blades** | Pointer to [**[]ComputeBladeRelationship**](ComputeBladeRelationship.md) | An array of relationships to computeBlade resources. | [optional] [readonly] 
+**ExpanderModules** | Pointer to [**[]EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) | An array of relationships to equipmentExpanderModule resources. | [optional] 
 **FanControl** | Pointer to [**EquipmentFanControlRelationship**](EquipmentFanControlRelationship.md) |  | [optional] 
 **Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -551,6 +552,41 @@ HasBlades returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetBlades()`
 
 UnsetBlades ensures that no value is present for Blades, not even an explicit nil
+### GetExpanderModules
+
+`func (o *EquipmentChassis) GetExpanderModules() []EquipmentExpanderModuleRelationship`
+
+GetExpanderModules returns the ExpanderModules field if non-nil, zero value otherwise.
+
+### GetExpanderModulesOk
+
+`func (o *EquipmentChassis) GetExpanderModulesOk() (*[]EquipmentExpanderModuleRelationship, bool)`
+
+GetExpanderModulesOk returns a tuple with the ExpanderModules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpanderModules
+
+`func (o *EquipmentChassis) SetExpanderModules(v []EquipmentExpanderModuleRelationship)`
+
+SetExpanderModules sets ExpanderModules field to given value.
+
+### HasExpanderModules
+
+`func (o *EquipmentChassis) HasExpanderModules() bool`
+
+HasExpanderModules returns a boolean if a field has been set.
+
+### SetExpanderModulesNil
+
+`func (o *EquipmentChassis) SetExpanderModulesNil(b bool)`
+
+ SetExpanderModulesNil sets the value for ExpanderModules to be an explicit nil
+
+### UnsetExpanderModules
+`func (o *EquipmentChassis) UnsetExpanderModules()`
+
+UnsetExpanderModules ensures that no value is present for ExpanderModules, not even an explicit nil
 ### GetFanControl
 
 `func (o *EquipmentChassis) GetFanControl() EquipmentFanControlRelationship`

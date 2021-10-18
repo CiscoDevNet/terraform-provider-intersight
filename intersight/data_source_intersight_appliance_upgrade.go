@@ -1243,8 +1243,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceUpgrade{}
-	if _, ok := d.GetOk("account"); ok {
-		v := d.Get("account")
+	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1287,16 +1286,17 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	o.SetActive(d.Get("active").(bool))
+	if v, ok := d.GetOkExists("active"); ok {
+		x := (v.(bool))
+		o.SetActive(x)
+	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1305,8 +1305,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1346,16 +1345,17 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetAncestors(x)
 	}
 
-	o.SetAutoCreated(d.Get("auto_created").(bool))
+	if v, ok := d.GetOkExists("auto_created"); ok {
+		x := (v.(bool))
+		o.SetAutoCreated(x)
+	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("completed_phases"); ok {
-		v := d.Get("completed_phases")
+	if v, ok := d.GetOk("completed_phases"); ok {
 		x := make([]models.OnpremUpgradePhase, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1383,14 +1383,12 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetCompletedPhases(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("current_phase"); ok {
-		v := d.Get("current_phase")
+	if v, ok := d.GetOk("current_phase"); ok {
 		p := make([]models.OnpremUpgradePhase, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1421,44 +1419,37 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("elapsed_time"); ok {
-		v := d.Get("elapsed_time")
+	if v, ok := d.GetOkExists("elapsed_time"); ok {
 		x := int64(v.(int))
 		o.SetElapsedTime(x)
 	}
 
-	if _, ok := d.GetOk("end_time"); ok {
-		v := d.Get("end_time")
+	if v, ok := d.GetOk("end_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndTime(x)
 	}
 
-	if _, ok := d.GetOk("error_code"); ok {
-		v := d.Get("error_code")
+	if v, ok := d.GetOkExists("error_code"); ok {
 		x := int64(v.(int))
 		o.SetErrorCode(x)
 	}
 
-	if _, ok := d.GetOk("fingerprint"); ok {
-		v := d.Get("fingerprint")
+	if v, ok := d.GetOk("fingerprint"); ok {
 		x := (v.(string))
 		o.SetFingerprint(x)
 	}
 
-	if _, ok := d.GetOk("image_bundle"); ok {
-		v := d.Get("image_bundle")
+	if v, ok := d.GetOk("image_bundle"); ok {
 		p := make([]models.ApplianceImageBundleRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1501,12 +1492,17 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	o.SetIsRollingBack(d.Get("is_rolling_back").(bool))
+	if v, ok := d.GetOkExists("is_rolling_back"); ok {
+		x := (v.(bool))
+		o.SetIsRollingBack(x)
+	}
 
-	o.SetIsUserTriggered(d.Get("is_user_triggered").(bool))
+	if v, ok := d.GetOkExists("is_user_triggered"); ok {
+		x := (v.(bool))
+		o.SetIsUserTriggered(x)
+	}
 
-	if _, ok := d.GetOk("messages"); ok {
-		v := d.Get("messages")
+	if v, ok := d.GetOk("messages"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1515,26 +1511,22 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetMessages(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1543,8 +1535,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1587,8 +1578,7 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1628,10 +1618,12 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetPermissionResources(x)
 	}
 
-	o.SetRollbackNeeded(d.Get("rollback_needed").(bool))
+	if v, ok := d.GetOkExists("rollback_needed"); ok {
+		x := (v.(bool))
+		o.SetRollbackNeeded(x)
+	}
 
-	if _, ok := d.GetOk("rollback_phases"); ok {
-		v := d.Get("rollback_phases")
+	if v, ok := d.GetOk("rollback_phases"); ok {
 		x := make([]models.OnpremUpgradePhase, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1659,14 +1651,12 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetRollbackPhases(x)
 	}
 
-	if _, ok := d.GetOk("rollback_status"); ok {
-		v := d.Get("rollback_status")
+	if v, ok := d.GetOk("rollback_status"); ok {
 		x := (v.(string))
 		o.SetRollbackStatus(x)
 	}
 
-	if _, ok := d.GetOk("services"); ok {
-		v := d.Get("services")
+	if v, ok := d.GetOk("services"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1675,26 +1665,22 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetServices(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("start_time"); ok {
-		v := d.Get("start_time")
+	if v, ok := d.GetOk("start_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetStartTime(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1727,14 +1713,12 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("total_phases"); ok {
-		v := d.Get("total_phases")
+	if v, ok := d.GetOkExists("total_phases"); ok {
 		x := int64(v.(int))
 		o.SetTotalPhases(x)
 	}
 
-	if _, ok := d.GetOk("ui_packages"); ok {
-		v := d.Get("ui_packages")
+	if v, ok := d.GetOk("ui_packages"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1743,14 +1727,12 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 		o.SetUiPackages(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1822,99 +1804,6 @@ func dataSourceApplianceUpgradeRead(c context.Context, d *schema.ResourceData, m
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("active"); ok {
-		x := (v.(bool))
-		o.SetActive(x)
-	}
-	if v, ok := d.GetOk("auto_created"); ok {
-		x := (v.(bool))
-		o.SetAutoCreated(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("elapsed_time"); ok {
-		x := int64(v.(int))
-		o.SetElapsedTime(x)
-	}
-	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndTime(x)
-	}
-	if v, ok := d.GetOk("error_code"); ok {
-		x := int64(v.(int))
-		o.SetErrorCode(x)
-	}
-	if v, ok := d.GetOk("fingerprint"); ok {
-		x := (v.(string))
-		o.SetFingerprint(x)
-	}
-	if v, ok := d.GetOk("is_rolling_back"); ok {
-		x := (v.(bool))
-		o.SetIsRollingBack(x)
-	}
-	if v, ok := d.GetOk("is_user_triggered"); ok {
-		x := (v.(bool))
-		o.SetIsUserTriggered(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("rollback_needed"); ok {
-		x := (v.(bool))
-		o.SetRollbackNeeded(x)
-	}
-	if v, ok := d.GetOk("rollback_status"); ok {
-		x := (v.(string))
-		o.SetRollbackStatus(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartTime(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("total_phases"); ok {
-		x := int64(v.(int))
-		o.SetTotalPhases(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -35,7 +35,9 @@ type ComputePhysical struct {
 	BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
 	// The fault summary for the server.
 	// Deprecated
-	FaultSummary   *int64             `json:"FaultSummary,omitempty"`
+	FaultSummary *int64 `json:"FaultSummary,omitempty"`
+	// The universally unique hardware identity of the server provided by the manufacturer.
+	HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
 	KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 	// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 	ManagementMode *string `json:"ManagementMode,omitempty"`
@@ -379,6 +381,38 @@ func (o *ComputePhysical) HasFaultSummary() bool {
 // Deprecated
 func (o *ComputePhysical) SetFaultSummary(v int64) {
 	o.FaultSummary = &v
+}
+
+// GetHardwareUuid returns the HardwareUuid field value if set, zero value otherwise.
+func (o *ComputePhysical) GetHardwareUuid() string {
+	if o == nil || o.HardwareUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.HardwareUuid
+}
+
+// GetHardwareUuidOk returns a tuple with the HardwareUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysical) GetHardwareUuidOk() (*string, bool) {
+	if o == nil || o.HardwareUuid == nil {
+		return nil, false
+	}
+	return o.HardwareUuid, true
+}
+
+// HasHardwareUuid returns a boolean if a field has been set.
+func (o *ComputePhysical) HasHardwareUuid() bool {
+	if o != nil && o.HardwareUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHardwareUuid gets a reference to the given string and assigns it to the HardwareUuid field.
+func (o *ComputePhysical) SetHardwareUuid(v string) {
+	o.HardwareUuid = &v
 }
 
 // GetKvmIpAddresses returns the KvmIpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1516,6 +1550,9 @@ func (o ComputePhysical) MarshalJSON() ([]byte, error) {
 	if o.FaultSummary != nil {
 		toSerialize["FaultSummary"] = o.FaultSummary
 	}
+	if o.HardwareUuid != nil {
+		toSerialize["HardwareUuid"] = o.HardwareUuid
+	}
 	if o.KvmIpAddresses != nil {
 		toSerialize["KvmIpAddresses"] = o.KvmIpAddresses
 	}
@@ -1643,7 +1680,9 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		BiosPostComplete *bool `json:"BiosPostComplete,omitempty"`
 		// The fault summary for the server.
 		// Deprecated
-		FaultSummary   *int64             `json:"FaultSummary,omitempty"`
+		FaultSummary *int64 `json:"FaultSummary,omitempty"`
+		// The universally unique hardware identity of the server provided by the manufacturer.
+		HardwareUuid   *string            `json:"HardwareUuid,omitempty"`
 		KvmIpAddresses []ComputeIpAddress `json:"KvmIpAddresses,omitempty"`
 		// The management mode of the server. * `IntersightStandalone` - Intersight Standalone mode of operation. * `UCSM` - Unified Computing System Manager mode of operation. * `Intersight` - Intersight managed mode of operation.
 		ManagementMode *string `json:"ManagementMode,omitempty"`
@@ -1722,6 +1761,7 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		varComputePhysical.AvailableMemory = varComputePhysicalWithoutEmbeddedStruct.AvailableMemory
 		varComputePhysical.BiosPostComplete = varComputePhysicalWithoutEmbeddedStruct.BiosPostComplete
 		varComputePhysical.FaultSummary = varComputePhysicalWithoutEmbeddedStruct.FaultSummary
+		varComputePhysical.HardwareUuid = varComputePhysicalWithoutEmbeddedStruct.HardwareUuid
 		varComputePhysical.KvmIpAddresses = varComputePhysicalWithoutEmbeddedStruct.KvmIpAddresses
 		varComputePhysical.ManagementMode = varComputePhysicalWithoutEmbeddedStruct.ManagementMode
 		varComputePhysical.MemorySpeed = varComputePhysicalWithoutEmbeddedStruct.MemorySpeed
@@ -1781,6 +1821,7 @@ func (o *ComputePhysical) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AvailableMemory")
 		delete(additionalProperties, "BiosPostComplete")
 		delete(additionalProperties, "FaultSummary")
+		delete(additionalProperties, "HardwareUuid")
 		delete(additionalProperties, "KvmIpAddresses")
 		delete(additionalProperties, "ManagementMode")
 		delete(additionalProperties, "MemorySpeed")

@@ -610,13 +610,25 @@ func resourceNetworkconfigPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetDynamicDnsDomain(x)
 	}
 
-	o.SetEnableDynamicDns(d.Get("enable_dynamic_dns").(bool))
+	if v, ok := d.GetOkExists("enable_dynamic_dns"); ok {
+		x := (v.(bool))
+		o.SetEnableDynamicDns(x)
+	}
 
-	o.SetEnableIpv4dnsFromDhcp(d.Get("enable_ipv4dns_from_dhcp").(bool))
+	if v, ok := d.GetOkExists("enable_ipv4dns_from_dhcp"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv4dnsFromDhcp(x)
+	}
 
-	o.SetEnableIpv6(d.Get("enable_ipv6").(bool))
+	if v, ok := d.GetOkExists("enable_ipv6"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv6(x)
+	}
 
-	o.SetEnableIpv6dnsFromDhcp(d.Get("enable_ipv6dns_from_dhcp").(bool))
+	if v, ok := d.GetOkExists("enable_ipv6dns_from_dhcp"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv6dnsFromDhcp(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

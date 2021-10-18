@@ -582,7 +582,10 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 		}
 	}
 
-	o.SetAdminState(d.Get("admin_state").(bool))
+	if v, ok := d.GetOkExists("admin_state"); ok {
+		x := (v.(bool))
+		o.SetAdminState(x)
+	}
 
 	o.SetClassId("hyperflex.ExtFcStoragePolicy")
 

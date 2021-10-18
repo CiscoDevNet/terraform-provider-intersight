@@ -701,7 +701,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyCreate(c context.Context, d
 		}
 	}
 
-	if v, ok := d.GetOk("replication_bandwidth_mbps"); ok {
+	if v, ok := d.GetOkExists("replication_bandwidth_mbps"); ok {
 		x := int64(v.(int))
 		o.SetReplicationBandwidthMbps(x)
 	}
@@ -803,7 +803,7 @@ func resourceHyperflexClusterReplicationNetworkPolicyCreate(c context.Context, d
 		}
 	}
 
-	if v, ok := d.GetOk("replication_mtu"); ok {
+	if v, ok := d.GetOkExists("replication_mtu"); ok {
 		x := int64(v.(int))
 		o.SetReplicationMtu(x)
 	}

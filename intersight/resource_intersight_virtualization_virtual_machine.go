@@ -499,7 +499,7 @@ func resourceVirtualizationVirtualMachine() *schema.Resource {
 				Optional:    true,
 			},
 			"hypervisor_type": {
-				Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -1235,12 +1235,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		o.SetClusterEsxi(x)
 	}
 
-	if v, ok := d.GetOk("cpu"); ok {
+	if v, ok := d.GetOkExists("cpu"); ok {
 		x := int64(v.(int))
 		o.SetCpu(x)
 	}
-
-	o.SetDiscovered(d.Get("discovered").(bool))
 
 	if v, ok := d.GetOk("disk"); ok {
 		x := make([]models.VirtualizationVirtualMachineDisk, 0)
@@ -1364,7 +1362,10 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	o.SetForceDelete(d.Get("force_delete").(bool))
+	if v, ok := d.GetOkExists("force_delete"); ok {
+		x := (v.(bool))
+		o.SetForceDelete(x)
+	}
 
 	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
@@ -1515,7 +1516,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("memory"); ok {
+	if v, ok := d.GetOkExists("memory"); ok {
 		x := int64(v.(int))
 		o.SetMemory(x)
 	}

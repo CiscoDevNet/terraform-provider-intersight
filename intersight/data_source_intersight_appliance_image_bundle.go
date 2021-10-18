@@ -1885,14 +1885,12 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceImageBundle{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1901,8 +1899,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1942,8 +1939,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("ansible_packages"); ok {
-		v := d.Get("ansible_packages")
+	if v, ok := d.GetOk("ansible_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1971,22 +1967,22 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetAnsiblePackages(x)
 	}
 
-	o.SetAutoUpgrade(d.Get("auto_upgrade").(bool))
+	if v, ok := d.GetOkExists("auto_upgrade"); ok {
+		x := (v.(bool))
+		o.SetAutoUpgrade(x)
+	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("dc_packages"); ok {
-		v := d.Get("dc_packages")
+	if v, ok := d.GetOk("dc_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2014,8 +2010,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetDcPackages(x)
 	}
 
-	if _, ok := d.GetOk("debug_packages"); ok {
-		v := d.Get("debug_packages")
+	if v, ok := d.GetOk("debug_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2043,20 +2038,17 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetDebugPackages(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("endpoint_packages"); ok {
-		v := d.Get("endpoint_packages")
+	if v, ok := d.GetOk("endpoint_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2084,16 +2076,17 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetEndpointPackages(x)
 	}
 
-	if _, ok := d.GetOk("fingerprint"); ok {
-		v := d.Get("fingerprint")
+	if v, ok := d.GetOk("fingerprint"); ok {
 		x := (v.(string))
 		o.SetFingerprint(x)
 	}
 
-	o.SetHasError(d.Get("has_error").(bool))
+	if v, ok := d.GetOkExists("has_error"); ok {
+		x := (v.(bool))
+		o.SetHasError(x)
+	}
 
-	if _, ok := d.GetOk("infra_packages"); ok {
-		v := d.Get("infra_packages")
+	if v, ok := d.GetOk("infra_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2121,8 +2114,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetInfraPackages(x)
 	}
 
-	if _, ok := d.GetOk("init_packages"); ok {
-		v := d.Get("init_packages")
+	if v, ok := d.GetOk("init_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2150,38 +2142,32 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetInitPackages(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("notes"); ok {
-		v := d.Get("notes")
+	if v, ok := d.GetOk("notes"); ok {
 		x := (v.(string))
 		o.SetNotes(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2190,8 +2176,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2234,8 +2219,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2275,20 +2259,17 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("priority"); ok {
-		v := d.Get("priority")
+	if v, ok := d.GetOk("priority"); ok {
 		x := (v.(string))
 		o.SetPriority(x)
 	}
 
-	if _, ok := d.GetOk("release_time"); ok {
-		v := d.Get("release_time")
+	if v, ok := d.GetOk("release_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetReleaseTime(x)
 	}
 
-	if _, ok := d.GetOk("service_packages"); ok {
-		v := d.Get("service_packages")
+	if v, ok := d.GetOk("service_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2316,20 +2297,17 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetServicePackages(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status_message"); ok {
-		v := d.Get("status_message")
+	if v, ok := d.GetOk("status_message"); ok {
 		x := (v.(string))
 		o.SetStatusMessage(x)
 	}
 
-	if _, ok := d.GetOk("system_packages"); ok {
-		v := d.Get("system_packages")
+	if v, ok := d.GetOk("system_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2357,8 +2335,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetSystemPackages(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2391,8 +2368,7 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("ui_packages"); ok {
-		v := d.Get("ui_packages")
+	if v, ok := d.GetOk("ui_packages"); ok {
 		x := make([]models.OnpremImagePackage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2420,44 +2396,37 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 		o.SetUiPackages(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_end_time"); ok {
-		v := d.Get("upgrade_end_time")
+	if v, ok := d.GetOk("upgrade_end_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetUpgradeEndTime(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_grace_period"); ok {
-		v := d.Get("upgrade_grace_period")
+	if v, ok := d.GetOkExists("upgrade_grace_period"); ok {
 		x := int64(v.(int))
 		o.SetUpgradeGracePeriod(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_impact_duration"); ok {
-		v := d.Get("upgrade_impact_duration")
+	if v, ok := d.GetOkExists("upgrade_impact_duration"); ok {
 		x := int64(v.(int))
 		o.SetUpgradeImpactDuration(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_impact_enum"); ok {
-		v := d.Get("upgrade_impact_enum")
+	if v, ok := d.GetOk("upgrade_impact_enum"); ok {
 		x := (v.(string))
 		o.SetUpgradeImpactEnum(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_start_time"); ok {
-		v := d.Get("upgrade_start_time")
+	if v, ok := d.GetOk("upgrade_start_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetUpgradeStartTime(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2529,99 +2498,6 @@ func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceDat
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("auto_upgrade"); ok {
-		x := (v.(bool))
-		o.SetAutoUpgrade(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("fingerprint"); ok {
-		x := (v.(string))
-		o.SetFingerprint(x)
-	}
-	if v, ok := d.GetOk("has_error"); ok {
-		x := (v.(bool))
-		o.SetHasError(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("notes"); ok {
-		x := (v.(string))
-		o.SetNotes(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("priority"); ok {
-		x := (v.(string))
-		o.SetPriority(x)
-	}
-	if v, ok := d.GetOk("release_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetReleaseTime(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status_message"); ok {
-		x := (v.(string))
-		o.SetStatusMessage(x)
-	}
-	if v, ok := d.GetOk("upgrade_end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetUpgradeEndTime(x)
-	}
-	if v, ok := d.GetOk("upgrade_grace_period"); ok {
-		x := int64(v.(int))
-		o.SetUpgradeGracePeriod(x)
-	}
-	if v, ok := d.GetOk("upgrade_impact_duration"); ok {
-		x := int64(v.(int))
-		o.SetUpgradeImpactDuration(x)
-	}
-	if v, ok := d.GetOk("upgrade_impact_enum"); ok {
-		x := (v.(string))
-		o.SetUpgradeImpactEnum(x)
-	}
-	if v, ok := d.GetOk("upgrade_start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetUpgradeStartTime(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

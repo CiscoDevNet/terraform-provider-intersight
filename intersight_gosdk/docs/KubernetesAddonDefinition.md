@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **IconUrl** | Pointer to **string** | Icon used to represent the addon in UI. | [optional] 
 **Labels** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** | Name of an addon component. | [optional] 
+**Overrides** | Pointer to **string** | Properties that can be overridden for an addon. | [optional] 
 **Platforms** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **string** | Version of the addon component. | [optional] 
 **Catalog** | Pointer to [**KubernetesCatalogRelationship**](KubernetesCatalogRelationship.md) |  | [optional] 
@@ -313,6 +314,31 @@ SetName sets Name field to given value.
 `func (o *KubernetesAddonDefinition) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetOverrides
+
+`func (o *KubernetesAddonDefinition) GetOverrides() string`
+
+GetOverrides returns the Overrides field if non-nil, zero value otherwise.
+
+### GetOverridesOk
+
+`func (o *KubernetesAddonDefinition) GetOverridesOk() (*string, bool)`
+
+GetOverridesOk returns a tuple with the Overrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverrides
+
+`func (o *KubernetesAddonDefinition) SetOverrides(v string)`
+
+SetOverrides sets Overrides field to given value.
+
+### HasOverrides
+
+`func (o *KubernetesAddonDefinition) HasOverrides() bool`
+
+HasOverrides returns a boolean if a field has been set.
 
 ### GetPlatforms
 

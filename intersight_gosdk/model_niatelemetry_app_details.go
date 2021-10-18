@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,7 @@ type NiatelemetryAppDetails struct {
 	// Clustername on which apps are running on ND.
 	NexusDashboard *string `json:"NexusDashboard,omitempty"`
 	// Number of sites on which particular app installed on ND.
-	NumberofSitesOnboarded *int64 `json:"NumberofSitesOnboarded,omitempty"`
+	NumberOfSitesOnboarded *int64 `json:"NumberOfSitesOnboarded,omitempty"`
 	// Type of apps running on ND.
 	Type                 *string                              `json:"Type,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -241,36 +241,36 @@ func (o *NiatelemetryAppDetails) SetNexusDashboard(v string) {
 	o.NexusDashboard = &v
 }
 
-// GetNumberofSitesOnboarded returns the NumberofSitesOnboarded field value if set, zero value otherwise.
-func (o *NiatelemetryAppDetails) GetNumberofSitesOnboarded() int64 {
-	if o == nil || o.NumberofSitesOnboarded == nil {
+// GetNumberOfSitesOnboarded returns the NumberOfSitesOnboarded field value if set, zero value otherwise.
+func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboarded() int64 {
+	if o == nil || o.NumberOfSitesOnboarded == nil {
 		var ret int64
 		return ret
 	}
-	return *o.NumberofSitesOnboarded
+	return *o.NumberOfSitesOnboarded
 }
 
-// GetNumberofSitesOnboardedOk returns a tuple with the NumberofSitesOnboarded field value if set, nil otherwise
+// GetNumberOfSitesOnboardedOk returns a tuple with the NumberOfSitesOnboarded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NiatelemetryAppDetails) GetNumberofSitesOnboardedOk() (*int64, bool) {
-	if o == nil || o.NumberofSitesOnboarded == nil {
+func (o *NiatelemetryAppDetails) GetNumberOfSitesOnboardedOk() (*int64, bool) {
+	if o == nil || o.NumberOfSitesOnboarded == nil {
 		return nil, false
 	}
-	return o.NumberofSitesOnboarded, true
+	return o.NumberOfSitesOnboarded, true
 }
 
-// HasNumberofSitesOnboarded returns a boolean if a field has been set.
-func (o *NiatelemetryAppDetails) HasNumberofSitesOnboarded() bool {
-	if o != nil && o.NumberofSitesOnboarded != nil {
+// HasNumberOfSitesOnboarded returns a boolean if a field has been set.
+func (o *NiatelemetryAppDetails) HasNumberOfSitesOnboarded() bool {
+	if o != nil && o.NumberOfSitesOnboarded != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNumberofSitesOnboarded gets a reference to the given int64 and assigns it to the NumberofSitesOnboarded field.
-func (o *NiatelemetryAppDetails) SetNumberofSitesOnboarded(v int64) {
-	o.NumberofSitesOnboarded = &v
+// SetNumberOfSitesOnboarded gets a reference to the given int64 and assigns it to the NumberOfSitesOnboarded field.
+func (o *NiatelemetryAppDetails) SetNumberOfSitesOnboarded(v int64) {
+	o.NumberOfSitesOnboarded = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -365,8 +365,8 @@ func (o NiatelemetryAppDetails) MarshalJSON() ([]byte, error) {
 	if o.NexusDashboard != nil {
 		toSerialize["NexusDashboard"] = o.NexusDashboard
 	}
-	if o.NumberofSitesOnboarded != nil {
-		toSerialize["NumberofSitesOnboarded"] = o.NumberofSitesOnboarded
+	if o.NumberOfSitesOnboarded != nil {
+		toSerialize["NumberOfSitesOnboarded"] = o.NumberOfSitesOnboarded
 	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
@@ -397,7 +397,7 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 		// Clustername on which apps are running on ND.
 		NexusDashboard *string `json:"NexusDashboard,omitempty"`
 		// Number of sites on which particular app installed on ND.
-		NumberofSitesOnboarded *int64 `json:"NumberofSitesOnboarded,omitempty"`
+		NumberOfSitesOnboarded *int64 `json:"NumberOfSitesOnboarded,omitempty"`
 		// Type of apps running on ND.
 		Type             *string                              `json:"Type,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -414,7 +414,7 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryAppDetails.AppStatus = varNiatelemetryAppDetailsWithoutEmbeddedStruct.AppStatus
 		varNiatelemetryAppDetails.AppVersion = varNiatelemetryAppDetailsWithoutEmbeddedStruct.AppVersion
 		varNiatelemetryAppDetails.NexusDashboard = varNiatelemetryAppDetailsWithoutEmbeddedStruct.NexusDashboard
-		varNiatelemetryAppDetails.NumberofSitesOnboarded = varNiatelemetryAppDetailsWithoutEmbeddedStruct.NumberofSitesOnboarded
+		varNiatelemetryAppDetails.NumberOfSitesOnboarded = varNiatelemetryAppDetailsWithoutEmbeddedStruct.NumberOfSitesOnboarded
 		varNiatelemetryAppDetails.Type = varNiatelemetryAppDetailsWithoutEmbeddedStruct.Type
 		varNiatelemetryAppDetails.RegisteredDevice = varNiatelemetryAppDetailsWithoutEmbeddedStruct.RegisteredDevice
 		*o = NiatelemetryAppDetails(varNiatelemetryAppDetails)
@@ -440,7 +440,7 @@ func (o *NiatelemetryAppDetails) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AppStatus")
 		delete(additionalProperties, "AppVersion")
 		delete(additionalProperties, "NexusDashboard")
-		delete(additionalProperties, "NumberofSitesOnboarded")
+		delete(additionalProperties, "NumberOfSitesOnboarded")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "RegisteredDevice")
 

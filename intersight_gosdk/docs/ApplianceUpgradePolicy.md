@@ -11,7 +11,10 @@ Name | Type | Description | Notes
 **BlackoutEndDate** | Pointer to **time.Time** | End date of the black out period. | [optional] 
 **BlackoutStartDate** | Pointer to **time.Time** | Start date of the black out period. The appliance will not be upgraded during this period. | [optional] 
 **EnableMetaDataSync** | Pointer to **bool** | Indicates if the updated metadata files should be synced immediately or at the next upgrade. | [optional] [default to true]
+**IsSynced** | Pointer to **bool** | Flag to indicate software upgrade setting is synchronized with Intersight SaaS. | [optional] [readonly] 
+**ManualInstallationStartTime** | Pointer to **time.Time** | Intersight Appliance manual upgrade start time. | [optional] 
 **Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
+**SoftwareDownloadType** | Pointer to **string** | SoftwareDownloadType is used to indicate the kind of software download. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually . | [optional] [default to "connected"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods
@@ -198,6 +201,56 @@ SetEnableMetaDataSync sets EnableMetaDataSync field to given value.
 
 HasEnableMetaDataSync returns a boolean if a field has been set.
 
+### GetIsSynced
+
+`func (o *ApplianceUpgradePolicy) GetIsSynced() bool`
+
+GetIsSynced returns the IsSynced field if non-nil, zero value otherwise.
+
+### GetIsSyncedOk
+
+`func (o *ApplianceUpgradePolicy) GetIsSyncedOk() (*bool, bool)`
+
+GetIsSyncedOk returns a tuple with the IsSynced field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSynced
+
+`func (o *ApplianceUpgradePolicy) SetIsSynced(v bool)`
+
+SetIsSynced sets IsSynced field to given value.
+
+### HasIsSynced
+
+`func (o *ApplianceUpgradePolicy) HasIsSynced() bool`
+
+HasIsSynced returns a boolean if a field has been set.
+
+### GetManualInstallationStartTime
+
+`func (o *ApplianceUpgradePolicy) GetManualInstallationStartTime() time.Time`
+
+GetManualInstallationStartTime returns the ManualInstallationStartTime field if non-nil, zero value otherwise.
+
+### GetManualInstallationStartTimeOk
+
+`func (o *ApplianceUpgradePolicy) GetManualInstallationStartTimeOk() (*time.Time, bool)`
+
+GetManualInstallationStartTimeOk returns a tuple with the ManualInstallationStartTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManualInstallationStartTime
+
+`func (o *ApplianceUpgradePolicy) SetManualInstallationStartTime(v time.Time)`
+
+SetManualInstallationStartTime sets ManualInstallationStartTime field to given value.
+
+### HasManualInstallationStartTime
+
+`func (o *ApplianceUpgradePolicy) HasManualInstallationStartTime() bool`
+
+HasManualInstallationStartTime returns a boolean if a field has been set.
+
 ### GetSchedule
 
 `func (o *ApplianceUpgradePolicy) GetSchedule() OnpremSchedule`
@@ -233,6 +286,31 @@ HasSchedule returns a boolean if a field has been set.
 `func (o *ApplianceUpgradePolicy) UnsetSchedule()`
 
 UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
+### GetSoftwareDownloadType
+
+`func (o *ApplianceUpgradePolicy) GetSoftwareDownloadType() string`
+
+GetSoftwareDownloadType returns the SoftwareDownloadType field if non-nil, zero value otherwise.
+
+### GetSoftwareDownloadTypeOk
+
+`func (o *ApplianceUpgradePolicy) GetSoftwareDownloadTypeOk() (*string, bool)`
+
+GetSoftwareDownloadTypeOk returns a tuple with the SoftwareDownloadType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareDownloadType
+
+`func (o *ApplianceUpgradePolicy) SetSoftwareDownloadType(v string)`
+
+SetSoftwareDownloadType sets SoftwareDownloadType field to given value.
+
+### HasSoftwareDownloadType
+
+`func (o *ApplianceUpgradePolicy) HasSoftwareDownloadType() bool`
+
+HasSoftwareDownloadType returns a boolean if a field has been set.
+
 ### GetAccount
 
 `func (o *ApplianceUpgradePolicy) GetAccount() IamAccountRelationship`

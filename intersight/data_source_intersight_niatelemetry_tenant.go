@@ -1051,14 +1051,12 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryTenant{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1067,8 +1065,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1108,158 +1105,132 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("bfd_if_pol_count"); ok {
-		v := d.Get("bfd_if_pol_count")
+	if v, ok := d.GetOkExists("bfd_if_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetBfdIfPolCount(x)
 	}
 
-	if _, ok := d.GetOk("bfd_ifp_count"); ok {
-		v := d.Get("bfd_ifp_count")
+	if v, ok := d.GetOkExists("bfd_ifp_count"); ok {
 		x := int64(v.(int))
 		o.SetBfdIfpCount(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("dhcp_rs_prov_count"); ok {
-		v := d.Get("dhcp_rs_prov_count")
+	if v, ok := d.GetOkExists("dhcp_rs_prov_count"); ok {
 		x := int64(v.(int))
 		o.SetDhcpRsProvCount(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("fhs_bd_pol_count"); ok {
-		v := d.Get("fhs_bd_pol_count")
+	if v, ok := d.GetOkExists("fhs_bd_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetFhsBdPolCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_ap_count"); ok {
-		v := d.Get("fv_ap_count")
+	if v, ok := d.GetOkExists("fv_ap_count"); ok {
 		x := int64(v.(int))
 		o.SetFvApCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_bd_count"); ok {
-		v := d.Get("fv_bd_count")
+	if v, ok := d.GetOkExists("fv_bd_count"); ok {
 		x := int64(v.(int))
 		o.SetFvBdCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_bd_subnet_count"); ok {
-		v := d.Get("fv_bd_subnet_count")
+	if v, ok := d.GetOkExists("fv_bd_subnet_count"); ok {
 		x := int64(v.(int))
 		o.SetFvBdSubnetCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_bdno_arp_count"); ok {
-		v := d.Get("fv_bdno_arp_count")
+	if v, ok := d.GetOkExists("fv_bdno_arp_count"); ok {
 		x := int64(v.(int))
 		o.SetFvBdnoArpCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_cep_count"); ok {
-		v := d.Get("fv_cep_count")
+	if v, ok := d.GetOkExists("fv_cep_count"); ok {
 		x := int64(v.(int))
 		o.SetFvCepCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_rs_bd_to_fhs_count"); ok {
-		v := d.Get("fv_rs_bd_to_fhs_count")
+	if v, ok := d.GetOkExists("fv_rs_bd_to_fhs_count"); ok {
 		x := int64(v.(int))
 		o.SetFvRsBdToFhsCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_rs_bd_to_out_count"); ok {
-		v := d.Get("fv_rs_bd_to_out_count")
+	if v, ok := d.GetOkExists("fv_rs_bd_to_out_count"); ok {
 		x := int64(v.(int))
 		o.SetFvRsBdToOutCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_site_connp_count"); ok {
-		v := d.Get("fv_site_connp_count")
+	if v, ok := d.GetOkExists("fv_site_connp_count"); ok {
 		x := int64(v.(int))
 		o.SetFvSiteConnpCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_subnet_count"); ok {
-		v := d.Get("fv_subnet_count")
+	if v, ok := d.GetOkExists("fv_subnet_count"); ok {
 		x := int64(v.(int))
 		o.SetFvSubnetCount(x)
 	}
 
-	if _, ok := d.GetOk("ip_static_route_count"); ok {
-		v := d.Get("ip_static_route_count")
+	if v, ok := d.GetOkExists("ip_static_route_count"); ok {
 		x := int64(v.(int))
 		o.SetIpStaticRouteCount(x)
 	}
 
-	if _, ok := d.GetOk("l3_multicast_count"); ok {
-		v := d.Get("l3_multicast_count")
+	if v, ok := d.GetOkExists("l3_multicast_count"); ok {
 		x := int64(v.(int))
 		o.SetL3MulticastCount(x)
 	}
 
-	if _, ok := d.GetOk("l3_multicast_ctx_count"); ok {
-		v := d.Get("l3_multicast_ctx_count")
+	if v, ok := d.GetOkExists("l3_multicast_ctx_count"); ok {
 		x := int64(v.(int))
 		o.SetL3MulticastCtxCount(x)
 	}
 
-	if _, ok := d.GetOk("l3_multicast_if_count"); ok {
-		v := d.Get("l3_multicast_if_count")
+	if v, ok := d.GetOkExists("l3_multicast_if_count"); ok {
 		x := int64(v.(int))
 		o.SetL3MulticastIfCount(x)
 	}
 
-	if _, ok := d.GetOk("l3out_count"); ok {
-		v := d.Get("l3out_count")
+	if v, ok := d.GetOkExists("l3out_count"); ok {
 		x := int64(v.(int))
 		o.SetL3outCount(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1268,8 +1239,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1312,8 +1282,7 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1353,26 +1322,22 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("qos_custom_pol_count"); ok {
-		v := d.Get("qos_custom_pol_count")
+	if v, ok := d.GetOkExists("qos_custom_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetQosCustomPolCount(x)
 	}
 
-	if _, ok := d.GetOk("record_type"); ok {
-		v := d.Get("record_type")
+	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
 		o.SetRecordType(x)
 	}
 
-	if _, ok := d.GetOk("record_version"); ok {
-		v := d.Get("record_version")
+	if v, ok := d.GetOk("record_version"); ok {
 		x := (v.(string))
 		o.SetRecordVersion(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1415,32 +1380,27 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("ssm"); ok {
-		v := d.Get("ssm")
+	if v, ok := d.GetOk("ssm"); ok {
 		x := (v.(string))
 		o.SetSsm(x)
 	}
 
-	if _, ok := d.GetOk("ssm_count"); ok {
-		v := d.Get("ssm_count")
+	if v, ok := d.GetOkExists("ssm_count"); ok {
 		x := int64(v.(int))
 		o.SetSsmCount(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1473,38 +1433,32 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("tcam_opt_count"); ok {
-		v := d.Get("tcam_opt_count")
+	if v, ok := d.GetOkExists("tcam_opt_count"); ok {
 		x := int64(v.(int))
 		o.SetTcamOptCount(x)
 	}
 
-	if _, ok := d.GetOk("trace_route_ep_count"); ok {
-		v := d.Get("trace_route_ep_count")
+	if v, ok := d.GetOkExists("trace_route_ep_count"); ok {
 		x := int64(v.(int))
 		o.SetTraceRouteEpCount(x)
 	}
 
-	if _, ok := d.GetOk("trace_route_ep_ext_count"); ok {
-		v := d.Get("trace_route_ep_ext_count")
+	if v, ok := d.GetOkExists("trace_route_ep_ext_count"); ok {
 		x := int64(v.(int))
 		o.SetTraceRouteEpExtCount(x)
 	}
 
-	if _, ok := d.GetOk("trace_route_ext_ep_count"); ok {
-		v := d.Get("trace_route_ext_ep_count")
+	if v, ok := d.GetOkExists("trace_route_ext_ep_count"); ok {
 		x := int64(v.(int))
 		o.SetTraceRouteExtEpCount(x)
 	}
 
-	if _, ok := d.GetOk("trace_route_ext_ext_count"); ok {
-		v := d.Get("trace_route_ext_ext_count")
+	if v, ok := d.GetOkExists("trace_route_ext_ext_count"); ok {
 		x := int64(v.(int))
 		o.SetTraceRouteExtExtCount(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1578,235 +1532,42 @@ func dataSourceNiatelemetryTenantRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("vns_abs_graph_count"); ok {
-		v := d.Get("vns_abs_graph_count")
+	if v, ok := d.GetOkExists("vns_abs_graph_count"); ok {
 		x := int64(v.(int))
 		o.SetVnsAbsGraphCount(x)
 	}
 
-	if _, ok := d.GetOk("vns_backup_pol_count"); ok {
-		v := d.Get("vns_backup_pol_count")
+	if v, ok := d.GetOkExists("vns_backup_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetVnsBackupPolCount(x)
 	}
 
-	if _, ok := d.GetOk("vns_redirect_dest_count"); ok {
-		v := d.Get("vns_redirect_dest_count")
+	if v, ok := d.GetOkExists("vns_redirect_dest_count"); ok {
 		x := int64(v.(int))
 		o.SetVnsRedirectDestCount(x)
 	}
 
-	if _, ok := d.GetOk("vns_svc_redirect_pol_count"); ok {
-		v := d.Get("vns_svc_redirect_pol_count")
+	if v, ok := d.GetOkExists("vns_svc_redirect_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetVnsSvcRedirectPolCount(x)
 	}
 
-	if _, ok := d.GetOk("vrf_count"); ok {
-		v := d.Get("vrf_count")
+	if v, ok := d.GetOkExists("vrf_count"); ok {
 		x := int64(v.(int))
 		o.SetVrfCount(x)
 	}
 
-	if _, ok := d.GetOk("vz_br_cp_count"); ok {
-		v := d.Get("vz_br_cp_count")
+	if v, ok := d.GetOkExists("vz_br_cp_count"); ok {
 		x := int64(v.(int))
 		o.SetVzBrCpCount(x)
 	}
 
-	if _, ok := d.GetOk("vz_rt_cons_count"); ok {
-		v := d.Get("vz_rt_cons_count")
+	if v, ok := d.GetOkExists("vz_rt_cons_count"); ok {
 		x := int64(v.(int))
 		o.SetVzRtConsCount(x)
 	}
 
-	if _, ok := d.GetOk("vz_rt_prov_count"); ok {
-		v := d.Get("vz_rt_prov_count")
-		x := int64(v.(int))
-		o.SetVzRtProvCount(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("bfd_if_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetBfdIfPolCount(x)
-	}
-	if v, ok := d.GetOk("bfd_ifp_count"); ok {
-		x := int64(v.(int))
-		o.SetBfdIfpCount(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("dhcp_rs_prov_count"); ok {
-		x := int64(v.(int))
-		o.SetDhcpRsProvCount(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("fhs_bd_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetFhsBdPolCount(x)
-	}
-	if v, ok := d.GetOk("fv_ap_count"); ok {
-		x := int64(v.(int))
-		o.SetFvApCount(x)
-	}
-	if v, ok := d.GetOk("fv_bd_count"); ok {
-		x := int64(v.(int))
-		o.SetFvBdCount(x)
-	}
-	if v, ok := d.GetOk("fv_bd_subnet_count"); ok {
-		x := int64(v.(int))
-		o.SetFvBdSubnetCount(x)
-	}
-	if v, ok := d.GetOk("fv_bdno_arp_count"); ok {
-		x := int64(v.(int))
-		o.SetFvBdnoArpCount(x)
-	}
-	if v, ok := d.GetOk("fv_cep_count"); ok {
-		x := int64(v.(int))
-		o.SetFvCepCount(x)
-	}
-	if v, ok := d.GetOk("fv_rs_bd_to_fhs_count"); ok {
-		x := int64(v.(int))
-		o.SetFvRsBdToFhsCount(x)
-	}
-	if v, ok := d.GetOk("fv_rs_bd_to_out_count"); ok {
-		x := int64(v.(int))
-		o.SetFvRsBdToOutCount(x)
-	}
-	if v, ok := d.GetOk("fv_site_connp_count"); ok {
-		x := int64(v.(int))
-		o.SetFvSiteConnpCount(x)
-	}
-	if v, ok := d.GetOk("fv_subnet_count"); ok {
-		x := int64(v.(int))
-		o.SetFvSubnetCount(x)
-	}
-	if v, ok := d.GetOk("ip_static_route_count"); ok {
-		x := int64(v.(int))
-		o.SetIpStaticRouteCount(x)
-	}
-	if v, ok := d.GetOk("l3_multicast_count"); ok {
-		x := int64(v.(int))
-		o.SetL3MulticastCount(x)
-	}
-	if v, ok := d.GetOk("l3_multicast_ctx_count"); ok {
-		x := int64(v.(int))
-		o.SetL3MulticastCtxCount(x)
-	}
-	if v, ok := d.GetOk("l3_multicast_if_count"); ok {
-		x := int64(v.(int))
-		o.SetL3MulticastIfCount(x)
-	}
-	if v, ok := d.GetOk("l3out_count"); ok {
-		x := int64(v.(int))
-		o.SetL3outCount(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("qos_custom_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetQosCustomPolCount(x)
-	}
-	if v, ok := d.GetOk("record_type"); ok {
-		x := (v.(string))
-		o.SetRecordType(x)
-	}
-	if v, ok := d.GetOk("record_version"); ok {
-		x := (v.(string))
-		o.SetRecordVersion(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("ssm"); ok {
-		x := (v.(string))
-		o.SetSsm(x)
-	}
-	if v, ok := d.GetOk("ssm_count"); ok {
-		x := int64(v.(int))
-		o.SetSsmCount(x)
-	}
-	if v, ok := d.GetOk("tcam_opt_count"); ok {
-		x := int64(v.(int))
-		o.SetTcamOptCount(x)
-	}
-	if v, ok := d.GetOk("trace_route_ep_count"); ok {
-		x := int64(v.(int))
-		o.SetTraceRouteEpCount(x)
-	}
-	if v, ok := d.GetOk("trace_route_ep_ext_count"); ok {
-		x := int64(v.(int))
-		o.SetTraceRouteEpExtCount(x)
-	}
-	if v, ok := d.GetOk("trace_route_ext_ep_count"); ok {
-		x := int64(v.(int))
-		o.SetTraceRouteExtEpCount(x)
-	}
-	if v, ok := d.GetOk("trace_route_ext_ext_count"); ok {
-		x := int64(v.(int))
-		o.SetTraceRouteExtExtCount(x)
-	}
-	if v, ok := d.GetOk("vns_abs_graph_count"); ok {
-		x := int64(v.(int))
-		o.SetVnsAbsGraphCount(x)
-	}
-	if v, ok := d.GetOk("vns_backup_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetVnsBackupPolCount(x)
-	}
-	if v, ok := d.GetOk("vns_redirect_dest_count"); ok {
-		x := int64(v.(int))
-		o.SetVnsRedirectDestCount(x)
-	}
-	if v, ok := d.GetOk("vns_svc_redirect_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetVnsSvcRedirectPolCount(x)
-	}
-	if v, ok := d.GetOk("vrf_count"); ok {
-		x := int64(v.(int))
-		o.SetVrfCount(x)
-	}
-	if v, ok := d.GetOk("vz_br_cp_count"); ok {
-		x := int64(v.(int))
-		o.SetVzBrCpCount(x)
-	}
-	if v, ok := d.GetOk("vz_rt_cons_count"); ok {
-		x := int64(v.(int))
-		o.SetVzRtConsCount(x)
-	}
-	if v, ok := d.GetOk("vz_rt_prov_count"); ok {
+	if v, ok := d.GetOkExists("vz_rt_prov_count"); ok {
 		x := int64(v.(int))
 		o.SetVzRtProvCount(x)
 	}

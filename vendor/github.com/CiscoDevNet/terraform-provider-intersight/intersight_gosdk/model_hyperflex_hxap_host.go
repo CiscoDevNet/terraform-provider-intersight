@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -42,6 +42,8 @@ type HyperflexHxapHost struct {
 	// Is the role of this host is master in the cluster? true or false.
 	MasterRole       *bool                                  `json:"MasterRole,omitempty"`
 	MemoryAllocation NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
+	// Is the Storage Controller VM on the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
+	StorageVmPowerState *string `json:"StorageVmPowerState,omitempty"`
 	// Product version of the Host.
 	Version              *string                           `json:"Version,omitempty"`
 	Cluster              *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
@@ -66,6 +68,8 @@ func NewHyperflexHxapHost(classId string, objectType string) *HyperflexHxapHost 
 	this.Status = &status
 	var hwPowerState string = "Unknown"
 	this.HwPowerState = &hwPowerState
+	var storageVmPowerState string = "Unknown"
+	this.StorageVmPowerState = &storageVmPowerState
 	return &this
 }
 
@@ -80,6 +84,8 @@ func NewHyperflexHxapHostWithDefaults() *HyperflexHxapHost {
 	this.ObjectType = objectType
 	var hwPowerState string = "Unknown"
 	this.HwPowerState = &hwPowerState
+	var storageVmPowerState string = "Unknown"
+	this.StorageVmPowerState = &storageVmPowerState
 	return &this
 }
 
@@ -473,6 +479,38 @@ func (o *HyperflexHxapHost) UnsetMemoryAllocation() {
 	o.MemoryAllocation.Unset()
 }
 
+// GetStorageVmPowerState returns the StorageVmPowerState field value if set, zero value otherwise.
+func (o *HyperflexHxapHost) GetStorageVmPowerState() string {
+	if o == nil || o.StorageVmPowerState == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageVmPowerState
+}
+
+// GetStorageVmPowerStateOk returns a tuple with the StorageVmPowerState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxapHost) GetStorageVmPowerStateOk() (*string, bool) {
+	if o == nil || o.StorageVmPowerState == nil {
+		return nil, false
+	}
+	return o.StorageVmPowerState, true
+}
+
+// HasStorageVmPowerState returns a boolean if a field has been set.
+func (o *HyperflexHxapHost) HasStorageVmPowerState() bool {
+	if o != nil && o.StorageVmPowerState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageVmPowerState gets a reference to the given string and assigns it to the StorageVmPowerState field.
+func (o *HyperflexHxapHost) SetStorageVmPowerState(v string) {
+	o.StorageVmPowerState = &v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *HyperflexHxapHost) GetVersion() string {
 	if o == nil || o.Version == nil {
@@ -647,6 +685,9 @@ func (o HyperflexHxapHost) MarshalJSON() ([]byte, error) {
 	if o.MemoryAllocation.IsSet() {
 		toSerialize["MemoryAllocation"] = o.MemoryAllocation.Get()
 	}
+	if o.StorageVmPowerState != nil {
+		toSerialize["StorageVmPowerState"] = o.StorageVmPowerState
+	}
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
 	}
@@ -691,6 +732,8 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		// Is the role of this host is master in the cluster? true or false.
 		MasterRole       *bool                                  `json:"MasterRole,omitempty"`
 		MemoryAllocation NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
+		// Is the Storage Controller VM on the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
+		StorageVmPowerState *string `json:"StorageVmPowerState,omitempty"`
 		// Product version of the Host.
 		Version        *string                           `json:"Version,omitempty"`
 		Cluster        *HyperflexHxapClusterRelationship `json:"Cluster,omitempty"`
@@ -715,6 +758,7 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexHxapHost.ManagementIpAddress = varHyperflexHxapHostWithoutEmbeddedStruct.ManagementIpAddress
 		varHyperflexHxapHost.MasterRole = varHyperflexHxapHostWithoutEmbeddedStruct.MasterRole
 		varHyperflexHxapHost.MemoryAllocation = varHyperflexHxapHostWithoutEmbeddedStruct.MemoryAllocation
+		varHyperflexHxapHost.StorageVmPowerState = varHyperflexHxapHostWithoutEmbeddedStruct.StorageVmPowerState
 		varHyperflexHxapHost.Version = varHyperflexHxapHostWithoutEmbeddedStruct.Version
 		varHyperflexHxapHost.Cluster = varHyperflexHxapHostWithoutEmbeddedStruct.Cluster
 		varHyperflexHxapHost.ClusterMember = varHyperflexHxapHostWithoutEmbeddedStruct.ClusterMember
@@ -748,6 +792,7 @@ func (o *HyperflexHxapHost) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ManagementIpAddress")
 		delete(additionalProperties, "MasterRole")
 		delete(additionalProperties, "MemoryAllocation")
+		delete(additionalProperties, "StorageVmPowerState")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "ClusterMember")

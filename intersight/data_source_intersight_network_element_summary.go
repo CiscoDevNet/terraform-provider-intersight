@@ -1221,14 +1221,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NetworkElementSummary{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1237,20 +1235,17 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("admin_evac_state"); ok {
-		v := d.Get("admin_evac_state")
+	if v, ok := d.GetOk("admin_evac_state"); ok {
 		x := (v.(string))
 		o.SetAdminEvacState(x)
 	}
 
-	if _, ok := d.GetOk("admin_inband_interface_state"); ok {
-		v := d.Get("admin_inband_interface_state")
+	if v, ok := d.GetOk("admin_inband_interface_state"); ok {
 		x := (v.(string))
 		o.SetAdminInbandInterfaceState(x)
 	}
 
-	if _, ok := d.GetOk("alarm_summary"); ok {
-		v := d.Get("alarm_summary")
+	if v, ok := d.GetOk("alarm_summary"); ok {
 		p := make([]models.ComputeAlarmSummary, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1293,8 +1288,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1334,260 +1328,217 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("available_memory"); ok {
-		v := d.Get("available_memory")
+	if v, ok := d.GetOk("available_memory"); ok {
 		x := (v.(string))
 		o.SetAvailableMemory(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("ethernet_mode"); ok {
-		v := d.Get("ethernet_mode")
+	if v, ok := d.GetOk("ethernet_mode"); ok {
 		x := (v.(string))
 		o.SetEthernetMode(x)
 	}
 
-	if _, ok := d.GetOk("ethernet_switching_mode"); ok {
-		v := d.Get("ethernet_switching_mode")
+	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
 		x := (v.(string))
 		o.SetEthernetSwitchingMode(x)
 	}
 
-	if _, ok := d.GetOk("fault_summary"); ok {
-		v := d.Get("fault_summary")
+	if v, ok := d.GetOkExists("fault_summary"); ok {
 		x := int64(v.(int))
 		o.SetFaultSummary(x)
 	}
 
-	if _, ok := d.GetOk("fc_mode"); ok {
-		v := d.Get("fc_mode")
+	if v, ok := d.GetOk("fc_mode"); ok {
 		x := (v.(string))
 		o.SetFcMode(x)
 	}
 
-	if _, ok := d.GetOk("fc_switching_mode"); ok {
-		v := d.Get("fc_switching_mode")
+	if v, ok := d.GetOk("fc_switching_mode"); ok {
 		x := (v.(string))
 		o.SetFcSwitchingMode(x)
 	}
 
-	if _, ok := d.GetOk("firmware"); ok {
-		v := d.Get("firmware")
+	if v, ok := d.GetOk("firmware"); ok {
 		x := (v.(string))
 		o.SetFirmware(x)
 	}
 
-	if _, ok := d.GetOk("inband_ip_address"); ok {
-		v := d.Get("inband_ip_address")
+	if v, ok := d.GetOk("inband_ip_address"); ok {
 		x := (v.(string))
 		o.SetInbandIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("inband_ip_gateway"); ok {
-		v := d.Get("inband_ip_gateway")
+	if v, ok := d.GetOk("inband_ip_gateway"); ok {
 		x := (v.(string))
 		o.SetInbandIpGateway(x)
 	}
 
-	if _, ok := d.GetOk("inband_ip_mask"); ok {
-		v := d.Get("inband_ip_mask")
+	if v, ok := d.GetOk("inband_ip_mask"); ok {
 		x := (v.(string))
 		o.SetInbandIpMask(x)
 	}
 
-	if _, ok := d.GetOk("inband_vlan"); ok {
-		v := d.Get("inband_vlan")
+	if v, ok := d.GetOkExists("inband_vlan"); ok {
 		x := int64(v.(int))
 		o.SetInbandVlan(x)
 	}
 
-	if _, ok := d.GetOk("ipv4_address"); ok {
-		v := d.Get("ipv4_address")
+	if v, ok := d.GetOk("ipv4_address"); ok {
 		x := (v.(string))
 		o.SetIpv4Address(x)
 	}
 
-	if _, ok := d.GetOk("management_mode"); ok {
-		v := d.Get("management_mode")
+	if v, ok := d.GetOk("management_mode"); ok {
 		x := (v.(string))
 		o.SetManagementMode(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("num_ether_ports"); ok {
-		v := d.Get("num_ether_ports")
+	if v, ok := d.GetOkExists("num_ether_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumEtherPorts(x)
 	}
 
-	if _, ok := d.GetOk("num_ether_ports_configured"); ok {
-		v := d.Get("num_ether_ports_configured")
+	if v, ok := d.GetOkExists("num_ether_ports_configured"); ok {
 		x := int64(v.(int))
 		o.SetNumEtherPortsConfigured(x)
 	}
 
-	if _, ok := d.GetOk("num_ether_ports_link_up"); ok {
-		v := d.Get("num_ether_ports_link_up")
+	if v, ok := d.GetOkExists("num_ether_ports_link_up"); ok {
 		x := int64(v.(int))
 		o.SetNumEtherPortsLinkUp(x)
 	}
 
-	if _, ok := d.GetOk("num_expansion_modules"); ok {
-		v := d.Get("num_expansion_modules")
+	if v, ok := d.GetOkExists("num_expansion_modules"); ok {
 		x := int64(v.(int))
 		o.SetNumExpansionModules(x)
 	}
 
-	if _, ok := d.GetOk("num_fc_ports"); ok {
-		v := d.Get("num_fc_ports")
+	if v, ok := d.GetOkExists("num_fc_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumFcPorts(x)
 	}
 
-	if _, ok := d.GetOk("num_fc_ports_configured"); ok {
-		v := d.Get("num_fc_ports_configured")
+	if v, ok := d.GetOkExists("num_fc_ports_configured"); ok {
 		x := int64(v.(int))
 		o.SetNumFcPortsConfigured(x)
 	}
 
-	if _, ok := d.GetOk("num_fc_ports_link_up"); ok {
-		v := d.Get("num_fc_ports_link_up")
+	if v, ok := d.GetOkExists("num_fc_ports_link_up"); ok {
 		x := int64(v.(int))
 		o.SetNumFcPortsLinkUp(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_evac_state"); ok {
-		v := d.Get("oper_evac_state")
+	if v, ok := d.GetOk("oper_evac_state"); ok {
 		x := (v.(string))
 		o.SetOperEvacState(x)
 	}
 
-	if _, ok := d.GetOk("operability"); ok {
-		v := d.Get("operability")
+	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ip_address"); ok {
-		v := d.Get("out_of_band_ip_address")
+	if v, ok := d.GetOk("out_of_band_ip_address"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ip_gateway"); ok {
-		v := d.Get("out_of_band_ip_gateway")
+	if v, ok := d.GetOk("out_of_band_ip_gateway"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpGateway(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ip_mask"); ok {
-		v := d.Get("out_of_band_ip_mask")
+	if v, ok := d.GetOk("out_of_band_ip_mask"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpMask(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv4_address"); ok {
-		v := d.Get("out_of_band_ipv4_address")
+	if v, ok := d.GetOk("out_of_band_ipv4_address"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv4Address(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv4_gateway"); ok {
-		v := d.Get("out_of_band_ipv4_gateway")
+	if v, ok := d.GetOk("out_of_band_ipv4_gateway"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv4Gateway(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv4_mask"); ok {
-		v := d.Get("out_of_band_ipv4_mask")
+	if v, ok := d.GetOk("out_of_band_ipv4_mask"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv4Mask(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv6_address"); ok {
-		v := d.Get("out_of_band_ipv6_address")
+	if v, ok := d.GetOk("out_of_band_ipv6_address"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Address(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv6_gateway"); ok {
-		v := d.Get("out_of_band_ipv6_gateway")
+	if v, ok := d.GetOk("out_of_band_ipv6_gateway"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Gateway(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_ipv6_prefix"); ok {
-		v := d.Get("out_of_band_ipv6_prefix")
+	if v, ok := d.GetOk("out_of_band_ipv6_prefix"); ok {
 		x := (v.(string))
 		o.SetOutOfBandIpv6Prefix(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_mac"); ok {
-		v := d.Get("out_of_band_mac")
+	if v, ok := d.GetOk("out_of_band_mac"); ok {
 		x := (v.(string))
 		o.SetOutOfBandMac(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1596,8 +1547,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1640,8 +1590,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1681,14 +1630,12 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1731,44 +1678,37 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("source_object_type"); ok {
-		v := d.Get("source_object_type")
+	if v, ok := d.GetOk("source_object_type"); ok {
 		x := (v.(string))
 		o.SetSourceObjectType(x)
 	}
 
-	if _, ok := d.GetOk("switch_id"); ok {
-		v := d.Get("switch_id")
+	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1801,32 +1741,27 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("thermal"); ok {
-		v := d.Get("thermal")
+	if v, ok := d.GetOk("thermal"); ok {
 		x := (v.(string))
 		o.SetThermal(x)
 	}
 
-	if _, ok := d.GetOk("total_memory"); ok {
-		v := d.Get("total_memory")
+	if v, ok := d.GetOkExists("total_memory"); ok {
 		x := int64(v.(int))
 		o.SetTotalMemory(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1898,231 +1833,6 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("admin_evac_state"); ok {
-		x := (v.(string))
-		o.SetAdminEvacState(x)
-	}
-	if v, ok := d.GetOk("admin_inband_interface_state"); ok {
-		x := (v.(string))
-		o.SetAdminInbandInterfaceState(x)
-	}
-	if v, ok := d.GetOk("available_memory"); ok {
-		x := (v.(string))
-		o.SetAvailableMemory(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("ethernet_mode"); ok {
-		x := (v.(string))
-		o.SetEthernetMode(x)
-	}
-	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
-		x := (v.(string))
-		o.SetEthernetSwitchingMode(x)
-	}
-	if v, ok := d.GetOk("fault_summary"); ok {
-		x := int64(v.(int))
-		o.SetFaultSummary(x)
-	}
-	if v, ok := d.GetOk("fc_mode"); ok {
-		x := (v.(string))
-		o.SetFcMode(x)
-	}
-	if v, ok := d.GetOk("fc_switching_mode"); ok {
-		x := (v.(string))
-		o.SetFcSwitchingMode(x)
-	}
-	if v, ok := d.GetOk("firmware"); ok {
-		x := (v.(string))
-		o.SetFirmware(x)
-	}
-	if v, ok := d.GetOk("inband_ip_address"); ok {
-		x := (v.(string))
-		o.SetInbandIpAddress(x)
-	}
-	if v, ok := d.GetOk("inband_ip_gateway"); ok {
-		x := (v.(string))
-		o.SetInbandIpGateway(x)
-	}
-	if v, ok := d.GetOk("inband_ip_mask"); ok {
-		x := (v.(string))
-		o.SetInbandIpMask(x)
-	}
-	if v, ok := d.GetOk("inband_vlan"); ok {
-		x := int64(v.(int))
-		o.SetInbandVlan(x)
-	}
-	if v, ok := d.GetOk("ipv4_address"); ok {
-		x := (v.(string))
-		o.SetIpv4Address(x)
-	}
-	if v, ok := d.GetOk("management_mode"); ok {
-		x := (v.(string))
-		o.SetManagementMode(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("num_ether_ports"); ok {
-		x := int64(v.(int))
-		o.SetNumEtherPorts(x)
-	}
-	if v, ok := d.GetOk("num_ether_ports_configured"); ok {
-		x := int64(v.(int))
-		o.SetNumEtherPortsConfigured(x)
-	}
-	if v, ok := d.GetOk("num_ether_ports_link_up"); ok {
-		x := int64(v.(int))
-		o.SetNumEtherPortsLinkUp(x)
-	}
-	if v, ok := d.GetOk("num_expansion_modules"); ok {
-		x := int64(v.(int))
-		o.SetNumExpansionModules(x)
-	}
-	if v, ok := d.GetOk("num_fc_ports"); ok {
-		x := int64(v.(int))
-		o.SetNumFcPorts(x)
-	}
-	if v, ok := d.GetOk("num_fc_ports_configured"); ok {
-		x := int64(v.(int))
-		o.SetNumFcPortsConfigured(x)
-	}
-	if v, ok := d.GetOk("num_fc_ports_link_up"); ok {
-		x := int64(v.(int))
-		o.SetNumFcPortsLinkUp(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_evac_state"); ok {
-		x := (v.(string))
-		o.SetOperEvacState(x)
-	}
-	if v, ok := d.GetOk("operability"); ok {
-		x := (v.(string))
-		o.SetOperability(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ip_address"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpAddress(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ip_gateway"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpGateway(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ip_mask"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpMask(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv4_address"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv4Address(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv4_gateway"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv4Gateway(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv4_mask"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv4Mask(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv6_address"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv6Address(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv6_gateway"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv6Gateway(x)
-	}
-	if v, ok := d.GetOk("out_of_band_ipv6_prefix"); ok {
-		x := (v.(string))
-		o.SetOutOfBandIpv6Prefix(x)
-	}
-	if v, ok := d.GetOk("out_of_band_mac"); ok {
-		x := (v.(string))
-		o.SetOutOfBandMac(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("source_object_type"); ok {
-		x := (v.(string))
-		o.SetSourceObjectType(x)
-	}
-	if v, ok := d.GetOk("switch_id"); ok {
-		x := (v.(string))
-		o.SetSwitchId(x)
-	}
-	if v, ok := d.GetOk("thermal"); ok {
-		x := (v.(string))
-		o.SetThermal(x)
-	}
-	if v, ok := d.GetOk("total_memory"); ok {
-		x := int64(v.(int))
-		o.SetTotalMemory(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

@@ -941,14 +941,12 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StoragePureVolumeSnapshot{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -957,8 +955,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -998,8 +995,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("array"); ok {
-		v := d.Get("array")
+	if v, ok := d.GetOk("array"); ok {
 		p := make([]models.StoragePureArrayRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1042,56 +1038,47 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("created_time"); ok {
-		v := d.Get("created_time")
+	if v, ok := d.GetOk("created_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreatedTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1100,8 +1087,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1144,8 +1130,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1185,14 +1170,12 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("protection_group_name"); ok {
-		v := d.Get("protection_group_name")
+	if v, ok := d.GetOk("protection_group_name"); ok {
 		x := (v.(string))
 		o.SetProtectionGroupName(x)
 	}
 
-	if _, ok := d.GetOk("protection_group_snapshot"); ok {
-		v := d.Get("protection_group_snapshot")
+	if v, ok := d.GetOk("protection_group_snapshot"); ok {
 		p := make([]models.StoragePureProtectionGroupSnapshotRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1235,8 +1218,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1279,32 +1261,27 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("size"); ok {
-		v := d.Get("size")
+	if v, ok := d.GetOkExists("size"); ok {
 		x := int64(v.(int))
 		o.SetSize(x)
 	}
 
-	if _, ok := d.GetOk("nr_source"); ok {
-		v := d.Get("nr_source")
+	if v, ok := d.GetOk("nr_source"); ok {
 		x := (v.(string))
 		o.SetSource(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1337,8 +1314,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1412,8 +1388,7 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("volume"); ok {
-		v := d.Get("volume")
+	if v, ok := d.GetOk("volume"); ok {
 		p := make([]models.StoragePureVolumeRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1454,63 +1429,6 @@ func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.Resour
 			x := p[0]
 			o.SetVolume(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("created_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreatedTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("protection_group_name"); ok {
-		x := (v.(string))
-		o.SetProtectionGroupName(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("size"); ok {
-		x := int64(v.(int))
-		o.SetSize(x)
-	}
-	if v, ok := d.GetOk("nr_source"); ok {
-		x := (v.(string))
-		o.SetSource(x)
 	}
 
 	data, err := o.MarshalJSON()

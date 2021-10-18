@@ -499,8 +499,6 @@ func resourceSdwanVmanageAccountPolicyCreate(c context.Context, d *schema.Resour
 		o.SetEndpointAddress(x)
 	}
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -561,7 +559,7 @@ func resourceSdwanVmanageAccountPolicyCreate(c context.Context, d *schema.Resour
 		o.SetPassword(x)
 	}
 
-	if v, ok := d.GetOk("port"); ok {
+	if v, ok := d.GetOkExists("port"); ok {
 		x := int64(v.(int))
 		o.SetPort(x)
 	}

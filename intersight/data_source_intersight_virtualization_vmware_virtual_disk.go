@@ -1071,14 +1071,12 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareVirtualDisk{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1087,8 +1085,7 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1128,32 +1125,27 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("compatibility_mode"); ok {
-		v := d.Get("compatibility_mode")
+	if v, ok := d.GetOk("compatibility_mode"); ok {
 		x := (v.(string))
 		o.SetCompatibilityMode(x)
 	}
 
-	if _, ok := d.GetOk("controller_key"); ok {
-		v := d.Get("controller_key")
+	if v, ok := d.GetOkExists("controller_key"); ok {
 		x := int64(v.(int))
 		o.SetControllerKey(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("datastore"); ok {
-		v := d.Get("datastore")
+	if v, ok := d.GetOk("datastore"); ok {
 		p := make([]models.VirtualizationVmwareDatastoreRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1196,74 +1188,62 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("device_name"); ok {
-		v := d.Get("device_name")
+	if v, ok := d.GetOk("device_name"); ok {
 		x := (v.(string))
 		o.SetDeviceName(x)
 	}
 
-	if _, ok := d.GetOk("disk_mode"); ok {
-		v := d.Get("disk_mode")
+	if v, ok := d.GetOk("disk_mode"); ok {
 		x := (v.(string))
 		o.SetDiskMode(x)
 	}
 
-	if _, ok := d.GetOk("disk_type"); ok {
-		v := d.Get("disk_type")
+	if v, ok := d.GetOk("disk_type"); ok {
 		x := (v.(string))
 		o.SetDiskType(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("key"); ok {
-		v := d.Get("key")
+	if v, ok := d.GetOkExists("key"); ok {
 		x := int64(v.(int))
 		o.SetKey(x)
 	}
 
-	if _, ok := d.GetOk("limit"); ok {
-		v := d.Get("limit")
+	if v, ok := d.GetOkExists("limit"); ok {
 		x := int64(v.(int))
 		o.SetLimit(x)
 	}
 
-	if _, ok := d.GetOk("lun_uuid"); ok {
-		v := d.Get("lun_uuid")
+	if v, ok := d.GetOk("lun_uuid"); ok {
 		x := (v.(string))
 		o.SetLunUuid(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1272,8 +1252,7 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1316,8 +1295,7 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1357,8 +1335,7 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1401,20 +1378,17 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("shares"); ok {
-		v := d.Get("shares")
+	if v, ok := d.GetOk("shares"); ok {
 		p := make([]models.VirtualizationVmwareSharesInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1457,26 +1431,22 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("sharing"); ok {
-		v := d.Get("sharing")
+	if v, ok := d.GetOk("sharing"); ok {
 		x := (v.(string))
 		o.SetSharing(x)
 	}
 
-	if _, ok := d.GetOk("size"); ok {
-		v := d.Get("size")
+	if v, ok := d.GetOkExists("size"); ok {
 		x := int64(v.(int))
 		o.SetSize(x)
 	}
 
-	if _, ok := d.GetOk("storage_allocation_type"); ok {
-		v := d.Get("storage_allocation_type")
+	if v, ok := d.GetOk("storage_allocation_type"); ok {
 		x := (v.(string))
 		o.SetStorageAllocationType(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1509,32 +1479,27 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("unit_number"); ok {
-		v := d.Get("unit_number")
+	if v, ok := d.GetOkExists("unit_number"); ok {
 		x := int64(v.(int))
 		o.SetUnitNumber(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("vdisk_id"); ok {
-		v := d.Get("vdisk_id")
+	if v, ok := d.GetOk("vdisk_id"); ok {
 		x := (v.(string))
 		o.SetVdiskId(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1608,14 +1573,12 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("virtual_disk_path"); ok {
-		v := d.Get("virtual_disk_path")
+	if v, ok := d.GetOk("virtual_disk_path"); ok {
 		x := (v.(string))
 		o.SetVirtualDiskPath(x)
 	}
 
-	if _, ok := d.GetOk("virtual_machine"); ok {
-		v := d.Get("virtual_machine")
+	if v, ok := d.GetOk("virtual_machine"); ok {
 		p := make([]models.VirtualizationVmwareVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1658,116 +1621,6 @@ func dataSourceVirtualizationVmwareVirtualDiskRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("vm_identity"); ok {
-		v := d.Get("vm_identity")
-		x := (v.(string))
-		o.SetVmIdentity(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("compatibility_mode"); ok {
-		x := (v.(string))
-		o.SetCompatibilityMode(x)
-	}
-	if v, ok := d.GetOk("controller_key"); ok {
-		x := int64(v.(int))
-		o.SetControllerKey(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_name"); ok {
-		x := (v.(string))
-		o.SetDeviceName(x)
-	}
-	if v, ok := d.GetOk("disk_mode"); ok {
-		x := (v.(string))
-		o.SetDiskMode(x)
-	}
-	if v, ok := d.GetOk("disk_type"); ok {
-		x := (v.(string))
-		o.SetDiskType(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("key"); ok {
-		x := int64(v.(int))
-		o.SetKey(x)
-	}
-	if v, ok := d.GetOk("limit"); ok {
-		x := int64(v.(int))
-		o.SetLimit(x)
-	}
-	if v, ok := d.GetOk("lun_uuid"); ok {
-		x := (v.(string))
-		o.SetLunUuid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("sharing"); ok {
-		x := (v.(string))
-		o.SetSharing(x)
-	}
-	if v, ok := d.GetOk("size"); ok {
-		x := int64(v.(int))
-		o.SetSize(x)
-	}
-	if v, ok := d.GetOk("storage_allocation_type"); ok {
-		x := (v.(string))
-		o.SetStorageAllocationType(x)
-	}
-	if v, ok := d.GetOk("unit_number"); ok {
-		x := int64(v.(int))
-		o.SetUnitNumber(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("vdisk_id"); ok {
-		x := (v.(string))
-		o.SetVdiskId(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("virtual_disk_path"); ok {
-		x := (v.(string))
-		o.SetVirtualDiskPath(x)
-	}
 	if v, ok := d.GetOk("vm_identity"); ok {
 		x := (v.(string))
 		o.SetVmIdentity(x)

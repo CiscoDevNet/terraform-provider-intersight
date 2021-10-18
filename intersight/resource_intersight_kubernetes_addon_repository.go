@@ -763,11 +763,10 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 
 	o.SetClassId("kubernetes.AddonRepository")
 
-	o.SetInsecureSkipVerification(d.Get("insecure_skip_verification").(bool))
-
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
-	o.SetIsTokenSet(d.Get("is_token_set").(bool))
+	if v, ok := d.GetOkExists("insecure_skip_verification"); ok {
+		x := (v.(bool))
+		o.SetInsecureSkipVerification(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

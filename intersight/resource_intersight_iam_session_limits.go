@@ -476,12 +476,12 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetClassId("iam.SessionLimits")
 
-	if v, ok := d.GetOk("idle_time_out"); ok {
+	if v, ok := d.GetOkExists("idle_time_out"); ok {
 		x := int64(v.(int))
 		o.SetIdleTimeOut(x)
 	}
 
-	if v, ok := d.GetOk("maximum_limit"); ok {
+	if v, ok := d.GetOkExists("maximum_limit"); ok {
 		x := int64(v.(int))
 		o.SetMaximumLimit(x)
 	}
@@ -493,7 +493,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 
 	o.SetObjectType("iam.SessionLimits")
 
-	if v, ok := d.GetOk("per_user_limit"); ok {
+	if v, ok := d.GetOkExists("per_user_limit"); ok {
 		x := int64(v.(int))
 		o.SetPerUserLimit(x)
 	}
@@ -541,7 +541,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("session_time_out"); ok {
+	if v, ok := d.GetOkExists("session_time_out"); ok {
 		x := int64(v.(int))
 		o.SetSessionTimeOut(x)
 	}

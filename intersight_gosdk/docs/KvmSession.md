@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Session"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Session"]
+**KvmLaunchUrlPath** | Pointer to **string** | One time URL that is used to launch the KVM console. | [optional] 
 **OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
 **SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 
 **Username** | Pointer to **string** | Username used for vKVM access. | [optional] 
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetKvmLaunchUrlPath
+
+`func (o *KvmSession) GetKvmLaunchUrlPath() string`
+
+GetKvmLaunchUrlPath returns the KvmLaunchUrlPath field if non-nil, zero value otherwise.
+
+### GetKvmLaunchUrlPathOk
+
+`func (o *KvmSession) GetKvmLaunchUrlPathOk() (*string, bool)`
+
+GetKvmLaunchUrlPathOk returns a tuple with the KvmLaunchUrlPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmLaunchUrlPath
+
+`func (o *KvmSession) SetKvmLaunchUrlPath(v string)`
+
+SetKvmLaunchUrlPath sets KvmLaunchUrlPath field to given value.
+
+### HasKvmLaunchUrlPath
+
+`func (o *KvmSession) HasKvmLaunchUrlPath() bool`
+
+HasKvmLaunchUrlPath returns a boolean if a field has been set.
 
 ### GetOneTimePassword
 

@@ -15,11 +15,16 @@ import (
 )
 
 func dataSourceHyperflexStorageContainer() *schema.Resource {
-	var subSchema = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
+	var subSchema = map[string]*schema.Schema{"accessibility_summary": {
+		Description: "Storage container accessibility summary.\n* `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable.\n* `ACCESSIBLE` - The HyperFlex storage container is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible.",
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -118,6 +123,49 @@ func dataSourceHyperflexStorageContainer() *schema.Resource {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"host_mount_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"accessibility": {
+						Description: "Host specific storage container accessibility status.\n* `NOT_APPLICABLE` - The HyperFlex storage container accessibility on host is not applicable.\n* `ACCESSIBLE` - The HyperFlex storage container is accessible on the host.\n* `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible on the host.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible on the host.\n* `READONLY` - The HyperFlex storage container accessibility is readonly on the host.\n* `HOST_NOT_REACHABLE` - The storage container is not accessible via this host because it is not accessible.\n* `UNKNOWN` - The storage container accessibility via this host is unknown.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"host_name": {
+						Description: "The name of the host corresponding to the mount and accessibility status of the storage container.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"mounted": {
+						Description: "Host specific storage container mount status.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reason": {
+						Description: "Host specific storage container mount status reason.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"in_use": {
 			Description: "Indicates whether the storage container has volumes.",
@@ -494,11 +542,16 @@ func dataSourceHyperflexStorageContainer() *schema.Resource {
 			},
 		},
 	}
-	var model = map[string]*schema.Schema{"account_moid": {
-		Description: "The Account ID for this managed object.",
+	var model = map[string]*schema.Schema{"accessibility_summary": {
+		Description: "Storage container accessibility summary.\n* `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable.\n* `ACCESSIBLE` - The HyperFlex storage container is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible.",
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"account_moid": {
+			Description: "The Account ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -597,6 +650,49 @@ func dataSourceHyperflexStorageContainer() *schema.Resource {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"host_mount_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"accessibility": {
+						Description: "Host specific storage container accessibility status.\n* `NOT_APPLICABLE` - The HyperFlex storage container accessibility on host is not applicable.\n* `ACCESSIBLE` - The HyperFlex storage container is accessible on the host.\n* `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible on the host.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible on the host.\n* `READONLY` - The HyperFlex storage container accessibility is readonly on the host.\n* `HOST_NOT_REACHABLE` - The storage container is not accessible via this host because it is not accessible.\n* `UNKNOWN` - The storage container accessibility via this host is unknown.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"host_name": {
+						Description: "The name of the host corresponding to the mount and accessibility status of the storage container.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"mounted": {
+						Description: "Host specific storage container mount status.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reason": {
+						Description: "Host specific storage container mount status reason.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"in_use": {
 			Description: "Indicates whether the storage container has volumes.",
@@ -989,14 +1085,17 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexStorageContainer{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("accessibility_summary"); ok {
+		x := (v.(string))
+		o.SetAccessibilitySummary(x)
+	}
+
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1005,8 +1104,7 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1046,14 +1144,12 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster"); ok {
-		v := d.Get("cluster")
+	if v, ok := d.GetOk("cluster"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1096,88 +1192,105 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("created_time"); ok {
-		v := d.Get("created_time")
+	if v, ok := d.GetOk("created_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreatedTime(x)
 	}
 
-	if _, ok := d.GetOk("data_block_size"); ok {
-		v := d.Get("data_block_size")
+	if v, ok := d.GetOkExists("data_block_size"); ok {
 		x := int64(v.(int))
 		o.SetDataBlockSize(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetInUse(d.Get("in_use").(bool))
+	if v, ok := d.GetOk("host_mount_status"); ok {
+		x := make([]models.StorageStorageContainerHostMountStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.StorageStorageContainerHostMountStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.StorageContainerHostMountStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetHostMountStatus(x)
+	}
 
-	if _, ok := d.GetOk("kind"); ok {
-		v := d.Get("kind")
+	if v, ok := d.GetOkExists("in_use"); ok {
+		x := (v.(bool))
+		o.SetInUse(x)
+	}
+
+	if v, ok := d.GetOk("kind"); ok {
 		x := (v.(string))
 		o.SetKind(x)
 	}
 
-	if _, ok := d.GetOk("last_access_time"); ok {
-		v := d.Get("last_access_time")
+	if v, ok := d.GetOk("last_access_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastAccessTime(x)
 	}
 
-	if _, ok := d.GetOk("last_modified_time"); ok {
-		v := d.Get("last_modified_time")
+	if v, ok := d.GetOk("last_modified_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastModifiedTime(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("mount_status"); ok {
-		v := d.Get("mount_status")
+	if v, ok := d.GetOk("mount_status"); ok {
 		x := (v.(string))
 		o.SetMountStatus(x)
 	}
 
-	if _, ok := d.GetOk("mount_summary"); ok {
-		v := d.Get("mount_summary")
+	if v, ok := d.GetOk("mount_summary"); ok {
 		x := (v.(string))
 		o.SetMountSummary(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1186,8 +1299,7 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1230,8 +1342,7 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1271,26 +1382,22 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("provisioned_capacity"); ok {
-		v := d.Get("provisioned_capacity")
+	if v, ok := d.GetOkExists("provisioned_capacity"); ok {
 		x := int64(v.(int))
 		o.SetProvisionedCapacity(x)
 	}
 
-	if _, ok := d.GetOk("provisioned_volume_capacity_utilization"); ok {
-		v := d.Get("provisioned_volume_capacity_utilization")
+	if v, ok := d.GetOk("provisioned_volume_capacity_utilization"); ok {
 		x := v.(float32)
 		o.SetProvisionedVolumeCapacityUtilization(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("storage_utilization"); ok {
-		v := d.Get("storage_utilization")
+	if v, ok := d.GetOk("storage_utilization"); ok {
 		p := make([]models.StorageBaseCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1321,8 +1428,7 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1355,26 +1461,22 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("un_compressed_used_bytes"); ok {
-		v := d.Get("un_compressed_used_bytes")
+	if v, ok := d.GetOkExists("un_compressed_used_bytes"); ok {
 		x := int64(v.(int))
 		o.SetUnCompressedUsedBytes(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1448,14 +1550,12 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("volume_count"); ok {
-		v := d.Get("volume_count")
+	if v, ok := d.GetOkExists("volume_count"); ok {
 		x := int64(v.(int))
 		o.SetVolumeCount(x)
 	}
 
-	if _, ok := d.GetOk("volumes"); ok {
-		v := d.Get("volumes")
+	if v, ok := d.GetOk("volumes"); ok {
 		x := make([]models.HyperflexVolumeRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1495,99 +1595,6 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 		o.SetVolumes(x)
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("created_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreatedTime(x)
-	}
-	if v, ok := d.GetOk("data_block_size"); ok {
-		x := int64(v.(int))
-		o.SetDataBlockSize(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("in_use"); ok {
-		x := (v.(bool))
-		o.SetInUse(x)
-	}
-	if v, ok := d.GetOk("kind"); ok {
-		x := (v.(string))
-		o.SetKind(x)
-	}
-	if v, ok := d.GetOk("last_access_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastAccessTime(x)
-	}
-	if v, ok := d.GetOk("last_modified_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastModifiedTime(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("mount_status"); ok {
-		x := (v.(string))
-		o.SetMountStatus(x)
-	}
-	if v, ok := d.GetOk("mount_summary"); ok {
-		x := (v.(string))
-		o.SetMountSummary(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("provisioned_capacity"); ok {
-		x := int64(v.(int))
-		o.SetProvisionedCapacity(x)
-	}
-	if v, ok := d.GetOk("provisioned_volume_capacity_utilization"); ok {
-		x := v.(float32)
-		o.SetProvisionedVolumeCapacityUtilization(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-	if v, ok := d.GetOk("un_compressed_used_bytes"); ok {
-		x := int64(v.(int))
-		o.SetUnCompressedUsedBytes(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("volume_count"); ok {
-		x := int64(v.(int))
-		o.SetVolumeCount(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of HyperflexStorageContainer object failed with error : %s", err.Error())
@@ -1624,6 +1631,7 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 			for i := 0; i < len(results); i++ {
 				var s = results[i]
 				var temp = make(map[string]interface{})
+				temp["accessibility_summary"] = (s.GetAccessibilitySummary())
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
@@ -1637,6 +1645,8 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 				temp["created_time"] = (s.GetCreatedTime()).String()
 				temp["data_block_size"] = (s.GetDataBlockSize())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["host_mount_status"] = flattenListStorageStorageContainerHostMountStatus(s.GetHostMountStatus(), d)
 				temp["in_use"] = (s.GetInUse())
 				temp["kind"] = (s.GetKind())
 

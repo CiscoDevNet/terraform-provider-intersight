@@ -871,14 +871,12 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryOperatingSystemFile{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -887,8 +885,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -928,8 +925,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("catalog"); ok {
-		v := d.Get("catalog")
+	if v, ok := d.GetOk("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -972,98 +968,82 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("download_count"); ok {
-		v := d.Get("download_count")
+	if v, ok := d.GetOkExists("download_count"); ok {
 		x := int64(v.(int))
 		o.SetDownloadCount(x)
 	}
 
-	if _, ok := d.GetOk("import_action"); ok {
-		v := d.Get("import_action")
+	if v, ok := d.GetOk("import_action"); ok {
 		x := (v.(string))
 		o.SetImportAction(x)
 	}
 
-	if _, ok := d.GetOk("import_state"); ok {
-		v := d.Get("import_state")
+	if v, ok := d.GetOk("import_state"); ok {
 		x := (v.(string))
 		o.SetImportState(x)
 	}
 
-	if _, ok := d.GetOk("imported_time"); ok {
-		v := d.Get("imported_time")
+	if v, ok := d.GetOk("imported_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetImportedTime(x)
 	}
 
-	if _, ok := d.GetOk("last_access_time"); ok {
-		v := d.Get("last_access_time")
+	if v, ok := d.GetOk("last_access_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastAccessTime(x)
 	}
 
-	if _, ok := d.GetOk("md5e_tag"); ok {
-		v := d.Get("md5e_tag")
+	if v, ok := d.GetOk("md5e_tag"); ok {
 		x := (v.(string))
 		o.SetMd5eTag(x)
 	}
 
-	if _, ok := d.GetOk("md5sum"); ok {
-		v := d.Get("md5sum")
+	if v, ok := d.GetOk("md5sum"); ok {
 		x := (v.(string))
 		o.SetMd5sum(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1072,8 +1052,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1116,8 +1095,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1157,38 +1135,32 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("release_date"); ok {
-		v := d.Get("release_date")
+	if v, ok := d.GetOk("release_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetReleaseDate(x)
 	}
 
-	if _, ok := d.GetOk("sha512sum"); ok {
-		v := d.Get("sha512sum")
+	if v, ok := d.GetOk("sha512sum"); ok {
 		x := (v.(string))
 		o.SetSha512sum(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("size"); ok {
-		v := d.Get("size")
+	if v, ok := d.GetOkExists("size"); ok {
 		x := int64(v.(int))
 		o.SetSize(x)
 	}
 
-	if _, ok := d.GetOk("software_advisory_url"); ok {
-		v := d.Get("software_advisory_url")
+	if v, ok := d.GetOk("software_advisory_url"); ok {
 		x := (v.(string))
 		o.SetSoftwareAdvisoryUrl(x)
 	}
 
-	if _, ok := d.GetOk("nr_source"); ok {
-		v := d.Get("nr_source")
+	if v, ok := d.GetOk("nr_source"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1219,8 +1191,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1253,20 +1224,17 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1338,99 +1306,6 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("download_count"); ok {
-		x := int64(v.(int))
-		o.SetDownloadCount(x)
-	}
-	if v, ok := d.GetOk("import_action"); ok {
-		x := (v.(string))
-		o.SetImportAction(x)
-	}
-	if v, ok := d.GetOk("import_state"); ok {
-		x := (v.(string))
-		o.SetImportState(x)
-	}
-	if v, ok := d.GetOk("imported_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetImportedTime(x)
-	}
-	if v, ok := d.GetOk("last_access_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastAccessTime(x)
-	}
-	if v, ok := d.GetOk("md5e_tag"); ok {
-		x := (v.(string))
-		o.SetMd5eTag(x)
-	}
-	if v, ok := d.GetOk("md5sum"); ok {
-		x := (v.(string))
-		o.SetMd5sum(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("release_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetReleaseDate(x)
-	}
-	if v, ok := d.GetOk("sha512sum"); ok {
-		x := (v.(string))
-		o.SetSha512sum(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("size"); ok {
-		x := int64(v.(int))
-		o.SetSize(x)
-	}
-	if v, ok := d.GetOk("software_advisory_url"); ok {
-		x := (v.(string))
-		o.SetSoftwareAdvisoryUrl(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

@@ -1399,14 +1399,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicFcIf{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1415,8 +1413,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1456,26 +1453,22 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("fc_adapter_policy"); ok {
-		v := d.Get("fc_adapter_policy")
+	if v, ok := d.GetOk("fc_adapter_policy"); ok {
 		p := make([]models.VnicFcAdapterPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1518,8 +1511,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("fc_network_policy"); ok {
-		v := d.Get("fc_network_policy")
+	if v, ok := d.GetOk("fc_network_policy"); ok {
 		p := make([]models.VnicFcNetworkPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1562,8 +1554,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("fc_qos_policy"); ok {
-		v := d.Get("fc_qos_policy")
+	if v, ok := d.GetOk("fc_qos_policy"); ok {
 		p := make([]models.VnicFcQosPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1606,38 +1597,32 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("order"); ok {
-		v := d.Get("order")
+	if v, ok := d.GetOkExists("order"); ok {
 		x := int64(v.(int))
 		o.SetOrder(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1646,8 +1631,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1690,8 +1674,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1731,10 +1714,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		o.SetPermissionResources(x)
 	}
 
-	o.SetPersistentBindings(d.Get("persistent_bindings").(bool))
+	if v, ok := d.GetOkExists("persistent_bindings"); ok {
+		x := (v.(bool))
+		o.SetPersistentBindings(x)
+	}
 
-	if _, ok := d.GetOk("placement"); ok {
-		v := d.Get("placement")
+	if v, ok := d.GetOk("placement"); ok {
 		p := make([]models.VnicPlacementSettings, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1789,8 +1774,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("profile"); ok {
-		v := d.Get("profile")
+	if v, ok := d.GetOk("profile"); ok {
 		p := make([]models.PolicyAbstractConfigProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1833,8 +1817,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("san_connectivity_policy"); ok {
-		v := d.Get("san_connectivity_policy")
+	if v, ok := d.GetOk("san_connectivity_policy"); ok {
 		p := make([]models.VnicSanConnectivityPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1877,8 +1860,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("scp_vhba"); ok {
-		v := d.Get("scp_vhba")
+	if v, ok := d.GetOk("scp_vhba"); ok {
 		p := make([]models.VnicFcIfRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1921,14 +1903,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("sp_vhbas"); ok {
-		v := d.Get("sp_vhbas")
+	if v, ok := d.GetOk("sp_vhbas"); ok {
 		x := make([]models.VnicFcIfRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1968,14 +1948,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		o.SetSpVhbas(x)
 	}
 
-	if _, ok := d.GetOk("static_wwpn_address"); ok {
-		v := d.Get("static_wwpn_address")
+	if v, ok := d.GetOk("static_wwpn_address"); ok {
 		x := (v.(string))
 		o.SetStaticWwpnAddress(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2008,14 +1986,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2089,26 +2065,22 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("vif_id"); ok {
-		v := d.Get("vif_id")
+	if v, ok := d.GetOkExists("vif_id"); ok {
 		x := int64(v.(int))
 		o.SetVifId(x)
 	}
 
-	if _, ok := d.GetOk("wwpn"); ok {
-		v := d.Get("wwpn")
+	if v, ok := d.GetOk("wwpn"); ok {
 		x := (v.(string))
 		o.SetWwpn(x)
 	}
 
-	if _, ok := d.GetOk("wwpn_address_type"); ok {
-		v := d.Get("wwpn_address_type")
+	if v, ok := d.GetOk("wwpn_address_type"); ok {
 		x := (v.(string))
 		o.SetWwpnAddressType(x)
 	}
 
-	if _, ok := d.GetOk("wwpn_lease"); ok {
-		v := d.Get("wwpn_lease")
+	if v, ok := d.GetOk("wwpn_lease"); ok {
 		p := make([]models.FcpoolLeaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2151,8 +2123,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
-	if _, ok := d.GetOk("wwpn_pool"); ok {
-		v := d.Get("wwpn_pool")
+	if v, ok := d.GetOk("wwpn_pool"); ok {
 		p := make([]models.FcpoolPoolRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2193,71 +2164,6 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 			x := p[0]
 			o.SetWwpnPool(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("order"); ok {
-		x := int64(v.(int))
-		o.SetOrder(x)
-	}
-	if v, ok := d.GetOk("persistent_bindings"); ok {
-		x := (v.(bool))
-		o.SetPersistentBindings(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("static_wwpn_address"); ok {
-		x := (v.(string))
-		o.SetStaticWwpnAddress(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-	if v, ok := d.GetOk("vif_id"); ok {
-		x := int64(v.(int))
-		o.SetVifId(x)
-	}
-	if v, ok := d.GetOk("wwpn"); ok {
-		x := (v.(string))
-		o.SetWwpn(x)
-	}
-	if v, ok := d.GetOk("wwpn_address_type"); ok {
-		x := (v.(string))
-		o.SetWwpnAddressType(x)
 	}
 
 	data, err := o.MarshalJSON()

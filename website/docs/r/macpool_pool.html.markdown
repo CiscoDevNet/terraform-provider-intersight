@@ -43,7 +43,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `from`:(string) Starting address of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `size`:(int)(ReadOnly) Number of identifiers this block can hold. 
+  + `size`:(int) Number of identifiers this block can hold. 
   + `to`:(string) Ending address of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

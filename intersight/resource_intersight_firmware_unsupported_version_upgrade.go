@@ -634,12 +634,12 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 		o.SetDownloadError(x)
 	}
 
-	if v, ok := d.GetOk("download_progress"); ok {
+	if v, ok := d.GetOkExists("download_progress"); ok {
 		x := int64(v.(int))
 		o.SetDownloadProgress(x)
 	}
 
-	if v, ok := d.GetOk("download_retries"); ok {
+	if v, ok := d.GetOkExists("download_retries"); ok {
 		x := int64(v.(int))
 		o.SetDownloadRetries(x)
 	}

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -34,8 +34,14 @@ type ApplianceUpgradePolicy struct {
 	// Start date of the black out period. The appliance will not be upgraded during this period.
 	BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
 	// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
-	EnableMetaDataSync   *bool                   `json:"EnableMetaDataSync,omitempty"`
-	Schedule             NullableOnpremSchedule  `json:"Schedule,omitempty"`
+	EnableMetaDataSync *bool `json:"EnableMetaDataSync,omitempty"`
+	// Flag to indicate software upgrade setting is synchronized with Intersight SaaS.
+	IsSynced *bool `json:"IsSynced,omitempty"`
+	// Intersight Appliance manual upgrade start time.
+	ManualInstallationStartTime *time.Time             `json:"ManualInstallationStartTime,omitempty"`
+	Schedule                    NullableOnpremSchedule `json:"Schedule,omitempty"`
+	// SoftwareDownloadType is used to indicate the kind of software download. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .
+	SoftwareDownloadType *string                 `json:"SoftwareDownloadType,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -52,6 +58,8 @@ func NewApplianceUpgradePolicy(classId string, objectType string) *ApplianceUpgr
 	this.ObjectType = objectType
 	var enableMetaDataSync bool = true
 	this.EnableMetaDataSync = &enableMetaDataSync
+	var softwareDownloadType string = "connected"
+	this.SoftwareDownloadType = &softwareDownloadType
 	return &this
 }
 
@@ -66,6 +74,8 @@ func NewApplianceUpgradePolicyWithDefaults() *ApplianceUpgradePolicy {
 	this.ObjectType = objectType
 	var enableMetaDataSync bool = true
 	this.EnableMetaDataSync = &enableMetaDataSync
+	var softwareDownloadType string = "connected"
+	this.SoftwareDownloadType = &softwareDownloadType
 	return &this
 }
 
@@ -277,6 +287,70 @@ func (o *ApplianceUpgradePolicy) SetEnableMetaDataSync(v bool) {
 	o.EnableMetaDataSync = &v
 }
 
+// GetIsSynced returns the IsSynced field value if set, zero value otherwise.
+func (o *ApplianceUpgradePolicy) GetIsSynced() bool {
+	if o == nil || o.IsSynced == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSynced
+}
+
+// GetIsSyncedOk returns a tuple with the IsSynced field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceUpgradePolicy) GetIsSyncedOk() (*bool, bool) {
+	if o == nil || o.IsSynced == nil {
+		return nil, false
+	}
+	return o.IsSynced, true
+}
+
+// HasIsSynced returns a boolean if a field has been set.
+func (o *ApplianceUpgradePolicy) HasIsSynced() bool {
+	if o != nil && o.IsSynced != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSynced gets a reference to the given bool and assigns it to the IsSynced field.
+func (o *ApplianceUpgradePolicy) SetIsSynced(v bool) {
+	o.IsSynced = &v
+}
+
+// GetManualInstallationStartTime returns the ManualInstallationStartTime field value if set, zero value otherwise.
+func (o *ApplianceUpgradePolicy) GetManualInstallationStartTime() time.Time {
+	if o == nil || o.ManualInstallationStartTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ManualInstallationStartTime
+}
+
+// GetManualInstallationStartTimeOk returns a tuple with the ManualInstallationStartTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceUpgradePolicy) GetManualInstallationStartTimeOk() (*time.Time, bool) {
+	if o == nil || o.ManualInstallationStartTime == nil {
+		return nil, false
+	}
+	return o.ManualInstallationStartTime, true
+}
+
+// HasManualInstallationStartTime returns a boolean if a field has been set.
+func (o *ApplianceUpgradePolicy) HasManualInstallationStartTime() bool {
+	if o != nil && o.ManualInstallationStartTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManualInstallationStartTime gets a reference to the given time.Time and assigns it to the ManualInstallationStartTime field.
+func (o *ApplianceUpgradePolicy) SetManualInstallationStartTime(v time.Time) {
+	o.ManualInstallationStartTime = &v
+}
+
 // GetSchedule returns the Schedule field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceUpgradePolicy) GetSchedule() OnpremSchedule {
 	if o == nil || o.Schedule.Get() == nil {
@@ -318,6 +392,38 @@ func (o *ApplianceUpgradePolicy) SetScheduleNil() {
 // UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
 func (o *ApplianceUpgradePolicy) UnsetSchedule() {
 	o.Schedule.Unset()
+}
+
+// GetSoftwareDownloadType returns the SoftwareDownloadType field value if set, zero value otherwise.
+func (o *ApplianceUpgradePolicy) GetSoftwareDownloadType() string {
+	if o == nil || o.SoftwareDownloadType == nil {
+		var ret string
+		return ret
+	}
+	return *o.SoftwareDownloadType
+}
+
+// GetSoftwareDownloadTypeOk returns a tuple with the SoftwareDownloadType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceUpgradePolicy) GetSoftwareDownloadTypeOk() (*string, bool) {
+	if o == nil || o.SoftwareDownloadType == nil {
+		return nil, false
+	}
+	return o.SoftwareDownloadType, true
+}
+
+// HasSoftwareDownloadType returns a boolean if a field has been set.
+func (o *ApplianceUpgradePolicy) HasSoftwareDownloadType() bool {
+	if o != nil && o.SoftwareDownloadType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSoftwareDownloadType gets a reference to the given string and assigns it to the SoftwareDownloadType field.
+func (o *ApplianceUpgradePolicy) SetSoftwareDownloadType(v string) {
+	o.SoftwareDownloadType = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -383,8 +489,17 @@ func (o ApplianceUpgradePolicy) MarshalJSON() ([]byte, error) {
 	if o.EnableMetaDataSync != nil {
 		toSerialize["EnableMetaDataSync"] = o.EnableMetaDataSync
 	}
+	if o.IsSynced != nil {
+		toSerialize["IsSynced"] = o.IsSynced
+	}
+	if o.ManualInstallationStartTime != nil {
+		toSerialize["ManualInstallationStartTime"] = o.ManualInstallationStartTime
+	}
 	if o.Schedule.IsSet() {
 		toSerialize["Schedule"] = o.Schedule.Get()
+	}
+	if o.SoftwareDownloadType != nil {
+		toSerialize["SoftwareDownloadType"] = o.SoftwareDownloadType
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -412,9 +527,15 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// Start date of the black out period. The appliance will not be upgraded during this period.
 		BlackoutStartDate *time.Time `json:"BlackoutStartDate,omitempty"`
 		// Indicates if the updated metadata files should be synced immediately or at the next upgrade.
-		EnableMetaDataSync *bool                   `json:"EnableMetaDataSync,omitempty"`
-		Schedule           NullableOnpremSchedule  `json:"Schedule,omitempty"`
-		Account            *IamAccountRelationship `json:"Account,omitempty"`
+		EnableMetaDataSync *bool `json:"EnableMetaDataSync,omitempty"`
+		// Flag to indicate software upgrade setting is synchronized with Intersight SaaS.
+		IsSynced *bool `json:"IsSynced,omitempty"`
+		// Intersight Appliance manual upgrade start time.
+		ManualInstallationStartTime *time.Time             `json:"ManualInstallationStartTime,omitempty"`
+		Schedule                    NullableOnpremSchedule `json:"Schedule,omitempty"`
+		// SoftwareDownloadType is used to indicate the kind of software download. * `connected` - Indicates if the upgrade service is set to upload software to latest version automatically. * `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .
+		SoftwareDownloadType *string                 `json:"SoftwareDownloadType,omitempty"`
+		Account              *IamAccountRelationship `json:"Account,omitempty"`
 	}
 
 	varApplianceUpgradePolicyWithoutEmbeddedStruct := ApplianceUpgradePolicyWithoutEmbeddedStruct{}
@@ -429,7 +550,10 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varApplianceUpgradePolicy.BlackoutEndDate = varApplianceUpgradePolicyWithoutEmbeddedStruct.BlackoutEndDate
 		varApplianceUpgradePolicy.BlackoutStartDate = varApplianceUpgradePolicyWithoutEmbeddedStruct.BlackoutStartDate
 		varApplianceUpgradePolicy.EnableMetaDataSync = varApplianceUpgradePolicyWithoutEmbeddedStruct.EnableMetaDataSync
+		varApplianceUpgradePolicy.IsSynced = varApplianceUpgradePolicyWithoutEmbeddedStruct.IsSynced
+		varApplianceUpgradePolicy.ManualInstallationStartTime = varApplianceUpgradePolicyWithoutEmbeddedStruct.ManualInstallationStartTime
 		varApplianceUpgradePolicy.Schedule = varApplianceUpgradePolicyWithoutEmbeddedStruct.Schedule
+		varApplianceUpgradePolicy.SoftwareDownloadType = varApplianceUpgradePolicyWithoutEmbeddedStruct.SoftwareDownloadType
 		varApplianceUpgradePolicy.Account = varApplianceUpgradePolicyWithoutEmbeddedStruct.Account
 		*o = ApplianceUpgradePolicy(varApplianceUpgradePolicy)
 	} else {
@@ -455,7 +579,10 @@ func (o *ApplianceUpgradePolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BlackoutEndDate")
 		delete(additionalProperties, "BlackoutStartDate")
 		delete(additionalProperties, "EnableMetaDataSync")
+		delete(additionalProperties, "IsSynced")
+		delete(additionalProperties, "ManualInstallationStartTime")
 		delete(additionalProperties, "Schedule")
+		delete(additionalProperties, "SoftwareDownloadType")
 		delete(additionalProperties, "Account")
 
 		// remove fields from embedded structs

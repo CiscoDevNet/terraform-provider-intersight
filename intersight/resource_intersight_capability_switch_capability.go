@@ -1195,14 +1195,20 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 
 	o.SetClassId("capability.SwitchCapability")
 
-	if v, ok := d.GetOk("default_fcoe_vlan"); ok {
+	if v, ok := d.GetOkExists("default_fcoe_vlan"); ok {
 		x := int64(v.(int))
 		o.SetDefaultFcoeVlan(x)
 	}
 
-	o.SetDynamicVifsSupported(d.Get("dynamic_vifs_supported").(bool))
+	if v, ok := d.GetOkExists("dynamic_vifs_supported"); ok {
+		x := (v.(bool))
+		o.SetDynamicVifsSupported(x)
+	}
 
-	o.SetFanModulesSupported(d.Get("fan_modules_supported").(bool))
+	if v, ok := d.GetOkExists("fan_modules_supported"); ok {
+		x := (v.(bool))
+		o.SetFanModulesSupported(x)
+	}
 
 	if v, ok := d.GetOk("fc_end_host_mode_reserved_vsans"); ok {
 		x := make([]models.CapabilityPortRange, 0)
@@ -1258,16 +1264,22 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	o.SetFcUplinkPortsAutoNegotiationSupported(d.Get("fc_uplink_ports_auto_negotiation_supported").(bool))
+	if v, ok := d.GetOkExists("fc_uplink_ports_auto_negotiation_supported"); ok {
+		x := (v.(bool))
+		o.SetFcUplinkPortsAutoNegotiationSupported(x)
+	}
 
-	o.SetLocatorBeaconSupported(d.Get("locator_beacon_supported").(bool))
+	if v, ok := d.GetOkExists("locator_beacon_supported"); ok {
+		x := (v.(bool))
+		o.SetLocatorBeaconSupported(x)
+	}
 
-	if v, ok := d.GetOk("max_ports"); ok {
+	if v, ok := d.GetOkExists("max_ports"); ok {
 		x := int64(v.(int))
 		o.SetMaxPorts(x)
 	}
 
-	if v, ok := d.GetOk("max_slots"); ok {
+	if v, ok := d.GetOkExists("max_slots"); ok {
 		x := int64(v.(int))
 		o.SetMaxSlots(x)
 	}
@@ -1896,7 +1908,10 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	o.SetSerenoNetflowSupported(d.Get("sereno_netflow_supported").(bool))
+	if v, ok := d.GetOkExists("sereno_netflow_supported"); ok {
+		x := (v.(bool))
+		o.SetSerenoNetflowSupported(x)
+	}
 
 	if v, ok := d.GetOk("sku"); ok {
 		x := (v.(string))

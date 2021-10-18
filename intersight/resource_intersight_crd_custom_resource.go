@@ -558,7 +558,7 @@ func resourceCrdCustomResourceCreate(c context.Context, d *schema.ResourceData, 
 
 	o.SetObjectType("crd.CustomResource")
 
-	if v, ok := d.GetOk("port"); ok {
+	if v, ok := d.GetOkExists("port"); ok {
 		x := int64(v.(int))
 		o.SetPort(x)
 	}

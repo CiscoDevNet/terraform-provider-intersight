@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -23,15 +23,19 @@ type VirtualizationBaseVirtualMachineAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
 	// Time when this VM booted up.
-	BootTime  *time.Time                      `json:"BootTime,omitempty"`
-	Capacity  NullableInfraHardwareInfo       `json:"Capacity,omitempty"`
-	GuestInfo NullableVirtualizationGuestInfo `json:"GuestInfo,omitempty"`
-	// Type of hypervisor where the virtual machine is hosted for example ESXi. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
+	BootTime *time.Time                `json:"BootTime,omitempty"`
+	Capacity NullableInfraHardwareInfo `json:"Capacity,omitempty"`
+	// Average CPU utilization percentage derived as a ratio of CPU used to CPU allocated. The value is calculated whenever inventory is performed.
+	CpuUtilization *float32                        `json:"CpuUtilization,omitempty"`
+	GuestInfo      NullableVirtualizationGuestInfo `json:"GuestInfo,omitempty"`
+	// Type of hypervisor where the virtual machine is hosted for example ESXi. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
 	HypervisorType *string `json:"HypervisorType,omitempty"`
 	// The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference).
 	Identity       *string                              `json:"Identity,omitempty"`
 	IpAddress      []string                             `json:"IpAddress,omitempty"`
 	MemoryCapacity NullableVirtualizationMemoryCapacity `json:"MemoryCapacity,omitempty"`
+	// Average memory utilization percentage derived as a ratio of memory used to available memory. The value is calculated whenever inventory is performed.
+	MemoryUtilization *float32 `json:"MemoryUtilization,omitempty"`
 	// User-provided name to identify the virtual machine.
 	Name *string `json:"Name,omitempty"`
 	// Power state of the virtual machine. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
@@ -206,6 +210,38 @@ func (o *VirtualizationBaseVirtualMachineAllOf) SetCapacityNil() {
 // UnsetCapacity ensures that no value is present for Capacity, not even an explicit nil
 func (o *VirtualizationBaseVirtualMachineAllOf) UnsetCapacity() {
 	o.Capacity.Unset()
+}
+
+// GetCpuUtilization returns the CpuUtilization field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetCpuUtilization() float32 {
+	if o == nil || o.CpuUtilization == nil {
+		var ret float32
+		return ret
+	}
+	return *o.CpuUtilization
+}
+
+// GetCpuUtilizationOk returns a tuple with the CpuUtilization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetCpuUtilizationOk() (*float32, bool) {
+	if o == nil || o.CpuUtilization == nil {
+		return nil, false
+	}
+	return o.CpuUtilization, true
+}
+
+// HasCpuUtilization returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasCpuUtilization() bool {
+	if o != nil && o.CpuUtilization != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuUtilization gets a reference to the given float32 and assigns it to the CpuUtilization field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetCpuUtilization(v float32) {
+	o.CpuUtilization = &v
 }
 
 // GetGuestInfo returns the GuestInfo field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -389,6 +425,38 @@ func (o *VirtualizationBaseVirtualMachineAllOf) SetMemoryCapacityNil() {
 // UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
 func (o *VirtualizationBaseVirtualMachineAllOf) UnsetMemoryCapacity() {
 	o.MemoryCapacity.Unset()
+}
+
+// GetMemoryUtilization returns the MemoryUtilization field value if set, zero value otherwise.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetMemoryUtilization() float32 {
+	if o == nil || o.MemoryUtilization == nil {
+		var ret float32
+		return ret
+	}
+	return *o.MemoryUtilization
+}
+
+// GetMemoryUtilizationOk returns a tuple with the MemoryUtilization field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) GetMemoryUtilizationOk() (*float32, bool) {
+	if o == nil || o.MemoryUtilization == nil {
+		return nil, false
+	}
+	return o.MemoryUtilization, true
+}
+
+// HasMemoryUtilization returns a boolean if a field has been set.
+func (o *VirtualizationBaseVirtualMachineAllOf) HasMemoryUtilization() bool {
+	if o != nil && o.MemoryUtilization != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryUtilization gets a reference to the given float32 and assigns it to the MemoryUtilization field.
+func (o *VirtualizationBaseVirtualMachineAllOf) SetMemoryUtilization(v float32) {
+	o.MemoryUtilization = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -640,6 +708,9 @@ func (o VirtualizationBaseVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.Capacity.IsSet() {
 		toSerialize["Capacity"] = o.Capacity.Get()
 	}
+	if o.CpuUtilization != nil {
+		toSerialize["CpuUtilization"] = o.CpuUtilization
+	}
 	if o.GuestInfo.IsSet() {
 		toSerialize["GuestInfo"] = o.GuestInfo.Get()
 	}
@@ -654,6 +725,9 @@ func (o VirtualizationBaseVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.MemoryCapacity.IsSet() {
 		toSerialize["MemoryCapacity"] = o.MemoryCapacity.Get()
+	}
+	if o.MemoryUtilization != nil {
+		toSerialize["MemoryUtilization"] = o.MemoryUtilization
 	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
@@ -698,11 +772,13 @@ func (o *VirtualizationBaseVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (err
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BootTime")
 		delete(additionalProperties, "Capacity")
+		delete(additionalProperties, "CpuUtilization")
 		delete(additionalProperties, "GuestInfo")
 		delete(additionalProperties, "HypervisorType")
 		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "IpAddress")
 		delete(additionalProperties, "MemoryCapacity")
+		delete(additionalProperties, "MemoryUtilization")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "PowerState")
 		delete(additionalProperties, "ProcessorCapacity")

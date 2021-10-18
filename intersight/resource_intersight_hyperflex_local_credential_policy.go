@@ -150,7 +150,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"hypervisor_admin_pwd": {
-				Description: "The ESXi root password. For HyperFlex Data Platform 3.0 or later, if the factory default password was not manually changed, you must set a new custom password. If the password was manually changed, you must not enable the factory default password property and provide the current hypervisor password. Note - All HyperFlex nodes require the same hypervisor password for installation. For HyperFlex Data Platform prior to 3.0, use the default password \"Cisco123\" for newly manufactured HyperFlex servers. A custom password should only be entered if hypervisor credentials were manually changed prior to deployment.",
+				Description: "The Hypervisor root password. For HyperFlex Data Platform 3.0 or later, if the factory default password was not manually changed, you must set a new custom password. If the password was manually changed, you must not enable the factory default password property and provide the current hypervisor password. Note - All HyperFlex nodes require the same hypervisor password for installation. For HyperFlex Data Platform prior to 3.0, use the default password \"Cisco123\" for newly manufactured HyperFlex servers. A custom password should only be entered if hypervisor credentials were manually changed prior to deployment.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -542,7 +542,10 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 		o.SetDescription(x)
 	}
 
-	o.SetFactoryHypervisorPassword(d.Get("factory_hypervisor_password").(bool))
+	if v, ok := d.GetOkExists("factory_hypervisor_password"); ok {
+		x := (v.(bool))
+		o.SetFactoryHypervisorPassword(x)
+	}
 
 	if v, ok := d.GetOk("hxdp_root_pwd"); ok {
 		x := (v.(string))
@@ -558,10 +561,6 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetHypervisorAdminPwd(x)
 	}
-
-	o.SetIsHxdpRootPwdSet(d.Get("is_hxdp_root_pwd_set").(bool))
-
-	o.SetIsHypervisorAdminPwdSet(d.Get("is_hypervisor_admin_pwd_set").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

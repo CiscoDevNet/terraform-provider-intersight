@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "bulk.RestResult"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "bulk.RestResult"]
 **Body** | Pointer to [**MoBaseMo**](MoBaseMo.md) |  | [optional] 
+**BodyString** | Pointer to **string** | The response string for an individual REST API action. | [optional] [readonly] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetBody sets Body field to given value.
 `func (o *BulkRestResultAllOf) HasBody() bool`
 
 HasBody returns a boolean if a field has been set.
+
+### GetBodyString
+
+`func (o *BulkRestResultAllOf) GetBodyString() string`
+
+GetBodyString returns the BodyString field if non-nil, zero value otherwise.
+
+### GetBodyStringOk
+
+`func (o *BulkRestResultAllOf) GetBodyStringOk() (*string, bool)`
+
+GetBodyStringOk returns a tuple with the BodyString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBodyString
+
+`func (o *BulkRestResultAllOf) SetBodyString(v string)`
+
+SetBodyString sets BodyString field to given value.
+
+### HasBodyString
+
+`func (o *BulkRestResultAllOf) HasBodyString() bool`
+
+HasBodyString returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

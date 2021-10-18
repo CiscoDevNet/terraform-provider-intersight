@@ -686,7 +686,10 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	o.SetRenewClientSecret(d.Get("renew_client_secret").(bool))
+	if v, ok := d.GetOkExists("renew_client_secret"); ok {
+		x := (v.(bool))
+		o.SetRenewClientSecret(x)
+	}
 
 	if v, ok := d.GetOk("response_types"); ok {
 		x := make([]string, 0)
@@ -699,7 +702,10 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	o.SetRevoke(d.Get("revoke").(bool))
+	if v, ok := d.GetOkExists("revoke"); ok {
+		x := (v.(bool))
+		o.SetRevoke(x)
+	}
 
 	if v, ok := d.GetOk("roles"); ok {
 		x := make([]models.IamRoleRelationship, 0)

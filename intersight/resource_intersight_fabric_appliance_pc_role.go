@@ -660,7 +660,7 @@ func resourceFabricAppliancePcRoleCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetObjectType("fabric.AppliancePcRole")
 
-	if v, ok := d.GetOk("pc_id"); ok {
+	if v, ok := d.GetOkExists("pc_id"); ok {
 		x := int64(v.(int))
 		o.SetPcId(x)
 	}

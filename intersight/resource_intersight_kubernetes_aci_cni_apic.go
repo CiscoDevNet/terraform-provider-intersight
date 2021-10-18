@@ -554,7 +554,7 @@ func resourceKubernetesAciCniApicCreate(c context.Context, d *schema.ResourceDat
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("num_aci_cni_profiles"); ok {
+	if v, ok := d.GetOkExists("num_aci_cni_profiles"); ok {
 		x := int64(v.(int))
 		o.SetNumAciCniProfiles(x)
 	}

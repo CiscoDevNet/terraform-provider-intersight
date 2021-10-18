@@ -1061,14 +1061,12 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EtherHostPort{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("acknowledged_peer_interface"); ok {
-		v := d.Get("acknowledged_peer_interface")
+	if v, ok := d.GetOk("acknowledged_peer_interface"); ok {
 		p := make([]models.PortInterfaceBaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1111,8 +1109,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1121,8 +1118,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1162,38 +1158,32 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("equipment_io_card_base"); ok {
-		v := d.Get("equipment_io_card_base")
+	if v, ok := d.GetOk("equipment_io_card_base"); ok {
 		p := make([]models.EquipmentIoCardBaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1236,62 +1226,52 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("mac_address"); ok {
-		v := d.Get("mac_address")
+	if v, ok := d.GetOk("mac_address"); ok {
 		x := (v.(string))
 		o.SetMacAddress(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("mode"); ok {
-		v := d.Get("mode")
+	if v, ok := d.GetOk("mode"); ok {
 		x := (v.(string))
 		o.SetMode(x)
 	}
 
-	if _, ok := d.GetOk("module_id"); ok {
-		v := d.Get("module_id")
+	if v, ok := d.GetOkExists("module_id"); ok {
 		x := int64(v.(int))
 		o.SetModuleId(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_speed"); ok {
-		v := d.Get("oper_speed")
+	if v, ok := d.GetOk("oper_speed"); ok {
 		x := (v.(string))
 		o.SetOperSpeed(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("oper_state_qual"); ok {
-		v := d.Get("oper_state_qual")
+	if v, ok := d.GetOk("oper_state_qual"); ok {
 		x := (v.(string))
 		o.SetOperStateQual(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1300,8 +1280,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1344,14 +1323,12 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("peer_dn"); ok {
-		v := d.Get("peer_dn")
+	if v, ok := d.GetOk("peer_dn"); ok {
 		x := (v.(string))
 		o.SetPeerDn(x)
 	}
 
-	if _, ok := d.GetOk("peer_interface"); ok {
-		v := d.Get("peer_interface")
+	if v, ok := d.GetOk("peer_interface"); ok {
 		p := make([]models.PortInterfaceBaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1394,8 +1371,7 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1435,26 +1411,22 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("port_channel_id"); ok {
-		v := d.Get("port_channel_id")
+	if v, ok := d.GetOkExists("port_channel_id"); ok {
 		x := int64(v.(int))
 		o.SetPortChannelId(x)
 	}
 
-	if _, ok := d.GetOk("port_id"); ok {
-		v := d.Get("port_id")
+	if v, ok := d.GetOkExists("port_id"); ok {
 		x := int64(v.(int))
 		o.SetPortId(x)
 	}
 
-	if _, ok := d.GetOk("port_type"); ok {
-		v := d.Get("port_type")
+	if v, ok := d.GetOk("port_type"); ok {
 		x := (v.(string))
 		o.SetPortType(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1497,44 +1469,37 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("role"); ok {
-		v := d.Get("role")
+	if v, ok := d.GetOk("role"); ok {
 		x := (v.(string))
 		o.SetRole(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("slot_id"); ok {
-		v := d.Get("slot_id")
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}
 
-	if _, ok := d.GetOk("speed"); ok {
-		v := d.Get("speed")
+	if v, ok := d.GetOk("speed"); ok {
 		x := (v.(string))
 		o.SetSpeed(x)
 	}
 
-	if _, ok := d.GetOk("switch_id"); ok {
-		v := d.Get("switch_id")
+	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1567,14 +1532,12 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("transceiver_type"); ok {
-		v := d.Get("transceiver_type")
+	if v, ok := d.GetOk("transceiver_type"); ok {
 		x := (v.(string))
 		o.SetTransceiverType(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1646,111 +1609,6 @@ func dataSourceEtherHostPortRead(c context.Context, d *schema.ResourceData, meta
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mac_address"); ok {
-		x := (v.(string))
-		o.SetMacAddress(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("mode"); ok {
-		x := (v.(string))
-		o.SetMode(x)
-	}
-	if v, ok := d.GetOk("module_id"); ok {
-		x := int64(v.(int))
-		o.SetModuleId(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_speed"); ok {
-		x := (v.(string))
-		o.SetOperSpeed(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("oper_state_qual"); ok {
-		x := (v.(string))
-		o.SetOperStateQual(x)
-	}
-	if v, ok := d.GetOk("peer_dn"); ok {
-		x := (v.(string))
-		o.SetPeerDn(x)
-	}
-	if v, ok := d.GetOk("port_channel_id"); ok {
-		x := int64(v.(int))
-		o.SetPortChannelId(x)
-	}
-	if v, ok := d.GetOk("port_id"); ok {
-		x := int64(v.(int))
-		o.SetPortId(x)
-	}
-	if v, ok := d.GetOk("port_type"); ok {
-		x := (v.(string))
-		o.SetPortType(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("role"); ok {
-		x := (v.(string))
-		o.SetRole(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("slot_id"); ok {
-		x := int64(v.(int))
-		o.SetSlotId(x)
-	}
-	if v, ok := d.GetOk("speed"); ok {
-		x := (v.(string))
-		o.SetSpeed(x)
-	}
-	if v, ok := d.GetOk("switch_id"); ok {
-		x := (v.(string))
-		o.SetSwitchId(x)
-	}
-	if v, ok := d.GetOk("transceiver_type"); ok {
-		x := (v.(string))
-		o.SetTransceiverType(x)
 	}
 
 	data, err := o.MarshalJSON()

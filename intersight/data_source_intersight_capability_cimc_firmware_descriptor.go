@@ -20,6 +20,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"adapter_ep_proxy_enabled": {
+			Description: "Indicates whether the server uses ep proxy to communicate with the adapter.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -239,6 +244,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 					},
 				},
 			},
+		},
+		"uuid_supported_ver": {
+			Description: "Minimum server firmware version for UUID feature support.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"vendor": {
 			Description: "The vendor of the endpoint, for which this capability information is applicable.",
@@ -364,6 +374,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"adapter_ep_proxy_enabled": {
+			Description: "Indicates whether the server uses ep proxy to communicate with the adapter.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -583,6 +598,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 					},
 				},
 			},
+		},
+		"uuid_supported_ver": {
+			Description: "Minimum server firmware version for UUID feature support.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"vendor": {
 			Description: "The vendor of the endpoint, for which this capability information is applicable.",
@@ -719,14 +739,17 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityCimcFirmwareDescriptor{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOkExists("adapter_ep_proxy_enabled"); ok {
+		x := (v.(bool))
+		o.SetAdapterEpProxyEnabled(x)
+	}
+
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -735,8 +758,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -776,8 +798,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("capabilities"); ok {
-		v := d.Get("capabilities")
+	if v, ok := d.GetOk("capabilities"); ok {
 		x := make([]models.CapabilityCapabilityRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -817,56 +838,47 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetCapabilities(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -875,8 +887,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -919,8 +930,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -960,20 +970,17 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1006,20 +1013,22 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("uuid_supported_ver"); ok {
+		x := (v.(string))
+		o.SetUuidSupportedVer(x)
+	}
+
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1093,59 +1102,6 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of CapabilityCimcFirmwareDescriptor object failed with error : %s", err.Error())
@@ -1183,6 +1139,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 				var s = results[i]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["adapter_ep_proxy_enabled"] = (s.GetAdapterEpProxyEnabled())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -1207,6 +1164,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["uuid_supported_ver"] = (s.GetUuidSupportedVer())
 				temp["vendor"] = (s.GetVendor())
 				temp["nr_version"] = (s.GetVersion())
 

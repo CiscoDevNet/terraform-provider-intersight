@@ -1057,14 +1057,12 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StorageHitachiHost{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1073,8 +1071,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1114,8 +1111,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("array"); ok {
-		v := d.Get("array")
+	if v, ok := d.GetOk("array"); ok {
 		p := make([]models.StorageHitachiArrayRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1158,50 +1154,42 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("authentication_mode"); ok {
-		v := d.Get("authentication_mode")
+	if v, ok := d.GetOk("authentication_mode"); ok {
 		x := (v.(string))
 		o.SetAuthenticationMode(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("host_group_id"); ok {
-		v := d.Get("host_group_id")
+	if v, ok := d.GetOk("host_group_id"); ok {
 		x := (v.(string))
 		o.SetHostGroupId(x)
 	}
 
-	if _, ok := d.GetOk("host_group_number"); ok {
-		v := d.Get("host_group_number")
+	if v, ok := d.GetOkExists("host_group_number"); ok {
 		x := int64(v.(int))
 		o.SetHostGroupNumber(x)
 	}
 
-	if _, ok := d.GetOk("host_mode_options"); ok {
-		v := d.Get("host_mode_options")
+	if v, ok := d.GetOk("host_mode_options"); ok {
 		x := make([]int64, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1210,8 +1198,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetHostModeOptions(x)
 	}
 
-	if _, ok := d.GetOk("initiators"); ok {
-		v := d.Get("initiators")
+	if v, ok := d.GetOk("initiators"); ok {
 		x := make([]models.StorageBaseInitiator, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1239,46 +1226,42 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetInitiators(x)
 	}
 
-	o.SetIsChapMutual(d.Get("is_chap_mutual").(bool))
+	if v, ok := d.GetOkExists("is_chap_mutual"); ok {
+		x := (v.(bool))
+		o.SetIsChapMutual(x)
+	}
 
-	if _, ok := d.GetOk("iscsi_name"); ok {
-		v := d.Get("iscsi_name")
+	if v, ok := d.GetOk("iscsi_name"); ok {
 		x := (v.(string))
 		o.SetIscsiName(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("os_type"); ok {
-		v := d.Get("os_type")
+	if v, ok := d.GetOk("os_type"); ok {
 		x := (v.(string))
 		o.SetOsType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1287,8 +1270,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1331,8 +1313,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1372,16 +1353,17 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("port_id"); ok {
-		v := d.Get("port_id")
+	if v, ok := d.GetOk("port_id"); ok {
 		x := (v.(string))
 		o.SetPortId(x)
 	}
 
-	o.SetPortLunSecurity(d.Get("port_lun_security").(bool))
+	if v, ok := d.GetOkExists("port_lun_security"); ok {
+		x := (v.(bool))
+		o.SetPortLunSecurity(x)
+	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1424,14 +1406,12 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("storage_utilization"); ok {
-		v := d.Get("storage_utilization")
+	if v, ok := d.GetOk("storage_utilization"); ok {
 		p := make([]models.StorageBaseCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1462,8 +1442,7 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1496,14 +1475,12 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1577,88 +1554,6 @@ func dataSourceStorageHitachiHostRead(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	if _, ok := d.GetOk("wwn"); ok {
-		v := d.Get("wwn")
-		x := (v.(string))
-		o.SetWwn(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("authentication_mode"); ok {
-		x := (v.(string))
-		o.SetAuthenticationMode(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("host_group_id"); ok {
-		x := (v.(string))
-		o.SetHostGroupId(x)
-	}
-	if v, ok := d.GetOk("host_group_number"); ok {
-		x := int64(v.(int))
-		o.SetHostGroupNumber(x)
-	}
-	if v, ok := d.GetOk("is_chap_mutual"); ok {
-		x := (v.(bool))
-		o.SetIsChapMutual(x)
-	}
-	if v, ok := d.GetOk("iscsi_name"); ok {
-		x := (v.(string))
-		o.SetIscsiName(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("os_type"); ok {
-		x := (v.(string))
-		o.SetOsType(x)
-	}
-	if v, ok := d.GetOk("port_id"); ok {
-		x := (v.(string))
-		o.SetPortId(x)
-	}
-	if v, ok := d.GetOk("port_lun_security"); ok {
-		x := (v.(bool))
-		o.SetPortLunSecurity(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
 	if v, ok := d.GetOk("wwn"); ok {
 		x := (v.(string))
 		o.SetWwn(x)

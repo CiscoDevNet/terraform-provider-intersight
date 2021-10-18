@@ -101,7 +101,7 @@ func resourceVmediaPolicy() *schema.Resource {
 				Default:     true,
 			},
 			"encryption": {
-				Description: "If enabled, allows encryption of all Virtual Media communications.",
+				Description: "If enabled, allows encryption of all Virtual Media communications. Please note that this is no longer applicable for servers running versions 4.2 and above.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     true,
@@ -582,11 +582,20 @@ func resourceVmediaPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
-	o.SetEncryption(d.Get("encryption").(bool))
+	if v, ok := d.GetOkExists("encryption"); ok {
+		x := (v.(bool))
+		o.SetEncryption(x)
+	}
 
-	o.SetLowPowerUsb(d.Get("low_power_usb").(bool))
+	if v, ok := d.GetOkExists("low_power_usb"); ok {
+		x := (v.(bool))
+		o.SetLowPowerUsb(x)
+	}
 
 	if v, ok := d.GetOk("mappings"); ok {
 		x := make([]models.VmediaMapping, 0)

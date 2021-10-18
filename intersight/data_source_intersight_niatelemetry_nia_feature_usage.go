@@ -1841,32 +1841,27 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaFeatureUsage{}
-	if _, ok := d.GetOk("aaa_ldap_provider_count"); ok {
-		v := d.Get("aaa_ldap_provider_count")
+	if v, ok := d.GetOkExists("aaa_ldap_provider_count"); ok {
 		x := int64(v.(int))
 		o.SetAaaLdapProviderCount(x)
 	}
 
-	if _, ok := d.GetOk("aaa_radius_provider_count"); ok {
-		v := d.Get("aaa_radius_provider_count")
+	if v, ok := d.GetOkExists("aaa_radius_provider_count"); ok {
 		x := int64(v.(int))
 		o.SetAaaRadiusProviderCount(x)
 	}
 
-	if _, ok := d.GetOk("aaa_tacacs_provider_count"); ok {
-		v := d.Get("aaa_tacacs_provider_count")
+	if v, ok := d.GetOkExists("aaa_tacacs_provider_count"); ok {
 		x := int64(v.(int))
 		o.SetAaaTacacsProviderCount(x)
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1875,8 +1870,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1916,348 +1910,337 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("apic_count"); ok {
-		v := d.Get("apic_count")
+	if v, ok := d.GetOkExists("apic_count"); ok {
 		x := int64(v.(int))
 		o.SetApicCount(x)
 	}
 
-	o.SetApicIsTelnetEnabled(d.Get("apic_is_telnet_enabled").(bool))
+	if v, ok := d.GetOkExists("apic_is_telnet_enabled"); ok {
+		x := (v.(bool))
+		o.SetApicIsTelnetEnabled(x)
+	}
 
-	if _, ok := d.GetOk("apic_ntp_count"); ok {
-		v := d.Get("apic_ntp_count")
+	if v, ok := d.GetOkExists("apic_ntp_count"); ok {
 		x := int64(v.(int))
 		o.SetApicNtpCount(x)
 	}
 
-	if _, ok := d.GetOk("apic_snmp_community_count"); ok {
-		v := d.Get("apic_snmp_community_count")
+	if v, ok := d.GetOkExists("apic_snmp_community_count"); ok {
 		x := int64(v.(int))
 		o.SetApicSnmpCommunityCount(x)
 	}
 
-	if _, ok := d.GetOk("apic_sys_log_grp_count"); ok {
-		v := d.Get("apic_sys_log_grp_count")
+	if v, ok := d.GetOkExists("apic_sys_log_grp_count"); ok {
 		x := int64(v.(int))
 		o.SetApicSysLogGrpCount(x)
 	}
 
-	if _, ok := d.GetOk("apic_sys_log_src_count"); ok {
-		v := d.Get("apic_sys_log_src_count")
+	if v, ok := d.GetOkExists("apic_sys_log_src_count"); ok {
 		x := int64(v.(int))
 		o.SetApicSysLogSrcCount(x)
 	}
 
-	if _, ok := d.GetOk("app_center_count"); ok {
-		v := d.Get("app_center_count")
+	if v, ok := d.GetOkExists("app_center_count"); ok {
 		x := int64(v.(int))
 		o.SetAppCenterCount(x)
 	}
 
-	if _, ok := d.GetOk("ave"); ok {
-		v := d.Get("ave")
+	if v, ok := d.GetOk("ave"); ok {
 		x := (v.(string))
 		o.SetAve(x)
 	}
 
-	if _, ok := d.GetOk("bd_count"); ok {
-		v := d.Get("bd_count")
+	if v, ok := d.GetOkExists("bd_count"); ok {
 		x := int64(v.(int))
 		o.SetBdCount(x)
 	}
 
-	if _, ok := d.GetOk("callhome_smart_group_count"); ok {
-		v := d.Get("callhome_smart_group_count")
+	if v, ok := d.GetOkExists("callhome_smart_group_count"); ok {
 		x := int64(v.(int))
 		o.SetCallhomeSmartGroupCount(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cloud_sec_peer_count"); ok {
-		v := d.Get("cloud_sec_peer_count")
+	if v, ok := d.GetOkExists("cloud_sec_peer_count"); ok {
 		x := int64(v.(int))
 		o.SetCloudSecPeerCount(x)
 	}
 
-	if _, ok := d.GetOk("comp_hv_count"); ok {
-		v := d.Get("comp_hv_count")
+	if v, ok := d.GetOkExists("comp_hv_count"); ok {
 		x := int64(v.(int))
 		o.SetCompHvCount(x)
 	}
 
-	if _, ok := d.GetOk("config_exportp_count"); ok {
-		v := d.Get("config_exportp_count")
+	if v, ok := d.GetOkExists("config_exportp_count"); ok {
 		x := int64(v.(int))
 		o.SetConfigExportpCount(x)
 	}
 
-	if _, ok := d.GetOk("config_job_count"); ok {
-		v := d.Get("config_job_count")
+	if v, ok := d.GetOkExists("config_job_count"); ok {
 		x := int64(v.(int))
 		o.SetConfigJobCount(x)
 	}
 
-	if _, ok := d.GetOk("consistency_checker_app"); ok {
-		v := d.Get("consistency_checker_app")
+	if v, ok := d.GetOk("consistency_checker_app"); ok {
 		x := (v.(string))
 		o.SetConsistencyCheckerApp(x)
 	}
 
-	if _, ok := d.GetOk("contract_count"); ok {
-		v := d.Get("contract_count")
+	if v, ok := d.GetOkExists("contract_count"); ok {
 		x := int64(v.(int))
 		o.SetContractCount(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("dns_count"); ok {
-		v := d.Get("dns_count")
+	if v, ok := d.GetOkExists("dns_count"); ok {
 		x := int64(v.(int))
 		o.SetDnsCount(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("eigrp_count"); ok {
-		v := d.Get("eigrp_count")
+	if v, ok := d.GetOkExists("eigrp_count"); ok {
 		x := int64(v.(int))
 		o.SetEigrpCount(x)
 	}
 
-	if _, ok := d.GetOk("epg_count"); ok {
-		v := d.Get("epg_count")
+	if v, ok := d.GetOkExists("epg_count"); ok {
 		x := int64(v.(int))
 		o.SetEpgCount(x)
 	}
 
-	if _, ok := d.GetOk("fabric_module_count"); ok {
-		v := d.Get("fabric_module_count")
+	if v, ok := d.GetOkExists("fabric_module_count"); ok {
 		x := int64(v.(int))
 		o.SetFabricModuleCount(x)
 	}
 
-	if _, ok := d.GetOk("fabric_setupp_count"); ok {
-		v := d.Get("fabric_setupp_count")
+	if v, ok := d.GetOkExists("fabric_setupp_count"); ok {
 		x := int64(v.(int))
 		o.SetFabricSetuppCount(x)
 	}
 
-	if _, ok := d.GetOk("fcoe_nport_count"); ok {
-		v := d.Get("fcoe_nport_count")
+	if v, ok := d.GetOkExists("fcoe_nport_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportCount(x)
 	}
 
-	if _, ok := d.GetOk("fcoe_nport_dom_count"); ok {
-		v := d.Get("fcoe_nport_dom_count")
+	if v, ok := d.GetOkExists("fcoe_nport_dom_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportDomCount(x)
 	}
 
-	if _, ok := d.GetOk("fcoe_nport_vlan_count"); ok {
-		v := d.Get("fcoe_nport_vlan_count")
+	if v, ok := d.GetOkExists("fcoe_nport_vlan_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportVlanCount(x)
 	}
 
-	if _, ok := d.GetOk("fcoe_nport_vsan_count"); ok {
-		v := d.Get("fcoe_nport_vsan_count")
+	if v, ok := d.GetOkExists("fcoe_nport_vsan_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportVsanCount(x)
 	}
 
-	if _, ok := d.GetOk("fv_sla_def_count"); ok {
-		v := d.Get("fv_sla_def_count")
+	if v, ok := d.GetOkExists("fv_sla_def_count"); ok {
 		x := int64(v.(int))
 		o.SetFvSlaDefCount(x)
 	}
 
-	if _, ok := d.GetOk("hsrp_count"); ok {
-		v := d.Get("hsrp_count")
+	if v, ok := d.GetOkExists("hsrp_count"); ok {
 		x := int64(v.(int))
 		o.SetHsrpCount(x)
 	}
 
-	if _, ok := d.GetOk("ibgp_count"); ok {
-		v := d.Get("ibgp_count")
+	if v, ok := d.GetOkExists("ibgp_count"); ok {
 		x := int64(v.(int))
 		o.SetIbgpCount(x)
 	}
 
-	if _, ok := d.GetOk("igmp_access_list_count"); ok {
-		v := d.Get("igmp_access_list_count")
+	if v, ok := d.GetOkExists("igmp_access_list_count"); ok {
 		x := int64(v.(int))
 		o.SetIgmpAccessListCount(x)
 	}
 
-	if _, ok := d.GetOk("igmp_snoop"); ok {
-		v := d.Get("igmp_snoop")
+	if v, ok := d.GetOk("igmp_snoop"); ok {
 		x := (v.(string))
 		o.SetIgmpSnoop(x)
 	}
 
-	if _, ok := d.GetOk("ip_epg_count"); ok {
-		v := d.Get("ip_epg_count")
+	if v, ok := d.GetOkExists("ip_epg_count"); ok {
 		x := int64(v.(int))
 		o.SetIpEpgCount(x)
 	}
 
-	o.SetIsBgpRouteReflectorsFeatureUsed(d.Get("is_bgp_route_reflectors_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_bgp_route_reflectors_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsBgpRouteReflectorsFeatureUsed(x)
+	}
 
-	o.SetIsBridgeDomainsFeatureUsed(d.Get("is_bridge_domains_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_bridge_domains_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsBridgeDomainsFeatureUsed(x)
+	}
 
-	o.SetIsCommonLocalUserName(d.Get("is_common_local_user_name").(bool))
+	if v, ok := d.GetOkExists("is_common_local_user_name"); ok {
+		x := (v.(bool))
+		o.SetIsCommonLocalUserName(x)
+	}
 
-	o.SetIsContractsFeatureUsed(d.Get("is_contracts_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_contracts_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsContractsFeatureUsed(x)
+	}
 
-	o.SetIsEpgFeatureUsed(d.Get("is_epg_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_epg_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsEpgFeatureUsed(x)
+	}
 
-	o.SetIsFiltersFeatureUsed(d.Get("is_filters_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_filters_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsFiltersFeatureUsed(x)
+	}
 
-	o.SetIsHttpConfigured(d.Get("is_http_configured").(bool))
+	if v, ok := d.GetOkExists("is_http_configured"); ok {
+		x := (v.(bool))
+		o.SetIsHttpConfigured(x)
+	}
 
-	o.SetIsHttpsConfigured(d.Get("is_https_configured").(bool))
+	if v, ok := d.GetOkExists("is_https_configured"); ok {
+		x := (v.(bool))
+		o.SetIsHttpsConfigured(x)
+	}
 
-	o.SetIsNtpFeatureUsed(d.Get("is_ntp_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_ntp_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsNtpFeatureUsed(x)
+	}
 
-	o.SetIsPtpFeatureUsed(d.Get("is_ptp_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_ptp_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsPtpFeatureUsed(x)
+	}
 
-	o.SetIsSynceFeatureUsed(d.Get("is_synce_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_synce_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsSynceFeatureUsed(x)
+	}
 
-	if _, ok := d.GetOk("is_tech_support_collected"); ok {
-		v := d.Get("is_tech_support_collected")
+	if v, ok := d.GetOk("is_tech_support_collected"); ok {
 		x := (v.(string))
 		o.SetIsTechSupportCollected(x)
 	}
 
-	o.SetIsTenantsFeatureUsed(d.Get("is_tenants_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_tenants_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsTenantsFeatureUsed(x)
+	}
 
-	o.SetIsVrfsFeatureUsed(d.Get("is_vrfs_feature_used").(bool))
+	if v, ok := d.GetOkExists("is_vrfs_feature_used"); ok {
+		x := (v.(bool))
+		o.SetIsVrfsFeatureUsed(x)
+	}
 
-	if _, ok := d.GetOk("isis_count"); ok {
-		v := d.Get("isis_count")
+	if v, ok := d.GetOkExists("isis_count"); ok {
 		x := int64(v.(int))
 		o.SetIsisCount(x)
 	}
 
-	if _, ok := d.GetOk("l2_multicast"); ok {
-		v := d.Get("l2_multicast")
+	if v, ok := d.GetOk("l2_multicast"); ok {
 		x := (v.(string))
 		o.SetL2Multicast(x)
 	}
 
-	if _, ok := d.GetOk("leaf_count"); ok {
-		v := d.Get("leaf_count")
+	if v, ok := d.GetOkExists("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
 	}
 
-	if _, ok := d.GetOk("local_username_count"); ok {
-		v := d.Get("local_username_count")
+	if v, ok := d.GetOkExists("local_username_count"); ok {
 		x := int64(v.(int))
 		o.SetLocalUsernameCount(x)
 	}
 
-	if _, ok := d.GetOk("login_block_duration"); ok {
-		v := d.Get("login_block_duration")
+	if v, ok := d.GetOkExists("login_block_duration"); ok {
 		x := int64(v.(int))
 		o.SetLoginBlockDuration(x)
 	}
 
-	if _, ok := d.GetOk("login_max_failed_attempts"); ok {
-		v := d.Get("login_max_failed_attempts")
+	if v, ok := d.GetOkExists("login_max_failed_attempts"); ok {
 		x := int64(v.(int))
 		o.SetLoginMaxFailedAttempts(x)
 	}
 
-	if _, ok := d.GetOk("login_max_failed_attempts_window"); ok {
-		v := d.Get("login_max_failed_attempts_window")
+	if v, ok := d.GetOkExists("login_max_failed_attempts_window"); ok {
 		x := int64(v.(int))
 		o.SetLoginMaxFailedAttemptsWindow(x)
 	}
 
-	if _, ok := d.GetOk("maintenance_mode_count"); ok {
-		v := d.Get("maintenance_mode_count")
+	if v, ok := d.GetOkExists("maintenance_mode_count"); ok {
 		x := int64(v.(int))
 		o.SetMaintenanceModeCount(x)
 	}
 
-	if _, ok := d.GetOk("management_over_v6_count"); ok {
-		v := d.Get("management_over_v6_count")
+	if v, ok := d.GetOkExists("management_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetManagementOverV6Count(x)
 	}
 
-	if _, ok := d.GetOk("microsoft_useg_vmm_ep_pd_count"); ok {
-		v := d.Get("microsoft_useg_vmm_ep_pd_count")
+	if v, ok := d.GetOkExists("microsoft_useg_vmm_ep_pd_count"); ok {
 		x := int64(v.(int))
 		o.SetMicrosoftUsegVmmEpPdCount(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("net_flow_count"); ok {
-		v := d.Get("net_flow_count")
+	if v, ok := d.GetOkExists("net_flow_count"); ok {
 		x := int64(v.(int))
 		o.SetNetFlowCount(x)
 	}
 
-	if _, ok := d.GetOk("nir"); ok {
-		v := d.Get("nir")
+	if v, ok := d.GetOk("nir"); ok {
 		x := (v.(string))
 		o.SetNir(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("open_stack"); ok {
-		v := d.Get("open_stack")
+	if v, ok := d.GetOk("open_stack"); ok {
 		x := (v.(string))
 		o.SetOpenStack(x)
 	}
 
-	if _, ok := d.GetOk("opflex_kubernetes_count"); ok {
-		v := d.Get("opflex_kubernetes_count")
+	if v, ok := d.GetOkExists("opflex_kubernetes_count"); ok {
 		x := int64(v.(int))
 		o.SetOpflexKubernetesCount(x)
 	}
 
-	if _, ok := d.GetOk("ospf_count"); ok {
-		v := d.Get("ospf_count")
+	if v, ok := d.GetOkExists("ospf_count"); ok {
 		x := int64(v.(int))
 		o.SetOspfCount(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2266,8 +2249,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2310,26 +2292,22 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 	}
 
-	if _, ok := d.GetOk("password_history_count"); ok {
-		v := d.Get("password_history_count")
+	if v, ok := d.GetOkExists("password_history_count"); ok {
 		x := int64(v.(int))
 		o.SetPasswordHistoryCount(x)
 	}
 
-	if _, ok := d.GetOk("password_strength_check"); ok {
-		v := d.Get("password_strength_check")
+	if v, ok := d.GetOk("password_strength_check"); ok {
 		x := (v.(string))
 		o.SetPasswordStrengthCheck(x)
 	}
 
-	if _, ok := d.GetOk("password_strength_profile_count"); ok {
-		v := d.Get("password_strength_profile_count")
+	if v, ok := d.GetOkExists("password_strength_profile_count"); ok {
 		x := int64(v.(int))
 		o.SetPasswordStrengthProfileCount(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2369,56 +2347,47 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("poe_count"); ok {
-		v := d.Get("poe_count")
+	if v, ok := d.GetOkExists("poe_count"); ok {
 		x := int64(v.(int))
 		o.SetPoeCount(x)
 	}
 
-	if _, ok := d.GetOk("port_security_count"); ok {
-		v := d.Get("port_security_count")
+	if v, ok := d.GetOkExists("port_security_count"); ok {
 		x := int64(v.(int))
 		o.SetPortSecurityCount(x)
 	}
 
-	if _, ok := d.GetOk("qin_vni_tunnel_count"); ok {
-		v := d.Get("qin_vni_tunnel_count")
+	if v, ok := d.GetOkExists("qin_vni_tunnel_count"); ok {
 		x := int64(v.(int))
 		o.SetQinVniTunnelCount(x)
 	}
 
-	if _, ok := d.GetOk("qos_cong_count"); ok {
-		v := d.Get("qos_cong_count")
+	if v, ok := d.GetOkExists("qos_cong_count"); ok {
 		x := int64(v.(int))
 		o.SetQosCongCount(x)
 	}
 
-	if _, ok := d.GetOk("qos_pfc_pol_count"); ok {
-		v := d.Get("qos_pfc_pol_count")
+	if v, ok := d.GetOkExists("qos_pfc_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetQosPfcPolCount(x)
 	}
 
-	if _, ok := d.GetOk("realm_count"); ok {
-		v := d.Get("realm_count")
+	if v, ok := d.GetOkExists("realm_count"); ok {
 		x := int64(v.(int))
 		o.SetRealmCount(x)
 	}
 
-	if _, ok := d.GetOk("record_type"); ok {
-		v := d.Get("record_type")
+	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
 		o.SetRecordType(x)
 	}
 
-	if _, ok := d.GetOk("record_version"); ok {
-		v := d.Get("record_version")
+	if v, ok := d.GetOk("record_version"); ok {
 		x := (v.(string))
 		o.SetRecordVersion(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2461,44 +2430,37 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 	}
 
-	if _, ok := d.GetOk("remote_leaf_count"); ok {
-		v := d.Get("remote_leaf_count")
+	if v, ok := d.GetOkExists("remote_leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetRemoteLeafCount(x)
 	}
 
-	if _, ok := d.GetOk("scvmm_count"); ok {
-		v := d.Get("scvmm_count")
+	if v, ok := d.GetOkExists("scvmm_count"); ok {
 		x := int64(v.(int))
 		o.SetScvmmCount(x)
 	}
 
-	if _, ok := d.GetOk("shared_l3_out_count"); ok {
-		v := d.Get("shared_l3_out_count")
+	if v, ok := d.GetOkExists("shared_l3_out_count"); ok {
 		x := int64(v.(int))
 		o.SetSharedL3OutCount(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("smart_call_home"); ok {
-		v := d.Get("smart_call_home")
+	if v, ok := d.GetOk("smart_call_home"); ok {
 		x := (v.(string))
 		o.SetSmartCallHome(x)
 	}
 
-	if _, ok := d.GetOk("smart_license"); ok {
-		v := d.Get("smart_license")
+	if v, ok := d.GetOk("smart_license"); ok {
 		p := make([]models.NiatelemetrySmartLicense, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2553,110 +2515,92 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 	}
 
-	if _, ok := d.GetOk("snapshot_count"); ok {
-		v := d.Get("snapshot_count")
+	if v, ok := d.GetOkExists("snapshot_count"); ok {
 		x := int64(v.(int))
 		o.SetSnapshotCount(x)
 	}
 
-	if _, ok := d.GetOk("snmp"); ok {
-		v := d.Get("snmp")
+	if v, ok := d.GetOk("snmp"); ok {
 		x := (v.(string))
 		o.SetSnmp(x)
 	}
 
-	if _, ok := d.GetOk("snmp_community_access_count"); ok {
-		v := d.Get("snmp_community_access_count")
+	if v, ok := d.GetOkExists("snmp_community_access_count"); ok {
 		x := int64(v.(int))
 		o.SetSnmpCommunityAccessCount(x)
 	}
 
-	if _, ok := d.GetOk("snmp_group_count"); ok {
-		v := d.Get("snmp_group_count")
+	if v, ok := d.GetOkExists("snmp_group_count"); ok {
 		x := int64(v.(int))
 		o.SetSnmpGroupCount(x)
 	}
 
-	if _, ok := d.GetOk("snmp_trap_count"); ok {
-		v := d.Get("snmp_trap_count")
+	if v, ok := d.GetOkExists("snmp_trap_count"); ok {
 		x := int64(v.(int))
 		o.SetSnmpTrapCount(x)
 	}
 
-	if _, ok := d.GetOk("snmp_v3_count"); ok {
-		v := d.Get("snmp_v3_count")
+	if v, ok := d.GetOkExists("snmp_v3_count"); ok {
 		x := int64(v.(int))
 		o.SetSnmpV3Count(x)
 	}
 
-	if _, ok := d.GetOk("span_count"); ok {
-		v := d.Get("span_count")
+	if v, ok := d.GetOkExists("span_count"); ok {
 		x := int64(v.(int))
 		o.SetSpanCount(x)
 	}
 
-	if _, ok := d.GetOk("span_dst_count"); ok {
-		v := d.Get("span_dst_count")
+	if v, ok := d.GetOkExists("span_dst_count"); ok {
 		x := int64(v.(int))
 		o.SetSpanDstCount(x)
 	}
 
-	if _, ok := d.GetOk("span_src_count"); ok {
-		v := d.Get("span_src_count")
+	if v, ok := d.GetOkExists("span_src_count"); ok {
 		x := int64(v.(int))
 		o.SetSpanSrcCount(x)
 	}
 
-	if _, ok := d.GetOk("spine_count"); ok {
-		v := d.Get("spine_count")
+	if v, ok := d.GetOkExists("spine_count"); ok {
 		x := int64(v.(int))
 		o.SetSpineCount(x)
 	}
 
-	if _, ok := d.GetOk("ssh_over_v6_count"); ok {
-		v := d.Get("ssh_over_v6_count")
+	if v, ok := d.GetOkExists("ssh_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetSshOverV6Count(x)
 	}
 
-	if _, ok := d.GetOk("ssh_v2_count"); ok {
-		v := d.Get("ssh_v2_count")
+	if v, ok := d.GetOkExists("ssh_v2_count"); ok {
 		x := int64(v.(int))
 		o.SetSshV2Count(x)
 	}
 
-	if _, ok := d.GetOk("supervisor_module_count"); ok {
-		v := d.Get("supervisor_module_count")
+	if v, ok := d.GetOkExists("supervisor_module_count"); ok {
 		x := int64(v.(int))
 		o.SetSupervisorModuleCount(x)
 	}
 
-	if _, ok := d.GetOk("syslog_group_count"); ok {
-		v := d.Get("syslog_group_count")
+	if v, ok := d.GetOkExists("syslog_group_count"); ok {
 		x := int64(v.(int))
 		o.SetSyslogGroupCount(x)
 	}
 
-	if _, ok := d.GetOk("syslog_over_v6_count"); ok {
-		v := d.Get("syslog_over_v6_count")
+	if v, ok := d.GetOkExists("syslog_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetSyslogOverV6Count(x)
 	}
 
-	if _, ok := d.GetOk("system_controller_count"); ok {
-		v := d.Get("system_controller_count")
+	if v, ok := d.GetOkExists("system_controller_count"); ok {
 		x := int64(v.(int))
 		o.SetSystemControllerCount(x)
 	}
 
-	if _, ok := d.GetOk("tacacs_group_count"); ok {
-		v := d.Get("tacacs_group_count")
+	if v, ok := d.GetOkExists("tacacs_group_count"); ok {
 		x := int64(v.(int))
 		o.SetTacacsGroupCount(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2689,38 +2633,32 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("tenant_count"); ok {
-		v := d.Get("tenant_count")
+	if v, ok := d.GetOkExists("tenant_count"); ok {
 		x := int64(v.(int))
 		o.SetTenantCount(x)
 	}
 
-	if _, ok := d.GetOk("tier_two_leaf_count"); ok {
-		v := d.Get("tier_two_leaf_count")
+	if v, ok := d.GetOkExists("tier_two_leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetTierTwoLeafCount(x)
 	}
 
-	if _, ok := d.GetOk("total_critical_faults"); ok {
-		v := d.Get("total_critical_faults")
+	if v, ok := d.GetOkExists("total_critical_faults"); ok {
 		x := int64(v.(int))
 		o.SetTotalCriticalFaults(x)
 	}
 
-	if _, ok := d.GetOk("twamp"); ok {
-		v := d.Get("twamp")
+	if v, ok := d.GetOk("twamp"); ok {
 		x := (v.(string))
 		o.SetTwamp(x)
 	}
 
-	if _, ok := d.GetOk("useg"); ok {
-		v := d.Get("useg")
+	if v, ok := d.GetOk("useg"); ok {
 		x := (v.(string))
 		o.SetUseg(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2794,509 +2732,37 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		}
 	}
 
-	if _, ok := d.GetOk("vm_ware_vds_count"); ok {
-		v := d.Get("vm_ware_vds_count")
+	if v, ok := d.GetOkExists("vm_ware_vds_count"); ok {
 		x := int64(v.(int))
 		o.SetVmWareVdsCount(x)
 	}
 
-	if _, ok := d.GetOk("vmm_ctrlrp_count"); ok {
-		v := d.Get("vmm_ctrlrp_count")
+	if v, ok := d.GetOkExists("vmm_ctrlrp_count"); ok {
 		x := int64(v.(int))
 		o.SetVmmCtrlrpCount(x)
 	}
 
-	if _, ok := d.GetOk("vmm_domp_count"); ok {
-		v := d.Get("vmm_domp_count")
+	if v, ok := d.GetOkExists("vmm_domp_count"); ok {
 		x := int64(v.(int))
 		o.SetVmmDompCount(x)
 	}
 
-	if _, ok := d.GetOk("vmm_ep_pd_count"); ok {
-		v := d.Get("vmm_ep_pd_count")
+	if v, ok := d.GetOkExists("vmm_ep_pd_count"); ok {
 		x := int64(v.(int))
 		o.SetVmmEpPdCount(x)
 	}
 
-	if _, ok := d.GetOk("vnsm_dev_count"); ok {
-		v := d.Get("vnsm_dev_count")
+	if v, ok := d.GetOkExists("vnsm_dev_count"); ok {
 		x := int64(v.(int))
 		o.SetVnsmDevCount(x)
 	}
 
-	if _, ok := d.GetOk("vpod_count"); ok {
-		v := d.Get("vpod_count")
+	if v, ok := d.GetOkExists("vpod_count"); ok {
 		x := int64(v.(int))
 		o.SetVpodCount(x)
 	}
 
-	if _, ok := d.GetOk("webtoken_timeout_seconds"); ok {
-		v := d.Get("webtoken_timeout_seconds")
-		x := int64(v.(int))
-		o.SetWebtokenTimeoutSeconds(x)
-	}
-
-	if v, ok := d.GetOk("aaa_ldap_provider_count"); ok {
-		x := int64(v.(int))
-		o.SetAaaLdapProviderCount(x)
-	}
-	if v, ok := d.GetOk("aaa_radius_provider_count"); ok {
-		x := int64(v.(int))
-		o.SetAaaRadiusProviderCount(x)
-	}
-	if v, ok := d.GetOk("aaa_tacacs_provider_count"); ok {
-		x := int64(v.(int))
-		o.SetAaaTacacsProviderCount(x)
-	}
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("apic_count"); ok {
-		x := int64(v.(int))
-		o.SetApicCount(x)
-	}
-	if v, ok := d.GetOk("apic_is_telnet_enabled"); ok {
-		x := (v.(bool))
-		o.SetApicIsTelnetEnabled(x)
-	}
-	if v, ok := d.GetOk("apic_ntp_count"); ok {
-		x := int64(v.(int))
-		o.SetApicNtpCount(x)
-	}
-	if v, ok := d.GetOk("apic_snmp_community_count"); ok {
-		x := int64(v.(int))
-		o.SetApicSnmpCommunityCount(x)
-	}
-	if v, ok := d.GetOk("apic_sys_log_grp_count"); ok {
-		x := int64(v.(int))
-		o.SetApicSysLogGrpCount(x)
-	}
-	if v, ok := d.GetOk("apic_sys_log_src_count"); ok {
-		x := int64(v.(int))
-		o.SetApicSysLogSrcCount(x)
-	}
-	if v, ok := d.GetOk("app_center_count"); ok {
-		x := int64(v.(int))
-		o.SetAppCenterCount(x)
-	}
-	if v, ok := d.GetOk("ave"); ok {
-		x := (v.(string))
-		o.SetAve(x)
-	}
-	if v, ok := d.GetOk("bd_count"); ok {
-		x := int64(v.(int))
-		o.SetBdCount(x)
-	}
-	if v, ok := d.GetOk("callhome_smart_group_count"); ok {
-		x := int64(v.(int))
-		o.SetCallhomeSmartGroupCount(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cloud_sec_peer_count"); ok {
-		x := int64(v.(int))
-		o.SetCloudSecPeerCount(x)
-	}
-	if v, ok := d.GetOk("comp_hv_count"); ok {
-		x := int64(v.(int))
-		o.SetCompHvCount(x)
-	}
-	if v, ok := d.GetOk("config_exportp_count"); ok {
-		x := int64(v.(int))
-		o.SetConfigExportpCount(x)
-	}
-	if v, ok := d.GetOk("config_job_count"); ok {
-		x := int64(v.(int))
-		o.SetConfigJobCount(x)
-	}
-	if v, ok := d.GetOk("consistency_checker_app"); ok {
-		x := (v.(string))
-		o.SetConsistencyCheckerApp(x)
-	}
-	if v, ok := d.GetOk("contract_count"); ok {
-		x := int64(v.(int))
-		o.SetContractCount(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("dns_count"); ok {
-		x := int64(v.(int))
-		o.SetDnsCount(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("eigrp_count"); ok {
-		x := int64(v.(int))
-		o.SetEigrpCount(x)
-	}
-	if v, ok := d.GetOk("epg_count"); ok {
-		x := int64(v.(int))
-		o.SetEpgCount(x)
-	}
-	if v, ok := d.GetOk("fabric_module_count"); ok {
-		x := int64(v.(int))
-		o.SetFabricModuleCount(x)
-	}
-	if v, ok := d.GetOk("fabric_setupp_count"); ok {
-		x := int64(v.(int))
-		o.SetFabricSetuppCount(x)
-	}
-	if v, ok := d.GetOk("fcoe_nport_count"); ok {
-		x := int64(v.(int))
-		o.SetFcoeNportCount(x)
-	}
-	if v, ok := d.GetOk("fcoe_nport_dom_count"); ok {
-		x := int64(v.(int))
-		o.SetFcoeNportDomCount(x)
-	}
-	if v, ok := d.GetOk("fcoe_nport_vlan_count"); ok {
-		x := int64(v.(int))
-		o.SetFcoeNportVlanCount(x)
-	}
-	if v, ok := d.GetOk("fcoe_nport_vsan_count"); ok {
-		x := int64(v.(int))
-		o.SetFcoeNportVsanCount(x)
-	}
-	if v, ok := d.GetOk("fv_sla_def_count"); ok {
-		x := int64(v.(int))
-		o.SetFvSlaDefCount(x)
-	}
-	if v, ok := d.GetOk("hsrp_count"); ok {
-		x := int64(v.(int))
-		o.SetHsrpCount(x)
-	}
-	if v, ok := d.GetOk("ibgp_count"); ok {
-		x := int64(v.(int))
-		o.SetIbgpCount(x)
-	}
-	if v, ok := d.GetOk("igmp_access_list_count"); ok {
-		x := int64(v.(int))
-		o.SetIgmpAccessListCount(x)
-	}
-	if v, ok := d.GetOk("igmp_snoop"); ok {
-		x := (v.(string))
-		o.SetIgmpSnoop(x)
-	}
-	if v, ok := d.GetOk("ip_epg_count"); ok {
-		x := int64(v.(int))
-		o.SetIpEpgCount(x)
-	}
-	if v, ok := d.GetOk("is_bgp_route_reflectors_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsBgpRouteReflectorsFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_bridge_domains_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsBridgeDomainsFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_common_local_user_name"); ok {
-		x := (v.(bool))
-		o.SetIsCommonLocalUserName(x)
-	}
-	if v, ok := d.GetOk("is_contracts_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsContractsFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_epg_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsEpgFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_filters_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsFiltersFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_http_configured"); ok {
-		x := (v.(bool))
-		o.SetIsHttpConfigured(x)
-	}
-	if v, ok := d.GetOk("is_https_configured"); ok {
-		x := (v.(bool))
-		o.SetIsHttpsConfigured(x)
-	}
-	if v, ok := d.GetOk("is_ntp_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsNtpFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_ptp_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsPtpFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_synce_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsSynceFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_tech_support_collected"); ok {
-		x := (v.(string))
-		o.SetIsTechSupportCollected(x)
-	}
-	if v, ok := d.GetOk("is_tenants_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsTenantsFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("is_vrfs_feature_used"); ok {
-		x := (v.(bool))
-		o.SetIsVrfsFeatureUsed(x)
-	}
-	if v, ok := d.GetOk("isis_count"); ok {
-		x := int64(v.(int))
-		o.SetIsisCount(x)
-	}
-	if v, ok := d.GetOk("l2_multicast"); ok {
-		x := (v.(string))
-		o.SetL2Multicast(x)
-	}
-	if v, ok := d.GetOk("leaf_count"); ok {
-		x := int64(v.(int))
-		o.SetLeafCount(x)
-	}
-	if v, ok := d.GetOk("local_username_count"); ok {
-		x := int64(v.(int))
-		o.SetLocalUsernameCount(x)
-	}
-	if v, ok := d.GetOk("login_block_duration"); ok {
-		x := int64(v.(int))
-		o.SetLoginBlockDuration(x)
-	}
-	if v, ok := d.GetOk("login_max_failed_attempts"); ok {
-		x := int64(v.(int))
-		o.SetLoginMaxFailedAttempts(x)
-	}
-	if v, ok := d.GetOk("login_max_failed_attempts_window"); ok {
-		x := int64(v.(int))
-		o.SetLoginMaxFailedAttemptsWindow(x)
-	}
-	if v, ok := d.GetOk("maintenance_mode_count"); ok {
-		x := int64(v.(int))
-		o.SetMaintenanceModeCount(x)
-	}
-	if v, ok := d.GetOk("management_over_v6_count"); ok {
-		x := int64(v.(int))
-		o.SetManagementOverV6Count(x)
-	}
-	if v, ok := d.GetOk("microsoft_useg_vmm_ep_pd_count"); ok {
-		x := int64(v.(int))
-		o.SetMicrosoftUsegVmmEpPdCount(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("net_flow_count"); ok {
-		x := int64(v.(int))
-		o.SetNetFlowCount(x)
-	}
-	if v, ok := d.GetOk("nir"); ok {
-		x := (v.(string))
-		o.SetNir(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("open_stack"); ok {
-		x := (v.(string))
-		o.SetOpenStack(x)
-	}
-	if v, ok := d.GetOk("opflex_kubernetes_count"); ok {
-		x := int64(v.(int))
-		o.SetOpflexKubernetesCount(x)
-	}
-	if v, ok := d.GetOk("ospf_count"); ok {
-		x := int64(v.(int))
-		o.SetOspfCount(x)
-	}
-	if v, ok := d.GetOk("password_history_count"); ok {
-		x := int64(v.(int))
-		o.SetPasswordHistoryCount(x)
-	}
-	if v, ok := d.GetOk("password_strength_check"); ok {
-		x := (v.(string))
-		o.SetPasswordStrengthCheck(x)
-	}
-	if v, ok := d.GetOk("password_strength_profile_count"); ok {
-		x := int64(v.(int))
-		o.SetPasswordStrengthProfileCount(x)
-	}
-	if v, ok := d.GetOk("poe_count"); ok {
-		x := int64(v.(int))
-		o.SetPoeCount(x)
-	}
-	if v, ok := d.GetOk("port_security_count"); ok {
-		x := int64(v.(int))
-		o.SetPortSecurityCount(x)
-	}
-	if v, ok := d.GetOk("qin_vni_tunnel_count"); ok {
-		x := int64(v.(int))
-		o.SetQinVniTunnelCount(x)
-	}
-	if v, ok := d.GetOk("qos_cong_count"); ok {
-		x := int64(v.(int))
-		o.SetQosCongCount(x)
-	}
-	if v, ok := d.GetOk("qos_pfc_pol_count"); ok {
-		x := int64(v.(int))
-		o.SetQosPfcPolCount(x)
-	}
-	if v, ok := d.GetOk("realm_count"); ok {
-		x := int64(v.(int))
-		o.SetRealmCount(x)
-	}
-	if v, ok := d.GetOk("record_type"); ok {
-		x := (v.(string))
-		o.SetRecordType(x)
-	}
-	if v, ok := d.GetOk("record_version"); ok {
-		x := (v.(string))
-		o.SetRecordVersion(x)
-	}
-	if v, ok := d.GetOk("remote_leaf_count"); ok {
-		x := int64(v.(int))
-		o.SetRemoteLeafCount(x)
-	}
-	if v, ok := d.GetOk("scvmm_count"); ok {
-		x := int64(v.(int))
-		o.SetScvmmCount(x)
-	}
-	if v, ok := d.GetOk("shared_l3_out_count"); ok {
-		x := int64(v.(int))
-		o.SetSharedL3OutCount(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("smart_call_home"); ok {
-		x := (v.(string))
-		o.SetSmartCallHome(x)
-	}
-	if v, ok := d.GetOk("snapshot_count"); ok {
-		x := int64(v.(int))
-		o.SetSnapshotCount(x)
-	}
-	if v, ok := d.GetOk("snmp"); ok {
-		x := (v.(string))
-		o.SetSnmp(x)
-	}
-	if v, ok := d.GetOk("snmp_community_access_count"); ok {
-		x := int64(v.(int))
-		o.SetSnmpCommunityAccessCount(x)
-	}
-	if v, ok := d.GetOk("snmp_group_count"); ok {
-		x := int64(v.(int))
-		o.SetSnmpGroupCount(x)
-	}
-	if v, ok := d.GetOk("snmp_trap_count"); ok {
-		x := int64(v.(int))
-		o.SetSnmpTrapCount(x)
-	}
-	if v, ok := d.GetOk("snmp_v3_count"); ok {
-		x := int64(v.(int))
-		o.SetSnmpV3Count(x)
-	}
-	if v, ok := d.GetOk("span_count"); ok {
-		x := int64(v.(int))
-		o.SetSpanCount(x)
-	}
-	if v, ok := d.GetOk("span_dst_count"); ok {
-		x := int64(v.(int))
-		o.SetSpanDstCount(x)
-	}
-	if v, ok := d.GetOk("span_src_count"); ok {
-		x := int64(v.(int))
-		o.SetSpanSrcCount(x)
-	}
-	if v, ok := d.GetOk("spine_count"); ok {
-		x := int64(v.(int))
-		o.SetSpineCount(x)
-	}
-	if v, ok := d.GetOk("ssh_over_v6_count"); ok {
-		x := int64(v.(int))
-		o.SetSshOverV6Count(x)
-	}
-	if v, ok := d.GetOk("ssh_v2_count"); ok {
-		x := int64(v.(int))
-		o.SetSshV2Count(x)
-	}
-	if v, ok := d.GetOk("supervisor_module_count"); ok {
-		x := int64(v.(int))
-		o.SetSupervisorModuleCount(x)
-	}
-	if v, ok := d.GetOk("syslog_group_count"); ok {
-		x := int64(v.(int))
-		o.SetSyslogGroupCount(x)
-	}
-	if v, ok := d.GetOk("syslog_over_v6_count"); ok {
-		x := int64(v.(int))
-		o.SetSyslogOverV6Count(x)
-	}
-	if v, ok := d.GetOk("system_controller_count"); ok {
-		x := int64(v.(int))
-		o.SetSystemControllerCount(x)
-	}
-	if v, ok := d.GetOk("tacacs_group_count"); ok {
-		x := int64(v.(int))
-		o.SetTacacsGroupCount(x)
-	}
-	if v, ok := d.GetOk("tenant_count"); ok {
-		x := int64(v.(int))
-		o.SetTenantCount(x)
-	}
-	if v, ok := d.GetOk("tier_two_leaf_count"); ok {
-		x := int64(v.(int))
-		o.SetTierTwoLeafCount(x)
-	}
-	if v, ok := d.GetOk("total_critical_faults"); ok {
-		x := int64(v.(int))
-		o.SetTotalCriticalFaults(x)
-	}
-	if v, ok := d.GetOk("twamp"); ok {
-		x := (v.(string))
-		o.SetTwamp(x)
-	}
-	if v, ok := d.GetOk("useg"); ok {
-		x := (v.(string))
-		o.SetUseg(x)
-	}
-	if v, ok := d.GetOk("vm_ware_vds_count"); ok {
-		x := int64(v.(int))
-		o.SetVmWareVdsCount(x)
-	}
-	if v, ok := d.GetOk("vmm_ctrlrp_count"); ok {
-		x := int64(v.(int))
-		o.SetVmmCtrlrpCount(x)
-	}
-	if v, ok := d.GetOk("vmm_domp_count"); ok {
-		x := int64(v.(int))
-		o.SetVmmDompCount(x)
-	}
-	if v, ok := d.GetOk("vmm_ep_pd_count"); ok {
-		x := int64(v.(int))
-		o.SetVmmEpPdCount(x)
-	}
-	if v, ok := d.GetOk("vnsm_dev_count"); ok {
-		x := int64(v.(int))
-		o.SetVnsmDevCount(x)
-	}
-	if v, ok := d.GetOk("vpod_count"); ok {
-		x := int64(v.(int))
-		o.SetVpodCount(x)
-	}
-	if v, ok := d.GetOk("webtoken_timeout_seconds"); ok {
+	if v, ok := d.GetOkExists("webtoken_timeout_seconds"); ok {
 		x := int64(v.(int))
 		o.SetWebtokenTimeoutSeconds(x)
 	}

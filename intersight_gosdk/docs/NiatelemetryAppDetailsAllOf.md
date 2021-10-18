@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **AppStatus** | Pointer to **string** | Status of apps running on ND. | [optional] 
 **AppVersion** | Pointer to **string** | Versions of apps running on ND. | [optional] 
 **NexusDashboard** | Pointer to **string** | Clustername on which apps are running on ND. | [optional] 
-**NumberofSitesOnboarded** | Pointer to **int64** | Number of sites on which particular app installed on ND. | [optional] 
+**NumberOfSitesOnboarded** | Pointer to **int64** | Number of sites on which particular app installed on ND. | [optional] 
 **Type** | Pointer to **string** | Type of apps running on ND. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -173,30 +173,30 @@ SetNexusDashboard sets NexusDashboard field to given value.
 
 HasNexusDashboard returns a boolean if a field has been set.
 
-### GetNumberofSitesOnboarded
+### GetNumberOfSitesOnboarded
 
-`func (o *NiatelemetryAppDetailsAllOf) GetNumberofSitesOnboarded() int64`
+`func (o *NiatelemetryAppDetailsAllOf) GetNumberOfSitesOnboarded() int64`
 
-GetNumberofSitesOnboarded returns the NumberofSitesOnboarded field if non-nil, zero value otherwise.
+GetNumberOfSitesOnboarded returns the NumberOfSitesOnboarded field if non-nil, zero value otherwise.
 
-### GetNumberofSitesOnboardedOk
+### GetNumberOfSitesOnboardedOk
 
-`func (o *NiatelemetryAppDetailsAllOf) GetNumberofSitesOnboardedOk() (*int64, bool)`
+`func (o *NiatelemetryAppDetailsAllOf) GetNumberOfSitesOnboardedOk() (*int64, bool)`
 
-GetNumberofSitesOnboardedOk returns a tuple with the NumberofSitesOnboarded field if it's non-nil, zero value otherwise
+GetNumberOfSitesOnboardedOk returns a tuple with the NumberOfSitesOnboarded field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNumberofSitesOnboarded
+### SetNumberOfSitesOnboarded
 
-`func (o *NiatelemetryAppDetailsAllOf) SetNumberofSitesOnboarded(v int64)`
+`func (o *NiatelemetryAppDetailsAllOf) SetNumberOfSitesOnboarded(v int64)`
 
-SetNumberofSitesOnboarded sets NumberofSitesOnboarded field to given value.
+SetNumberOfSitesOnboarded sets NumberOfSitesOnboarded field to given value.
 
-### HasNumberofSitesOnboarded
+### HasNumberOfSitesOnboarded
 
-`func (o *NiatelemetryAppDetailsAllOf) HasNumberofSitesOnboarded() bool`
+`func (o *NiatelemetryAppDetailsAllOf) HasNumberOfSitesOnboarded() bool`
 
-HasNumberofSitesOnboarded returns a boolean if a field has been set.
+HasNumberOfSitesOnboarded returns a boolean if a field has been set.
 
 ### GetType
 

@@ -961,20 +961,17 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamOAuthToken{}
-	if _, ok := d.GetOk("access_expiration_time"); ok {
-		v := d.Get("access_expiration_time")
+	if v, ok := d.GetOk("access_expiration_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetAccessExpirationTime(x)
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -983,8 +980,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1024,8 +1020,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("app_registration"); ok {
-		v := d.Get("app_registration")
+	if v, ok := d.GetOk("app_registration"); ok {
 		p := make([]models.IamAppRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1068,80 +1063,67 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("client_id"); ok {
-		v := d.Get("client_id")
+	if v, ok := d.GetOk("client_id"); ok {
 		x := (v.(string))
 		o.SetClientId(x)
 	}
 
-	if _, ok := d.GetOk("client_ip_address"); ok {
-		v := d.Get("client_ip_address")
+	if v, ok := d.GetOk("client_ip_address"); ok {
 		x := (v.(string))
 		o.SetClientIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("client_name"); ok {
-		v := d.Get("client_name")
+	if v, ok := d.GetOk("client_name"); ok {
 		x := (v.(string))
 		o.SetClientName(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("expiration_time"); ok {
-		v := d.Get("expiration_time")
+	if v, ok := d.GetOk("expiration_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetExpirationTime(x)
 	}
 
-	if _, ok := d.GetOk("last_login_client"); ok {
-		v := d.Get("last_login_client")
+	if v, ok := d.GetOk("last_login_client"); ok {
 		x := (v.(string))
 		o.SetLastLoginClient(x)
 	}
 
-	if _, ok := d.GetOk("last_login_time"); ok {
-		v := d.Get("last_login_time")
+	if v, ok := d.GetOk("last_login_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastLoginTime(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1150,8 +1132,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1194,8 +1175,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("permission"); ok {
-		v := d.Get("permission")
+	if v, ok := d.GetOk("permission"); ok {
 		p := make([]models.IamPermissionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1238,8 +1218,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1279,14 +1258,12 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1319,14 +1296,12 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("token_id"); ok {
-		v := d.Get("token_id")
+	if v, ok := d.GetOk("token_id"); ok {
 		x := (v.(string))
 		o.SetTokenId(x)
 	}
 
-	if _, ok := d.GetOk("user"); ok {
-		v := d.Get("user")
+	if v, ok := d.GetOk("user"); ok {
 		p := make([]models.IamUserRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1369,8 +1344,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("user_meta"); ok {
-		v := d.Get("user_meta")
+	if v, ok := d.GetOk("user_meta"); ok {
 		p := make([]models.IamClientMeta, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1413,8 +1387,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1486,71 +1459,6 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("access_expiration_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetAccessExpirationTime(x)
-	}
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("client_id"); ok {
-		x := (v.(string))
-		o.SetClientId(x)
-	}
-	if v, ok := d.GetOk("client_ip_address"); ok {
-		x := (v.(string))
-		o.SetClientIpAddress(x)
-	}
-	if v, ok := d.GetOk("client_name"); ok {
-		x := (v.(string))
-		o.SetClientName(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("expiration_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetExpirationTime(x)
-	}
-	if v, ok := d.GetOk("last_login_client"); ok {
-		x := (v.(string))
-		o.SetLastLoginClient(x)
-	}
-	if v, ok := d.GetOk("last_login_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastLoginTime(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("token_id"); ok {
-		x := (v.(string))
-		o.SetTokenId(x)
 	}
 
 	data, err := o.MarshalJSON()

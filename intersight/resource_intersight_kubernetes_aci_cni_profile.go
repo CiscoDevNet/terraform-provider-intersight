@@ -725,12 +725,12 @@ func resourceKubernetesAciCniProfileCreate(c context.Context, d *schema.Resource
 		o.SetNodeSvcSubnetStart(x)
 	}
 
-	if v, ok := d.GetOk("node_vlan_range_end"); ok {
+	if v, ok := d.GetOkExists("node_vlan_range_end"); ok {
 		x := int64(v.(int))
 		o.SetNodeVlanRangeEnd(x)
 	}
 
-	if v, ok := d.GetOk("node_vlan_range_start"); ok {
+	if v, ok := d.GetOkExists("node_vlan_range_start"); ok {
 		x := int64(v.(int))
 		o.SetNodeVlanRangeStart(x)
 	}

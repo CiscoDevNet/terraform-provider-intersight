@@ -337,7 +337,7 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 			Optional:    true,
 		},
 		"supported_hypervisor_type": {
-			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `` - The Health Check is supported only on Cisco HyperFlexAp platform.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -810,7 +810,7 @@ func dataSourceHyperflexHealthCheckDefinition() *schema.Resource {
 			Optional:    true,
 		},
 		"supported_hypervisor_type": {
-			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
+			Description: "Hypervisor type that the Health Check is supported on (All, if it is hypervisor agnostic).\n* `All` - The Health Check is hypervisor-agnostic.\n* `ESXi` - The Health Check is supported only on Vmware ESXi hypervisor of any version.\n* `` - The Health Check is supported only on Cisco HyperFlexAp platform.\n* `IWE` - The Health Check is supported only on Cisco IWE platform.\n* `HyperV` - The Health Check is supported only on Microsoft HyperV hypervisor.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -977,14 +977,12 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHealthCheckDefinition{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -993,8 +991,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1034,38 +1031,32 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("category"); ok {
-		v := d.Get("category")
+	if v, ok := d.GetOk("category"); ok {
 		x := (v.(string))
 		o.SetCategory(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("common_causes"); ok {
-		v := d.Get("common_causes")
+	if v, ok := d.GetOk("common_causes"); ok {
 		x := (v.(string))
 		o.SetCommonCauses(x)
 	}
 
-	if _, ok := d.GetOk("configuration"); ok {
-		v := d.Get("configuration")
+	if v, ok := d.GetOk("configuration"); ok {
 		x := (v.(string))
 		o.SetConfiguration(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("default_health_check_script_info"); ok {
-		v := d.Get("default_health_check_script_info")
+	if v, ok := d.GetOk("default_health_check_script_info"); ok {
 		p := make([]models.HyperflexHealthCheckScriptInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1096,20 +1087,17 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("health_check_script_infos"); ok {
-		v := d.Get("health_check_script_infos")
+	if v, ok := d.GetOk("health_check_script_infos"); ok {
 		x := make([]models.HyperflexHealthCheckScriptInfo, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1137,50 +1125,42 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetHealthCheckScriptInfos(x)
 	}
 
-	if _, ok := d.GetOk("health_impact"); ok {
-		v := d.Get("health_impact")
+	if v, ok := d.GetOk("health_impact"); ok {
 		x := (v.(string))
 		o.SetHealthImpact(x)
 	}
 
-	if _, ok := d.GetOk("internal_name"); ok {
-		v := d.Get("internal_name")
+	if v, ok := d.GetOk("internal_name"); ok {
 		x := (v.(string))
 		o.SetInternalName(x)
 	}
 
-	if _, ok := d.GetOk("minimum_hyper_flex_version"); ok {
-		v := d.Get("minimum_hyper_flex_version")
+	if v, ok := d.GetOk("minimum_hyper_flex_version"); ok {
 		x := (v.(string))
 		o.SetMinimumHyperFlexVersion(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1189,8 +1169,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1233,8 +1212,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1274,40 +1252,37 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("reference"); ok {
-		v := d.Get("reference")
+	if v, ok := d.GetOk("reference"); ok {
 		x := (v.(string))
 		o.SetReference(x)
 	}
 
-	if _, ok := d.GetOk("resolution"); ok {
-		v := d.Get("resolution")
+	if v, ok := d.GetOk("resolution"); ok {
 		x := (v.(string))
 		o.SetResolution(x)
 	}
 
-	if _, ok := d.GetOk("script_execution_mode"); ok {
-		v := d.Get("script_execution_mode")
+	if v, ok := d.GetOk("script_execution_mode"); ok {
 		x := (v.(string))
 		o.SetScriptExecutionMode(x)
 	}
 
-	o.SetScriptExecutionOnComputeNodes(d.Get("script_execution_on_compute_nodes").(bool))
+	if v, ok := d.GetOkExists("script_execution_on_compute_nodes"); ok {
+		x := (v.(bool))
+		o.SetScriptExecutionOnComputeNodes(x)
+	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("supported_hypervisor_type"); ok {
-		v := d.Get("supported_hypervisor_type")
+	if v, ok := d.GetOk("supported_hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetSupportedHypervisorType(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1340,20 +1315,17 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("target_execution_type"); ok {
-		v := d.Get("target_execution_type")
+	if v, ok := d.GetOk("target_execution_type"); ok {
 		x := (v.(string))
 		o.SetTargetExecutionType(x)
 	}
 
-	if _, ok := d.GetOk("timeout"); ok {
-		v := d.Get("timeout")
+	if v, ok := d.GetOkExists("timeout"); ok {
 		x := int64(v.(int))
 		o.SetTimeout(x)
 	}
 
-	if _, ok := d.GetOk("unsupported_hyper_flex_versions"); ok {
-		v := d.Get("unsupported_hyper_flex_versions")
+	if v, ok := d.GetOk("unsupported_hyper_flex_versions"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1362,8 +1334,7 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 		o.SetUnsupportedHyperFlexVersions(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1435,99 +1406,6 @@ func dataSourceHyperflexHealthCheckDefinitionRead(c context.Context, d *schema.R
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("category"); ok {
-		x := (v.(string))
-		o.SetCategory(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("common_causes"); ok {
-		x := (v.(string))
-		o.SetCommonCauses(x)
-	}
-	if v, ok := d.GetOk("configuration"); ok {
-		x := (v.(string))
-		o.SetConfiguration(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("health_impact"); ok {
-		x := (v.(string))
-		o.SetHealthImpact(x)
-	}
-	if v, ok := d.GetOk("internal_name"); ok {
-		x := (v.(string))
-		o.SetInternalName(x)
-	}
-	if v, ok := d.GetOk("minimum_hyper_flex_version"); ok {
-		x := (v.(string))
-		o.SetMinimumHyperFlexVersion(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("reference"); ok {
-		x := (v.(string))
-		o.SetReference(x)
-	}
-	if v, ok := d.GetOk("resolution"); ok {
-		x := (v.(string))
-		o.SetResolution(x)
-	}
-	if v, ok := d.GetOk("script_execution_mode"); ok {
-		x := (v.(string))
-		o.SetScriptExecutionMode(x)
-	}
-	if v, ok := d.GetOk("script_execution_on_compute_nodes"); ok {
-		x := (v.(bool))
-		o.SetScriptExecutionOnComputeNodes(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("supported_hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetSupportedHypervisorType(x)
-	}
-	if v, ok := d.GetOk("target_execution_type"); ok {
-		x := (v.(string))
-		o.SetTargetExecutionType(x)
-	}
-	if v, ok := d.GetOk("timeout"); ok {
-		x := int64(v.(int))
-		o.SetTimeout(x)
 	}
 
 	data, err := o.MarshalJSON()

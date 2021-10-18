@@ -760,7 +760,10 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 		o.SetDescription(x)
 	}
 
-	o.SetJumboFrame(d.Get("jumbo_frame").(bool))
+	if v, ok := d.GetOkExists("jumbo_frame"); ok {
+		x := (v.(bool))
+		o.SetJumboFrame(x)
+	}
 
 	if v, ok := d.GetOk("kvm_ip_range"); ok {
 		p := make([]models.HyperflexIpAddrRange, 0, 1)

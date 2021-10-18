@@ -484,7 +484,7 @@ func resourceSolPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("baud_rate"); ok {
+	if v, ok := d.GetOkExists("baud_rate"); ok {
 		x := int32(v.(int))
 		o.SetBaudRate(x)
 	}
@@ -501,7 +501,10 @@ func resourceSolPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -600,7 +603,7 @@ func resourceSolPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("ssh_port"); ok {
+	if v, ok := d.GetOkExists("ssh_port"); ok {
 		x := int64(v.(int))
 		o.SetSshPort(x)
 	}

@@ -781,14 +781,12 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiaapiApicSweol{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -797,14 +795,12 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("affected_versions"); ok {
-		v := d.Get("affected_versions")
+	if v, ok := d.GetOk("affected_versions"); ok {
 		x := (v.(string))
 		o.SetAffectedVersions(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -844,140 +840,117 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("announcement_date"); ok {
-		v := d.Get("announcement_date")
+	if v, ok := d.GetOk("announcement_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetAnnouncementDate(x)
 	}
 
-	if _, ok := d.GetOk("announcement_date_epoch"); ok {
-		v := d.Get("announcement_date_epoch")
+	if v, ok := d.GetOkExists("announcement_date_epoch"); ok {
 		x := int64(v.(int))
 		o.SetAnnouncementDateEpoch(x)
 	}
 
-	if _, ok := d.GetOk("bulletin_no"); ok {
-		v := d.Get("bulletin_no")
+	if v, ok := d.GetOk("bulletin_no"); ok {
 		x := (v.(string))
 		o.SetBulletinNo(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("endof_new_service_attachment_date"); ok {
-		v := d.Get("endof_new_service_attachment_date")
+	if v, ok := d.GetOk("endof_new_service_attachment_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndofNewServiceAttachmentDate(x)
 	}
 
-	if _, ok := d.GetOk("endof_new_service_attachment_date_epoch"); ok {
-		v := d.Get("endof_new_service_attachment_date_epoch")
+	if v, ok := d.GetOkExists("endof_new_service_attachment_date_epoch"); ok {
 		x := int64(v.(int))
 		o.SetEndofNewServiceAttachmentDateEpoch(x)
 	}
 
-	if _, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
-		v := d.Get("endof_service_contract_renewal_date")
+	if v, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndofServiceContractRenewalDate(x)
 	}
 
-	if _, ok := d.GetOk("endof_service_contract_renewal_date_epoch"); ok {
-		v := d.Get("endof_service_contract_renewal_date_epoch")
+	if v, ok := d.GetOkExists("endof_service_contract_renewal_date_epoch"); ok {
 		x := int64(v.(int))
 		o.SetEndofServiceContractRenewalDateEpoch(x)
 	}
 
-	if _, ok := d.GetOk("endof_sw_maintenance_date"); ok {
-		v := d.Get("endof_sw_maintenance_date")
+	if v, ok := d.GetOk("endof_sw_maintenance_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndofSwMaintenanceDate(x)
 	}
 
-	if _, ok := d.GetOk("endof_sw_maintenance_date_epoch"); ok {
-		v := d.Get("endof_sw_maintenance_date_epoch")
+	if v, ok := d.GetOkExists("endof_sw_maintenance_date_epoch"); ok {
 		x := int64(v.(int))
 		o.SetEndofSwMaintenanceDateEpoch(x)
 	}
 
-	if _, ok := d.GetOk("headline"); ok {
-		v := d.Get("headline")
+	if v, ok := d.GetOk("headline"); ok {
 		x := (v.(string))
 		o.SetHeadline(x)
 	}
 
-	if _, ok := d.GetOk("last_dateof_support"); ok {
-		v := d.Get("last_dateof_support")
+	if v, ok := d.GetOk("last_dateof_support"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastDateofSupport(x)
 	}
 
-	if _, ok := d.GetOk("last_dateof_support_epoch"); ok {
-		v := d.Get("last_dateof_support_epoch")
+	if v, ok := d.GetOkExists("last_dateof_support_epoch"); ok {
 		x := int64(v.(int))
 		o.SetLastDateofSupportEpoch(x)
 	}
 
-	if _, ok := d.GetOk("last_ship_date"); ok {
-		v := d.Get("last_ship_date")
+	if v, ok := d.GetOk("last_ship_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastShipDate(x)
 	}
 
-	if _, ok := d.GetOk("last_ship_date_epoch"); ok {
-		v := d.Get("last_ship_date_epoch")
+	if v, ok := d.GetOkExists("last_ship_date_epoch"); ok {
 		x := int64(v.(int))
 		o.SetLastShipDateEpoch(x)
 	}
 
-	if _, ok := d.GetOk("migration_url"); ok {
-		v := d.Get("migration_url")
+	if v, ok := d.GetOk("migration_url"); ok {
 		x := (v.(string))
 		o.SetMigrationUrl(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -986,8 +959,7 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1030,8 +1002,7 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1071,20 +1042,17 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("software_eol_url"); ok {
-		v := d.Get("software_eol_url")
+	if v, ok := d.GetOk("software_eol_url"); ok {
 		x := (v.(string))
 		o.SetSoftwareEolUrl(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1117,8 +1085,7 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1190,111 +1157,6 @@ func dataSourceNiaapiApicSweolRead(c context.Context, d *schema.ResourceData, me
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("affected_versions"); ok {
-		x := (v.(string))
-		o.SetAffectedVersions(x)
-	}
-	if v, ok := d.GetOk("announcement_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetAnnouncementDate(x)
-	}
-	if v, ok := d.GetOk("announcement_date_epoch"); ok {
-		x := int64(v.(int))
-		o.SetAnnouncementDateEpoch(x)
-	}
-	if v, ok := d.GetOk("bulletin_no"); ok {
-		x := (v.(string))
-		o.SetBulletinNo(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("endof_new_service_attachment_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndofNewServiceAttachmentDate(x)
-	}
-	if v, ok := d.GetOk("endof_new_service_attachment_date_epoch"); ok {
-		x := int64(v.(int))
-		o.SetEndofNewServiceAttachmentDateEpoch(x)
-	}
-	if v, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndofServiceContractRenewalDate(x)
-	}
-	if v, ok := d.GetOk("endof_service_contract_renewal_date_epoch"); ok {
-		x := int64(v.(int))
-		o.SetEndofServiceContractRenewalDateEpoch(x)
-	}
-	if v, ok := d.GetOk("endof_sw_maintenance_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndofSwMaintenanceDate(x)
-	}
-	if v, ok := d.GetOk("endof_sw_maintenance_date_epoch"); ok {
-		x := int64(v.(int))
-		o.SetEndofSwMaintenanceDateEpoch(x)
-	}
-	if v, ok := d.GetOk("headline"); ok {
-		x := (v.(string))
-		o.SetHeadline(x)
-	}
-	if v, ok := d.GetOk("last_dateof_support"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastDateofSupport(x)
-	}
-	if v, ok := d.GetOk("last_dateof_support_epoch"); ok {
-		x := int64(v.(int))
-		o.SetLastDateofSupportEpoch(x)
-	}
-	if v, ok := d.GetOk("last_ship_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastShipDate(x)
-	}
-	if v, ok := d.GetOk("last_ship_date_epoch"); ok {
-		x := int64(v.(int))
-		o.SetLastShipDateEpoch(x)
-	}
-	if v, ok := d.GetOk("migration_url"); ok {
-		x := (v.(string))
-		o.SetMigrationUrl(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("software_eol_url"); ok {
-		x := (v.(string))
-		o.SetSoftwareEolUrl(x)
 	}
 
 	data, err := o.MarshalJSON()

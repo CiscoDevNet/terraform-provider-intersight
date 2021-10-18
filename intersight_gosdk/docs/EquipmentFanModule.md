@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for this Fan Module. | [optional] [readonly] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
+**EquipmentExpanderModule** | Pointer to [**EquipmentExpanderModuleRelationship**](EquipmentExpanderModuleRelationship.md) |  | [optional] 
+**EquipmentIoCard** | Pointer to [**EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) |  | [optional] 
 **EquipmentRackEnclosure** | Pointer to [**EquipmentRackEnclosureRelationship**](EquipmentRackEnclosureRelationship.md) |  | [optional] 
 **Fans** | Pointer to [**[]EquipmentFanRelationship**](EquipmentFanRelationship.md) | An array of relationships to equipmentFan resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
@@ -366,6 +368,56 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 `func (o *EquipmentFanModule) HasEquipmentChassis() bool`
 
 HasEquipmentChassis returns a boolean if a field has been set.
+
+### GetEquipmentExpanderModule
+
+`func (o *EquipmentFanModule) GetEquipmentExpanderModule() EquipmentExpanderModuleRelationship`
+
+GetEquipmentExpanderModule returns the EquipmentExpanderModule field if non-nil, zero value otherwise.
+
+### GetEquipmentExpanderModuleOk
+
+`func (o *EquipmentFanModule) GetEquipmentExpanderModuleOk() (*EquipmentExpanderModuleRelationship, bool)`
+
+GetEquipmentExpanderModuleOk returns a tuple with the EquipmentExpanderModule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentExpanderModule
+
+`func (o *EquipmentFanModule) SetEquipmentExpanderModule(v EquipmentExpanderModuleRelationship)`
+
+SetEquipmentExpanderModule sets EquipmentExpanderModule field to given value.
+
+### HasEquipmentExpanderModule
+
+`func (o *EquipmentFanModule) HasEquipmentExpanderModule() bool`
+
+HasEquipmentExpanderModule returns a boolean if a field has been set.
+
+### GetEquipmentIoCard
+
+`func (o *EquipmentFanModule) GetEquipmentIoCard() EquipmentIoCardRelationship`
+
+GetEquipmentIoCard returns the EquipmentIoCard field if non-nil, zero value otherwise.
+
+### GetEquipmentIoCardOk
+
+`func (o *EquipmentFanModule) GetEquipmentIoCardOk() (*EquipmentIoCardRelationship, bool)`
+
+GetEquipmentIoCardOk returns a tuple with the EquipmentIoCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentIoCard
+
+`func (o *EquipmentFanModule) SetEquipmentIoCard(v EquipmentIoCardRelationship)`
+
+SetEquipmentIoCard sets EquipmentIoCard field to given value.
+
+### HasEquipmentIoCard
+
+`func (o *EquipmentFanModule) HasEquipmentIoCard() bool`
+
+HasEquipmentIoCard returns a boolean if a field has been set.
 
 ### GetEquipmentRackEnclosure
 

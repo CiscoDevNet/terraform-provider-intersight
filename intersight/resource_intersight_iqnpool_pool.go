@@ -167,7 +167,6 @@ func resourceIqnpoolPool() *schema.Resource {
 							Description: "The first suffix number in the block.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -179,7 +178,6 @@ func resourceIqnpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"suffix": {
 							Description: "The suffix for this bock of IQNs.",
@@ -190,7 +188,6 @@ func resourceIqnpoolPool() *schema.Resource {
 							Description: "The last suffix number in the block.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 					},
 				},
@@ -563,16 +560,34 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 				}
 			}
 			o.SetClassId("iqnpool.IqnSuffixBlock")
+			if v, ok := l["from"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
 			if v, ok := l["suffix"]; ok {
 				{
 					x := (v.(string))
 					o.SetSuffix(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)
@@ -863,16 +878,34 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 				}
 			}
 			o.SetClassId("iqnpool.IqnSuffixBlock")
+			if v, ok := l["from"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetFrom(x)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
 			if v, ok := l["suffix"]; ok {
 				{
 					x := (v.(string))
 					o.SetSuffix(x)
+				}
+			}
+			if v, ok := l["to"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTo(x)
 				}
 			}
 			x = append(x, *o)

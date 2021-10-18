@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **NetConfig** | Pointer to [**KubernetesNetworkPolicyRelationship**](KubernetesNetworkPolicyRelationship.md) |  | [optional] 
 **NodeGroups** | Pointer to [**[]KubernetesNodeGroupProfileRelationship**](KubernetesNodeGroupProfileRelationship.md) | An array of relationships to kubernetesNodeGroupProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ParentSolutionProfile** | Pointer to [**MoBaseMoRelationship**](MoBaseMoRelationship.md) |  | [optional] 
 **SysConfig** | Pointer to [**KubernetesSysConfigPolicyRelationship**](KubernetesSysConfigPolicyRelationship.md) |  | [optional] 
 **TrustedRegistries** | Pointer to [**KubernetesTrustedRegistriesPolicyRelationship**](KubernetesTrustedRegistriesPolicyRelationship.md) |  | [optional] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
@@ -564,6 +565,31 @@ SetOrganization sets Organization field to given value.
 `func (o *KubernetesClusterProfile) HasOrganization() bool`
 
 HasOrganization returns a boolean if a field has been set.
+
+### GetParentSolutionProfile
+
+`func (o *KubernetesClusterProfile) GetParentSolutionProfile() MoBaseMoRelationship`
+
+GetParentSolutionProfile returns the ParentSolutionProfile field if non-nil, zero value otherwise.
+
+### GetParentSolutionProfileOk
+
+`func (o *KubernetesClusterProfile) GetParentSolutionProfileOk() (*MoBaseMoRelationship, bool)`
+
+GetParentSolutionProfileOk returns a tuple with the ParentSolutionProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentSolutionProfile
+
+`func (o *KubernetesClusterProfile) SetParentSolutionProfile(v MoBaseMoRelationship)`
+
+SetParentSolutionProfile sets ParentSolutionProfile field to given value.
+
+### HasParentSolutionProfile
+
+`func (o *KubernetesClusterProfile) HasParentSolutionProfile() bool`
+
+HasParentSolutionProfile returns a boolean if a field has been set.
 
 ### GetSysConfig
 

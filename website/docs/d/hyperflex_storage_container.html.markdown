@@ -13,6 +13,7 @@ The results of this data source are stored in `results` property.
 All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_hyperflex_storage_container.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
+* `accessibility_summary`:(string) Storage container accessibility summary.* `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable.* `ACCESSIBLE` - The HyperFlex storage container is accessible.* `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible.* `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible. 
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `created_time`:(string) Storage container's creation time. 

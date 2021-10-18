@@ -27,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fault_summary`:(int) The fault summary for the server. 
 * `firmware`:(string) The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. 
+* `hardware_uuid`:(string) The universally unique hardware identity of the server provided by the manufacturer. 
 * `ipv4_address`:(string) The IPv4 address configured on the management interface of the Integrated Management Controller. 
 * `management_mode`:(string) The management mode of the server.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `memory_speed`:(string) The maximum memory speed in MHz available on the server. 

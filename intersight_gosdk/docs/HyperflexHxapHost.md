@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the Host. | [optional] 
 **MasterRole** | Pointer to **bool** | Is the role of this host is master in the cluster? true or false. | [optional] 
 **MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](VirtualizationMemoryAllocation.md) |  | [optional] 
+**StorageVmPowerState** | Pointer to **string** | Is the Storage Controller VM on the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **Version** | Pointer to **string** | Product version of the Host. | [optional] 
 **Cluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
 **ClusterMember** | Pointer to [**AssetClusterMemberRelationship**](AssetClusterMemberRelationship.md) |  | [optional] 
@@ -350,6 +351,31 @@ HasMemoryAllocation returns a boolean if a field has been set.
 `func (o *HyperflexHxapHost) UnsetMemoryAllocation()`
 
 UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
+### GetStorageVmPowerState
+
+`func (o *HyperflexHxapHost) GetStorageVmPowerState() string`
+
+GetStorageVmPowerState returns the StorageVmPowerState field if non-nil, zero value otherwise.
+
+### GetStorageVmPowerStateOk
+
+`func (o *HyperflexHxapHost) GetStorageVmPowerStateOk() (*string, bool)`
+
+GetStorageVmPowerStateOk returns a tuple with the StorageVmPowerState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageVmPowerState
+
+`func (o *HyperflexHxapHost) SetStorageVmPowerState(v string)`
+
+SetStorageVmPowerState sets StorageVmPowerState field to given value.
+
+### HasStorageVmPowerState
+
+`func (o *HyperflexHxapHost) HasStorageVmPowerState() bool`
+
+HasStorageVmPowerState returns a boolean if a field has been set.
+
 ### GetVersion
 
 `func (o *HyperflexHxapHost) GetVersion() string`

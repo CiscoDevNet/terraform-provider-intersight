@@ -940,9 +940,15 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
-	o.SetEnableDns(d.Get("enable_dns").(bool))
+	if v, ok := d.GetOkExists("enable_dns"); ok {
+		x := (v.(bool))
+		o.SetEnableDns(x)
+	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("groups"); ok {
 		x := make([]models.IamLdapGroupRelationship, 0)

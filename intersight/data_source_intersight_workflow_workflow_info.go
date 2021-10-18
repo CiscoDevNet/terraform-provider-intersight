@@ -1809,8 +1809,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowInfo{}
-	if _, ok := d.GetOk("account"); ok {
-		v := d.Get("account")
+	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1853,20 +1852,17 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("action"); ok {
-		v := d.Get("action")
+	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1875,8 +1871,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1916,8 +1911,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("associated_object"); ok {
-		v := d.Get("associated_object")
+	if v, ok := d.GetOk("associated_object"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1960,69 +1954,61 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cleanup_time"); ok {
-		v := d.Get("cleanup_time")
+	if v, ok := d.GetOk("cleanup_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCleanupTime(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("email"); ok {
-		v := d.Get("email")
+	if v, ok := d.GetOk("email"); ok {
 		x := (v.(string))
 		o.SetEmail(x)
 	}
 
-	if _, ok := d.GetOk("end_time"); ok {
-		v := d.Get("end_time")
+	if v, ok := d.GetOk("end_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetEndTime(x)
 	}
 
-	if _, ok := d.GetOk("failed_workflow_cleanup_duration"); ok {
-		v := d.Get("failed_workflow_cleanup_duration")
+	if v, ok := d.GetOkExists("failed_workflow_cleanup_duration"); ok {
 		x := int64(v.(int))
 		o.SetFailedWorkflowCleanupDuration(x)
 	}
 
-	if _, ok := d.GetOk("input"); ok {
-		v := d.Get("input")
+	if v, ok := d.GetOk("input"); ok {
 		o.SetInput(v)
 	}
 
-	if _, ok := d.GetOk("inst_id"); ok {
-		v := d.Get("inst_id")
+	if v, ok := d.GetOk("inst_id"); ok {
 		x := (v.(string))
 		o.SetInstId(x)
 	}
 
-	o.SetInternal(d.Get("internal").(bool))
+	if v, ok := d.GetOkExists("internal"); ok {
+		x := (v.(bool))
+		o.SetInternal(x)
+	}
 
-	if _, ok := d.GetOk("last_action"); ok {
-		v := d.Get("last_action")
+	if v, ok := d.GetOk("last_action"); ok {
 		x := (v.(string))
 		o.SetLastAction(x)
 	}
 
-	if _, ok := d.GetOk("message"); ok {
-		v := d.Get("message")
+	if v, ok := d.GetOk("message"); ok {
 		x := make([]models.WorkflowMessage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2062,38 +2048,32 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetMessage(x)
 	}
 
-	if _, ok := d.GetOk("meta_version"); ok {
-		v := d.Get("meta_version")
+	if v, ok := d.GetOkExists("meta_version"); ok {
 		x := int64(v.(int))
 		o.SetMetaVersion(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2136,13 +2116,11 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("output"); ok {
-		v := d.Get("output")
+	if v, ok := d.GetOk("output"); ok {
 		o.SetOutput(v)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2151,8 +2129,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2195,8 +2172,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("parent_task_info"); ok {
-		v := d.Get("parent_task_info")
+	if v, ok := d.GetOk("parent_task_info"); ok {
 		p := make([]models.WorkflowTaskInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2239,14 +2215,12 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("pause_reason"); ok {
-		v := d.Get("pause_reason")
+	if v, ok := d.GetOk("pause_reason"); ok {
 		x := (v.(string))
 		o.SetPauseReason(x)
 	}
 
-	if _, ok := d.GetOk("pending_dynamic_workflow_info"); ok {
-		v := d.Get("pending_dynamic_workflow_info")
+	if v, ok := d.GetOk("pending_dynamic_workflow_info"); ok {
 		p := make([]models.WorkflowPendingDynamicWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2289,8 +2263,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("permission"); ok {
-		v := d.Get("permission")
+	if v, ok := d.GetOk("permission"); ok {
 		p := make([]models.IamPermissionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2333,8 +2306,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2374,14 +2346,12 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("progress"); ok {
-		v := d.Get("progress")
+	if v, ok := d.GetOk("progress"); ok {
 		x := v.(float32)
 		o.SetProgress(x)
 	}
 
-	if _, ok := d.GetOk("properties"); ok {
-		v := d.Get("properties")
+	if v, ok := d.GetOk("properties"); ok {
 		p := make([]models.WorkflowWorkflowInfoProperties, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2418,44 +2388,37 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("retry_from_task_name"); ok {
-		v := d.Get("retry_from_task_name")
+	if v, ok := d.GetOk("retry_from_task_name"); ok {
 		x := (v.(string))
 		o.SetRetryFromTaskName(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("src"); ok {
-		v := d.Get("src")
+	if v, ok := d.GetOk("src"); ok {
 		x := (v.(string))
 		o.SetSrc(x)
 	}
 
-	if _, ok := d.GetOk("start_time"); ok {
-		v := d.Get("start_time")
+	if v, ok := d.GetOk("start_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetStartTime(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("success_workflow_cleanup_duration"); ok {
-		v := d.Get("success_workflow_cleanup_duration")
+	if v, ok := d.GetOkExists("success_workflow_cleanup_duration"); ok {
 		x := int64(v.(int))
 		o.SetSuccessWorkflowCleanupDuration(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2488,8 +2451,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("task_infos"); ok {
-		v := d.Get("task_infos")
+	if v, ok := d.GetOk("task_infos"); ok {
 		x := make([]models.WorkflowTaskInfoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2529,28 +2491,27 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		o.SetTaskInfos(x)
 	}
 
-	if _, ok := d.GetOk("trace_id"); ok {
-		v := d.Get("trace_id")
+	if v, ok := d.GetOk("trace_id"); ok {
 		x := (v.(string))
 		o.SetTraceId(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	o.SetUserActionRequired(d.Get("user_action_required").(bool))
+	if v, ok := d.GetOkExists("user_action_required"); ok {
+		x := (v.(bool))
+		o.SetUserActionRequired(x)
+	}
 
-	if _, ok := d.GetOk("user_id"); ok {
-		v := d.Get("user_id")
+	if v, ok := d.GetOk("user_id"); ok {
 		x := (v.(string))
 		o.SetUserId(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2624,14 +2585,12 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("wait_reason"); ok {
-		v := d.Get("wait_reason")
+	if v, ok := d.GetOk("wait_reason"); ok {
 		x := (v.(string))
 		o.SetWaitReason(x)
 	}
 
-	if _, ok := d.GetOk("workflow_ctx"); ok {
-		v := d.Get("workflow_ctx")
+	if v, ok := d.GetOk("workflow_ctx"); ok {
 		p := make([]models.WorkflowWorkflowCtx, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2779,8 +2738,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("workflow_definition"); ok {
-		v := d.Get("workflow_definition")
+	if v, ok := d.GetOk("workflow_definition"); ok {
 		p := make([]models.WorkflowWorkflowDefinitionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2823,153 +2781,17 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if _, ok := d.GetOk("workflow_meta_type"); ok {
-		v := d.Get("workflow_meta_type")
-		x := (v.(string))
-		o.SetWorkflowMetaType(x)
-	}
-
-	if _, ok := d.GetOk("workflow_task_count"); ok {
-		v := d.Get("workflow_task_count")
-		x := int64(v.(int))
-		o.SetWorkflowTaskCount(x)
-	}
-
-	if _, ok := d.GetOk("workflow_worker_task_count"); ok {
-		v := d.Get("workflow_worker_task_count")
-		x := int64(v.(int))
-		o.SetWorkflowWorkerTaskCount(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("action"); ok {
-		x := (v.(string))
-		o.SetAction(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cleanup_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCleanupTime(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("email"); ok {
-		x := (v.(string))
-		o.SetEmail(x)
-	}
-	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetEndTime(x)
-	}
-	if v, ok := d.GetOk("failed_workflow_cleanup_duration"); ok {
-		x := int64(v.(int))
-		o.SetFailedWorkflowCleanupDuration(x)
-	}
-	if v, ok := d.GetOk("inst_id"); ok {
-		x := (v.(string))
-		o.SetInstId(x)
-	}
-	if v, ok := d.GetOk("internal"); ok {
-		x := (v.(bool))
-		o.SetInternal(x)
-	}
-	if v, ok := d.GetOk("last_action"); ok {
-		x := (v.(string))
-		o.SetLastAction(x)
-	}
-	if v, ok := d.GetOk("meta_version"); ok {
-		x := int64(v.(int))
-		o.SetMetaVersion(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("pause_reason"); ok {
-		x := (v.(string))
-		o.SetPauseReason(x)
-	}
-	if v, ok := d.GetOk("progress"); ok {
-		x := v.(float32)
-		o.SetProgress(x)
-	}
-	if v, ok := d.GetOk("retry_from_task_name"); ok {
-		x := (v.(string))
-		o.SetRetryFromTaskName(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("src"); ok {
-		x := (v.(string))
-		o.SetSrc(x)
-	}
-	if v, ok := d.GetOk("start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetStartTime(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("success_workflow_cleanup_duration"); ok {
-		x := int64(v.(int))
-		o.SetSuccessWorkflowCleanupDuration(x)
-	}
-	if v, ok := d.GetOk("trace_id"); ok {
-		x := (v.(string))
-		o.SetTraceId(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-	if v, ok := d.GetOk("user_action_required"); ok {
-		x := (v.(bool))
-		o.SetUserActionRequired(x)
-	}
-	if v, ok := d.GetOk("user_id"); ok {
-		x := (v.(string))
-		o.SetUserId(x)
-	}
-	if v, ok := d.GetOk("wait_reason"); ok {
-		x := (v.(string))
-		o.SetWaitReason(x)
-	}
 	if v, ok := d.GetOk("workflow_meta_type"); ok {
 		x := (v.(string))
 		o.SetWorkflowMetaType(x)
 	}
-	if v, ok := d.GetOk("workflow_task_count"); ok {
+
+	if v, ok := d.GetOkExists("workflow_task_count"); ok {
 		x := int64(v.(int))
 		o.SetWorkflowTaskCount(x)
 	}
-	if v, ok := d.GetOk("workflow_worker_task_count"); ok {
+
+	if v, ok := d.GetOkExists("workflow_worker_task_count"); ok {
 		x := int64(v.(int))
 		o.SetWorkflowWorkerTaskCount(x)
 	}

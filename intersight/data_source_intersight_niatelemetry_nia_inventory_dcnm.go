@@ -901,14 +901,12 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaInventoryDcnm{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -917,8 +915,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -958,126 +955,122 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	o.SetDev(d.Get("dev").(bool))
+	if v, ok := d.GetOkExists("dev"); ok {
+		x := (v.(bool))
+		o.SetDev(x)
+	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("epld_image_count"); ok {
-		v := d.Get("epld_image_count")
+	if v, ok := d.GetOkExists("epld_image_count"); ok {
 		x := int64(v.(int))
 		o.SetEpldImageCount(x)
 	}
 
-	o.SetHaEnabled(d.Get("ha_enabled").(bool))
+	if v, ok := d.GetOkExists("ha_enabled"); ok {
+		x := (v.(bool))
+		o.SetHaEnabled(x)
+	}
 
-	if _, ok := d.GetOk("ha_replication_status"); ok {
-		v := d.Get("ha_replication_status")
+	if v, ok := d.GetOk("ha_replication_status"); ok {
 		x := (v.(string))
 		o.SetHaReplicationStatus(x)
 	}
 
-	if _, ok := d.GetOk("install"); ok {
-		v := d.Get("install")
+	if v, ok := d.GetOk("install"); ok {
 		x := (v.(string))
 		o.SetInstall(x)
 	}
 
-	o.SetIsIsnConfigured(d.Get("is_isn_configured").(bool))
+	if v, ok := d.GetOkExists("is_isn_configured"); ok {
+		x := (v.(bool))
+		o.SetIsIsnConfigured(x)
+	}
 
-	o.SetIsMediaController(d.Get("is_media_controller").(bool))
+	if v, ok := d.GetOkExists("is_media_controller"); ok {
+		x := (v.(bool))
+		o.SetIsMediaController(x)
+	}
 
-	o.SetIsSmartLicenseEnabled(d.Get("is_smart_license_enabled").(bool))
+	if v, ok := d.GetOkExists("is_smart_license_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsSmartLicenseEnabled(x)
+	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("num_fabrics"); ok {
-		v := d.Get("num_fabrics")
+	if v, ok := d.GetOkExists("num_fabrics"); ok {
 		x := int64(v.(int))
 		o.SetNumFabrics(x)
 	}
 
-	if _, ok := d.GetOk("num_fabrics_in_msd"); ok {
-		v := d.Get("num_fabrics_in_msd")
+	if v, ok := d.GetOkExists("num_fabrics_in_msd"); ok {
 		x := int64(v.(int))
 		o.SetNumFabricsInMsd(x)
 	}
 
-	if _, ok := d.GetOk("num_ingress_replication_fabrics"); ok {
-		v := d.Get("num_ingress_replication_fabrics")
+	if v, ok := d.GetOkExists("num_ingress_replication_fabrics"); ok {
 		x := int64(v.(int))
 		o.SetNumIngressReplicationFabrics(x)
 	}
 
-	if _, ok := d.GetOk("num_local_users"); ok {
-		v := d.Get("num_local_users")
+	if v, ok := d.GetOkExists("num_local_users"); ok {
 		x := int64(v.(int))
 		o.SetNumLocalUsers(x)
 	}
 
-	if _, ok := d.GetOk("num_msd"); ok {
-		v := d.Get("num_msd")
+	if v, ok := d.GetOkExists("num_msd"); ok {
 		x := int64(v.(int))
 		o.SetNumMsd(x)
 	}
 
-	if _, ok := d.GetOk("num_svi_vrf_count"); ok {
-		v := d.Get("num_svi_vrf_count")
+	if v, ok := d.GetOkExists("num_svi_vrf_count"); ok {
 		x := int64(v.(int))
 		o.SetNumSviVrfCount(x)
 	}
 
-	if _, ok := d.GetOk("num_trm_enabled_count"); ok {
-		v := d.Get("num_trm_enabled_count")
+	if v, ok := d.GetOkExists("num_trm_enabled_count"); ok {
 		x := int64(v.(int))
 		o.SetNumTrmEnabledCount(x)
 	}
 
-	if _, ok := d.GetOk("num_upg_users"); ok {
-		v := d.Get("num_upg_users")
+	if v, ok := d.GetOkExists("num_upg_users"); ok {
 		x := int64(v.(int))
 		o.SetNumUpgUsers(x)
 	}
 
-	if _, ok := d.GetOk("nxos_image_count"); ok {
-		v := d.Get("nxos_image_count")
+	if v, ok := d.GetOkExists("nxos_image_count"); ok {
 		x := int64(v.(int))
 		o.SetNxosImageCount(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1086,8 +1079,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1130,8 +1122,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1171,8 +1162,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1215,26 +1205,22 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1267,32 +1253,27 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("underlay_peering_active_links_count"); ok {
-		v := d.Get("underlay_peering_active_links_count")
+	if v, ok := d.GetOkExists("underlay_peering_active_links_count"); ok {
 		x := int64(v.(int))
 		o.SetUnderlayPeeringActiveLinksCount(x)
 	}
 
-	if _, ok := d.GetOk("upg_job_count"); ok {
-		v := d.Get("upg_job_count")
+	if v, ok := d.GetOkExists("upg_job_count"); ok {
 		x := int64(v.(int))
 		o.SetUpgJobCount(x)
 	}
 
-	if _, ok := d.GetOk("upg_status"); ok {
-		v := d.Get("upg_status")
+	if v, ok := d.GetOk("upg_status"); ok {
 		x := (v.(string))
 		o.SetUpgStatus(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1364,131 +1345,6 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("dev"); ok {
-		x := (v.(bool))
-		o.SetDev(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("epld_image_count"); ok {
-		x := int64(v.(int))
-		o.SetEpldImageCount(x)
-	}
-	if v, ok := d.GetOk("ha_enabled"); ok {
-		x := (v.(bool))
-		o.SetHaEnabled(x)
-	}
-	if v, ok := d.GetOk("ha_replication_status"); ok {
-		x := (v.(string))
-		o.SetHaReplicationStatus(x)
-	}
-	if v, ok := d.GetOk("install"); ok {
-		x := (v.(string))
-		o.SetInstall(x)
-	}
-	if v, ok := d.GetOk("is_isn_configured"); ok {
-		x := (v.(bool))
-		o.SetIsIsnConfigured(x)
-	}
-	if v, ok := d.GetOk("is_media_controller"); ok {
-		x := (v.(bool))
-		o.SetIsMediaController(x)
-	}
-	if v, ok := d.GetOk("is_smart_license_enabled"); ok {
-		x := (v.(bool))
-		o.SetIsSmartLicenseEnabled(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("num_fabrics"); ok {
-		x := int64(v.(int))
-		o.SetNumFabrics(x)
-	}
-	if v, ok := d.GetOk("num_fabrics_in_msd"); ok {
-		x := int64(v.(int))
-		o.SetNumFabricsInMsd(x)
-	}
-	if v, ok := d.GetOk("num_ingress_replication_fabrics"); ok {
-		x := int64(v.(int))
-		o.SetNumIngressReplicationFabrics(x)
-	}
-	if v, ok := d.GetOk("num_local_users"); ok {
-		x := int64(v.(int))
-		o.SetNumLocalUsers(x)
-	}
-	if v, ok := d.GetOk("num_msd"); ok {
-		x := int64(v.(int))
-		o.SetNumMsd(x)
-	}
-	if v, ok := d.GetOk("num_svi_vrf_count"); ok {
-		x := int64(v.(int))
-		o.SetNumSviVrfCount(x)
-	}
-	if v, ok := d.GetOk("num_trm_enabled_count"); ok {
-		x := int64(v.(int))
-		o.SetNumTrmEnabledCount(x)
-	}
-	if v, ok := d.GetOk("num_upg_users"); ok {
-		x := int64(v.(int))
-		o.SetNumUpgUsers(x)
-	}
-	if v, ok := d.GetOk("nxos_image_count"); ok {
-		x := int64(v.(int))
-		o.SetNxosImageCount(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("underlay_peering_active_links_count"); ok {
-		x := int64(v.(int))
-		o.SetUnderlayPeeringActiveLinksCount(x)
-	}
-	if v, ok := d.GetOk("upg_job_count"); ok {
-		x := int64(v.(int))
-		o.SetUpgJobCount(x)
-	}
-	if v, ok := d.GetOk("upg_status"); ok {
-		x := (v.(string))
-		o.SetUpgStatus(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()

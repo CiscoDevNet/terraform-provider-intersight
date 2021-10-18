@@ -44,11 +44,11 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `iqn_suffix_blocks`:(Array)
 This complex property has following sub-properties:
-  + `from`:(int)(ReadOnly) The first suffix number in the block. 
+  + `from`:(int) The first suffix number in the block. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `size`:(int)(ReadOnly) Number of identifiers this block can hold. 
+  + `size`:(int) Number of identifiers this block can hold. 
   + `suffix`:(string) The suffix for this bock of IQNs. 
-  + `to`:(int)(ReadOnly) The last suffix number in the block. 
+  + `to`:(int) The last suffix number in the block. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

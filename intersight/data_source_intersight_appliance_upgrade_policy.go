@@ -134,6 +134,16 @@ func dataSourceApplianceUpgradePolicy() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_synced": {
+			Description: "Flag to indicate software upgrade setting is synchronized with Intersight SaaS.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"manual_installation_start_time": {
+			Description: "Intersight Appliance manual upgrade start time.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -285,6 +295,11 @@ func dataSourceApplianceUpgradePolicy() *schema.Resource {
 		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"software_download_type": {
+			Description: "SoftwareDownloadType is used to indicate the kind of software download.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -539,6 +554,16 @@ func dataSourceApplianceUpgradePolicy() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"is_synced": {
+			Description: "Flag to indicate software upgrade setting is synchronized with Intersight SaaS.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"manual_installation_start_time": {
+			Description: "Intersight Appliance manual upgrade start time.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -693,6 +718,11 @@ func dataSourceApplianceUpgradePolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"software_download_type": {
+			Description: "SoftwareDownloadType is used to indicate the kind of software download.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -841,8 +871,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceUpgradePolicy{}
-	if _, ok := d.GetOk("account"); ok {
-		v := d.Get("account")
+	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -885,14 +914,12 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -901,8 +928,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -942,62 +968,72 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		o.SetAncestors(x)
 	}
 
-	o.SetAutoUpgrade(d.Get("auto_upgrade").(bool))
+	if v, ok := d.GetOkExists("auto_upgrade"); ok {
+		x := (v.(bool))
+		o.SetAutoUpgrade(x)
+	}
 
-	o.SetBlackoutDatesEnabled(d.Get("blackout_dates_enabled").(bool))
+	if v, ok := d.GetOkExists("blackout_dates_enabled"); ok {
+		x := (v.(bool))
+		o.SetBlackoutDatesEnabled(x)
+	}
 
-	if _, ok := d.GetOk("blackout_end_date"); ok {
-		v := d.Get("blackout_end_date")
+	if v, ok := d.GetOk("blackout_end_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetBlackoutEndDate(x)
 	}
 
-	if _, ok := d.GetOk("blackout_start_date"); ok {
-		v := d.Get("blackout_start_date")
+	if v, ok := d.GetOk("blackout_start_date"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetBlackoutStartDate(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetEnableMetaDataSync(d.Get("enable_meta_data_sync").(bool))
+	if v, ok := d.GetOkExists("enable_meta_data_sync"); ok {
+		x := (v.(bool))
+		o.SetEnableMetaDataSync(x)
+	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOkExists("is_synced"); ok {
+		x := (v.(bool))
+		o.SetIsSynced(x)
+	}
+
+	if v, ok := d.GetOk("manual_installation_start_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetManualInstallationStartTime(x)
+	}
+
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1006,8 +1042,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1050,8 +1085,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1091,8 +1125,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("schedule"); ok {
-		v := d.Get("schedule")
+	if v, ok := d.GetOk("schedule"); ok {
 		p := make([]models.OnpremSchedule, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1165,14 +1198,17 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("software_download_type"); ok {
+		x := (v.(string))
+		o.SetSoftwareDownloadType(x)
+	}
+
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1205,8 +1241,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1280,59 +1315,6 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("auto_upgrade"); ok {
-		x := (v.(bool))
-		o.SetAutoUpgrade(x)
-	}
-	if v, ok := d.GetOk("blackout_dates_enabled"); ok {
-		x := (v.(bool))
-		o.SetBlackoutDatesEnabled(x)
-	}
-	if v, ok := d.GetOk("blackout_end_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetBlackoutEndDate(x)
-	}
-	if v, ok := d.GetOk("blackout_start_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetBlackoutStartDate(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("enable_meta_data_sync"); ok {
-		x := (v.(bool))
-		o.SetEnableMetaDataSync(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of ApplianceUpgradePolicy object failed with error : %s", err.Error())
@@ -1386,6 +1368,9 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["enable_meta_data_sync"] = (s.GetEnableMetaDataSync())
+				temp["is_synced"] = (s.GetIsSynced())
+
+				temp["manual_installation_start_time"] = (s.GetManualInstallationStartTime()).String()
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1398,6 +1383,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 
 				temp["schedule"] = flattenMapOnpremSchedule(s.GetSchedule(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["software_download_type"] = (s.GetSoftwareDownloadType())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

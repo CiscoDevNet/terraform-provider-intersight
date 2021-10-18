@@ -911,32 +911,27 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CondAlarm{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("acknowledge"); ok {
-		v := d.Get("acknowledge")
+	if v, ok := d.GetOk("acknowledge"); ok {
 		x := (v.(string))
 		o.SetAcknowledge(x)
 	}
 
-	if _, ok := d.GetOk("acknowledge_by"); ok {
-		v := d.Get("acknowledge_by")
+	if v, ok := d.GetOk("acknowledge_by"); ok {
 		x := (v.(string))
 		o.SetAcknowledgeBy(x)
 	}
 
-	if _, ok := d.GetOk("acknowledge_time"); ok {
-		v := d.Get("acknowledge_time")
+	if v, ok := d.GetOk("acknowledge_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetAcknowledgeTime(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -945,8 +940,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("affected_mo"); ok {
-		v := d.Get("affected_mo")
+	if v, ok := d.GetOk("affected_mo"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -989,44 +983,37 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("affected_mo_display_name"); ok {
-		v := d.Get("affected_mo_display_name")
+	if v, ok := d.GetOk("affected_mo_display_name"); ok {
 		x := (v.(string))
 		o.SetAffectedMoDisplayName(x)
 	}
 
-	if _, ok := d.GetOk("affected_mo_id"); ok {
-		v := d.Get("affected_mo_id")
+	if v, ok := d.GetOk("affected_mo_id"); ok {
 		x := (v.(string))
 		o.SetAffectedMoId(x)
 	}
 
-	if _, ok := d.GetOk("affected_mo_type"); ok {
-		v := d.Get("affected_mo_type")
+	if v, ok := d.GetOk("affected_mo_type"); ok {
 		x := (v.(string))
 		o.SetAffectedMoType(x)
 	}
 
-	if _, ok := d.GetOk("affected_object"); ok {
-		v := d.Get("affected_object")
+	if v, ok := d.GetOk("affected_object"); ok {
 		x := (v.(string))
 		o.SetAffectedObject(x)
 	}
 
-	if _, ok := d.GetOk("ancestor_mo_id"); ok {
-		v := d.Get("ancestor_mo_id")
+	if v, ok := d.GetOk("ancestor_mo_id"); ok {
 		x := (v.(string))
 		o.SetAncestorMoId(x)
 	}
 
-	if _, ok := d.GetOk("ancestor_mo_type"); ok {
-		v := d.Get("ancestor_mo_type")
+	if v, ok := d.GetOk("ancestor_mo_type"); ok {
 		x := (v.(string))
 		o.SetAncestorMoType(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1066,86 +1053,72 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("code"); ok {
-		v := d.Get("code")
+	if v, ok := d.GetOk("code"); ok {
 		x := (v.(string))
 		o.SetCode(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("creation_time"); ok {
-		v := d.Get("creation_time")
+	if v, ok := d.GetOk("creation_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreationTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("last_transition_time"); ok {
-		v := d.Get("last_transition_time")
+	if v, ok := d.GetOk("last_transition_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastTransitionTime(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("ms_affected_object"); ok {
-		v := d.Get("ms_affected_object")
+	if v, ok := d.GetOk("ms_affected_object"); ok {
 		x := (v.(string))
 		o.SetMsAffectedObject(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("orig_severity"); ok {
-		v := d.Get("orig_severity")
+	if v, ok := d.GetOk("orig_severity"); ok {
 		x := (v.(string))
 		o.SetOrigSeverity(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1154,8 +1127,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1198,8 +1170,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1239,8 +1210,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1283,20 +1253,17 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("severity"); ok {
-		v := d.Get("severity")
+	if v, ok := d.GetOk("severity"); ok {
 		x := (v.(string))
 		o.SetSeverity(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1329,8 +1296,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1402,107 +1368,6 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("acknowledge"); ok {
-		x := (v.(string))
-		o.SetAcknowledge(x)
-	}
-	if v, ok := d.GetOk("acknowledge_by"); ok {
-		x := (v.(string))
-		o.SetAcknowledgeBy(x)
-	}
-	if v, ok := d.GetOk("acknowledge_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetAcknowledgeTime(x)
-	}
-	if v, ok := d.GetOk("affected_mo_display_name"); ok {
-		x := (v.(string))
-		o.SetAffectedMoDisplayName(x)
-	}
-	if v, ok := d.GetOk("affected_mo_id"); ok {
-		x := (v.(string))
-		o.SetAffectedMoId(x)
-	}
-	if v, ok := d.GetOk("affected_mo_type"); ok {
-		x := (v.(string))
-		o.SetAffectedMoType(x)
-	}
-	if v, ok := d.GetOk("affected_object"); ok {
-		x := (v.(string))
-		o.SetAffectedObject(x)
-	}
-	if v, ok := d.GetOk("ancestor_mo_id"); ok {
-		x := (v.(string))
-		o.SetAncestorMoId(x)
-	}
-	if v, ok := d.GetOk("ancestor_mo_type"); ok {
-		x := (v.(string))
-		o.SetAncestorMoType(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("code"); ok {
-		x := (v.(string))
-		o.SetCode(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("creation_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreationTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("last_transition_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastTransitionTime(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("ms_affected_object"); ok {
-		x := (v.(string))
-		o.SetMsAffectedObject(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("orig_severity"); ok {
-		x := (v.(string))
-		o.SetOrigSeverity(x)
-	}
-	if v, ok := d.GetOk("severity"); ok {
-		x := (v.(string))
-		o.SetSeverity(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

@@ -27,6 +27,12 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"adapter_ep_proxy_enabled": {
+				Description: "Indicates whether the server uses ep proxy to communicate with the adapter.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -278,6 +284,12 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 						},
 					},
 				},
+			},
+			"uuid_supported_ver": {
+				Description: "Minimum server firmware version for UUID feature support.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"vendor": {
 				Description: "The vendor of the endpoint, for which this capability information is applicable.",
@@ -585,6 +597,10 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while setting property AccountMoid in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("adapter_ep_proxy_enabled", (s.GetAdapterEpProxyEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property AdapterEpProxyEnabled in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
 	}
@@ -651,6 +667,10 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("uuid_supported_ver", (s.GetUuidSupportedVer())); err != nil {
+		return diag.Errorf("error occurred while setting property UuidSupportedVer in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("vendor", (s.GetVendor())); err != nil {

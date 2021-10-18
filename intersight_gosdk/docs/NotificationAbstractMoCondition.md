@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AlarmMoCondition"]
 **Enabled** | Pointer to **bool** | Condition can be switched on/off which out necessity to change the subscription settings: actions, conditions etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
 **MoType** | Pointer to **string** | MoType for which the condition is created. | [optional] [readonly] 
-**OdataFilter** | Pointer to **string** | Odata filter string managed internally. It&#39;s built with specific ObjectType properties. | [optional] [readonly] 
+**OdataFilter** | Pointer to **string** | Odata filter string managed internally. It is built with specific ObjectType properties. | [optional] [readonly] 
 
 ## Methods
 

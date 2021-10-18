@@ -264,6 +264,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 				},
 			},
 		},
+		"last_renew": {
+			Description: "Specifies last certificate renew time with SA.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"last_sync": {
 			Description: "Specifies last sync time with SA.",
 			Type:        schema.TypeString,
@@ -868,6 +873,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 				},
 			},
 		},
+		"last_renew": {
+			Description: "Specifies last certificate renew time with SA.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"last_sync": {
 			Description: "Specifies last sync time with SA.",
 			Type:        schema.TypeString,
@@ -1239,8 +1249,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseAccountLicenseData{}
-	if _, ok := d.GetOk("account"); ok {
-		v := d.Get("account")
+	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1283,20 +1292,17 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("account_id"); ok {
-		v := d.Get("account_id")
+	if v, ok := d.GetOk("account_id"); ok {
 		x := (v.(string))
 		o.SetAccountId(x)
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1305,14 +1311,12 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("agent_data"); ok {
-		v := d.Get("agent_data")
+	if v, ok := d.GetOk("agent_data"); ok {
 		x := (v.(string))
 		o.SetAgentData(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1352,44 +1356,37 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("auth_expire_time"); ok {
-		v := d.Get("auth_expire_time")
+	if v, ok := d.GetOk("auth_expire_time"); ok {
 		x := (v.(string))
 		o.SetAuthExpireTime(x)
 	}
 
-	if _, ok := d.GetOk("auth_initial_time"); ok {
-		v := d.Get("auth_initial_time")
+	if v, ok := d.GetOk("auth_initial_time"); ok {
 		x := (v.(string))
 		o.SetAuthInitialTime(x)
 	}
 
-	if _, ok := d.GetOk("auth_next_time"); ok {
-		v := d.Get("auth_next_time")
+	if v, ok := d.GetOk("auth_next_time"); ok {
 		x := (v.(string))
 		o.SetAuthNextTime(x)
 	}
 
-	if _, ok := d.GetOk("category"); ok {
-		v := d.Get("category")
+	if v, ok := d.GetOk("category"); ok {
 		x := (v.(string))
 		o.SetCategory(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("customer_op"); ok {
-		v := d.Get("customer_op")
+	if v, ok := d.GetOk("customer_op"); ok {
 		p := make([]models.LicenseCustomerOpRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1432,38 +1429,32 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("default_license_type"); ok {
-		v := d.Get("default_license_type")
+	if v, ok := d.GetOk("default_license_type"); ok {
 		x := (v.(string))
 		o.SetDefaultLicenseType(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("error_desc"); ok {
-		v := d.Get("error_desc")
+	if v, ok := d.GetOk("error_desc"); ok {
 		x := (v.(string))
 		o.SetErrorDesc(x)
 	}
 
-	if _, ok := d.GetOk("group"); ok {
-		v := d.Get("group")
+	if v, ok := d.GetOk("group"); ok {
 		x := (v.(string))
 		o.SetGroup(x)
 	}
 
-	if _, ok := d.GetOk("highest_compliant_license_tier"); ok {
-		v := d.Get("highest_compliant_license_tier")
+	if v, ok := d.GetOk("highest_compliant_license_tier"); ok {
 		x := (v.(string))
 		o.SetHighestCompliantLicenseTier(x)
 	}
 
-	if _, ok := d.GetOk("iwo_customer_op"); ok {
-		v := d.Get("iwo_customer_op")
+	if v, ok := d.GetOk("iwo_customer_op"); ok {
 		p := make([]models.LicenseIwoCustomerOpRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1506,8 +1497,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("iwo_license_count"); ok {
-		v := d.Get("iwo_license_count")
+	if v, ok := d.GetOk("iwo_license_count"); ok {
 		p := make([]models.LicenseIwoLicenseCountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1550,32 +1540,32 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("last_sync"); ok {
-		v := d.Get("last_sync")
+	if v, ok := d.GetOk("last_renew"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetLastRenew(x)
+	}
+
+	if v, ok := d.GetOk("last_sync"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastSync(x)
 	}
 
-	if _, ok := d.GetOk("last_updated_time"); ok {
-		v := d.Get("last_updated_time")
+	if v, ok := d.GetOk("last_updated_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastUpdatedTime(x)
 	}
 
-	if _, ok := d.GetOk("license_state"); ok {
-		v := d.Get("license_state")
+	if v, ok := d.GetOk("license_state"); ok {
 		x := (v.(string))
 		o.SetLicenseState(x)
 	}
 
-	if _, ok := d.GetOk("license_tech_support_info"); ok {
-		v := d.Get("license_tech_support_info")
+	if v, ok := d.GetOk("license_tech_support_info"); ok {
 		x := (v.(string))
 		o.SetLicenseTechSupportInfo(x)
 	}
 
-	if _, ok := d.GetOk("licenseinfos"); ok {
-		v := d.Get("licenseinfos")
+	if v, ok := d.GetOk("licenseinfos"); ok {
 		x := make([]models.LicenseLicenseInfoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1615,26 +1605,22 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetLicenseinfos(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1643,8 +1629,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1687,8 +1672,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1728,50 +1712,42 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("register_expire_time"); ok {
-		v := d.Get("register_expire_time")
+	if v, ok := d.GetOk("register_expire_time"); ok {
 		x := (v.(string))
 		o.SetRegisterExpireTime(x)
 	}
 
-	if _, ok := d.GetOk("register_initial_time"); ok {
-		v := d.Get("register_initial_time")
+	if v, ok := d.GetOk("register_initial_time"); ok {
 		x := (v.(string))
 		o.SetRegisterInitialTime(x)
 	}
 
-	if _, ok := d.GetOk("register_next_time"); ok {
-		v := d.Get("register_next_time")
+	if v, ok := d.GetOk("register_next_time"); ok {
 		x := (v.(string))
 		o.SetRegisterNextTime(x)
 	}
 
-	if _, ok := d.GetOk("registration_status"); ok {
-		v := d.Get("registration_status")
+	if v, ok := d.GetOk("registration_status"); ok {
 		x := (v.(string))
 		o.SetRegistrationStatus(x)
 	}
 
-	if _, ok := d.GetOk("renew_failure_string"); ok {
-		v := d.Get("renew_failure_string")
+	if v, ok := d.GetOk("renew_failure_string"); ok {
 		x := (v.(string))
 		o.SetRenewFailureString(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("smart_account"); ok {
-		v := d.Get("smart_account")
+	if v, ok := d.GetOk("smart_account"); ok {
 		x := (v.(string))
 		o.SetSmartAccount(x)
 	}
 
-	if _, ok := d.GetOk("smartlicense_token"); ok {
-		v := d.Get("smartlicense_token")
+	if v, ok := d.GetOk("smartlicense_token"); ok {
 		p := make([]models.LicenseSmartlicenseTokenRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1814,14 +1790,12 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("sync_status"); ok {
-		v := d.Get("sync_status")
+	if v, ok := d.GetOk("sync_status"); ok {
 		x := (v.(string))
 		o.SetSyncStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1854,8 +1828,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1929,128 +1902,6 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("virtual_account"); ok {
-		v := d.Get("virtual_account")
-		x := (v.(string))
-		o.SetVirtualAccount(x)
-	}
-
-	if v, ok := d.GetOk("account_id"); ok {
-		x := (v.(string))
-		o.SetAccountId(x)
-	}
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("agent_data"); ok {
-		x := (v.(string))
-		o.SetAgentData(x)
-	}
-	if v, ok := d.GetOk("auth_expire_time"); ok {
-		x := (v.(string))
-		o.SetAuthExpireTime(x)
-	}
-	if v, ok := d.GetOk("auth_initial_time"); ok {
-		x := (v.(string))
-		o.SetAuthInitialTime(x)
-	}
-	if v, ok := d.GetOk("auth_next_time"); ok {
-		x := (v.(string))
-		o.SetAuthNextTime(x)
-	}
-	if v, ok := d.GetOk("category"); ok {
-		x := (v.(string))
-		o.SetCategory(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("default_license_type"); ok {
-		x := (v.(string))
-		o.SetDefaultLicenseType(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("error_desc"); ok {
-		x := (v.(string))
-		o.SetErrorDesc(x)
-	}
-	if v, ok := d.GetOk("group"); ok {
-		x := (v.(string))
-		o.SetGroup(x)
-	}
-	if v, ok := d.GetOk("highest_compliant_license_tier"); ok {
-		x := (v.(string))
-		o.SetHighestCompliantLicenseTier(x)
-	}
-	if v, ok := d.GetOk("last_sync"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastSync(x)
-	}
-	if v, ok := d.GetOk("last_updated_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastUpdatedTime(x)
-	}
-	if v, ok := d.GetOk("license_state"); ok {
-		x := (v.(string))
-		o.SetLicenseState(x)
-	}
-	if v, ok := d.GetOk("license_tech_support_info"); ok {
-		x := (v.(string))
-		o.SetLicenseTechSupportInfo(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("register_expire_time"); ok {
-		x := (v.(string))
-		o.SetRegisterExpireTime(x)
-	}
-	if v, ok := d.GetOk("register_initial_time"); ok {
-		x := (v.(string))
-		o.SetRegisterInitialTime(x)
-	}
-	if v, ok := d.GetOk("register_next_time"); ok {
-		x := (v.(string))
-		o.SetRegisterNextTime(x)
-	}
-	if v, ok := d.GetOk("registration_status"); ok {
-		x := (v.(string))
-		o.SetRegistrationStatus(x)
-	}
-	if v, ok := d.GetOk("renew_failure_string"); ok {
-		x := (v.(string))
-		o.SetRenewFailureString(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("smart_account"); ok {
-		x := (v.(string))
-		o.SetSmartAccount(x)
-	}
-	if v, ok := d.GetOk("sync_status"); ok {
-		x := (v.(string))
-		o.SetSyncStatus(x)
-	}
 	if v, ok := d.GetOk("virtual_account"); ok {
 		x := (v.(string))
 		o.SetVirtualAccount(x)
@@ -2118,6 +1969,8 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 				temp["iwo_customer_op"] = flattenMapLicenseIwoCustomerOpRelationship(s.GetIwoCustomerOp(), d)
 
 				temp["iwo_license_count"] = flattenMapLicenseIwoLicenseCountRelationship(s.GetIwoLicenseCount(), d)
+
+				temp["last_renew"] = (s.GetLastRenew()).String()
 
 				temp["last_sync"] = (s.GetLastSync()).String()
 

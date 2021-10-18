@@ -8,11 +8,13 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **BootTime** | Pointer to **time.Time** | Time when this VM booted up. | [optional] 
 **Capacity** | Pointer to [**NullableInfraHardwareInfo**](InfraHardwareInfo.md) |  | [optional] 
+**CpuUtilization** | Pointer to **float32** | Average CPU utilization percentage derived as a ratio of CPU used to CPU allocated. The value is calculated whenever inventory is performed. | [optional] 
 **GuestInfo** | Pointer to [**NullableVirtualizationGuestInfo**](VirtualizationGuestInfo.md) |  | [optional] 
-**HypervisorType** | Pointer to **string** | Type of hypervisor where the virtual machine is hosted for example ESXi. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
+**HypervisorType** | Pointer to **string** | Type of hypervisor where the virtual machine is hosted for example ESXi. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **Identity** | Pointer to **string** | The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference). | [optional] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
 **MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](VirtualizationMemoryCapacity.md) |  | [optional] 
+**MemoryUtilization** | Pointer to **float32** | Average memory utilization percentage derived as a ratio of memory used to available memory. The value is calculated whenever inventory is performed. | [optional] 
 **Name** | Pointer to **string** | User-provided name to identify the virtual machine. | [optional] 
 **PowerState** | Pointer to **string** | Power state of the virtual machine. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](VirtualizationComputeCapacity.md) |  | [optional] 
@@ -140,6 +142,31 @@ HasCapacity returns a boolean if a field has been set.
 `func (o *VirtualizationBaseVirtualMachineAllOf) UnsetCapacity()`
 
 UnsetCapacity ensures that no value is present for Capacity, not even an explicit nil
+### GetCpuUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetCpuUtilization() float32`
+
+GetCpuUtilization returns the CpuUtilization field if non-nil, zero value otherwise.
+
+### GetCpuUtilizationOk
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetCpuUtilizationOk() (*float32, bool)`
+
+GetCpuUtilizationOk returns a tuple with the CpuUtilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCpuUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetCpuUtilization(v float32)`
+
+SetCpuUtilization sets CpuUtilization field to given value.
+
+### HasCpuUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) HasCpuUtilization() bool`
+
+HasCpuUtilization returns a boolean if a field has been set.
+
 ### GetGuestInfo
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetGuestInfo() VirtualizationGuestInfo`
@@ -295,6 +322,31 @@ HasMemoryCapacity returns a boolean if a field has been set.
 `func (o *VirtualizationBaseVirtualMachineAllOf) UnsetMemoryCapacity()`
 
 UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
+### GetMemoryUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetMemoryUtilization() float32`
+
+GetMemoryUtilization returns the MemoryUtilization field if non-nil, zero value otherwise.
+
+### GetMemoryUtilizationOk
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetMemoryUtilizationOk() (*float32, bool)`
+
+GetMemoryUtilizationOk returns a tuple with the MemoryUtilization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetMemoryUtilization(v float32)`
+
+SetMemoryUtilization sets MemoryUtilization field to given value.
+
+### HasMemoryUtilization
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) HasMemoryUtilization() bool`
+
+HasMemoryUtilization returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetName() string`

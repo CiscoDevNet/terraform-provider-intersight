@@ -35,25 +35,25 @@ resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
     moid        = var.hyperflex_node_config_policy
     object_type = "hyperflex.NodeConfigPolicy"
   }
-  cluster_network = {
+  cluster_network {
     moid        = var.hyperflex_cluster_network_policy
     object_type = "hyperflex.ClusterNetworkPolicy"
   }
-  cluster_storage = {
+  cluster_storage {
     moid        = var.hyperflex_cluster_storage_policy
     object_type = "hyperflex.ClusterStoragePolicy"
   }
-  vcenter_config = {
+  vcenter_config {
     moid        = var.hyperflex_vcenter_config_policy
     object_type = "hyperflex.VcenterConfigPolicy"
   }
   hypervisor_type = "ESXi"
   storage_type    = "HyperFlexDp"
-  auto_support = {
+  auto_support {
     moid        = var.hyperflex_auto_support_policy
     object_type = "hyperflex.AutoSupportPolicy"
   }
-  proxy_setting = {
+  proxy_setting {
     moid        = var.hyperflex_proxy_setting_policy
     object_type = "hyperflex.ProxySettingPolicy"
   }
@@ -71,6 +71,7 @@ resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
   name = "hyperflex_cluster_profile1"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
@@ -145,7 +146,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `hypervisor_control_ip_address`:(string) The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management. 
-* `hypervisor_type`:(string) The hypervisor type for the HyperFlex cluster.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
+* `hypervisor_type`:(string) The hypervisor type for the HyperFlex cluster.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `local_credential`:(HashMap) - A reference to a hyperflexLocalCredentialPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

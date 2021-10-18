@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of rollback task definition. | [optional] 
 **InputParameters** | Pointer to **interface{}** | Input parameters mapping for rollback task from the input or output of the main task definition. | [optional] 
 **Name** | Pointer to **string** | Name of the task definition which is capable of doing rollback of this task. | [optional] 
+**SkipCondition** | Pointer to **string** | The rollback task will not be executed if the given condition evaluates to \&quot;true\&quot;. | [optional] [readonly] 
 **TaskMoid** | Pointer to **string** | The resolved referenced rollback task definition managed object. | [optional] 
 **Version** | Pointer to **int64** | The version of the task definition. | [optional] 
 
@@ -181,6 +182,31 @@ SetName sets Name field to given value.
 `func (o *WorkflowRollbackTask) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetSkipCondition
+
+`func (o *WorkflowRollbackTask) GetSkipCondition() string`
+
+GetSkipCondition returns the SkipCondition field if non-nil, zero value otherwise.
+
+### GetSkipConditionOk
+
+`func (o *WorkflowRollbackTask) GetSkipConditionOk() (*string, bool)`
+
+GetSkipConditionOk returns a tuple with the SkipCondition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipCondition
+
+`func (o *WorkflowRollbackTask) SetSkipCondition(v string)`
+
+SetSkipCondition sets SkipCondition field to given value.
+
+### HasSkipCondition
+
+`func (o *WorkflowRollbackTask) HasSkipCondition() bool`
+
+HasSkipCondition returns a boolean if a field has been set.
 
 ### GetTaskMoid
 

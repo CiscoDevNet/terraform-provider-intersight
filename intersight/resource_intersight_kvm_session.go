@@ -141,6 +141,11 @@ func resourceKvmSession() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"kvm_launch_url_path": {
+				Description: "One time URL that is used to launch the KVM console.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -666,6 +671,11 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 
 	o.SetClassId("kvm.Session")
 
+	if v, ok := d.GetOk("kvm_launch_url_path"); ok {
+		x := (v.(string))
+		o.SetKvmLaunchUrlPath(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -720,8 +730,6 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 			o.SetServer(x)
 		}
 	}
-
-	o.SetSsoSupported(d.Get("sso_supported").(bool))
 
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
@@ -883,6 +891,10 @@ func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property EndTime in KvmSession object: %s", err.Error())
 	}
 
+	if err := d.Set("kvm_launch_url_path", (s.GetKvmLaunchUrlPath())); err != nil {
+		return diag.Errorf("error occurred while setting property KvmLaunchUrlPath in KvmSession object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in KvmSession object: %s", err.Error())
 	}
@@ -990,6 +1002,12 @@ func resourceKvmSessionUpdate(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	o.SetClassId("kvm.Session")
+
+	if d.HasChange("kvm_launch_url_path") {
+		v := d.Get("kvm_launch_url_path")
+		x := (v.(string))
+		o.SetKvmLaunchUrlPath(x)
+	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

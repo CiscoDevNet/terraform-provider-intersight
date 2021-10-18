@@ -2123,14 +2123,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilitySwitchCapability{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -2139,8 +2137,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2180,36 +2177,37 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("default_fcoe_vlan"); ok {
-		v := d.Get("default_fcoe_vlan")
+	if v, ok := d.GetOkExists("default_fcoe_vlan"); ok {
 		x := int64(v.(int))
 		o.SetDefaultFcoeVlan(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetDynamicVifsSupported(d.Get("dynamic_vifs_supported").(bool))
+	if v, ok := d.GetOkExists("dynamic_vifs_supported"); ok {
+		x := (v.(bool))
+		o.SetDynamicVifsSupported(x)
+	}
 
-	o.SetFanModulesSupported(d.Get("fan_modules_supported").(bool))
+	if v, ok := d.GetOkExists("fan_modules_supported"); ok {
+		x := (v.(bool))
+		o.SetFanModulesSupported(x)
+	}
 
-	if _, ok := d.GetOk("fc_end_host_mode_reserved_vsans"); ok {
-		v := d.Get("fc_end_host_mode_reserved_vsans")
+	if v, ok := d.GetOk("fc_end_host_mode_reserved_vsans"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2261,42 +2259,42 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetFcEndHostModeReservedVsans(x)
 	}
 
-	o.SetFcUplinkPortsAutoNegotiationSupported(d.Get("fc_uplink_ports_auto_negotiation_supported").(bool))
+	if v, ok := d.GetOkExists("fc_uplink_ports_auto_negotiation_supported"); ok {
+		x := (v.(bool))
+		o.SetFcUplinkPortsAutoNegotiationSupported(x)
+	}
 
-	o.SetLocatorBeaconSupported(d.Get("locator_beacon_supported").(bool))
+	if v, ok := d.GetOkExists("locator_beacon_supported"); ok {
+		x := (v.(bool))
+		o.SetLocatorBeaconSupported(x)
+	}
 
-	if _, ok := d.GetOk("max_ports"); ok {
-		v := d.Get("max_ports")
+	if v, ok := d.GetOkExists("max_ports"); ok {
 		x := int64(v.(int))
 		o.SetMaxPorts(x)
 	}
 
-	if _, ok := d.GetOk("max_slots"); ok {
-		v := d.Get("max_slots")
+	if v, ok := d.GetOkExists("max_slots"); ok {
 		x := int64(v.(int))
 		o.SetMaxSlots(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("network_limits"); ok {
-		v := d.Get("network_limits")
+	if v, ok := d.GetOk("network_limits"); ok {
 		p := make([]models.CapabilitySwitchNetworkLimits, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2417,14 +2415,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2433,8 +2429,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2477,8 +2472,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2518,14 +2512,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("pid"); ok {
-		v := d.Get("pid")
+	if v, ok := d.GetOk("pid"); ok {
 		x := (v.(string))
 		o.SetPid(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting100g_speed"); ok {
-		v := d.Get("ports_supporting100g_speed")
+	if v, ok := d.GetOk("ports_supporting100g_speed"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2577,8 +2569,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting100gSpeed(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting10g_speed"); ok {
-		v := d.Get("ports_supporting10g_speed")
+	if v, ok := d.GetOk("ports_supporting10g_speed"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2630,8 +2621,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting10gSpeed(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting1g_speed"); ok {
-		v := d.Get("ports_supporting1g_speed")
+	if v, ok := d.GetOk("ports_supporting1g_speed"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2683,8 +2673,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting1gSpeed(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting25g_speed"); ok {
-		v := d.Get("ports_supporting25g_speed")
+	if v, ok := d.GetOk("ports_supporting25g_speed"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2736,8 +2725,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting25gSpeed(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting40g_speed"); ok {
-		v := d.Get("ports_supporting40g_speed")
+	if v, ok := d.GetOk("ports_supporting40g_speed"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2789,8 +2777,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupporting40gSpeed(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting_breakout"); ok {
-		v := d.Get("ports_supporting_breakout")
+	if v, ok := d.GetOk("ports_supporting_breakout"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2842,8 +2829,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupportingBreakout(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting_fcoe"); ok {
-		v := d.Get("ports_supporting_fcoe")
+	if v, ok := d.GetOk("ports_supporting_fcoe"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2895,8 +2881,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupportingFcoe(x)
 	}
 
-	if _, ok := d.GetOk("ports_supporting_server_role"); ok {
-		v := d.Get("ports_supporting_server_role")
+	if v, ok := d.GetOk("ports_supporting_server_role"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2948,8 +2933,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetPortsSupportingServerRole(x)
 	}
 
-	if _, ok := d.GetOk("reserved_vsans"); ok {
-		v := d.Get("reserved_vsans")
+	if v, ok := d.GetOk("reserved_vsans"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3001,22 +2985,22 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetReservedVsans(x)
 	}
 
-	o.SetSerenoNetflowSupported(d.Get("sereno_netflow_supported").(bool))
+	if v, ok := d.GetOkExists("sereno_netflow_supported"); ok {
+		x := (v.(bool))
+		o.SetSerenoNetflowSupported(x)
+	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("sku"); ok {
-		v := d.Get("sku")
+	if v, ok := d.GetOk("sku"); ok {
 		x := (v.(string))
 		o.SetSku(x)
 	}
 
-	if _, ok := d.GetOk("storage_limits"); ok {
-		v := d.Get("storage_limits")
+	if v, ok := d.GetOk("storage_limits"); ok {
 		p := make([]models.CapabilitySwitchStorageLimits, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3077,8 +3061,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("switching_mode_capabilities"); ok {
-		v := d.Get("switching_mode_capabilities")
+	if v, ok := d.GetOk("switching_mode_capabilities"); ok {
 		x := make([]models.CapabilitySwitchingModeCapability, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3118,8 +3101,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetSwitchingModeCapabilities(x)
 	}
 
-	if _, ok := d.GetOk("system_limits"); ok {
-		v := d.Get("system_limits")
+	if v, ok := d.GetOk("system_limits"); ok {
 		p := make([]models.CapabilitySwitchSystemLimits, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3168,8 +3150,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3202,8 +3183,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("unified_ports"); ok {
-		v := d.Get("unified_ports")
+	if v, ok := d.GetOk("unified_ports"); ok {
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3255,14 +3235,12 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		o.SetUnifiedPorts(x)
 	}
 
-	if _, ok := d.GetOk("unified_rule"); ok {
-		v := d.Get("unified_rule")
+	if v, ok := d.GetOk("unified_rule"); ok {
 		x := (v.(string))
 		o.SetUnifiedRule(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3336,92 +3314,6 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 		}
 	}
 
-	if _, ok := d.GetOk("vid"); ok {
-		v := d.Get("vid")
-		x := (v.(string))
-		o.SetVid(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("default_fcoe_vlan"); ok {
-		x := int64(v.(int))
-		o.SetDefaultFcoeVlan(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("dynamic_vifs_supported"); ok {
-		x := (v.(bool))
-		o.SetDynamicVifsSupported(x)
-	}
-	if v, ok := d.GetOk("fan_modules_supported"); ok {
-		x := (v.(bool))
-		o.SetFanModulesSupported(x)
-	}
-	if v, ok := d.GetOk("fc_uplink_ports_auto_negotiation_supported"); ok {
-		x := (v.(bool))
-		o.SetFcUplinkPortsAutoNegotiationSupported(x)
-	}
-	if v, ok := d.GetOk("locator_beacon_supported"); ok {
-		x := (v.(bool))
-		o.SetLocatorBeaconSupported(x)
-	}
-	if v, ok := d.GetOk("max_ports"); ok {
-		x := int64(v.(int))
-		o.SetMaxPorts(x)
-	}
-	if v, ok := d.GetOk("max_slots"); ok {
-		x := int64(v.(int))
-		o.SetMaxSlots(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("pid"); ok {
-		x := (v.(string))
-		o.SetPid(x)
-	}
-	if v, ok := d.GetOk("sereno_netflow_supported"); ok {
-		x := (v.(bool))
-		o.SetSerenoNetflowSupported(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("sku"); ok {
-		x := (v.(string))
-		o.SetSku(x)
-	}
-	if v, ok := d.GetOk("unified_rule"); ok {
-		x := (v.(string))
-		o.SetUnifiedRule(x)
-	}
 	if v, ok := d.GetOk("vid"); ok {
 		x := (v.(string))
 		o.SetVid(x)

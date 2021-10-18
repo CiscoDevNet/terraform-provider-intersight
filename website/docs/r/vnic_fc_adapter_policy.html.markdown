@@ -86,7 +86,7 @@ This complex property has following sub-properties:
 * `flogi_settings`:(HashMap) - Fibre Channel Flogi Settings. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `retries`:(int) The number of times that the system tries to log in to the fabric after the first failure. 
+  + `retries`:(int) The number of times that the system tries to log in to the fabric after the first failure. Allowed range is 0-4294967295. 
   + `timeout`:(int) The number of milliseconds that the system waits before it tries to log in again. 
 * `interrupt_settings`:(HashMap) - Interrupt Settings for the virtual fibre channel interface. 
 This complex property has following sub-properties:

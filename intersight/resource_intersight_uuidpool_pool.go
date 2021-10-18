@@ -372,7 +372,6 @@ func resourceUuidpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"to": {
 							Description: "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
@@ -661,6 +660,12 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
 				}
 			}
 			if v, ok := l["to"]; ok {
@@ -970,6 +975,12 @@ func resourceUuidpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta 
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
 				}
 			}
 			if v, ok := l["to"]; ok {

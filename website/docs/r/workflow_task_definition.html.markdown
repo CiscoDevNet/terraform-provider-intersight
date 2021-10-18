@@ -54,6 +54,11 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `cloned_from`:(HashMap) -(ReadOnly) A reference to a workflowTaskDefinition resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `default_version`:(bool) When true this will be the task version that is used when a specific task definition version is not specified. The very first task definition created with a name will be set as the default version, after that user can explicitly set any version of the task definition as the default version. 
 * `description`:(string) A user friendly description about task on what operations are done as part of the task execution and any other specific information about task input and output. 
@@ -78,7 +83,7 @@ This complex property has following sub-properties:
   + `internal`:(bool)(ReadOnly) Denotes this is an internal task. Internal tasks will be hidden from the UI when executing a workflow. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `owner`:(string)(ReadOnly) The service that owns and is responsible for execution of the task. 
-* `label`:(string) A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_). 
+* `label`:(string) A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters. 
 * `license_entitlement`:(string)(ReadOnly) License entitlement required to run this task. It is determined by license requirement of features.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -97,6 +102,7 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `properties`:(HashMap) - Type to capture all the properties for the task definition. 
 This complex property has following sub-properties:
+  + `cloneable`:(bool)(ReadOnly) When set to false task is not cloneable. It is set to true only if task is of ApiTask type and it is not system defined. 
   + `external_meta`:(bool) When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows. 
   + `input_definition`:(Array)
 This complex property has following sub-properties:
@@ -160,6 +166,7 @@ This complex property has following sub-properties:
   + `input_parameters`:(JSON as string) Input parameters mapping for rollback task from the input or output of the main task definition. 
   + `name`:(string) Name of the task definition which is capable of doing rollback of this task. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `skip_condition`:(string)(ReadOnly) The rollback task will not be executed if the given condition evaluates to \ true\ . 
   + `task_moid`:(string) The resolved referenced rollback task definition managed object. 
   + `nr_version`:(int) The version of the task definition. 
 * `secure_prop_access`:(bool) If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties. 

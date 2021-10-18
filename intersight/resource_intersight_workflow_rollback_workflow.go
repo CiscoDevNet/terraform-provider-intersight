@@ -624,7 +624,10 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 
 	o.SetClassId("workflow.RollbackWorkflow")
 
-	o.SetContinueOnTaskFailure(d.Get("continue_on_task_failure").(bool))
+	if v, ok := d.GetOkExists("continue_on_task_failure"); ok {
+		x := (v.(bool))
+		o.SetContinueOnTaskFailure(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

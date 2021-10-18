@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `ipv6_global_address`:(string) IPv6 global address value. 
 * `ipv6_link_local_address`:(string) IPv6 link local address value. 
 * `iqn`:(string) ISCSI qualified name applicable for ethernet port. Example - 'iqn.2008-05.com.storage:fnm00151300643-514f0c50141faf05'. 
-* `is_ipv6_enable`:(bool) IPv6 mode. 
+* `is_ipv6_enable`:(bool) Determines if IPv6 mode is enabled on the port. 
 * `loop_id`:(string) The value set for the port loop ID (AL_PA). 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

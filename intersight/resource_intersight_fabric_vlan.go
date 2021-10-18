@@ -471,7 +471,10 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	o.SetAutoAllowOnUplinks(d.Get("auto_allow_on_uplinks").(bool))
+	if v, ok := d.GetOkExists("auto_allow_on_uplinks"); ok {
+		x := (v.(bool))
+		o.SetAutoAllowOnUplinks(x)
+	}
 
 	o.SetClassId("fabric.Vlan")
 
@@ -518,7 +521,10 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	o.SetIsNative(d.Get("is_native").(bool))
+	if v, ok := d.GetOkExists("is_native"); ok {
+		x := (v.(bool))
+		o.SetIsNative(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -610,7 +616,7 @@ func resourceFabricVlanCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if v, ok := d.GetOk("vlan_id"); ok {
+	if v, ok := d.GetOkExists("vlan_id"); ok {
 		x := int64(v.(int))
 		o.SetVlanId(x)
 	}

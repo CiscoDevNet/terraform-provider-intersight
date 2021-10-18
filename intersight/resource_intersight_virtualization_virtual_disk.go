@@ -628,8 +628,6 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	o.SetDiscovered(d.Get("discovered").(bool))
-
 	if v, ok := d.GetOk("mode"); ok {
 		x := (v.(string))
 		o.SetMode(x)
